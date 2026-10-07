@@ -1227,7 +1227,12 @@ export async function clearArchive() {
 
 /** Sauvegarde le ticket d'une date (pour le suivi ultérieur).
  *  🔒 GEL DU PREMIER TICKET : si un ticket existe déjà, on ne l'écrase JAMAIS.
- *  Le premier ticket figé reste — même si le marché bouge après. */
+ *  Le premier ticket figé reste — même si le marché bouge après.
+ *
+ *  ⚠ `ticketPoseLe` = L'HEURE DU PREMIER AFFICHAGE, pas l'heure du serveur.
+ *    `new Date()` ici est l'horloge du navigateur de l'utilisateur : c'est
+ *    exactement ce qu'on veut (le moment où il a vu le ticket pour la
+ *    première fois). Une fois écrit, cette heure ne bouge plus. */
 export async function attachTicket(date, ticket) {
   const all = lireTout()
   if (!all[date]) return null
