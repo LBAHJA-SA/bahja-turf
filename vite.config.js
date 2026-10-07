@@ -92,16 +92,16 @@ function proxiesApi() {
         if (!m) return next();
         relayer(m[1], req.url, res);
       });
-      /* /api/labo : le corpus du laboratoire. C'est une FONCTION (elle lit
-       * `archives/` sur le disque), pas un proxy. En production Vercel la
-       * trouve dans `api/labo.js` ; ici on l'appelle directement, sinon la
-       * page COPLY aurait un corpus différent en local et en ligne —
-       * exactement le piège du §18.2. */
+      /* /api/couple : les courses du jour pour la page Couplé. C'est une
+       * FONCTION (elle lit reu.php + prog-{date}.json sur le disque), pas
+       * un proxy. En production Vercel la trouve dans `api/couple.js` ;
+       * ici on l'appelle directement, sinon la page aurait des données
+       * différentes en local et en ligne — exactement le piège du §18.2. */
       server.middlewares.use(async (req, res, next) => {
         const u = new URL(req.url || "/", "http://localhost");
-        if (u.pathname !== "/api/labo") return next();
+        if (u.pathname !== "/api/couple") return next();
         try {
-          const mod = await server.ssrLoadModule("/api/labo.js");
+          const mod = await server.ssrLoadModule("/api/couple.js");
           await mod.default(req, res);
         } catch (e) {
           res.statusCode = 500;
