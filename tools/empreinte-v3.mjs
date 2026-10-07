@@ -378,7 +378,11 @@ function principale() {
   console.log('')
 }
 
-const args = process.argv.slice(2)
+/* On n'exécute que si le fichier est lancé directement : pools et autres
+ * outils importent famille/coarse/rangs d'ici, et sans ce garde chaque
+ * import réimprimait tout le rapport (le bug vu le 07/10, deux fois). */
+const estMainV3 = process.argv[1] && path.basename(process.argv[1]) === 'empreinte-v3.mjs'
+const args = estMainV3 ? process.argv.slice(2) : []
 const dem = args.find((a) => a.startsWith('--course='))
 if (dem) {
   const tout = charger()
@@ -401,4 +405,4 @@ if (dem) {
     console.log('  arrivée réelle : ' + c.arrivee.slice(0, 5).join(' - '))
     console.log('')
   }
-} else principale()
+} else if (estMainV3) principale()
