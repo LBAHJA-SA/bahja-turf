@@ -261,6 +261,9 @@ export default function QuinteGrille() {
   // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
   //   (AGENTS.md §13.3) : la page doit le montrer tel quel, pas le recalculer.
   const [ticketManuel, setTicketManuel] = useState(null)
+  // ⚑ la lecture du RÉSULTAT est déclenchée par l'utilisateur (bouton) :
+  //   on ne va pas sonder casacourses en boucle toute la journée.
+  const [busyResultat, setBusyResultat] = useState(false)
   // 🔒 AUCUNE modification à la main : le numéro de chaque case est celui du moteur.
   //    Le clic ne change plus rien (demandé le 05/10/2026).
 
@@ -610,6 +613,49 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
     await rafraichirArchive()
   }
 
+  /* ------------------------------------------------- ⚑ LE RÉSULTAT ------- */
+  /* Un clic → on relit la course sur pro.casacourses.com. Si elle est
+   *  finie, l'arrivée est écrite dans l'archive (avec le bilan x/5) et le
+   *  ticket est figé au passage s'il ne l'était pas encore.
+   *
+   *  ⚠ Si la course n'est pas finie, on ne devine RIEN : on affiche juste
+   *    que le résultat n'est pas encore publié (§7 — jamais de donnée
+   *    inventée, jamais une autre course à la place). */
+  const chercherResultat = async () => {
+    setBusyResultat(true); setMsg('')
+    try {
+      const res = await chargerCourseCC(date, syn?.synthese || [])
+      const arr = res?.arrivee
+      if (!arr || !arr.length) {
+        setMsg('⚠ Pas de résultat publié pour cette course. Elle n’est pas encore clôturée — réessaie plus tard.')
+        return
+      }
+      // le ticket est figé d'abord : le résultat se mesure sur le ticket gelé
+      if (ticket && ticket.length) await attachTicket(date, ticket)
+      await attachResult(date, {
+        arrivee: arr,
+        discipline: res.discipline,
+        distance: res.distance,
+        nbPartants: res.nbPartants,
+        hippodrome: res.hippodrome,
+        prix: res.prix,
+        courseId: res.courseId,
+        cle: res.cle || null,
+        runners: (res.participants || []).filter((p) => p.statut !== 'NON_PARTANT').map((p) => p.num),
+      })
+      setArrivee(arr)
+      setInfos(res)
+      setParticipants((res.participants || []).filter((p) => p.statut !== 'NON_PARTANT'))
+      await rafraichirArchive()
+      const t = new Set(ticket)
+      const p = arr.filter((n) => t.has(n)).length
+      setMsg(`✓ Arrivée enregistrée : ${arr.join(' - ')}  →  ${p}/5`)
+    } catch (e) {
+      setMsg('⚠ Resultat indisponible : ' + e.message)
+    }
+    setBusyResultat(false)
+  }
+
   /* ------------------------------------------------------------- vue --- */
 
   return (
@@ -774,6 +820,35 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 Arrivée {arrivee.join(' - ')} → <b>{verdict.pris}/5</b>
                 {verdict.manques.length > 0 && <> · manquants : {verdict.manques.join(', ')}</>}
               </div>
+            )}
+          </div>
+
+          {/* ⭐ LE BOUTON « RÉSULTAT ». La course est finie : un clic va chercher
+              l'arrivée sur pro.casacourses.com et l'écrit dans l'archive.
+              Tant qu'on n'a pas cliqué, l'arrivée reste vide — on ne l'invente
+              jamais (§7). Le bouton est-ce que l'utilisateur déclenche : le
+              job quotidien (Quinte AM/PM) fait de même en automatique. */}
+          <div style={{ ...s.box, padding: 12, marginBottom: 14, display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', fontFamily: SK.police }}>
+            {arrivee && arrivee.length ? (
+              <>
+                <span style={{ fontSize: 13, color: SK.texte }}>
+                  Arrivée enregistrée : <b style={{ fontFamily: SK.nb.td }}>{arrivee.join(' - ')}</b>
+                </span>
+                <button onClick={() => charger(date)} disabled={busy}
+                  style={{ padding: '6px 14px', borderRadius: 6, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: busy ? 'default' : 'pointer', fontFamily: SK.police, fontSize: 12 }}>
+                  {busy ? 'Lecture…' : '↻ Relire le résultat'}
+                </button>
+              </>
+            ) : (
+              <>
+                <span style={{ fontSize: 13, color: '#b45309' }}>
+                  La course n'est pas encore clôturée — ou le résultat n'a pas été lu.
+                </span>
+                <button onClick={() => chercherResultat()} disabled={busyResultat}
+                  style={{ padding: '8px 20px', borderRadius: 6, border: '2px solid ' + SK.accent, background: busyResultat ? '#94a3b8' : SK.accent, color: '#fff', cursor: busyResultat ? 'default' : 'pointer', fontWeight: 700, fontSize: 13, fontFamily: SK.police }}>
+                  {busyResultat ? 'Lecture en cours…' : '⚑ Chercher le résultat'}
+                </button>
+              </>
             )}
           </div>
 
