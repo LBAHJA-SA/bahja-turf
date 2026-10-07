@@ -50,7 +50,7 @@
    "cheval": "MARBELLESA",
    "driver": "C. SOUMILLON",
    "entraineur": "M. DELCHER SANCHEZ",
-   "cote": 6.5,
+   "cote": 5.5,
    "coteRef": 6.7,
    "musique": "1p5p3p3p3p3p5p",
    "gains": 30146,
@@ -72,7 +72,7 @@
    "cheval": "SAINT SAENS",
    "driver": "M. VELON",
    "entraineur": "Y. BARBEROT",
-   "cote": 11,
+   "cote": 8.6,
    "coteRef": 5.7,
    "musique": "7p0p0p7p3p3p1p2p(25)4p",
    "gains": 48690,
@@ -94,7 +94,7 @@
    "cheval": "INDY B",
    "driver": "A. LEMAITRE",
    "entraineur": "J. REYNIER",
-   "cote": 14,
+   "cote": 15,
    "coteRef": null,
    "musique": "4p1p3p4p8p4p(25)0p2p3p",
    "gains": 27942,
@@ -116,7 +116,7 @@
    "cheval": "SKY DREAM",
    "driver": "C. DEMURO",
    "entraineur": "M. BARATTI",
-   "cote": 25,
+   "cote": 20,
    "coteRef": 20.7,
    "musique": "0p1p2p4p4p4p0p",
    "gains": 23711,
@@ -138,7 +138,7 @@
    "cheval": "OSHIA",
    "driver": "M. BARZALONA",
    "entraineur": "JESUS",
-   "cote": 9.9,
+   "cote": 10,
    "coteRef": 5,
    "musique": "3p4p0p2p1p3p4p2p4p2p",
    "gains": 83818,
@@ -160,7 +160,7 @@
    "cheval": "VIZIOSA",
    "driver": "A. POUCHIN",
    "entraineur": "G. BIETOLINI",
-   "cote": 21,
+   "cote": 25,
    "coteRef": 6.5,
    "musique": "0p2p9p5p8p6p3p(25)1p7p",
    "gains": 45177,
@@ -182,7 +182,7 @@
    "cheval": "ZENADIA",
    "driver": "A. MOLINS",
    "entraineur": "CH. PLISSON",
-   "cote": 11,
+   "cote": 12,
    "coteRef": 18.9,
    "musique": "0p2p7p0p9p1p4p(25)8p7p",
    "gains": 38677,
@@ -204,7 +204,7 @@
    "cheval": "DAMN PRECIOUS",
    "driver": "T. BACHELOT",
    "entraineur": "D. ARTU",
-   "cote": 15,
+   "cote": 19,
    "coteRef": 13,
    "musique": "8p6p0p1p7p0p7p7p(25)2p",
    "gains": 23749,
@@ -226,7 +226,7 @@
    "cheval": "SIGHISH",
    "driver": "F. VALLE SKAR",
    "entraineur": "M. GUARNIERI",
-   "cote": 7.9,
+   "cote": 9.4,
    "coteRef": 51,
    "musique": "7p4p6p3p2p",
    "gains": 11491,
@@ -248,7 +248,7 @@
    "cheval": "HOLLIE WOOD",
    "driver": "T. TRULLIER",
    "entraineur": "JUL . PHELIPPON",
-   "cote": 10,
+   "cote": 12,
    "coteRef": 12.7,
    "musique": "2p7p4p4p2p2p0p3p7p1p",
    "gains": 52232,
@@ -270,7 +270,7 @@
    "cheval": "GOUTTES DE DIEU",
    "driver": "R. THOMAS",
    "entraineur": "C & Y. LERNER",
-   "cote": 6.2,
+   "cote": 5.8,
    "coteRef": 7.8,
    "musique": "3p8p6p0p0p0p4p1p(25)0p",
    "gains": 40174,
@@ -314,7 +314,7 @@
    "cheval": "ROMAN BOY",
    "driver": "A. MADAMET",
    "entraineur": "F. JOLIVET",
-   "cote": 13,
+   "cote": 15,
    "coteRef": 93,
    "musique": "3p5p7p3p3p8p0p4p2p6p",
    "gains": 15845,
@@ -394,14 +394,14 @@
    "10"
   ],
   "topCotesDirect": [
-   "12",
    "2",
+   "12",
+   "3",
    "10",
    "6",
-   "11",
-   "3",
    "8",
-   "14"
+   "11",
+   "1"
   ],
   "topChevaux": [
    "1",
@@ -499,7 +499,6 @@
    "7"
   ],
   "pourUnePlace": [
-   "10",
    "12"
   ],
   "outiders": [
@@ -667,5 +666,5 @@
   "4 - 2 - 3 - 7 - 6 - 5 - 11",
   "6 - 14 - 2 - 5 - 8 - 11 - 9 - 12"
  ],
- "collecteLe": "2026-10-07T09:15:32.424Z"
+ "collecteLe": "2026-10-07T10:26:13.048Z"
 }

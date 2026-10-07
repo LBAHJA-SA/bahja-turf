@@ -58,12 +58,12 @@
    "sexe": "H",
    "poids": 62,
    "valeur": 27,
-   "chrono": "1'44\"2",
+   "chrono": "",
    "coteRefJockey": null,
    "coteRefEntraineur": "16,6",
    "silk": "https://assets.racingdata.pmu.fr/silks/20261007/KEM/8/20261007-KEM-8-2.png",
    "proprietaire": "MRS M. ELLIOTT",
-   "dernierPassage": 469,
+   "dernierPassage": 29,
    "depart": 13,
    "def": null
   },
@@ -409,16 +409,15 @@
   "aptitudePlace": [],
   "topChronos": [
    "6",
-   "11",
-   "2"
+   "11"
   ],
   "topCordes": [
-   "11",
    "5",
    "7",
    "6",
    "9",
-   "12"
+   "12",
+   "1"
   ],
   "ecartsChevaux": [
    "11",
@@ -450,8 +449,8 @@
    "8",
    "12",
    "9",
-   "11",
-   "1"
+   "1",
+   "11"
   ]
  },
  "aptitudes": [
@@ -604,5 +603,5 @@
   "5 - 12 - 4 - 2 - 8 - 13 - 3",
   "11 - 1 - 9"
  ],
- "collecteLe": "2026-10-07T09:16:02.073Z"
+ "collecteLe": "2026-10-07T10:26:42.590Z"
 }

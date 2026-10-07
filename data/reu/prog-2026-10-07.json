@@ -11,7 +11,13 @@
      "code": "C1",
      "pays": "FRANCE",
      "nom": "PRIX DES GOBELINS (Quinte+)",
-     "heure": "13:55"
+     "heure": "13:55",
+     "dist": 2875,
+     "partants": 18,
+     "type": null,
+     "hippodrome": "Enghien",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -19,7 +25,13 @@
      "code": "C2",
      "pays": "FRANCE",
      "nom": "PRIX DU PONT ROYAL",
-     "heure": "14:30"
+     "heure": "14:30",
+     "dist": 2250,
+     "partants": 11,
+     "type": null,
+     "hippodrome": "Enghien",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -27,7 +39,13 @@
      "code": "C3",
      "pays": "FRANCE",
      "nom": "PRIX LORD WILLIAMS",
-     "heure": "15:05"
+     "heure": "15:05",
+     "dist": 2150,
+     "partants": 15,
+     "type": null,
+     "hippodrome": "Enghien",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -35,7 +53,13 @@
      "code": "C4",
      "pays": "FRANCE",
      "nom": "PRIX DE LA TOUR MONTPARNASSE",
-     "heure": "15:40"
+     "heure": "15:40",
+     "dist": 2150,
+     "partants": 13,
+     "type": null,
+     "hippodrome": "Enghien",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -43,7 +67,13 @@
      "code": "C5",
      "pays": "FRANCE",
      "nom": "PRIX ARMAND DE BELLAIGUE",
-     "heure": "16:15"
+     "heure": "16:15",
+     "dist": 2875,
+     "partants": 18,
+     "type": null,
+     "hippodrome": "Enghien",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -51,7 +81,13 @@
      "code": "C6",
      "pays": "FRANCE",
      "nom": "PRIX DE LA PLACE BEAUVAU",
-     "heure": "16:50"
+     "heure": "16:50",
+     "dist": 2875,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Enghien",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -59,7 +95,13 @@
      "code": "C7",
      "pays": "FRANCE",
      "nom": "PRIX DE PASSY",
-     "heure": "17:25"
+     "heure": "17:25",
+     "dist": 2150,
+     "partants": 15,
+     "type": null,
+     "hippodrome": "Enghien",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -67,7 +109,13 @@
      "code": "C8",
      "pays": "FRANCE",
      "nom": "PRIX DE LA PORTE DE SAINT-MANDE",
-     "heure": "18:00"
+     "heure": "18:00",
+     "dist": 2875,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Enghien",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     }
    ]
   },
@@ -81,7 +129,13 @@
      "code": "C1",
      "pays": "NORV",
      "nom": "PRIX DE DEAUVILLE NORVEGE",
-     "heure": "11:05"
+     "heure": "11:05",
+     "dist": 1609,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Jarlsberg",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -89,7 +143,13 @@
      "code": "C2",
      "pays": "NORV",
      "nom": "PRIX DE BIARRITZ NORVEGE",
-     "heure": "11:24"
+     "heure": "11:24",
+     "dist": 2100,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Jarlsberg",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -97,7 +157,13 @@
      "code": "C3",
      "pays": "NORV",
      "nom": "PRIX DE STRASBOURG NORVEGE",
-     "heure": "11:59"
+     "heure": "12:00",
+     "dist": 2100,
+     "partants": 10,
+     "type": null,
+     "hippodrome": "Jarlsberg",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -105,7 +171,13 @@
      "code": "C4",
      "pays": "NORV",
      "nom": "PRIX DE SANARY NORVEGE",
-     "heure": "12:34"
+     "heure": "12:34",
+     "dist": 2100,
+     "partants": 10,
+     "type": null,
+     "hippodrome": "Jarlsberg",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -113,7 +185,13 @@
      "code": "C5",
      "pays": "NORV",
      "nom": "PRIX DE NARBONNE NORVEGE",
-     "heure": "13:09"
+     "heure": "13:09",
+     "dist": 2100,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Jarlsberg",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -121,7 +199,13 @@
      "code": "C6",
      "pays": "NORV",
      "nom": "PRIX DE MARSEILLE NORVEGE",
-     "heure": "13:30"
+     "heure": "13:30",
+     "dist": 1609,
+     "partants": 6,
+     "type": null,
+     "hippodrome": "Jarlsberg",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     }
    ]
   },
@@ -135,7 +219,13 @@
      "code": "C1",
      "pays": "FRANCE",
      "nom": "PRIX D'INDROLLES",
-     "heure": "11:42"
+     "heure": "11:44",
+     "dist": 1400,
+     "partants": 7,
+     "type": null,
+     "hippodrome": "Chantilly",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -143,7 +233,13 @@
      "code": "C2",
      "pays": "FRANCE",
      "nom": "PRIX DU GRAND VIVIER",
-     "heure": "12:17"
+     "heure": "12:18",
+     "dist": 1400,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Chantilly",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -151,7 +247,13 @@
      "code": "C3",
      "pays": "FRANCE",
      "nom": "PRIX DES TERROIRS DE FRANCE",
-     "heure": "12:52"
+     "heure": "12:52",
+     "dist": 1400,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Chantilly",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -159,7 +261,13 @@
      "code": "C4",
      "pays": "FRANCE",
      "nom": "PRIX DE SAINT-IMIER",
-     "heure": "13:27"
+     "heure": "13:27",
+     "dist": 1900,
+     "partants": 16,
+     "type": null,
+     "hippodrome": "Chantilly",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -167,7 +275,13 @@
      "code": "C5",
      "pays": "FRANCE",
      "nom": "PRIX DU BOIS LARIS",
-     "heure": "14:12"
+     "heure": "14:12",
+     "dist": 1900,
+     "partants": 16,
+     "type": null,
+     "hippodrome": "Chantilly",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -175,7 +289,13 @@
      "code": "C6",
      "pays": "FRANCE",
      "nom": "PRIX DE L'HOTEL DE VERMANDOIS",
-     "heure": "14:47"
+     "heure": "14:47",
+     "dist": 1200,
+     "partants": 14,
+     "type": null,
+     "hippodrome": "Chantilly",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -183,7 +303,13 @@
      "code": "C7",
      "pays": "FRANCE",
      "nom": "PRIX DU BOIS BOURILLON",
-     "heure": "15:22"
+     "heure": "15:22",
+     "dist": 1900,
+     "partants": 16,
+     "type": null,
+     "hippodrome": "Chantilly",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -191,7 +317,13 @@
      "code": "C8",
      "pays": "FRANCE",
      "nom": "PRIX DE SENLIS",
-     "heure": "15:57"
+     "heure": "15:57",
+     "dist": 1200,
+     "partants": 14,
+     "type": null,
+     "hippodrome": "Chantilly",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     }
    ]
   },
@@ -205,7 +337,13 @@
      "code": "C1",
      "pays": "FRANCE",
      "nom": "PRIX DU PORT DE BANC",
-     "heure": "16:32"
+     "heure": "16:32",
+     "dist": 2000,
+     "partants": 8,
+     "type": null,
+     "hippodrome": "Pont De Vivaux",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -213,7 +351,13 @@
      "code": "C2",
      "pays": "FRANCE",
      "nom": "PRIX DES TROIS PONTS",
-     "heure": "17:07"
+     "heure": "17:07",
+     "dist": 2000,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Pont De Vivaux",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -221,7 +365,13 @@
      "code": "C3",
      "pays": "FRANCE",
      "nom": "PRIX TWIG",
-     "heure": "17:42"
+     "heure": "17:42",
+     "dist": 2000,
+     "partants": 8,
+     "type": null,
+     "hippodrome": "Pont De Vivaux",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -229,7 +379,13 @@
      "code": "C4",
      "pays": "FRANCE",
      "nom": "PRIX DE L'ILE DE TIBOULEN",
-     "heure": "18:15"
+     "heure": "18:15",
+     "dist": 1500,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Pont De Vivaux",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -237,7 +393,13 @@
      "code": "C5",
      "pays": "FRANCE",
      "nom": "PRIX DE LA MADRAGUE",
-     "heure": "18:45"
+     "heure": "18:45",
+     "dist": 1500,
+     "partants": 8,
+     "type": null,
+     "hippodrome": "Pont De Vivaux",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -245,7 +407,13 @@
      "code": "C6",
      "pays": "FRANCE",
      "nom": "PRIX DE TOURNEFORT",
-     "heure": "19:15"
+     "heure": "19:15",
+     "dist": 1500,
+     "partants": 8,
+     "type": null,
+     "hippodrome": "Pont De Vivaux",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -253,7 +421,13 @@
      "code": "C7",
      "pays": "FRANCE",
      "nom": "PRIX DU CERCLE DES PHOCEENS",
-     "heure": "19:45"
+     "heure": "19:45",
+     "dist": 2000,
+     "partants": 7,
+     "type": null,
+     "hippodrome": "Pont De Vivaux",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -261,7 +435,13 @@
      "code": "C8",
      "pays": "FRANCE",
      "nom": "PRIX DU PORT DE L'EOUBE",
-     "heure": "20:15"
+     "heure": "20:15",
+     "dist": 2000,
+     "partants": 7,
+     "type": null,
+     "hippodrome": "Pont De Vivaux",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     }
    ]
   },
@@ -275,7 +455,13 @@
      "code": "C1",
      "pays": "ROYAUME",
      "nom": "APPRENTICE HANDICAP (CLASS 5)",
-     "heure": "18:00"
+     "heure": "18:00",
+     "dist": 1400,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Kempton Park",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -283,7 +469,13 @@
      "code": "C2",
      "pays": "ROYAUME",
      "nom": "EBF NOVICE STAKES (CLASS 3)",
-     "heure": "18:30"
+     "heure": "18:30",
+     "dist": 1400,
+     "partants": 10,
+     "type": null,
+     "hippodrome": "Kempton Park",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -291,7 +483,13 @@
      "code": "C3",
      "pays": "ROYAUME",
      "nom": "MAIDEN FILLIES' STAKES (CLASS 3)",
-     "heure": "19:00"
+     "heure": "19:00",
+     "dist": 1400,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Kempton Park",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -299,7 +497,13 @@
      "code": "C4",
      "pays": "ROYAUME",
      "nom": "FILLIES' NOVICE STAKES",
-     "heure": "19:30"
+     "heure": "19:30",
+     "dist": 2200,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Kempton Park",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -307,7 +511,13 @@
      "code": "C5",
      "pays": "ROYAUME",
      "nom": "HANDICAP (CLASS 6)",
-     "heure": "20:00"
+     "heure": "20:00",
+     "dist": 1400,
+     "partants": 14,
+     "type": null,
+     "hippodrome": "Kempton Park",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -315,7 +525,13 @@
      "code": "C6",
      "pays": "ROYAUME",
      "nom": "HANDICAP (CLASS 5) (LONDON SPRINT SERIES QUALIFIER)",
-     "heure": "20:30"
+     "heure": "20:30",
+     "dist": 1200,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Kempton Park",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -323,7 +539,13 @@
      "code": "C7",
      "pays": "ROYAUME",
      "nom": "HANDICAP (CLASS 5) (LONDON STAYERS SERIES QUALIFIER)",
-     "heure": "21:00"
+     "heure": "21:00",
+     "dist": 3210,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Kempton Park",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -331,7 +553,13 @@
      "code": "C8",
      "pays": "ROYAUME",
      "nom": "HANDICAP (CLASS 6)",
-     "heure": "21:30"
+     "heure": "21:30",
+     "dist": 1600,
+     "partants": 13,
+     "type": null,
+     "hippodrome": "Kempton Park",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     }
    ]
   },
@@ -345,7 +573,13 @@
      "code": "C1",
      "pays": "HONG",
      "nom": "BEDFORD HANDICAP",
-     "heure": "12:35"
+     "heure": "12:35",
+     "dist": 1800,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -353,7 +587,13 @@
      "code": "C2",
      "pays": "HONG",
      "nom": "CHEUNG FAT HANDICAP - SECTION 2",
-     "heure": "13:05"
+     "heure": "13:05",
+     "dist": 1200,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -361,7 +601,13 @@
      "code": "C3",
      "pays": "HONG",
      "nom": "FAT TSEUNG HANDICAP - SECTION 2",
-     "heure": "13:35"
+     "heure": "13:35",
+     "dist": 1650,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -369,7 +615,13 @@
      "code": "C4",
      "pays": "HONG",
      "nom": "FAT TSEUNG HANDICAP - SECTION 1",
-     "heure": "14:10"
+     "heure": "14:10",
+     "dist": 1650,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -377,7 +629,13 @@
      "code": "C5",
      "pays": "HONG",
      "nom": "THE CHINESE GENERAL CHAMBER OF COMMERCE CUP (HANDICAP)",
-     "heure": "14:40"
+     "heure": "14:40",
+     "dist": 1000,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -385,7 +643,13 @@
      "code": "C6",
      "pays": "HONG",
      "nom": "CHEUNG FAT HANDICAP - SECTION 1",
-     "heure": "15:10"
+     "heure": "15:10",
+     "dist": 1200,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -393,7 +657,13 @@
      "code": "C7",
      "pays": "HONG",
      "nom": "YIP FAT HANDICAP - SECTION 2",
-     "heure": "15:45"
+     "heure": "15:45",
+     "dist": 1200,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -401,7 +671,13 @@
      "code": "C8",
      "pays": "HONG",
      "nom": "HING FAT HANDICAP",
-     "heure": "16:15"
+     "heure": "16:15",
+     "dist": 1650,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -409,7 +685,13 @@
      "code": "C9",
      "pays": "HONG",
      "nom": "YIP FAT HANDICAP - SECTION 1",
-     "heure": "16:50"
+     "heure": "16:50",
+     "dist": 1200,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Happy Valley",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     }
    ]
   },
@@ -423,7 +705,13 @@
      "code": "C1",
      "pays": "SU",
      "nom": "PRIX DE LILLE SUEDE",
-     "heure": "18:15"
+     "heure": "18:15",
+     "dist": 1640,
+     "partants": 4,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -431,7 +719,13 @@
      "code": "C2",
      "pays": "SU",
      "nom": "PRIX DE NANTES SUEDE",
-     "heure": "18:39"
+     "heure": "18:39",
+     "dist": 2140,
+     "partants": 10,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -439,7 +733,13 @@
      "code": "C3",
      "pays": "SU",
      "nom": "PRIX DE CAEN SUEDE",
-     "heure": "19:03"
+     "heure": "19:03",
+     "dist": 2140,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -447,7 +747,13 @@
      "code": "C4",
      "pays": "SU",
      "nom": "PRIX DE TOURS SUEDE",
-     "heure": "19:27"
+     "heure": "19:27",
+     "dist": 2140,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -455,7 +761,13 @@
      "code": "C5",
      "pays": "SU",
      "nom": "PRIX DE RENNES SUEDE",
-     "heure": "19:51"
+     "heure": "19:51",
+     "dist": 2140,
+     "partants": 10,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -463,7 +775,13 @@
      "code": "C6",
      "pays": "SU",
      "nom": "PRIX DE ROUEN SUEDE",
-     "heure": "20:13"
+     "heure": "20:13",
+     "dist": 1640,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -471,7 +789,13 @@
      "code": "C7",
      "pays": "SU",
      "nom": "PRIX DE BREST SUEDE",
-     "heure": "20:41"
+     "heure": "20:41",
+     "dist": 2140,
+     "partants": 9,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -479,7 +803,13 @@
      "code": "C8",
      "pays": "SU",
      "nom": "PRIX DE LENS SUEDE",
-     "heure": "21:03"
+     "heure": "21:03",
+     "dist": 2640,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -487,7 +817,13 @@
      "code": "C9",
      "pays": "SU",
      "nom": "PRIX DU MANS SUEDE",
-     "heure": "21:26"
+     "heure": "21:26",
+     "dist": 1640,
+     "partants": 11,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -495,7 +831,13 @@
      "code": "C10",
      "pays": "SU",
      "nom": "PRIX D'ANGERS SUEDE",
-     "heure": "21:51"
+     "heure": "21:51",
+     "dist": 2140,
+     "partants": 12,
+     "type": null,
+     "hippodrome": "Solvalla",
+     "source": "Turf-France · reu.php",
+     "arrivee": null
     }
    ]
   },
@@ -509,7 +851,13 @@
      "code": "C1",
      "pays": "MAROC",
      "nom": "CHAPO",
-     "heure": "12:18"
+     "heure": "12:18",
+     "dist": 1200,
+     "partants": 5,
+     "type": "T",
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (reu.php ne publie pas ce pays)",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -517,7 +865,13 @@
      "code": "C2",
      "pays": "MAROC",
      "nom": "ALLEGED",
-     "heure": "12:53"
+     "heure": "12:53",
+     "dist": 1900,
+     "partants": 8,
+     "type": "T",
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (reu.php ne publie pas ce pays)",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -525,7 +879,13 @@
      "code": "C3",
      "pays": "MAROC",
      "nom": "L'ESCAPADE",
-     "heure": "13:28"
+     "heure": "13:28",
+     "dist": 1700,
+     "partants": 8,
+     "type": "T",
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (reu.php ne publie pas ce pays)",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -533,7 +893,13 @@
      "code": "C4",
      "pays": "MAROC",
      "nom": "JELINA",
-     "heure": "14:03"
+     "heure": "14:03",
+     "dist": 1300,
+     "partants": 9,
+     "type": "T",
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (reu.php ne publie pas ce pays)",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -541,7 +907,13 @@
      "code": "C5",
      "pays": "MAROC",
      "nom": "NADJI",
-     "heure": "14:38"
+     "heure": "14:38",
+     "dist": 1900,
+     "partants": 15,
+     "type": "T",
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (reu.php ne publie pas ce pays)",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -549,7 +921,13 @@
      "code": "C6",
      "pays": "MAROC",
      "nom": "AL MAJBOURA",
-     "heure": "15:13"
+     "heure": "15:13",
+     "dist": 1700,
+     "partants": 9,
+     "type": "T",
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (reu.php ne publie pas ce pays)",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -557,7 +935,13 @@
      "code": "C7",
      "pays": "MAROC",
      "nom": "AIN MIRA",
-     "heure": "15:48"
+     "heure": "15:48",
+     "dist": 1800,
+     "partants": 12,
+     "type": "T",
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (reu.php ne publie pas ce pays)",
+     "arrivee": null
     },
     {
      "date": "2026-10-07",
@@ -565,10 +949,16 @@
      "code": "C8",
      "pays": "MAROC",
      "nom": "MARESCA",
-     "heure": "16:20"
+     "heure": "16:20",
+     "dist": 1700,
+     "partants": 13,
+     "type": "T",
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (reu.php ne publie pas ce pays)",
+     "arrivee": null
     }
    ]
   }
  ],
- "collecteLe": "2026-10-07T09:14:52.833Z"
+ "collecteLe": "2026-10-07T10:27:31.671Z"
 }

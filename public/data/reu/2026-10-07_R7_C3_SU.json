@@ -48,7 +48,7 @@
   {
    "num": 2,
    "cheval": "CRISPY BET",
-   "driver": "K. OSCARSSON",
+   "driver": "J. WIMAN",
    "entraineur": "J. HANSEN",
    "cote": null,
    "coteRef": null,
@@ -291,8 +291,8 @@
  "tops": {
   "chevaux": [],
   "drivers": [
-   "1",
    "2",
+   "1",
    "3",
    "4",
    "5",
@@ -316,8 +316,8 @@
   ],
   "top10chevaux": [],
   "top10drivers": [
-   "1",
    "2",
+   "1",
    "3",
    "4",
    "5",
@@ -395,7 +395,6 @@
   ],
   "aptitudePlace": [
    "7",
-   "2",
    "6"
   ],
   "topChronos": [
@@ -446,5 +445,5 @@
  "pronosTf": [
   "1 - 3 - 12 - 7 - 5 - 2 - 6"
  ],
- "collecteLe": "2026-10-07T09:16:24.778Z"
+ "collecteLe": "2026-10-07T10:27:04.096Z"
 }

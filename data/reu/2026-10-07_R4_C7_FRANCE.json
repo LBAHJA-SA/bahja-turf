@@ -28,7 +28,7 @@
    "cheval": "NYMPHEAS",
    "driver": "M. GERMAIN",
    "entraineur": "F. BOUALEM",
-   "cote": 17,
+   "cote": 11,
    "coteRef": 12.8,
    "musique": "0p5p5p1p1p1p2p6p6p0p",
    "gains": 27478,
@@ -50,7 +50,7 @@
    "cheval": "L'ALTA ROCCA",
    "driver": "C. PACAUT",
    "entraineur": "C. ESCUDER",
-   "cote": 9.7,
+   "cote": 10,
    "coteRef": 5.2,
    "musique": "0p3p1p6p0p0p2p3p1p4p",
    "gains": 33026,
@@ -72,7 +72,7 @@
    "cheval": "LE DOC",
    "driver": "A. CRASTUS",
    "entraineur": "R. CHOTARD",
-   "cote": 6.5,
+   "cote": 6.9,
    "coteRef": 7.7,
    "musique": "5p4p4p3p1p2p2p1p7p8p",
    "gains": 56728,
@@ -94,7 +94,7 @@
    "cheval": "JUST FOR MEME",
    "driver": "H. BESNIER",
    "entraineur": "C. ESCUDER",
-   "cote": 1.4,
+   "cote": 1.6,
    "coteRef": 11.3,
    "musique": "1p0p6p6p5p0p3p7p4p6p",
    "gains": 44525,
@@ -116,7 +116,7 @@
    "cheval": "SPACE GOOD",
    "driver": "M. GRANDIN",
    "entraineur": "C. ESCUDER",
-   "cote": 12,
+   "cote": 9,
    "coteRef": 3.4,
    "musique": "3p9p0p2p3p9p1p4p3p2p",
    "gains": 28094,
@@ -138,7 +138,7 @@
    "cheval": "LES PRINCES",
    "driver": "A. D'JJI",
    "entraineur": "N. PERRET",
-   "cote": 21,
+   "cote": 17,
    "coteRef": null,
    "musique": "8p0p0p6p6p6p7p",
    "gains": 1845,
@@ -160,7 +160,7 @@
    "cheval": "AGNESIT'A",
    "driver": "J. NICOLEAU",
    "entraineur": "A. SANGLARD",
-   "cote": 20,
+   "cote": 13,
    "coteRef": 41.2,
    "musique": "0p5p6p0p5p3p9p8p5p2p",
    "gains": 13516,
@@ -225,8 +225,8 @@
   "topCotesDirect": [
    "4",
    "3",
-   "2",
    "5",
+   "2",
    "1",
    "7",
    "6"
@@ -409,5 +409,5 @@
  "pronosTf": [
   "3 - 5 - 2 - 1 - 4"
  ],
- "collecteLe": "2026-10-07T09:15:45.647Z"
+ "collecteLe": "2026-10-07T10:26:26.487Z"
 }

@@ -28,7 +28,7 @@
    "cheval": "KINIRO",
    "driver": "OISIN MURPHY",
    "entraineur": "DAN HORSFORD",
-   "cote": 5,
+   "cote": 8.3,
    "coteRef": null,
    "musique": "9p7p3p8p2p",
    "gains": 27171,
@@ -50,7 +50,7 @@
    "cheval": "CALLING A STAR",
    "driver": "FINLEY MARSH",
    "entraineur": "RICHARD HUGHES",
-   "cote": 21,
+   "cote": 43,
    "coteRef": null,
    "musique": "0p0p4p1p7p",
    "gains": 24996,
@@ -72,7 +72,7 @@
    "cheval": "MADMAN",
    "driver": "BILLY LOUGHNANE",
    "entraineur": "RACHEL COOK & JOHN BRIDGER",
-   "cote": 2,
+   "cote": 4.1,
    "coteRef": 4.8,
    "musique": "1p3p1p1p6p",
    "gains": 25364,
@@ -116,7 +116,7 @@
    "cheval": "KING OF CHAOS",
    "driver": "MARCO GHIANI",
    "entraineur": "DYLAN CUNHA",
-   "cote": 21,
+   "cote": 2.5,
    "coteRef": 8.3,
    "musique": "9p0p7p1p7p",
    "gains": 16711,
@@ -138,7 +138,7 @@
    "cheval": "AN OUTLAW'S GRACE",
    "driver": "SEAN LEVEY",
    "entraineur": "RICHARD HANNON",
-   "cote": null,
+   "cote": 12,
    "coteRef": null,
    "musique": "0p6p2p7p4p",
    "gains": 58133,
@@ -182,7 +182,7 @@
    "cheval": "GOLDWORK",
    "driver": "CALLUM HUTCHINSON",
    "entraineur": "EVE JOHNSON HOUGHTON",
-   "cote": null,
+   "cote": 43,
    "coteRef": null,
    "musique": "4p6p3p7p3p",
    "gains": 15196,
@@ -226,7 +226,7 @@
    "cheval": "BLUE ORBIT",
    "driver": "LUKE MORRIS",
    "entraineur": "TOM WARD",
-   "cote": 10,
+   "cote": 9.6,
    "coteRef": null,
    "musique": "7p6p4p5p0p",
    "gains": 14965,
@@ -248,7 +248,7 @@
    "cheval": "UP THE AGENDA",
    "driver": "GEORGE WOOD",
    "entraineur": "JACK MORLAND",
-   "cote": 5.3,
+   "cote": 10,
    "coteRef": null,
    "musique": "9p4p6p8p7p",
    "gains": 19459,
@@ -333,13 +333,14 @@
    "7"
   ],
   "topCotesDirect": [
+   "5",
    "3",
    "1",
-   "11",
-   "4",
    "10",
-   "2",
-   "5"
+   "4",
+   "11",
+   "6",
+   "2"
   ],
   "topChevaux": [
    "3",
@@ -429,9 +430,7 @@
    "5",
    "6"
   ],
-  "pourUnePlace": [
-   "11"
-  ],
+  "pourUnePlace": [],
   "outiders": [
    "1",
    "11"
@@ -575,5 +574,5 @@
   "6 - 8 - 3 - 4 - 1 - 2 - 9",
   "7 - 2 - 6"
  ],
- "collecteLe": "2026-10-07T09:15:58.623Z"
+ "collecteLe": "2026-10-07T10:26:39.093Z"
 }

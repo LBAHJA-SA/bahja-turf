@@ -28,7 +28,7 @@
    "cheval": "AQUILA D'ORO",
    "driver": "LUKE MORRIS",
    "entraineur": "OLIVER COLE",
-   "cote": null,
+   "cote": 46,
    "coteRef": null,
    "musique": "0p",
    "gains": 0,
@@ -50,7 +50,7 @@
    "cheval": "CORONETA",
    "driver": "WILLIAM CARVER",
    "entraineur": "JAMIE OSBORNE",
-   "cote": 20,
+   "cote": 15,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -72,7 +72,7 @@
    "cheval": "FOREVER FAITHFULL",
    "driver": "ROB HORNBY",
    "entraineur": "JONATHAN PORTMAN",
-   "cote": 20,
+   "cote": 23,
    "coteRef": null,
    "musique": "8p7p",
    "gains": 0,
@@ -94,7 +94,7 @@
    "cheval": "GHAIYYATH DREAM",
    "driver": "BILLY LOUGHNANE",
    "entraineur": "RICHARD HUGHES",
-   "cote": 4.1,
+   "cote": 6.6,
    "coteRef": null,
    "musique": "5p",
    "gains": 0,
@@ -107,7 +107,7 @@
    "coteRefEntraineur": "07,0",
    "silk": "https://assets.racingdata.pmu.fr/silks/20261007/KEM/3/20261007-KEM-3-4.png",
    "proprietaire": "JABER ABDULLAH",
-   "dernierPassage": null,
+   "dernierPassage": 26,
    "depart": 7,
    "def": null
   },
@@ -116,7 +116,7 @@
    "cheval": "GODSPEED GIRL",
    "driver": "P. J. MCDONALD",
    "entraineur": "ANDREW BALDING",
-   "cote": 6.9,
+   "cote": 7.7,
    "coteRef": null,
    "musique": "4p5p",
    "gains": 3624,
@@ -129,7 +129,7 @@
    "coteRefEntraineur": "05,0",
    "silk": "https://assets.racingdata.pmu.fr/silks/20261007/KEM/3/20261007-KEM-3-5.png",
    "proprietaire": "BOND THOROUGHBRED LIMITED",
-   "dernierPassage": null,
+   "dernierPassage": 26,
    "depart": 9,
    "def": null
   },
@@ -138,7 +138,7 @@
    "cheval": "INMYOPINION",
    "driver": "FINLEY MARSH",
    "entraineur": "AMANDA PERRETT",
-   "cote": null,
+   "cote": 13,
    "coteRef": null,
    "musique": "6p6p",
    "gains": 0,
@@ -160,7 +160,7 @@
    "cheval": "JUMEIRAH PEARL",
    "driver": "MARCO GHIANI",
    "entraineur": "ISMAIL MOHAMMED & JOSE SANTOS",
-   "cote": null,
+   "cote": 46,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -182,7 +182,7 @@
    "cheval": "KISS OF LIFE",
    "driver": "GEORGE BASS",
    "entraineur": "JACK CHANNON",
-   "cote": null,
+   "cote": 46,
    "coteRef": null,
    "musique": "8p",
    "gains": 0,
@@ -204,7 +204,7 @@
    "cheval": "MISS TRICKSTER",
    "driver": "SEAN LEVEY",
    "entraineur": "JAMIE OSBORNE",
-   "cote": 5.2,
+   "cote": 9.3,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -226,7 +226,7 @@
    "cheval": "PERPETUALLY",
    "driver": "LEWIS EDMUNDS",
    "entraineur": "HARRY CHARLTON",
-   "cote": 13,
+   "cote": 18,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -248,7 +248,7 @@
    "cheval": "TENSHI",
    "driver": "JACK MITCHELL",
    "entraineur": "ROGER VARIAN",
-   "cote": 20,
+   "cote": 23,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -270,7 +270,7 @@
    "cheval": "USAYLAH",
    "driver": "OISIN MURPHY",
    "entraineur": "JOHN & THADY GOSDEN",
-   "cote": 2.6,
+   "cote": 2.2,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -330,12 +330,12 @@
   "topCotesDirect": [
    "12",
    "4",
-   "9",
    "5",
-   "10",
+   "9",
+   "6",
    "2",
-   "3",
-   "11"
+   "10",
+   "3"
   ],
   "topChevaux": [],
   "topPalmares": [
@@ -397,7 +397,6 @@
   ],
   "incontournables": [],
   "pourUnePlace": [
-   "9",
    "12"
   ],
   "outiders": [
@@ -409,10 +408,10 @@
    "4",
    "1",
    "8",
+   "12",
    "2",
    "9",
-   "11",
-   "12"
+   "10"
   ]
  },
  "aptitudes": [
@@ -487,5 +486,5 @@
  "pronosTf": [
   "5 - 4 - 1 - 3 - 8 - 12 - 11"
  ],
- "collecteLe": "2026-10-07T09:15:52.713Z"
+ "collecteLe": "2026-10-07T10:26:33.656Z"
 }

@@ -50,7 +50,7 @@
    "cheval": "NAOS PACO",
    "driver": "M. DUCRE",
    "entraineur": "PH. GAILLARD",
-   "cote": 22,
+   "cote": 28,
    "coteRef": null,
    "musique": "Da",
    "gains": 0,
@@ -72,7 +72,7 @@
    "cheval": "NOUGAT JOLI",
    "driver": "W. DERSOIR-HABIB",
    "entraineur": "Guillaume JOUVE",
-   "cote": 14,
+   "cote": 13,
    "coteRef": null,
    "musique": "Dm4mDa8aDa",
    "gains": 1200,
@@ -94,7 +94,7 @@
    "cheval": "NEGRO RIO",
    "driver": "V. SAUSSAYE",
    "entraineur": "L. BARASSIN",
-   "cote": 12,
+   "cote": 13,
    "coteRef": null,
    "musique": "DaDa5aDaDa5a6a7a",
    "gains": 1600,
@@ -116,7 +116,7 @@
    "cheval": "NINOS",
    "driver": "M. LELIEVRE",
    "entraineur": "D. BROHIER",
-   "cote": 14,
+   "cote": 16,
    "coteRef": null,
    "musique": "4a4aDmDa",
    "gains": 3160,
@@ -124,12 +124,12 @@
    "sexe": "H",
    "poids": null,
    "valeur": null,
-   "chrono": "1'16\"2",
-   "coteRefJockey": "12,1",
-   "coteRefEntraineur": "17,2",
-   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/ENG/2/20261007-ENG-2-5.png",
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/d.gif",
    "proprietaire": "J. MELIS MACIAS",
-   "dernierPassage": 25,
+   "dernierPassage": null,
    "depart": null,
    "def": null
   },
@@ -138,7 +138,7 @@
    "cheval": "NO NASDAK TODAY",
    "driver": "A. VOISIN",
    "entraineur": "J. M. MARIE",
-   "cote": 17,
+   "cote": 19,
    "coteRef": null,
    "musique": "DmDm5m6mDm5mDm7aDm",
    "gains": 4690,
@@ -160,7 +160,7 @@
    "cheval": "NINO DU POMMEREUX",
    "driver": "R. HEMERY",
    "entraineur": "M. DUPUIS",
-   "cote": 34,
+   "cote": 38,
    "coteRef": null,
    "musique": "6a5a0a6a9a0a8a8a2a9a",
    "gains": 4790,
@@ -182,7 +182,7 @@
    "cheval": "NE M'ATTENDS PAS",
    "driver": "M. CHAMPENOIS",
    "entraineur": "D. BONNE",
-   "cote": 5.5,
+   "cote": 4,
    "coteRef": null,
    "musique": "DmDa1aDa6a5a5aDa4a(25)",
    "gains": 7255,
@@ -204,7 +204,7 @@
    "cheval": "NICE DREAM MESLOIS",
    "driver": "M. MOTTIER",
    "entraineur": "P. BELLOCHE",
-   "cote": 4.6,
+   "cote": 4.2,
    "coteRef": null,
    "musique": "Dm1mDa6aDm5m(25)DmDaDa",
    "gains": 8560,
@@ -226,7 +226,7 @@
    "cheval": "NINETY ONE BOND",
    "driver": "A. COLLETTE",
    "entraineur": "J. M. CHAINEUX",
-   "cote": 7.6,
+   "cote": 7.5,
    "coteRef": 3.9,
    "musique": "4m8a1mDa7aDa",
    "gains": 8610,
@@ -248,7 +248,7 @@
    "cheval": "NET MATCH",
    "driver": "E. RAFFIN",
    "entraineur": "M. LECOURT",
-   "cote": 5.2,
+   "cote": 5.1,
    "coteRef": null,
    "musique": "7a1a2aDa4aDa7a",
    "gains": 10660,
@@ -273,14 +273,14 @@
   "drivers": [
    "11",
    "9",
-   "5",
    "2",
    "1",
    "3",
    "10",
    "4",
    "8",
-   "7"
+   "7",
+   "6"
   ],
   "entraineurs": [
    "11",
@@ -290,9 +290,9 @@
    "10",
    "2",
    "1",
-   "5",
    "6",
-   "4"
+   "4",
+   "7"
   ],
   "top10chevaux": [
    "10"
@@ -300,14 +300,14 @@
   "top10drivers": [
    "11",
    "9",
-   "5",
    "2",
    "1",
    "3",
    "10",
    "4",
    "8",
-   "7"
+   "7",
+   "6"
   ],
   "top10entraineurs": [
    "11",
@@ -317,19 +317,19 @@
    "10",
    "2",
    "1",
-   "5",
    "6",
-   "4"
+   "4",
+   "7"
   ],
   "topCotesDirect": [
+   "8",
    "9",
    "11",
-   "8",
    "10",
    "1",
-   "4",
    "3",
-   "5"
+   "4",
+   "6"
   ],
   "topChevaux": [
    "8",
@@ -343,19 +343,19 @@
    "10",
    "9",
    "7",
-   "5",
    "3",
-   "4"
+   "4",
+   "6"
   ],
   "topForme": [
-   "8",
    "11",
+   "8",
    "9",
    "10",
    "4",
-   "5",
    "6",
-   "3"
+   "3",
+   "7"
   ],
   "topClasse": [
    "11",
@@ -364,8 +364,8 @@
    "8",
    "7",
    "6",
-   "5",
-   "4"
+   "4",
+   "3"
   ],
   "topJockeys": [
    "9",
@@ -381,23 +381,22 @@
    "9",
    "1",
    "8",
-   "5",
    "4",
    "6",
    "11",
-   "2"
+   "2",
+   "3"
   ],
   "aptitudePlace": [],
   "topChronos": [
    "9",
    "6",
-   "5",
    "10",
    "11",
-   "3"
+   "3",
+   "8"
   ],
   "topPosition": [
-   "5",
    "8",
    "10",
    "6",
@@ -409,8 +408,8 @@
    "4",
    "6",
    "3",
-   "5",
-   "10"
+   "10",
+   "11"
   ],
   "incontournables": [
    "11",
@@ -428,11 +427,11 @@
    "10",
    "9",
    "7",
-   "5",
    "3",
    "4",
    "6",
-   "1"
+   "1",
+   "2"
   ]
  },
  "aptitudes": [
@@ -464,17 +463,6 @@
    "courses": 8,
    "victoires": 0,
    "places": 4,
-   "pctV": "0",
-   "pctP": "50",
-   "aptG": null,
-   "aptP": null
-  },
-  {
-   "num": 5,
-   "cheval": "NINOS",
-   "courses": 4,
-   "victoires": 0,
-   "places": 2,
    "pctV": "0",
    "pctP": "50",
    "aptG": null,
@@ -547,10 +535,10 @@
    "aptP": null
   }
  ],
- "synthesePct": "11 - 8 - 9 - 10 - 4 - 6 - 7 - 5",
+ "synthesePct": "8 - 11 - 9 - 10 - 4 - 6 - 7 - 3",
  "pronosTf": [
-  "11 - 8 - 9 - 10 - 4 - 7 - 5",
+  "11 - 8 - 9 - 10 - 3 - 4 - 6",
   "3 - 6 - 7 - 10 - 11"
  ],
- "collecteLe": "2026-10-07T09:14:54.892Z"
+ "collecteLe": "2026-10-07T10:25:36.011Z"
 }

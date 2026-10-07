@@ -134,24 +134,34 @@ export async function meetingsDepuisReu(date, base = '/api/tf') {
     /* Les CHAMPS MANQUANTS du programme (reu.php ne donne ni la distance ni
      *  le nombre de partants) sont pris dans l'archive du collecteur quand
      *  elle existe : `public/data/reu/{date}_R{n}_C{m}_{PAYS}.json`. Sans ça
-     *  l/programme affiche « ?p • m » sur chaque ligne —难看 et inutile.
-     *  On ne comble RIEN quand le fichier manque (§7). */
-    for (const c of out.flatMap((m) => m.courses)) {
-      try {
-        const url = `/data/reu/${nomFichierCourse(date, Number(String(c.reunion).replace(/\D/g, '')), c.numOrdre, c.pays || pays)}`
-        const r2 = await fetch(url)
-        if (!r2.ok || !/json/i.test(r2.headers.get('content-type') || '')) continue
-        const f = await r2.json()
-        if (f?.race) {
-          if (f.race.distance != null) c.distance = f.race.distance
-          if (f.race.nbPartants != null) c.runners = f.race.nbPartants
-          else if (f.participants?.length) c.runners = f.participants.length
-          if (!c.libelle) c.libelle = f.race.nom || c.libelle
-          if (f.race.type) c.type = f.race.type
+     *  le programme affiche « ?p • m » sur chaque ligne.
+     *
+     *  ⚠ 07/10/2026 : un `fetch` PAR COURSE faisait 65 requêtes (~13 s), et
+     *  la page s'affichait à moitié — l'utilisateur ne voyait que 4 réunions
+     *  sur 8. On ne lit donc QUE LE PROGRAMME DU JOUR (`prog-{date}.json`,
+     *  une requête), et on lit le détail seulement des courses qu'il donne.
+     *  C'est aussi la seule source qui contient les distances. */
+    try {
+      const pr = await fetch(`/data/reu/prog-${date}.json`)
+      if (pr.ok && /json/i.test(pr.headers.get('content-type') || '')) {
+        const pj = await pr.json()
+        const parCle = new Map()
+        for (const r of pj.reunions || []) {
+          for (const c of r.courses || []) {
+            const k = `${String(c.reunion).replace(/\D/g, '')}_${String(c.code).replace(/\D/g, '')}_${String(c.pays || r.pays || '').replace(/\s+/g, '')}`
+            if (c.dist || c.partants || c.nb_partants) parCle.set(k, { dist: c.dist, partants: c.partants ?? c.nb_partants })
+          }
         }
-        if (f?.arrivee?.length && !c.quinte) { /* résultat : pas de marqueur quinté sans source */ }
-      } catch (e) { /* l'archive est un complément, jamais un bloquant */ }
-    }
+        for (const m of out) for (const c of m.courses) {
+          const k = `${String(c.reunion).replace(/\D/g, '')}_${c.numOrdre}_${String(c.pays || '').replace(/\s+/g, '')}`
+          const v = parCle.get(k)
+          if (v) {
+            if (v.dist) c.distance = v.dist
+            if (v.partants) c.runners = v.partants
+          }
+        }
+      }
+    } catch (e) { /* l'archive est un complément, jamais un bloquant */ }
     out.push({
       num: Number(String(re.courses[0].reunion || '1').replace(/\D+/g, '')) || 1,
       hippodrome: hippo,

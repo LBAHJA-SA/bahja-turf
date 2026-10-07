@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DE DEAUVILLE Course 01 Départ à l'Autostart 3.686 - Attelé. - 1.609 mètres. 1.512, 756, 504, 378, 294. - 252 au fonds d'élevage. Pour 3 à 15 ans n'ayant pas gagné 16.800.",
   "montant": 3686,
-  "arrivee": null,
+  "arrivee": [
+   3,
+   9,
+   7,
+   1,
+   4
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -25,7 +31,7 @@
  "participants": [
   {
    "num": 1,
-   "cheval": "KJÆRS LYKKE",
+   "cheval": "KJÏ¿?RS LYKKE",
    "driver": "L. A. KOLLE",
    "entraineur": "M. WESSEL",
    "cote": 27,
@@ -36,12 +42,12 @@
    "sexe": "F",
    "poids": null,
    "valeur": null,
-   "chrono": "1'27\"6",
+   "chrono": "",
    "coteRefJockey": "18,7",
    "coteRefEntraineur": null,
    "silk": "https://assets.racingdata.pmu.fr/silks/20261007/JBG/1/20261007-JBG-1-1.png",
    "proprietaire": "OLE ARNE HOTVEDT",
-   "dernierPassage": 53,
+   "dernierPassage": null,
    "depart": null,
    "def": "DA"
   },
@@ -91,7 +97,7 @@
   },
   {
    "num": 4,
-   "cheval": "FRØKEN FRANSEN",
+   "cheval": "FRÏ¿?KEN FRANSEN",
    "driver": "H. R. TVEDT",
    "entraineur": "U. OPHEIM",
    "cote": 11,
@@ -135,7 +141,7 @@
   },
   {
    "num": 6,
-   "cheval": "MORGEDØLEN",
+   "cheval": "MORGEDÏ¿?LEN",
    "driver": "J. H. UNDEM",
    "entraineur": "J. UNDEM",
    "cote": 15,
@@ -179,7 +185,7 @@
   },
   {
    "num": 8,
-   "cheval": "TRØ EIKA",
+   "cheval": "TRÏ¿? EIKA",
    "driver": "A. TENGSAREID",
    "entraineur": "K. DOKKEDAL",
    "cote": 3.2,
@@ -190,12 +196,12 @@
    "sexe": "F",
    "poids": null,
    "valeur": null,
-   "chrono": "1'26\"3",
+   "chrono": "",
    "coteRefJockey": "06,6",
    "coteRefEntraineur": null,
    "silk": "https://assets.racingdata.pmu.fr/silks/20261007/JBG/1/20261007-JBG-1-8.png",
    "proprietaire": "KRISTIAN DOKKEDAL",
-   "dernierPassage": 53,
+   "dernierPassage": null,
    "depart": null,
    "def": null
   },
@@ -309,9 +315,7 @@
    "4"
   ],
   "topChronos": [
-   "8",
    "7",
-   "1",
    "5",
    "9"
   ],
@@ -360,5 +364,5 @@
  "pronosTf": [
   "7 - 8 - 5 - 4 - 3 - 2"
  ],
- "collecteLe": "2026-10-07T09:15:08.626Z"
+ "collecteLe": "2026-10-07T10:25:49.422Z"
 }

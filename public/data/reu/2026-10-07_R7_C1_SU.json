@@ -80,12 +80,12 @@
    "sexe": "H",
    "poids": null,
    "valeur": null,
-   "chrono": "",
+   "chrono": "1'16\"7",
    "coteRefJockey": null,
    "coteRefEntraineur": null,
    "silk": "https://assets.racingdata.pmu.fr/silks/20261007/SOL/1/20261007-SOL-1-3.png",
    "proprietaire": "GUSTAFSSON PIA",
-   "dernierPassage": null,
+   "dernierPassage": 19,
    "depart": null,
    "def": null
   },
@@ -163,7 +163,9 @@
    "4"
   ],
   "aptitudePlace": [],
-  "topChronos": [],
+  "topChronos": [
+   "3"
+  ],
   "topPosition": [
    "5",
    "8",
@@ -194,5 +196,5 @@
  "aptitudes": [],
  "synthesePct": "",
  "pronosTf": [],
- "collecteLe": "2026-10-07T09:16:21.306Z"
+ "collecteLe": "2026-10-07T10:27:00.467Z"
 }

@@ -29,6 +29,11 @@ function ecrire(relatif, obj) {
   }
 }
 
+/** Le fichier tout juste écrit, relu (pour réécrire le programme avec les distances). */
+function lire(relatif) {
+  try { return fs.readFileSync(path.join(RACINE, 'data', relatif), 'utf8') } catch (e) { return null }
+}
+
 async function collecterJour(date) {
   console.log('══ ' + date + ' ══')
   const t0 = Date.now()
@@ -110,6 +115,11 @@ async function collecterJour(date) {
             cheval: String(r2.horse?.name || '').replace(/\s*\([^)]*\)\s*$/, ''),
             nom: String(r2.horse?.name || '').replace(/\s*\([^)]*\)\s*$/, ''),
             poids: r2.weight ?? null,
+            /* ⚠ LA PAGE LIT `driver`, PAS `jockey` (Article.jsx:374).
+             *   reu.php appelle le jockey « driver », e-sorec « rider ».
+             *   On écrit les deux : sans `driver`, la colonne Jockey
+             *   affichait « — » alors que la donnée était là. */
+            driver: r2.rider?.name || '',
             jockey: r2.rider?.name || '',
             entraineur: r2.horse?.trainer || '',
             valeur: null,
@@ -117,6 +127,17 @@ async function collecterJour(date) {
             age: r2.horse?.age ?? null,
             couleur: r2.horse?.colour || '',
             proprietaire: r2.horse?.owner || '',
+            /* Les champs que la page lit et qu'e-sorec donne : on les écrit
+             * avec les MÊMES noms qu'elle attend (Article.jsx liste
+             * `p.cote`, `p.depart`, `p.def`, `p.gains`…). Sans cela la fiche
+             * reste à moitié vide alors que la donnée existe. */
+            cote: r2.odd ?? null,
+            coteRef: r2.startodd ?? null,
+            depart: r2.startbox ?? null,
+            def: r2.horseshoe ?? r2.blinkers ?? null,
+            silk: r2.jockeycolorfile ?? r2.jockeycolour ?? null,
+            dernierPassage: r2.shortperformance ?? null,
+            gains: r2.horse?.gains ?? null,
             musique: (r2.horse?.forms || []).map((f) => `${f.pos || ''}${f.running || ''}`).join(' ') || '',
             place: r2.finishorder || null,
           }))
@@ -154,7 +175,8 @@ async function collecterJour(date) {
               num: r2.number,
               cheval: r2.name || '', nom: r2.name || '',   // voir §2a : la page lit `cheval`
               poids: r2.weight ?? null,
-              jockey: r2.jockey || '', entraineur: r2.trainer || '', valeur: r2.value ?? null,
+              driver: r2.jockey || '', jockey: r2.jockey || '',   // voir §2a : la page lit `driver`
+              entraineur: r2.trainer || '', valeur: r2.value ?? null,
               musique: r2.musique || '', place: r2.finish ?? null,
             }))
             if (partants.length) {
@@ -184,6 +206,42 @@ async function collecterJour(date) {
     await pause(1200)
   }
   console.log(`\n  ${ok} courses archivées, ${ko} échecs (${((Date.now() - t0) / 1000).toFixed(0)} s)`)
+
+  /* ⚠ LE PROGRAMME EST RÉÉCRIT AVEC LA DISTANCE ET LE NOMBRE DE PARTANTS.
+   *   `prog-{date}.json` est écrit plus haut, quand on n'a que reu.php — qui
+   *   ne donne NI l'un NI l'autre. La page Programme lisait alors 65 fichiers
+   *   d'archive (13 s) et ne montrait que la moitié des réunions. En
+   *   réécrivant le programme depuis les fichiers qu'on vient d'archiver, la
+   *   page lit UNE requête et affiche tout. C'est la même donnée, pas une
+   *   invention : elle vient des pages de détail qu'on vient de lire. */
+  try {
+    const avecDistances = reunions.map((r) => ({
+      ...r,
+      courses: (r.courses || []).map((c) => {
+        const cle = nomFichierCourse(date, Number(String(c.reunion).replace(/\D/g, '')),
+          Number(String(c.code).replace(/\D/g, '')), c.pays || r.pays || 'FRANCE')
+        const f = lire('reu/' + cle)
+        if (!f) return c
+        try {
+          const j = JSON.parse(f)
+          return {
+            ...c,
+            dist: j?.race?.distance ?? null,
+            partants: j?.race?.nbPartants ?? (j?.participants?.length || null),
+            type: j?.race?.type || null,
+            hippodrome: j?.meeting?.hippodrome || r.hippodrome,
+            source: j?.source || null,
+            arrivee: (j?.arrivee || []).join('-') || null,
+          }
+        } catch (e) { return c }
+      }),
+    }))
+    ecrire(`reu/prog-${date}.json`, { date, reunions: avecDistances, collecteLe: new Date().toISOString() })
+    const nb = avecDistances.reduce((a, r) => a + r.courses.filter((c) => c.dist).length, 0)
+    const total = avecDistances.reduce((a, r) => a + r.courses.length, 0)
+    console.log(`  programme réécrit : ${nb}/${total} courses avec distance et partants`)
+  } catch (e) { /* le programme reste utilisable sans distance */ }
+
   return { date, ok, ko }
 }
 
