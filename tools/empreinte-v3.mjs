@@ -244,7 +244,30 @@ function* triples(partants) {
 
 const NIVEAU_RANG = { FULL: 3, FAM: 2, COARSE: 1 }
 
-/* Le meilleur trio d'une course selon (level, support, -rank_dev, -prof_dev, rel_freq). */
+/* ───────────────────────────────────────────── le CLASSEMENT (§21)
+ *
+ * Ordre spécifié : (level, support, -rank_dev, -prof_dev, rel_freq).
+ *
+ * Essai du 07/10 (cohérence d'abord, support en dernier) : RÉFUTÉ par la
+ * mesure — rang-1 0.39% (contre 1.67%), top-10 4.11% (contre 10.14%),
+ * médiane 152 (contre 136). Le support d'abord concentre mieux : les
+ * vrais podiums appartiennent le plus souvent aux formes communes, et
+ * rel_freq favorise des trios « manuels » rares en réalité.
+ * On garde donc l'ordre spécifié. Aucun seuil, aucun filtre.
+ */
+export function cleClassement(cand, coh) {
+  return [NIVEAU_RANG[cand.level], cand.support, -coh.rankDev, -coh.profDev, coh.relFreq]
+}
+
+function comparerCles(a, b) {
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] > b[i]) return -1
+    if (a[i] < b[i]) return 1
+  }
+  return 0
+}
+
+/* Le meilleur trio d'une course selon le classement rééquilibré. */
 export function meilleurTrio(partants, index) {
   let best = null
   for (const t of triples(partants)) {
@@ -256,14 +279,8 @@ export function meilleurTrio(partants, index) {
     else if (index.coarse[emp.coarse]) cand = { level: 'COARSE', support: index.coarse[emp.coarse].n, resume: index.coarse[emp.coarse] }
     if (!cand) continue
     const coh = coherence(emp, cand.resume)
-    const cle = [NIVEAU_RANG[cand.level], cand.support, -coh.rankDev, -coh.profDev, coh.relFreq]
-    if (!best) { best = { trio: t, emp, ...cand, ...coh, cle }; continue }
-    let mieux = false
-    for (let i = 0; i < cle.length; i++) {
-      if (cle[i] > best.cle[i]) { mieux = true; break }
-      if (cle[i] < best.cle[i]) break
-    }
-    if (mieux) best = { trio: t, emp, ...cand, ...coh, cle }
+    const cle = cleClassement(cand, coh)
+    if (!best || comparerCles(cle, best.cle) < 0) best = { trio: t, emp, ...cand, ...coh, cle }
   }
   return best
 }
@@ -322,15 +339,9 @@ function principale() {
       else if (index.coarse[emp.coarse]) cand = { level: 'COARSE', support: index.coarse[emp.coarse].n, resume: index.coarse[emp.coarse] }
       if (!cand) continue
       const coh = coherence(emp, cand.resume)
-      tous.push({ trio: t, cle: [NIVEAU_RANG[cand.level], cand.support, -coh.rankDev, -coh.profDev, coh.relFreq], level: cand.level })
+      tous.push({ trio: t, cle: cleClassement(cand, coh), level: cand.level })
     }
-    tous.sort((x, y) => {
-      for (let i = 0; i < x.cle.length; i++) {
-        if (x.cle[i] > y.cle[i]) return -1
-        if (x.cle[i] < y.cle[i]) return 1
-      }
-      return 0
-    })
+    tous.sort((x, y) => comparerCles(x.cle, y.cle))
     const pos = tous.findIndex((x) => x.trio[0] === a[0] && x.trio[1] === a[1] && x.trio[2] === a[2])
     const premier = tous[0]
     if (premier) {
