@@ -7,7 +7,7 @@ dist/
 .vite/
 
 # -- donnees quotidiennes : ce qui reste LOCAL (caches regenerables) --
-data/synthese.json          # copie de travail -- public/ EST versionne
+data/synthese.json          # copie de travail
 data/cotes.json             # cache du marche Equidia, regenerable
 data/carriere.json
 data/daily.log
@@ -15,11 +15,23 @@ data/replay/
 public/data/cotes.json      # repli hors-ligne du marche, regenerable
 public/data/carriere.json
 
-# ATTENTION : public/data/synthese.json EST VERSIONNE.
-#   C'est l'archive de la presse. Elle ne peut PAS etre recalculee
-#   (pronostics-turf.info ne publie que la course du jour).
-#   Sans elle, le site deploye demarre avec une grille vide.
-public/data/reu/            # programmes du jour : regenerables
+# -- L'ARCHIVE DE LA PRESSE ----------------------------------------
+#   public/data/synthese.json EST l'archive (tickets + resultats).
+#   Elle ne peut PAS etre recalculee : pronostics-turf.info ne publie
+#   que la course du jour. Sans elle, le site demarre avec une grille
+#   vide et aucun ticket.
+#
+#   ⚠ ELLE EST IGNOREE PAR DEFAUT. Le job l'ecrit chaque jour ; on ne
+#   veut pas qu'un commit de code embarque l'archive et ne remplace pas
+#   le site par surprise. Elle ne part sur le site QUE a la demande :
+#       node tools\publier-archive.mjs
+#   (ce script la force dans git, commit, push, et attend le deploy.)
+#
+#   Pour l'inspecter sans la modifier : elle reste lisible sur le disque.
+public/data/synthese.json
+
+# programmes du jour : regenerables, grossissent sans fin
+public/data/reu/
 
 # -- corpus d'analyse (laboratoire, hors deploy) --------
 data/corpus/

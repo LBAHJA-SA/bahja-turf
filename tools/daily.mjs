@@ -9,6 +9,11 @@
 //    data/synthese.json   la Synthèse + le ticket + l'arrivée, jour par jour
 //    data/carriere.json   les carrières saisies (clé = date)
 //    data/daily.log       journal
+//
+//  ⭐ CE JOB NE PUBLIE RIEN. Il écrit public/data/synthese.json (le site le
+//    lit en direct), mais ne fait NI commit NI push : l'archive ne part sur
+//    le site que par `node tools\publier-archive.mjs`. Sans ça, chaque run
+//    du matin remplacerait le site sans que personne l'ait demandé.
 // ============================================================================
 import fs, { existsSync } from 'node:fs'
 import path from 'node:path'
