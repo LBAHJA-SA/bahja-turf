@@ -1,0 +1,7435 @@
+{
+ "races": [
+  {
+   "date": "2021-03-27",
+   "hippodrome": "VINCENNES",
+   "prix": "DU BOIS DE VINCENNES",
+   "grille": [
+    7,
+    9,
+    14,
+    13,
+    10,
+    1,
+    2,
+    4,
+    5,
+    8,
+    6,
+    11,
+    15,
+    12,
+    3
+   ],
+   "arrivee": [
+    9,
+    12,
+    13,
+    10,
+    14
+   ],
+   "snapshots": [
+    "20210327070815"
+   ]
+  },
+  {
+   "date": "2021-04-10",
+   "hippodrome": "VINCENNES",
+   "prix": "DU TREPORT",
+   "grille": [
+    13,
+    14,
+    9,
+    7,
+    10,
+    6,
+    4,
+    1,
+    8,
+    11,
+    12,
+    3,
+    2,
+    5
+   ],
+   "arrivee": [
+    10,
+    4,
+    11,
+    14,
+    1
+   ],
+   "snapshots": [
+    "20210409171644"
+   ]
+  },
+  {
+   "date": "2021-09-06",
+   "hippodrome": "CRAON",
+   "prix": "V AND B (TROPHEE VERT)",
+   "grille": [
+    15,
+    13,
+    5,
+    11,
+    16,
+    14,
+    9,
+    3,
+    1,
+    10,
+    12,
+    2,
+    7,
+    6,
+    8
+   ],
+   "arrivee": [
+    15,
+    16,
+    13,
+    5,
+    3
+   ],
+   "snapshots": [
+    "20210906051429"
+   ]
+  },
+  {
+   "date": "2021-09-20",
+   "hippodrome": "FONTAINEBLEAU",
+   "prix": "ROLAND FOUGEDOIRE",
+   "grille": [
+    8,
+    6,
+    4,
+    2,
+    16,
+    11,
+    1,
+    15,
+    10,
+    12,
+    7,
+    13,
+    9,
+    14,
+    5,
+    3
+   ],
+   "arrivee": [
+    5,
+    1,
+    8,
+    3,
+    4
+   ],
+   "snapshots": [
+    "20210920115816"
+   ]
+  },
+  {
+   "date": "2021-11-21",
+   "hippodrome": "VINCENNES",
+   "prix": "D'AMERIQUE RACES - PRIX DE BRETAGNE",
+   "grille": [
+    17,
+    1,
+    4,
+    9,
+    6,
+    10,
+    12,
+    11,
+    13,
+    7,
+    2,
+    5,
+    15,
+    14,
+    16,
+    8
+   ],
+   "arrivee": [
+    17,
+    12,
+    1,
+    7,
+    11
+   ],
+   "snapshots": [
+    "20211120183942"
+   ]
+  },
+  {
+   "date": "2021-12-02",
+   "hippodrome": "VINCENNES",
+   "prix": "BOURIGNY",
+   "grille": [
+    9,
+    14,
+    6,
+    16,
+    10,
+    4,
+    5,
+    8,
+    7,
+    1,
+    3,
+    2,
+    13,
+    15,
+    12,
+    11
+   ],
+   "arrivee": [
+    9,
+    14,
+    10,
+    6,
+    5
+   ],
+   "snapshots": [
+    "20211201225403"
+   ]
+  },
+  {
+   "date": "2022-05-17",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "HANDICAP DE L'ILE-DE-FRANCE",
+   "grille": [
+    7,
+    9,
+    4,
+    2,
+    15,
+    6,
+    5,
+    14,
+    11,
+    12,
+    16,
+    3,
+    1,
+    13,
+    10,
+    8
+   ],
+   "arrivee": [
+    15,
+    7,
+    8,
+    12,
+    4
+   ],
+   "snapshots": [
+    "20220517071700"
+   ]
+  },
+  {
+   "date": "2022-05-25",
+   "hippodrome": "LE CROISE LAROCHE",
+   "prix": "GRAND NATIONAL DU TROT PARISTURF DU 25/05/2022",
+   "grille": [
+    12,
+    5,
+    6,
+    11,
+    7,
+    10,
+    15,
+    1,
+    13,
+    8,
+    2,
+    16,
+    9,
+    14,
+    4,
+    3
+   ],
+   "arrivee": [
+    15,
+    10,
+    7,
+    1,
+    3
+   ],
+   "snapshots": [
+    "20220525084802"
+   ]
+  },
+  {
+   "date": "2022-05-26",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "MONTRETOUT",
+   "grille": [
+    1,
+    8,
+    5,
+    4,
+    10,
+    7,
+    9,
+    13,
+    14,
+    11,
+    2,
+    6,
+    3,
+    12
+   ],
+   "arrivee": [
+    9,
+    5,
+    8,
+    12,
+    7
+   ],
+   "snapshots": [
+    "20220525180627",
+    "20220526094022"
+   ]
+  },
+  {
+   "date": "2022-06-16",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "MAJOR FRIDOLIN",
+   "grille": [
+    6,
+    13,
+    14,
+    12,
+    10,
+    1,
+    3,
+    11,
+    2,
+    8,
+    7,
+    9,
+    5,
+    4,
+    16,
+    15
+   ],
+   "arrivee": [
+    15,
+    11,
+    10,
+    8,
+    1
+   ],
+   "snapshots": [
+    "20220616041914"
+   ]
+  },
+  {
+   "date": "2022-06-24",
+   "hippodrome": "VINCENNES",
+   "prix": "TERPSICHORE",
+   "grille": [
+    13,
+    11,
+    16,
+    7,
+    6,
+    10,
+    8,
+    12,
+    5,
+    9,
+    1,
+    15,
+    14,
+    4,
+    3
+   ],
+   "arrivee": [
+    4,
+    10,
+    12,
+    7,
+    2
+   ],
+   "snapshots": [
+    "20220624035327"
+   ]
+  },
+  {
+   "date": "2022-06-26",
+   "hippodrome": "VINCENNES",
+   "prix": "LE PARISIEN (PX BERTRAND DELOISON)",
+   "grille": [
+    3,
+    14,
+    8,
+    13,
+    5,
+    11,
+    10,
+    15,
+    4,
+    6,
+    2,
+    7,
+    1,
+    9,
+    12
+   ],
+   "arrivee": [
+    6,
+    2,
+    10,
+    15,
+    4
+   ],
+   "snapshots": [
+    "20220625151118",
+    "20220625224024"
+   ]
+  },
+  {
+   "date": "2024-04-27",
+   "hippodrome": "AUTEUIL",
+   "prix": "GRANDE COURSE DE HAIES DE PRINTEMPS",
+   "grille": [
+    4,
+    8,
+    16,
+    7,
+    1,
+    5,
+    3,
+    10,
+    2,
+    6,
+    14,
+    9,
+    13,
+    11,
+    17,
+    12
+   ],
+   "arrivee": [
+    4,
+    9,
+    14,
+    7,
+    2
+   ],
+   "snapshots": [
+    "20240426233745",
+    "20240426233841"
+   ]
+  },
+  {
+   "date": "2024-04-28",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE CHEVILLY",
+   "grille": [
+    2,
+    8,
+    14,
+    9,
+    16,
+    10,
+    12,
+    1,
+    4,
+    5,
+    3,
+    11,
+    7,
+    15,
+    13,
+    6
+   ],
+   "arrivee": [
+    1,
+    14,
+    10,
+    11,
+    5
+   ],
+   "snapshots": [
+    "20240428005909"
+   ]
+  },
+  {
+   "date": "2024-04-30",
+   "hippodrome": "FONTAINEBLEAU",
+   "prix": "DES GRANDES FONTAINES",
+   "grille": [
+    4,
+    15,
+    13,
+    12,
+    9,
+    3,
+    10,
+    5,
+    2,
+    16,
+    11,
+    14,
+    8,
+    6,
+    1
+   ],
+   "arrivee": [
+    3,
+    8,
+    2,
+    11,
+    15
+   ],
+   "snapshots": [
+    "20240429233156"
+   ]
+  },
+  {
+   "date": "2024-05-01",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "DE FOUILLEUSE",
+   "grille": [
+    3,
+    6,
+    11,
+    9,
+    4,
+    1,
+    5,
+    8,
+    2,
+    10,
+    14,
+    7,
+    12,
+    13
+   ],
+   "arrivee": [
+    10,
+    13,
+    3,
+    12,
+    7
+   ],
+   "snapshots": [
+    "20240501081002",
+    "20240501083921"
+   ]
+  },
+  {
+   "date": "2024-05-02",
+   "hippodrome": "CHANTILLY",
+   "prix": "DES GRANDES ECURIES",
+   "grille": [
+    16,
+    13,
+    9,
+    4,
+    7,
+    15,
+    2,
+    1,
+    8,
+    3,
+    12,
+    11,
+    6,
+    10,
+    5,
+    14
+   ],
+   "arrivee": [
+    10,
+    13,
+    3,
+    12,
+    7
+   ],
+   "snapshots": [
+    "20240502002723"
+   ]
+  },
+  {
+   "date": "2024-05-05",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DU PASSAGE SAINTE-ANNE",
+   "grille": [
+    10,
+    2,
+    4,
+    3,
+    7,
+    15,
+    6,
+    8,
+    1,
+    14,
+    9,
+    12,
+    13,
+    5,
+    16,
+    11
+   ],
+   "arrivee": [
+    7,
+    11,
+    9,
+    6,
+    14
+   ],
+   "snapshots": [
+    "20240504233205"
+   ]
+  },
+  {
+   "date": "2024-05-06",
+   "hippodrome": "VICHY",
+   "prix": "HENRI BERRY",
+   "grille": [
+    9,
+    11,
+    12,
+    8,
+    6,
+    10,
+    14,
+    15,
+    4,
+    7,
+    13,
+    5,
+    2,
+    3,
+    16
+   ],
+   "arrivee": [
+    6,
+    8,
+    7,
+    2,
+    13
+   ],
+   "snapshots": [
+    "20240505233152"
+   ]
+  },
+  {
+   "date": "2024-05-07",
+   "hippodrome": "CHANTILLY",
+   "prix": "DE MONTAGNY",
+   "grille": [
+    2,
+    6,
+    1,
+    10,
+    5,
+    11,
+    4,
+    13,
+    3,
+    7,
+    8,
+    9,
+    15,
+    12,
+    14
+   ],
+   "arrivee": [
+    3,
+    2,
+    15,
+    10,
+    1
+   ],
+   "snapshots": [
+    "20240506233251",
+    "20240507045108"
+   ]
+  },
+  {
+   "date": "2024-05-08",
+   "hippodrome": "LYON-PARILLY",
+   "prix": "DE LYON PARILLY",
+   "grille": [
+    10,
+    1,
+    5,
+    9,
+    2,
+    7,
+    12,
+    6,
+    11,
+    8,
+    3,
+    13,
+    4,
+    14,
+    15,
+    16
+   ],
+   "arrivee": [
+    10,
+    1,
+    6,
+    11,
+    4
+   ],
+   "snapshots": [
+    "20240507233339",
+    "20240508082625"
+   ]
+  },
+  {
+   "date": "2024-05-09",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DU BEL AIR",
+   "grille": [
+    6,
+    7,
+    9,
+    5,
+    13,
+    8,
+    2,
+    11,
+    1,
+    14,
+    3,
+    4,
+    12,
+    16,
+    10
+   ],
+   "arrivee": [
+    4,
+    12,
+    2,
+    10,
+    1
+   ],
+   "snapshots": [
+    "20240508233132",
+    "20240509024326"
+   ]
+  },
+  {
+   "date": "2024-05-11",
+   "hippodrome": "CAEN",
+   "prix": "DES DUCS DE NORMANDIE",
+   "grille": [
+    15,
+    16,
+    9,
+    13,
+    8,
+    2,
+    14,
+    5,
+    11,
+    3,
+    4,
+    10,
+    12,
+    1
+   ],
+   "arrivee": [
+    9,
+    3,
+    15,
+    16,
+    13
+   ],
+   "snapshots": [
+    "20240510233138"
+   ]
+  },
+  {
+   "date": "2024-05-12",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE LA CONCORDE",
+   "grille": [
+    6,
+    3,
+    4,
+    7,
+    13,
+    9,
+    1,
+    5,
+    12,
+    2,
+    15,
+    16,
+    8,
+    14,
+    10
+   ],
+   "arrivee": [
+    13,
+    4,
+    2,
+    6,
+    9
+   ],
+   "snapshots": [
+    "20240512000752"
+   ]
+  },
+  {
+   "date": "2024-05-13",
+   "hippodrome": "VICHY",
+   "prix": "DE SAINT-POURCAIN-SUR-SIOULE",
+   "grille": [
+    13,
+    14,
+    4,
+    9,
+    5,
+    1,
+    10,
+    11,
+    6,
+    7,
+    3,
+    15,
+    12,
+    8,
+    2
+   ],
+   "arrivee": [
+    4,
+    14,
+    1,
+    13,
+    2
+   ],
+   "snapshots": [
+    "20240513024219"
+   ]
+  },
+  {
+   "date": "2024-05-14",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "DES COTEAUX DE LA SEINE",
+   "grille": [
+    1,
+    5,
+    12,
+    15,
+    4,
+    10,
+    8,
+    13,
+    7,
+    14,
+    11,
+    6,
+    3,
+    9,
+    2,
+    16
+   ],
+   "arrivee": [
+    10,
+    6,
+    11,
+    3,
+    13
+   ],
+   "snapshots": [
+    "20240514003751"
+   ]
+  },
+  {
+   "date": "2024-05-19",
+   "hippodrome": "AUTEUIL",
+   "prix": "GRAND STEEPLE-CHASE DE PARIS",
+   "grille": [
+    6,
+    14,
+    2,
+    12,
+    10,
+    7,
+    4,
+    5,
+    8,
+    1,
+    11,
+    3,
+    9,
+    13
+   ],
+   "arrivee": [
+    8,
+    1,
+    5,
+    12,
+    13
+   ],
+   "snapshots": [
+    "20240519050527"
+   ]
+  },
+  {
+   "date": "2024-05-20",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "PISTOL PACKER",
+   "grille": [
+    5,
+    3,
+    13,
+    9,
+    12,
+    4,
+    10,
+    15,
+    8,
+    2,
+    14,
+    11,
+    1,
+    16,
+    7,
+    6
+   ],
+   "arrivee": [
+    3,
+    6,
+    12,
+    13,
+    9
+   ],
+   "snapshots": [
+    "20240520082151"
+   ]
+  },
+  {
+   "date": "2025-09-04",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE LA GALERIE DES VARIETES",
+   "grille": [
+    3,
+    8,
+    4,
+    1,
+    5,
+    9,
+    6,
+    7,
+    2,
+    11,
+    15,
+    13,
+    16,
+    10,
+    12
+   ],
+   "arrivee": [
+    12,
+    3,
+    10,
+    16,
+    6
+   ],
+   "snapshots": [
+    "20250904093129"
+   ]
+  },
+  {
+   "date": "2025-12-06",
+   "hippodrome": "VINCENNES",
+   "prix": "OCTAVE DOUESNEL",
+   "grille": [
+    14,
+    4,
+    13,
+    11,
+    10,
+    5,
+    12,
+    8,
+    7,
+    2,
+    6,
+    3,
+    9,
+    1
+   ],
+   "arrivee": [
+    14,
+    11,
+    6,
+    13,
+    12
+   ],
+   "snapshots": [
+    "20251205233930"
+   ]
+  }
+ ],
+ "toutes": [
+  {
+   "date": "2018-02-23",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    15,
+    13,
+    5,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2018-02-24",
+   "hippodrome": "CAGNESMER",
+   "prix": "PRINCESSE CHARLENE DE MONACO",
+   "grille": [
+    13,
+    15,
+    1,
+    8,
+    12,
+    10,
+    6,
+    5,
+    4,
+    9,
+    3,
+    14,
+    11,
+    7,
+    2,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20180224034604",
+    "20180224161344"
+   ]
+  },
+  {
+   "date": "2018-08-09",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    15,
+    5,
+    4,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2018-08-10",
+   "hippodrome": "CABOURG",
+   "prix": "BRUNO COQUATRIX",
+   "grille": [
+    12,
+    8,
+    2,
+    5,
+    9,
+    16,
+    13,
+    3,
+    4,
+    6,
+    15,
+    11,
+    14,
+    1,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20180809144056"
+   ]
+  },
+  {
+   "date": "2018-08-31",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    9,
+    8,
+    7,
+    4,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2018-09-01",
+   "hippodrome": "VINCENNES",
+   "prix": "GUY LE GONIDEC",
+   "grille": [
+    14,
+    16,
+    9,
+    7,
+    12,
+    13,
+    5,
+    1,
+    11,
+    8,
+    3,
+    10,
+    4,
+    15,
+    6,
+    2
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20180901100347",
+    "20180901101429"
+   ]
+  },
+  {
+   "date": "2018-09-05",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    3,
+    4,
+    1,
+    5
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2018-09-06",
+   "hippodrome": "AUTEUIL",
+   "prix": "JEAN BART",
+   "grille": [
+    7,
+    9,
+    4,
+    1,
+    6,
+    11,
+    3,
+    5,
+    8,
+    2,
+    14,
+    13,
+    12,
+    10,
+    16,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20180905221708"
+   ]
+  },
+  {
+   "date": "2019-01-02",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    1,
+    13,
+    5,
+    14
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2019-01-03",
+   "hippodrome": "VINCENNES",
+   "prix": "HERSILIE",
+   "grille": [
+    3,
+    5,
+    9,
+    4,
+    1,
+    13,
+    6,
+    12,
+    8,
+    7,
+    2,
+    11,
+    14,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20190103095247"
+   ]
+  },
+  {
+   "date": "2019-01-24",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    15,
+    11,
+    6,
+    17,
+    18
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2019-01-25",
+   "hippodrome": "PAU",
+   "prix": "EQUIDIA (PRIX RENE CRAMAIL)",
+   "grille": [
+    12,
+    6,
+    9,
+    2,
+    7,
+    15,
+    1,
+    11,
+    16,
+    14,
+    5,
+    4,
+    3,
+    13,
+    10,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20190124205656"
+   ]
+  },
+  {
+   "date": "2019-02-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    7,
+    2,
+    11,
+    3
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2019-02-17",
+   "hippodrome": "VINCENNES",
+   "prix": "D'ARRAS",
+   "grille": [
+    3,
+    13,
+    8,
+    4,
+    12,
+    7,
+    2,
+    1,
+    14,
+    6,
+    11,
+    10,
+    16,
+    9,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20190217133057"
+   ]
+  },
+  {
+   "date": "2019-07-17",
+   "hippodrome": "ARGENTAN",
+   "prix": "VIVEZ LE REVE DU PROPRIETAIRE",
+   "grille": [
+    7,
+    12,
+    11,
+    15,
+    14,
+    8,
+    16,
+    10,
+    13,
+    1,
+    3,
+    6,
+    9,
+    5,
+    2
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20190717102614",
+    "20190717102903"
+   ]
+  },
+  {
+   "date": "2019-07-22",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    15,
+    5,
+    8,
+    9,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2019-07-23",
+   "hippodrome": "COMPIEGNE",
+   "prix": "DE LA PLAINE DU PUTOIS",
+   "grille": [
+    11,
+    6,
+    13,
+    8,
+    16,
+    15,
+    12,
+    3,
+    1,
+    4,
+    5,
+    9,
+    10,
+    7,
+    14,
+    2
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20190723052248"
+   ]
+  },
+  {
+   "date": "2019-08-24",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    3,
+    10,
+    13,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2019-08-25",
+   "hippodrome": "DEAUVILLE",
+   "prix": "CASINO BARRIERE DEAUVILLE",
+   "grille": [
+    4,
+    6,
+    8,
+    7,
+    3,
+    1,
+    13,
+    2,
+    12,
+    10,
+    5,
+    9,
+    14,
+    16,
+    11,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20190824164839",
+    "20190825175433"
+   ]
+  },
+  {
+   "date": "2019-09-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    6,
+    4,
+    14,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2019-09-17",
+   "hippodrome": "COMPIEGNE",
+   "prix": "DU CHATEAU DE COMPIEGNE",
+   "grille": [
+    1,
+    8,
+    4,
+    7,
+    12,
+    10,
+    5,
+    3,
+    2,
+    9,
+    15,
+    11,
+    14,
+    13,
+    6,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20190917024317"
+   ]
+  },
+  {
+   "date": "2019-09-19",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    7,
+    1,
+    12,
+    8
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2019-09-20",
+   "hippodrome": "VINCENNES",
+   "prix": "LA MUTUELLE FAMILIALE",
+   "grille": [
+    7,
+    14,
+    12,
+    15,
+    9,
+    2,
+    5,
+    11,
+    10,
+    13,
+    3,
+    6,
+    16,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20190920180629",
+    "20190920180923"
+   ]
+  },
+  {
+   "date": "2019-10-14",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    5,
+    6,
+    1,
+    8
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2019-10-15",
+   "hippodrome": "CHANTILLY",
+   "prix": "DE LA CHAMBRE DE MONSIEUR LE PRINCE",
+   "grille": [
+    4,
+    7,
+    9,
+    11,
+    1,
+    10,
+    5,
+    6,
+    12,
+    15,
+    14,
+    13,
+    8,
+    2,
+    16,
+    3
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20191015084106"
+   ]
+  },
+  {
+   "date": "2019-10-23",
+   "hippodrome": "DEAUVILLE",
+   "prix": "EQUIDAYS",
+   "grille": [
+    3,
+    1,
+    6,
+    7,
+    2,
+    15,
+    8,
+    9,
+    5,
+    10,
+    16,
+    4,
+    14,
+    11,
+    12,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20191022145833"
+   ]
+  },
+  {
+   "date": "2020-09-29",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    4,
+    15,
+    8,
+    13
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2020-10-01",
+   "hippodrome": "AUTEUIL",
+   "prix": "GUILLAUME DE PRACOMTAL",
+   "grille": [
+    1,
+    2,
+    5,
+    3,
+    14,
+    10,
+    4,
+    6,
+    8,
+    7,
+    15,
+    11,
+    12,
+    16,
+    13,
+    9
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20200930223449"
+   ]
+  },
+  {
+   "date": "2020-10-14",
+   "hippodrome": "ANGERS",
+   "prix": "GNT PARIS-TURF",
+   "grille": [
+    4,
+    14,
+    1,
+    7,
+    9,
+    13,
+    10,
+    12,
+    2,
+    8,
+    3,
+    16,
+    15,
+    11,
+    6,
+    5
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20201007205145",
+    "20201013141353"
+   ]
+  },
+  {
+   "date": "2020-11-01",
+   "hippodrome": "LAVAL",
+   "prix": "DE LA VILLE DE LAVAL",
+   "grille": [
+    12,
+    14,
+    13,
+    11,
+    10,
+    15,
+    16,
+    3,
+    8,
+    2,
+    9,
+    5,
+    4,
+    1,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20201101045508"
+   ]
+  },
+  {
+   "date": "2020-11-17",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    1,
+    9,
+    3,
+    6
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2020-11-18",
+   "hippodrome": "MAUQUENCHY",
+   "prix": "GNT PARIS-TURF",
+   "grille": [
+    2,
+    8,
+    7,
+    13,
+    5,
+    9,
+    3,
+    6,
+    14,
+    10,
+    4,
+    16,
+    15,
+    11,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20201118102809"
+   ]
+  },
+  {
+   "date": "2020-11-24",
+   "hippodrome": "DEAUVILLE",
+   "prix": "DES POMMIERS",
+   "grille": [
+    1,
+    16,
+    15,
+    12,
+    7,
+    8,
+    3,
+    2,
+    4,
+    14,
+    6,
+    9,
+    11,
+    5,
+    10,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20201123160921"
+   ]
+  },
+  {
+   "date": "2020-11-29",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    5,
+    10,
+    2,
+    8
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2020-11-30",
+   "hippodrome": "VINCENNES",
+   "prix": "DE MESLAY DU MAINE",
+   "grille": [
+    14,
+    3,
+    8,
+    12,
+    13,
+    7,
+    15,
+    5,
+    4,
+    9,
+    6,
+    1,
+    10,
+    2,
+    16,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20201130013807"
+   ]
+  },
+  {
+   "date": "2020-11-31",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    6,
+    15,
+    13,
+    16,
+    2
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2020-12-01",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    6,
+    8,
+    11,
+    4,
+    7
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2020-12-02",
+   "hippodrome": "VINCENNES",
+   "prix": "DE ROZAY EN BRIE",
+   "grille": [
+    9,
+    8,
+    11,
+    13,
+    10,
+    14,
+    15,
+    7,
+    12,
+    2,
+    3,
+    6,
+    5,
+    4,
+    16,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20201202002909"
+   ]
+  },
+  {
+   "date": "2021-01-16",
+   "hippodrome": "VINCENNES",
+   "prix": "DU FOREZ",
+   "grille": [
+    10,
+    6,
+    5,
+    16,
+    15,
+    14,
+    3,
+    11,
+    12,
+    8,
+    1,
+    7,
+    4,
+    13,
+    9,
+    2
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210115141519"
+   ]
+  },
+  {
+   "date": "2021-01-25",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    14,
+    3,
+    15,
+    5,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-01-26",
+   "hippodrome": "CAGNESMER",
+   "prix": "DE MARSEILLE",
+   "grille": [
+    1,
+    3,
+    2,
+    7,
+    8,
+    6,
+    4,
+    5,
+    16,
+    14,
+    11,
+    13,
+    12,
+    9,
+    15,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210126105820"
+   ]
+  },
+  {
+   "date": "2021-01-28",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    9,
+    13,
+    10,
+    7,
+    6
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-01-29",
+   "hippodrome": "PAU",
+   "prix": "EQUIDIA (RENE CRAMAIL)",
+   "grille": [
+    5,
+    4,
+    2,
+    9,
+    3,
+    1,
+    12,
+    14,
+    11,
+    6,
+    10,
+    15,
+    13,
+    7,
+    8,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210129051157"
+   ]
+  },
+  {
+   "date": "2021-02-06",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    3,
+    12,
+    11,
+    6,
+    8
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-02-07",
+   "hippodrome": "VINCENNES",
+   "prix": "OVIDE MOULINET",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20210207061010"
+   ]
+  },
+  {
+   "date": "2021-02-13",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    11,
+    3,
+    10,
+    4
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-02-14",
+   "hippodrome": "VINCENNES",
+   "prix": "REVERDY (PRIX DES VOSGES)",
+   "grille": [
+    16,
+    12,
+    9,
+    6,
+    5,
+    8,
+    3,
+    13,
+    2,
+    1,
+    11,
+    10,
+    4,
+    14,
+    15,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210214100954"
+   ]
+  },
+  {
+   "date": "2021-02-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    2,
+    12,
+    6,
+    7,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-02-17",
+   "hippodrome": "CAGNESMER",
+   "prix": "JACQUES GELIOT",
+   "grille": [
+    6,
+    7,
+    8,
+    5,
+    3,
+    2,
+    15,
+    14,
+    13,
+    9,
+    4,
+    12,
+    1,
+    16,
+    10,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210217022559"
+   ]
+  },
+  {
+   "date": "2021-02-25",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    8,
+    6,
+    1,
+    4,
+    3
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-02-26",
+   "hippodrome": "VINCENNES",
+   "prix": "DE PONT-L'EVEQUE",
+   "grille": [
+    5,
+    14,
+    6,
+    11,
+    12,
+    10,
+    8,
+    13,
+    9,
+    7,
+    1,
+    3,
+    4,
+    16,
+    15,
+    2
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210226121754"
+   ]
+  },
+  {
+   "date": "2021-03-25",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    6,
+    12,
+    11,
+    13,
+    15
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-03-26",
+   "hippodrome": "VINCENNES",
+   "prix": "MAIA",
+   "grille": null,
+   "arrivee": [
+    9,
+    2,
+    13,
+    10,
+    12
+   ],
+   "snapshots": [
+    "20210326114443"
+   ]
+  },
+  {
+   "date": "2021-03-27",
+   "hippodrome": "VINCENNES",
+   "prix": "DU BOIS DE VINCENNES",
+   "grille": [
+    7,
+    9,
+    14,
+    13,
+    10,
+    1,
+    2,
+    4,
+    5,
+    8,
+    6,
+    11,
+    15,
+    12,
+    3
+   ],
+   "arrivee": [
+    9,
+    12,
+    13,
+    10,
+    14
+   ],
+   "snapshots": [
+    "20210327070815"
+   ]
+  },
+  {
+   "date": "2021-03-28",
+   "hippodrome": "AUTEUIL",
+   "prix": "LUTTEUR III",
+   "grille": [
+    4,
+    8,
+    7,
+    12,
+    3,
+    2,
+    6,
+    10,
+    1,
+    11,
+    15,
+    14,
+    5,
+    9,
+    16,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210328143345"
+   ]
+  },
+  {
+   "date": "2021-04-04",
+   "hippodrome": "AUTEUIL",
+   "prix": "GENERAL DE GENERAL DE ROUGEMONT",
+   "grille": [
+    7,
+    16,
+    3,
+    4,
+    2,
+    10,
+    12,
+    1,
+    6,
+    9,
+    15,
+    13,
+    5,
+    8,
+    14,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210403181036",
+    "20210404115942"
+   ]
+  },
+  {
+   "date": "2021-04-05",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    11,
+    14,
+    8,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-04-06",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "PLATANES",
+   "grille": [
+    1,
+    2,
+    3,
+    6,
+    7,
+    10,
+    12,
+    13,
+    14,
+    5,
+    8,
+    9,
+    11,
+    15,
+    4,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210406122601"
+   ]
+  },
+  {
+   "date": "2021-04-08",
+   "hippodrome": "DEAUVILLE",
+   "prix": "L'OPERATION OVERLORD",
+   "grille": [
+    15,
+    2,
+    4,
+    8,
+    11,
+    5,
+    3,
+    12,
+    9,
+    13,
+    10,
+    7,
+    6,
+    16,
+    14,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210407174228"
+   ]
+  },
+  {
+   "date": "2021-04-10",
+   "hippodrome": "VINCENNES",
+   "prix": "DU TREPORT",
+   "grille": [
+    13,
+    14,
+    9,
+    7,
+    10,
+    6,
+    4,
+    1,
+    8,
+    11,
+    12,
+    3,
+    2,
+    5
+   ],
+   "arrivee": [
+    10,
+    4,
+    11,
+    14,
+    1
+   ],
+   "snapshots": [
+    "20210409171644"
+   ]
+  },
+  {
+   "date": "2021-04-11",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE CHEVILLY",
+   "grille": [
+    3,
+    4,
+    7,
+    2,
+    1,
+    16,
+    5,
+    15,
+    12,
+    6,
+    9,
+    8,
+    14,
+    11,
+    13,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210411063528",
+    "20210411103101"
+   ]
+  },
+  {
+   "date": "2021-04-12",
+   "hippodrome": "COMPIGNE",
+   "prix": "DE LA ROCHELLE",
+   "grille": [
+    3,
+    5,
+    4,
+    6,
+    11,
+    1,
+    16,
+    10,
+    2,
+    13,
+    8,
+    15,
+    14,
+    9,
+    12,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210411155733",
+    "20210413031013"
+   ]
+  },
+  {
+   "date": "2021-04-25",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    10,
+    2,
+    20,
+    3,
+    6
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-04-26",
+   "hippodrome": "CHANTILLY",
+   "prix": "CHANTILLY CAPITALE DU CHEVAL",
+   "grille": [
+    2,
+    9,
+    3,
+    8,
+    10,
+    15,
+    1,
+    6,
+    5,
+    12,
+    16,
+    13,
+    7,
+    14,
+    11,
+    4
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210426042858"
+   ]
+  },
+  {
+   "date": "2021-04-28",
+   "hippodrome": "MAURE-DE-BRETAGNE",
+   "prix": "GNT PARIS-TURF",
+   "grille": [
+    7,
+    4,
+    15,
+    11,
+    1,
+    6,
+    3,
+    5,
+    14,
+    10,
+    9,
+    8,
+    16,
+    13,
+    2,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210427124123"
+   ]
+  },
+  {
+   "date": "2021-05-05",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    1,
+    2,
+    8,
+    9,
+    5
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-05-06",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE LA COMEDIE FRANCAISE",
+   "grille": [
+    4,
+    14,
+    3,
+    7,
+    12,
+    1,
+    9,
+    6,
+    10,
+    5,
+    8,
+    13,
+    2,
+    15,
+    16,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210506001634"
+   ]
+  },
+  {
+   "date": "2021-05-11",
+   "hippodrome": "CHANTILLY",
+   "prix": "DES GRANDES ECURIES",
+   "grille": [
+    3,
+    5,
+    16,
+    8,
+    4,
+    10,
+    1,
+    2,
+    15,
+    14,
+    12,
+    11,
+    6,
+    7,
+    9,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210510130307"
+   ]
+  },
+  {
+   "date": "2021-05-13",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    11,
+    16,
+    3,
+    6,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-05-14",
+   "hippodrome": "VINCENNES",
+   "prix": "LEO",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20210514100757"
+   ]
+  },
+  {
+   "date": "2021-05-24",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    14,
+    6,
+    8,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-05-25",
+   "hippodrome": "COMPIEGNE",
+   "prix": "BENJAMIN BOUTIN",
+   "grille": [
+    2,
+    15,
+    8,
+    9,
+    4,
+    10,
+    13,
+    5,
+    3,
+    7,
+    1,
+    6,
+    14,
+    16,
+    12,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210525040648"
+   ]
+  },
+  {
+   "date": "2021-05-27",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    10,
+    6,
+    11,
+    9
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-05-28",
+   "hippodrome": "VINCENNES",
+   "prix": "DU CREPUSCULE",
+   "grille": [
+    6,
+    5,
+    10,
+    15,
+    13,
+    3,
+    11,
+    7,
+    2,
+    12,
+    8,
+    1,
+    4,
+    9,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210528125154"
+   ]
+  },
+  {
+   "date": "2021-06-10",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DU BEL AIR",
+   "grille": [
+    3,
+    5,
+    9,
+    2,
+    10,
+    4,
+    6,
+    15,
+    8,
+    11,
+    1,
+    12,
+    16,
+    14,
+    7,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210609205421"
+   ]
+  },
+  {
+   "date": "2021-06-21",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    6,
+    9,
+    1,
+    8
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-06-22",
+   "hippodrome": "NANTES",
+   "prix": "SYNERGIE",
+   "grille": [
+    3,
+    10,
+    4,
+    2,
+    6,
+    1,
+    9,
+    7,
+    8,
+    5,
+    11,
+    12,
+    14,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210622073529"
+   ]
+  },
+  {
+   "date": "2021-06-24",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    2,
+    6,
+    14,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-06-25",
+   "hippodrome": "VINCENNES",
+   "prix": "HYGICA",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20210625093449"
+   ]
+  },
+  {
+   "date": "2021-07-13",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    4,
+    15,
+    12,
+    13
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-07-14",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE LA FETE NATONALE",
+   "grille": [
+    3,
+    10,
+    5,
+    9,
+    2,
+    12,
+    14,
+    11,
+    16,
+    13,
+    6,
+    1,
+    7,
+    8,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210714004731"
+   ]
+  },
+  {
+   "date": "2021-07-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    10,
+    6,
+    5,
+    8,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-07-17",
+   "hippodrome": "ENGHIEN",
+   "prix": "DE VILLIERS",
+   "grille": [
+    7,
+    4,
+    1,
+    5,
+    2,
+    9,
+    6,
+    14,
+    3,
+    15,
+    8,
+    13,
+    16,
+    12,
+    11,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210717093808"
+   ]
+  },
+  {
+   "date": "2021-07-23",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    10,
+    9,
+    3,
+    7
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-07-24",
+   "hippodrome": "ENGHIEN",
+   "prix": "DE L'ESPLANADE",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20210724115921"
+   ]
+  },
+  {
+   "date": "2021-07-25",
+   "hippodrome": "LA TESTE",
+   "prix": "JOURNAL LE VEINARD",
+   "grille": [
+    9,
+    1,
+    5,
+    4,
+    2,
+    11,
+    10,
+    3,
+    8,
+    15,
+    6,
+    13,
+    12,
+    7,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210724162331"
+   ]
+  },
+  {
+   "date": "2021-07-29",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    10,
+    13,
+    11,
+    3,
+    5
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-07-30",
+   "hippodrome": "CABOURG",
+   "prix": "HENRI BALLIERE",
+   "grille": [
+    15,
+    7,
+    16,
+    6,
+    9,
+    11,
+    8,
+    1,
+    4,
+    3,
+    14,
+    13,
+    5,
+    12,
+    2,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210730125459"
+   ]
+  },
+  {
+   "date": "2021-08-02",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    10,
+    7,
+    14,
+    15
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-08-04",
+   "hippodrome": "ENGHIEN",
+   "prix": "DU PARC DES PRINCES",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20210803231834"
+   ]
+  },
+  {
+   "date": "2021-08-17",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    15,
+    7,
+    1,
+    14,
+    8
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-08-18",
+   "hippodrome": "D'ENGHIEN-LES-BAINS",
+   "prix": "D'ENGHIEN-LES-BAINS",
+   "grille": [
+    13,
+    8,
+    7,
+    5,
+    1,
+    6,
+    11,
+    3,
+    10,
+    12,
+    4,
+    2,
+    9,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210818043547"
+   ]
+  },
+  {
+   "date": "2021-09-05",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    6,
+    1,
+    3,
+    12,
+    9
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-09-06",
+   "hippodrome": "CRAON",
+   "prix": "V AND B (TROPHEE VERT)",
+   "grille": [
+    15,
+    13,
+    5,
+    11,
+    16,
+    14,
+    9,
+    3,
+    1,
+    10,
+    12,
+    2,
+    7,
+    6,
+    8
+   ],
+   "arrivee": [
+    15,
+    16,
+    13,
+    5,
+    3
+   ],
+   "snapshots": [
+    "20210906051429"
+   ]
+  },
+  {
+   "date": "2021-09-07",
+   "hippodrome": "AUTEUIL",
+   "prix": "ALAIN ET GILLES DE GOULAINE",
+   "grille": [
+    7,
+    2,
+    4,
+    5,
+    8,
+    15,
+    3,
+    1,
+    14,
+    9,
+    13,
+    12,
+    16,
+    11,
+    6,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210907120859"
+   ]
+  },
+  {
+   "date": "2021-09-11",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    11,
+    13,
+    9,
+    12,
+    7
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-09-12",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "QATAR HANDICAP DES ARC TRIALS",
+   "grille": [
+    6,
+    16,
+    5,
+    4,
+    3,
+    7,
+    9,
+    11,
+    1,
+    2,
+    15,
+    8,
+    14,
+    10,
+    13,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210912131205"
+   ]
+  },
+  {
+   "date": "2021-09-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    14,
+    15,
+    4,
+    8,
+    13
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-09-17",
+   "hippodrome": "VINCENNES",
+   "prix": "OPHELIA",
+   "grille": [
+    16,
+    12,
+    7,
+    10,
+    5,
+    3,
+    9,
+    4,
+    6,
+    13,
+    2,
+    11,
+    14,
+    1,
+    15,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210917055209"
+   ]
+  },
+  {
+   "date": "2021-09-19",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    2,
+    1,
+    11,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-09-20",
+   "hippodrome": "FONTAINEBLEAU",
+   "prix": "ROLAND FOUGEDOIRE",
+   "grille": [
+    8,
+    6,
+    4,
+    2,
+    16,
+    11,
+    1,
+    15,
+    10,
+    12,
+    7,
+    13,
+    9,
+    14,
+    5,
+    3
+   ],
+   "arrivee": [
+    5,
+    1,
+    8,
+    3,
+    4
+   ],
+   "snapshots": [
+    "20210920115816"
+   ]
+  },
+  {
+   "date": "2021-09-21",
+   "hippodrome": "AUTEUIL",
+   "prix": "CALABRAIS",
+   "grille": [
+    1,
+    4,
+    5,
+    11,
+    3,
+    2,
+    6,
+    8,
+    12,
+    7,
+    9,
+    13,
+    15,
+    14,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20210921104632"
+   ]
+  },
+  {
+   "date": "2021-10-12",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    1,
+    5,
+    11,
+    13,
+    9
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-10-13",
+   "hippodrome": "ENGHIEN",
+   "prix": "GOBELINS",
+   "grille": [
+    10,
+    15,
+    12,
+    8,
+    16,
+    6,
+    9,
+    14,
+    11,
+    2,
+    7,
+    5,
+    1,
+    4,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211013062824"
+   ]
+  },
+  {
+   "date": "2021-10-23",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    10,
+    11,
+    7,
+    16,
+    3
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-10-24",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "LE PARISIEN - GRAND HANDICAP DE PARISLONGCHAMP",
+   "grille": [
+    8,
+    3,
+    5,
+    2,
+    6,
+    1,
+    9,
+    13,
+    7,
+    11,
+    12,
+    4,
+    15,
+    16,
+    14,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211024085530"
+   ]
+  },
+  {
+   "date": "2021-11-14",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    11,
+    7,
+    6,
+    10,
+    13
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-11-15",
+   "hippodrome": "LE BOUSCAT",
+   "prix": "SAUTERNES'S CUP",
+   "grille": [
+    15,
+    8,
+    16,
+    3,
+    9,
+    4,
+    2,
+    7,
+    5,
+    6,
+    10,
+    14,
+    13,
+    11,
+    12,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211115074705"
+   ]
+  },
+  {
+   "date": "2021-11-21",
+   "hippodrome": "VINCENNES",
+   "prix": "D'AMERIQUE RACES - PRIX DE BRETAGNE",
+   "grille": [
+    17,
+    1,
+    4,
+    9,
+    6,
+    10,
+    12,
+    11,
+    13,
+    7,
+    2,
+    5,
+    15,
+    14,
+    16,
+    8
+   ],
+   "arrivee": [
+    17,
+    12,
+    1,
+    7,
+    11
+   ],
+   "snapshots": [
+    "20211120183942"
+   ]
+  },
+  {
+   "date": "2021-11-22",
+   "hippodrome": "VINCENNES",
+   "prix": "MONTIGNAC-CHARENTE",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20211122114341"
+   ]
+  },
+  {
+   "date": "2021-11-26",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    1,
+    10,
+    15,
+    8
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-11-27",
+   "hippodrome": "VINCENNES",
+   "prix": "ANNICK DREUX",
+   "grille": [
+    15,
+    10,
+    13,
+    12,
+    4,
+    14,
+    11,
+    2,
+    8,
+    5,
+    9,
+    6,
+    7,
+    3,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211127032359"
+   ]
+  },
+  {
+   "date": "2021-11-28",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    2,
+    11,
+    5,
+    9,
+    15
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-11-29",
+   "hippodrome": "VINCENNES",
+   "prix": "MESLAY-DU-MAINE",
+   "grille": [
+    16,
+    3,
+    14,
+    12,
+    9,
+    13,
+    1,
+    7,
+    11,
+    8,
+    15,
+    4,
+    10,
+    2,
+    6,
+    5
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211129043658"
+   ]
+  },
+  {
+   "date": "2021-11-30",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    10,
+    6,
+    9,
+    11,
+    2
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-12-01",
+   "hippodrome": "DEAUVILLE",
+   "prix": "SAINTE-MERE-EGLISE",
+   "grille": [
+    14,
+    1,
+    2,
+    13,
+    6,
+    15,
+    8,
+    9,
+    3,
+    4,
+    10,
+    7,
+    11,
+    5,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211130183550",
+    "20211201120606"
+   ]
+  },
+  {
+   "date": "2021-12-02",
+   "hippodrome": "VINCENNES",
+   "prix": "BOURIGNY",
+   "grille": [
+    9,
+    14,
+    6,
+    16,
+    10,
+    4,
+    5,
+    8,
+    7,
+    1,
+    3,
+    2,
+    13,
+    15,
+    12,
+    11
+   ],
+   "arrivee": [
+    9,
+    14,
+    10,
+    6,
+    5
+   ],
+   "snapshots": [
+    "20211201225403"
+   ]
+  },
+  {
+   "date": "2021-12-03",
+   "hippodrome": "VINCENNES",
+   "prix": "MELUSINA",
+   "grille": [
+    10,
+    2,
+    6,
+    5,
+    12,
+    11,
+    4,
+    1,
+    9,
+    3,
+    15,
+    7,
+    13,
+    8,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211203192425"
+   ]
+  },
+  {
+   "date": "2021-12-05",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    18,
+    7,
+    8,
+    2,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-12-06",
+   "hippodrome": "VINCENNES",
+   "prix": "ALPES",
+   "grille": [
+    10,
+    3,
+    11,
+    12,
+    4,
+    5,
+    6,
+    14,
+    2,
+    15,
+    9,
+    13,
+    8,
+    1,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211206063756"
+   ]
+  },
+  {
+   "date": "2021-12-09",
+   "hippodrome": "VINCENNES",
+   "prix": "JEAN BOILLEREAU (PRIX DE BLOIS )",
+   "grille": [
+    2,
+    13,
+    9,
+    1,
+    5,
+    3,
+    6,
+    14,
+    8,
+    12,
+    15,
+    4,
+    7,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211208151545"
+   ]
+  },
+  {
+   "date": "2021-12-13",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    3,
+    14,
+    13,
+    9,
+    8
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-12-14",
+   "hippodrome": "PAU",
+   "prix": "BIRABEN FOIE GRAS (PRIX GEORGES PASTRE)",
+   "grille": [
+    3,
+    2,
+    4,
+    7,
+    10,
+    1,
+    11,
+    14,
+    9,
+    12,
+    8,
+    13,
+    6,
+    16,
+    5,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211214064003"
+   ]
+  },
+  {
+   "date": "2021-12-21",
+   "hippodrome": "CAGNESMER",
+   "prix": "PHILIPPE LORAIN",
+   "grille": [
+    1,
+    3,
+    7,
+    6,
+    4,
+    2,
+    11,
+    5,
+    10,
+    9,
+    8,
+    16,
+    15,
+    14,
+    12,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211220134032"
+   ]
+  },
+  {
+   "date": "2021-12-25",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    8,
+    1,
+    7,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2021-12-26",
+   "hippodrome": "VINCENNES",
+   "prix": "CRITERIUM CONTINENTAL - PRIX D'AMERIQUE RACES",
+   "grille": [
+    3,
+    1,
+    4,
+    2,
+    9,
+    5,
+    7,
+    16,
+    10,
+    6,
+    15,
+    12,
+    8,
+    17,
+    13,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20211226153425"
+   ]
+  },
+  {
+   "date": "2022-01-28",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    9,
+    5,
+    10,
+    11,
+    4
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-01-29",
+   "hippodrome": "VINCENNES",
+   "prix": "LUXEMBOURG",
+   "grille": [
+    6,
+    10,
+    5,
+    2,
+    1,
+    4,
+    3,
+    15,
+    11,
+    16,
+    9,
+    13,
+    7,
+    12,
+    14,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220129040116"
+   ]
+  },
+  {
+   "date": "2022-03-07",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    3,
+    14,
+    11,
+    10,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-03-08",
+   "hippodrome": "CHANTILLY",
+   "prix": "JOCKER",
+   "grille": [
+    1,
+    3,
+    9,
+    10,
+    13,
+    2,
+    4,
+    6,
+    7,
+    5,
+    16,
+    8,
+    12,
+    11,
+    14,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220308042453"
+   ]
+  },
+  {
+   "date": "2022-03-13",
+   "hippodrome": "CAGNESMER",
+   "prix": "GRAND CRITERIUM DE VITESSE COTE D'AZUR",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20220312162649"
+   ]
+  },
+  {
+   "date": "2022-03-30",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    9,
+    11,
+    5,
+    7,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-04-01",
+   "hippodrome": "VINCENNES",
+   "prix": "AMALTHEA",
+   "grille": [
+    10,
+    5,
+    8,
+    9,
+    3,
+    7,
+    2,
+    6,
+    13,
+    11,
+    4,
+    14,
+    1,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220331155333",
+    "20220331230154",
+    "20220331230156"
+   ]
+  },
+  {
+   "date": "2022-04-05",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    15,
+    9,
+    13,
+    16
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-04-07",
+   "hippodrome": "DEAUVILLE",
+   "prix": "L'OPERATION OVERLORD",
+   "grille": [
+    4,
+    5,
+    8,
+    3,
+    9,
+    16,
+    13,
+    12,
+    6,
+    2,
+    11,
+    1,
+    14,
+    7,
+    10,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220406221612"
+   ]
+  },
+  {
+   "date": "2022-04-21",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    6,
+    11,
+    8,
+    10,
+    15
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-04-22",
+   "hippodrome": "VINCENNES",
+   "prix": "BRASIL NIGHT SESSION (PRIX MARTHA)",
+   "grille": [
+    8,
+    2,
+    4,
+    7,
+    6,
+    10,
+    5,
+    3,
+    13,
+    11,
+    14,
+    15,
+    12,
+    1,
+    9
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220422013243"
+   ]
+  },
+  {
+   "date": "2022-04-28",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    4,
+    7,
+    6,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-04-29",
+   "hippodrome": "MAUQUENCHY",
+   "prix": "HUBERTA",
+   "grille": [
+    11,
+    12,
+    16,
+    3,
+    7,
+    6,
+    8,
+    14,
+    1,
+    9,
+    15,
+    4,
+    13,
+    10,
+    2,
+    5
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220429065418"
+   ]
+  },
+  {
+   "date": "2022-05-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    11,
+    7,
+    15,
+    4
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-05-17",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "HANDICAP DE L'ILE-DE-FRANCE",
+   "grille": [
+    7,
+    9,
+    4,
+    2,
+    15,
+    6,
+    5,
+    14,
+    11,
+    12,
+    16,
+    3,
+    1,
+    13,
+    10,
+    8
+   ],
+   "arrivee": [
+    15,
+    7,
+    8,
+    12,
+    4
+   ],
+   "snapshots": [
+    "20220517071700"
+   ]
+  },
+  {
+   "date": "2022-05-18",
+   "hippodrome": "VINCENNES",
+   "prix": "GATINAIS",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20220518104320"
+   ]
+  },
+  {
+   "date": "2022-05-24",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    6,
+    1,
+    15,
+    16
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-05-25",
+   "hippodrome": "LE CROISE LAROCHE",
+   "prix": "GRAND NATIONAL DU TROT PARISTURF DU 25/05/2022",
+   "grille": [
+    12,
+    5,
+    6,
+    11,
+    7,
+    10,
+    15,
+    1,
+    13,
+    8,
+    2,
+    16,
+    9,
+    14,
+    4,
+    3
+   ],
+   "arrivee": [
+    15,
+    10,
+    7,
+    1,
+    3
+   ],
+   "snapshots": [
+    "20220525084802"
+   ]
+  },
+  {
+   "date": "2022-05-26",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "MONTRETOUT",
+   "grille": [
+    1,
+    8,
+    5,
+    4,
+    10,
+    7,
+    9,
+    13,
+    14,
+    11,
+    2,
+    6,
+    3,
+    12
+   ],
+   "arrivee": [
+    9,
+    5,
+    8,
+    12,
+    7
+   ],
+   "snapshots": [
+    "20220525180627",
+    "20220526094022"
+   ]
+  },
+  {
+   "date": "2022-05-27",
+   "hippodrome": "VINCENNES",
+   "prix": "SIRRAH",
+   "grille": [
+    14,
+    8,
+    5,
+    2,
+    10,
+    9,
+    15,
+    6,
+    3,
+    11,
+    4,
+    7,
+    1,
+    13,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220526203932",
+    "20220527053825"
+   ]
+  },
+  {
+   "date": "2022-05-31",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    1,
+    4,
+    7,
+    9,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-06-01",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "MAGIC NIGHT",
+   "grille": [
+    2,
+    14,
+    9,
+    5,
+    4,
+    13,
+    8,
+    6,
+    10,
+    1,
+    15,
+    12,
+    11,
+    3,
+    16,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220601045807"
+   ]
+  },
+  {
+   "date": "2022-06-07",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    11,
+    5,
+    2,
+    3,
+    6
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-06-08",
+   "hippodrome": null,
+   "prix": null,
+   "grille": [
+    12,
+    10,
+    9,
+    7,
+    3,
+    11,
+    2,
+    4,
+    6,
+    14,
+    1,
+    15,
+    13,
+    16,
+    8,
+    5
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220608030601"
+   ]
+  },
+  {
+   "date": "2022-06-15",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    3,
+    6,
+    13,
+    8,
+    2
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-06-16",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "MAJOR FRIDOLIN",
+   "grille": [
+    6,
+    13,
+    14,
+    12,
+    10,
+    1,
+    3,
+    11,
+    2,
+    8,
+    7,
+    9,
+    5,
+    4,
+    16,
+    15
+   ],
+   "arrivee": [
+    15,
+    11,
+    10,
+    8,
+    1
+   ],
+   "snapshots": [
+    "20220616041914"
+   ]
+  },
+  {
+   "date": "2022-06-17",
+   "hippodrome": "LAVAL",
+   "prix": "FORET DE CONCISE",
+   "grille": [
+    11,
+    9,
+    7,
+    8,
+    14,
+    12,
+    4,
+    10,
+    6,
+    1,
+    13,
+    5,
+    3,
+    2
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220617070852"
+   ]
+  },
+  {
+   "date": "2022-06-21",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    15,
+    11,
+    10,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-06-22",
+   "hippodrome": "LA CEPIERE",
+   "prix": "GRAND NATIONAL DU TROT PARISTURF",
+   "grille": [
+    2,
+    4,
+    8,
+    14,
+    15,
+    3,
+    5,
+    11,
+    9,
+    13,
+    10,
+    7,
+    12,
+    6,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220622082533"
+   ]
+  },
+  {
+   "date": "2022-06-23",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    2,
+    14,
+    6,
+    1,
+    9
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-06-24",
+   "hippodrome": "VINCENNES",
+   "prix": "TERPSICHORE",
+   "grille": [
+    13,
+    11,
+    16,
+    7,
+    6,
+    10,
+    8,
+    12,
+    5,
+    9,
+    1,
+    15,
+    14,
+    4,
+    3
+   ],
+   "arrivee": [
+    4,
+    10,
+    12,
+    7,
+    2
+   ],
+   "snapshots": [
+    "20220624035327"
+   ]
+  },
+  {
+   "date": "2022-06-26",
+   "hippodrome": "VINCENNES",
+   "prix": "LE PARISIEN (PX BERTRAND DELOISON)",
+   "grille": [
+    3,
+    14,
+    8,
+    13,
+    5,
+    11,
+    10,
+    15,
+    4,
+    6,
+    2,
+    7,
+    1,
+    9,
+    12
+   ],
+   "arrivee": [
+    6,
+    2,
+    10,
+    15,
+    4
+   ],
+   "snapshots": [
+    "20220625151118",
+    "20220625224024"
+   ]
+  },
+  {
+   "date": "2022-06-27",
+   "hippodrome": "LYON-PARILLY",
+   "prix": "FEDERATION DES COURSES DU CENTRE-EST",
+   "grille": [
+    3,
+    7,
+    15,
+    16,
+    9,
+    8,
+    6,
+    1,
+    13,
+    4,
+    12,
+    2,
+    10,
+    5,
+    14,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220627020515"
+   ]
+  },
+  {
+   "date": "2022-07-13",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    11,
+    2,
+    4,
+    9,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-07-14",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE LA FETE NATIONALE",
+   "grille": [
+    8,
+    4,
+    2,
+    7,
+    13,
+    15,
+    3,
+    16,
+    11,
+    1,
+    10,
+    14,
+    6,
+    5,
+    12,
+    9
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220714075144"
+   ]
+  },
+  {
+   "date": "2022-07-21",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DES FEMMES JOCKEYS",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20220720205940"
+   ]
+  },
+  {
+   "date": "2022-08-14",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    16,
+    4,
+    5,
+    2,
+    15
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-08-15",
+   "hippodrome": "DEAUVILLE",
+   "prix": "KONG JOCKEY CLUB - DES SPRINTERS",
+   "grille": [
+    3,
+    4,
+    2,
+    5,
+    9,
+    6,
+    1,
+    11,
+    13,
+    10,
+    7,
+    8,
+    15,
+    16,
+    12,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220815074752"
+   ]
+  },
+  {
+   "date": "2022-08-18",
+   "hippodrome": "DEAUVILLE",
+   "prix": "DU VIEUX BASSIN",
+   "grille": [
+    2,
+    3,
+    10,
+    9,
+    4,
+    11,
+    5,
+    13,
+    1,
+    14,
+    8,
+    7,
+    16,
+    6,
+    15,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220817191211"
+   ]
+  },
+  {
+   "date": "2022-09-25",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    2,
+    6,
+    9,
+    4,
+    3
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-09-26",
+   "hippodrome": "LYON-PARILLY",
+   "prix": "DE TROT DE LYON",
+   "grille": [
+    14,
+    16,
+    12,
+    7,
+    2,
+    13,
+    5,
+    10,
+    11,
+    8,
+    6,
+    3,
+    15,
+    1,
+    9,
+    4
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20220926055223"
+   ]
+  },
+  {
+   "date": "2022-10-13",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    2,
+    16,
+    3,
+    10,
+    14
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-10-14",
+   "hippodrome": "VINCENNES",
+   "prix": "CHAMPIONNAT EUROPEEN DES 5 ANS",
+   "grille": [
+    9,
+    7,
+    4,
+    6,
+    13,
+    11,
+    5,
+    2,
+    17,
+    14,
+    15,
+    10,
+    3,
+    12,
+    8,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20221014151208"
+   ]
+  },
+  {
+   "date": "2022-11-29",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    9,
+    1,
+    11,
+    15,
+    13
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2022-11-30",
+   "hippodrome": "DEAUVILLE",
+   "prix": "DU CHATEAU DE BAYEUX",
+   "grille": [
+    3,
+    5,
+    6,
+    4,
+    7,
+    14,
+    13,
+    10,
+    9,
+    16,
+    15,
+    1,
+    2,
+    11,
+    8,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20221130100705"
+   ]
+  },
+  {
+   "date": "2022-12-09",
+   "hippodrome": "VINCENNES",
+   "prix": "ELECTRA",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20221208135653"
+   ]
+  },
+  {
+   "date": "2023-01-30",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    9,
+    13,
+    4,
+    6,
+    3
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-01-31",
+   "hippodrome": "CAGNESMER",
+   "prix": "CHARLES GASTAUD",
+   "grille": [
+    8,
+    1,
+    5,
+    3,
+    2,
+    11,
+    6,
+    7,
+    15,
+    9,
+    4,
+    10,
+    12,
+    16,
+    13,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230131001440"
+   ]
+  },
+  {
+   "date": "2023-02-04",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    5,
+    8,
+    1,
+    2
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-02-05",
+   "hippodrome": "VINCENNES",
+   "prix": "DE L'ILE-DE-FRANCE",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20230205071034"
+   ]
+  },
+  {
+   "date": "2023-03-19",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    14,
+    12,
+    8,
+    11,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-03-20",
+   "hippodrome": "COMPIEGNE",
+   "prix": "DE LA PLAINE DU PUTOIS",
+   "grille": [
+    1,
+    10,
+    5,
+    4,
+    11,
+    3,
+    8,
+    14,
+    6,
+    9,
+    12,
+    15,
+    13,
+    7,
+    16,
+    2
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230320024627"
+   ]
+  },
+  {
+   "date": "2023-03-21",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    8,
+    2,
+    12,
+    4
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-03-22",
+   "hippodrome": "LISIEUX",
+   "prix": "ROGER LEDOYEN",
+   "grille": [
+    14,
+    16,
+    12,
+    3,
+    13,
+    6,
+    10,
+    9,
+    5,
+    11,
+    2,
+    15,
+    1,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230322024106"
+   ]
+  },
+  {
+   "date": "2023-03-25",
+   "hippodrome": "VINCENNES",
+   "prix": "DU BOIS DE VINCENNES",
+   "grille": [
+    11,
+    12,
+    4,
+    5,
+    13,
+    8,
+    14,
+    9,
+    7,
+    6,
+    3,
+    1,
+    15,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230324195507"
+   ]
+  },
+  {
+   "date": "2023-04-04",
+   "hippodrome": "FONTAINEBLEAU",
+   "prix": "DES GRANDES FONTAINES",
+   "grille": [
+    4,
+    1,
+    13,
+    3,
+    12,
+    2,
+    8,
+    11,
+    6,
+    5,
+    9,
+    7,
+    14,
+    10,
+    15,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230403182048"
+   ]
+  },
+  {
+   "date": "2023-05-15",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    1,
+    4,
+    6,
+    15,
+    7
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-05-16",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "PISTOL PACKER",
+   "grille": [
+    10,
+    8,
+    1,
+    4,
+    9,
+    12,
+    2,
+    16,
+    6,
+    15,
+    7,
+    5,
+    3,
+    11,
+    13,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230516005845"
+   ]
+  },
+  {
+   "date": "2023-05-29",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE LA CONCORDE",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20230528171213"
+   ]
+  },
+  {
+   "date": "2023-06-05",
+   "hippodrome": "VICHY",
+   "prix": "GROSBOIS",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20230604201302"
+   ]
+  },
+  {
+   "date": "2023-06-20",
+   "hippodrome": "NANTES",
+   "prix": "BELLAMY",
+   "grille": [
+    8,
+    7,
+    9,
+    5,
+    3,
+    2,
+    1,
+    4,
+    10,
+    6,
+    12,
+    11,
+    14,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230619192054"
+   ]
+  },
+  {
+   "date": "2023-07-04",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    6,
+    2,
+    4,
+    9
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-07-05",
+   "hippodrome": "ENGHIEN",
+   "prix": "DE LA PLACE SAINT-AUGUSTIN",
+   "grille": [
+    15,
+    3,
+    2,
+    14,
+    6,
+    5,
+    4,
+    12,
+    11,
+    8,
+    13,
+    9,
+    10,
+    1,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230705120609"
+   ]
+  },
+  {
+   "date": "2023-08-16",
+   "hippodrome": "ENGHIEN",
+   "prix": "DU PONT DE L'ALMA",
+   "grille": [
+    15,
+    5,
+    4,
+    6,
+    11,
+    10,
+    2,
+    3,
+    1,
+    12,
+    9,
+    8,
+    13,
+    7,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20230815195339"
+   ]
+  },
+  {
+   "date": "2023-09-28",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    2,
+    3,
+    15,
+    6
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-09-29",
+   "hippodrome": "VINCENNES",
+   "prix": "AUSTRIA",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20230929031330",
+    "20230929111414"
+   ]
+  },
+  {
+   "date": "2023-12-07",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    5,
+    14,
+    11,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-12-08",
+   "hippodrome": "VINCENNES",
+   "prix": "PHOBOS",
+   "grille": [
+    5,
+    7,
+    14,
+    12,
+    8,
+    13,
+    2,
+    10,
+    9,
+    6,
+    11,
+    3,
+    4,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20231208054104"
+   ]
+  },
+  {
+   "date": "2023-12-09",
+   "hippodrome": "VINCENNES",
+   "prix": "OCTAVE DOUESNEL - SWC 5 ANS Q1",
+   "grille": [
+    17,
+    16,
+    12,
+    18,
+    15,
+    13,
+    5,
+    9,
+    7,
+    14,
+    10,
+    3,
+    11,
+    6,
+    4,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20231209151131"
+   ]
+  },
+  {
+   "date": "2023-12-30",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    3,
+    14,
+    13,
+    7,
+    11
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2023-12-31",
+   "hippodrome": "VINCENNES",
+   "prix": "BOURGOGNE-AMERIQUE RACES PMU Q5",
+   "grille": [
+    5,
+    12,
+    1,
+    3,
+    10,
+    16,
+    18,
+    6,
+    13,
+    9,
+    4,
+    8,
+    2,
+    11,
+    7,
+    17
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20231231130757"
+   ]
+  },
+  {
+   "date": "2024-01-03",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    2,
+    10,
+    7,
+    6
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-01-04",
+   "hippodrome": "VINCENNES",
+   "prix": "DE LIMOURS",
+   "grille": [
+    3,
+    8,
+    5,
+    15,
+    12,
+    4,
+    2,
+    11,
+    1,
+    6,
+    13,
+    9,
+    7,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240104112118"
+   ]
+  },
+  {
+   "date": "2024-01-07",
+   "hippodrome": "VINCENNES",
+   "prix": "DE LILLE",
+   "grille": [
+    3,
+    4,
+    5,
+    8,
+    2,
+    1,
+    10,
+    9,
+    7,
+    14,
+    12,
+    11,
+    15,
+    13,
+    6
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240106200814"
+   ]
+  },
+  {
+   "date": "2024-02-26",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    1,
+    8,
+    11,
+    10,
+    14
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-02-27",
+   "hippodrome": "MARSEILLE BORELY",
+   "prix": "DE CARNOUX-EN-PROVENCE",
+   "grille": [
+    3,
+    9,
+    1,
+    11,
+    7,
+    8,
+    4,
+    6,
+    5,
+    2,
+    14,
+    10,
+    12,
+    16,
+    13,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240227031659"
+   ]
+  },
+  {
+   "date": "2024-03-23",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    16,
+    14,
+    10,
+    5,
+    11
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-03-24",
+   "hippodrome": "AUTEUIL",
+   "prix": "GENERAL DE ROUGEMONT",
+   "grille": [
+    14,
+    12,
+    1,
+    6,
+    2,
+    10,
+    3,
+    9,
+    7,
+    16,
+    4,
+    8,
+    15,
+    13,
+    5,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240324012203"
+   ]
+  },
+  {
+   "date": "2024-04-12",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    8,
+    14,
+    9,
+    5,
+    4
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-04-13",
+   "hippodrome": "VINCENNES",
+   "prix": "HENRI LEVESQUE",
+   "grille": [
+    14,
+    9,
+    8,
+    11,
+    6,
+    4,
+    15,
+    1,
+    10,
+    5,
+    3,
+    2,
+    12,
+    13,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240413025054"
+   ]
+  },
+  {
+   "date": "2024-04-25",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    11,
+    4,
+    12,
+    1,
+    9
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-04-27",
+   "hippodrome": "AUTEUIL",
+   "prix": "GRANDE COURSE DE HAIES DE PRINTEMPS",
+   "grille": [
+    4,
+    8,
+    16,
+    7,
+    1,
+    5,
+    3,
+    10,
+    2,
+    6,
+    14,
+    9,
+    13,
+    11,
+    17,
+    12
+   ],
+   "arrivee": [
+    4,
+    9,
+    14,
+    7,
+    2
+   ],
+   "snapshots": [
+    "20240426233745",
+    "20240426233841"
+   ]
+  },
+  {
+   "date": "2024-04-28",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE CHEVILLY",
+   "grille": [
+    2,
+    8,
+    14,
+    9,
+    16,
+    10,
+    12,
+    1,
+    4,
+    5,
+    3,
+    11,
+    7,
+    15,
+    13,
+    6
+   ],
+   "arrivee": [
+    1,
+    14,
+    10,
+    11,
+    5
+   ],
+   "snapshots": [
+    "20240428005909"
+   ]
+  },
+  {
+   "date": "2024-04-29",
+   "hippodrome": "CHANTILLY",
+   "prix": "CHANTILLY CAPITALE DU CHEVAL",
+   "grille": [
+    3,
+    2,
+    12,
+    5,
+    13,
+    4,
+    11,
+    9,
+    1,
+    15,
+    8,
+    14,
+    6,
+    7,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240428233257"
+   ]
+  },
+  {
+   "date": "2024-04-30",
+   "hippodrome": "FONTAINEBLEAU",
+   "prix": "DES GRANDES FONTAINES",
+   "grille": [
+    4,
+    15,
+    13,
+    12,
+    9,
+    3,
+    10,
+    5,
+    2,
+    16,
+    11,
+    14,
+    8,
+    6,
+    1
+   ],
+   "arrivee": [
+    3,
+    8,
+    2,
+    11,
+    15
+   ],
+   "snapshots": [
+    "20240429233156"
+   ]
+  },
+  {
+   "date": "2024-05-01",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "DE FOUILLEUSE",
+   "grille": [
+    3,
+    6,
+    11,
+    9,
+    4,
+    1,
+    5,
+    8,
+    2,
+    10,
+    14,
+    7,
+    12,
+    13
+   ],
+   "arrivee": [
+    10,
+    13,
+    3,
+    12,
+    7
+   ],
+   "snapshots": [
+    "20240501081002",
+    "20240501083921"
+   ]
+  },
+  {
+   "date": "2024-05-02",
+   "hippodrome": "CHANTILLY",
+   "prix": "DES GRANDES ECURIES",
+   "grille": [
+    16,
+    13,
+    9,
+    4,
+    7,
+    15,
+    2,
+    1,
+    8,
+    3,
+    12,
+    11,
+    6,
+    10,
+    5,
+    14
+   ],
+   "arrivee": [
+    10,
+    13,
+    3,
+    12,
+    7
+   ],
+   "snapshots": [
+    "20240502002723"
+   ]
+  },
+  {
+   "date": "2024-05-03",
+   "hippodrome": "VINCENNES",
+   "prix": "BETTINA",
+   "grille": null,
+   "arrivee": [
+    6,
+    4,
+    11,
+    2,
+    3
+   ],
+   "snapshots": [
+    "20240502233145",
+    "20240503233155"
+   ]
+  },
+  {
+   "date": "2024-05-04",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    10,
+    4,
+    3,
+    2,
+    13
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-05-05",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DU PASSAGE SAINTE-ANNE",
+   "grille": [
+    10,
+    2,
+    4,
+    3,
+    7,
+    15,
+    6,
+    8,
+    1,
+    14,
+    9,
+    12,
+    13,
+    5,
+    16,
+    11
+   ],
+   "arrivee": [
+    7,
+    11,
+    9,
+    6,
+    14
+   ],
+   "snapshots": [
+    "20240504233205"
+   ]
+  },
+  {
+   "date": "2024-05-06",
+   "hippodrome": "VICHY",
+   "prix": "HENRI BERRY",
+   "grille": [
+    9,
+    11,
+    12,
+    8,
+    6,
+    10,
+    14,
+    15,
+    4,
+    7,
+    13,
+    5,
+    2,
+    3,
+    16
+   ],
+   "arrivee": [
+    6,
+    8,
+    7,
+    2,
+    13
+   ],
+   "snapshots": [
+    "20240505233152"
+   ]
+  },
+  {
+   "date": "2024-05-07",
+   "hippodrome": "CHANTILLY",
+   "prix": "DE MONTAGNY",
+   "grille": [
+    2,
+    6,
+    1,
+    10,
+    5,
+    11,
+    4,
+    13,
+    3,
+    7,
+    8,
+    9,
+    15,
+    12,
+    14
+   ],
+   "arrivee": [
+    3,
+    2,
+    15,
+    10,
+    1
+   ],
+   "snapshots": [
+    "20240506233251",
+    "20240507045108"
+   ]
+  },
+  {
+   "date": "2024-05-08",
+   "hippodrome": "LYON-PARILLY",
+   "prix": "DE LYON PARILLY",
+   "grille": [
+    10,
+    1,
+    5,
+    9,
+    2,
+    7,
+    12,
+    6,
+    11,
+    8,
+    3,
+    13,
+    4,
+    14,
+    15,
+    16
+   ],
+   "arrivee": [
+    10,
+    1,
+    6,
+    11,
+    4
+   ],
+   "snapshots": [
+    "20240507233339",
+    "20240508082625"
+   ]
+  },
+  {
+   "date": "2024-05-09",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DU BEL AIR",
+   "grille": [
+    6,
+    7,
+    9,
+    5,
+    13,
+    8,
+    2,
+    11,
+    1,
+    14,
+    3,
+    4,
+    12,
+    16,
+    10
+   ],
+   "arrivee": [
+    4,
+    12,
+    2,
+    10,
+    1
+   ],
+   "snapshots": [
+    "20240508233132",
+    "20240509024326"
+   ]
+  },
+  {
+   "date": "2024-05-10",
+   "hippodrome": "VINCENNES",
+   "prix": "L E O",
+   "grille": [
+    10,
+    12,
+    2,
+    3,
+    14,
+    15,
+    6,
+    1,
+    5,
+    4,
+    13,
+    16,
+    7,
+    9,
+    8,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240509233125",
+    "20240510053408"
+   ]
+  },
+  {
+   "date": "2024-05-11",
+   "hippodrome": "CAEN",
+   "prix": "DES DUCS DE NORMANDIE",
+   "grille": [
+    15,
+    16,
+    9,
+    13,
+    8,
+    2,
+    14,
+    5,
+    11,
+    3,
+    4,
+    10,
+    12,
+    1
+   ],
+   "arrivee": [
+    9,
+    3,
+    15,
+    16,
+    13
+   ],
+   "snapshots": [
+    "20240510233138"
+   ]
+  },
+  {
+   "date": "2024-05-12",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE LA CONCORDE",
+   "grille": [
+    6,
+    3,
+    4,
+    7,
+    13,
+    9,
+    1,
+    5,
+    12,
+    2,
+    15,
+    16,
+    8,
+    14,
+    10
+   ],
+   "arrivee": [
+    13,
+    4,
+    2,
+    6,
+    9
+   ],
+   "snapshots": [
+    "20240512000752"
+   ]
+  },
+  {
+   "date": "2024-05-13",
+   "hippodrome": "VICHY",
+   "prix": "DE SAINT-POURCAIN-SUR-SIOULE",
+   "grille": [
+    13,
+    14,
+    4,
+    9,
+    5,
+    1,
+    10,
+    11,
+    6,
+    7,
+    3,
+    15,
+    12,
+    8,
+    2
+   ],
+   "arrivee": [
+    4,
+    14,
+    1,
+    13,
+    2
+   ],
+   "snapshots": [
+    "20240513024219"
+   ]
+  },
+  {
+   "date": "2024-05-14",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "DES COTEAUX DE LA SEINE",
+   "grille": [
+    1,
+    5,
+    12,
+    15,
+    4,
+    10,
+    8,
+    13,
+    7,
+    14,
+    11,
+    6,
+    3,
+    9,
+    2,
+    16
+   ],
+   "arrivee": [
+    10,
+    6,
+    11,
+    3,
+    13
+   ],
+   "snapshots": [
+    "20240514003751"
+   ]
+  },
+  {
+   "date": "2024-05-15",
+   "hippodrome": "VINCENNES",
+   "prix": "DU GATINAIS",
+   "grille": [
+    9,
+    10,
+    6,
+    13,
+    12,
+    16,
+    7,
+    11,
+    15,
+    3,
+    4,
+    14,
+    5,
+    8,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240515014838"
+   ]
+  },
+  {
+   "date": "2024-05-16",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DU PALAIS BOURBON",
+   "grille": null,
+   "arrivee": [
+    10,
+    6,
+    11,
+    3,
+    13
+   ],
+   "snapshots": [
+    "20240515233420",
+    "20240516233150"
+   ]
+  },
+  {
+   "date": "2024-05-18",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    6,
+    14,
+    2,
+    5
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-05-19",
+   "hippodrome": "AUTEUIL",
+   "prix": "GRAND STEEPLE-CHASE DE PARIS",
+   "grille": [
+    6,
+    14,
+    2,
+    12,
+    10,
+    7,
+    4,
+    5,
+    8,
+    1,
+    11,
+    3,
+    9,
+    13
+   ],
+   "arrivee": [
+    8,
+    1,
+    5,
+    12,
+    13
+   ],
+   "snapshots": [
+    "20240519050527"
+   ]
+  },
+  {
+   "date": "2024-05-20",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "PISTOL PACKER",
+   "grille": [
+    5,
+    3,
+    13,
+    9,
+    12,
+    4,
+    10,
+    15,
+    8,
+    2,
+    14,
+    11,
+    1,
+    16,
+    7,
+    6
+   ],
+   "arrivee": [
+    3,
+    6,
+    12,
+    13,
+    9
+   ],
+   "snapshots": [
+    "20240520082151"
+   ]
+  },
+  {
+   "date": "2024-05-21",
+   "hippodrome": "ANGERS",
+   "prix": "D'ANGERS LOIRE METROPOLE",
+   "grille": [
+    7,
+    3,
+    4,
+    1,
+    2,
+    13,
+    5,
+    9,
+    6,
+    15,
+    10,
+    16,
+    8,
+    12,
+    14,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240520233201"
+   ]
+  },
+  {
+   "date": "2024-05-22",
+   "hippodrome": "LE CROISE LAROCHE",
+   "prix": "GRAND NATIONAL DU TROT",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20240521222708"
+   ]
+  },
+  {
+   "date": "2024-05-23",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    13,
+    9,
+    7,
+    5
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-05-24",
+   "hippodrome": "VINCENNES",
+   "prix": "JEAN RIAUD",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20240524112008"
+   ]
+  },
+  {
+   "date": "2024-05-28",
+   "hippodrome": "AUTEUIL",
+   "prix": "ALADDIN",
+   "grille": [
+    4,
+    3,
+    10,
+    14,
+    13,
+    16,
+    9,
+    11,
+    2,
+    1,
+    5,
+    6,
+    15,
+    7,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240527145232"
+   ]
+  },
+  {
+   "date": "2024-06-19",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    16,
+    12,
+    9,
+    14
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-06-20",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DU NABOB",
+   "grille": [
+    9,
+    8,
+    3,
+    7,
+    5,
+    4,
+    11,
+    2,
+    1,
+    10,
+    16,
+    14,
+    6,
+    13,
+    12,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240620150151"
+   ]
+  },
+  {
+   "date": "2024-06-24",
+   "hippodrome": "LYON-PARILLY",
+   "prix": "FEDERATION DES COURSES",
+   "grille": [
+    2,
+    10,
+    11,
+    9,
+    13,
+    12,
+    16,
+    4,
+    6,
+    1,
+    3,
+    14,
+    15,
+    5,
+    7,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240623195446"
+   ]
+  },
+  {
+   "date": "2024-07-19",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    4,
+    5,
+    3,
+    11
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-07-20",
+   "hippodrome": "ENGHIEN",
+   "prix": "DE MILAN",
+   "grille": [
+    6,
+    5,
+    1,
+    8,
+    9,
+    2,
+    10,
+    3,
+    12,
+    4,
+    16,
+    7,
+    15,
+    14,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240720091217"
+   ]
+  },
+  {
+   "date": "2024-07-22",
+   "hippodrome": "COMPIEGNE",
+   "prix": "DES HAUTS-DE-FRANCE",
+   "grille": [
+    8,
+    3,
+    5,
+    6,
+    13,
+    7,
+    14,
+    9,
+    12,
+    15,
+    2,
+    1,
+    11,
+    16,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240721173144"
+   ]
+  },
+  {
+   "date": "2024-08-14",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    2,
+    3,
+    5,
+    4
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-08-15",
+   "hippodrome": "DEAUVILLE",
+   "prix": "HONG KONG JOCKEY CLUB - SPRINTERS",
+   "grille": [
+    10,
+    1,
+    3,
+    6,
+    7,
+    11,
+    5,
+    2,
+    9,
+    15,
+    14,
+    13,
+    17,
+    8,
+    4,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240815113939"
+   ]
+  },
+  {
+   "date": "2024-08-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20240816002515"
+   ]
+  },
+  {
+   "date": "2024-09-10",
+   "hippodrome": "AUTEUIL",
+   "prix": "JEAN BART",
+   "grille": [
+    1,
+    6,
+    14,
+    4,
+    7,
+    8,
+    15,
+    13,
+    2,
+    12,
+    3,
+    9,
+    16,
+    5,
+    10,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20240909144656"
+   ]
+  },
+  {
+   "date": "2024-10-09",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    12,
+    5,
+    1,
+    13
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-10-10",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "DE VERSAILLES",
+   "grille": [
+    2,
+    1,
+    13,
+    9,
+    8,
+    4,
+    6,
+    10,
+    14,
+    12,
+    11,
+    3,
+    5,
+    7,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20241010022036"
+   ]
+  },
+  {
+   "date": "2024-10-14",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    13,
+    6,
+    11,
+    4,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-10-15",
+   "hippodrome": "CHANTILLY",
+   "prix": "DU CHENE DU COUP DE FOUDRE",
+   "grille": [
+    14,
+    6,
+    9,
+    10,
+    11,
+    8,
+    7,
+    16,
+    12,
+    5,
+    15,
+    2,
+    13,
+    3,
+    1,
+    4
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20241015023838"
+   ]
+  },
+  {
+   "date": "2024-11-04",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    16,
+    7,
+    10,
+    8,
+    2
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-11-05",
+   "hippodrome": "VINCENNES",
+   "prix": "D'ARCACHON",
+   "grille": [
+    13,
+    6,
+    8,
+    9,
+    7,
+    4,
+    12,
+    3,
+    5,
+    15,
+    2,
+    16,
+    10,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20241105002627",
+    "20241105002722"
+   ]
+  },
+  {
+   "date": "2024-11-13",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    16,
+    2,
+    4,
+    6,
+    11
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2024-11-15",
+   "hippodrome": "VINCENNES",
+   "prix": "MIZAR",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20241114235408"
+   ]
+  },
+  {
+   "date": "2024-12-07",
+   "hippodrome": "VINCENNES",
+   "prix": "OCTAVE DOUESNEL",
+   "grille": [
+    17,
+    8,
+    11,
+    10,
+    12,
+    6,
+    14,
+    7,
+    15,
+    9,
+    2,
+    4,
+    16,
+    1,
+    3,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20241206203843"
+   ]
+  },
+  {
+   "date": "2024-12-15",
+   "hippodrome": "VINCENNES",
+   "prix": "JEAN DUMOUCH - PRIX DE CHETEAUDUN",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20241214190007"
+   ]
+  },
+  {
+   "date": "2024-12-17",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20241217003329"
+   ]
+  },
+  {
+   "date": "2024-12-19",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20241219081322"
+   ]
+  },
+  {
+   "date": "2025-01-13",
+   "hippodrome": "CAGNESMER",
+   "prix": "DU LANGUEDOC",
+   "grille": [
+    1,
+    8,
+    2,
+    5,
+    4,
+    12,
+    9,
+    10,
+    11,
+    3,
+    13,
+    7,
+    6,
+    15,
+    14
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250112203139"
+   ]
+  },
+  {
+   "date": "2025-02-12",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    14,
+    11,
+    13,
+    7
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-02-13",
+   "hippodrome": "CAGNESMER",
+   "prix": "JULES ROUCAYROL",
+   "grille": [
+    10,
+    15,
+    8,
+    14,
+    11,
+    7,
+    3,
+    9,
+    6,
+    2,
+    13,
+    12,
+    4,
+    1
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250213054151"
+   ]
+  },
+  {
+   "date": "2025-03-19",
+   "hippodrome": "ARGENTAN",
+   "prix": "TERRES D'ARGENTAN NORMANDIE - CHETEAU DE MEDAVY",
+   "grille": [
+    14,
+    8,
+    9,
+    7,
+    3,
+    4,
+    12,
+    13,
+    5,
+    2,
+    15,
+    11,
+    10,
+    1,
+    6,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250318144110"
+   ]
+  },
+  {
+   "date": "2025-03-22",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    6,
+    5,
+    12,
+    3,
+    7
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-03-24",
+   "hippodrome": "CHANTILLY",
+   "prix": "DE LA RUE DES POTAGERS",
+   "grille": [
+    3,
+    7,
+    8,
+    14,
+    4,
+    2,
+    5,
+    1,
+    6,
+    11,
+    10,
+    9,
+    12,
+    13,
+    16,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250323234015"
+   ]
+  },
+  {
+   "date": "2025-04-17",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    14,
+    13,
+    12,
+    6,
+    11
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-04-18",
+   "hippodrome": "VINCENNES",
+   "prix": "MARTHA",
+   "grille": [
+    7,
+    10,
+    5,
+    6,
+    12,
+    13,
+    9,
+    8,
+    3,
+    1,
+    2,
+    14,
+    4,
+    11
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250418001348"
+   ]
+  },
+  {
+   "date": "2025-05-09",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    2,
+    15,
+    3,
+    10,
+    16
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-05-10",
+   "hippodrome": "CAEN",
+   "prix": "GEORGES DREUX",
+   "grille": [
+    4,
+    7,
+    6,
+    1,
+    12,
+    8,
+    9,
+    13,
+    14,
+    10,
+    16,
+    15,
+    2,
+    11,
+    3,
+    5
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250510140911"
+   ]
+  },
+  {
+   "date": "2025-05-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    10,
+    2,
+    5,
+    7,
+    3
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-05-17",
+   "hippodrome": "AUTEUIL",
+   "prix": "LE PARISIEN (PRIX LE GUALES DE MEZAUBRAN)",
+   "grille": [
+    4,
+    6,
+    3,
+    11,
+    9,
+    15,
+    10,
+    2,
+    12,
+    13,
+    14,
+    16,
+    5,
+    7,
+    1,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250517132633"
+   ]
+  },
+  {
+   "date": "2025-05-24",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    6,
+    13,
+    14,
+    2,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-05-25",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DES EPINETTES",
+   "grille": [
+    3,
+    13,
+    10,
+    2,
+    9,
+    1,
+    5,
+    4,
+    14,
+    16,
+    15,
+    8,
+    7,
+    12,
+    11,
+    6
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250525013409"
+   ]
+  },
+  {
+   "date": "2025-06-09",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    1,
+    7,
+    8,
+    10
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-06-10",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "DE FOUILLEUSE",
+   "grille": [
+    9,
+    1,
+    6,
+    7,
+    10,
+    5,
+    3,
+    14,
+    2,
+    13,
+    12,
+    11,
+    8,
+    4,
+    16,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250610121304"
+   ]
+  },
+  {
+   "date": "2025-06-15",
+   "hippodrome": "CHANTILLY",
+   "prix": "DE LAMORLAYE LONGINES",
+   "grille": [
+    1,
+    2,
+    12,
+    4,
+    13,
+    8,
+    14,
+    11,
+    5,
+    10,
+    6,
+    3,
+    7,
+    9,
+    16,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250614164816"
+   ]
+  },
+  {
+   "date": "2025-07-11",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    3,
+    9,
+    1,
+    4,
+    12
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-07-12",
+   "hippodrome": "ENGHIEN",
+   "prix": "DE ROMAINVILLE",
+   "grille": [
+    12,
+    13,
+    11,
+    10,
+    4,
+    3,
+    7,
+    8,
+    5,
+    14,
+    9,
+    1,
+    6,
+    2
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250712063039"
+   ]
+  },
+  {
+   "date": "2025-08-04",
+   "hippodrome": "DIEPPE",
+   "prix": "REGION NORMANDIE",
+   "grille": [
+    5,
+    8,
+    1,
+    12,
+    14,
+    2,
+    7,
+    15,
+    9,
+    11,
+    4,
+    16,
+    13,
+    6,
+    3,
+    10
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250804091825"
+   ]
+  },
+  {
+   "date": "2025-08-11",
+   "hippodrome": "CLAIREFONTAINE",
+   "prix": "GENYBET-GUILLAUME D'ORNANO",
+   "grille": [
+    2,
+    3,
+    7,
+    14,
+    13,
+    10,
+    5,
+    11,
+    16,
+    4,
+    6,
+    1,
+    9,
+    15,
+    12,
+    8
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250810171025"
+   ]
+  },
+  {
+   "date": "2025-08-25",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    11,
+    12,
+    15,
+    14,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-08-26",
+   "hippodrome": "DEAUVILLE",
+   "prix": "DE LA MANCHE",
+   "grille": [
+    3,
+    11,
+    9,
+    14,
+    5,
+    7,
+    2,
+    4,
+    6,
+    1,
+    16,
+    13,
+    12,
+    8,
+    10,
+    15
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250826024706",
+    "20250826030224"
+   ]
+  },
+  {
+   "date": "2025-09-03",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    2,
+    10,
+    3,
+    6
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-09-04",
+   "hippodrome": "PARISLONGCHAMP",
+   "prix": "DE LA GALERIE DES VARIETES",
+   "grille": [
+    3,
+    8,
+    4,
+    1,
+    5,
+    9,
+    6,
+    7,
+    2,
+    11,
+    15,
+    13,
+    16,
+    10,
+    12
+   ],
+   "arrivee": [
+    12,
+    3,
+    10,
+    16,
+    6
+   ],
+   "snapshots": [
+    "20250904093129"
+   ]
+  },
+  {
+   "date": "2025-09-05",
+   "hippodrome": "VINCENNES",
+   "prix": "BRUNA",
+   "grille": [
+    8,
+    9,
+    13,
+    16,
+    6,
+    4,
+    11,
+    12,
+    14,
+    10,
+    15,
+    3,
+    1,
+    2,
+    7,
+    5
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20250905171546",
+    "20250925162432"
+   ]
+  },
+  {
+   "date": "2025-10-16",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    1,
+    2,
+    11,
+    6,
+    4
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-10-17",
+   "hippodrome": "VINCENNES",
+   "prix": "GUDRUN",
+   "grille": [
+    12,
+    7,
+    10,
+    9,
+    3,
+    13,
+    14,
+    2,
+    8,
+    11,
+    1,
+    4,
+    6,
+    5
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20251016214738",
+    "20251017071338"
+   ]
+  },
+  {
+   "date": "2025-11-11",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    11,
+    2,
+    15,
+    4,
+    16
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-11-12",
+   "hippodrome": "BORDEAUX-LE BOUSCAT",
+   "prix": "JONNY RUFFATO",
+   "grille": [
+    10,
+    9,
+    14,
+    5,
+    3,
+    8,
+    1,
+    2,
+    13,
+    12,
+    11,
+    6,
+    4,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20251112074743"
+   ]
+  },
+  {
+   "date": "2025-11-14",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    6,
+    10,
+    9,
+    14,
+    7
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-11-15",
+   "hippodrome": "AUTEUIL",
+   "prix": "COUNT SCHOMBERG",
+   "grille": [
+    4,
+    3,
+    5,
+    8,
+    2,
+    12,
+    9,
+    15,
+    11,
+    13,
+    1,
+    14,
+    10,
+    6,
+    7,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20251115075921"
+   ]
+  },
+  {
+   "date": "2025-12-04",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    14,
+    11,
+    1,
+    6,
+    15
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2025-12-06",
+   "hippodrome": "VINCENNES",
+   "prix": "OCTAVE DOUESNEL",
+   "grille": [
+    14,
+    4,
+    13,
+    11,
+    10,
+    5,
+    12,
+    8,
+    7,
+    2,
+    6,
+    3,
+    9,
+    1
+   ],
+   "arrivee": [
+    14,
+    11,
+    6,
+    13,
+    12
+   ],
+   "snapshots": [
+    "20251205233930"
+   ]
+  },
+  {
+   "date": "2025-12-07",
+   "hippodrome": "VINCENNES",
+   "prix": "DU BOURBONNAIS-AMERIQUE RACES Q2",
+   "grille": [
+    16,
+    7,
+    13,
+    18,
+    6,
+    10,
+    14,
+    2,
+    9,
+    8,
+    15,
+    11,
+    5,
+    3,
+    1,
+    12
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20251207074701"
+   ]
+  },
+  {
+   "date": "2026-01-12",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    5,
+    8,
+    2,
+    9,
+    4
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2026-01-13",
+   "hippodrome": "VINCENNES",
+   "prix": "DE BRIONNE",
+   "grille": [
+    10,
+    8,
+    9,
+    14,
+    3,
+    2,
+    12,
+    11,
+    13,
+    7,
+    6,
+    5,
+    16,
+    15,
+    1,
+    4
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20260113054108"
+   ]
+  },
+  {
+   "date": "2026-02-17",
+   "hippodrome": "VINCENNES",
+   "prix": "DU CHESNAY",
+   "grille": [
+    14,
+    10,
+    1,
+    15,
+    12,
+    13,
+    2,
+    4,
+    9,
+    16,
+    8,
+    6,
+    5,
+    11,
+    7
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20260216170613"
+   ]
+  },
+  {
+   "date": "2026-03-15",
+   "hippodrome": "SAINT-CLOUD",
+   "prix": "DE LA GLORIETTE",
+   "grille": [
+    3,
+    9,
+    6,
+    4,
+    5,
+    7,
+    2,
+    1,
+    10,
+    14,
+    8,
+    15,
+    12,
+    13,
+    11,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20260314163241"
+   ]
+  },
+  {
+   "date": "2026-04-13",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    12,
+    1,
+    16,
+    2,
+    11
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2026-04-14",
+   "hippodrome": "CHANTILLY",
+   "prix": "DE ROISSY",
+   "grille": [
+    1,
+    9,
+    15,
+    10,
+    12,
+    5,
+    7,
+    8,
+    16,
+    4,
+    11,
+    6,
+    2,
+    3,
+    14,
+    13
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20260414053852"
+   ]
+  },
+  {
+   "date": "2026-04-17",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    4,
+    2,
+    11,
+    10,
+    1
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2026-04-18",
+   "hippodrome": "ENGHIEN",
+   "prix": "DE L'ATLANTIQUE",
+   "grille": null,
+   "arrivee": null,
+   "snapshots": [
+    "20260418080926"
+   ]
+  },
+  {
+   "date": "2026-05-13",
+   "hippodrome": "VINCENNES",
+   "prix": "DU PERREUX",
+   "grille": [
+    12,
+    7,
+    14,
+    11,
+    8,
+    1,
+    10,
+    2,
+    13,
+    6,
+    9,
+    3,
+    4,
+    16,
+    5
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20260512212454"
+   ]
+  },
+  {
+   "date": "2026-06-11",
+   "hippodrome": null,
+   "prix": null,
+   "grille": null,
+   "arrivee": [
+    7,
+    1,
+    3,
+    5,
+    16
+   ],
+   "snapshots": []
+  },
+  {
+   "date": "2026-06-12",
+   "hippodrome": "VINCENNES",
+   "prix": "EUDORA",
+   "grille": [
+    4,
+    12,
+    13,
+    1,
+    9,
+    8,
+    6,
+    10,
+    5,
+    14,
+    7,
+    3,
+    15,
+    11,
+    2,
+    16
+   ],
+   "arrivee": null,
+   "snapshots": [
+    "20260612110128"
+   ]
+  }
+ ],
+ "stat": {
+  "grilles": 192,
+  "arrivees": 163,
+  "paires": 30
+ }
+}

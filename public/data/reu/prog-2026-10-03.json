@@ -1,0 +1,698 @@
+{
+ "date": "2026-10-03",
+ "reunions": [
+  {
+   "hippodrome": "ParisLongchamp",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "QATAR PRIX CHAUDENAY",
+     "heure": "13:28"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "QATAR PRIX DOLLAR",
+     "heure": "14:01"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "QATAR ARABIAN TROPHY DES JUMENTS (POULICHES 4 ANS)",
+     "heure": "14:38"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "QATAR PRIX DE LA PLACE DES VOSGES (Quinte+)",
+     "heure": "15:15"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "ARQANA SERIES - HARAS DE BOUQUETOT CRITERIUM D'AUTOMNE",
+     "heure": "15:53"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "QATAR PRIX DE ROYALLIEU",
+     "heure": "16:27"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "QATAR PRIX DU CADRAN",
+     "heure": "17:02"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C8",
+     "pays": "FRANCE",
+     "nom": "QATAR PRIX DANIEL WILDENSTEIN",
+     "heure": "17:40"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R1",
+     "code": "C9",
+     "pays": "FRANCE",
+     "nom": "QATAR PRIX DE LA PLACE DE LA CONCORDE",
+     "heure": "18:15"
+    }
+   ]
+  },
+  {
+   "hippodrome": "FONTAINEBLEAU",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R2",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "PRIX DE L'ECOLE MILITAIRE D'EQUITATION",
+     "heure": "10:42"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R2",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "PRIX DE L'ASSOCIATION DES AMIS DU MUSEE DU CHEVAL MILITAIRE",
+     "heure": "11:12"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R2",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "PRIX DU CARREFOUR DE L'OBELISQUE",
+     "heure": "11:47"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R2",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "PRIX PIERRE DEBROISE",
+     "heure": "12:20"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R2",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "PRIX DE LA TABLE DU ROI",
+     "heure": "12:54"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R2",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "PRIX D'AMIENS",
+     "heure": "13:25"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R2",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "PRIX EXPOSITION PAUL TAVERNIER",
+     "heure": "13:59"
+    }
+   ]
+  },
+  {
+   "hippodrome": "CABOURG",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R3",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "PRIX DE BRECEY",
+     "heure": "11:28"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R3",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "PRIX DE VILLEBON",
+     "heure": "12:04"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R3",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "PRIX DE CERNAY",
+     "heure": "12:36"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R3",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "PRIX DE FOLLIGNY",
+     "heure": "13:10"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R3",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "PRIX DE BOISSEY",
+     "heure": "13:44"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R3",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "PRIX D'ISIGNY-SUR-MER",
+     "heure": "14:19"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R3",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "PRIX DES PELICANS",
+     "heure": "14:55"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R3",
+     "code": "C8",
+     "pays": "FRANCE",
+     "nom": "PRIX DE LONGVILLERS",
+     "heure": "15:32"
+    }
+   ]
+  },
+  {
+   "hippodrome": "LAVAL",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R4",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "PRIX FRANCIS-LUCIEN ADAM",
+     "heure": "16:09"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R4",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "PRIX GERARD ET PATRICK MOTTIER",
+     "heure": "16:43"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R4",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "PRIX ALPHONSE GOUABAU",
+     "heure": "17:21"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R4",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "PRIX HORSERAIL FRANCE / CLOTURES CONCEPT",
+     "heure": "17:57"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R4",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "PRIX IVAN LAMBERTZ",
+     "heure": "18:32"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R4",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "PRIX PHILIPPE ET GILLES BAUDRON",
+     "heure": "19:06"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R4",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "PRIX GABRIEL ET ROBERT SANDRIN",
+     "heure": "19:39"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R4",
+     "code": "C8",
+     "pays": "FRANCE",
+     "nom": "PRIX LOIC BELLANGER",
+     "heure": "20:18"
+    }
+   ]
+  },
+  {
+   "hippodrome": "MONS GHLIN",
+   "pays": "BELGIQUE",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R5",
+     "code": "C1",
+     "pays": "BELGIQUE",
+     "nom": "PRIX WWW.EUROTIERCE.BE BELGIQUE",
+     "heure": "18:49"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R5",
+     "code": "C2",
+     "pays": "BELGIQUE",
+     "nom": "PRIX COLOMBIE BELGIQUE",
+     "heure": "19:23"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R5",
+     "code": "C3",
+     "pays": "BELGIQUE",
+     "nom": "PRIX ARGENTINE BELGIQUE",
+     "heure": "19:57"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R5",
+     "code": "C4",
+     "pays": "BELGIQUE",
+     "nom": "PRIX CHILI BELGIQUE",
+     "heure": "20:34"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R5",
+     "code": "C5",
+     "pays": "BELGIQUE",
+     "nom": "PRIX BOLIVIE BELGIQUE",
+     "heure": "21:17"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R5",
+     "code": "C6",
+     "pays": "BELGIQUE",
+     "nom": "PRIX BRESIL BELGIQUE",
+     "heure": "21:47"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R5",
+     "code": "C7",
+     "pays": "BELGIQUE",
+     "nom": "PRIX ZETURF- PAR LES TURFISTES BELGIQUE",
+     "heure": "22:17"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R5",
+     "code": "C8",
+     "pays": "BELGIQUE",
+     "nom": "COUPE DES 2 ANS BELGIQUE",
+     "heure": "22:47"
+    }
+   ]
+  },
+  {
+   "hippodrome": "NEWMARKET",
+   "pays": "ROYAUME",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R6",
+     "code": "C1",
+     "pays": "ROYAUME",
+     "nom": "BRITISH EBF PREMIER FILLIES' HAND - WORLD POOL",
+     "heure": "13:25"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R6",
+     "code": "C2",
+     "pays": "ROYAUME",
+     "nom": "TATTERSALLS OCTOBER AUCTION STAKES - WORLD POOL",
+     "heure": "14:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R6",
+     "code": "C3",
+     "pays": "ROYAUME",
+     "nom": "SUN CHARIOT S. - WORLD POOL",
+     "heure": "14:35"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R6",
+     "code": "C4",
+     "pays": "ROYAUME",
+     "nom": "HKJC HANDICAP (CLASS 2) - WORLD POOL",
+     "heure": "15:10"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R6",
+     "code": "C5",
+     "pays": "ROYAUME",
+     "nom": "MAIDEN STAKES (CLASS 2)",
+     "heure": "15:45"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R6",
+     "code": "C6",
+     "pays": "ROYAUME",
+     "nom": "MAIDEN STAKES (CLASS 3)",
+     "heure": "16:15"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R6",
+     "code": "C7",
+     "pays": "ROYAUME",
+     "nom": "NEWMARKET FILLIES' HANDICAP (CLASS 3)",
+     "heure": "16:50"
+    }
+   ]
+  },
+  {
+   "hippodrome": "BELMONT PARK",
+   "pays": "ETATS",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C1",
+     "pays": "ETATS",
+     "nom": "MAIDEN SPECIAL WEIGHT (2 YO)",
+     "heure": "18:06"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C2",
+     "pays": "ETATS",
+     "nom": "MAIDEN OPTIONAL CLAIMING (2 YO - FILLIES)",
+     "heure": "18:40"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C3",
+     "pays": "ETATS",
+     "nom": "MAIDEN SPECIAL WEIGHT (2 YO - FILLIES - TURF)",
+     "heure": "19:13"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C4",
+     "pays": "ETATS",
+     "nom": "MAIDEN SPECIAL WEIGHT (2 YO)",
+     "heure": "19:46"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C5",
+     "pays": "ETATS",
+     "nom": "MAIDEN SPECIAL WEIGHT (2 YO - FILLIES)",
+     "heure": "20:19"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C6",
+     "pays": "ETATS",
+     "nom": "MATRON STAKES",
+     "heure": "20:50"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C7",
+     "pays": "ETATS",
+     "nom": "MISS GRILLO S.",
+     "heure": "21:24"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C8",
+     "pays": "ETATS",
+     "nom": "CHAMPAGNE S.",
+     "heure": "21:54"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C9",
+     "pays": "ETATS",
+     "nom": "FRIZETTE S.",
+     "heure": "22:32"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R7",
+     "code": "C10",
+     "pays": "ETATS",
+     "nom": "FUTURITY S.",
+     "heure": "23:07"
+    }
+   ]
+  },
+  {
+   "hippodrome": "SAN ISIDRO",
+   "pays": "ARGENTINE",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R8",
+     "code": "C1",
+     "pays": "ARGENTINE",
+     "nom": "SUIPACHA S. ( GRADE I )",
+     "heure": "21:05"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R8",
+     "code": "C2",
+     "pays": "ARGENTINE",
+     "nom": "PREMIO NATAN 2022",
+     "heure": "21:40"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R8",
+     "code": "C3",
+     "pays": "ARGENTINE",
+     "nom": "SAN ISIDRO S. ( GRADE I )",
+     "heure": "22:15"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R8",
+     "code": "C4",
+     "pays": "ARGENTINE",
+     "nom": "PREMIO REAL RIM 2025",
+     "heure": "22:50"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R8",
+     "code": "C5",
+     "pays": "ARGENTINE",
+     "nom": "JOCKEY CLUB S. ( GRADE I )",
+     "heure": "23:35"
+    }
+   ]
+  },
+  {
+   "hippodrome": "AMIENS",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R9",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "PRIX JEEP AMIENS - SOFIDA AUTO",
+     "heure": "19:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R9",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "GRAND PRIX D'AMIENS METROPOLE",
+     "heure": "19:30"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R9",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "PRIX WAKE UP AMIENS (GR.A)",
+     "heure": "20:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R9",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "PRIX DE SAVEUSE (GR.B)",
+     "heure": "20:30"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R9",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "PRIX FICTAC",
+     "heure": "21:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R9",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "PRIX ARROVERT (GR.A)",
+     "heure": "21:30"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R9",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "PRIX DE LA PICARDIE (GR.B)",
+     "heure": "22:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R9",
+     "code": "C8",
+     "pays": "FRANCE",
+     "nom": "PRIX OCTOBRE ROSE",
+     "heure": "22:30"
+    }
+   ]
+  },
+  {
+   "hippodrome": "BEAUMONT DE LOMAGNE",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "PRIX DE YONKERS (GR A)",
+     "heure": "14:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "PRIX DE YONKERS (GR B)",
+     "heure": "14:30"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "PRIX D'AGNANO",
+     "heure": "15:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "PRIX DE SOLVALLA",
+     "heure": "15:30"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "PX DE LA LIGUE CONTRE LE CANCER 82 (GR A)",
+     "heure": "16:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "PRIX DE MEADOWLAND (GR B)",
+     "heure": "16:30"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "PRIX ROAD TRIPS BY CEDRIC",
+     "heure": "17:00"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C8",
+     "pays": "FRANCE",
+     "nom": "PRIX DE WOLVEGA",
+     "heure": "17:32"
+    },
+    {
+     "date": "2026-10-03",
+     "reunion": "R10",
+     "code": "C9",
+     "pays": "FRANCE",
+     "nom": "PRIX DE SON PARDO",
+     "heure": "18:04"
+    }
+   ]
+  }
+ ],
+ "collecteLe": "2026-10-04T08:16:20.700Z"
+}

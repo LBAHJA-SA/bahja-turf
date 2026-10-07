@@ -1,0 +1,648 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        3
+      ],
+      [
+        9
+      ],
+      [
+        13
+      ],
+      [
+        2
+      ],
+      [
+        5
+      ],
+      [
+        6
+      ],
+      [
+        12
+      ],
+      [
+        10
+      ],
+      [
+        11
+      ],
+      [
+        8
+      ],
+      [
+        15
+      ],
+      [
+        4
+      ],
+      [
+        14
+      ],
+      [
+        7
+      ],
+      [
+        1
+      ]
+    ],
+    "classe": "HANDICAP_DIVISE",
+    "corde": "D",
+    "definitif": false,
+    "discipline": "PLAT",
+    "distance": 1400,
+    "going": null,
+    "imminent": false,
+    "num": 1,
+    "penetrometer": "Bon souple",
+    "prix": "PRIX CARRUS",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 16,
+    "specialty": "PLAT",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": "HERBE",
+    "time": 1789041300000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 15,
+      "cote_pmu": 14,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 16909700,
+      "horse": "TORTISAMBERT",
+      "horse_id": "TORTISAMBERT-TOP CHAIN-SIOUX NATION",
+      "jockey": "C.DEMURO",
+      "musique": "0p2p2p5p1p2p8p(25)3p3p",
+      "nombreCourses": 27,
+      "nombrePlaces": 20,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 8,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 605,
+      "proprietaire": "G.AUGUSTIN-NORMAND",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "F.CHAPPET (S)",
+      "valeur": 43.5
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 10,
+      "cote_pmu": 10,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 17956300,
+      "horse": "SKYLIGHT BROCHARD",
+      "horse_id": "SKYLIGHT BROCHARD-FONSECA-MEHMAS",
+      "jockey": "PC.BOUDOT",
+      "musique": "4p2p1p9p2p0p4p5p2p",
+      "nombreCourses": 35,
+      "nombrePlaces": 20,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "OEILLERES_AUSTRALIENNES",
+      "poids": 600,
+      "proprietaire": "TIM.TIM .DONWORTH (S)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "TIM.DONWORTH (S)",
+      "valeur": 43
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 8,
+      "cote_pmu": 9.9,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 9190100,
+      "horse": "ALEM",
+      "horse_id": "ALEM-ALLUCINATION-GOLDEN HORDE",
+      "jockey": "T.PICCONE",
+      "musique": "0p3p3p4p5p3p5p(25)3p2p",
+      "nombreCourses": 15,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 600,
+      "proprietaire": "N.BIZAKOV",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "HA.PANTALL (S)",
+      "valeur": 43
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": 7,
+      "cote_pmu": 54,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 38117900,
+      "horse": "FAST RAAJ",
+      "horse_id": "FAST RAAJ-INTERESTING-IFFRAAJ",
+      "jockey": "C.LECOEUVRE",
+      "musique": "6p0p3p6p6p4p3p(25)5p3p",
+      "nombreCourses": 47,
+      "nombrePlaces": 25,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 11,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 585,
+      "proprietaire": "A.JATHIERE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Y.BARBEROT (S)",
+      "valeur": 41.5
+    },
+    {
+      "age": 3,
+      "codeStatut": null,
+      "corde": 3,
+      "cote_pmu": 62,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 4569000,
+      "horse": "VIVA LA SKIDS",
+      "horse_id": "VIVA LA SKIDS-MANDOLINE-VICTOR LUDORUM",
+      "jockey": "I.MENDIZABAL",
+      "musique": "0p0p6p1p(25)4p1p1p",
+      "nombreCourses": 7,
+      "nombrePlaces": 1,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 575,
+      "proprietaire": "R.DEACON",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "A.WEST",
+      "valeur": 42.5
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 6,
+      "cote_pmu": 15,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 10827400,
+      "horse": "TALENTUOSO",
+      "horse_id": "TALENTUOSO-TWO SUGARS-OMAHA BEACH",
+      "jockey": "M.GRANDIN",
+      "musique": "4p3p9p3p2p3p1p(25)2p4p",
+      "nombreCourses": 22,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 570,
+      "proprietaire": "BLU RACING",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "PE.DUBOIS (S)",
+      "valeur": 40
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 12,
+      "cote_pmu": 30,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 13034100,
+      "horse": "FIRE REBEL",
+      "horse_id": "FIRE REBEL-ORANGE DE JUILLEY-LE REBEL",
+      "jockey": "F.LEFEBVRE",
+      "musique": "8p0p8p6p7p6p1p1p5p",
+      "nombreCourses": 37,
+      "nombrePlaces": 16,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 570,
+      "proprietaire": "P.PIOCHAUD",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "A.SPANU",
+      "valeur": 40
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 16,
+      "cote_pmu": 35,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 9858400,
+      "horse": "CHALDERO",
+      "horse_id": "CHALDERO-CHARMEY-MORANDI",
+      "jockey": "T.BACHELOT",
+      "musique": "5p1p9p0p0p0p8p8p9p8p",
+      "nombreCourses": 42,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 565,
+      "proprietaire": "MME E.NIESLANIKOVA",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "M.NIESLANIK",
+      "valeur": 39.5
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 1,
+      "cote_pmu": 2.8,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 3499000,
+      "horse": "ELIMAN",
+      "horse_id": "ELIMAN-ELDENA-SIYOUNI",
+      "jockey": "M.BARZALONA",
+      "musique": "1p(25)9p3p1p2p2p",
+      "nombreCourses": 6,
+      "nombrePlaces": 3,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 565,
+      "proprietaire": "AGA KHAN STUDS SC",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "FH.GRAFFARD (S)",
+      "valeur": 39.5
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 2,
+      "cote_pmu": 28,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 15386600,
+      "horse": "REVE DE VALLARSA",
+      "horse_id": "REVE DE VALLARSA-SALAR LIVIUS-DARIYAN",
+      "jockey": "D.SANTIAGO",
+      "musique": "1p6p0p6p0p2p1p0p(25)0p",
+      "nombreCourses": 44,
+      "nombrePlaces": 21,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "OEILLERES_AUSTRALIENNES",
+      "poids": 560,
+      "proprietaire": "A.LEVOIR",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "MME S.GAVILAN",
+      "valeur": 39
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 9,
+      "cote_pmu": 11,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 5957100,
+      "horse": "KRASKHOV",
+      "horse_id": "KRASKHOV-TADAABEER-GOKEN",
+      "jockey": "C.SOUMILLON",
+      "musique": "0p6p6p3p3p4p(25)1p0p2p",
+      "nombreCourses": 14,
+      "nombrePlaces": 8,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 555,
+      "proprietaire": "A.JATHIERE/A.MOUKNASS",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "M.DELCHER SANCHEZ",
+      "valeur": 38.5
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 5,
+      "cote_pmu": 20,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 4667700,
+      "horse": "ZAWAN",
+      "horse_id": "ZAWAN-CRACKER-SHALAA",
+      "jockey": "A.POUCHIN",
+      "musique": "3p9p5p9p(25)4p7p6p4p1p",
+      "nombreCourses": 15,
+      "nombrePlaces": 6,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "OEILLERES_AUSTRALIENNES",
+      "poids": 555,
+      "proprietaire": "A.B RACING/M.ALMAHOUD",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "G.HERNON (S)",
+      "valeur": 38.5
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 4,
+      "cote_pmu": 12,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 13673600,
+      "horse": "OMICRONE",
+      "horse_id": "OMICRONE-AL SAILIYAH-ZELZAL",
+      "jockey": "A.HAMELIN",
+      "musique": "5p9p8p0p9p0p(25)8p7p4p",
+      "nombreCourses": 37,
+      "nombrePlaces": 13,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 555,
+      "proprietaire": "F.LE CORNO/G.AUGUSTIN-NORMAND",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "P.GROUALLE (S)",
+      "valeur": 38.5
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": 11,
+      "cote_pmu": 57,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 31225000,
+      "horse": "CICCIO BOY",
+      "horse_id": "CICCIO BOY-SOGDIANA-HUNTER'S LIGHT",
+      "jockey": "M.JUSTUM",
+      "musique": "0p5p5p0p2p0p4p1p3p4p",
+      "nombreCourses": 76,
+      "nombrePlaces": 41,
+      "nombrePlacesSecond": 13,
+      "nombrePlacesTroisieme": 8,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 550,
+      "proprietaire": "JM.ANGLES",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "M.JUSTUM",
+      "valeur": 38
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 13,
+      "cote_pmu": 27,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 9428200,
+      "horse": "CHIRICCO",
+      "horse_id": "CHIRICCO-PRINCESS BIANCA-CARAVAGGIO",
+      "jockey": "A.MADAMET",
+      "musique": "3p1p0p3p4p0p5p(25)0p5p",
+      "nombreCourses": 30,
+      "nombrePlaces": 17,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 550,
+      "proprietaire": "ECURIE MELANIE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "M.BRASME (S)",
+      "valeur": 38
+    },
+    {
+      "age": 3,
+      "codeStatut": null,
+      "corde": 14,
+      "cote_pmu": null,
+      "deferre": "FF",
+      "deferre_stats": {
+        "FF": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 4806600,
+      "horse": "MIUCCIA",
+      "horse_id": "MIUCCIA-CATCH-STARSPANGLEDBANNER",
+      "jockey": "NON PARTANT",
+      "musique": "2p3p3p7p2p5p(25)4p4p1p",
+      "nombreCourses": 10,
+      "nombrePlaces": 8,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 16,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": 550,
+      "proprietaire": "FRASSETTO STABLES LLC",
+      "sexe": "FEMELLES",
+      "statut": "NON_PARTANT",
+      "trainer": "G.BIETOLINI",
+      "valeur": 40
+    }
+  ],
+  "reunion": {
+    "date": "2026-09-10",
+    "hippodrome": "ParisLongchamp",
+    "num": 1
+  }
+}

@@ -1,0 +1,291 @@
+{
+ "v": 2,
+ "pv": 3,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 2,
+  "nom": "PREMIO NATAN 2022",
+  "prix": "PREMIO NATAN 2022",
+  "heure": "21:40",
+  "distance": 1200,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "Pour pur sang males et femelles de quatre ans (Allocations distribuées aux 5 remiers). Les informations concernant les partants sont communiquées sous la esponsabilité de l'autorité hippique du pays dans lequel la course est organ ée.",
+  "montant": 6882,
+  "arrivee": [
+   1,
+   5,
+   3,
+   4,
+   2
+  ],
+  "dateLongue": "samedi 3 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 8,
+  "hippodrome": "San Isidro",
+  "pays": "ARGENTINE"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "ENGUALICHAO",
+   "driver": "EDUARDO ORTEGA PAVON",
+   "entraineur": "CARLOS DANIEL ETCHECHOURY",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p3p3p4p4p",
+   "gains": 38277400,
+   "age": 4,
+   "sexe": "M",
+   "poids": 54,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "01,4",
+   "coteRefEntraineur": "01,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/SIO/2/20261003-SIO-2-1.png",
+   "proprietaire": "HARAS EL ANGEL DE VENECIA",
+   "dernierPassage": 111,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "HUDSON",
+   "driver": "IVAN MONASTEROLO",
+   "entraineur": "ENRIQUE MARTIN FERRO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p0p1p6p5p",
+   "gains": 17460800,
+   "age": 4,
+   "sexe": "M",
+   "poids": 54,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "01,0",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/SIO/2/20261003-SIO-2-2.png",
+   "proprietaire": "TRES P",
+   "dernierPassage": null,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "MATUTE JOY",
+   "driver": "JORGE MARCELINO ORTIZ",
+   "entraineur": "ENRIQUE MARTIN FERRO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p4p1p3p1p",
+   "gains": 44688000,
+   "age": 4,
+   "sexe": "M",
+   "poids": 54,
+   "valeur": null,
+   "chrono": "1'13\"6",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/SIO/2/20261003-SIO-2-3.png",
+   "proprietaire": "SAN ISIDORO",
+   "dernierPassage": 111,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "PITLOCHRY",
+   "driver": "BRIAN RODRIGO ENRIQUE",
+   "entraineur": "JOSE CARLOS VIOLA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p6p1p6p1p",
+   "gains": 28684600,
+   "age": 4,
+   "sexe": "M",
+   "poids": 54,
+   "valeur": null,
+   "chrono": "1'07\"1",
+   "coteRefJockey": "01,0",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/SIO/2/20261003-SIO-2-4.png",
+   "proprietaire": "MILU Y LOLA",
+   "dernierPassage": 239,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "VOY AL BAILE",
+   "driver": "ENRIQUE CARLOS E. WEISHEIM",
+   "entraineur": "FRANCISCO RICARDO VILLARRETA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p7p0p6p1p",
+   "gains": 10281600,
+   "age": 4,
+   "sexe": "M",
+   "poids": 53,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/SIO/2/20261003-SIO-2-5.png",
+   "proprietaire": "CRISBELA",
+   "dernierPassage": null,
+   "depart": 5,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [],
+  "drivers": [
+   2,
+   4,
+   1
+  ],
+  "entraineurs": [
+   1
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "topPalmares": [
+   "3",
+   "1",
+   "4",
+   "2",
+   "5"
+  ],
+  "topForme": [
+   "3",
+   "1",
+   "4",
+   "2",
+   "5"
+  ],
+  "topClasse": [
+   "3",
+   "1",
+   "4",
+   "2",
+   "5"
+  ],
+  "topJockeys": [
+   "4",
+   "2",
+   "1",
+   "3"
+  ],
+  "topEntraineurs": [
+   "1",
+   "2",
+   "3"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "4",
+   "3"
+  ],
+  "topCordes": [
+   "1",
+   "3",
+   "4",
+   "2",
+   "5"
+  ],
+  "ecartsChevaux": [
+   "3",
+   "1",
+   "2",
+   "4",
+   "5"
+  ],
+  "incontournables": [
+   "1",
+   "3",
+   "4",
+   "2",
+   "5"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "3",
+   "4"
+  ],
+  "syntheseTf": [
+   "1",
+   "2",
+   "5"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "ENGUALICHAO",
+   "courses": 9,
+   "victoires": 2,
+   "places": 7,
+   "pctV": "22.22",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": "1200"
+  },
+  {
+   "num": 2,
+   "cheval": "HUDSON",
+   "courses": 5,
+   "victoires": 2,
+   "places": 2,
+   "pctV": "40",
+   "pctP": "80",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "MATUTE JOY",
+   "courses": 8,
+   "victoires": 3,
+   "places": 5,
+   "pctV": "37.5",
+   "pctP": "100",
+   "aptG": "1200",
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "PITLOCHRY",
+   "courses": 9,
+   "victoires": 2,
+   "places": 7,
+   "pctV": "22.22",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "VOY AL BAILE",
+   "courses": 7,
+   "victoires": 2,
+   "places": 4,
+   "pctV": "28.57",
+   "pctP": "85.71",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "3 - 1 - 4 - 5 - 2",
+ "pronosTf": [
+  "3 - 1 - 2"
+ ],
+ "collecteLe": "2026-10-04T08:18:17.688Z"
+}

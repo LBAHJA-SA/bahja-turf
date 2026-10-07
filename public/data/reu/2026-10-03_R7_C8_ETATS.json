@@ -1,0 +1,330 @@
+{
+ "v": 2,
+ "pv": 3,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 8,
+  "nom": "CHAMPAGNE S.",
+  "prix": "CHAMPAGNE S.",
+  "heure": "21:54",
+  "distance": 1600,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "GROUPE I",
+  "conditions": "Pour pur sang males, hongres et femelles de deux ans (Allocations distribuée aux 5 premiers). Les informations concernant les partants sont communiquées us la responsabilité de l'autorité hippique du pays dans lequel la course es organisée.",
+  "montant": 480895,
+  "arrivee": [
+   5,
+   3,
+   4,
+   6,
+   1
+  ],
+  "dateLongue": "samedi 3 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 7,
+  "hippodrome": "Belmont Park",
+  "pays": "ETATS"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "JOHNNY HOCKEY",
+   "driver": "K DAVIS",
+   "entraineur": "A ARRIAGA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p1p4p4p3p",
+   "gains": 57238,
+   "age": 2,
+   "sexe": "M",
+   "poids": 55.5,
+   "valeur": 26.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/BED/8/20261003-BED-8-1.png",
+   "proprietaire": "NEXT LEVEL STABLES",
+   "dernierPassage": 37,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "RAKU",
+   "driver": "P LOPEZ",
+   "entraineur": "K J BREEN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p1p",
+   "gains": 44600,
+   "age": 2,
+   "sexe": "M",
+   "poids": 55.5,
+   "valeur": 36,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/BED/8/20261003-BED-8-2.png",
+   "proprietaire": "CONOVER STABLE",
+   "dernierPassage": null,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "GAUDREAU",
+   "driver": "F PRAT",
+   "entraineur": "C C BROWN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p",
+   "gains": 63250,
+   "age": 2,
+   "sexe": "M",
+   "poids": 55.5,
+   "valeur": 37,
+   "chrono": "1'34\"0",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/BED/8/20261003-BED-8-3.png",
+   "proprietaire": "TANGLEWOOD THOROUGHBREDS LLC, TH",
+   "dernierPassage": 56,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "CLUB REIGN",
+   "driver": "E J ZAYAS",
+   "entraineur": "D BECKMAN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p",
+   "gains": 63250,
+   "age": 2,
+   "sexe": "M",
+   "poids": 55.5,
+   "valeur": 35,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/BED/8/20261003-BED-8-4.png",
+   "proprietaire": "RIBBLE FARMS, THREE BRAND RACING",
+   "dernierPassage": null,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "U. S. S. VALOR",
+   "driver": "M FRANCO",
+   "entraineur": "C R MCGAUGHEY III",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p3p",
+   "gains": 77050,
+   "age": 2,
+   "sexe": "M",
+   "poids": 55.5,
+   "valeur": 41.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/BED/8/20261003-BED-8-5.png",
+   "proprietaire": "TEAM VALOR INTERNATIONAL LLC",
+   "dernierPassage": 56,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "EARTH SONG",
+   "driver": "R SANTANA, JR.",
+   "entraineur": "J DELGADO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p",
+   "gains": 24600,
+   "age": 2,
+   "sexe": "M",
+   "poids": 55.5,
+   "valeur": 34.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/BED/8/20261003-BED-8-6.png",
+   "proprietaire": "AMO RACING USA LLC",
+   "dernierPassage": null,
+   "depart": 6,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [],
+  "drivers": [],
+  "entraineurs": [],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "topPalmares": [
+   "1",
+   "2",
+   "5",
+   "3",
+   "4",
+   "6"
+  ],
+  "topForme": [
+   "1",
+   "2",
+   "5",
+   "3",
+   "4",
+   "6"
+  ],
+  "topClasse": [
+   "5",
+   "3",
+   "4",
+   "1",
+   "2",
+   "6"
+  ],
+  "topJockeys": [
+   "4",
+   "5",
+   "3",
+   "6",
+   "2",
+   "1"
+  ],
+  "topEntraineurs": [
+   "3",
+   "6",
+   "5",
+   "4",
+   "2",
+   "1"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "3"
+  ],
+  "topCordes": [
+   "1",
+   "3",
+   "2",
+   "4",
+   "5"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "incontournables": [
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "1"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "1",
+   "2"
+  ],
+  "syntheseTf": [
+   "5",
+   "3",
+   "4",
+   "6"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "JOHNNY HOCKEY",
+   "courses": 6,
+   "victoires": 1,
+   "places": 4,
+   "pctV": "16.67",
+   "pctP": "83.33",
+   "aptG": null,
+   "aptP": "1100"
+  },
+  {
+   "num": 2,
+   "cheval": "RAKU",
+   "courses": 2,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "GAUDREAU",
+   "courses": 1,
+   "victoires": 1,
+   "places": 0,
+   "pctV": "100",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "CLUB REIGN",
+   "courses": 1,
+   "victoires": 1,
+   "places": 0,
+   "pctV": "100",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "U. S. S. VALOR",
+   "courses": 2,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "EARTH SONG",
+   "courses": 1,
+   "victoires": 1,
+   "places": 0,
+   "pctV": "100",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "1 - 2 - 5 - 3 - 4 - 6",
+ "pronosTf": [
+  "1 - 2 - 5 - 3"
+ ],
+ "collecteLe": "2026-10-04T08:18:10.106Z"
+}

@@ -1,0 +1,289 @@
+{
+ "v": 2,
+ "pv": 3,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 6,
+  "nom": "CLÁSICO PLINIO ORIBE Y ANDRES ORIBE DEUS S.",
+  "prix": "CLÁSICO PLINIO ORIBE Y ANDRES ORIBE DEUS S.",
+  "heure": "20:15",
+  "distance": 1000,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "Pour pur sang femelle de trois ans et plus (Allocations distribuées aux 5 pr iers). Les informations concernant les partants sont communiquées sous la re onsabilité de l'autorité hippique du pays dans lequel la course est organisé",
+  "montant": 13116,
+  "arrivee": null,
+  "dateLongue": "dimanche 4 octobre 2026",
+  "jour": "dimanche"
+ },
+ "meeting": {
+  "num": 4,
+  "hippodrome": "Maronas",
+  "pays": "URUGUAY"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "LA SOBRINA",
+   "driver": "ERNESTO TONNA",
+   "entraineur": "PAOLA RODRIGUEZ",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p1p0p1p1p",
+   "gains": 4023520,
+   "age": 6,
+   "sexe": "F",
+   "poids": 60,
+   "valeur": null,
+   "chrono": "0'59\"3",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/MXD/6/20261004-MXD-6-1.png",
+   "proprietaire": "HEROICO",
+   "dernierPassage": 63,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "BERLINA FEVER",
+   "driver": "NICOL MATHIAS ROMERO",
+   "entraineur": "CESAR ANDRES MARTIN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p1p6p",
+   "gains": 396440,
+   "age": 3,
+   "sexe": "F",
+   "poids": 55,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "01,2",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/MXD/6/20261004-MXD-6-2.png",
+   "proprietaire": "10 DE ENERO",
+   "dernierPassage": null,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "AGOSTINA",
+   "driver": "JAVIER EMANUEL PEREZ",
+   "entraineur": "CHRISTOPHER ORTELLADO",
+   "cote": null,
+   "coteRef": 4,
+   "musique": "3p2p1p1p1p",
+   "gains": 2424400,
+   "age": 4,
+   "sexe": "F",
+   "poids": 60,
+   "valeur": null,
+   "chrono": "0'59\"9",
+   "coteRefJockey": "01,6",
+   "coteRefEntraineur": "01,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/MXD/6/20261004-MXD-6-3.png",
+   "proprietaire": "INTUICION",
+   "dernierPassage": 63,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "TSEDAKA",
+   "driver": "LUIS ALBERTO CACERES",
+   "entraineur": "RAIMUNDO SOARES",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p1p8p1p4p",
+   "gains": 1830360,
+   "age": 4,
+   "sexe": "F",
+   "poids": 60,
+   "valeur": null,
+   "chrono": "1'01\"2",
+   "coteRefJockey": "01,1",
+   "coteRefEntraineur": "01,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/MXD/6/20261004-MXD-6-4.png",
+   "proprietaire": "HARAS PHILLIPSON",
+   "dernierPassage": 133,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "SUPER KOWGIRL",
+   "driver": "PABLO RODRIGUEZ",
+   "entraineur": "PABLO GERMAN GONZALEZ",
+   "cote": null,
+   "coteRef": 4.5,
+   "musique": "2p1p7p1p1p",
+   "gains": 2378640,
+   "age": 5,
+   "sexe": "F",
+   "poids": 60,
+   "valeur": null,
+   "chrono": "0'59\"1",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "01,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/MXD/6/20261004-MXD-6-5.png",
+   "proprietaire": "TITO BORJAS",
+   "dernierPassage": 231,
+   "depart": 5,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   3,
+   5
+  ],
+  "drivers": [
+   4,
+   3
+  ],
+  "entraineurs": [
+   4,
+   5,
+   2,
+   3
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "1",
+   "3",
+   "4",
+   "5",
+   "2"
+  ],
+  "topPalmares": [
+   "3",
+   "1",
+   "5",
+   "4",
+   "2"
+  ],
+  "topForme": [
+   "3",
+   "1",
+   "5",
+   "4",
+   "2"
+  ],
+  "topClasse": [
+   "1",
+   "3",
+   "5",
+   "4",
+   "2"
+  ],
+  "topJockeys": [
+   "5",
+   "4",
+   "3",
+   "2",
+   "1"
+  ],
+  "topEntraineurs": [
+   "5",
+   "4",
+   "2",
+   "1",
+   "3"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "5",
+   "1",
+   "3",
+   "4"
+  ],
+  "topCordes": [
+   "3",
+   "1",
+   "2"
+  ],
+  "ecartsChevaux": [],
+  "incontournables": [
+   "3",
+   "1",
+   "5",
+   "2",
+   "4"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "3",
+   "5"
+  ],
+  "syntheseTf": [
+   "1",
+   "4",
+   "2"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "LA SOBRINA",
+   "courses": 22,
+   "victoires": 9,
+   "places": 10,
+   "pctV": "40.91",
+   "pctP": "86.36",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "BERLINA FEVER",
+   "courses": 3,
+   "victoires": 2,
+   "places": 0,
+   "pctV": "66.67",
+   "pctP": "66.67",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "AGOSTINA",
+   "courses": 16,
+   "victoires": 5,
+   "places": 8,
+   "pctV": "31.25",
+   "pctP": "81.25",
+   "aptG": null,
+   "aptP": "1200"
+  },
+  {
+   "num": 4,
+   "cheval": "TSEDAKA",
+   "courses": 10,
+   "victoires": 6,
+   "places": 3,
+   "pctV": "60",
+   "pctP": "90",
+   "aptG": "1400",
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "SUPER KOWGIRL",
+   "courses": 18,
+   "victoires": 7,
+   "places": 8,
+   "pctV": "38.89",
+   "pctP": "83.33",
+   "aptG": "1200",
+   "aptP": null
+  }
+ ],
+ "synthesePct": "1 - 5 - 4 - 3 - 2",
+ "pronosTf": [
+  "3 - 1 - 5",
+  "1 - 3 - 5 - 4"
+ ],
+ "collecteLe": "2026-10-04T08:15:06.537Z"
+}

@@ -1,0 +1,372 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 9,
+  "nom": "PRIX DU CAMBRESIS",
+  "prix": "PRIX DU CAMBRESIS",
+  "heure": "21:01",
+  "distance": 1900,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "",
+  "conditions": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus n'ayant pas depuis le 5 octobre 2025 inclus été classés dans les trois premiers d'une Listed ni depuis le 5 avril 2026 inclus (Handicap et A Réclamer excepté) gag une Classe 3 ou reçu une allocation de 11.500. Poids : 56 kg. Surcharges accumulées pour les sommes reçues en victoires et places depuis le 5 avril 2026 inclus : 1 kg par 5.000.",
+  "montant": 13700,
+  "arrivee": [
+   2,
+   1,
+   3,
+   4,
+   5
+  ],
+  "dateLongue": "lundi 5 octobre 2026",
+  "jour": "lundi"
+ },
+ "meeting": {
+  "num": 4,
+  "hippodrome": "Deauville",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "TIEGO THE FIRST",
+   "driver": "M. GUYON",
+   "entraineur": "P & J. BRANDT",
+   "cote": 2.2,
+   "coteRef": 11.2,
+   "musique": "0p4p4p5p2p8p(25)8p0p2p",
+   "gains": 104636,
+   "age": 4,
+   "sexe": "M",
+   "poids": 59,
+   "valeur": 43.5,
+   "chrono": "",
+   "coteRefJockey": "05,8",
+   "coteRefEntraineur": "10,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/DEA/9/20261005-DEA-9-1.png",
+   "proprietaire": "STALL PERLEN ET F. BLICHFELDT",
+   "dernierPassage": 43,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "LORAXED",
+   "driver": "A. CRASTUS",
+   "entraineur": "A. WATTEL",
+   "cote": 4.1,
+   "coteRef": null,
+   "musique": "1p3p1p",
+   "gains": 11868,
+   "age": 4,
+   "sexe": "H",
+   "poids": 58,
+   "valeur": null,
+   "chrono": "1'57\"5",
+   "coteRefJockey": "11,2",
+   "coteRefEntraineur": "09,2",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/DEA/9/20261005-DEA-9-2.png",
+   "proprietaire": "OTI MANAGEMENT PTY LTD",
+   "dernierPassage": 15,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "CLIMATE CHANGE",
+   "driver": "T. BACHELOT",
+   "entraineur": "S. WATTEL",
+   "cote": 2.8,
+   "coteRef": 5.6,
+   "musique": "8p2p4p5p(25)1p4p6p2p2p",
+   "gains": 160239,
+   "age": 6,
+   "sexe": "H",
+   "poids": 57,
+   "valeur": 44,
+   "chrono": "2'05\"0",
+   "coteRefJockey": "09,6",
+   "coteRefEntraineur": "08,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/DEA/9/20261005-DEA-9-3.png",
+   "proprietaire": "A. PRATT",
+   "dernierPassage": 67,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "DARK ROCKSTER",
+   "driver": "C. PACAUT",
+   "entraineur": "S. WATTEL",
+   "cote": 35,
+   "coteRef": 10.6,
+   "musique": "(25)1p4p2p",
+   "gains": 20400,
+   "age": 4,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "2'04\"9",
+   "coteRefJockey": "10,0",
+   "coteRefEntraineur": "08,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/DEA/9/20261005-DEA-9-4.png",
+   "proprietaire": "I. CORBANI",
+   "dernierPassage": 478,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "WAKABURN",
+   "driver": "M. GRANDIN",
+   "entraineur": "M. KREBS",
+   "cote": 29,
+   "coteRef": 8.7,
+   "musique": "0p2p6p7p7p3p(25)9p6p1p",
+   "gains": 90073,
+   "age": 7,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 40.5,
+   "chrono": "",
+   "coteRefJockey": "08,7",
+   "coteRefEntraineur": "14,8",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/DEA/9/20261005-DEA-9-5.png",
+   "proprietaire": "M. M. KREBS",
+   "dernierPassage": 62,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "AGILE",
+   "driver": "M. VELON",
+   "entraineur": "JM. BEGUIGNE",
+   "cote": 16,
+   "coteRef": 9.8,
+   "musique": "9p6p(25)5p4p2p2p2p(24)3p",
+   "gains": 141257,
+   "age": 7,
+   "sexe": "F",
+   "poids": 54.5,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "08,9",
+   "coteRefEntraineur": "09,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/DEA/9/20261005-DEA-9-6.png",
+   "proprietaire": "FAMILLE PHARAON",
+   "dernierPassage": 155,
+   "depart": 3,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "4",
+   "1",
+   "3",
+   "5",
+   "6"
+  ],
+  "drivers": [
+   1,
+   5,
+   6,
+   3,
+   4,
+   2
+  ],
+  "entraineurs": [
+   "3",
+   "4",
+   "2",
+   "6",
+   "1",
+   "5"
+  ],
+  "top10chevaux": [
+   "4",
+   "1",
+   "3",
+   "5",
+   "6"
+  ],
+  "top10entraineurs": [
+   "3",
+   "4",
+   "2",
+   "6",
+   "1",
+   "5"
+  ],
+  "topCotesDirect": [
+   "1",
+   "3",
+   "2",
+   "6",
+   "5",
+   "4"
+  ],
+  "topChevaux": [
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "topPalmares": [
+   "3",
+   "6",
+   "1",
+   "2",
+   "5",
+   "4"
+  ],
+  "topForme": [
+   "2",
+   "3",
+   "4",
+   "6",
+   "1",
+   "5"
+  ],
+  "topClasse": [
+   "3",
+   "6",
+   "1",
+   "5",
+   "4",
+   "2"
+  ],
+  "topJockeys": [
+   "1",
+   "3",
+   "2",
+   "6",
+   "5",
+   "4"
+  ],
+  "topEntraineurs": [
+   "3",
+   "4",
+   "1",
+   "5",
+   "6",
+   "2"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "2",
+   "4",
+   "3"
+  ],
+  "topCordes": [
+   "6",
+   "3",
+   "2",
+   "4"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "6",
+   "3",
+   "5",
+   "2",
+   "4"
+  ],
+  "incontournables": [
+   "2",
+   "4",
+   "6",
+   "3",
+   "5",
+   "1"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "5",
+   "6"
+  ],
+  "syntheseTf": [
+   "3",
+   "1",
+   "2",
+   "4"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "TIEGO THE FIRST",
+   "courses": 17,
+   "victoires": 3,
+   "places": 8,
+   "pctV": "17.65",
+   "pctP": "64.71",
+   "aptG": "1600",
+   "aptP": "1600"
+  },
+  {
+   "num": 2,
+   "cheval": "LORAXED",
+   "courses": 3,
+   "victoires": 2,
+   "places": 1,
+   "pctV": "66.67",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "CLIMATE CHANGE",
+   "courses": 24,
+   "victoires": 6,
+   "places": 12,
+   "pctV": "25",
+   "pctP": "75",
+   "aptG": "1800",
+   "aptP": "2000"
+  },
+  {
+   "num": 4,
+   "cheval": "DARK ROCKSTER",
+   "courses": 3,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "33.33",
+   "pctP": "100",
+   "aptG": "3000",
+   "aptP": "2400"
+  },
+  {
+   "num": 5,
+   "cheval": "WAKABURN",
+   "courses": 21,
+   "victoires": 3,
+   "places": 13,
+   "pctV": "14.29",
+   "pctP": "76.19",
+   "aptG": "1900",
+   "aptP": "1900"
+  },
+  {
+   "num": 6,
+   "cheval": "AGILE",
+   "courses": 19,
+   "victoires": 3,
+   "places": 13,
+   "pctV": "15.79",
+   "pctP": "84.21",
+   "aptG": "2400",
+   "aptP": "2400"
+  }
+ ],
+ "synthesePct": "3 - 5 - 6 - 1 - 2 - 4",
+ "pronosTf": [
+  "3 - 6 - 1 - 2",
+  "3 - 6 - 1 - 5"
+ ],
+ "collecteLe": "2026-10-05T23:15:44.869Z"
+}

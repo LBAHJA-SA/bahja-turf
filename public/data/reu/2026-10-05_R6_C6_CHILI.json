@@ -1,0 +1,389 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 6,
+  "nom": "CONAF S.",
+  "prix": "CONAF S.",
+  "heure": "21:00",
+  "distance": 1600,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "",
+  "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 4 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
+  "montant": 5515,
+  "arrivee": [
+   4,
+   1,
+   3,
+   7,
+   6
+  ],
+  "dateLongue": "lundi 5 octobre 2026",
+  "jour": "lundi"
+ },
+ "meeting": {
+  "num": 6,
+  "hippodrome": "Santiago",
+  "pays": "CHILI"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "NORMAN PRICE",
+   "driver": "JAIME FABIAN MEDINA",
+   "entraineur": "PATRICIO BAEZA ALAMOS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p5p2p5p4p",
+   "gains": 27377100,
+   "age": 5,
+   "sexe": "M",
+   "poids": 52,
+   "valeur": null,
+   "chrono": "1'34\"3",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/S88/6/20261005-S88-6-1.png",
+   "proprietaire": "TONLEMO",
+   "dernierPassage": 703,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "JAZZ ROCK",
+   "driver": "RODOLFO S DORES",
+   "entraineur": "DOMINGO ENRIQUE MATTE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "0p4p4p6p4p",
+   "gains": 23195700,
+   "age": 6,
+   "sexe": "M",
+   "poids": 53,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/S88/6/20261005-S88-6-2.png",
+   "proprietaire": "FELIPE JESUS",
+   "dernierPassage": 182,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "REFERENDUM JOKE",
+   "driver": "IGNACIO ISAIAS VALDIVIA",
+   "entraineur": "ALBERTO EMILIO AVILES LOPEZ",
+   "cote": null,
+   "coteRef": null,
+   "musique": "8p2p7p6p2p",
+   "gains": 63959400,
+   "age": 6,
+   "sexe": "H",
+   "poids": 51,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/S88/6/20261005-S88-6-3.png",
+   "proprietaire": "ALBERTO AVILES L.",
+   "dernierPassage": 25,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "RAZYEL",
+   "driver": "JORGE EDUARDO ZUNIGA",
+   "entraineur": "PATRICIO BAEZA ALAMOS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p1p4p7p1p",
+   "gains": 33284700,
+   "age": 5,
+   "sexe": "M",
+   "poids": 51,
+   "valeur": null,
+   "chrono": "1'35\"4",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/S88/6/20261005-S88-6-4.png",
+   "proprietaire": "EL QUIJOTE",
+   "dernierPassage": 140,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "EL RECTOR",
+   "driver": "PEDRO ROBERTO ROBLES",
+   "entraineur": "JOHN RICARDO PINOCHET PONCE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p3p3p2p6p",
+   "gains": 99316800,
+   "age": 8,
+   "sexe": "H",
+   "poids": 58,
+   "valeur": null,
+   "chrono": "1'35\"9",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/S88/6/20261005-S88-6-5.png",
+   "proprietaire": "LOS QUE SABEN",
+   "dernierPassage": 28,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "THE TROOPER",
+   "driver": "AXEL JUAVIER ALVAREZ GALLARDO",
+   "entraineur": "CLAUDIO ALAMIRO BERNAL GONZALEZ",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p4p4p1p4p",
+   "gains": 22261500,
+   "age": 5,
+   "sexe": "M",
+   "poids": 52,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "01,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/S88/6/20261005-S88-6-6.png",
+   "proprietaire": "MAESTRANZA",
+   "dernierPassage": 392,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "RIBEYE",
+   "driver": "LUIS ADRIAN TORRES CHAMORRO",
+   "entraineur": "JOSE MIGUEL ALVAREZ DONOSO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p1p8p4p1p",
+   "gains": 59914800,
+   "age": 6,
+   "sexe": "M",
+   "poids": 58,
+   "valeur": null,
+   "chrono": "1'31\"3",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261005/S88/6/20261005-S88-6-7.png",
+   "proprietaire": "KAROLO",
+   "dernierPassage": 112,
+   "depart": 7,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "5",
+   "7"
+  ],
+  "drivers": [],
+  "entraineurs": [
+   "1",
+   "2",
+   "4",
+   "5",
+   "7",
+   "6"
+  ],
+  "top10chevaux": [
+   "5",
+   "7"
+  ],
+  "top10entraineurs": [
+   "1",
+   "2",
+   "4",
+   "5",
+   "7",
+   "6"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "4",
+   "7",
+   "1",
+   "6"
+  ],
+  "topPalmares": [
+   "4",
+   "6",
+   "7",
+   "1",
+   "5",
+   "3",
+   "2"
+  ],
+  "topForme": [
+   "7",
+   "4",
+   "1",
+   "6",
+   "5",
+   "3",
+   "2"
+  ],
+  "topClasse": [
+   "5",
+   "3",
+   "7",
+   "4",
+   "1",
+   "2",
+   "6"
+  ],
+  "topJockeys": [
+   "1",
+   "4",
+   "3",
+   "5",
+   "2"
+  ],
+  "topEntraineurs": [
+   "1",
+   "4",
+   "6",
+   "5",
+   "7",
+   "2"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "7",
+   "1",
+   "4",
+   "5"
+  ],
+  "topCordes": [
+   "1",
+   "5",
+   "4",
+   "6"
+  ],
+  "ecartsChevaux": [
+   "2",
+   "3",
+   "5",
+   "1",
+   "4",
+   "6"
+  ],
+  "incontournables": [
+   "4",
+   "5",
+   "7",
+   "1",
+   "3",
+   "6"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "3",
+   "5"
+  ],
+  "syntheseTf": [
+   "4",
+   "6",
+   "7",
+   "1",
+   "2"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "NORMAN PRICE",
+   "courses": 13,
+   "victoires": 6,
+   "places": 2,
+   "pctV": "46.15",
+   "pctP": "61.54",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "JAZZ ROCK",
+   "courses": 34,
+   "victoires": 9,
+   "places": 13,
+   "pctV": "26.47",
+   "pctP": "64.71",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "REFERENDUM JOKE",
+   "courses": 39,
+   "victoires": 8,
+   "places": 18,
+   "pctV": "20.51",
+   "pctP": "66.67",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "RAZYEL",
+   "courses": 20,
+   "victoires": 7,
+   "places": 6,
+   "pctV": "35",
+   "pctP": "65",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "EL RECTOR",
+   "courses": 69,
+   "victoires": 16,
+   "places": 27,
+   "pctV": "23.19",
+   "pctP": "62.32",
+   "aptG": "1600",
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "THE TROOPER",
+   "courses": 29,
+   "victoires": 5,
+   "places": 12,
+   "pctV": "17.24",
+   "pctP": "58.62",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "RIBEYE",
+   "courses": 64,
+   "victoires": 9,
+   "places": 35,
+   "pctV": "14.06",
+   "pctP": "68.75",
+   "aptG": "1200",
+   "aptP": null
+  }
+ ],
+ "synthesePct": "5 - 7 - 2 - 3 - 6 - 4 - 1",
+ "pronosTf": [
+  "4 - 1 - 5 - 6 - 7",
+  "5 - 2 - 3"
+ ],
+ "collecteLe": "2026-10-05T23:16:06.894Z"
+}

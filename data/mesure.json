@@ -1,0 +1,709 @@
+{
+ "2026-10-01": {
+  "date": "2026-10-01",
+  "hippodrome": "Auteuil",
+  "code": "C1",
+  "discipline": "HAIE",
+  "distance": 3600,
+  "partants": 15,
+  "arriveeOfficielle": [
+   15,
+   3,
+   14,
+   1,
+   9,
+   4,
+   11,
+   7,
+   13,
+   5,
+   6,
+   8,
+   12
+  ],
+  "arriveeArchive": [
+   15,
+   3,
+   14,
+   1,
+   9
+  ],
+  "controle": "OK",
+  "cotes": [
+   {
+    "num": 1,
+    "nom": "WEBCAM",
+    "cote": 4.1,
+    "ouverture": 5,
+    "age": 5,
+    "place": 4,
+    "musique": "1h2h254s5sAh7h2h1h"
+   },
+   {
+    "num": 2,
+    "nom": "SPECIALS ONE",
+    "cote": 103.6,
+    "ouverture": 40,
+    "age": 5,
+    "place": null,
+    "musique": "8sJs5s2s1h1h254s2s1s"
+   },
+   {
+    "num": 3,
+    "nom": "GREY FIGHTER",
+    "cote": 4.7,
+    "ouverture": 4,
+    "age": 5,
+    "place": 2,
+    "musique": "4h254h1h9hTsTh5h244h"
+   },
+   {
+    "num": 4,
+    "nom": "MR DIAFOIRUS",
+    "cote": 4.8,
+    "ouverture": 8,
+    "age": 5,
+    "place": 6,
+    "musique": "3h1h3h1hAh8h1h3h3h"
+   },
+   {
+    "num": 5,
+    "nom": "KUCHARSKY",
+    "cote": 32.7,
+    "ouverture": 25,
+    "age": 5,
+    "place": 10,
+    "musique": "6hAs1sAh2sAh1h255s3s"
+   },
+   {
+    "num": 6,
+    "nom": "LATINO LA NOVERIE",
+    "cote": 56.5,
+    "ouverture": 22,
+    "age": 5,
+    "place": 11,
+    "musique": "1h4h253p6hTs5p249p4p"
+   },
+   {
+    "num": 7,
+    "nom": "EXCITING HUNT",
+    "cote": 8.6,
+    "ouverture": 18,
+    "age": 5,
+    "place": 8,
+    "musique": "1h5h7h5h1h257h6h5h5h"
+   },
+   {
+    "num": 8,
+    "nom": "TITI DE PARIS",
+    "cote": 44.4,
+    "ouverture": 35,
+    "age": 5,
+    "place": 12,
+    "musique": "0hAhAhAh2h3hAh251h"
+   },
+   {
+    "num": 9,
+    "nom": "LACRYMA CHRISTI",
+    "cote": 16.8,
+    "ouverture": 15,
+    "age": 5,
+    "place": 5,
+    "musique": "4h252s2s1h4s242s3s3s"
+   },
+   {
+    "num": 10,
+    "nom": "KADOVER",
+    "cote": 9.7,
+    "ouverture": 33,
+    "age": 5,
+    "place": null,
+    "musique": "3hAh5s253s4h2s2sJs"
+   },
+   {
+    "num": 11,
+    "nom": "LUCKY NONANTAIS",
+    "cote": 34.5,
+    "ouverture": 43,
+    "age": 5,
+    "place": 7,
+    "musique": "252s1s241s1sAs7h0h9p"
+   },
+   {
+    "num": 12,
+    "nom": "LE COLOMBAR",
+    "cote": 7.4,
+    "ouverture": 9,
+    "age": 5,
+    "place": 13,
+    "musique": "3h0h6h4h252h1h8s8h5h"
+   },
+   {
+    "num": 13,
+    "nom": "LILETTE",
+    "cote": 11.5,
+    "ouverture": 12,
+    "age": 5,
+    "place": 9,
+    "musique": "1h5h6h5h4h257h3h5h2h"
+   },
+   {
+    "num": 14,
+    "nom": "LUTECE ALLEN",
+    "cote": 11.9,
+    "ouverture": 13,
+    "age": 5,
+    "place": 3,
+    "musique": "2h1s5s2s252h2h5p2p1p"
+   },
+   {
+    "num": 15,
+    "nom": "LIPRIKA D'ANJOU",
+    "cote": 13.5,
+    "ouverture": 20,
+    "age": 5,
+    "place": 1,
+    "musique": "0h2h7h5s255sAs3s4s"
+   }
+  ]
+ },
+ "2026-10-02": {
+  "date": "2026-10-02",
+  "hippodrome": "Paris-Vincennes",
+  "code": "C4",
+  "discipline": "ATTELE",
+  "distance": 2700,
+  "partants": 14,
+  "arriveeOfficielle": [
+   4,
+   11,
+   13,
+   12,
+   7,
+   8,
+   6,
+   5,
+   10,
+   1,
+   2,
+   14,
+   9
+  ],
+  "arriveeArchive": [
+   4,
+   11,
+   13,
+   12,
+   7
+  ],
+  "controle": "OK",
+  "cotes": [
+   {
+    "num": 1,
+    "nom": "JADE DE NAVARY",
+    "cote": 141.7,
+    "ouverture": 85,
+    "age": 7,
+    "place": 10,
+    "musique": "0aDa8a8a2a2a0a5a25Da"
+   },
+   {
+    "num": 2,
+    "nom": "JUNIOR STEED",
+    "cote": 60.7,
+    "ouverture": 22,
+    "age": 7,
+    "place": 11,
+    "musique": "6a1a0a2a2a6a4a0a2a4a"
+   },
+   {
+    "num": 3,
+    "nom": "JYTRACE DE HOUELLE",
+    "cote": 22.9,
+    "ouverture": 22,
+    "age": 7,
+    "place": null,
+    "musique": "4a0aDa0a2a1a2a251aDa"
+   },
+   {
+    "num": 4,
+    "nom": "JAIFA DE L'ITON",
+    "cote": 4.4,
+    "ouverture": 5,
+    "age": 7,
+    "place": 1,
+    "musique": "0a1a1a4a0a5a0a6a1a25"
+   },
+   {
+    "num": 5,
+    "nom": "JOHORE",
+    "cote": 6.5,
+    "ouverture": 15,
+    "age": 7,
+    "place": 8,
+    "musique": "DaDa0a3a4a251a1aDa3a"
+   },
+   {
+    "num": 6,
+    "nom": "JAZZ D'OURVILLE",
+    "cote": 4.7,
+    "ouverture": 6,
+    "age": 7,
+    "place": 7,
+    "musique": "1a3a3m7aDa5a5a2a3a0a"
+   },
+   {
+    "num": 7,
+    "nom": "JOB DES LOUANGES",
+    "cote": 20.7,
+    "ouverture": 32,
+    "age": 7,
+    "place": 5,
+    "musique": "Da3a5a2a2a6aDa1a0a4a"
+   },
+   {
+    "num": 8,
+    "nom": "JACKSON D'ARC",
+    "cote": 170,
+    "ouverture": 70,
+    "age": 7,
+    "place": 6,
+    "musique": "4a4a3a1a5a2a3a9a2a25"
+   },
+   {
+    "num": 9,
+    "nom": "JOG JELOCA",
+    "cote": 7.9,
+    "ouverture": 7,
+    "age": 7,
+    "place": 13,
+    "musique": "2a1a2a3a2a1a1a8a1a9a"
+   },
+   {
+    "num": 10,
+    "nom": "JUDOPOCK",
+    "cote": 31.4,
+    "ouverture": 11,
+    "age": 7,
+    "place": 9,
+    "musique": "4a2a3a2a1a2a2a5aDa8a"
+   },
+   {
+    "num": 11,
+    "nom": "JEWEL DE BANVILLE",
+    "cote": 6.5,
+    "ouverture": 18,
+    "age": 7,
+    "place": 2,
+    "musique": "9a6a25Da4mDa0a0a3aDa"
+   },
+   {
+    "num": 12,
+    "nom": "JOEY DU NOYER",
+    "cote": 6.9,
+    "ouverture": 27,
+    "age": 7,
+    "place": 4,
+    "musique": "6a1a2a7a6a0a0a2a2a1a"
+   },
+   {
+    "num": 13,
+    "nom": "JOHNNY MIX",
+    "cote": 8.5,
+    "ouverture": 4,
+    "age": 7,
+    "place": 3,
+    "musique": "1a1a1a1a3aDa1a2a2aDa"
+   },
+   {
+    "num": 14,
+    "nom": "JERICHO",
+    "cote": 6.8,
+    "ouverture": 31,
+    "age": 7,
+    "place": 12,
+    "musique": "5a5a9a2a4a2a6a2aDa25"
+   }
+  ]
+ },
+ "2026-10-03": {
+  "date": "2026-10-03",
+  "hippodrome": "Parislongchamp",
+  "code": "C4",
+  "discipline": "PLAT",
+  "distance": 2500,
+  "partants": 18,
+  "arriveeOfficielle": [
+   4,
+   5,
+   8,
+   17,
+   3,
+   9,
+   11,
+   1,
+   12,
+   18,
+   13,
+   7,
+   15,
+   10,
+   6,
+   14,
+   2,
+   16
+  ],
+  "arriveeArchive": [
+   4,
+   5,
+   8,
+   17,
+   3
+  ],
+  "controle": "OK",
+  "cotes": [
+   {
+    "num": 1,
+    "nom": "LE LAVANDOU",
+    "cote": 47.6,
+    "ouverture": 35,
+    "age": 5,
+    "place": 8,
+    "musique": "9p7p8p6p252p2p7p3p3p"
+   },
+   {
+    "num": 2,
+    "nom": "ANNABEL'S GHOST",
+    "cote": 8.1,
+    "ouverture": 24,
+    "age": 5,
+    "place": 17,
+    "musique": "0p5p0p7p3p1p250p5p6p"
+   },
+   {
+    "num": 3,
+    "nom": "GOLDEN WEAVER",
+    "cote": 30.9,
+    "ouverture": 13,
+    "age": 4,
+    "place": 5,
+    "musique": "2p9p258p1p5p4p241p6p"
+   },
+   {
+    "num": 4,
+    "nom": "REMBRAND TO GO",
+    "cote": 2.2,
+    "ouverture": 4,
+    "age": 4,
+    "place": 1,
+    "musique": "2p4p1p2p3p5p4p252p1p"
+   },
+   {
+    "num": 5,
+    "nom": "SHRIHARA",
+    "cote": 12.1,
+    "ouverture": 15,
+    "age": 4,
+    "place": 2,
+    "musique": "8p1p3p5p251p3p1p2p4p"
+   },
+   {
+    "num": 6,
+    "nom": "MISTER GATZ",
+    "cote": 15.1,
+    "ouverture": 16,
+    "age": 5,
+    "place": 15,
+    "musique": "1p7p7p6p2p4p0p257p0p"
+   },
+   {
+    "num": 7,
+    "nom": "MON RICIN",
+    "cote": 68.8,
+    "ouverture": 30,
+    "age": 7,
+    "place": 12,
+    "musique": "0p1p0p3p253p3p6p1p1p"
+   },
+   {
+    "num": 8,
+    "nom": "COLGAN SENORA",
+    "cote": 10.5,
+    "ouverture": 20,
+    "age": 5,
+    "place": 3,
+    "musique": "5p0p9p7p253p1p4p1p0p"
+   },
+   {
+    "num": 9,
+    "nom": "NITY GALESTE",
+    "cote": 15.4,
+    "ouverture": 10,
+    "age": 3,
+    "place": 6,
+    "musique": "3p2p4p2p7p2p1p"
+   },
+   {
+    "num": 10,
+    "nom": "ARNAY LE DUC",
+    "cote": 47.6,
+    "ouverture": 40,
+    "age": 4,
+    "place": 14,
+    "musique": "0p1p2p4p7p7p251p7p1p"
+   },
+   {
+    "num": 11,
+    "nom": "SHARPSHOOT",
+    "cote": 13.7,
+    "ouverture": 7,
+    "age": 3,
+    "place": 7,
+    "musique": "1p1p2p5p"
+   },
+   {
+    "num": 12,
+    "nom": "PAOLINO",
+    "cote": 88.5,
+    "ouverture": 50,
+    "age": 4,
+    "place": 9,
+    "musique": "0p0p1p5p0p7p250p8p5p"
+   },
+   {
+    "num": 13,
+    "nom": "EBIYAR",
+    "cote": 8,
+    "ouverture": 9,
+    "age": 3,
+    "place": 11,
+    "musique": "4p4p3p2p6p251p"
+   },
+   {
+    "num": 14,
+    "nom": "I GOT RHYTHM",
+    "cote": 38.7,
+    "ouverture": 45,
+    "age": 4,
+    "place": 16,
+    "musique": "2p2p0p2p250h7h9p1p2p"
+   },
+   {
+    "num": 15,
+    "nom": "PINK MONDAY",
+    "cote": 26.9,
+    "ouverture": 70,
+    "age": 4,
+    "place": 13,
+    "musique": "1p8p4p5p4p8p8p255p1p"
+   },
+   {
+    "num": 16,
+    "nom": "ZELKER",
+    "cote": 22.1,
+    "ouverture": 18,
+    "age": 4,
+    "place": 18,
+    "musique": "3p7p7p4p256p4p0p1p8p"
+   },
+   {
+    "num": 17,
+    "nom": "KING TREZY",
+    "cote": 24.7,
+    "ouverture": 26,
+    "age": 5,
+    "place": 4,
+    "musique": "8p8p8p3p25Ap7p2p3p2p"
+   },
+   {
+    "num": 18,
+    "nom": "DEMPY",
+    "cote": 9.1,
+    "ouverture": 14,
+    "age": 5,
+    "place": 10,
+    "musique": "2p7p1p0p7p3p4p5p7p7p"
+   }
+  ]
+ },
+ "2026-10-04": {
+  "date": "2026-10-04",
+  "hippodrome": "Parislongchamp",
+  "code": "C5",
+  "discipline": "PLAT",
+  "distance": 2400,
+  "partants": 16,
+  "arriveeOfficielle": [
+   1,
+   7,
+   16,
+   10,
+   9,
+   14,
+   11,
+   15,
+   12,
+   8,
+   4,
+   6,
+   3,
+   5,
+   2,
+   13
+  ],
+  "arriveeArchive": [
+   1,
+   7,
+   16,
+   10,
+   9
+  ],
+  "controle": "OK",
+  "cotes": [
+   {
+    "num": 1,
+    "nom": "DARYZ",
+    "cote": 2.1,
+    "ouverture": 3,
+    "age": 4,
+    "place": 1,
+    "musique": "1p3p1p1p251p2p6p1p1p"
+   },
+   {
+    "num": 2,
+    "nom": "SADDADD",
+    "cote": 44.7,
+    "ouverture": 40,
+    "age": 4,
+    "place": 15,
+    "musique": "1p4p3p1p253p1p1p2p3p"
+   },
+   {
+    "num": 3,
+    "nom": "CHESTNUT ROCKET",
+    "cote": 73.1,
+    "ouverture": 99,
+    "age": 4,
+    "place": 13,
+    "musique": "2p1p5p6p2p251p4p3p1p"
+   },
+   {
+    "num": 4,
+    "nom": "ADMIRE TERRA",
+    "cote": 44.7,
+    "ouverture": 60,
+    "age": 5,
+    "place": 11,
+    "musique": "9p3p1p250pJp4p1p1p"
+   },
+   {
+    "num": 5,
+    "nom": "MEISHO TABARU",
+    "cote": 17.1,
+    "ouverture": 33,
+    "age": 5,
+    "place": 14,
+    "musique": "1p2p250p6p1p5p0p240p"
+   },
+   {
+    "num": 6,
+    "nom": "ARROW EAGLE",
+    "cote": 73.1,
+    "ouverture": 89,
+    "age": 5,
+    "place": 12,
+    "musique": "3p7p4p251p6p6p1p1p1p"
+   },
+   {
+    "num": 7,
+    "nom": "BAY CITY ROLLER",
+    "cote": 47.3,
+    "ouverture": 30,
+    "age": 4,
+    "place": 2,
+    "musique": "2p1p2p2p251p4p2p2p6p"
+   },
+   {
+    "num": 8,
+    "nom": "MINNIE HAUK",
+    "cote": 21.1,
+    "ouverture": 20,
+    "age": 4,
+    "place": 10,
+    "musique": "3p8p2p5p1p256p2p1p1p"
+   },
+   {
+    "num": 9,
+    "nom": "KALPANA",
+    "cote": 6.1,
+    "ouverture": 6,
+    "age": 5,
+    "place": 5,
+    "musique": "1p1p2p1p251p7p2p2p2p"
+   },
+   {
+    "num": 10,
+    "nom": "FRIENDLY SOUL",
+    "cote": 15.4,
+    "ouverture": 25,
+    "age": 5,
+    "place": 4,
+    "musique": "1p2p3pAp241p1p1p7p1p"
+   },
+   {
+    "num": 11,
+    "nom": "VARANDIR",
+    "cote": 12,
+    "ouverture": 12,
+    "age": 3,
+    "place": 7,
+    "musique": "1p4p1p1p1p"
+   },
+   {
+    "num": 12,
+    "nom": "BENVENUTO CELLINI",
+    "cote": 16.4,
+    "ouverture": 13,
+    "age": 3,
+    "place": 9,
+    "musique": "5p3p1p1p253p1p1p2p"
+   },
+   {
+    "num": 13,
+    "nom": "BRIGHT LIGHT",
+    "cote": 57.4,
+    "ouverture": 99,
+    "age": 3,
+    "place": 16,
+    "musique": "3p2p5p4p2p1p"
+   },
+   {
+    "num": 14,
+    "nom": "MALTESE CROSS",
+    "cote": 8,
+    "ouverture": 6,
+    "age": 3,
+    "place": 6,
+    "musique": "1p1p2p1p1p251p2p"
+   },
+   {
+    "num": 15,
+    "nom": "THUNDERING ON",
+    "cote": 9.6,
+    "ouverture": 9,
+    "age": 3,
+    "place": 8,
+    "musique": "1p4p1p1p2p252p4p"
+   },
+   {
+    "num": 16,
+    "nom": "DIAMOND NECKLACE",
+    "cote": 6.2,
+    "ouverture": 14,
+    "age": 3,
+    "place": 3,
+    "musique": "2p1p1p1p251p1p1p"
+   }
+  ]
+ }
+}

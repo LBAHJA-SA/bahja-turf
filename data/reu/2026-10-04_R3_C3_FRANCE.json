@@ -1,0 +1,298 @@
+{
+ "v": 2,
+ "pv": 3,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 3,
+  "nom": "PRIX D'AUTEUIL",
+  "prix": "PRIX D'AUTEUIL",
+  "heure": "12:05",
+  "distance": 4200,
+  "discipline": "STEEPLECHASE",
+  "corde": "",
+  "classe": "",
+  "conditions": "Pour tous chevaux de 5 ans et au-dessus, n'ayant pas, cette année, en steeple-chase, reçu 10.000 (victoires et places). Poids : 5 ans, 67 kg ; 6 a et au-dessus, 68 kg. Surcharges accumulées pour les sommes reçues, en cours à obstacles (victoires et places) : 1 kg par 2.500 cette année et par 5.000 l'année dernière.",
+  "montant": 21000,
+  "arrivee": null,
+  "dateLongue": "dimanche 4 octobre 2026",
+  "jour": "dimanche"
+ },
+ "meeting": {
+  "num": 3,
+  "hippodrome": "Strasbourg",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "LE GENE BLEU",
+   "driver": "J. BRYAN",
+   "entraineur": "L. URBANEK",
+   "cote": 7.4,
+   "coteRef": 11.4,
+   "musique": "5s0s(25)3h1s3s5s2s4s2h",
+   "gains": 73284,
+   "age": 7,
+   "sexe": "H",
+   "poids": 75,
+   "valeur": 55.5,
+   "chrono": "5'32\"9",
+   "coteRefJockey": "07,2",
+   "coteRefEntraineur": "15,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/STR/3/20261004-STR-3-1.png",
+   "proprietaire": "LOKO TRANS",
+   "dernierPassage": 128,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "KWELAFE",
+   "driver": "B. GELHAY",
+   "entraineur": "N. DE LAGENESTE DE",
+   "cote": 3,
+   "coteRef": null,
+   "musique": "5s(25)Ts1s1h(23)Jh",
+   "gains": 22400,
+   "age": 6,
+   "sexe": "H",
+   "poids": 72,
+   "valeur": 55,
+   "chrono": "5'38\"5",
+   "coteRefJockey": "07,8",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/STR/3/20261004-STR-3-2.png",
+   "proprietaire": "HARAS DE SAINT-VOIR",
+   "dernierPassage": 16,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "PIPER'S HILL",
+   "driver": "D. GALLON",
+   "entraineur": "V. CHATELLIER",
+   "cote": 11,
+   "coteRef": null,
+   "musique": "(24)0pJh2hTh3h0p7p4p6p",
+   "gains": 9010,
+   "age": 6,
+   "sexe": "H",
+   "poids": 68,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "11,4",
+   "coteRefEntraineur": "17,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/STR/3/20261004-STR-3-3.png",
+   "proprietaire": "RUDY. NERBONNE",
+   "dernierPassage": 651,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "IN VICTIS",
+   "driver": "N. FERREIRA",
+   "entraineur": "A. ACKER",
+   "cote": 7,
+   "coteRef": 4.2,
+   "musique": "As(25)As5hAs0s4h0h(24)2s",
+   "gains": 114295,
+   "age": 8,
+   "sexe": "H",
+   "poids": 68,
+   "valeur": 50.5,
+   "chrono": "",
+   "coteRefJockey": "11,7",
+   "coteRefEntraineur": "12,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/STR/3/20261004-STR-3-4.png",
+   "proprietaire": "G. THOMESSE",
+   "dernierPassage": 25,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "BONITA DE LA SERRE",
+   "driver": "T. BEAURAIN",
+   "entraineur": "L. URBANEK",
+   "cote": 2.1,
+   "coteRef": 10,
+   "musique": "(25)2s(24)1s3s2s4s1h2s2s",
+   "gains": 60495,
+   "age": 6,
+   "sexe": "F",
+   "poids": 67,
+   "valeur": 57.5,
+   "chrono": "4'53\"9",
+   "coteRefJockey": "10,1",
+   "coteRefEntraineur": "15,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261004/STR/3/20261004-STR-3-5.png",
+   "proprietaire": "LOKO TRANS",
+   "dernierPassage": 474,
+   "depart": null,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   4,
+   5,
+   1
+  ],
+  "drivers": [
+   1,
+   2,
+   5,
+   3,
+   4
+  ],
+  "entraineurs": [
+   4,
+   1,
+   5,
+   3
+  ],
+  "topCotesDirect": [
+   "5",
+   "2",
+   "4",
+   "1",
+   "3"
+  ],
+  "topChevaux": [
+   "5",
+   "2",
+   "1"
+  ],
+  "topPalmares": [
+   "5",
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "topForme": [
+   "5",
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "topClasse": [
+   "4",
+   "1",
+   "5",
+   "2",
+   "3"
+  ],
+  "topJockeys": [
+   "5",
+   "2",
+   "3",
+   "4",
+   "1"
+  ],
+  "topEntraineurs": [
+   "4",
+   "1",
+   "5",
+   "3"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "5",
+   "1",
+   "2"
+  ],
+  "topCordes": [
+   "5"
+  ],
+  "ecartsChevaux": [
+   "4",
+   "1",
+   "2",
+   "3",
+   "5"
+  ],
+  "incontournables": [
+   "5",
+   "2",
+   "1",
+   "3",
+   "4"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "4",
+   "1"
+  ],
+  "syntheseTf": [
+   "5",
+   "2",
+   "3"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "LE GENE BLEU",
+   "courses": 21,
+   "victoires": 3,
+   "places": 16,
+   "pctV": "14.29",
+   "pctP": "90.48",
+   "aptG": "4200",
+   "aptP": "4200"
+  },
+  {
+   "num": 2,
+   "cheval": "KWELAFE",
+   "courses": 5,
+   "victoires": 2,
+   "places": 1,
+   "pctV": "40",
+   "pctP": "60",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "PIPER'S HILL",
+   "courses": 6,
+   "victoires": 0,
+   "places": 3,
+   "pctV": "0",
+   "pctP": "50",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "IN VICTIS",
+   "courses": 33,
+   "victoires": 1,
+   "places": 19,
+   "pctV": "3.03",
+   "pctP": "60.61",
+   "aptG": "3900",
+   "aptP": "3600"
+  },
+  {
+   "num": 5,
+   "cheval": "BONITA DE LA SERRE",
+   "courses": 10,
+   "victoires": 2,
+   "places": 7,
+   "pctV": "20",
+   "pctP": "90",
+   "aptG": "3800",
+   "aptP": "3900"
+  }
+ ],
+ "synthesePct": "1 - 4 - 5 - 2 - 3",
+ "pronosTf": [
+  "5 - 1 - 3"
+ ],
+ "collecteLe": "2026-10-04T08:14:49.440Z"
+}

@@ -1,0 +1,303 @@
+{
+ "v": 2,
+ "pv": 3,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 8,
+  "nom": "COUPE DES 2 ANS BELGIQUE",
+  "prix": "COUPE DES 2 ANS BELGIQUE",
+  "heure": "22:47",
+  "distance": 2300,
+  "discipline": "ATTELE",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "COUPE DES 2 ANS Course 08 Départ à l'Autostart 5.000 - Attelé. - 2.300 mètres. 2.400, 1.200, 500, 400, 250, 150, 100. Pour 2 ans.",
+  "montant": 5000,
+  "arrivee": [
+   4,
+   2,
+   5,
+   3,
+   1
+  ],
+  "dateLongue": "samedi 3 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 5,
+  "hippodrome": "MONS (GHLIN)",
+  "pays": "BELGIQUE"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "VIKING DK",
+   "driver": "JOHAN KINDT",
+   "entraineur": "JOHAN KINDT",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5aQa",
+   "gains": 75,
+   "age": 2,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "103,0",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/HWM/8/20261003-HWM-8-1.png",
+   "proprietaire": "JOHAN KINDT",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "VEUVE CLICQUOT",
+   "driver": "MARC HUYGENS",
+   "entraineur": "INGEBORG HUYGENS-DE WITTE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "Qa",
+   "gains": 0,
+   "age": 2,
+   "sexe": "F",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "18,8",
+   "coteRefEntraineur": "06,8",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/HWM/8/20261003-HWM-8-2.png",
+   "proprietaire": "AGRO NV",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "VERY NICE PRESENT",
+   "driver": "GEOFFREY HUART",
+   "entraineur": "PAVEL TAMSIN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "Qa",
+   "gains": 0,
+   "age": 2,
+   "sexe": "F",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "06,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/HWM/8/20261003-HWM-8-3.png",
+   "proprietaire": "FREDDY GRISEZ",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "OMARICK DIESCHOOT",
+   "driver": "LYNUS LANNOO",
+   "entraineur": "ARSÈNE LANNOO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "Qa3aQa",
+   "gains": 150,
+   "age": 2,
+   "sexe": "M",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "03,0",
+   "coteRefEntraineur": "01,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/HWM/8/20261003-HWM-8-4.png",
+   "proprietaire": "TOM NEMEGHEER",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "VAMBORA",
+   "driver": "GREGORY CELIS",
+   "entraineur": "GREGORY CELIS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4aQa",
+   "gains": 120,
+   "age": 2,
+   "sexe": "F",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "28,5",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/HWM/8/20261003-HWM-8-5.png",
+   "proprietaire": "MICHEL BOVÉ",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "VALBUENO FLAC",
+   "driver": "CHRISTOPHE DE GROOTE",
+   "entraineur": "CHRISTOPHE DE GROOTE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1aQa",
+   "gains": 720,
+   "age": 2,
+   "sexe": "M",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "10,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/HWM/8/20261003-HWM-8-6.png",
+   "proprietaire": "DE GROOTE LIEVEN BV",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "VERYNICE VRIJTHOUT",
+   "driver": "PAVEL TAMSIN",
+   "entraineur": "PAVEL TAMSIN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2aQa",
+   "gains": 360,
+   "age": 2,
+   "sexe": "F",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "11,2",
+   "coteRefEntraineur": "06,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/HWM/8/20261003-HWM-8-7.png",
+   "proprietaire": "ECURIE AFRIT",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [],
+  "drivers": [
+   4,
+   7,
+   2,
+   5,
+   1
+  ],
+  "entraineurs": [
+   4,
+   3,
+   7,
+   2,
+   6
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "6"
+  ],
+  "topPalmares": [
+   "6",
+   "7",
+   "4",
+   "5",
+   "1",
+   "2",
+   "3"
+  ],
+  "topForme": [
+   "6",
+   "4",
+   "7",
+   "1",
+   "5",
+   "2",
+   "3"
+  ],
+  "topClasse": [
+   "6",
+   "7",
+   "4",
+   "5",
+   "1"
+  ],
+  "topJockeys": [
+   "4",
+   "2",
+   "7",
+   "5",
+   "1"
+  ],
+  "topEntraineurs": [
+   "2",
+   "3",
+   "7",
+   "4",
+   "6"
+  ],
+  "aptitudePlace": [
+   "7"
+  ],
+  "topChronos": [],
+  "topCordes": [
+   "5",
+   "8",
+   "2",
+   "4",
+   "6",
+   "7"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "5",
+   "2",
+   "3",
+   "4",
+   "6"
+  ],
+  "incontournables": [
+   "4",
+   "6",
+   "7"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "1",
+   "5"
+  ],
+  "syntheseTf": [
+   "6",
+   "7",
+   "4",
+   "2",
+   "3",
+   "8"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 4,
+   "cheval": "OMARICK DIESCHOOT",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "",
+ "pronosTf": [
+  "7 - 4 - 6 - 2 - 5"
+ ],
+ "collecteLe": "2026-10-04T08:17:40.437Z"
+}

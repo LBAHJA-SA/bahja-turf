@@ -1,0 +1,760 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        8
+      ],
+      [
+        9
+      ],
+      [
+        11
+      ],
+      [
+        13
+      ],
+      [
+        15
+      ],
+      [
+        4
+      ],
+      [
+        10
+      ],
+      [
+        6
+      ],
+      [
+        14
+      ],
+      [
+        2
+      ],
+      [
+        5
+      ],
+      [
+        7
+      ],
+      [
+        1
+      ],
+      [
+        3
+      ]
+    ],
+    "classe": "INCONNU",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2850,
+    "going": null,
+    "imminent": false,
+    "num": 4,
+    "penetrometer": null,
+    "prix": "CRITERIUM DES 5 ANS",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 15,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1789218900000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 144,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.7,
+          "disq": 2,
+          "n": 5,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 2,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": 2.3,
+          "disq": 0,
+          "n": 3,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 16154000,
+      "horse": "LADY DADA",
+      "horse_id": "LADY DADA-DUBAI DREAM-READY CASH",
+      "jockey": "W. BIGEON",
+      "musique": "4a8a2a1a7a7a0aDa2a(25)",
+      "nombreCourses": 27,
+      "nombrePlaces": 14,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. SECHE",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "W. BIGEON",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 40,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.6,
+          "disq": 1,
+          "n": 8,
+          "top5": 7
+        }
+      },
+      "etat": null,
+      "gain": 16202500,
+      "horse": "LE GENTLEMAN",
+      "horse_id": "LE GENTLEMAN-GIANT CELEBRITY-PRODIGIOUS",
+      "jockey": "B. ROCHARD",
+      "musique": "DaDa1a2a1a4a1a9a(25)Da",
+      "nombreCourses": 20,
+      "nombrePlaces": 8,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Sté. Ent. Etienne DUBOIS",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Sté. Ent. Etienne DUBOIS",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 7.6,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "P2": {
+          "avgRang": 4.8,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 17035500,
+      "horse": "LARIANO",
+      "horse_id": "LARIANO-FIERTE D'AUNOU-FOLLOW YOU",
+      "jockey": "M. MOTTIER",
+      "musique": "1a1a5a7a1a6aDa9a8a7a",
+      "nombreCourses": 23,
+      "nombrePlaces": 9,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme E. DUBOIS",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Sté. Ent. Etienne DUBOIS",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 26,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.8,
+          "disq": 0,
+          "n": 4,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 1.7,
+          "disq": 4,
+          "n": 7,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 17045500,
+      "horse": "LAROZE DU GERS",
+      "horse_id": "LAROZE DU GERS-BIENVENUE DU GERS-ROYAL DREAM",
+      "jockey": "M. ABRIVARD",
+      "musique": "3a4aDa1a3a2aDa(25)1aDa",
+      "nombreCourses": 23,
+      "nombrePlaces": 5,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Jean-Pascal BRAGATO",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "M. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 226,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 7,
+          "disq": 1,
+          "n": 2,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4.6,
+          "disq": 2,
+          "n": 16,
+          "top5": 9
+        },
+        "P2": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 4.2,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 17109000,
+      "horse": "LYRIKO BELLO",
+      "horse_id": "LYRIKO BELLO-BALLERINA BELLA-TIMOKO",
+      "jockey": "A. PILLON",
+      "musique": "4a3a7a7a6a6a3a6aDa4a",
+      "nombreCourses": 35,
+      "nombrePlaces": 24,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Alexandre PILLON",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "A. PILLON",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 41,
+      "deferre": "DEFERRE_ANTERIEURS_PROTEGE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D2A": {
+          "avgRang": 2.7,
+          "disq": 1,
+          "n": 4,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 1.4,
+          "disq": 5,
+          "n": 10,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 19468000,
+      "horse": "LOUIS VITTON MIJO",
+      "horse_id": "LOUIS VITTON MIJO-TOQUE ORANGE-DOLLAR MACKER",
+      "jockey": "D. THOMAIN",
+      "musique": "DaDa1a3aDaDaDa4aDaDa",
+      "nombreCourses": 30,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "M. JOURNO",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "S. GUARATO",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 83,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.3,
+          "disq": 0,
+          "n": 6,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 21828500,
+      "horse": "LIZZANO D'ALOUETTE",
+      "horse_id": "LIZZANO D'ALOUETTE-CADIX D'ALOUETTE-UN AMOUR D'HAUFOR",
+      "jockey": "G. GELORMINI",
+      "musique": "5a2a0a6a5a5a0a1a(25)2a",
+      "nombreCourses": 24,
+      "nombrePlaces": 14,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ec. Alain et Arnaud CHAVATTE",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "A. CHAVATTE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 22,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.9,
+          "disq": 2,
+          "n": 14,
+          "top5": 8
+        }
+      },
+      "etat": null,
+      "gain": 24611500,
+      "horse": "LUNELLA LEMAN",
+      "horse_id": "LUNELLA LEMAN-COMETE LEMAN-BOCCADOR DE SIMM",
+      "jockey": "B. ROBIN",
+      "musique": "3a0a6aDa1a3a1a(25)1a5a",
+      "nombreCourses": 30,
+      "nombrePlaces": 16,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "B. ROBIN",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "B. ROBIN",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 10,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.7,
+          "disq": 3,
+          "n": 10,
+          "top5": 7
+        }
+      },
+      "etat": null,
+      "gain": 28063000,
+      "horse": "LORD DU BASSIN",
+      "horse_id": "LORD DU BASSIN-FALENTINA DU GITE-ROYAL DREAM",
+      "jockey": "A. ABRIVARD",
+      "musique": "1a1aDaDa6a1a(25)1aDa5a",
+      "nombreCourses": 23,
+      "nombrePlaces": 8,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. RATTINA",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "L.CL. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 50,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.4,
+          "disq": 1,
+          "n": 18,
+          "top5": 12
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 7.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 2.8,
+          "disq": 1,
+          "n": 5,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 41320500,
+      "horse": "LEARN TO FLY",
+      "horse_id": "LEARN TO FLY-SANTANNA GIRL-URIEL SPEED",
+      "jockey": "F. NIVARD",
+      "musique": "4a2aDa5a3a4a7a5a8a(25)",
+      "nombreCourses": 46,
+      "nombrePlaces": 30,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme M. STIHL",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "F. SENET",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 7.3,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2,
+          "disq": 1,
+          "n": 3,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 2.8,
+          "disq": 1,
+          "n": 11,
+          "top5": 8
+        },
+        "P2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 2.2,
+          "disq": 4,
+          "n": 8,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 44256500,
+      "horse": "L'AS DESBOIS",
+      "horse_id": "L'AS DESBOIS-DORIA DESBOIS-BOOSTER WINNER",
+      "jockey": "A. COLLETTE",
+      "musique": "3a0a2a3a2a1a(25)6a1a1a",
+      "nombreCourses": 34,
+      "nombrePlaces": 20,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. SECHE",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "W. BIGEON",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 4.8,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.6,
+          "disq": 1,
+          "n": 9,
+          "top5": 8
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 1,
+          "n": 4,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 45935000,
+      "horse": "LANCIER DU GOUTIER",
+      "horse_id": "LANCIER DU GOUTIER-ELISSI JAMES-READY CASH",
+      "jockey": "THEO DUVALDESTIN",
+      "musique": "DaDa4a1aDa2a4a(25)1a2a",
+      "nombreCourses": 22,
+      "nombrePlaces": 7,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 10,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie SAINT MARTIN",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "TH. DUVALDESTIN",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 22,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.8,
+          "disq": 1,
+          "n": 10,
+          "top5": 8
+        },
+        "D4": {
+          "avgRang": 1.8,
+          "disq": 0,
+          "n": 4,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 75670000,
+      "horse": "LIONHEART",
+      "horse_id": "LIONHEART-DECADENCE-FALCAO DE LAURMA",
+      "jockey": "N. BAZIRE",
+      "musique": "2a9a1m7a0a9a3m2m1m(25)",
+      "nombreCourses": 28,
+      "nombrePlaces": 9,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 13,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie de LORADOUR",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "N. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 6.1,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.6,
+          "disq": 1,
+          "n": 8,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 5.2,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 3,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 77510000,
+      "horse": "LIZA JOSSELYN",
+      "horse_id": "LIZA JOSSELYN-BELINA JOSSELYN-READY CASH",
+      "jockey": "J.M. BAZIRE",
+      "musique": "7a6a7a7a5a3a1a(25)1a2a",
+      "nombreCourses": 29,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 14,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie BERNARD",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "N. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 7.2,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.6,
+          "disq": 1,
+          "n": 8,
+          "top5": 7
+        },
+        "D4": {
+          "avgRang": 3.4,
+          "disq": 0,
+          "n": 5,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": 1.7,
+          "disq": 1,
+          "n": 4,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 87317500,
+      "horse": "LOMBOK JIEL",
+      "horse_id": "LOMBOK JIEL-SURABAYA JIEL-ENINO DU POMMEREUX",
+      "jockey": "P.Y. VERVA",
+      "musique": "6a7a5aDa1a6a2a3a(25)4a",
+      "nombreCourses": 33,
+      "nombrePlaces": 21,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie LUCK",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.L. DERSOIR",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2026-09-12",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

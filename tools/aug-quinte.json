@@ -1,0 +1,3198 @@
+[
+ {
+  "date": "2026-08-01",
+  "id": "2026-08-01_R5_C5",
+  "num": 5,
+  "disc": "ATTELE",
+  "hip": "VICHY",
+  "distance": 2950,
+  "prix": "PRIX COMPAGNONS FICELLE DE ST POURCAIN",
+  "nRated": 13,
+  "nRunners": 13,
+  "horses": [
+   {
+    "num": 13,
+    "horse": "MUST DE BANVILLE",
+    "cote": 2.1,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "MYLEY ELDE",
+    "cote": 5.9,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "MENHIR",
+    "cote": 6.7,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "MARQUIS DU SAPHIR",
+    "cote": 9.5,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "MILLENIUM",
+    "cote": 10,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "MIROITANTE DE PADD",
+    "cote": 21,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "MINNEAPOLIS",
+    "cote": 23,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "MEDEE DU VIVIER",
+    "cote": 50,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "MONSIEUR DARLING",
+    "cote": 66,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "MESTA ATALANTE",
+    "cote": 74,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "MADRILENE",
+    "cote": 98,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "MARELLA DALEO",
+    "cote": 126,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "MYSTERE DES MARES",
+    "cote": 999,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   }
+  ],
+  "arrivee": [
+   8,
+   13,
+   6,
+   9,
+   3,
+   12,
+   10,
+   4,
+   11,
+   7,
+   2,
+   5
+  ]
+ },
+ {
+  "date": "2026-08-02",
+  "id": "2026-08-02_R5_C6",
+  "num": 6,
+  "disc": "PLAT",
+  "hip": "LE LION D'ANGERS",
+  "distance": 2000,
+  "prix": "PRIX DU PMU \"LE DIPLOMATE\" (PRIX DES PARTENAIRES DE L'HIPPODROME)",
+  "nRated": 15,
+  "nRunners": 15,
+  "horses": [
+   {
+    "num": 2,
+    "horse": "SEABISCUIT DU RHEU",
+    "cote": 4.1,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "NANTIKA",
+    "cote": 8.3,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "KELBOFRER",
+    "cote": 8.4,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "MEARAS STYLE",
+    "cote": 9.6,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "KAHOUNA",
+    "cote": 10,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "GALIWAY D'ANGE",
+    "cote": 10,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "PODIA DAZ",
+    "cote": 12,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "ECLAIR DE VATI",
+    "cote": 16,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "TOSCANE TEMPLE",
+    "cote": 18,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "MR GOODNIGHT",
+    "cote": 22,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "CHOEUR DES ANGES",
+    "cote": 23,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 15,
+    "horse": "MAESTRO CHOP",
+    "cote": 24,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "BANMA",
+    "cote": 47,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "SEMEUR",
+    "cote": 57,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "MALTOCK D'ORGERES",
+    "cote": 999,
+    "rang": 15,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   }
+  ],
+  "arrivee": [
+   9,
+   2,
+   3,
+   1,
+   7,
+   15,
+   5,
+   11,
+   4,
+   12,
+   13,
+   14,
+   8,
+   10
+  ]
+ },
+ {
+  "date": "2026-08-03",
+  "id": "2026-08-03_R5_C7",
+  "num": 7,
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "distance": 2150,
+  "prix": "PRIX DE LA CROISETTE",
+  "nRated": 12,
+  "nRunners": 12,
+  "horses": [
+   {
+    "num": 1,
+    "horse": "NOVELLO",
+    "cote": 1.9,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "NUANCE SECRETE",
+    "cote": 5.9,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "NUIT DE FOLIE",
+    "cote": 9.4,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "NOBILUS BAR",
+    "cote": 10,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "NOBLE PETTEVINIERE",
+    "cote": 12,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "NYCIA RED",
+    "cote": 12,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "NIKITA D'ORGUEIL",
+    "cote": 44,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "NINA ERA",
+    "cote": 61,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "NAPOLEON DE GOUYE",
+    "cote": 64,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "NIGHT DE LA COUR",
+    "cote": 71,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "NACRE DU VALLON",
+    "cote": 90,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "NOLANN DES AGETS",
+    "cote": 132,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   1,
+   5,
+   6,
+   12,
+   9,
+   2,
+   4,
+   8
+  ]
+ },
+ {
+  "date": "2026-08-04",
+  "id": "2026-08-04_R6_C8",
+  "num": 8,
+  "disc": "MONTE",
+  "hip": "CABOURG",
+  "distance": 2750,
+  "prix": "PRIX DES ERABLES",
+  "nRated": 14,
+  "nRunners": 14,
+  "horses": [
+   {
+    "num": 13,
+    "horse": "NOKITA DU RIB",
+    "cote": 2.6,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "NATIVE D'AUVERS",
+    "cote": 4.9,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "NOUVELLE D'ATOUT",
+    "cote": 8.4,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "NATURE DU RIB",
+    "cote": 8.8,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "NIDORINA DE VIVOIN",
+    "cote": 12,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "NACRE DE LA CHAULE",
+    "cote": 16,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "NACRE D'ORIENT",
+    "cote": 25,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "NAPOLIA DAIRPET",
+    "cote": 28,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "NAGOYA MESLOISE",
+    "cote": 32,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "NAELE DU POMMEREUX",
+    "cote": 50,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "NANALAND",
+    "cote": 61,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "NOUBA CASTELETS",
+    "cote": 71,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "NARAGONAISE",
+    "cote": 91,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "NUSICA ASSCHADEL",
+    "cote": 91,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   9,
+   1,
+   13,
+   14,
+   3,
+   11,
+   4,
+   2,
+   12,
+   6,
+   5
+  ]
+ },
+ {
+  "date": "2026-08-05",
+  "id": "2026-08-05_R5_C5",
+  "num": 5,
+  "disc": "PLAT",
+  "hip": "KEMPTON PARK",
+  "distance": 2200,
+  "prix": "BECKY BURKE MEMORIAL NOVICE STAKES (CLASS 3) (DIV I)",
+  "nRated": 12,
+  "nRunners": 12,
+  "horses": [
+   {
+    "num": 8,
+    "horse": "DIALSTONE",
+    "cote": 1.9,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "FORTITUDINE",
+    "cote": 5.1,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "PURPLE MOON",
+    "cote": 8.6,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "TREBLE BASS",
+    "cote": 8.8,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "CENTRUM",
+    "cote": 14,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "ARKLAN",
+    "cote": 24,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "BARACHIEL",
+    "cote": 37,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "MID FLIGHT",
+    "cote": 52,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "WESTENDER",
+    "cote": 62,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "DIGGER ONE",
+    "cote": 99,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "BE HOPEFUL",
+    "cote": 102,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "ANCHOR",
+    "cote": 134,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   9,
+   8,
+   11,
+   1,
+   3,
+   6,
+   12,
+   4,
+   5,
+   10,
+   7,
+   2
+  ]
+ },
+ {
+  "date": "2026-08-06",
+  "id": "2026-08-06_R5_C8",
+  "num": 8,
+  "disc": "PLAT",
+  "hip": "SARATOGA",
+  "distance": 1800,
+  "prix": "ALLOWANCE OPTIONAL CLAIMING 1800M",
+  "nRated": 11,
+  "nRunners": 14,
+  "horses": [
+   {
+    "num": 2,
+    "horse": "STARSHIP TITAN",
+    "cote": 2.7,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "A BOURBON FOR TOBY",
+    "cote": 4.8,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "RELATIVE VALUE",
+    "cote": 6,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "WALLEY WORLD",
+    "cote": 6.1,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "EARLY ADOPTER",
+    "cote": 13,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "OCEAN ATLANTIQUE",
+    "cote": 19,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "SLAPINTHEFACE",
+    "cote": 24,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "DAUNT",
+    "cote": 36,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "DISCREET DANCER",
+    "cote": 39,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "MOUNT RUNDLE",
+    "cote": 52,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "ALAN TURING",
+    "cote": 999,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   }
+  ],
+  "arrivee": [
+   2,
+   9,
+   3,
+   4,
+   6,
+   7,
+   10,
+   5,
+   8,
+   1
+  ]
+ },
+ {
+  "date": "2026-08-08",
+  "id": "2026-08-08_R4_C8",
+  "num": 8,
+  "disc": "MONTE",
+  "hip": "ARGENTAN",
+  "distance": 2875,
+  "prix": "PRIX CAPITAL MAIL",
+  "nRated": 12,
+  "nRunners": 12,
+  "horses": [
+   {
+    "num": 4,
+    "horse": "LA GARBO",
+    "cote": 2.8,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "LARGO DE LA BESSE",
+    "cote": 4.2,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "LOVE ET CASH RENKA",
+    "cote": 6.3,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "LADY DE GREZ",
+    "cote": 10,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "LUMIO FALL",
+    "cote": 11,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "LOU DES COUPERIES",
+    "cote": 13,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "LACINIA",
+    "cote": 17,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "LOU D'ECROVILLE",
+    "cote": 41,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "LORD DE VANDEL",
+    "cote": 46,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "KSAR LUDOIS",
+    "cote": 46,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "KIVIANA",
+    "cote": 187,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "KARRY WHITE",
+    "cote": 192,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   10,
+   8,
+   11,
+   6,
+   12
+  ]
+ },
+ {
+  "date": "2026-08-09",
+  "id": "2026-08-09_R4_C5",
+  "num": 5,
+  "disc": "PLAT",
+  "hip": "LE LION D'ANGERS",
+  "distance": 2400,
+  "prix": "PRIX DE HAUTE FOLIE",
+  "nRated": 12,
+  "nRunners": 12,
+  "horses": [
+   {
+    "num": 2,
+    "horse": "GRAND PALAIS",
+    "cote": 3.5,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "UMMAGUMMA",
+    "cote": 4.1,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "MALENA",
+    "cote": 5.2,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "HONEYBLISS",
+    "cote": 5.5,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "LACRA",
+    "cote": 9.8,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "MAJESTE'BLAN",
+    "cote": 23,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "QERDIE DES ROSES",
+    "cote": 41,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "MASTER EMERY",
+    "cote": 44,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "PASTILLE BAM'S",
+    "cote": 46,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "PERFECT MAN",
+    "cote": 49,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "MY SISTER LOVE",
+    "cote": 54,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "GALIE",
+    "cote": 103,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   11,
+   5,
+   3,
+   4,
+   12,
+   10,
+   6,
+   2,
+   8,
+   9,
+   7
+  ]
+ },
+ {
+  "date": "2026-08-10",
+  "id": "2026-08-10_R5_C6",
+  "num": 6,
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "distance": 2925,
+  "prix": "PRIX FANEUR",
+  "nRated": 12,
+  "nRunners": 12,
+  "horses": [
+   {
+    "num": 10,
+    "horse": "NEVADA DARBY",
+    "cote": 3.6,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "NOT A BAD DEAL",
+    "cote": 4.7,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "NYCIA RED",
+    "cote": 6.5,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "NADA MAS HILLPERON",
+    "cote": 9.7,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "NEMROD GEDE",
+    "cote": 11,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "NO WOMAN ERCA",
+    "cote": 11,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "NILDA LAND",
+    "cote": 15,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "NIKKO DE JOUDES",
+    "cote": 19,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "NAPOLEON DE GOUYE",
+    "cote": 28,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "NISSA STAR",
+    "cote": 28,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "NOUMEA D'AMOUR",
+    "cote": 51,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "NOLANN DES AGETS",
+    "cote": 81,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   11,
+   10,
+   9,
+   8,
+   7,
+   2,
+   1,
+   3
+  ]
+ },
+ {
+  "date": "2026-08-11",
+  "id": "2026-08-11_R5_C6",
+  "num": 6,
+  "disc": "ATTELE",
+  "hip": "CABOURG",
+  "distance": 2750,
+  "prix": "PRIX DES ASPHODELES",
+  "nRated": 16,
+  "nRunners": 16,
+  "horses": [
+   {
+    "num": 15,
+    "horse": "MAISY DU DONJON",
+    "cote": 3.1,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "MAJESTE DE TILLARD",
+    "cote": 4,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "MAYA DE LA FYE",
+    "cote": 8,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "MARITZA DU PERCHE",
+    "cote": 8.5,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "MISSISSIPPI QUEEN",
+    "cote": 10,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "MURCIELAGO MIJO",
+    "cote": 18,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "MILOTTE DU HOULBET",
+    "cote": 25,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "MERVEILLE",
+    "cote": 39,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 16,
+    "horse": "MUSE DU VIVIER",
+    "cote": 42,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "MASTERCLASS D'EARL",
+    "cote": 47,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "MANZANA TIME",
+    "cote": 50,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "MISS COCO",
+    "cote": 71,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "MAHANA OF LOVE",
+    "cote": 83,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "MERVEILLE DU JOUR",
+    "cote": 116,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "MERIADEG D'AVEL",
+    "cote": 122,
+    "rang": 15,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "MAYBE DAIRPET",
+    "cote": 191,
+    "rang": 16,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   6,
+   3,
+   1,
+   9,
+   15,
+   10,
+   5,
+   16,
+   13,
+   14,
+   7
+  ]
+ },
+ {
+  "date": "2026-08-12",
+  "id": "2026-08-12_R5_C7",
+  "num": 7,
+  "disc": "PLAT",
+  "hip": "KEMPTON PARK",
+  "distance": 2400,
+  "prix": "HANDICAP (CLASS 3)",
+  "nRated": 12,
+  "nRunners": 12,
+  "horses": [
+   {
+    "num": 8,
+    "horse": "KOKBASTAU",
+    "cote": 2.3,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "BULLETIN",
+    "cote": 4.3,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "CLASSICAL ALLUSION",
+    "cote": 9.4,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "FOREVER PENYWERN",
+    "cote": 9.9,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "THE GREEN MILE",
+    "cote": 11,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "SON OF MAN",
+    "cote": 19,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "DUST COVER",
+    "cote": 30,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "MUST BELIEVE",
+    "cote": 37,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "MATHEMATICIAN",
+    "cote": 38,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "GALAXY STAR",
+    "cote": 40,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "DUC DE KENT",
+    "cote": 75,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "CUMULONIMBUS",
+    "cote": 83,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   8,
+   3,
+   5,
+   11,
+   7,
+   2,
+   4,
+   6,
+   9,
+   1,
+   12
+  ]
+ },
+ {
+  "date": "2026-08-13",
+  "id": "2026-08-13_R6_C8",
+  "num": 8,
+  "disc": "ATTELE",
+  "hip": "PORNICHET",
+  "distance": 2725,
+  "prix": "PRIX UP2PLAY",
+  "nRated": 14,
+  "nRunners": 14,
+  "horses": [
+   {
+    "num": 13,
+    "horse": "NUMBER WAY",
+    "cote": 2.8,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "NOBLE LOVE",
+    "cote": 4.6,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "NAMARA D'ECHAL",
+    "cote": 8.1,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "NOBLESSE DES ARCS",
+    "cote": 10,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "NUIT DE ROMA",
+    "cote": 11,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "NIKITA DUAL",
+    "cote": 13,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "NO DOUBT WALLIE",
+    "cote": 16,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "NUMEROBIS LUCINES",
+    "cote": 32,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "NO TIME TO JYL",
+    "cote": 34,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "NETFLIX MIJO",
+    "cote": 55,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "NAYA LIGHT",
+    "cote": 71,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "NICE TO ME",
+    "cote": 78,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "NANATELLA TERRIE",
+    "cote": 87,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "NIMOKO STAR",
+    "cote": 110,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   13,
+   9,
+   12,
+   8,
+   4,
+   6,
+   1,
+   11,
+   5,
+   3
+  ]
+ },
+ {
+  "date": "2026-08-15",
+  "id": "2026-08-15_R5_C4",
+  "num": 4,
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "distance": 2700,
+  "prix": "PRIX IDEAL PICARD",
+  "nRated": 16,
+  "nRunners": 16,
+  "horses": [
+   {
+    "num": 6,
+    "horse": "LOTTERIO",
+    "cote": 1.6,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "LEPTON",
+    "cote": 9.2,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "LLUC DES BOSC",
+    "cote": 12,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "LUCKY D'AVIGNERE",
+    "cote": 15,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "LIVE ON",
+    "cote": 18,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "LARRE",
+    "cote": 19,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "LONGING VENESI",
+    "cote": 28,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "LOVE ME DO",
+    "cote": 34,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "LEADER DU MOUCHEL",
+    "cote": 47,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "LIGHTNING RIVER",
+    "cote": 54,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "L'AIGLE",
+    "cote": 56,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 15,
+    "horse": "LEONITO STAR",
+    "cote": 84,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "LONELY RIDER",
+    "cote": 94,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "LANDEVY",
+    "cote": 154,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "LATINO DREAM",
+    "cote": 173,
+    "rang": 15,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 16,
+    "horse": "LINGFIELD",
+    "cote": 999,
+    "rang": 16,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   }
+  ],
+  "arrivee": [
+   6,
+   2,
+   7,
+   4,
+   10,
+   1,
+   8,
+   5,
+   15,
+   9,
+   12
+  ]
+ },
+ {
+  "date": "2026-08-16",
+  "id": "2026-08-16_R5_C4",
+  "num": 4,
+  "disc": "PLAT",
+  "hip": "SAN ISIDRO",
+  "distance": 1200,
+  "prix": "PREMIO EL ASESOR",
+  "nRated": 12,
+  "nRunners": 13,
+  "horses": [
+   {
+    "num": 11,
+    "horse": "MEDALLERO",
+    "cote": 3.4,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "RECIFE",
+    "cote": 6.6,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "TELEO",
+    "cote": 6.9,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "TRUCO GALLO",
+    "cote": 9.1,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "SCRATCH NICK",
+    "cote": 9.2,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "BENJALEZ",
+    "cote": 9.4,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "NAMASTE",
+    "cote": 15,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "MONTE LINDO",
+    "cote": 16,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "ECO HIT",
+    "cote": 25,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "INTER FUM",
+    "cote": 30,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "ESCAPE ESPECIAL",
+    "cote": 37,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "OBVIO",
+    "cote": 999,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   }
+  ],
+  "arrivee": [
+   3,
+   9,
+   12,
+   11,
+   6,
+   5,
+   10,
+   2,
+   4,
+   13,
+   7
+  ]
+ },
+ {
+  "date": "2026-08-18",
+  "id": "2026-08-18_R5_C7",
+  "num": 7,
+  "disc": "ATTELE",
+  "hip": "CABOURG",
+  "distance": 2725,
+  "prix": "PRIX DES CARDAMINES",
+  "nRated": 14,
+  "nRunners": 14,
+  "horses": [
+   {
+    "num": 7,
+    "horse": "LACERTOSUS",
+    "cote": 4.4,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "LATINOS DU NOYER",
+    "cote": 5.8,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "LOUNA DES BRETTES",
+    "cote": 6.5,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "LUCKY DELADOU",
+    "cote": 6.9,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "LET IT OUT",
+    "cote": 8.7,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "LIBRE PENSEUR MEEK",
+    "cote": 12,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "LUCKY LUKE DANOVER",
+    "cote": 16,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "LORD RIVER",
+    "cote": 22,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "LASSIE DES SOURCES",
+    "cote": 22,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "LASCAUX DU PERCHE",
+    "cote": 30,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "LADY DE BEYLEV",
+    "cote": 45,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "LEOPARDUS",
+    "cote": 47,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "LANA DE BEAUMEE",
+    "cote": 65,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "LUCKY LULU",
+    "cote": 95,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   6,
+   7,
+   1,
+   4,
+   11,
+   5,
+   8,
+   9,
+   3,
+   12,
+   10
+  ]
+ },
+ {
+  "date": "2026-08-19",
+  "id": "2026-08-19_R6_C6",
+  "num": 6,
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "distance": 2925,
+  "prix": "PRIX DU SUD-EST",
+  "nRated": 14,
+  "nRunners": 14,
+  "horses": [
+   {
+    "num": 13,
+    "horse": "MODELE",
+    "cote": 3.2,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "MAFIOSO DRY",
+    "cote": 3.8,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "MATTHEWS BOKO",
+    "cote": 5,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "MISTRAL DE LARRE",
+    "cote": 8,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "MALIN DE L'ANTE",
+    "cote": 11,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "MAGICIEN D'OZ",
+    "cote": 29,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "MINOS DES CHARRONS",
+    "cote": 47,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "MAGIC DU SAPTEL",
+    "cote": 49,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "MIMOSA DE LARRE",
+    "cote": 51,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "MEETIC DE BEAULIEU",
+    "cote": 61,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "MANDARINO FLEURY",
+    "cote": 71,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "MISTER DES THUYAS",
+    "cote": 85,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "MORIARTY",
+    "cote": 114,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "MASTER JACK",
+    "cote": 133,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   }
+  ],
+  "arrivee": [
+   7,
+   8,
+   5,
+   1,
+   11
+  ]
+ },
+ {
+  "date": "2026-08-20",
+  "id": "2026-08-20_R6_C8",
+  "num": 8,
+  "disc": "ATTELE",
+  "hip": "PORNICHET",
+  "distance": 2725,
+  "prix": "PRIX LABEL EQUURES-HIPPODROME PORNICHET",
+  "nRated": 12,
+  "nRunners": 12,
+  "horses": [
+   {
+    "num": 4,
+    "horse": "NEW GRASS",
+    "cote": 2.7,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "NELL DES RIOULTS",
+    "cote": 6.1,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "NO LIMIT VICTORY",
+    "cote": 8.1,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "NIKITA WOOD",
+    "cote": 9.2,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "NAVETTE SPATIALE",
+    "cote": 9.5,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "NYMPHE DAXEL",
+    "cote": 10,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "NEOUVIELLE",
+    "cote": 18,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "NUIT DU QUENNE",
+    "cote": 21,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "NIKITA DE BEAUM",
+    "cote": 35,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "NOTRE CASHMAKER",
+    "cote": 37,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "NAKUPENDA FIVE",
+    "cote": 53,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "NOISETTE DE SOCERY",
+    "cote": 106,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   4,
+   9,
+   6,
+   2,
+   10,
+   3,
+   7,
+   5,
+   11,
+   12,
+   8
+  ]
+ },
+ {
+  "date": "2026-08-22",
+  "id": "2026-08-22_R6_C7",
+  "num": 7,
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "distance": 2150,
+  "prix": "14E PALIO DE L'AMITIE - NICE MATIN",
+  "nRated": 13,
+  "nRunners": 13,
+  "horses": [
+   {
+    "num": 1,
+    "horse": "KYSKO DE FAEL",
+    "cote": 3.4,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "KATSUKI",
+    "cote": 3.6,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "KATMAI",
+    "cote": 5.7,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "JACK FLAC",
+    "cote": 9.2,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "KYLLIAN",
+    "cote": 11,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "JULIA DOCTOR",
+    "cote": 16,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "KASH SNIPER",
+    "cote": 18,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "IDOCTRO DE HOUELLE",
+    "cote": 47,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "KANTOR DU VIVIER",
+    "cote": 47,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "INDESKAYA BIRD",
+    "cote": 53,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "KHALEESI SMART",
+    "cote": 72,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "HACKER MESLOIS",
+    "cote": 107,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "JASMINE WINNER",
+    "cote": 171,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   13,
+   5,
+   11,
+   1,
+   10,
+   9,
+   12,
+   8,
+   2,
+   4,
+   7,
+   6
+  ]
+ },
+ {
+  "date": "2026-08-23",
+  "id": "2026-08-23_R6_C5",
+  "num": 5,
+  "disc": "PLAT",
+  "hip": "MARONAS",
+  "distance": 1600,
+  "prix": "VOZNIACKI",
+  "nRated": 12,
+  "nRunners": 12,
+  "horses": [
+   {
+    "num": 6,
+    "horse": "FATHER AND SON",
+    "cote": 3.2,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "U OPTIMISTIK",
+    "cote": 4.7,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "RIGHT NOW",
+    "cote": 5.7,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "CAFE DEL CIELO",
+    "cote": 6.5,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "WINEMAKER",
+    "cote": 10,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "BONIATO",
+    "cote": 16,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "FENIXIO",
+    "cote": 25,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "EL GRANJERO",
+    "cote": 34,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "ULYSSES IRON",
+    "cote": 44,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "UR THE CAUSE",
+    "cote": 49,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "PORTENO HAT",
+    "cote": 63,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "SINATRA",
+    "cote": 77,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   7,
+   3,
+   2,
+   10,
+   6,
+   9,
+   4,
+   5,
+   1,
+   11,
+   12
+  ]
+ },
+ {
+  "date": "2026-08-24",
+  "id": "2026-08-24_R5_C7",
+  "num": 7,
+  "disc": "ATTELE",
+  "hip": "PORNICHET",
+  "distance": 2725,
+  "prix": "PRIX DE L'ETE AU TROT",
+  "nRated": 14,
+  "nRunners": 14,
+  "horses": [
+   {
+    "num": 12,
+    "horse": "NEUTRON DE BRION",
+    "cote": 2.6,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "NIKITA DUAL",
+    "cote": 3.5,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "NOTORIOUS JIEL",
+    "cote": 5.1,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "NANOU D'AIMTE",
+    "cote": 18,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "NOBLESSE DES ARCS",
+    "cote": 22,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "NOUVELLE JABA",
+    "cote": 22,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "NAUTIC HAUFOR",
+    "cote": 24,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "NOBLE D'ATOUT",
+    "cote": 26,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "NOVA CASTELETS",
+    "cote": 72,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "NOIRE EBENE",
+    "cote": 84,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "NIKITA PERRINE",
+    "cote": 92,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "NIMBUS DE LERINS",
+    "cote": 103,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "NINA DE BASSIERE",
+    "cote": 111,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "NIELLUCCIO BEHEM",
+    "cote": 206,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   2,
+   3,
+   13,
+   6,
+   12,
+   14,
+   4,
+   5,
+   11,
+   7,
+   9,
+   8
+  ]
+ },
+ {
+  "date": "2026-08-25",
+  "id": "2026-08-25_R5_C7",
+  "num": 7,
+  "disc": "ATTELE",
+  "hip": "CABOURG",
+  "distance": 2050,
+  "prix": "PRIX DES SUNSATIAS",
+  "nRated": 13,
+  "nRunners": 14,
+  "horses": [
+   {
+    "num": 1,
+    "horse": "NICIE CASH",
+    "cote": 3.6,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "NEWMARKET",
+    "cote": 5.1,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "NYALA BILOU",
+    "cote": 7.9,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "NEW LIFE STAR",
+    "cote": 9.1,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "NAGA JOLOKIA",
+    "cote": 9.9,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "NEWLIFE DE CAHOT",
+    "cote": 10,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "NATALIA MELODY",
+    "cote": 11,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "NIKITA TENSAU",
+    "cote": 21,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "NAIROBI JOMA",
+    "cote": 36,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "NAPOLEONE",
+    "cote": 40,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "NATACHA HEUVELLAND",
+    "cote": 44,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "NON_PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "NEIGE DES LANDES",
+    "cote": 58,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "NUT AND MONEY",
+    "cote": 116,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   1,
+   2,
+   14,
+   12,
+   3,
+   4,
+   5,
+   10,
+   13,
+   11,
+   9
+  ]
+ },
+ {
+  "date": "2026-08-26",
+  "id": "2026-08-26_R5_C7",
+  "num": 7,
+  "disc": "MONTE",
+  "hip": "LES SABLES D OLONNE",
+  "distance": 2775,
+  "prix": "PRIX DES BENEVOLES DU LITTORAL OLONNOIS",
+  "nRated": 14,
+  "nRunners": 14,
+  "horses": [
+   {
+    "num": 6,
+    "horse": "MEMPHIS DE VAL",
+    "cote": 4.2,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "MILLONGA VRIE",
+    "cote": 5.7,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "MOUMBA DE GUEZ",
+    "cote": 6.5,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "MAKAO DE LA BESVRE",
+    "cote": 6.6,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "MAGIC GARLINOIS",
+    "cote": 7.8,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "MEMPHIS NEMO",
+    "cote": 15,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "MY SHOT JOSSELYN",
+    "cote": 17,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "MAC GYVER",
+    "cote": 19,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "MA JYL",
+    "cote": 23,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "MISS BELLEVUE",
+    "cote": 42,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "MY LADY GEDE",
+    "cote": 58,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "MYRTILLE UP STAR",
+    "cote": 75,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "MAYO DES FLOTS",
+    "cote": 81,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "MAGIE DES GLENAN",
+    "cote": 104,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   13,
+   4,
+   9,
+   14,
+   3,
+   6,
+   5,
+   7,
+   2,
+   8
+  ]
+ },
+ {
+  "date": "2026-08-30",
+  "id": "2026-08-30_R6_C11",
+  "num": 11,
+  "disc": "PLAT",
+  "hip": "SANTIAGO",
+  "distance": 1700,
+  "prix": "POLLA DE POTRILLOS - ROBERTO ALLENDE U. S. ( GRADE I )",
+  "nRated": 18,
+  "nRunners": 18,
+  "horses": [
+   {
+    "num": 11,
+    "horse": "DASTAN",
+    "cote": 2.5,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "VOLTAJE",
+    "cote": 8.4,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "NIRZAN",
+    "cote": 9.2,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "MAKHULU",
+    "cote": 9.9,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "NETO POSITIVO",
+    "cote": 12,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "EL JOVERO",
+    "cote": 17,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "CAMPOMARINO",
+    "cote": 20,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "TIZ CAT",
+    "cote": 22,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 13,
+    "horse": "LUCKY GUY",
+    "cote": 36,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "CORAGGIOSO",
+    "cote": 39,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "ACURRUCAO",
+    "cote": 40,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "BERLINALE",
+    "cote": 45,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 4,
+    "horse": "PILLAN KUTRAL",
+    "cote": 53,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 18,
+    "horse": "ROSENDO",
+    "cote": 55,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 17,
+    "horse": "SOPELANA",
+    "cote": 63,
+    "rang": 15,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "EL FANDI",
+    "cote": 69,
+    "rang": 16,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 15,
+    "horse": "CRAZY HORSE",
+    "cote": 78,
+    "rang": 17,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 16,
+    "horse": "RESOLUTIVO",
+    "cote": 80,
+    "rang": 18,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   6,
+   12,
+   7,
+   11,
+   5,
+   3,
+   8,
+   9,
+   10,
+   16,
+   15,
+   14,
+   18,
+   1,
+   2,
+   4,
+   13,
+   17
+  ]
+ },
+ {
+  "date": "2026-08-31",
+  "id": "2026-08-31_R1_C8",
+  "num": 8,
+  "disc": "PLAT",
+  "hip": "SAINT-CLOUD",
+  "distance": 2400,
+  "prix": "PRIX DE L'AVENUE MARENGO",
+  "nRated": 15,
+  "nRunners": 16,
+  "horses": [
+   {
+    "num": 4,
+    "horse": "HONGUEMARE",
+    "cote": 6,
+    "rang": 1,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 10,
+    "horse": "QUEENFLEUR",
+    "cote": 7.5,
+    "rang": 2,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 2,
+    "horse": "KAMAKURA ONE",
+    "cote": 7.7,
+    "rang": 3,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 1,
+    "horse": "BEAUTIFUL MEMORY",
+    "cote": 10,
+    "rang": 4,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 9,
+    "horse": "SOLDIERS CHORUS",
+    "cote": 11,
+    "rang": 5,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 11,
+    "horse": "VIANETA",
+    "cote": 11,
+    "rang": 6,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 3,
+    "horse": "LETTYT FIGHT",
+    "cote": 13,
+    "rang": 7,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 5,
+    "horse": "GRAND ART",
+    "cote": 13,
+    "rang": 8,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 6,
+    "horse": "TIMBALLINA",
+    "cote": 13,
+    "rang": 9,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 7,
+    "horse": "GOT FLOWER",
+    "cote": 15,
+    "rang": 10,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 8,
+    "horse": "GOLDEN BEACH",
+    "cote": 23,
+    "rang": 11,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 15,
+    "horse": "RIGEL",
+    "cote": 24,
+    "rang": 12,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 12,
+    "horse": "EASTERN STAR",
+    "cote": 40,
+    "rang": 13,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 14,
+    "horse": "STARLIGHT",
+    "cote": 44,
+    "rang": 14,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   },
+   {
+    "num": 16,
+    "horse": "CLAIR DE LUNE",
+    "cote": 44,
+    "rang": 15,
+    "nonPartant": null,
+    "statut": "PARTANT"
+   }
+  ],
+  "arrivee": [
+   11,
+   3,
+   10,
+   5,
+   4,
+   2,
+   9,
+   7,
+   15,
+   1,
+   14,
+   6,
+   16,
+   8
+  ]
+ }
+]

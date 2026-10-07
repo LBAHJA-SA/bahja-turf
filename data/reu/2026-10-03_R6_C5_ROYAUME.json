@@ -1,0 +1,198 @@
+{
+ "v": 2,
+ "pv": 3,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 5,
+  "nom": "MAIDEN STAKES (CLASS 2)",
+  "prix": "MAIDEN STAKES (CLASS 2)",
+  "heure": "15:45",
+  "distance": 1400,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "",
+  "conditions": "Pour pur sang males, hongres et femelles de deux ans (Allocations distribuée aux 4 premiers). Les informations concernant les partants sont communiquées us la responsabilité de l'autorité hippique du pays dans lequel la course es organisée.",
+  "montant": 18072,
+  "arrivee": null,
+  "dateLongue": "samedi 3 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 6,
+  "hippodrome": "Newmarket",
+  "pays": "ROYAUME"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "AFIF",
+   "driver": "COLIN KEANE",
+   "entraineur": "JOHN & THADY GOSDEN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "",
+   "gains": 0,
+   "age": 2,
+   "sexe": "M",
+   "poids": 60,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "09,7",
+   "coteRefEntraineur": "03,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/MKT/5/20261003-MKT-5-1.png",
+   "proprietaire": "PRINCE A. A. FAISAL",
+   "dernierPassage": null,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "ALTIUS",
+   "driver": "SAFFIE OSBORNE",
+   "entraineur": "CHARLIE APPLEBY",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p",
+   "gains": 1522,
+   "age": 2,
+   "sexe": "M",
+   "poids": 60,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "02,1",
+   "coteRefEntraineur": "01,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/MKT/5/20261003-MKT-5-2.png",
+   "proprietaire": "GODOLPHIN",
+   "dernierPassage": null,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "KICKING BEAR",
+   "driver": "ROBERT HAVLIN",
+   "entraineur": "ED WALKER",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p",
+   "gains": 3042,
+   "age": 2,
+   "sexe": "M",
+   "poids": 60,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "06,8",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/MKT/5/20261003-MKT-5-3.png",
+   "proprietaire": "WOODHURST LTD & WITHERNSEA",
+   "dernierPassage": null,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "PROCYON",
+   "driver": "DANIEL MUSCUTT",
+   "entraineur": "WILLIAM HAGGAS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "",
+   "gains": 0,
+   "age": 2,
+   "sexe": "M",
+   "poids": 60,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "03,8",
+   "coteRefEntraineur": "08,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/MKT/5/20261003-MKT-5-4.png",
+   "proprietaire": "WATHNAN RACING",
+   "dernierPassage": null,
+   "depart": 1,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [],
+  "drivers": [
+   2,
+   4,
+   3,
+   1
+  ],
+  "entraineurs": [
+   2,
+   1,
+   4
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [],
+  "topPalmares": [
+   "3",
+   "2"
+  ],
+  "topForme": [
+   "2",
+   "3"
+  ],
+  "topClasse": [
+   "3",
+   "2"
+  ],
+  "topJockeys": [
+   "2",
+   "1",
+   "3",
+   "4"
+  ],
+  "topEntraineurs": [
+   "2",
+   "1",
+   "4"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [],
+  "topCordes": [],
+  "ecartsChevaux": [],
+  "incontournables": [
+   "2",
+   "3"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "2",
+   "3"
+  ],
+  "syntheseTf": [
+   "1",
+   "4"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 2,
+   "cheval": "ALTIUS",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "KICKING BEAR",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "2 - 3",
+ "pronosTf": [],
+ "collecteLe": "2026-10-04T08:17:51.302Z"
+}

@@ -1,0 +1,711 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        12
+      ],
+      [
+        7
+      ],
+      [
+        2
+      ],
+      [
+        1
+      ],
+      [
+        11
+      ],
+      [
+        3
+      ],
+      [
+        14
+      ],
+      [
+        13
+      ],
+      [
+        4
+      ],
+      [
+        10
+      ],
+      [
+        5
+      ],
+      [
+        8
+      ],
+      [
+        6
+      ]
+    ],
+    "classe": "INCONNU",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2700,
+    "going": null,
+    "imminent": false,
+    "num": 4,
+    "penetrometer": null,
+    "prix": "PRIX GUDRUN",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 14,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1760724900000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "TIC_TROIS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 48,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 5,
+          "disq": 1,
+          "n": 3,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 6.1,
+          "disq": 1,
+          "n": 10,
+          "top5": 4
+        },
+        "P4": {
+          "avgRang": 5.7,
+          "disq": 4,
+          "n": 7,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 7194000,
+      "horse": "LOLA DU CAMPUS",
+      "horse_id": "LOLA DU CAMPUS-ELISIA DE VANDEL-VOELAND",
+      "jockey": "F. LAGADEUC",
+      "musique": "DaDa1aAaDa1a8a2a1a7a",
+      "nombreCourses": 21,
+      "nombrePlaces": 9,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Stal CAMPUS RPF",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "D. LOCQUENEUX",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 15,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.9,
+          "disq": 1,
+          "n": 10,
+          "top5": 6
+        }
+      },
+      "etat": null,
+      "gain": 8413000,
+      "horse": "LOTTA LOVE",
+      "horse_id": "LOTTA LOVE-CISSY JAMES-GOTLAND",
+      "jockey": "P.PH. PLOQUIN",
+      "musique": "1a5a4a3a7a8a4a8a(24)6a",
+      "nombreCourses": 26,
+      "nombrePlaces": 17,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "T. PARTAIX",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "T. PARTAIX",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 17,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.9,
+          "disq": 1,
+          "n": 13,
+          "top5": 8
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 9241500,
+      "horse": "KHAMSA",
+      "horse_id": "KHAMSA-UNITED EXPRESS-PRODIGIOUS",
+      "jockey": "J. DUBOIS",
+      "musique": "3a0a0a8a0aDa(24)2a1aDa",
+      "nombreCourses": 18,
+      "nombrePlaces": 4,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. DUBOIS",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "J. DUBOIS",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 63,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.1,
+          "disq": 4,
+          "n": 16,
+          "top5": 9
+        },
+        "P2": {
+          "avgRang": 7,
+          "disq": 4,
+          "n": 5,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 3.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 10207000,
+      "horse": "KEY OF LOVE",
+      "horse_id": "KEY OF LOVE-UNE LOVE STAR-READY CASH",
+      "jockey": "G. GELORMINI",
+      "musique": "Da2a0a7a9aDa4aDaDa1a",
+      "nombreCourses": 33,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Gianni FASCELLA",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "TH. LAMARE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 143,
+      "deferre": "PROTEGE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": null,
+          "disq": 2,
+          "n": 2,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 3.9,
+          "disq": 4,
+          "n": 24,
+          "top5": 16
+        },
+        "P4": {
+          "avgRang": 8.2,
+          "disq": 0,
+          "n": 4,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 10633000,
+      "horse": "KASSYA",
+      "horse_id": "KASSYA-BLUE ISLAND-READY CASH",
+      "jockey": "F. OUVRIE",
+      "musique": "8a0a0aDa9a1a4a5a6aDa",
+      "nombreCourses": 29,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie des CHARMES",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "D. LOCQUENEUX",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 236,
+      "deferre": "",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 3.8,
+          "disq": 2,
+          "n": 10,
+          "top5": 8
+        },
+        "P4": {
+          "avgRang": 4,
+          "disq": 2,
+          "n": 6,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 10810000,
+      "horse": "LYZIA DES AGETS",
+      "horse_id": "LYZIA DES AGETS-CARA DES AGETS-CANADIEN D'AM",
+      "jockey": "LILIAN BERTIN",
+      "musique": "0a(24)8m0aDm7m9aDm5m1m",
+      "nombreCourses": 15,
+      "nombrePlaces": 6,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Alexis GRIMAULT",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "EMILIEN RAULLINE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 13,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.8,
+          "disq": 1,
+          "n": 7,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 10979000,
+      "horse": "LOUVE DE DAIDOU",
+      "horse_id": "LOUVE DE DAIDOU-DUCHESSE DAIDOU-OURAGAN DE CELLAND",
+      "jockey": "LEO ABRIVARD",
+      "musique": "1a3aDa3a3a6a(24)1a7a9a",
+      "nombreCourses": 14,
+      "nombrePlaces": 6,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie DAIDOU",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "L.CL. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 31,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 6.5,
+          "disq": 4,
+          "n": 26,
+          "top5": 7
+        },
+        "P4": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 11009000,
+      "horse": "KANAKA DE BUSSET",
+      "horse_id": "KANAKA DE BUSSET-PLUME INDIENNE-ENINO DU POMMEREUX",
+      "jockey": "D. THOMAIN",
+      "musique": "4a0a0aDa9a0a4a0a(24)6a",
+      "nombreCourses": 38,
+      "nombrePlaces": 17,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "N. LOLIC",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "S. ROGER",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 11,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.8,
+          "disq": 1,
+          "n": 5,
+          "top5": 2
+        },
+        "D2A": {
+          "avgRang": 4.5,
+          "disq": 2,
+          "n": 4,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 1,
+          "disq": 3,
+          "n": 4,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 3.6,
+          "disq": 6,
+          "n": 13,
+          "top5": 6
+        }
+      },
+      "etat": null,
+      "gain": 11026000,
+      "horse": "KALINE DE VIVOIN",
+      "horse_id": "KALINE DE VIVOIN-DENTELLE DE VIVOIN-KERIDO DU DONJON",
+      "jockey": "E. RAFFIN",
+      "musique": "DaDa8mDa5m6m1aDa8a9m",
+      "nombreCourses": 31,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Thierry RAFFEGEAU",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "TH. RAFFEGEAU",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 3.5,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.3,
+          "disq": 2,
+          "n": 8,
+          "top5": 4
+        },
+        "P4": {
+          "avgRang": 6.2,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 11145500,
+      "horse": "LARA CROFT",
+      "horse_id": "LARA CROFT-DRYADE-UN MEC D'HERIPRE",
+      "jockey": "T. LE BELLER",
+      "musique": "2aDa4a1a(24)3a0a1a4a2a",
+      "nombreCourses": 18,
+      "nombrePlaces": 6,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Tony LE BELLER",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "T. LE BELLER",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 43,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.7,
+          "disq": 3,
+          "n": 21,
+          "top5": 11
+        },
+        "P2": {
+          "avgRang": 14,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 11755000,
+      "horse": "KNITULIA",
+      "horse_id": "KNITULIA-VARKAVA-EYE OF THE STORM",
+      "jockey": "N. BAZIRE",
+      "musique": "0a3a2a9a1a0a0a(24)2a2m",
+      "nombreCourses": 28,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. COTTEL",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "L.CL. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 3.1,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 12,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 3.4,
+          "disq": 1,
+          "n": 11,
+          "top5": 9
+        },
+        "P4": {
+          "avgRang": 9,
+          "disq": 1,
+          "n": 3,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 11882000,
+      "horse": "KALISKANA",
+      "horse_id": "KALISKANA-EMULSION-NIKY",
+      "jockey": "M. ABRIVARD",
+      "musique": "1a1a2a6a3a0a1aDa(24)3a",
+      "nombreCourses": 26,
+      "nombrePlaces": 7,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie MARECHAL",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "M. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 22,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4.7,
+          "disq": 2,
+          "n": 21,
+          "top5": 12
+        },
+        "P2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 13767000,
+      "horse": "KORONA DELADOU",
+      "horse_id": "KORONA DELADOU-EMMY DELADOU-TIEGO D'ETANG",
+      "jockey": "GUILLAUME MARTIN",
+      "musique": "3a9a7a1a0a2a4aDa0a7a",
+      "nombreCourses": 28,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "E. DUFOUR",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "E. LETOUZE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 18,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 3.9,
+          "disq": 6,
+          "n": 23,
+          "top5": 11
+        },
+        "P2": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 13849000,
+      "horse": "KAPUSHA MIP",
+      "horse_id": "KAPUSHA MIP-PRETTY JET-CARAT WILLIAMS",
+      "jockey": "H. MONTHULE",
+      "musique": "4aDaDa1a1aDa1a3a3a6a",
+      "nombreCourses": 28,
+      "nombrePlaces": 13,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie MIP",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "S. GUARATO",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2025-10-17",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

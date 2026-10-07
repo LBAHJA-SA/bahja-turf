@@ -1,0 +1,3242 @@
+[
+ {
+  "date": "2025-12-02",
+  "id": "2025-12-02_R4_C8",
+  "disc": "ATTELE",
+  "hip": "MAUQUENCHY",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 7,
+    "horse": "JOKER PLANCHETTE"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 10,
+    "horse": "HUTA JAZZ"
+   },
+   {
+    "pos": 3,
+    "rk": 7,
+    "num": 2,
+    "horse": "JUSTINE DU MESNIL"
+   },
+   {
+    "pos": 4,
+    "rk": 4,
+    "num": 13,
+    "horse": "JAMAIQUE DE HOERDT"
+   },
+   {
+    "pos": 5,
+    "rk": 2,
+    "num": 14,
+    "horse": "JOYAU DARLING"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-03",
+  "id": "2025-12-03_R4_C8",
+  "disc": "PLAT",
+  "hip": "DEAUVILLE",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 3,
+    "horse": "CRACK CITY"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 11,
+    "horse": "GIN GEMBRE"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 1,
+    "horse": "CAP SKIRRING"
+   },
+   {
+    "pos": 4,
+    "rk": 10,
+    "num": 7,
+    "horse": "DIEPPE"
+   },
+   {
+    "pos": 5,
+    "rk": 11,
+    "num": 10,
+    "horse": "MEHANYDREAM"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-04",
+  "id": "2025-12-04_R4_C7",
+  "disc": "ATTELE",
+  "hip": "PONT DE VIVAUX",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 11,
+    "horse": "MISTER MAGIC"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 6,
+    "horse": "MILADY SMART"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 8,
+    "horse": "MISSION ROYALE"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 10,
+    "horse": "MA FELICITE"
+   },
+   {
+    "pos": 5,
+    "rk": 14,
+    "num": 1,
+    "horse": "MYSTESS DE CANI"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-11",
+  "id": "2025-12-11_R4_C8",
+  "disc": "ATTELE",
+  "hip": "PONT DE VIVAUX",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 10,
+    "horse": "LAZAN DE PASSIEU"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 15,
+    "horse": "KONRAD DE CORDAY"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 13,
+    "horse": "LASKO DES FORGES"
+   },
+   {
+    "pos": 4,
+    "rk": 10,
+    "num": 6,
+    "horse": "KALL ME SIXTY ONE"
+   },
+   {
+    "pos": 5,
+    "rk": 12,
+    "num": 8,
+    "horse": "KAPTAIN DE CRISTAL"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-13",
+  "id": "2025-12-13_R4_C9",
+  "disc": "PLAT",
+  "hip": "DEAUVILLE",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 3,
+    "horse": "HALL OF FAME"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 9,
+    "horse": "UNE FRAGRANCE"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 12,
+    "horse": "IMAYA"
+   },
+   {
+    "pos": 4,
+    "rk": 10,
+    "num": 7,
+    "horse": "PREA GIANCA"
+   },
+   {
+    "pos": 5,
+    "rk": 5,
+    "num": 4,
+    "horse": "CIACCINO"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-15",
+  "id": "2025-12-15_R3_C6",
+  "disc": "ATTELE",
+  "hip": "LE CROISE LAROCHE",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 5,
+    "num": 8,
+    "horse": "LINEA DE L'ALBA"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 6,
+    "horse": "LALOU D'AMOUR"
+   },
+   {
+    "pos": 3,
+    "rk": 6,
+    "num": 7,
+    "horse": "LIZA MARCEAUX"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 3,
+    "horse": "LIBELLULE"
+   },
+   {
+    "pos": 5,
+    "rk": 10,
+    "num": 2,
+    "horse": "LACOUMA"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-16",
+  "id": "2025-12-16_R3_C8",
+  "disc": "MONTE",
+  "hip": "CABOURG",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 10,
+    "num": 13,
+    "horse": "MISTRAL DU PORET"
+   },
+   {
+    "pos": 2,
+    "rk": 9,
+    "num": 3,
+    "horse": "MILORD DES ARRIS"
+   },
+   {
+    "pos": 3,
+    "rk": 11,
+    "num": 7,
+    "horse": "MAHARADJAH ROYAL"
+   },
+   {
+    "pos": 4,
+    "rk": 4,
+    "num": 6,
+    "horse": "MINEFIELDS"
+   },
+   {
+    "pos": 5,
+    "rk": 14,
+    "num": 1,
+    "horse": "MEMPHIS PARIS"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-17",
+  "id": "2025-12-17_R4_C8",
+  "disc": "PLAT",
+  "hip": "DEAUVILLE",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 4,
+    "horse": "OFF TO DUBAI"
+   },
+   {
+    "pos": 2,
+    "rk": 9,
+    "num": 11,
+    "horse": "NEAR FLY"
+   },
+   {
+    "pos": 3,
+    "rk": 12,
+    "num": 13,
+    "horse": "TOMOE GOZEN"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 9,
+    "horse": "ARKEN"
+   },
+   {
+    "pos": 5,
+    "rk": 2,
+    "num": 6,
+    "horse": "ARTEMISE"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-18",
+  "id": "2025-12-18_R4_C7",
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "nRated": 18,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 7,
+    "num": 10,
+    "horse": "LUTIN DE BOISNEY"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 15,
+    "horse": "LOMAC GEDE"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 16,
+    "horse": "LASER DE JOUDES"
+   },
+   {
+    "pos": 4,
+    "rk": 9,
+    "num": 14,
+    "horse": "LABEL D'HERMES"
+   },
+   {
+    "pos": 5,
+    "rk": 12,
+    "num": 4,
+    "horse": "L'OCEAN"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-20",
+  "id": "2025-12-20_R5_C8",
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 14,
+    "horse": "JOY FOR EVER"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 1,
+    "horse": "JACOVIA MADRIK"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 3,
+    "horse": "GAETANE DU VIVIER"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 8,
+    "horse": "JUST D'HERIPRE"
+   },
+   {
+    "pos": 5,
+    "rk": 9,
+    "num": 6,
+    "horse": "ILOUMAX"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-22",
+  "id": "2025-12-22_R4_C8",
+  "disc": "MONTE",
+  "hip": "CABOURG",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 14,
+    "horse": "MIST NIGHT QUICK"
+   },
+   {
+    "pos": 2,
+    "rk": 4,
+    "num": 13,
+    "horse": "MAGIE DE FLEUR"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 12,
+    "horse": "MISSION IMPOSSIBLE"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 3,
+    "horse": "MIDINETTE DU YUCCA"
+   },
+   {
+    "pos": 5,
+    "rk": 10,
+    "num": 9,
+    "horse": "MIRABELLA PAULOIS"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-23",
+  "id": "2025-12-23_R4_C5",
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 9,
+    "horse": "MOON DU VIVIER"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 11,
+    "horse": "MANOLITA"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 14,
+    "horse": "MA FELICITE"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 5,
+    "horse": "MARGUERITE QUICK"
+   },
+   {
+    "pos": 5,
+    "rk": 11,
+    "num": 12,
+    "horse": "MY LADY DARLING"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-29",
+  "id": "2025-12-29_R4_C5",
+  "disc": "PLAT",
+  "hip": "DEAUVILLE",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 11,
+    "num": 3,
+    "horse": "ROI TREZY"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 6,
+    "horse": "UNE AVENTURE"
+   },
+   {
+    "pos": 3,
+    "rk": 7,
+    "num": 11,
+    "horse": "ANGEL DREAMER"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 1,
+    "horse": "BEWARE OF THE BEAR"
+   },
+   {
+    "pos": 5,
+    "rk": 3,
+    "num": 2,
+    "horse": "MISTY CITY"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2025-12-30",
+  "id": "2025-12-30_R4_C6",
+  "disc": "ATTELE",
+  "hip": "GRAIGNES",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 1,
+    "horse": "METAVERS ERA"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 2,
+    "horse": "MAGNIFICAT"
+   },
+   {
+    "pos": 3,
+    "rk": 6,
+    "num": 7,
+    "horse": "MARKUS DES AGETS"
+   },
+   {
+    "pos": 4,
+    "rk": 5,
+    "num": 8,
+    "horse": "MONZON DU CHATELET"
+   },
+   {
+    "pos": 5,
+    "rk": 10,
+    "num": 4,
+    "horse": "MY WAY LOVE"
+   }
+  ],
+  "m": "2025-12"
+ },
+ {
+  "date": "2026-01-02",
+  "id": "2026-01-02_R4_C5",
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 5,
+    "horse": "INGLETON DE BRY"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 9,
+    "horse": "IRUN DU BOCAGE"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 3,
+    "horse": "INSAISISSABLE DUO"
+   },
+   {
+    "pos": 4,
+    "rk": 10,
+    "num": 11,
+    "horse": "ILLUMINATI"
+   },
+   {
+    "pos": 5,
+    "rk": 13,
+    "num": 6,
+    "horse": "HARMONICA"
+   }
+  ],
+  "m": "2026-01"
+ },
+ {
+  "date": "2026-01-05",
+  "id": "2026-01-05_R1_C8",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 4,
+    "horse": "JADE RENARDIER"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 11,
+    "horse": "HIGH FIVE D.K."
+   },
+   {
+    "pos": 3,
+    "rk": 9,
+    "num": 14,
+    "horse": "PORTOFINO (SWE)"
+   },
+   {
+    "pos": 4,
+    "rk": 11,
+    "num": 16,
+    "horse": "FIORANO"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 12,
+    "horse": "MODRIC RENKA"
+   }
+  ],
+  "m": "2026-01"
+ },
+ {
+  "date": "2026-01-17",
+  "id": "2026-01-17_R4_C6",
+  "disc": "ATTELE",
+  "hip": "LYON LA SOIE",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 5,
+    "horse": "JUNIOR DU GRENIER"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 16,
+    "horse": "JOFESCA BUISSONAY"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 13,
+    "horse": "JENJOY MAYBE"
+   },
+   {
+    "pos": 4,
+    "rk": 9,
+    "num": 11,
+    "horse": "JAWENN DE KERYANN"
+   },
+   {
+    "pos": 5,
+    "rk": 5,
+    "num": 14,
+    "horse": "JIRARDIERE MERITE"
+   }
+  ],
+  "m": "2026-01"
+ },
+ {
+  "date": "2026-01-18",
+  "id": "2026-01-18_R5_C6",
+  "disc": "ATTELE",
+  "hip": "PONT DE VIVAUX",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 10,
+    "horse": "KING KONG SMILE"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 5,
+    "horse": "KALL ME SIXTY ONE"
+   },
+   {
+    "pos": 3,
+    "rk": 9,
+    "num": 11,
+    "horse": "KENDO JIEL"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 6,
+    "horse": "KRAC DE CAZOULENE"
+   },
+   {
+    "pos": 5,
+    "rk": 3,
+    "num": 7,
+    "horse": "JOJO DE BOURGOGNE"
+   }
+  ],
+  "m": "2026-01"
+ },
+ {
+  "date": "2026-01-20",
+  "id": "2026-01-20_R4_C7",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 11,
+    "horse": "JOYEUX MESLOIS"
+   },
+   {
+    "pos": 2,
+    "rk": 4,
+    "num": 4,
+    "horse": "INDUCTIF"
+   },
+   {
+    "pos": 3,
+    "rk": 7,
+    "num": 2,
+    "horse": "JACKPOT DES BORDES"
+   },
+   {
+    "pos": 4,
+    "rk": 5,
+    "num": 13,
+    "horse": "IDEE SHANNON"
+   },
+   {
+    "pos": 5,
+    "rk": 3,
+    "num": 1,
+    "horse": "JASMIN DE COEUR"
+   }
+  ],
+  "m": "2026-01"
+ },
+ {
+  "date": "2026-01-22",
+  "id": "2026-01-22_R4_C8",
+  "disc": "PLAT",
+  "hip": "DEAUVILLE",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 9,
+    "horse": "ECLAIR DE VATI"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 2,
+    "horse": "PREFERENCIA"
+   },
+   {
+    "pos": 3,
+    "rk": 9,
+    "num": 3,
+    "horse": "SUDDEN DEATH"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 7,
+    "horse": "LHASA"
+   },
+   {
+    "pos": 5,
+    "rk": 2,
+    "num": 8,
+    "horse": "MAESTRO CHOP"
+   }
+  ],
+  "m": "2026-01"
+ },
+ {
+  "date": "2026-01-24",
+  "id": "2026-01-24_R5_C8",
+  "disc": "ATTELE",
+  "hip": "SAINT GALMIER",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 10,
+    "horse": "KANNABIS JELOCA"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 6,
+    "horse": "KENAVO DU BOUILLON"
+   },
+   {
+    "pos": 3,
+    "rk": 9,
+    "num": 7,
+    "horse": "KUNG FU FAMILY"
+   },
+   {
+    "pos": 4,
+    "rk": 4,
+    "num": 13,
+    "horse": "KADENCE MAN"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 9,
+    "horse": "KONOR HIGHLAND"
+   }
+  ],
+  "m": "2026-01"
+ },
+ {
+  "date": "2026-01-26",
+  "id": "2026-01-26_R4_C6",
+  "disc": "ATTELE",
+  "hip": "MAUQUENCHY",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 9,
+    "num": 6,
+    "horse": "NUT AND MONEY"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 14,
+    "horse": "NALA LEALMANI"
+   },
+   {
+    "pos": 3,
+    "rk": 13,
+    "num": 5,
+    "horse": "NOUCHKA ROYALE"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 13,
+    "horse": "NAGODA"
+   },
+   {
+    "pos": 5,
+    "rk": 14,
+    "num": 4,
+    "horse": "NUANCE DU HOULET"
+   }
+  ],
+  "m": "2026-01"
+ },
+ {
+  "date": "2026-02-02",
+  "id": "2026-02-02_R4_C4",
+  "disc": "ATTELE",
+  "hip": "GRAIGNES",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 5,
+    "num": 12,
+    "horse": "JUNIOR ANGELE"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 1,
+    "horse": "JACK QUICK"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 6,
+    "horse": "ILUCE DE BEAUCAMPS"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 13,
+    "horse": "JUST A MAN"
+   },
+   {
+    "pos": 5,
+    "rk": 8,
+    "num": 3,
+    "horse": "INDULGENTE"
+   }
+  ],
+  "m": "2026-02"
+ },
+ {
+  "date": "2026-02-05",
+  "id": "2026-02-05_R4_C5",
+  "disc": "PLAT",
+  "hip": "PORNICHET",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 13,
+    "horse": "NARGIZ"
+   },
+   {
+    "pos": 2,
+    "rk": 9,
+    "num": 5,
+    "horse": "RHIPPER"
+   },
+   {
+    "pos": 3,
+    "rk": 11,
+    "num": 6,
+    "horse": "SUPERCLASS"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 2,
+    "horse": "NORTH COAST"
+   },
+   {
+    "pos": 5,
+    "rk": 10,
+    "num": 3,
+    "horse": "DHIGALI"
+   }
+  ],
+  "m": "2026-02"
+ },
+ {
+  "date": "2026-02-11",
+  "id": "2026-02-11_R4_C7",
+  "disc": "ATTELE",
+  "hip": "LYON LA SOIE",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 8,
+    "horse": "LASCAR D'ENFER"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 15,
+    "horse": "LOU GEHRIG"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 9,
+    "horse": "LOOK AT ME"
+   },
+   {
+    "pos": 4,
+    "rk": 9,
+    "num": 14,
+    "horse": "LUCCIANO D'OMAHA"
+   },
+   {
+    "pos": 5,
+    "rk": 13,
+    "num": 2,
+    "horse": "LUAP D'ORTIGE"
+   }
+  ],
+  "m": "2026-02"
+ },
+ {
+  "date": "2026-02-14",
+  "id": "2026-02-14_R5_C5",
+  "disc": "PLAT",
+  "hip": "LYON LA SOIE",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 12,
+    "horse": "EXHIT"
+   },
+   {
+    "pos": 2,
+    "rk": 9,
+    "num": 10,
+    "horse": "JAGDA"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 2,
+    "horse": "SOGYNT"
+   },
+   {
+    "pos": 4,
+    "rk": 4,
+    "num": 11,
+    "horse": "THARPE"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 3,
+    "horse": "NOUSDEUX"
+   }
+  ],
+  "m": "2026-02"
+ },
+ {
+  "date": "2026-02-16",
+  "id": "2026-02-16_R4_C8",
+  "disc": "ATTELE",
+  "hip": "SAINT GALMIER",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 4,
+    "horse": "JENJOY MAYBE"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 7,
+    "horse": "INDY VET"
+   },
+   {
+    "pos": 3,
+    "rk": 9,
+    "num": 1,
+    "horse": "INCAS D'EURVAD"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 2,
+    "horse": "JACKASS LATIN"
+   },
+   {
+    "pos": 5,
+    "rk": 10,
+    "num": 13,
+    "horse": "IAKA"
+   }
+  ],
+  "m": "2026-02"
+ },
+ {
+  "date": "2026-02-18",
+  "id": "2026-02-18_R3_C7",
+  "disc": "ATTELE",
+  "hip": "LAVAL",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 6,
+    "horse": "KRONO DU TRIO"
+   },
+   {
+    "pos": 2,
+    "rk": 9,
+    "num": 10,
+    "horse": "IBAN DE KARA"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 8,
+    "horse": "KHEOPS DE FREDLAU"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 9,
+    "horse": "I LOVE DU CHERISAY"
+   },
+   {
+    "pos": 5,
+    "rk": 2,
+    "num": 12,
+    "horse": "JOW PIQUENARD"
+   }
+  ],
+  "m": "2026-02"
+ },
+ {
+  "date": "2026-02-26",
+  "id": "2026-02-26_R4_C5",
+  "disc": "ATTELE",
+  "hip": "LAVAL",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 9,
+    "num": 11,
+    "horse": "INSTINCT SAINT BAR"
+   },
+   {
+    "pos": 2,
+    "rk": 7,
+    "num": 14,
+    "horse": "ISERIA GRIFF"
+   },
+   {
+    "pos": 3,
+    "rk": 13,
+    "num": 12,
+    "horse": "HARIBO DU CARNOIS"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 3,
+    "horse": "JAGUAR DU FAN"
+   },
+   {
+    "pos": 5,
+    "rk": 2,
+    "num": 7,
+    "horse": "ILMAT DES KECHES"
+   }
+  ],
+  "m": "2026-02"
+ },
+ {
+  "date": "2026-03-23",
+  "id": "2026-03-23_R4_C6",
+  "disc": "MONTE",
+  "hip": "LE CROISE LAROCHE",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 5,
+    "num": 12,
+    "horse": "LOOPING DE CAPONET"
+   },
+   {
+    "pos": 2,
+    "rk": 6,
+    "num": 2,
+    "horse": "LE BOCAGE"
+   },
+   {
+    "pos": 3,
+    "rk": 10,
+    "num": 6,
+    "horse": "LUIDGI DES EPINES"
+   },
+   {
+    "pos": 4,
+    "rk": 11,
+    "num": 5,
+    "horse": "LUXEMBOURGEOISE"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 13,
+    "horse": "LORD"
+   }
+  ],
+  "m": "2026-03"
+ },
+ {
+  "date": "2026-03-28",
+  "id": "2026-03-28_R6_C8",
+  "disc": "ATTELE",
+  "hip": "LAVAL",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 6,
+    "num": 14,
+    "horse": "HAPUNA BEACH"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 3,
+    "horse": "JUSTINE DU MESNIL"
+   },
+   {
+    "pos": 3,
+    "rk": 3,
+    "num": 7,
+    "horse": "JUMP WITH ME"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 2,
+    "horse": "JOUR DE JUIN"
+   },
+   {
+    "pos": 5,
+    "rk": 8,
+    "num": 4,
+    "horse": "JAIN DE JANVILLE"
+   }
+  ],
+  "m": "2026-03"
+ },
+ {
+  "date": "2026-03-31",
+  "id": "2026-03-31_R4_C8",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 4,
+    "horse": "KALI DES LANDIERS"
+   },
+   {
+    "pos": 2,
+    "rk": 6,
+    "num": 5,
+    "horse": "JULIUS ECUS"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 8,
+    "horse": "JOY CAPTAIN"
+   },
+   {
+    "pos": 4,
+    "rk": 13,
+    "num": 9,
+    "horse": "IMZARA VALIERE"
+   },
+   {
+    "pos": 5,
+    "rk": 3,
+    "num": 3,
+    "horse": "KADECOLE DE GUERRE"
+   }
+  ],
+  "m": "2026-03"
+ },
+ {
+  "date": "2026-04-07",
+  "id": "2026-04-07_R4_C7",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 8,
+    "horse": "NIKKI BEACH JISCE"
+   },
+   {
+    "pos": 2,
+    "rk": 7,
+    "num": 3,
+    "horse": "NIKITA DES ARRIS"
+   },
+   {
+    "pos": 3,
+    "rk": 11,
+    "num": 11,
+    "horse": "NEUILLY"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 2,
+    "horse": "NONOLETA"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 5,
+    "horse": "NOBLESSE"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-13",
+  "id": "2026-04-13_R4_C8",
+  "disc": "ATTELE",
+  "hip": "ARGENTAN",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 16,
+    "horse": "KRONOS D'ERPION"
+   },
+   {
+    "pos": 2,
+    "rk": 7,
+    "num": 10,
+    "horse": "JUNON DES ROSES"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 8,
+    "horse": "JOKER DU MATCH"
+   },
+   {
+    "pos": 4,
+    "rk": 5,
+    "num": 1,
+    "horse": "JOY DES CHAMPS"
+   },
+   {
+    "pos": 5,
+    "rk": 1,
+    "num": 4,
+    "horse": "I PLAY POKER"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-14",
+  "id": "2026-04-14_R4_C9",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 13,
+    "horse": "JARDIN DU ROI"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 5,
+    "horse": "KINGALA"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 6,
+    "horse": "JOSTA"
+   },
+   {
+    "pos": 4,
+    "rk": 4,
+    "num": 7,
+    "horse": "IN ROCK DE PLAY"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 2,
+    "horse": "KATNISS MORMOULIN"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-15",
+  "id": "2026-04-15_R3_C8",
+  "disc": "PLAT",
+  "hip": "EVREUX",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 7,
+    "horse": "SUDDEN DEATH"
+   },
+   {
+    "pos": 2,
+    "rk": 6,
+    "num": 13,
+    "horse": "DIORA STREET"
+   },
+   {
+    "pos": 3,
+    "rk": 10,
+    "num": 6,
+    "horse": "PALMEIRA EMERY"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 3,
+    "horse": "PONTD'YEU"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 10,
+    "horse": "SCHERWOOD"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-16",
+  "id": "2026-04-16_R4_C8",
+  "disc": "ATTELE",
+  "hip": "ENGHIEN",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 7,
+    "horse": "HEGA DES LANDIERS"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 13,
+    "horse": "KATINA DE TOUSSAC"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 1,
+    "horse": "IBAN DE KARA"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 9,
+    "horse": "JACKSON HILL"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 10,
+    "horse": "JOYCE PILE"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-20",
+  "id": "2026-04-20_R4_C5",
+  "disc": "PLAT",
+  "hip": "LE LION D'ANGERS",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 3,
+    "horse": "KUPKA"
+   },
+   {
+    "pos": 2,
+    "rk": 4,
+    "num": 7,
+    "horse": "TORREADOR"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 12,
+    "horse": "RAIATEA"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 4,
+    "horse": "GRAND TERROIR"
+   },
+   {
+    "pos": 5,
+    "rk": 14,
+    "num": 6,
+    "horse": "MENLINK DU CHABOIS"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-21",
+  "id": "2026-04-21_R4_C8",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 7,
+    "horse": "KINJAL DE BELLANDE"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 16,
+    "horse": "KATIA DHELPA"
+   },
+   {
+    "pos": 3,
+    "rk": 3,
+    "num": 2,
+    "horse": "KINGALA"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 1,
+    "horse": "JOSTA"
+   },
+   {
+    "pos": 5,
+    "rk": 8,
+    "num": 11,
+    "horse": "ILLICO DE VAU"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-23",
+  "id": "2026-04-23_R4_C8",
+  "disc": "ATTELE",
+  "hip": "LAVAL",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 15,
+    "horse": "NORTH LIFE"
+   },
+   {
+    "pos": 2,
+    "rk": 6,
+    "num": 16,
+    "horse": "NOLLY WOOD"
+   },
+   {
+    "pos": 3,
+    "rk": 9,
+    "num": 13,
+    "horse": "NOUVELLE CHANCE"
+   },
+   {
+    "pos": 4,
+    "rk": 5,
+    "num": 5,
+    "horse": "NOBLESS DU NOYER"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 8,
+    "horse": "NEW CREATION"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-27",
+  "id": "2026-04-27_R4_C6",
+  "disc": "ATTELE",
+  "hip": "ENGHIEN",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 4,
+    "horse": "LEADER DE JOUDES"
+   },
+   {
+    "pos": 2,
+    "rk": 13,
+    "num": 15,
+    "horse": "JEAN NO DU MARGAS"
+   },
+   {
+    "pos": 3,
+    "rk": 7,
+    "num": 10,
+    "horse": "JOYAU BLUE"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 2,
+    "horse": "JARDIN D'ERABLE"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 12,
+    "horse": "JICKY GIRL"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-28",
+  "id": "2026-04-28_R4_C8",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 5,
+    "num": 3,
+    "horse": "GALTON SAINT BAR"
+   },
+   {
+    "pos": 2,
+    "rk": 6,
+    "num": 10,
+    "horse": "INDIEN EMJI"
+   },
+   {
+    "pos": 3,
+    "rk": 11,
+    "num": 5,
+    "horse": "HIBISCUS NORMAND"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 1,
+    "horse": "HISTOIRE DE LIERRE"
+   },
+   {
+    "pos": 5,
+    "rk": 8,
+    "num": 13,
+    "horse": "ISA DU PRESSOIR"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-04-29",
+  "id": "2026-04-29_R4_C6",
+  "disc": "ATTELE",
+  "hip": "BEAUMONT DE LOMAGNE",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 3,
+    "horse": "MISTER JENILOU"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 12,
+    "horse": "MILLENIUM GALAXY"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 8,
+    "horse": "MAC VENESI"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 2,
+    "horse": "MADISON DANICA"
+   },
+   {
+    "pos": 5,
+    "rk": 9,
+    "num": 15,
+    "horse": "MEXICO"
+   }
+  ],
+  "m": "2026-04"
+ },
+ {
+  "date": "2026-05-04",
+  "id": "2026-05-04_R4_C8",
+  "disc": "PLAT",
+  "hip": "CHANTILLY",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 11,
+    "num": 16,
+    "horse": "LA MOMY"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 1,
+    "horse": "CLOUD MAN"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 7,
+    "horse": "YOUM IN LOVE"
+   },
+   {
+    "pos": 4,
+    "rk": 16,
+    "num": 11,
+    "horse": "CHONBURI"
+   },
+   {
+    "pos": 5,
+    "rk": 8,
+    "num": 8,
+    "horse": "ZAADOR"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-06",
+  "id": "2026-05-06_R5_C5",
+  "disc": "ATTELE",
+  "hip": "GRAIGNES",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 5,
+    "horse": "KID DE CAPONET"
+   },
+   {
+    "pos": 2,
+    "rk": 6,
+    "num": 2,
+    "horse": "KELLY CHARLY ERA"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 1,
+    "horse": "KIRENE FLASH"
+   },
+   {
+    "pos": 4,
+    "rk": 5,
+    "num": 12,
+    "horse": "KSAR D'ESSARTS"
+   },
+   {
+    "pos": 5,
+    "rk": 13,
+    "num": 9,
+    "horse": "KALEDA DE LA COUR"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-08",
+  "id": "2026-05-08_R4_C7",
+  "disc": "PLAT",
+  "hip": "STRASBOURG",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 5,
+    "num": 1,
+    "horse": "VAZIRPOUR"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 7,
+    "horse": "IT'S EAGLE"
+   },
+   {
+    "pos": 3,
+    "rk": 8,
+    "num": 8,
+    "horse": "NOUSDEUX"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 4,
+    "horse": "MYKISS"
+   },
+   {
+    "pos": 5,
+    "rk": 10,
+    "num": 6,
+    "horse": "GWO KA"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-10",
+  "id": "2026-05-10_R4_C8",
+  "disc": "ATTELE",
+  "hip": "VICHY",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 7,
+    "num": 2,
+    "horse": "JASON GEDE"
+   },
+   {
+    "pos": 2,
+    "rk": 11,
+    "num": 9,
+    "horse": "INVICTUS ELLIS"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 8,
+    "horse": "JOYEUX DES SOURCES"
+   },
+   {
+    "pos": 4,
+    "rk": 6,
+    "num": 14,
+    "horse": "ISCO DE JOUDES"
+   },
+   {
+    "pos": 5,
+    "rk": 13,
+    "num": 3,
+    "horse": "JOS DU GOUTAI"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-13",
+  "id": "2026-05-13_R4_C8",
+  "disc": "PLAT",
+  "hip": "VICHY",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 10,
+    "horse": "POET'S BLACK"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 5,
+    "horse": "PARVA SCURRA"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 2,
+    "horse": "LUCKY YOU"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 4,
+    "horse": "JARDIN BLEU"
+   },
+   {
+    "pos": 5,
+    "rk": 9,
+    "num": 3,
+    "horse": "KALEOBAYANE"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-16",
+  "id": "2026-05-16_R5_C7",
+  "disc": "ATTELE",
+  "hip": "VICHY",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 5,
+    "num": 3,
+    "horse": "NOVERRIO"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 11,
+    "horse": "NATHALINA D'ARGENT"
+   },
+   {
+    "pos": 3,
+    "rk": 8,
+    "num": 4,
+    "horse": "NORMA DU BOCAGE"
+   },
+   {
+    "pos": 4,
+    "rk": 4,
+    "num": 8,
+    "horse": "NUMBER TWO"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 7,
+    "horse": "NIFTY DREAM"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-17",
+  "id": "2026-05-17_R6_C7",
+  "disc": "PLAT",
+  "hip": "LE CROISE LAROCHE",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 8,
+    "horse": "READY KING"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 5,
+    "horse": "BEJAR"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 2,
+    "horse": "BURATTINA"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 1,
+    "horse": "MONTE LINAS"
+   },
+   {
+    "pos": 5,
+    "rk": 3,
+    "num": 9,
+    "horse": "PRAIRIE GLORY"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-19",
+  "id": "2026-05-19_R4_C7",
+  "disc": "MONTE",
+  "hip": "VINCENNES",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 7,
+    "num": 8,
+    "horse": "NAMBALADA"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 11,
+    "horse": "NEW ORLEANS WIND"
+   },
+   {
+    "pos": 3,
+    "rk": 12,
+    "num": 6,
+    "horse": "NIKALY D'EOLE"
+   },
+   {
+    "pos": 4,
+    "rk": 10,
+    "num": 4,
+    "horse": "NASTREE DU VINOIS"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 12,
+    "horse": "NIGHT DE LA COUR"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-21",
+  "id": "2026-05-21_R4_C6",
+  "disc": "ATTELE",
+  "hip": "LE MANS",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 8,
+    "horse": "MAMACITA"
+   },
+   {
+    "pos": 2,
+    "rk": 4,
+    "num": 3,
+    "horse": "MIGRAINE DE CONNEE"
+   },
+   {
+    "pos": 3,
+    "rk": 10,
+    "num": 11,
+    "horse": "MAGIC MAGGIE"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 12,
+    "horse": "MA JOLIE PRINCESS"
+   },
+   {
+    "pos": 5,
+    "rk": 9,
+    "num": 2,
+    "horse": "MY PRINCESS HAUFOR"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-23",
+  "id": "2026-05-23_R5_C6",
+  "disc": "ATTELE",
+  "hip": "BEAUMONT DE LOMAGNE",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 6,
+    "horse": "LAZZARO ELLIS"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 7,
+    "horse": "LAMA DE CORDAY"
+   },
+   {
+    "pos": 3,
+    "rk": 8,
+    "num": 1,
+    "horse": "LOULOU'S TEAM"
+   },
+   {
+    "pos": 4,
+    "rk": 10,
+    "num": 15,
+    "horse": "LABEL TURGOT"
+   },
+   {
+    "pos": 5,
+    "rk": 4,
+    "num": 9,
+    "horse": "LEWIS DE BLARY"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-05-24",
+  "id": "2026-05-24_R6_C8",
+  "disc": "HAIE",
+  "hip": "CHATEAUBRIANT",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 9,
+    "num": 9,
+    "horse": "SOBEST"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 7,
+    "horse": "ASTON D'ENOCQ"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 5,
+    "horse": "PRINCESSE DU LYS"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 1,
+    "horse": "EMIR CHOP"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 3,
+    "horse": "COKO NUMBER ONE"
+   }
+  ],
+  "m": "2026-05"
+ },
+ {
+  "date": "2026-06-01",
+  "id": "2026-06-01_R4_C8",
+  "disc": "MONTE",
+  "hip": "NANTES",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 9,
+    "horse": "LA GARBO"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 3,
+    "horse": "LOOPING DU PERRE"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 6,
+    "horse": "LOCKED UP"
+   },
+   {
+    "pos": 4,
+    "rk": 5,
+    "num": 4,
+    "horse": "LAZIO"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 2,
+    "horse": "LUIGI KALOUMA"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-05",
+  "id": "2026-06-05_R5_C5",
+  "disc": "PLAT",
+  "hip": "LE LION D'ANGERS",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 12,
+    "horse": "MEARAS STYLE"
+   },
+   {
+    "pos": 2,
+    "rk": 8,
+    "num": 7,
+    "horse": "KAHOUNA"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 1,
+    "horse": "CATHERINE'S GIFT"
+   },
+   {
+    "pos": 4,
+    "rk": 10,
+    "num": 13,
+    "horse": "ANNA MANDARA"
+   },
+   {
+    "pos": 5,
+    "rk": 4,
+    "num": 3,
+    "horse": "RHIPPER"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-09",
+  "id": "2026-06-09_R4_C8",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 2,
+    "horse": "INKERMAN DE PLAY"
+   },
+   {
+    "pos": 2,
+    "rk": 7,
+    "num": 15,
+    "horse": "JOKER D'AMARO"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 7,
+    "horse": "KAISER DE MORTREE"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 1,
+    "horse": "HIVAROSA DU BOCAGE"
+   },
+   {
+    "pos": 5,
+    "rk": 3,
+    "num": 8,
+    "horse": "KLARCK DE VANDEL"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-11",
+  "id": "2026-06-11_R4_C5",
+  "disc": "ATTELE",
+  "hip": "LAVAL",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 8,
+    "horse": "KANT"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 11,
+    "horse": "KING DE GINAI"
+   },
+   {
+    "pos": 3,
+    "rk": 3,
+    "num": 4,
+    "horse": "KOZMIC BLUES"
+   },
+   {
+    "pos": 4,
+    "rk": 6,
+    "num": 5,
+    "horse": "KOCKTAIL WOOD"
+   },
+   {
+    "pos": 5,
+    "rk": 10,
+    "num": 6,
+    "horse": "KARMA TEJY"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-13",
+  "id": "2026-06-13_R6_C6",
+  "disc": "ATTELE",
+  "hip": "VICHY",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 4,
+    "horse": "MIRZA DU BOUILLON"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 11,
+    "horse": "MYA D'OLIVERIE"
+   },
+   {
+    "pos": 3,
+    "rk": 8,
+    "num": 8,
+    "horse": "MIMI WILLIAMS"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 2,
+    "horse": "MANDOLINE"
+   },
+   {
+    "pos": 5,
+    "rk": 9,
+    "num": 9,
+    "horse": "MUSE DE VANDEL"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-15",
+  "id": "2026-06-15_R4_C8",
+  "disc": "ATTELE",
+  "hip": "VICHY",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 7,
+    "num": 14,
+    "horse": "NYAKA"
+   },
+   {
+    "pos": 2,
+    "rk": 8,
+    "num": 5,
+    "horse": "NAIROBI DE CHENU"
+   },
+   {
+    "pos": 3,
+    "rk": 10,
+    "num": 6,
+    "horse": "NOUMEA DEUGE"
+   },
+   {
+    "pos": 4,
+    "rk": 5,
+    "num": 13,
+    "horse": "NAGOYA DE LOU"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 7,
+    "horse": "NIKITA KYDE"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-16",
+  "id": "2026-06-16_R5_C8",
+  "disc": "ATTELE",
+  "hip": "VINCENNES",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 9,
+    "horse": "KATE DU RIL"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 7,
+    "horse": "JIM DE SUCE"
+   },
+   {
+    "pos": 3,
+    "rk": 9,
+    "num": 2,
+    "horse": "JULIE DU NORD"
+   },
+   {
+    "pos": 4,
+    "rk": 11,
+    "num": 12,
+    "horse": "FRONSAC DE BOMO"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 6,
+    "horse": "JULIANA SPIRIT"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-22",
+  "id": "2026-06-22_R4_C3",
+  "disc": "ATTELE",
+  "hip": "LE CROISE LAROCHE",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 5,
+    "horse": "L'ELITE DU CHOQUEL"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 6,
+    "horse": "LUTECE RINGEAT"
+   },
+   {
+    "pos": 3,
+    "rk": 6,
+    "num": 10,
+    "horse": "LADY D'ELFE"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 11,
+    "horse": "LINAYA DU CHATELET"
+   },
+   {
+    "pos": 5,
+    "rk": 11,
+    "num": 14,
+    "horse": "LUPINE DIESCHOOT"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-28",
+  "id": "2026-06-28_R5_C2",
+  "disc": "ATTELE",
+  "hip": "SAINT GALMIER",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 7,
+    "horse": "IDEAL DE NGANDA"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 11,
+    "horse": "JACKSON D'ARC"
+   },
+   {
+    "pos": 3,
+    "rk": 3,
+    "num": 12,
+    "horse": "JANDICE STAR"
+   },
+   {
+    "pos": 4,
+    "rk": 6,
+    "num": 8,
+    "horse": "JUSTAUCORPS"
+   },
+   {
+    "pos": 5,
+    "rk": 4,
+    "num": 14,
+    "horse": "ISIS DE POULINE"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-06-30",
+  "id": "2026-06-30_R1_C8",
+  "disc": "MONTE",
+  "hip": "VICHY",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 12,
+    "horse": "NARCOTIC THRUST"
+   },
+   {
+    "pos": 2,
+    "rk": 7,
+    "num": 10,
+    "horse": "NALTO DE FOSSAVIE"
+   },
+   {
+    "pos": 3,
+    "rk": 15,
+    "num": 1,
+    "horse": "NASH AND STEEL"
+   },
+   {
+    "pos": 4,
+    "rk": 4,
+    "num": 13,
+    "horse": "NAPOLI SAINT JEAN"
+   },
+   {
+    "pos": 5,
+    "rk": 11,
+    "num": 11,
+    "horse": "NINA DE BENAC"
+   }
+  ],
+  "m": "2026-06"
+ },
+ {
+  "date": "2026-07-01",
+  "id": "2026-07-01_R5_C8",
+  "disc": "MONTE",
+  "hip": "VICHY",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 2,
+    "num": 3,
+    "horse": "IWAN D'AVEL"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 9,
+    "horse": "JABLO DU CHENE"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 4,
+    "horse": "BATTUTA FACE"
+   },
+   {
+    "pos": 4,
+    "rk": 9,
+    "num": 11,
+    "horse": "INSTANT GRAVE"
+   },
+   {
+    "pos": 5,
+    "rk": 3,
+    "num": 15,
+    "horse": "IMELDA"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-02",
+  "id": "2026-07-02_R5_C8",
+  "disc": "ATTELE",
+  "hip": "PORNICHET",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 8,
+    "horse": "NICIE CASH"
+   },
+   {
+    "pos": 2,
+    "rk": 9,
+    "num": 13,
+    "horse": "NAYAJACQ"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 9,
+    "horse": "NATIVE DES LOYAUX"
+   },
+   {
+    "pos": 4,
+    "rk": 8,
+    "num": 3,
+    "horse": "NORALIE TENSAU"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 4,
+    "horse": "NOUVELLE JABA"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-03",
+  "id": "2026-07-03_R1_C7",
+  "disc": "MONTE",
+  "hip": "CABOURG",
+  "nRated": 18,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 9,
+    "horse": "MONDAINE"
+   },
+   {
+    "pos": 2,
+    "rk": 3,
+    "num": 12,
+    "horse": "MANA TEJY"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 5,
+    "horse": "MY WAY PIYA"
+   },
+   {
+    "pos": 4,
+    "rk": 6,
+    "num": 13,
+    "horse": "MA BELLE ASSCHADEL"
+   },
+   {
+    "pos": 5,
+    "rk": 8,
+    "num": 8,
+    "horse": "MARIGNANA JEEP"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-06",
+  "id": "2026-07-06_R5_C5",
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 4,
+    "num": 2,
+    "horse": "LADY DU CHENE"
+   },
+   {
+    "pos": 2,
+    "rk": 8,
+    "num": 10,
+    "horse": "LUTECIA ELLIS"
+   },
+   {
+    "pos": 3,
+    "rk": 10,
+    "num": 3,
+    "horse": "KERIA FLEURY"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 15,
+    "horse": "JOCONDE DE RHEVE"
+   },
+   {
+    "pos": 5,
+    "rk": 2,
+    "num": 16,
+    "horse": "KANELLE STAR"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-07",
+  "id": "2026-07-07_R5_C4",
+  "disc": "MONTE",
+  "hip": "CABOURG",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 7,
+    "horse": "KANARDO FOR CLARA"
+   },
+   {
+    "pos": 2,
+    "rk": 9,
+    "num": 2,
+    "horse": "KENAVO RUSH"
+   },
+   {
+    "pos": 3,
+    "rk": 8,
+    "num": 6,
+    "horse": "KAID DES CHAMPS"
+   },
+   {
+    "pos": 4,
+    "rk": 10,
+    "num": 5,
+    "horse": "KALLISTO DE LASTEL"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 9,
+    "horse": "KALMIA DES NOES"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-13",
+  "id": "2026-07-13_R5_C6",
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 6,
+    "num": 9,
+    "horse": "JAKARTA MADRIK"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 4,
+    "horse": "KATE DU RIL"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 5,
+    "horse": "KEOPS DU CHATAULT"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 1,
+    "horse": "KALIE TEJY"
+   },
+   {
+    "pos": 5,
+    "rk": 9,
+    "num": 13,
+    "horse": "JAZZ LINOIS"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-14",
+  "id": "2026-07-14_R5_C8",
+  "disc": "ATTELE",
+  "hip": "CABOURG",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 2,
+    "horse": "JOKER DARLING"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 3,
+    "horse": "KOMINA"
+   },
+   {
+    "pos": 3,
+    "rk": 8,
+    "num": 4,
+    "horse": "KILLER ANGOT"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 6,
+    "horse": "KALISTO DU BOURDON"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 14,
+    "horse": "KIARA DU SAPTEL"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-16",
+  "id": "2026-07-16_R5_C8",
+  "disc": "ATTELE",
+  "hip": "PORNICHET",
+  "nRated": 13,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 12,
+    "horse": "JERRY DE BRAYE"
+   },
+   {
+    "pos": 2,
+    "rk": 9,
+    "num": 11,
+    "horse": "HAUGAIN"
+   },
+   {
+    "pos": 3,
+    "rk": 5,
+    "num": 8,
+    "horse": "JOKER DU DOLLAR"
+   },
+   {
+    "pos": 4,
+    "rk": 3,
+    "num": 9,
+    "horse": "JAGUAR DU DOLLAR"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 4,
+    "horse": "JORGE ARTHUR"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-18",
+  "id": "2026-07-18_R6_C5",
+  "disc": "ATTELE",
+  "hip": "PORNICHET",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 9,
+    "num": 12,
+    "horse": "KARELLE DU DORAT"
+   },
+   {
+    "pos": 2,
+    "rk": 10,
+    "num": 2,
+    "horse": "KYOHA"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 13,
+    "horse": "KRONOS ZEN"
+   },
+   {
+    "pos": 4,
+    "rk": 1,
+    "num": 4,
+    "horse": "KABRELLA"
+   },
+   {
+    "pos": 5,
+    "rk": 14,
+    "num": 1,
+    "horse": "KHAO LAK"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-19",
+  "id": "2026-07-19_R5_C7",
+  "disc": "ATTELE",
+  "hip": "HYERES",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 3,
+    "num": 1,
+    "horse": "KURLING ATOUT"
+   },
+   {
+    "pos": 2,
+    "rk": 1,
+    "num": 3,
+    "horse": "KAYAK"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 8,
+    "horse": "KLEPPER DU LOIR"
+   },
+   {
+    "pos": 4,
+    "rk": 2,
+    "num": 15,
+    "horse": "IMPRESARIO"
+   },
+   {
+    "pos": 5,
+    "rk": 7,
+    "num": 12,
+    "horse": "JORDANA"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-21",
+  "id": "2026-07-21_R5_C4",
+  "disc": "ATTELE",
+  "hip": "CABOURG",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 10,
+    "horse": "NOBLIA"
+   },
+   {
+    "pos": 2,
+    "rk": 7,
+    "num": 9,
+    "horse": "NOBLE INTENTION"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 4,
+    "horse": "NAIADE JAYF"
+   },
+   {
+    "pos": 4,
+    "rk": 6,
+    "num": 2,
+    "horse": "NEBULA DANICA"
+   },
+   {
+    "pos": 5,
+    "rk": 5,
+    "num": 5,
+    "horse": "NORMA DU TRIEUX"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-22",
+  "id": "2026-07-22_R5_C5",
+  "disc": "PLAT",
+  "hip": "VICHY",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 9,
+    "num": 3,
+    "horse": "HADITOUNI"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 12,
+    "horse": "PARDO BAY"
+   },
+   {
+    "pos": 3,
+    "rk": 1,
+    "num": 4,
+    "horse": "NOVA LUXOR"
+   },
+   {
+    "pos": 4,
+    "rk": 5,
+    "num": 15,
+    "horse": "ABERDEEN"
+   },
+   {
+    "pos": 5,
+    "rk": 8,
+    "num": 2,
+    "horse": "NIEDERBRONN"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-23",
+  "id": "2026-07-23_R1_C4",
+  "disc": "PLAT",
+  "hip": "VICHY",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 1,
+    "horse": "JAYCLE DE GREE"
+   },
+   {
+    "pos": 2,
+    "rk": 6,
+    "num": 8,
+    "horse": "KINGORI"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 12,
+    "horse": "LOFSONGUR ISLANDE"
+   },
+   {
+    "pos": 4,
+    "rk": 13,
+    "num": 13,
+    "horse": "NUMERUS BORGET"
+   },
+   {
+    "pos": 5,
+    "rk": 11,
+    "num": 15,
+    "horse": "PHIL THE FLUTER"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-25",
+  "id": "2026-07-25_R6_C7",
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 6,
+    "horse": "KAP PAASLOO"
+   },
+   {
+    "pos": 2,
+    "rk": 2,
+    "num": 2,
+    "horse": "JOLIE COSTARDIERE"
+   },
+   {
+    "pos": 3,
+    "rk": 4,
+    "num": 3,
+    "horse": "JOLLY LOOK"
+   },
+   {
+    "pos": 4,
+    "rk": 13,
+    "num": 14,
+    "horse": "KLASSIC DE SYVA"
+   },
+   {
+    "pos": 5,
+    "rk": 6,
+    "num": 10,
+    "horse": "KYOSHIRO"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-27",
+  "id": "2026-07-27_R5_C7",
+  "disc": "ATTELE",
+  "hip": "CAGNES/MER",
+  "nRated": 15,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 3,
+    "horse": "LOTTERIO"
+   },
+   {
+    "pos": 2,
+    "rk": 12,
+    "num": 13,
+    "horse": "LUTECE SMART"
+   },
+   {
+    "pos": 3,
+    "rk": 2,
+    "num": 7,
+    "horse": "LUCKY D'AVIGNERE"
+   },
+   {
+    "pos": 4,
+    "rk": 7,
+    "num": 10,
+    "horse": "LEADER DU MOUCHEL"
+   },
+   {
+    "pos": 5,
+    "rk": 9,
+    "num": 6,
+    "horse": "LE DON JUAN"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-28",
+  "id": "2026-07-28_R6_C6",
+  "disc": "ATTELE",
+  "hip": "CABOURG",
+  "nRated": 16,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 1,
+    "num": 7,
+    "horse": "LOCHNESS CASTELETS"
+   },
+   {
+    "pos": 2,
+    "rk": 8,
+    "num": 13,
+    "horse": "LOUP SOLITAIRE"
+   },
+   {
+    "pos": 3,
+    "rk": 6,
+    "num": 8,
+    "horse": "LAMPARO"
+   },
+   {
+    "pos": 4,
+    "rk": 14,
+    "num": 3,
+    "horse": "LUPIN DU HOULEY"
+   },
+   {
+    "pos": 5,
+    "rk": 9,
+    "num": 15,
+    "horse": "LUXOR DE VILLABON"
+   }
+  ],
+  "m": "2026-07"
+ },
+ {
+  "date": "2026-07-30",
+  "id": "2026-07-30_R6_C8",
+  "disc": "ATTELE",
+  "hip": "PORNICHET",
+  "nRated": 14,
+  "top": [
+   {
+    "pos": 1,
+    "rk": 6,
+    "num": 11,
+    "horse": "HELLO KERODA"
+   },
+   {
+    "pos": 2,
+    "rk": 5,
+    "num": 12,
+    "horse": "HAHICHA GIRL"
+   },
+   {
+    "pos": 3,
+    "rk": 8,
+    "num": 13,
+    "horse": "JET GIRL"
+   },
+   {
+    "pos": 4,
+    "rk": 12,
+    "num": 8,
+    "horse": "HYAK DES FONTAINES"
+   },
+   {
+    "pos": 5,
+    "rk": 3,
+    "num": 3,
+    "horse": "JEDELWEIS D'URFIST"
+   }
+  ],
+  "m": "2026-07"
+ }
+]

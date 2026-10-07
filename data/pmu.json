@@ -1,0 +1,704 @@
+{
+ "2026-10-01": {
+  "date": "2026-10-01",
+  "quintes": [
+   {
+    "num": 1,
+    "reunion": 1,
+    "hippodrome": "AUT",
+    "libelle": "PRIX CEREALISTE",
+    "distance": 3600,
+    "discipline": "HAIE",
+    "partants": [
+     {
+      "num": 1,
+      "nom": "WEBCAM"
+     },
+     {
+      "num": 2,
+      "nom": "SPECIALS ONE"
+     },
+     {
+      "num": 3,
+      "nom": "GREY FIGHTER"
+     },
+     {
+      "num": 4,
+      "nom": "MR DIAFOIRUS"
+     },
+     {
+      "num": 5,
+      "nom": "KUCHARSKY"
+     },
+     {
+      "num": 6,
+      "nom": "LATINO LA NOVERIE"
+     },
+     {
+      "num": 7,
+      "nom": "EXCITING HUNT"
+     },
+     {
+      "num": 8,
+      "nom": "TITI DE PARIS"
+     },
+     {
+      "num": 9,
+      "nom": "LACRYMA CHRISTI"
+     },
+     {
+      "num": 10,
+      "nom": "KADOVER"
+     },
+     {
+      "num": 11,
+      "nom": "LUCKY NONANTAIS"
+     },
+     {
+      "num": 12,
+      "nom": "LE COLOMBAR"
+     },
+     {
+      "num": 13,
+      "nom": "LILETTE"
+     },
+     {
+      "num": 14,
+      "nom": "LUTECE ALLEN"
+     },
+     {
+      "num": 15,
+      "nom": "LIPRIKA D'ANJOU"
+     }
+    ],
+    "heure": "2026-10-01T11:55:00.000Z",
+    "cotes": [
+     {
+      "num": 3,
+      "rang": 1,
+      "brut": "4/1",
+      "cote": 5
+     },
+     {
+      "num": 1,
+      "rang": 2,
+      "brut": "5/1",
+      "cote": 6
+     },
+     {
+      "num": 4,
+      "rang": 3,
+      "brut": "8/1",
+      "cote": 9
+     },
+     {
+      "num": 12,
+      "rang": 4,
+      "brut": "9/1",
+      "cote": 10
+     },
+     {
+      "num": 6,
+      "rang": 5,
+      "brut": "22/1",
+      "cote": 23
+     },
+     {
+      "num": 14,
+      "rang": 6,
+      "brut": "13/1",
+      "cote": 14
+     },
+     {
+      "num": 9,
+      "rang": 7,
+      "brut": "15/1",
+      "cote": 16
+     },
+     {
+      "num": 7,
+      "rang": 8,
+      "brut": "18/1",
+      "cote": 19
+     },
+     {
+      "num": 15,
+      "rang": 9,
+      "brut": "20/1",
+      "cote": 21
+     },
+     {
+      "num": 13,
+      "rang": 10,
+      "brut": "12/1",
+      "cote": 13
+     },
+     {
+      "num": 5,
+      "rang": 11,
+      "brut": "25/1",
+      "cote": 26
+     },
+     {
+      "num": 10,
+      "rang": 12,
+      "brut": "33/1",
+      "cote": 34
+     },
+     {
+      "num": 8,
+      "rang": 13,
+      "brut": "35/1",
+      "cote": 36
+     },
+     {
+      "num": 2,
+      "rang": 14,
+      "brut": "40/1",
+      "cote": 41
+     },
+     {
+      "num": 11,
+      "rang": 15,
+      "brut": "43/1",
+      "cote": 44
+     }
+    ]
+   }
+  ]
+ },
+ "2026-10-02": {
+  "date": "2026-10-02",
+  "quintes": [
+   {
+    "num": 4,
+    "reunion": 1,
+    "hippodrome": "VIN",
+    "libelle": "PRIX LUDOVICA",
+    "distance": 2700,
+    "discipline": "ATTELE",
+    "partants": [
+     {
+      "num": 1,
+      "nom": "JADE DE NAVARY"
+     },
+     {
+      "num": 2,
+      "nom": "JUNIOR STEED"
+     },
+     {
+      "num": 3,
+      "nom": "JYTRACE DE HOUELLE"
+     },
+     {
+      "num": 4,
+      "nom": "JAIFA DE L'ITON"
+     },
+     {
+      "num": 5,
+      "nom": "JOHORE"
+     },
+     {
+      "num": 6,
+      "nom": "JAZZ D'OURVILLE"
+     },
+     {
+      "num": 7,
+      "nom": "JOB DES LOUANGES"
+     },
+     {
+      "num": 8,
+      "nom": "JACKSON D'ARC"
+     },
+     {
+      "num": 9,
+      "nom": "JOG JELOCA"
+     },
+     {
+      "num": 10,
+      "nom": "JUDOPOCK"
+     },
+     {
+      "num": 11,
+      "nom": "JEWEL DE BANVILLE"
+     },
+     {
+      "num": 12,
+      "nom": "JOEY DU NOYER"
+     },
+     {
+      "num": 13,
+      "nom": "JOHNNY MIX"
+     },
+     {
+      "num": 14,
+      "nom": "JERICHO"
+     }
+    ],
+    "heure": "2026-10-02T18:15:00.000Z",
+    "cotes": [
+     {
+      "num": 4,
+      "rang": 1,
+      "brut": "5/1",
+      "cote": 6
+     },
+     {
+      "num": 13,
+      "rang": 2,
+      "brut": "4/1",
+      "cote": 5
+     },
+     {
+      "num": 6,
+      "rang": 3,
+      "brut": "6/1",
+      "cote": 7
+     },
+     {
+      "num": 9,
+      "rang": 4,
+      "brut": "7/1",
+      "cote": 8
+     },
+     {
+      "num": 10,
+      "rang": 5,
+      "brut": "11/1",
+      "cote": 12
+     },
+     {
+      "num": 5,
+      "rang": 6,
+      "brut": "15/1",
+      "cote": 16
+     },
+     {
+      "num": 11,
+      "rang": 7,
+      "brut": "18/1",
+      "cote": 19
+     },
+     {
+      "num": 3,
+      "rang": 8,
+      "brut": "22/1",
+      "cote": 23
+     },
+     {
+      "num": 12,
+      "rang": 9,
+      "brut": "27/1",
+      "cote": 28
+     },
+     {
+      "num": 2,
+      "rang": 10,
+      "brut": "22/1",
+      "cote": 23
+     },
+     {
+      "num": 14,
+      "rang": 11,
+      "brut": "31/1",
+      "cote": 32
+     },
+     {
+      "num": 7,
+      "rang": 12,
+      "brut": "32/1",
+      "cote": 33
+     },
+     {
+      "num": 1,
+      "rang": 13,
+      "brut": "85/1",
+      "cote": 86
+     },
+     {
+      "num": 8,
+      "rang": 14,
+      "brut": "70/1",
+      "cote": 71
+     }
+    ]
+   }
+  ]
+ },
+ "2026-10-03": {
+  "date": "2026-10-03",
+  "quintes": [
+   {
+    "num": 4,
+    "reunion": 1,
+    "hippodrome": "LON",
+    "libelle": "QATAR PRIX DE LA PLACE DES VOSGES",
+    "distance": 2500,
+    "discipline": "PLAT",
+    "partants": [
+     {
+      "num": 1,
+      "nom": "LE LAVANDOU"
+     },
+     {
+      "num": 2,
+      "nom": "ANNABEL'S GHOST"
+     },
+     {
+      "num": 3,
+      "nom": "GOLDEN WEAVER"
+     },
+     {
+      "num": 4,
+      "nom": "REMBRAND TO GO"
+     },
+     {
+      "num": 5,
+      "nom": "SHRIHARA"
+     },
+     {
+      "num": 6,
+      "nom": "MISTER GATZ"
+     },
+     {
+      "num": 7,
+      "nom": "MON RICIN"
+     },
+     {
+      "num": 8,
+      "nom": "COLGAN SENORA"
+     },
+     {
+      "num": 9,
+      "nom": "NITY GALESTE"
+     },
+     {
+      "num": 10,
+      "nom": "ARNAY LE DUC"
+     },
+     {
+      "num": 11,
+      "nom": "SHARPSHOOT"
+     },
+     {
+      "num": 12,
+      "nom": "PAOLINO"
+     },
+     {
+      "num": 13,
+      "nom": "EBIYAR"
+     },
+     {
+      "num": 14,
+      "nom": "I GOT RHYTHM"
+     },
+     {
+      "num": 15,
+      "nom": "PINK MONDAY"
+     },
+     {
+      "num": 16,
+      "nom": "ZELKER"
+     },
+     {
+      "num": 17,
+      "nom": "KING TREZY"
+     },
+     {
+      "num": 18,
+      "nom": "DEMPY"
+     }
+    ],
+    "heure": "2026-10-03T13:15:00.000Z",
+    "cotes": [
+     {
+      "num": 4,
+      "rang": 1,
+      "brut": "4/1",
+      "cote": 5
+     },
+     {
+      "num": 11,
+      "rang": 2,
+      "brut": "7/1",
+      "cote": 8
+     },
+     {
+      "num": 9,
+      "rang": 3,
+      "brut": "10/1",
+      "cote": 11
+     },
+     {
+      "num": 13,
+      "rang": 4,
+      "brut": "9/1",
+      "cote": 10
+     },
+     {
+      "num": 5,
+      "rang": 5,
+      "brut": "15/1",
+      "cote": 16
+     },
+     {
+      "num": 18,
+      "rang": 6,
+      "brut": "14/1",
+      "cote": 15
+     },
+     {
+      "num": 16,
+      "rang": 7,
+      "brut": "18/1",
+      "cote": 19
+     },
+     {
+      "num": 3,
+      "rang": 8,
+      "brut": "13/1",
+      "cote": 14
+     },
+     {
+      "num": 6,
+      "rang": 9,
+      "brut": "16/1",
+      "cote": 17
+     },
+     {
+      "num": 8,
+      "rang": 10,
+      "brut": "20/1",
+      "cote": 21
+     },
+     {
+      "num": 2,
+      "rang": 11,
+      "brut": "24/1",
+      "cote": 25
+     },
+     {
+      "num": 17,
+      "rang": 12,
+      "brut": "26/1",
+      "cote": 27
+     },
+     {
+      "num": 7,
+      "rang": 13,
+      "brut": "30/1",
+      "cote": 31
+     },
+     {
+      "num": 1,
+      "rang": 14,
+      "brut": "35/1",
+      "cote": 36
+     },
+     {
+      "num": 10,
+      "rang": 15,
+      "brut": "40/1",
+      "cote": 41
+     },
+     {
+      "num": 14,
+      "rang": 16,
+      "brut": "45/1",
+      "cote": 46
+     },
+     {
+      "num": 12,
+      "rang": 17,
+      "brut": "50/1",
+      "cote": 51
+     },
+     {
+      "num": 15,
+      "rang": 18,
+      "brut": "70/1",
+      "cote": 71
+     }
+    ]
+   }
+  ]
+ },
+ "2026-10-04": {
+  "date": "2026-10-04",
+  "quintes": [
+   {
+    "num": 5,
+    "reunion": 1,
+    "hippodrome": "LON",
+    "libelle": "QATAR PRIX DE L'ARC DE TRIOMPHE",
+    "distance": 2400,
+    "discipline": "PLAT",
+    "partants": [
+     {
+      "num": 1,
+      "nom": "DARYZ"
+     },
+     {
+      "num": 2,
+      "nom": "SADDADD"
+     },
+     {
+      "num": 3,
+      "nom": "CHESTNUT ROCKET"
+     },
+     {
+      "num": 4,
+      "nom": "ADMIRE TERRA"
+     },
+     {
+      "num": 5,
+      "nom": "MEISHO TABARU"
+     },
+     {
+      "num": 6,
+      "nom": "ARROW EAGLE"
+     },
+     {
+      "num": 7,
+      "nom": "BAY CITY ROLLER"
+     },
+     {
+      "num": 8,
+      "nom": "MINNIE HAUK"
+     },
+     {
+      "num": 9,
+      "nom": "KALPANA"
+     },
+     {
+      "num": 10,
+      "nom": "FRIENDLY SOUL"
+     },
+     {
+      "num": 11,
+      "nom": "VARANDIR"
+     },
+     {
+      "num": 12,
+      "nom": "BENVENUTO CELLINI"
+     },
+     {
+      "num": 13,
+      "nom": "BRIGHT LIGHT"
+     },
+     {
+      "num": 14,
+      "nom": "MALTESE CROSS"
+     },
+     {
+      "num": 15,
+      "nom": "THUNDERING ON"
+     },
+     {
+      "num": 16,
+      "nom": "DIAMOND NECKLACE"
+     }
+    ],
+    "heure": "2026-10-04T14:05:00.000Z",
+    "cotes": [
+     {
+      "num": 1,
+      "rang": 1,
+      "brut": "3/1",
+      "cote": 4
+     },
+     {
+      "num": 14,
+      "rang": 2,
+      "brut": "6/1",
+      "cote": 7
+     },
+     {
+      "num": 9,
+      "rang": 3,
+      "brut": "6/1",
+      "cote": 7
+     },
+     {
+      "num": 12,
+      "rang": 4,
+      "brut": "13/1",
+      "cote": 14
+     },
+     {
+      "num": 11,
+      "rang": 5,
+      "brut": "12/1",
+      "cote": 13
+     },
+     {
+      "num": 7,
+      "rang": 6,
+      "brut": "30/1",
+      "cote": 31
+     },
+     {
+      "num": 8,
+      "rang": 7,
+      "brut": "20/1",
+      "cote": 21
+     },
+     {
+      "num": 15,
+      "rang": 8,
+      "brut": "9/1",
+      "cote": 10
+     },
+     {
+      "num": 16,
+      "rang": 9,
+      "brut": "14/1",
+      "cote": 15
+     },
+     {
+      "num": 10,
+      "rang": 10,
+      "brut": "25/1",
+      "cote": 26
+     },
+     {
+      "num": 4,
+      "rang": 11,
+      "brut": "60/1",
+      "cote": 61
+     },
+     {
+      "num": 2,
+      "rang": 12,
+      "brut": "40/1",
+      "cote": 41
+     },
+     {
+      "num": 5,
+      "rang": 13,
+      "brut": "33/1",
+      "cote": 34
+     },
+     {
+      "num": 6,
+      "rang": 14,
+      "brut": "100/1",
+      "cote": 101
+     },
+     {
+      "num": 13,
+      "rang": 15,
+      "brut": "200/1",
+      "cote": 201
+     },
+     {
+      "num": 3,
+      "rang": 16,
+      "brut": "200/1",
+      "cote": 201
+     }
+    ]
+   }
+  ]
+ }
+}

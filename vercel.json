@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/api/eq/:surcharge(.*)", "destination": "/api/eq?p=:surcharge" },
+    { "source": "/api/pt/:surcharge(.*)", "destination": "/api/pt?p=:surcharge" },
+    { "source": "/api/tf/:surcharge(.*)", "destination": "/api/tf?p=:surcharge" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

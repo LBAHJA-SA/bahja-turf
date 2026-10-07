@@ -1,0 +1,35 @@
+# ── Node ────────────────────────────────────────────────
+node_modules/
+dist/
+*.log
+
+# ── Vite / build ───────────────────────────────────────
+.vite/
+
+# ── données quotidiennes (restent LOCALES au serveur) ──
+#    l'archĭve du job (synthese + cotes + carriere) est propre a cette machine.
+data/synthese.json
+data/cotes.json
+data/carriere.json
+data/daily.log
+data/replay/
+public/data/synthese.json
+public/data/cotes.json
+public/data/carriere.json
+
+# ── corpus d'analyse (laboratoire, hors deploy) ────────
+data/corpus/
+
+# ── Windows / OS ───────────────────────────────────────
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ── IDE ────────────────────────────────────────────────
+.idea/
+.vscode/
+
+# ── secrets / config Vercel locale (JAMAIS sur git) ────
+.deploy-env
+.vercel/
+.vercelignore

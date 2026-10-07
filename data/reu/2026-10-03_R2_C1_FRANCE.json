@@ -1,0 +1,346 @@
+{
+ "v": 2,
+ "pv": 3,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 1,
+  "nom": "PRIX DE L'ECOLE MILITAIRE D'EQUITATION",
+  "prix": "PRIX DE L'ECOLE MILITAIRE D'EQUITATION",
+  "heure": "10:42",
+  "distance": 4600,
+  "discipline": "CROSS",
+  "corde": "",
+  "classe": "",
+  "conditions": "Pour tous chevaux de 5 ans et au-dessus, n'ayant, depuis le 1 er décembre de l'année dernière inclus, en steeple-chase, ni reçu une allocation de 12.000, ni été classés 2 e ou 3 e d'une course de dotation totale supérieure ou égal à 48.000. Poids : 5 ans, 67 kg ; 6 ans et au-dessus, 68 kg. Surcharges accumulées pour les sommes reçues en steeple-chase (victoires et places) : 1 kg par 4.500 cette année et par 7.000 l'année dernière.",
+  "montant": 24000,
+  "arrivee": null,
+  "dateLongue": "samedi 3 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 2,
+  "hippodrome": "Fontainebleau",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "KEPI D'ESTRUVAL",
+   "driver": "K. DUBOURG",
+   "entraineur": "LAGENESTE & MACAIRE",
+   "cote": 1.8,
+   "coteRef": null,
+   "musique": "1c1c4c5c(25)1s1h1h(24)4h",
+   "gains": 48855,
+   "age": 6,
+   "sexe": "H",
+   "poids": 73,
+   "valeur": null,
+   "chrono": "6'24\"8",
+   "coteRefJockey": "04,4",
+   "coteRefEntraineur": "04,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/1/20261003-FON-1-1.png",
+   "proprietaire": "B. LE GENTIL",
+   "dernierPassage": 34,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "HARRY BROWN",
+   "driver": "M. CHAILLOLEAU",
+   "entraineur": "P & C. PELTIER",
+   "cote": 6.2,
+   "coteRef": 4.3,
+   "musique": "3c2c2c(25)3c2c1c1c(24)4c",
+   "gains": 121300,
+   "age": 9,
+   "sexe": "H",
+   "poids": 72,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "09,9",
+   "coteRefEntraineur": "08,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/1/20261003-FON-1-2.png",
+   "proprietaire": "ECURIE HAMON",
+   "dernierPassage": 26,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "WAL CASSANDRE",
+   "driver": "R. MAYEUR",
+   "entraineur": "W. MENUET",
+   "cote": 9.4,
+   "coteRef": 5.2,
+   "musique": "Ac(25)3c3c2c(24)1c6c1c2c",
+   "gains": 128145,
+   "age": 8,
+   "sexe": "H",
+   "poids": 71,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "14,0",
+   "coteRefEntraineur": "13,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/1/20261003-FON-1-3.png",
+   "proprietaire": "W. W. MENUET",
+   "dernierPassage": 41,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "IDEALGADOR",
+   "driver": "THO . JOURNIAC",
+   "entraineur": "E. GRALL",
+   "cote": 4.2,
+   "coteRef": null,
+   "musique": "1c1c3s8c(25)8s(24)Tc(22)1h",
+   "gains": 24785,
+   "age": 8,
+   "sexe": "H",
+   "poids": 71,
+   "valeur": null,
+   "chrono": "5'51\"6",
+   "coteRefJockey": "12,3",
+   "coteRefEntraineur": "11,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/1/20261003-FON-1-4.png",
+   "proprietaire": "A. MASSELIN/JP. MASSELIN",
+   "dernierPassage": 41,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "HILLICO CONTI",
+   "driver": "Q. DEFONTAINE",
+   "entraineur": "CH. DUBOURG",
+   "cote": 11,
+   "coteRef": 3.7,
+   "musique": "(25)4c7c2c2c(24)3c4c(23)1c",
+   "gains": 38440,
+   "age": 9,
+   "sexe": "H",
+   "poids": 70,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "06,2",
+   "coteRefEntraineur": "09,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/1/20261003-FON-1-5.png",
+   "proprietaire": "R. DUBOIS",
+   "dernierPassage": 479,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "CHOEUR DE MESC",
+   "driver": "A. LEPAGE",
+   "entraineur": "J. BIGOT",
+   "cote": 31,
+   "coteRef": null,
+   "musique": "5s(23)4s2s1s1s3h2h(22)6h",
+   "gains": 47490,
+   "age": 8,
+   "sexe": "H",
+   "poids": 68,
+   "valeur": null,
+   "chrono": "5'49\"6",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "50,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/1/20261003-FON-1-6.png",
+   "proprietaire": "J. BIGOT",
+   "dernierPassage": 27,
+   "depart": null,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   5,
+   2,
+   3
+  ],
+  "drivers": [
+   1,
+   5,
+   2,
+   4,
+   3
+  ],
+  "entraineurs": [
+   1,
+   2,
+   5,
+   4,
+   3,
+   6
+  ],
+  "topCotesDirect": [
+   "1",
+   "4",
+   "2",
+   "3",
+   "5",
+   "6"
+  ],
+  "topChevaux": [
+   "1",
+   "4",
+   "2",
+   "3",
+   "6",
+   "5"
+  ],
+  "topPalmares": [
+   "1",
+   "2",
+   "3",
+   "6",
+   "5",
+   "4"
+  ],
+  "topForme": [
+   "1",
+   "2",
+   "3",
+   "6",
+   "4",
+   "5"
+  ],
+  "topClasse": [
+   "3",
+   "2",
+   "1",
+   "6",
+   "5",
+   "4"
+  ],
+  "topJockeys": [
+   "1",
+   "2",
+   "5",
+   "3",
+   "4"
+  ],
+  "topEntraineurs": [
+   "1",
+   "2",
+   "5",
+   "3",
+   "4",
+   "6"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "6",
+   "4",
+   "1"
+  ],
+  "topCordes": [
+   "6"
+  ],
+  "ecartsChevaux": [
+   "5",
+   "6",
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "incontournables": [
+   "2",
+   "3",
+   "4",
+   "1",
+   "6",
+   "5"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "1",
+   "2"
+  ],
+  "syntheseTf": [
+   "3",
+   "6",
+   "5",
+   "4"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "KEPI D'ESTRUVAL",
+   "courses": 8,
+   "victoires": 5,
+   "places": 3,
+   "pctV": "62.5",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "HARRY BROWN",
+   "courses": 29,
+   "victoires": 6,
+   "places": 21,
+   "pctV": "20.69",
+   "pctP": "93.1",
+   "aptG": "4500",
+   "aptP": "3700"
+  },
+  {
+   "num": 3,
+   "cheval": "WAL CASSANDRE",
+   "courses": 23,
+   "victoires": 6,
+   "places": 13,
+   "pctV": "26.09",
+   "pctP": "82.61",
+   "aptG": "4500",
+   "aptP": "5200"
+  },
+  {
+   "num": 4,
+   "cheval": "IDEALGADOR",
+   "courses": 9,
+   "victoires": 3,
+   "places": 2,
+   "pctV": "33.33",
+   "pctP": "55.56",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "HILLICO CONTI",
+   "courses": 12,
+   "victoires": 1,
+   "places": 10,
+   "pctV": "8.33",
+   "pctP": "91.67",
+   "aptG": null,
+   "aptP": "4600"
+  },
+  {
+   "num": 6,
+   "cheval": "CHOEUR DE MESC",
+   "courses": 10,
+   "victoires": 2,
+   "places": 8,
+   "pctV": "20",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "2 - 3 - 5 - 1 - 4 - 6",
+ "pronosTf": [
+  "1 - 2 - 3 - 5",
+  "3 - 2 - 1"
+ ],
+ "collecteLe": "2026-10-04T08:16:38.751Z"
+}

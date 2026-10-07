@@ -1,0 +1,832 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        2
+      ],
+      [
+        6
+      ],
+      [
+        8
+      ],
+      [
+        16
+      ],
+      [
+        1
+      ],
+      [
+        15
+      ],
+      [
+        7
+      ],
+      [
+        12
+      ],
+      [
+        9
+      ],
+      [
+        5
+      ],
+      [
+        3
+      ],
+      [
+        11
+      ]
+    ],
+    "classe": "EUROPEENNE",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2850,
+    "going": null,
+    "imminent": false,
+    "num": 4,
+    "penetrometer": null,
+    "prix": "GRAND PRIX DU PORTUGAL (PRIX D'ARGELES)",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 16,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1759065300000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "TIC_TROIS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 54,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 3.6,
+          "disq": 2,
+          "n": 7,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 5.5,
+          "disq": 4,
+          "n": 22,
+          "top5": 10
+        }
+      },
+      "etat": null,
+      "gain": 15164200,
+      "horse": "HAND FULL",
+      "horse_id": "HAND FULL-SIRENE DE MAI-READY CASH",
+      "jockey": "D. BONNE",
+      "musique": "0a1a3a2a2a0a0a(24)0a2a",
+      "nombreCourses": 51,
+      "nombrePlaces": 29,
+      "nombrePlacesSecond": 10,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Emmanuel BARANDE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "D. BONNE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 3.8,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.8,
+          "disq": 1,
+          "n": 7,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 4.1,
+          "disq": 1,
+          "n": 22,
+          "top5": 16
+        }
+      },
+      "etat": null,
+      "gain": 15887000,
+      "horse": "NEO TURBO",
+      "horse_id": "NEO TURBO-BELLA TURBO-VARENNE",
+      "jockey": "A. ABRIVARD",
+      "musique": "1a6a1a1a2a2a",
+      "nombreCourses": 8,
+      "nombrePlaces": 4,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "M. BRUYNEEL (BEL)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J. CORBANIE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 103,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.5,
+          "disq": 8,
+          "n": 19,
+          "top5": 5
+        },
+        "P4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 17290000,
+      "horse": "HIBISCUS DE LATOM",
+      "horse_id": "HIBISCUS DE LATOM-PEPITE GRANGELABBE-FIRST DE RETZ",
+      "jockey": "A. COLLETTE",
+      "musique": "8a4a9a2a4a2a4a8a9a(24)",
+      "nombreCourses": 58,
+      "nombrePlaces": 22,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 12,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "E. NICOLAYSEN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "A.G. MAILLARD",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 12,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "-": {
+          "avgRang": 1,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        },
+        "D2": {
+          "avgRang": 5.3,
+          "disq": 1,
+          "n": 7,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 4.8,
+          "disq": 2,
+          "n": 7,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 17437900,
+      "horse": "GARTH VADER",
+      "horse_id": "GARTH VADER-MARTA BROLINE (SWE)-KEN WARKENTIN (US)",
+      "jockey": "M. ABRIVARD",
+      "musique": "5a4a8aDmDa4a4a(24)8aDa",
+      "nombreCourses": 16,
+      "nombrePlaces": 9,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Stall TRESS RISA (NOR)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J. WESTHOLM",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 21,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5.1,
+          "disq": 0,
+          "n": 9,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 6.7,
+          "disq": 1,
+          "n": 8,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 17606000,
+      "horse": "HIP HOP DE MADKER",
+      "horse_id": "HIP HOP DE MADKER-SAFRANEE D'OMBREE-SERENO",
+      "jockey": "D. THOMAIN",
+      "musique": "4a0aDa0a8a7a5a5aDm7a",
+      "nombreCourses": 82,
+      "nombrePlaces": 48,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Christophe MALLET",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "CH.A. MALLET",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 61,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 6.1,
+          "disq": 1,
+          "n": 8,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 1.3,
+          "disq": 3,
+          "n": 6,
+          "top5": 3
+        },
+        "P2": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 18115000,
+      "horse": "HALL BLACK MESS",
+      "horse_id": "HALL BLACK MESS-POP STAR MESS-VILLAGE MYSTIC",
+      "jockey": "CH. CHALON",
+      "musique": "7a5a1a3a0a3a1a7aDa8a",
+      "nombreCourses": 93,
+      "nombrePlaces": 51,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 11,
+      "nombreVictoires": 10,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "F. CHARBIT",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "CH. CHALON",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 7.9,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 1,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 11,
+          "disq": 1,
+          "n": 2,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 18339500,
+      "horse": "FIGHTER SIMONI",
+      "horse_id": "FIGHTER SIMONI-WINK SPOT-ORLANDO VICI",
+      "jockey": "B. ROCHARD",
+      "musique": "3a5a0a0m(24)5a1a",
+      "nombreCourses": 12,
+      "nombrePlaces": 6,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Stall FIGHTER HB (SWE)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Mme Maria TORNQVIST",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 49,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.4,
+          "disq": 5,
+          "n": 19,
+          "top5": 8
+        },
+        "D4": {
+          "avgRang": 7.2,
+          "disq": 4,
+          "n": 8,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 18347500,
+      "horse": "HERMES PAT",
+      "horse_id": "HERMES PAT-TESTA ROSSA PAT-UP AND QUICK",
+      "jockey": "G. GELORMINI",
+      "musique": "2a4aDa0a4a0a2a0aDa6a",
+      "nombreCourses": 43,
+      "nombrePlaces": 22,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie QUICK STAR",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "M. VARIN",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 48,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 7.2,
+          "disq": 1,
+          "n": 15,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 7.3,
+          "disq": 1,
+          "n": 8,
+          "top5": 3
+        },
+        "P2": {
+          "avgRang": 6,
+          "disq": 1,
+          "n": 4,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 18505000,
+      "horse": "HUGO DU BOURG",
+      "horse_id": "HUGO DU BOURG-VIOLETTE DES ELFES-TUCSON",
+      "jockey": "F. LAGADEUC",
+      "musique": "7a8aAa5a2a9a8a0a6a7a",
+      "nombreCourses": 83,
+      "nombrePlaces": 42,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Francis DAVOUST",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J.G. VAN EECKHAUTE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 4.8,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2,
+          "disq": 6,
+          "n": 10,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 2.7,
+          "disq": 3,
+          "n": 13,
+          "top5": 8
+        },
+        "P2": {
+          "avgRang": 1.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 18673500,
+      "horse": "HAJIME",
+      "horse_id": "HAJIME-UNANIME DU MONT-UNO DU MELEUC",
+      "jockey": "CH. MARTENS",
+      "musique": "1a1a2a1a1a2a2a2a4a(24)",
+      "nombreCourses": 53,
+      "nombrePlaces": 18,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 13,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie du VIEUX CHENE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Pierrick LE MOEL",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 20,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.5,
+          "disq": 1,
+          "n": 16,
+          "top5": 12
+        },
+        "D4": {
+          "avgRang": 5.4,
+          "disq": 3,
+          "n": 10,
+          "top5": 4
+        },
+        "P4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 18797000,
+      "horse": "HELECHO",
+      "horse_id": "HELECHO-BUSQUEDA-SAM BOURBON",
+      "jockey": "G. PORZIO",
+      "musique": "1aDa6a1a7a4a6a0aDaDa",
+      "nombreCourses": 87,
+      "nombrePlaces": 42,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 10,
+      "nombreVictoires": 16,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie MANTARO (ITY)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "H. LE BEC",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 64,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "3": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5.9,
+          "disq": 1,
+          "n": 24,
+          "top5": 11
+        },
+        "P2": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 18853000,
+      "horse": "HIPPOCRATE DU TRIO",
+      "horse_id": "HIPPOCRATE DU TRIO-ADEHENE DU TRIO-AMIRAL SACHA",
+      "jockey": "M. MOTTIER",
+      "musique": "6a0a0a(24)7a4a6a6a5a3a",
+      "nombreCourses": 55,
+      "nombrePlaces": 28,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 8,
+      "nombreVictoires": 14,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "TH. LEJEUNE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "B. MARIE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 29,
+      "deferre": "PROTEGE_ANTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4.8,
+          "disq": 1,
+          "n": 17,
+          "top5": 9
+        },
+        "P2": {
+          "avgRang": 6.2,
+          "disq": 3,
+          "n": 9,
+          "top5": 3
+        },
+        "P4": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 19163500,
+      "horse": "HANA D'OCCAGNES",
+      "horse_id": "HANA D'OCCAGNES-ANITA D'OCCAGNES-ODEISIS DE VANDEL",
+      "jockey": "F. OUVRIE",
+      "musique": "7m4aDm3a1a5a1a4m5mDa",
+      "nombreCourses": 89,
+      "nombrePlaces": 54,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 12,
+      "nombreVictoires": 11,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme M.TH. PERRIN",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "J. VANMEERBECK",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 19,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.8,
+          "disq": 2,
+          "n": 7,
+          "top5": 3
+        },
+        "D2A": {
+          "avgRang": 7.7,
+          "disq": 0,
+          "n": 3,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 6.5,
+          "disq": 1,
+          "n": 5,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 19271000,
+      "horse": "HEAVEN STAR",
+      "horse_id": "HEAVEN STAR-AQUARELLE ROSE-CRISTAL MONEY",
+      "jockey": "E. RAFFIN",
+      "musique": "6a7aDa0a7aDa9m(24)3a1a",
+      "nombreCourses": 57,
+      "nombrePlaces": 23,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 14,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie des CHARMES",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "S. ERNAULT",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 27,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5.6,
+          "disq": 3,
+          "n": 24,
+          "top5": 12
+        },
+        "P2": {
+          "avgRang": 6,
+          "disq": 1,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 19356500,
+      "horse": "HANDZARO DU BOCAGE",
+      "horse_id": "HANDZARO DU BOCAGE-QUENZA DU BOCAGE-VILLAGE MYSTIC",
+      "jockey": "TH. BEAUCHENE",
+      "musique": "2a6a2a6aDa1a9a9a5a2a",
+      "nombreCourses": 65,
+      "nombrePlaces": 37,
+      "nombrePlacesSecond": 10,
+      "nombrePlacesTroisieme": 12,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie VICTO",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Mlle V.M. GOETZ",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 10,
+      "deferre": "DEFERRE_ANTERIEURS_PROTEGE_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 6.2,
+          "disq": 1,
+          "n": 18,
+          "top5": 9
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 3.5,
+          "disq": 1,
+          "n": 3,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 6.4,
+          "disq": 0,
+          "n": 5,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 19577500,
+      "horse": "HAIKIDO",
+      "horse_id": "HAIKIDO-TAMPA SIMARDIERE-QUICK WOOD",
+      "jockey": "F. NIVARD",
+      "musique": "7a5a5aDa3aDa5aDa3a4a",
+      "nombreCourses": 93,
+      "nombrePlaces": 56,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 10,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 16,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J.CL. LAUVRIERE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "G. BEAUFILS",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2025-09-28",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

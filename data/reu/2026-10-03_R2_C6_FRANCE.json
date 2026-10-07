@@ -1,0 +1,391 @@
+{
+ "v": 2,
+ "pv": 3,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 6,
+  "nom": "PRIX D'AMIENS",
+  "prix": "PRIX D'AMIENS",
+  "heure": "13:25",
+  "distance": 3600,
+  "discipline": "STEEPLECHASE",
+  "corde": "",
+  "classe": "",
+  "conditions": "Pour tous poulains et pouliches de 4 ans, mis à réclamer pour 12.000 avec pr de réclamation supérieurs de 2.000 en 2.000. Poids : 68 kg. Surcharges accumulées 1 kg par 2.000 pour les prix de réclamation supérieurs à 12.000. outre, les poulains et pouliches ayant, cette année, en steeple-chase, reçu 9.000 porteront 2 kg.",
+  "montant": 19000,
+  "arrivee": [
+   1,
+   2,
+   5,
+   4,
+   3
+  ],
+  "dateLongue": "samedi 3 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 2,
+  "hippodrome": "Fontainebleau",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "MAVERICK'AMSYL",
+   "driver": "L. SUISSE",
+   "entraineur": "GAB. LEENDERS",
+   "cote": 5.4,
+   "coteRef": 21,
+   "musique": "1s3s3s5s5s(25)5s5s5hTh",
+   "gains": 20130,
+   "age": 4,
+   "sexe": "H",
+   "poids": 72,
+   "valeur": 53,
+   "chrono": "4'31\"8",
+   "coteRefJockey": "15,6",
+   "coteRefEntraineur": "08,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/6/20261003-FON-6-1.png",
+   "proprietaire": "J. DUCHESNE",
+   "dernierPassage": 153,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "BEL ECLAT",
+   "driver": "A. BLAIS",
+   "entraineur": "D. WINDRIF",
+   "cote": 2,
+   "coteRef": 5.8,
+   "musique": "1s2s5s3s7s2s5s3s5s",
+   "gains": 69760,
+   "age": 4,
+   "sexe": "H",
+   "poids": 72,
+   "valeur": 58,
+   "chrono": "4'19\"6",
+   "coteRefJockey": "18,3",
+   "coteRefEntraineur": "10,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/6/20261003-FON-6-2.png",
+   "proprietaire": "M. CHAOUAT/N. MENSCHAERT",
+   "dernierPassage": 38,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "PACHA DES BEAUX",
+   "driver": "J. HONDIER",
+   "entraineur": "N. GEORGE & A. ZETTERHOLM",
+   "cote": 9.3,
+   "coteRef": null,
+   "musique": "8h0h0h",
+   "gains": 0,
+   "age": 4,
+   "sexe": "H",
+   "poids": 71,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "13,4",
+   "coteRefEntraineur": "07,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/6/20261003-FON-6-3.png",
+   "proprietaire": "ECURIE ARNAUD BOCHET",
+   "dernierPassage": 24,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "MAKAO'K",
+   "driver": "B. MARCHAND",
+   "entraineur": "Y. FOUIN",
+   "cote": 13,
+   "coteRef": null,
+   "musique": "As(25)6h2h4pAh6p",
+   "gains": 8710,
+   "age": 4,
+   "sexe": "H",
+   "poids": 70,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "13,4",
+   "coteRefEntraineur": "10,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/6/20261003-FON-6-4.png",
+   "proprietaire": "F. DUVIVIER",
+   "dernierPassage": 15,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "LA CHOCOLATINE",
+   "driver": "T. CHEVILLARD",
+   "entraineur": "L. BAUDRON",
+   "cote": 5.3,
+   "coteRef": 9.6,
+   "musique": "5s1s3h6hAh1p9p",
+   "gains": 14240,
+   "age": 4,
+   "sexe": "F",
+   "poids": 69,
+   "valeur": 55,
+   "chrono": "4'40\"5",
+   "coteRefJockey": "11,5",
+   "coteRefEntraineur": "09,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/6/20261003-FON-6-5.png",
+   "proprietaire": "L. L. BAUDRON",
+   "dernierPassage": 80,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "PETITE THEYSS",
+   "driver": "A. RENARD",
+   "entraineur": "M. PINEDA",
+   "cote": 10,
+   "coteRef": 11,
+   "musique": "5h4s1s7pAhAh9h",
+   "gains": 8325,
+   "age": 4,
+   "sexe": "F",
+   "poids": 68,
+   "valeur": 51,
+   "chrono": "4'38\"4",
+   "coteRefJockey": "10,9",
+   "coteRefEntraineur": "10,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/6/20261003-FON-6-6.png",
+   "proprietaire": "M. BREGAUD",
+   "dernierPassage": 93,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "LOZEN DE LORME",
+   "driver": "FE. ANDRE",
+   "entraineur": "S. JEDDARI",
+   "cote": 26,
+   "coteRef": null,
+   "musique": "Ah9s0hAh(25)Ah",
+   "gains": 0,
+   "age": 4,
+   "sexe": "F",
+   "poids": 66,
+   "valeur": 48.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "17,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261003/FON/6/20261003-FON-6-7.png",
+   "proprietaire": "S. JEDDARI",
+   "dernierPassage": 29,
+   "depart": null,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   2,
+   5,
+   6,
+   1
+  ],
+  "drivers": [
+   6,
+   5,
+   3,
+   4,
+   1,
+   2
+  ],
+  "entraineurs": [
+   3,
+   1,
+   5,
+   2,
+   4,
+   6,
+   7
+  ],
+  "topCotesDirect": [
+   "2",
+   "5",
+   "1",
+   "3",
+   "6",
+   "4",
+   "7"
+  ],
+  "topChevaux": [
+   "5",
+   "1",
+   "2",
+   "6"
+  ],
+  "topPalmares": [
+   "2",
+   "1",
+   "5",
+   "6",
+   "4",
+   "3",
+   "7"
+  ],
+  "topForme": [
+   "1",
+   "2",
+   "5",
+   "6",
+   "4",
+   "3",
+   "7"
+  ],
+  "topClasse": [
+   "2",
+   "1",
+   "5",
+   "4",
+   "6"
+  ],
+  "topJockeys": [
+   "5",
+   "6",
+   "4",
+   "1",
+   "2",
+   "3"
+  ],
+  "topEntraineurs": [
+   "1",
+   "4",
+   "3",
+   "2",
+   "5",
+   "6",
+   "7"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "2",
+   "1",
+   "6",
+   "5"
+  ],
+  "topCordes": [
+   "7"
+  ],
+  "ecartsChevaux": [
+   "3",
+   "6",
+   "7",
+   "4",
+   "5",
+   "1"
+  ],
+  "incontournables": [
+   "2",
+   "5",
+   "1",
+   "4",
+   "6"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "2",
+   "1"
+  ],
+  "syntheseTf": [
+   "5",
+   "6",
+   "4",
+   "3",
+   "7"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "MAVERICK'AMSYL",
+   "courses": 9,
+   "victoires": 1,
+   "places": 7,
+   "pctV": "11.11",
+   "pctP": "88.89",
+   "aptG": null,
+   "aptP": "3600"
+  },
+  {
+   "num": 2,
+   "cheval": "BEL ECLAT",
+   "courses": 13,
+   "victoires": 3,
+   "places": 10,
+   "pctV": "23.08",
+   "pctP": "100",
+   "aptG": "3400",
+   "aptP": "4100"
+  },
+  {
+   "num": 3,
+   "cheval": "PACHA DES BEAUX",
+   "courses": 3,
+   "victoires": 0,
+   "places": 0,
+   "pctV": "0",
+   "pctP": "0",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "MAKAO'K",
+   "courses": 4,
+   "victoires": 0,
+   "places": 2,
+   "pctV": "0",
+   "pctP": "50",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "LA CHOCOLATINE",
+   "courses": 5,
+   "victoires": 1,
+   "places": 3,
+   "pctV": "20",
+   "pctP": "80",
+   "aptG": "3500",
+   "aptP": "3600"
+  },
+  {
+   "num": 6,
+   "cheval": "PETITE THEYSS",
+   "courses": 6,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "16.67",
+   "pctP": "50",
+   "aptG": "3800",
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "LOZEN DE LORME",
+   "courses": 5,
+   "victoires": 0,
+   "places": 0,
+   "pctV": "0",
+   "pctP": "0",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "2 - 1 - 5 - 6 - 4",
+ "pronosTf": [
+  "2 - 1 - 5 - 6 - 4",
+  "2 - 5 - 6"
+ ],
+ "collecteLe": "2026-10-04T08:16:49.027Z"
+}
