@@ -1,0 +1,1111 @@
+{
+  "reunion": {
+    "num": 4,
+    "hippodrome": "Toulouse",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1684072,
+    "num": 3,
+    "prix": "Prix Mona Lisa",
+    "time": "17:42:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 2100,
+    "surface": "GAZON",
+    "going": "BON",
+    "corde": "D",
+    "runners": 16,
+    "quinte": false,
+    "condition": "Pour pouliches de 3 ans inscrites à la naissance au Stud-Book arabe de leur pays de naissance affilié à la WAHO, n'ayant jamais gagné ni été classés 2ème ou 3ème d'un Groupe PA. Poids : 56 kg. Les pouliches n'ayant jamais couru recevront 2 kg.",
+    "classe": null,
+    "depart": null,
+    "penetrometer": 3.2,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "MULTI",
+      "COUPLE",
+      "TRIO"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 20000,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 10000,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3800,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2800,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1800,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 800,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 500,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 300,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 10,
+      "horse": "Hilmiyyah",
+      "horse_id": 2893364,
+      "jockey": "-",
+      "trainer": "Frédéric Sanchez",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 800,
+      "poids": 56,
+      "decharge": null,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.3,
+      "cote_geny": 36.8,
+      "musique": "5p",
+      "note": null,
+      "red_km": null,
+      "distance": 2100,
+      "rang": 0,
+      "ecart": null,
+      "proprietaire": "Yas Horse Racing Management",
+      "casaque": "/web/image/casaque/44/1121544_2.png",
+      "etat": "NON_PARTANT",
+      "incident": null
+    },
+    {
+      "num": 12,
+      "horse": "Medellin",
+      "horse_id": 2901268,
+      "jockey": "Antoine Werlé",
+      "trainer": "Jean-François Bernard",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 54,
+      "decharge": null,
+      "corde": 10,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 27.9,
+      "cote_geny": 23.6,
+      "musique": "Inédite",
+      "note": "Vite derrière le groupe de tête, à la corde, a eu le passage à mi-ligne droite et a terminé le mieux pour faire sûrement la différence.",
+      "red_km": "2'23''7",
+      "distance": 2100,
+      "rang": 1,
+      "ecart": "00:02:23,700",
+      "proprietaire": "Al-Dosari",
+      "casaque": "/web/image/casaque/88/1211388_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Senna",
+      "horse_id": 2899806,
+      "jockey": "Mickaël Forest",
+      "trainer": "François Rohaut",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 56,
+      "decharge": null,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 25.9,
+      "cote_geny": 28.7,
+      "musique": "0p",
+      "note": "Vite en tête, a longtemps fait illusion pour le succès avant d'être débordée près du but par [Medellin (12)], résistant à [Chamiya de Lauze (15)] et [Nout de Littré (4)].",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 2,
+      "ecart": "2",
+      "proprietaire": "Almarri",
+      "casaque": "/web/image/casaque/92/1196892_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 15,
+      "horse": "Chamiya de Lauze",
+      "horse_id": 2901271,
+      "jockey": "Mégane Peslier",
+      "trainer": "Thomas Fourcy",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 54,
+      "decharge": 51.5,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 16.9,
+      "cote_geny": 11.5,
+      "musique": "Inédite",
+      "note": "Vite derrière l'animatrice [Senna (3)], a changé de vitesse à mi-ligne droite et a bien terminé, échouant de peu pour le premier accessit.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 3,
+      "ecart": "TETE",
+      "proprietaire": "Safinate",
+      "casaque": "/web/image/casaque/15/1203415_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Nout de Littré",
+      "horse_id": 2896391,
+      "jockey": "Anaëlle Mekouche",
+      "trainer": "Eric Dell'Ova",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 500,
+      "poids": 56,
+      "decharge": 53.5,
+      "corde": 6,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 67.4,
+      "cote_geny": 63.9,
+      "musique": "6p",
+      "note": "Vite derrière le groupe de tête, à la corde, a fait illusion pour le succès à mi-ligne droite, puis a lutté pour les accessits, concédant le second près du but.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 4,
+      "ecart": "1/2",
+      "proprietaire": "Chaumet-Lagrange",
+      "casaque": "/web/image/casaque/54/1166754_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Janny",
+      "horse_id": 2896386,
+      "jockey": "Guillaume Guedj-Gay",
+      "trainer": "Xavier Thomas-Demeaulte",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 2800,
+      "poids": 56,
+      "decharge": null,
+      "corde": 15,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.7,
+      "cote_geny": 3.8,
+      "musique": "3p",
+      "note": "Venue de l'arrière-garde, a bien terminé, mais sans inquiéter les quatre premiers.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 5,
+      "ecart": "1",
+      "proprietaire": "Alhtoushi",
+      "casaque": "/web/image/casaque/91/1114391_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Shakirah",
+      "horse_id": 2892259,
+      "jockey": "Samy Le Quilleuc",
+      "trainer": "Thomas Fourcy",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 4100,
+      "poids": 56,
+      "decharge": null,
+      "corde": 16,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7.5,
+      "cote_geny": 7.6,
+      "musique": "2p7p",
+      "note": "Vite à l'arrière-garde, a progressé entre les chevaux dans la phase finale et a bien terminé, près de [Janny (2)], mais sans inquiéter les quatre premiers.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 6,
+      "ecart": "TETE",
+      "proprietaire": "Al Taei",
+      "casaque": "/web/image/casaque/94/1143094_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Neige de Faust",
+      "horse_id": 2898467,
+      "jockey": "Nuno Manuel Lopes Duarte",
+      "trainer": "Jean-François Bernard",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 56,
+      "decharge": 54.5,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 104,
+      "cote_geny": 67.9,
+      "musique": "0p",
+      "note": "Venue de l'arrière-garde, n'a pas mal terminé, mais sans vraiment espérer mieux.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 7,
+      "ecart": "1/2",
+      "proprietaire": "Ingram",
+      "casaque": "/web/image/casaque/92/1005292_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Mode Al Maury",
+      "horse_id": 2887565,
+      "jockey": "Martin Protti",
+      "trainer": "Roberto-Carlos Montenegro",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 600,
+      "poids": 56,
+      "decharge": 54.5,
+      "corde": 9,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 33.9,
+      "cote_geny": 26.7,
+      "musique": "5p",
+      "note": "Vite au sein du peloton, a terminé courageusement, mais sans faire illusion.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 8,
+      "ecart": "3/4",
+      "proprietaire": "Kayed",
+      "casaque": "/web/image/casaque/15/1182515_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Hasna Grine",
+      "horse_id": 2897700,
+      "jockey": "Jean-Bernard Eyquem",
+      "trainer": "Xavier Thomas-Demeaulte",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 56,
+      "decharge": null,
+      "corde": 14,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.8,
+      "cote_geny": 28,
+      "musique": "8p",
+      "note": "Vite au sein du peloton, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 9,
+      "ecart": "2",
+      "proprietaire": "Chomard",
+      "casaque": "/web/image/casaque/74/1177874_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Af Tahleel",
+      "horse_id": 2899206,
+      "jockey": "Maxime Foulon",
+      "trainer": "Roberto-Carlos Montenegro",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 54,
+      "decharge": null,
+      "corde": 13,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 110,
+      "cote_geny": 95.8,
+      "musique": "Inédite",
+      "note": "Vite à l'extérieur de l'animatrice [Senna (3)], a plafonné à la sortie du tournant final.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 10,
+      "ecart": "1",
+      "proprietaire": "Khalifa Al Nabooda",
+      "casaque": "/web/image/casaque/82/1074182_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Ajouz",
+      "horse_id": 2893362,
+      "jockey": "Fabrice Veron",
+      "trainer": "Damien de Watrigant",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 3100,
+      "poids": 56,
+      "decharge": null,
+      "corde": 8,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5,
+      "cote_geny": 5.5,
+      "musique": "7p3p",
+      "note": "Vite derrière les animatrices, [Senna (3)] et [Af Tahleel (11)], a plafonné à l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 11,
+      "ecart": "3/4",
+      "proprietaire": "Yas Horse Racing Management",
+      "casaque": "/web/image/casaque/44/1121544_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Shatoush",
+      "horse_id": 2892258,
+      "jockey": "Ioritz Mendizabal",
+      "trainer": "François Rohaut",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 500,
+      "poids": 56,
+      "decharge": null,
+      "corde": 11,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 13,
+      "cote_geny": 15.5,
+      "musique": "6p0p",
+      "note": "Vite derrière le groupe de tête, a plafonné à l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 12,
+      "ecart": "NEZ",
+      "proprietaire": "Srl",
+      "casaque": "/web/image/casaque/22/1170522_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 13,
+      "horse": "Trixie",
+      "horse_id": 2901269,
+      "jockey": "Alejandro Gutiérrez Val",
+      "trainer": "Philippe Sogorb",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 54,
+      "decharge": null,
+      "corde": 7,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 9,
+      "cote_geny": 5.4,
+      "musique": "Inédite",
+      "note": "N'a jamais été dangereuse après avoir figuré en queue de peloton.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 13,
+      "ecart": "2 1/2",
+      "proprietaire": "Ireland",
+      "casaque": "/web/image/casaque/96/1088096_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 14,
+      "horse": "Shamaal Girl",
+      "horse_id": 2901270,
+      "jockey": "Alexandre Gavilan",
+      "trainer": "Thomas Fourcy",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 54,
+      "decharge": null,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 33.9,
+      "cote_geny": 36.7,
+      "musique": "Inédite",
+      "note": "Vite à l'arrière-garde, n'a jamais été dangereuse.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 14,
+      "ecart": "2 1/2",
+      "proprietaire": "du Grand Courgeon",
+      "casaque": "/web/image/casaque/60/1113560_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 16,
+      "horse": "Tayyibah",
+      "horse_id": 2900724,
+      "jockey": "Matthias Lauron",
+      "trainer": "Alexandre Lartigau",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 54,
+      "decharge": null,
+      "corde": 12,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 96.7,
+      "cote_geny": 67.9,
+      "musique": "Inédite",
+      "note": "Vite derrière le groupe de tête, a plafonné à l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 2100,
+      "rang": 15,
+      "ecart": "4 1/2",
+      "proprietaire": "Yas Horse Racing Management",
+      "casaque": "/web/image/casaque/44/1121544_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Shakirah",
+                  "numero": null,
+                  "id": 2892259,
+                  "idParticipation": 21737386
+                },
+                {
+                  "nom": "Janny",
+                  "numero": null,
+                  "id": 2896386,
+                  "idParticipation": 21737387
+                },
+                {
+                  "nom": "Trixie",
+                  "numero": null,
+                  "id": 2901269,
+                  "idParticipation": 21737398
+                }
+              ]
+            },
+            "commentaire": "[Janny (2)] a fourni un bon effort lors de ses premiers pas et semble capable de courir en progrès et de s'imposer. [Shakirah (1)] vient pour sa part d'évoluer sur la montante, c'est de bon augure. L'extérieur est donc à considérer. La mère de [Trixie (13)] avait gagné d'entrée de jeu, suivons son comportement.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Janny (2)], bonne note",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21737387,
+            "idCheval": 2896386,
+            "numero": 2,
+            "nomCheval": "Janny"
+          },
+          {
+            "idParticipation": 21737386,
+            "idCheval": 2892259,
+            "numero": 1,
+            "nomCheval": "Shakirah"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21737398,
+            "idCheval": 2901269,
+            "numero": 13,
+            "nomCheval": "Trixie"
+          },
+          {
+            "idParticipation": 21737400,
+            "idCheval": 2901271,
+            "numero": 15,
+            "nomCheval": "Chamiya de Lauze"
+          },
+          {
+            "idParticipation": 21737397,
+            "idCheval": 2901268,
+            "numero": 12,
+            "nomCheval": "Medellin"
+          },
+          {
+            "idParticipation": 21737399,
+            "idCheval": 2901270,
+            "numero": 14,
+            "nomCheval": "Shamaal Girl"
+          },
+          {
+            "idParticipation": 21737395,
+            "idCheval": 2893364,
+            "numero": 10,
+            "nomCheval": "Hilmiyyah"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21737396,
+            "idCheval": 2899206,
+            "numero": 11,
+            "nomCheval": "Af Tahleel"
+          },
+          {
+            "idParticipation": 21737393,
+            "idCheval": 2887565,
+            "numero": 8,
+            "nomCheval": "Mode Al Maury"
+          },
+          {
+            "idParticipation": 21737392,
+            "idCheval": 2892258,
+            "numero": 7,
+            "nomCheval": "Shatoush"
+          },
+          {
+            "idParticipation": 21737389,
+            "idCheval": 2896391,
+            "numero": 4,
+            "nomCheval": "Nout de Littré"
+          },
+          {
+            "idParticipation": 21737401,
+            "idCheval": 2900724,
+            "numero": 16,
+            "nomCheval": "Tayyibah"
+          },
+          {
+            "idParticipation": 21737390,
+            "idCheval": 2897700,
+            "numero": 5,
+            "nomCheval": "Hasna Grine"
+          },
+          {
+            "idParticipation": 21737391,
+            "idCheval": 2898467,
+            "numero": 6,
+            "nomCheval": "Neige de Faust"
+          },
+          {
+            "idParticipation": 21737388,
+            "idCheval": 2899806,
+            "numero": 3,
+            "nomCheval": "Senna"
+          },
+          {
+            "idParticipation": 21737394,
+            "idCheval": 2893362,
+            "numero": 9,
+            "nomCheval": "Ajouz"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5085072,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737386,
+            "idCheval": 2892259,
+            "numero": 1,
+            "nomCheval": "Shakirah"
+          },
+          {
+            "idParticipation": 21737387,
+            "idCheval": 2896386,
+            "numero": 2,
+            "nomCheval": "Janny"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085073,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737387,
+            "idCheval": 2896386,
+            "numero": 2,
+            "nomCheval": "Janny"
+          },
+          {
+            "idParticipation": 21737386,
+            "idCheval": 2892259,
+            "numero": 1,
+            "nomCheval": "Shakirah"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085074,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737387,
+            "idCheval": 2896386,
+            "numero": 2,
+            "nomCheval": "Janny"
+          },
+          {
+            "idParticipation": 21737386,
+            "idCheval": 2892259,
+            "numero": 1,
+            "nomCheval": "Shakirah"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085075,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737386,
+            "idCheval": 2892259,
+            "numero": 1,
+            "nomCheval": "Shakirah"
+          },
+          {
+            "idParticipation": 21737387,
+            "idCheval": 2896386,
+            "numero": 2,
+            "nomCheval": "Janny"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085076,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737387,
+            "idCheval": 2896386,
+            "numero": 2,
+            "nomCheval": "Janny"
+          },
+          {
+            "idParticipation": 21737386,
+            "idCheval": 2892259,
+            "numero": 1,
+            "nomCheval": "Shakirah"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085077,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737387,
+            "idCheval": 2896386,
+            "numero": 2,
+            "nomCheval": "Janny"
+          },
+          {
+            "idParticipation": 21737386,
+            "idCheval": 2892259,
+            "numero": 1,
+            "nomCheval": "Shakirah"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085078,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737387,
+            "idCheval": 2896386,
+            "numero": 2,
+            "nomCheval": "Janny"
+          },
+          {
+            "idParticipation": 21737386,
+            "idCheval": 2892259,
+            "numero": 1,
+            "nomCheval": "Shakirah"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2896386,
+          "numero": 2,
+          "nomCheval": "Janny"
+        },
+        {
+          "points": 2,
+          "idCheval": 2892259,
+          "numero": 1,
+          "nomCheval": "Shakirah"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2892259,
+          "numero": 1,
+          "nomCheval": "Shakirah"
+        },
+        {
+          "points": 2,
+          "idCheval": 2896386,
+          "numero": 2,
+          "nomCheval": "Janny"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

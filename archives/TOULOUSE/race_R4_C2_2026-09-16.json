@@ -1,0 +1,1091 @@
+{
+  "reunion": {
+    "num": 4,
+    "hippodrome": "Toulouse",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1684071,
+    "num": 2,
+    "prix": "Prix de la Croix Falgarde",
+    "time": "17:08:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 2000,
+    "surface": "GAZON",
+    "going": "BON",
+    "corde": "D",
+    "runners": 15,
+    "quinte": false,
+    "condition": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus.",
+    "classe": "CLASSE_4",
+    "depart": null,
+    "penetrometer": 3.2,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "MULTI",
+      "QUARTE_PLUS_REGIONAL",
+      "COUPLE",
+      "TRIO"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 16300,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 8150,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3098,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2282,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1467,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 652,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 407,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 244,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 3,
+      "horse": "Kirby",
+      "horse_id": 2811036,
+      "jockey": "Shana Topin",
+      "trainer": "Philippe Sogorb",
+      "age": 5,
+      "sexe": "HONGRE",
+      "gain": 59541,
+      "poids": 59,
+      "decharge": 55.5,
+      "corde": 8,
+      "valeur": 28,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.9,
+      "cote_geny": 3.2,
+      "musique": "2p6p3p2p0p0p9p0p4p9p",
+      "note": "Vite à l'extérieur [Mimosa des Sources (4)], a pris le meilleur à mi-ligne droite et a ensuite contenu les attaques.",
+      "red_km": "2'05''5",
+      "distance": 2000,
+      "rang": 1,
+      "ecart": "00:02:05,500",
+      "proprietaire": "Gaillard",
+      "casaque": "/web/image/casaque/15/1177715_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Malicia",
+      "horse_id": 2837821,
+      "jockey": "Ioritz Mendizabal",
+      "trainer": "Damien de Watrigant",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 25172,
+      "poids": 56.5,
+      "decharge": null,
+      "corde": 7,
+      "valeur": 25.5,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.2,
+      "cote_geny": 19.6,
+      "musique": "0p0p1p6p4p1p8p(25)0p7p",
+      "note": "Vite derrière le groupe de tête, a bien terminé et a échoué de peu pour le succès.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 2,
+      "ecart": "1",
+      "proprietaire": "Naccache",
+      "casaque": "/web/image/casaque/46/1173146_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Atamak",
+      "horse_id": 2827894,
+      "jockey": "Adeline Mérou",
+      "trainer": "Guillaume Soulie",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 17663,
+      "poids": 56,
+      "decharge": 54.5,
+      "corde": 5,
+      "valeur": 25,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 9.3,
+      "cote_geny": 9.7,
+      "musique": "8p2p4p1p0p0p0p0p0p8p",
+      "note": "Vite sur une quatrième ligne à la corde, a bien terminé pour prendre le second accessit près du but, échouant de peu pour un meilleur classement.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 3,
+      "ecart": "CENC",
+      "proprietaire": "Serrano",
+      "casaque": "/web/image/casaque/70/1169470_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Amity",
+      "horse_id": 2835345,
+      "jockey": "Samy Le Quilleuc",
+      "trainer": "Miguel Alonso Roldan",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 31204,
+      "poids": 56,
+      "decharge": null,
+      "corde": 10,
+      "valeur": 25,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 6.2,
+      "cote_geny": 5.1,
+      "musique": "5p2p1p7p0p9p8p3p0p9p",
+      "note": "Vite sur une quatrième ligne en épaisseur, a bien terminé et a échoué de peu pour un accessit.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 4,
+      "ecart": "3/4",
+      "proprietaire": "Diaz",
+      "casaque": "/web/image/casaque/69/1168369_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Mimosa des Sources",
+      "horse_id": 2821322,
+      "jockey": "Nuno Manuel Lopes Duarte",
+      "trainer": "Olivier Trigodet",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 14494,
+      "poids": 59,
+      "decharge": null,
+      "corde": 6,
+      "valeur": 28,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18,
+      "cote_geny": 19,
+      "musique": "7p2p2p2p4p1p3pAhAhTh",
+      "note": "Vite en tête, a été dominée pour le succès à mi-ligne droite par [Kirby (3)], puis s'est bien défendue tout en concédant les accessits près du but.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 5,
+      "ecart": "CENC",
+      "proprietaire": "Le Provost",
+      "casaque": "/web/image/casaque/04/1006104_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 13,
+      "horse": "Angel Charly",
+      "horse_id": 2741411,
+      "jockey": "Delphine Santiago",
+      "trainer": "Charles Gourdain",
+      "age": 6,
+      "sexe": "FEMELLE",
+      "gain": 78602,
+      "poids": 55,
+      "decharge": 53.5,
+      "corde": 13,
+      "valeur": 24,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 11.6,
+      "cote_geny": 13.1,
+      "musique": "6p0p4p2p5p6p0p4p3p3p",
+      "note": "Venue de la seconde moitié de peloton, a comblé du terrain dans la phase finale, échouant de peu pour un meilleur classement.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 6,
+      "ecart": "CENC",
+      "proprietaire": "Garavaglia-Drion",
+      "casaque": "/web/image/casaque/30/1108730_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 14,
+      "horse": "Jureer",
+      "horse_id": 2691731,
+      "jockey": "Romain Dubord",
+      "trainer": "Lara Le Geay",
+      "age": 8,
+      "sexe": "HONGRE",
+      "gain": 41680,
+      "poids": 55,
+      "decharge": null,
+      "corde": 4,
+      "valeur": 24,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 125,
+      "cote_geny": 138,
+      "musique": "0p6p(24)2p8p0p2p4p9p0p",
+      "note": "Venu de la seconde moitié de peloton, n'a pas mal terminé, mais sans espérer mieux.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 7,
+      "ecart": "2 1/2",
+      "proprietaire": "Le Geay",
+      "casaque": "/web/image/casaque/14/1037414_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Charm King",
+      "horse_id": 2596166,
+      "jockey": "Alexandre Gavilan",
+      "trainer": "Jacques Piednoel",
+      "age": 9,
+      "sexe": "HONGRE",
+      "gain": 173101,
+      "poids": 57.5,
+      "decharge": null,
+      "corde": 9,
+      "valeur": 26.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 6.7,
+      "cote_geny": 7.9,
+      "musique": "3p1p4p3p2p4p1p0p7p0p",
+      "note": "Vite derrière le groupe de tête, a plafonné à mi-ligne droite.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 8,
+      "ecart": "TETE",
+      "proprietaire": "Dos Santos",
+      "casaque": "/web/image/casaque/80/1131680_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Tamaghu",
+      "horse_id": 2821198,
+      "jockey": "Alejandro Gutiérrez Val",
+      "trainer": "Miguel Alonso Roldan",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 23735,
+      "poids": 60,
+      "decharge": null,
+      "corde": 12,
+      "valeur": 29,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 23.7,
+      "cote_geny": 15.9,
+      "musique": "4p6p3p0p6p4p(25)2p7p7p",
+      "note": "Vite au sein du peloton, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 9,
+      "ecart": "3/4",
+      "proprietaire": "Simon",
+      "casaque": "/web/image/casaque/08/1055408_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Crocus Borget",
+      "horse_id": 2725013,
+      "jockey": "Anthony Crastus",
+      "trainer": "Jérôme Andreu",
+      "age": 8,
+      "sexe": "HONGRE",
+      "gain": 82918,
+      "poids": 56,
+      "decharge": null,
+      "corde": 15,
+      "valeur": 25,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 36.1,
+      "cote_geny": 34.7,
+      "musique": "0p2p6p8p4p1p6p2p(25)4p",
+      "note": "Vite à l'arrière-garde, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 10,
+      "ecart": "1 3/4",
+      "proprietaire": "Khalifa",
+      "casaque": "/web/image/casaque/53/1124153_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 12,
+      "horse": "Seven For All",
+      "horse_id": 2869031,
+      "jockey": "Antoine Werlé",
+      "trainer": "Caroline Bonin",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 3454,
+      "poids": 56,
+      "decharge": null,
+      "corde": 3,
+      "valeur": 25,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 43.8,
+      "cote_geny": 35.8,
+      "musique": "3p0p5p0p0p0p7p7p(25)0p",
+      "note": "N'a jamais pu quitter l'arrière-garde.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 11,
+      "ecart": "CTETE",
+      "proprietaire": "Descourty",
+      "casaque": "/web/image/casaque/31/1207431_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Zodd",
+      "horse_id": 2828986,
+      "jockey": "Mathilde Collet",
+      "trainer": "Céline Hérisson de Beauvoir",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 39119,
+      "poids": 58,
+      "decharge": 55.5,
+      "corde": 14,
+      "valeur": 27,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 13,
+      "cote_geny": 16.2,
+      "musique": "2p5p4p7p7p0p3p6p(25)4p",
+      "note": "Venu se placer derrière le groupe de tête dans le premier tournant, a plafonné peu après l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 12,
+      "ecart": "NEZ",
+      "proprietaire": "Hérisson de Beauvoir",
+      "casaque": "/web/image/casaque/77/1005077_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Pianino",
+      "horse_id": 2744411,
+      "jockey": "Clément Cadel",
+      "trainer": "Lara Le Geay",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 100920,
+      "poids": 60,
+      "decharge": null,
+      "corde": 2,
+      "valeur": 29,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 103,
+      "cote_geny": 123,
+      "musique": "(25)3p8p4p(24)3p3p4p7p4p",
+      "note": "Vite au sein du peloton, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 13,
+      "ecart": "TETE",
+      "proprietaire": "Le Geay",
+      "casaque": "/web/image/casaque/14/1037414_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 15,
+      "horse": "Golden State",
+      "horse_id": 2777131,
+      "jockey": "Clément Merille",
+      "trainer": "Grégory Ortiz",
+      "age": 5,
+      "sexe": "HONGRE",
+      "gain": 73384,
+      "poids": 54.5,
+      "decharge": null,
+      "corde": 11,
+      "valeur": 23.5,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 62.2,
+      "cote_geny": 92.7,
+      "musique": "0p7p6p0p7p1p3p8p6p4p",
+      "note": "Vite à l'arrière-garde, n'a jamais été dangereux.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 14,
+      "ecart": "1 3/4",
+      "proprietaire": "Ortiz",
+      "casaque": "/web/image/casaque/89/1094789_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Cha'hore",
+      "horse_id": 2813151,
+      "jockey": "Hugo Mouesan",
+      "trainer": "Julian Resimont",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 25343,
+      "poids": 57,
+      "decharge": null,
+      "corde": 1,
+      "valeur": 26,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 92.2,
+      "cote_geny": 81.8,
+      "musique": "0p(25)3p8p2p5p4p8p4p7p",
+      "note": "N'a jamais pu quitter l'arrière-garde.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 15,
+      "ecart": "LOIN",
+      "proprietaire": "Lauffer",
+      "casaque": "/web/image/casaque/82/1185882_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Kirby",
+                  "numero": null,
+                  "id": 2811036,
+                  "idParticipation": 21737373
+                },
+                {
+                  "nom": "Charm King",
+                  "numero": null,
+                  "id": 2596166,
+                  "idParticipation": 21737376
+                },
+                {
+                  "nom": "Amity",
+                  "numero": null,
+                  "id": 2835345,
+                  "idParticipation": 21737380
+                }
+              ]
+            },
+            "commentaire": "[Kirby (3)] aime aller de l'avant et tourne autour du pot, il devrait lutter activement pour la victoire. [Charm King (6)] fait preuve d'une belle constance dans ce genre de confrontations. [Amity (10)] aurait pu finir plus près la dernière fois, il convient de la surveiller de près.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Kirby (3)] incontournable",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21737373,
+            "idCheval": 2811036,
+            "numero": 3,
+            "nomCheval": "Kirby"
+          },
+          {
+            "idParticipation": 21737376,
+            "idCheval": 2596166,
+            "numero": 6,
+            "nomCheval": "Charm King"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21737380,
+            "idCheval": 2835345,
+            "numero": 10,
+            "nomCheval": "Amity"
+          },
+          {
+            "idParticipation": 21737375,
+            "idCheval": 2828986,
+            "numero": 5,
+            "nomCheval": "Zodd"
+          },
+          {
+            "idParticipation": 21737382,
+            "idCheval": 2869031,
+            "numero": 12,
+            "nomCheval": "Seven For All"
+          },
+          {
+            "idParticipation": 21737381,
+            "idCheval": 2827894,
+            "numero": 11,
+            "nomCheval": "Atamak"
+          },
+          {
+            "idParticipation": 21737383,
+            "idCheval": 2741411,
+            "numero": 13,
+            "nomCheval": "Angel Charly"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21737379,
+            "idCheval": 2725013,
+            "numero": 9,
+            "nomCheval": "Crocus Borget"
+          },
+          {
+            "idParticipation": 21737371,
+            "idCheval": 2821198,
+            "numero": 1,
+            "nomCheval": "Tamaghu"
+          },
+          {
+            "idParticipation": 21737374,
+            "idCheval": 2821322,
+            "numero": 4,
+            "nomCheval": "Mimosa des Sources"
+          },
+          {
+            "idParticipation": 21737385,
+            "idCheval": 2777131,
+            "numero": 15,
+            "nomCheval": "Golden State"
+          },
+          {
+            "idParticipation": 21737377,
+            "idCheval": 2813151,
+            "numero": 7,
+            "nomCheval": "Cha'hore"
+          },
+          {
+            "idParticipation": 21737378,
+            "idCheval": 2837821,
+            "numero": 8,
+            "nomCheval": "Malicia"
+          },
+          {
+            "idParticipation": 21737372,
+            "idCheval": 2744411,
+            "numero": 2,
+            "nomCheval": "Pianino"
+          },
+          {
+            "idParticipation": 21737384,
+            "idCheval": 2691731,
+            "numero": 14,
+            "nomCheval": "Jureer"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": {
+      "bloc": [
+        {
+          "chevaux": {
+            "cheval": [
+              {
+                "nom": "Zodd",
+                "numero": null,
+                "id": 2828986,
+                "idParticipation": 21737375
+              }
+            ]
+          },
+          "commentaire": "[Zodd (5)] : Ses trois dernières tentatives plaident en sa faveur. Toujours maiden, il va bien finir par trouver son jour.",
+          "id": "dm"
+        }
+      ],
+      "id": null,
+      "idParticipation": null
+    },
+    "presse": [
+      {
+        "id": 5085030,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737376,
+            "idCheval": 2596166,
+            "numero": 6,
+            "nomCheval": "Charm King"
+          },
+          {
+            "idParticipation": 21737380,
+            "idCheval": 2835345,
+            "numero": 10,
+            "nomCheval": "Amity"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085031,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737373,
+            "idCheval": 2811036,
+            "numero": 3,
+            "nomCheval": "Kirby"
+          },
+          {
+            "idParticipation": 21737376,
+            "idCheval": 2596166,
+            "numero": 6,
+            "nomCheval": "Charm King"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085032,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737373,
+            "idCheval": 2811036,
+            "numero": 3,
+            "nomCheval": "Kirby"
+          },
+          {
+            "idParticipation": 21737376,
+            "idCheval": 2596166,
+            "numero": 6,
+            "nomCheval": "Charm King"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085033,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737376,
+            "idCheval": 2596166,
+            "numero": 6,
+            "nomCheval": "Charm King"
+          },
+          {
+            "idParticipation": 21737380,
+            "idCheval": 2835345,
+            "numero": 10,
+            "nomCheval": "Amity"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085034,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737376,
+            "idCheval": 2596166,
+            "numero": 6,
+            "nomCheval": "Charm King"
+          },
+          {
+            "idParticipation": 21737380,
+            "idCheval": 2835345,
+            "numero": 10,
+            "nomCheval": "Amity"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085035,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737376,
+            "idCheval": 2596166,
+            "numero": 6,
+            "nomCheval": "Charm King"
+          },
+          {
+            "idParticipation": 21737380,
+            "idCheval": 2835345,
+            "numero": 10,
+            "nomCheval": "Amity"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085036,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737373,
+            "idCheval": 2811036,
+            "numero": 3,
+            "nomCheval": "Kirby"
+          },
+          {
+            "idParticipation": 21737376,
+            "idCheval": 2596166,
+            "numero": 6,
+            "nomCheval": "Charm King"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2596166,
+          "numero": 6,
+          "nomCheval": "Charm King"
+        },
+        {
+          "points": 3,
+          "idCheval": 2811036,
+          "numero": 3,
+          "nomCheval": "Kirby"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2835345,
+          "numero": 10,
+          "nomCheval": "Amity"
+        },
+        {
+          "points": 3,
+          "idCheval": 2596166,
+          "numero": 6,
+          "nomCheval": "Charm King"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

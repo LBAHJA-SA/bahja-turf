@@ -1,0 +1,800 @@
+{
+  "reunion": {
+    "num": 2,
+    "hippodrome": "Momarken [Norvège]",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1683857,
+    "num": 5,
+    "prix": "Prix des Roses",
+    "time": "13:11:00",
+    "specialty": "ATTELE",
+    "discipline": "TROT",
+    "distance": 2140,
+    "surface": "POUZZOLANE",
+    "going": "BON",
+    "corde": "G",
+    "runners": 12,
+    "quinte": false,
+    "condition": "Pour 3 à 14 ans, n'ayant pas gagné 4.620 €.",
+    "classe": null,
+    "depart": "AUTOSTART",
+    "penetrometer": null,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "COUPLE",
+      "TRIO",
+      "MINI_MULTI"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 4500,
+      "devise": "EUR",
+      "details": []
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 3,
+      "horse": "Carlos Mahia",
+      "horse_id": 2891852,
+      "jockey": "Marcus Totland  Aadland",
+      "trainer": "Kristian Malmin",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 3260,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.5,
+      "cote_geny": 3,
+      "musique": "2a3a2a3a",
+      "note": null,
+      "red_km": "1'16''7",
+      "distance": 2140,
+      "rang": 1,
+      "ecart": "00:01:16,700",
+      "proprietaire": "Ok Vatnöy As",
+      "casaque": "/web/image/casaque/84/1195384_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Just Like Me",
+      "horse_id": 2897286,
+      "jockey": "Eirik Höitomt",
+      "trainer": "Sigbjörn Kolnes",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 1466,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 9.7,
+      "cote_geny": 31.2,
+      "musique": "3a3a",
+      "note": null,
+      "red_km": "1'16''7",
+      "distance": 2140,
+      "rang": 2,
+      "ecart": null,
+      "proprietaire": "Kolnes",
+      "casaque": "/web/image/casaque/07/1019307_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 12,
+      "horse": "G.G. Finca",
+      "horse_id": 2892444,
+      "jockey": "Fredrik Sandmoe  Lyssand",
+      "trainer": "Erik Killingmo",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 1596,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "DD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 6.2,
+      "cote_geny": 7,
+      "musique": "1a4a",
+      "note": null,
+      "red_km": "1'16''8",
+      "distance": 2140,
+      "rang": 3,
+      "ecart": null,
+      "proprietaire": "Killingmo",
+      "casaque": "/web/image/casaque/75/1139175_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Skinny Jeans",
+      "horse_id": 2854907,
+      "jockey": "Per Oleg Midtfjeld",
+      "trainer": "Rune Solberg",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 1851,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 9.1,
+      "cote_geny": 12.8,
+      "musique": "10a3a9a(25)5a2a3a5a",
+      "note": null,
+      "red_km": "1'16''9",
+      "distance": 2140,
+      "rang": 4,
+      "ecart": null,
+      "proprietaire": "Solberg",
+      "casaque": "/web/image/casaque/41/1056741_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Salett",
+      "horse_id": 2860168,
+      "jockey": "Knut Arne Ödegaard",
+      "trainer": "Knut Arne Ödegaard",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 3845,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 13.6,
+      "cote_geny": 7.5,
+      "musique": "6a3a8a(25)4a4a1a11a",
+      "note": null,
+      "red_km": "1'16''9",
+      "distance": 2140,
+      "rang": 5,
+      "ecart": null,
+      "proprietaire": "Kristiansen",
+      "casaque": "/web/image/casaque/96/1090196_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Little Big Man",
+      "horse_id": 2873865,
+      "jockey": "Magnus-Teien Gundersen",
+      "trainer": "Gro Rognerud",
+      "age": 5,
+      "sexe": "HONGRE",
+      "gain": 2663,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 16.4,
+      "cote_geny": 20.2,
+      "musique": "5aDa5a1aAa3aAa(25)4a",
+      "note": null,
+      "red_km": "1'17''0",
+      "distance": 2140,
+      "rang": 6,
+      "ecart": null,
+      "proprietaire": "Rognerud",
+      "casaque": "/web/image/casaque/87/1165087_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "I.D.Ingenious",
+      "horse_id": 2866661,
+      "jockey": "Ove Bakkevold Reime",
+      "trainer": "Michelle Johnsrud",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 3299,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 39.4,
+      "cote_geny": 46.9,
+      "musique": "9a3a(25)5a2a",
+      "note": null,
+      "red_km": "1'17''0",
+      "distance": 2140,
+      "rang": 7,
+      "ecart": null,
+      "proprietaire": "Johnsrud",
+      "casaque": "/web/image/casaque/94/1191194_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Quite Nice",
+      "horse_id": 2878332,
+      "jockey": "Lars Anvar Kolle",
+      "trainer": "Björn Larsen",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 3780,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.5,
+      "cote_geny": 3.7,
+      "musique": "2a6a1a1a",
+      "note": null,
+      "red_km": "1'17''1",
+      "distance": 2140,
+      "rang": 8,
+      "ecart": null,
+      "proprietaire": "Johnsen",
+      "casaque": "/web/image/casaque/66/1112466_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Kleopatra Light",
+      "horse_id": 2808334,
+      "jockey": "Erlend Rennesvik",
+      "trainer": "Sigbjörn Kolnes",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 2383,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 134,
+      "cote_geny": 116,
+      "musique": "6a9a(25)8a2a5a8aDa7a(24)DaAa",
+      "note": null,
+      "red_km": "1'17''2",
+      "distance": 2140,
+      "rang": 9,
+      "ecart": null,
+      "proprietaire": "Gro  Rognerud & Stall Timogco",
+      "casaque": "/web/image/casaque/05/1204605_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Papa Child",
+      "horse_id": 2726089,
+      "jockey": "Adrian Solberg Akselsen",
+      "trainer": "Anne Grete Rasmussen",
+      "age": 7,
+      "sexe": "FEMELLE",
+      "gain": 4353,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 30.5,
+      "cote_geny": 19.4,
+      "musique": "2a(23)3a(22)8a3a2a4a3a",
+      "note": null,
+      "red_km": "1'17''6",
+      "distance": 2140,
+      "rang": 10,
+      "ecart": null,
+      "proprietaire": "Team Pc",
+      "casaque": "/web/image/casaque/17/1175917_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Desperatechoice",
+      "horse_id": 2787848,
+      "jockey": "Robert Kruse",
+      "trainer": "Linn Therese Fagerheim",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 3524,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 95.5,
+      "cote_geny": 93,
+      "musique": "(24)8a3a2a2a(23)8a2a6a",
+      "note": null,
+      "red_km": "1'17''7",
+      "distance": 2140,
+      "rang": 11,
+      "ecart": null,
+      "proprietaire": "Fagerheim",
+      "casaque": "/web/image/casaque/89/1117789_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "My West Gift",
+      "horse_id": 2845156,
+      "jockey": "Asbjörn Tengsareid",
+      "trainer": "Jan-Arne Raab",
+      "age": 6,
+      "sexe": "FEMELLE",
+      "gain": 1313,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 151,
+      "cote_geny": 188,
+      "musique": "6a7a6a5a8a(25)5a5a7a",
+      "note": null,
+      "red_km": "1'18''4",
+      "distance": 2140,
+      "rang": 12,
+      "ecart": null,
+      "proprietaire": "Haugen",
+      "casaque": "/web/image/casaque/72/1061772_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": null,
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5085156,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734917,
+            "idCheval": 2891852,
+            "numero": 3,
+            "nomCheval": "Carlos Mahia"
+          },
+          {
+            "idParticipation": 21734918,
+            "idCheval": 2892444,
+            "numero": 12,
+            "nomCheval": "G.G. Finca"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085157,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734917,
+            "idCheval": 2891852,
+            "numero": 3,
+            "nomCheval": "Carlos Mahia"
+          },
+          {
+            "idParticipation": 21734918,
+            "idCheval": 2892444,
+            "numero": 12,
+            "nomCheval": "G.G. Finca"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085158,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734916,
+            "idCheval": 2878332,
+            "numero": 9,
+            "nomCheval": "Quite Nice"
+          },
+          {
+            "idParticipation": 21734917,
+            "idCheval": 2891852,
+            "numero": 3,
+            "nomCheval": "Carlos Mahia"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085159,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734916,
+            "idCheval": 2878332,
+            "numero": 9,
+            "nomCheval": "Quite Nice"
+          },
+          {
+            "idParticipation": 21734917,
+            "idCheval": 2891852,
+            "numero": 3,
+            "nomCheval": "Carlos Mahia"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085160,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734917,
+            "idCheval": 2891852,
+            "numero": 3,
+            "nomCheval": "Carlos Mahia"
+          },
+          {
+            "idParticipation": 21734916,
+            "idCheval": 2878332,
+            "numero": 9,
+            "nomCheval": "Quite Nice"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085161,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734917,
+            "idCheval": 2891852,
+            "numero": 3,
+            "nomCheval": "Carlos Mahia"
+          },
+          {
+            "idParticipation": 21734916,
+            "idCheval": 2878332,
+            "numero": 9,
+            "nomCheval": "Quite Nice"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085162,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734916,
+            "idCheval": 2878332,
+            "numero": 9,
+            "nomCheval": "Quite Nice"
+          },
+          {
+            "idParticipation": 21734917,
+            "idCheval": 2891852,
+            "numero": 3,
+            "nomCheval": "Carlos Mahia"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2891852,
+          "numero": 3,
+          "nomCheval": "Carlos Mahia"
+        },
+        {
+          "points": 3,
+          "idCheval": 2878332,
+          "numero": 9,
+          "nomCheval": "Quite Nice"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 3,
+          "idCheval": 2891852,
+          "numero": 3,
+          "nomCheval": "Carlos Mahia"
+        },
+        {
+          "points": 2,
+          "idCheval": 2878332,
+          "numero": 9,
+          "nomCheval": "Quite Nice"
+        },
+        {
+          "points": 2,
+          "idCheval": 2892444,
+          "numero": 12,
+          "nomCheval": "G.G. Finca"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

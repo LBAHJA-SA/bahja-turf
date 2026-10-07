@@ -1,0 +1,800 @@
+{
+  "reunion": {
+    "num": 2,
+    "hippodrome": "Momarken [Norvège]",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1683855,
+    "num": 3,
+    "prix": "Prix des Marguerites",
+    "time": "12:07:00",
+    "specialty": "ATTELE",
+    "discipline": "TROT",
+    "distance": 2140,
+    "surface": "POUZZOLANE",
+    "going": "BON",
+    "corde": "G",
+    "runners": 12,
+    "quinte": false,
+    "condition": "Pour 3 à 14 ans, n'ayant pas gagné 2.700 €.",
+    "classe": null,
+    "depart": "AUTOSTART",
+    "penetrometer": null,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "COUPLE",
+      "TRIO",
+      "MINI_MULTI"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 5450,
+      "devise": "EUR",
+      "details": []
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 9,
+      "horse": "Classichap's Lady",
+      "horse_id": 2898876,
+      "jockey": "Magnus-Teien Gundersen",
+      "trainer": "Anders Lundström Wolden",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 1344,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.3,
+      "cote_geny": 6.2,
+      "musique": "3a2a5a",
+      "note": null,
+      "red_km": "1'16''1",
+      "distance": 2140,
+      "rang": 1,
+      "ecart": "00:01:16,100",
+      "proprietaire": "Fox Racing",
+      "casaque": "/web/image/casaque/16/1091616_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Linus",
+      "horse_id": 2900376,
+      "jockey": "Eirik Höitomt",
+      "trainer": "Morten M. Ottersen",
+      "age": 3,
+      "sexe": "HONGRE",
+      "gain": 1344,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 1.8,
+      "cote_geny": 2.5,
+      "musique": "1a",
+      "note": null,
+      "red_km": "1'16''2",
+      "distance": 2140,
+      "rang": 2,
+      "ecart": null,
+      "proprietaire": "Stall Ottersen",
+      "casaque": "/web/image/casaque/92/1131992_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Lilyhammer",
+      "horse_id": 2895294,
+      "jockey": "Lars Anvar Kolle",
+      "trainer": "Anette Riise",
+      "age": 3,
+      "sexe": "HONGRE",
+      "gain": 2657,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.6,
+      "cote_geny": 5.5,
+      "musique": "Da1a11a1a",
+      "note": null,
+      "red_km": "1'16''4",
+      "distance": 2140,
+      "rang": 3,
+      "ecart": null,
+      "proprietaire": "Riise",
+      "casaque": "/web/image/casaque/28/1101728_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Eye In The Sky",
+      "horse_id": 2883696,
+      "jockey": "Per Oleg Midtfjeld",
+      "trainer": "Per Oleg Midtfjeld",
+      "age": 3,
+      "sexe": "HONGRE",
+      "gain": 546,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "DD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 16.3,
+      "cote_geny": 11.8,
+      "musique": "4a5a",
+      "note": null,
+      "red_km": "1'17''1",
+      "distance": 2140,
+      "rang": 4,
+      "ecart": null,
+      "proprietaire": "Hartvig",
+      "casaque": "/web/image/casaque/53/1208453_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 12,
+      "horse": "Vassa Re",
+      "horse_id": 2883785,
+      "jockey": "Roy-Atle Ruud Nilsen",
+      "trainer": "Emma Rattfält",
+      "age": 6,
+      "sexe": "FEMELLE",
+      "gain": 686,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 116,
+      "cote_geny": 26.2,
+      "musique": "Da9a6a",
+      "note": null,
+      "red_km": "1'17''5",
+      "distance": 2140,
+      "rang": 5,
+      "ecart": null,
+      "proprietaire": "Rattfält",
+      "casaque": "/web/image/casaque/16/1052116_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Logical Exit",
+      "horse_id": 2867368,
+      "jockey": "Gunnar Austevoll",
+      "trainer": "Björnar Blakkestad",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 1428,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "DD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 14,
+      "cote_geny": 10.2,
+      "musique": "8a1a5a(25)7a",
+      "note": null,
+      "red_km": "1'17''9",
+      "distance": 2140,
+      "rang": 6,
+      "ecart": null,
+      "proprietaire": "Blakkestad",
+      "casaque": "/web/image/casaque/70/1044770_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Big Time Rush",
+      "horse_id": 2829028,
+      "jockey": "Kristian Björneröd",
+      "trainer": "Marthe-Lise Strande",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 769,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 82.8,
+      "cote_geny": 30.4,
+      "musique": "8a8a(25)3a3a(24)8a7a",
+      "note": null,
+      "red_km": "1'18''1",
+      "distance": 2140,
+      "rang": 7,
+      "ecart": null,
+      "proprietaire": "Strande",
+      "casaque": "/web/image/casaque/11/1099311_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Indy de Young",
+      "horse_id": 2901241,
+      "jockey": "Jarle-Andre Smedtorp",
+      "trainer": "Elin Bergseth",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 0,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 93.8,
+      "cote_geny": 38.4,
+      "musique": "inédit",
+      "note": null,
+      "red_km": "1'18''5",
+      "distance": 2140,
+      "rang": 8,
+      "ecart": null,
+      "proprietaire": "Stable",
+      "casaque": "/web/image/casaque/23/1211523_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Ingenuity",
+      "horse_id": 2845152,
+      "jockey": "Ole-Christian Kjenner",
+      "trainer": "Jaran Gjerløw",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 1518,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 65.9,
+      "cote_geny": 30.4,
+      "musique": "7a4a6a3a7a(25)7a6a",
+      "note": null,
+      "red_km": "1'18''8",
+      "distance": 2140,
+      "rang": 9,
+      "ecart": null,
+      "proprietaire": "Jaran Gjerlöw & Elisabeth Gjerlöw",
+      "casaque": "/web/image/casaque/33/1140233_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "I.D.Janeece",
+      "horse_id": 2901240,
+      "jockey": "Paw Mahony",
+      "trainer": "Paw Mahony",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 14.8,
+      "cote_geny": 13.1,
+      "musique": "inédite",
+      "note": null,
+      "red_km": null,
+      "distance": 2140,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Mahony",
+      "casaque": "/web/image/casaque/95/1148295_1.png",
+      "etat": "PARTANT",
+      "incident": "DISQUALIFIE_ALLURES_IRREGULIERES"
+    },
+    {
+      "num": 8,
+      "horse": "Mr. Siboney",
+      "horse_id": 2901242,
+      "jockey": "Björn Steine",
+      "trainer": "Tom Forkerud",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 0,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 22.2,
+      "cote_geny": 66.5,
+      "musique": "inédit",
+      "note": null,
+      "red_km": null,
+      "distance": 2140,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Bergsvåg",
+      "casaque": "/web/image/casaque/19/1108619_1.png",
+      "etat": "NON_PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Marwin",
+      "horse_id": 2890096,
+      "jockey": "Asbjörn Tengsareid",
+      "trainer": "Anders Røken",
+      "age": 5,
+      "sexe": "HONGRE",
+      "gain": 1176,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.2,
+      "cote_geny": 5.8,
+      "musique": "4a4a3a6a8a9a",
+      "note": null,
+      "red_km": null,
+      "distance": 2140,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Røken",
+      "casaque": "/web/image/casaque/75/1107275_1.png",
+      "etat": "NON_PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": null,
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5085142,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734892,
+            "idCheval": 2900376,
+            "numero": 5,
+            "nomCheval": "Linus"
+          },
+          {
+            "idParticipation": 21734891,
+            "idCheval": 2898876,
+            "numero": 9,
+            "nomCheval": "Classichap's Lady"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085143,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734892,
+            "idCheval": 2900376,
+            "numero": 5,
+            "nomCheval": "Linus"
+          },
+          {
+            "idParticipation": 21734891,
+            "idCheval": 2898876,
+            "numero": 9,
+            "nomCheval": "Classichap's Lady"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085144,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734890,
+            "idCheval": 2895294,
+            "numero": 4,
+            "nomCheval": "Lilyhammer"
+          },
+          {
+            "idParticipation": 21734891,
+            "idCheval": 2898876,
+            "numero": 9,
+            "nomCheval": "Classichap's Lady"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085145,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734892,
+            "idCheval": 2900376,
+            "numero": 5,
+            "nomCheval": "Linus"
+          },
+          {
+            "idParticipation": 21734891,
+            "idCheval": 2898876,
+            "numero": 9,
+            "nomCheval": "Classichap's Lady"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085146,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734891,
+            "idCheval": 2898876,
+            "numero": 9,
+            "nomCheval": "Classichap's Lady"
+          },
+          {
+            "idParticipation": 21734892,
+            "idCheval": 2900376,
+            "numero": 5,
+            "nomCheval": "Linus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085147,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734892,
+            "idCheval": 2900376,
+            "numero": 5,
+            "nomCheval": "Linus"
+          },
+          {
+            "idParticipation": 21734891,
+            "idCheval": 2898876,
+            "numero": 9,
+            "nomCheval": "Classichap's Lady"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085148,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734892,
+            "idCheval": 2900376,
+            "numero": 5,
+            "nomCheval": "Linus"
+          },
+          {
+            "idParticipation": 21734891,
+            "idCheval": 2898876,
+            "numero": 9,
+            "nomCheval": "Classichap's Lady"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2900376,
+          "numero": 5,
+          "nomCheval": "Linus"
+        },
+        {
+          "points": 1,
+          "idCheval": 2895294,
+          "numero": 4,
+          "nomCheval": "Lilyhammer"
+        },
+        {
+          "points": 1,
+          "idCheval": 2898876,
+          "numero": 9,
+          "nomCheval": "Classichap's Lady"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 6,
+          "idCheval": 2898876,
+          "numero": 9,
+          "nomCheval": "Classichap's Lady"
+        },
+        {
+          "points": 1,
+          "idCheval": 2900376,
+          "numero": 5,
+          "nomCheval": "Linus"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

@@ -1,0 +1,738 @@
+{
+  "reunion": {
+    "num": 4,
+    "hippodrome": "Toulouse",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1684077,
+    "num": 8,
+    "prix": "Prix Kann",
+    "time": "20:32:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 2200,
+    "surface": "GAZON",
+    "going": "BON",
+    "corde": "D",
+    "runners": 7,
+    "quinte": false,
+    "condition": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus inscrits à la naissance au Stud-Book arabe de leur pays d'origine affilié à la WAHO. Poids : 4 ans, 56 kg ; 5 ans et au-dessus, 57,5 kg. Surcharges accumulées pour les sommes reçues en victoires et places cette année : 1 kg par 3.000. Les chevaux n'ayant jamais couru recevront 2 kg.",
+    "classe": null,
+    "depart": null,
+    "penetrometer": 3.2,
+    "types_pari": [
+      "SIMPLE",
+      "TRIO_ORDRE",
+      "COUPLE_ORDRE",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 16000,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 8000,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3040,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2240,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1440,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 640,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 400,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 240,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Tabarus",
+      "horse_id": 2851633,
+      "jockey": "Alexandre Gavilan",
+      "trainer": "Thomas Fourcy",
+      "age": 5,
+      "sexe": "HONGRE",
+      "gain": 6720,
+      "poids": 59.5,
+      "decharge": null,
+      "corde": 4,
+      "valeur": 41,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.4,
+      "cote_geny": 10.2,
+      "musique": "5p2p2p(25)7p8p0p",
+      "note": "Tout de suite en tête, s'est imposé de bout en bout, luttant pour le succès depuis l'entrée de la ligne droite et repoussant l'attaque de [Marsoul (2)] dans les cent cinquante derniers mètres.",
+      "red_km": "2'32''1",
+      "distance": 2200,
+      "rang": 1,
+      "ecart": "00:02:32,100",
+      "proprietaire": "Al Thani",
+      "casaque": "/web/image/casaque/55/1014655_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Marsoul",
+      "horse_id": 2870012,
+      "jockey": "Fabrice Veron",
+      "trainer": "Thomas Fourcy",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 6720,
+      "poids": 58,
+      "decharge": null,
+      "corde": 6,
+      "valeur": 43,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.3,
+      "cote_geny": 2.2,
+      "musique": "4p3p2p",
+      "note": "Vite à mi-peloton, puis sur une deuxième ligne en épaisseur en face, a lutté pour le succès avec l'animateur [Tabarus (1)] dans les cent cinquante derniers mètres et l'a attaqué en vain.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 2,
+      "ecart": "1/4",
+      "proprietaire": "Al Shaqab Racing",
+      "casaque": "/web/image/casaque/66/1095666_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Chakifa",
+      "horse_id": 2864293,
+      "jockey": "Guillaume Guedj-Gay",
+      "trainer": "Damien de Watrigant",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 9240,
+      "poids": 56,
+      "decharge": null,
+      "corde": 2,
+      "valeur": 40,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.8,
+      "cote_geny": 5.1,
+      "musique": "3p2p6p3p0p(25)4p5p",
+      "note": "Vite troisième à la corde, puis derrière l'animateur [Tabarus (1)], a lutté avec les deux premiers jusqu'à cent mètres du but, puis a conservé le second accessit en résistant à [Sky Amber Krf (3)].",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 3,
+      "ecart": "1 1/4",
+      "proprietaire": "Mandore",
+      "casaque": "/web/image/casaque/26/1123126_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Sky Amber Krf",
+      "horse_id": 2848130,
+      "jockey": "Nuno Manuel Lopes Duarte",
+      "trainer": "Olivier Trigodet",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 19595,
+      "poids": 58,
+      "decharge": 56.5,
+      "corde": 5,
+      "valeur": 43.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4,
+      "cote_geny": 5.2,
+      "musique": "8p6p5p7p2p2p(25)3p4p2p",
+      "note": "Vite parmi les derniers, a progressé en troisième épaisseur dans le tournant final, puis a bien terminé, échouant de peu pour le second accessit.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 4,
+      "ecart": "ENC",
+      "proprietaire": "Ruiz-Fouquet",
+      "casaque": "/web/image/casaque/21/1185821_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Antinori",
+      "horse_id": 2865496,
+      "jockey": "Ioritz Mendizabal",
+      "trainer": "Damien de Watrigant",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 5100,
+      "poids": 56,
+      "decharge": null,
+      "corde": 3,
+      "valeur": 40,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 10.2,
+      "cote_geny": 7.3,
+      "musique": "3p0p0p8p(25)3p6p",
+      "note": "Vite derrière l'animateur [Tabarus (1)], puis à son extérieur en face, a lutté pour le succès jusqu'à mi-ligne droite, puis a dû se contenter de la cinquième place.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 5,
+      "ecart": "1",
+      "proprietaire": "Assed",
+      "casaque": "/web/image/casaque/08/1197108_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Agandjir",
+      "horse_id": 2872818,
+      "jockey": "Maxime Foulon",
+      "trainer": "Roberto-Carlos Montenegro",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 6280,
+      "poids": 56,
+      "decharge": null,
+      "corde": 7,
+      "valeur": 40,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 21.1,
+      "cote_geny": 29,
+      "musique": "6p5p4p0p(25)2p",
+      "note": "Vite dernier, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 6,
+      "ecart": "1/4",
+      "proprietaire": "Clos",
+      "casaque": "/web/image/casaque/63/1014563_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Fraiztagada Darteo",
+      "horse_id": 2872824,
+      "jockey": "Clément Merille",
+      "trainer": "Roberto-Carlos Montenegro",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 240,
+      "poids": 54,
+      "decharge": null,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 46.6,
+      "cote_geny": 90.3,
+      "musique": "7p(25)9p",
+      "note": "Vite parmi les derniers, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 7,
+      "ecart": "3/4",
+      "proprietaire": "Leonhardt",
+      "casaque": "/web/image/casaque/64/1176164_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Tabarus",
+                  "numero": null,
+                  "id": 2851633,
+                  "idParticipation": 21737444
+                },
+                {
+                  "nom": "Marsoul",
+                  "numero": null,
+                  "id": 2870012,
+                  "idParticipation": 21737445
+                },
+                {
+                  "nom": "Chakifa",
+                  "numero": null,
+                  "id": 2864293,
+                  "idParticipation": 21737448
+                }
+              ]
+            },
+            "commentaire": "[Chakifa (5)] aligne les bonnes perfs cette saison et mériterait d'ouvrir son palmarès. [Tabarus (1)] a bien tenu sa partie lors de ses plus récentes prestations, il va falloir compter sur lui. [Marsoul (2)], modèle de constance, a le droit de nourrir des ambitions.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "La course de [Chakifa (5)] ?",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21737448,
+            "idCheval": 2864293,
+            "numero": 5,
+            "nomCheval": "Chakifa"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21737444,
+            "idCheval": 2851633,
+            "numero": 1,
+            "nomCheval": "Tabarus"
+          },
+          {
+            "idParticipation": 21737445,
+            "idCheval": 2870012,
+            "numero": 2,
+            "nomCheval": "Marsoul"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21737446,
+            "idCheval": 2848130,
+            "numero": 3,
+            "nomCheval": "Sky Amber Krf"
+          },
+          {
+            "idParticipation": 21737449,
+            "idCheval": 2865496,
+            "numero": 6,
+            "nomCheval": "Antinori"
+          },
+          {
+            "idParticipation": 21737447,
+            "idCheval": 2872818,
+            "numero": 4,
+            "nomCheval": "Agandjir"
+          },
+          {
+            "idParticipation": 21737450,
+            "idCheval": 2872824,
+            "numero": 7,
+            "nomCheval": "Fraiztagada Darteo"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5085065,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737448,
+            "idCheval": 2864293,
+            "numero": 5,
+            "nomCheval": "Chakifa"
+          },
+          {
+            "idParticipation": 21737444,
+            "idCheval": 2851633,
+            "numero": 1,
+            "nomCheval": "Tabarus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085066,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737448,
+            "idCheval": 2864293,
+            "numero": 5,
+            "nomCheval": "Chakifa"
+          },
+          {
+            "idParticipation": 21737444,
+            "idCheval": 2851633,
+            "numero": 1,
+            "nomCheval": "Tabarus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085067,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737448,
+            "idCheval": 2864293,
+            "numero": 5,
+            "nomCheval": "Chakifa"
+          },
+          {
+            "idParticipation": 21737444,
+            "idCheval": 2851633,
+            "numero": 1,
+            "nomCheval": "Tabarus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085068,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737448,
+            "idCheval": 2864293,
+            "numero": 5,
+            "nomCheval": "Chakifa"
+          },
+          {
+            "idParticipation": 21737444,
+            "idCheval": 2851633,
+            "numero": 1,
+            "nomCheval": "Tabarus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085069,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737448,
+            "idCheval": 2864293,
+            "numero": 5,
+            "nomCheval": "Chakifa"
+          },
+          {
+            "idParticipation": 21737444,
+            "idCheval": 2851633,
+            "numero": 1,
+            "nomCheval": "Tabarus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085070,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737448,
+            "idCheval": 2864293,
+            "numero": 5,
+            "nomCheval": "Chakifa"
+          },
+          {
+            "idParticipation": 21737444,
+            "idCheval": 2851633,
+            "numero": 1,
+            "nomCheval": "Tabarus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085071,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737448,
+            "idCheval": 2864293,
+            "numero": 5,
+            "nomCheval": "Chakifa"
+          },
+          {
+            "idParticipation": 21737444,
+            "idCheval": 2851633,
+            "numero": 1,
+            "nomCheval": "Tabarus"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 7,
+          "idCheval": 2864293,
+          "numero": 5,
+          "nomCheval": "Chakifa"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 7,
+          "idCheval": 2851633,
+          "numero": 1,
+          "nomCheval": "Tabarus"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

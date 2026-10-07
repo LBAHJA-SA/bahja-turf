@@ -1,0 +1,609 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        2
+      ],
+      [
+        6
+      ],
+      [
+        13
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ],
+      [
+        1
+      ],
+      [
+        11
+      ],
+      [
+        9
+      ],
+      [
+        12
+      ],
+      [
+        10
+      ],
+      [
+        7
+      ],
+      [
+        8
+      ],
+      [
+        5
+      ]
+    ],
+    "classe": "INTERNATIONALE_AUTOSTART",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2100,
+    "going": null,
+    "imminent": false,
+    "num": 4,
+    "penetrometer": null,
+    "prix": "U.E.T ELITE CIRCUIT FINALE",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 13,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1728670500000,
+    "types_pari": [
+      "TIC_TROIS",
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "QUINTE_PLUS",
+      "QUARTE_PLUS",
+      "TIERCE",
+      "MINI_MULTI",
+      "SIMPLE_GAGNANT",
+      "SIMPLE_PLACE",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": 1,
+      "cote_pmu": 16,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 4.4,
+          "disq": 6,
+          "n": 29,
+          "top5": 15
+        }
+      },
+      "etat": null,
+      "gain": 152069600,
+      "horse": "AMPIA MEDE SM",
+      "horse_id": null,
+      "jockey": "THEO DUVALDESTIN",
+      "musique": "2A2ADA3ADA3A3A7A233A",
+      "nombreCourses": 42,
+      "nombrePlaces": 18,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 17,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Scuderia SE.FIN. (ITY)",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "TH. DUVALDESTIN",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": 2,
+      "cote_pmu": 4.7,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 2.2,
+          "disq": 2,
+          "n": 7,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 140587000,
+      "horse": "GO ON BOY",
+      "horse_id": null,
+      "jockey": "R. DERIEUX",
+      "musique": "1A2A2A2ADA1ADA3A2A4A",
+      "nombreCourses": 58,
+      "nombrePlaces": 29,
+      "nombrePlacesSecond": 14,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 16,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie NIXONN",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "R. DERIEUX",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 3,
+      "cote_pmu": 2,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.4,
+          "disq": 3,
+          "n": 26,
+          "top5": 20
+        },
+        "D4": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 4,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 235466000,
+      "horse": "IDAO DE TILLARD",
+      "horse_id": null,
+      "jockey": "CL. DUVALDESTIN",
+      "musique": "3A1A2A6A3A1A1A1A231A",
+      "nombreCourses": 45,
+      "nombrePlaces": 9,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 31,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "C. SEVESTRE",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "TH. DUVALDESTIN",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 4,
+      "cote_pmu": 16,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 12,
+          "top5": 10
+        }
+      },
+      "etat": null,
+      "gain": 88726500,
+      "horse": "BORUPS VICTORY",
+      "horse_id": null,
+      "jockey": "D. WAJERSTEN",
+      "musique": "3A1A1A2A4A1A",
+      "nombreCourses": 0,
+      "nombrePlaces": 0,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Stall DROAD AB (SWE)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Daniel WAJERSTEN",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": 5,
+      "cote_pmu": 157,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6.1,
+          "disq": 2,
+          "n": 19,
+          "top5": 7
+        },
+        "D2A": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 4,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 5,
+          "top5": 5
+        },
+        "P4": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 97838000,
+      "horse": "ELVIS DU VALLON",
+      "horse_id": null,
+      "jockey": "D. THOMAIN",
+      "musique": "6A6A5A0A4A0A2A3A6A3A",
+      "nombreCourses": 110,
+      "nombrePlaces": 69,
+      "nombrePlacesSecond": 17,
+      "nombrePlacesTroisieme": 13,
+      "nombreVictoires": 17,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "UNION STABLE (BEL)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "CH. CUILLER",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": 6,
+      "cote_pmu": 30,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.6,
+          "disq": 1,
+          "n": 10,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 3.6,
+          "disq": 3,
+          "n": 17,
+          "top5": 12
+        }
+      },
+      "etat": null,
+      "gain": 73089000,
+      "horse": "GANAY DE BANVILLE",
+      "horse_id": null,
+      "jockey": "J.M. BAZIRE",
+      "musique": "7A4ADA3A5A6A1A8A5A0A",
+      "nombreCourses": 56,
+      "nombrePlaces": 30,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 10,
+      "nombreVictoires": 15,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie VALLIERE RACING",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.M. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": 7,
+      "cote_pmu": 22,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 3.8,
+          "disq": 5,
+          "n": 27,
+          "top5": 18
+        },
+        "P4": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 92656000,
+      "horse": "EMERAUDE DE BAIS",
+      "horse_id": null,
+      "jockey": "F. NIVARD",
+      "musique": "DA3A1ADA0ADA1A2A4A8A",
+      "nombreCourses": 106,
+      "nombrePlaces": 40,
+      "nombrePlacesSecond": 10,
+      "nombrePlacesTroisieme": 10,
+      "nombreVictoires": 20,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Hervé CARLUS",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "B. GOETZ",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 8,
+      "cote_pmu": 113,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 6.1,
+          "disq": 4,
+          "n": 27,
+          "top5": 11
+        }
+      },
+      "etat": null,
+      "gain": 78119000,
+      "horse": "INMAROSA",
+      "horse_id": null,
+      "jockey": "LEO ABRIVARD",
+      "musique": "0A4A8A7A9A4A9A4A2ADA",
+      "nombreCourses": 54,
+      "nombrePlaces": 33,
+      "nombrePlacesSecond": 14,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. COTTEL",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "L.CL. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": 9,
+      "cote_pmu": 98,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "-": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D2": {
+          "avgRang": 3.7,
+          "disq": 1,
+          "n": 19,
+          "top5": 14
+        }
+      },
+      "etat": null,
+      "gain": 54242400,
+      "horse": "ORACLE TILE",
+      "horse_id": null,
+      "jockey": "B. GOOP",
+      "musique": "8A5A1A5A2A230A2A1A2A",
+      "nombreCourses": 13,
+      "nombrePlaces": 5,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Stall READY TO WIN (NOR)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "K. MALMIN",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": 10,
+      "cote_pmu": 44,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 3.5,
+          "disq": 2,
+          "n": 30,
+          "top5": 22
+        }
+      },
+      "etat": null,
+      "gain": 367338100,
+      "horse": "VIVID WISE AS",
+      "horse_id": null,
+      "jockey": "M. ABRIVARD",
+      "musique": "9A3ADA5A6A9A2ADA228A",
+      "nombreCourses": 37,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 13,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Scuderia BIVANS SRL (ITY)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "A. GOCCIADORO",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": 11,
+      "cote_pmu": 65,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5.5,
+          "disq": 3,
+          "n": 9,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 69625500,
+      "horse": "BANDERAS BI",
+      "horse_id": null,
+      "jockey": "A. GOCCIADORO",
+      "musique": "1A5A3A6A1A7A",
+      "nombreCourses": 0,
+      "nombrePlaces": 0,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "PACHINO HORSE SRLS (ITY)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "A. GOCCIADORO",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 12,
+      "cote_pmu": 9.5,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 3.6,
+          "disq": 2,
+          "n": 7,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 222460200,
+      "horse": "FRANCESCO ZET",
+      "horse_id": null,
+      "jockey": "O. KIHLSTROM",
+      "musique": "1A2A1A1A4A3A",
+      "nombreCourses": 0,
+      "nombrePlaces": 0,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "BRIXTON MEDICAL AB (SWE)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Daniel REDEN",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": 13,
+      "cote_pmu": 52,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 6,
+          "disq": 4,
+          "n": 29,
+          "top5": 12
+        }
+      },
+      "etat": null,
+      "gain": 169882000,
+      "horse": "HOOKER BERRY",
+      "horse_id": null,
+      "jockey": "N. BAZIRE",
+      "musique": "4A8A5A1A7A8A3A6A3A9A",
+      "nombreCourses": 70,
+      "nombrePlaces": 43,
+      "nombrePlacesSecond": 11,
+      "nombrePlacesTroisieme": 12,
+      "nombreVictoires": 14,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "M. ALADENISE",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.M. BAZIRE",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2024-10-11",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

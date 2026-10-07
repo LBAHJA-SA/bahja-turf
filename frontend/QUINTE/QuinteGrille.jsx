@@ -674,6 +674,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           </div>
           <nav style={{ display: 'flex', gap: 16 }}>
             <Link to="/" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
+            <Link to="/coply" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Coply</Link>
             <Link to="/quinte" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
           </nav>
         </div>

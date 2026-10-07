@@ -1,0 +1,947 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        11
+      ],
+      [
+        18
+      ],
+      [
+        17
+      ],
+      [
+        13
+      ],
+      [
+        4
+      ],
+      [
+        15
+      ],
+      [
+        8
+      ],
+      [
+        3
+      ],
+      [
+        9
+      ],
+      [
+        16
+      ],
+      [
+        1
+      ]
+    ],
+    "classe": "INCONNU",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2850,
+    "going": null,
+    "imminent": false,
+    "num": 4,
+    "penetrometer": null,
+    "prix": "CRITERIUM DES 4 ANS",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 18,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1757769300000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "TIC_TROIS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 29,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 6,
+          "disq": 3,
+          "n": 8,
+          "top5": 2
+        },
+        "P2": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 5,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 12684500,
+      "horse": "LUTIN DE REUX",
+      "horse_id": "LUTIN DE REUX-ET SI SEULEMENT-FACE TIME BOURBON",
+      "jockey": "A. ABRIVARD",
+      "musique": "1a7a2a4a3aDa1a6a3a(24)",
+      "nombreCourses": 18,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Y. DESMET",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "L.CL. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 53,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.3,
+          "disq": 2,
+          "n": 11,
+          "top5": 7
+        },
+        "P2": {
+          "avgRang": 7,
+          "disq": 1,
+          "n": 6,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 14845500,
+      "horse": "LUMINOSITY",
+      "horse_id": "LUMINOSITY-EARTH VICTORY-ROYAL DREAM",
+      "jockey": "M. ABRIVARD",
+      "musique": "5a3a2a3aDa6a0a(24)9a3a",
+      "nombreCourses": 23,
+      "nombrePlaces": 16,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Etienne DUBOIS",
+      "sexe": "FEMELLES",
+      "statut": "NON_PARTANT",
+      "trainer": "Etienne DUBOIS",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 90,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 4,
+          "n": 15,
+          "top5": 6
+        },
+        "P4": {
+          "avgRang": 4.4,
+          "disq": 0,
+          "n": 10,
+          "top5": 8
+        }
+      },
+      "etat": null,
+      "gain": 15393000,
+      "horse": "LARA DU GOUTIER",
+      "horse_id": "LARA DU GOUTIER-DEMOISELLE MIKA-READY CASH",
+      "jockey": "D. BONNE",
+      "musique": "2a9aDa4a1a8a(24)2a5a5a",
+      "nombreCourses": 21,
+      "nombrePlaces": 17,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie SAINT MARTIN",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "D. BONNE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 126,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.5,
+          "disq": 0,
+          "n": 4,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 6.8,
+          "disq": 3,
+          "n": 7,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 3,
+          "disq": 1,
+          "n": 9,
+          "top5": 7
+        }
+      },
+      "etat": null,
+      "gain": 15427000,
+      "horse": "LOUVE DE REVE D'OR",
+      "horse_id": "LOUVE DE REVE D'OR-CHARMEUSE DE SIMM-BOLD EAGLE",
+      "jockey": "B. ROCHARD",
+      "musique": "9a0a5a3a2a(24)2a2a3a7a",
+      "nombreCourses": 17,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Pascal GERARD",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "M. SASSIER",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 71,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 4.4,
+          "disq": 1,
+          "n": 8,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 5.7,
+          "disq": 0,
+          "n": 7,
+          "top5": 3
+        },
+        "P4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 15681000,
+      "horse": "LOVE LETTER",
+      "horse_id": "LOVE LETTER-ENDIABLEE-ROYAL DREAM",
+      "jockey": "J. DUBOIS",
+      "musique": "3a4a8a4a2a6a(24)5a3m7a",
+      "nombreCourses": 24,
+      "nombrePlaces": 21,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. DUBOIS",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "J. DUBOIS",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 75,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.3,
+          "disq": 4,
+          "n": 7,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 3,
+          "n": 3,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 1,
+          "n": 3,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 16956500,
+      "horse": "LISSANDRO",
+      "horse_id": "LISSANDRO-FANTASIA DREAM-READY CASH",
+      "jockey": "Y. LEBOURGEOIS",
+      "musique": "Da0aDa8a1a1a(24)1a1a3a",
+      "nombreCourses": 16,
+      "nombrePlaces": 3,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie des CHARMES",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "N. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 17,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.2,
+          "disq": 2,
+          "n": 11,
+          "top5": 9
+        },
+        "D4": {
+          "avgRang": 4.5,
+          "disq": 3,
+          "n": 5,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 20676000,
+      "horse": "LORD DU GERS",
+      "horse_id": "LORD DU GERS-ELLE VIENT DU GERS-FACE TIME BOURBON",
+      "jockey": "N. BAZIRE",
+      "musique": "1a2a1aDa2a4a2a(24)1a1a",
+      "nombreCourses": 12,
+      "nombrePlaces": 5,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Jean-Michel RANCOULE",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "N. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 20,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.4,
+          "disq": 0,
+          "n": 10,
+          "top5": 10
+        },
+        "D4": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 20905500,
+      "horse": "LIVE TO TELL",
+      "horse_id": "LIVE TO TELL-FABULOUS SAM-FIFTY KALOUMA",
+      "jockey": "A. BARRIER",
+      "musique": "3a1a2a3a3a3a1a2a2a(24)",
+      "nombreCourses": 16,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. COTTEL",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "A. BUISSON",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 190,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 6,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 6,
+          "disq": 2,
+          "n": 6,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 3.2,
+          "disq": 0,
+          "n": 6,
+          "top5": 5
+        }
+      },
+      "etat": null,
+      "gain": 21964000,
+      "horse": "LEMON TREE",
+      "horse_id": "LEMON TREE-DIVINE JET-FACE TIME BOURBON",
+      "jockey": "W. BIGEON",
+      "musique": "2a8a5a0a9a5a(24)1a0a6a",
+      "nombreCourses": 21,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. SECHE",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "W. BIGEON",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 118,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 8.4,
+          "disq": 2,
+          "n": 7,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 6.2,
+          "disq": 1,
+          "n": 11,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 5.4,
+          "disq": 1,
+          "n": 6,
+          "top5": 3
+        },
+        "P4": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 4,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 22852800,
+      "horse": "LITTLE BROWN",
+      "horse_id": "LITTLE BROWN-BLUE GRASS-GOETMALS WOOD",
+      "jockey": "D. THOMAIN",
+      "musique": "6a7a0a4a4a3a0a0a(24)8a",
+      "nombreCourses": 29,
+      "nombrePlaces": 16,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "CH. TOULORGE",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Ph. ALLAIRE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 3.8,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.6,
+          "disq": 1,
+          "n": 9,
+          "top5": 8
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 1,
+          "n": 4,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 23035000,
+      "horse": "LANCIER DU GOUTIER",
+      "horse_id": "LANCIER DU GOUTIER-ELISSI JAMES-READY CASH",
+      "jockey": "THEO DUVALDESTIN",
+      "musique": "2a4a3a1a1a1a1a5a(24)1a",
+      "nombreCourses": 14,
+      "nombrePlaces": 4,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie SAINT MARTIN",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "TH. DUVALDESTIN",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 138,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6,
+          "disq": 1,
+          "n": 12,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 5.3,
+          "disq": 1,
+          "n": 4,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 3.7,
+          "disq": 0,
+          "n": 7,
+          "top5": 4
+        },
+        "P4": {
+          "avgRang": 6.2,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 25577500,
+      "horse": "LIGHT MY FIRE",
+      "horse_id": "LIGHT MY FIRE-REETHI RAH JET-READY CASH",
+      "jockey": "F. NIVARD",
+      "musique": "7a9a5a6a5a0a2a2a7a4a",
+      "nombreCourses": 26,
+      "nombrePlaces": 14,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Emmanuel PETIT",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "S. GUARATO",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 100,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.4,
+          "disq": 2,
+          "n": 19,
+          "top5": 12
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 7.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 2.8,
+          "disq": 1,
+          "n": 5,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 27900500,
+      "horse": "LEARN TO FLY",
+      "horse_id": "LEARN TO FLY-SANTANNA GIRL-URIEL SPEED",
+      "jockey": "P.PH. PLOQUIN",
+      "musique": "8a3a4a4a6a6a1a1aDa(24)",
+      "nombreCourses": 32,
+      "nombrePlaces": 18,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme M. STIHL",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "F. SENET",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 24,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5,
+          "disq": 4,
+          "n": 10,
+          "top5": 3
+        },
+        "P2": {
+          "avgRang": 2.5,
+          "disq": 2,
+          "n": 6,
+          "top5": 4
+        },
+        "P4": {
+          "avgRang": 4.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 31497000,
+      "horse": "LONDON",
+      "horse_id": "LONDON-TILDA-ROCKFELLER CENTER",
+      "jockey": "M. MOTTIER",
+      "musique": "4a6a3a4a0a1a5aDa7a(24)",
+      "nombreCourses": 23,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme D. MOTTIER",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "M. MOTTIER",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 243,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6.2,
+          "disq": 3,
+          "n": 9,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 6.8,
+          "disq": 1,
+          "n": 5,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 6,
+          "top5": 4
+        },
+        "P4": {
+          "avgRang": 5.3,
+          "disq": 0,
+          "n": 3,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 31946000,
+      "horse": "LOULOU DE MYE",
+      "horse_id": "LOULOU DE MYE-ARISTA DE MYE-CLIF DU POMMEREUX",
+      "jockey": "R.CH. LARUE",
+      "musique": "Da9a2a7a8a8a6a6a9a5a",
+      "nombreCourses": 28,
+      "nombrePlaces": 17,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie du MONT JOLY",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "R.CH. LARUE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 2.9,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.6,
+          "disq": 1,
+          "n": 8,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 5.2,
+          "disq": 1,
+          "n": 5,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 3,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 47390000,
+      "horse": "LIZA JOSSELYN",
+      "horse_id": "LIZA JOSSELYN-BELINA JOSSELYN-READY CASH",
+      "jockey": "J.M. BAZIRE",
+      "musique": "1a1a1aDa(24)4aDa1aDa1a",
+      "nombreCourses": 18,
+      "nombrePlaces": 3,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 11,
+      "nonPartant": null,
+      "num": 16,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Yvan BERNARD",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "N. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 8.7,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.6,
+          "disq": 1,
+          "n": 8,
+          "top5": 7
+        },
+        "D4": {
+          "avgRang": 3.4,
+          "disq": 1,
+          "n": 6,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": 1.7,
+          "disq": 1,
+          "n": 4,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 62672500,
+      "horse": "LOMBOK JIEL",
+      "horse_id": "LOMBOK JIEL-SURABAYA JIEL-ENINO DU POMMEREUX",
+      "jockey": "P.Y. VERVA",
+      "musique": "4a5a6a1a2a2a(24)Da2a1a",
+      "nombreCourses": 21,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 17,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie LUCK",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.L. DERSOIR",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 9.1,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.2,
+          "disq": 0,
+          "n": 6,
+          "top5": 5
+        },
+        "D4": {
+          "avgRang": 4.3,
+          "disq": 2,
+          "n": 9,
+          "top5": 5
+        },
+        "P4": {
+          "avgRang": 2,
+          "disq": 1,
+          "n": 9,
+          "top5": 8
+        }
+      },
+      "etat": null,
+      "gain": 68815500,
+      "horse": "LOVINO BELLO",
+      "horse_id": "LOVINO BELLO-LOUVINA BELLA-VILLAGE MYSTIC",
+      "jockey": "E. RAFFIN",
+      "musique": "6a5a2a1a2a3a(24)1a3a2a",
+      "nombreCourses": 23,
+      "nombrePlaces": 13,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 18,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme S. ROBERT",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "TH. DUVALDESTIN",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2025-09-13",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

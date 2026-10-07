@@ -1,0 +1,899 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        14
+      ],
+      [
+        16
+      ],
+      [
+        15
+      ],
+      [
+        6
+      ],
+      [
+        4
+      ],
+      [
+        12
+      ],
+      [
+        8
+      ],
+      [
+        17
+      ],
+      [
+        2
+      ],
+      [
+        10
+      ],
+      [
+        3
+      ],
+      [
+        7
+      ],
+      [
+        13
+      ],
+      [
+        1
+      ],
+      [
+        11
+      ]
+    ],
+    "classe": "INCONNU",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 3000,
+    "going": null,
+    "imminent": false,
+    "num": 4,
+    "penetrometer": null,
+    "prix": "CRITERIUM DES 5 ANS",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 17,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1726319700000,
+    "types_pari": [
+      "TIC_TROIS",
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "QUINTE_PLUS",
+      "MULTI",
+      "QUARTE_PLUS",
+      "TIERCE",
+      "SIMPLE_GAGNANT",
+      "SIMPLE_PLACE",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 69,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 5.5,
+          "disq": 2,
+          "n": 16,
+          "top5": 8
+        },
+        "P4": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 16131000,
+      "horse": "JOLIE POUPEE",
+      "horse_id": null,
+      "jockey": "R. MARTY",
+      "musique": "5A3ADA8A1A6A5A2A1A23",
+      "nombreCourses": 23,
+      "nombrePlaces": 7,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "FRANCOIS NICOLLE",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "J.M. BAUDOUIN",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 50,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 14,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4.2,
+          "disq": 1,
+          "n": 25,
+          "top5": 17
+        }
+      },
+      "etat": null,
+      "gain": 17829000,
+      "horse": "JABALPUR",
+      "horse_id": null,
+      "jockey": "G. GELORMINI",
+      "musique": "0A1A1ADA5A6A6A233A2A",
+      "nombreCourses": 31,
+      "nombrePlaces": 17,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "TRAMONTOM SRL",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "A. CHAVATTE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 142,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.4,
+          "disq": 1,
+          "n": 6,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 4,
+          "n": 19,
+          "top5": 7
+        }
+      },
+      "etat": null,
+      "gain": 18798000,
+      "horse": "JOCONDE SIBEY",
+      "horse_id": null,
+      "jockey": "L. BAUDOUIN",
+      "musique": "7A7A8ADA4A2A6A1A231A",
+      "nombreCourses": 24,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Y. DESMET",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "J.M. BAUDOUIN",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 137,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6.5,
+          "disq": 4,
+          "n": 19,
+          "top5": 7
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 11,
+          "top5": 7
+        }
+      },
+      "etat": null,
+      "gain": 23524000,
+      "horse": "JUST A MIDI",
+      "horse_id": null,
+      "jockey": "S. BAUDE",
+      "musique": "0ADA1A3A4ADA238A9A3A",
+      "nombreCourses": 31,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Frédéric DUVIVIER",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "F. SOULOY",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 83,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.8,
+          "disq": 5,
+          "n": 13,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 1.8,
+          "disq": 5,
+          "n": 10,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 26996000,
+      "horse": "JOUMBA DE GUEZ",
+      "horse_id": null,
+      "jockey": "N. BAZIRE",
+      "musique": "6ADM2M3A8A0A231MDA3M",
+      "nombreCourses": 26,
+      "nombrePlaces": 7,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie VAUTORS",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "J.M. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 27,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6.1,
+          "disq": 2,
+          "n": 19,
+          "top5": 8
+        },
+        "D4": {
+          "avgRang": 3.2,
+          "disq": 1,
+          "n": 6,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 5.8,
+          "disq": 0,
+          "n": 4,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 27065000,
+      "horse": "JANGO VICI",
+      "horse_id": null,
+      "jockey": "B. ROCHARD",
+      "musique": "2A6A2ADA2A5A5A6A1ADA",
+      "nombreCourses": 39,
+      "nombrePlaces": 18,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Cuadra HERMANOS INIGUEZ",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "A. RIPOLL RIGO",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 49,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4.5,
+          "disq": 3,
+          "n": 24,
+          "top5": 14
+        },
+        "P4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 28717000,
+      "horse": "JIOSCO DE PHYT'S",
+      "horse_id": null,
+      "jockey": "E. RAFFIN",
+      "musique": "0ADA2A1A5A2ADA0A1A4A",
+      "nombreCourses": 34,
+      "nombrePlaces": 14,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie OSTHEIMER",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.M. BAUDOUIN",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 8.2,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.8,
+          "disq": 0,
+          "n": 5,
+          "top5": 3
+        },
+        "D2A": {
+          "avgRang": 9.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 4.8,
+          "disq": 1,
+          "n": 19,
+          "top5": 11
+        }
+      },
+      "etat": null,
+      "gain": 31138000,
+      "horse": "JAZZMAN DEBAILLEUL",
+      "horse_id": null,
+      "jockey": "F. NIVARD",
+      "musique": "2A2A1A1A1A1A1A232A1A",
+      "nombreCourses": 31,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "E. SZIRMAY",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "E. SZIRMAY",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 37,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.5,
+          "disq": 1,
+          "n": 7,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 3,
+          "n": 3,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 2,
+          "disq": 1,
+          "n": 3,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 34805000,
+      "horse": "JASPER DES CHARMES",
+      "horse_id": null,
+      "jockey": "P.PH. PLOQUIN",
+      "musique": "4A1M1ADADMDADA7A8A23",
+      "nombreCourses": 32,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie des CHARMES",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.M. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 67,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.2,
+          "disq": 5,
+          "n": 14,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 3.6,
+          "disq": 2,
+          "n": 9,
+          "top5": 6
+        },
+        "P2": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 7,
+          "top5": 6
+        }
+      },
+      "etat": null,
+      "gain": 39165000,
+      "horse": "JACK TONIC",
+      "horse_id": null,
+      "jockey": "THEO DUVALDESTIN",
+      "musique": "5A3A2ADA1A8A0A235A8A",
+      "nombreCourses": 30,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie HARAS DES QUATRE VENTS",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "TH. DUVALDESTIN",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 246,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 7.4,
+          "disq": 2,
+          "n": 9,
+          "top5": 3
+        },
+        "D2A": {
+          "avgRang": 2,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 6,
+          "disq": 1,
+          "n": 4,
+          "top5": 2
+        },
+        "P2": {
+          "avgRang": 3.7,
+          "disq": 2,
+          "n": 11,
+          "top5": 7
+        },
+        "P4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 41041800,
+      "horse": "JOYNER SPORT",
+      "horse_id": null,
+      "jockey": "R. BOUVIER",
+      "musique": "5ADA9ADADM237M5M0A2A",
+      "nombreCourses": 41,
+      "nombrePlaces": 23,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "B. GOETZ",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "B. GOETZ",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 76,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 5.8,
+          "disq": 1,
+          "n": 11,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 6.1,
+          "disq": 1,
+          "n": 9,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 4,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 43165000,
+      "horse": "J'AIME LE FOOT",
+      "horse_id": null,
+      "jockey": "A. LHERETE",
+      "musique": "0A3M0A3A4A5A3A5ADA23",
+      "nombreCourses": 34,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Olivier MOREL",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Antoine LHERETE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 12,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.8,
+          "disq": 2,
+          "n": 14,
+          "top5": 8
+        },
+        "D4": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 5.3,
+          "disq": 2,
+          "n": 5,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 4,
+          "disq": 3,
+          "n": 7,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 46918000,
+      "horse": "JUSTIN BOLD",
+      "horse_id": null,
+      "jockey": "Y. LEBOURGEOIS",
+      "musique": "9A1A5A4A1A1A3A4A239A",
+      "nombreCourses": 44,
+      "nombrePlaces": 22,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 11,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie du DAMIER",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.R. DELLIAUX",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 18,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.8,
+          "disq": 1,
+          "n": 5,
+          "top5": 3
+        },
+        "D2A": {
+          "avgRang": 4.3,
+          "disq": 0,
+          "n": 3,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 2.8,
+          "disq": 2,
+          "n": 17,
+          "top5": 14
+        },
+        "P2": {
+          "avgRang": 9,
+          "disq": 1,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 51517000,
+      "horse": "JOSH POWER",
+      "horse_id": null,
+      "jockey": "S. ERNAULT",
+      "musique": "3A4A4A9A2A4A232A3A4A",
+      "nombreCourses": 40,
+      "nombrePlaces": 23,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 10,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie BG TROT",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "S. ERNAULT",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 48,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.2,
+          "disq": 1,
+          "n": 11,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 5.2,
+          "disq": 0,
+          "n": 6,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 56445000,
+      "horse": "JUST LOVE YOU",
+      "horse_id": null,
+      "jockey": "A. ABRIVARD",
+      "musique": "0A0A0A0A9A233A1A0A3A",
+      "nombreCourses": 29,
+      "nombrePlaces": 8,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 10,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mlle M. BLIARD",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "L.CL. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 1.6,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.4,
+          "disq": 2,
+          "n": 16,
+          "top5": 14
+        },
+        "D4": {
+          "avgRang": 1.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 84365000,
+      "horse": "JUSHUA TREE",
+      "horse_id": null,
+      "jockey": "J.M. BAZIRE",
+      "musique": "1ADA1ADA1A1A231A1A5A",
+      "nombreCourses": 24,
+      "nombrePlaces": 2,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 18,
+      "nonPartant": null,
+      "num": 16,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie OLMENHOF",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.M. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 49,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 8.7,
+          "disq": 3,
+          "n": 6,
+          "top5": 0
+        },
+        "D2A": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 7.6,
+          "disq": 3,
+          "n": 10,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 123083100,
+      "horse": "JUST A GIGOLO",
+      "horse_id": null,
+      "jockey": "D. THOMAIN",
+      "musique": "8A1A6A5A6A0A3ADADA6A",
+      "nombreCourses": 41,
+      "nombrePlaces": 18,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 17,
+      "nonPartant": null,
+      "num": 17,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ph. ALLAIRE",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Ph. ALLAIRE",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2024-09-14",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

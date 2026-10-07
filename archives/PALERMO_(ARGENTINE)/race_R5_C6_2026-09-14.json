@@ -1,0 +1,964 @@
+{
+  "reunion": {
+    "num": 5,
+    "hippodrome": "Palermo (Argentine)",
+    "organizer": "PMU",
+    "date": "2026-09-14"
+  },
+  "course": {
+    "id": 1683291,
+    "num": 6,
+    "prix": "Premio Issa",
+    "time": "20:43:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 1000,
+    "surface": "DIRT",
+    "going": "RAPIDE",
+    "corde": "G",
+    "runners": 17,
+    "quinte": false,
+    "condition": "Pour chevaux entiers, hongres et juments de 4 ans, n'ayant jamais gagné.",
+    "classe": "MAIDEN",
+    "depart": null,
+    "penetrometer": null,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "COUPLE",
+      "TRIO",
+      "MINI_MULTI"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 3350,
+      "devise": "EUR",
+      "details": []
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Amiguito Maipuense",
+      "horse_id": 2900856,
+      "jockey": "Pablo Damian Carrizo",
+      "trainer": "Diego Silvio Guaragna",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 38.2,
+      "cote_geny": 25.8,
+      "musique": "0p5p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 4,
+      "ecart": null,
+      "proprietaire": "Los Demonios",
+      "casaque": "/web/image/casaque/20/1094620_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Soleil Lake",
+      "horse_id": 2900849,
+      "jockey": "Leo Nicolas Acuna",
+      "trainer": "Juan S. Maldotti",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 67.1,
+      "cote_geny": 74.8,
+      "musique": "8p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "America",
+      "casaque": "/web/image/casaque/14/1094614_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Que Glorioso",
+      "horse_id": 2874546,
+      "jockey": "Rodrigo Daniel Bascunan",
+      "trainer": "Mourazos Carlos",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.9,
+      "cote_geny": 18.4,
+      "musique": "4p3p5p10p7p(25)8p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 3,
+      "ecart": null,
+      "proprietaire": "Quemu",
+      "casaque": "/web/image/casaque/29/1074329_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Spectacular Ted",
+      "horse_id": 2875813,
+      "jockey": "Rodriguez Maximiliano Aserito",
+      "trainer": "Jorge Ariel Olivera",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 595,
+      "poids": 57,
+      "decharge": null,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 19.9,
+      "cote_geny": 14.5,
+      "musique": "10p6p2p(25)2p3p2p4p7p2p10p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "America",
+      "casaque": "/web/image/casaque/36/1206836_2.png",
+      "etat": "NON_PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Fernet Puro",
+      "horse_id": 2855551,
+      "jockey": "William Pereyra",
+      "trainer": "Maria Alvarez",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.1,
+      "cote_geny": 7,
+      "musique": "3p2p7p(25)0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 2,
+      "ecart": null,
+      "proprietaire": "Stud Braca",
+      "casaque": "/web/image/casaque/54/1211454_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Aca Estoy Yo",
+      "horse_id": 2900860,
+      "jockey": "Facundo Marcelo Coria",
+      "trainer": "Pablo A Bibiloni",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 6,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 19.2,
+      "cote_geny": 9.9,
+      "musique": "inédit",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "El Tigre De Iriarte",
+      "casaque": "/web/image/casaque/47/1083047_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Peruana War",
+      "horse_id": 2900848,
+      "jockey": "Axel Ezequiel Banegas",
+      "trainer": "Raul-Osvaldo Orlando",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 55,
+      "decharge": null,
+      "corde": 7,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 80.4,
+      "cote_geny": 74.8,
+      "musique": "0p0p10p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "El Fortin",
+      "casaque": "/web/image/casaque/40/1128840_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Soy de Charly",
+      "horse_id": 2900853,
+      "jockey": "Thiago Ever Larrea Frutos",
+      "trainer": "Santiago Emanuel Nievas",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 8,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 44.3,
+      "cote_geny": 54.6,
+      "musique": "0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Rosada",
+      "casaque": "/web/image/casaque/48/1184348_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Tocate Una Milonga",
+      "horse_id": 2900850,
+      "jockey": "Cesar Cuellar",
+      "trainer": "Cesar Holstein",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 9,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 60.9,
+      "cote_geny": 38.6,
+      "musique": "0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Ali-Ori",
+      "casaque": "/web/image/casaque/62/1110262_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Marroco Moi",
+      "horse_id": 2875567,
+      "jockey": "Martin Javier Valle",
+      "trainer": "Jose A Ionadi",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 10,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 16.3,
+      "cote_geny": 24,
+      "musique": "5p8p5p5p6p0p(25)6p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Don Chilo",
+      "casaque": "/web/image/casaque/89/1211289_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Rey Matrero",
+      "horse_id": 2868478,
+      "jockey": "Rodrigo Gonzalo Blanco",
+      "trainer": "Rolando Vega",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 68,
+      "poids": 57,
+      "decharge": null,
+      "corde": 11,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.5,
+      "cote_geny": 20.2,
+      "musique": "9p5p7p2p0p(25)8p6p8p0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 4,
+      "ecart": null,
+      "proprietaire": "Fortin 7",
+      "casaque": "/web/image/casaque/35/1103235_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 12,
+      "horse": "Iginus",
+      "horse_id": 2865898,
+      "jockey": "Maria Eugenia Schneider",
+      "trainer": "Rafael Osmar Liberatori",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 12,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 29.9,
+      "cote_geny": 16.5,
+      "musique": "10p6p0p10p7p0p(25)3p9p6p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Delfina",
+      "casaque": "/web/image/casaque/17/1206617_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 13,
+      "horse": "El Endiosado",
+      "horse_id": 2900855,
+      "jockey": "Mauricio E. Villaruel",
+      "trainer": "Cesar Peralta",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 13,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.4,
+      "cote_geny": 3.6,
+      "musique": "(25)6p7p2p2p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Solana",
+      "casaque": "/web/image/casaque/39/1145739_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 14,
+      "horse": "Spanky",
+      "horse_id": 2875591,
+      "jockey": "Enrique Carlos E. Weisheim",
+      "trainer": "Maximiliano Emanuel Vallejo",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 14,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 23.5,
+      "cote_geny": 23.2,
+      "musique": "8p8p(25)5p2p8p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Los 3 Hermanos II",
+      "casaque": "/web/image/casaque/14/1075014_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 15,
+      "horse": "Quereme Asi",
+      "horse_id": 2900858,
+      "jockey": "Lautaro Ariel Moreta",
+      "trainer": "Lucas Ademar Guasco",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 15,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 13.3,
+      "cote_geny": 6.7,
+      "musique": "inédit",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 1,
+      "ecart": null,
+      "proprietaire": "Pucara",
+      "casaque": "/web/image/casaque/86/1165186_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 16,
+      "horse": "Mi Talentoso",
+      "horse_id": 2900846,
+      "jockey": "Elvio Gaspar Candia Gutierrez",
+      "trainer": "Maria Alvarez",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 16,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.4,
+      "cote_geny": 15.7,
+      "musique": "0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Prisionero",
+      "casaque": "/web/image/casaque/69/1063769_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 17,
+      "horse": "Chanta Cosmico",
+      "horse_id": 2865226,
+      "jockey": "Juan Cruz Villagra",
+      "trainer": "Juan Benesperi",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 423,
+      "poids": 57,
+      "decharge": null,
+      "corde": 17,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 17.8,
+      "cote_geny": 17.3,
+      "musique": "6p0p8p(25)6p4p7p8p0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Blue Comm",
+      "casaque": "/web/image/casaque/45/1182245_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": null,
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5083897,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728046,
+            "idCheval": 2855551,
+            "numero": 5,
+            "nomCheval": "Fernet Puro"
+          },
+          {
+            "idParticipation": 21728051,
+            "idCheval": 2874546,
+            "numero": 3,
+            "nomCheval": "Que Glorioso"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083898,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728051,
+            "idCheval": 2874546,
+            "numero": 3,
+            "nomCheval": "Que Glorioso"
+          },
+          {
+            "idParticipation": 21728046,
+            "idCheval": 2855551,
+            "numero": 5,
+            "nomCheval": "Fernet Puro"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083899,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728051,
+            "idCheval": 2874546,
+            "numero": 3,
+            "nomCheval": "Que Glorioso"
+          },
+          {
+            "idParticipation": 21728046,
+            "idCheval": 2855551,
+            "numero": 5,
+            "nomCheval": "Fernet Puro"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083900,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728046,
+            "idCheval": 2855551,
+            "numero": 5,
+            "nomCheval": "Fernet Puro"
+          },
+          {
+            "idParticipation": 21728051,
+            "idCheval": 2874546,
+            "numero": 3,
+            "nomCheval": "Que Glorioso"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083901,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728046,
+            "idCheval": 2855551,
+            "numero": 5,
+            "nomCheval": "Fernet Puro"
+          },
+          {
+            "idParticipation": 21728051,
+            "idCheval": 2874546,
+            "numero": 3,
+            "nomCheval": "Que Glorioso"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083902,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728051,
+            "idCheval": 2874546,
+            "numero": 3,
+            "nomCheval": "Que Glorioso"
+          },
+          {
+            "idParticipation": 21728046,
+            "idCheval": 2855551,
+            "numero": 5,
+            "nomCheval": "Fernet Puro"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083903,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728046,
+            "idCheval": 2855551,
+            "numero": 5,
+            "nomCheval": "Fernet Puro"
+          },
+          {
+            "idParticipation": 21728051,
+            "idCheval": 2874546,
+            "numero": 3,
+            "nomCheval": "Que Glorioso"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2855551,
+          "numero": 5,
+          "nomCheval": "Fernet Puro"
+        },
+        {
+          "points": 3,
+          "idCheval": 2874546,
+          "numero": 3,
+          "nomCheval": "Que Glorioso"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2874546,
+          "numero": 3,
+          "nomCheval": "Que Glorioso"
+        },
+        {
+          "points": 3,
+          "idCheval": 2855551,
+          "numero": 5,
+          "nomCheval": "Fernet Puro"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

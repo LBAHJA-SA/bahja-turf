@@ -1,0 +1,794 @@
+{
+  "reunion": {
+    "num": 5,
+    "hippodrome": "Palermo (Argentine)",
+    "organizer": "PMU",
+    "date": "2026-09-14"
+  },
+  "course": {
+    "id": 1683287,
+    "num": 2,
+    "prix": "Premio Cyboogie",
+    "time": "18:34:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 1000,
+    "surface": "DIRT",
+    "going": "RAPIDE",
+    "corde": "G",
+    "runners": 12,
+    "quinte": false,
+    "condition": "Pour pouliches de 3 ans, n'ayant jamais gagné.",
+    "classe": "MAIDEN",
+    "depart": null,
+    "penetrometer": null,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "COUPLE",
+      "TRIO",
+      "MINI_MULTI"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 7700,
+      "devise": "EUR",
+      "details": []
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Angela de Areco",
+      "horse_id": 2900817,
+      "jockey": "Mauricio E. Villaruel",
+      "trainer": "Cesar Peralta",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4,
+      "cote_geny": 3.5,
+      "musique": "2p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Don Florentino",
+      "casaque": "/web/image/casaque/44/1073044_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Serpentia",
+      "horse_id": 2900821,
+      "jockey": "Eduardo Ortega Pavon",
+      "trainer": "Lucas Gaitan",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.9,
+      "cote_geny": 6.3,
+      "musique": "3p2p2p5p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Vacacion",
+      "casaque": "/web/image/casaque/50/1063450_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Morena Texana",
+      "horse_id": 2900819,
+      "jockey": "Martin Montoya",
+      "trainer": "Oscar A. Farias",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 25.5,
+      "cote_geny": 65.3,
+      "musique": "5p7p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Yavel",
+      "casaque": "/web/image/casaque/91/1202791_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Tender Love",
+      "horse_id": 2900835,
+      "jockey": "Pablo Damian Carrizo",
+      "trainer": "Maximiliano Emanuel Vallejo",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 32.5,
+      "cote_geny": 138,
+      "musique": "inédite",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Los 14 Hermanos",
+      "casaque": "/web/image/casaque/62/1136662_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Best Blue",
+      "horse_id": 2900822,
+      "jockey": "William Pereyra",
+      "trainer": "Juan Saldivia",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.4,
+      "cote_geny": 11.5,
+      "musique": "inédite",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Garabo",
+      "casaque": "/web/image/casaque/35/1066135_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Alas de Golondrina",
+      "horse_id": 2882962,
+      "jockey": "Osvaldo Alderete",
+      "trainer": "Juan Godoy",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 6,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 21.3,
+      "cote_geny": 20.8,
+      "musique": "0p8p4p7p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Iv",
+      "casaque": "/web/image/casaque/70/1167870_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "La Nena de Argentina",
+      "horse_id": 2900824,
+      "jockey": "Gustavo Emiliano Calvente",
+      "trainer": "Hector Calvente",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 7,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 34.5,
+      "cote_geny": 17.9,
+      "musique": "6p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 1,
+      "ecart": null,
+      "proprietaire": "Team Calvente",
+      "casaque": "/web/image/casaque/59/1194359_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Start Joy",
+      "horse_id": 2900826,
+      "jockey": "Leo Nicolas Acuna",
+      "trainer": "Mario Berns",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 8,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 64.3,
+      "cote_geny": 65.3,
+      "musique": "inédite",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Tiara",
+      "casaque": "/web/image/casaque/96/1074496_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Valedera Chic",
+      "horse_id": 2900828,
+      "jockey": "Luciano Emanuel Cabrera",
+      "trainer": "Carlos Raul Proenza",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 9,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 54.6,
+      "cote_geny": 20.8,
+      "musique": "0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Los Nominados",
+      "casaque": "/web/image/casaque/03/1109003_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Honor A Juana",
+      "horse_id": 2900829,
+      "jockey": "Rodrigo Gonzalo Blanco",
+      "trainer": "Nahuel Ignacio Periga",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 10,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.9,
+      "cote_geny": 5.1,
+      "musique": "inédite",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Un Sueno",
+      "casaque": "/web/image/casaque/23/1199123_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Rompemarcas Stripes",
+      "horse_id": 2887043,
+      "jockey": "Sergio Antonio Piliero",
+      "trainer": "Juan Carlos Amor",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 11,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 24,
+      "cote_geny": 43.5,
+      "musique": "4p5p8p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Agostina",
+      "casaque": "/web/image/casaque/95/1174195_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 12,
+      "horse": "Gran Pajarita",
+      "horse_id": 2887045,
+      "jockey": "Jorge Luis Peralta",
+      "trainer": "Fernando Abel Garces",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 826,
+      "poids": 56,
+      "decharge": null,
+      "corde": 12,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.8,
+      "cote_geny": 5,
+      "musique": "4p7p3p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 2,
+      "ecart": null,
+      "proprietaire": "Pampeana",
+      "casaque": "/web/image/casaque/91/1200791_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": null,
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5083869,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728007,
+            "idCheval": 2900821,
+            "numero": 2,
+            "nomCheval": "Serpentia"
+          },
+          {
+            "idParticipation": 21728006,
+            "idCheval": 2900817,
+            "numero": 1,
+            "nomCheval": "Angela de Areco"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083870,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728006,
+            "idCheval": 2900817,
+            "numero": 1,
+            "nomCheval": "Angela de Areco"
+          },
+          {
+            "idParticipation": 21728007,
+            "idCheval": 2900821,
+            "numero": 2,
+            "nomCheval": "Serpentia"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083871,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728007,
+            "idCheval": 2900821,
+            "numero": 2,
+            "nomCheval": "Serpentia"
+          },
+          {
+            "idParticipation": 21728006,
+            "idCheval": 2900817,
+            "numero": 1,
+            "nomCheval": "Angela de Areco"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083872,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728007,
+            "idCheval": 2900821,
+            "numero": 2,
+            "nomCheval": "Serpentia"
+          },
+          {
+            "idParticipation": 21728006,
+            "idCheval": 2900817,
+            "numero": 1,
+            "nomCheval": "Angela de Areco"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083873,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728007,
+            "idCheval": 2900821,
+            "numero": 2,
+            "nomCheval": "Serpentia"
+          },
+          {
+            "idParticipation": 21728010,
+            "idCheval": 2900822,
+            "numero": 5,
+            "nomCheval": "Best Blue"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083874,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728007,
+            "idCheval": 2900821,
+            "numero": 2,
+            "nomCheval": "Serpentia"
+          },
+          {
+            "idParticipation": 21728006,
+            "idCheval": 2900817,
+            "numero": 1,
+            "nomCheval": "Angela de Areco"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083875,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728006,
+            "idCheval": 2900817,
+            "numero": 1,
+            "nomCheval": "Angela de Areco"
+          },
+          {
+            "idParticipation": 21728010,
+            "idCheval": 2900822,
+            "numero": 5,
+            "nomCheval": "Best Blue"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2900821,
+          "numero": 2,
+          "nomCheval": "Serpentia"
+        },
+        {
+          "points": 2,
+          "idCheval": 2900817,
+          "numero": 1,
+          "nomCheval": "Angela de Areco"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2900817,
+          "numero": 1,
+          "nomCheval": "Angela de Areco"
+        },
+        {
+          "points": 2,
+          "idCheval": 2900822,
+          "numero": 5,
+          "nomCheval": "Best Blue"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

@@ -1,0 +1,740 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        15
+      ],
+      [
+        6
+      ],
+      [
+        9
+      ],
+      [
+        7
+      ],
+      [
+        5
+      ],
+      [
+        3
+      ],
+      [
+        12
+      ],
+      [
+        10
+      ],
+      [
+        14
+      ],
+      [
+        13
+      ],
+      [
+        2
+      ],
+      [
+        11
+      ],
+      [
+        8
+      ],
+      [
+        1
+      ],
+      [
+        4
+      ]
+    ],
+    "classe": "EUROPEENNE",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2700,
+    "going": null,
+    "imminent": false,
+    "num": 1,
+    "penetrometer": null,
+    "prix": "PRIX BERNARD LE QUELLEC",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 15,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1758196500000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "TIC_TROIS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 173,
+      "deferre": "",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 6.1,
+          "disq": 1,
+          "n": 8,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 2.9,
+          "disq": 3,
+          "n": 10,
+          "top5": 6
+        },
+        "P2": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 11888000,
+      "horse": "JAMAICA BROWN",
+      "horse_id": "JAMAICA BROWN-TESS MERETT-VRAMDAO",
+      "jockey": "R. CONGARD",
+      "musique": "(24)1a2a0a0a1a(23)Da2a5a",
+      "nombreCourses": 29,
+      "nombrePlaces": 13,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Christiaan DRIESSEN (HOL)",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "N. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 200,
+      "deferre": "",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 7,
+          "disq": 1,
+          "n": 5,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 4.5,
+          "disq": 2,
+          "n": 12,
+          "top5": 6
+        }
+      },
+      "etat": null,
+      "gain": 14166800,
+      "horse": "DIVA DEL RONCO",
+      "horse_id": "DIVA DEL RONCO-MAGIC VISION LF-VARENNE",
+      "jockey": "MARCO BASILE",
+      "musique": "8a9a6aDa6a8a(24)6a8a6a",
+      "nombreCourses": 30,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Sc. ALLENAMENTO TEAM MINOPOLI (ITY)",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "SALVATORE MINOPOLI",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 6.1,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 5.8,
+          "disq": 4,
+          "n": 22,
+          "top5": 9
+        },
+        "P2": {
+          "avgRang": 6,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 15888200,
+      "horse": "DIE HARD (ITY)",
+      "horse_id": "DIE HARD (ITY)-ROSNAY-BIRD PARKER",
+      "jockey": "F. LAGADEUC",
+      "musique": "Da1a1a0a1a7a(24)2a7a8a",
+      "nombreCourses": 20,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "G. SARFATI",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "P.L. DESAUNETTE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 96,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.2,
+          "disq": 1,
+          "n": 5,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 1.8,
+          "disq": 1,
+          "n": 7,
+          "top5": 6
+        }
+      },
+      "etat": null,
+      "gain": 17446000,
+      "horse": "DESTINY DI POGGIO",
+      "horse_id": "DESTINY DI POGGIO-SAND GRENADE-BOLD EAGLE",
+      "jockey": "N. BAZIRE",
+      "musique": "Da1a3a(24)2aDa4a1a2a6a",
+      "nombreCourses": 14,
+      "nombrePlaces": 5,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Scuderia MISTERO S.R.L.(ITY)",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "N. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 25,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5.6,
+          "disq": 3,
+          "n": 28,
+          "top5": 15
+        },
+        "P4": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 19198500,
+      "horse": "JIBI DU FRUITIER",
+      "horse_id": "JIBI DU FRUITIER-ALPINE DU FRUITIER-ROC MESLOIS",
+      "jockey": "D. THOMAIN",
+      "musique": "3a3a5a9a3a7a4a9a7a8a",
+      "nombreCourses": 56,
+      "nombrePlaces": 39,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 8,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme M. BRUNEAU",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "CH.M. BRUNEAU",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 16,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 3,
+          "disq": 3,
+          "n": 26,
+          "top5": 20
+        },
+        "P4": {
+          "avgRang": 7.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 23822500,
+      "horse": "IMPERIAL DURABUTIN",
+      "horse_id": "IMPERIAL DURABUTIN-REINE MADRIK-ROYAL DREAM",
+      "jockey": "F. OUVRIE",
+      "musique": "Da1a8a1a2a1a6aDa(24)4a",
+      "nombreCourses": 47,
+      "nombrePlaces": 26,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 13,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie du DAMIER",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J.R. DELLIAUX",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 5.9,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.1,
+          "disq": 4,
+          "n": 23,
+          "top5": 14
+        }
+      },
+      "etat": null,
+      "gain": 25819500,
+      "horse": "JAPPELOUP TURGOT",
+      "horse_id": "JAPPELOUP TURGOT-DOUCHKA TURGOT-UP AND QUICK",
+      "jockey": "M. ABRIVARD",
+      "musique": "5a2a1a4a4a1a0a0a(24)2a",
+      "nombreCourses": 39,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 11,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie TURGOT",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "M. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 200,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 7.7,
+          "disq": 0,
+          "n": 3,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 3.7,
+          "disq": 3,
+          "n": 18,
+          "top5": 11
+        },
+        "P2": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 26254200,
+      "horse": "GERICAULT",
+      "horse_id": "GERICAULT-REVERIE D'AR-MUSCLE HILL",
+      "jockey": "CH. MARTENS",
+      "musique": "(24)7a9aDa7a6a5a0a1a2a",
+      "nombreCourses": 19,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie BLACK AND WHITE (BEL)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "V. MARTENS",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 5.3,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 4.2,
+          "disq": 5,
+          "n": 25,
+          "top5": 16
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 2,
+          "n": 3,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 11,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 26597600,
+      "horse": "COLBERT WF",
+      "horse_id": "COLBERT WF-TRENDY WF-VARENNE",
+      "jockey": "E. RAFFIN",
+      "musique": "Da1a1a3a2a1a1a(24)5aDa",
+      "nombreCourses": 15,
+      "nombrePlaces": 7,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Sc. MY HORSE S.R.L.(ITY)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "H.E. BONDO",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 35,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 2,
+          "n": 24,
+          "top5": 11
+        },
+        "P4": {
+          "avgRang": 5,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 26768500,
+      "horse": "ASTRONASCENTE ZAC",
+      "horse_id": "ASTRONASCENTE ZAC-GLAMOUR GRIF-READY CASH",
+      "jockey": "A. ABRIVARD",
+      "musique": "8a3a1a5a2a6a",
+      "nombreCourses": 33,
+      "nombrePlaces": 13,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "M. BRUYNEEL (BEL)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J. CORBANIE",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 116,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 5.3,
+          "disq": 4,
+          "n": 10,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 28201000,
+      "horse": "FAKIR DE L'AULNE",
+      "horse_id": "FAKIR DE L'AULNE-PATAYA DES CORVEES-REAL DE LOU",
+      "jockey": "M. MOTTIER",
+      "musique": "0a8a7a9a3a1a0a0a0a(24)",
+      "nombreCourses": 108,
+      "nombrePlaces": 55,
+      "nombrePlacesSecond": 10,
+      "nombrePlacesTroisieme": 12,
+      "nombreVictoires": 16,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "D. KUMPEN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "D. KUMPEN",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 19,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5.2,
+          "disq": 1,
+          "n": 30,
+          "top5": 16
+        }
+      },
+      "etat": null,
+      "gain": 28269600,
+      "horse": "CANTO DEI VENTI",
+      "horse_id": "CANTO DEI VENTI-TERRA DEI VENTI-MAGO D'AMORE",
+      "jockey": "G. GELORMINI",
+      "musique": "9a2a5a3a5a8a1a6a(24)6a",
+      "nombreCourses": 30,
+      "nombrePlaces": 18,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "CUMANA GROUP SRL (ITY)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "H.E. BONDO",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 79,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 7,
+          "disq": 3,
+          "n": 11,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 29395800,
+      "horse": "DANGER BI",
+      "horse_id": "DANGER BI-TOP MODEL BI-BIRD PARKER",
+      "jockey": "D. BONNE",
+      "musique": "0a0a7a3a2a0aDaDaDa(24)",
+      "nombreCourses": 10,
+      "nombrePlaces": 3,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Azienda Agricola BIASUZZI (ITY)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "H.E. BONDO",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 41,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 7.3,
+          "disq": 1,
+          "n": 8,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 5,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 30264000,
+      "horse": "FURIOSO FLIGNY",
+      "horse_id": "FURIOSO FLIGNY-SO PROUD-QUICK WOOD",
+      "jockey": "E. DE JESUS",
+      "musique": "6a0a3a1a9a5a5a0a1a3a",
+      "nombreCourses": 85,
+      "nombrePlaces": 41,
+      "nombrePlacesSecond": 14,
+      "nombrePlacesTroisieme": 11,
+      "nombreVictoires": 15,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Des AULNAIES",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "A. DE JESUS",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 3.1,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 15,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4.7,
+          "disq": 1,
+          "n": 21,
+          "top5": 13
+        }
+      },
+      "etat": null,
+      "gain": 30320500,
+      "horse": "INDY DARK",
+      "horse_id": "INDY DARK-RASTA PERRINE-READY CASH",
+      "jockey": "B. ROCHARD",
+      "musique": "2a7a2a1a3a1a9a(24)0a2a",
+      "nombreCourses": 39,
+      "nombrePlaces": 19,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 13,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J.F. MARY",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.F. MARY",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2025-09-18",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

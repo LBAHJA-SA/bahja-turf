@@ -1,0 +1,710 @@
+{
+  "reunion": {
+    "num": 3,
+    "hippodrome": "Lyon-Parilly",
+    "organizer": "PMU",
+    "date": "2026-09-15"
+  },
+  "course": {
+    "id": 1683915,
+    "num": 5,
+    "prix": "Prix de la Mulatière",
+    "time": "14:12:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 2400,
+    "surface": "GAZON",
+    "going": "SOUPLE",
+    "corde": "G",
+    "runners": 6,
+    "quinte": false,
+    "condition": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus.",
+    "classe": "CLASSE_3",
+    "depart": null,
+    "penetrometer": 3.6,
+    "types_pari": [
+      "SIMPLE",
+      "TRIO_ORDRE",
+      "COUPLE_ORDRE",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 19200,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 9600,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3648,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2688,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1728,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 768,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 480,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 288,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 5,
+      "horse": "Pink Monday",
+      "horse_id": 2824779,
+      "jockey": "Antonio Orani",
+      "trainer": "Elauryne Cury",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 36285,
+      "poids": 56.5,
+      "decharge": 57,
+      "corde": 4,
+      "valeur": 33.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.1,
+      "cote_geny": 2.5,
+      "musique": "8p4p5p4p8p8p(25)5p1p1p",
+      "note": "Vite installé en tête, s'est montré tenace dans la ligne droite, repoussant jusqu'au bout l'assaut incisif de [Black Saxon (1)].",
+      "red_km": "2'43''6",
+      "distance": 2400,
+      "rang": 1,
+      "ecart": "00:02:43,620",
+      "proprietaire": "Baguenault de Puchesse",
+      "casaque": "/web/image/casaque/95/1000395_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Black Saxon",
+      "horse_id": 2814626,
+      "jockey": "Clément Lecoeuvre",
+      "trainer": "Nicolas Bellanger",
+      "age": 5,
+      "sexe": "HONGRE",
+      "gain": 90796,
+      "poids": 62,
+      "decharge": 62.5,
+      "corde": 5,
+      "valeur": 39,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.6,
+      "cote_geny": 3.9,
+      "musique": "4p5p0p1p1p2p2p(25)7p2p",
+      "note": "Dans le sillage de l'animateur [Pink Monday (5)], a été lancé en dedans de son rival à mi-ligne droite, et a échoué de peu après une belle lutte.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 2,
+      "ecart": "NEZ",
+      "proprietaire": "Mars",
+      "casaque": "/web/image/casaque/63/1145763_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Golden Blush",
+      "horse_id": 2842062,
+      "jockey": "Marvin Grandin",
+      "trainer": "Christophe Escuder",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 64356,
+      "poids": 60,
+      "decharge": 60.5,
+      "corde": 6,
+      "valeur": 37,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.6,
+      "cote_geny": 4,
+      "musique": "6p8p1p1p0p1p1p3p7p0p",
+      "note": "Au contact de l'animateur [Pink Monday (5)], a fait illusion à deux cent cinquante mètres du poteau, puis a été dominée par le duo gagnant dans les cinquante derniers.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 3,
+      "ecart": "1 1/4",
+      "proprietaire": "Stempniak",
+      "casaque": "/web/image/casaque/28/1009728_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Sea The Aurora",
+      "horse_id": 2824780,
+      "jockey": "Hugo Boutin",
+      "trainer": "Dalibor Torok",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 12420,
+      "poids": 57,
+      "decharge": 57.5,
+      "corde": 3,
+      "valeur": 34,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 6.4,
+      "cote_geny": 8.7,
+      "musique": "6p(25)0p6p5p1p7p3p",
+      "note": "Au contact des animateurs, a eu sa chance pour un meilleur classement dans la ligne droite,",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 4,
+      "ecart": "1 3/4",
+      "proprietaire": "Haras de Beaufay",
+      "casaque": "/web/image/casaque/87/1130087_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Raw Energy",
+      "horse_id": 2843547,
+      "jockey": "Victor Dupont",
+      "trainer": "Yoann Bonnefoy",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 17480,
+      "poids": 53,
+      "decharge": 52,
+      "corde": 1,
+      "valeur": 30,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 31,
+      "cote_geny": 23.8,
+      "musique": "(25)8p3p1p0p2p6p4p6p5p",
+      "note": null,
+      "red_km": null,
+      "distance": 2400,
+      "rang": 5,
+      "ecart": "5",
+      "proprietaire": "Gerlach",
+      "casaque": "/web/image/casaque/22/1204122_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Niagaro",
+      "horse_id": 2713846,
+      "jockey": "Kévin Gaudeffroy",
+      "trainer": "Edouard Lacaille",
+      "age": 7,
+      "sexe": "MALE",
+      "gain": 64212,
+      "poids": 61.5,
+      "decharge": 60.5,
+      "corde": 2,
+      "valeur": 38.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 28.3,
+      "cote_geny": 19.1,
+      "musique": "8p0p3p4p(24)6p1p5p(23)7p",
+      "note": "Après avoir patienté à l'arrière, n'a pu suivre l'accélération à trois cents mètres du poteau, puis a fini en retrait.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 6,
+      "ecart": "NEZ",
+      "proprietaire": "Tanti",
+      "casaque": "/web/image/casaque/08/1194608_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Black Saxon",
+                  "numero": null,
+                  "id": 2814626,
+                  "idParticipation": 21735703
+                },
+                {
+                  "nom": "Pink Monday",
+                  "numero": null,
+                  "id": 2824779,
+                  "idParticipation": 21735707
+                }
+              ]
+            },
+            "commentaire": "Jugé sur son avant-dernière sortie où il terminait d'excellente manière dans un quinté+ disputé à Vichy, [Pink Monday (5)] est une base solide avec [Black Saxon (1)] qui ne sera pas dérangé par le raccourcissement de la distance.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Pink Monday (5)] est compétitif",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21735707,
+            "idCheval": 2824779,
+            "numero": 5,
+            "nomCheval": "Pink Monday"
+          },
+          {
+            "idParticipation": 21735703,
+            "idCheval": 2814626,
+            "numero": 1,
+            "nomCheval": "Black Saxon"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21735705,
+            "idCheval": 2842062,
+            "numero": 3,
+            "nomCheval": "Golden Blush"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21735704,
+            "idCheval": 2713846,
+            "numero": 2,
+            "nomCheval": "Niagaro"
+          },
+          {
+            "idParticipation": 21735706,
+            "idCheval": 2824780,
+            "numero": 4,
+            "nomCheval": "Sea The Aurora"
+          },
+          {
+            "idParticipation": 21735708,
+            "idCheval": 2843547,
+            "numero": 6,
+            "nomCheval": "Raw Energy"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5084106,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735703,
+            "idCheval": 2814626,
+            "numero": 1,
+            "nomCheval": "Black Saxon"
+          },
+          {
+            "idParticipation": 21735707,
+            "idCheval": 2824779,
+            "numero": 5,
+            "nomCheval": "Pink Monday"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084107,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735705,
+            "idCheval": 2842062,
+            "numero": 3,
+            "nomCheval": "Golden Blush"
+          },
+          {
+            "idParticipation": 21735707,
+            "idCheval": 2824779,
+            "numero": 5,
+            "nomCheval": "Pink Monday"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084108,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735707,
+            "idCheval": 2824779,
+            "numero": 5,
+            "nomCheval": "Pink Monday"
+          },
+          {
+            "idParticipation": 21735703,
+            "idCheval": 2814626,
+            "numero": 1,
+            "nomCheval": "Black Saxon"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084109,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735703,
+            "idCheval": 2814626,
+            "numero": 1,
+            "nomCheval": "Black Saxon"
+          },
+          {
+            "idParticipation": 21735707,
+            "idCheval": 2824779,
+            "numero": 5,
+            "nomCheval": "Pink Monday"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084110,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735707,
+            "idCheval": 2824779,
+            "numero": 5,
+            "nomCheval": "Pink Monday"
+          },
+          {
+            "idParticipation": 21735703,
+            "idCheval": 2814626,
+            "numero": 1,
+            "nomCheval": "Black Saxon"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084111,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735705,
+            "idCheval": 2842062,
+            "numero": 3,
+            "nomCheval": "Golden Blush"
+          },
+          {
+            "idParticipation": 21735707,
+            "idCheval": 2824779,
+            "numero": 5,
+            "nomCheval": "Pink Monday"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084112,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735707,
+            "idCheval": 2824779,
+            "numero": 5,
+            "nomCheval": "Pink Monday"
+          },
+          {
+            "idParticipation": 21735703,
+            "idCheval": 2814626,
+            "numero": 1,
+            "nomCheval": "Black Saxon"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 3,
+          "idCheval": 2824779,
+          "numero": 5,
+          "nomCheval": "Pink Monday"
+        },
+        {
+          "points": 2,
+          "idCheval": 2814626,
+          "numero": 1,
+          "nomCheval": "Black Saxon"
+        },
+        {
+          "points": 2,
+          "idCheval": 2842062,
+          "numero": 3,
+          "nomCheval": "Golden Blush"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2824779,
+          "numero": 5,
+          "nomCheval": "Pink Monday"
+        },
+        {
+          "points": 3,
+          "idCheval": 2814626,
+          "numero": 1,
+          "nomCheval": "Black Saxon"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

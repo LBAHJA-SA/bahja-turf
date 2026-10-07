@@ -1,0 +1,750 @@
+{
+  "reunion": {
+    "num": 4,
+    "hippodrome": "Toulouse",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1684075,
+    "num": 6,
+    "prix": "Prix du Mesnil",
+    "time": "19:31:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 1600,
+    "surface": "GAZON",
+    "going": "BON",
+    "corde": "D",
+    "runners": 7,
+    "quinte": false,
+    "condition": "Pour poulains entiers et hongres de 2 ans n'ayant jamais gagné (A Réclamer excepté). Poids : 58 kg. Les poulains n'ayant jamais couru recevront 2 kg.",
+    "classe": "MAIDEN",
+    "depart": null,
+    "penetrometer": 3.2,
+    "types_pari": [
+      "SIMPLE",
+      "TRIO_ORDRE",
+      "COUPLE_ORDRE",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 21000,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 10500,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3990,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2940,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1890,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 840,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 525,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 315,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 3,
+      "horse": "Tomtit",
+      "horse_id": 2897483,
+      "jockey": "Jean-Bernard Eyquem",
+      "trainer": "Jean-Claude Rouget",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 1828,
+      "poids": 58,
+      "decharge": null,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 1.7,
+      "cote_geny": 1.8,
+      "musique": "5p",
+      "note": "Vite derrière l'animateur [Spanish Nation Cen (7)], a profité d'un passage à l'intérieur de son rival à la sortie du tournant final, pour progresser, puis l'a débordé et s'est imposé sûrement.",
+      "red_km": "1'40''2",
+      "distance": 1600,
+      "rang": 1,
+      "ecart": "00:01:40,200",
+      "proprietaire": "Alnet",
+      "casaque": "/web/image/casaque/10/1023010_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "El Lagar",
+      "horse_id": 2893351,
+      "jockey": "Romain Dubord",
+      "trainer": "Ramón Avial-Lopez",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 3255,
+      "poids": 58,
+      "decharge": 56.5,
+      "corde": 1,
+      "valeur": 35,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 17.4,
+      "cote_geny": 10.7,
+      "musique": "3p8p7p",
+      "note": "Vite sur une troisième ligne à la corde, a progressé en dedans et a pris le premier accessit près du but.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 2,
+      "ecart": "1",
+      "proprietaire": "Galdona Inurrategui",
+      "casaque": "/web/image/casaque/32/1066932_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Loukpan",
+      "horse_id": 2899402,
+      "jockey": "Martin Protti",
+      "trainer": "Henri-Alex Pantall",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 2466,
+      "poids": 58,
+      "decharge": 56.5,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.9,
+      "cote_geny": 6.4,
+      "musique": "4p",
+      "note": "Vite derrière les animateurs, a lutté pour un accessit dans la phase finale et a échoué de peu pour le premier.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 3,
+      "ecart": "1/4",
+      "proprietaire": "Bizakov",
+      "casaque": "/web/image/casaque/91/1038191_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Scaty Chop",
+      "horse_id": 2892690,
+      "jockey": "Thomas Blanchouin",
+      "trainer": "Sandrine Gavilan",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 5880,
+      "poids": 58,
+      "decharge": null,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.9,
+      "cote_geny": 5.9,
+      "musique": "2p4p",
+      "note": "Vite parmi les derniers, n'a pas mal terminé et a débordé l'animateur [Spanish Nation Cen (7)] tout à la fin pour lui prendre la quatrième place, près des concurrents à la lutte pour les accessits",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 4,
+      "ecart": "1",
+      "proprietaire": "A.Chopard/A.Klodawski/J.Gavilan",
+      "casaque": "/web/image/casaque/38/1210738_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Spanish Nation Cen",
+      "horse_id": 2898331,
+      "jockey": "Aurélien Lemaitre",
+      "trainer": "Patrik Olave Valdivielso",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": null,
+      "poids": 58,
+      "decharge": null,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.5,
+      "cote_geny": 10.9,
+      "musique": "0p",
+      "note": "Vite en tête, a été débordé à son intérieur par [Tomtit (3)] à la sortie du tournant final, puis a lutté pour un accessit avant de concéder la quatrième place tout à la fin.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 5,
+      "ecart": "NEZ",
+      "proprietaire": "Yeguada Centurion Slu",
+      "casaque": "/web/image/casaque/43/1142743_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Wish You Joy",
+      "horse_id": 2901323,
+      "jockey": "Nuno Manuel Lopes Duarte",
+      "trainer": "Helder Jose Faria Pereira",
+      "age": 2,
+      "sexe": "HONGRE",
+      "gain": 800,
+      "poids": 58,
+      "decharge": 56.5,
+      "corde": 6,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 44,
+      "cote_geny": 31.4,
+      "musique": "4p",
+      "note": "Vite dernier, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 6,
+      "ecart": "6 1/2",
+      "proprietaire": "Pereira",
+      "casaque": "/web/image/casaque/39/1034839_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Canncity",
+      "horse_id": 2891314,
+      "jockey": "Clément Merille",
+      "trainer": "Didier Guillemin",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 4694,
+      "poids": 58,
+      "decharge": null,
+      "corde": 7,
+      "valeur": 38,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 35.9,
+      "cote_geny": 25.8,
+      "musique": "8p2p0p",
+      "note": "Vite à l'extérieur de l'animateur [Spanish Nation Cen (7)], a plafonné peu après l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 7,
+      "ecart": "3/4",
+      "proprietaire": "As & D. Allard",
+      "casaque": "/web/image/casaque/74/1124474_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Scaty Chop",
+                  "numero": null,
+                  "id": 2892690,
+                  "idParticipation": 21737428
+                },
+                {
+                  "nom": "Tomtit",
+                  "numero": null,
+                  "id": 2897483,
+                  "idParticipation": 21737430
+                },
+                {
+                  "nom": "Loukpan",
+                  "numero": null,
+                  "id": 2899402,
+                  "idParticipation": 21737431
+                }
+              ]
+            },
+            "commentaire": "[Scaty Chop (1)] a bien couru à deux reprises, évoluant sur la montante, et peut s'imposer pour ses débuts sur le mile. [Tomtit (3)] a débuté dans un lot bien composé et possède une marge de progression. [Loukpan (4)] a le droit de rivaliser également jugé sur sa sortie initiale.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Scaty Chop (1)] sur le mile",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21737428,
+            "idCheval": 2892690,
+            "numero": 1,
+            "nomCheval": "Scaty Chop"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21737430,
+            "idCheval": 2897483,
+            "numero": 3,
+            "nomCheval": "Tomtit"
+          },
+          {
+            "idParticipation": 21737431,
+            "idCheval": 2899402,
+            "numero": 4,
+            "nomCheval": "Loukpan"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21737433,
+            "idCheval": 2893351,
+            "numero": 6,
+            "nomCheval": "El Lagar"
+          },
+          {
+            "idParticipation": 21737432,
+            "idCheval": 2901323,
+            "numero": 5,
+            "nomCheval": "Wish You Joy"
+          },
+          {
+            "idParticipation": 21737434,
+            "idCheval": 2898331,
+            "numero": 7,
+            "nomCheval": "Spanish Nation Cen"
+          },
+          {
+            "idParticipation": 21737429,
+            "idCheval": 2891314,
+            "numero": 2,
+            "nomCheval": "Canncity"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5085051,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737428,
+            "idCheval": 2892690,
+            "numero": 1,
+            "nomCheval": "Scaty Chop"
+          },
+          {
+            "idParticipation": 21737430,
+            "idCheval": 2897483,
+            "numero": 3,
+            "nomCheval": "Tomtit"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085052,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737428,
+            "idCheval": 2892690,
+            "numero": 1,
+            "nomCheval": "Scaty Chop"
+          },
+          {
+            "idParticipation": 21737430,
+            "idCheval": 2897483,
+            "numero": 3,
+            "nomCheval": "Tomtit"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085053,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737428,
+            "idCheval": 2892690,
+            "numero": 1,
+            "nomCheval": "Scaty Chop"
+          },
+          {
+            "idParticipation": 21737430,
+            "idCheval": 2897483,
+            "numero": 3,
+            "nomCheval": "Tomtit"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085054,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737428,
+            "idCheval": 2892690,
+            "numero": 1,
+            "nomCheval": "Scaty Chop"
+          },
+          {
+            "idParticipation": 21737430,
+            "idCheval": 2897483,
+            "numero": 3,
+            "nomCheval": "Tomtit"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085055,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737428,
+            "idCheval": 2892690,
+            "numero": 1,
+            "nomCheval": "Scaty Chop"
+          },
+          {
+            "idParticipation": 21737430,
+            "idCheval": 2897483,
+            "numero": 3,
+            "nomCheval": "Tomtit"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085056,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737430,
+            "idCheval": 2897483,
+            "numero": 3,
+            "nomCheval": "Tomtit"
+          },
+          {
+            "idParticipation": 21737428,
+            "idCheval": 2892690,
+            "numero": 1,
+            "nomCheval": "Scaty Chop"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085057,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737428,
+            "idCheval": 2892690,
+            "numero": 1,
+            "nomCheval": "Scaty Chop"
+          },
+          {
+            "idParticipation": 21737430,
+            "idCheval": 2897483,
+            "numero": 3,
+            "nomCheval": "Tomtit"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 6,
+          "idCheval": 2892690,
+          "numero": 1,
+          "nomCheval": "Scaty Chop"
+        },
+        {
+          "points": 1,
+          "idCheval": 2897483,
+          "numero": 3,
+          "nomCheval": "Tomtit"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 6,
+          "idCheval": 2897483,
+          "numero": 3,
+          "nomCheval": "Tomtit"
+        },
+        {
+          "points": 1,
+          "idCheval": 2892690,
+          "numero": 1,
+          "nomCheval": "Scaty Chop"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

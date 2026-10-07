@@ -1,0 +1,912 @@
+{
+  "reunion": {
+    "num": 3,
+    "hippodrome": "Lyon-Parilly",
+    "organizer": "PMU",
+    "date": "2026-09-15"
+  },
+  "course": {
+    "id": 1683918,
+    "num": 8,
+    "prix": "Prix Serge Maillard",
+    "time": "16:04:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 1600,
+    "surface": "GAZON",
+    "going": "SOUPLE",
+    "corde": "G",
+    "runners": 11,
+    "quinte": false,
+    "condition": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus.",
+    "classe": "CLASSE_4",
+    "depart": null,
+    "penetrometer": 3.6,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "QUARTE_PLUS_REGIONAL",
+      "COUPLE",
+      "TRIO",
+      "MINI_MULTI"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 16300,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 8150,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3098,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2282,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1467,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 652,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 407,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 244,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 6,
+      "horse": "Boavista",
+      "horse_id": 2820725,
+      "jockey": "Cassi Brechon",
+      "trainer": "Damien Artu",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 32191,
+      "poids": 70.5,
+      "decharge": 67.5,
+      "corde": 5,
+      "valeur": 25.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.2,
+      "cote_geny": 5.8,
+      "musique": "7p0p3p4p7p6p3p3p0p6p",
+      "note": "Patiente à l'arrière, et encore en retrait dans la ligne droite, a été décalée aux deux cents mètres, puis s'est mise ventre à terre pour finir, venant arracher le succès sur le fil.",
+      "red_km": "1'40''5",
+      "distance": 1600,
+      "rang": 1,
+      "ecart": "00:01:40,570",
+      "proprietaire": "Delalande",
+      "casaque": "/web/image/casaque/27/1019827_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Magic Stars",
+      "horse_id": 2754215,
+      "jockey": "Florent Guy",
+      "trainer": "Julien Phelippon",
+      "age": 6,
+      "sexe": "FEMELLE",
+      "gain": 76147,
+      "poids": 72,
+      "decharge": 72.5,
+      "corde": 6,
+      "valeur": 27,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.4,
+      "cote_geny": 3.2,
+      "musique": "7p1p1p8p0p1p5p6p9p8p",
+      "note": "Au sein du peloton, s'est lancée à la poursuite de l'animateur [Hurricane (8)] à mi-ligne droite, puis a pris sa mesure à la fin, non sans subir l'assaut final de [Boavista (6)].",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 2,
+      "ecart": "TETE",
+      "proprietaire": "Conde Ferreira",
+      "casaque": "/web/image/casaque/33/1202933_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Hurricane",
+      "horse_id": 2722167,
+      "jockey": "Marine Lebas",
+      "trainer": "Louis Bernhardt",
+      "age": 7,
+      "sexe": "HONGRE",
+      "gain": 77087,
+      "poids": 70,
+      "decharge": 67,
+      "corde": 10,
+      "valeur": 25,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.9,
+      "cote_geny": 5,
+      "musique": "2p0p0p8p4p9p0p2p(25)0p",
+      "note": "Animateur, a accéléré à l'entrée de la ligne droite, se détachant, puis a fait illusion, mais a trouvé le temps long dans les cent derniers mètres et a subi deux assauts tout à la fin.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 3,
+      "ecart": "1/4",
+      "proprietaire": "Lebas",
+      "casaque": "/web/image/casaque/77/1187777_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Résolution",
+      "horse_id": 2831375,
+      "jockey": "Niccolo Guarnieri",
+      "trainer": "Francesco Santella",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 18235,
+      "poids": 71,
+      "decharge": 69.5,
+      "corde": 11,
+      "valeur": 26,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 10.5,
+      "cote_geny": 14.2,
+      "musique": "4p5p3pTp2p(25)6p4p6p4p",
+      "note": "Au contact de l'animateur [Hurricane (8)], n'a pu s'accrocher à ses basques à l'entrée de la ligne droite, puis a concédé les accessits dans les cent derniers mètres mais a contenu [Magic Treville (10)].",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 4,
+      "ecart": "2 1/2",
+      "proprietaire": "Rugani",
+      "casaque": "/web/image/casaque/82/1164482_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Magic Treville",
+      "horse_id": 2828310,
+      "jockey": "Arthur Ferland",
+      "trainer": "Manon Scandella-Lacaille",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 30460,
+      "poids": 67.5,
+      "decharge": 66,
+      "corde": 9,
+      "valeur": 22.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 60.5,
+      "cote_geny": 45.2,
+      "musique": "9p7p7p3p4p7p6p4p8p9p",
+      "note": "Vite au contact des premiers, s'est défendue correctement dans la ligne droite, sans pouvoir déborder [Résolution (3)].",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 5,
+      "ecart": "TETE",
+      "proprietaire": "Joya Racing Sas",
+      "casaque": "/web/image/casaque/84/1145984_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Lorlisalsa",
+      "horse_id": 2539125,
+      "jockey": "Margaux Collomb",
+      "trainer": "Stéphane Eveno",
+      "age": 11,
+      "sexe": "FEMELLE",
+      "gain": 138589,
+      "poids": 65,
+      "decharge": 64,
+      "corde": 7,
+      "valeur": 20,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 22.2,
+      "cote_geny": 22.4,
+      "musique": "7p6p6p4p0p9p9p(25)0p5p",
+      "note": "Patiente à mi-peloton, a conclu honorablement en retrait, sans menacer les premiers.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 6,
+      "ecart": "2 1/2",
+      "proprietaire": "Eveno",
+      "casaque": "/web/image/casaque/81/1003681_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Elusive Nelson",
+      "horse_id": 2686989,
+      "jockey": "Luis Urbano Aguero",
+      "trainer": "Stéphane Labate",
+      "age": 8,
+      "sexe": "FEMELLE",
+      "gain": 108089,
+      "poids": 69.5,
+      "decharge": 70,
+      "corde": 8,
+      "valeur": 24.5,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7.8,
+      "cote_geny": 10.4,
+      "musique": "6p1p6p6p1p6p4p2p0p5p",
+      "note": "Patiente non loin des animateurs, n'a pu hausser le ton dans la ligne droite et a fini à son rythme en retrait.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 7,
+      "ecart": "1 1/4",
+      "proprietaire": "Bouckhuyt",
+      "casaque": "/web/image/casaque/24/1082124_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Grey Belle",
+      "horse_id": 2700827,
+      "jockey": "Kevin Braye",
+      "trainer": "Benjamin Bossert",
+      "age": 7,
+      "sexe": "FEMELLE",
+      "gain": 100104,
+      "poids": 71,
+      "decharge": 71.5,
+      "corde": 3,
+      "valeur": 26,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 17.6,
+      "cote_geny": 23.4,
+      "musique": "6p1p4p7p3p0p6p0p9p5p",
+      "note": "En queue de peloton, n'a pu que conclure courageusement en retrait.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 8,
+      "ecart": "1/4",
+      "proprietaire": "Bossert",
+      "casaque": "/web/image/casaque/37/1001237_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Mister Gan",
+      "horse_id": 2774522,
+      "jockey": "Ludwin Doulayram",
+      "trainer": "Alicja Karkosa",
+      "age": 5,
+      "sexe": "HONGRE",
+      "gain": 19515,
+      "poids": 70,
+      "decharge": 68.5,
+      "corde": 1,
+      "valeur": 25,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 44.2,
+      "cote_geny": 24.7,
+      "musique": "9p6p8p9p1p(24)0p3p6p7p",
+      "note": "Attentiste à l'arrière, n'a pu se montrer menaçant dans la plase finale.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 9,
+      "ecart": "2",
+      "proprietaire": "Nayir",
+      "casaque": "/web/image/casaque/37/1210237_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Tiberiana",
+      "horse_id": 2815280,
+      "jockey": "Eugenie De Granvilliers",
+      "trainer": "Richard Chotard (G)",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 46522,
+      "poids": 70.5,
+      "decharge": 67.5,
+      "corde": 2,
+      "valeur": 25.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 13.7,
+      "cote_geny": 14.5,
+      "musique": "3p0p4p2p1p1p3p3p5p9p",
+      "note": "Dans le sillage des animateurs, n'a pu passer la vitesse supérieure dans la ligne droite et a été dominée.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 10,
+      "ecart": "3",
+      "proprietaire": "Auneau",
+      "casaque": "/web/image/casaque/27/1000327_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Balagan",
+      "horse_id": 2701201,
+      "jockey": "Jonathan Plassard",
+      "trainer": "Stéphane Labate",
+      "age": 7,
+      "sexe": "FEMELLE",
+      "gain": 99976,
+      "poids": 70.5,
+      "decharge": 71,
+      "corde": 4,
+      "valeur": 25.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 14.9,
+      "cote_geny": 15.9,
+      "musique": "1p4p3p5p0p1p6p(25)1p3p",
+      "note": "En queue de peloton, n'a pu se rapprocher utilement dans la phase finale.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 11,
+      "ecart": "7",
+      "proprietaire": "Collet",
+      "casaque": "/web/image/casaque/29/1102229_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Magic Stars",
+                  "numero": null,
+                  "id": 2754215,
+                  "idParticipation": 21735730
+                },
+                {
+                  "nom": "Hurricane",
+                  "numero": null,
+                  "id": 2722167,
+                  "idParticipation": 21735737
+                }
+              ]
+            },
+            "commentaire": "[Magic Stars (1)], qui découvre un très bel engagement et qui s'entend à merveille avec Florent Guy, est un bon point d'appui. [Hurricane (8)], qui a retrouvé la forme ces dernières semaines, peut poursuivre sa série.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Magic Stars (1)] les feux sont au vert",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21735730,
+            "idCheval": 2754215,
+            "numero": 1,
+            "nomCheval": "Magic Stars"
+          },
+          {
+            "idParticipation": 21735737,
+            "idCheval": 2722167,
+            "numero": 8,
+            "nomCheval": "Hurricane"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21735734,
+            "idCheval": 2815280,
+            "numero": 5,
+            "nomCheval": "Tiberiana"
+          },
+          {
+            "idParticipation": 21735738,
+            "idCheval": 2686989,
+            "numero": 9,
+            "nomCheval": "Elusive Nelson"
+          },
+          {
+            "idParticipation": 21735735,
+            "idCheval": 2820725,
+            "numero": 6,
+            "nomCheval": "Boavista"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21735731,
+            "idCheval": 2700827,
+            "numero": 2,
+            "nomCheval": "Grey Belle"
+          },
+          {
+            "idParticipation": 21735733,
+            "idCheval": 2701201,
+            "numero": 4,
+            "nomCheval": "Balagan"
+          },
+          {
+            "idParticipation": 21735740,
+            "idCheval": 2539125,
+            "numero": 11,
+            "nomCheval": "Lorlisalsa"
+          },
+          {
+            "idParticipation": 21735739,
+            "idCheval": 2828310,
+            "numero": 10,
+            "nomCheval": "Magic Treville"
+          },
+          {
+            "idParticipation": 21735736,
+            "idCheval": 2774522,
+            "numero": 7,
+            "nomCheval": "Mister Gan"
+          },
+          {
+            "idParticipation": 21735732,
+            "idCheval": 2831375,
+            "numero": 3,
+            "nomCheval": "Résolution"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5084148,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735737,
+            "idCheval": 2722167,
+            "numero": 8,
+            "nomCheval": "Hurricane"
+          },
+          {
+            "idParticipation": 21735730,
+            "idCheval": 2754215,
+            "numero": 1,
+            "nomCheval": "Magic Stars"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084149,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735730,
+            "idCheval": 2754215,
+            "numero": 1,
+            "nomCheval": "Magic Stars"
+          },
+          {
+            "idParticipation": 21735737,
+            "idCheval": 2722167,
+            "numero": 8,
+            "nomCheval": "Hurricane"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084150,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735730,
+            "idCheval": 2754215,
+            "numero": 1,
+            "nomCheval": "Magic Stars"
+          },
+          {
+            "idParticipation": 21735737,
+            "idCheval": 2722167,
+            "numero": 8,
+            "nomCheval": "Hurricane"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084151,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735737,
+            "idCheval": 2722167,
+            "numero": 8,
+            "nomCheval": "Hurricane"
+          },
+          {
+            "idParticipation": 21735730,
+            "idCheval": 2754215,
+            "numero": 1,
+            "nomCheval": "Magic Stars"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084152,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735737,
+            "idCheval": 2722167,
+            "numero": 8,
+            "nomCheval": "Hurricane"
+          },
+          {
+            "idParticipation": 21735734,
+            "idCheval": 2815280,
+            "numero": 5,
+            "nomCheval": "Tiberiana"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084153,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735737,
+            "idCheval": 2722167,
+            "numero": 8,
+            "nomCheval": "Hurricane"
+          },
+          {
+            "idParticipation": 21735734,
+            "idCheval": 2815280,
+            "numero": 5,
+            "nomCheval": "Tiberiana"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084154,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735730,
+            "idCheval": 2754215,
+            "numero": 1,
+            "nomCheval": "Magic Stars"
+          },
+          {
+            "idParticipation": 21735737,
+            "idCheval": 2722167,
+            "numero": 8,
+            "nomCheval": "Hurricane"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2722167,
+          "numero": 8,
+          "nomCheval": "Hurricane"
+        },
+        {
+          "points": 3,
+          "idCheval": 2754215,
+          "numero": 1,
+          "nomCheval": "Magic Stars"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 3,
+          "idCheval": 2722167,
+          "numero": 8,
+          "nomCheval": "Hurricane"
+        },
+        {
+          "points": 2,
+          "idCheval": 2754215,
+          "numero": 1,
+          "nomCheval": "Magic Stars"
+        },
+        {
+          "points": 2,
+          "idCheval": 2815280,
+          "numero": 5,
+          "nomCheval": "Tiberiana"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

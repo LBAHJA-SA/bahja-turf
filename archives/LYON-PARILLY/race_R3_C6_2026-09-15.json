@@ -1,0 +1,865 @@
+{
+  "reunion": {
+    "num": 3,
+    "hippodrome": "Lyon-Parilly",
+    "organizer": "PMU",
+    "date": "2026-09-15"
+  },
+  "course": {
+    "id": 1683916,
+    "num": 6,
+    "prix": "Prix de Saint-Cyr-les-Vignes",
+    "time": "14:47:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 1600,
+    "surface": "GAZON",
+    "going": "SOUPLE",
+    "corde": "G",
+    "runners": 10,
+    "quinte": false,
+    "condition": "Pour poulains entiers et hongres de 2 ans n'ayant jamais gagné (A Réclamer excepté). Poids : 58 kg. Les poulains n'ayant jamais couru recevront 2 kg.",
+    "classe": "MAIDEN",
+    "depart": null,
+    "penetrometer": 3.6,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "COUPLE",
+      "TRIO",
+      "MINI_MULTI"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 21000,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 10500,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3990,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2940,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1890,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 840,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 525,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 315,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 9,
+      "horse": "Ababel",
+      "horse_id": 2901119,
+      "jockey": "Clément Lecoeuvre",
+      "trainer": "Alessandro Botti",
+      "age": 2,
+      "sexe": "HONGRE",
+      "gain": null,
+      "poids": 56,
+      "decharge": 56.5,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 15.7,
+      "cote_geny": 12,
+      "musique": "",
+      "note": "A été déclaré non partant après avoir fait des difficultés pour entrer dans les stalles.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 0,
+      "ecart": null,
+      "proprietaire": "Al-Sulaiti",
+      "casaque": "/web/image/casaque/87/1196287_2.png",
+      "etat": "NON_PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "All Wootton",
+      "horse_id": 2898752,
+      "jockey": "Tony Piccone",
+      "trainer": "Henri-Alex Pantall",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 3836,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.2,
+      "cote_geny": 2.4,
+      "musique": "3p",
+      "note": "Vite en bon rang, a pris le meilleur à deux cents mètres du but et a vaincu facilement, confirmant la belle impression laissée en débutant.",
+      "red_km": "1'41''4",
+      "distance": 1600,
+      "rang": 1,
+      "ecart": "00:01:41,400",
+      "proprietaire": "Pantall",
+      "casaque": "/web/image/casaque/45/1008045_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Romanus Pontifex",
+      "horse_id": 2900215,
+      "jockey": "Hugo Besnier",
+      "trainer": "Christophe Escuder",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": null,
+      "poids": 56,
+      "decharge": 56.5,
+      "corde": 10,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 26.4,
+      "cote_geny": 29.4,
+      "musique": "",
+      "note": "Sorti moyennement des stalles, puis patient à l'arrière, a plongé en dedans à mi-ligne droite, puis a donné un joli coup de reins final pour venir ajuster [Hello Major Tom (3)].",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 2,
+      "ecart": "1 3/4",
+      "proprietaire": "Escuder",
+      "casaque": "/web/image/casaque/45/1003645_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Hello Major Tom",
+      "horse_id": 2893843,
+      "jockey": "Anthony Crastus",
+      "trainer": "Gavin Hernon",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 1781,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 15.2,
+      "cote_geny": 17.5,
+      "musique": "6p5p",
+      "note": "Animateur, n'a pu contrer [All Wootton (7)] à deux cents mètres du poteau, avant de se faire ajuster par [Romanus Pontifex (10)].",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 3,
+      "ecart": "TETE",
+      "proprietaire": "Ftp Equine Holdings Ltd",
+      "casaque": "/web/image/casaque/72/1139372_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Victorstrung",
+      "horse_id": 2900085,
+      "jockey": "Guillaume Guedj-Gay",
+      "trainer": "Mickaël Seror",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 1890,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 6,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 10.3,
+      "cote_geny": 12.1,
+      "musique": "4p",
+      "note": "Au sein du peloton, a été lancé dans la ligne droite et a bien conclu, terminant aux portes du podium, non loin des chevaux classés devant lui.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 4,
+      "ecart": "1/4",
+      "proprietaire": "Varet",
+      "casaque": "/web/image/casaque/92/1176192_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Ozark James",
+      "horse_id": 2895513,
+      "jockey": "Hugo Journiac",
+      "trainer": "Florian Guyader",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 2415,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.6,
+      "cote_geny": 18.7,
+      "musique": "6p4p",
+      "note": "Dans le sillage de l'animateur [Hello Major Tom (3)], n'a pu suivre l'accélération à mi-ligne droite, puis a lutté en vain pour un accessit, sans démériter.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 5,
+      "ecart": "1/2",
+      "proprietaire": "Guyader",
+      "casaque": "/web/image/casaque/72/1164172_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Takavor",
+      "horse_id": 2892694,
+      "jockey": "Antonio Orani",
+      "trainer": "Christophe Escuder",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 7893,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 8,
+      "valeur": 36,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.5,
+      "cote_geny": 6.6,
+      "musique": "5p3p4p",
+      "note": "Patient à l'arrière, n'a pu que conclure honorablement en retrait.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 6,
+      "ecart": "3",
+      "proprietaire": "Le Marais/K.Mungan/A.Dubarry",
+      "casaque": "/web/image/casaque/90/1211390_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Arwood",
+      "horse_id": 2895512,
+      "jockey": "Hugo Boutin",
+      "trainer": "Dalibor Torok",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 584,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 7,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 15.4,
+      "cote_geny": 10.3,
+      "musique": "5p9p",
+      "note": "Au contact des animateurs, n'a pu changer de vitesse à mi-ligne droite et a conclu à son rythme en retrait.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 7,
+      "ecart": "1 1/4",
+      "proprietaire": "Ds Pegas",
+      "casaque": "/web/image/casaque/99/1046999_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "In Space",
+      "horse_id": 2896539,
+      "jockey": "Marvin Grandin",
+      "trainer": "Mathieu Pitart",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 1890,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 9,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.9,
+      "cote_geny": 4.6,
+      "musique": "4p",
+      "note": "Vite en queue e peloton, n'a jamais véritablement donné d'espoir à ses preneurs, tout en comblant un peu de terrain pour finir.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 8,
+      "ecart": "CENC",
+      "proprietaire": "des Mouettes",
+      "casaque": "/web/image/casaque/10/1088810_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Rocket League",
+      "horse_id": 2896542,
+      "jockey": "Kévin Gaudeffroy",
+      "trainer": "Manon Scandella-Lacaille",
+      "age": 2,
+      "sexe": "MALE",
+      "gain": 315,
+      "poids": 58,
+      "decharge": 55,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 74.3,
+      "cote_geny": 62.5,
+      "musique": "7p",
+      "note": "Au sein du peloton, n'a pu hausser le ton à mi-ligne droite et a été dominé.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 9,
+      "ecart": "2 1/2",
+      "proprietaire": "Pariente",
+      "casaque": "/web/image/casaque/67/1008067_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Takavor",
+                  "numero": null,
+                  "id": 2892694,
+                  "idParticipation": 21735714
+                },
+                {
+                  "nom": "All Wootton",
+                  "numero": null,
+                  "id": 2898752,
+                  "idParticipation": 21735715
+                }
+              ]
+            },
+            "commentaire": "La fin de course d'[All Wootton (7)], lors de ses débuts à Clairefontaine, n'est pas passée inaperçue. Ici, il est capable de l'emporter. [Takavor (6)], qui réalise un bon début de carrière, a sa place à l'arrivée.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[All Wootton (7)] dans nos jumelles",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21735715,
+            "idCheval": 2898752,
+            "numero": 7,
+            "nomCheval": "All Wootton"
+          },
+          {
+            "idParticipation": 21735714,
+            "idCheval": 2892694,
+            "numero": 6,
+            "nomCheval": "Takavor"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21735710,
+            "idCheval": 2896539,
+            "numero": 2,
+            "nomCheval": "In Space"
+          },
+          {
+            "idParticipation": 21735716,
+            "idCheval": 2900085,
+            "numero": 8,
+            "nomCheval": "Victorstrung"
+          },
+          {
+            "idParticipation": 21735711,
+            "idCheval": 2893843,
+            "numero": 3,
+            "nomCheval": "Hello Major Tom"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21735709,
+            "idCheval": 2895512,
+            "numero": 1,
+            "nomCheval": "Arwood"
+          },
+          {
+            "idParticipation": 21735713,
+            "idCheval": 2895513,
+            "numero": 5,
+            "nomCheval": "Ozark James"
+          },
+          {
+            "idParticipation": 21735717,
+            "idCheval": 2901119,
+            "numero": 9,
+            "nomCheval": "Ababel"
+          },
+          {
+            "idParticipation": 21735718,
+            "idCheval": 2900215,
+            "numero": 10,
+            "nomCheval": "Romanus Pontifex"
+          },
+          {
+            "idParticipation": 21735712,
+            "idCheval": 2896542,
+            "numero": 4,
+            "nomCheval": "Rocket League"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5084113,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735714,
+            "idCheval": 2892694,
+            "numero": 6,
+            "nomCheval": "Takavor"
+          },
+          {
+            "idParticipation": 21735715,
+            "idCheval": 2898752,
+            "numero": 7,
+            "nomCheval": "All Wootton"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084114,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735714,
+            "idCheval": 2892694,
+            "numero": 6,
+            "nomCheval": "Takavor"
+          },
+          {
+            "idParticipation": 21735715,
+            "idCheval": 2898752,
+            "numero": 7,
+            "nomCheval": "All Wootton"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084115,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735714,
+            "idCheval": 2892694,
+            "numero": 6,
+            "nomCheval": "Takavor"
+          },
+          {
+            "idParticipation": 21735710,
+            "idCheval": 2896539,
+            "numero": 2,
+            "nomCheval": "In Space"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084116,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735714,
+            "idCheval": 2892694,
+            "numero": 6,
+            "nomCheval": "Takavor"
+          },
+          {
+            "idParticipation": 21735715,
+            "idCheval": 2898752,
+            "numero": 7,
+            "nomCheval": "All Wootton"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084117,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735715,
+            "idCheval": 2898752,
+            "numero": 7,
+            "nomCheval": "All Wootton"
+          },
+          {
+            "idParticipation": 21735710,
+            "idCheval": 2896539,
+            "numero": 2,
+            "nomCheval": "In Space"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084118,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735714,
+            "idCheval": 2892694,
+            "numero": 6,
+            "nomCheval": "Takavor"
+          },
+          {
+            "idParticipation": 21735710,
+            "idCheval": 2896539,
+            "numero": 2,
+            "nomCheval": "In Space"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084119,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735715,
+            "idCheval": 2898752,
+            "numero": 7,
+            "nomCheval": "All Wootton"
+          },
+          {
+            "idParticipation": 21735714,
+            "idCheval": 2892694,
+            "numero": 6,
+            "nomCheval": "Takavor"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2892694,
+          "numero": 6,
+          "nomCheval": "Takavor"
+        },
+        {
+          "points": 2,
+          "idCheval": 2898752,
+          "numero": 7,
+          "nomCheval": "All Wootton"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 3,
+          "idCheval": 2896539,
+          "numero": 2,
+          "nomCheval": "In Space"
+        },
+        {
+          "points": 3,
+          "idCheval": 2898752,
+          "numero": 7,
+          "nomCheval": "All Wootton"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

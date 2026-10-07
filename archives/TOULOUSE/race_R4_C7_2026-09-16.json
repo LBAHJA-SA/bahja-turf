@@ -1,0 +1,830 @@
+{
+  "reunion": {
+    "num": 4,
+    "hippodrome": "Toulouse",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1684076,
+    "num": 7,
+    "prix": "Prix André Lahouille",
+    "time": "20:01:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 2400,
+    "surface": "GAZON",
+    "going": "BON",
+    "corde": "D",
+    "runners": 9,
+    "quinte": false,
+    "condition": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus nés et élevés en France, inscrits au Stud-Book Anglo-Arabe, comptant au moins 37.5 % de sang arabe, n'ayant pas depuis le 1er juillet 2025 inclus reçu 20.000 en victoires et places. Poids : 58 kg. Surcharges accumulées pour les sommes reçues en victoires et places : 1 kg par 5.000 cette année et par 20.000 antérieurement. En outre, les chevaux comptant au moins 50 % de sang arabe recevront 3 kg.",
+    "classe": null,
+    "depart": null,
+    "penetrometer": 3.2,
+    "types_pari": [
+      "SIMPLE",
+      "COUPLE",
+      "TRIO",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 18000,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 9000,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3420,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2520,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1620,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 720,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 450,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 270,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Halandjila",
+      "horse_id": 2774210,
+      "jockey": "Maxime Foulon",
+      "trainer": "Roberto-Carlos Montenegro",
+      "age": 7,
+      "sexe": "FEMELLE",
+      "gain": 102593,
+      "poids": 61.5,
+      "decharge": null,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.4,
+      "cote_geny": 2.2,
+      "musique": "4p8p4p(25)7p5p5p2p1p3p",
+      "note": "D'abord à l'arrière-garde, a ensuite rejoint l'animateur [Mauzac (5)], puis est passée troisième dans le tournant final, mais a sûrement pris le meilleur sur son rival à cent mètres.",
+      "red_km": "2'36''9",
+      "distance": 2400,
+      "rang": 1,
+      "ecart": "00:02:36,900",
+      "proprietaire": "Clos",
+      "casaque": "/web/image/casaque/63/1014563_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Mauzac",
+      "horse_id": 2838591,
+      "jockey": "Alexandre Gavilan",
+      "trainer": "Ludovic Cadot",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 11307,
+      "poids": 58,
+      "decharge": null,
+      "corde": 6,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 26.7,
+      "cote_geny": 28.4,
+      "musique": "3p8p(25)7p0p2p6p4p3p",
+      "note": "Vite en tête, a fait illusion pour le succès dans la phase finale, mais n'a rien pu faire contre [Halandjila (1)] à cent mètres du but.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 2,
+      "ecart": "1 1/2",
+      "proprietaire": "Viala Grob",
+      "casaque": "/web/image/casaque/14/1110314_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Hyde Pompadour",
+      "horse_id": 2811005,
+      "jockey": "Adeline Mérou",
+      "trainer": "Anne-Laure Guildoux",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 25782,
+      "poids": 57.5,
+      "decharge": 56,
+      "corde": 9,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 15.1,
+      "cote_geny": 14.7,
+      "musique": "5p2p3p6p5p6p(25)8p4p4p",
+      "note": "Vite parmi les derniers, a bien terminé et a comblé du terrain sur les deux premiers, prenant nettement le second accessit.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 3,
+      "ecart": "3/4",
+      "proprietaire": "Boisseuil",
+      "casaque": "/web/image/casaque/75/1049275_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Idéal de Cajus",
+      "horse_id": 2856614,
+      "jockey": "Romain Dubord",
+      "trainer": "Fabian Cellier",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 5788,
+      "poids": 58,
+      "decharge": null,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 86.9,
+      "cote_geny": 82.3,
+      "musique": "(25)3p0p6p7p9p",
+      "note": "Vite derrière les animateurs, n'a pu rivaliser avec les trois premiers à mi-ligne droite, prenant la quatrième place tout à la fin en débordant [Horizon de Tanues (2)].",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 4,
+      "ecart": "3 1/2",
+      "proprietaire": "Lozano",
+      "casaque": "/web/image/casaque/47/1021847_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Horizon de Tanues",
+      "horse_id": 2630098,
+      "jockey": "Anthony Crastus",
+      "trainer": "P.J. Giraud",
+      "age": 9,
+      "sexe": "HONGRE",
+      "gain": 123271,
+      "poids": 60,
+      "decharge": null,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.5,
+      "cote_geny": 3.8,
+      "musique": "4p3p(25)9p8p2p7p5p9p6p",
+      "note": "A progressé en face pour venir aux avant-postes, puis a mis la pression sur l'animateur [Mauzac (5)] dans le tournant final, mais n'a pu suivre les trois premiers à mi-ligne droite, plafonnant.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 5,
+      "ecart": "NEZ",
+      "proprietaire": "Giraud",
+      "casaque": "/web/image/casaque/20/1004420_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Voix de Cristal",
+      "horse_id": 2817869,
+      "jockey": "Samy Le Quilleuc",
+      "trainer": "Michel Thabuteau",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 35180,
+      "poids": 60,
+      "decharge": null,
+      "corde": 8,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.9,
+      "cote_geny": 9.3,
+      "musique": "3p1p5p7p8p(25)2p1p1p3p",
+      "note": "Vite à l'arrière-garde, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 6,
+      "ecart": "4 1/2",
+      "proprietaire": "Thabuteau",
+      "casaque": "/web/image/casaque/14/1009914_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Magic Dream",
+      "horse_id": 2856615,
+      "jockey": "Antoine Werlé",
+      "trainer": "Charles Gourdain",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 8640,
+      "poids": 56.5,
+      "decharge": null,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5,
+      "cote_geny": 8.4,
+      "musique": "(25)1p2p",
+      "note": "N'a jamais pu quitter l'arrière-garde.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 7,
+      "ecart": "1 1/4",
+      "proprietaire": "Mottoul",
+      "casaque": "/web/image/casaque/18/1202418_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Madame Laboueyrie",
+      "horse_id": 2849214,
+      "jockey": "Hugo Mouesan",
+      "trainer": "Xavier Thomas-Demeaulte",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 21005,
+      "poids": 54.5,
+      "decharge": null,
+      "corde": 7,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 9.9,
+      "cote_geny": 16.4,
+      "musique": "(25)1p5p6p2p3p6p2p",
+      "note": "Vite au sein du peloton, a plafonné à l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 8,
+      "ecart": "5 1/2",
+      "proprietaire": "Thomas",
+      "casaque": "/web/image/casaque/61/1009961_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Divine de Lenzac",
+      "horse_id": 2842633,
+      "jockey": "Vincent Chenet",
+      "trainer": "Marguerite Prunet-Foch",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 16171,
+      "poids": 56.5,
+      "decharge": null,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 80.3,
+      "cote_geny": 82.3,
+      "musique": "7p5p6p8p8p6p6p(25)6p7p",
+      "note": "Vite dernière, était déjà battue dans le tournant final.",
+      "red_km": null,
+      "distance": 2400,
+      "rang": 9,
+      "ecart": "13",
+      "proprietaire": "Boujenah",
+      "casaque": "/web/image/casaque/25/1181325_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Halandjila",
+                  "numero": null,
+                  "id": 2774210,
+                  "idParticipation": 21737435
+                },
+                {
+                  "nom": "Horizon de Tanues",
+                  "numero": null,
+                  "id": 2630098,
+                  "idParticipation": 21737436
+                },
+                {
+                  "nom": "Voix de Cristal",
+                  "numero": null,
+                  "id": 2817869,
+                  "idParticipation": 21737437
+                }
+              ]
+            },
+            "commentaire": "[Horizon de Tanues (2)] a bien couru à deux reprises cette saison et mériterait de renouer avec le succès. [Halandjila (1)] peut lui mener la vie dure jugée sur ce qu'elle a fait de mieux. [Voix de Cristal (3)] va tenter de profiter de sa belle condition physique, attention.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Horizon de Tanues (2)] tourne autour",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21737436,
+            "idCheval": 2630098,
+            "numero": 2,
+            "nomCheval": "Horizon de Tanues"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21737435,
+            "idCheval": 2774210,
+            "numero": 1,
+            "nomCheval": "Halandjila"
+          },
+          {
+            "idParticipation": 21737437,
+            "idCheval": 2817869,
+            "numero": 3,
+            "nomCheval": "Voix de Cristal"
+          },
+          {
+            "idParticipation": 21737442,
+            "idCheval": 2856615,
+            "numero": 8,
+            "nomCheval": "Magic Dream"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21737440,
+            "idCheval": 2811005,
+            "numero": 6,
+            "nomCheval": "Hyde Pompadour"
+          },
+          {
+            "idParticipation": 21737443,
+            "idCheval": 2849214,
+            "numero": 9,
+            "nomCheval": "Madame Laboueyrie"
+          },
+          {
+            "idParticipation": 21737438,
+            "idCheval": 2856614,
+            "numero": 4,
+            "nomCheval": "Idéal de Cajus"
+          },
+          {
+            "idParticipation": 21737439,
+            "idCheval": 2838591,
+            "numero": 5,
+            "nomCheval": "Mauzac"
+          },
+          {
+            "idParticipation": 21737441,
+            "idCheval": 2842633,
+            "numero": 7,
+            "nomCheval": "Divine de Lenzac"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5085023,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737436,
+            "idCheval": 2630098,
+            "numero": 2,
+            "nomCheval": "Horizon de Tanues"
+          },
+          {
+            "idParticipation": 21737435,
+            "idCheval": 2774210,
+            "numero": 1,
+            "nomCheval": "Halandjila"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085024,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737436,
+            "idCheval": 2630098,
+            "numero": 2,
+            "nomCheval": "Horizon de Tanues"
+          },
+          {
+            "idParticipation": 21737435,
+            "idCheval": 2774210,
+            "numero": 1,
+            "nomCheval": "Halandjila"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085025,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737435,
+            "idCheval": 2774210,
+            "numero": 1,
+            "nomCheval": "Halandjila"
+          },
+          {
+            "idParticipation": 21737436,
+            "idCheval": 2630098,
+            "numero": 2,
+            "nomCheval": "Horizon de Tanues"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085026,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737436,
+            "idCheval": 2630098,
+            "numero": 2,
+            "nomCheval": "Horizon de Tanues"
+          },
+          {
+            "idParticipation": 21737435,
+            "idCheval": 2774210,
+            "numero": 1,
+            "nomCheval": "Halandjila"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085027,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737435,
+            "idCheval": 2774210,
+            "numero": 1,
+            "nomCheval": "Halandjila"
+          },
+          {
+            "idParticipation": 21737436,
+            "idCheval": 2630098,
+            "numero": 2,
+            "nomCheval": "Horizon de Tanues"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085028,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737436,
+            "idCheval": 2630098,
+            "numero": 2,
+            "nomCheval": "Horizon de Tanues"
+          },
+          {
+            "idParticipation": 21737435,
+            "idCheval": 2774210,
+            "numero": 1,
+            "nomCheval": "Halandjila"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085029,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737436,
+            "idCheval": 2630098,
+            "numero": 2,
+            "nomCheval": "Horizon de Tanues"
+          },
+          {
+            "idParticipation": 21737435,
+            "idCheval": 2774210,
+            "numero": 1,
+            "nomCheval": "Halandjila"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2630098,
+          "numero": 2,
+          "nomCheval": "Horizon de Tanues"
+        },
+        {
+          "points": 2,
+          "idCheval": 2774210,
+          "numero": 1,
+          "nomCheval": "Halandjila"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2774210,
+          "numero": 1,
+          "nomCheval": "Halandjila"
+        },
+        {
+          "points": 2,
+          "idCheval": 2630098,
+          "numero": 2,
+          "nomCheval": "Horizon de Tanues"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

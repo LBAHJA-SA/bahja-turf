@@ -1,0 +1,629 @@
+{
+  "reunion": {
+    "num": 2,
+    "hippodrome": "Momarken [Norvège]",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1683854,
+    "num": 2,
+    "prix": "Prix des Coquelits",
+    "time": "11:35:00",
+    "specialty": "ATTELE",
+    "discipline": "TROT",
+    "distance": 2140,
+    "surface": "POUZZOLANE",
+    "going": "BON",
+    "corde": "G",
+    "runners": 7,
+    "quinte": false,
+    "condition": "Pour 3 à 14 ans, ayant gagné au moins 23.688 € mais pas 38.388 €.",
+    "classe": null,
+    "depart": "AUTOSTART",
+    "penetrometer": null,
+    "types_pari": [
+      "SIMPLE",
+      "TRIO_ORDRE",
+      "COUPLE_ORDRE",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 4400,
+      "devise": "EUR",
+      "details": []
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 2,
+      "horse": "Victorys Maximus",
+      "horse_id": 2706904,
+      "jockey": "Asbjörn Tengsareid",
+      "trainer": "Ivar Henriksen",
+      "age": 8,
+      "sexe": "HONGRE",
+      "gain": 20524,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.8,
+      "cote_geny": 3.2,
+      "musique": "8a7a4a7a9a2a(25)3a6a2a4a6a",
+      "note": null,
+      "red_km": "1'14''2",
+      "distance": 2140,
+      "rang": 1,
+      "ecart": "00:01:14,200",
+      "proprietaire": "Team Maximus",
+      "casaque": "/web/image/casaque/24/1171424_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "G.G. Egri",
+      "horse_id": 2787845,
+      "jockey": "Fredrik Sandmoe  Lyssand",
+      "trainer": "Erik Killingmo",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 29274,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "DD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.9,
+      "cote_geny": 5.5,
+      "musique": "5a6a7a6a8a1a3a4a2a1a5aDa",
+      "note": null,
+      "red_km": "1'14''3",
+      "distance": 2140,
+      "rang": 2,
+      "ecart": null,
+      "proprietaire": "Killingmo",
+      "casaque": "/web/image/casaque/75/1139175_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Kong Amok",
+      "horse_id": 2671846,
+      "jockey": "Björn Steine",
+      "trainer": "Tom Forkerud",
+      "age": 9,
+      "sexe": "MALE",
+      "gain": 35386,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.2,
+      "cote_geny": 6.7,
+      "musique": "7a5a1a8a10a2a9a4a(25)12a4aDa",
+      "note": null,
+      "red_km": "1'14''3",
+      "distance": 2140,
+      "rang": 3,
+      "ecart": null,
+      "proprietaire": "Forkerud",
+      "casaque": "/web/image/casaque/86/1044786_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Stepping Moneygirl",
+      "horse_id": 2753519,
+      "jockey": "Lars Anvar Kolle",
+      "trainer": "Erik Korsvolla",
+      "age": 6,
+      "sexe": "FEMELLE",
+      "gain": 31377,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 15.7,
+      "cote_geny": 11.8,
+      "musique": "7a9a7a7a6a8a11a6a7a2a(25)5a",
+      "note": null,
+      "red_km": "1'14''5",
+      "distance": 2140,
+      "rang": 4,
+      "ecart": null,
+      "proprietaire": "Korsvolla",
+      "casaque": "/web/image/casaque/58/1048058_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Watch Me Explode",
+      "horse_id": 2740005,
+      "jockey": "Gunnar Austevoll",
+      "trainer": "Jan-Arne Raab",
+      "age": 9,
+      "sexe": "HONGRE",
+      "gain": 28850,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "DD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.6,
+      "cote_geny": 10.8,
+      "musique": "7a5a6a3a2a6a6a6a9a6a9a8a",
+      "note": null,
+      "red_km": "1'14''9",
+      "distance": 2140,
+      "rang": 5,
+      "ecart": null,
+      "proprietaire": "Jan-Arne Raab & Arne-Chr.Rödby",
+      "casaque": "/web/image/casaque/73/1140173_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Carlos Diamant",
+      "horse_id": 2767019,
+      "jockey": "Roy-Atle Ruud Nilsen",
+      "trainer": "Jenny Eriksson",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 37382,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.4,
+      "cote_geny": 3.6,
+      "musique": "8a3aDa4a1a4aDa7a4a(25)6a1a",
+      "note": null,
+      "red_km": "1'15''3",
+      "distance": 2140,
+      "rang": 6,
+      "ecart": null,
+      "proprietaire": "Jenny  Eriksson & Carlsson A",
+      "casaque": "/web/image/casaque/71/1211071_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Dream Briljant",
+      "horse_id": 2596262,
+      "jockey": "Hans-Christian Holm",
+      "trainer": "Terje Pedersen",
+      "age": 11,
+      "sexe": "HONGRE",
+      "gain": 21495,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "DD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 34.2,
+      "cote_geny": 26.7,
+      "musique": "11a5a(25)8a9a6a12a8a10a7a3a",
+      "note": null,
+      "red_km": null,
+      "distance": 2140,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Terje Pedersen & Anne-C.Pedersen",
+      "casaque": "/web/image/casaque/78/1140078_1.png",
+      "etat": "PARTANT",
+      "incident": "ARRETE"
+    }
+  ],
+  "pronostics": {
+    "geny": null,
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5085135,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734883,
+            "idCheval": 2787845,
+            "numero": 3,
+            "nomCheval": "G.G. Egri"
+          },
+          {
+            "idParticipation": 21734879,
+            "idCheval": 2706904,
+            "numero": 2,
+            "nomCheval": "Victorys Maximus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085136,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734883,
+            "idCheval": 2787845,
+            "numero": 3,
+            "nomCheval": "G.G. Egri"
+          },
+          {
+            "idParticipation": 21734879,
+            "idCheval": 2706904,
+            "numero": 2,
+            "nomCheval": "Victorys Maximus"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085137,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734882,
+            "idCheval": 2767019,
+            "numero": 5,
+            "nomCheval": "Carlos Diamant"
+          },
+          {
+            "idParticipation": 21734883,
+            "idCheval": 2787845,
+            "numero": 3,
+            "nomCheval": "G.G. Egri"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085138,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734882,
+            "idCheval": 2767019,
+            "numero": 5,
+            "nomCheval": "Carlos Diamant"
+          },
+          {
+            "idParticipation": 21734883,
+            "idCheval": 2787845,
+            "numero": 3,
+            "nomCheval": "G.G. Egri"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085139,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734883,
+            "idCheval": 2787845,
+            "numero": 3,
+            "nomCheval": "G.G. Egri"
+          },
+          {
+            "idParticipation": 21734882,
+            "idCheval": 2767019,
+            "numero": 5,
+            "nomCheval": "Carlos Diamant"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085140,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734882,
+            "idCheval": 2767019,
+            "numero": 5,
+            "nomCheval": "Carlos Diamant"
+          },
+          {
+            "idParticipation": 21734883,
+            "idCheval": 2787845,
+            "numero": 3,
+            "nomCheval": "G.G. Egri"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085141,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734883,
+            "idCheval": 2787845,
+            "numero": 3,
+            "nomCheval": "G.G. Egri"
+          },
+          {
+            "idParticipation": 21734882,
+            "idCheval": 2767019,
+            "numero": 5,
+            "nomCheval": "Carlos Diamant"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2787845,
+          "numero": 3,
+          "nomCheval": "G.G. Egri"
+        },
+        {
+          "points": 3,
+          "idCheval": 2767019,
+          "numero": 5,
+          "nomCheval": "Carlos Diamant"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 3,
+          "idCheval": 2787845,
+          "numero": 3,
+          "nomCheval": "G.G. Egri"
+        },
+        {
+          "points": 2,
+          "idCheval": 2706904,
+          "numero": 2,
+          "nomCheval": "Victorys Maximus"
+        },
+        {
+          "points": 2,
+          "idCheval": 2767019,
+          "numero": 5,
+          "nomCheval": "Carlos Diamant"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

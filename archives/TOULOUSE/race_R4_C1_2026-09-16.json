@@ -1,0 +1,1090 @@
+{
+  "reunion": {
+    "num": 4,
+    "hippodrome": "Toulouse",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1684070,
+    "num": 1,
+    "prix": "Prix de La Garonne",
+    "time": "16:34:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 2000,
+    "surface": "GAZON",
+    "going": "BON",
+    "corde": "D",
+    "runners": 15,
+    "quinte": false,
+    "condition": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus.",
+    "classe": "CLASSE_4",
+    "depart": null,
+    "penetrometer": 3.2,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "MULTI",
+      "COUPLE",
+      "TRIO"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 14400,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 7200,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 2736,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2016,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1296,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 576,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 360,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 216,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 8,
+      "horse": "Gwenn Ha du",
+      "horse_id": 2749952,
+      "jockey": "Marvin Grandin",
+      "trainer": "Philippe Sogorb",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 46065,
+      "poids": 56,
+      "decharge": null,
+      "corde": 12,
+      "valeur": 19.5,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 6.1,
+      "cote_geny": 8.1,
+      "musique": "4p7p7p0p9p8p(25)0p4p0p",
+      "note": "Vite derrière les animateurs, a progressé à l'entrée de la ligne droite et a terminé le mieux pour faire la différence près du but.",
+      "red_km": "2'06''7",
+      "distance": 2000,
+      "rang": 1,
+      "ecart": "00:02:06,700",
+      "proprietaire": "Cornou",
+      "casaque": "/web/image/casaque/59/1085759_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Grecian Ruler",
+      "horse_id": 2805722,
+      "jockey": "Hugo Mouesan",
+      "trainer": "A. Macedo Da Silva",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 18363,
+      "poids": 59,
+      "decharge": null,
+      "corde": 14,
+      "valeur": 22.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 56.8,
+      "cote_geny": 28.8,
+      "musique": "0p0p5p9p0p5p7p6p0p5p",
+      "note": "Vite en tête, a longtemps fait illusion pour le succès, mais n'a pu résister à la belle fin de course de [Gwenn Ha du (8)].",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 2,
+      "ecart": "1 1/2",
+      "proprietaire": "Da Silva",
+      "casaque": "/web/image/casaque/99/1099999_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Aryvesan",
+      "horse_id": 2813685,
+      "jockey": "Anthony Crastus",
+      "trainer": "Jacques Piednoel",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 18706,
+      "poids": 59,
+      "decharge": null,
+      "corde": 1,
+      "valeur": 22.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 15.4,
+      "cote_geny": 10.4,
+      "musique": "6p7p0p9p0p6p(25)1p5p4p",
+      "note": "Vite derrière l'animateur [Grecian Ruler (5)], l'a attaqué en vain jusqu'au bout, échouant de peu, tout en résistant à la belle fin de course.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 3,
+      "ecart": "CENC",
+      "proprietaire": "Angiargia",
+      "casaque": "/web/image/casaque/83/1204983_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Miss Parano",
+      "horse_id": 2809385,
+      "jockey": "Adeline Mérou",
+      "trainer": "Anthony Lopez",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 30691,
+      "poids": 56,
+      "decharge": 54.5,
+      "corde": 2,
+      "valeur": 19.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.9,
+      "cote_geny": 5.7,
+      "musique": "1p1p7p9p0p7p6p3p8p4p",
+      "note": "Vite derrière le groupe de tête, n'a pas été très chanceuse à deux cents mètres du but, puis s'est bien relancée, échouant de très peu pour un accessit.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 4,
+      "ecart": "NEZ",
+      "proprietaire": "Lopez",
+      "casaque": "/web/image/casaque/77/1023377_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Gyp Sea",
+      "horse_id": 2808821,
+      "jockey": "Fabrice Veron",
+      "trainer": "Amy Murphy",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 44807,
+      "poids": 59.5,
+      "decharge": null,
+      "corde": 5,
+      "valeur": 23,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.5,
+      "cote_geny": 7.1,
+      "musique": "7p8p5p7p4p6p8p9p(25)8p",
+      "note": "Vite derrière le groupe de tête, a lutté en vain pour un meilleur classement dans la phase finale, échouant de peu.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 5,
+      "ecart": "1",
+      "proprietaire": "F. Demnard / M. Emain",
+      "casaque": "/web/image/casaque/04/1203804_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 14,
+      "horse": "Khelle Tartare",
+      "horse_id": 2707519,
+      "jockey": "Shana Topin",
+      "trainer": "Hervé Froidefond",
+      "age": 7,
+      "sexe": "FEMELLE",
+      "gain": 34757,
+      "poids": 51.5,
+      "decharge": 49,
+      "corde": 3,
+      "valeur": 15,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 10.8,
+      "cote_geny": 13.6,
+      "musique": "2p3p4p2p3p4p4p6p7p0p",
+      "note": "Vite dans la seconde moitié de peloton, n'a pas mal terminé, mais sans inquiéter les cinq premiers.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 6,
+      "ecart": "1 1/2",
+      "proprietaire": "Froidefond",
+      "casaque": "/web/image/casaque/16/1100816_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Karkhov",
+      "horse_id": 2682342,
+      "jockey": "Delphine Santiago",
+      "trainer": "Julian Resimont",
+      "age": 8,
+      "sexe": "HONGRE",
+      "gain": 71120,
+      "poids": 55.5,
+      "decharge": 54,
+      "corde": 4,
+      "valeur": 19,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 33.3,
+      "cote_geny": 48.6,
+      "musique": "(25)0p6p1p5p7p(24)0p0p9p",
+      "note": "Vite au sein du peloton, a terminé courageusement tout en étant débordé près du but par [Khelle Tartare (14)].",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 7,
+      "ecart": "1",
+      "proprietaire": "Lauffer",
+      "casaque": "/web/image/casaque/55/1019755_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Sedition",
+      "horse_id": 2848791,
+      "jockey": "Alexandre Gavilan",
+      "trainer": "Armony Tinchon",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 18696,
+      "poids": 60,
+      "decharge": null,
+      "corde": 13,
+      "valeur": 23.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7.4,
+      "cote_geny": 12,
+      "musique": "5p7p0p5p2p5p8p1p2p0p",
+      "note": "Vite à l'extérieur de l'animateur [Grecian Ruler (5)], a plafonné à mi-ligne droite.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 8,
+      "ecart": "1 1/4",
+      "proprietaire": "Tinchon",
+      "casaque": "/web/image/casaque/26/1192726_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 15,
+      "horse": "Slayer",
+      "horse_id": 2617689,
+      "jockey": "Anaëlle Mekouche",
+      "trainer": "Catherine Papon",
+      "age": 9,
+      "sexe": "HONGRE",
+      "gain": 87214,
+      "poids": 51.5,
+      "decharge": 50.5,
+      "corde": 10,
+      "valeur": 15,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 46.9,
+      "cote_geny": 35.9,
+      "musique": "3p6p6p3p6p5p9p5p4p0p",
+      "note": "Vite à l'arrière-garde, a terminé convenablement, sans faire illusion.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 9,
+      "ecart": "3/4",
+      "proprietaire": "Papon",
+      "casaque": "/web/image/casaque/20/1022520_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Piraillan",
+      "horse_id": 2813676,
+      "jockey": "Clément Merille",
+      "trainer": "Alexis Fouchet",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 18085,
+      "poids": 60,
+      "decharge": null,
+      "corde": 6,
+      "valeur": 23.5,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 59.5,
+      "cote_geny": 42.6,
+      "musique": "9p5p6p2p4p8p0p8p0p0p",
+      "note": "Vite dans la seconde moitié de peloton, a tenté de progresser à l'entrée de la ligne droite, puis est resté dans son action un peu plus loin.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 10,
+      "ecart": "1/4",
+      "proprietaire": "Ile De Ré Galop Ec. Territoire",
+      "casaque": "/web/image/casaque/45/1194745_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 12,
+      "horse": "Spichope",
+      "horse_id": 2814784,
+      "jockey": "Warren Levesque",
+      "trainer": "Tatiana Puitg",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 37789,
+      "poids": 54.5,
+      "decharge": 53,
+      "corde": 15,
+      "valeur": 18,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 56.8,
+      "cote_geny": 41,
+      "musique": "0p8p9p7p0p5p8p9p5p0p",
+      "note": "Vite au sein du peloton, n'a joué aucun rôle.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 11,
+      "ecart": "1/4",
+      "proprietaire": "Bellette",
+      "casaque": "/web/image/casaque/82/1036382_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 13,
+      "horse": "La Fille de Berlin",
+      "horse_id": 2630933,
+      "jockey": "Chloé Damour",
+      "trainer": "Julian Resimont",
+      "age": 9,
+      "sexe": "FEMELLE",
+      "gain": 111605,
+      "poids": 54,
+      "decharge": 50.5,
+      "corde": 8,
+      "valeur": 17.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 55.7,
+      "cote_geny": 98.4,
+      "musique": "(25)0p0p1p2p5p9p4p2p8p",
+      "note": "Vite derrière le groupe de tête, a plafonné à l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 12,
+      "ecart": "3/4",
+      "proprietaire": "Lauffer",
+      "casaque": "/web/image/casaque/55/1019755_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Mana Sis",
+      "horse_id": 2762406,
+      "jockey": "Samy Le Quilleuc",
+      "trainer": "Julian Resimont",
+      "age": 6,
+      "sexe": "FEMELLE",
+      "gain": 27139,
+      "poids": 55.5,
+      "decharge": null,
+      "corde": 11,
+      "valeur": 19,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 75.6,
+      "cote_geny": 69.8,
+      "musique": "(25)3p3p4p9p0p(24)4p8p1p",
+      "note": "N'a jamais été en mesure de quitter les derniers rangs.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 13,
+      "ecart": "2 1/2",
+      "proprietaire": "Lauffer",
+      "casaque": "/web/image/casaque/55/1019755_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Zokoa",
+      "horse_id": 2728375,
+      "jockey": "Guillaume Guedj-Gay",
+      "trainer": "Frédéric Sanchez",
+      "age": 6,
+      "sexe": "HONGRE",
+      "gain": 50631,
+      "poids": 56.5,
+      "decharge": null,
+      "corde": 7,
+      "valeur": 20,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 14.1,
+      "cote_geny": 8.8,
+      "musique": "5p3p0p0p0p2p0p(25)6p2p",
+      "note": "Vite à l'arrière-garde, n'a jamais été dangereux.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 14,
+      "ecart": "7 1/2",
+      "proprietaire": "Sanchez-Lepaysan",
+      "casaque": "/web/image/casaque/03/1121703_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Becho",
+      "horse_id": 2665758,
+      "jockey": "Ioritz Mendizabal",
+      "trainer": "Roberto-Carlos Montenegro",
+      "age": 8,
+      "sexe": "FEMELLE",
+      "gain": 115493,
+      "poids": 55.5,
+      "decharge": null,
+      "corde": 9,
+      "valeur": 19,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": null,
+      "attache_langue": null,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 8.4,
+      "cote_geny": 5.5,
+      "musique": "3p5p0p6p1p0p7p2p2p0p",
+      "note": "Vite en queue de peloton, n'a jamais été dangereuse, terminant en net retrait.",
+      "red_km": null,
+      "distance": 2000,
+      "rang": 15,
+      "ecart": "LOIN",
+      "proprietaire": "Montenegro",
+      "casaque": "/web/image/casaque/76/1125476_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Zokoa",
+                  "numero": null,
+                  "id": 2728375,
+                  "idParticipation": 21737361
+                },
+                {
+                  "nom": "Gwenn Ha du",
+                  "numero": null,
+                  "id": 2749952,
+                  "idParticipation": 21737363
+                },
+                {
+                  "nom": "Becho",
+                  "numero": null,
+                  "id": 2665758,
+                  "idParticipation": 21737364
+                }
+              ]
+            },
+            "commentaire": "[Zokoa (6)], en bonne condition, devrait jouer les premiers rôles dans ce handicap divisé. [Becho (9)], sur la pente ascendante, a le droit de lutter pour les premières places également. [Gwenn Ha du (8)] vient de conclure à ses côtés, ce qui lui confère une chance.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "A la portée de [Zokoa (6)]",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21737361,
+            "idCheval": 2728375,
+            "numero": 6,
+            "nomCheval": "Zokoa"
+          },
+          {
+            "idParticipation": 21737364,
+            "idCheval": 2665758,
+            "numero": 9,
+            "nomCheval": "Becho"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21737363,
+            "idCheval": 2749952,
+            "numero": 8,
+            "nomCheval": "Gwenn Ha du"
+          },
+          {
+            "idParticipation": 21737362,
+            "idCheval": 2809385,
+            "numero": 7,
+            "nomCheval": "Miss Parano"
+          },
+          {
+            "idParticipation": 21737369,
+            "idCheval": 2707519,
+            "numero": 14,
+            "nomCheval": "Khelle Tartare"
+          },
+          {
+            "idParticipation": 21737356,
+            "idCheval": 2848791,
+            "numero": 1,
+            "nomCheval": "Sedition"
+          },
+          {
+            "idParticipation": 21737359,
+            "idCheval": 2813685,
+            "numero": 4,
+            "nomCheval": "Aryvesan"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21737358,
+            "idCheval": 2808821,
+            "numero": 3,
+            "nomCheval": "Gyp Sea"
+          },
+          {
+            "idParticipation": 21737357,
+            "idCheval": 2813676,
+            "numero": 2,
+            "nomCheval": "Piraillan"
+          },
+          {
+            "idParticipation": 21737370,
+            "idCheval": 2617689,
+            "numero": 15,
+            "nomCheval": "Slayer"
+          },
+          {
+            "idParticipation": 21737366,
+            "idCheval": 2762406,
+            "numero": 11,
+            "nomCheval": "Mana Sis"
+          },
+          {
+            "idParticipation": 21737367,
+            "idCheval": 2814784,
+            "numero": 12,
+            "nomCheval": "Spichope"
+          },
+          {
+            "idParticipation": 21737365,
+            "idCheval": 2682342,
+            "numero": 10,
+            "nomCheval": "Karkhov"
+          },
+          {
+            "idParticipation": 21737360,
+            "idCheval": 2805722,
+            "numero": 5,
+            "nomCheval": "Grecian Ruler"
+          },
+          {
+            "idParticipation": 21737368,
+            "idCheval": 2630933,
+            "numero": 13,
+            "nomCheval": "La Fille de Berlin"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": {
+      "bloc": [
+        {
+          "chevaux": {
+            "cheval": [
+              {
+                "nom": "Miss Parano",
+                "numero": null,
+                "id": 2809385,
+                "idParticipation": 21737362
+              }
+            ]
+          },
+          "commentaire": "[Miss Parano (7)] : Sa forme ne se dément pas. Bien que pénalisée de sept livres, elle peut réaliser le coup du chapeau.",
+          "id": "dm"
+        }
+      ],
+      "id": null,
+      "idParticipation": null
+    },
+    "presse": [
+      {
+        "id": 5085037,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737364,
+            "idCheval": 2665758,
+            "numero": 9,
+            "nomCheval": "Becho"
+          },
+          {
+            "idParticipation": 21737361,
+            "idCheval": 2728375,
+            "numero": 6,
+            "nomCheval": "Zokoa"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085038,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737361,
+            "idCheval": 2728375,
+            "numero": 6,
+            "nomCheval": "Zokoa"
+          },
+          {
+            "idParticipation": 21737364,
+            "idCheval": 2665758,
+            "numero": 9,
+            "nomCheval": "Becho"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085039,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737361,
+            "idCheval": 2728375,
+            "numero": 6,
+            "nomCheval": "Zokoa"
+          },
+          {
+            "idParticipation": 21737364,
+            "idCheval": 2665758,
+            "numero": 9,
+            "nomCheval": "Becho"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085040,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737364,
+            "idCheval": 2665758,
+            "numero": 9,
+            "nomCheval": "Becho"
+          },
+          {
+            "idParticipation": 21737361,
+            "idCheval": 2728375,
+            "numero": 6,
+            "nomCheval": "Zokoa"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085041,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737364,
+            "idCheval": 2665758,
+            "numero": 9,
+            "nomCheval": "Becho"
+          },
+          {
+            "idParticipation": 21737361,
+            "idCheval": 2728375,
+            "numero": 6,
+            "nomCheval": "Zokoa"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085042,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737361,
+            "idCheval": 2728375,
+            "numero": 6,
+            "nomCheval": "Zokoa"
+          },
+          {
+            "idParticipation": 21737364,
+            "idCheval": 2665758,
+            "numero": 9,
+            "nomCheval": "Becho"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085043,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21737364,
+            "idCheval": 2665758,
+            "numero": 9,
+            "nomCheval": "Becho"
+          },
+          {
+            "idParticipation": 21737361,
+            "idCheval": 2728375,
+            "numero": 6,
+            "nomCheval": "Zokoa"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2665758,
+          "numero": 9,
+          "nomCheval": "Becho"
+        },
+        {
+          "points": 3,
+          "idCheval": 2728375,
+          "numero": 6,
+          "nomCheval": "Zokoa"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2728375,
+          "numero": 6,
+          "nomCheval": "Zokoa"
+        },
+        {
+          "points": 3,
+          "idCheval": 2665758,
+          "numero": 9,
+          "nomCheval": "Becho"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

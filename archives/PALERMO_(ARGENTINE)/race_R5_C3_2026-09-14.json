@@ -1,0 +1,657 @@
+{
+  "reunion": {
+    "num": 5,
+    "hippodrome": "Palermo (Argentine)",
+    "organizer": "PMU",
+    "date": "2026-09-14"
+  },
+  "course": {
+    "id": 1683288,
+    "num": 3,
+    "prix": "Premio Martana",
+    "time": "19:09:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 1000,
+    "surface": "DIRT",
+    "going": "RAPIDE",
+    "corde": "G",
+    "runners": 8,
+    "quinte": false,
+    "condition": "Pour poulains entiers et hongres de 3 ans, n'ayant jamais gagné.",
+    "classe": "MAIDEN",
+    "depart": null,
+    "penetrometer": null,
+    "types_pari": [
+      "SIMPLE",
+      "COUPLE",
+      "TRIO",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 7700,
+      "devise": "EUR",
+      "details": []
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Best Seller",
+      "horse_id": 2900831,
+      "jockey": "Juan Cruz Villagra",
+      "trainer": "Guillermo Frenkel Santillan",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.6,
+      "cote_geny": 9,
+      "musique": "3p9p5p8p10p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 1,
+      "ecart": null,
+      "proprietaire": "Pancha",
+      "casaque": "/web/image/casaque/79/1073379_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Scaloneta Sar",
+      "horse_id": 2880143,
+      "jockey": "Jorge Luis Peralta",
+      "trainer": "Walter Dario Carbajal",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 8,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7,
+      "cote_geny": 8.7,
+      "musique": "7p3p4p6p3p3p(25)5p3p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 2,
+      "ecart": "2",
+      "proprietaire": "El Bandido",
+      "casaque": "/web/image/casaque/21/1181021_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Nino Matico",
+      "horse_id": 2886201,
+      "jockey": "Elvio Gaspar Candia Gutierrez",
+      "trainer": "Maria Alvarez",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 10.3,
+      "cote_geny": 9.4,
+      "musique": "7p3p6p2p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 3,
+      "ecart": "1",
+      "proprietaire": "May-Clau",
+      "casaque": "/web/image/casaque/70/1178370_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "El Destino Real",
+      "horse_id": 2900830,
+      "jockey": "Jorge Marcelino Ortiz",
+      "trainer": "Claudio Quiroga",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.7,
+      "cote_geny": 20.2,
+      "musique": "5p(25)4p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 4,
+      "ecart": "ENC",
+      "proprietaire": "Pacha",
+      "casaque": "/web/image/casaque/86/1147186_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Bagualon",
+      "horse_id": 2887021,
+      "jockey": "Pablo Damian Carrizo",
+      "trainer": "Adrian Eugenio Rudolf",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 826,
+      "poids": 56,
+      "decharge": null,
+      "corde": 6,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.2,
+      "cote_geny": 2.3,
+      "musique": "2p2p3p5p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 5,
+      "ecart": "1",
+      "proprietaire": "Stud Eugenio",
+      "casaque": "/web/image/casaque/78/1209078_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Sonador Holiday",
+      "horse_id": 2893717,
+      "jockey": "Jesus Roman Azcona",
+      "trainer": "Lucas Caru",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 266,
+      "poids": 56,
+      "decharge": null,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 15.3,
+      "cote_geny": 7.8,
+      "musique": "4p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 6,
+      "ecart": "3/4",
+      "proprietaire": "La Doble G Caleufu",
+      "casaque": "/web/image/casaque/55/1186555_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "My Wind",
+      "horse_id": 2900833,
+      "jockey": "Wilson Rosario Moreyra",
+      "trainer": "Alberto E. Soave",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 6.4,
+      "cote_geny": 6.9,
+      "musique": "inédit",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 7,
+      "ecart": "1",
+      "proprietaire": "Rosa",
+      "casaque": "/web/image/casaque/28/1138728_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Emm Jugador",
+      "horse_id": 2900832,
+      "jockey": "Facundo Marcelo Coria",
+      "trainer": "Maximino Herroz",
+      "age": 3,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 56,
+      "decharge": null,
+      "corde": 7,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 39.6,
+      "cote_geny": 24.2,
+      "musique": "10p10p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 8,
+      "ecart": "NEZ",
+      "proprietaire": "Ignacio C.",
+      "casaque": "/web/image/casaque/86/1107386_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": null,
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5083876,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728019,
+            "idCheval": 2887021,
+            "numero": 6,
+            "nomCheval": "Bagualon"
+          },
+          {
+            "idParticipation": 21728016,
+            "idCheval": 2900831,
+            "numero": 1,
+            "nomCheval": "Best Seller"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083877,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728022,
+            "idCheval": 2900833,
+            "numero": 3,
+            "nomCheval": "My Wind"
+          },
+          {
+            "idParticipation": 21728016,
+            "idCheval": 2900831,
+            "numero": 1,
+            "nomCheval": "Best Seller"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083878,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728016,
+            "idCheval": 2900831,
+            "numero": 1,
+            "nomCheval": "Best Seller"
+          },
+          {
+            "idParticipation": 21728019,
+            "idCheval": 2887021,
+            "numero": 6,
+            "nomCheval": "Bagualon"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083879,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728019,
+            "idCheval": 2887021,
+            "numero": 6,
+            "nomCheval": "Bagualon"
+          },
+          {
+            "idParticipation": 21728016,
+            "idCheval": 2900831,
+            "numero": 1,
+            "nomCheval": "Best Seller"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083880,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728016,
+            "idCheval": 2900831,
+            "numero": 1,
+            "nomCheval": "Best Seller"
+          },
+          {
+            "idParticipation": 21728022,
+            "idCheval": 2900833,
+            "numero": 3,
+            "nomCheval": "My Wind"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083881,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728016,
+            "idCheval": 2900831,
+            "numero": 1,
+            "nomCheval": "Best Seller"
+          },
+          {
+            "idParticipation": 21728022,
+            "idCheval": 2900833,
+            "numero": 3,
+            "nomCheval": "My Wind"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083882,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728019,
+            "idCheval": 2887021,
+            "numero": 6,
+            "nomCheval": "Bagualon"
+          },
+          {
+            "idParticipation": 21728016,
+            "idCheval": 2900831,
+            "numero": 1,
+            "nomCheval": "Best Seller"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 3,
+          "idCheval": 2900831,
+          "numero": 1,
+          "nomCheval": "Best Seller"
+        },
+        {
+          "points": 3,
+          "idCheval": 2887021,
+          "numero": 6,
+          "nomCheval": "Bagualon"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2900831,
+          "numero": 1,
+          "nomCheval": "Best Seller"
+        },
+        {
+          "points": 2,
+          "idCheval": 2900833,
+          "numero": 3,
+          "nomCheval": "My Wind"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

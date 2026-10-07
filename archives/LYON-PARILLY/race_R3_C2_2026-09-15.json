@@ -1,0 +1,784 @@
+{
+  "reunion": {
+    "num": 3,
+    "hippodrome": "Lyon-Parilly",
+    "organizer": "PMU",
+    "date": "2026-09-15"
+  },
+  "course": {
+    "id": 1683912,
+    "num": 2,
+    "prix": "Prix du Mont Cindré",
+    "time": "12:23:00",
+    "specialty": "HAIES",
+    "discipline": "GALOP",
+    "distance": 3400,
+    "surface": "GAZON",
+    "going": "TRES_SOUPLE",
+    "corde": "G",
+    "runners": 8,
+    "quinte": false,
+    "condition": "Pour tous poulains et pouliches de 4 ans, mis à réclamer pour 8.000, 10.000 ou 12.000. Poids : 68 kg. Les poulains et pouliches mis à réclamer pour 10.000 porteront 2 kg ; pour 12.000, 4 kg. En outre, les poulains et pouliches ayant, cette année, en course de haies, reçu une allocation de 6.000 porteront 2 kg ; Plusieurs allocations de 6.000, 4 kg.",
+    "classe": null,
+    "depart": null,
+    "penetrometer": 3.9,
+    "types_pari": [
+      "SIMPLE",
+      "COUPLE",
+      "TRIO",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 19000,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 8740,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 4370,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2470,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1710,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 855,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 570,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 285,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Happy Time",
+      "horse_id": 2875128,
+      "jockey": "Elouan Meunier",
+      "trainer": "Davide Satalia",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 21040,
+      "poids": 74,
+      "decharge": 71.5,
+      "corde": null,
+      "valeur": 55,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7.6,
+      "cote_geny": 8.2,
+      "musique": "2p3p1h8h3h6h4sTh0hAh",
+      "note": "A été déclaré non partant sans précision du motif.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 0,
+      "ecart": null,
+      "proprietaire": "D.Satalia/Sasu Scuderia C.Troge",
+      "casaque": "/web/image/casaque/80/1209580_2.png",
+      "etat": "NON_PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Prairie Samba",
+      "horse_id": 2865832,
+      "jockey": "Jean-Frédéric Rambur",
+      "trainer": "Mathieu Pitart",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 21700,
+      "poids": 72,
+      "decharge": 68.5,
+      "corde": null,
+      "valeur": 54,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.3,
+      "cote_geny": 5,
+      "musique": "3h4h5hAh1h(25)0p9p8p",
+      "note": "Vite en bon rang, en retrait de l'animateur [Allure (4)], a chuté à la réception de l'avant-dernière haie, à l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 0,
+      "ecart": null,
+      "proprietaire": "Lugdunum",
+      "casaque": "/web/image/casaque/34/1003534_2.png",
+      "etat": "PARTANT",
+      "incident": "TOMBE"
+    },
+    {
+      "num": 7,
+      "horse": "Lady Zaza",
+      "horse_id": 2825045,
+      "jockey": "Bastien Marchand",
+      "trainer": "Mickaël Seror",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 27980,
+      "poids": 68,
+      "decharge": 65.5,
+      "corde": null,
+      "valeur": 51,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.9,
+      "cote_geny": 5.9,
+      "musique": "6p7h5h3h8h3s1hAh1h9p",
+      "note": "Vite en queue de peloton, en retrait des deux animateurs, a perdu le contact dans le tournant final, et a été arrêtée à l'entrée de la ligne droite.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 0,
+      "ecart": null,
+      "proprietaire": "Tygaly",
+      "casaque": "/web/image/casaque/83/1156483_2.png",
+      "etat": "PARTANT",
+      "incident": "ARRETE"
+    },
+    {
+      "num": 6,
+      "horse": "Stupéfiante",
+      "horse_id": 2838762,
+      "jockey": "Gaëtan Champier",
+      "trainer": "Mathieu Pitart",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 70,
+      "decharge": 69.5,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 13.6,
+      "cote_geny": 14.6,
+      "musique": "0p0p9p1p9p0p6p4p4p8p",
+      "note": "Après avoir fermé la marche, s'est rapprochée entre les deux dernières haies, quand les animateurs ont marqué le pas, puis a facilement dominé les débats sur le plat.",
+      "red_km": "4'09''8",
+      "distance": 3400,
+      "rang": 1,
+      "ecart": "00:04:09,800",
+      "proprietaire": "Giraudon",
+      "casaque": "/web/image/casaque/25/1004425_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Miss Jang",
+      "horse_id": 2869571,
+      "jockey": "Félix de Giles",
+      "trainer": "David Windrif",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 5325,
+      "poids": 68,
+      "decharge": 68.5,
+      "corde": null,
+      "valeur": 50,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 9.4,
+      "cote_geny": 10.3,
+      "musique": "3h2h9p4p5p0p0p7h(25)0p",
+      "note": "Patiente au sein d'un petit peloton, en retrait des deux animateurs, a fait mouvement entre les deux dernières haies, puis a bien sprinté pour s'emparer du premier accessit sur le plat.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 2,
+      "ecart": "5 1/2",
+      "proprietaire": "Fontaine",
+      "casaque": "/web/image/casaque/52/1107352_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Guido d'Oneix",
+      "horse_id": 2846060,
+      "jockey": "Joël Phelippe",
+      "trainer": "Mickaël Seror",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 17995,
+      "poids": 70,
+      "decharge": 66.5,
+      "corde": null,
+      "valeur": 55,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.3,
+      "cote_geny": 3.7,
+      "musique": "5hAh3h(25)2h5h6h4h",
+      "note": "Après avoir galopé en retrait des deux animateurs, s'est rapproché entre les deux dernières haies, puis a obtenu après lutte le second accessit sur le plat.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 3,
+      "ecart": "2",
+      "proprietaire": "Finch",
+      "casaque": "/web/image/casaque/26/1135126_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Allure",
+      "horse_id": 2839886,
+      "jockey": "Luigi Maceli",
+      "trainer": "David Cottin",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 23432,
+      "poids": 72,
+      "decharge": 69.5,
+      "corde": null,
+      "valeur": 56.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.7,
+      "cote_geny": 3.2,
+      "musique": "3h5p0h4h1h5h(25)2h8p5p",
+      "note": "Vite en tête, s'est progressivement détaché de ses adversaires, mais a donné des signes de lassitude entre les deux dernières haies, puis a subi un triple assaut sur le plat.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 4,
+      "ecart": "NEZ",
+      "proprietaire": "Dei Principi",
+      "casaque": "/web/image/casaque/05/1018405_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Noctambule",
+      "horse_id": 2842235,
+      "jockey": "Tyson Ventadour",
+      "trainer": "Giada Menato",
+      "age": 4,
+      "sexe": "MALE",
+      "gain": 2385,
+      "poids": 72,
+      "decharge": 68.5,
+      "corde": null,
+      "valeur": 51,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 36.9,
+      "cote_geny": 87.1,
+      "musique": "6h8pAh5h(25)7p7p8p",
+      "note": "Vite à l'arrière, en retrait des deux animateurs, a conclu courageusement, sans pouvoir rivaliser avec les quatre premiers sur le plat.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 5,
+      "ecart": "4 1/2",
+      "proprietaire": "Menato",
+      "casaque": "/web/image/casaque/44/1034044_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Prairie Samba",
+                  "numero": null,
+                  "id": 2865832,
+                  "idParticipation": 21735684
+                },
+                {
+                  "nom": "Allure",
+                  "numero": null,
+                  "id": 2839886,
+                  "idParticipation": 21735686
+                }
+              ]
+            },
+            "commentaire": "Avec deux bonnes courses de rentrée, bien engagé et évoluant dans sa catégorie, [Allure (4)] fait partie des belles chances de cette épreuve. [Prairie Samba (2)], qui revoit ses ambitions à la baisse, décevrait en ne luttant pas pour le succès.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Allure (4)]  vise la gagne",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21735686,
+            "idCheval": 2839886,
+            "numero": 4,
+            "nomCheval": "Allure"
+          },
+          {
+            "idParticipation": 21735684,
+            "idCheval": 2865832,
+            "numero": 2,
+            "nomCheval": "Prairie Samba"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21735687,
+            "idCheval": 2846060,
+            "numero": 5,
+            "nomCheval": "Guido d'Oneix"
+          },
+          {
+            "idParticipation": 21735683,
+            "idCheval": 2875128,
+            "numero": 1,
+            "nomCheval": "Happy Time"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21735690,
+            "idCheval": 2869571,
+            "numero": 8,
+            "nomCheval": "Miss Jang"
+          },
+          {
+            "idParticipation": 21735688,
+            "idCheval": 2838762,
+            "numero": 6,
+            "nomCheval": "Stupéfiante"
+          },
+          {
+            "idParticipation": 21735689,
+            "idCheval": 2825045,
+            "numero": 7,
+            "nomCheval": "Lady Zaza"
+          },
+          {
+            "idParticipation": 21735685,
+            "idCheval": 2842235,
+            "numero": 3,
+            "nomCheval": "Noctambule"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5084127,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735686,
+            "idCheval": 2839886,
+            "numero": 4,
+            "nomCheval": "Allure"
+          },
+          {
+            "idParticipation": 21735684,
+            "idCheval": 2865832,
+            "numero": 2,
+            "nomCheval": "Prairie Samba"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084128,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735687,
+            "idCheval": 2846060,
+            "numero": 5,
+            "nomCheval": "Guido d'Oneix"
+          },
+          {
+            "idParticipation": 21735686,
+            "idCheval": 2839886,
+            "numero": 4,
+            "nomCheval": "Allure"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084129,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735686,
+            "idCheval": 2839886,
+            "numero": 4,
+            "nomCheval": "Allure"
+          },
+          {
+            "idParticipation": 21735684,
+            "idCheval": 2865832,
+            "numero": 2,
+            "nomCheval": "Prairie Samba"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084130,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735686,
+            "idCheval": 2839886,
+            "numero": 4,
+            "nomCheval": "Allure"
+          },
+          {
+            "idParticipation": 21735684,
+            "idCheval": 2865832,
+            "numero": 2,
+            "nomCheval": "Prairie Samba"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084131,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735686,
+            "idCheval": 2839886,
+            "numero": 4,
+            "nomCheval": "Allure"
+          },
+          {
+            "idParticipation": 21735684,
+            "idCheval": 2865832,
+            "numero": 2,
+            "nomCheval": "Prairie Samba"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084132,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735686,
+            "idCheval": 2839886,
+            "numero": 4,
+            "nomCheval": "Allure"
+          },
+          {
+            "idParticipation": 21735684,
+            "idCheval": 2865832,
+            "numero": 2,
+            "nomCheval": "Prairie Samba"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084133,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735686,
+            "idCheval": 2839886,
+            "numero": 4,
+            "nomCheval": "Allure"
+          },
+          {
+            "idParticipation": 21735684,
+            "idCheval": 2865832,
+            "numero": 2,
+            "nomCheval": "Prairie Samba"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 6,
+          "idCheval": 2839886,
+          "numero": 4,
+          "nomCheval": "Allure"
+        },
+        {
+          "points": 1,
+          "idCheval": 2846060,
+          "numero": 5,
+          "nomCheval": "Guido d'Oneix"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 6,
+          "idCheval": 2865832,
+          "numero": 2,
+          "nomCheval": "Prairie Samba"
+        },
+        {
+          "points": 1,
+          "idCheval": 2839886,
+          "numero": 4,
+          "nomCheval": "Allure"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

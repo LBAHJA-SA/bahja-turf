@@ -1,0 +1,663 @@
+{
+  "reunion": {
+    "num": 2,
+    "hippodrome": "Momarken [Norvège]",
+    "organizer": "PMU",
+    "date": "2026-09-16"
+  },
+  "course": {
+    "id": 1683853,
+    "num": 1,
+    "prix": "Prix des Fleurs",
+    "time": "11:15:00",
+    "specialty": "ATTELE",
+    "discipline": "TROT",
+    "distance": 2140,
+    "surface": "POUZZOLANE",
+    "going": "BON",
+    "corde": "G",
+    "runners": 8,
+    "quinte": false,
+    "condition": "Pour 3 à 14 ans, ayant gagné au moins 14.700 € mais pas 23.688 €.",
+    "classe": null,
+    "depart": "AUTOSTART",
+    "penetrometer": null,
+    "types_pari": [
+      "SIMPLE",
+      "COUPLE",
+      "TRIO",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 4400,
+      "devise": "EUR",
+      "details": []
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 3,
+      "horse": "Gambino",
+      "horse_id": 2689802,
+      "jockey": "Magnus-Teien Gundersen",
+      "trainer": "Bent Olav Wigdal",
+      "age": 8,
+      "sexe": "HONGRE",
+      "gain": 20371,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 20.1,
+      "cote_geny": 12.9,
+      "musique": "7a9a5a6a2a(25)Da4a8a9a2a4a",
+      "note": null,
+      "red_km": "1'16''0",
+      "distance": 2140,
+      "rang": 1,
+      "ecart": "00:01:16,000",
+      "proprietaire": "Wigdal",
+      "casaque": "/web/image/casaque/42/1089942_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Isabelle Ima",
+      "horse_id": 2806640,
+      "jockey": "Jonas-Andreas As",
+      "trainer": "Jonas-Andreas As",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 21363,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.3,
+      "cote_geny": 4.3,
+      "musique": "3a6a7a8a7a8a1a1a1a2a11a7a",
+      "note": null,
+      "red_km": "1'16''3",
+      "distance": 2140,
+      "rang": 2,
+      "ecart": null,
+      "proprietaire": "Stalll Exclusive",
+      "casaque": "/web/image/casaque/26/1174126_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Lucky Luciano",
+      "horse_id": 2818075,
+      "jockey": "Göran Antonsen",
+      "trainer": "Göran Antonsen",
+      "age": 5,
+      "sexe": "HONGRE",
+      "gain": 17095,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FD",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7.7,
+      "cote_geny": 4.8,
+      "musique": "7a2a7a3a6a8a7a8a3a4a(25)3a",
+      "note": null,
+      "red_km": "1'16''3",
+      "distance": 2140,
+      "rang": 3,
+      "ecart": null,
+      "proprietaire": "Olsson",
+      "casaque": "/web/image/casaque/91/1084191_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Korsico Decoy",
+      "horse_id": 2804561,
+      "jockey": "Björn Steine",
+      "trainer": "Tom Forkerud",
+      "age": 6,
+      "sexe": "MALE",
+      "gain": 15002,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 26.3,
+      "cote_geny": 25.2,
+      "musique": "9a9a7a11aAa8a2a6a2aDa5a",
+      "note": null,
+      "red_km": "1'16''4",
+      "distance": 2140,
+      "rang": 4,
+      "ecart": null,
+      "proprietaire": "Forkerud",
+      "casaque": "/web/image/casaque/86/1044786_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "S.K.'s Gentle Trick",
+      "horse_id": 2813783,
+      "jockey": "Gunnar Austevoll",
+      "trainer": "Göran Antonsen",
+      "age": 7,
+      "sexe": "FEMELLE",
+      "gain": 13540,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.1,
+      "cote_geny": 6.2,
+      "musique": "6a3a6a6a9a6a9a1a10a3a3a",
+      "note": null,
+      "red_km": "1'16''5",
+      "distance": 2140,
+      "rang": 5,
+      "ecart": null,
+      "proprietaire": "Arthur Solvang & Nina-Th. Solvang",
+      "casaque": "/web/image/casaque/77/1140477_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Mironn",
+      "horse_id": 2787843,
+      "jockey": "Öyvind Ruttenborg",
+      "trainer": "Öyvind Ruttenborg",
+      "age": 7,
+      "sexe": "HONGRE",
+      "gain": 14701,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 6.9,
+      "cote_geny": 7.6,
+      "musique": "5a(25)8a4a8a4a4a2a8a3a3a9a",
+      "note": null,
+      "red_km": "1'16''6",
+      "distance": 2140,
+      "rang": 6,
+      "ecart": null,
+      "proprietaire": "Larsen Gravrok",
+      "casaque": "/web/image/casaque/23/1092823_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Stella P.E.T.",
+      "horse_id": 2775291,
+      "jockey": "Asbjörn Tengsareid",
+      "trainer": "Veronica Paltto Sommerstad",
+      "age": 6,
+      "sexe": "FEMELLE",
+      "gain": 13061,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 25.3,
+      "cote_geny": 20.2,
+      "musique": "6a9a8a5a7a5a4a4a5a4m6a8a",
+      "note": null,
+      "red_km": "1'16''7",
+      "distance": 2140,
+      "rang": 7,
+      "ecart": null,
+      "proprietaire": "Paltto Sommerstad",
+      "casaque": "/web/image/casaque/68/1205168_1.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Guitar Man E P",
+      "horse_id": 2742505,
+      "jockey": "Eirik Höitomt",
+      "trainer": "Gro Rognerud",
+      "age": 7,
+      "sexe": "HONGRE",
+      "gain": 17446,
+      "poids": null,
+      "decharge": null,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.9,
+      "cote_geny": 4.3,
+      "musique": "7a10a1a5a8a8a7aDa7a6aDa6a",
+      "note": null,
+      "red_km": null,
+      "distance": 2140,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Rognerud",
+      "casaque": "/web/image/casaque/87/1165087_1.png",
+      "etat": "PARTANT",
+      "incident": "DISQUALIFIE_ALLURES_IRREGULIERES"
+    }
+  ],
+  "pronostics": {
+    "geny": null,
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5085128,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734869,
+            "idCheval": 2689802,
+            "numero": 3,
+            "nomCheval": "Gambino"
+          },
+          {
+            "idParticipation": 21734875,
+            "idCheval": 2813783,
+            "numero": 2,
+            "nomCheval": "S.K.'s Gentle Trick"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085129,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734869,
+            "idCheval": 2689802,
+            "numero": 3,
+            "nomCheval": "Gambino"
+          },
+          {
+            "idParticipation": 21734876,
+            "idCheval": 2818075,
+            "numero": 7,
+            "nomCheval": "Lucky Luciano"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085130,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734874,
+            "idCheval": 2806640,
+            "numero": 8,
+            "nomCheval": "Isabelle Ima"
+          },
+          {
+            "idParticipation": 21734875,
+            "idCheval": 2813783,
+            "numero": 2,
+            "nomCheval": "S.K.'s Gentle Trick"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085131,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734874,
+            "idCheval": 2806640,
+            "numero": 8,
+            "nomCheval": "Isabelle Ima"
+          },
+          {
+            "idParticipation": 21734875,
+            "idCheval": 2813783,
+            "numero": 2,
+            "nomCheval": "S.K.'s Gentle Trick"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085132,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734875,
+            "idCheval": 2813783,
+            "numero": 2,
+            "nomCheval": "S.K.'s Gentle Trick"
+          },
+          {
+            "idParticipation": 21734874,
+            "idCheval": 2806640,
+            "numero": 8,
+            "nomCheval": "Isabelle Ima"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085133,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734874,
+            "idCheval": 2806640,
+            "numero": 8,
+            "nomCheval": "Isabelle Ima"
+          },
+          {
+            "idParticipation": 21734875,
+            "idCheval": 2813783,
+            "numero": 2,
+            "nomCheval": "S.K.'s Gentle Trick"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5085134,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21734874,
+            "idCheval": 2806640,
+            "numero": 8,
+            "nomCheval": "Isabelle Ima"
+          },
+          {
+            "idParticipation": 21734875,
+            "idCheval": 2813783,
+            "numero": 2,
+            "nomCheval": "S.K.'s Gentle Trick"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2806640,
+          "numero": 8,
+          "nomCheval": "Isabelle Ima"
+        },
+        {
+          "points": 2,
+          "idCheval": 2689802,
+          "numero": 3,
+          "nomCheval": "Gambino"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2813783,
+          "numero": 2,
+          "nomCheval": "S.K.'s Gentle Trick"
+        },
+        {
+          "points": 1,
+          "idCheval": 2818075,
+          "numero": 7,
+          "nomCheval": "Lucky Luciano"
+        },
+        {
+          "points": 1,
+          "idCheval": 2806640,
+          "numero": 8,
+          "nomCheval": "Isabelle Ima"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

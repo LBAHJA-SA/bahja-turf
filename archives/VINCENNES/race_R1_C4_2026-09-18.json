@@ -1,0 +1,684 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        6
+      ],
+      [
+        1
+      ],
+      [
+        5
+      ],
+      [
+        4
+      ],
+      [
+        14
+      ],
+      [
+        9
+      ],
+      [
+        7
+      ],
+      [
+        13
+      ],
+      [
+        8
+      ],
+      [
+        16
+      ],
+      [
+        11
+      ],
+      [
+        15
+      ],
+      [
+        12
+      ]
+    ],
+    "classe": "AUTOSTART",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2100,
+    "going": null,
+    "imminent": false,
+    "num": 4,
+    "penetrometer": null,
+    "prix": "PRIX EUCHARIS",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 16,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1789755420000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 1,
+      "cote_pmu": 4.5,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 1.3,
+          "disq": 0,
+          "n": 3,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 5798000,
+      "horse": "MIDDLE EARTH",
+      "horse_id": "MIDDLE EARTH-GALIKA DE VANDEL-GALIUS",
+      "jockey": "R. LAMY",
+      "musique": "1a1a(25)4a3a1a4a1a4a",
+      "nombreCourses": 8,
+      "nombrePlaces": 4,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Thomas LEVESQUE",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "TH. LEVESQUE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 2,
+      "cote_pmu": 5.9,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 3,
+          "n": 3,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 6222500,
+      "horse": "MA LIBERTE",
+      "horse_id": "MA LIBERTE-CORAMES-CARAT WILLIAMS",
+      "jockey": "M. MOTTIER",
+      "musique": "2a2aDaDaDm(25)1a1a1aDa",
+      "nombreCourses": 14,
+      "nombrePlaces": 3,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie JCM RACING",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "M. MOTTIER",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 3,
+      "cote_pmu": 164,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 6273500,
+      "horse": "MINILADY DE CHOC",
+      "horse_id": "MINILADY DE CHOC-RUANITA DE LOU-UNICLOVE",
+      "jockey": "F. DESMIGNEUX",
+      "musique": "0m1mDm7m4m2m4mDm(25)7m",
+      "nombreCourses": 16,
+      "nombrePlaces": 9,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie David JAVELLE",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "D. JAVELLE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 4,
+      "cote_pmu": 13,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 2,
+          "disq": 1,
+          "n": 4,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 5791000,
+      "horse": "MAGIE MESLOISE",
+      "horse_id": "MAGIE MESLOISE-DIVINE MESLOISE-CHARLY DU NOYER",
+      "jockey": "P. BELLOCHE",
+      "musique": "0a1a9a1a(25)8a6a6a9a4a",
+      "nombreCourses": 12,
+      "nombrePlaces": 5,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "D. BELLOCHE",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "P. BELLOCHE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 5,
+      "cote_pmu": 6.5,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 6180500,
+      "horse": "MALICIA BELLA",
+      "horse_id": "MALICIA BELLA-TALICIA BELLA-VILLAGE MYSTIC",
+      "jockey": "A. WIELS",
+      "musique": "1a3a8a1a(25)1a1a1a1a",
+      "nombreCourses": 8,
+      "nombrePlaces": 1,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Jean Paul MARMION",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "J.P. MARMION",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 6,
+      "cote_pmu": 45,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.8,
+          "disq": 0,
+          "n": 4,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 6268000,
+      "horse": "MARINA JAMES",
+      "horse_id": "MARINA JAMES-FABIOLA CEIJY-BOCCADOR DE SIMM",
+      "jockey": "ARNAUD DESMOTTES",
+      "musique": "5a5a9a0a9a(25)5a4a3a3a",
+      "nombreCourses": 16,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Arnaud DESMOTTES",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "ARNAUD DESMOTTES",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 7,
+      "cote_pmu": 12,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5.5,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 5753000,
+      "horse": "MAGIE DE CHAHAINS",
+      "horse_id": "MAGIE DE CHAHAINS-FEE DE CHAHAINS-EROS DU CHENE",
+      "jockey": "F. LAGADEUC",
+      "musique": "4a4a2a3a0a0a6a(25)6a8a",
+      "nombreCourses": 22,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J.M. DUTARTRE",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "ST. MEUNIER",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 8,
+      "cote_pmu": 7.4,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.6,
+          "disq": 0,
+          "n": 7,
+          "top5": 3
+        },
+        "P4": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 6267500,
+      "horse": "MOUSTACHE",
+      "horse_id": "MOUSTACHE-EASY VINIERE-GIROLAMO",
+      "jockey": "B. ROCHARD",
+      "musique": "2a7a1a9a6a6a2a1a(25)6a",
+      "nombreCourses": 22,
+      "nombrePlaces": 13,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "John SEYCHELL",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "L. CHARBONNEL",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 9,
+      "cote_pmu": 33,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.6,
+          "disq": 1,
+          "n": 6,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 2,
+          "disq": 2,
+          "n": 3,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 5659500,
+      "horse": "MANDARINA DE LOU",
+      "horse_id": "MANDARINA DE LOU-SABA DU VIVIER-LOVE YOU",
+      "jockey": "A. ABRIVARD",
+      "musique": "Da6aDa2a2a2aDa2a(25)Da",
+      "nombreCourses": 19,
+      "nombrePlaces": 8,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "CH. GERMAIN",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "L.CL. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 10,
+      "cote_pmu": 67,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 6,
+          "disq": 3,
+          "n": 5,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 5457500,
+      "horse": "MALVINA MADRIK",
+      "horse_id": "MALVINA MADRIK-AIMA DE VILLENEUVE-CHARLY DU NOYER",
+      "jockey": "A. COLLETTE",
+      "musique": "9a9a3aDaDa0a8a(25)5a3a",
+      "nombreCourses": 15,
+      "nombrePlaces": 6,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie D.M. MOTTIER",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "M. MOTTIER",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 11,
+      "cote_pmu": 41,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 7.3,
+          "disq": 2,
+          "n": 5,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 4865000,
+      "horse": "MILADY OF PARIS",
+      "horse_id": "MILADY OF PARIS-A L'ATTAQUE-FREE MAN",
+      "jockey": "D. THOMAIN",
+      "musique": "2a7a7a0aDa1aDa(25)3a4a",
+      "nombreCourses": 16,
+      "nombrePlaces": 9,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Jean-Pierre BARJON",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "CL. THOMAIN",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 12,
+      "cote_pmu": 130,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1,
+          "disq": 5,
+          "n": 7,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 4643500,
+      "horse": "MOONSTAR JYL",
+      "horse_id": "MOONSTAR JYL-ESTRELLA JYL-CHARLY DU NOYER",
+      "jockey": "G. GELORMINI",
+      "musique": "5a6aAaDaDaDa1a1aDa(25)",
+      "nombreCourses": 20,
+      "nombrePlaces": 5,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "A. GOKESCH",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "H.E. BONDO",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 13,
+      "cote_pmu": 13,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 5467000,
+      "horse": "MERRY",
+      "horse_id": "MERRY-BLACK RAIN-ORLANDO VICI",
+      "jockey": "P.Y. VERVA",
+      "musique": "0a5a6a9a(25)3a2a3a2a9a",
+      "nombreCourses": 19,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "L. AUBERT",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "PH. DAUGEARD",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 14,
+      "cote_pmu": 66,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 7,
+          "top5": 6
+        }
+      },
+      "etat": null,
+      "gain": 5179500,
+      "horse": "MOSCANTIDA PEAL",
+      "horse_id": "MOSCANTIDA PEAL-URIELLE PEAL-ORLANDO VICI",
+      "jockey": "A. BARRIER",
+      "musique": "6a6a3a3a7a3a5a2a6m7a",
+      "nombreCourses": 24,
+      "nombrePlaces": 22,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Jean Paul DERENNE",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "Mme G. MASSCHAELE",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 15,
+      "cote_pmu": 20,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4,
+          "disq": 2,
+          "n": 3,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 0,
+          "n": 3,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 5644000,
+      "horse": "MILANTERA",
+      "horse_id": "MILANTERA-DOMINICANA-GOETMALS WOOD",
+      "jockey": "E. RAFFIN",
+      "musique": "5aDaDm4a3a2m6a9mDm4m",
+      "nombreCourses": 27,
+      "nombrePlaces": 7,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Scuderia SANT' EUSEBIO SNC",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "J.PH. MONCLIN",
+      "valeur": null
+    },
+    {
+      "age": 4,
+      "codeStatut": null,
+      "corde": 16,
+      "cote_pmu": 85,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6.5,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": null,
+          "disq": 2,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 4314500,
+      "horse": "MONNAIE COURANTE",
+      "horse_id": "MONNAIE COURANTE-BIANCA-NI HO PED D'OMBREE",
+      "jockey": "M. ABRIVARD",
+      "musique": "DaDaGa5a6a5a5a(25)1a3a",
+      "nombreCourses": 22,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 16,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "C. TRAVERT",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "C. TRAVERT",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2026-09-18",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

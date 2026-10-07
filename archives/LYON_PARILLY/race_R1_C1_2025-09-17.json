@@ -1,0 +1,720 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        2
+      ],
+      [
+        11
+      ],
+      [
+        4
+      ],
+      [
+        8
+      ],
+      [
+        14
+      ],
+      [
+        7
+      ],
+      [
+        9
+      ],
+      [
+        1
+      ],
+      [
+        5
+      ],
+      [
+        13
+      ]
+    ],
+    "classe": "INCONNU",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2850,
+    "going": null,
+    "imminent": false,
+    "num": 1,
+    "penetrometer": "Bon",
+    "prix": "PRIX DE VINCENNES",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 14,
+    "specialty": "TROT_ATTELE",
+    "statut": "FIN_COURSE",
+    "surface": "POUZZOLANE",
+    "time": 1758110100000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "TIC_TROIS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 93,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 8,
+          "disq": 1,
+          "n": 5,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5.9,
+          "disq": 1,
+          "n": 9,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 4,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 13066500,
+      "horse": "GRANIT PACO",
+      "horse_id": "GRANIT PACO-REINE DE LA VILLE-GAZOUILLIS",
+      "jockey": "P. CALLIER",
+      "musique": "4a9a7aDm8a0a8a8a0a8a",
+      "nombreCourses": 95,
+      "nombrePlaces": 56,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 7,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "P. CALLIER",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P. CALLIER",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 3.6,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "D2A": {
+          "avgRang": 1,
+          "disq": 1,
+          "n": 4,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "P2": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 15119000,
+      "horse": "INDICE D'ARGENT",
+      "horse_id": "INDICE D'ARGENT-HATHALINA-URLANDO D'OR",
+      "jockey": "M. ABRIVARD",
+      "musique": "8a1a5a0a1a0a3a7a4a1a",
+      "nombreCourses": 35,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie LD-M. ABRIVARD",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "M. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 90,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 8,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 4,
+          "n": 20,
+          "top5": 9
+        },
+        "P2": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 15697000,
+      "horse": "INCAHUASI",
+      "horse_id": "INCAHUASI-SANAWA-READY CASH",
+      "jockey": "N. MOUROT",
+      "musique": "8a0a(24)2a7a8a1a9a1a1a",
+      "nombreCourses": 41,
+      "nombrePlaces": 16,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ph. DEWULF",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "D. ALEXANDRE",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 8.9,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.7,
+          "disq": 4,
+          "n": 28,
+          "top5": 17
+        }
+      },
+      "etat": null,
+      "gain": 15833500,
+      "horse": "IDAHI DE HOUELLE",
+      "horse_id": "IDAHI DE HOUELLE-TRAVITA DE HOUELLE-UNIQUE QUICK",
+      "jockey": "A. WIELS",
+      "musique": "4a3a2a3a2a3a6a(24)5a0a",
+      "nombreCourses": 61,
+      "nombrePlaces": 44,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 11,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "F. LEBLANC",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "F. LEBLANC",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 174,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 7.2,
+          "disq": 2,
+          "n": 6,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 5.9,
+          "disq": 5,
+          "n": 20,
+          "top5": 7
+        },
+        "P2": {
+          "avgRang": 12,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 15859500,
+      "horse": "HONNEUR DU CEBE",
+      "horse_id": "HONNEUR DU CEBE-IRMA SAINT JEAN-UN CHARME FOU",
+      "jockey": "M.J. BARCELO BISQUERRA",
+      "musique": "0a5m9a6a5aDm4a0a3a9a",
+      "nombreCourses": 82,
+      "nombrePlaces": 39,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 7,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Louis Théo WISSOCQ",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "A. WISSOCQ",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 166,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 7,
+          "disq": 2,
+          "n": 9,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 4,
+          "n": 19,
+          "top5": 8
+        },
+        "DA": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 16152000,
+      "horse": "FOR EVER THE BEST",
+      "horse_id": "FOR EVER THE BEST-PAMPA-VILLAGE MYSTIC",
+      "jockey": "S. PELTIER",
+      "musique": "0a5a3a0m2a8a0aDa8m(23)",
+      "nombreCourses": 73,
+      "nombrePlaces": 25,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 12,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "D. BORNET",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "S. PELTIER",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 32,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "D2A": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4.9,
+          "disq": 0,
+          "n": 12,
+          "top5": 6
+        },
+        "P2": {
+          "avgRang": 7.3,
+          "disq": 1,
+          "n": 4,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": 6,
+          "disq": 2,
+          "n": 5,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 16374000,
+      "horse": "GALOPIN DE BIANCA",
+      "horse_id": "GALOPIN DE BIANCA-POMPONNETTE-PICSOU DE VILLABON",
+      "jockey": "F.J. PELTIER",
+      "musique": "1a2a8a7a7a9m7a3a3a4a",
+      "nombreCourses": 104,
+      "nombrePlaces": 61,
+      "nombrePlacesSecond": 10,
+      "nombrePlacesTroisieme": 7,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie de BELGRAVE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "L. LERENARD",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 16,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.7,
+          "disq": 2,
+          "n": 24,
+          "top5": 15
+        }
+      },
+      "etat": null,
+      "gain": 16376000,
+      "horse": "HAPPY D'AIMTE",
+      "horse_id": "HAPPY D'AIMTE-SOUVERAINE D'AIMTE-TORNADO BELLO",
+      "jockey": "TH. BRIAND",
+      "musique": "2a6a7a4a1a3a7a1a0a(24)",
+      "nombreCourses": 84,
+      "nombrePlaces": 47,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 12,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "M. THIELIN",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "L. FRESNEAU",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 21,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 3.5,
+          "disq": 4,
+          "n": 27,
+          "top5": 18
+        },
+        "P2": {
+          "avgRang": 5.7,
+          "disq": 0,
+          "n": 3,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 21452500,
+      "horse": "IL VIENT DU LUDE",
+      "horse_id": "IL VIENT DU LUDE-BYZANCE FROMENTRO-ARTISTE DE JOUDES",
+      "jockey": "A. TINTILLIER",
+      "musique": "DaDa3a2a1a3a1a4a(24)2a",
+      "nombreCourses": 50,
+      "nombrePlaces": 32,
+      "nombrePlacesSecond": 16,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Sté. Ent. Anthony TINTILLIER",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Sté. Ent. Anthony TINTILLIER",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 122,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 9,
+          "n": 28,
+          "top5": 9
+        },
+        "P4": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 24134500,
+      "horse": "HISTOIRE PHILS",
+      "horse_id": "HISTOIRE PHILS-MY CHANCE PARTY-BRUTUS DE BAILLY",
+      "jockey": "JULIEN RAFFESTIN",
+      "musique": "Da7a0a0a7a7a6aDa(24)9a",
+      "nombreCourses": 80,
+      "nombrePlaces": 32,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 11,
+      "nombreVictoires": 16,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Joris FILOGRASSO",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "Joris FILOGRASSO",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 2.4,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5,
+          "disq": 5,
+          "n": 26,
+          "top5": 12
+        },
+        "P4": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 3,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 26868500,
+      "horse": "HIMBERLAND",
+      "horse_id": "HIMBERLAND-TIFLANDE-MEAULNES DU CORTA",
+      "jockey": "B. ROCHARD",
+      "musique": "4a1a5a1a2aDaDa0a2a3a",
+      "nombreCourses": 78,
+      "nombrePlaces": 43,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 12,
+      "nombreVictoires": 10,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme A. GERMAIN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Mme A. GERMAIN",
+      "valeur": null
+    },
+    {
+      "age": 11,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 82,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 8,
+          "disq": 2,
+          "n": 5,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 6.4,
+          "disq": 6,
+          "n": 22,
+          "top5": 7
+        },
+        "P2": {
+          "avgRang": 8,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 8.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 26989000,
+      "horse": "EDEN JULRY",
+      "horse_id": "EDEN JULRY-GAMME D'OR-OISEAU DE FEUX",
+      "jockey": "J.P. GAUVIN",
+      "musique": "9a8m9a4a4a9a(24)6a8aDm",
+      "nombreCourses": 90,
+      "nombrePlaces": 31,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 20,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie JULRY",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J.P. GAUVIN",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 17,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 2,
+          "n": 28,
+          "top5": 15
+        }
+      },
+      "etat": null,
+      "gain": 27711000,
+      "horse": "GAMIN DE MAHEY",
+      "horse_id": "GAMIN DE MAHEY-MAHEY STORM-URIEL SPEED",
+      "jockey": "G. GELORMINI",
+      "musique": "3a8a7a0a9a9a0a9aDa2a",
+      "nombreCourses": 75,
+      "nombrePlaces": 36,
+      "nombrePlacesSecond": 13,
+      "nombrePlacesTroisieme": 9,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "M. SOULAS",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "K. THONNERIEUX",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 25,
+      "deferre": "PROTEGE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.8,
+          "disq": 0,
+          "n": 10,
+          "top5": 8
+        },
+        "D4": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 29055000,
+      "horse": "HARRY DE SASSY",
+      "horse_id": "HARRY DE SASSY-ROMY DE SASSY-QUARO",
+      "jockey": "J. LEROULLEY",
+      "musique": "4a8a0aDa(24)4a3a1a1a2a",
+      "nombreCourses": 46,
+      "nombrePlaces": 16,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 19,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme M. COLLET",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Jules LEROULLEY",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2025-09-17",
+    "hippodrome": "LYON-PARILLY",
+    "num": 1
+  }
+}

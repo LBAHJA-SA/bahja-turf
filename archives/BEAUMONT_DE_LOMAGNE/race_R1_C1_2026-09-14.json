@@ -1,0 +1,698 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        6
+      ],
+      [
+        10
+      ],
+      [
+        9
+      ],
+      [
+        13
+      ],
+      [
+        14
+      ],
+      [
+        12
+      ],
+      [
+        7
+      ],
+      [
+        11
+      ],
+      [
+        3
+      ],
+      [
+        1
+      ],
+      [
+        5
+      ]
+    ],
+    "classe": "EUROPEENNE",
+    "corde": "D",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2550,
+    "going": null,
+    "imminent": false,
+    "num": 1,
+    "penetrometer": null,
+    "prix": "GRAND PRIX JEAN DUMOUCH",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 14,
+    "specialty": "TROT_ATTELE",
+    "statut": "FIN_COURSE",
+    "surface": null,
+    "time": 1789386900000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 144,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "3": {
+          "avgRang": null,
+          "disq": 2,
+          "n": 2,
+          "top5": 0
+        },
+        "D2A": {
+          "avgRang": 12,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 3,
+          "n": 15,
+          "top5": 7
+        }
+      },
+      "etat": null,
+      "gain": 9903000,
+      "horse": "IRISH SONG",
+      "horse_id": "IRISH SONG-BAMBA DU PONT-TURBO JET",
+      "jockey": "P. GERAY",
+      "musique": "6a8m0a5a9a4a8a0aDa9m",
+      "nombreCourses": 66,
+      "nombrePlaces": 27,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "PH. ARAGON",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "C. HERSERANT",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 15,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "-": {
+          "avgRang": 1.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "D2": {
+          "avgRang": 3.5,
+          "disq": 1,
+          "n": 3,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 2.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 13088600,
+      "horse": "FEROX BRICK",
+      "horse_id": "FEROX BRICK-BLAZING KEMP-ORLANDO VICI",
+      "jockey": "A. ANDRE",
+      "musique": "Da1a3a4a3a4aDaDm(25)2a",
+      "nombreCourses": 11,
+      "nombrePlaces": 6,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "FERNLUNDS TRAVSERVICE AB (SWE)",
+      "sexe": "HONGRES",
+      "statut": "NON_PARTANT",
+      "trainer": "Mme Jasmine ISING",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 159,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "3": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "-": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 7.7,
+          "disq": 1,
+          "n": 7,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 13256300,
+      "horse": "GERBEN",
+      "horse_id": "GERBEN-EVELYN HONEY-RUSSEL NOVEMBER",
+      "jockey": "P. LE MOEL",
+      "musique": "Da8a5aDm(25)6a7m6m3a0a",
+      "nombreCourses": 19,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "A. LALOUM",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "S. LALOUM",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 22,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6,
+          "disq": 1,
+          "n": 7,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 3.5,
+          "disq": 3,
+          "n": 5,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 14499000,
+      "horse": "IROCKO STRYCK",
+      "horse_id": "IROCKO STRYCK-THEBEE DU GOUTIER-ROCKFELLER CENTER",
+      "jockey": "CEDRIC TERRY",
+      "musique": "Da4a4aDa3a5a5aDa0a(25)",
+      "nombreCourses": 59,
+      "nombrePlaces": 25,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Marc CARTIER",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "F. TERRY",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 120,
+      "deferre": "FF",
+      "deferre_stats": {
+        "-": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D2": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 5.3,
+          "disq": 1,
+          "n": 4,
+          "top5": 2
+        },
+        "DP": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 15200500,
+      "horse": "GEWURZTRAMINER",
+      "horse_id": "GEWURZTRAMINER-MAZARINA-THE BEST MADRIK",
+      "jockey": "Y. HAMON",
+      "musique": "(25)2a1a6a1aDa5a0aDa6a",
+      "nombreCourses": 67,
+      "nombrePlaces": 29,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 7,
+      "nombreVictoires": 13,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme M. FRESIA",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Y. HAMON",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 4.9,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.9,
+          "disq": 1,
+          "n": 17,
+          "top5": 11
+        }
+      },
+      "etat": null,
+      "gain": 15289500,
+      "horse": "JUGEMENT D'AVE",
+      "horse_id": "JUGEMENT D'AVE-UCASONE-VILLAGE MYSTIC",
+      "jockey": "TH. BRIAND",
+      "musique": "Da1a3a6a1a5a8a6a(25)6a",
+      "nombreCourses": 47,
+      "nombrePlaces": 28,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "P.A. RYNWALT-BOULARD",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P.A. RYNWALT-BOULARD",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 49,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "3": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D2": {
+          "avgRang": 4.3,
+          "disq": 1,
+          "n": 16,
+          "top5": 11
+        },
+        "D4": {
+          "avgRang": 6,
+          "disq": 0,
+          "n": 3,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 15681000,
+      "horse": "I AM EAGLE",
+      "horse_id": "I AM EAGLE-UPSALA DU VIVIER-BOLD EAGLE",
+      "jockey": "M. CRIADO",
+      "musique": "5a7a5a7a3a8a6a4a4a7a",
+      "nombreCourses": 66,
+      "nombrePlaces": 45,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 11,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie TENACIOUS SAUVIGNEY",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "F. MARTY",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 68,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5.3,
+          "disq": 6,
+          "n": 28,
+          "top5": 14
+        }
+      },
+      "etat": null,
+      "gain": 15750500,
+      "horse": "INCREDIBLE GO",
+      "horse_id": "INCREDIBLE GO-URRACA-NI HO PED D'OMBREE",
+      "jockey": "TH. DUCOS",
+      "musique": "8a1a9a5a3a2a3aDa0a6a",
+      "nombreCourses": 85,
+      "nombrePlaces": 49,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 12,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Philippe RENNESSON",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "F. TERRY",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 13,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "3": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D2": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 2.1,
+          "disq": 1,
+          "n": 12,
+          "top5": 10
+        },
+        "P2": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": 8,
+          "disq": 1,
+          "n": 3,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 16255500,
+      "horse": "JAZZ PAT",
+      "horse_id": "JAZZ PAT-NAMOROSA-VERY NICE MARCEAUX",
+      "jockey": "M. GRASSET",
+      "musique": "3a5a4a1a0a4a1a3a1a(25)",
+      "nombreCourses": 41,
+      "nombrePlaces": 20,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie BG TROT",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J. FOIN",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 5.3,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 8,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 4.3,
+          "disq": 1,
+          "n": 4,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 4.3,
+          "disq": 0,
+          "n": 20,
+          "top5": 15
+        }
+      },
+      "etat": null,
+      "gain": 16305500,
+      "horse": "KLASSE DE BRUZEAU",
+      "horse_id": "KLASSE DE BRUZEAU-DONA LISA-CAPTAIN SPARROW",
+      "jockey": "M. LEGROS",
+      "musique": "1a5a2a9a2a5a3a5a2a1a",
+      "nombreCourses": 51,
+      "nombrePlaces": 33,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie BKM",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "B. MARIE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 45,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.9,
+          "disq": 1,
+          "n": 11,
+          "top5": 5
+        }
+      },
+      "etat": null,
+      "gain": 16374000,
+      "horse": "ISERE",
+      "horse_id": "ISERE-ORFRAIE-READY CASH",
+      "jockey": "CH. FEYTE",
+      "musique": "5a5a5a0a8a4a7a0a9a5a",
+      "nombreCourses": 72,
+      "nombrePlaces": 42,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 7,
+      "nombreVictoires": 10,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "B. DESMONTILS",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "CH. FEYTE",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 5.1,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "3": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D2": {
+          "avgRang": 4.7,
+          "disq": 1,
+          "n": 4,
+          "top5": 2
+        },
+        "D2A": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 3.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 16396500,
+      "horse": "JEFF DE MONPAZ",
+      "horse_id": "JEFF DE MONPAZ-PENANG-APPRENTI SORCIER",
+      "jockey": "L. LALANDE",
+      "musique": "1a3a2a1a1aDaDa1aDa(25)",
+      "nombreCourses": 49,
+      "nombrePlaces": 19,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 12,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Louis LALANDE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "L. LALANDE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 11,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 5.4,
+          "disq": 4,
+          "n": 26,
+          "top5": 12
+        }
+      },
+      "etat": null,
+      "gain": 28794200,
+      "horse": "COOL KRONOS",
+      "horse_id": "COOL KRONOS-OCCASION KRONOS-READLY EXPRESS",
+      "jockey": "CH. MARTENS",
+      "musique": "5a3a7a8a0a0a2a(25)4a5a",
+      "nombreCourses": 34,
+      "nombrePlaces": 19,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "PH. VAN WEEHAEGHE (BEL)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Sté. Ent. Christophe MARTENS",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 4.5,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4,
+          "disq": 3,
+          "n": 23,
+          "top5": 15
+        }
+      },
+      "etat": null,
+      "gain": 32329500,
+      "horse": "JAPPELOUP TURGOT",
+      "horse_id": "JAPPELOUP TURGOT-DOUCHKA TURGOT-UP AND QUICK",
+      "jockey": "M. ABRIVARD",
+      "musique": "5a2a7a8a1a3a9a8a(25)Da",
+      "nombreCourses": 52,
+      "nombrePlaces": 22,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 12,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie TURGOT",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "M. ABRIVARD",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2026-09-14",
+    "hippodrome": "BEAUMONT DE LOMAGNE",
+    "num": 1
+  }
+}

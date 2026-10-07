@@ -1,0 +1,692 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        7
+      ],
+      [
+        6
+      ],
+      [
+        3
+      ],
+      [
+        10
+      ],
+      [
+        11
+      ],
+      [
+        15
+      ],
+      [
+        9
+      ],
+      [
+        12
+      ],
+      [
+        4
+      ],
+      [
+        13
+      ]
+    ],
+    "classe": "EUROPEENNE_AUTOSTART",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2100,
+    "going": null,
+    "imminent": false,
+    "num": 1,
+    "penetrometer": null,
+    "prix": "PRIX DE MEHUN SUR YEVRE",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 15,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1789646100000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 1,
+      "cote_pmu": 2.6,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 1,
+          "disq": 3,
+          "n": 6,
+          "top5": 3
+        },
+        "P2": {
+          "avgRang": 1.3,
+          "disq": 2,
+          "n": 5,
+          "top5": 3
+        },
+        "P4": {
+          "avgRang": 2,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 14551500,
+      "horse": "LE GRAAL",
+      "horse_id": "LE GRAAL-DULCINEE-FACE TIME BOURBON",
+      "jockey": "CL. DUVALDESTIN",
+      "musique": "1aDa1a1a2a5aDaDa9a(24)",
+      "nombreCourses": 19,
+      "nombrePlaces": 5,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ph. BEAUVISAGE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "TH. DUVALDESTIN",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 2,
+      "cote_pmu": 42,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 5.7,
+          "disq": 2,
+          "n": 5,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 6.5,
+          "disq": 2,
+          "n": 10,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 12785400,
+      "horse": "FERAHAN AS",
+      "horse_id": "FERAHAN AS-SIMPATICA OK-MAHARAJAH",
+      "jockey": "G. GELORMINI",
+      "musique": "Da9a9a4aAaDa8aDa7a7a",
+      "nombreCourses": 25,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Sc. ERCA (ITY)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "H.E. BONDO",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 3,
+      "cote_pmu": 28,
+      "deferre": "PROTEGE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.4,
+          "disq": 9,
+          "n": 24,
+          "top5": 10
+        },
+        "P4": {
+          "avgRang": 4.2,
+          "disq": 1,
+          "n": 6,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 14241000,
+      "horse": "LAMONT DU DOUET",
+      "horse_id": "LAMONT DU DOUET-MIMI L'ABEILLE-FADO DU CHENE",
+      "jockey": "F. LAGADEUC",
+      "musique": "4a3a3a5a7m7a7aDa3a2a",
+      "nombreCourses": 37,
+      "nombrePlaces": 25,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 7,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie BCC RACING",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "N. BRIDAULT",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 4,
+      "cote_pmu": 19,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 4,
+          "top5": 3
+        },
+        "D2A": {
+          "avgRang": 5.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 5.1,
+          "disq": 4,
+          "n": 15,
+          "top5": 7
+        }
+      },
+      "etat": null,
+      "gain": 12755600,
+      "horse": "EMPIRE AS",
+      "horse_id": "EMPIRE AS-SIMPATICA OK-READY CASH",
+      "jockey": "J.M. BAZIRE",
+      "musique": "DaDa0a7aDa8a4m(25)Dm4m",
+      "nombreCourses": 23,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "IL MIGLIO VERDE (ITY)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "N. BAZIRE",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 5,
+      "cote_pmu": 9.9,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 14529900,
+      "horse": "ALADIN (GER)",
+      "horse_id": "ALADIN (GER)-AINT SHE SWEET (GER)-BALTIMORE AS",
+      "jockey": "M. ABRIVARD",
+      "musique": "3a3a2a1a(25)Da2a",
+      "nombreCourses": 1,
+      "nombrePlaces": 0,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "GESTUT IDEE (GER)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "W. NIMCZYK",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 6,
+      "cote_pmu": 12,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.1,
+          "disq": 3,
+          "n": 17,
+          "top5": 14
+        },
+        "P2": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 13420000,
+      "horse": "LOVEBIRD",
+      "horse_id": "LOVEBIRD-ELECTRA GREEN-ROYAL DREAM",
+      "jockey": "E. RAFFIN",
+      "musique": "DaDa2a2a4a3a4aDa5a5a",
+      "nombreCourses": 32,
+      "nombrePlaces": 23,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie VICTORIA DREAMS",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "J.PH. DUBOIS",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 7,
+      "cote_pmu": 4.3,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.5,
+          "disq": 0,
+          "n": 4,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 12209300,
+      "horse": "FAWAZ MIL",
+      "horse_id": "FAWAZ MIL-ZAHRA MIL-GU D'HERIPRE",
+      "jockey": "M. MOTTIER",
+      "musique": "2a2a1a4a2a(25)0a",
+      "nombreCourses": 2,
+      "nombrePlaces": 1,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie HAZELAAR (BEL)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Mme Maria TORNQVIST",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 8,
+      "cote_pmu": 11,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 3,
+          "disq": 7,
+          "n": 13,
+          "top5": 5
+        }
+      },
+      "etat": null,
+      "gain": 13612600,
+      "horse": "PURE STEEL",
+      "horse_id": "PURE STEEL-ELSA AMERICA (SWE)-BIRD PARKER",
+      "jockey": "B. ROCHARD",
+      "musique": "2a4a1aDa6aDaDa3a2aDa",
+      "nombreCourses": 14,
+      "nombrePlaces": 7,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "ENGHAVEGARD AALBORG APS (DEN)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "H.E. BONDO",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 9,
+      "cote_pmu": 166,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.7,
+          "disq": 1,
+          "n": 7,
+          "top5": 6
+        },
+        "P2": {
+          "avgRang": null,
+          "disq": 2,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 11870000,
+      "horse": "LOULOU DAB",
+      "horse_id": "LOULOU DAB-DANSE BARBES-REAL DE LOU",
+      "jockey": "D. BONNE",
+      "musique": "DaDa1a(25)1a1a1a9a7a2a",
+      "nombreCourses": 19,
+      "nombrePlaces": 5,
+      "nombrePlacesSecond": 1,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Damien BONNE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "D. BONNE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 10,
+      "cote_pmu": 124,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "3": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 7,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 7514000,
+      "horse": "QUINTUS TOOMA",
+      "horse_id": "QUINTUS TOOMA-INVENTIVE TOOMA-S.J.'S CAVIAR",
+      "jockey": "A. COLLETTE",
+      "musique": "1a6a2aDa0a(25)3a",
+      "nombreCourses": 2,
+      "nombrePlaces": 1,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "K. M. HASTFARM I HOLM AB (SWE)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Vitale CIOTOLA",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 11,
+      "cote_pmu": 40,
+      "deferre": "",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 10887700,
+      "horse": "TROGIR",
+      "horse_id": "TROGIR-LIKASI-LOVE YOU",
+      "jockey": "M. NIMCZYK",
+      "musique": "Da2aDa1aDa1a2a",
+      "nombreCourses": 5,
+      "nombrePlaces": 2,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "U. MOMMERT (GER)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "W. NIMCZYK",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 12,
+      "cote_pmu": 278,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 8,
+          "disq": 1,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 3059600,
+      "horse": "FABIUS ORS",
+      "horse_id": "FABIUS ORS-ORCHESTRA SICULA-IDEALE LUIS",
+      "jockey": "G. PORZIO",
+      "musique": "Da3a8a1a8a2a",
+      "nombreCourses": 1,
+      "nombrePlaces": 0,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Francesco SORRENTINO (ITY)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "C. GODARD",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": 13,
+      "cote_pmu": 90,
+      "deferre": "",
+      "etat": null,
+      "gain": 5243100,
+      "horse": "ELFO BREED",
+      "horse_id": "ELFO BREED-SHELLEY BREED-NAPOLEON BAR",
+      "jockey": "A. LAMY",
+      "musique": "7a1a1a1a1a1a",
+      "nombreCourses": 1,
+      "nombrePlaces": 1,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 0,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Pietro GRANATA (ITY)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Vitale CIOTOLA",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 14,
+      "cote_pmu": 27,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 3058000,
+      "horse": "L'AMOUR MEARAS",
+      "horse_id": "L'AMOUR MEARAS-DARLING MEARAS-CHAPTER SEVEN",
+      "jockey": "CH. MARTENS",
+      "musique": "3a8a(25)6a2a2a(24)1a",
+      "nombreCourses": 1,
+      "nombrePlaces": 1,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 0,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Kjell JOHANSSON (SWE)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "V. MARTENS",
+      "valeur": null
+    },
+    {
+      "age": 5,
+      "codeStatut": null,
+      "corde": 15,
+      "cote_pmu": 59,
+      "deferre": "PROTEGE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": null,
+          "disq": 2,
+          "n": 2,
+          "top5": 0
+        },
+        "D2A": {
+          "avgRang": 3.3,
+          "disq": 1,
+          "n": 7,
+          "top5": 5
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 5,
+          "disq": 3,
+          "n": 8,
+          "top5": 3
+        },
+        "P4": {
+          "avgRang": 2.8,
+          "disq": 2,
+          "n": 8,
+          "top5": 5
+        }
+      },
+      "etat": null,
+      "gain": 11624500,
+      "horse": "LE RETOUR VRIE",
+      "horse_id": "LE RETOUR VRIE-BASTIDE VRIE-EXCELLENT",
+      "jockey": "A. ABRIVARD",
+      "musique": "2a9a2a1a4a(25)Da1a0aDa",
+      "nombreCourses": 30,
+      "nombrePlaces": 10,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie ELEVAGE DU ROY",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "L.CL. ABRIVARD",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2026-09-17",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

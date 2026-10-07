@@ -1,0 +1,784 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        3
+      ],
+      [
+        2
+      ],
+      [
+        9
+      ],
+      [
+        15
+      ],
+      [
+        1
+      ],
+      [
+        6
+      ],
+      [
+        11
+      ],
+      [
+        4
+      ],
+      [
+        14
+      ],
+      [
+        13
+      ],
+      [
+        8
+      ],
+      [
+        10
+      ]
+    ],
+    "classe": "EUROPEENNE",
+    "corde": "D",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2625,
+    "going": null,
+    "imminent": false,
+    "num": 1,
+    "penetrometer": null,
+    "prix": "GD PRIX DE L'AGGLO.D'AGEN - GP DYNAVENA",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 15,
+    "specialty": "TROT_ATTELE",
+    "statut": "FIN_COURSE",
+    "surface": null,
+    "time": 1729684500000,
+    "types_pari": [
+      "TIC_TROIS",
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "QUINTE_PLUS",
+      "MULTI",
+      "QUARTE_PLUS",
+      "TIERCE",
+      "SIMPLE_GAGNANT",
+      "SIMPLE_PLACE",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 36,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.9,
+          "disq": 8,
+          "n": 22,
+          "top5": 7
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 2,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 13731000,
+      "horse": "IDOLE D'OURVILLE",
+      "horse_id": null,
+      "jockey": "M. CRIADO",
+      "musique": "5ADA0A9A8A5ADADADA1A",
+      "nombreCourses": 72,
+      "nombrePlaces": 24,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie E. VARIN",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "E. VARIN",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 17,
+      "deferre": "PROTEGE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4,
+          "disq": 2,
+          "n": 10,
+          "top5": 5
+        },
+        "D4": {
+          "avgRang": 3.8,
+          "disq": 4,
+          "n": 9,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 8.3,
+          "disq": 1,
+          "n": 4,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 13845000,
+      "horse": "FORREST GUMP SET",
+      "horse_id": null,
+      "jockey": "F. CLOZIER",
+      "musique": "2ADA6A1ADADA3A0ADADA",
+      "nombreCourses": 96,
+      "nombrePlaces": 35,
+      "nombrePlacesSecond": 13,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie WATCH BUY WIN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "F. TERRY",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 15,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 3.8,
+          "disq": 7,
+          "n": 20,
+          "top5": 11
+        },
+        "P2": {
+          "avgRang": 8.3,
+          "disq": 0,
+          "n": 3,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 15063500,
+      "horse": "ICARE DU BERYL",
+      "horse_id": null,
+      "jockey": "V. CABOS",
+      "musique": "DA3A4A4A7ADA4A7A2ADA",
+      "nombreCourses": 51,
+      "nombrePlaces": 28,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 11,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mlle G. LACOMBE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Y. LACOMBE",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 156,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 15,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 5.7,
+          "disq": 3,
+          "n": 22,
+          "top5": 9
+        },
+        "P2": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 15441000,
+      "horse": "FIRST DE CHOISEL",
+      "horse_id": null,
+      "jockey": "Y. LACOMBE",
+      "musique": "8A3A7ADM6ADADA4A2A7A",
+      "nombreCourses": 91,
+      "nombrePlaces": 43,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 11,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "CH. BESNIER",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Y. LACOMBE",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 19,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "-": {
+          "avgRang": 3,
+          "disq": 2,
+          "n": 6,
+          "top5": 4
+        },
+        "D2A": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4.9,
+          "disq": 3,
+          "n": 10,
+          "top5": 4
+        }
+      },
+      "etat": null,
+      "gain": 15536000,
+      "horse": "FIFTY",
+      "horse_id": null,
+      "jockey": "N.R. BROSSARD",
+      "musique": "DADA1A3A2A2A1A4A1A1A",
+      "nombreCourses": 95,
+      "nombrePlaces": 38,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 13,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme Suzanne MARCHAIS",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "D. BROSSARD",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 92,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 6.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 6.1,
+          "disq": 1,
+          "n": 15,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 16076000,
+      "horse": "IVRAM",
+      "horse_id": null,
+      "jockey": "V. FOUCAULT",
+      "musique": "5A6A0A2A3ADA1A1ADA7A",
+      "nombreCourses": 70,
+      "nombrePlaces": 41,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 8,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "D. POINSIGNON",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "O. PICARD",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 5.8,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 2.8,
+          "disq": 0,
+          "n": 11,
+          "top5": 10
+        },
+        "D4": {
+          "avgRang": 2.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 16186000,
+      "horse": "HULK DE TILLARD",
+      "horse_id": null,
+      "jockey": "F. NIVARD",
+      "musique": "3A2A2A5A1A1A3A2A7A23",
+      "nombreCourses": 45,
+      "nombrePlaces": 28,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 10,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Jean François ABALAIN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "I.P. BLANCHON",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 152,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.3,
+          "disq": 1,
+          "n": 4,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 6.1,
+          "disq": 3,
+          "n": 20,
+          "top5": 7
+        },
+        "DP": {
+          "avgRang": 7,
+          "disq": 2,
+          "n": 3,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 16208500,
+      "horse": "GENERAL MITCHELL",
+      "horse_id": null,
+      "jockey": "ANTOINE MICHEL FOSSEY",
+      "musique": "0A8A4A4A3A9A5A0A0A4A",
+      "nombreCourses": 98,
+      "nombrePlaces": 44,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 14,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie E. VARIN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "E. VARIN",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 9.3,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 2.3,
+          "disq": 0,
+          "n": 6,
+          "top5": 6
+        }
+      },
+      "etat": null,
+      "gain": 16294000,
+      "horse": "HAPPY DU BOIS",
+      "horse_id": null,
+      "jockey": "D. BEKAERT",
+      "musique": "0A2A3A3A5A7A8A1A4A2A",
+      "nombreCourses": 41,
+      "nombrePlaces": 26,
+      "nombrePlacesSecond": 12,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 11,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J.P. MALLET",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "E. PLANCHENAULT",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 58,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.5,
+          "disq": 1,
+          "n": 3,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 3.7,
+          "disq": 0,
+          "n": 3,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 7.3,
+          "disq": 3,
+          "n": 6,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 16442300,
+      "horse": "FLYING DEVIL",
+      "horse_id": null,
+      "jockey": "A. BARRE",
+      "musique": "4ADADADA6ADADA5ADMDA",
+      "nombreCourses": 114,
+      "nombrePlaces": 39,
+      "nombrePlacesSecond": 11,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "A. BARRE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "A. BARRE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 78,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "-": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D2": {
+          "avgRang": 3.3,
+          "disq": 3,
+          "n": 15,
+          "top5": 9
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 23392000,
+      "horse": "GOLD D'OCCAGNES",
+      "horse_id": null,
+      "jockey": "J.H. TREICH",
+      "musique": "6A0A4ADA3ADA0A8A7A23",
+      "nombreCourses": 45,
+      "nombrePlaces": 19,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 19,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie MIP",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J.H. TREICH",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 74,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.8,
+          "disq": 6,
+          "n": 11,
+          "top5": 5
+        },
+        "D4": {
+          "avgRang": 6.8,
+          "disq": 1,
+          "n": 5,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 25673000,
+      "horse": "ENTRE AMIS",
+      "horse_id": null,
+      "jockey": "R. LE CREPS",
+      "musique": "9ADADA5A1A0A1ADM5M7A",
+      "nombreCourses": 80,
+      "nombrePlaces": 31,
+      "nombrePlacesSecond": 12,
+      "nombrePlacesTroisieme": 5,
+      "nombreVictoires": 16,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "R. SIE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "CH. FEYTE",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 3.4,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 5.3,
+          "disq": 0,
+          "n": 3,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 3.4,
+          "disq": 2,
+          "n": 21,
+          "top5": 16
+        },
+        "P4": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 28417500,
+      "horse": "HAPPYJO DE LIGNY",
+      "horse_id": null,
+      "jockey": "M. ABRIVARD",
+      "musique": "5A5A4A3A1A1A0A2A8A23",
+      "nombreCourses": 48,
+      "nombrePlaces": 26,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 11,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie SMART",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Y. HENRY",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 13,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 9.7,
+          "disq": 0,
+          "n": 3,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 7.5,
+          "disq": 1,
+          "n": 18,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 9.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 33604000,
+      "horse": "GIROLAMO",
+      "horse_id": null,
+      "jockey": "PIERRICK LE MOEL",
+      "musique": "4A3A7A8A2A0A8M5M0A23",
+      "nombreCourses": 84,
+      "nombrePlaces": 43,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 10,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie MZ",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Pierrick LE MOEL",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 5.7,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "-": {
+          "avgRang": 1,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D2": {
+          "avgRang": 8.5,
+          "disq": 0,
+          "n": 6,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 3.9,
+          "disq": 1,
+          "n": 16,
+          "top5": 13
+        }
+      },
+      "etat": null,
+      "gain": 33750900,
+      "horse": "GARDNER SHAW",
+      "horse_id": null,
+      "jockey": "A. ABRIVARD",
+      "musique": "0A8A9A5A2A4ADA1A3A5A",
+      "nombreCourses": 30,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Jérôme LARQUET",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Y. HENRY",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2024-10-23",
+    "hippodrome": "AGEN LA GARENNE",
+    "num": 1
+  }
+}

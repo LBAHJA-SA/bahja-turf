@@ -1,0 +1,905 @@
+{
+  "reunion": {
+    "num": 3,
+    "hippodrome": "Lyon-Parilly",
+    "organizer": "PMU",
+    "date": "2026-09-15"
+  },
+  "course": {
+    "id": 1683917,
+    "num": 7,
+    "prix": "Prix des Gentianes",
+    "time": "15:24:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 1600,
+    "surface": "GAZON",
+    "going": "SOUPLE",
+    "corde": "G",
+    "runners": 11,
+    "quinte": false,
+    "condition": "Pour pouliches de 2 ans n'ayant jamais gagné (A Réclamer excepté). Poids : 58 kg. Les pouliches n'ayant jamais couru recevront 2 kg.",
+    "classe": "MAIDEN",
+    "depart": null,
+    "penetrometer": 3.6,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "COUPLE",
+      "TRIO",
+      "MINI_MULTI"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 21000,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 10500,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 3990,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 2940,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1890,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 840,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 525,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 315,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Gafara",
+      "horse_id": 2897893,
+      "jockey": "Antonio Orani",
+      "trainer": "Mario Baratti",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 7,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.5,
+      "cote_geny": 2.9,
+      "musique": "7p",
+      "note": "Vite en tête, est bien repartie à mi-ligne droite, se mettant hors de portée et s'imposant avec autorité.",
+      "red_km": "1'41''0",
+      "distance": 1600,
+      "rang": 1,
+      "ecart": "00:01:41,000",
+      "proprietaire": "Bizakov",
+      "casaque": "/web/image/casaque/91/1038191_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Saxeen",
+      "horse_id": 2898426,
+      "jockey": "Hugo Journiac",
+      "trainer": "Yann Barberot",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": 411,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 11,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.1,
+      "cote_geny": 12.4,
+      "musique": "7p",
+      "note": "Dans la seconde partie du peloton, s'est bien allongée dans les deux cents derniers mètres pour venir décrocher la seconde place près du but.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 2,
+      "ecart": "1 1/2",
+      "proprietaire": "du Mont dit Mont",
+      "casaque": "/web/image/casaque/87/1207987_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Muhara Moon",
+      "horse_id": 2896791,
+      "jockey": "Maxence Marquette",
+      "trainer": "Gérald Mossé",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 58,
+      "decharge": 56,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 25.8,
+      "cote_geny": 22.5,
+      "musique": "0p",
+      "note": "Dans le sillage des animatrices, s'est bien allongée en dedans dans les cent cinquante derniers mètres, dominant [Chester Light (8)], avant de se faire ajuster par [Saxeen (4)].",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 3,
+      "ecart": "1/2",
+      "proprietaire": "Motschmann",
+      "casaque": "/web/image/casaque/53/1101153_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Chester Light",
+      "horse_id": 2897706,
+      "jockey": "Tony Piccone",
+      "trainer": "Henri-Alex Pantall",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": 5206,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 2.3,
+      "cote_geny": 2.8,
+      "musique": "2p",
+      "note": "Sur une troisième ligne, a été décalée dans le tournant final et s'est annoncée en dehors, mais s'est heurtée à [Gafara (1)] à mi-ligne droite, avant de concéder les accessits.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 4,
+      "ecart": "1 1/4",
+      "proprietaire": "Pantall",
+      "casaque": "/web/image/casaque/45/1008045_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Kriss de Valnor",
+      "horse_id": 2890885,
+      "jockey": "Anthony Crastus",
+      "trainer": "Richard Chotard (G)",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": 3255,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 9,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 13.1,
+      "cote_geny": 15.8,
+      "musique": "3p7p",
+      "note": "Au contact des animatrices, a été prise de vitesse au début de la ligne droite, avant de se relancer dans les cent cinquante derniers mètres pour venir arracher la cinquième place.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 5,
+      "ecart": "2 1/2",
+      "proprietaire": "C.Faure/Camvic",
+      "casaque": "/web/image/casaque/36/1209836_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Kata Tjuta",
+      "horse_id": 2882726,
+      "jockey": "Axel Baron",
+      "trainer": "Axel Baron",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": 11528,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 6,
+      "valeur": 37.5,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 45.9,
+      "cote_geny": 33.8,
+      "musique": "6p7p5p4p2p5p",
+      "note": "Mal sortie des boîtes et vite en queue de peloton, est venue conclure honorablement en retrait.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 6,
+      "ecart": "1/4",
+      "proprietaire": "Nicolson",
+      "casaque": "/web/image/casaque/56/1040756_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Finacra Fal",
+      "horse_id": 2898824,
+      "jockey": "Clément Lecoeuvre",
+      "trainer": "Lucie Pontoir",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 58,
+      "decharge": 58.5,
+      "corde": 10,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 42.3,
+      "cote_geny": 17.5,
+      "musique": "8p",
+      "note": "Vite aux avant-postes, n'a pu soutenir la comparaison à deux cents mètres du poteau, puis a subi plusieurs assauts pour finir.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 7,
+      "ecart": "TETE",
+      "proprietaire": "Fal Stud Sas",
+      "casaque": "/web/image/casaque/91/1183591_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Synnefia",
+      "horse_id": 2898823,
+      "jockey": "Sophie Tison",
+      "trainer": "Victoria Head",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 58,
+      "decharge": 56,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 81.8,
+      "cote_geny": 51.7,
+      "musique": "0p",
+      "note": "Dans la seconde partie du peloton, a plongé en dedans à cent cinquante mètres du poteau et a fini très convenablement, non loin des pouliches classées devant elle.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 8,
+      "ecart": "1/2",
+      "proprietaire": "Nightchill/Tolmi Racing",
+      "casaque": "/web/image/casaque/97/1192697_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Withney",
+      "horse_id": 2900717,
+      "jockey": "Maël Grondin",
+      "trainer": "Gérald Mossé",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 56,
+      "decharge": 53,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 15.1,
+      "cote_geny": 13.6,
+      "musique": "",
+      "note": "En queue de peloton, n'a pu jouer un rôle utile dans la phase finale.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 9,
+      "ecart": "5 1/2",
+      "proprietaire": "Riviera Equine",
+      "casaque": "/web/image/casaque/31/1108731_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Foot Loose",
+      "horse_id": 2901121,
+      "jockey": "Hugo Besnier",
+      "trainer": "Christophe Escuder",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 56,
+      "decharge": 56.5,
+      "corde": 8,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 64.4,
+      "cote_geny": 85,
+      "musique": "",
+      "note": "Au sein du peloton, n'a pu hausser le ton dans la ligne droite et a été dominée.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 10,
+      "ecart": "CENC",
+      "proprietaire": "Bayer",
+      "casaque": "/web/image/casaque/38/1180638_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Minx",
+      "horse_id": 2900884,
+      "jockey": "Marvin Grandin",
+      "trainer": "Mathieu Pitart",
+      "age": 2,
+      "sexe": "FEMELLE",
+      "gain": null,
+      "poids": 56,
+      "decharge": 56.5,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 23.5,
+      "cote_geny": 19.3,
+      "musique": "",
+      "note": "Pas trop bien sortie des stalles et vite à l'arrière, n'a pu se rapprocher utilement.",
+      "red_km": null,
+      "distance": 1600,
+      "rang": 11,
+      "ecart": "3 1/2",
+      "proprietaire": "Pitart",
+      "casaque": "/web/image/casaque/78/1008378_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Gafara",
+                  "numero": null,
+                  "id": 2897893,
+                  "idParticipation": 21735719
+                },
+                {
+                  "nom": "Chester Light",
+                  "numero": null,
+                  "id": 2897706,
+                  "idParticipation": 21735726
+                }
+              ]
+            },
+            "commentaire": "Auteur de bons débuts à Clairefontaine en étant seulement devancé par Golden Savior qui a depuis remporté le Critérium de l'Ouest à Craon, [Chester Light (8)] est une base solide. [Gafara (1)] a débuté à Deauville, dans un lot de qualité.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Chester Light (8)] a des atouts",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21735726,
+            "idCheval": 2897706,
+            "numero": 8,
+            "nomCheval": "Chester Light"
+          },
+          {
+            "idParticipation": 21735719,
+            "idCheval": 2897893,
+            "numero": 1,
+            "nomCheval": "Gafara"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21735720,
+            "idCheval": 2890885,
+            "numero": 2,
+            "nomCheval": "Kriss de Valnor"
+          },
+          {
+            "idParticipation": 21735723,
+            "idCheval": 2896791,
+            "numero": 5,
+            "nomCheval": "Muhara Moon"
+          },
+          {
+            "idParticipation": 21735721,
+            "idCheval": 2898824,
+            "numero": 3,
+            "nomCheval": "Finacra Fal"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21735722,
+            "idCheval": 2898426,
+            "numero": 4,
+            "nomCheval": "Saxeen"
+          },
+          {
+            "idParticipation": 21735724,
+            "idCheval": 2882726,
+            "numero": 6,
+            "nomCheval": "Kata Tjuta"
+          },
+          {
+            "idParticipation": 21735729,
+            "idCheval": 2900717,
+            "numero": 11,
+            "nomCheval": "Withney"
+          },
+          {
+            "idParticipation": 21735725,
+            "idCheval": 2898823,
+            "numero": 7,
+            "nomCheval": "Synnefia"
+          },
+          {
+            "idParticipation": 21735728,
+            "idCheval": 2900884,
+            "numero": 10,
+            "nomCheval": "Minx"
+          },
+          {
+            "idParticipation": 21735727,
+            "idCheval": 2901121,
+            "numero": 9,
+            "nomCheval": "Foot Loose"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5084120,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735719,
+            "idCheval": 2897893,
+            "numero": 1,
+            "nomCheval": "Gafara"
+          },
+          {
+            "idParticipation": 21735726,
+            "idCheval": 2897706,
+            "numero": 8,
+            "nomCheval": "Chester Light"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084121,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735726,
+            "idCheval": 2897706,
+            "numero": 8,
+            "nomCheval": "Chester Light"
+          },
+          {
+            "idParticipation": 21735719,
+            "idCheval": 2897893,
+            "numero": 1,
+            "nomCheval": "Gafara"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084122,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735719,
+            "idCheval": 2897893,
+            "numero": 1,
+            "nomCheval": "Gafara"
+          },
+          {
+            "idParticipation": 21735726,
+            "idCheval": 2897706,
+            "numero": 8,
+            "nomCheval": "Chester Light"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084123,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735726,
+            "idCheval": 2897706,
+            "numero": 8,
+            "nomCheval": "Chester Light"
+          },
+          {
+            "idParticipation": 21735719,
+            "idCheval": 2897893,
+            "numero": 1,
+            "nomCheval": "Gafara"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084124,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735719,
+            "idCheval": 2897893,
+            "numero": 1,
+            "nomCheval": "Gafara"
+          },
+          {
+            "idParticipation": 21735726,
+            "idCheval": 2897706,
+            "numero": 8,
+            "nomCheval": "Chester Light"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084125,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735726,
+            "idCheval": 2897706,
+            "numero": 8,
+            "nomCheval": "Chester Light"
+          },
+          {
+            "idParticipation": 21735719,
+            "idCheval": 2897893,
+            "numero": 1,
+            "nomCheval": "Gafara"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084126,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735726,
+            "idCheval": 2897706,
+            "numero": 8,
+            "nomCheval": "Chester Light"
+          },
+          {
+            "idParticipation": 21735719,
+            "idCheval": 2897893,
+            "numero": 1,
+            "nomCheval": "Gafara"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2897706,
+          "numero": 8,
+          "nomCheval": "Chester Light"
+        },
+        {
+          "points": 3,
+          "idCheval": 2897893,
+          "numero": 1,
+          "nomCheval": "Gafara"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2897893,
+          "numero": 1,
+          "nomCheval": "Gafara"
+        },
+        {
+          "points": 3,
+          "idCheval": 2897706,
+          "numero": 8,
+          "nomCheval": "Chester Light"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

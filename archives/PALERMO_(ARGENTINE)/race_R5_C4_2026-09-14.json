@@ -1,0 +1,868 @@
+{
+  "reunion": {
+    "num": 5,
+    "hippodrome": "Palermo (Argentine)",
+    "organizer": "PMU",
+    "date": "2026-09-14"
+  },
+  "course": {
+    "id": 1683289,
+    "num": 4,
+    "prix": "Premio Sankalpa",
+    "time": "19:43:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 1000,
+    "surface": "DIRT",
+    "going": "RAPIDE",
+    "corde": "G",
+    "runners": 14,
+    "quinte": false,
+    "condition": "Pour chevaux entiers, hongres et juments de 5 et 6 ans, n'ayant jamais gagné.",
+    "classe": "MAIDEN",
+    "depart": null,
+    "penetrometer": null,
+    "types_pari": [
+      "SIMPLE",
+      "DEUX_SUR_QUATRE",
+      "COUPLE",
+      "TRIO",
+      "MINI_MULTI"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 4500,
+      "devise": "EUR",
+      "details": []
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Candy Kid",
+      "horse_id": 2900844,
+      "jockey": "Angel Irineo Yalet",
+      "trainer": "Domingo Alberto Banegas",
+      "age": 5,
+      "sexe": "FEMELLE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 1,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 110,
+      "cote_geny": 91.8,
+      "musique": "8p0p0p9p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Las Dos T.T.",
+      "casaque": "/web/image/casaque/56/1211456_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Quiet Parade",
+      "horse_id": 2876611,
+      "jockey": "Lucas Jesus Noriega Cobian",
+      "trainer": "Facundo Ortiz",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 2,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 19.1,
+      "cote_geny": 19.3,
+      "musique": "4p9p10p6p(25)10p8p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Los Bichitos",
+      "casaque": "/web/image/casaque/77/1199177_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Indio Comanche",
+      "horse_id": 2899258,
+      "jockey": "Francisco Jesus Lavigna",
+      "trainer": "Jesus Jose Maria Rodriguez",
+      "age": 6,
+      "sexe": "MALE",
+      "gain": 929,
+      "poids": 55,
+      "decharge": null,
+      "corde": 3,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7.6,
+      "cote_geny": 12.6,
+      "musique": "2p4p5p10p5p8p5p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 2,
+      "ecart": null,
+      "proprietaire": "El Desecho",
+      "casaque": "/web/image/casaque/41/1139841_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Todito",
+      "horse_id": 2819993,
+      "jockey": "Eduardo Recuero",
+      "trainer": "Leguiza Rogelio",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 4,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 87.5,
+      "cote_geny": 104,
+      "musique": "0p10p10p(24)6p8p0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "El Aleman",
+      "casaque": "/web/image/casaque/07/1074207_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Don Almirante",
+      "horse_id": 2900839,
+      "jockey": "Maria Eugenia Schneider",
+      "trainer": "Rafael Osmar Liberatori",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 5,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 12.8,
+      "cote_geny": 18.8,
+      "musique": "(25)5p0p9p8p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 3,
+      "ecart": null,
+      "proprietaire": "Delfina",
+      "casaque": "/web/image/casaque/17/1206617_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Andaino",
+      "horse_id": 2900834,
+      "jockey": "Leo Nicolas Acuna",
+      "trainer": "Raul Taborda",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 6,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 55.3,
+      "cote_geny": 35.1,
+      "musique": "9p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "El Naranjero",
+      "casaque": "/web/image/casaque/51/1134351_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Full Lucky",
+      "horse_id": 2867666,
+      "jockey": "Maximiliano Hernan Machado",
+      "trainer": "Hector Oscar Morales",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 7,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 45.6,
+      "cote_geny": 21.8,
+      "musique": "10p9p(25)0p0p(24)0p0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Pedro 6 M",
+      "casaque": "/web/image/casaque/80/1210280_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 8,
+      "horse": "Safety Bell",
+      "horse_id": 2899265,
+      "jockey": "Rodriguez Maximiliano Aserito",
+      "trainer": "Mario Berns",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 8,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 102,
+      "cote_geny": 104,
+      "musique": "8p0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Tiara",
+      "casaque": "/web/image/casaque/96/1074496_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 9,
+      "horse": "Ups Limit",
+      "horse_id": 2863389,
+      "jockey": "Abel Lujan José Giorgis",
+      "trainer": "Edgardo Luis Gramajo",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 9,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 13.5,
+      "cote_geny": 18.8,
+      "musique": "5p5p(25)10p0p8p10p0p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Que Ilusion",
+      "casaque": "/web/image/casaque/26/1109026_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 10,
+      "horse": "Evo El Diez",
+      "horse_id": 2900842,
+      "jockey": "Pablo Damian Carrizo",
+      "trainer": "Alfonso Henner",
+      "age": 6,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 55,
+      "decharge": null,
+      "corde": 10,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.1,
+      "cote_geny": 5.8,
+      "musique": "3p2p(24)8p7p4p4p9p5p6p5p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 3,
+      "ecart": null,
+      "proprietaire": "Viejo",
+      "casaque": "/web/image/casaque/01/1182701_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 11,
+      "horse": "Lakefront",
+      "horse_id": 2900843,
+      "jockey": "Thiago Ever Larrea Frutos",
+      "trainer": "Eduardo Siele",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 11,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.8,
+      "cote_geny": 3.7,
+      "musique": "7p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Pergamino",
+      "casaque": "/web/image/casaque/81/1181681_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 12,
+      "horse": "Encantado Texan",
+      "horse_id": 2879971,
+      "jockey": "Enrique Carlos E. Weisheim",
+      "trainer": "Leonardo Campelo",
+      "age": 6,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 55,
+      "decharge": null,
+      "corde": 12,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 38.6,
+      "cote_geny": 49.8,
+      "musique": "6p7p(25)0p5p10p7p8p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Le Gaby",
+      "casaque": "/web/image/casaque/63/1077863_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 13,
+      "horse": "Day For Sun",
+      "horse_id": 2780610,
+      "jockey": "Adan Damelia",
+      "trainer": "Carlos Cesar Cabrera",
+      "age": 6,
+      "sexe": "MALE",
+      "gain": 502,
+      "poids": 55,
+      "decharge": null,
+      "corde": 13,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 38.8,
+      "cote_geny": 23.3,
+      "musique": "0p6p3p7p6p5p3p6p7p8p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": null,
+      "ecart": null,
+      "proprietaire": "Agustin",
+      "casaque": "/web/image/casaque/19/1199219_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 14,
+      "horse": "Soy Facha",
+      "horse_id": 2900837,
+      "jockey": "Jairo Flores",
+      "trainer": "Emiliano Nicolas Ferrero",
+      "age": 5,
+      "sexe": "MALE",
+      "gain": 0,
+      "poids": 57,
+      "decharge": null,
+      "corde": 14,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.9,
+      "cote_geny": 3.4,
+      "musique": "3p2p3p",
+      "note": null,
+      "red_km": null,
+      "distance": 1000,
+      "rang": 1,
+      "ecart": null,
+      "proprietaire": "Stud El Carancho",
+      "casaque": "/web/image/casaque/81/1136081_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": null,
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5083883,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728032,
+            "idCheval": 2900837,
+            "numero": 14,
+            "nomCheval": "Soy Facha"
+          },
+          {
+            "idParticipation": 21728025,
+            "idCheval": 2899258,
+            "numero": 3,
+            "nomCheval": "Indio Comanche"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083884,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728025,
+            "idCheval": 2899258,
+            "numero": 3,
+            "nomCheval": "Indio Comanche"
+          },
+          {
+            "idParticipation": 21728035,
+            "idCheval": 2900842,
+            "numero": 10,
+            "nomCheval": "Evo El Diez"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083885,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728032,
+            "idCheval": 2900837,
+            "numero": 14,
+            "nomCheval": "Soy Facha"
+          },
+          {
+            "idParticipation": 21728025,
+            "idCheval": 2899258,
+            "numero": 3,
+            "nomCheval": "Indio Comanche"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083886,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728032,
+            "idCheval": 2900837,
+            "numero": 14,
+            "nomCheval": "Soy Facha"
+          },
+          {
+            "idParticipation": 21728025,
+            "idCheval": 2899258,
+            "numero": 3,
+            "nomCheval": "Indio Comanche"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083887,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728032,
+            "idCheval": 2900837,
+            "numero": 14,
+            "nomCheval": "Soy Facha"
+          },
+          {
+            "idParticipation": 21728025,
+            "idCheval": 2899258,
+            "numero": 3,
+            "nomCheval": "Indio Comanche"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083888,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728032,
+            "idCheval": 2900837,
+            "numero": 14,
+            "nomCheval": "Soy Facha"
+          },
+          {
+            "idParticipation": 21728025,
+            "idCheval": 2899258,
+            "numero": 3,
+            "nomCheval": "Indio Comanche"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5083889,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21728035,
+            "idCheval": 2900842,
+            "numero": 10,
+            "nomCheval": "Evo El Diez"
+          },
+          {
+            "idParticipation": 21728025,
+            "idCheval": 2899258,
+            "numero": 3,
+            "nomCheval": "Indio Comanche"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 5,
+          "idCheval": 2900837,
+          "numero": 14,
+          "nomCheval": "Soy Facha"
+        },
+        {
+          "points": 1,
+          "idCheval": 2899258,
+          "numero": 3,
+          "nomCheval": "Indio Comanche"
+        },
+        {
+          "points": 1,
+          "idCheval": 2900842,
+          "numero": 10,
+          "nomCheval": "Evo El Diez"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 6,
+          "idCheval": 2899258,
+          "numero": 3,
+          "nomCheval": "Indio Comanche"
+        },
+        {
+          "points": 1,
+          "idCheval": 2900842,
+          "numero": 10,
+          "nomCheval": "Evo El Diez"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

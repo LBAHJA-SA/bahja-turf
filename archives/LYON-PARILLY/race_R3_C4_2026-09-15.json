@@ -1,0 +1,744 @@
+{
+  "reunion": {
+    "num": 3,
+    "hippodrome": "Lyon-Parilly",
+    "organizer": "PMU",
+    "date": "2026-09-15"
+  },
+  "course": {
+    "id": 1683914,
+    "num": 4,
+    "prix": "Prix Top World",
+    "time": "13:27:00",
+    "specialty": "PLAT",
+    "discipline": "GALOP",
+    "distance": 2200,
+    "surface": "GAZON",
+    "going": "SOUPLE",
+    "corde": "G",
+    "runners": 7,
+    "quinte": false,
+    "condition": "Pour poulains entiers, hongres et pouliches de 3 ans ayant une valeur inférieure ou égale à 33 k. Poids : 56 kg. Les chevaux ayant depuis le 15 mars 2026 inclus reçu une allocation de 3.500 porteront 1 kg ; une allocation de 5.500 ou plusieurs allocations de 3.500, 2 kg ; une allocation de 6.500 ou plusieurs allocations de 5.500, 3 kg.",
+    "classe": "CLASSE_3",
+    "depart": null,
+    "penetrometer": 3.6,
+    "types_pari": [
+      "SIMPLE",
+      "TRIO_ORDRE",
+      "COUPLE_ORDRE",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 13700,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 6850,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 2604,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 1918,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 1233,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 548,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 342,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 205,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 1,
+      "horse": "Babadoo",
+      "horse_id": 2869725,
+      "jockey": "Axel Baron",
+      "trainer": "Mathieu Brasme",
+      "age": 3,
+      "sexe": "HONGRE",
+      "gain": 28225,
+      "poids": 59,
+      "decharge": 59.5,
+      "corde": 4,
+      "valeur": 32,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.5,
+      "cote_geny": 5.5,
+      "musique": "1p1p4p8p3p8p2p(25)9p7p",
+      "note": "Sur une troisième ligne, s'est annoncé à deux cents mètres du but, puis s'est bien allongé pour venir dominer [The Magpie (4)] aux abords du poteau.",
+      "red_km": "2'19''3",
+      "distance": 2200,
+      "rang": 1,
+      "ecart": "00:02:19,310",
+      "proprietaire": "Provan",
+      "casaque": "/web/image/casaque/88/1206388_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "The Magpie",
+      "horse_id": 2871161,
+      "jockey": "Antonio Orani",
+      "trainer": "Jérôme Reynier",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 29499,
+      "poids": 57.5,
+      "decharge": 58,
+      "corde": 1,
+      "valeur": 33,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 3.6,
+      "cote_geny": 2.6,
+      "musique": "2p3p2p1p2p4p4p8p(25)4p",
+      "note": "Calée dans le sillage de l'animateur [Mister Socks (7)], a pris le meilleur à deux cent cinquante mètres du but, puis s'est défendue vaillamment, sans pouvoir contenir [Babadoo (1)].",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 2,
+      "ecart": "TETE",
+      "proprietaire": "Gousserie Racing",
+      "casaque": "/web/image/casaque/52/1185752_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "White Miracle",
+      "horse_id": 2853725,
+      "jockey": "Marvin Grandin",
+      "trainer": "Gordan Batistic",
+      "age": 3,
+      "sexe": "HONGRE",
+      "gain": 9824,
+      "poids": 57,
+      "decharge": 57.5,
+      "corde": 5,
+      "valeur": 33,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5,
+      "cote_geny": 8.4,
+      "musique": "3p2p5p2p(25)6p5p4p",
+      "note": "Sur une deuxième ligne, s'est annoncé en dehors à mi-ligne droite, puis a bien conclu, tout en se heurtant pour finir au duo gagnant.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 3,
+      "ecart": "1 1/4",
+      "proprietaire": "Müller",
+      "casaque": "/web/image/casaque/59/1172859_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 3,
+      "horse": "Lovatree Paris",
+      "horse_id": 2856167,
+      "jockey": "Guillaume Guedj-Gay",
+      "trainer": "Sandrine Gavilan",
+      "age": 3,
+      "sexe": "FEMELLE",
+      "gain": 41817,
+      "poids": 57.5,
+      "decharge": 58,
+      "corde": 3,
+      "valeur": 33,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 18.8,
+      "cote_geny": 23.8,
+      "musique": "4p0p4p4p4p1p3p7p3p4p",
+      "note": "En position de serre-file, a terminé convenablement en dedans pour venir régler la lutte pour la quatrième place.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 4,
+      "ecart": "2",
+      "proprietaire": "Rivetti",
+      "casaque": "/web/image/casaque/26/1081026_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 6,
+      "horse": "Nevados",
+      "horse_id": 2882420,
+      "jockey": "Tony Piccone",
+      "trainer": "Henri-Alex Pantall",
+      "age": 3,
+      "sexe": "HONGRE",
+      "gain": 7596,
+      "poids": 57,
+      "decharge": 57.5,
+      "corde": 2,
+      "valeur": 31.5,
+      "deferre": "FF",
+      "oeilleres": "O",
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7.1,
+      "cote_geny": 6.1,
+      "musique": "3p0p6p1p9p0p",
+      "note": "Patient à l'arrière du petit peloton, a fini honorablement en léger retrait, mais moins vite que [Lovatree Paris (3)] en dedans.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 5,
+      "ecart": "1/2",
+      "proprietaire": "Pantall",
+      "casaque": "/web/image/casaque/45/1008045_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 7,
+      "horse": "Mister Socks",
+      "horse_id": 2873051,
+      "jockey": "Clément Lecoeuvre",
+      "trainer": "Nicolas Bellanger",
+      "age": 3,
+      "sexe": "HONGRE",
+      "gain": 12959,
+      "poids": 56,
+      "decharge": 56.5,
+      "corde": 6,
+      "valeur": 33,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 5.5,
+      "cote_geny": 6.9,
+      "musique": "3p6p7p1p(25)9p",
+      "note": "Animateur, est bien reparti à l'entrée de la ligne droite, mais a plafonné dans les deux cents derniers mètres et a subi plusieurs assauts.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 6,
+      "ecart": "ENC",
+      "proprietaire": "Mars",
+      "casaque": "/web/image/casaque/63/1145763_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Encore Ridge",
+      "horse_id": 2864206,
+      "jockey": "Timothé Brebion",
+      "trainer": "Ludovic Gadbin",
+      "age": 3,
+      "sexe": "HONGRE",
+      "gain": 17157,
+      "poids": 59,
+      "decharge": 56,
+      "corde": 7,
+      "valeur": 33,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 7.3,
+      "cote_geny": 10.4,
+      "musique": "4p8p0p1p5p(25)4p2p",
+      "note": "Après avoir accompagné en tête [Mister Socks (7)], se montrant brillant, n'a pu soutenir la comparaison à mi-ligne droite et est rentré progressivement dans le rang.",
+      "red_km": null,
+      "distance": 2200,
+      "rang": 7,
+      "ecart": "3 1/2",
+      "proprietaire": "Stedman",
+      "casaque": "/web/image/casaque/31/1041331_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Babadoo",
+                  "numero": null,
+                  "id": 2869725,
+                  "idParticipation": 21735696
+                },
+                {
+                  "nom": "The Magpie",
+                  "numero": null,
+                  "id": 2871161,
+                  "idParticipation": 21735699
+                }
+              ]
+            },
+            "commentaire": "Il n'est pas si évident de faire un premier choix dans ce lot homogène où tous les participants peuvent l'emporter. [The Magpie (4)], en forme et dans sa catégorie, dispose d'une toute première chance avec [Babadoo (1)] qui a aligné les victoires cet été à Clairefontaine.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[The Magpie (4)] en base",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21735699,
+            "idCheval": 2871161,
+            "numero": 4,
+            "nomCheval": "The Magpie"
+          },
+          {
+            "idParticipation": 21735696,
+            "idCheval": 2869725,
+            "numero": 1,
+            "nomCheval": "Babadoo"
+          }
+        ],
+        "listeBelleChance": [
+          {
+            "idParticipation": 21735701,
+            "idCheval": 2882420,
+            "numero": 6,
+            "nomCheval": "Nevados"
+          }
+        ],
+        "listeOutsider": [
+          {
+            "idParticipation": 21735700,
+            "idCheval": 2853725,
+            "numero": 5,
+            "nomCheval": "White Miracle"
+          },
+          {
+            "idParticipation": 21735702,
+            "idCheval": 2873051,
+            "numero": 7,
+            "nomCheval": "Mister Socks"
+          },
+          {
+            "idParticipation": 21735697,
+            "idCheval": 2864206,
+            "numero": 2,
+            "nomCheval": "Encore Ridge"
+          },
+          {
+            "idParticipation": 21735698,
+            "idCheval": 2856167,
+            "numero": 3,
+            "nomCheval": "Lovatree Paris"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5084155,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735696,
+            "idCheval": 2869725,
+            "numero": 1,
+            "nomCheval": "Babadoo"
+          },
+          {
+            "idParticipation": 21735701,
+            "idCheval": 2882420,
+            "numero": 6,
+            "nomCheval": "Nevados"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084156,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735699,
+            "idCheval": 2871161,
+            "numero": 4,
+            "nomCheval": "The Magpie"
+          },
+          {
+            "idParticipation": 21735696,
+            "idCheval": 2869725,
+            "numero": 1,
+            "nomCheval": "Babadoo"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084157,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735699,
+            "idCheval": 2871161,
+            "numero": 4,
+            "nomCheval": "The Magpie"
+          },
+          {
+            "idParticipation": 21735696,
+            "idCheval": 2869725,
+            "numero": 1,
+            "nomCheval": "Babadoo"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084158,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735696,
+            "idCheval": 2869725,
+            "numero": 1,
+            "nomCheval": "Babadoo"
+          },
+          {
+            "idParticipation": 21735701,
+            "idCheval": 2882420,
+            "numero": 6,
+            "nomCheval": "Nevados"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084159,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735696,
+            "idCheval": 2869725,
+            "numero": 1,
+            "nomCheval": "Babadoo"
+          },
+          {
+            "idParticipation": 21735701,
+            "idCheval": 2882420,
+            "numero": 6,
+            "nomCheval": "Nevados"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084160,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735696,
+            "idCheval": 2869725,
+            "numero": 1,
+            "nomCheval": "Babadoo"
+          },
+          {
+            "idParticipation": 21735699,
+            "idCheval": 2871161,
+            "numero": 4,
+            "nomCheval": "The Magpie"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084161,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735699,
+            "idCheval": 2871161,
+            "numero": 4,
+            "nomCheval": "The Magpie"
+          },
+          {
+            "idParticipation": 21735696,
+            "idCheval": 2869725,
+            "numero": 1,
+            "nomCheval": "Babadoo"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2869725,
+          "numero": 1,
+          "nomCheval": "Babadoo"
+        },
+        {
+          "points": 3,
+          "idCheval": 2871161,
+          "numero": 4,
+          "nomCheval": "The Magpie"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 3,
+          "idCheval": 2869725,
+          "numero": 1,
+          "nomCheval": "Babadoo"
+        },
+        {
+          "points": 3,
+          "idCheval": 2882420,
+          "numero": 6,
+          "nomCheval": "Nevados"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

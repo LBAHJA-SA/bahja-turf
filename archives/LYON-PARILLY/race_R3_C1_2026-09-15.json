@@ -1,0 +1,663 @@
+{
+  "reunion": {
+    "num": 3,
+    "hippodrome": "Lyon-Parilly",
+    "organizer": "PMU",
+    "date": "2026-09-15"
+  },
+  "course": {
+    "id": 1683911,
+    "num": 1,
+    "prix": "Prix du Pic du Midi",
+    "time": "11:51:00",
+    "specialty": "STEEPLE_CHASE",
+    "discipline": "GALOP",
+    "distance": 3400,
+    "surface": "GAZON",
+    "going": "TRES_SOUPLE",
+    "corde": "G",
+    "runners": 5,
+    "quinte": false,
+    "condition": "Pour tous poulains et pouliches de 4 ans, n'ayant, en steeple-chase, ni reçu 10.000 (victoires et places), ni en course de haies, gagné une course de dotation totale supérieure ou égale à 49.000. Poids : 67 kg. Surcharges accumulées pour les sommes reçues en steeple-chase (victoires et places) : 1 kg par 3.000.",
+    "classe": "CLASSE_3",
+    "depart": null,
+    "penetrometer": 4.1,
+    "types_pari": [
+      "SIMPLE",
+      "TRIO_ORDRE",
+      "COUPLE_ORDRE",
+      "SUPER_4"
+    ],
+    "arrivee": null,
+    "allocations": {
+      "total": 24000,
+      "devise": "EUR",
+      "details": [
+        {
+          "montant": 10800,
+          "devise": "EUR",
+          "rangArrivee": 1
+        },
+        {
+          "montant": 5280,
+          "devise": "EUR",
+          "rangArrivee": 2
+        },
+        {
+          "montant": 3120,
+          "devise": "EUR",
+          "rangArrivee": 3
+        },
+        {
+          "montant": 2160,
+          "devise": "EUR",
+          "rangArrivee": 4
+        },
+        {
+          "montant": 1200,
+          "devise": "EUR",
+          "rangArrivee": 5
+        },
+        {
+          "montant": 840,
+          "devise": "EUR",
+          "rangArrivee": 6
+        },
+        {
+          "montant": 600,
+          "devise": "EUR",
+          "rangArrivee": 7
+        }
+      ]
+    },
+    "ref": null,
+    "ref2": null,
+    "ref_text": null
+  },
+  "participants": [
+    {
+      "num": 3,
+      "horse": "Philadelphie",
+      "horse_id": 2866369,
+      "jockey": "Benjamin Gelhay",
+      "trainer": "Mathieu Pitart",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 52630,
+      "poids": 65,
+      "decharge": 65.5,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 1.7,
+      "cote_geny": 2.1,
+      "musique": "6h2h4h1h(25)3h4h3h",
+      "note": "Patiente en avant-dernière position (peloton en file indienne), a fait mouvement dans le tournant final, puis a pris l'avantage pour sauter l'ultime, avant de facilement dicter sa loi.",
+      "red_km": "4'12''2",
+      "distance": 3400,
+      "rang": 1,
+      "ecart": "00:04:12,240",
+      "proprietaire": "Dubois",
+      "casaque": "/web/image/casaque/70/1003270_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 5,
+      "horse": "Nirvanafix",
+      "horse_id": 2867828,
+      "jockey": "Louis Nomis",
+      "trainer": "François Nicolle",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 15530,
+      "poids": 65,
+      "decharge": 61.5,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4.6,
+      "cote_geny": 5.3,
+      "musique": "3s5h1hTh(25)Ah",
+      "note": "Troisième au sein d'un petit peloton en file indienne, a bien tenu sa partie dans la ligne droite, dominant deux rivales sur le plat, mais sans pouvoir rivaliser avec [Philadelphie (3)].",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 2,
+      "ecart": "1 1/2",
+      "proprietaire": "Cypres",
+      "casaque": "/web/image/casaque/79/1002579_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 1,
+      "horse": "Ma Star Sivola",
+      "horse_id": 2857274,
+      "jockey": "Alexis Gautron",
+      "trainer": "Lubos Urbanek",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 36565,
+      "poids": 68,
+      "decharge": 68.5,
+      "corde": null,
+      "valeur": 54,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": true,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 10.8,
+      "cote_geny": 10.5,
+      "musique": "7s1h3s2s0h5s(25)7sTs2h",
+      "note": "Animatrice (petit peloton en file indienne), a subi trois attaques entre les deux dernières haies, puis n'a pu rivaliser avec le duo gagnant sur le plat, mais a dominé [Isula Senam (4)].",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 3,
+      "ecart": "2 1/2",
+      "proprietaire": "Loko Trans.S.R.O",
+      "casaque": "/web/image/casaque/98/1145798_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 4,
+      "horse": "Isula Senam",
+      "horse_id": 2867829,
+      "jockey": "Félix de Giles",
+      "trainer": "Jérôme Delaunay",
+      "age": 4,
+      "sexe": "FEMELLE",
+      "gain": 49635,
+      "poids": 65,
+      "decharge": 65.5,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": "A",
+      "bonnet": false,
+      "attache_langue": true,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 4,
+      "cote_geny": 2.9,
+      "musique": "As3h1h1h(25)5h4h1h",
+      "note": "Deuxième au sein d'un petit peloton en file indienne, s'est bien comportée dans la phase finale, mais s'est contentée de la quatrième place sur le plat.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 4,
+      "ecart": "1 3/4",
+      "proprietaire": "Team Spirit",
+      "casaque": "/web/image/casaque/54/1147754_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    },
+    {
+      "num": 2,
+      "horse": "Fakir de Mix",
+      "horse_id": 2877836,
+      "jockey": "Jean-Frédéric Rambur",
+      "trainer": "Laurent Girel",
+      "age": 4,
+      "sexe": "HONGRE",
+      "gain": 5735,
+      "poids": 67,
+      "decharge": 64.5,
+      "corde": null,
+      "valeur": null,
+      "deferre": "FF",
+      "oeilleres": null,
+      "bonnet": false,
+      "attache_langue": false,
+      "premiere_fois_deferre": null,
+      "premiere_fois_oeilleres": null,
+      "premiere_fois_bonnet": null,
+      "premiere_fois_attache_langue": null,
+      "cote_pmu": 31.5,
+      "cote_geny": 36.2,
+      "musique": "Ts4c7h4h6hTsAsAh7h",
+      "note": "Après avoir fermé la marche (petit peloton en file indienne), a moyennement négocié le brook en face et a perdu le contact, avant de finir à son rythme en retrait, au dernier rang.",
+      "red_km": null,
+      "distance": 3400,
+      "rang": 5,
+      "ecart": "5",
+      "proprietaire": "Girel",
+      "casaque": "/web/image/casaque/08/1180308_2.png",
+      "etat": "PARTANT",
+      "incident": null
+    }
+  ],
+  "pronostics": {
+    "geny": {
+      "id": null,
+      "texte": {
+        "bloc": [
+          {
+            "chevaux": {
+              "cheval": [
+                {
+                  "nom": "Philadelphie",
+                  "numero": null,
+                  "id": 2866369,
+                  "idParticipation": 21735680
+                },
+                {
+                  "nom": "Isula Senam",
+                  "numero": null,
+                  "id": 2867829,
+                  "idParticipation": 21735681
+                }
+              ]
+            },
+            "commentaire": "[Philadelphie (3)], qui a montré des moyens sur les balais, devrait vite se révéler sur les \"gros\". [Isula Senam (4)] avait besoin de courir lors de sa récente rentrée. Elle devrait vite refaire parler d'elle.",
+            "id": "course_pronostic_texte"
+          }
+        ],
+        "id": null,
+        "idParticipation": null
+      },
+      "titre": "[Philadelphie (3)] d'emblée ?",
+      "typePronostic": null,
+      "redacteur": null,
+      "interviewe": null,
+      "selections": null,
+      "metaData": {
+        "audio": null,
+        "listeBase": [
+          {
+            "idParticipation": 21735680,
+            "idCheval": 2866369,
+            "numero": 3,
+            "nomCheval": "Philadelphie"
+          },
+          {
+            "idParticipation": 21735681,
+            "idCheval": 2867829,
+            "numero": 4,
+            "nomCheval": "Isula Senam"
+          }
+        ],
+        "listeBelleChance": null,
+        "listeOutsider": [
+          {
+            "idParticipation": 21735682,
+            "idCheval": 2867828,
+            "numero": 5,
+            "nomCheval": "Nirvanafix"
+          },
+          {
+            "idParticipation": 21735678,
+            "idCheval": 2857274,
+            "numero": 1,
+            "nomCheval": "Ma Star Sivola"
+          },
+          {
+            "idParticipation": 21735679,
+            "idCheval": 2877836,
+            "numero": 2,
+            "nomCheval": "Fakir de Mix"
+          }
+        ],
+        "listeInterdit": null
+      }
+    },
+    "pronoDerniereMinute": null,
+    "presse": [
+      {
+        "id": 5084141,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Sud Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087121,
+          "nom": "Ouazan",
+          "prenom": "Steve",
+          "titre": null,
+          "initialePrenom": "S",
+          "slug": "steve-ouazan",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735681,
+            "idCheval": 2867829,
+            "numero": 4,
+            "nomCheval": "Isula Senam"
+          },
+          {
+            "idParticipation": 21735680,
+            "idCheval": 2866369,
+            "numero": 3,
+            "nomCheval": "Philadelphie"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084142,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Dépêche",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070725,
+          "nom": "Deligny",
+          "prenom": "Rémy",
+          "titre": "MONSIEUR",
+          "initialePrenom": "R",
+          "slug": "m-remy-deligny",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735681,
+            "idCheval": 2867829,
+            "numero": 4,
+            "nomCheval": "Isula Senam"
+          },
+          {
+            "idParticipation": 21735680,
+            "idCheval": 2866369,
+            "numero": 3,
+            "nomCheval": "Philadelphie"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084143,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Courrier de l'Ouest",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1053982,
+          "nom": "Lebasquier",
+          "prenom": "Pierre",
+          "titre": "MADEMOISELLE",
+          "initialePrenom": "P.",
+          "slug": "mlle-pierre-lebasquier",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735681,
+            "idCheval": 2867829,
+            "numero": 4,
+            "nomCheval": "Isula Senam"
+          },
+          {
+            "idParticipation": 21735680,
+            "idCheval": 2866369,
+            "numero": 3,
+            "nomCheval": "Philadelphie"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084144,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Radio Haute-Epine",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1070724,
+          "nom": "Noël",
+          "prenom": "Henry",
+          "titre": "MONSIEUR",
+          "initialePrenom": "H.",
+          "slug": "m-henry-noel",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735680,
+            "idCheval": 2866369,
+            "numero": 3,
+            "nomCheval": "Philadelphie"
+          },
+          {
+            "idParticipation": 21735681,
+            "idCheval": 2867829,
+            "numero": 4,
+            "nomCheval": "Isula Senam"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084145,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "Presse Océan",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1087120,
+          "nom": "Santos",
+          "prenom": "Gabriella",
+          "titre": null,
+          "initialePrenom": "G",
+          "slug": "gabriella-santos",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735680,
+            "idCheval": 2866369,
+            "numero": 3,
+            "nomCheval": "Philadelphie"
+          },
+          {
+            "idParticipation": 21735681,
+            "idCheval": 2867829,
+            "numero": 4,
+            "nomCheval": "Isula Senam"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084146,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "AIP",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1069644,
+          "nom": "Van Den Dooren",
+          "prenom": "Julien",
+          "titre": "MONSIEUR",
+          "initialePrenom": "J.",
+          "slug": "m-julien-van-den-dooren",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735680,
+            "idCheval": 2866369,
+            "numero": 3,
+            "nomCheval": "Philadelphie"
+          },
+          {
+            "idParticipation": 21735681,
+            "idCheval": 2867829,
+            "numero": 4,
+            "nomCheval": "Isula Senam"
+          }
+        ],
+        "metaData": null
+      },
+      {
+        "id": 5084147,
+        "texte": {
+          "bloc": [
+            {
+              "chevaux": {
+                "cheval": []
+              },
+              "commentaire": null,
+              "id": "course_pronostic_texte"
+            }
+          ],
+          "id": null,
+          "idParticipation": null
+        },
+        "titre": "La Casaque",
+        "typePronostic": "PAPYRUS_PRONOSTIC_COURSE",
+        "redacteur": {
+          "id": 1071208,
+          "nom": "Basin",
+          "prenom": "André",
+          "titre": null,
+          "initialePrenom": "A.",
+          "slug": "andre-basin",
+          "urlPhotoPersonne": null
+        },
+        "interviewe": null,
+        "selections": [
+          {
+            "idParticipation": 21735680,
+            "idCheval": 2866369,
+            "numero": 3,
+            "nomCheval": "Philadelphie"
+          },
+          {
+            "idParticipation": 21735681,
+            "idCheval": 2867829,
+            "numero": 4,
+            "nomCheval": "Isula Senam"
+          }
+        ],
+        "metaData": null
+      }
+    ],
+    "synthesePresse": null,
+    "synthesePressePremiers": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2866369,
+          "numero": 3,
+          "nomCheval": "Philadelphie"
+        },
+        {
+          "points": 3,
+          "idCheval": 2867829,
+          "numero": 4,
+          "nomCheval": "Isula Senam"
+        }
+      ]
+    },
+    "synthesePresseSeconds": {
+      "liste": [
+        {
+          "points": 4,
+          "idCheval": 2867829,
+          "numero": 4,
+          "nomCheval": "Isula Senam"
+        },
+        {
+          "points": 3,
+          "idCheval": 2866369,
+          "numero": 3,
+          "nomCheval": "Philadelphie"
+        }
+      ]
+    },
+    "tableRonde": null,
+    "syntheseTableRonde": null
+  }
+}

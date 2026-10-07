@@ -1,0 +1,787 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        15
+      ],
+      [
+        14
+      ],
+      [
+        6
+      ],
+      [
+        8
+      ],
+      [
+        5
+      ],
+      [
+        7
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        10
+      ],
+      [
+        11
+      ],
+      [
+        13
+      ],
+      [
+        3
+      ],
+      [
+        16
+      ]
+    ],
+    "classe": "INCONNU",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2850,
+    "going": null,
+    "imminent": false,
+    "num": 4,
+    "penetrometer": null,
+    "prix": "PRIX DE TAVERNY",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 16,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1758460500000,
+    "types_pari": [
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "SIMPLE_PLACE",
+      "SIMPLE_GAGNANT",
+      "TIERCE",
+      "MULTI",
+      "QUINTE_PLUS",
+      "TIC_TROIS",
+      "REPORT_PLUS",
+      "QUARTE_PLUS",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 5.3,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.6,
+          "disq": 1,
+          "n": 6,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 8088500,
+      "horse": "J'Y SUIS J'Y RESTE",
+      "horse_id": "J'Y SUIS J'Y RESTE-PIN UP DU CHANOT-NI HO PED D'OMBREE",
+      "jockey": "R. LAMY",
+      "musique": "1a1a0a2a1a1a1a9a2aDa",
+      "nombreCourses": 30,
+      "nombrePlaces": 9,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 9,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mlle G. LACOMBE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Mme Emeline DESMIGNEUX",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 20,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5,
+          "disq": 1,
+          "n": 12,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 6.5,
+          "disq": 0,
+          "n": 6,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 8116500,
+      "horse": "JULEJACQ",
+      "horse_id": "JULEJACQ-CIME DE BAUDRAIRIE-UNITED BACK",
+      "jockey": "B. ROCHARD",
+      "musique": "0a4a6a2a4a6a0a8a(24)0a",
+      "nombreCourses": 38,
+      "nombrePlaces": 26,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "P.Edouard MARY",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P.Edouard MARY",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 45,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.4,
+          "disq": 1,
+          "n": 6,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 6.5,
+          "disq": 1,
+          "n": 12,
+          "top5": 5
+        }
+      },
+      "etat": null,
+      "gain": 8152500,
+      "horse": "JAMES BOND",
+      "horse_id": "JAMES BOND-KUEEN OF VIKING'S-LOVE YOU",
+      "jockey": "Mlle CL. LELIEVRE",
+      "musique": "1a4a1a0a6a9a2a(24)0a0a",
+      "nombreCourses": 35,
+      "nombrePlaces": 17,
+      "nombrePlacesSecond": 5,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Hervé GUERIN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P. LELIEVRE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 25,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D2A": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": 6,
+          "disq": 2,
+          "n": 3,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 8183000,
+      "horse": "JITANA WILD",
+      "horse_id": "JITANA WILD-TZIGANE WILD-TIEGO D'ETANG",
+      "jockey": "E. RAFFIN",
+      "musique": "4a3a1a1aDaDa9aDa0a(24)",
+      "nombreCourses": 49,
+      "nombrePlaces": 25,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "CL. FRECELLE",
+      "sexe": "FEMELLES",
+      "statut": "NON_PARTANT",
+      "trainer": "CL. FRECELLE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 26,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "D2A": {
+          "avgRang": 5.3,
+          "disq": 0,
+          "n": 3,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 4.7,
+          "disq": 1,
+          "n": 8,
+          "top5": 5
+        }
+      },
+      "etat": null,
+      "gain": 8199500,
+      "horse": "JERRY DE L'ERDRE",
+      "horse_id": "JERRY DE L'ERDRE-TINA DE L'ERDRE-REAL DE LOU",
+      "jockey": "CH. CHALON",
+      "musique": "2a2a2a5a3a4a2a4a6a7a",
+      "nombreCourses": 49,
+      "nombrePlaces": 32,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme A. PAPON",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "CH. CHALON",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 10,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.6,
+          "disq": 4,
+          "n": 13,
+          "top5": 9
+        }
+      },
+      "etat": null,
+      "gain": 8250500,
+      "horse": "JASMIN VIVANCIERE",
+      "horse_id": "JASMIN VIVANCIERE-VICTORIA GIGA-ROCKLYN",
+      "jockey": "A. COLLETTE",
+      "musique": "4a2a5a2a1a2a7a(24)Da3a",
+      "nombreCourses": 37,
+      "nombrePlaces": 27,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "J. PLANCHARD",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J. PLANCHARD",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 28,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.3,
+          "disq": 0,
+          "n": 23,
+          "top5": 16
+        },
+        "P2": {
+          "avgRang": 10,
+          "disq": 1,
+          "n": 2,
+          "top5": 0
+        },
+        "P4": {
+          "avgRang": 6,
+          "disq": 1,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 8262500,
+      "horse": "JADORE D'ISQUES",
+      "horse_id": "JADORE D'ISQUES-ELLA D'OR-TAG WOOD",
+      "jockey": "J. KOUBICHE",
+      "musique": "Da1a6a6a4a(24)6a2a4a0a",
+      "nombreCourses": 40,
+      "nombrePlaces": 27,
+      "nombrePlacesSecond": 3,
+      "nombrePlacesTroisieme": 6,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie MEXIQUE RANCH",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J. KOUBICHE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 23,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5,
+          "disq": 1,
+          "n": 9,
+          "top5": 5
+        },
+        "P2": {
+          "avgRang": 8,
+          "disq": 0,
+          "n": 3,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 8387500,
+      "horse": "JOKER CASTILUANNE",
+      "horse_id": "JOKER CASTILUANNE-EMMA DES LIARDS-CARAT WILLIAMS",
+      "jockey": "D. THOMAIN",
+      "musique": "8a0a4a2a4a3aDa3a4a(24)",
+      "nombreCourses": 36,
+      "nombrePlaces": 18,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 8,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "B.A.P. DAVID",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "C. MEGISSIER",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 8.8,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 8.3,
+          "disq": 1,
+          "n": 4,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 2,
+          "n": 5,
+          "top5": 3
+        },
+        "P2": {
+          "avgRang": 4.6,
+          "disq": 3,
+          "n": 12,
+          "top5": 6
+        },
+        "P4": {
+          "avgRang": 4.2,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 8495000,
+      "horse": "JET DE BUSSET",
+      "horse_id": "JET DE BUSSET-ANNE DE BUSSET-DROLE DE JET",
+      "jockey": "P. VERCRUYSSE",
+      "musique": "7a3a4a0a6a7a9a(24)1a6a",
+      "nombreCourses": 34,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 0,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme F. ALLERA",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P. VERCRUYSSE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 84,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "3": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D2": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 8522500,
+      "horse": "JABUSCO PARC",
+      "horse_id": "JABUSCO PARC-DIANA PARC-ARTISTE DE JOUDES",
+      "jockey": "M. HAMELIN",
+      "musique": "3a2a1a7a3a4a3a3a4a3a",
+      "nombreCourses": 35,
+      "nombrePlaces": 26,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 8,
+      "nombreVictoires": 4,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "M. HAMELIN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "M. HAMELIN",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 25,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.4,
+          "disq": 2,
+          "n": 7,
+          "top5": 5
+        },
+        "D4": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 2,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 8527500,
+      "horse": "JAHINA VITA",
+      "horse_id": "JAHINA VITA-DOUPIE VITA-KESACO PHEDO",
+      "jockey": "F. GUINHUT",
+      "musique": "9a4a6a9a2a5a7a6a3a0a",
+      "nombreCourses": 42,
+      "nombrePlaces": 32,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 1,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "F. GUINHUT",
+      "sexe": "FEMELLES",
+      "statut": "PARTANT",
+      "trainer": "F. GUINHUT",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 29,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.4,
+          "disq": 2,
+          "n": 10,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 2,
+          "n": 4,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 8569500,
+      "horse": "JUST A MAN",
+      "horse_id": "JUST A MAN-UOTILA-DOBERMAN",
+      "jockey": "M. MOTTIER",
+      "musique": "2a7a9a9aDa7a3a4a0a0a",
+      "nombreCourses": 48,
+      "nombrePlaces": 22,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "A. DI STEFANO",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Mme E. LE BELLER",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 70,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 9,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 7.3,
+          "disq": 1,
+          "n": 14,
+          "top5": 4
+        },
+        "P2": {
+          "avgRang": 3.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "P4": {
+          "avgRang": 6.5,
+          "disq": 0,
+          "n": 6,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 8599500,
+      "horse": "JIRENZO",
+      "horse_id": "JIRENZO-TALYSSA-CASH AND GO",
+      "jockey": "CH. MARTENS",
+      "musique": "0a7a8a5a3a4a3a0a8a7a",
+      "nombreCourses": 35,
+      "nombrePlaces": 18,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 4,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "B.V.B.A. VANBERGHEN",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "A. VANBERGHEN",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 23,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D4": {
+          "avgRang": 4.4,
+          "disq": 1,
+          "n": 28,
+          "top5": 18
+        }
+      },
+      "etat": null,
+      "gain": 8602500,
+      "horse": "JOURNAL INTIME",
+      "horse_id": "JOURNAL INTIME-EDITION-ROYAL DREAM",
+      "jockey": "M. ABRIVARD",
+      "musique": "4aDa6a2a1a4a5a2a6a(24)",
+      "nombreCourses": 35,
+      "nombrePlaces": 20,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 14,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mme Aude MARION-PELLERIN",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "A. MARION",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 3.4,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "3": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D2": {
+          "avgRang": 3.5,
+          "disq": 3,
+          "n": 9,
+          "top5": 4
+        },
+        "D4": {
+          "avgRang": 3.2,
+          "disq": 2,
+          "n": 6,
+          "top5": 3
+        }
+      },
+      "etat": null,
+      "gain": 8637000,
+      "horse": "JAZZMAN",
+      "horse_id": "JAZZMAN-MYSTERIOUS VALLEY-ROYAL DREAM",
+      "jockey": "J.PH. DUBOIS",
+      "musique": "Da3a1a3a1aAa4a0a4a1a",
+      "nombreCourses": 28,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 15,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie VICTORIA DREAMS",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "J.PH. DUBOIS",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 13,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 4.8,
+          "disq": 5,
+          "n": 22,
+          "top5": 11
+        },
+        "D4": {
+          "avgRang": 4,
+          "disq": 1,
+          "n": 2,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 8687500,
+      "horse": "JERK HAUFOR",
+      "horse_id": "JERK HAUFOR-MAMBA D'HAUFOR-UN AMOUR D'HAUFOR",
+      "jockey": "A. ABRIVARD",
+      "musique": "2a2aDa0aDaDa1a8aDaDa",
+      "nombreCourses": 53,
+      "nombrePlaces": 25,
+      "nombrePlacesSecond": 7,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 16,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Pierre PELLEROT",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P. PELLEROT",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2025-09-21",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}

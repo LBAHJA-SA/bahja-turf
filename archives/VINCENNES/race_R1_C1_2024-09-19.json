@@ -1,0 +1,678 @@
+{
+  "course": {
+    "arrivee": [
+      [
+        4
+      ],
+      [
+        8
+      ],
+      [
+        1
+      ],
+      [
+        6
+      ],
+      [
+        7
+      ],
+      [
+        11
+      ],
+      [
+        5
+      ],
+      [
+        10
+      ],
+      [
+        2
+      ],
+      [
+        13
+      ],
+      [
+        3
+      ],
+      [
+        12
+      ]
+    ],
+    "classe": "EUROPEENNE",
+    "corde": "G",
+    "definitif": false,
+    "discipline": "ATTELE",
+    "distance": 2700,
+    "going": null,
+    "imminent": false,
+    "num": 1,
+    "penetrometer": null,
+    "prix": "PRIX DES HIPPODROMES DU MORBIHAN",
+    "quinte": false,
+    "ref": null,
+    "replay": true,
+    "runners": 13,
+    "specialty": "TROT_ATTELE",
+    "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+    "surface": null,
+    "time": 1726747020000,
+    "types_pari": [
+      "TIC_TROIS",
+      "COUPLE_PLACE",
+      "DEUX_SUR_QUATRE",
+      "QUINTE_PLUS",
+      "QUARTE_PLUS",
+      "TIERCE",
+      "MINI_MULTI",
+      "SIMPLE_GAGNANT",
+      "SIMPLE_PLACE",
+      "COUPLE_GAGNANT"
+    ]
+  },
+  "participants": [
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 9.7,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5.1,
+          "disq": 1,
+          "n": 16,
+          "top5": 10
+        }
+      },
+      "etat": null,
+      "gain": 19149800,
+      "horse": "CHERRY TOP",
+      "horse_id": null,
+      "jockey": "F. NIVARD",
+      "musique": "3ADA0A4A4A1A2A3A2A4A",
+      "nombreCourses": 24,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 2,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 3,
+      "nonPartant": null,
+      "num": 1,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Pasquale BRISCIANO (ITY)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Vitale CIOTOLA",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 19,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 4.3,
+          "disq": 5,
+          "n": 14,
+          "top5": 6
+        },
+        "D4": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "P2": {
+          "avgRang": 11,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 23049000,
+      "horse": "HAWAI PONT VAUTIER",
+      "horse_id": null,
+      "jockey": "B. ROCHARD",
+      "musique": "4A1A0A2A4A8ADA1A1A2A",
+      "nombreCourses": 57,
+      "nombrePlaces": 26,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 3,
+      "nombreVictoires": 19,
+      "nonPartant": null,
+      "num": 2,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Jérémy LEVY",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P.L. DESAUNETTE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 212,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.4,
+          "disq": 5,
+          "n": 17,
+          "top5": 10
+        }
+      },
+      "etat": null,
+      "gain": 23812000,
+      "horse": "IBERIK DE MONGOCHY",
+      "horse_id": null,
+      "jockey": "A. ANDRE",
+      "musique": "DMDM0A7M1M0ADM2MDM0A",
+      "nombreCourses": 37,
+      "nombrePlaces": 14,
+      "nombrePlacesSecond": 8,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 5,
+      "nonPartant": null,
+      "num": 3,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie INITIAL",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P.L. DESAUNETTE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 2.8,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 1.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 2
+        },
+        "D2A": {
+          "avgRang": 4,
+          "disq": 0,
+          "n": 3,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 3.4,
+          "disq": 3,
+          "n": 23,
+          "top5": 16
+        }
+      },
+      "etat": null,
+      "gain": 26594000,
+      "horse": "IGUSKI SAUTONNE",
+      "horse_id": null,
+      "jockey": "M. ABRIVARD",
+      "musique": "2A2ADA3A1A1A1A3A234A",
+      "nombreCourses": 43,
+      "nombrePlaces": 15,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 7,
+      "nombreVictoires": 13,
+      "nonPartant": null,
+      "num": 4,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie LD-M. ABRIVARD",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "M. ABRIVARD",
+      "valeur": null
+    },
+    {
+      "age": 7,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 5.3,
+      "deferre": "DEFERRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.2,
+          "disq": 3,
+          "n": 21,
+          "top5": 14
+        },
+        "D2A": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 5.2,
+          "disq": 3,
+          "n": 7,
+          "top5": 2
+        },
+        "P2": {
+          "avgRang": 12,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 26776000,
+      "horse": "HERALDIQUE",
+      "horse_id": null,
+      "jockey": "Y. LEBOURGEOIS",
+      "musique": "DA1A2A1A2A232A2A1A1A",
+      "nombreCourses": 39,
+      "nombrePlaces": 12,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 19,
+      "nonPartant": null,
+      "num": 5,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie DRAGON TROTTERS B.V.(HOL)",
+      "sexe": "MALES",
+      "statut": "PARTANT",
+      "trainer": "Mlle I. KLAPPE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 28,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 4.6,
+          "disq": 8,
+          "n": 21,
+          "top5": 9
+        }
+      },
+      "etat": null,
+      "gain": 26877200,
+      "horse": "CYRANO DE B.",
+      "horse_id": null,
+      "jockey": "E. RAFFIN",
+      "musique": "0A0A23DM0A8A0ADA7ADA",
+      "nombreCourses": 28,
+      "nombrePlaces": 11,
+      "nombrePlacesSecond": 6,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 6,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Tom HANSSON I SANKT OLOF AB (SWE)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "Vitale CIOTOLA",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 35,
+      "deferre": "DEFERRE_ANTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 3.2,
+          "disq": 0,
+          "n": 6,
+          "top5": 5
+        },
+        "D2A": {
+          "avgRang": 8.2,
+          "disq": 0,
+          "n": 4,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 6.3,
+          "disq": 0,
+          "n": 7,
+          "top5": 3
+        },
+        "P2": {
+          "avgRang": 7.2,
+          "disq": 0,
+          "n": 5,
+          "top5": 2
+        }
+      },
+      "etat": null,
+      "gain": 27379500,
+      "horse": "FOLLOW ME FLASH",
+      "horse_id": null,
+      "jockey": "G. GELORMINI",
+      "musique": "0A1A9A2A0A0A0A0A1A6A",
+      "nombreCourses": 116,
+      "nombrePlaces": 65,
+      "nombrePlacesSecond": 11,
+      "nombrePlacesTroisieme": 11,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 7,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie Etienne LEFRANC",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "ET. LEFRANC",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 12,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 5,
+          "disq": 1,
+          "n": 3,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 5.3,
+          "disq": 0,
+          "n": 3,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 6.1,
+          "disq": 1,
+          "n": 15,
+          "top5": 7
+        },
+        "P2": {
+          "avgRang": 5,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 27842000,
+      "horse": "IRON MESLOIS",
+      "horse_id": null,
+      "jockey": "P. VERCRUYSSE",
+      "musique": "1A2A5A2A0A8A3A2A3A2A",
+      "nombreCourses": 64,
+      "nombrePlaces": 41,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 9,
+      "nombreVictoires": 2,
+      "nonPartant": null,
+      "num": 8,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie B",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P. VERCRUYSSE",
+      "valeur": null
+    },
+    {
+      "age": 6,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 13,
+      "deferre": "PROTEGE_ANTERIEURS_DEFERRRE_POSTERIEURS",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 7.3,
+          "disq": 5,
+          "n": 11,
+          "top5": 1
+        },
+        "D4": {
+          "avgRang": 3.7,
+          "disq": 5,
+          "n": 17,
+          "top5": 8
+        },
+        "P4": {
+          "avgRang": 3,
+          "disq": 0,
+          "n": 1,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 27929000,
+      "horse": "IBISCUS MAN",
+      "horse_id": null,
+      "jockey": "R.CH. LARUE",
+      "musique": "DM6A5A6A3A9ADA2A2A7A",
+      "nombreCourses": 53,
+      "nombrePlaces": 21,
+      "nombrePlacesSecond": 10,
+      "nombrePlacesTroisieme": 2,
+      "nombreVictoires": 7,
+      "nonPartant": null,
+      "num": 9,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "D. LARUE",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "R.CH. LARUE",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 147,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 6,
+          "disq": 2,
+          "n": 27,
+          "top5": 11
+        }
+      },
+      "etat": null,
+      "gain": 28251000,
+      "horse": "FLUO MESLOIS",
+      "horse_id": null,
+      "jockey": "P. BELLOCHE",
+      "musique": "0A5A5M9A3M6M8M7M0A0A",
+      "nombreCourses": 91,
+      "nombrePlaces": 44,
+      "nombrePlacesSecond": 4,
+      "nombrePlacesTroisieme": 13,
+      "nombreVictoires": 8,
+      "nonPartant": null,
+      "num": 10,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Ecurie B",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "P. BELLOCHE",
+      "valeur": null
+    },
+    {
+      "age": 8,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 6.6,
+      "deferre": "DEFERRE_ANTERIEURS_POSTERIEURS",
+      "deferre_stats": {
+        "D2A": {
+          "avgRang": 6,
+          "disq": 0,
+          "n": 4,
+          "top5": 2
+        },
+        "D4": {
+          "avgRang": 5.9,
+          "disq": 2,
+          "n": 21,
+          "top5": 10
+        },
+        "P2": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "P4": {
+          "avgRang": 7,
+          "disq": 0,
+          "n": 3,
+          "top5": 1
+        }
+      },
+      "etat": null,
+      "gain": 28880000,
+      "horse": "GINO VIVA",
+      "horse_id": null,
+      "jockey": "A.ABRIVARD",
+      "musique": "3A1A3A5A0A4A8A1A9M23",
+      "nombreCourses": 62,
+      "nombrePlaces": 40,
+      "nombrePlacesSecond": 9,
+      "nombrePlacesTroisieme": 9,
+      "nombreVictoires": 10,
+      "nonPartant": null,
+      "num": 11,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Mlle Anna KARLSSON",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "D. LOCQUENEUX",
+      "valeur": null
+    },
+    {
+      "age": 10,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 179,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 7.7,
+          "disq": 7,
+          "n": 26,
+          "top5": 3
+        },
+        "D4": {
+          "avgRang": 8.5,
+          "disq": 1,
+          "n": 3,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 29052000,
+      "horse": "EL SANTO HAUFOR",
+      "horse_id": null,
+      "jockey": "J. DUBOIS",
+      "musique": "0A6A2A8A0ADA5A0A230A",
+      "nombreCourses": 83,
+      "nombrePlaces": 36,
+      "nombrePlacesSecond": 15,
+      "nombrePlacesTroisieme": 1,
+      "nombreVictoires": 6,
+      "nonPartant": null,
+      "num": 12,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "Y. DESMET (BEL)",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "E. VARIN",
+      "valeur": null
+    },
+    {
+      "age": 9,
+      "codeStatut": null,
+      "corde": null,
+      "cote_pmu": 97,
+      "deferre": "",
+      "deferre_stats": {
+        "D2": {
+          "avgRang": 6.5,
+          "disq": 0,
+          "n": 2,
+          "top5": 1
+        },
+        "D2A": {
+          "avgRang": 9.5,
+          "disq": 2,
+          "n": 4,
+          "top5": 0
+        },
+        "D4": {
+          "avgRang": 10,
+          "disq": 0,
+          "n": 1,
+          "top5": 0
+        },
+        "P2": {
+          "avgRang": null,
+          "disq": 1,
+          "n": 1,
+          "top5": 0
+        }
+      },
+      "etat": null,
+      "gain": 30002000,
+      "horse": "FALCO DES ROCHERS",
+      "horse_id": null,
+      "jockey": "A. LENOIR",
+      "musique": "DA7A7M9A0A8M6A0ADA0A",
+      "nombreCourses": 97,
+      "nombrePlaces": 60,
+      "nombrePlacesSecond": 10,
+      "nombrePlacesTroisieme": 12,
+      "nombreVictoires": 15,
+      "nonPartant": null,
+      "num": 13,
+      "oeilleres": "SANS_OEILLERES",
+      "poids": null,
+      "proprietaire": "P.A. SAUVAGET",
+      "sexe": "HONGRES",
+      "statut": "PARTANT",
+      "trainer": "A. LENOIR",
+      "valeur": null
+    }
+  ],
+  "reunion": {
+    "date": "2024-09-19",
+    "hippodrome": "VINCENNES",
+    "num": 1
+  }
+}
