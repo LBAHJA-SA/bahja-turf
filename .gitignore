@@ -1,35 +1,39 @@
-# ── Node ────────────────────────────────────────────────
+# -- Node -----------------------------------------------
 node_modules/
 dist/
 *.log
 
-# ── Vite / build ───────────────────────────────────────
+# -- Vite / build ---------------------------------------
 .vite/
 
-# ── données quotidiennes (restent LOCALES au serveur) ──
-#    l'archĭve du job (synthese + cotes + carriere) est propre a cette machine.
-data/synthese.json
-data/cotes.json
+# -- donnees quotidiennes : ce qui reste LOCAL (caches regenerables) --
+data/synthese.json          # copie de travail -- public/ EST versionne
+data/cotes.json             # cache du marche Equidia, regenerable
 data/carriere.json
 data/daily.log
 data/replay/
-public/data/synthese.json
-public/data/cotes.json
+public/data/cotes.json      # repli hors-ligne du marche, regenerable
 public/data/carriere.json
 
-# ── corpus d'analyse (laboratoire, hors deploy) ────────
+# ATTENTION : public/data/synthese.json EST VERSIONNE.
+#   C'est l'archive de la presse. Elle ne peut PAS etre recalculee
+#   (pronostics-turf.info ne publie que la course du jour).
+#   Sans elle, le site deploye demarre avec une grille vide.
+public/data/reu/            # programmes du jour : regenerables
+
+# -- corpus d'analyse (laboratoire, hors deploy) --------
 data/corpus/
 
-# ── Windows / OS ───────────────────────────────────────
+# -- Windows / OS ---------------------------------------
 Thumbs.db
 Desktop.ini
 .DS_Store
 
-# ── IDE ────────────────────────────────────────────────
+# -- IDE -----------------------------------------------
 .idea/
 .vscode/
 
-# ── secrets / config Vercel locale (JAMAIS sur git) ────
+# -- secrets / config Vercel locale (JAMAIS sur git) ---
 .deploy-env
 .vercel/
 .vercelignore

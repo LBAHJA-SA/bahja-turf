@@ -1,0 +1,1976 @@
+{
+  "2026-10-06": {
+    "date": "2026-10-06",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      9,
+      3,
+      4,
+      2,
+      14,
+      12,
+      15,
+      8,
+      1,
+      5,
+      11,
+      7,
+      6,
+      16,
+      13,
+      10
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "Haies",
+    "hippodrome": "Auteuil",
+    "prix": "PRIX GUILLAUME DE PRACOMTAL",
+    "courseId": "2026-10-06_R1_C1",
+    "distance": 3600,
+    "collecte": "2026-10-06T14:50:00.000Z",
+    "note": "restaure a la main — le site ne repond plus (timeout), la grille etait vide",
+    "ticket": [
+      9,
+      3,
+      2,
+      6,
+      15,
+      12,
+      8,
+      7
+    ],
+    "ticketMode": "manuel-verif",
+    "ticketSource": "manuel",
+    "ticketPoseLe": "2026-10-07T01:34:21.653Z"
+  },
+  "2026-10-05": {
+    "date": "2026-10-05",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      9,
+      11,
+      5,
+      13,
+      12,
+      8,
+      3,
+      7,
+      10,
+      6,
+      2,
+      14,
+      1,
+      4
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "nbPartants": 14,
+    "discipline": "Attelé",
+    "hippodrome": "Enghien",
+    "distance": 2875,
+    "courseId": "2026-10-05_R1_C1",
+    "arrivee": [
+      3,
+      7,
+      9,
+      13,
+      11
+    ],
+    "ticket": [
+      9,
+      11,
+      8,
+      5,
+      13,
+      3,
+      7,
+      4
+    ],
+    "ticketMode": "auto+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          9,
+          11,
+          8
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          5,
+          13
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          3
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          7
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          4
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "scores": [
+      {
+        "num": 1,
+        "nom": "FABIUS ORS",
+        "global": 4.89,
+        "forme": 0,
+        "dist": 5.53,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 2,
+        "nom": "FRISEE KB FONT",
+        "global": 5.04,
+        "forme": 0,
+        "dist": 6.59,
+        "piste": 6.54,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 3,
+        "nom": "OLIVER SCHERMER",
+        "global": 5.15,
+        "forme": 0,
+        "dist": 6.75,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 4,
+        "nom": "LOOK DE VALAILLES",
+        "global": 5.59,
+        "forme": 0.19,
+        "dist": 8.55,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 5,
+        "nom": "SOKRATES",
+        "global": 5.74,
+        "forme": 3.16,
+        "dist": 6.24,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 6,
+        "nom": "LEAD ME ON",
+        "global": 4.95,
+        "forme": 0,
+        "dist": 5.8,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 7,
+        "nom": "LUCIUS DE PUCH",
+        "global": 5.8,
+        "forme": 0,
+        "dist": 9.66,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 8,
+        "nom": "LORD ON WAY",
+        "global": 6.22,
+        "forme": 3.42,
+        "dist": 8.16,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 9,
+        "nom": "BLACK HEUVELLAND",
+        "global": 5.81,
+        "forme": 3.25,
+        "dist": 6.47,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 10,
+        "nom": "LORD SUN DRALIAM",
+        "global": 5.75,
+        "forme": 0.85,
+        "dist": 8.63,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 11,
+        "nom": "LONGWOOD D'HERIPRE",
+        "global": 6.04,
+        "forme": 1.34,
+        "dist": 9.44,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 12,
+        "nom": "TAURUS CROWN",
+        "global": 5.33,
+        "forme": 1.52,
+        "dist": 6.01,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 13,
+        "nom": "L'AS DES ISLES",
+        "global": 6.24,
+        "forme": 2.29,
+        "dist": 9.39,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 14,
+        "nom": "L'INTOUCHABLE",
+        "global": 5.3,
+        "forme": 0.45,
+        "dist": 6.96,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      }
+    ],
+    "collecte": "2026-10-05T23:14:21.061Z",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-05T00:32:22.203Z",
+    "ticketMoteur": [
+      9,
+      12,
+      13,
+      1,
+      5,
+      8,
+      3,
+      7
+    ],
+    "cloture": "2026-10-05T12:40:25.998Z",
+    "ticketVariantes": [
+      {
+        "le": "2026-10-05T00:32:22.203Z",
+        "ticket": [
+          9,
+          11,
+          8,
+          5,
+          13,
+          3,
+          7,
+          4
+        ]
+      },
+      {
+        "le": "2026-10-05T05:39:13.041Z",
+        "ticket": [
+          9,
+          12,
+          8,
+          5,
+          6,
+          3,
+          7,
+          1
+        ]
+      },
+      {
+        "le": "2026-10-05T08:45:21.715Z",
+        "ticket": [
+          9,
+          12,
+          13,
+          3,
+          7,
+          8,
+          5,
+          1
+        ]
+      },
+      {
+        "le": "2026-10-05T12:40:26.051Z",
+        "ticket": [
+          9,
+          12,
+          13,
+          3,
+          7,
+          8,
+          5,
+          1
+        ]
+      },
+      {
+        "le": "2026-10-05T12:46:34.535Z",
+        "ticket": [
+          9,
+          12,
+          13,
+          3,
+          7,
+          8,
+          5,
+          1
+        ]
+      }
+    ],
+    "note": "ticket de 00h32 (premier run du jour) remise en archive ; les 3 autres runs du matin sont dans ticketVariantes. Le marche est arrive apres et a propose autre chose - la regle dit que la premiere ticket ne bouge plus."
+  },
+  "2026-10-04": {
+    "date": "2026-10-04",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      1,
+      14,
+      9,
+      11,
+      16,
+      8,
+      10,
+      12,
+      15,
+      7,
+      5,
+      2,
+      4,
+      6,
+      3
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "arrivee": [
+      1,
+      7,
+      16,
+      10,
+      9
+    ],
+    "collecte": "2026-10-04T23:13:23.230Z",
+    "discipline": "Plat",
+    "distance": 2400,
+    "courseId": "2026-10-04_R1_C5",
+    "ticket": [
+      1,
+      14,
+      9,
+      11,
+      15,
+      7,
+      2,
+      13
+    ],
+    "ticketMode": "auto",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          1,
+          14,
+          9
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          11,
+          15
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          7
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          2
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          13
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "hippodrome": "Parislongchamp",
+    "cloture": "2026-10-05T23:12:52.363Z",
+    "scores": [
+      {
+        "num": 1,
+        "nom": "DARYZ",
+        "global": 6.59,
+        "forme": 5.6,
+        "dist": 7.66,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 2,
+        "nom": "SADDADD",
+        "global": 6.42,
+        "forme": 4.59,
+        "dist": 7.93,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 3,
+        "nom": "CHESTNUT ROCKET",
+        "global": 6.31,
+        "forme": 1.99,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 4,
+        "nom": "ADMIRE TERRA",
+        "global": 5.57,
+        "forme": 2.42,
+        "dist": 6.22,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 5,
+        "nom": "MEISHO TABARU",
+        "global": 6.25,
+        "forme": 3.59,
+        "dist": 8.14,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 6,
+        "nom": "ARROW EAGLE",
+        "global": 5.73,
+        "forme": 2.83,
+        "dist": 6.52,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 7,
+        "nom": "BAY CITY ROLLER",
+        "global": 6.7,
+        "forme": 5.02,
+        "dist": 8.77,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 8,
+        "nom": "MINNIE HAUK",
+        "global": 6.15,
+        "forme": 2.48,
+        "dist": 8.77,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 9,
+        "nom": "KALPANA",
+        "global": 7.2,
+        "forme": 6.04,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 10,
+        "nom": "FRIENDLY SOUL",
+        "global": 6.18,
+        "forme": 4.15,
+        "dist": 7.25,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 11,
+        "nom": "VARANDIR",
+        "global": 6.86,
+        "forme": 4.75,
+        "dist": 9.73,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 12,
+        "nom": "BENVENUTO CELLINI",
+        "global": 6.45,
+        "forme": 2.65,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 13,
+        "nom": "BRIGHT LIGHT",
+        "global": 6.47,
+        "forme": 2.94,
+        "dist": 9.78,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 14,
+        "nom": "MALTESE CROSS",
+        "global": 6.83,
+        "forme": 4.35,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 15,
+        "nom": "THUNDERING ON",
+        "global": 6.31,
+        "forme": 3.81,
+        "dist": 8.18,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 16,
+        "nom": "DIAMOND NECKLACE",
+        "global": 6.3,
+        "forme": 5.75,
+        "dist": 6.22,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": false
+      }
+    ]
+  },
+  "2026-10-03": {
+    "date": "2026-10-03",
+    "titre": "Qatar Prix de la Place des Vosges — ParisLongchamp R1C4",
+    "synthese": [
+      4,
+      13,
+      9,
+      8,
+      11,
+      6,
+      3,
+      18,
+      5,
+      16,
+      1,
+      2,
+      17,
+      7,
+      14,
+      12,
+      15
+    ],
+    "fois": [
+      40,
+      39,
+      34,
+      34,
+      31,
+      29,
+      24,
+      23,
+      18,
+      12,
+      11,
+      9,
+      8,
+      6,
+      6,
+      5,
+      4
+    ],
+    "arrivee": [
+      4,
+      5,
+      8,
+      17,
+      3
+    ],
+    "nb": 17,
+    "source": "pronostics-turf.info",
+    "collecte": "2026-10-03T16:04:24.544Z",
+    "note": "reconstitue a la main - la page avait ete overwritten par une collecte vide",
+    "hippodrome": "PARISLONGCHAMP",
+    "prix": "QATAR PRIX DE LA PLACE DES VOSGES",
+    "courseId": "2026-10-03_R1_C4",
+    "discipline": "Plat",
+    "distance": 2500,
+    "nbPartants": 18,
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "ticket": [
+      4,
+      13,
+      9,
+      3,
+      18,
+      5,
+      1,
+      14
+    ],
+    "found": true,
+    "placeholder": false,
+    "ticketMode": "defaut",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          4,
+          13,
+          9
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          3,
+          18
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          5
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          1
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          14
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "cloture": "2026-10-04T23:13:11.153Z",
+    "scores": [
+      {
+        "num": 1,
+        "nom": "LE LAVANDOU",
+        "global": 4.51,
+        "forme": 1.31,
+        "dist": 3.12,
+        "piste": 6.27,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 2,
+        "nom": "ANNABEL'S GHOST",
+        "global": 4.03,
+        "forme": 1.15,
+        "dist": 0.91,
+        "piste": 6.51,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 3,
+        "nom": "GOLDEN WEAVER",
+        "global": 6.21,
+        "forme": 4.45,
+        "dist": 7.67,
+        "piste": 6.27,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 4,
+        "nom": "REMBRAND TO GO",
+        "global": 6.92,
+        "forme": 6.37,
+        "dist": 8.39,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 5,
+        "nom": "SHRIHARA",
+        "global": 5.96,
+        "forme": 2.94,
+        "dist": 8.04,
+        "piste": 6.32,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 6,
+        "nom": "MISTER GATZ",
+        "global": 5.69,
+        "forme": 1.14,
+        "dist": 8.22,
+        "piste": 6.78,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 7,
+        "nom": "MON RICIN",
+        "global": 4.63,
+        "forme": 1.23,
+        "dist": 3.72,
+        "piste": 6.27,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 8,
+        "nom": "COLGAN SENORA",
+        "global": 4.52,
+        "forme": 0.85,
+        "dist": 3,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 9,
+        "nom": "NITY GALESTE",
+        "global": 5.38,
+        "forme": 2.83,
+        "dist": 5.55,
+        "piste": 6.27,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 10,
+        "nom": "ARNAY LE DUC",
+        "global": 5.76,
+        "forme": 3.99,
+        "dist": 5.5,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 11,
+        "nom": "SHARPSHOOT",
+        "global": 6.14,
+        "forme": 8.22,
+        "dist": 3,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 12,
+        "nom": "PAOLINO",
+        "global": 5.18,
+        "forme": 1.56,
+        "dist": 5.49,
+        "piste": 6.78,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 13,
+        "nom": "EBIYAR",
+        "global": 5.1,
+        "forme": 3.54,
+        "dist": 3.54,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 14,
+        "nom": "I GOT RHYTHM",
+        "global": 6.21,
+        "forme": 5.04,
+        "dist": 7.11,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 15,
+        "nom": "PINK MONDAY",
+        "global": 5.2,
+        "forme": 0.33,
+        "dist": 6.86,
+        "piste": 6.73,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 16,
+        "nom": "ZELKER",
+        "global": 6.23,
+        "forme": 2.69,
+        "dist": 9.22,
+        "piste": 6.66,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 17,
+        "nom": "KING TREZY",
+        "global": 5.78,
+        "forme": 0.84,
+        "dist": 8.99,
+        "piste": 6.73,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 18,
+        "nom": "DEMPY",
+        "global": 4.9,
+        "forme": 1.81,
+        "dist": 4.07,
+        "piste": 6.66,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      }
+    ]
+  },
+  "2026-10-02": {
+    "date": "2026-10-02",
+    "hippodrome": "VINCENNES",
+    "prix": "PRIX LUDOVICA",
+    "courseId": "2026-10-02_R1_C4",
+    "discipline": "ATTELE",
+    "distance": 2700,
+    "nbPartants": 14,
+    "synthese": [
+      4,
+      6,
+      13,
+      9,
+      11,
+      5,
+      10,
+      3,
+      12,
+      14,
+      8,
+      7,
+      2,
+      1
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "ticket": [
+      4,
+      6,
+      13,
+      10,
+      12,
+      14,
+      8,
+      2
+    ],
+    "arrivee": [
+      4,
+      11,
+      13,
+      12,
+      7
+    ],
+    "source": "utilisateur",
+    "nb": 14,
+    "found": true,
+    "collecte": "2026-10-03T03:02:51.835Z",
+    "note": "3/5 — perdus n11 (P5 de G2) et n7 (P12 de G4)",
+    "placeholder": false,
+    "ticketMode": "defaut",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          4,
+          6,
+          13
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          10,
+          12
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          14
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          2
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "cloture": "2026-10-03T03:34:40.791Z",
+    "scores": [
+      {
+        "num": 1,
+        "nom": "JADE DE NAVARY",
+        "global": 5.33,
+        "forme": 0.91,
+        "dist": 6.62,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 2,
+        "nom": "JUNIOR STEED",
+        "global": 6.24,
+        "forme": 3.59,
+        "dist": 8.1,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 3,
+        "nom": "JYTRACE DE HOUELLE",
+        "global": 5.39,
+        "forme": 0.56,
+        "dist": 7.28,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 4,
+        "nom": "JAIFA DE L'ITON",
+        "global": 5.56,
+        "forme": 3.97,
+        "dist": 4.61,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 5,
+        "nom": "JOHORE",
+        "global": 5,
+        "forme": 1,
+        "dist": 5.03,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 6,
+        "nom": "JAZZ D'OURVILLE",
+        "global": 5.53,
+        "forme": 4.54,
+        "dist": 3.94,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 7,
+        "nom": "JOB DES LOUANGES",
+        "global": 5.71,
+        "forme": 3.2,
+        "dist": 6.06,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 8,
+        "nom": "JACKSON D'ARC",
+        "global": 5.8,
+        "forme": 3.94,
+        "dist": 5.72,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 9,
+        "nom": "JOG JELOCA",
+        "global": 6.58,
+        "forme": 5.56,
+        "dist": 7.67,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 10,
+        "nom": "JUDOPOCK",
+        "global": 6.3,
+        "forme": 2.9,
+        "dist": 9.05,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 11,
+        "nom": "JEWEL DE BANVILLE",
+        "global": 5.78,
+        "forme": 0.63,
+        "dist": 8.98,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 12,
+        "nom": "JOEY DU NOYER",
+        "global": 5.9,
+        "forme": 2.54,
+        "dist": 7.62,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 13,
+        "nom": "JOHNNY MIX",
+        "global": 5.71,
+        "forme": 2.25,
+        "dist": 7.03,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 14,
+        "nom": "JERICHO",
+        "global": 5.7,
+        "forme": 2.15,
+        "dist": 7.07,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      }
+    ]
+  },
+  "2026-10-01": {
+    "date": "2026-10-01",
+    "hippodrome": "AUTEUIL",
+    "prix": "PRIX CEREALISTE",
+    "courseId": "2026-10-01_R1_C1",
+    "discipline": "HAIE",
+    "distance": 3600,
+    "nbPartants": 15,
+    "synthese": [
+      1,
+      3,
+      4,
+      14,
+      12,
+      7,
+      13,
+      9,
+      10,
+      2,
+      6,
+      11,
+      15,
+      8,
+      5
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ticket": [
+      1,
+      3,
+      4,
+      7,
+      13,
+      9,
+      15,
+      5
+    ],
+    "arrivee": [
+      15,
+      3,
+      14,
+      1,
+      9
+    ],
+    "source": "utilisateur",
+    "nb": 15,
+    "found": true,
+    "collecte": "2026-10-03T02:33:32.280Z",
+    "note": "4/5 — perdu n14 (P4 de G1, coupé par le quota 3/4)",
+    "ticketSource": "auto",
+    "scores": [
+      {
+        "num": 1,
+        "nom": "WEBCAM",
+        "global": 5.97,
+        "forme": 1.81,
+        "dist": 8.66,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 2,
+        "nom": "SPECIALS ONE",
+        "global": 5.37,
+        "forme": 2.75,
+        "dist": 4.99,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 3,
+        "nom": "GREY FIGHTER",
+        "global": 6.32,
+        "forme": 2.52,
+        "dist": 9.51,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 4,
+        "nom": "MR DIAFOIRUS",
+        "global": 5.98,
+        "forme": 1.34,
+        "dist": 9.15,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 5,
+        "nom": "KUCHARSKY",
+        "global": 5.27,
+        "forme": 2.47,
+        "dist": 4.78,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 6,
+        "nom": "LATINO LA NOVERIE",
+        "global": 6.12,
+        "forme": 4.54,
+        "dist": 6.58,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 7,
+        "nom": "EXCITING HUNT",
+        "global": 6.04,
+        "forme": 2.01,
+        "dist": 8.76,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 8,
+        "nom": "TITI DE PARIS",
+        "global": 5.62,
+        "forme": 0.78,
+        "dist": 8.1,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 9,
+        "nom": "LACRYMA CHRISTI",
+        "global": 6.4,
+        "forme": 4.72,
+        "dist": 7.71,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 10,
+        "nom": "KADOVER",
+        "global": 6.07,
+        "forme": 3.12,
+        "dist": 7.79,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 11,
+        "nom": "LUCKY NONANTAIS",
+        "global": 7.42,
+        "forme": 7.82,
+        "dist": 9.2,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 12,
+        "nom": "LE COLOMBAR",
+        "global": 5.71,
+        "forme": 1.18,
+        "dist": 8.1,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 13,
+        "nom": "LILETTE",
+        "global": 5.52,
+        "forme": 0.77,
+        "dist": 7.62,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      },
+      {
+        "num": 14,
+        "nom": "LUTECE ALLEN",
+        "global": 6.31,
+        "forme": 4.35,
+        "dist": 7.88,
+        "piste": 6.73,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          true,
+          true
+        ],
+        "pris": false
+      },
+      {
+        "num": 15,
+        "nom": "LIPRIKA D'ANJOU",
+        "global": 5.33,
+        "forme": 0.66,
+        "dist": 6.89,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 6,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "pris": true
+      }
+    ]
+  }
+}

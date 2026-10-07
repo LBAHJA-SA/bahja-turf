@@ -283,6 +283,33 @@ async function cloturer(date) {
     nbPartants: course.nbPartants, discipline: course.discipline, distance: course.distance,
     hippodrome: course.hippodrome || avant.hippodrome || avant.race?.hippodrome || null,
     courseId: course.courseId, arrivee: course.arrivee, cloture: new Date().toISOString() }
+  /* 🔒 LE GEL AU MOMENT DE LA CLÔTURE : si la ticket n'a pas été posée le jour
+   *    J (le moteur n'était pas prêt / pas de carrière), on la fige MAINTENANT
+   *    à partir du moteur avant d'écrire l'arrivée. Sinon la course est
+   *    classée SANS ticket (pas de x/5) — ce qui est arrivé le 06/10.
+   *    Si un ticket existe déjà (choix du job du matin), ON NE Y TOUCHE PAS. */
+  if (!Array.isArray(avant.ticket) || !avant.ticket.length) {
+    try {
+      const t = await construireTicket(
+        avant.synthese, course, lire(F_CAR, {})[date] || null, avant.courseId || course.courseId
+      )
+      const fige = figerTicket(avant, t)
+      if (fige.ticket && fige.ticket.length) {
+        rec.ticket = fige.ticket
+        rec.ticketMode = fige.ticketMode
+        rec.groupes = fige.groupes
+        rec.ticketSource = fige.ticketSource
+        rec.surprises = fige.surprises
+        rec.ticketPoseLe = fige.ticketPoseLe
+        for (const l of fige.log || []) log(l)
+        log(`  ${date}  ticket figé à la clôture : ${fige.ticket.join(' ')}  (${fige.ticketMode})`)
+      } else {
+        log(`  ${date}  pas de ticket à la clôture (moteur indisponible)`)
+      }
+    } catch (e) {
+      log(`  ${date}  construction du ticket impossible : ${e.message}`)
+    }
+  }
   db[date] = rec
   const tri = {}
   for (const k of Object.keys(db).sort().reverse()) tri[k] = db[k]
