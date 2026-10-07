@@ -1371,13 +1371,23 @@ export function computeStats(records) {
     //   dont un arrivant dépassait la Synthèse étaient JETÉES (04/10 : 4 valeurs).
     //   numéro → rang presse (P1, P2…), manquants à la suite par n° croissant.
     const placeOfNum = {}
+    // ⚠ LE P EST CELUI DU CARNET, PAS LE RANG DE LA SYNTHÈSE.
+    //   La grille place les PAIRS en haut (P1, P3, P5…) et les IMPAIRS en
+    //   bas (P2, P4, P6…), dans l'ordre de la Récapitulative — la règle du
+    //   carnet (§11.13). Lire « le n-ième cité » ici donnait des P différents
+    //   de ceux de la grille : le tableau Statistiques décrivait une autre
+    //   grille que celle affichée.
     const synthe = (rec.synthese || []).filter(Number.isFinite)
-    synthe.forEach((num, i) => { placeOfNum[num] = i + 1 })
+    const pairs = synthe.filter((n) => n % 2 === 0)
+    const impairs = synthe.filter((n) => n % 2 !== 0)
+    pairs.forEach((num, i) => { placeOfNum[num] = 2 * i + 1 })     // P1, P3, P5…
+    impairs.forEach((num, i) => { placeOfNum[num] = 2 * i + 2 })   // P2, P4, P6…
     // les partants non cités occupent les places suivantes, par n° croissant
     const manquants = (rec.runners || [])
-      .filter((n) => Number.isFinite(n) && synthe.indexOf(n) < 0)
+      .filter((n) => Number.isFinite(n) && placeOfNum[n] == null)
       .sort((a, b) => a - b)
-    manquants.forEach((num, k) => { placeOfNum[num] = synthe.length + 1 + k })
+    const apres = Math.max(0, ...Object.values(placeOfNum))
+    manquants.forEach((num, k) => { placeOfNum[num] = apres + 1 + k })
 
     const pl = rec.arrivee.slice(0, 5).map((n) => placeOfNum[n]).filter((r) => r != null)
     if (pl.length < 5) continue
