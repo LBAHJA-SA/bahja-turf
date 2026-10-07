@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   fetchRecapSite, fetchArchiveDisque,
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
-  scorePhysique, filtres,
+  scorePhysique, filtres, ordonnerParStats,
   saveArchive, listArchive, deleteArchive, attachResult, attachTicket,
   loadCarriere, syncDepuisDisque,
   clearArchive,
@@ -535,11 +535,16 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   //   la 2e, celui qui sort le plus souvent 2e… Ni la presse, ni les cotes, ni
   //   l'ordre des cases du carnet. → `ordonnerParStats` (appelé par remplirGrille).
   //   ⚠ Un ticket ARCHIVÉ garde son ordre d'origine : il est intouchable (§13.3).
+  /* ⚠ LE TICKET ARCHIVÉ EST INTOCABLE (§13.3) — mais SEULEMENT l'ORDRE
+   *  change avec l'archive. Les MÊMS chevaux, remis dans l'ordre que les
+   *  statistiques donnent aujourd'hui (§17.2). Sans cela la page resterait
+   *  bloquée sur un ordre de juin alors que la méthode a changé.
+   *  Le premier ticket figé reste : ce qu'on fige, c'est la SÉLECTION. */
   const ticket = useMemo(() => {
-    if (ticketManuel && ticketManuel.length) return ticketManuel
-    if (!rempli) return []
-    return rempli.ticket
-  }, [rempli, ticketManuel])
+    if (!rempli) return ticketManuel && ticketManuel.length ? ticketManuel : []
+    const base = (ticketManuel && ticketManuel.length) ? ticketManuel : rempli.ticket
+    return ordonnerParStats(base, grille, stats, cotes)
+  }, [rempli, ticketManuel, grille, stats, cotes])
 
   // ⚠ L'AUTO-FIGEAGE : dès que le moteur produit un ticket, on l'écrit dans
   //   l'archive. L'archive doit montrer le ticket DÈS LE PREMIER ANALYSE —
