@@ -239,7 +239,11 @@ function Lecture({ detail }) {
                       <td style={S.td}>{p.driver || p.jockey || '—'}</td>
                       <td style={S.td}>{p.entraineur || p.trainer || '—'}</td>
                       <td style={{ ...S.td, fontFamily: TE.mono }}>{p.poids ?? p.def ?? '—'}</td>
-                      <td style={{ ...S.td, fontFamily: TE.mono, fontWeight: 700 }}>{p.cote ?? p.cote_pmu ?? '—'}</td>
+                      {/* ⚠ LA COTE VA DE TROIS SOURCES : `cote` (reu.php temps réel, les
+                          courses simples), `coteRef` (la cote de référence —
+                          c'est la SEULE qui existe pour les courses de Suède,
+                          HH, GB…), `cote_pmu` (les archives du laboratoire). */}
+                      <td style={{ ...S.td, fontFamily: TE.mono, fontWeight: 700 }}>{p.cote ?? p.coteRef ?? p.cote_pmu ?? '—'}</td>
                       <td style={{ ...S.td, fontFamily: TE.mono }}>{p.gains ?? p.gain ?? '—'}</td>
                       <td style={{ ...S.td, fontFamily: TE.mono, fontSize: 11 }}>{p.nombreCourses ?? '—'}</td>
                       <td style={{ ...S.td, fontFamily: TE.mono, fontWeight: gagne ? 800 : 500, color: gagne ? '#15803d' : '#a8a29e' }}>
