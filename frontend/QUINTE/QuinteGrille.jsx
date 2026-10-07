@@ -849,7 +849,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
               <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
                 <thead>
                   <tr style={s.hdr}>
-                    {['Date', 'Hippodrome', 'Type', 'Distance', 'Synthèse', 'Arrivée', 'Ticket', 'Ticket posé le', 'Bilan', 'Enregistré', '']
+                    {['Date', 'Hippodrome', 'Type', 'Distance', 'Synthèse', 'Arrivée', 'Ticket', 'Posé le', 'Bilan', '']
                       .map((h) => <th key={h} style={s.th}>{h}</th>)}
                   </tr>
                 </thead>
@@ -869,17 +869,16 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         </td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>{(a.arrivee || []).join('-') || '—'}</td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>{(a.ticket || []).join(' ') || '—'}</td>
-                        {/* ⭐ QUAND le ticket a été POSÉ (le gel), pas quand la page
-                            a enregistré la Synthèse. Ce sont deux moments
-                            différents : le ticket se fige à 02 h 15, la
-                            Synthèse peut être enregistrée à 17 h 05. */}
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 10, color: a.ticketPoseLe ? SK.accent : '#94a3b8' }}>
+                        {/* ⭐ UN SEUL TEMPS : l'heure où le ticket a été POSÉ (le gel).
+                            Pas l'heure d'enregistrement de la Synthèse — ce
+                            sont deux moments différents, et n'en afficher
+                            qu'un évite toute ambiguïté. */}
+                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11, color: a.ticketPoseLe ? SK.accent : '#94a3b8' }}>
                           {a.ticketPoseLe ? a.ticketPoseLe.slice(11, 16) : '—'}
                         </td>
                         <td style={{ ...s.td, fontWeight: 700, color: p === 5 ? '#15803d' : p > 0 ? '#a16207' : '#94a3b8' }}>
                           {a.arrivee ? p + '/5' : '—'}
                         </td>
-                        <td style={{ ...s.td, fontSize: 11, color: '#94a3b8' }}>{a.savedAt?.slice(0, 16).replace('T', ' ')}</td>
                         <td style={s.td}>
                           <button onClick={async () => { await deleteArchive(a.date); rafraichirArchive() }}
                             style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#b91c1c' }}>✕</button>
