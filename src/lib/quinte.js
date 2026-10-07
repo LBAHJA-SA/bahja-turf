@@ -1097,6 +1097,12 @@ export async function syncDepuisDisque() {
       // 🔒 le ticket LOCAL gagne toujours : premier figé ne bouge plus,
       // même si le disque (job) apporte un autre ticket plus tard.
       ticket: local.ticket || (!synthChange ? rec.ticket : null) || null,
+      // ⚠ la MÉTA du gel (ticketSource, ticketPoseLe) est aussi locale :
+      //   si le disque ne la contient pas (elle vient de l'auto-figeage
+      //   côté page, pas du job), elle doit survivre au sync.
+      ticketSource: rec.ticketSource || local.ticketSource || null,
+      ticketPoseLe: rec.ticketPoseLe || local.ticketPoseLe || null,
+      ticketMode: rec.ticketMode || local.ticketMode || null,
       savedAt: local.savedAt || rec.collecte || null,
       syntheseChangee: synthChange ? true : (local.syntheseChangee || false),
     }
@@ -1227,7 +1233,12 @@ export async function attachTicket(date, ticket) {
   if (!all[date]) return null
   if (all[date].ticket && all[date].ticket.length) return all[date]
   if (!ticket || !ticket.length) return all[date]
-  all[date] = { ...all[date], ticket: [...ticket] }
+  all[date] = {
+    ...all[date],
+    ticket: [...ticket],
+    ticketSource: all[date].ticketSource || 'auto',
+    ticketPoseLe: all[date].ticketPoseLe || new Date().toISOString(),
+  }
   ecrireTout(all)
   return all[date]
 }

@@ -1,0 +1,825 @@
+{
+ "2026-10-01_R1_C1": {
+  "source": "equidia.fr",
+  "hippodrome": null,
+  "distance": null,
+  "discipline": null,
+  "favori": 3,
+  "cotes": [
+   {
+    "num": 3,
+    "nom": "GREY FIGHTER",
+    "cote": 4.1,
+    "ouverture": 4.9,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "MR DIAFOIRUS",
+    "cote": 6.7,
+    "ouverture": 6,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "WEBCAM",
+    "cote": 6.8,
+    "ouverture": 7.8,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "LILETTE",
+    "cote": 7.9,
+    "ouverture": 8.4,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 435226,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "EXCITING HUNT",
+    "cote": 10,
+    "ouverture": 14,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "LIPRIKA D'ANJOU",
+    "cote": 10,
+    "ouverture": 16,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 435226,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "LE COLOMBAR",
+    "cote": 11,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 435226,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "LUTECE ALLEN",
+    "cote": 15,
+    "ouverture": 11,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 435226,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "LACRYMA CHRISTI",
+    "cote": 24,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "LATINO LA NOVERIE",
+    "cote": 38,
+    "ouverture": 26,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "KUCHARSKY",
+    "cote": 46,
+    "ouverture": 29,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "LUCKY NONANTAIS",
+    "cote": 46,
+    "ouverture": 28,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 435226,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "SPECIALS ONE",
+    "cote": 61,
+    "ouverture": 40,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "KADOVER",
+    "cote": 64,
+    "ouverture": 37,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "TITI DE PARIS",
+    "cote": 65,
+    "ouverture": 37,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T13:58:00+02:00"
+   }
+  ]
+ },
+ "2026-10-02_R1_C4": {
+  "source": "equidia.fr",
+  "hippodrome": null,
+  "distance": null,
+  "discipline": null,
+  "favori": 4,
+  "cotes": [
+   {
+    "num": 4,
+    "nom": "JAIFA DE L'ITON",
+    "cote": 3.3,
+    "ouverture": 5.1,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "JEWEL DE BANVILLE",
+    "cote": 5.1,
+    "ouverture": 6.1,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 442195,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "JAZZ D'OURVILLE",
+    "cote": 7.3,
+    "ouverture": 6.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "JOHNNY MIX",
+    "cote": 8.1,
+    "ouverture": 6.7,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 442195,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "JOG JELOCA",
+    "cote": 9.4,
+    "ouverture": 9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "JOHORE",
+    "cote": 14,
+    "ouverture": 14,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "JERICHO",
+    "cote": 17,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 442195,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "JYTRACE DE HOUELLE",
+    "cote": 23,
+    "ouverture": 18,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "JOEY DU NOYER",
+    "cote": 25,
+    "ouverture": 18,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 442195,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "JUDOPOCK",
+    "cote": 31,
+    "ouverture": 23,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "JOB DES LOUANGES",
+    "cote": 34,
+    "ouverture": 25,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "JUNIOR STEED",
+    "cote": 56,
+    "ouverture": 38,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "JACKSON D'ARC",
+    "cote": 75,
+    "ouverture": 47,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "JADE DE NAVARY",
+    "cote": 113,
+    "ouverture": 77,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T20:15:00+02:00"
+   }
+  ]
+ },
+ "2026-10-03_R1_C4": {
+  "source": "equidia.fr",
+  "hippodrome": null,
+  "distance": null,
+  "discipline": null,
+  "favori": 4,
+  "cotes": [
+   {
+    "num": 4,
+    "nom": "REMBRAND TO GO",
+    "cote": 3.8,
+    "ouverture": 4.5,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:17:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "COLGAN SENORA",
+    "cote": 7.6,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:17:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "EBIYAR",
+    "cote": 8,
+    "ouverture": 7.9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 571139,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "SHARPSHOOT",
+    "cote": 10,
+    "ouverture": 12,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 571139,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 18,
+    "nom": "DEMPY",
+    "cote": 10,
+    "ouverture": 8.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 571139,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "SHRIHARA",
+    "cote": 15,
+    "ouverture": 12,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 571139,
+    "heure": "2026-10-05T15:17:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "MISTER GATZ",
+    "cote": 16,
+    "ouverture": 14,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "NITY GALESTE",
+    "cote": 17,
+    "ouverture": 14,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 17,
+    "nom": "KING TREZY",
+    "cote": 23,
+    "ouverture": 28,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 571139,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "ZELKER",
+    "cote": 24,
+    "ouverture": 20,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 571139,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "GOLDEN WEAVER",
+    "cote": 33,
+    "ouverture": 28,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:17:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "PINK MONDAY",
+    "cote": 33,
+    "ouverture": 46,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 571139,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "I GOT RHYTHM",
+    "cote": 35,
+    "ouverture": 34,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 571139,
+    "heure": "2026-10-05T15:16:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "MON RICIN",
+    "cote": 36,
+    "ouverture": 29,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:17:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "ANNABEL'S GHOST",
+    "cote": 39,
+    "ouverture": 31,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:17:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "LE LAVANDOU",
+    "cote": 49,
+    "ouverture": 36,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:17:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "ARNAY LE DUC",
+    "cote": 64,
+    "ouverture": 39,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:17:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "PAOLINO",
+    "cote": 67,
+    "ouverture": 40,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T15:17:00+02:00"
+   }
+  ]
+ },
+ "2026-10-04_R1_C5": {
+  "source": "equidia.fr",
+  "hippodrome": null,
+  "distance": null,
+  "discipline": null,
+  "favori": 1,
+  "cotes": [
+   {
+    "num": 1,
+    "nom": "DARYZ",
+    "cote": 2.2,
+    "ouverture": 2.3,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "KALPANA",
+    "cote": 6.6,
+    "ouverture": 7.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "MALTESE CROSS",
+    "cote": 8.9,
+    "ouverture": 8.4,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 2202391,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "THUNDERING ON",
+    "cote": 10,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 2202391,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "VARANDIR",
+    "cote": 14,
+    "ouverture": 14,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 2202391,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "DIAMOND NECKLACE",
+    "cote": 14,
+    "ouverture": 14,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 2153339,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "BENVENUTO CELLINI",
+    "cote": 22,
+    "ouverture": 27,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 2202391,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "FRIENDLY SOUL",
+    "cote": 27,
+    "ouverture": 26,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "MEISHO TABARU",
+    "cote": 29,
+    "ouverture": 17,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "MINNIE HAUK",
+    "cote": 33,
+    "ouverture": 28,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "BAY CITY ROLLER",
+    "cote": 38,
+    "ouverture": 36,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "SADDADD",
+    "cote": 57,
+    "ouverture": 49,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "ADMIRE TERRA",
+    "cote": 61,
+    "ouverture": 36,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "ARROW EAGLE",
+    "cote": 103,
+    "ouverture": 57,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "BRIGHT LIGHT",
+    "cote": 105,
+    "ouverture": 64,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "CHESTNUT ROCKET",
+    "cote": 134,
+    "ouverture": 76,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T16:08:00+02:00"
+   }
+  ]
+ },
+ "2026-10-05_R1_C1": {
+  "source": "equidia.fr",
+  "hippodrome": null,
+  "distance": null,
+  "discipline": null,
+  "favori": 9,
+  "cotes": [
+   {
+    "num": 9,
+    "nom": "BLACK HEUVELLAND",
+    "cote": 3.1,
+    "ouverture": 3.1,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "TAURUS CROWN",
+    "cote": 6.1,
+    "ouverture": 6.1,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "SOKRATES",
+    "cote": 6.7,
+    "ouverture": 6.7,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "LORD ON WAY",
+    "cote": 7.1,
+    "ouverture": 7.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "LONGWOOD D'HERIPRE",
+    "cote": 8.7,
+    "ouverture": 8.7,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "L'AS DES ISLES",
+    "cote": 12,
+    "ouverture": 12,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "OLIVER SCHERMER",
+    "cote": 17,
+    "ouverture": 17,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "LUCIUS DE PUCH",
+    "cote": 26,
+    "ouverture": 26,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "LORD SUN DRALIAM",
+    "cote": 40,
+    "ouverture": 40,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "FRISEE KB FONT",
+    "cote": 44,
+    "ouverture": 44,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "FABIUS ORS",
+    "cote": 50,
+    "ouverture": 50,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "LEAD ME ON",
+    "cote": 56,
+    "ouverture": 56,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "L'INTOUCHABLE",
+    "cote": 61,
+    "ouverture": 61,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 14162,
+    "heure": "2026-10-05T09:00:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "LOOK DE VALAILLES",
+    "cote": 96,
+    "ouverture": 96,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-05T09:00:00+02:00"
+   }
+  ]
+ },
+ "2026-10-05_R2_C7": {
+  "source": "equidia.fr",
+  "hippodrome": null,
+  "distance": null,
+  "discipline": null,
+  "favori": null,
+  "cotes": []
+ }
+}

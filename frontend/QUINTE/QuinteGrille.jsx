@@ -288,7 +288,7 @@ export default function QuinteGrille() {
       //   (arrivee connue). Tant qu'elle n'a pas couru, c'est le ticket LIVE
       //   qu'on joue : le marche bouge, l'archive est un instantane de 08h45
       //   ou 20h30 qui ne vaut plus rien (\u00a713.3 regle 5).
-      if (rec?.ticket?.length && rec?.arrivee?.length) setTicketManuel(rec.ticket)
+      if (rec?.ticket?.length) setTicketManuel(rec.ticket)
       if (rec?.synthese?.length) {
         j = {
           date: d, found: true, race: rec.race, source: rec.source || 'archive locale',
@@ -537,6 +537,31 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
     if (!rempli) return []
     return rempli.ticket
   }, [rempli, ticketManuel])
+
+  // ⚠ L'AUTO-FIGEAGE : dès que le moteur produit un ticket, on l'écrit dans
+  //   l'archive. L'archive doit montrer le ticket DÈS LE PREMIER ANALYSE —
+  //   pas seulement après un clic « Rafraîchir ». `attachTicket` ne fige que
+  //   le PREMIER (un ticket déjà posé est intouchable, §13.3).
+  //
+  //   Puis on recharge le ticket FIGÉ dans `ticketManuel` : dès lors l'affichage
+  //   lit l'archive, pas le marché — le marché peut bouger, la ticket reste.
+  const ticketAuto = useMemo(() => {
+    if (ticketManuel && ticketManuel.length) return null   // déjà figé
+    if (!rempli || !rempli.ticket.length) return null
+    return rempli.ticket
+  }, [rempli, ticketManuel])
+
+  useEffect(() => {
+    if (!ticketAuto || !ticketAuto.length) return
+    let annule = false
+    ;(async () => {
+      const res = await attachTicket(date, [...ticketAuto])
+      if (annule || !res) return
+      setArchive(await listArchive())
+      if (res.ticket && res.ticket.length) setTicketManuel(res.ticket)
+    })()
+    return () => { annule = true }
+  }, [date, ticketAuto])
 
   // ⚠ la page ne SAUVEGARDE aucun ticket : c'est le job (Quinte AM/PM, auto-carrière)
   //   qui construit et archive le ticket physique. Ici on ne fait qu'afficher.
