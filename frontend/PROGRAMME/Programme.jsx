@@ -74,17 +74,20 @@ export default function Programme(){
   const reunionsAffichees = (()=> {
     // ⚠ QUINTÉ FRANCE SEULEMENT : le Maroc n'a plus sa page.
     const HIPPO_MA = /MEKNESS|KHEMISSET|MARRAKECH|CASABLANCA|RABAT|TANGER|LARACHE|OUZZANE|BERKANE|ANFA|SIDI ?MOUSA|SOUAKA|ALGER/i
-    /* ⭐ LES RÉUNIONS FRANÇAISES + LE MAGHREB.
-     *  reu.php donne R1→R7 (tous pays) ; R9 (Khemisset, Maroc) vient du
-     *  complément. R14/R16 (autres sites) ne sont pas pris : leur numéro de
-     *  réunion est LOCAL au site, il ne correspond à aucun fichier d'archive
-     *  et le lien mènerait à « course indisponible ».
-     *  Le pays voyage dans l'URL : `?pays=…` est obligatoire, y compris pour
-     *  la France, car le fichier d'archive porte le suffixe du pays. */
+    /* ⭐ TOUTES LES RÉUNIONS DE reu.php + LE MAGHREB.
+     *  reu.php donne R1→R7 : Enghien (FR), Jarlsberg (NO), Chantilly (FR),
+     *  Pont-de-Vivaux (FR), Kempton (GB), Happy Valley (HK), Solvalla (SE).
+     *  R9 (Khemisset, MA) vient du complément. On ne filtre plus sur le pays :
+     *  le 07/10 le filtre « FR » cachait 4 réunions sur 8, soit 33 courses.
+     *  Le pays voyage dans l'URL (`?pays=…`), car le fichier d'archive porte
+     *  le suffixe du pays : `_NORV`, `_SU`, `_HONG`, `_ROYAUME`, `_MAROC`. */
     const base = meetings
       .filter(m => {
         const p = String(m.pays || m.country || '').toUpperCase()
-        return p.startsWith('FR') || p === 'MA' || p === 'MAROC'
+        // R14/R16 : numéros locaux à un AUTRE site (Horseshoe, Belmont).
+        // Aucun fichier d'archive ne porte ces numéros → liens morts.
+        const rNum = Number(String(m.num ?? '').replace(/\D/g, ''))
+        return !(rNum === 14 || rNum === 16)
       })
       .map(m=> ({
         ...m,
