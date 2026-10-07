@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
-import { meetingsDepuisCasacourses, slugify, heureGMT } from '../../backend/PROGRAMME/donnees.js'
+import { meetingsDepuisReu, slugify, heureGMT } from '../../backend/PROGRAMME/donnees.js'
 
 /* ── les 8 paris, couleurs duPMU (même ordre que la grille officielle) ── */
 const PARIS = [
@@ -52,128 +52,23 @@ export default function Programme(){
 
   useEffect(()=>{
     setLoading(true); setError(null)
-    // SEULE SOURCE : pro.casacourses.com. Bahja-TURF ne depend d'aucun
-    // autre backend - l'API bahja-pmu a ete retiree le 05/10/2026.
-    meetingsDepuisCasacourses(date).then(async (meetingsCC)=>{
-      let ms = meetingsCC||[]
-      setMeetings(ms); setLoading(false)   // rendu immédiat, les correctifs Sorec arrivent ensuite
-
-      // ===== Quinté réel : casacourses (sorec_quinte) + e-sorec (bets.premium) =====
-      const toksQ = s=> new Set(String(s||'').toUpperCase().split(/[^A-Z0-9]+/).filter(t=>t.length>=4))
-      const sameHippoQ = (a,b)=>{
-        const ta=toksQ(a), tb=toksQ(b)
-        if(!ta.size||!tb.size) return String(a||'').toLowerCase().trim()===String(b||'').toLowerCase().trim()
-        for(const t of ta) if(tb.has(t)) return true
-        return false
-      }
-      const fetchJson = async (urls, ms=9000) => {
-        for(const u of urls){
-          try{
-            const r = await axios.get(u,{timeout:ms, headers:{'Accept':'application/json'}})
-            const d = r.data?.contents ? JSON.parse(r.data.contents) : r.data
-            if(d) return d
-          }catch(e){}
-        }
-        return null
-      }
-      const tryUrlsQ = (u) => [
-        u,
-        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-      ]
-
-      // Priorite : casacourses d'abord (donnees plus a jour), puis e-sorec en complement
-      const ccData = await fetchJson(tryUrlsQ(`https://pro.casacourses.com/api/programme?date=${date}`))
-      let esData = null
-
-      esData = await fetchJson(tryUrlsQ(`https://e-sorec.ma/api/meetings?date=${date}`))
-
-      // --- casacourses ---
-      const ccQ = []
-      ;(ccData?.meetings||[]).forEach(sm=>{
-        (sm.races||[]).forEach(rc=>{
-          const ab = rc.available_bet_types||[]
-          if(ab.includes('sorec_quinte')||ab.includes('quinte')){
-            ccQ.push({ track:String(sm.track||''), code:String(rc.code||'').replace(/^C/i,''),
-                       country:sm.country, ccId:rc.id, name:rc.name })
-          }
-        })
-      })
-
-      // --- e-sorec ---
-      const esQ = []
-      const esEvents = esData?.content?.events || esData?.events || []
-      // e-sorec peut renvoyer le cache d'un autre jour : on filtre sur la date du jour meme
-      const dayOk = (ev,rc)=>{
-        const raw = String(ev.date || rc?.time || rc?.timestamp || '')
-        if(!raw) return true
-        const d = raw.slice(0,10).replace(/\//g,'-')
-        if(d === date) return true
-        // cache e-sorec : si la reunion demandee n'existe pas dans le backend non plus,
-        // on accepte le cache (Meknes 02/10 absent du backend = on garde ce que e-sorec donne)
-        const beHas = ms.some(m=> sameHippoQ(m.hippodrome, ev.track))
-        return !beHas
-      }
-      esEvents.forEach(ev=>{
-        (ev.races||[]).forEach(rc=>{
-          if(!dayOk(ev,rc)) return
-          const hb = (rc.bets||[]).some(b=> String(b.code||'').toLowerCase().includes('quinte') && b.premium)
-          if(hb){
-            esQ.push({ track:String(ev.track||''), code:String(rc.code||'').replace(/^C/i,''),
-                       country:ev.country, ccId:rc.id })
-          }
-        })
-      })
-
-      const MA_HIP = ['meknes','khemisset','marrakech','casablanca','rabat','tanger','larache','ouzzane',
-        'berkane','berrechid','houfiz','merzouga','khouribga','sefrou','ain taous','elgara','sidiaissa',
-        'sidibenzouhair','loukas','fes','eljadida','sidislimane','kent','aintahla',
-        'anfa','casablancaanfa','ain.diab','zariaidi','bouznika','sidiayachi','hadcourt',
-        'sidi Moussa','ain khemisset','marrakesh']
-      const cleanQ = s => String(s||'').toLowerCase().trim().replace(/[^a-z]/g,'')
-      const isMAQ = s => MA_HIP.includes(cleanQ(s))
-
-      // Marquage des courses du backend
-      ms.forEach(m=>{
-        if(isMAQ(m.hippodrome)) m.country='MA'
-        ;(m.courses||[]).forEach(c=>{
-          const cn = String(c.numOrdre ?? c.num ?? '').replace(/^C/i,'')
-          const hit = ccQ.find(q=> q.code===cn && sameHippoQ(q.track,m.hippodrome))
-                 || esQ.find(q=> q.code===cn && sameHippoQ(q.track,m.hippodrome))
-          if(hit){
-            c.quinte = true
-            if(!Array.isArray(c.types_pari)) c.types_pari=[]
-            if(!c.types_pari.includes('QUINTE_PLUS')) c.types_pari.push('QUINTE_PLUS')
-            if(hit.ccId) c.ccId = hit.ccId
-            const hc = String(hit.country||'').toUpperCase()
-            if((hc==='MAR'||hc==='MA'||isMAQ(hit.track)) && isMAQ(hit.track)) m.country='MA'
-            return
-          }
-          const tp = c.types_pari||[]
-          if(c.quinte || tp.includes('QUINTE_PLUS') || tp.includes('QUINTE')) c.quinte=true
-        })
-      })
-
-      // Si aucune source externe n'a répondu : garder le premier Quinté du PMU par réunion
-      if(!ccQ.length && !esQ.length){
-        ms.forEach(m=>{
-          const q=(m.courses||[]).filter(c=>c.quinte).sort((a,b)=>(a.numOrdre??a.num)-(b.numOrdre??b.num))
-          if(q.length>1) q.slice(1).forEach(c=>{
-            c.quinte=false
-            if(Array.isArray(c.types_pari)) c.types_pari = c.types_pari.filter(t=>t!=='QUINTE_PLUS' && t!=='QUINTE')
-          })
-        })
-      }
-
-      setMeetings([...ms])
+    /* ⭐ SEULE SOURCE : turf-france (reu.php). 07/10/2026 — casacourses a
+     *  été écarté : il ne donne pas `reunion_code` de façon fiable (« RR1 »)
+     *  et ses identifiants ne correspondent pas à R+C, donc les liens /r/
+     *  pointaient vers des réunions inexistantes (« course indisponible »).
+     *  reu.php est la MÊME source que la page Article : une seule vérité,
+     *  et le lien mène forcément à un fichier d'archive qui existe. */
+    meetingsDepuisReu(date).then((ms)=>{
+      setMeetings(ms || [])
       setLoading(false)
-      // fin
-    }).catch(async ()=>{
-      // SEULE SOURCE : plus de fallback bahja-pmu.
+      setError(null)
+    }).catch((e)=>{
       setMeetings([])
+      setError(e.message || 'source indisponible')
       setLoading(false)
     })
-  },[date])
+  }, [date])
+
 
   // TOUTES les courses : le Quinté (quand il est connu) passe en premier.
   const reunionsAffichees = (()=> {
@@ -248,7 +143,13 @@ export default function Programme(){
                   // ⚠ slug seul, SANS state : Article charge tout depuis SA source (turf-france).
                   // Lui passer l'objet course = partager la source d'affichage. Interdit.
                   const slug = `r${m.num}-c${c.numOrdre}-${slugify(c.name||c.libelle||'course')}-${date}-${slugify(m.hippodrome)}`
-                  const go = ()=> navigate(`/r/${slug}`)
+                  /* ⚠ LE PAYS VOYAGE DANS L'URL. Le fichier d'archive porte le
+                     *  suffixe du pays (`_NORV`, `_SUEDE`, `_ROYAUME`…) : sans lui,
+                     *  l'Article cherche `{cle}_FRANCE.json` et répond « course
+                     *  indisponible » — c'est ce qui cassait R2 et R5. reu.php
+                     *  donne le pays de chaque course, on le transmet donc. */
+                  const pays = String(c.pays || m.pays || 'FRANCE').trim().toUpperCase()
+                  const go = ()=> navigate(`/r/${slug}` + (pays && pays !== 'FRANCE' ? `?pays=${encodeURIComponent(pays)}` : ''))
                   const hhmm = heureGMT(date, c.time)
                   return (
                     <div key={c.numOrdre} style={{display:'flex',gap:8,alignItems:'stretch',padding:'8px 12px',borderBottom:'1px solid #f1efe7'}}>

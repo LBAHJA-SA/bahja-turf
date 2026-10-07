@@ -25,10 +25,22 @@ const TF_DIRECT = 'https://www.turf-france.com'
  */
 async function lirePageTqq(chemin) {
   let dernierStatut = 0
+  /* ⚠ LE PROXY EXIGE LA FORME `?p=` (mesuré le 07/10/2026).
+   *   `vercel.json` réécrit `/api/tf/<chemin>` → `/api/tf?p=<chemin>` et le
+   *   rewrite CONSOMME la query string d'origine : `?view=detail&reunion=R…`
+   *   arrivait à turf-france SANS paramètres, donc la page d'accueil en
+   *   réponse (3 935 o) — et « aucun partant lu ». En local le chemin nu
+   *   marche, en production non : on encode donc le chemin complet dans `p`
+   *   pour les deux (c'est exactement ce que fait `_proxy.js`). */
   for (let essai = 1; essai <= 3; essai++) {
-    for (const base of [TF_PROXY, TF_DIRECT]) {
+    const cibles = [
+      TF_PROXY + '?p=' + encodeURIComponent(chemin.replace(/^\/+/, '')),  // Vercel
+      TF_PROXY + chemin,                                                     // Vite (dev)
+      TF_DIRECT + chemin,                                                     // direct
+    ]
+    for (const url of cibles) {
       try {
-        const r = await fetch(base + chemin, {
+        const r = await fetch(url, {
           headers: { Accept: 'text/html' },
           signal: AbortSignal.timeout(12000),
         }).catch(() => null)

@@ -41,7 +41,12 @@ async function relayer(label, cheminComplet, res) {
       ? "/" + depuisRequete.replace(/^\/+/, "")
       : u.pathname.replace(new RegExp("^/api/" + label), "") || "/";
     if (!chemin.startsWith("/") || chemin.startsWith("//")) throw new Error("chemin refuse");
-    const cible = ORIGINES[label] + chemin;
+    /* ⚠ 07/10/2026 : la query string fait partie de la cible. reu.php
+     *   ?view=program&date=… sans la query retombait sur la page d'accueil
+     *   (3 935 o) au lieu du programme (132 165 o). `api/_proxy.js` le fait
+     *   déjà pour la production ; on aligne le middleware de dev dessus. */
+    const query = u.search && u.search !== "?" ? u.search : "";
+    const cible = ORIGINES[label] + chemin + query;
     const r = await fetch(cible, {
       headers: {
         "User-Agent": UA,

@@ -1,6 +1,8 @@
 // backend/PROGRAMME/donnees.js — les données de la page Programme (/).
 // Importé par frontend/PROGRAMME/Programme.jsx UNIQUEMENT. Ne pas partager.
 
+import { parseProgrammeReu } from '../ARTICLE/turfFrance.js'
+
 /** Normalise un nom pour l'URL (le slug ne transporte AUCUNE donnée). */
 export function slugify(t){ return (t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') }
 
@@ -63,6 +65,83 @@ const toCourse = (rc, estQuinte = false) => ({
   finished: !!rc.finished,
   status: rc.status || '',
 })
+
+/**
+ * ⭐ LE PROGRAMME DEPUIS turf-france (reu.php), pas casacourses.
+ *
+ * 07/10/2026 — Pourquoi le changement :
+ *  - casacourses ne publie pas `reunion_code` de façon fiable (les réunions
+ *    sortent « RR1 », « RR2 »…), et ses `id` ne correspondent pas à R+C. Le
+ *    lien construit pour /r/ pointait alors vers des réunions qui n'existent
+ *    pas (`2026-10-07_R14_C6`) → « course indisponible ».
+ *  - reu.php est la MÊME source que la page Article (§12). Un seul code, un
+ *    seul nom de fichier, une seule vérité : `{date}_R{n}_C{m}_{PAYS}.json`.
+ *    Le lien du programme mène donc forcément à un fichier qui existe.
+ *
+ * Le Quinté reste MARQUÉ, jamais deviné : sans `sorec_quinte`, aucun quinté.
+ */
+export async function meetingsDepuisReu(date, base = '/api/tf') {
+  /* ⚠ LA FORME `?p=` EST OBLIGATOIRE (mesuré le 07/10/2026).
+   *   `vercel.json` réécrit `/api/tf/<chemin>` → `/api/tf?p=<chemin>`, et le
+   *   rewrite CONSOMME la query string : `/api/tf/php/reu.php?view=program`
+   *   arrivait à turf-france SANS paramètre (3 935 o : la page d'accueil) au
+   *   lieu du programme (132 165 o). On encode donc le chemin complet dans
+   *   `p`, comme `_proxy.js` le prévoit déjà (« c'est la forme que vercel.json
+   *   produit »). */
+  const cible = `php/reu.php?view=program&date=${date}`
+  /* Les DEUX formes, car le chemin correct dépend de l'environnement :
+     - Vercel : le rewrite `/api/tf/<x>` → `/api/tf?p=<x>` CONSOMME la query
+       string, donc `/api/tf/php/reu.php?view=…` arrive SANS paramètres
+       (page d'accueil, 3 935 o). Il faut `?p=`, encodé.
+     - Vite (dev) : le middleware lit le CHEMIN, la query string passe déjà ;
+       `?p=` renvoie la page d'accueil. Il faut le chemin nu. */
+  const urls = [
+    `${base}?p=${encodeURIComponent(cible)}`,
+    `${base}/php/reu.php?view=program&date=${date}`,
+  ]
+
+  let html = ''
+  let dernier = null
+  for (const url of urls) {
+    try {
+      const r = await fetch(url, { headers: { Accept: 'text/html' }, signal: AbortSignal.timeout(20000) })
+      if (!r.ok) { dernier = 'HTTP ' + r.status; continue }
+      const t = await r.text()
+      // turf-france répond 200 avec sa page d'accueil : on vérifie le contenu
+      if (/view=detail/i.test(t) && t.length > 20000) { html = t; break }
+      dernier = 'page d\'accueil (' + t.length + ' o)'
+    } catch (e) { dernier = e.message }
+  }
+  if (!html) throw new Error('reu.php : programme indisponible — ' + (dernier || 'sans réponse'))
+  const reunions = parseProgrammeReu(html)
+  const out = []
+  for (const re of reunions) {
+    const pays = String(re.pays || '').trim().toUpperCase()
+    const hippo = String(re.hippodrome || '')
+    if (!re.courses.length) continue
+    const courses = re.courses.map((c) => ({
+      numOrdre: Number(String(c.code || '').replace(/\D/g, '')) || 0,
+      libelle: c.nom || '',
+      name: c.nom || '',
+      heure: c.heure || '',
+      reunion: c.reunion,
+      pays: c.pays || pays,
+      // reu.php ne dit pas quel pari est ouvert : aucun quinté n'est deviné.
+      quinte: false,
+      paris: [],
+      types_pari: [],
+    }))
+    out.push({
+      num: Number(String(re.courses[0].reunion || '1').replace(/\D+/g, '')) || 1,
+      hippodrome: hippo,
+      country: pays.startsWith('FR') ? 'FR' : pays,
+      pays,
+      courses,
+    })
+  }
+  // on garde l'ordre du site : R1, R2, R3…
+  return out.sort((a, b) => (a.num || 99) - (b.num || 99))
+}
 
 export async function meetingsDepuisCasacourses(date) {
   const r = await fetch(CC_API + '/programme?date=' + date, { headers: { Accept: 'application/json' } })
