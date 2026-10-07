@@ -848,6 +848,14 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
     return st.p[best]
   }
 
+  /* ⚠ LE DÉPARTAGE EST LE RANG DU CARNET, PAS LA COTE.
+   * Avec la cote, le même ticket donnait un ordre différent en local
+   * (pas de marché) et en production (marché lu) : la page et
+   * l'archive ne se ressemblaient plus. Or l'ordre doit être le même
+   * partout — c'est l'archive qui fait foi. On départage donc par le
+   * P le plus proche du début du carnet, ce qui est stable. */
+  const rangDe = (num) => rang[num] ?? 999
+
   const reste = nums.slice()
   const ordre = []
   for (let pos = 0; pos < 5 && reste.length; pos++) {
@@ -855,8 +863,7 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
     for (let i = 1; i < reste.length; i++) {
       const a = force(reste[i]) ?? -1
       const b = force(reste[meilleur]) ?? -1
-      // égalité de probabilité → la meilleure cote gagne (le marché, lui, sait)
-      if (a > b || (a === b && cote(reste[i]) < cote(reste[meilleur]))) meilleur = i
+      if (a > b || (a === b && rangDe(reste[i]) < rangDe(reste[meilleur]))) meilleur = i
     }
     ordre.push(reste.splice(meilleur, 1)[0])
   }
