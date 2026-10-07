@@ -50,7 +50,7 @@ export default function Couple() {
   const [base, setBase] = useState(null)
   useEffect(() => {
     let mort = false
-    fetch('/data/empreinte.json', { headers: { Accept: 'application/json' } })
+    fetch('/data/empreinte-v3.json', { headers: { Accept: 'application/json' } })
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
       .then((d) => { if (!mort) setBase(d) })
       .catch(() => { if (!mort) setBase(null) })
@@ -239,42 +239,48 @@ function Lecture({ course, base }) {
       {v && v.trio && (
         <div style={{
           ...S.box, padding: 14, marginBottom: 12,
-          borderLeft: '5px solid ' + (v.jouer ? '#16a34a' : emp?.ton === 'moyen' ? '#d97706' : '#d6d3d1'),
-          background: v.jouer ? '#f0fdf4' : '#fff',
+          borderLeft: '5px solid ' + (v.niveau === 'FULL' ? '#16a34a' : v.niveau === 'FAM' ? '#d97706' : '#d6d3d1'),
+          background: v.niveau === 'FULL' ? '#f0fdf4' : '#fff',
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
             <b style={{ fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', color: TE.accentSombre }}>
-              Empreinte : {emp?.forme || '—'}
+              Empreinte : {v.empreinte || '—'}
             </b>
-            <span style={{
-              fontSize: 13, fontWeight: 800,
-              color: v.jouer ? '#15803d' : '#78716c',
-            }}>
-              {v.jouer ? '★ JOUER' : '· PASSER'}
+            {v.niveau !== 'FULL' && v.empreinteJour && v.empreinteJour !== v.empreinte && (
+              <span style={{ fontSize: 11, color: '#78716c' }}>· jour : {v.empreinteJour}</span>
+            )}
+            <span style={{ fontSize: 12, fontWeight: 800, color: '#78716c' }}>
+              {v.niveau}{v.support ? ` · ${v.support} courses` : ''}
             </span>
           </div>
           <div style={{ fontSize: 14, fontWeight: 800, fontFamily: TE.mono, marginTop: 6 }}>
-            Trio : {v.trio.join('  ·  ')}
+            Top 3 : {v.trio.join('  ·  ')}
           </div>
-          {emp?.connue ? (
+          {v.coherence && (
             <>
               <div style={{ fontSize: 12, color: '#57534e', marginTop: 6 }}>
-                Vue <b>{emp.n}</b> fois dans l'archive
-                {' · '}les 3 : <b>{emp.les3}%</b>
-                {' · '}≥2 : <b>{emp.auMoins2}%</b>
-                {' · '}1er : <b>{emp.c1}%</b>
-                {' · '}2e : <b>{emp.c2}%</b>
-                {' · '}exact : <b>{emp.exact3}%</b>
+                Cohérence — rang : <b>{v.coherence.rankDev}</b>
+                {' · '}profil : <b>{v.coherence.profDev}</b>
+                {' · '}relations : <b>{Math.round(v.coherence.relFreq * 100)}%</b>
               </div>
-              <div style={{ fontSize: 13, fontWeight: 700, marginTop: 6, color: TE.accentSombre }}>
-                {emp.profil}
-              </div>
+              {v.profil && (
+                <div style={{ fontSize: 12, color: '#57534e', marginTop: 6 }}>
+                  Historique — rangs médians : <b>{(v.profil.medRangs || []).join('-')}</b>
+                  {' · '}cotes médianes : <b>{(v.profil.medCote || []).join('-')}</b>
+                  {v.profil.paires.map((p) => (
+                    <span key={p.paire} style={{ marginLeft: 10 }}>{p.paire} : <b>{p.habituelle}</b></span>
+                  ))}
+                </div>
+              )}
             </>
-          ) : (
-            <div style={{ fontSize: 12, color: '#78716c', marginTop: 6 }}>
-              {emp?.texte || 'Base des empreintes introuvable.'}
-            </div>
           )}
+        </div>
+      )}
+      {v && !v.trio && (
+        <div style={{ fontSize: 12, color: '#78716c', marginTop: 6 }}>
+          {v.raison === 'aucun antécédent'
+            ? 'Aucun antécédent pour les trios de cette course.'
+            : v.raison || 'Base des empreintes introuvable.'}
         </div>
       )}
 
