@@ -28,7 +28,7 @@
    "cheval": "DON FALCO",
    "driver": "C. PACAUT",
    "entraineur": "F. BOUALEM",
-   "cote": 8.3,
+   "cote": 9,
    "coteRef": 11.7,
    "musique": "0p0p6p2p8p1p4p5p3p5p",
    "gains": 121176,
@@ -50,7 +50,7 @@
    "cheval": "EL PROFESSOR CHOP",
    "driver": "A. CRASTUS",
    "entraineur": "J. PARIZE",
-   "cote": 6.9,
+   "cote": 7.4,
    "coteRef": 8.3,
    "musique": "1p1p1p4p5p2p3p0p2p3p",
    "gains": 104138,
@@ -72,7 +72,7 @@
    "cheval": "HALL OF FAME",
    "driver": "M. GRANDIN",
    "entraineur": "J. ANDREU",
-   "cote": 2.5,
+   "cote": 2.6,
    "coteRef": 12,
    "musique": "2p9p2p4p6p1p4p8p2p0p",
    "gains": 32828,
@@ -94,7 +94,7 @@
    "cheval": "SWEEP AWAY",
    "driver": "H. BOUTIN",
    "entraineur": "F. FORESI",
-   "cote": 12,
+   "cote": 10,
    "coteRef": 11.7,
    "musique": "0p7p3p5p2p0p5p4p5p0p",
    "gains": 71214,
@@ -116,7 +116,7 @@
    "cheval": "CERVARO",
    "driver": "M. WALDHAUSER",
    "entraineur": "L. BERNHARDT",
-   "cote": 13,
+   "cote": 12,
    "coteRef": 9,
    "musique": "0p3p3p8p3p5p5p7p2p",
    "gains": 104978,
@@ -138,7 +138,7 @@
    "cheval": "BLANC BLEU",
    "driver": "H. BESNIER",
    "entraineur": "P. COTTIER",
-   "cote": 7.4,
+   "cote": 7.1,
    "coteRef": 10.9,
    "musique": "5p0p8p5p0p9p0p6p9p9p",
    "gains": 155624,
@@ -182,7 +182,7 @@
    "cheval": "CAYSSIE MA STAR",
    "driver": "A. ORANI",
    "entraineur": "C. MARTINA",
-   "cote": 6.7,
+   "cote": 7,
    "coteRef": 10.7,
    "musique": "0p5p2p1p5p3p(25)3p2p3p",
    "gains": 30242,
@@ -254,12 +254,12 @@
   "topCotesDirect": [
    "3",
    "8",
-   "2",
    "6",
+   "2",
    "1",
    "4",
-   "7",
-   "5"
+   "5",
+   "7"
   ],
   "topChevaux": [
    "2",
@@ -454,5 +454,5 @@
   "2 - 8 - 3 - 1 - 5",
   "3 - 5 - 6 - 7"
  ],
- "collecteLe": "2026-10-07T09:07:55.274Z"
+ "collecteLe": "2026-10-07T09:15:41.889Z"
 }

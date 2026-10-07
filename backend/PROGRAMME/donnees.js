@@ -1,7 +1,7 @@
 // backend/PROGRAMME/donnees.js — les données de la page Programme (/).
 // Importé par frontend/PROGRAMME/Programme.jsx UNIQUEMENT. Ne pas partager.
 
-import { parseProgrammeReu } from '../ARTICLE/turfFrance.js'
+import { parseProgrammeReu, nomFichierCourse } from '../ARTICLE/turfFrance.js'
 
 /** Normalise un nom pour l'URL (le slug ne transporte AUCUNE donnée). */
 export function slugify(t){ return (t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') }
@@ -131,6 +131,27 @@ export async function meetingsDepuisReu(date, base = '/api/tf') {
       paris: [],
       types_pari: [],
     }))
+    /* Les CHAMPS MANQUANTS du programme (reu.php ne donne ni la distance ni
+     *  le nombre de partants) sont pris dans l'archive du collecteur quand
+     *  elle existe : `public/data/reu/{date}_R{n}_C{m}_{PAYS}.json`. Sans ça
+     *  l/programme affiche « ?p • m » sur chaque ligne —难看 et inutile.
+     *  On ne comble RIEN quand le fichier manque (§7). */
+    for (const c of out.flatMap((m) => m.courses)) {
+      try {
+        const url = `/data/reu/${nomFichierCourse(date, Number(String(c.reunion).replace(/\D/g, '')), c.numOrdre, c.pays || pays)}`
+        const r2 = await fetch(url)
+        if (!r2.ok || !/json/i.test(r2.headers.get('content-type') || '')) continue
+        const f = await r2.json()
+        if (f?.race) {
+          if (f.race.distance != null) c.distance = f.race.distance
+          if (f.race.nbPartants != null) c.runners = f.race.nbPartants
+          else if (f.participants?.length) c.runners = f.participants.length
+          if (!c.libelle) c.libelle = f.race.nom || c.libelle
+          if (f.race.type) c.type = f.race.type
+        }
+        if (f?.arrivee?.length && !c.quinte) { /* résultat : pas de marqueur quinté sans source */ }
+      } catch (e) { /* l'archive est un complément, jamais un bloquant */ }
+    }
     out.push({
       num: Number(String(re.courses[0].reunion || '1').replace(/\D+/g, '')) || 1,
       hippodrome: hippo,

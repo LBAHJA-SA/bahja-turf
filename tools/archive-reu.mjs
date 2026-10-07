@@ -102,11 +102,21 @@ async function collecterJour(date) {
           const ct = det?.content || {}
           const partants = (ct.runners || []).filter((r2) => r2.startnr).map((r2) => ({
             num: r2.startnr,
+            /* ⚠ LE NOM EST DANS `cheval`, PAS `nom` : c'est le nom que donne
+             *   reu.php, et la page Article lit `p.cheval` (Article.jsx:373).
+             *   Avec `nom`, la fiche affichait des lignes vides —_ONLY_ les
+             *   Golds et les entraîneurs, qui ont les deux noms. On écrit
+             *   donc les DEUX clés pour être sûr des deux côtés. */
+            cheval: String(r2.horse?.name || '').replace(/\s*\([^)]*\)\s*$/, ''),
             nom: String(r2.horse?.name || '').replace(/\s*\([^)]*\)\s*$/, ''),
             poids: r2.weight ?? null,
             jockey: r2.rider?.name || '',
             entraineur: r2.horse?.trainer || '',
             valeur: null,
+            sexe: r2.horse?.gender || '',
+            age: r2.horse?.age ?? null,
+            couleur: r2.horse?.colour || '',
+            proprietaire: r2.horse?.owner || '',
             musique: (r2.horse?.forms || []).map((f) => `${f.pos || ''}${f.running || ''}`).join(' ') || '',
             place: r2.finishorder || null,
           }))
@@ -141,7 +151,9 @@ async function collecterJour(date) {
           if (rc && rc.id) {
             const det = await fetch(`https://pro.casacourses.com/api/race/${rc.id}`, { headers: { Accept: 'application/json' } }).then((x) => x.json())
             const partants = (det.runners || []).filter((r2) => r2.number).map((r2) => ({
-              num: r2.number, nom: r2.name || '', poids: r2.weight ?? null,
+              num: r2.number,
+              cheval: r2.name || '', nom: r2.name || '',   // voir §2a : la page lit `cheval`
+              poids: r2.weight ?? null,
               jockey: r2.jockey || '', entraineur: r2.trainer || '', valeur: r2.value ?? null,
               musique: r2.musique || '', place: r2.finish ?? null,
             }))

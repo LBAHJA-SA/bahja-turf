@@ -28,7 +28,7 @@
    "cheval": "BYZANTINE",
    "driver": "BILLY LOUGHNANE",
    "entraineur": "GEORGE BOUGHEY",
-   "cote": 3.6,
+   "cote": 4.6,
    "coteRef": null,
    "musique": "1p",
    "gains": 7020,
@@ -50,7 +50,7 @@
    "cheval": "FENAROLI",
    "driver": "LEWIS EDMUNDS",
    "entraineur": "HARRY CHARLTON",
-   "cote": 6.8,
+   "cote": 6.2,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -94,7 +94,7 @@
    "cheval": "LANCASTER TOWER",
    "driver": "WILLIAM BUICK",
    "entraineur": "JOHN & THADY GOSDEN",
-   "cote": 6.8,
+   "cote": 5.7,
    "coteRef": null,
    "musique": "8p3p",
    "gains": 1648,
@@ -138,7 +138,7 @@
    "cheval": "OLDBULLYOUNGBULL",
    "driver": "CIEREN FALLON",
    "entraineur": "ALAN KING",
-   "cote": 4.5,
+   "cote": 5.7,
    "coteRef": null,
    "musique": "4p",
    "gains": 798,
@@ -160,7 +160,7 @@
    "cheval": "PALLADINO",
    "driver": "GEORGE DOWNING",
    "entraineur": "ED WALKER",
-   "cote": 4.9,
+   "cote": 4.6,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -182,7 +182,7 @@
    "cheval": "RED WIZARD",
    "driver": "GEORGE WOOD",
    "entraineur": "HARRY CHARLTON",
-   "cote": null,
+   "cote": 34,
    "coteRef": null,
    "musique": "9p",
    "gains": 0,
@@ -204,7 +204,7 @@
    "cheval": "TWELVE BARS",
    "driver": "OISIN MURPHY",
    "entraineur": "HUGO PALMER",
-   "cote": 5.7,
+   "cote": 5.1,
    "coteRef": null,
    "musique": "2p",
    "gains": 3626,
@@ -277,11 +277,12 @@
   ],
   "topCotesDirect": [
    "1",
-   "6",
    "7",
    "9",
+   "4",
+   "6",
    "2",
-   "4"
+   "8"
   ],
   "topChevaux": [
    "1"
@@ -442,5 +443,5 @@
  "pronosTf": [
   "1 - 9 - 4 - 6 - 5 - 8"
  ],
- "collecteLe": "2026-10-07T09:08:04.519Z"
+ "collecteLe": "2026-10-07T09:15:50.951Z"
 }

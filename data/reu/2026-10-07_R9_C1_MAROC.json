@@ -19,56 +19,81 @@
  "participants": [
   {
    "num": 1,
+   "cheval": "NOEMI",
    "nom": "NOEMI",
    "poids": "55,5",
    "jockey": "ARROMALI MOHAMMED",
    "entraineur": "AL MOURTAKI MOHAMMED",
    "valeur": null,
+   "sexe": "F",
+   "age": 3,
+   "couleur": "ALE",
+   "proprietaire": "ATLAS STUD",
    "musique": "",
    "place": null
   },
   {
    "num": 2,
+   "cheval": "MERCI OASIS",
    "nom": "MERCI OASIS",
    "poids": "55",
    "jockey": "BENDIA ABDELAKRIME",
    "entraineur": "EL OUARGHI KHALID",
    "valeur": null,
+   "sexe": "F",
+   "age": 3,
+   "couleur": "BAI",
+   "proprietaire": "EL OUARGHI KHALID",
    "musique": "    ",
    "place": null
   },
   {
    "num": 3,
+   "cheval": "MAJDA AL ASIL",
    "nom": "MAJDA AL ASIL",
    "poids": "54,5",
    "jockey": "MOUGHAT AMINE",
    "entraineur": "CHERKAOUI LARBI",
    "valeur": null,
+   "sexe": "F",
+   "age": 3,
+   "couleur": "ALE",
+   "proprietaire": "HOUAR YOUSSEF",
    "musique": "    ",
    "place": null
   },
   {
    "num": 4,
+   "cheval": "BENT EL GHABA",
    "nom": "BENT EL GHABA",
    "poids": "53,5",
    "jockey": "ARROMALI AYOUB",
    "entraineur": "LAZRAK ABDELHAQ",
    "valeur": null,
+   "sexe": "F",
+   "age": 3,
+   "couleur": "BAI",
+   "proprietaire": "LAZRAK ABDELHAQ",
    "musique": "",
    "place": null
   },
   {
    "num": 5,
+   "cheval": "FLORIDA BOGAR",
    "nom": "FLORIDA BOGAR",
    "poids": "53",
    "jockey": "BENDAMOU ABDELLAH",
    "entraineur": "ESRARFI BOUCHAIB",
    "valeur": null,
+   "sexe": "F",
+   "age": 3,
+   "couleur": "BAI",
+   "proprietaire": "ESRARFI BOUCHAIB",
    "musique": "    ",
    "place": null
   }
  ],
  "arrivee": [],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T09:08:53.042Z"
+ "collecteLe": "2026-10-07T09:16:38.965Z"
 }

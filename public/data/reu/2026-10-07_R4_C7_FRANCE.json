@@ -50,7 +50,7 @@
    "cheval": "L'ALTA ROCCA",
    "driver": "C. PACAUT",
    "entraineur": "C. ESCUDER",
-   "cote": 9.6,
+   "cote": 9.7,
    "coteRef": 5.2,
    "musique": "0p3p1p6p0p0p2p3p1p4p",
    "gains": 33026,
@@ -72,7 +72,7 @@
    "cheval": "LE DOC",
    "driver": "A. CRASTUS",
    "entraineur": "R. CHOTARD",
-   "cote": 6.6,
+   "cote": 6.5,
    "coteRef": 7.7,
    "musique": "5p4p4p3p1p2p2p1p7p8p",
    "gains": 56728,
@@ -138,7 +138,7 @@
    "cheval": "LES PRINCES",
    "driver": "A. D'JJI",
    "entraineur": "N. PERRET",
-   "cote": 22,
+   "cote": 21,
    "coteRef": null,
    "musique": "8p0p0p6p6p6p7p",
    "gains": 1845,
@@ -160,7 +160,7 @@
    "cheval": "AGNESIT'A",
    "driver": "J. NICOLEAU",
    "entraineur": "A. SANGLARD",
-   "cote": 24,
+   "cote": 20,
    "coteRef": 41.2,
    "musique": "0p5p6p0p5p3p9p8p5p2p",
    "gains": 13516,
@@ -228,8 +228,8 @@
    "2",
    "5",
    "1",
-   "6",
-   "7"
+   "7",
+   "6"
   ],
   "topChevaux": [
    "1",
@@ -409,5 +409,5 @@
  "pronosTf": [
   "3 - 5 - 2 - 1 - 4"
  ],
- "collecteLe": "2026-10-07T09:07:59.061Z"
+ "collecteLe": "2026-10-07T09:15:45.647Z"
 }
