@@ -1,694 +1,1568 @@
 {
- "genere": "2026-10-07T17:01:23.962Z",
+ "genere": "2026-10-07T17:10:53.480Z",
  "train": 3178,
  "test": 795,
- "baseline": 1.7,
- "formes": [
-  {
-   "forme": "FFF FFF FFF",
-   "n": 887,
-   "pExact": 2.4,
-   "pLes3": 8.5,
-   "nbExact": 21
-  },
-  {
-   "forme": "FFF FFF FmF",
-   "n": 509,
-   "pExact": 2,
-   "pLes3": 8.1,
-   "nbExact": 10
-  },
-  {
-   "forme": "FFF FmF FFF",
-   "n": 359,
-   "pExact": 1.4,
-   "pLes3": 6.1,
-   "nbExact": 5
-  },
-  {
-   "forme": "FmF FFF FFF",
-   "n": 219,
-   "pExact": 1.4,
-   "pLes3": 5.5,
-   "nbExact": 3
-  },
-  {
-   "forme": "FFF FFF FOF",
-   "n": 180,
-   "pExact": 2.8,
-   "pLes3": 7.2,
-   "nbExact": 5
-  },
-  {
-   "forme": "FFF FmF FmF",
-   "n": 139,
-   "pExact": 0.7,
-   "pLes3": 5.8,
-   "nbExact": 1
-  },
-  {
-   "forme": "FmF FFF FmF",
-   "n": 107,
-   "pExact": 0.9,
-   "pLes3": 8.4,
-   "nbExact": 1
-  },
-  {
-   "forme": "FFF FOF FFF",
-   "n": 106,
-   "pExact": 1.9,
-   "pLes3": 6.6,
-   "nbExact": 2
-  },
-  {
-   "forme": "FmF FmF FFF",
-   "n": 90,
-   "pExact": 2.2,
-   "pLes3": 8.9,
-   "nbExact": 2
-  },
-  {
-   "forme": "FOF FFF FFF",
-   "n": 65,
-   "pExact": 0,
-   "pLes3": 6.2,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FmF FOF",
-   "n": 64,
-   "pExact": 0,
-   "pLes3": 7.8,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmF FFF FOF",
-   "n": 51,
-   "pExact": 0,
-   "pLes3": 2,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FOF FmF",
-   "n": 50,
-   "pExact": 2,
-   "pLes3": 4,
-   "nbExact": 1
-  },
-  {
-   "forme": "FmF FmF FmF",
-   "n": 35,
-   "pExact": 0,
-   "pLes3": 11.4,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FmF FFF",
-   "n": 31,
-   "pExact": 0,
-   "pLes3": 12.9,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FFF FmF",
-   "n": 28,
-   "pExact": 0,
-   "pLes3": 7.1,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmF FOF FFF",
-   "n": 26,
-   "pExact": 0,
-   "pLes3": 3.8,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FFF FOF",
-   "n": 19,
-   "pExact": 0,
-   "pLes3": 15.8,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FOF FOF",
-   "n": 16,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FOF FFF",
-   "n": 15,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmF FmF FOF",
-   "n": 12,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FmF FmF",
-   "n": 9,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmF FOF FmF",
-   "n": 8,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FFm FFO",
-   "n": 5,
-   "pExact": 0,
-   "pLes3": 40,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FOF FmF",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmF FOF FOF",
-   "n": 4,
-   "pExact": 25,
-   "pLes3": 25,
-   "nbExact": 1
-  },
-  {
-   "forme": "FOF FmF FOF",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFm FFm",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFF FFO",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFm FFO",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFF FFm",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFm FFm",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFF FFm",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFF FOO",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FFm FmO",
-   "n": 4,
-   "pExact": 50,
-   "pLes3": 50,
-   "nbExact": 2
-  },
-  {
-   "forme": "FFF FFm FOO",
-   "n": 4,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFF FFF",
-   "n": 3,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFO FFm",
-   "n": 3,
-   "pExact": 0,
-   "pLes3": 66.7,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FmF FFF",
-   "n": 3,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm Fmm FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmO FmF FmF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOO FFm FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FOO FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FmO FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FOO FmF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FmF FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOO FFO FOm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO Fmm FFO",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFO FFm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF Fmm FFO",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFm FmO",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FFF FFm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FmO FFm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FOm FOm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FmO FFm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FmO FFO",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 100,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmF FFO FmF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "Fmm FFm FOm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FOF FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOm FmF FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFO FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmO FFm FmF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOm FFF Fmm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FmO FmO",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FmO FFF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm Fmm FFm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FmF FFm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmO FFF FFO",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFF FmO",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOO FFm Fmm",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFm FmF",
-   "n": 2,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FOF FOF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FOF mOF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFF mmF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FFF mmF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FFO FFm",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FFF FmO",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm Fmm FOF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFF FFO",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FmO FFF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF Fmm FFF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFO FFO",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FFO Fmm",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmF FFO FOm",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmO FOO FmO",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFm FmF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "Fmm FFF FFF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FFm FmF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFO FFO",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFF FFm FFF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOF FmO FFF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFm FFm FFF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOO FOO FmO",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FOO FmF FFm",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmO FFF FFm",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmO FFO FmF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FmF FmO FOF",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  },
-  {
-   "forme": "FFO FFm Fmm",
-   "n": 1,
-   "pExact": 0,
-   "pLes3": 0,
-   "nbExact": 0
-  }
- ]
+ "seuils": {
+  "n": 10,
+  "facteur": 2
+ },
+ "baselines": {
+  "n": 3178,
+  "c1": 31.12,
+  "c2": 16.52,
+  "c3": 13.28,
+  "exact3": 1.7,
+  "les3": 7.24,
+  "auMoins2": 52.14
+ },
+ "niveaux": {
+  "complet": [
+   {
+    "forme": "FFF FFF FFF",
+    "n": 887,
+    "c1": 301,
+    "c2": 160,
+    "c3": 133,
+    "exact3": 21,
+    "les3": 75,
+    "auMoins2": 476
+   },
+   {
+    "forme": "FFF FFF FmF",
+    "n": 509,
+    "c1": 165,
+    "c2": 85,
+    "c3": 79,
+    "exact3": 10,
+    "les3": 41,
+    "auMoins2": 270
+   },
+   {
+    "forme": "FFF FmF FFF",
+    "n": 359,
+    "c1": 102,
+    "c2": 67,
+    "c3": 43,
+    "exact3": 5,
+    "les3": 22,
+    "auMoins2": 195
+   },
+   {
+    "forme": "FmF FFF FFF",
+    "n": 219,
+    "c1": 55,
+    "c2": 37,
+    "c3": 33,
+    "exact3": 3,
+    "les3": 12,
+    "auMoins2": 111
+   },
+   {
+    "forme": "FFF FFF FOF",
+    "n": 180,
+    "c1": 55,
+    "c2": 25,
+    "c3": 16,
+    "exact3": 5,
+    "les3": 13,
+    "auMoins2": 90
+   },
+   {
+    "forme": "FFF FmF FmF",
+    "n": 139,
+    "c1": 47,
+    "c2": 21,
+    "c3": 15,
+    "exact3": 1,
+    "les3": 8,
+    "auMoins2": 76
+   },
+   {
+    "forme": "FmF FFF FmF",
+    "n": 107,
+    "c1": 25,
+    "c2": 14,
+    "c3": 14,
+    "exact3": 1,
+    "les3": 9,
+    "auMoins2": 50
+   },
+   {
+    "forme": "FFF FOF FFF",
+    "n": 106,
+    "c1": 27,
+    "c2": 20,
+    "c3": 16,
+    "exact3": 2,
+    "les3": 7,
+    "auMoins2": 55
+   },
+   {
+    "forme": "FmF FmF FFF",
+    "n": 90,
+    "c1": 31,
+    "c2": 18,
+    "c3": 14,
+    "exact3": 2,
+    "les3": 8,
+    "auMoins2": 57
+   },
+   {
+    "forme": "FOF FFF FFF",
+    "n": 65,
+    "c1": 19,
+    "c2": 8,
+    "c3": 9,
+    "exact3": 0,
+    "les3": 4,
+    "auMoins2": 35
+   },
+   {
+    "forme": "FFF FmF FOF",
+    "n": 64,
+    "c1": 25,
+    "c2": 7,
+    "c3": 3,
+    "exact3": 0,
+    "les3": 5,
+    "auMoins2": 40
+   },
+   {
+    "forme": "FmF FFF FOF",
+    "n": 51,
+    "c1": 14,
+    "c2": 9,
+    "c3": 6,
+    "exact3": 0,
+    "les3": 1,
+    "auMoins2": 25
+   },
+   {
+    "forme": "FFF FOF FmF",
+    "n": 50,
+    "c1": 15,
+    "c2": 4,
+    "c3": 6,
+    "exact3": 1,
+    "les3": 2,
+    "auMoins2": 22
+   },
+   {
+    "forme": "FmF FmF FmF",
+    "n": 35,
+    "c1": 8,
+    "c2": 5,
+    "c3": 6,
+    "exact3": 0,
+    "les3": 4,
+    "auMoins2": 12
+   },
+   {
+    "forme": "FOF FmF FFF",
+    "n": 31,
+    "c1": 10,
+    "c2": 6,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 4,
+    "auMoins2": 15
+   },
+   {
+    "forme": "FOF FFF FmF",
+    "n": 28,
+    "c1": 8,
+    "c2": 5,
+    "c3": 5,
+    "exact3": 0,
+    "les3": 2,
+    "auMoins2": 12
+   },
+   {
+    "forme": "FmF FOF FFF",
+    "n": 26,
+    "c1": 6,
+    "c2": 3,
+    "c3": 3,
+    "exact3": 0,
+    "les3": 1,
+    "auMoins2": 13
+   },
+   {
+    "forme": "FOF FFF FOF",
+    "n": 19,
+    "c1": 6,
+    "c2": 3,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 3,
+    "auMoins2": 8
+   },
+   {
+    "forme": "FFF FOF FOF",
+    "n": 16,
+    "c1": 3,
+    "c2": 3,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 6
+   },
+   {
+    "forme": "FOF FOF FFF",
+    "n": 15,
+    "c1": 7,
+    "c2": 2,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 9
+   },
+   {
+    "forme": "FmF FmF FOF",
+    "n": 12,
+    "c1": 4,
+    "c2": 1,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 6
+   },
+   {
+    "forme": "FOF FmF FmF",
+    "n": 9,
+    "c1": 3,
+    "c2": 0,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "FmF FOF FmF",
+    "n": 8,
+    "c1": 4,
+    "c2": 1,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 5
+   },
+   {
+    "forme": "FFO FFm FFO",
+    "n": 5,
+    "c1": 2,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 2,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FOF FOF FmF",
+    "n": 4,
+    "c1": 1,
+    "c2": 1,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "FmF FOF FOF",
+    "n": 4,
+    "c1": 1,
+    "c2": 2,
+    "c3": 1,
+    "exact3": 1,
+    "les3": 1,
+    "auMoins2": 3
+   },
+   {
+    "forme": "FOF FmF FOF",
+    "n": 4,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFF FFm FFm",
+    "n": 4,
+    "c1": 3,
+    "c2": 0,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFF FFF FFO",
+    "n": 4,
+    "c1": 1,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FFF FFm FFO",
+    "n": 4,
+    "c1": 1,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FFm FFF FFm",
+    "n": 4,
+    "c1": 0,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 4
+   },
+   {
+    "forme": "FFm FFm FFm",
+    "n": 4,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 4
+   },
+   {
+    "forme": "FFF FFF FFm",
+    "n": 4,
+    "c1": 2,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "FFF FFF FOO",
+    "n": 4,
+    "c1": 4,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFO FFm FmO",
+    "n": 4,
+    "c1": 4,
+    "c2": 2,
+    "c3": 2,
+    "exact3": 2,
+    "les3": 2,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFF FFm FOO",
+    "n": 4,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 4
+   },
+   {
+    "forme": "FFm FFF FFF",
+    "n": 3,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FFm FFO FFm",
+    "n": 3,
+    "c1": 0,
+    "c2": 0,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 2,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFO FmF FFF",
+    "n": 3,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FFm Fmm FFF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FmO FmF FmF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FOO FFm FFF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FOO FFF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFF FmO FFF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO FOO FmF",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFm FmF FFF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FOO FFO FOm",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO Fmm FFO",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFF FFO FFm",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFF Fmm FFO",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FFm FmO",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FOF FFF FFm",
+    "n": 2,
+    "c1": 0,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FmO FFm",
+    "n": 2,
+    "c1": 0,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFO FOm FOm",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO FmO FFm",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFF FmO FFO",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 2,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FmF FFO FmF",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "Fmm FFm FOm",
+    "n": 2,
+    "c1": 0,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FOF FFF",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FOm FmF FFF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FFO FFF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FmO FFm FmF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FOm FFF Fmm",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO FmO FmO",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FmO FFF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm Fmm FFm",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO FmF FFm",
+    "n": 2,
+    "c1": 2,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FmO FFF FFO",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FFF FmO",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FOO FFm Fmm",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FFm FmF",
+    "n": 2,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FOF FOF FOF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FFF FOF mOF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFF FFF mmF",
+    "n": 1,
+    "c1": 1,
+    "c2": 1,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FOF FFF mmF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FFO FFO FFm",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO FFF FmO",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm Fmm FOF",
+    "n": 1,
+    "c1": 0,
+    "c2": 1,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FFF FFO",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO FmO FFF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFF Fmm FFF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FFF FFO FFO",
+    "n": 1,
+    "c1": 1,
+    "c2": 0,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FFO FFO Fmm",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FmF FFO FOm",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FmO FOO FmO",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFF FFm FmF",
+    "n": 1,
+    "c1": 1,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "Fmm FFF FFF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO FFm FmF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FFO FFO",
+    "n": 1,
+    "c1": 1,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFF FFm FFF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "FOF FmO FFF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFm FFm FFF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FOO FOO FmO",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FOO FmF FFm",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FmO FFF FFm",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FmO FFO FmF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FmF FmO FOF",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FFO FFm Fmm",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   }
+  ],
+  "marche": [
+   {
+    "forme": "FFF",
+    "n": 3175,
+    "c1": 988,
+    "c2": 524,
+    "c3": 422,
+    "exact3": 54,
+    "les3": 230,
+    "auMoins2": 1655
+   },
+   {
+    "forme": "FFm",
+    "n": 3,
+    "c1": 1,
+    "c2": 1,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   }
+  ],
+  "forme": [
+   {
+    "forme": "FFF",
+    "n": 932,
+    "c1": 316,
+    "c2": 166,
+    "c3": 137,
+    "exact3": 21,
+    "les3": 79,
+    "auMoins2": 502
+   },
+   {
+    "forme": "FFm",
+    "n": 525,
+    "c1": 173,
+    "c2": 88,
+    "c3": 81,
+    "exact3": 12,
+    "les3": 43,
+    "auMoins2": 277
+   },
+   {
+    "forme": "FmF",
+    "n": 386,
+    "c1": 112,
+    "c2": 71,
+    "c3": 47,
+    "exact3": 5,
+    "les3": 24,
+    "auMoins2": 205
+   },
+   {
+    "forme": "mFF",
+    "n": 223,
+    "c1": 55,
+    "c2": 37,
+    "c3": 33,
+    "exact3": 3,
+    "les3": 12,
+    "auMoins2": 111
+   },
+   {
+    "forme": "FFO",
+    "n": 188,
+    "c1": 61,
+    "c2": 25,
+    "c3": 16,
+    "exact3": 5,
+    "les3": 13,
+    "auMoins2": 96
+   },
+   {
+    "forme": "Fmm",
+    "n": 141,
+    "c1": 47,
+    "c2": 21,
+    "c3": 15,
+    "exact3": 1,
+    "les3": 8,
+    "auMoins2": 76
+   },
+   {
+    "forme": "mFm",
+    "n": 112,
+    "c1": 27,
+    "c2": 14,
+    "c3": 14,
+    "exact3": 1,
+    "les3": 9,
+    "auMoins2": 52
+   },
+   {
+    "forme": "FOF",
+    "n": 110,
+    "c1": 29,
+    "c2": 20,
+    "c3": 16,
+    "exact3": 2,
+    "les3": 7,
+    "auMoins2": 57
+   },
+   {
+    "forme": "mmF",
+    "n": 90,
+    "c1": 31,
+    "c2": 18,
+    "c3": 14,
+    "exact3": 2,
+    "les3": 8,
+    "auMoins2": 57
+   },
+   {
+    "forme": "OFF",
+    "n": 69,
+    "c1": 19,
+    "c2": 10,
+    "c3": 9,
+    "exact3": 0,
+    "les3": 4,
+    "auMoins2": 35
+   },
+   {
+    "forme": "FmO",
+    "n": 65,
+    "c1": 25,
+    "c2": 8,
+    "c3": 3,
+    "exact3": 0,
+    "les3": 5,
+    "auMoins2": 40
+   },
+   {
+    "forme": "mFO",
+    "n": 54,
+    "c1": 14,
+    "c2": 11,
+    "c3": 6,
+    "exact3": 0,
+    "les3": 1,
+    "auMoins2": 26
+   },
+   {
+    "forme": "FOm",
+    "n": 52,
+    "c1": 17,
+    "c2": 4,
+    "c3": 8,
+    "exact3": 1,
+    "les3": 2,
+    "auMoins2": 24
+   },
+   {
+    "forme": "mmm",
+    "n": 37,
+    "c1": 8,
+    "c2": 5,
+    "c3": 6,
+    "exact3": 0,
+    "les3": 4,
+    "auMoins2": 12
+   },
+   {
+    "forme": "OmF",
+    "n": 35,
+    "c1": 10,
+    "c2": 6,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 4,
+    "auMoins2": 15
+   },
+   {
+    "forme": "OFm",
+    "n": 33,
+    "c1": 8,
+    "c2": 5,
+    "c3": 5,
+    "exact3": 0,
+    "les3": 2,
+    "auMoins2": 13
+   },
+   {
+    "forme": "mOF",
+    "n": 26,
+    "c1": 6,
+    "c2": 3,
+    "c3": 3,
+    "exact3": 0,
+    "les3": 1,
+    "auMoins2": 13
+   },
+   {
+    "forme": "OFO",
+    "n": 21,
+    "c1": 6,
+    "c2": 3,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 3,
+    "auMoins2": 8
+   },
+   {
+    "forme": "FOO",
+    "n": 19,
+    "c1": 5,
+    "c2": 3,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 6
+   },
+   {
+    "forme": "OOF",
+    "n": 15,
+    "c1": 7,
+    "c2": 2,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 9
+   },
+   {
+    "forme": "mmO",
+    "n": 13,
+    "c1": 4,
+    "c2": 1,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 6
+   },
+   {
+    "forme": "Omm",
+    "n": 9,
+    "c1": 3,
+    "c2": 0,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "mOm",
+    "n": 9,
+    "c1": 4,
+    "c2": 1,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 5
+   },
+   {
+    "forme": "OOm",
+    "n": 5,
+    "c1": 1,
+    "c2": 1,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "mOO",
+    "n": 4,
+    "c1": 1,
+    "c2": 2,
+    "c3": 1,
+    "exact3": 1,
+    "les3": 1,
+    "auMoins2": 3
+   },
+   {
+    "forme": "OmO",
+    "n": 4,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "OOO",
+    "n": 1,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   }
+  ],
+  "palmares": [
+   {
+    "forme": "FFF",
+    "n": 3041,
+    "c1": 943,
+    "c2": 508,
+    "c3": 409,
+    "exact3": 52,
+    "les3": 222,
+    "auMoins2": 1602
+   },
+   {
+    "forme": "OmO",
+    "n": 11,
+    "c1": 8,
+    "c2": 4,
+    "c3": 2,
+    "exact3": 2,
+    "les3": 4,
+    "auMoins2": 6
+   },
+   {
+    "forme": "mFF",
+    "n": 10,
+    "c1": 4,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "FmO",
+    "n": 10,
+    "c1": 3,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 5
+   },
+   {
+    "forme": "FFO",
+    "n": 8,
+    "c1": 5,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "mmm",
+    "n": 8,
+    "c1": 4,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 4
+   },
+   {
+    "forme": "OOm",
+    "n": 6,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "mmF",
+    "n": 6,
+    "c1": 0,
+    "c2": 1,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "mFm",
+    "n": 6,
+    "c1": 0,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 4
+   },
+   {
+    "forme": "mOF",
+    "n": 6,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FOF",
+    "n": 6,
+    "c1": 2,
+    "c2": 0,
+    "c3": 3,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FFm",
+    "n": 6,
+    "c1": 2,
+    "c2": 4,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "mOm",
+    "n": 5,
+    "c1": 0,
+    "c2": 2,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 2,
+    "auMoins2": 4
+   },
+   {
+    "forme": "OFF",
+    "n": 5,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 1
+   },
+   {
+    "forme": "OmF",
+    "n": 5,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "Omm",
+    "n": 5,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "Fmm",
+    "n": 4,
+    "c1": 3,
+    "c2": 0,
+    "c3": 1,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "OOF",
+    "n": 4,
+    "c1": 2,
+    "c2": 0,
+    "c3": 2,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "OOO",
+    "n": 4,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "OFm",
+    "n": 4,
+    "c1": 2,
+    "c2": 2,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "OFO",
+    "n": 3,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "mFO",
+    "n": 3,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   },
+   {
+    "forme": "FmF",
+    "n": 3,
+    "c1": 1,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "FOO",
+    "n": 3,
+    "c1": 1,
+    "c2": 0,
+    "c3": 3,
+    "exact3": 0,
+    "les3": 2,
+    "auMoins2": 3
+   },
+   {
+    "forme": "FOm",
+    "n": 3,
+    "c1": 0,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 3
+   },
+   {
+    "forme": "mmO",
+    "n": 2,
+    "c1": 2,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 2
+   },
+   {
+    "forme": "mOO",
+    "n": 1,
+    "c1": 1,
+    "c2": 0,
+    "c3": 0,
+    "exact3": 0,
+    "les3": 0,
+    "auMoins2": 0
+   }
+  ]
+ }
 }

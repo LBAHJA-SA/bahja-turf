@@ -1,4 +1,4 @@
-// backend/COUPLE/moteur.js — LE MOTEUR « EMPREINTE DU COUPLÉ », côté page.
+// backend/COUPLE/moteur.js — LE MOTEUR « EMPREINTE DU COUPLÉ » v2, côté page.
 //
 // Importé par frontend/COUPLE/Couple.jsx UNIQUEMENT. Ne pas partager.
 //
@@ -7,18 +7,12 @@
 //   (construite par `node tools/moteur-couple.mjs`, 3 986 courses).
 //
 // ─────────────────────────────────────────────────────────────────────────
-// LA RÈGLE (vision du 07/10/2026, mesurée sur 3 986 courses)
-//
-//   1. Le trio CANDIDAT = top-3 de la cote (le meilleur critère isolé).
-//   2. Sa FORME = tiers(marché) + tiers(forme) + tiers(palmarès), calculés
-//      DANS LA COURSE (jamais de seuils absolus).
-//   3. On cherche la forme dans la base : n apparitions, P(3/3), P(les3).
-//   4. FORTE = n ≥ 10 ET P(3/3) ≥ 2× baseline. Sinon on PASSE.
-//
-// ⚠ ÉTAT AU 07/10/2026 : 0 forme forte sur 98. Le moteur PASSE donc
-//   partout — c'est honnête, pas un bug. Le seul signal stable trouvé
-//   (favori ≤3 → 2.69% contre 1.70% de baseline) est affiché en INFO,
-//   pas en décision : il n'est pas encore validé comme règle.
+// v2 (critique du 07/10/2026 — juste) : on n'exige plus la forme EXACTE à
+// 9 caractères (875 formes sur 3 986 trios — aucune ne revenait 10 fois).
+// On interroge 4 NIVEAUX — complet, marché, forme, palmarès — et pour
+// chacun 4 QUESTIONS : les3 ? auMoins2 ? le 1er finit-il 1er ? le 2e 2e ?
+// FORTE = n ≥ 10 ET taux ≥ 2× baseline(de la question).
+// JOUER = au moins une réponse forte, sur n'importe quel niveau.
 
 /* ─────────────────────────────────────────────────────── les couches ──── */
 
@@ -58,11 +52,6 @@ function coteDe(p) {
 
 /* ─────────────────────────────────────────────────────── le moteur ────── */
 
-/**
- * Le trio candidat : top-3 de la cote. `null` s'il manque des cotes.
- * Les partants viennent de `/api/couple` (déjà normalisés : num, cheval,
- * driver, cote, musique, valeur, gains, corde, poids, age…).
- */
 export function trioCandidat(partants) {
   const ps = (partants || [])
     .map((p) => ({ num: p.num, v: coteDe(p) }))
@@ -73,61 +62,93 @@ export function trioCandidat(partants) {
 }
 
 /**
- * La forme D'UN trio : les trois couches, dans la course.
+ * Les 4 niveaux d'un trio : complet + une entrée par couche.
  * `null` si un des trois manque ou n'a pas de cote.
  */
-export function formeDe(partants, trio) {
+export function niveauxDe(partants, trio) {
   const parNum = new Map((partants || []).map((p) => [p.num, p]))
   if (!trio || trio.some((n) => !parNum.get(n))) return null
   const cotes = partants.map(coteDe).filter(Number.isFinite)
-  const formes = partants.map((p) => formeScore(p.musique))
-  const palms = partants.map((p) => palmares(p))
   if (!cotes.length) return null
   const tC = tiers(cotes, 'bas')
-  const tF = tiers(formes, 'haut')
-  const tP = tiers(palms, 'haut')
-  return trio.map((n) => {
+  const tF = tiers(partants.map((p) => formeScore(p.musique)), 'haut')
+  const tP = tiers(partants.map((p) => palmares(p)), 'haut')
+  const couches = trio.map((n) => {
     const p = parNum.get(n)
-    return tC(coteDe(p)) + tF(formeScore(p.musique)) + tP(palmares(p))
-  }).join(' ')
+    return {
+      m: tC(coteDe(p)),
+      f: tF(formeScore(p.musique)),
+      p: tP(palmares(p)),
+    }
+  })
+  const m = couches.map((c) => c.m).join('')
+  const f = couches.map((c) => c.f).join('')
+  const p = couches.map((c) => c.p).join('')
+  return {
+    complet: couches.map((c) => c.m + c.f + c.p).join(' '),
+    marche: m, forme: f, palmares: p,
+  }
 }
 
+const QUESTIONS = [
+  ['les3', 'les 3 dans le Top3'],
+  ['auMoins2', 'au moins 2 dans le Top3'],
+  ['c1', 'le 1er finit 1er'],
+  ['c2', 'le 2e finit 2e'],
+  ['exact3', 'podium exact'],
+]
+
 /**
- * Le verdict : le trio, sa forme, son historique, et la décision.
+ * Le verdict : le trio, ses 4 niveaux, et pour chacun les réponses fortes.
  *
- *   db = public/data/empreinte.json { baseline, formes: [{forme,n,pExact,pLes3}] }
+ *   db = public/data/empreinte.json
+ *     { baselines: {les3, auMoins2, c1, c2, exact3},
+ *       seuils: {n, facteur},
+ *       niveaux: {complet: [{forme,n,c1,c2,c3,exact3,les3,auMoins2}], …} }
  *
- *   forte = n ≥ 10 ET pExact ≥ 2× baseline   →  JOUER
- *   sinon                                    →  PASSER
- *
- * `infoFavori` rappelle le seul signal stable mesuré (favori ≤3 → 2.69%) :
- * affiché, jamais décisif tant qu'il n'est pas validé comme règle.
+ *   Pour chaque niveau : on cherche la forme, et pour chaque question on
+ *   compare au double de sa baseline (n ≥ 10 exigé).
+ *   jouer = au moins une réponse forte, sur n'importe quel niveau.
  */
 export function verdict(partants, db) {
   const trio = trioCandidat(partants)
   if (!trio) return { trio: null, raison: 'pas assez de cotes' }
-  const forme = formeDe(partants, trio)
-  if (!forme) return { trio, forme: null, raison: 'forme incalculable' }
+  const niveaux = niveauxDe(partants, trio)
+  if (!niveaux) return { trio, raison: 'forme incalculable' }
 
-  const e = (db?.formes || []).find((x) => x.forme === forme) || null
-  const baseline = Number(db?.baseline ?? 1.7)
-  const forte = !!e && e.n >= 10 && e.pExact >= baseline * 2
+  const seuils = db?.seuils || { n: 10, facteur: 2 }
+  const base = db?.baselines || {}
+  const reponses = []
+
+  for (const niveau of ['complet', 'marche', 'forme', 'palmares']) {
+    const table = db?.niveaux?.[niveau] || []
+    const e = table.find((x) => x.forme === niveaux[niveau])
+    if (!e || e.n < (seuils.n ?? 10)) continue
+    for (const [cle, label] of QUESTIONS) {
+      const taux = e[cle] / e.n * 100
+      const seuil = (base[cle] ?? 0) * (seuils.facteur ?? 2)
+      if (taux >= seuil) {
+        reponses.push({
+          niveau, forme: niveaux[niveau],
+          question: label, taux: +taux.toFixed(1),
+          nb: e[cle], n: e.n,
+          forte: true,
+        })
+      }
+    }
+  }
 
   const parNum = new Map((partants || []).map((p) => [p.num, p]))
   const fav = trio.map((n) => coteDe(parNum.get(n))).sort((a, b) => a - b)[0]
 
   return {
     trio,
-    forme,
-    n: e?.n ?? 0,
-    pExact: e?.pExact ?? 0,
-    pLes3: e?.pLes3 ?? 0,
-    baseline,
-    forte,
-    jouer: forte,
+    niveaux,
+    reponses,
+    jouer: reponses.length > 0,
     infoFavori: {
       cote: Number.isFinite(fav) ? fav : null,
-      // le seul signal stable (2.69% sur n=2232) — INFO, pas décision
+      // le seul signal numérique stable (2.69% sur n=2232) — INFO, pas décision
       signal: Number.isFinite(fav) && fav <= 3,
     },
   }
