@@ -1385,3 +1385,112 @@ P(n) بلا données (n<2) →  0%   (pas de force = pas de place)
 
 **Code :** `ordonnerParStats()` — `src/lib/quinte.js` ligne ~815.
 `force(num)` = `max(p[0..4])` ديال P(n)، **0 إذا n<2** (bruit), départage par la cote.
+---
+
+## 18. ⭐ LA RÈGLE DE VÉRIFICATION D'UNE NOUVELLE SOURCE (07/10/2026)
+
+> **Écrit de 5 bugs en une seule journée.** Chacun était visible **au premier run**.
+
+### 18.1 Les 5 pièges (tous rencontrés le 07/10)
+
+| # | Piège | Symptôme | Correctif |
+|---|---|---|---|
+| **1** | Le proxy **mange la query string** — `vercel.json` réécrit `/api/tf/<x>` → `/api/tf?p=<x>` | `reu.php?view=program&date=…` arrivait **sans paramètres** → page d'accueil (3 935 o) au lieu du programme (132 165 o) | Encoder le chemin dans `?p=` (`api/_proxy.js` le fait déjà) |
+| **2** | Vercel répond **200 + index.html** pour un fichier absent | `r.ok === true` sur un 404 déguisé → `j.v` undefined → page cassée plus loin | Vérifier `content-type: application/json` **ET** `j.v === 2 && j.participants.length` |
+| **3** | Le **nom du champ** diffère entre sources | `reu.php` dit `cheval`, `e-sorec` dit `horse` ; la page lit `p.cheval` et `p.driver` → colonnes vides | Écrire **les deux noms** (`cheval` + `nom`, `driver` + `jockey`) |
+| **4** | Un `fetch` **par course** | 65 requêtes ≈ 13 s → la page montrait **32 courses sur 65** | **Une** requête : réécrire `prog-{date}.json` avec les distances après la collecte |
+| **5** | Le numéro de réunion est **local à chaque site** | `R14` = Horseshoe (US) sur un site, réunion 14 inexistante chez nous | Le **pays voyage dans l'URL** (`?pays=NORV`) et le fichier porte son suffixe (`_NORV`) |
+
+### 18.2 Les 3 vérifications — AVANT de croire que ça marche
+
+```
+① LE CONTENU
+   La réponse est-elle la bonne page ?
+   reu.php ?view=program  →  ≥ 20 000 o ET contient « view=detail »
+   (la page d'accueil fait 3 935 o et passe pour un HTTP 200)
+
+② LE TYPE
+   Content-Type: application/json ?
+   Un 200 + text/html est un FICHIER ABSENT déguisé par le rewrite SPA.
+
+③ LES 3 PREMIERS ENREGISTREMENTS
+   Les noms s'affichent-ils ? le premier, le deuxième, le troisième ?
+   Un seul enregistrement vérifié laisse passer un bug de schéma
+   (le bug ③ : 8 courses archivées, 0 nom affiché).
+```
+
+### 18.3 Ce qui est FIXE (ne plus y toucher)
+
+```
+Le Quinté
+  quotas 3-2-1-1-1            §11.16 — jamais modifiés
+  P(n) = case du carnet       §17.1  — pairs en haut, impairs en bas
+  ordre du ticket             §17.2  — la place où le P est le plus fort
+  le premier ticket est gelé  §13.3  — la SÉLECTION, pas l'ordre
+  archive                      data/synthese.json, publiée par
+                               tools/publier-archive.mjs — jamais par le job
+
+Les sources
+  programme   turf-france reu.php   (+ e-sorec pour le Maghreb)
+  marché      equidia.fr / rapp_evol
+  presse      pronostics-turf.info
+  carrière   casacourses (auto)
+```
+
+### 18.4 Ce qui est EN COURS DE DÉVELOPPEMENT
+
+```
+Programme / Article  → encore instable le 07/10 (5 bugs)
+```
+
+**Tant que cette section n'est pas passée en « fixe », chaque nouveau run
+doit passer par les 3 vérifications ci-dessus.**
+
+---
+
+## 19. ⭐ LE PROGRAMME ET LES FICHERS DE COURSE (07/10/2026)
+
+### 19.1 Qui fournit quoi
+
+| Source | Donne | Pour |
+|---|---|---|
+| `reu.php?view=program&date=` | la liste des réunions + R/C + pays | le Programme |
+| `reu.php?view=detail&date=&reunion=R&course=C&pays=` | partants, poids, musique, résultat | la fiche /r/ |
+| `e-sorec.ma/api/meetings?date=` | les réunions que reu.php ne publie pas (Maroc) | R9 Khemisset |
+| `e-sorec.ma/api/races/{id}` | noms, jockeys, entraîneurs, poids | le Maghreb, en détail |
+| `casacourses/api/programme?date=` | le repli : le numéro de réunion du jour | le Maghreb |
+| `casacourses/api/race/{id}` | peu : les noms y sont vides | dépannage |
+
+**reu.php ne donne NI la distance NI le nombre de partants.** Ils viennent
+de `prog-{date}.json`, réécrit par le collecteur après la collecte.
+
+### 19.2 Le collecteur
+
+```
+node tools\archive-reu.mjs 2026-10-07
+  ① reu.php        la référence (France, Norvège, Suède, GB, HK…)
+  ② e-sorec       le Maghreb — avec les noms
+  ③ casacourses    le dépannage — sans les noms, on ne comble rien (§7)
+
+→ data/reu/ ET public/data/reu/
+→ réécrit prog-{date}.json avec distance, partants, arrivée
+```
+
+**Publier ensuite** (le dossier `public/data/reu/` est ignoré par git) :
+
+```
+git add -f public/data/reu && git commit && git push
+```
+
+### 19.3 Ce que la page lit, et sous quel nom
+
+```
+p.cheval      p.driver      p.entraineur    p.poids
+p.num        p.cote        p.coteRef       p.depart
+p.musique    p.gains       p.valeur        p.proprietaire
+p.chrono     p.def         p.silk          p.dernierPassage
+```
+
+**Les deux noms sont écrits** (`cheval` ET `nom`, `driver` ET `jockey`) parce
+que les sources ne s'accordent pas sur le vocabulaire — et une page qui lit un
+champ absent affiche `—` sans dire pourquoi.
