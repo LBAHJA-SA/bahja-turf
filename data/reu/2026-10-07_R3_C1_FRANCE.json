@@ -28,7 +28,7 @@
    "cheval": "BOURGOIN",
    "driver": "PC. BOUDOT",
    "entraineur": "F. CHAPPET",
-   "cote": 7.8,
+   "cote": 8.1,
    "coteRef": 14.8,
    "musique": "1p6p0p8p6p3p4p0p(25)1p",
    "gains": 42626,
@@ -50,7 +50,7 @@
    "cheval": "ETCHEBASTER",
    "driver": "S. PASQUIER",
    "entraineur": "CLEMENT & HERMANS",
-   "cote": 7.7,
+   "cote": 6.9,
    "coteRef": 3,
    "musique": "4p3p3p3p4p5p(25)1p",
    "gains": 36612,
@@ -72,7 +72,7 @@
    "cheval": "STREET SHOW",
    "driver": "M. GUYON",
    "entraineur": "P & J. BRANDT",
-   "cote": 2.1,
+   "cote": 2.2,
    "coteRef": 9.8,
    "musique": "6p2p6p7p2p(25)2p1p2p3p",
    "gains": 129338,
@@ -94,7 +94,7 @@
    "cheval": "GIZMO",
    "driver": "T. BACHELOT",
    "entraineur": "G. BIETOLINI",
-   "cote": 17,
+   "cote": 18,
    "coteRef": null,
    "musique": "5p6p(25)3p1p",
    "gains": 7959,
@@ -116,7 +116,7 @@
    "cheval": "VIVA LA SKIDS",
    "driver": "S. KIRRANE",
    "entraineur": "A. WEST",
-   "cote": 7.3,
+   "cote": 7.1,
    "coteRef": 23.5,
    "musique": "3p5p0p0p6p1p(25)4p1p1p",
    "gains": 54013,
@@ -160,7 +160,7 @@
    "cheval": "TIMES JUBILEE",
    "driver": "A. MADAMET",
    "entraineur": "V. HEAD",
-   "cote": 14,
+   "cote": 13,
    "coteRef": 30,
    "musique": "4p4p4p4p2p4p",
    "gains": 18494,
@@ -224,8 +224,8 @@
   "topCotesDirect": [
    "3",
    "6",
-   "5",
    "2",
+   "5",
    "1",
    "7",
    "4"
@@ -408,5 +408,5 @@
   "3 - 2 - 1 - 7 - 6",
   "2 - 3 - 7"
  ],
- "collecteLe": "2026-10-07T08:57:57.669Z"
+ "collecteLe": "2026-10-07T09:07:32.285Z"
 }

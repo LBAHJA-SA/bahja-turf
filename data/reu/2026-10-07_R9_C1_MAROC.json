@@ -1,73 +1,74 @@
 {
  "v": 2,
  "pv": 4,
- "source": "API programme (reu.php ne publie pas ce pays)",
+ "source": "e-sorec (reu.php ne publie pas ce pays)",
  "race": {
   "numOrdre": 1,
   "nom": "CHAPO",
   "distance": 1200,
-  "type": "N",
+  "type": "T",
   "date": "2026-10-07",
-  "nbPartants": 5
+  "nbPartants": 5,
+  "meteo": "20.71"
  },
  "meeting": {
   "num": 9,
   "hippodrome": "Khemisset",
-  "pays": "MA"
+  "pays": "MAR"
  },
  "participants": [
   {
-   "num": "1",
-   "nom": "",
-   "poids": 55.5,
-   "jockey": "",
-   "entraineur": "",
+   "num": 1,
+   "nom": "NOEMI",
+   "poids": "55,5",
+   "jockey": "ARROMALI MOHAMMED",
+   "entraineur": "AL MOURTAKI MOHAMMED",
    "valeur": null,
    "musique": "",
    "place": null
   },
   {
-   "num": "2",
-   "nom": "",
-   "poids": 55,
-   "jockey": "",
-   "entraineur": "",
+   "num": 2,
+   "nom": "MERCI OASIS",
+   "poids": "55",
+   "jockey": "BENDIA ABDELAKRIME",
+   "entraineur": "EL OUARGHI KHALID",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 3,
+   "nom": "MAJDA AL ASIL",
+   "poids": "54,5",
+   "jockey": "MOUGHAT AMINE",
+   "entraineur": "CHERKAOUI LARBI",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 4,
+   "nom": "BENT EL GHABA",
+   "poids": "53,5",
+   "jockey": "ARROMALI AYOUB",
+   "entraineur": "LAZRAK ABDELHAQ",
    "valeur": null,
    "musique": "",
    "place": null
   },
   {
-   "num": "3",
-   "nom": "",
-   "poids": 54.5,
-   "jockey": "",
-   "entraineur": "",
+   "num": 5,
+   "nom": "FLORIDA BOGAR",
+   "poids": "53",
+   "jockey": "BENDAMOU ABDELLAH",
+   "entraineur": "ESRARFI BOUCHAIB",
    "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "4",
-   "nom": "",
-   "poids": 53.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "5",
-   "nom": "",
-   "poids": 53,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
+   "musique": "    ",
    "place": null
   }
  ],
  "arrivee": [],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T08:59:17.310Z"
+ "collecteLe": "2026-10-07T09:08:53.042Z"
 }

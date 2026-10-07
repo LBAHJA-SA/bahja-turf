@@ -72,7 +72,7 @@
    "cheval": "OMARBEK",
    "driver": "S. PASQUIER",
    "entraineur": "HA. PANTALL",
-   "cote": 9.4,
+   "cote": 10,
    "coteRef": null,
    "musique": "8p5p",
    "gains": 584,
@@ -138,7 +138,7 @@
    "cheval": "CALYX EXPRESS",
    "driver": "C. DEMURO",
    "entraineur": "L. BLANCHET",
-   "cote": 6.4,
+   "cote": 6.5,
    "coteRef": null,
    "musique": "6p2p",
    "gains": 8684,
@@ -182,7 +182,7 @@
    "cheval": "GOOSEMAN",
    "driver": "P. REMOUE",
    "entraineur": "L. BAUDRON",
-   "cote": 21,
+   "cote": 22,
    "coteRef": null,
    "musique": "9p",
    "gains": 0,
@@ -204,7 +204,7 @@
    "cheval": "WILD TRUE",
    "driver": "A. MADAMET",
    "entraineur": "M. DELCHER SANCHEZ",
-   "cote": 12,
+   "cote": 10,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -453,5 +453,5 @@
   "2 - 6 - 3 - 1 - 4 - 7",
   "3 - 7 - 8"
  ],
- "collecteLe": "2026-10-07T08:57:59.576Z"
+ "collecteLe": "2026-10-07T09:07:34.196Z"
 }

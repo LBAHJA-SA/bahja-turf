@@ -28,7 +28,7 @@
    "cheval": "KINIRO",
    "driver": "OISIN MURPHY",
    "entraineur": "DAN HORSFORD",
-   "cote": 6,
+   "cote": 6.2,
    "coteRef": null,
    "musique": "9p7p3p8p2p",
    "gains": 27171,
@@ -50,7 +50,7 @@
    "cheval": "CALLING A STAR",
    "driver": "FINLEY MARSH",
    "entraineur": "RICHARD HUGHES",
-   "cote": 19,
+   "cote": 20,
    "coteRef": null,
    "musique": "0p0p4p1p7p",
    "gains": 24996,
@@ -72,7 +72,7 @@
    "cheval": "MADMAN",
    "driver": "BILLY LOUGHNANE",
    "entraineur": "RACHEL COOK & JOHN BRIDGER",
-   "cote": 1.8,
+   "cote": 1.9,
    "coteRef": 4.8,
    "musique": "1p3p1p1p6p",
    "gains": 25364,
@@ -94,7 +94,7 @@
    "cheval": "CHARLIE BOYO",
    "driver": "GEORGIA DOBIE",
    "entraineur": "CLIVE COX",
-   "cote": 9.7,
+   "cote": 10,
    "coteRef": null,
    "musique": "3p2p1p9p6p",
    "gains": 9853,
@@ -116,7 +116,7 @@
    "cheval": "KING OF CHAOS",
    "driver": "MARCO GHIANI",
    "entraineur": "DYLAN CUNHA",
-   "cote": null,
+   "cote": 20,
    "coteRef": 8.3,
    "musique": "9p0p7p1p7p",
    "gains": 16711,
@@ -226,7 +226,7 @@
    "cheval": "BLUE ORBIT",
    "driver": "LUKE MORRIS",
    "entraineur": "TOM WARD",
-   "cote": 9.7,
+   "cote": 10,
    "coteRef": null,
    "musique": "7p6p4p5p0p",
    "gains": 14965,
@@ -248,7 +248,7 @@
    "cheval": "UP THE AGENDA",
    "driver": "GEORGE WOOD",
    "entraineur": "JACK MORLAND",
-   "cote": 4.8,
+   "cote": 5.1,
    "coteRef": null,
    "musique": "9p4p6p8p7p",
    "gains": 19459,
@@ -338,7 +338,8 @@
    "1",
    "4",
    "10",
-   "2"
+   "2",
+   "5"
   ],
   "topChevaux": [
    "3",
@@ -574,5 +575,5 @@
   "6 - 8 - 3 - 4 - 1 - 2 - 9",
   "7 - 2 - 6"
  ],
- "collecteLe": "2026-10-07T08:58:37.495Z"
+ "collecteLe": "2026-10-07T09:08:12.293Z"
 }

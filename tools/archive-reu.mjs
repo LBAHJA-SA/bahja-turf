@@ -88,39 +88,76 @@ async function collecterJour(date) {
     } catch (e) { /* on tente l'API */ }
 
     // ② l'API du programme, pour ce que reu.php ne publie pas (Maroc).
-    //    Les noms de chevaux y sont souvent vides : on ne comble JAMAIS,
-    //    on archive ce qui existe et le fichier le dit (`source`).
+    //    ⚠ 07/10 : e-sorec d'abord (il donne le NOM du cheval, le jockey,
+    //    l'entraîneur, le poids, la forme) ; casacourses ensuite (noms vides,
+    //    donc on ne garde que ce qui existe, jamais de relleno — §7).
     if (!obj) {
+      // ②a e-sorec : le seul qui nomme les chevaux du Maghreb
       try {
-        const r = await fetch('https://pro.casacourses.com/api/programme?date=' + date, { headers: { Accept: 'application/json' } })
-        const j = await r.json()
-        const m = (j.meetings || []).find((x) => Number(String(x.reunion_code || '').replace(/\D/g, '')) === rNum)
-        const rc = m && (m.races || []).find((x) => Number(String(x.code || '').replace(/\D/g, '')) === cNum)
-        if (rc && rc.id) {
-          const det = await fetch(`https://pro.casacourses.com/api/race/${rc.id}`, { headers: { Accept: 'application/json' } }).then((x) => x.json())
-          const partants = (det.runners || []).filter((r2) => r2.number).map((r2) => ({
-            num: r2.number, nom: r2.name || '', poids: r2.weight ?? null,
-            jockey: r2.jockey || '', entraineur: r2.trainer || '', valeur: r2.value ?? null,
-            musique: r2.musique || '', place: r2.finish ?? null,
+        const prog = await fetch('https://e-sorec.ma/api/meetings?date=' + date, { headers: { Accept: 'application/json' } }).then((x) => x.json())
+        const ev = (prog?.content?.events || []).find((x) => Number(String(x.code || '').replace(/\D/g, '')) === rNum)
+        const rc = ev && (ev.races || []).find((x) => Number(String(x.code || '').replace(/\D/g, '')) === cNum)
+        if (rc?.id) {
+          const det = await fetch('https://e-sorec.ma/api/races/' + rc.id, { headers: { Accept: 'application/json' } }).then((x) => x.json())
+          const ct = det?.content || {}
+          const partants = (ct.runners || []).filter((r2) => r2.startnr).map((r2) => ({
+            num: r2.startnr,
+            nom: String(r2.horse?.name || '').replace(/\s*\([^)]*\)\s*$/, ''),
+            poids: r2.weight ?? null,
+            jockey: r2.rider?.name || '',
+            entraineur: r2.horse?.trainer || '',
+            valeur: null,
+            musique: (r2.horse?.forms || []).map((f) => `${f.pos || ''}${f.running || ''}`).join(' ') || '',
+            place: r2.finishorder || null,
           }))
           if (partants.length) {
             obj = {
-              v: 2, pv: 4, source: 'API programme (reu.php ne publie pas ce pays)',
+              v: 2, pv: 4, source: 'e-sorec (reu.php ne publie pas ce pays)',
               race: {
-                numOrdre: cNum, nom: rc.name || '', distance: rc.distance || null,
-                type: rc.type || '', date, nbPartants: partants.length,
+                numOrdre: cNum, nom: ct.name || rc.name || '', distance: ct.distance || null,
+                type: ct.type || '', date, nbPartants: partants.length,
+                meteo: ct.weather_temp != null ? String(ct.weather_temp) : null,
               },
               meeting: {
-                num: rNum, hippodrome: String(m.track || m.label || ''),
-                pays: String(m.country || pays).toUpperCase(),
+                num: rNum, hippodrome: String(ev.track || '').replace(/\s*\([^)]*\)\s*$/, ''),
+                pays: String(ev.country || pays).trim().toUpperCase(),
               },
               participants: partants,
-              arrivee: (rc.finish_order || []).map(Number).filter(Number.isFinite),
+              arrivee: (ct.runners || []).filter((r2) => r2.finishorder)
+                .sort((a, b) => a.finishorder - b.finishorder).map((r2) => r2.startnr),
               contenuBrut: null,
             }
           }
         }
-      } catch (e2) { /* ni l'un ni l'autre : on compte un échec */ }
+      } catch (e2) { /* e-sorec indisponible : on tente casacourses */ }
+
+      // ②b casacourses : les identifiants sont là, pas toujours les noms
+      if (!obj) {
+        try {
+          const r = await fetch('https://pro.casacourses.com/api/programme?date=' + date, { headers: { Accept: 'application/json' } })
+          const j = await r.json()
+          const m = (j.meetings || []).find((x) => Number(String(x.reunion_code || '').replace(/\D/g, '')) === rNum)
+          const rc = m && (m.races || []).find((x) => Number(String(x.code || '').replace(/\D/g, '')) === cNum)
+          if (rc && rc.id) {
+            const det = await fetch(`https://pro.casacourses.com/api/race/${rc.id}`, { headers: { Accept: 'application/json' } }).then((x) => x.json())
+            const partants = (det.runners || []).filter((r2) => r2.number).map((r2) => ({
+              num: r2.number, nom: r2.name || '', poids: r2.weight ?? null,
+              jockey: r2.jockey || '', entraineur: r2.trainer || '', valeur: r2.value ?? null,
+              musique: r2.musique || '', place: r2.finish ?? null,
+            }))
+            if (partants.length) {
+              obj = {
+                v: 2, pv: 4, source: 'API programme (noms indisponibles)',
+                race: { numOrdre: cNum, nom: rc.name || '', distance: rc.distance || null, type: rc.type || '', date, nbPartants: partants.length },
+                meeting: { num: rNum, hippodrome: String(m.track || m.label || ''), pays: String(m.country || pays).toUpperCase() },
+                participants: partants,
+                arrivee: (rc.finish_order || []).map(Number).filter(Number.isFinite),
+                contenuBrut: null,
+              }
+            }
+          }
+        } catch (e3) { /* ni l'un ni l'autre : on compte un échec */ }
+      }
     }
 
     if (obj && obj.participants?.length) {

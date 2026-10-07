@@ -1,107 +1,108 @@
 {
  "v": 2,
  "pv": 4,
- "source": "API programme (reu.php ne publie pas ce pays)",
+ "source": "e-sorec (reu.php ne publie pas ce pays)",
  "race": {
   "numOrdre": 4,
   "nom": "JELINA",
   "distance": 1300,
-  "type": "N",
+  "type": "T",
   "date": "2026-10-07",
-  "nbPartants": 9
+  "nbPartants": 9,
+  "meteo": "20.71"
  },
  "meeting": {
   "num": 9,
   "hippodrome": "Khemisset",
-  "pays": "MA"
+  "pays": "MAR"
  },
  "participants": [
   {
-   "num": "1",
-   "nom": "",
-   "poids": 59,
-   "jockey": "",
-   "entraineur": "",
+   "num": 1,
+   "nom": "CHEF ATLAS",
+   "poids": "59",
+   "jockey": "ARROMALI MOHAMMED",
+   "entraineur": "DAHBI MOUHCINE",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 2,
+   "nom": "LOUNA MASSIYA",
+   "poids": "58,5",
+   "jockey": "SAMIR HAMZA",
+   "entraineur": "EL KILI RACHID",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 3,
+   "nom": "DIWANE EL GHABA",
+   "poids": "58",
+   "jockey": "EL MAYMOUNY TIBARI",
+   "entraineur": "EL KOTAICHI ADAM",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 4,
+   "nom": "HIFTI ATLAS",
+   "poids": "58",
+   "jockey": "MADIHI ZOUHAIR",
+   "entraineur": "AL MOURTAKI MOHAMMED",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 5,
+   "nom": "KHALFIA FAL",
+   "poids": "55,5",
+   "jockey": "ABOUHAYANE SOUFIANE",
+   "entraineur": "BOUHAYANE ABDELMOUGHIT",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 6,
+   "nom": "MABROUKAT EL GHABA",
+   "poids": "55,5",
+   "jockey": "MOUGHAT AMINE",
+   "entraineur": "LAZRAK ABDELHAQ",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 7,
+   "nom": "KAWAM MIM",
+   "poids": "55",
+   "jockey": "BOUAROUA ICHI",
+   "entraineur": "MOUNADI IDRISSI MOUHSINE",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 8,
+   "nom": "RAYYANE AM",
+   "poids": "55",
+   "jockey": "ARROMALI AYOUB",
+   "entraineur": "GOAICHI ABDALLAH",
    "valeur": null,
    "musique": "",
    "place": null
   },
   {
-   "num": "2",
-   "nom": "",
-   "poids": 58.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "3",
-   "nom": "",
-   "poids": 58,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "4",
-   "nom": "",
-   "poids": 58,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "5",
-   "nom": "",
-   "poids": 55.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "6",
-   "nom": "",
-   "poids": 55.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "7",
-   "nom": "",
-   "poids": 55,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "8",
-   "nom": "",
-   "poids": 55,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "9",
-   "nom": "",
-   "poids": 53.5,
-   "jockey": "",
-   "entraineur": "",
+   "num": 9,
+   "nom": "MAWSILA FAL",
+   "poids": "53,5",
+   "jockey": "IBBA KHALID",
+   "entraineur": "RHATTAS BOUCHAIB",
    "valeur": null,
    "musique": "",
    "place": null
@@ -109,5 +110,5 @@
  ],
  "arrivee": [],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T08:59:23.885Z"
+ "collecteLe": "2026-10-07T09:08:58.440Z"
 }

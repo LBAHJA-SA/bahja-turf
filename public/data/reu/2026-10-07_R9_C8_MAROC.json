@@ -1,153 +1,154 @@
 {
  "v": 2,
  "pv": 4,
- "source": "API programme (reu.php ne publie pas ce pays)",
+ "source": "e-sorec (reu.php ne publie pas ce pays)",
  "race": {
   "numOrdre": 8,
   "nom": "MARESCA",
   "distance": 1700,
-  "type": "N",
+  "type": "T",
   "date": "2026-10-07",
-  "nbPartants": 13
+  "nbPartants": 13,
+  "meteo": "20.71"
  },
  "meeting": {
   "num": 9,
   "hippodrome": "Khemisset",
-  "pays": "MA"
+  "pays": "MAR"
  },
  "participants": [
   {
-   "num": "1",
-   "nom": "",
-   "poids": 58,
-   "jockey": "",
-   "entraineur": "",
+   "num": 1,
+   "nom": "AMIR JAD",
+   "poids": "58",
+   "jockey": "LAKJAL OMAR",
+   "entraineur": "SAMIE TAHAR",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 2,
+   "nom": "CHADI ISMALIYA",
+   "poids": "56,5",
+   "jockey": "BAJJOU REDA",
+   "entraineur": "BAJJOU MAHMOUD",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 3,
+   "nom": "LABIBA FAL",
+   "poids": "56,5",
+   "jockey": "MADIHI WASSIM",
+   "entraineur": "LAKHAL MOHAMED",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 4,
+   "nom": "TAAMOUL ZOUHOUR",
+   "poids": "56,5",
+   "jockey": "EL MAYMOUNY TIBARI",
+   "entraineur": "RAMDI ABDELLAH",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 5,
+   "nom": "CHAHID TASNIM",
+   "poids": "56",
+   "jockey": "BOUAROUA ICHI",
+   "entraineur": "HOUMMADI FOUAD",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 6,
+   "nom": "MOCHAHAR",
+   "poids": "56",
+   "jockey": "KHALLOUJI SAID",
+   "entraineur": "KHALLOUJI MOHAMED",
+   "valeur": null,
+   "musique": "   ",
+   "place": null
+  },
+  {
+   "num": 7,
+   "nom": "ASSAADAH",
+   "poids": "55,5",
+   "jockey": "BAYOUD AZIZ",
+   "entraineur": "BENDRAOUI ABDALLAH",
+   "valeur": null,
+   "musique": "    ",
+   "place": null
+  },
+  {
+   "num": 8,
+   "nom": "NABAB",
+   "poids": "55",
+   "jockey": "ARROMALI AYOUB",
+   "entraineur": "BAJJOU AMIN",
    "valeur": null,
    "musique": "",
    "place": null
   },
   {
-   "num": "2",
-   "nom": "",
-   "poids": 56.5,
-   "jockey": "",
-   "entraineur": "",
+   "num": 9,
+   "nom": "CHAYMA LKASBA",
+   "poids": "53,5",
+   "jockey": "MADIHI ZOUHAIR",
+   "entraineur": "BAGHRAR ABDESSAMAD",
    "valeur": null,
-   "musique": "",
+   "musique": "    ",
    "place": null
   },
   {
-   "num": "3",
-   "nom": "",
-   "poids": 56.5,
-   "jockey": "",
-   "entraineur": "",
+   "num": 10,
+   "nom": "NACHWAT OUM RABII",
+   "poids": "53,5",
+   "jockey": "SAMIR HAMZA",
+   "entraineur": "MOUSSAID MUSTAPHA",
    "valeur": null,
-   "musique": "",
+   "musique": "   ",
    "place": null
   },
   {
-   "num": "4",
-   "nom": "",
-   "poids": 56.5,
-   "jockey": "",
-   "entraineur": "",
+   "num": 11,
+   "nom": "MAMAR ENNAKHIL",
+   "poids": "52,5",
+   "jockey": "BAHADI SAFOUANE",
+   "entraineur": "FELLAHI TAHAR",
    "valeur": null,
-   "musique": "",
+   "musique": "  ",
    "place": null
   },
   {
-   "num": "5",
-   "nom": "",
-   "poids": 56,
-   "jockey": "",
-   "entraineur": "",
+   "num": 12,
+   "nom": "SADAWI AL BORAQ",
+   "poids": "52,5",
+   "jockey": "EL FALSS MOHAMMED",
+   "entraineur": "CHALH ABDELGHAFOUR",
    "valeur": null,
-   "musique": "",
+   "musique": "  ",
    "place": null
   },
   {
-   "num": "6",
-   "nom": "",
-   "poids": 56,
-   "jockey": "",
-   "entraineur": "",
+   "num": 13,
+   "nom": "YAJID FAL",
+   "poids": "52",
+   "jockey": "ASTAIFI EL MEHDI",
+   "entraineur": "EL MAACHY ABDELMALEK",
    "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "7",
-   "nom": "",
-   "poids": 55.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "8",
-   "nom": "",
-   "poids": 55,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "9",
-   "nom": "",
-   "poids": 53.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "10",
-   "nom": "",
-   "poids": 53.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "11",
-   "nom": "",
-   "poids": 52.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "12",
-   "nom": "",
-   "poids": 52.5,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
-   "place": null
-  },
-  {
-   "num": "13",
-   "nom": "",
-   "poids": 52,
-   "jockey": "",
-   "entraineur": "",
-   "valeur": null,
-   "musique": "",
+   "musique": "    ",
    "place": null
   }
  ],
  "arrivee": [],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T08:59:31.609Z"
+ "collecteLe": "2026-10-07T09:09:06.078Z"
 }
