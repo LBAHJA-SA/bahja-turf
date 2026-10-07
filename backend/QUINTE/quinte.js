@@ -444,10 +444,19 @@ export async function fetchRaceCC(id, date) {
  *    de la course dans `meeting.races` (l'ordre y est 1, 2, 3…). */
 export function cleEquidia(date, m, r) {
   if (!m || !r) return null
-  const reunion = String(m.reunion_code || '').replace(/^R/i, '')
+  /* ⚠ 07/10/2026 : `meeting.reunion_code` est VIDE chez casacourses (le
+   *    programme affiche « RR2 », « RR1 »…). Avec une réunion vide on
+   *    construisait `…_R_C3` — une clé fausse, et l'erreur « course
+   *    indisponible ». On tente donc trois sources, dans cet ordre :
+   *      ① la course elle-même (`r.pmu_course`) — la plus fiable ;
+   *      ② la réunion (`m.reunion_code`), si elle est renseignée ;
+   *      ③ la position dans `m.races` (1-indexée). */
+  const cnum = String(r.pmu_course || '').replace(/\D/g, '')
+  const reunion = String(m.reunion_code || '').replace(/\D/g, '')
+  if (cnum) return `${date}_R${reunion || 1}_C${cnum}`
   const idx = (m.races || []).findIndex((x) => x && x.id === r.id)
-  if (!reunion || idx < 0) return null
-  return `${date}_R${reunion}_C${idx + 1}`
+  if (idx < 0) return null
+  return `${date}_R${reunion || 1}_C${idx + 1}`
 }
 
 /** Programme + course Quinté en un seul appel : c'est le chemin de la page. */
