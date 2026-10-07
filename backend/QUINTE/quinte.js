@@ -1093,6 +1093,12 @@ export async function syncDepuisDisque() {
   for (const [date, rec] of Object.entries(db)) {
     if (!rec || !date) continue
     const local = all[date] || {}
+    /* ⚠ PURGE : ce navigateur a peut-être gardé une `ticketPoseLe` d'une
+     *   session antérieure (écrite par un test, ou Stunden avant que le
+     *   disque ne soit corrigé). Le disque fait foi : s'il ne dit rien,
+     *   l'heure est inconnue et on l'efface — sinon les deux serveurs
+     *   afficheraient deux heures différentes pour la même course. */
+    if (local.ticketPoseLe && !rec.ticketPoseLe) delete local.ticketPoseLe
 
     // ⚠ Si la Synthèse a changé, le ticket calculé dessus n'est plus valable.
     const synthAvant = (local.synthese || []).join(',')
@@ -1106,11 +1112,14 @@ export async function syncDepuisDisque() {
       // 🔒 le ticket LOCAL gagne toujours : premier figé ne bouge plus,
       // même si le disque (job) apporte un autre ticket plus tard.
       ticket: local.ticket || (!synthChange ? rec.ticket : null) || null,
-      // ⚠ la MÉTA du gel (ticketSource, ticketPoseLe) est aussi locale :
-      //   si le disque ne la contient pas (elle vient de l'auto-figeage
-      //   côté page, pas du job), elle doit survivre au sync.
+      // ⚠ LE DISQUE EST FAIT SOURCE DE VÉRITÉ pour l'heure du gel.
+      //   On ne retombe JAMAIS sur la valeur locale : une heure écrite
+      //   autrefois dans ce navigateur (ou une heure inventée par un test)
+      //   survivrait sinon pour toujours, et les deux serveurs afficheraient
+      //   deux POSÉ LE différents pour la même course. Si le disque ne dit
+      //   rien, l'heure est INCONNUE — on affiche « — », on ne comble pas.
       ticketSource: rec.ticketSource || local.ticketSource || null,
-      ticketPoseLe: rec.ticketPoseLe || local.ticketPoseLe || null,
+      ticketPoseLe: rec.ticketPoseLe || null,
       ticketMode: rec.ticketMode || local.ticketMode || null,
       savedAt: local.savedAt || rec.collecte || null,
       syntheseChangee: synthChange ? true : (local.syntheseChangee || false),
