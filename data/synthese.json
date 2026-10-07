@@ -48,7 +48,7 @@
     "prix": "PRIX DES GOBELINS",
     "courseId": "2026-10-07_R1_C1",
     "distance": 2875,
-    "collecte": "2026-10-07T08:45:05.890Z",
+    "collecte": "2026-10-07T21:13:25.539Z",
     "note": "Synthese lasee manuellement (capture Archive du 07/10) — le site pronostics-turf.info ne repond plus",
     "ticket": [
       12,
@@ -63,11 +63,17 @@
     "ticketMode": "defaut",
     "ticketSource": "auto",
     "ticketPoseLe": "2026-10-07T01:55:00.000Z",
-    "arrivee": null,
+    "arrivee": [
+      16,
+      5,
+      14,
+      13,
+      2
+    ],
     "groupes": null,
     "surprises": [],
     "ticketMoteur": null,
-    "cloture": null,
+    "cloture": "2026-10-07T21:13:25.539Z",
     "scores": null
   },
   "2026-10-06": {
@@ -139,7 +145,7 @@
       3,
       15
     ],
-    "cloture": "2026-10-07T08:45:04.520Z"
+    "cloture": "2026-10-07T21:13:23.269Z"
   },
   "2026-10-05": {
     "date": "2026-10-05",

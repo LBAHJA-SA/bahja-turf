@@ -146,10 +146,67 @@ export function verdict(partants, db) {
     niveaux,
     reponses,
     jouer: reponses.length > 0,
+    // ★ LA PERSONNALITÉ DE LA FORME COMPLÈTE : ce n'est pas un signal
+    //   isolé (« OmO = 70% »), c'est le portrait de la forme entière —
+    //   combien de fois vue, et ce qui s'est passé à chaque fois.
+    empreinte: personnalite(db, niveaux.complet),
     infoFavori: {
       cote: Number.isFinite(fav) ? fav : null,
       // le seul signal numérique stable (2.69% sur n=2232) — INFO, pas décision
       signal: Number.isFinite(fav) && fav <= 3,
     },
   }
+}
+
+/**
+ * La personnalité d'une forme COMPLÈTE (« OmO | FmO | mFF ») : son
+ * historique complet, en chiffres, plus une phrase qui la résume.
+ *
+ *   N'apparaît que si la forme a été vue (sinon : inconnue, on passe).
+ *   Le profil se lit sur les TAUX comparés à leurs baselines — jamais
+ *   sur un seul chiffre isolé :
+ *     les3 ≥ 2× base      → le trio entre souvent ensemble
+ *     auMoins2 ≥ 2× base   → deux des trois entrent, rarement les trois
+ *     c1 ≥ 2× base         → le 1er gagne souvent, la suite suit mal
+ *     sinon                → forme sans force particulière
+ */
+export function personnalite(db, formeComplet) {
+  const table = db?.niveaux?.complet || []
+  const seuils = db?.seuils || { n: 10, facteur: 2 }
+  const base = db?.baselines || {}
+  const e = table.find((x) => x.forme === formeComplet)
+  if (!e) {
+    return {
+      forme: formeComplet, connue: false, n: 0,
+      texte: 'Forme jamais vue dans l\u2019archive — on passe.',
+    }
+  }
+  const taux = (k) => (e[k] / Math.max(1, e.n)) * 100
+  const stats = {
+    n: e.n,
+    les3: +taux('les3').toFixed(1),
+    auMoins2: +taux('auMoins2').toFixed(1),
+    c1: +taux('c1').toFixed(1),
+    c2: +taux('c2').toFixed(1),
+    exact3: +taux('exact3').toFixed(1),
+  }
+  const F = seuils.facteur ?? 2
+  let profil, ton
+  if (e.n < (seuils.n ?? 10)) {
+    profil = 'Forme trop rare pour conclure (n<' + (seuils.n ?? 10) + ').'
+    ton = 'neutre'
+  } else if (stats.les3 >= (base.les3 ?? 0) * F) {
+    profil = 'Profil TRIO : les trois entrent souvent ensemble.'
+    ton = 'fort'
+  } else if (stats.auMoins2 >= (base.auMoins2 ?? 0) * F) {
+    profil = 'Profil COUPLÉ : deux des trois entrent, rarement les trois.'
+    ton = 'moyen'
+  } else if (stats.c1 >= (base.c1 ?? 0) * F) {
+    profil = 'Profil FAVORI : le 1er gagne souvent, la suite suit mal.'
+    ton = 'moyen'
+  } else {
+    profil = 'Forme sans force particulière.'
+    ton = 'neutre'
+  }
+  return { forme: formeComplet, connue: true, ...stats, profil, ton }
 }

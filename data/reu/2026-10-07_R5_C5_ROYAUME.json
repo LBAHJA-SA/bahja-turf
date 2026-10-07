@@ -13,7 +13,13 @@
   "classe": "HANDICAP",
   "conditions": "Pour pur sang males, hongres et femelles de trois ans (Allocations distribué aux 5 premiers). Les informations concernant les partants sont communiquées ous la responsabilité de l'autorité hippique du pays dans lequel la course e organisée.",
   "montant": 7229,
-  "arrivee": null,
+  "arrivee": [
+   1,
+   14,
+   3,
+   2,
+   4
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "ROYAL COUNTY GLORY",
    "driver": "OISIN MURPHY",
    "entraineur": "JACK JONES",
-   "cote": 7.5,
+   "cote": 1.8,
    "coteRef": null,
    "musique": "9p1p1p2p9p",
    "gains": 18224,
@@ -50,7 +56,7 @@
    "cheval": "SEEING STARS",
    "driver": "LUKE MORRIS",
    "entraineur": "WILLIAM KNIGHT",
-   "cote": 14,
+   "cote": 4.6,
    "coteRef": 1.9,
    "musique": "6p8p4p8p3p",
    "gains": 13599,
@@ -72,7 +78,7 @@
    "cheval": "BECAUSE WE CAN",
    "driver": "P. J. MCDONALD",
    "entraineur": "CLIVE COX",
-   "cote": 8.9,
+   "cote": 11,
    "coteRef": null,
    "musique": "5p9p5p1p",
    "gains": 3590,
@@ -94,7 +100,7 @@
    "cheval": "CIXI",
    "driver": "FINLEY MARSH",
    "entraineur": "JIM BOYLE",
-   "cote": 2.7,
+   "cote": 20,
    "coteRef": null,
    "musique": "3p6p7p0p4p",
    "gains": 10243,
@@ -116,7 +122,7 @@
    "cheval": "MOJITO",
    "driver": "CIEREN FALLON",
    "entraineur": "RICHARD HANNON",
-   "cote": 38,
+   "cote": 20,
    "coteRef": null,
    "musique": "0p7p7p0p1p",
    "gains": 4135,
@@ -138,7 +144,7 @@
    "cheval": "SENOR CAMPANARO",
    "driver": "CALLUM HUTCHINSON",
    "entraineur": "DAVID KILLAHENA & GRAEME MCPHERS",
-   "cote": 14,
+   "cote": 25,
    "coteRef": null,
    "musique": "2p8p0p(25)1p",
    "gains": 7943,
@@ -160,7 +166,7 @@
    "cheval": "BLACK ENDEAVOUR",
    "driver": "JACK MITCHELL",
    "entraineur": "MARK RIMELL",
-   "cote": 38,
+   "cote": 41,
    "coteRef": null,
    "musique": "9p0p4p7p6p",
    "gains": 12970,
@@ -182,7 +188,7 @@
    "cheval": "STATION BAR",
    "driver": "OLIVER CARMICHAEL",
    "entraineur": "EVE JOHNSON HOUGHTON",
-   "cote": 19,
+   "cote": 37,
    "coteRef": null,
    "musique": "4p6p4p5p1p",
    "gains": 11145,
@@ -204,7 +210,7 @@
    "cheval": "FOR EVER HOPEFULL",
    "driver": "JONNY PEATE",
    "entraineur": "J. R. JENKINS",
-   "cote": 38,
+   "cote": 59,
    "coteRef": null,
    "musique": "3p4p6p",
    "gains": 1902,
@@ -226,7 +232,7 @@
    "cheval": "UPSOMDOWNS",
    "driver": "PADDY BRADLEY",
    "entraineur": "PAT PHELAN",
-   "cote": 29,
+   "cote": 57,
    "coteRef": null,
    "musique": "4p0p8p2p",
    "gains": 4102,
@@ -248,7 +254,7 @@
    "cheval": "ODDJOB",
    "driver": "GEORGE DOWNING",
    "entraineur": "ED WALKER",
-   "cote": 19,
+   "cote": 66,
    "coteRef": null,
    "musique": "7p5p4p",
    "gains": 634,
@@ -270,7 +276,7 @@
    "cheval": "SURGEON COMMANDER",
    "driver": "BILLY LOUGHNANE",
    "entraineur": "CRAIG LIDSTER",
-   "cote": 11,
+   "cote": 34,
    "coteRef": null,
    "musique": "6p6p1p4p6p",
    "gains": 11667,
@@ -292,7 +298,7 @@
    "cheval": "BARBUDA BAY",
    "driver": "DOUGIE COSTELLO",
    "entraineur": "ROGER TEAL",
-   "cote": 14,
+   "cote": 47,
    "coteRef": null,
    "musique": "5p3p5p0p6p",
    "gains": 3668,
@@ -314,7 +320,7 @@
    "cheval": "CREDIT FORGEDD IT",
    "driver": "SEAN LEVEY",
    "entraineur": "SIMON DOW",
-   "cote": 23,
+   "cote": 19,
    "coteRef": null,
    "musique": "0p3p2p6p3p",
    "gains": 9419,
@@ -378,14 +384,14 @@
    "13"
   ],
   "topCotesDirect": [
-   "4",
    "1",
-   "3",
-   "12",
    "2",
+   "3",
+   "14",
+   "4",
+   "5",
    "6",
-   "13",
-   "8"
+   "12"
   ],
   "topChevaux": [
    "1",
@@ -478,9 +484,7 @@
    "2",
    "4"
   ],
-  "pourUnePlace": [
-   "4"
-  ],
+  "pourUnePlace": [],
   "outiders": [
    "1",
    "7"
@@ -492,8 +496,8 @@
    "3",
    "12",
    "2",
-   "4",
-   "5"
+   "5",
+   "4"
   ]
  },
  "aptitudes": [
@@ -657,5 +661,5 @@
   "14 - 6 - 3 - 2 - 1 - 8 - 12",
   "2 - 14 - 7 - 10 - 11 - 12"
  ],
- "collecteLe": "2026-10-07T10:26:37.129Z"
+ "collecteLe": "2026-10-07T21:14:32.994Z"
 }

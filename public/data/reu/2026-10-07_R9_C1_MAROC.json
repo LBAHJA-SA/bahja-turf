@@ -9,7 +9,7 @@
   "type": "T",
   "date": "2026-10-07",
   "nbPartants": 5,
-  "meteo": "22.44"
+  "meteo": "18.87"
  },
  "meeting": {
   "num": 9,
@@ -30,7 +30,7 @@
    "age": 3,
    "couleur": "ALE",
    "proprietaire": "ATLAS STUD",
-   "cote": null,
+   "cote": 140,
    "coteRef": 110,
    "depart": 5,
    "def": null,
@@ -38,7 +38,7 @@
    "dernierPassage": "1p",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 1
   },
   {
    "num": 2,
@@ -53,7 +53,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "EL OUARGHI KHALID",
-   "cote": null,
+   "cote": 8670,
    "coteRef": 140,
    "depart": 1,
    "def": null,
@@ -76,7 +76,7 @@
    "age": 3,
    "couleur": "ALE",
    "proprietaire": "HOUAR YOUSSEF",
-   "cote": null,
+   "cote": 500,
    "coteRef": 750,
    "depart": 2,
    "def": null,
@@ -84,7 +84,7 @@
    "dernierPassage": "4p6p3p8p7p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 4,
@@ -99,7 +99,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "LAZRAK ABDELHAQ",
-   "cote": null,
+   "cote": 1570,
    "coteRef": 150,
    "depart": 4,
    "def": null,
@@ -107,7 +107,7 @@
    "dernierPassage": "",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 3
   },
   {
    "num": 5,
@@ -122,7 +122,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "ESRARFI BOUCHAIB",
-   "cote": null,
+   "cote": 2510,
    "coteRef": 160,
    "depart": 3,
    "def": null,
@@ -130,10 +130,15 @@
    "dernierPassage": "6p4p4p4p8p4p5p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   }
  ],
- "arrivee": [],
+ "arrivee": [
+  1,
+  3,
+  4,
+  5
+ ],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T10:27:18.826Z"
+ "collecteLe": "2026-10-07T21:15:17.291Z"
 }

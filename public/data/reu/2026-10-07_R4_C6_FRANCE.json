@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "Pour poulains entiers, hongres et pouliches de 2 ans mis à réclamer pour 12.000, 16.000 ou 20.000. Poids : 54, 5 kg. Les chevaux mis à réclamer pour 16.000 porteront 1, 5 kg ; pour 20.000, 3 kg. En outre, les chevaux ayant depuis le 7 mai 2026 inclus reçu une allocation de 7.000 ou gagné une Classe porteront 2 kg ; plusieurs allocations de 7.000 ou gagné plusieurs Classe 2 4 kg. Les chevaux n'ayant jamais couru recevront 1 kg.",
   "montant": 14400,
-  "arrivee": null,
+  "arrivee": [
+   1,
+   5,
+   2,
+   7,
+   6
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "LOVELY WARRIOR",
    "driver": "H. BESNIER",
    "entraineur": "P. COTTIER",
-   "cote": 3.3,
+   "cote": 3.4,
    "coteRef": 8.6,
    "musique": "8p6p7p1p3p2p2p6p",
    "gains": 27370,
@@ -50,7 +56,7 @@
    "cheval": "MARCH MADNESS",
    "driver": "C. PACAUT",
    "entraineur": "P. MONFORT",
-   "cote": 2.9,
+   "cote": 2.5,
    "coteRef": null,
    "musique": "1p4p4p6p",
    "gains": 9746,
@@ -72,7 +78,7 @@
    "cheval": "BINOTTO",
    "driver": "A. ORANI",
    "entraineur": "R. FRADET",
-   "cote": 10,
+   "cote": 11,
    "coteRef": null,
    "musique": "8p",
    "gains": 0,
@@ -116,7 +122,7 @@
    "cheval": "PINK PALACE",
    "driver": "J. NICOLEAU",
    "entraineur": "C. ESCUDER",
-   "cote": 10,
+   "cote": 7.8,
    "coteRef": null,
    "musique": "6p6p2p3p0p4p5p",
    "gains": 9165,
@@ -138,7 +144,7 @@
    "cheval": "BODY PHYSICAL",
    "driver": "M. WALDHAUSER",
    "entraineur": "C. ESCUDER",
-   "cote": 9.3,
+   "cote": 13,
    "coteRef": 5.7,
    "musique": "8p6p3p7p5p4p2p1p3p3p",
    "gains": 22154,
@@ -160,7 +166,7 @@
    "cheval": "MERI SHAKTI",
    "driver": "I. MENDIZABAL",
    "entraineur": "E. LACAILLE",
-   "cote": 20,
+   "cote": 35,
    "coteRef": null,
    "musique": "8p0p",
    "gains": 0,
@@ -182,7 +188,7 @@
    "cheval": "AMAZING SURPRISE",
    "driver": "A. CRASTUS",
    "entraineur": "Y. BONNEFOY",
-   "cote": 9.9,
+   "cote": 12,
    "coteRef": 3.8,
    "musique": "7p6p3p6p4p6p3p4p5p",
    "gains": 9826,
@@ -244,11 +250,11 @@
   "topCotesDirect": [
    "2",
    "1",
-   "6",
-   "8",
-   "3",
    "5",
+   "3",
    "4",
+   "8",
+   "6",
    "7"
   ],
   "topChevaux": [
@@ -441,5 +447,5 @@
   "6 - 1 - 8 - 5 - 2",
   "1 - 3 - 7"
  ],
- "collecteLe": "2026-10-07T10:26:24.707Z"
+ "collecteLe": "2026-10-07T21:14:20.384Z"
 }

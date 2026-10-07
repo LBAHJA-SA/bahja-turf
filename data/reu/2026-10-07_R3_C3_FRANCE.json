@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "Pour pouliches de 2 ans n'ayant jamais gagné (A Réclamer excepté). Poids : 5 kg. Les pouliches n'ayant jamais couru recevront 2 kg.",
   "montant": 27400,
-  "arrivee": null,
+  "arrivee": [
+   10,
+   3,
+   6,
+   11,
+   1
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "STRONG CROWN",
    "driver": "PC. BOUDOT",
    "entraineur": "A. SCHUTZ",
-   "cote": 16,
+   "cote": 9.5,
    "coteRef": null,
    "musique": "7p",
    "gains": 685,
@@ -50,7 +56,7 @@
    "cheval": "NEW EVE",
    "driver": "A. VILCHIEN",
    "entraineur": "M. BLANCPAIN",
-   "cote": 41,
+   "cote": 95,
    "coteRef": null,
    "musique": "0p",
    "gains": 0,
@@ -72,7 +78,7 @@
    "cheval": "RISCAL",
    "driver": "C. DEMURO",
    "entraineur": "M. BARATTI",
-   "cote": 16,
+   "cote": 17,
    "coteRef": null,
    "musique": "6p",
    "gains": 685,
@@ -94,7 +100,7 @@
    "cheval": "SELINUNTE",
    "driver": "F. VALLE SKAR",
    "entraineur": "M. GUARNIERI",
-   "cote": 25,
+   "cote": 51,
    "coteRef": null,
    "musique": "6p",
    "gains": 685,
@@ -116,7 +122,7 @@
    "cheval": "LATISANAH",
    "driver": "D. PROVOST",
    "entraineur": "J. ANDREU",
-   "cote": 7.6,
+   "cote": 11,
    "coteRef": null,
    "musique": "2p",
    "gains": 3990,
@@ -138,7 +144,7 @@
    "cheval": "WHY NOT",
    "driver": "M. LERNER",
    "entraineur": "C & Y. LERNER",
-   "cote": 7.6,
+   "cote": 10,
    "coteRef": 3.7,
    "musique": "3p2p7p3p5p",
    "gains": 14101,
@@ -182,7 +188,7 @@
    "cheval": "ALMOONTASIRA",
    "driver": "T. BACHELOT",
    "entraineur": "G. NAKOUZI",
-   "cote": 30,
+   "cote": 47,
    "coteRef": null,
    "musique": "5p",
    "gains": 1096,
@@ -191,11 +197,11 @@
    "poids": 58,
    "valeur": null,
    "chrono": "",
-   "coteRefJockey": "09,6",
-   "coteRefEntraineur": "13,8",
-   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/CHA/3/20261007-CHA-3-8.png",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/h.gif",
    "proprietaire": "G. NAKOUZI",
-   "dernierPassage": 46,
+   "dernierPassage": null,
    "depart": 10,
    "def": null
   },
@@ -204,7 +210,7 @@
    "cheval": "SIOUX PAPILLON",
    "driver": "C. LECOEUVRE",
    "entraineur": "BUTEL & BEAUNEZ",
-   "cote": 49,
+   "cote": 93,
    "coteRef": null,
    "musique": "0p",
    "gains": 0,
@@ -226,7 +232,7 @@
    "cheval": "RING JOY",
    "driver": "M. GUYON",
    "entraineur": "C. FERLAND",
-   "cote": 1.9,
+   "cote": 1.4,
    "coteRef": null,
    "musique": "2p3p",
    "gains": 29206,
@@ -248,7 +254,7 @@
    "cheval": "ALETHEIA",
    "driver": "A. POUCHIN",
    "entraineur": "A & L. FABRE",
-   "cote": 8.7,
+   "cote": 14,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -270,7 +276,7 @@
    "cheval": "NEKOSHIMA",
    "driver": "A. LEMAITRE",
    "entraineur": "S. KOBAYASHI",
-   "cote": 26,
+   "cote": 43,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -298,11 +304,11 @@
    3,
    6,
    11,
-   8,
    12,
    5,
    9,
-   2
+   2,
+   4
   ],
   "entraineurs": [
    "10",
@@ -333,40 +339,39 @@
   ],
   "topCotesDirect": [
    "10",
-   "5",
-   "6",
-   "11",
    "1",
+   "6",
+   "5",
+   "11",
    "3",
-   "4",
-   "12"
+   "12",
+   "4"
   ],
   "topChevaux": [],
   "topPalmares": [
    "6",
    "10",
    "5",
-   "8",
    "1",
    "2",
    "3",
-   "4"
+   "4",
+   "9"
   ],
   "topForme": [
    "6",
    "10",
    "5",
-   "8",
    "1",
    "2",
    "3",
-   "4"
+   "4",
+   "9"
   ],
   "topClasse": [
    "10",
    "6",
    "5",
-   "8",
    "1",
    "3",
    "4"
@@ -374,12 +379,12 @@
   "topJockeys": [
    "10",
    "3",
-   "8",
    "12",
    "11",
    "9",
    "1",
-   "4"
+   "4",
+   "5"
   ],
   "topEntraineurs": [
    "10",
@@ -397,7 +402,6 @@
    "1",
    "9",
    "11",
-   "8",
    "10"
   ],
   "ecartsChevaux": [
@@ -405,8 +409,8 @@
    "2",
    "3",
    "4",
-   "8",
-   "9"
+   "9",
+   "5"
   ],
   "incontournables": [
    "5",
@@ -420,13 +424,13 @@
   ],
   "syntheseTf": [
    "5",
-   "8",
    "1",
    "2",
    "3",
    "4",
    "9",
-   "11"
+   "11",
+   "12"
   ]
  },
  "aptitudes": [
@@ -497,17 +501,6 @@
    "aptP": "1400"
   },
   {
-   "num": 8,
-   "cheval": "ALMOONTASIRA",
-   "courses": 1,
-   "victoires": 0,
-   "places": 1,
-   "pctV": "0",
-   "pctP": "100",
-   "aptG": null,
-   "aptP": null
-  },
-  {
    "num": 9,
    "cheval": "SIOUX PAPILLON",
    "courses": 1,
@@ -530,10 +523,10 @@
    "aptP": null
   }
  ],
- "synthesePct": "6 - 10 - 1 - 3 - 4 - 5 - 8",
+ "synthesePct": "6 - 10 - 1 - 3 - 4 - 5",
  "pronosTf": [
-  "10 - 6 - 5 - 1 - 3 - 4 - 8",
-  "5 - 10 - 6 - 8"
+  "10 - 5 - 6 - 1 - 3 - 4 - 9",
+  "5 - 10 - 6"
  ],
- "collecteLe": "2026-10-07T10:26:03.668Z"
+ "collecteLe": "2026-10-07T21:13:59.867Z"
 }

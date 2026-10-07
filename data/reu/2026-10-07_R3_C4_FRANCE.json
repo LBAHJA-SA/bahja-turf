@@ -13,7 +13,13 @@
   "classe": "HANDICAP",
   "conditions": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus. Seront qualifiés dans cette épreuve, les chevaux auxquels le handicapeur aura attribué une valeur inférieure ou égale à 29 k.",
   "montant": 14400,
-  "arrivee": null,
+  "arrivee": [
+   3,
+   13,
+   12,
+   11,
+   15
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "SENECHALE",
    "driver": "G. MEURY",
    "entraineur": "JE. MORICE",
-   "cote": 35,
+   "cote": 39,
    "coteRef": 15.9,
    "musique": "0p0p8p0p0p5p0p(25)6p3p",
    "gains": 21591,
@@ -72,7 +78,7 @@
    "cheval": "BAILEYS ECLAIR",
    "driver": "M. VELON",
    "entraineur": "M. DREAN",
-   "cote": 6,
+   "cote": 4.8,
    "coteRef": 11,
    "musique": "3p6p5p0p8p4p5p0p0p9p",
    "gains": 90503,
@@ -116,7 +122,7 @@
    "cheval": "CLOUD MAN",
    "driver": "C. DEMURO",
    "entraineur": "K. HOSTE",
-   "cote": 7.8,
+   "cote": 4,
    "coteRef": 27.6,
    "musique": "6p7p5p2p7p2p5p2p(25)0p",
    "gains": 42159,
@@ -138,7 +144,7 @@
    "cheval": "RIVER DAVEN",
    "driver": "J. MOUTARD",
    "entraineur": "C. RESTOUT",
-   "cote": 4.9,
+   "cote": 6.2,
    "coteRef": 10.6,
    "musique": "2p1p0p3p5p2p5p6p6p3p",
    "gains": 45529,
@@ -182,7 +188,7 @@
    "cheval": "QUI EVIDAMENT QUI",
    "driver": "D. SANTIAGO",
    "entraineur": "CH. PLISSON",
-   "cote": 7.9,
+   "cote": 15,
    "coteRef": null,
    "musique": "3p0p0p0p0p0p(25)0p0p0p",
    "gains": 10686,
@@ -204,7 +210,7 @@
    "cheval": "MAGURO",
    "driver": "C. CARBONI",
    "entraineur": "G. VERHEYE",
-   "cote": 28,
+   "cote": 32,
    "coteRef": 7.4,
    "musique": "0p0p1p8p9p9p8p0p0p7p",
    "gains": 63198,
@@ -226,7 +232,7 @@
    "cheval": "EMPRESS STAR",
    "driver": "LHW . GHYS-DIETEREN",
    "entraineur": "S. GHYS",
-   "cote": 42,
+   "cote": 80,
    "coteRef": 7.7,
    "musique": "5p0p0p4p2p9p(25)9p0p0p",
    "gains": 53059,
@@ -248,7 +254,7 @@
    "cheval": "ZYGFRYD",
    "driver": "E. HARDOUIN",
    "entraineur": "C. AUVRAY",
-   "cote": 8.6,
+   "cote": 6,
    "coteRef": 11.8,
    "musique": "3p0p2p0p0p6p5p5p0p3p",
    "gains": 88356,
@@ -270,7 +276,7 @@
    "cheval": "ZOUBAREVA",
    "driver": "C. BELMONT",
    "entraineur": "M. ANDRIANTSOA RATSIMIHAH",
-   "cote": 20,
+   "cote": 16,
    "coteRef": 6,
    "musique": "0p6p8p8p0p0p0p1p3p4p",
    "gains": 36225,
@@ -292,7 +298,7 @@
    "cheval": "NOT SO SILLY",
    "driver": "L. BAILS",
    "entraineur": "D. DE WAELE",
-   "cote": 9.7,
+   "cote": 12,
    "coteRef": 5.1,
    "musique": "7p3p0p4p0p5p0p6p0p8p",
    "gains": 104839,
@@ -314,7 +320,7 @@
    "cheval": "ALPENGEIST",
    "driver": "L. BOISSEAU",
    "entraineur": "B. DE KONINCK",
-   "cote": 17,
+   "cote": 48,
    "coteRef": 7.2,
    "musique": "0p0p0p8p0p0p5p0p9p",
    "gains": 63171,
@@ -336,7 +342,7 @@
    "cheval": "LA MOMY",
    "driver": "F. VALLE SKAR",
    "entraineur": "A. MCMAHON-REIDY",
-   "cote": 12,
+   "cote": 20,
    "coteRef": 28,
    "musique": "9p0p0p0p0p6p1p0p0p8p",
    "gains": 19410,
@@ -358,7 +364,7 @@
    "cheval": "KASIMSKA",
    "driver": "M. PIEN",
    "entraineur": "M. ROSSEEL",
-   "cote": 62,
+   "cote": 171,
    "coteRef": null,
    "musique": "9p0p9p0p0p0p7p(25)4p9p",
    "gains": 12025,
@@ -438,14 +444,14 @@
    "16"
   ],
   "topCotesDirect": [
-   "6",
-   "3",
    "5",
-   "8",
+   "3",
    "11",
+   "6",
    "13",
-   "15",
-   "14"
+   "8",
+   "12",
+   "15"
   ],
   "topChevaux": [
    "6",
@@ -534,9 +540,7 @@
    "10",
    "3"
   ],
-  "pourUnePlace": [
-   "8"
-  ],
+  "pourUnePlace": [],
   "outiders": [
    "9",
    "4"
@@ -713,5 +717,5 @@
   "6 - 11 - 3 - 5 - 12 - 10 - 13 - 8",
   "11 - 8 - 1 - 4 - 9 - 15 - 16"
  ],
- "collecteLe": "2026-10-07T10:26:05.598Z"
+ "collecteLe": "2026-10-07T21:14:01.757Z"
 }

@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DE TOURS Course 04 Départ à l'Autostart 16.718 - Attelé. - 2.140 mètres. 7.328, 3.664, 2.061, 1.466, 1.008, 733, 458. Pour 3 à 6 ans ayant gagné au moins 16.030, mais pas 56.792.",
   "montant": 16718,
-  "arrivee": null,
+  "arrivee": [
+   3,
+   5,
+   7,
+   2,
+   4
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -131,7 +137,7 @@
    "proprietaire": "JJ TROTTING HB",
    "dernierPassage": 308,
    "depart": null,
-   "def": "DP"
+   "def": "D4"
   },
   {
    "num": 6,
@@ -395,5 +401,5 @@
   "1 - 3 - 5 - 2 - 6 - 7",
   "1 - 7 - 6 - 5"
  ],
- "collecteLe": "2026-10-07T10:27:06.087Z"
+ "collecteLe": "2026-10-07T21:15:01.785Z"
 }

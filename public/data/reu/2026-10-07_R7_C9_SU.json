@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DU MANS Course 09 Départ à l'Autostart 16.718 - Attelé. - 1.640 mètres. 7.328, 3.664, 2.061, 1.466, 1.008, 733, 458. Pour 3 à 12 ans ayant gagné au moins 20.152, mais pas 81.300.",
   "montant": 16718,
-  "arrivee": null,
+  "arrivee": [
+   2,
+   5,
+   9,
+   10,
+   6
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -48,7 +54,7 @@
   {
    "num": 2,
    "cheval": "ZIGZAG ZAGAZOO",
-   "driver": "M. JAKOBSSON",
+   "driver": "P. LENNARTSSON",
    "entraineur": "J. IVEHAG",
    "cote": null,
    "coteRef": null,
@@ -131,7 +137,7 @@
    "proprietaire": "EIDEFORS TOINI",
    "dernierPassage": 195,
    "depart": null,
-   "def": null
+   "def": "DP"
   },
   {
    "num": 6,
@@ -358,9 +364,9 @@
    "8",
    "5",
    "7",
+   "2",
    "3",
-   "11",
-   "10"
+   "11"
   ],
   "topEntraineurs": [
    "8",
@@ -423,8 +429,8 @@
  "aptitudes": [],
  "synthesePct": "",
  "pronosTf": [
-  "10 - 11 - 3 - 8 - 9 - 2 - 4",
-  "11 - 3 - 10 - 6 - 8 - 2 - 4"
+  "11 - 3 - 8 - 9 - 10 - 2 - 4",
+  "11 - 3 - 10 - 6 - 8 - 4"
  ],
- "collecteLe": "2026-10-07T10:27:14.680Z"
+ "collecteLe": "2026-10-07T21:15:11.426Z"
 }

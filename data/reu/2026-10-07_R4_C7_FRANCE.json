@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "Pour poulains entiers, hongres et pouliches de 3 ans mis à réclamer pour 10.000 ou 14.000. Poids : 56 kg. Les chevaux mis à réclamer pour 14.000 porteront 2 kg. En outre, les chevaux ayant depuis le 7 mai 2026 inclus reçu une allocation de 5.000 ou gagné une Classe 2 porteront 2 kg ; plusieurs allocations de 5.000 ou gagné plusieurs Classe 2, 4 kg. Les chevaux n'ayant jamais couru recevront 1 kg.",
   "montant": 11500,
-  "arrivee": null,
+  "arrivee": [
+   7,
+   3,
+   4,
+   5,
+   6
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "NYMPHEAS",
    "driver": "M. GERMAIN",
    "entraineur": "F. BOUALEM",
-   "cote": 11,
+   "cote": 9.9,
    "coteRef": 12.8,
    "musique": "0p5p5p1p1p1p2p6p6p0p",
    "gains": 27478,
@@ -50,7 +56,7 @@
    "cheval": "L'ALTA ROCCA",
    "driver": "C. PACAUT",
    "entraineur": "C. ESCUDER",
-   "cote": 10,
+   "cote": 9.5,
    "coteRef": 5.2,
    "musique": "0p3p1p6p0p0p2p3p1p4p",
    "gains": 33026,
@@ -72,7 +78,7 @@
    "cheval": "LE DOC",
    "driver": "A. CRASTUS",
    "entraineur": "R. CHOTARD",
-   "cote": 6.9,
+   "cote": 3.9,
    "coteRef": 7.7,
    "musique": "5p4p4p3p1p2p2p1p7p8p",
    "gains": 56728,
@@ -94,7 +100,7 @@
    "cheval": "JUST FOR MEME",
    "driver": "H. BESNIER",
    "entraineur": "C. ESCUDER",
-   "cote": 1.6,
+   "cote": 2.4,
    "coteRef": 11.3,
    "musique": "1p0p6p6p5p0p3p7p4p6p",
    "gains": 44525,
@@ -116,7 +122,7 @@
    "cheval": "SPACE GOOD",
    "driver": "M. GRANDIN",
    "entraineur": "C. ESCUDER",
-   "cote": 9,
+   "cote": 4.1,
    "coteRef": 3.4,
    "musique": "3p9p0p2p3p9p1p4p3p2p",
    "gains": 28094,
@@ -138,7 +144,7 @@
    "cheval": "LES PRINCES",
    "driver": "A. D'JJI",
    "entraineur": "N. PERRET",
-   "cote": 17,
+   "cote": 37,
    "coteRef": null,
    "musique": "8p0p0p6p6p6p7p",
    "gains": 1845,
@@ -160,7 +166,7 @@
    "cheval": "AGNESIT'A",
    "driver": "J. NICOLEAU",
    "entraineur": "A. SANGLARD",
-   "cote": 13,
+   "cote": 37,
    "coteRef": 41.2,
    "musique": "0p5p6p0p5p3p9p8p5p2p",
    "gains": 13516,
@@ -228,8 +234,8 @@
    "5",
    "2",
    "1",
-   "7",
-   "6"
+   "6",
+   "7"
   ],
   "topChevaux": [
    "1",
@@ -409,5 +415,5 @@
  "pronosTf": [
   "3 - 5 - 2 - 1 - 4"
  ],
- "collecteLe": "2026-10-07T10:26:26.487Z"
+ "collecteLe": "2026-10-07T21:14:22.195Z"
 }

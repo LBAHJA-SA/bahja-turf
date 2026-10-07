@@ -13,7 +13,13 @@
   "classe": "HANDICAP",
   "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 5 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
   "montant": 7229,
-  "arrivee": null,
+  "arrivee": [
+   3,
+   6,
+   13,
+   11,
+   5
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -603,5 +609,5 @@
   "5 - 12 - 4 - 2 - 8 - 13 - 3",
   "11 - 1 - 9"
  ],
- "collecteLe": "2026-10-07T10:26:42.590Z"
+ "collecteLe": "2026-10-07T21:14:38.316Z"
 }

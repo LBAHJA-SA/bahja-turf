@@ -13,7 +13,13 @@
   "classe": "HANDICAP",
   "conditions": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus. Seront qualifiés dans cette épreuve les chevaux auxquels le handicapeur aura attrib une valeur inférieure ou égale à 29 k.",
   "montant": 16300,
-  "arrivee": null,
+  "arrivee": [
+   7,
+   1,
+   3,
+   5,
+   6
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "KERNO QUATZ",
    "driver": "C. PACAUT",
    "entraineur": "M. SCANDELLA-LACAILLE",
-   "cote": 11,
+   "cote": 16,
    "coteRef": 9.7,
    "musique": "9p9p3p4p6p6p6p8p9p5p",
    "gains": 79538,
@@ -50,7 +56,7 @@
    "cheval": "SIR GARSING",
    "driver": "A. ORANI",
    "entraineur": "R. CHOTARD",
-   "cote": 3.8,
+   "cote": 2.5,
    "coteRef": 10.6,
    "musique": "5p7p9p2p1p4p0p1p1p8p",
    "gains": 69013,
@@ -72,7 +78,7 @@
    "cheval": "GLAVIA",
    "driver": "M. GERMAIN",
    "entraineur": "L. BOUALEM",
-   "cote": 10,
+   "cote": 36,
    "coteRef": 4.2,
    "musique": "0p0p6p2p7p0p0p5p6p9p",
    "gains": 44779,
@@ -94,7 +100,7 @@
    "cheval": "DENGIE",
    "driver": "A. CRASTUS",
    "entraineur": "N. PERRET",
-   "cote": 17,
+   "cote": 7.2,
    "coteRef": 6.8,
    "musique": "5p9p5p6p0p0p0p(25)6p0p",
    "gains": 20967,
@@ -116,7 +122,7 @@
    "cheval": "ATAVAMADA",
    "driver": "I. MENDIZABAL",
    "entraineur": "E. LACAILLE",
-   "cote": 4.3,
+   "cote": 4.9,
    "coteRef": 30,
    "musique": "2p3p5p9p5p7p7p7p7p6p",
    "gains": 9023,
@@ -138,7 +144,7 @@
    "cheval": "MASINDHAL",
    "driver": "H. BOUTIN",
    "entraineur": "Y. BONNEFOY",
-   "cote": 15,
+   "cote": 36,
    "coteRef": 10.4,
    "musique": "0p8p7p4p6p9p7p5p4p0p",
    "gains": 33842,
@@ -160,7 +166,7 @@
    "cheval": "MOKKA LATTE",
    "driver": "M. GRANDIN",
    "entraineur": "R. FRADET",
-   "cote": 8.1,
+   "cote": 7,
    "coteRef": 11.7,
    "musique": "4p6p0p4p0p8p0p5p5p",
    "gains": 26008,
@@ -204,8 +210,8 @@
    "cheval": "SPIRIT GREY",
    "driver": "K. GAUDEFFROY",
    "entraineur": "M. SCANDELLA-LACAILLE",
-   "cote": 14,
-   "coteRef": 7.6,
+   "cote": 8.5,
+   "coteRef": null,
    "musique": "5p0p5p4p2p2p7p3p3p1p",
    "gains": 92877,
    "age": 6,
@@ -213,11 +219,11 @@
    "poids": 54,
    "valeur": 23,
    "chrono": "",
-   "coteRefJockey": "54,5",
-   "coteRefEntraineur": "09,4",
-   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/PON/2/20261007-PON-2-9.png",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/h.gif",
    "proprietaire": "M. BLANC",
-   "dernierPassage": 29,
+   "dernierPassage": null,
    "depart": 9,
    "def": null
   }
@@ -230,7 +236,6 @@
    "5",
    "3",
    "4",
-   "9",
    "8",
    "1"
   ],
@@ -242,8 +247,7 @@
    1,
    6,
    3,
-   4,
-   9
+   4
   ],
   "entraineurs": [
    "5",
@@ -251,7 +255,6 @@
    "8",
    "7",
    "1",
-   "9",
    "2",
    "6",
    "3"
@@ -263,7 +266,6 @@
    "5",
    "3",
    "4",
-   "9",
    "8",
    "1"
   ],
@@ -273,7 +275,6 @@
    "8",
    "7",
    "1",
-   "9",
    "2",
    "6",
    "3"
@@ -283,45 +284,44 @@
    "5",
    "8",
    "7",
-   "3",
+   "4",
    "1",
-   "9",
+   "3",
    "6"
   ],
   "topChevaux": [
    "2",
-   "8",
-   "9"
+   "8"
   ],
   "topPalmares": [
-   "9",
    "2",
    "8",
    "5",
    "1",
    "7",
    "3",
-   "6"
+   "6",
+   "4"
   ],
   "topForme": [
    "8",
    "2",
-   "9",
    "5",
    "1",
    "3",
    "4",
-   "7"
+   "7",
+   "6"
   ],
   "topClasse": [
-   "9",
    "1",
    "8",
    "2",
    "3",
    "6",
    "7",
-   "4"
+   "4",
+   "5"
   ],
   "topJockeys": [
    "4",
@@ -337,11 +337,11 @@
    "8",
    "4",
    "1",
-   "9",
    "6",
    "2",
    "7",
-   "5"
+   "5",
+   "3"
   ],
   "aptitudePlace": [],
   "topChronos": [
@@ -360,13 +360,12 @@
    "6",
    "4",
    "7",
-   "9",
    "2",
-   "3"
+   "3",
+   "1"
   ],
   "incontournables": [
    "8",
-   "9",
    "2",
    "5",
    "1",
@@ -378,7 +377,6 @@
    "5"
   ],
   "syntheseTf": [
-   "9",
    "2",
    "8",
    "1",
@@ -475,23 +473,12 @@
    "pctP": "69.64",
    "aptG": "2000",
    "aptP": "2000"
-  },
-  {
-   "num": 9,
-   "cheval": "SPIRIT GREY",
-   "courses": 69,
-   "victoires": 3,
-   "places": 41,
-   "pctV": "4.35",
-   "pctP": "63.77",
-   "aptG": "2000",
-   "aptP": "2000"
   }
  ],
- "synthesePct": "2 - 1 - 8 - 9 - 3 - 6 - 7 - 4",
+ "synthesePct": "2 - 1 - 8 - 3 - 6 - 7 - 4 - 5",
  "pronosTf": [
-  "2 - 8 - 5 - 1 - 9 - 7",
+  "2 - 8 - 5 - 1 - 3 - 7",
   "5 - 8 - 2 - 3 - 4 - 7"
  ],
- "collecteLe": "2026-10-07T10:26:17.118Z"
+ "collecteLe": "2026-10-07T21:14:12.956Z"
 }

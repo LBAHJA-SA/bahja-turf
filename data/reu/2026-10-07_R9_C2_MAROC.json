@@ -9,7 +9,7 @@
   "type": "T",
   "date": "2026-10-07",
   "nbPartants": 8,
-  "meteo": "22.44"
+  "meteo": "18.87"
  },
  "meeting": {
   "num": 9,
@@ -30,7 +30,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "LYAZIDI HARB",
-   "cote": null,
+   "cote": 400,
    "coteRef": 110,
    "depart": 5,
    "def": null,
@@ -38,7 +38,7 @@
    "dernierPassage": "7p9p9p(25)11p1p15p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 5
   },
   {
    "num": 2,
@@ -53,7 +53,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "SAIS STUD",
-   "cote": null,
+   "cote": 730,
    "coteRef": 120,
    "depart": 1,
    "def": null,
@@ -61,7 +61,7 @@
    "dernierPassage": "13p9p",
    "gains": null,
    "musique": " ",
-   "place": null
+   "place": 1
   },
   {
    "num": 3,
@@ -76,7 +76,7 @@
    "age": 4,
    "couleur": "ALE",
    "proprietaire": "ALLAGA YOUNES (A)",
-   "cote": null,
+   "cote": 250,
    "coteRef": 130,
    "depart": 2,
    "def": null,
@@ -84,7 +84,7 @@
    "dernierPassage": "12p1p3p7p11p7p10p10p15p(25)10p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 4,
@@ -99,7 +99,7 @@
    "age": 6,
    "couleur": "BFO",
    "proprietaire": "SAMIE TAHAR (A)",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 120,
    "depart": 3,
    "def": null,
@@ -122,7 +122,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "EL HAMDI NOUR EDDINE",
-   "cote": null,
+   "cote": 920,
    "coteRef": 860,
    "depart": 7,
    "def": null,
@@ -130,7 +130,7 @@
    "dernierPassage": "10p8p9p6p8p9p10p4p3p(25)3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 6
   },
   {
    "num": 6,
@@ -145,7 +145,7 @@
    "age": 5,
    "couleur": "ALE",
    "proprietaire": "BAGHRAR ABDESSAMAD",
-   "cote": null,
+   "cote": 1560,
    "coteRef": 650,
    "depart": 8,
    "def": null,
@@ -153,7 +153,7 @@
    "dernierPassage": "13p5p10p2p5p7p5p(25)4p5p8p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 7,
@@ -168,7 +168,7 @@
    "age": 5,
    "couleur": "BAI",
    "proprietaire": "EL MAYMOUNY MAHFOUD",
-   "cote": null,
+   "cote": 5390,
    "coteRef": 1700,
    "depart": 6,
    "def": null,
@@ -176,7 +176,7 @@
    "dernierPassage": "9p5p6p9p10p6p7p13p11p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 7
   },
   {
    "num": 8,
@@ -191,7 +191,7 @@
    "age": 5,
    "couleur": "BAI",
    "proprietaire": "NASSIF ISMAIL",
-   "cote": null,
+   "cote": 3610,
    "coteRef": 120,
    "depart": 4,
    "def": null,
@@ -199,10 +199,18 @@
    "dernierPassage": "10p8p4p6p8p10p13p9p(25)7p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   }
  ],
- "arrivee": [],
+ "arrivee": [
+  2,
+  3,
+  6,
+  8,
+  1,
+  5,
+  7
+ ],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T10:27:20.462Z"
+ "collecteLe": "2026-10-07T21:15:19.119Z"
 }

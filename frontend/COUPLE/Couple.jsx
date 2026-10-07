@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { chargerProgramme, chargerCourse, grouperParReunion } from '../../backend/COUPLE/donnees.js'
+import { verdict } from '../../backend/COUPLE/moteur.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  frontend/COUPLE/Couple.jsx — LES COURSES DU JOUR, UNE PAR UNE.
@@ -44,6 +45,17 @@ export default function Couple() {
   const [cle, setCle] = useState(null)
   const [detail, setDetail] = useState(null)
   const [errDetail, setErrDetail] = useState(null)
+  /* La base des empreintes : UNE requête, au chargement. Sans elle le
+     moteur ne peut pas parler — la page l'affiche, elle ne l'invente pas. */
+  const [base, setBase] = useState(null)
+  useEffect(() => {
+    let mort = false
+    fetch('/data/empreinte.json', { headers: { Accept: 'application/json' } })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
+      .then((d) => { if (!mort) setBase(d) })
+      .catch(() => { if (!mort) setBase(null) })
+    return () => { mort = true }
+  }, [])
 
   /* ① le programme du jour */
   useEffect(() => {
@@ -189,7 +201,7 @@ export default function Couple() {
                 ⚠ {errDetail}
               </div>
             )}
-            {detail && <Lecture course={detail} />}
+            {detail && <Lecture course={detail} base={base} />}
           </div>
         </div>
 
@@ -203,8 +215,12 @@ export default function Couple() {
 
 /* ───────────────────────────────────────────────────── la lecture ───────── */
 
-function Lecture({ course }) {
+function Lecture({ course, base }) {
   const partants = course.partants || []
+  /* L'empreinte de CETTE course : le trio candidat, sa forme complète et
+     sa personnalité (combien de fois vue, ce qui s'est passé). */
+  const v = partants.length >= 3 && base ? verdict(partants, base) : null
+  const emp = v?.empreinte
   return (
     <>
       <div style={{ ...S.box, padding: 16, marginBottom: 12 }}>
@@ -219,6 +235,48 @@ function Lecture({ course }) {
           {course.pays && course.pays !== 'FRANCE' ? ` · ${course.pays}` : ''}
         </div>
       </div>
+
+      {v && v.trio && (
+        <div style={{
+          ...S.box, padding: 14, marginBottom: 12,
+          borderLeft: '5px solid ' + (v.jouer ? '#16a34a' : emp?.ton === 'moyen' ? '#d97706' : '#d6d3d1'),
+          background: v.jouer ? '#f0fdf4' : '#fff',
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
+            <b style={{ fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', color: TE.accentSombre }}>
+              Empreinte : {emp?.forme || '—'}
+            </b>
+            <span style={{
+              fontSize: 13, fontWeight: 800,
+              color: v.jouer ? '#15803d' : '#78716c',
+            }}>
+              {v.jouer ? '★ JOUER' : '· PASSER'}
+            </span>
+          </div>
+          <div style={{ fontSize: 14, fontWeight: 800, fontFamily: TE.mono, marginTop: 6 }}>
+            Trio : {v.trio.join('  ·  ')}
+          </div>
+          {emp?.connue ? (
+            <>
+              <div style={{ fontSize: 12, color: '#57534e', marginTop: 6 }}>
+                Vue <b>{emp.n}</b> fois dans l'archive
+                {' · '}les 3 : <b>{emp.les3}%</b>
+                {' · '}≥2 : <b>{emp.auMoins2}%</b>
+                {' · '}1er : <b>{emp.c1}%</b>
+                {' · '}2e : <b>{emp.c2}%</b>
+                {' · '}exact : <b>{emp.exact3}%</b>
+              </div>
+              <div style={{ fontSize: 13, fontWeight: 700, marginTop: 6, color: TE.accentSombre }}>
+                {emp.profil}
+              </div>
+            </>
+          ) : (
+            <div style={{ fontSize: 12, color: '#78716c', marginTop: 6 }}>
+              {emp?.texte || 'Base des empreintes introuvable.'}
+            </div>
+          )}
+        </div>
+      )}
 
       {partants.length === 0 ? (
         <div style={{ padding: 26, textAlign: 'center', background: '#fff', borderRadius: 12, border: '1px solid ' + TE.bord, color: '#78716c', fontSize: 13 }}>

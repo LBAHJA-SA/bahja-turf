@@ -9,7 +9,7 @@
   "type": "T",
   "date": "2026-10-07",
   "nbPartants": 9,
-  "meteo": "22.44"
+  "meteo": "18.87"
  },
  "meeting": {
   "num": 9,
@@ -30,7 +30,7 @@
    "age": 4,
    "couleur": "ALE",
    "proprietaire": "DAHBI MOUHCINE (A)",
-   "cote": null,
+   "cote": 300,
    "coteRef": 0,
    "depart": 1,
    "def": null,
@@ -38,7 +38,7 @@
    "dernierPassage": "5p3p3p2p7p(25)8p2p5p2p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 8
   },
   {
    "num": 2,
@@ -53,7 +53,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "EL KILI RACHID",
-   "cote": null,
+   "cote": 450,
    "coteRef": 0,
    "depart": 3,
    "def": null,
@@ -61,7 +61,7 @@
    "dernierPassage": "5p3p4p3p5p5p2p3p9p5p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 1
   },
   {
    "num": 3,
@@ -76,7 +76,7 @@
    "age": 4,
    "couleur": "ALE",
    "proprietaire": "EL KOTAICHI ADAM",
-   "cote": null,
+   "cote": 1340,
    "coteRef": 0,
    "depart": 5,
    "def": null,
@@ -84,7 +84,7 @@
    "dernierPassage": "9p3p3p5p10p6p4p5p6p9p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 6
   },
   {
    "num": 4,
@@ -99,7 +99,7 @@
    "age": 4,
    "couleur": "ALE",
    "proprietaire": "ATLAS STUD",
-   "cote": null,
+   "cote": 530,
    "coteRef": 0,
    "depart": 9,
    "def": null,
@@ -107,7 +107,7 @@
    "dernierPassage": "6p2p3p10p5p4p7p7p3p(25)3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 5,
@@ -122,7 +122,7 @@
    "age": 4,
    "couleur": "BBR",
    "proprietaire": "BOUHAYANE ABDELMOUGHIT",
-   "cote": null,
+   "cote": 1120,
    "coteRef": 0,
    "depart": 7,
    "def": null,
@@ -130,7 +130,7 @@
    "dernierPassage": "4p3p10p5p2p7p7p10p8p(25)5p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   },
   {
    "num": 6,
@@ -145,7 +145,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "LAZRAK ABDELHAQ",
-   "cote": null,
+   "cote": 2640,
    "coteRef": 0,
    "depart": 8,
    "def": null,
@@ -153,7 +153,7 @@
    "dernierPassage": "4p5p6p10p9p11p4p3p2p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 7
   },
   {
    "num": 7,
@@ -168,7 +168,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "MOUNADI IDRISSI MOUHSINE",
-   "cote": null,
+   "cote": 3770,
    "coteRef": 0,
    "depart": 6,
    "def": null,
@@ -176,7 +176,7 @@
    "dernierPassage": "6p6p6p5p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 8,
@@ -191,7 +191,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "TARIK DRISS",
-   "cote": null,
+   "cote": 9480,
    "coteRef": 0,
    "depart": 4,
    "def": null,
@@ -199,7 +199,7 @@
    "dernierPassage": "",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 9
   },
   {
    "num": 9,
@@ -214,7 +214,7 @@
    "age": 4,
    "couleur": "GRS",
    "proprietaire": "FAL STUD",
-   "cote": null,
+   "cote": 2970,
    "coteRef": 0,
    "depart": 2,
    "def": null,
@@ -222,10 +222,20 @@
    "dernierPassage": "",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 5
   }
  ],
- "arrivee": [],
+ "arrivee": [
+  2,
+  7,
+  4,
+  5,
+  9,
+  3,
+  6,
+  1,
+  8
+ ],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T10:27:23.841Z"
+ "collecteLe": "2026-10-07T21:15:22.999Z"
 }

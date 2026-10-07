@@ -9,7 +9,7 @@
   "type": "T",
   "date": "2026-10-07",
   "nbPartants": 8,
-  "meteo": "22.44"
+  "meteo": "18.87"
  },
  "meeting": {
   "num": 9,
@@ -30,7 +30,7 @@
    "age": 4,
    "couleur": "BFR",
    "proprietaire": "JORDANE NADIA",
-   "cote": null,
+   "cote": 490,
    "coteRef": 250,
    "depart": 8,
    "def": null,
@@ -38,7 +38,7 @@
    "dernierPassage": "3p3p1p7p",
    "gains": null,
    "musique": "   ",
-   "place": null
+   "place": 5
   },
   {
    "num": 2,
@@ -53,7 +53,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "NASSIF ISMAIL",
-   "cote": null,
+   "cote": 850,
    "coteRef": 130,
    "depart": 4,
    "def": null,
@@ -61,7 +61,7 @@
    "dernierPassage": "7p9p2p3p4p1p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 3,
@@ -76,7 +76,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "LAFRAM MUSTAPHA (A)",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 1400,
    "depart": 2,
    "def": null,
@@ -99,7 +99,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "ZAK STUD",
-   "cote": null,
+   "cote": 180,
    "coteRef": 220,
    "depart": 1,
    "def": null,
@@ -107,7 +107,7 @@
    "dernierPassage": "2p1p1p",
    "gains": null,
    "musique": "  ",
-   "place": null
+   "place": 2
   },
   {
    "num": 5,
@@ -122,7 +122,7 @@
    "age": 3,
    "couleur": "BAB",
    "proprietaire": "SAIS STUD",
-   "cote": null,
+   "cote": 860,
    "coteRef": 230,
    "depart": 7,
    "def": null,
@@ -130,7 +130,7 @@
    "dernierPassage": "4p2p2p3p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 1
   },
   {
    "num": 6,
@@ -145,7 +145,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "JAMAA SLAIMANE (A)",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 140,
    "depart": 6,
    "def": null,
@@ -168,7 +168,7 @@
    "age": 3,
    "couleur": "BRU",
    "proprietaire": "HALOUI AZIZ",
-   "cote": null,
+   "cote": 4370,
    "coteRef": 110,
    "depart": 3,
    "def": null,
@@ -176,7 +176,7 @@
    "dernierPassage": "6p3p7p9p7p2p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   },
   {
    "num": 8,
@@ -191,7 +191,7 @@
    "age": 5,
    "couleur": "AFA",
    "proprietaire": "AAMEUR ABDELGHANI",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 260,
    "depart": 5,
    "def": null,
@@ -199,10 +199,17 @@
    "dernierPassage": "4p2p7p6p",
    "gains": null,
    "musique": "   ",
-   "place": null
+   "place": 6
   }
  ],
- "arrivee": [],
+ "arrivee": [
+  5,
+  4,
+  2,
+  7,
+  1,
+  8
+ ],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T10:27:22.232Z"
+ "collecteLe": "2026-10-07T21:15:21.229Z"
 }

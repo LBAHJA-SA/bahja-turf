@@ -13,7 +13,13 @@
   "classe": "HANDICAP",
   "conditions": "Pour pur sang males, hongres et femelles de 4 ans et plus (Allocations distr uées aux 5 premiers). Les informations concernant les partants sont communiq es sous la responsabilité de l'autorité hippique du pays dans lequel la cour est organisée.",
   "montant": 9638,
-  "arrivee": null,
+  "arrivee": [
+   6,
+   8,
+   5,
+   7,
+   2
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -440,5 +446,5 @@
  "pronosTf": [
   "8 - 7 - 1 - 2 - 6 - 5"
  ],
- "collecteLe": "2026-10-07T10:26:30.297Z"
+ "collecteLe": "2026-10-07T21:14:25.946Z"
 }

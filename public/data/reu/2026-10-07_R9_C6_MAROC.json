@@ -9,7 +9,7 @@
   "type": "T",
   "date": "2026-10-07",
   "nbPartants": 9,
-  "meteo": "22.44"
+  "meteo": "18.87"
  },
  "meeting": {
   "num": 9,
@@ -30,7 +30,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "DAHBI MOUHCINE (A)",
-   "cote": null,
+   "cote": 260,
    "coteRef": 1400,
    "depart": 6,
    "def": null,
@@ -38,7 +38,7 @@
    "dernierPassage": "1p4p1p1p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 7
   },
   {
    "num": 2,
@@ -53,7 +53,7 @@
    "age": 3,
    "couleur": "ALE",
    "proprietaire": "EL HAJRI REDOUANE (A)",
-   "cote": null,
+   "cote": 1340,
    "coteRef": 320,
    "depart": 4,
    "def": null,
@@ -61,7 +61,7 @@
    "dernierPassage": "10p6p7p8p6p6p5p4p4p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 6
   },
   {
    "num": 3,
@@ -76,7 +76,7 @@
    "age": 3,
    "couleur": "BFR",
    "proprietaire": "KARIMINE AHMED",
-   "cote": null,
+   "cote": 420,
    "coteRef": 1100,
    "depart": 1,
    "def": null,
@@ -84,7 +84,7 @@
    "dernierPassage": "3p1p4p1p4p6p8p9p2p1p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 4,
@@ -99,7 +99,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "FAL STUD",
-   "cote": null,
+   "cote": 630,
    "coteRef": 110,
    "depart": 2,
    "def": null,
@@ -107,7 +107,7 @@
    "dernierPassage": "6p9p6p2p3p2p1p1p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 1
   },
   {
    "num": 5,
@@ -122,7 +122,7 @@
    "age": 3,
    "couleur": "GRO",
    "proprietaire": "LAFRAM OTHMANE (A)",
-   "cote": null,
+   "cote": 1140,
    "coteRef": 200,
    "depart": 5,
    "def": null,
@@ -130,7 +130,7 @@
    "dernierPassage": "4p3p7p4p2p1p2p1p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 6,
@@ -145,7 +145,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "EL HAJRI REDOUANE (A)",
-   "cote": null,
+   "cote": 2430,
    "coteRef": 500,
    "depart": 8,
    "def": null,
@@ -153,7 +153,7 @@
    "dernierPassage": "8p4p3p5p2p6p2p4p2p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 5
   },
   {
    "num": 7,
@@ -168,7 +168,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "AIT RAHMOUNE OMAR",
-   "cote": null,
+   "cote": 8650,
    "coteRef": 1600,
    "depart": 7,
    "def": null,
@@ -176,7 +176,7 @@
    "dernierPassage": "9p4p4p5p6p2p3p1p1p8p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 9
   },
   {
    "num": 8,
@@ -191,7 +191,7 @@
    "age": 3,
    "couleur": "BAB",
    "proprietaire": "RAMDI MOHAMMED (A)",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 1500,
    "depart": 9,
    "def": null,
@@ -199,7 +199,7 @@
    "dernierPassage": "7p10p5p8p1p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 8
   },
   {
    "num": 9,
@@ -214,7 +214,7 @@
    "age": 3,
    "couleur": "ALE",
    "proprietaire": "DAISSAOUI MOHAMED",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 340,
    "depart": 3,
    "def": null,
@@ -222,10 +222,20 @@
    "dernierPassage": "5p12p4p2p4p2p4p5p3p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   }
  ],
- "arrivee": [],
+ "arrivee": [
+  4,
+  5,
+  3,
+  9,
+  6,
+  2,
+  1,
+  8,
+  7
+ ],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T10:27:27.122Z"
+ "collecteLe": "2026-10-07T21:15:26.771Z"
 }

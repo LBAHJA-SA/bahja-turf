@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DE LENS Course 08 Départ à l'Autostart 36.640 - Attelé. mâles. - 2.640 mètres. 18.320, 9.160, 4.580, 2.198, 1.466, 916. Pour poulains entiers et hongres de 3 ans.",
   "montant": 36640,
-  "arrivee": null,
+  "arrivee": [
+   3,
+   1,
+   12,
+   6,
+   9
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -197,7 +203,7 @@
    "proprietaire": "TEAM WALMANN AB & HB WS. PARMALEE",
    "dernierPassage": 21,
    "depart": null,
-   "def": "D4"
+   "def": "DA"
   },
   {
    "num": 9,
@@ -285,7 +291,7 @@
    "proprietaire": "SRF STABLE",
    "dernierPassage": 182,
    "depart": null,
-   "def": null
+   "def": "DA"
   }
  ],
  "tops": {
@@ -462,5 +468,5 @@
   "3 - 11 - 1 - 7 - 9 - 2 - 12",
   "6 - 1 - 2 - 8 - 9 - 10"
  ],
- "collecteLe": "2026-10-07T10:27:12.943Z"
+ "collecteLe": "2026-10-07T21:15:09.691Z"
 }

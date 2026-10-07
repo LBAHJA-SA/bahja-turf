@@ -9,7 +9,7 @@
   "type": "T",
   "date": "2026-10-07",
   "nbPartants": 13,
-  "meteo": "22.44"
+  "meteo": "18.87"
  },
  "meeting": {
   "num": 9,
@@ -30,7 +30,7 @@
    "age": 5,
    "couleur": "ALE",
    "proprietaire": "SAMIE TAHAR",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 110,
    "depart": 3,
    "def": null,
@@ -53,7 +53,7 @@
    "age": 6,
    "couleur": "GRO",
    "proprietaire": "BAJJOU MAHMOUD",
-   "cote": null,
+   "cote": 1690,
    "coteRef": 180,
    "depart": 13,
    "def": null,
@@ -61,7 +61,7 @@
    "dernierPassage": "(25)15p8p(24)9p6p11p9p(23)6p8p9p8p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 9
   },
   {
    "num": 3,
@@ -76,7 +76,7 @@
    "age": 5,
    "couleur": "ALE",
    "proprietaire": "LAKHAL MOHAMED (A)",
-   "cote": null,
+   "cote": 220,
    "coteRef": 150,
    "depart": 12,
    "def": null,
@@ -84,7 +84,7 @@
    "dernierPassage": "6p12p5p7p9p7p(25)8p9p5p9p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 4,
@@ -99,7 +99,7 @@
    "age": 6,
    "couleur": "BAI",
    "proprietaire": "RAMDI ABDELLAH",
-   "cote": null,
+   "cote": 1370,
    "coteRef": 120,
    "depart": 4,
    "def": null,
@@ -107,7 +107,7 @@
    "dernierPassage": "14p7p8p12p14p16p(25)6p7p11p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   },
   {
    "num": 5,
@@ -122,7 +122,7 @@
    "age": 5,
    "couleur": "BAI",
    "proprietaire": "HOUMMADI FOUAD",
-   "cote": null,
+   "cote": 2950,
    "coteRef": 4000,
    "depart": 2,
    "def": null,
@@ -130,7 +130,7 @@
    "dernierPassage": "(25)10p13p9p7p8p(24)11p8p10p5p7p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 11
   },
   {
    "num": 6,
@@ -145,7 +145,7 @@
    "age": 5,
    "couleur": "ALE",
    "proprietaire": "KHALLOUJI MOHAMED",
-   "cote": null,
+   "cote": 740,
    "coteRef": 3000,
    "depart": 6,
    "def": null,
@@ -153,7 +153,7 @@
    "dernierPassage": "11p3p13p(25)7p",
    "gains": null,
    "musique": "   ",
-   "place": null
+   "place": 8
   },
   {
    "num": 7,
@@ -168,7 +168,7 @@
    "age": 5,
    "couleur": "ALE",
    "proprietaire": "BENDRAOUI ABDALLAH",
-   "cote": null,
+   "cote": 2480,
    "coteRef": 180,
    "depart": 7,
    "def": null,
@@ -176,7 +176,7 @@
    "dernierPassage": "13p9p4p16p8p13p13p15p(25)5p12p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 7
   },
   {
    "num": 8,
@@ -191,7 +191,7 @@
    "age": 6,
    "couleur": "BCR",
    "proprietaire": "BAJJOU AMIN",
-   "cote": null,
+   "cote": 3970,
    "coteRef": 200,
    "depart": 11,
    "def": null,
@@ -199,7 +199,7 @@
    "dernierPassage": "(25)8p",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 12
   },
   {
    "num": 9,
@@ -214,7 +214,7 @@
    "age": 7,
    "couleur": "ABR",
    "proprietaire": "BAGHRAR ABDESSAMAD",
-   "cote": null,
+   "cote": 1660,
    "coteRef": 260,
    "depart": 8,
    "def": null,
@@ -222,7 +222,7 @@
    "dernierPassage": "11p7p16p8p13p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 10,
@@ -237,7 +237,7 @@
    "age": 6,
    "couleur": "BAI",
    "proprietaire": "MOUSSAID MUSTAPHA",
-   "cote": null,
+   "cote": 2000,
    "coteRef": 280,
    "depart": 9,
    "def": null,
@@ -245,7 +245,7 @@
    "dernierPassage": "11p0p(25)10p16p",
    "gains": null,
    "musique": "   ",
-   "place": null
+   "place": 1
   },
   {
    "num": 11,
@@ -260,7 +260,7 @@
    "age": 5,
    "couleur": "BBF",
    "proprietaire": "AAMEUR ABDELGHANI",
-   "cote": null,
+   "cote": 5070,
    "coteRef": 190,
    "depart": 5,
    "def": null,
@@ -268,7 +268,7 @@
    "dernierPassage": "(25)14p7p15p",
    "gains": null,
    "musique": "  ",
-   "place": null
+   "place": 10
   },
   {
    "num": 12,
@@ -283,7 +283,7 @@
    "age": 8,
    "couleur": "BAI",
    "proprietaire": "CHALH ABDELGHAFOUR",
-   "cote": null,
+   "cote": 4610,
    "coteRef": 170,
    "depart": 10,
    "def": null,
@@ -291,7 +291,7 @@
    "dernierPassage": "15p13p8p",
    "gains": null,
    "musique": "  ",
-   "place": null
+   "place": 6
   },
   {
    "num": 13,
@@ -306,7 +306,7 @@
    "age": 5,
    "couleur": "BAI",
    "proprietaire": "EL MAACHY ABDELMALEK",
-   "cote": null,
+   "cote": 2590,
    "coteRef": 160,
    "depart": 1,
    "def": null,
@@ -314,10 +314,23 @@
    "dernierPassage": "11p10p16p15p7p4p(24)13p11p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 5
   }
  ],
- "arrivee": [],
+ "arrivee": [
+  10,
+  9,
+  3,
+  4,
+  13,
+  12,
+  7,
+  6,
+  2,
+  11,
+  5,
+  8
+ ],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T10:27:30.393Z"
+ "collecteLe": "2026-10-07T21:15:30.469Z"
 }

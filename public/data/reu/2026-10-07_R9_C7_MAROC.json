@@ -9,7 +9,7 @@
   "type": "T",
   "date": "2026-10-07",
   "nbPartants": 12,
-  "meteo": "22.44"
+  "meteo": "18.87"
  },
  "meeting": {
   "num": 9,
@@ -30,7 +30,7 @@
    "age": 7,
    "couleur": "ALE",
    "proprietaire": "EL GUERRAB LEKBIR",
-   "cote": null,
+   "cote": 1300,
    "coteRef": 670,
    "depart": 9,
    "def": null,
@@ -38,7 +38,7 @@
    "dernierPassage": "9p14p(25)8p11p12p12p18p(24)1p1p16p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 6
   },
   {
    "num": 2,
@@ -53,7 +53,7 @@
    "age": 6,
    "couleur": "ALE",
    "proprietaire": "OULAHCEN ARCHANE",
-   "cote": null,
+   "cote": 230,
    "coteRef": 630,
    "depart": 4,
    "def": null,
@@ -61,7 +61,7 @@
    "dernierPassage": "7p16p7p2p3p8p3p2p1p2p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 3,
@@ -76,7 +76,7 @@
    "age": 5,
    "couleur": "ABR",
    "proprietaire": "BOUCHFIA NOUREDDINE (A)",
-   "cote": null,
+   "cote": 520,
    "coteRef": 500,
    "depart": 1,
    "def": null,
@@ -84,7 +84,7 @@
    "dernierPassage": "6p3p3p15p8p3p4p10p6p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 8
   },
   {
    "num": 4,
@@ -99,7 +99,7 @@
    "age": 4,
    "couleur": "ALE",
    "proprietaire": "BENIMARZOUK ELGHAZI",
-   "cote": null,
+   "cote": 2620,
    "coteRef": 4000,
    "depart": 3,
    "def": null,
@@ -107,7 +107,7 @@
    "dernierPassage": "14p4p11p2p4p1p2p7p5p11p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 7
   },
   {
    "num": 5,
@@ -122,7 +122,7 @@
    "age": 7,
    "couleur": "ALE",
    "proprietaire": "HAJJI SMAIL",
-   "cote": null,
+   "cote": 2360,
    "coteRef": 2500,
    "depart": 8,
    "def": null,
@@ -130,7 +130,7 @@
    "dernierPassage": "7p12p6p9p5p12p5p5p10p10p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 6,
@@ -145,7 +145,7 @@
    "age": 5,
    "couleur": "BAI",
    "proprietaire": "OULMADANI DRISS",
-   "cote": null,
+   "cote": 1280,
    "coteRef": 2300,
    "depart": 6,
    "def": null,
@@ -153,7 +153,7 @@
    "dernierPassage": "4p9p3p6p3p6p1p2p3p5p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 9
   },
   {
    "num": 7,
@@ -168,7 +168,7 @@
    "age": 5,
    "couleur": "BFR",
    "proprietaire": "ELAYAT DRISS",
-   "cote": null,
+   "cote": 4310,
    "coteRef": 1500,
    "depart": 11,
    "def": null,
@@ -191,7 +191,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "KHAZROUNI LAHCEN",
-   "cote": null,
+   "cote": 1220,
    "coteRef": 110,
    "depart": 12,
    "def": null,
@@ -199,7 +199,7 @@
    "dernierPassage": "2p3p1p7p7p1p8p4p(25)6p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 9,
@@ -214,7 +214,7 @@
    "age": 4,
    "couleur": "ALE",
    "proprietaire": "BENZEKRI NOUR EDDINE",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 580,
    "depart": 5,
    "def": null,
@@ -237,7 +237,7 @@
    "age": 6,
    "couleur": "BAI",
    "proprietaire": "EL FALS ZOUHIR",
-   "cote": null,
+   "cote": 3090,
    "coteRef": 880,
    "depart": 10,
    "def": null,
@@ -245,7 +245,7 @@
    "dernierPassage": "8p4p7p2p4p2p3p8p5p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   },
   {
    "num": 11,
@@ -260,7 +260,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "AABIRROU MOHA OU HAMMOU",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 2200,
    "depart": 7,
    "def": null,
@@ -268,7 +268,7 @@
    "dernierPassage": "2p13p5p8p6p8p8p(25)1p6p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 1
   },
   {
    "num": 12,
@@ -283,7 +283,7 @@
    "age": 5,
    "couleur": "BBR",
    "proprietaire": "LAHBOUB HAMMOU",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 520,
    "depart": 2,
    "def": null,
@@ -291,10 +291,21 @@
    "dernierPassage": "10p13p4p8p6p3p1p2p4p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 5
   }
  ],
- "arrivee": [],
+ "arrivee": [
+  11,
+  2,
+  8,
+  5,
+  10,
+  12,
+  1,
+  4,
+  3,
+  6
+ ],
  "contenuBrut": null,
- "collecteLe": "2026-10-07T10:27:28.759Z"
+ "collecteLe": "2026-10-07T21:15:28.613Z"
 }

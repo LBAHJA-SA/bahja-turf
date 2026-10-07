@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "Pour pur sang femelle de trois ans et plus (Allocations distribuées aux 4 pr iers). Les informations concernant les partants sont communiquées sous la re onsabilité de l'autorité hippique du pays dans lequel la course est organisé",
   "montant": 14457,
-  "arrivee": null,
+  "arrivee": [
+   2,
+   9,
+   7,
+   8,
+   4
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "ALPINARA",
    "driver": "DAVID EGAN",
    "entraineur": "SIR MARK PRESCOTT BT",
-   "cote": 2.5,
+   "cote": 2.7,
    "coteRef": null,
    "musique": "1p(25)7p",
    "gains": 6480,
@@ -50,7 +56,7 @@
    "cheval": "QUEEN OF SCOTLAND",
    "driver": "BILLY LOUGHNANE",
    "entraineur": "GEORGE BOUGHEY",
-   "cote": 3,
+   "cote": 2.7,
    "coteRef": null,
    "musique": "1p2p",
    "gains": 18565,
@@ -63,7 +69,7 @@
    "coteRefEntraineur": "02,4",
    "silk": "https://assets.racingdata.pmu.fr/silks/20261007/KEM/4/20261007-KEM-4-2.png",
    "proprietaire": "QUEEN OF SCOTLAND PARTNERS",
-   "dernierPassage": null,
+   "dernierPassage": 39,
    "depart": 3,
    "def": null
   },
@@ -72,7 +78,7 @@
    "cheval": "PERZAANEH",
    "driver": "CALLUM HUTCHINSON",
    "entraineur": "PATRICK CHAMINGS",
-   "cote": 46,
+   "cote": 47,
    "coteRef": null,
    "musique": "6p",
    "gains": 0,
@@ -94,7 +100,7 @@
    "cheval": "TRALEE BAY",
    "driver": "ALISTAIR RAWLINSON",
    "entraineur": "SIMON HODGSON",
-   "cote": 9.3,
+   "cote": 23,
    "coteRef": null,
    "musique": "(24)2p",
    "gains": 0,
@@ -138,7 +144,7 @@
    "cheval": "HATTA ROMANCE",
    "driver": "TYLER HEARD",
    "entraineur": "MARK USHER",
-   "cote": 9.3,
+   "cote": 19,
    "coteRef": null,
    "musique": "2p5p",
    "gains": 3042,
@@ -160,7 +166,7 @@
    "cheval": "MARQUETRY",
    "driver": "OISIN MURPHY",
    "entraineur": "ANDREW BALDING",
-   "cote": 10,
+   "cote": 7.3,
    "coteRef": null,
    "musique": "2p7p",
    "gains": 3042,
@@ -173,7 +179,7 @@
    "coteRefEntraineur": "05,0",
    "silk": "https://assets.racingdata.pmu.fr/silks/20261007/KEM/4/20261007-KEM-4-7.png",
    "proprietaire": "DENFORD STUD",
-   "dernierPassage": null,
+   "dernierPassage": 39,
    "depart": 1,
    "def": null
   },
@@ -182,7 +188,7 @@
    "cheval": "SAAFFYA",
    "driver": "GEORGE DOWNING",
    "entraineur": "ED WALKER",
-   "cote": 11,
+   "cote": 42,
    "coteRef": null,
    "musique": "5p",
    "gains": 0,
@@ -204,7 +210,7 @@
    "cheval": "YAMNAH",
    "driver": "WILLIAM BUICK",
    "entraineur": "JOHN & THADY GOSDEN",
-   "cote": 46,
+   "cote": 6.3,
    "coteRef": null,
    "musique": "4p",
    "gains": 761,
@@ -254,12 +260,12 @@
   "topCotesDirect": [
    "1",
    "2",
-   "4",
-   "6",
+   "9",
    "7",
+   "6",
+   "4",
    "8",
-   "3",
-   "9"
+   "3"
   ],
   "topChevaux": [
    "1",
@@ -312,7 +318,14 @@
   ],
   "aptitudePlace": [],
   "topChronos": [],
-  "topCordes": [],
+  "topCordes": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "6",
+   "7"
+  ],
   "ecartsChevaux": [
    "8",
    "3",
@@ -425,5 +438,5 @@
  "pronosTf": [
   "2 - 1 - 6 - 4 - 7 - 9"
  ],
- "collecteLe": "2026-10-07T10:26:35.359Z"
+ "collecteLe": "2026-10-07T21:14:31.192Z"
 }

@@ -13,7 +13,13 @@
   "classe": "HANDICAP",
   "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 6 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
   "montant": 230082,
-  "arrivee": null,
+  "arrivee": [
+   7,
+   9,
+   1,
+   11,
+   10
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -146,12 +152,12 @@
    "sexe": "H",
    "poids": 57,
    "valeur": 28,
-   "chrono": "1'09\"6",
-   "coteRefJockey": "06,3",
-   "coteRefEntraineur": "08,0",
-   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/HPV/9/20261007-HPV-9-6.png",
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": null,
    "proprietaire": "ERIC YEUNG TING FUNG & ANGEL WON",
-   "dernierPassage": 14,
+   "dernierPassage": null,
    "depart": 3,
    "def": null
   },
@@ -303,26 +309,26 @@
   "drivers": [
    1,
    9,
-   6,
    7,
    4,
    10,
    5,
    3,
    8,
-   2
+   2,
+   11
   ],
   "entraineurs": [
    "10",
    "5",
-   "6",
    "7",
    "9",
    "2",
    "12",
    "3",
    "8",
-   "1"
+   "1",
+   "4"
   ],
   "top10chevaux": [
    "1",
@@ -338,19 +344,18 @@
   "top10entraineurs": [
    "10",
    "5",
-   "6",
    "7",
    "9",
    "2",
    "12",
    "3",
    "8",
-   "1"
+   "1",
+   "4"
   ],
   "topCotesDirect": [],
   "topChevaux": [
    "2",
-   "6",
    "7",
    "9",
    "5",
@@ -362,9 +367,9 @@
    "9",
    "1",
    "5",
-   "6",
    "8",
-   "3"
+   "3",
+   "4"
   ],
   "topForme": [
    "7",
@@ -372,19 +377,19 @@
    "9",
    "1",
    "5",
-   "6",
    "8",
-   "3"
+   "3",
+   "4"
   ],
   "topClasse": [
    "11",
    "3",
    "7",
-   "6",
    "2",
    "1",
    "4",
-   "8"
+   "8",
+   "5"
   ],
   "topJockeys": [
    "1",
@@ -411,9 +416,9 @@
    "2",
    "7",
    "8",
-   "6",
    "11",
-   "9"
+   "9",
+   "5"
   ],
   "topCordes": [
    "11",
@@ -424,22 +429,22 @@
    "8"
   ],
   "ecartsChevaux": [
-   "11",
    "4",
+   "11",
    "3",
    "12",
    "8",
    "2"
   ],
   "incontournables": [
-   "7",
    "2",
+   "7",
    "1",
    "5",
    "9",
-   "6",
    "8",
-   "3"
+   "3",
+   "4"
   ],
   "pourUnePlace": [],
   "outiders": [
@@ -451,10 +456,10 @@
    "2",
    "9",
    "1",
-   "6",
    "8",
    "3",
-   "4"
+   "4",
+   "12"
   ]
  },
  "aptitudes": [
@@ -512,17 +517,6 @@
    "pctP": "70",
    "aptG": "1200",
    "aptP": "1200"
-  },
-  {
-   "num": 6,
-   "cheval": "PRESTIGE ALWAYS",
-   "courses": 25,
-   "victoires": 3,
-   "places": 12,
-   "pctV": "12",
-   "pctP": "60",
-   "aptG": null,
-   "aptP": null
   },
   {
    "num": 7,
@@ -591,10 +585,10 @@
    "aptP": null
   }
  ],
- "synthesePct": "11 - 7 - 3 - 6 - 1 - 2 - 4 - 8",
+ "synthesePct": "11 - 7 - 3 - 1 - 2 - 4 - 8 - 9",
  "pronosTf": [
-  "7 - 2 - 9 - 1 - 5 - 8 - 3",
-  "6 - 1 - 3 - 12"
+  "7 - 2 - 9 - 1 - 5 - 8 - 4",
+  "1 - 3 - 12"
  ],
- "collecteLe": "2026-10-07T10:26:58.789Z"
+ "collecteLe": "2026-10-07T21:14:54.721Z"
 }

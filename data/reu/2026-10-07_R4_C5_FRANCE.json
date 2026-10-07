@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "Pour chevaux entiers, hongres et juments de 4 ans et au-dessus ayant une valeur inférieure ou égale à 28 k. Poids : 56 kg. Les chevaux ayant depuis l 7 avril 2026 inclus reçu une allocation de 3.000 porteront 1 kg ; une allocation de 4.500 ou plusieurs allocations de 3.000, 2 kg ; une allocation de 6.000 ou plusieurs allocations de 4.500, 3 kg.",
   "montant": 12800,
-  "arrivee": null,
+  "arrivee": [
+   7,
+   2,
+   4,
+   6,
+   3
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "DON FALCO",
    "driver": "C. PACAUT",
    "entraineur": "F. BOUALEM",
-   "cote": 10,
+   "cote": 16,
    "coteRef": 11.7,
    "musique": "0p0p6p2p8p1p4p5p3p5p",
    "gains": 121176,
@@ -72,7 +78,7 @@
    "cheval": "HALL OF FAME",
    "driver": "M. GRANDIN",
    "entraineur": "J. ANDREU",
-   "cote": 2.6,
+   "cote": 2.9,
    "coteRef": 12,
    "musique": "2p9p2p4p6p1p4p8p2p0p",
    "gains": 32828,
@@ -94,7 +100,7 @@
    "cheval": "SWEEP AWAY",
    "driver": "H. BOUTIN",
    "entraineur": "F. FORESI",
-   "cote": 13,
+   "cote": 8.3,
    "coteRef": 11.7,
    "musique": "0p7p3p5p2p0p5p4p5p0p",
    "gains": 71214,
@@ -116,7 +122,7 @@
    "cheval": "CERVARO",
    "driver": "M. WALDHAUSER",
    "entraineur": "L. BERNHARDT",
-   "cote": 12,
+   "cote": 11,
    "coteRef": 9,
    "musique": "0p3p3p8p3p5p5p7p2p",
    "gains": 104978,
@@ -138,7 +144,7 @@
    "cheval": "BLANC BLEU",
    "driver": "H. BESNIER",
    "entraineur": "P. COTTIER",
-   "cote": 6,
+   "cote": 5.5,
    "coteRef": 10.9,
    "musique": "5p0p8p5p0p9p0p6p9p9p",
    "gains": 155624,
@@ -160,7 +166,7 @@
    "cheval": "RESOLUTION",
    "driver": "I. MENDIZABAL",
    "entraineur": "M. PLANARD",
-   "cote": 11,
+   "cote": 13,
    "coteRef": 6.3,
    "musique": "4p4p5p3pTp2p(25)6p4p6p",
    "gains": 19702,
@@ -182,7 +188,7 @@
    "cheval": "CAYSSIE MA STAR",
    "driver": "A. ORANI",
    "entraineur": "C. MARTINA",
-   "cote": 7.4,
+   "cote": 6.5,
    "coteRef": 10.7,
    "musique": "0p5p2p1p5p3p(25)3p2p3p",
    "gains": 30242,
@@ -254,12 +260,12 @@
   "topCotesDirect": [
    "3",
    "6",
-   "2",
    "8",
-   "1",
-   "7",
+   "2",
+   "4",
    "5",
-   "4"
+   "7",
+   "1"
   ],
   "topChevaux": [
    "2",
@@ -454,5 +460,5 @@
   "2 - 8 - 3 - 1 - 5",
   "3 - 5 - 6 - 7"
  ],
- "collecteLe": "2026-10-07T10:26:22.654Z"
+ "collecteLe": "2026-10-07T21:14:18.534Z"
 }

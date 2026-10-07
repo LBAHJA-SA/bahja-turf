@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DE ROUEN Course 06 Départ à l'Autostart 12.870 - Attelé. - 1.640 mètres. 5.496, 2.748, 1.557, 1.191, 916, 687. - 824 au fonds d'élevage. Pour 3 à 8 ans ayant gagné au moins 4.580, mais pas 18.320.",
   "montant": 12870,
-  "arrivee": null,
+  "arrivee": [
+   10,
+   12,
+   2,
+   11,
+   5
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -39,7 +45,7 @@
    "chrono": "",
    "coteRefJockey": null,
    "coteRefEntraineur": null,
-   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/SOL/6/20261007-SOL-6-1.png",
+   "silk": null,
    "proprietaire": "BLOMS KONSULTING HB",
    "dernierPassage": null,
    "depart": null,
@@ -219,7 +225,7 @@
    "proprietaire": "SVANBERG LUCAS",
    "dernierPassage": null,
    "depart": null,
-   "def": "DA"
+   "def": "D4"
   },
   {
    "num": 10,
@@ -295,7 +301,6 @@
   ],
   "drivers": [
    "9",
-   "1",
    "2",
    "3",
    "5",
@@ -303,10 +308,10 @@
    "8",
    "10",
    "11",
-   "12"
+   "12",
+   "6"
   ],
   "entraineurs": [
-   "1",
    "2",
    "3",
    "5",
@@ -320,7 +325,6 @@
   ],
   "top10drivers": [
    "9",
-   "1",
    "2",
    "3",
    "5",
@@ -328,10 +332,10 @@
    "8",
    "10",
    "11",
-   "12"
+   "12",
+   "6"
   ],
   "top10entraineurs": [
-   "1",
    "2",
    "3",
    "5",
@@ -350,23 +354,23 @@
   ],
   "topPalmares": [
    "7",
-   "1",
    "3",
    "12",
    "5",
    "2",
    "10",
-   "6"
+   "6",
+   "8"
   ],
   "topForme": [
    "7",
-   "1",
    "3",
    "5",
    "12",
    "2",
    "6",
-   "8"
+   "8",
+   "10"
   ],
   "topClasse": [
    "12",
@@ -385,8 +389,8 @@
    "6",
    "12",
    "3",
-   "1",
-   "5"
+   "5",
+   "11"
   ],
   "topEntraineurs": [
    "7",
@@ -394,7 +398,6 @@
    "10",
    "12",
    "3",
-   "1",
    "5"
   ],
   "aptitudePlace": [],
@@ -419,40 +422,40 @@
    "6",
    "10",
    "12",
-   "1",
-   "2"
+   "2",
+   "3"
   ],
   "incontournables": [
    "7",
    "2",
-   "1",
    "3",
    "12",
    "5",
    "9",
-   "6"
+   "6",
+   "10"
   ],
   "pourUnePlace": [],
   "outiders": [
    "8",
-   "1"
+   "3"
   ],
   "syntheseTf": [
    "7",
-   "3",
    "12",
    "5",
    "2",
    "10",
    "6",
-   "9"
+   "9",
+   "11"
   ]
  },
  "aptitudes": [],
  "synthesePct": "",
  "pronosTf": [
-  "7 - 1 - 3 - 12 - 5 - 2 - 10",
+  "7 - 3 - 12 - 5 - 2 - 10 - 6",
   "3 - 7 - 12 - 5 - 11"
  ],
- "collecteLe": "2026-10-07T10:27:09.476Z"
+ "collecteLe": "2026-10-07T21:15:06.063Z"
 }

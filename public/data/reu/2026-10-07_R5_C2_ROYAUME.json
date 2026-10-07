@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "Pour pur sang males, hongres et femelles de deux ans (Allocations distribuée aux 5 premiers). Les informations concernant les partants sont communiquées us la responsabilité de l'autorité hippique du pays dans lequel la course es organisée.",
   "montant": 15662,
-  "arrivee": null,
+  "arrivee": [
+   9,
+   4,
+   2,
+   1,
+   8
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "BYZANTINE",
    "driver": "BILLY LOUGHNANE",
    "entraineur": "GEORGE BOUGHEY",
-   "cote": 4.1,
+   "cote": 6,
    "coteRef": null,
    "musique": "1p",
    "gains": 7020,
@@ -50,7 +56,7 @@
    "cheval": "FENAROLI",
    "driver": "LEWIS EDMUNDS",
    "entraineur": "HARRY CHARLTON",
-   "cote": 8.2,
+   "cote": 18,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -94,7 +100,7 @@
    "cheval": "LANCASTER TOWER",
    "driver": "WILLIAM BUICK",
    "entraineur": "JOHN & THADY GOSDEN",
-   "cote": 3.1,
+   "cote": 3.4,
    "coteRef": null,
    "musique": "8p3p",
    "gains": 1648,
@@ -116,7 +122,7 @@
    "cheval": "ODELL",
    "driver": "ROBERT HAVLIN",
    "entraineur": "DAVID MENUISIER",
-   "cote": 78,
+   "cote": 56,
    "coteRef": null,
    "musique": "6p",
    "gains": 604,
@@ -138,7 +144,7 @@
    "cheval": "OLDBULLYOUNGBULL",
    "driver": "CIEREN FALLON",
    "entraineur": "ALAN KING",
-   "cote": 6,
+   "cote": 17,
    "coteRef": null,
    "musique": "4p",
    "gains": 798,
@@ -160,7 +166,7 @@
    "cheval": "PALLADINO",
    "driver": "GEORGE DOWNING",
    "entraineur": "ED WALKER",
-   "cote": 7,
+   "cote": 30,
    "coteRef": null,
    "musique": "",
    "gains": 0,
@@ -182,7 +188,7 @@
    "cheval": "RED WIZARD",
    "driver": "GEORGE WOOD",
    "entraineur": "HARRY CHARLTON",
-   "cote": 26,
+   "cote": 72,
    "coteRef": null,
    "musique": "9p",
    "gains": 0,
@@ -204,7 +210,7 @@
    "cheval": "TWELVE BARS",
    "driver": "OISIN MURPHY",
    "entraineur": "HUGO PALMER",
-   "cote": 8,
+   "cote": 1.8,
    "coteRef": null,
    "musique": "2p",
    "gains": 3626,
@@ -276,14 +282,14 @@
    "9"
   ],
   "topCotesDirect": [
+   "9",
    "4",
    "1",
    "6",
-   "7",
-   "9",
    "2",
-   "8",
-   "5"
+   "7",
+   "5",
+   "8"
   ],
   "topChevaux": [
    "1"
@@ -355,9 +361,7 @@
    "9",
    "4"
   ],
-  "pourUnePlace": [
-   "7"
-  ],
+  "pourUnePlace": [],
   "outiders": [
    "4",
    "8"
@@ -443,5 +447,5 @@
  "pronosTf": [
   "1 - 9 - 4 - 6 - 5 - 8"
  ],
- "collecteLe": "2026-10-07T10:26:31.950Z"
+ "collecteLe": "2026-10-07T21:14:27.667Z"
 }

@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DE NANTES Course 02 Départ à l'Autostart 12.870 - Attelé. - 2.140 mètres. 5.496, 2.748, 1.557, 1.191, 916. - 962 au fonds d'élevage. Pour 3 à 5 ans ayant gagné au moins 137, mais pas 4.600.",
   "montant": 12870,
-  "arrivee": null,
+  "arrivee": [
+   7,
+   4,
+   1,
+   6,
+   5
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -131,7 +137,7 @@
    "proprietaire": "OFCOURSE KB",
    "dernierPassage": 210,
    "depart": null,
-   "def": null
+   "def": "DA"
   },
   {
    "num": 6,
@@ -403,5 +409,5 @@
  "pronosTf": [
   "4 - 7 - 2 - 1 - 10 - 9"
  ],
- "collecteLe": "2026-10-07T10:27:02.348Z"
+ "collecteLe": "2026-10-07T21:14:58.264Z"
 }

@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DE LA TOUR MONTPARNASSE Course 6 Course E Départ à l'Autostart 35.000. - Attelé, mâles. - 2.150 mètres. 15.750, 8.750, 4.900, 2.800, 1.750, 700, 350. Pour poulains entiers et hongres de 4 ans, n'ayant pas gagné 28.500.",
   "montant": 35000,
-  "arrivee": null,
+  "arrivee": [
+   6,
+   7,
+   2,
+   5,
+   4
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -28,7 +34,7 @@
    "cheval": "MADIBA DE BELLANDE",
    "driver": "F. NIVARD",
    "entraineur": "H. LE BEC",
-   "cote": 18,
+   "cote": 11,
    "coteRef": 22.5,
    "musique": "2aAa3a5aDa8a3a1aDaDa",
    "gains": 25525,
@@ -50,7 +56,7 @@
    "cheval": "MAESTRO DE PAGERIE",
    "driver": "M. LEGROS",
    "entraineur": "B. MARIE",
-   "cote": 13,
+   "cote": 31,
    "coteRef": 9,
    "musique": "1aDa0a5a3a2a3a5a(25)0a",
    "gains": 28190,
@@ -72,7 +78,7 @@
    "cheval": "MAJIRO KALOUMA",
    "driver": "G. A. POU POU",
    "entraineur": "G. A. POU POU",
-   "cote": 24,
+   "cote": 84,
    "coteRef": 19.2,
    "musique": "8a2a0a8a7a(25)2a3a4aDa",
    "gains": 26380,
@@ -94,7 +100,7 @@
    "cheval": "MUST GO FAST",
    "driver": "P. HOUEL",
    "entraineur": "G. HOUEL",
-   "cote": 24,
+   "cote": 36,
    "coteRef": 40,
    "musique": "Da0a6a2a1a2a6a6a6a8a",
    "gains": 27715,
@@ -116,7 +122,7 @@
    "cheval": "MEXXIT CALENDES",
    "driver": "E. RAFFIN",
    "entraineur": "A. CHAVATTE",
-   "cote": 2.5,
+   "cote": 2,
    "coteRef": 4.6,
    "musique": "2aDa2a5a1a5a(25)Da2a2a",
    "gains": 25825,
@@ -138,7 +144,7 @@
    "cheval": "MY HOPE",
    "driver": "D. BONNE",
    "entraineur": "A. HUREAU",
-   "cote": 5.2,
+   "cote": 3.7,
    "coteRef": 9.8,
    "musique": "6a3a2aDa1a2a1a5aDa2a",
    "gains": 27755,
@@ -160,7 +166,7 @@
    "cheval": "MY JIBAY",
    "driver": "M. ABRIVARD",
    "entraineur": "J. DUBREIL",
-   "cote": 6,
+   "cote": 9.1,
    "coteRef": 13,
    "musique": "6aDa5a6a8a9a3a5a8a0a",
    "gains": 27320,
@@ -204,7 +210,7 @@
    "cheval": "MICA DE FARCHAT",
    "driver": "A. COLLETTE",
    "entraineur": "Gregg LUPI",
-   "cote": 23,
+   "cote": 49,
    "coteRef": null,
    "musique": "7a6a1a0aDm1a6a(25)0a5a",
    "gains": 23400,
@@ -212,12 +218,12 @@
    "sexe": "H",
    "poids": null,
    "valeur": null,
-   "chrono": "1'14\"1",
-   "coteRefJockey": "14,3",
-   "coteRefEntraineur": "28,2",
-   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/ENG/4/20261007-ENG-4-9.png",
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/h.gif",
    "proprietaire": "Oscar LE LOUREC",
-   "dernierPassage": 24,
+   "dernierPassage": null,
    "depart": null,
    "def": null
   },
@@ -226,7 +232,7 @@
    "cheval": "MIGOVE DU CHARME",
    "driver": "D. BLOND",
    "entraineur": "D. BLOND",
-   "cote": 32,
+   "cote": 75,
    "coteRef": 37.5,
    "musique": "Da4a2a4a4a2aDaDa5a3a",
    "gains": 20825,
@@ -248,7 +254,7 @@
    "cheval": "MY HERO",
    "driver": "J. MAILLARD",
    "entraineur": "Grégory THOREL",
-   "cote": 63,
+   "cote": 85,
    "coteRef": null,
    "musique": "Dm2m2mAa5aDa7a2a1a4a",
    "gains": 22560,
@@ -270,7 +276,7 @@
    "cheval": "MILLESIME PIYA",
    "driver": "V. SAUSSAYE",
    "entraineur": "N. VIEL-PIERRE",
-   "cote": 14,
+   "cote": 11,
    "coteRef": null,
    "musique": "1a1a4a(25)DaDaDaDaDa",
    "gains": 13560,
@@ -292,7 +298,7 @@
    "cheval": "MAESTRO D'OUVILLE",
    "driver": "J. GOSSELIN",
    "entraineur": "J. GOSSELIN",
-   "cote": 19,
+   "cote": 31,
    "coteRef": null,
    "musique": "4a0a2a8a1a1a8a3a(25)7a",
    "gains": 22245,
@@ -327,11 +333,11 @@
    "1",
    "6",
    "13",
-   "9",
    "12",
    "11",
    "3",
-   "2"
+   "2",
+   "4"
   ],
   "entraineurs": [
    "5",
@@ -361,11 +367,11 @@
    "1",
    "6",
    "13",
-   "9",
    "12",
    "11",
    "3",
-   "2"
+   "2",
+   "4"
   ],
   "top10entraineurs": [
    "5",
@@ -383,21 +389,21 @@
    "5",
    "6",
    "7",
-   "2",
-   "12",
    "1",
+   "12",
+   "2",
    "13",
-   "9"
+   "4"
   ],
   "topChevaux": [
-   "6",
-   "9",
    "12",
+   "6",
    "13",
    "1",
    "2",
    "4",
-   "5"
+   "5",
+   "11"
   ],
   "topPalmares": [
    "6",
@@ -427,17 +433,17 @@
    "3",
    "5",
    "1",
-   "9"
+   "11"
   ],
   "topJockeys": [
    "5",
    "7",
    "1",
-   "9",
    "6",
    "3",
    "2",
-   "4"
+   "4",
+   "13"
   ],
   "topEntraineurs": [
    "5",
@@ -466,15 +472,15 @@
    "4",
    "6",
    "7",
-   "9"
+   "11"
   ],
   "ecartsChevaux": [
    "7",
    "4",
-   "9",
    "13",
    "3",
-   "6"
+   "6",
+   "10"
   ],
   "incontournables": [
    "6",
@@ -486,9 +492,7 @@
    "13",
    "10"
   ],
-  "pourUnePlace": [
-   "7"
-  ],
+  "pourUnePlace": [],
   "outiders": [
    "7",
    "3"
@@ -498,10 +502,10 @@
    "5",
    "11",
    "13",
+   "10",
    "2",
    "1",
-   "4",
-   "9"
+   "4"
   ]
  },
  "aptitudes": [
@@ -583,17 +587,6 @@
    "aptP": "2175"
   },
   {
-   "num": 9,
-   "cheval": "MICA DE FARCHAT",
-   "courses": 22,
-   "victoires": 2,
-   "places": 10,
-   "pctV": "9.09",
-   "pctP": "54.55",
-   "aptG": null,
-   "aptP": null
-  },
-  {
    "num": 10,
    "cheval": "MIGOVE DU CHARME",
    "courses": 21,
@@ -638,10 +631,10 @@
    "aptP": null
   }
  ],
- "synthesePct": "4 - 9 - 7 - 1 - 2 - 13 - 6 - 12",
+ "synthesePct": "4 - 7 - 1 - 2 - 13 - 6 - 12 - 11",
  "pronosTf": [
-  "5 - 2 - 1 - 6 - 11 - 3 - 13",
+  "5 - 2 - 1 - 6 - 11 - 13 - 3",
   "12 - 11 - 5 - 4 - 13 - 3 - 10 - 1"
  ],
- "collecteLe": "2026-10-07T10:25:39.886Z"
+ "collecteLe": "2026-10-07T21:13:34.951Z"
 }

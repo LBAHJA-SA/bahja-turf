@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "Pour poulains entiers et hongres de 2 ans n'ayant jamais gagné (A Réclamer excepté). Poids : 58 kg. Les poulains n'ayant jamais couru recevront 2 kg.",
   "montant": 27400,
-  "arrivee": null,
+  "arrivee": [
+   2,
+   6,
+   3,
+   7,
+   9
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -453,5 +459,5 @@
   "2 - 6 - 3 - 1 - 4 - 7",
   "3 - 7 - 8"
  ],
- "collecteLe": "2026-10-07T10:26:01.911Z"
+ "collecteLe": "2026-10-07T21:13:57.353Z"
 }

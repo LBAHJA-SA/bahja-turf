@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DE MARSEILLE Course 06 Départ à l'Autostart 3.696 - Attelé. - 1.609 mètres. 1.512, 756, 504, 378, 294. - 252 au fonds d'élevage. Pour 3 à 14 ans n'ayant pas gagné 9.660.",
   "montant": 3696,
-  "arrivee": null,
+  "arrivee": [
+   4,
+   1,
+   6,
+   3,
+   5
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -272,5 +278,5 @@
  "pronosTf": [
   "5 - 1 - 2 - 4"
  ],
- "collecteLe": "2026-10-07T10:25:58.142Z"
+ "collecteLe": "2026-10-07T21:13:53.669Z"
 }

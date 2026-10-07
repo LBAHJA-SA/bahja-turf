@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX DE BREST Course 07 Départ à l'Autostart 20.746 - Attelé. femelles. - 2.140 mètres. 9.160, 4.580, 2.656, 1.603, 1.053, 824, 504. - 366 au fonds d'élevage. Pour pouliches de 4 ans ayant gagné au moins 9.160.",
   "montant": 20746,
-  "arrivee": null,
+  "arrivee": [
+   4,
+   6,
+   8,
+   2,
+   1
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -381,5 +387,5 @@
   "2 - 6 - 1 - 3 - 7 - 8",
   "1 - 7 - 3 - 6 - 8"
  ],
- "collecteLe": "2026-10-07T10:27:11.196Z"
+ "collecteLe": "2026-10-07T21:15:07.781Z"
 }

@@ -13,7 +13,13 @@
   "classe": "",
   "conditions": "PRIX D'ANGERS Course 10 Départ à l'Autostart 36.640 - Attelé. femelles. - 2.140 mètres. 18.320, 9.160, 4.580, 2.198, 1.466, 916. Pour pouliches de 3 ans.",
   "montant": 36640,
-  "arrivee": null,
+  "arrivee": [
+   12,
+   1,
+   10,
+   5,
+   6
+  ],
   "dateLongue": "mercredi 7 octobre 2026",
   "jour": "mercredi"
  },
@@ -43,7 +49,7 @@
    "proprietaire": "BONANOVA STABLES S. L. U.",
    "dernierPassage": 103,
    "depart": null,
-   "def": "D4"
+   "def": "DA"
   },
   {
    "num": 2,
@@ -109,7 +115,7 @@
    "proprietaire": "TEAM YOUNG AB",
    "dernierPassage": 98,
    "depart": null,
-   "def": null
+   "def": "D4"
   },
   {
    "num": 5,
@@ -175,7 +181,7 @@
    "proprietaire": "STALLSKRIKET GAVLE",
    "dernierPassage": 84,
    "depart": null,
-   "def": null
+   "def": "D4"
   },
   {
    "num": 8,
@@ -285,7 +291,7 @@
    "proprietaire": "ANDERSEN RACING STABLE AB",
    "dernierPassage": 129,
    "depart": null,
-   "def": null
+   "def": "D4"
   }
  ],
  "tops": {
@@ -474,5 +480,5 @@
   "11 - 1 - 3 - 5 - 7 - 4 - 2",
   "11 - 1 - 2 - 3 - 6 - 12 - 10 - 8"
  ],
- "collecteLe": "2026-10-07T10:27:16.390Z"
+ "collecteLe": "2026-10-07T21:15:13.169Z"
 }
