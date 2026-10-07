@@ -110,9 +110,9 @@
       8,
       7
     ],
-    "ticketMode": "manuel-verif",
-    "ticketSource": "manuel",
-    "ticketPoseLe": "2026-10-07T01:34:21.668Z",
+    "ticketMode": "defaut",
+    "ticketSource": "auto",
+    "ticketPoseLe": "2026-10-06T02:15:00.000Z",
     "arrivee": [
       8,
       2,
