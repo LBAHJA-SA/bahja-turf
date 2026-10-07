@@ -1,0 +1,173 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "API programme (reu.php ne publie pas ce pays)",
+ "race": {
+  "numOrdre": 5,
+  "nom": "NADJI",
+  "distance": 1900,
+  "type": "N",
+  "date": "2026-10-07",
+  "nbPartants": 15
+ },
+ "meeting": {
+  "num": 9,
+  "hippodrome": "Khemisset",
+  "pays": "MA"
+ },
+ "participants": [
+  {
+   "num": "1",
+   "nom": "",
+   "poids": 61,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "2",
+   "nom": "",
+   "poids": 61,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "3",
+   "nom": "",
+   "poids": 61,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "4",
+   "nom": "",
+   "poids": 60,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "5",
+   "nom": "",
+   "poids": 60,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "6",
+   "nom": "",
+   "poids": 60,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "7",
+   "nom": "",
+   "poids": 60,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "8",
+   "nom": "",
+   "poids": 60,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "9",
+   "nom": "",
+   "poids": 59,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "10",
+   "nom": "",
+   "poids": 59,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "11",
+   "nom": "",
+   "poids": 58,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "12",
+   "nom": "",
+   "poids": 57,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "13",
+   "nom": "",
+   "poids": 56,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "14",
+   "nom": "",
+   "poids": 56,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "15",
+   "nom": "",
+   "poids": 54,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  }
+ ],
+ "arrivee": [],
+ "contenuBrut": null,
+ "collecteLe": "2026-10-07T08:59:25.801Z"
+}

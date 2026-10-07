@@ -79,7 +79,7 @@ export async function chargerCourse(fetchId, pays = 'FRANCE', hippoSlug = '') {
         if (c?.pays && !suffixes.includes(c.pays)) suffixes.push(c.pays)
       }
     } catch (e) { /* le programme peut manquer : on continue */ }
-    for (const extra of ['FRANCE', 'NORV', 'SUEDE', 'GB', 'BELGIQUE', 'MAROC']) {
+    for (const extra of ['FRANCE', 'MAROC', 'NORV', 'SU', 'SUEDE', 'ROYAUME', 'GB', 'HONG', 'NORV', 'BELGIQUE']) {
       if (!suffixes.includes(extra)) suffixes.push(extra)
     }
     for (const p of suffixes) {

@@ -1,0 +1,153 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "API programme (reu.php ne publie pas ce pays)",
+ "race": {
+  "numOrdre": 8,
+  "nom": "MARESCA",
+  "distance": 1700,
+  "type": "N",
+  "date": "2026-10-07",
+  "nbPartants": 13
+ },
+ "meeting": {
+  "num": 9,
+  "hippodrome": "Khemisset",
+  "pays": "MA"
+ },
+ "participants": [
+  {
+   "num": "1",
+   "nom": "",
+   "poids": 58,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "2",
+   "nom": "",
+   "poids": 56.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "3",
+   "nom": "",
+   "poids": 56.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "4",
+   "nom": "",
+   "poids": 56.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "5",
+   "nom": "",
+   "poids": 56,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "6",
+   "nom": "",
+   "poids": 56,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "7",
+   "nom": "",
+   "poids": 55.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "8",
+   "nom": "",
+   "poids": 55,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "9",
+   "nom": "",
+   "poids": 53.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "10",
+   "nom": "",
+   "poids": 53.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "11",
+   "nom": "",
+   "poids": 52.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "12",
+   "nom": "",
+   "poids": 52.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "13",
+   "nom": "",
+   "poids": 52,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  }
+ ],
+ "arrivee": [],
+ "contenuBrut": null,
+ "collecteLe": "2026-10-07T08:59:31.609Z"
+}

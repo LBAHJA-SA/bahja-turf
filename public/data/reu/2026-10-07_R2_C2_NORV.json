@@ -28,7 +28,7 @@
    "cheval": "NYMERIA",
    "driver": "P. O. MIDTFJELD",
    "entraineur": "M. HOV",
-   "cote": 21,
+   "cote": 25,
    "coteRef": null,
    "musique": "0a0a4a4a5a",
    "gains": 4830,
@@ -72,7 +72,7 @@
    "cheval": "APRILS GEM",
    "driver": "H. R. TVEDT",
    "entraineur": "H. TVEDT",
-   "cote": 6.2,
+   "cote": 6.5,
    "coteRef": null,
    "musique": "2a2a4a0a3a",
    "gains": 2940,
@@ -94,7 +94,7 @@
    "cheval": "DRAGON GAMES",
    "driver": "B. STEINE",
    "entraineur": "B. STEINE",
-   "cote": 2.4,
+   "cote": 2.2,
    "coteRef": null,
    "musique": "2aDa1a1a2a",
    "gains": 5124,
@@ -138,7 +138,7 @@
    "cheval": "IGNITE",
    "driver": "G. AUSTEVOLL",
    "entraineur": "J. BRENNE",
-   "cote": 14,
+   "cote": 17,
    "coteRef": null,
    "musique": "Da5a0aDaDa",
    "gains": 5368,
@@ -160,7 +160,7 @@
    "cheval": "LITTLE BIG MAN",
    "driver": "A. TENGSAREID",
    "entraineur": "G. ROGNERUD",
-   "cote": 27,
+   "cote": 23,
    "coteRef": null,
    "musique": "0a6a5a0a0a",
    "gains": 3833,
@@ -182,7 +182,7 @@
    "cheval": "QUITE NICE",
    "driver": "L. A. KOLLE",
    "entraineur": "B. LARSEN",
-   "cote": 8.2,
+   "cote": 8.3,
    "coteRef": null,
    "musique": "8a2a2a6a1a",
    "gains": 4704,
@@ -204,7 +204,7 @@
    "cheval": "ARMANI KNICK",
    "driver": "E. HØITOMT",
    "entraineur": "M. HØITOMT",
-   "cote": 4.4,
+   "cote": 4.5,
    "coteRef": null,
    "musique": "0a2a0a1a1a",
    "gains": 5796,
@@ -268,8 +268,8 @@
    "8",
    "5",
    "6",
-   "1",
-   "7"
+   "7",
+   "1"
   ],
   "topChevaux": [
    "4",
@@ -375,5 +375,5 @@
  "pronosTf": [
   "3 - 8 - 5 - 9 - 7 - 4"
  ],
- "collecteLe": "2026-10-07T08:45:23.875Z"
+ "collecteLe": "2026-10-07T08:57:49.023Z"
 }

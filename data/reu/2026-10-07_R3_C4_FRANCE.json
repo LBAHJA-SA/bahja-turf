@@ -51,19 +51,19 @@
    "driver": "C. LECOEUVRE",
    "entraineur": "FX. BELVISI",
    "cote": 7,
-   "coteRef": 5.6,
+   "coteRef": null,
    "musique": "2p4p7p1p5p2p3p2p0p0p",
    "gains": 63365,
    "age": 9,
    "sexe": "H",
    "poids": 59.5,
    "valeur": 19.5,
-   "chrono": "2'00\"7",
-   "coteRefJockey": "10,6",
-   "coteRefEntraineur": "13,3",
-   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/CHA/4/20261007-CHA-4-2.png",
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/d.gif",
    "proprietaire": "FX. BELVISI/J. P. BOUE",
-   "dernierPassage": 14,
+   "dernierPassage": null,
    "depart": 16,
    "def": null
   },
@@ -169,11 +169,11 @@
    "poids": 57.5,
    "valeur": 17.5,
    "chrono": "",
-   "coteRefJockey": "09,9",
-   "coteRefEntraineur": "13,3",
-   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/CHA/4/20261007-CHA-4-7.png",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/d.gif",
    "proprietaire": "FX. BELVISI",
-   "dernierPassage": 19,
+   "dernierPassage": null,
    "depart": 5,
    "def": null
   },
@@ -384,22 +384,22 @@
    "1",
    "5",
    "13",
-   "2",
    "12",
    "15",
-   "4"
+   "4",
+   "14"
   ],
   "drivers": [
    5,
    3,
-   7,
    8,
-   2,
    1,
    11,
    4,
    12,
-   9
+   9,
+   15,
+   10
   ],
   "entraineurs": [
    "6",
@@ -407,11 +407,11 @@
    "4",
    "3",
    "9",
-   "2",
-   "7",
    "11",
    "13",
-   "8"
+   "8",
+   "12",
+   "16"
   ],
   "top10chevaux": [
    "6",
@@ -420,10 +420,10 @@
    "1",
    "5",
    "13",
-   "2",
    "12",
    "15",
-   "4"
+   "4",
+   "14"
   ],
   "top10entraineurs": [
    "6",
@@ -431,92 +431,90 @@
    "4",
    "3",
    "9",
-   "2",
-   "7",
    "11",
    "13",
-   "8"
+   "8",
+   "12",
+   "16"
   ],
   "topCotesDirect": [
    "6",
-   "2",
    "3",
    "11",
    "5",
    "8",
    "15",
-   "13"
+   "13",
+   "14"
   ],
   "topChevaux": [
-   "2",
    "6",
    "9",
    "12",
    "15"
   ],
   "topPalmares": [
-   "2",
    "6",
    "5",
    "11",
    "12",
    "3",
    "10",
-   "13"
+   "13",
+   "9"
   ],
   "topForme": [
    "6",
-   "2",
    "5",
    "3",
    "10",
    "11",
    "13",
-   "9"
+   "9",
+   "8"
   ],
   "topClasse": [
    "13",
    "4",
    "3",
    "11",
-   "2",
    "9",
    "14",
-   "10"
+   "10",
+   "6"
   ],
   "topJockeys": [
    "5",
    "3",
    "11",
-   "2",
    "8",
    "15",
    "14",
-   "6"
+   "6",
+   "13"
   ],
   "topEntraineurs": [
    "8",
    "11",
-   "7",
-   "2",
    "13",
    "6",
    "3",
-   "14"
+   "14",
+   "10",
+   "12"
   ],
   "aptitudePlace": [],
   "topChronos": [
    "6",
-   "2",
    "9"
   ],
   "topCordes": [
    "1",
    "4",
-   "11",
-   "13",
    "3",
-   "5"
+   "5",
+   "10",
+   "6"
   ],
   "ecartsChevaux": [
    "4",
@@ -524,17 +522,17 @@
    "16",
    "1",
    "12",
-   "7"
+   "15"
   ],
   "incontournables": [
-   "2",
    "6",
    "5",
    "11",
    "12",
    "1",
    "8",
-   "10"
+   "10",
+   "3"
   ],
   "pourUnePlace": [],
   "outiders": [
@@ -542,10 +540,10 @@
    "4"
   ],
   "syntheseTf": [
-   "2",
    "6",
    "5",
    "11",
+   "12",
    "3",
    "10",
    "13",
@@ -563,17 +561,6 @@
    "pctP": "40",
    "aptG": "2100",
    "aptP": "2100"
-  },
-  {
-   "num": 2,
-   "cheval": "YOUM IN LOVE",
-   "courses": 33,
-   "victoires": 2,
-   "places": 18,
-   "pctV": "6.06",
-   "pctP": "60.61",
-   "aptG": "1900",
-   "aptP": "1900"
   },
   {
    "num": 3,
@@ -618,17 +605,6 @@
    "pctP": "46.3",
    "aptG": "2100",
    "aptP": "2100"
-  },
-  {
-   "num": 7,
-   "cheval": "MAGIC MIDGREY",
-   "courses": 6,
-   "victoires": 0,
-   "places": 0,
-   "pctV": "0",
-   "pctP": "0",
-   "aptG": null,
-   "aptP": null
   },
   {
    "num": 8,
@@ -732,8 +708,8 @@
  ],
  "synthesePct": "13 - 3 - 4 - 14 - 9 - 10 - 11 - 6",
  "pronosTf": [
-  "2 - 6 - 11 - 5 - 3 - 8 - 12 - 10",
-  "11 - 2 - 8 - 1 - 4 - 9 - 15 - 16"
+  "6 - 11 - 3 - 5 - 12 - 10 - 13 - 8",
+  "11 - 8 - 1 - 4 - 9 - 15 - 16"
  ],
- "collecteLe": "2026-10-07T08:45:38.233Z"
+ "collecteLe": "2026-10-07T08:58:03.532Z"
 }

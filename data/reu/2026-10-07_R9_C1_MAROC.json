@@ -1,0 +1,73 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "API programme (reu.php ne publie pas ce pays)",
+ "race": {
+  "numOrdre": 1,
+  "nom": "CHAPO",
+  "distance": 1200,
+  "type": "N",
+  "date": "2026-10-07",
+  "nbPartants": 5
+ },
+ "meeting": {
+  "num": 9,
+  "hippodrome": "Khemisset",
+  "pays": "MA"
+ },
+ "participants": [
+  {
+   "num": "1",
+   "nom": "",
+   "poids": 55.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "2",
+   "nom": "",
+   "poids": 55,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "3",
+   "nom": "",
+   "poids": 54.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "4",
+   "nom": "",
+   "poids": 53.5,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "5",
+   "nom": "",
+   "poids": 53,
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  }
+ ],
+ "arrivee": [],
+ "contenuBrut": null,
+ "collecteLe": "2026-10-07T08:59:17.310Z"
+}
