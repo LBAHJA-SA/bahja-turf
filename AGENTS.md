@@ -1330,3 +1330,58 @@ et on regarde en particulier :
 
 **Tant qu'une de ces sources n'est pas ouverte, 66 % de la note physique restent
 non mesurés. On ne les simule pas.**
+
+---
+
+## 17. ⭐ LE P DU CARNET — et l'ordre du ticket (07/10/2026)
+
+> **المصادق:** ماكاينش تعريف آخر. P(n) = n-ième case فالـCarnet (§11.14).
+
+### 17.1 P(n) = CASE، ماشي «اللي pressé»
+الـSynthèse كتعطي **شكون cite شكون** — ماشي ترتيب الـCarnet.
+
+الـCarnet كيدوز بـla **parité**:
+
+```
+الشطر li فوق  = P1  P3  P5  P7  P9  P11 P13 P15 P17   ← tous les PAIRS
+الشطر li تحت  = P2  P4  P6  P8  P10 P12 P14 P16 P18   ← tous les IMPAIRS
+```
+
+مثال 07/10 (`Synthèse 12 15 17 16 13 11 14 18 4 2 5 10 7 8 3 6`):
+```
+p1=12 p3=16 p5=14 p7=18 p9=4 p11=2 p13=10 p15=8 p17=6
+p2=15 p4=17 p6=13 p8=11 p10=5 p12=7  p14=3 p16=1 p18=9
+```
+
+**⛔ الخطأ لي فات (04/10 → 07/10):** `computeStats` كان كيدير `placeOfNum[n] = i+1`
+(الترتيب فالـSynthèse). النتيجة: **P3 فالجدول = 17** و **P3 فالـStats = 17** ماشي 16.
+كل موضع من P3 فصاعد كان **كيتبدل**. دابا `computeStats` كيدير نفس الـparité ديال
+`buildGrid` → **الجدول والـgrille 18/18 متطابقين**.
+
+### 17.2 ⭐ الترتيب ديال التيكيت — القاعدة المعتمدة
+
+> **كل P(n) كيتحط فـالمركز لي فيه أعلى نسبة ديالو فالـStats.**
+
+```
+P1  عندو 100% فالـ1er  →  المركز 1
+P3  عندو  75% فالـ3e   →  المركز 3
+P4  عندو  50% فالـ5e   →  المركز 5 (il n'y a pas mieux)
+P(n) بلا données (n<2) →  0%   (pas de force = pas de place)
+```
+
+**ماشي P1 P2 P3 بالتتابع.** علاش؟ حيت كل P عندو **place لي最强 فيه** — P2 مثلاً
+عندو 0% فالـ1er، إذن ماشي فـالمركز 1.
+
+**Verification (7 courses d'archive, 07/10):**
+
+| # | Ticket | Centre 1 |
+|---|---|---|
+| 01/10 | `1 13 4 3 7 9 15 5` | n1 (**P1**, 100%) |
+| 05/10 | `9 3 5 11 8 13 7 4` | n9 (**P1**, 100%) |
+| 06/10 | `9 15 3 2 12 6 8 7` | n9 (**P1**, 100%) |
+| 07/10 | `12 17 2 10 15 4 13 11` | n12 (**P1**, 100%) |
+
+**P1 فـالمركز 1 فـ7/7.** ماشي صدفة: P1 هو لي عندو أعلى P(1er).
+
+**Code :** `ordonnerParStats()` — `src/lib/quinte.js` ligne ~815.
+`force(num)` = `max(p[0..4])` ديال P(n)، **0 إذا n<2** (bruit), départage par la cote.
