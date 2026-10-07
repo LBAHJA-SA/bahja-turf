@@ -60,7 +60,15 @@
     ],
     "ticketMode": "manuel-verif",
     "ticketSource": "manuel",
-    "ticketPoseLe": "2026-10-07T01:34:21.653Z"
+    "ticketPoseLe": "2026-10-07T01:34:21.668Z",
+    "arrivee": [
+      8,
+      2,
+      7,
+      3,
+      15
+    ],
+    "cloture": "2026-10-07T01:36:16.051Z"
   },
   "2026-10-05": {
     "date": "2026-10-05",
