@@ -67,6 +67,13 @@ export default function Couple() {
   }, [cle])
 
   const groupes = grouperParReunion(programme?.courses)
+  /* Accordéon : une seule réunion ouverte à la fois. 8 réunions × 8 courses
+     = 65 lignes : même avec un scroll par réunion, la page restait trop
+     longue. Par défaut la première est ouverte. */
+  const [ouvert, setOuvert] = useState(null)
+  useEffect(() => {
+    if (groupes.length && ouvert == null) setOuvert(0)
+  }, [groupes.length])
 
   return (
     <>
@@ -122,16 +129,25 @@ export default function Couple() {
                 Chargement du programme…
               </div>
             )}
-            {groupes.map((g) => (
+            {groupes.map((g, gi) => (
               <div key={g.reunion + g.hippodrome} style={S.box}>
-                <div style={{ background: TE.entete, padding: '8px 13px', borderRadius: '8px 8px 0 0' }}>
+                <button onClick={() => setOuvert(ouvert === gi ? null : gi)}
+                  style={{
+                    display: 'block', width: '100%', textAlign: 'left', cursor: 'pointer',
+                    background: TE.entete, padding: '8px 13px', border: 'none',
+                    borderRadius: '8px 8px 0 0', fontFamily: TE.police,
+                  }}>
                   <b style={{ color: '#fff', fontSize: 13 }}>
-                    {g.reunion} · {g.hippodrome}
+                    {ouvert === gi ? '▾' : '▸'} {g.reunion} · {g.hippodrome}
                   </b>
                   {g.pays && g.pays !== 'FRANCE' && (
                     <span style={{ marginLeft: 8, fontSize: 11, color: '#fed7aa' }}>· {g.pays}</span>
                   )}
-                </div>
+                  <span style={{ marginLeft: 8, fontSize: 11, color: '#fed7aa' }}>
+                    · {g.courses.length} courses
+                  </span>
+                </button>
+                {ouvert !== gi ? null : (
                 <div style={{ maxHeight: 208, overflowY: 'auto' }}>
                   {g.courses.map((c) => (
                     <button key={c.cle} onClick={() => setCle(c.cle)}
@@ -151,6 +167,7 @@ export default function Couple() {
                     </button>
                   ))}
                 </div>
+                )}
               </div>
             ))}
           </div>
