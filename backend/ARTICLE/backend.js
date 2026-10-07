@@ -21,7 +21,7 @@
 
 
 import { lireCourseArchive, sauverCourse, lireProgrammeArchive, sauverProgramme } from './archive.js'
-import { chargerDetailReu, chargerPageTqq, offsetJour, normaliserDetailReu, nomFichierCourse, slugNorm } from './turfFrance.js'
+import { chargerDetailReu, chargerPageTqq, offsetJour, normaliserDetailReu, nomFichierCourse, slugNorm, chargerProgrammeReu } from './turfFrance.js'
 
 /** « r1-c5-qatar-prix…-2026-10-04-parislongchamp » ou « 2026-10-04_R1_C5 ».
  *  Le pays voyage en ?pays= (défaut FRANCE) : le programme liste le monde entier. */
@@ -62,15 +62,42 @@ export async function chargerCourse(fetchId, pays = 'FRANCE', hippoSlug = '') {
     if (loc && loc.participants?.length) return { ...loc, source: (loc.source || 'archive') + ' · archive' }
   } catch (e) {}
 
-  // ② chez nous : les fichiers du collecteur
+  // ② chez nous : les fichiers du collecteur.
+  //   ⚠ 07/10/2026 : le fichier porte le SUFFIXE DU PAYS (`_NORV`, `_SUEDE`…),
+  //   et une réunion peut être étrangère alors qu'on la demande en FRANCE —
+  //   `2026-10-07_R2_C1` est PRIX DE DEAUVILLE (NORVÈGE), pas une course
+  //   française. La page disait alors « course indisponible ». On essaie donc
+  //   le pays demandé, puis le programme du jour pour découvrir le vrai pays,
+  //   puis une liste de suffixes usuels. Sans cela, R2/R3 du 07/10 breakage.
   try {
-    const r = await fetch(`/data/reu/${nomFichierCourse(dateDemandee, rNum, cNum, pays)}`)
-    if (r.ok) {
-      const j = await r.json()
-      if (j?.v === 2 && j?.pv === 4 && j?.participants?.length) {
-        try { sauverCourse(dateDemandee, rNum, cNum, pays, j) } catch (e) {}
-        return { ...j, source: (j.source || 'archive') + ' · archive' }
+    const suffixes = [pays]
+    try {
+      const prog = await chargerProgrammeReu(dateDemandee)
+      for (const r of prog || []) {
+        const c = (r.courses || []).find((x) => Number(String(x.reunion).replace(/\D/g, '')) === rNum
+          && Number(String(x.code).replace(/\D/g, '')) === cNum)
+        if (c?.pays && !suffixes.includes(c.pays)) suffixes.push(c.pays)
       }
+    } catch (e) { /* le programme peut manquer : on continue */ }
+    for (const extra of ['FRANCE', 'NORV', 'SUEDE', 'GB', 'BELGIQUE', 'MAROC']) {
+      if (!suffixes.includes(extra)) suffixes.push(extra)
+    }
+    for (const p of suffixes) {
+      try {
+        const r = await fetch(`/data/reu/${nomFichierCourse(dateDemandee, rNum, cNum, p)}`)
+        if (!r.ok) continue
+        /* ⚠ Vercel répond 200 + index.html (384 o) pour un fichier absent —
+         *   le rewrite `/(.*) → /index.html` de vercel.json. `r.ok` ne suffit
+         *   donc pas : un JSON absent passe le test et casse la page en aval
+         *   (`j.v` undefined). On vérifie le type ET la taille. */
+        const type = String(r.headers.get('content-type') || '')
+        if (!/json/i.test(type)) continue
+        const j = await r.json()
+        if (j?.v === 2 && j?.pv === 4 && j?.participants?.length) {
+          try { sauverCourse(dateDemandee, rNum, cNum, p, j) } catch (e) {}
+          return { ...j, source: (j.source || 'archive') + ' · archive' }
+        }
+      } catch (e) {}
     }
   } catch (e) {}
 
