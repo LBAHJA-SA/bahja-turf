@@ -1,0 +1,504 @@
+{
+ "date": "2026-10-07",
+ "reunions": [
+  {
+   "hippodrome": "ENGHIEN",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-07",
+     "reunion": "R1",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "PRIX DES GOBELINS (Quinte+)",
+     "heure": "13:55"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R1",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "PRIX DU PONT ROYAL",
+     "heure": "14:30"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R1",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "PRIX LORD WILLIAMS",
+     "heure": "15:05"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R1",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "PRIX DE LA TOUR MONTPARNASSE",
+     "heure": "15:40"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R1",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "PRIX ARMAND DE BELLAIGUE",
+     "heure": "16:15"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R1",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "PRIX DE LA PLACE BEAUVAU",
+     "heure": "16:50"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R1",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "PRIX DE PASSY",
+     "heure": "17:25"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R1",
+     "code": "C8",
+     "pays": "FRANCE",
+     "nom": "PRIX DE LA PORTE DE SAINT-MANDE",
+     "heure": "18:00"
+    }
+   ]
+  },
+  {
+   "hippodrome": "JARLSBERG",
+   "pays": "NORV",
+   "courses": [
+    {
+     "date": "2026-10-07",
+     "reunion": "R2",
+     "code": "C1",
+     "pays": "NORV",
+     "nom": "PRIX DE DEAUVILLE NORVEGE",
+     "heure": "11:05"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R2",
+     "code": "C2",
+     "pays": "NORV",
+     "nom": "PRIX DE BIARRITZ NORVEGE",
+     "heure": "11:24"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R2",
+     "code": "C3",
+     "pays": "NORV",
+     "nom": "PRIX DE STRASBOURG NORVEGE",
+     "heure": "11:59"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R2",
+     "code": "C4",
+     "pays": "NORV",
+     "nom": "PRIX DE SANARY NORVEGE",
+     "heure": "12:34"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R2",
+     "code": "C5",
+     "pays": "NORV",
+     "nom": "PRIX DE NARBONNE NORVEGE",
+     "heure": "13:09"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R2",
+     "code": "C6",
+     "pays": "NORV",
+     "nom": "PRIX DE MARSEILLE NORVEGE",
+     "heure": "13:30"
+    }
+   ]
+  },
+  {
+   "hippodrome": "CHANTILLY",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-07",
+     "reunion": "R3",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "PRIX D'INDROLLES",
+     "heure": "11:42"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R3",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "PRIX DU GRAND VIVIER",
+     "heure": "12:17"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R3",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "PRIX DES TERROIRS DE FRANCE",
+     "heure": "12:52"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R3",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "PRIX DE SAINT-IMIER",
+     "heure": "13:27"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R3",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "PRIX DU BOIS LARIS",
+     "heure": "14:12"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R3",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "PRIX DE L'HOTEL DE VERMANDOIS",
+     "heure": "14:47"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R3",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "PRIX DU BOIS BOURILLON",
+     "heure": "15:22"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R3",
+     "code": "C8",
+     "pays": "FRANCE",
+     "nom": "PRIX DE SENLIS",
+     "heure": "15:57"
+    }
+   ]
+  },
+  {
+   "hippodrome": "PONT DE VIVAUX",
+   "pays": "FRANCE",
+   "courses": [
+    {
+     "date": "2026-10-07",
+     "reunion": "R4",
+     "code": "C1",
+     "pays": "FRANCE",
+     "nom": "PRIX DU PORT DE BANC",
+     "heure": "16:32"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R4",
+     "code": "C2",
+     "pays": "FRANCE",
+     "nom": "PRIX DES TROIS PONTS",
+     "heure": "17:07"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R4",
+     "code": "C3",
+     "pays": "FRANCE",
+     "nom": "PRIX TWIG",
+     "heure": "17:42"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R4",
+     "code": "C4",
+     "pays": "FRANCE",
+     "nom": "PRIX DE L'ILE DE TIBOULEN",
+     "heure": "18:15"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R4",
+     "code": "C5",
+     "pays": "FRANCE",
+     "nom": "PRIX DE LA MADRAGUE",
+     "heure": "18:45"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R4",
+     "code": "C6",
+     "pays": "FRANCE",
+     "nom": "PRIX DE TOURNEFORT",
+     "heure": "19:15"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R4",
+     "code": "C7",
+     "pays": "FRANCE",
+     "nom": "PRIX DU CERCLE DES PHOCEENS",
+     "heure": "19:45"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R4",
+     "code": "C8",
+     "pays": "FRANCE",
+     "nom": "PRIX DU PORT DE L'EOUBE",
+     "heure": "20:15"
+    }
+   ]
+  },
+  {
+   "hippodrome": "KEMPTON PARK",
+   "pays": "ROYAUME",
+   "courses": [
+    {
+     "date": "2026-10-07",
+     "reunion": "R5",
+     "code": "C1",
+     "pays": "ROYAUME",
+     "nom": "APPRENTICE HANDICAP (CLASS 5)",
+     "heure": "18:00"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R5",
+     "code": "C2",
+     "pays": "ROYAUME",
+     "nom": "EBF NOVICE STAKES (CLASS 3)",
+     "heure": "18:30"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R5",
+     "code": "C3",
+     "pays": "ROYAUME",
+     "nom": "MAIDEN FILLIES' STAKES (CLASS 3)",
+     "heure": "19:00"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R5",
+     "code": "C4",
+     "pays": "ROYAUME",
+     "nom": "FILLIES' NOVICE STAKES",
+     "heure": "19:30"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R5",
+     "code": "C5",
+     "pays": "ROYAUME",
+     "nom": "HANDICAP (CLASS 6)",
+     "heure": "20:00"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R5",
+     "code": "C6",
+     "pays": "ROYAUME",
+     "nom": "HANDICAP (CLASS 5) (LONDON SPRINT SERIES QUALIFIER)",
+     "heure": "20:30"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R5",
+     "code": "C7",
+     "pays": "ROYAUME",
+     "nom": "HANDICAP (CLASS 5) (LONDON STAYERS SERIES QUALIFIER)",
+     "heure": "21:00"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R5",
+     "code": "C8",
+     "pays": "ROYAUME",
+     "nom": "HANDICAP (CLASS 6)",
+     "heure": "21:30"
+    }
+   ]
+  },
+  {
+   "hippodrome": "HAPPY VALLEY",
+   "pays": "HONG",
+   "courses": [
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C1",
+     "pays": "HONG",
+     "nom": "BEDFORD HANDICAP",
+     "heure": "12:35"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C2",
+     "pays": "HONG",
+     "nom": "CHEUNG FAT HANDICAP - SECTION 2",
+     "heure": "13:05"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C3",
+     "pays": "HONG",
+     "nom": "FAT TSEUNG HANDICAP - SECTION 2",
+     "heure": "13:35"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C4",
+     "pays": "HONG",
+     "nom": "FAT TSEUNG HANDICAP - SECTION 1",
+     "heure": "14:10"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C5",
+     "pays": "HONG",
+     "nom": "THE CHINESE GENERAL CHAMBER OF COMMERCE CUP (HANDICAP)",
+     "heure": "14:40"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C6",
+     "pays": "HONG",
+     "nom": "CHEUNG FAT HANDICAP - SECTION 1",
+     "heure": "15:10"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C7",
+     "pays": "HONG",
+     "nom": "YIP FAT HANDICAP - SECTION 2",
+     "heure": "15:45"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C8",
+     "pays": "HONG",
+     "nom": "HING FAT HANDICAP",
+     "heure": "16:15"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R6",
+     "code": "C9",
+     "pays": "HONG",
+     "nom": "YIP FAT HANDICAP - SECTION 1",
+     "heure": "16:50"
+    }
+   ]
+  },
+  {
+   "hippodrome": "SOLVALLA",
+   "pays": "SU",
+   "courses": [
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C1",
+     "pays": "SU",
+     "nom": "PRIX DE LILLE SUEDE",
+     "heure": "18:15"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C2",
+     "pays": "SU",
+     "nom": "PRIX DE NANTES SUEDE",
+     "heure": "18:39"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C3",
+     "pays": "SU",
+     "nom": "PRIX DE CAEN SUEDE",
+     "heure": "19:03"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C4",
+     "pays": "SU",
+     "nom": "PRIX DE TOURS SUEDE",
+     "heure": "19:27"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C5",
+     "pays": "SU",
+     "nom": "PRIX DE RENNES SUEDE",
+     "heure": "19:51"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C6",
+     "pays": "SU",
+     "nom": "PRIX DE ROUEN SUEDE",
+     "heure": "20:13"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C7",
+     "pays": "SU",
+     "nom": "PRIX DE BREST SUEDE",
+     "heure": "20:41"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C8",
+     "pays": "SU",
+     "nom": "PRIX DE LENS SUEDE",
+     "heure": "21:03"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C9",
+     "pays": "SU",
+     "nom": "PRIX DU MANS SUEDE",
+     "heure": "21:26"
+    },
+    {
+     "date": "2026-10-07",
+     "reunion": "R7",
+     "code": "C10",
+     "pays": "SU",
+     "nom": "PRIX D'ANGERS SUEDE",
+     "heure": "21:51"
+    }
+   ]
+  }
+ ],
+ "collecteLe": "2026-10-07T08:08:07.856Z"
+}
