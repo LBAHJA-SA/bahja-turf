@@ -1127,9 +1127,12 @@ export async function syncDepuisDisque() {
       ...local,
       ...rec,
       arrivee: rec.arrivee || local.arrivee || null,
-      // 🔒 le ticket LOCAL gagne toujours : premier figé ne bouge plus,
-      // même si le disque (job) apporte un autre ticket plus tard.
-      ticket: local.ticket || (!synthChange ? rec.ticket : null) || null,
+      // ⚠ LE TICKET VIENT DU DISQUE quand il y en a un. Le local peut être
+      //   plus ancien (un ordre de ticket calculé avec une petite archive,
+      //   avant que le moteur ou les stats n'aient changé). La règle du
+      //   premier figé porte sur la SÉLECTION, pas sur l'ordre : si le
+      //   disque a un ticket, c'est lui. Sinon on garde le local.
+      ticket: rec.ticket || local.ticket || null,
       // ⚠ LE DISQUE EST FAIT SOURCE DE VÉRITÉ pour l'heure du gel.
       //   On ne retombe JAMAIS sur la valeur locale : une heure écrite
       //   autrefois dans ce navigateur (ou une heure inventée par un test)
