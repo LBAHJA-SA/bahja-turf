@@ -74,11 +74,15 @@ export default function Programme(){
   const reunionsAffichees = (()=> {
     // ⚠ QUINTÉ FRANCE SEULEMENT : le Maroc n'a plus sa page.
     const HIPPO_MA = /MEKNESS|KHEMISSET|MARRAKECH|CASABLANCA|RABAT|TANGER|LARACHE|OUZZANE|BERKANE|ANFA|SIDI ?MOUSA|SOUAKA|ALGER/i
+    /* ⭐ TOUTES LES RÉUNIONS, tous pays. reu.php numérote ses réunions de façon
+     *  globale (R1…R7 le 07/10) ; le numéro d'une réunion est LOCAL à son
+     *  pays — `R14` est Horseshoe Indianapolis sur un autre site, et R16
+     *  Belmont Park. Filtrer sur « FR » cachait la moitié du monde et cassait
+     *  les liens ; on affiche tout, et le pays voyage dans l'URL. */
     const base = meetings
-      .filter(m => m.country === 'FR')
       .map(m=> ({
         ...m,
-        country: 'FR',
+        country: String(m.pays || m.country || '').toUpperCase().startsWith('FR') ? 'FR' : String(m.pays || m.country || '').toUpperCase(),
         courses: (Array.isArray(m.courses)?m.courses:[]).slice().sort((a,b)=>((b.quinte?1:0)-(a.quinte?1:0)) || ((a.numOrdre??a.num)-(b.numOrdre??b.num)))
       })).filter(m=> m.courses.length>0)
     // suppression des doublons : R4 Vincennes + R104 Paris-Vincennes = meme course
@@ -149,7 +153,13 @@ export default function Programme(){
                      *  indisponible » — c'est ce qui cassait R2 et R5. reu.php
                      *  donne le pays de chaque course, on le transmet donc. */
                   const pays = String(c.pays || m.pays || 'FRANCE').trim().toUpperCase()
-                  const go = ()=> navigate(`/r/${slug}` + (pays && pays !== 'FRANCE' ? `?pays=${encodeURIComponent(pays)}` : ''))
+                  /* ⚠ LE PAYS VA DANS L'URL — TOUJOURS, même pour la France.
+                     *   Le numéro de réunion est LOCAL à chaque pays : `R14` est
+                     *   Horseshoe Indianapolis (USA) sur casacourses, mais la
+                     *   réunion 14 de la journée du 07/10 en France n'existe
+                     *   pas. Sans le pays, l'Article cherche `{cle}_FRANCE.json`
+                     *   et répond « course indisponible ». */
+                  const go = ()=> navigate(`/r/${slug}?pays=${encodeURIComponent(pays)}`)
                   const hhmm = heureGMT(date, c.time)
                   return (
                     <div key={c.numOrdre} style={{display:'flex',gap:8,alignItems:'stretch',padding:'8px 12px',borderBottom:'1px solid #f1efe7'}}>
