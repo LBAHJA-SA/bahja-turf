@@ -830,20 +830,31 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
     return Number.isFinite(x) && x > 0 ? x : Infinity
   }
 
-  /* ── L'ORDRE EST CELUI DES PROBABILITÉS DE PLACE ──
-   * Rien n'est mis d'office en tête : c'est l'archive qui décide.
-   * Sur les 6 Quintés clôturés, le vainqueur est venu de P1 (×2), P4,
-   * P7, P8, P13 — P1 n'est donc PAS « le 1er par défaut », c'est
-   * l'historique qui classe. La boucle ci-dessous suit donc la loi
-   * gloutonne depuis la 1re place : le meilleur pour le 1er, puis le
-   * meilleur pour le 2e parmi ce qui reste, puis le 3e, le 4e, le 5e. */
+  /* ── L'ORDRE : LA PLACE EST CELLE OÙ LE P EST LE PLUS FORT ──
+   * Règle de l'utilisateur (07/10/2026) : chaque cheval du ticket se
+   * place à la position où son P(n) est le plus fort d'après le tableau
+   * Statistiques. P1 à 100 % au 1er → première case. P4 à 50 % au 5e →
+   * cinquième case. Puis les autres, sans place.
+   *
+   * ⚠ Un P avec n=1 (une seule course) affiche des pourcentages de
+   *   100 % qui ne veulent rien dire. On les traite comme nuls : sans
+   *   historique, pas de force — c'est le même principe que « physique
+   *   > forme » : le fait bat la supposition. */
+  const force = (num) => {
+    const st = parPlace[(rang[num] ?? 0) - 1]
+    if (!st || !st.n || st.n < 2) return null
+    let best = 0
+    for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
+    return st.p[best]
+  }
+
   const reste = nums.slice()
   const ordre = []
   for (let pos = 0; pos < 5 && reste.length; pos++) {
     let meilleur = 0
     for (let i = 1; i < reste.length; i++) {
-      const a = pDe(reste[i])?.[pos] ?? -1
-      const b = pDe(reste[meilleur])?.[pos] ?? -1
+      const a = force(reste[i]) ?? -1
+      const b = force(reste[meilleur]) ?? -1
       // égalité de probabilité → la meilleure cote gagne (le marché, lui, sait)
       if (a > b || (a === b && cote(reste[i]) < cote(reste[meilleur]))) meilleur = i
     }
