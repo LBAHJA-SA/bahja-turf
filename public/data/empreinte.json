@@ -1,0 +1,694 @@
+{
+ "genere": "2026-10-07T17:01:23.962Z",
+ "train": 3178,
+ "test": 795,
+ "baseline": 1.7,
+ "formes": [
+  {
+   "forme": "FFF FFF FFF",
+   "n": 887,
+   "pExact": 2.4,
+   "pLes3": 8.5,
+   "nbExact": 21
+  },
+  {
+   "forme": "FFF FFF FmF",
+   "n": 509,
+   "pExact": 2,
+   "pLes3": 8.1,
+   "nbExact": 10
+  },
+  {
+   "forme": "FFF FmF FFF",
+   "n": 359,
+   "pExact": 1.4,
+   "pLes3": 6.1,
+   "nbExact": 5
+  },
+  {
+   "forme": "FmF FFF FFF",
+   "n": 219,
+   "pExact": 1.4,
+   "pLes3": 5.5,
+   "nbExact": 3
+  },
+  {
+   "forme": "FFF FFF FOF",
+   "n": 180,
+   "pExact": 2.8,
+   "pLes3": 7.2,
+   "nbExact": 5
+  },
+  {
+   "forme": "FFF FmF FmF",
+   "n": 139,
+   "pExact": 0.7,
+   "pLes3": 5.8,
+   "nbExact": 1
+  },
+  {
+   "forme": "FmF FFF FmF",
+   "n": 107,
+   "pExact": 0.9,
+   "pLes3": 8.4,
+   "nbExact": 1
+  },
+  {
+   "forme": "FFF FOF FFF",
+   "n": 106,
+   "pExact": 1.9,
+   "pLes3": 6.6,
+   "nbExact": 2
+  },
+  {
+   "forme": "FmF FmF FFF",
+   "n": 90,
+   "pExact": 2.2,
+   "pLes3": 8.9,
+   "nbExact": 2
+  },
+  {
+   "forme": "FOF FFF FFF",
+   "n": 65,
+   "pExact": 0,
+   "pLes3": 6.2,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FmF FOF",
+   "n": 64,
+   "pExact": 0,
+   "pLes3": 7.8,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmF FFF FOF",
+   "n": 51,
+   "pExact": 0,
+   "pLes3": 2,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FOF FmF",
+   "n": 50,
+   "pExact": 2,
+   "pLes3": 4,
+   "nbExact": 1
+  },
+  {
+   "forme": "FmF FmF FmF",
+   "n": 35,
+   "pExact": 0,
+   "pLes3": 11.4,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FmF FFF",
+   "n": 31,
+   "pExact": 0,
+   "pLes3": 12.9,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FFF FmF",
+   "n": 28,
+   "pExact": 0,
+   "pLes3": 7.1,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmF FOF FFF",
+   "n": 26,
+   "pExact": 0,
+   "pLes3": 3.8,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FFF FOF",
+   "n": 19,
+   "pExact": 0,
+   "pLes3": 15.8,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FOF FOF",
+   "n": 16,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FOF FFF",
+   "n": 15,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmF FmF FOF",
+   "n": 12,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FmF FmF",
+   "n": 9,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmF FOF FmF",
+   "n": 8,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FFm FFO",
+   "n": 5,
+   "pExact": 0,
+   "pLes3": 40,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FOF FmF",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmF FOF FOF",
+   "n": 4,
+   "pExact": 25,
+   "pLes3": 25,
+   "nbExact": 1
+  },
+  {
+   "forme": "FOF FmF FOF",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFm FFm",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFF FFO",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFm FFO",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFF FFm",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFm FFm",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFF FFm",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFF FOO",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FFm FmO",
+   "n": 4,
+   "pExact": 50,
+   "pLes3": 50,
+   "nbExact": 2
+  },
+  {
+   "forme": "FFF FFm FOO",
+   "n": 4,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFF FFF",
+   "n": 3,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFO FFm",
+   "n": 3,
+   "pExact": 0,
+   "pLes3": 66.7,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FmF FFF",
+   "n": 3,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm Fmm FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmO FmF FmF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOO FFm FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FOO FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FmO FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FOO FmF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FmF FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOO FFO FOm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO Fmm FFO",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFO FFm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF Fmm FFO",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFm FmO",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FFF FFm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FmO FFm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FOm FOm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FmO FFm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FmO FFO",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 100,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmF FFO FmF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "Fmm FFm FOm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FOF FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOm FmF FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFO FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmO FFm FmF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOm FFF Fmm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FmO FmO",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FmO FFF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm Fmm FFm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FmF FFm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmO FFF FFO",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFF FmO",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOO FFm Fmm",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFm FmF",
+   "n": 2,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FOF FOF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FOF mOF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFF mmF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FFF mmF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FFO FFm",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FFF FmO",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm Fmm FOF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFF FFO",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FmO FFF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF Fmm FFF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFO FFO",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FFO Fmm",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmF FFO FOm",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmO FOO FmO",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFm FmF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "Fmm FFF FFF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FFm FmF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFO FFO",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFF FFm FFF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOF FmO FFF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFm FFm FFF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOO FOO FmO",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FOO FmF FFm",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmO FFF FFm",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmO FFO FmF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FmF FmO FOF",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  },
+  {
+   "forme": "FFO FFm Fmm",
+   "n": 1,
+   "pExact": 0,
+   "pLes3": 0,
+   "nbExact": 0
+  }
+ ]
+}
