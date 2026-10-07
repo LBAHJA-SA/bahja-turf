@@ -28,7 +28,7 @@
    "cheval": "MADIBA DE BELLANDE",
    "driver": "F. NIVARD",
    "entraineur": "H. LE BEC",
-   "cote": 17,
+   "cote": 16,
    "coteRef": 22.5,
    "musique": "2aAa3a5aDa8a3a1aDaDa",
    "gains": 25525,
@@ -50,7 +50,7 @@
    "cheval": "MAESTRO DE PAGERIE",
    "driver": "M. LEGROS",
    "entraineur": "B. MARIE",
-   "cote": 16,
+   "cote": 17,
    "coteRef": 9,
    "musique": "1aDa0a5a3a2a3a5a(25)0a",
    "gains": 28190,
@@ -72,7 +72,7 @@
    "cheval": "MAJIRO KALOUMA",
    "driver": "G. A. POU POU",
    "entraineur": "G. A. POU POU",
-   "cote": 28,
+   "cote": 24,
    "coteRef": 19.2,
    "musique": "8a2a0a8a7a(25)2a3a4aDa",
    "gains": 26380,
@@ -94,7 +94,7 @@
    "cheval": "MUST GO FAST",
    "driver": "P. HOUEL",
    "entraineur": "G. HOUEL",
-   "cote": 20,
+   "cote": 24,
    "coteRef": 40,
    "musique": "Da0a6a2a1a2a6a6a6a8a",
    "gains": 27715,
@@ -116,7 +116,7 @@
    "cheval": "MEXXIT CALENDES",
    "driver": "E. RAFFIN",
    "entraineur": "A. CHAVATTE",
-   "cote": 2.1,
+   "cote": 2.2,
    "coteRef": 4.6,
    "musique": "2aDa2a5a1a5a(25)Da2a2a",
    "gains": 25825,
@@ -138,7 +138,7 @@
    "cheval": "MY HOPE",
    "driver": "D. BONNE",
    "entraineur": "A. HUREAU",
-   "cote": 4.5,
+   "cote": 5.1,
    "coteRef": 9.8,
    "musique": "6a3a2aDa1a2a1a5aDa2a",
    "gains": 27755,
@@ -160,7 +160,7 @@
    "cheval": "MY JIBAY",
    "driver": "M. ABRIVARD",
    "entraineur": "J. DUBREIL",
-   "cote": 11,
+   "cote": 7.5,
    "coteRef": 13,
    "musique": "6aDa5a6a8a9a3a5a8a0a",
    "gains": 27320,
@@ -204,7 +204,7 @@
    "cheval": "MICA DE FARCHAT",
    "driver": "A. COLLETTE",
    "entraineur": "Gregg LUPI",
-   "cote": 22,
+   "cote": 24,
    "coteRef": null,
    "musique": "7a6a1a0aDm1a6a(25)0a5a",
    "gains": 23400,
@@ -226,7 +226,7 @@
    "cheval": "MIGOVE DU CHARME",
    "driver": "D. BLOND",
    "entraineur": "D. BLOND",
-   "cote": 30,
+   "cote": 33,
    "coteRef": 37.5,
    "musique": "Da4a2a4a4a2aDaDa5a3a",
    "gains": 20825,
@@ -270,7 +270,7 @@
    "cheval": "MILLESIME PIYA",
    "driver": "V. SAUSSAYE",
    "entraineur": "N. VIEL-PIERRE",
-   "cote": 19,
+   "cote": 16,
    "coteRef": null,
    "musique": "1a1a4a(25)DaDaDaDaDa",
    "gains": 13560,
@@ -292,7 +292,7 @@
    "cheval": "MAESTRO D'OUVILLE",
    "driver": "J. GOSSELIN",
    "entraineur": "J. GOSSELIN",
-   "cote": 20,
+   "cote": 23,
    "coteRef": null,
    "musique": "4a0a2a8a1a1a8a3a(25)7a",
    "gains": 22245,
@@ -383,11 +383,11 @@
    "5",
    "6",
    "7",
-   "2",
    "1",
    "12",
-   "4",
-   "13"
+   "2",
+   "13",
+   "3"
   ],
   "topChevaux": [
    "6",
@@ -486,7 +486,9 @@
    "13",
    "10"
   ],
-  "pourUnePlace": [],
+  "pourUnePlace": [
+   "7"
+  ],
   "outiders": [
    "7",
    "3"
@@ -641,5 +643,5 @@
   "5 - 2 - 1 - 6 - 11 - 3 - 13",
   "12 - 11 - 5 - 4 - 13 - 3 - 10 - 1"
  ],
- "collecteLe": "2026-10-07T08:08:13.590Z"
+ "collecteLe": "2026-10-07T08:45:12.862Z"
 }

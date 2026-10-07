@@ -1,0 +1,388 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 8,
+  "nom": "PRIX DU PORT DE L'EOUBE",
+  "prix": "PRIX DU PORT DE L'EOUBE",
+  "heure": "20:15",
+  "distance": 2000,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "Pour poulains entiers, hongres et pouliches de 3 ans ayant une valeur inférieure ou égale à 35 k. Poids : 56 kg. Les chevaux ayant depuis le 7 avr 2026 inclus reçu une allocation de 5.000 porteront 1 kg ; une allocation de 7.000 ou plusieurs allocations de 5.000, 2 kg ; une allocation de 9.000 ou plusieurs allocations de 7.000, 3 kg.",
+  "montant": 16500,
+  "arrivee": null,
+  "dateLongue": "mercredi 7 octobre 2026",
+  "jour": "mercredi"
+ },
+ "meeting": {
+  "num": 4,
+  "hippodrome": "Pont De Vivaux",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "MEFIE TOI",
+   "driver": "H. BESNIER",
+   "entraineur": "P. COTTIER",
+   "cote": 5,
+   "coteRef": 3.6,
+   "musique": "3p9p8p1p3p4p1p6p5p2p",
+   "gains": 71119,
+   "age": 3,
+   "sexe": "H",
+   "poids": 59,
+   "valeur": 35,
+   "chrono": "2'04\"0",
+   "coteRefJockey": "09,2",
+   "coteRefEntraineur": "06,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/PON/8/20261007-PON-8-1.png",
+   "proprietaire": "GOUSSERIE RACING",
+   "dernierPassage": 12,
+   "depart": 7,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "LAMIYA",
+   "driver": "A. ORANI",
+   "entraineur": "J. REYNIER",
+   "cote": 3.2,
+   "coteRef": 4.3,
+   "musique": "1p5p2p3p9p0p3p",
+   "gains": 19266,
+   "age": 3,
+   "sexe": "F",
+   "poids": 57.5,
+   "valeur": 34,
+   "chrono": "2'10\"1",
+   "coteRefJockey": "07,2",
+   "coteRefEntraineur": "06,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/PON/8/20261007-PON-8-2.png",
+   "proprietaire": "N. BIZAKOV",
+   "dernierPassage": 8,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "LE LANDIN",
+   "driver": "I. MENDIZABAL",
+   "entraineur": "M. SCANDELLA-LACAILLE",
+   "cote": 7,
+   "coteRef": 3.6,
+   "musique": "Ap2p6p2p7p3p5p(25)4p9p",
+   "gains": 26368,
+   "age": 3,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 34,
+   "chrono": "",
+   "coteRefJockey": "09,4",
+   "coteRefEntraineur": "09,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/PON/8/20261007-PON-8-3.png",
+   "proprietaire": "M. BLANC",
+   "dernierPassage": 75,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "HOLD MY DREAMS",
+   "driver": "A. CRASTUS",
+   "entraineur": "R. CHOTARD",
+   "cote": 4.6,
+   "coteRef": null,
+   "musique": "2p5p0p",
+   "gains": 3588,
+   "age": 3,
+   "sexe": "M",
+   "poids": 56,
+   "valeur": 35,
+   "chrono": "",
+   "coteRefJockey": "11,2",
+   "coteRefEntraineur": "10,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/PON/8/20261007-PON-8-4.png",
+   "proprietaire": "D. DE WAELE/ P. DE WAELE",
+   "dernierPassage": 23,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "CELAGO",
+   "driver": "M. GRANDIN",
+   "entraineur": "C. ESCUDER",
+   "cote": 5.2,
+   "coteRef": null,
+   "musique": "3p2p2p4p4p",
+   "gains": 11178,
+   "age": 3,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 34.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/h.gif",
+   "proprietaire": "JC. SEROUL",
+   "dernierPassage": null,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "VALDERRAMA",
+   "driver": "H. BOUTIN",
+   "entraineur": "N. PERRET",
+   "cote": 4.5,
+   "coteRef": 6.1,
+   "musique": "2p2p1p2p5p3p",
+   "gains": 22622,
+   "age": 3,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 31,
+   "chrono": "2'14\"7",
+   "coteRefJockey": "10,5",
+   "coteRefEntraineur": "08,2",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/PON/8/20261007-PON-8-6.png",
+   "proprietaire": "J. N.. TEMAM",
+   "dernierPassage": 8,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "MUHAARIA",
+   "driver": "M. BRUNELLI",
+   "entraineur": "M. SCANDELLA-LACAILLE",
+   "cote": 12,
+   "coteRef": 10.7,
+   "musique": "5p0p3p3p3p(25)1p3p4p2p",
+   "gains": 37414,
+   "age": 3,
+   "sexe": "F",
+   "poids": 54.5,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "09,3",
+   "coteRefEntraineur": "09,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/PON/8/20261007-PON-8-7.png",
+   "proprietaire": "S. URIZZI",
+   "dernierPassage": 180,
+   "depart": 2,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "7",
+   "1",
+   "3",
+   "2",
+   "6"
+  ],
+  "drivers": [
+   2,
+   1,
+   7,
+   3,
+   6,
+   4
+  ],
+  "entraineurs": [
+   "2",
+   "1",
+   "6",
+   "3",
+   "7",
+   "4"
+  ],
+  "top10chevaux": [
+   "7",
+   "1",
+   "3",
+   "2",
+   "6"
+  ],
+  "top10entraineurs": [
+   "2",
+   "1",
+   "6",
+   "3",
+   "7",
+   "4"
+  ],
+  "topCotesDirect": [
+   "2",
+   "6",
+   "4",
+   "1",
+   "3",
+   "7"
+  ],
+  "topChevaux": [
+   "1",
+   "2",
+   "6",
+   "7"
+  ],
+  "topPalmares": [
+   "7",
+   "1",
+   "6",
+   "2",
+   "3",
+   "4"
+  ],
+  "topForme": [
+   "6",
+   "7",
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "topClasse": [
+   "1",
+   "7",
+   "3",
+   "6",
+   "2",
+   "4"
+  ],
+  "topJockeys": [
+   "4",
+   "3",
+   "2",
+   "1",
+   "6",
+   "7"
+  ],
+  "topEntraineurs": [
+   "2",
+   "1",
+   "6",
+   "3",
+   "7",
+   "4"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "1",
+   "2",
+   "6"
+  ],
+  "topCordes": [
+   "1",
+   "7",
+   "3",
+   "2"
+  ],
+  "ecartsChevaux": [
+   "7",
+   "1",
+   "2",
+   "3",
+   "4",
+   "6"
+  ],
+  "incontournables": [
+   "6",
+   "7",
+   "2",
+   "1",
+   "3",
+   "4"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "3",
+   "1"
+  ],
+  "syntheseTf": [
+   "7",
+   "6",
+   "2",
+   "4"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "MEFIE TOI",
+   "courses": 22,
+   "victoires": 4,
+   "places": 12,
+   "pctV": "18.18",
+   "pctP": "72.73",
+   "aptG": "1350",
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "LAMIYA",
+   "courses": 7,
+   "victoires": 1,
+   "places": 4,
+   "pctV": "14.29",
+   "pctP": "71.43",
+   "aptG": null,
+   "aptP": "1700"
+  },
+  {
+   "num": 3,
+   "cheval": "LE LANDIN",
+   "courses": 12,
+   "victoires": 1,
+   "places": 9,
+   "pctV": "8.33",
+   "pctP": "83.33",
+   "aptG": "1650",
+   "aptP": "2000"
+  },
+  {
+   "num": 4,
+   "cheval": "HOLD MY DREAMS",
+   "courses": 3,
+   "victoires": 0,
+   "places": 2,
+   "pctV": "0",
+   "pctP": "66.67",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "VALDERRAMA",
+   "courses": 6,
+   "victoires": 1,
+   "places": 5,
+   "pctV": "16.67",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": "2400"
+  },
+  {
+   "num": 7,
+   "cheval": "MUHAARIA",
+   "courses": 14,
+   "victoires": 1,
+   "places": 11,
+   "pctV": "7.14",
+   "pctP": "85.71",
+   "aptG": "1850",
+   "aptP": "2150"
+  }
+ ],
+ "synthesePct": "1 - 7 - 3 - 6 - 2 - 4",
+ "pronosTf": [
+  "7 - 1 - 6 - 2 - 3",
+  "1 - 3 - 2 - 4"
+ ],
+ "collecteLe": "2026-10-07T08:46:01.217Z"
+}

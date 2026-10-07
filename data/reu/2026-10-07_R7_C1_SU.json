@@ -1,0 +1,198 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 1,
+  "nom": "PRIX DE LILLE SUEDE",
+  "prix": "PRIX DE LILLE SUEDE",
+  "heure": "18:15",
+  "distance": 1640,
+  "discipline": "ATTELE",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "PRIX DE LILLE Course 01 Départ à l'Autostart 20.746 - Attelé. - 1.640 mètres. 9.160, 4.580, 2.656, 1.603, 1.053, 824, 504. - 366 au fonds d'élevage. Pour 2 ans.",
+  "montant": 20746,
+  "arrivee": null,
+  "dateLongue": "mercredi 7 octobre 2026",
+  "jour": "mercredi"
+ },
+ "meeting": {
+  "num": 7,
+  "hippodrome": "Solvalla",
+  "pays": "SU"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "DUNDEE",
+   "driver": "J. KONTIO",
+   "entraineur": "S. NORRSTROM",
+   "cote": null,
+   "coteRef": null,
+   "musique": "8a4a1a",
+   "gains": 6618,
+   "age": 2,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": null,
+   "proprietaire": "NORRSTROM SARA",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "OVERLORD SISU",
+   "driver": "R. BAKKER",
+   "entraineur": "P. HAGOORT",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4a2a7a",
+   "gains": 6938,
+   "age": 2,
+   "sexe": "M",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "02,0",
+   "coteRefEntraineur": "02,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/SOL/1/20261007-SOL-1-2.png",
+   "proprietaire": "STABLE WHY NOT",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "TOUGHER THAN YOU",
+   "driver": "O. KIHLSTROM",
+   "entraineur": "S. NORRSTROM",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1a3a2a",
+   "gains": 20472,
+   "age": 2,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/SOL/1/20261007-SOL-1-3.png",
+   "proprietaire": "GUSTAFSSON PIA",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "ROCKSTEADY ARTIST",
+   "driver": "C. SJOSTROM",
+   "entraineur": "C. SJOSTROM",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1a1a",
+   "gains": 32976,
+   "age": 2,
+   "sexe": "M",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261007/SOL/1/20261007-SOL-1-4.png",
+   "proprietaire": "UPPSALA HANDELSHUS AB",
+   "dernierPassage": null,
+   "depart": null,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [],
+  "drivers": [
+   "4",
+   "3",
+   "2"
+  ],
+  "entraineurs": [
+   "4",
+   "2"
+  ],
+  "top10chevaux": [],
+  "top10drivers": [
+   "4",
+   "3",
+   "2"
+  ],
+  "top10entraineurs": [
+   "4",
+   "2"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "4",
+   "3"
+  ],
+  "topPalmares": [
+   "3",
+   "4",
+   "2"
+  ],
+  "topForme": [
+   "3",
+   "4",
+   "2"
+  ],
+  "topClasse": [
+   "4",
+   "3",
+   "2"
+  ],
+  "topJockeys": [
+   "3",
+   "2",
+   "4"
+  ],
+  "topEntraineurs": [
+   "2",
+   "4"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [],
+  "topPosition": [
+   "5",
+   "8",
+   "2",
+   "4"
+  ],
+  "ecartsChevaux": [
+   "2",
+   "3",
+   "4"
+  ],
+  "incontournables": [
+   "4",
+   "3",
+   "2"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "2",
+   "3"
+  ],
+  "syntheseTf": [
+   "4",
+   "5",
+   "8"
+  ]
+ },
+ "aptitudes": [],
+ "synthesePct": "",
+ "pronosTf": [],
+ "collecteLe": "2026-10-07T08:46:34.007Z"
+}

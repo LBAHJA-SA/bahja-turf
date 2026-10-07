@@ -28,7 +28,7 @@
    "cheval": "GARBINO",
    "driver": "M. T. AADLAND",
    "entraineur": "S. KOLNES",
-   "cote": 7,
+   "cote": 8.6,
    "coteRef": null,
    "musique": "3a7aDa5aDa",
    "gains": 31552,
@@ -50,7 +50,7 @@
    "cheval": "H.M. HIPPOKRENE",
    "driver": "G. NORDBOTTEN",
    "entraineur": "G. NORDBOTTEN",
-   "cote": 7.8,
+   "cote": 9.5,
    "coteRef": null,
    "musique": "0a0a0aDa4a",
    "gains": 37464,
@@ -72,7 +72,7 @@
    "cheval": "SIOUX KUNG X.",
    "driver": "A. S. AKSELSEN",
    "entraineur": "B. SOLBERG",
-   "cote": 16,
+   "cote": 21,
    "coteRef": null,
    "musique": "0a6aDa6a3a",
    "gains": 39744,
@@ -94,7 +94,7 @@
    "cheval": "ALAMEDA",
    "driver": "B. STEINE",
    "entraineur": "A. FOSS",
-   "cote": 7.3,
+   "cote": 10,
    "coteRef": null,
    "musique": "3a0a0a5a4a",
    "gains": 33486,
@@ -116,7 +116,7 @@
    "cheval": "KONG AMOK",
    "driver": "L. A. KOLLE",
    "entraineur": "T. FORKERUD",
-   "cote": 8.2,
+   "cote": 10,
    "coteRef": null,
    "musique": "0a3a0a5a1a",
    "gains": 38457,
@@ -138,7 +138,7 @@
    "cheval": "STEPPING MONEYGIRL",
    "driver": "G. AUSTEVOLL",
    "entraineur": "E. KORSVOLLA",
-   "cote": 3.6,
+   "cote": 4.3,
    "coteRef": null,
    "musique": "4a4a0a5a0a",
    "gains": 31521,
@@ -160,7 +160,7 @@
    "cheval": "LEIGHTON BOKO",
    "driver": "S. RISHOVD",
    "entraineur": "A. RISHOVD",
-   "cote": 16,
+   "cote": 20,
    "coteRef": null,
    "musique": "0a3a0a0a0a",
    "gains": 39681,
@@ -182,7 +182,7 @@
    "cheval": "NETTO PHARMA",
    "driver": "E. HØITOMT",
    "entraineur": "G. ROGNERUD",
-   "cote": 6.8,
+   "cote": 3.1,
    "coteRef": null,
    "musique": "2a4a0a5a4a",
    "gains": 39977,
@@ -204,7 +204,7 @@
    "cheval": "COBOL INFINITY",
    "driver": "T. E. SOLBERG",
    "entraineur": "G. BUAAS",
-   "cote": 18,
+   "cote": 16,
    "coteRef": null,
    "musique": "5a5m0a0a1a",
    "gains": 28777,
@@ -226,7 +226,7 @@
    "cheval": "WATCH ME EXPLODE",
    "driver": "P. O. MIDTFJELD",
    "entraineur": "J. RAAB",
-   "cote": 27,
+   "cote": 21,
    "coteRef": null,
    "musique": "0m3a5a0a5a",
    "gains": 38701,
@@ -284,13 +284,13 @@
    "5"
   ],
   "topCotesDirect": [
-   "6",
    "8",
+   "6",
    "1",
-   "4",
    "2",
+   "4",
    "5",
-   "3",
+   "9",
    "7"
   ],
   "topChevaux": [
@@ -382,9 +382,7 @@
    "9",
    "10"
   ],
-  "pourUnePlace": [
-   "2"
-  ],
+  "pourUnePlace": [],
   "outiders": [
    "9",
    "6"
@@ -418,5 +416,5 @@
   "5 - 8 - 9 - 10 - 1 - 3",
   "2 - 4 - 5"
  ],
- "collecteLe": "2026-10-07T08:08:27.993Z"
+ "collecteLe": "2026-10-07T08:45:27.334Z"
 }

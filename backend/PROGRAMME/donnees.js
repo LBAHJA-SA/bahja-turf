@@ -139,8 +139,49 @@ export async function meetingsDepuisReu(date, base = '/api/tf') {
       courses,
     })
   }
+  /* ⚠ LE MAGHREB N'EST PAS SUR reu.php (07/10/2026).
+ *   reu.php donne 7 réunions (R1→R7) ; il ne publie ni le Maroc ni les
+ *   réunions « R9 » des autres sites. Or le Morocco est demandé tous les
+ *   jours : on le complète depuis l'API du programme, qui donne le pays
+ *   (`MA`), le numéro de réunion et le nom des courses. Sans ce complément,
+ *   `R9 KHEMISSET` disparaissait du Programme.
+ *   ⚠ reu.php reste la SEULE source des 7 premières réunions : on ne le
+ *   remplace pas, on complète. */
+  let mg = []
+  try {
+    const r = await fetch(CC_API + '/programme?date=' + date, { headers: { Accept: 'application/json' } })
+    const j = await r.json()
+    for (const m of j.meetings || []) {
+      if (!/^(MA|MAR|MAROC)$/i.test(String(m.country || ''))) continue
+      const num = parseInt(String(m.reunion_code || '').replace(/\D+/g, ''), 10)
+      if (!Number.isFinite(num)) continue
+      const courses = (m.races || []).map((rc) => ({
+        numOrdre: parseInt(String(rc.code || '').replace(/\D+/g, ''), 10) || 0,
+        libelle: rc.name || '',
+        name: rc.name || '',
+        heure: rc.time_hm || '',
+        reunion: 'R' + num,
+        pays: 'MAROC',
+        quinte: (rc.available_bet_types || []).includes('sorec_quinte'),
+        paris: rc.available_bet_types || [],
+        types_pari: (rc.available_bet_types || []).includes('sorec_quinte') ? ['QUINTE_PLUS'] : [],
+        distance: rc.distance || null,
+        runners: rc.starters ?? null,
+      })).filter((c) => c.numOrdre)
+      if (!courses.length) continue
+      mg.push({
+        num,
+        hippodrome: String(m.track || m.label || ''),
+        country: 'MA',
+        pays: 'MAROC',
+        source: 'programme',
+        courses,
+      })
+    }
+  } catch (e) { /* le Maghreb est un complément, jamais un bloquant */ }
+
   // on garde l'ordre du site : R1, R2, R3…
-  return out.sort((a, b) => (a.num || 99) - (b.num || 99))
+  return [...out, ...mg].sort((a, b) => (a.num || 99) - (b.num || 99))
 }
 
 export async function meetingsDepuisCasacourses(date) {

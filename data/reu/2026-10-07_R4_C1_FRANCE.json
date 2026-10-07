@@ -50,7 +50,7 @@
    "cheval": "OLAF THE BIG ONE",
    "driver": "C. PACAUT",
    "entraineur": "F. BOUALEM",
-   "cote": 15,
+   "cote": 12,
    "coteRef": 28,
    "musique": "8pAp6p6p3p1p0p9p0p9p",
    "gains": 116410,
@@ -72,7 +72,7 @@
    "cheval": "RIDWAAN",
    "driver": "H. BESNIER",
    "entraineur": "C. MARTINON",
-   "cote": 10,
+   "cote": 13,
    "coteRef": 19.9,
    "musique": "0p0p9p6p0p0p4p8p2p0p",
    "gains": 185505,
@@ -94,7 +94,7 @@
    "cheval": "SEKKU",
    "driver": "A. ORANI",
    "entraineur": "LL. ROHN-PELVIN",
-   "cote": 1.6,
+   "cote": 1.5,
    "coteRef": 10.1,
    "musique": "2p2p9p(25)0p0p0p5p0p4p",
    "gains": 123403,
@@ -116,7 +116,7 @@
    "cheval": "SANKA CHOP",
    "driver": "M. WALDHAUSER",
    "entraineur": "F. FORESI",
-   "cote": 9.1,
+   "cote": 9.4,
    "coteRef": 13,
    "musique": "7p8p9p7p9p9p7p0p3p1p",
    "gains": 83067,
@@ -138,7 +138,7 @@
    "cheval": "CAPABLE",
    "driver": "M. GERMAIN",
    "entraineur": "LL. ROHN-PELVIN",
-   "cote": 17,
+   "cote": 21,
    "coteRef": 11.4,
    "musique": "5p7p8p7p0p6p2p(25)0p0p",
    "gains": 110797,
@@ -160,7 +160,7 @@
    "cheval": "GOOD QUESTION",
    "driver": "A. CRASTUS",
    "entraineur": "C. MARTINON",
-   "cote": 19,
+   "cote": 20,
    "coteRef": 11.9,
    "musique": "0p9p8p0p0p9p0p5p1p8p",
    "gains": 460089,
@@ -182,7 +182,7 @@
    "cheval": "ROSISSIM",
    "driver": "M. GRANDIN",
    "entraineur": "F. FORESI",
-   "cote": 8.3,
+   "cote": 9.8,
    "coteRef": 10.4,
    "musique": "6p7p5p5p0p2p3p6p5p0p",
    "gains": 159665,
@@ -253,13 +253,13 @@
   ],
   "topCotesDirect": [
    "4",
-   "8",
    "5",
+   "8",
+   "2",
    "3",
    "1",
-   "2",
-   "6",
-   "7"
+   "7",
+   "6"
   ],
   "topChevaux": [
    "2",
@@ -453,5 +453,5 @@
   "4 - 8 - 1 - 2 - 5",
   "4 - 3 - 5 - 6 - 8"
  ],
- "collecteLe": "2026-10-07T08:08:48.278Z"
+ "collecteLe": "2026-10-07T08:45:47.915Z"
 }

@@ -74,15 +74,21 @@ export default function Programme(){
   const reunionsAffichees = (()=> {
     // ⚠ QUINTÉ FRANCE SEULEMENT : le Maroc n'a plus sa page.
     const HIPPO_MA = /MEKNESS|KHEMISSET|MARRAKECH|CASABLANCA|RABAT|TANGER|LARACHE|OUZZANE|BERKANE|ANFA|SIDI ?MOUSA|SOUAKA|ALGER/i
-    /* ⭐ TOUTES LES RÉUNIONS, tous pays. reu.php numérote ses réunions de façon
-     *  globale (R1…R7 le 07/10) ; le numéro d'une réunion est LOCAL à son
-     *  pays — `R14` est Horseshoe Indianapolis sur un autre site, et R16
-     *  Belmont Park. Filtrer sur « FR » cachait la moitié du monde et cassait
-     *  les liens ; on affiche tout, et le pays voyage dans l'URL. */
+    /* ⭐ LES RÉUNIONS FRANÇAISES + LE MAGHREB.
+     *  reu.php donne R1→R7 (tous pays) ; R9 (Khemisset, Maroc) vient du
+     *  complément. R14/R16 (autres sites) ne sont pas pris : leur numéro de
+     *  réunion est LOCAL au site, il ne correspond à aucun fichier d'archive
+     *  et le lien mènerait à « course indisponible ».
+     *  Le pays voyage dans l'URL : `?pays=…` est obligatoire, y compris pour
+     *  la France, car le fichier d'archive porte le suffixe du pays. */
     const base = meetings
+      .filter(m => {
+        const p = String(m.pays || m.country || '').toUpperCase()
+        return p.startsWith('FR') || p === 'MA' || p === 'MAROC'
+      })
       .map(m=> ({
         ...m,
-        country: String(m.pays || m.country || '').toUpperCase().startsWith('FR') ? 'FR' : String(m.pays || m.country || '').toUpperCase(),
+        country: String(m.pays || m.country || '').toUpperCase().startsWith('FR') ? 'FR' : 'MA',
         courses: (Array.isArray(m.courses)?m.courses:[]).slice().sort((a,b)=>((b.quinte?1:0)-(a.quinte?1:0)) || ((a.numOrdre??a.num)-(b.numOrdre??b.num)))
       })).filter(m=> m.courses.length>0)
     // suppression des doublons : R4 Vincennes + R104 Paris-Vincennes = meme course
