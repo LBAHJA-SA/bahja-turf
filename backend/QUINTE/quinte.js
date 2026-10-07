@@ -830,23 +830,16 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
     return Number.isFinite(x) && x > 0 ? x : Infinity
   }
 
-  /* ── ① P1, P2, P3 EN TÊTE — dans l'ordre du carnet (rang de presse) ──
-   * Le tableau Statistiques le montre : le podium (1er+2e+3e) sort de
-   * P1-P4 dans 6/6 courses. Avec si peu de courses, la probabilité par
-   * P(n) n'est pas fiable (P3 = 50 % sur 2 courses, P13 = 50 % aussi) et
-   * la cote peut alors faire passer un P13 devant un P3. Le rang de
-   * presse, lui, ne bouge pas : les 3 premiers de la Synthèse passent
-   * donc en tête dans l'ordre du carnet, avant toute probabilité.
-   * ② le reste suit la loi gloutonne ci-dessous (4e place, puis 5e). */
-  const tete = []
-  for (const cible of [1, 2, 3]) {
-    const i = nums.findIndex((n) => (rang[n] ?? 0) === cible)
-    if (i >= 0) tete.push(nums.splice(i, 1)[0])
-  }
-
+  /* ── L'ORDRE EST CELUI DES PROBABILITÉS DE PLACE ──
+   * Rien n'est mis d'office en tête : c'est l'archive qui décide.
+   * Sur les 6 Quintés clôturés, le vainqueur est venu de P1 (×2), P4,
+   * P7, P8, P13 — P1 n'est donc PAS « le 1er par défaut », c'est
+   * l'historique qui classe. La boucle ci-dessous suit donc la loi
+   * gloutonne depuis la 1re place : le meilleur pour le 1er, puis le
+   * meilleur pour le 2e parmi ce qui reste, puis le 3e, le 4e, le 5e. */
   const reste = nums.slice()
   const ordre = []
-  for (let pos = 3; pos < 5 && reste.length; pos++) {
+  for (let pos = 0; pos < 5 && reste.length; pos++) {
     let meilleur = 0
     for (let i = 1; i < reste.length; i++) {
       const a = pDe(reste[i])?.[pos] ?? -1
@@ -857,7 +850,7 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
     ordre.push(reste.splice(meilleur, 1)[0])
   }
   while (reste.length) ordre.push(reste.shift())
-  return [...tete, ...ordre]
+  return ordre
 }
 
 /* ------------------------------------------------------- CARRIÈRE (B) --- */
