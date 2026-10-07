@@ -19,6 +19,8 @@ export default function App(){
         <Route path="/race/:id" element={<Article />} />
         <Route path="/quinte" element={<QuinteGrille />} />
         <Route path="/couple" element={<Couple />} />
+        {/* alias : l'ancien nom reste valable (les bookmarks ne cassent pas) */}
+        <Route path="/coply" element={<Couple />} />
       </Routes>
     </BrowserRouter>
   )

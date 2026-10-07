@@ -112,7 +112,10 @@ export default function Couple() {
         )}
 
         <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-          {/* ── les réunions ── */}
+          {/* ── les réunions : chacune son scroll.
+              8 réunions × 8 courses = 65 lignes : un seul scroll les enterre.
+              Chaque réunion a donc sa propre zone qui défile (≈ 4 courses
+              visibles), l'en-tête restant fixe. */}
           <div style={{ flex: '1 1 360px', minWidth: 330, display: 'flex', flexDirection: 'column', gap: 12 }}>
             {!programme && !err && (
               <div style={{ padding: 24, color: '#a8a29e', fontSize: 13, background: '#fff', borderRadius: 10, border: '1px solid ' + TE.bord }}>
@@ -129,23 +132,25 @@ export default function Couple() {
                     <span style={{ marginLeft: 8, fontSize: 11, color: '#fed7aa' }}>· {g.pays}</span>
                   )}
                 </div>
-                {g.courses.map((c) => (
-                  <button key={c.cle} onClick={() => setCle(c.cle)}
-                    style={{
-                      display: 'block', width: '100%', textAlign: 'left', padding: '8px 13px',
-                      border: 'none', borderBottom: '1px solid #f5f5f4', cursor: 'pointer',
-                      background: cle === c.cle ? TE.accentClair : '#fff',
-                      borderLeft: '4px solid ' + (cle === c.cle ? TE.accent : 'transparent'),
-                      fontFamily: TE.police,
-                    }}>
-                    <div style={{ fontSize: 12, fontWeight: 800, color: TE.accentSombre }}>
-                      {c.code}{c.heure ? ` · ${c.heure}` : ''}
-                      {c.distance ? <span style={{ fontWeight: 600, color: '#78716c' }}> · {c.distance}m</span> : null}
-                      {c.partants ? <span style={{ fontWeight: 600, color: '#78716c' }}> · {c.partants}p</span> : null}
-                    </div>
-                    <div style={{ fontSize: 11, color: '#57534e' }}>{c.nom || '—'}</div>
-                  </button>
-                ))}
+                <div style={{ maxHeight: 208, overflowY: 'auto' }}>
+                  {g.courses.map((c) => (
+                    <button key={c.cle} onClick={() => setCle(c.cle)}
+                      style={{
+                        display: 'block', width: '100%', textAlign: 'left', padding: '8px 13px',
+                        border: 'none', borderBottom: '1px solid #f5f5f4', cursor: 'pointer',
+                        background: cle === c.cle ? TE.accentClair : '#fff',
+                        borderLeft: '4px solid ' + (cle === c.cle ? TE.accent : 'transparent'),
+                        fontFamily: TE.police,
+                      }}>
+                      <div style={{ fontSize: 12, fontWeight: 800, color: TE.accentSombre }}>
+                        {c.code}{c.heure ? ` · ${c.heure}` : ''}
+                        {c.distance ? <span style={{ fontWeight: 600, color: '#78716c' }}> · {c.distance}m</span> : null}
+                        {c.partants ? <span style={{ fontWeight: 600, color: '#78716c' }}> · {c.partants}p</span> : null}
+                      </div>
+                      <div style={{ fontSize: 11, color: '#57534e' }}>{c.nom || '—'}</div>
+                    </button>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
