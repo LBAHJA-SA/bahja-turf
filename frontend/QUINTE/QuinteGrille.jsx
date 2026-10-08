@@ -10,6 +10,7 @@ import {
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
 } from '../../src/lib/quinte'
+import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
 const s = {
   box: { border: '1px solid #d7dce5', borderRadius: 6, background: '#fff' },
@@ -630,7 +631,19 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
     setBusyResultat(true); setMsg('')
     try {
       const res = await chargerCourseCC(date, syn?.synthese || [])
-      const arr = res?.arrivee
+      let arr = res?.arrivee
+      // repli turf-france : casacourses ne publie pas toujours l'arrivée
+      // (08/10 : status CLOSED mais has_results=false). La clé R/C vient
+      // de casacourses lui-même, donc c'est la même course.
+      if ((!arr || !arr.length) && res?.cle) {
+        const m = String(res.cle).match(/_R(\d+)_C(\d+)$/)
+        if (m) {
+          try {
+            const det = await chargerDetailReu(date, Number(m[1]), Number(m[2]), 'FRANCE')
+            if (det?.arrivee?.length) arr = det.arrivee
+          } catch (e2) { /* on garde le message standard ci-dessous */ }
+        }
+      }
       if (!arr || !arr.length) {
         setMsg('⚠ Pas de résultat publié pour cette course. Elle n’est pas encore clôturée — réessaie plus tard.')
         return
