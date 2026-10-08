@@ -49,10 +49,31 @@ export function coarse(fam) {
   return 'TOC'
 }
 
+/* ⚠ QUELLE COTE ? (vérifié le 08/10/2026 — point bloquant levé par la revue)
+ *   Les archives historiques n'ont QU'UN SEUL champ : `cote_pmu` (la cote
+ *   PMU de référence, ex. 17). Les courses du jour en ont DEUX :
+ *     `cote`    = la colonne « Cotes » de reu.php (ex. 185, 141, 3.8…)
+ *     `coteRef` = la colonne « Cotes Ref. » (ex. 5.4, 16.7, 19.9…)
+ *   Mesuré sur 616 paires : 74% diffèrent de plus de ×1.5 (ex. n17 :
+ *   cote=3.8 contre coteRef=19.9 — inversés). La colonne « Cotes » est
+ *   donc INUTILISABLE pour la famille : autre type, autre moment, ou
+ *   lignes décalées. Seule `coteRef` est du même type que `cote_pmu`.
+ *   Ordre imposé : coteRef d'abord, jamais la « Cotes » du jour. */
 function coteDe(p) {
-  const v = p.cote ?? p.coteRef ?? p.cote_pmu ?? null
+  const v = p.coteRef ?? p.cote_pmu ?? null
   const n = Number(v)
-  return Number.isFinite(n) && n > 0 ? n : Infinity
+  if (Number.isFinite(n) && n > 0) return n
+  // repli : la cote déjà normalisée par /api/couple (qui met la ref dedans)
+  const c = Number(p.cote)
+  return Number.isFinite(c) && c > 0 ? c : Infinity
+}
+
+/* ⚠ Infinity N'EST PAS une cote (08/10/2026). `Number.isFinite(Infinity)`
+ *   vaut true : sans ce garde, les chevaux sans cote passaient le filtre
+ *   et formaient un « trio » fantôme — le verdict répondait n'importe quoi
+ *   au lieu de « pas assez de cotes ». */
+function coteValide(x) {
+  return Number.isFinite(x) && x !== Infinity && x > 0
 }
 
 /* ─────────────────────────────────────────────────── une empreinte ────── */
@@ -60,7 +81,7 @@ function coteDe(p) {
 function rangsMarche(partants) {
   const ordre = (partants || [])
     .map((p) => ({ num: p.num, c: coteDe(p) }))
-    .filter((x) => Number.isFinite(x.c))
+    .filter((x) => coteValide(x.c))
     .sort((a, b) => a.c - b.c)
   return new Map(ordre.map((x, i) => [x.num, i + 1]))
 }
@@ -157,11 +178,11 @@ function* triples(partants) {
   const nums = (partants || []).map((p) => p.num)
   const cotes = new Map((partants || []).map((p) => [p.num, coteDe(p)]))
   for (const a of nums) {
-    if (!Number.isFinite(cotes.get(a))) continue
+    if (!coteValide(cotes.get(a))) continue
     for (const b of nums) {
-      if (b === a || !Number.isFinite(cotes.get(b))) continue
+      if (b === a || !coteValide(cotes.get(b))) continue
       for (const c of nums) {
-        if (c === a || c === b || !Number.isFinite(cotes.get(c))) continue
+        if (c === a || c === b || !coteValide(cotes.get(c))) continue
         yield [a, b, c]
       }
     }
@@ -222,6 +243,10 @@ export function meilleurTrio(partants, index) {
 export function verdict(partants, db) {
   const index = db?.index || db
   if (!index || !index.full) return { trio: null, raison: 'index introuvable' }
+  /* ⚠ D'abord les cotes : sans 3 cotes valides il n'y a pas de trio à
+   *   tester — ce n'est pas « aucun antécédent », c'est « pas de cotes »
+   *   (le matin, reu.php ne les publie pas encore). */
+  if (!trioCandidat(partants)) return { trio: null, raison: 'pas assez de cotes' }
   const best = meilleurTrio(partants, index)
   if (!best) return { trio: null, raison: 'aucun antécédent' }
   const r = best.resume
@@ -248,7 +273,7 @@ export function verdict(partants, db) {
 export function trioCandidat(partants) {
   const ps = (partants || [])
     .map((p) => ({ num: p.num, v: coteDe(p) }))
-    .filter((x) => Number.isFinite(x.v))
+    .filter((x) => coteValide(x.v))
     .sort((a, b) => a.v - b.v)
   if (ps.length < 3) return null
   return [ps[0].num, ps[1].num, ps[2].num]

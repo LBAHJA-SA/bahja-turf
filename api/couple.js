@@ -140,14 +140,20 @@ function lireDetailArchive(date, rNum, cNum, pays) {
  * `jockey`) sont ramenés à UN SEUL : celui que la page Couplé affiche.
  * Cf. le piège ③ du §18 : une page qui lit un champ absent affiche « — ». */
 function normaliserPartant(p) {
-  const cote = p.cote ?? p.coteRef ?? p.cote_pmu ?? null
+  /* ⚠ QUELLE COTE ? (08/10/2026) Les archives n'ont que `cote_pmu`, les
+   *   courses du jour ont `cote` (colonne « Cotes ») + `coteRef (« Ref »).
+   *   Mesuré : 74% des paires diffèrent de ×1.5 ou plus — ce ne sont pas
+   *   les mêmes cotes. Seule `coteRef` est du même type que `cote_pmu` :
+   *   c'est elle qui remplit `cote` (le moteur lit `coteRef` d'abord). */
+  const ref = p.coteRef ?? p.cote_pmu ?? null
+  const cote = ref != null && ref > 1 ? ref : null
   return {
     num: p.num,
     cheval: p.cheval || p.nom || p.horse || '',
     driver: p.driver || p.jockey || '',
     entraineur: p.entraineur || p.trainer || '',
     poids: p.poids ?? null,
-    cote: cote != null && cote > 1 ? cote : null,
+    cote, coteRef: ref,
     gains: p.gains ?? p.gain ?? null,
     musique: p.musique || '',
     corde: p.corde ?? null,
