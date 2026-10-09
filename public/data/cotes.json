@@ -821,5 +821,162 @@
   "discipline": null,
   "favori": null,
   "cotes": []
+ },
+ "2026-10-09_R1_C4": {
+  "source": "equidia.fr",
+  "favori": 10,
+  "snapshots": {},
+  "cotes": [
+   {
+    "num": 10,
+    "nom": "IRISH NICE ELGE",
+    "cote": 4.4,
+    "ouverture": 4.3,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "I STILL LOVING YOU",
+    "cote": 6.2,
+    "ouverture": 6.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "INDIEN DE FONTAINE",
+    "cote": 6.6,
+    "ouverture": 6.6,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "JYTRACE DE HOUELLE",
+    "cote": 8.2,
+    "ouverture": 8.3,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "JANNIG D'EREVAN",
+    "cote": 9.1,
+    "ouverture": 9.7,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "ILEO PIERJI",
+    "cote": 10,
+    "ouverture": 10,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "HEAVEN D'ECAJEUL",
+    "cote": 13,
+    "ouverture": 13,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "INHERIT",
+    "cote": 16,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "IZIJAL",
+    "cote": 19,
+    "ouverture": 19,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "HORIZON DU THAY",
+    "cote": 31,
+    "ouverture": 31,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "INEDIT DU PAVILLON",
+    "cote": 34,
+    "ouverture": 33,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "HORACIO DE CERISY",
+    "cote": 59,
+    "ouverture": 55,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "HISTORY MAJYC",
+    "cote": 82,
+    "ouverture": 89,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "IGLOO DE BEAULIEU",
+    "cote": 87,
+    "ouverture": 80,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "HOVE PONT VAUTIER",
+    "cote": 94,
+    "ouverture": 89,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 45225,
+    "heure": "2026-10-09T12:00:00+02:00"
+   }
+  ]
  }
 }

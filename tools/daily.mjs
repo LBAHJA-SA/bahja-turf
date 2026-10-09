@@ -23,12 +23,13 @@ import {
   buildGrid, classerPartants, classerPhysique, remplirGrille, parseCarriere, scorePhysique, filtres,
   autoCarriere, chargerCourseCC, computeStats,
 } from '../src/lib/quinte.js'
-import { chargerCotes } from './cotes.mjs'
+import { chargerCotes, chargerEquidia, lireCourse } from './cotes.mjs'
 
 const DATA = path.resolve('data')
 const F_SYN = path.join(DATA, 'synthese.json')
 const F_CAR = path.join(DATA, 'carriere.json')
 const F_LOG = path.join(DATA, 'daily.log')
+const F_COT = path.join(DATA, 'cotes.json')
 const PUB = path.resolve('public', 'data')
 /* Les ENTREES figees au moment ou la ticket a ete posee : sans elles, on ne
  * peut pas rejouer une ticket (le marche bouge, les carrieres arrivent). */
@@ -430,6 +431,50 @@ function parisVersGMT(minParis, d = new Date()) {
   return Math.round(minParis - decalage)
 }
 
+/* ⭐ LES 3 INSTANTS DU MARCHÉ (09/10/2026, instruction utilisateur).
+ *   Pour savoir QUEL timing donne les meilleurs tickets, on photographie
+ *   le marché 3 fois par course : à l'ouverture (04:30, tâche dédiée),
+ *   à H-3 et à H-2 (runs --final qui passent par là).
+ *   Stockage : data/cotes.json[courseId].snapshots.{ouverture,h_moins_3,
+ *   h_moins_2} = {heure, cotes}. La racine `cotes` suit TOUJOURS le dernier
+ *   marché lu (compat : chargerCotes + repli page inchangés) — seuls les
+ *   snapshots s'accumulent, jamais écrasés. */
+export async function snapshotMarche(date, label) {
+  const db = lire(F_SYN, {})
+  const avant = db[date]
+  if (!avant || !avant.synthese || !avant.synthese.length) { log(`  ${date}  snapshot ${label} : pas de Synthèse`); return null }
+  let courseId = avant.courseId || null
+  if (!courseId) {
+    try {
+      const course = await trouverCourse(date, avant.synthese, null)
+      courseId = course?.courseId || null
+    } catch (e) { /* ci-dessous */ }
+  }
+  const m = String(courseId || '').match(/^(\d{4}-\d{2}-\d{2})_R(\d+)_C(\d+)$/)
+  if (!m) { log(`  ${date}  snapshot ${label} : courseId illisible`); return null }
+  const [, d, r, c] = m
+  let etat = null
+  try { etat = await chargerEquidia(d, r, c) } catch (e) { log(`  ${date}  snapshot ${label} : equidia KO (${e.message})`); return null }
+  if (!etat) { log(`  ${date}  snapshot ${label} : page Equidia illisible`); return null }
+  const cotes = lireCourse(etat, d, r, c)
+  if (cotes.length <= 4) { log(`  ${date}  snapshot ${label} : marché insuffisant (${cotes.length})`); return null }
+  const cache = lire(F_COT, {})
+  const prec = cache[courseId] || {}
+  if (prec.snapshots?.[label]?.cotes?.length > 4) { log(`  ${date}  snapshot ${label} : déjà pris à ${(prec.snapshots[label].heure || '').slice(11, 16)} GMT`); return prec.snapshots[label] }
+  const snap = { heure: new Date().toISOString(), cotes }
+  cache[courseId] = {
+    ...prec,
+    source: 'equidia.fr',
+    favori: cotes.find((x) => x.favori)?.num ?? prec.favori ?? null,
+    snapshots: { ...(prec.snapshots || {}), [label]: snap },
+    cotes,
+  }
+  ecrire(F_COT, cache)
+  try { fs.mkdirSync(PUB, { recursive: true }); fs.copyFileSync(F_COT, path.join(PUB, 'cotes.json')) } catch (e) {}
+  log(`  ${date}  snapshot ${label} : ${cotes.length} cotes @ ${snap.heure.slice(11, 16)} GMT`)
+  return snap
+}
+
 function enMinutes(hhmm) {
   const m = String(hhmm || '').match(/(\d{1,2})[:hH]?(\d{2})/)
   return m ? Number(m[1]) * 60 + Number(m[2]) : null
@@ -459,6 +504,11 @@ async function finaliserJour(date) {
   if (depart == null) { log(`  ${date}  heure de départ inconnue — pas de re-gel`); return null }
   const now = minutesParis()
   const hh = (m) => String(Math.floor(((m % 1440) + 1440) % 1440 / 60)).padStart(2, '0') + ':' + String(((m % 1440) + 1440) % 1440 % 60).padStart(2, '0')
+  /* Les 2 snapshots intermédiaires : fenêtres de 30 min (cadence des runs),
+   * bornes incluses — un run tombe toujours dedans. Un seul snapshot par
+   * label (le premier qui passe) : après, c'est verrouillé comme le reste. */
+  if (now >= depart - 195 && now <= depart - 165) await snapshotMarche(date, 'h_moins_3')
+  if (now >= depart - 135 && now <= depart - 105) await snapshotMarche(date, 'h_moins_2')
   if (now < depart - 90 || now > depart - 10) {
     log(`  ${date}  hors fenêtre (départ ${hh(parisVersGMT(depart))} GMT, il est ${hh(minutesGMT())} GMT — fenêtre ${hh(parisVersGMT(depart - 90))}→${hh(parisVersGMT(depart - 10))} GMT)`)
     return null
@@ -699,8 +749,11 @@ if (args.includes('--install')) {
   console.log('  2) le soir 20:30   (on r\u00e9cup\u00e8re le r\u00e9sultat, on calcule le bilan) :')
   console.log('     schtasks /Create /TN "Quinte PM" /TR "' + bat + '" /SC DAILY /ST 20:30')
   console.log('')
-  console.log('  3) avant-course     (on re-g\u00e8le le ticket avec le march\u00e9 du moment, UNE fois) :')
-  console.log('     schtasks /Create /TN "Quinte Final" /TR "' + bat + ' --final" /SC DAILY /ST 11:00 /RI 30 /DU 540')
+  console.log('  3) ouverture 04:35     (photo du march\u00e9 \u00e0 l\u2019ouverture) :')
+  console.log('     schtasks /Create /TN "Quinte Cotes" /TR "' + bat + ' --cotes" /SC DAILY /ST 04:35')
+  console.log('')
+  console.log('  4) avant-course     (on re-g\u00e8le le ticket avec le march\u00e9 du moment, UNE fois) :')
+  console.log('     schtasks /Create /TN "Quinte Final" /TR "' + bat + ' --final" /SC DAILY /ST 11:00 /RI 30 /DU 09:00')
   console.log('     (toutes les 30 min 11:00->20:00 ; le job ne g\u00e8le que dans [depart-90, depart-10])')
   console.log('')
   console.log('  Pour tout effacer :')
@@ -716,6 +769,9 @@ if (args.includes('--install')) {
 if (args.includes('--final')) {
   log('===== final (re-gel avant-course) =====')
   await finaliserJour(aujourdhui())
+} else if (args.includes('--cotes')) {
+  log('===== cotes (snapshot ouverture) =====')
+  await snapshotMarche(aujourdhui(), 'ouverture')
 } else if (args.includes('--watch')) {
   console.log('Mode watch : toutes les 20 minutes. Ctrl+C pour arreter.' + nl)
   await cycle()

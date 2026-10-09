@@ -83,7 +83,12 @@ export async function chargerCotes(courseId) {
         const cotes = lireCourse(etat, d, r, c)
         if (cotes.length > 4) {
           const cache = cacheCotes()
-          cache[courseId] = { source: 'equidia.fr', favori: cotes.find((x) => x.favori)?.num ?? null, cotes }
+          /* ⚠ 09/10/2026 : ne jamais écraser les snapshots (ouverture /
+           *   h_moins_3 / h_moins_2) : la racine `cotes` suit le dernier
+           *   marché lu, mais l'historique reste. Sans ça, chaque lecture
+           *   du moteur effaçait les 3 instants à comparer. */
+          const prec = cache[courseId] || {}
+          cache[courseId] = { ...prec, source: 'equidia.fr', favori: cotes.find((x) => x.favori)?.num ?? prec.favori ?? null, cotes }
           fs.writeFileSync(FILE, JSON.stringify(cache, null, 1))
           cc = cache[courseId]
         }
@@ -95,7 +100,7 @@ export async function chargerCotes(courseId) {
 }
 
 /* ── CLI ─────────────────────────────────────────────────────────────────── */
-if (import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'))) {
+if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'))) {
   const db = JSON.parse(fs.readFileSync('data/synthese.json', 'utf8'))
   const cibles = process.argv[2]
     ? [process.argv[2]]

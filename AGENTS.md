@@ -1043,7 +1043,16 @@ bilan          → N courses, N avec résultat, N en 5/5
 schtasks /Create /TN "Quinte AM" /TR "C:\bahja-TURF\tools\quinte-daily.bat" /SC DAILY /ST 08:45
 schtasks /Create /TN "Quinte PM" /TR "C:\bahja-TURF\tools\quinte-daily.bat" /SC DAILY /ST 20:30
 schtasks /Create /TN "Quinte Final" /TR "C:\bahja-TURF\tools\quinte-daily.bat --final" /SC DAILY /ST 11:00 /RI 30 /DU 09:00
+schtasks /Create /TN "Quinte Cotes" /TR "C:\bahja-TURF\tools\quinte-daily.bat --cotes" /SC DAILY /ST 04:35
 ```
+
+⭐ LES 3 INSTANTS DU MARCHÉ (09/10/2026) : pour savoir QUEL timing donne
+les meilleurs tickets, le marché est photographié 3 fois par course dans
+`data/cotes.json[courseId].snapshots` : `ouverture` (04:35, juste après
+l'ouverture PMU 04:00 GMT), `h_moins_3` ([H-3h15, H-2h45], runs --final),
+`h_moins_2` ([H-2h15, H-1h45]). Un seul snapshot par label (le premier).
+La racine `cotes` suit toujours le DERNIER marché lu (compat : moteur +
+repli page inchangés) — `chargerCotes()` ne les écrase plus (testé).
 (final : toutes les 30 min 11:00→20:00 ; le job ne gèle que dans
 [départ-90, départ-10], une fois — test : `node tools\test-gel.mjs`, 19 OK)
 
