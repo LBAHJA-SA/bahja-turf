@@ -845,6 +845,17 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                *   LIVE (gris)        = rien de gelé : c'est le marché en direct. */
               const rec = archive.find((a) => a.date === date)
               if (!ticket.length) return null
+              /* Course courue = ticket jugé : ni provisoire ni définitif, CLÔTURÉ.
+               * (09/10/2026 : un 5/5 étiqueté PROVISOIRE n'a aucun sens.) */
+              if ((rec?.arrivee || []).length > 0) return (
+                <span style={{
+                  marginLeft: 12, fontSize: 12, fontWeight: 800, letterSpacing: 1,
+                  color: '#57534e', border: '2px solid #57534e', borderRadius: 999,
+                  padding: '2px 12px', verticalAlign: 'middle',
+                }}>
+                  CLÔTURÉ
+                </span>
+              )
               const src = rec?.ticketSource || null
               const conf = !src ? ['LIVE', '#94a3b8']
                 : src === 'final' ? ['DÉFINITIF', '#4ade80']
@@ -1013,6 +1024,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         </td>
                         <td style={{ ...s.td, fontSize: 11, fontWeight: 800 }}>
                           {(() => {
+                            if ((a.arrivee || []).length > 0) return <span style={{ color: '#57534e' }}>CLÔTURÉ</span>
                             const src = a.ticketSource || null
                             if (!src || !(a.ticket || []).length) return <span style={{ color: '#94a3b8' }}>—</span>
                             const conf = src === 'final' ? ['DÉFINITIF', '#15803d']
