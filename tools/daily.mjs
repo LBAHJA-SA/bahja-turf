@@ -753,7 +753,7 @@ if (args.includes('--install')) {
   console.log('     schtasks /Create /TN "Quinte Cotes" /TR "' + bat + ' --cotes" /SC DAILY /ST 04:35')
   console.log('')
   console.log('  4) avant-course     (on re-g\u00e8le le ticket avec le march\u00e9 du moment, UNE fois) :')
-  console.log('     schtasks /Create /TN "Quinte Final" /TR "' + bat + ' --final" /SC DAILY /ST 11:00 /RI 30 /DU 09:00')
+  console.log('     schtasks /Create /TN "Quinte Final" /TR "' + bat + ' --final" /SC DAILY /ST 08:00 /RI 30 /DU 13:00')
   console.log('     (toutes les 30 min 11:00->20:00 ; le job ne g\u00e8le que dans [depart-90, depart-10])')
   console.log('')
   console.log('  Pour tout effacer :')

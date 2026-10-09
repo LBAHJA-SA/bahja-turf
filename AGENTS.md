@@ -1042,7 +1042,7 @@ bilan          → N courses, N avec résultat, N en 5/5
 ```
 schtasks /Create /TN "Quinte AM" /TR "C:\bahja-TURF\tools\quinte-daily.bat" /SC DAILY /ST 08:45
 schtasks /Create /TN "Quinte PM" /TR "C:\bahja-TURF\tools\quinte-daily.bat" /SC DAILY /ST 20:30
-schtasks /Create /TN "Quinte Final" /TR "C:\bahja-TURF\tools\quinte-daily.bat --final" /SC DAILY /ST 11:00 /RI 30 /DU 09:00
+schtasks /Create /TN "Quinte Final" /TR "C:\bahja-TURF\tools\quinte-daily.bat --final" /SC DAILY /ST 08:00 /RI 30 /DU 13:00
 schtasks /Create /TN "Quinte Cotes" /TR "C:\bahja-TURF\tools\quinte-daily.bat --cotes" /SC DAILY /ST 04:35
 ```
 
