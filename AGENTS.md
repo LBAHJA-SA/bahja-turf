@@ -1023,6 +1023,14 @@ bilan          → N courses, N avec résultat, N en 5/5
    manuel — un niveau n'écrase que les niveaux inférieurs, jamais l'inverse.
    La nuit (21:00→05:00 Paris), la page affiche SANS figer : la nuit ne
    décide de rien.
+   ⭐ GMT PARTOUT (09/10/2026) : toutes les heures affichées et loggées sont
+   en GMT (ISO `Z`, colonne `Posé le (GMT)`, logs du job). La fenêtre
+   [départ-90, départ-10] se calcule en heure de Paris (fuseau de la course)
+   mais se LIT en GMT.
+   ⭐ STATUT VISIBLE (09/10/2026) : chaque ticket porte son statut —
+   PROVISOIRE (matin/page, ambre), DÉFINITIF (re-gel avant-course, vert),
+   MANUEL (bleu), LIVE (rien de gelé, gris). Colonne `Statut` dans
+   l'Archive + badge dans l'onglet Ticket.
 
 ### 13.4 L'automatisation Windows
 

@@ -837,6 +837,30 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
         <div>
           <div style={{ ...s.box, padding: 16, marginBottom: 14, background: SK.entete, border: 'none', color: '#fff' }}>
             <b style={{ fontSize: 14, letterSpacing: 1.2, opacity: 0.95 }}>TICKET DU {date}</b>
+            {(() => {
+              /* ⭐ LE STATUT : provisoire ou définitif ? (09/10/2026, fuseau GMT).
+               *   PROVISOIRE (ambre) = gel du matin / de la page, marché pas mûr.
+               *   DÉFINITIF (vert)   = re-gel FINAL avant-course, marché du moment.
+               *   MANUEL (bleu)      = posé à la main, intouchable.
+               *   LIVE (gris)        = rien de gelé : c'est le marché en direct. */
+              const rec = archive.find((a) => a.date === date)
+              if (!ticket.length) return null
+              const src = rec?.ticketSource || null
+              const conf = !src ? ['LIVE', '#94a3b8']
+                : src === 'final' ? ['DÉFINITIF', '#4ade80']
+                : src === 'manuel' ? ['MANUEL', '#93c5fd']
+                : ['PROVISOIRE', '#fcd34d']
+              return (
+                <span style={{
+                  marginLeft: 12, fontSize: 12, fontWeight: 800, letterSpacing: 1,
+                  color: conf[1], border: `2px solid ${conf[1]}`, borderRadius: 999,
+                  padding: '2px 12px', verticalAlign: 'middle',
+                }}>
+                  {conf[0]}
+                  {rec?.ticketPoseLe && src && src !== null ? ` · gelé à ${rec.ticketPoseLe.slice(11, 16)} GMT` : ''}
+                </span>
+              )
+            })()}
             <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 3, marginTop: 8, color: '#fff', fontFamily: SK.nb.td }}>
               {ticket.length ? ticket.join('  ·  ') : '—'}
             </div>
@@ -954,7 +978,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
               <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
                 <thead>
                   <tr style={s.hdr}>
-                    {['Date', 'Hippodrome', 'Type', 'Distance', 'Synthèse', 'Arrivée', 'Ticket', 'Posé le', 'Bilan', 'Top3', '']
+                    {['Date', 'Hippodrome', 'Type', 'Distance', 'Synthèse', 'Arrivée', 'Ticket', 'Posé le (GMT)', 'Statut', 'Bilan', 'Top3', '']
                       .map((h) => <th key={h} style={s.th}>{h}</th>)}
                   </tr>
                 </thead>
@@ -986,6 +1010,16 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                             qu'un évite toute ambiguïté. */}
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11, color: a.ticketPoseLe ? SK.accent : '#94a3b8' }}>
                           {a.ticketPoseLe ? a.ticketPoseLe.slice(11, 16) : '—'}
+                        </td>
+                        <td style={{ ...s.td, fontSize: 11, fontWeight: 800 }}>
+                          {(() => {
+                            const src = a.ticketSource || null
+                            if (!src || !(a.ticket || []).length) return <span style={{ color: '#94a3b8' }}>—</span>
+                            const conf = src === 'final' ? ['DÉFINITIF', '#15803d']
+                              : src === 'manuel' ? ['MANUEL', '#1d4ed8']
+                              : ['PROVISOIRE', '#b45309']
+                            return <span style={{ color: conf[1] }}>{conf[0]}</span>
+                          })()}
                         </td>
                         <td style={{ ...s.td, fontWeight: 700, color: p === 5 ? '#15803d' : p > 0 ? '#a16207' : '#94a3b8' }}>
                           {a.arrivee ? p + '/5' : '—'}

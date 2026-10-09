@@ -417,6 +417,19 @@ function minutesParis(d = new Date()) {
   return p.getHours() * 60 + p.getMinutes()
 }
 
+/* ⭐ TOUT S'AFFICHE EN GMT (09/10/2026, instruction utilisateur).
+ *   Les heures de course arrivent en heure de Paris : on convertit pour
+ *   l'affichage. La fenêtre [départ-90, départ-10] se calcule en Paris
+ *   (fuseau de la course), mais se LIT en GMT. */
+function minutesGMT(d = new Date()) {
+  return d.getUTCHours() * 60 + d.getUTCMinutes()
+}
+
+function parisVersGMT(minParis, d = new Date()) {
+  const decalage = (new Date(d.toLocaleString('en-US', { timeZone: 'Europe/Paris' })) - d) / 60000
+  return Math.round(minParis - decalage)
+}
+
 function enMinutes(hhmm) {
   const m = String(hhmm || '').match(/(\d{1,2})[:hH]?(\d{2})/)
   return m ? Number(m[1]) * 60 + Number(m[2]) : null
@@ -445,9 +458,9 @@ async function finaliserJour(date) {
   const depart = enMinutes(heure)
   if (depart == null) { log(`  ${date}  heure de départ inconnue — pas de re-gel`); return null }
   const now = minutesParis()
-  const hh = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0')
+  const hh = (m) => String(Math.floor(((m % 1440) + 1440) % 1440 / 60)).padStart(2, '0') + ':' + String(((m % 1440) + 1440) % 1440 % 60).padStart(2, '0')
   if (now < depart - 90 || now > depart - 10) {
-    log(`  ${date}  hors fenêtre (départ ${hh(depart)}, il est ${hh(now)} — fenêtre ${hh(depart - 90)}→${hh(depart - 10)})`)
+    log(`  ${date}  hors fenêtre (départ ${hh(parisVersGMT(depart))} GMT, il est ${hh(minutesGMT())} GMT — fenêtre ${hh(parisVersGMT(depart - 90))}→${hh(parisVersGMT(depart - 10))} GMT)`)
     return null
   }
 
@@ -471,7 +484,7 @@ async function finaliserJour(date) {
   for (const k of Object.keys(db).sort().reverse()) tri[k] = db[k]
   ecrire(F_SYN, tri)
   try { fs.mkdirSync(PUB, { recursive: true }); fs.writeFileSync(path.join(PUB, 'synthese.json'), JSON.stringify(tri, null, 2)) } catch (e) {}
-  log(`  ${date}  FINAL gelé à ${hh(now)} (départ ${hh(depart)})`)
+  log(`  ${date}  FINAL gelé à ${hh(minutesGMT())} GMT (départ ${hh(parisVersGMT(depart))} GMT)`)
   return rec
 }
 
