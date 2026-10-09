@@ -943,7 +943,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
               <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
                 <thead>
                   <tr style={s.hdr}>
-                    {['Date', 'Hippodrome', 'Type', 'Distance', 'Synthèse', 'Arrivée', 'Ticket', 'Posé le', 'Bilan', '']
+                    {['Date', 'Hippodrome', 'Type', 'Distance', 'Synthèse', 'Arrivée', 'Ticket', 'Posé le', 'Bilan', 'Top3', '']
                       .map((h) => <th key={h} style={s.th}>{h}</th>)}
                   </tr>
                 </thead>
@@ -951,6 +951,12 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   {archive.map((a) => {
                     const t = new Set(a.ticket || [])
                     const p = (a.arrivee || []).filter((n) => t.has(n)).length
+                    /* ⭐ Les 3 indicateurs (09/10/2026) : le x/5 ne suffit pas.
+                     *   Un 4/5 qui rate le 1er est une feuille perdante : on
+                     *   compte le Top3 à part, et on signale le 1er manqué. */
+                    const top3 = (a.arrivee || []).slice(0, 3)
+                    const hit3 = top3.filter((n) => t.has(n)).length
+                    const manque1er = (a.arrivee || []).length > 0 && (a.ticket || []).length > 0 && !t.has(a.arrivee[0])
                     return (
                       <tr key={a.date} style={{ borderBottom: '1px solid #f1f5f9',                         background: a.placeholder ? SK.danger : (a.found ? SK.ligne : SK.alt) }}>
                         <td style={{ ...s.td, fontWeight: 700 }}>{a.date}</td>
@@ -972,6 +978,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         </td>
                         <td style={{ ...s.td, fontWeight: 700, color: p === 5 ? '#15803d' : p > 0 ? '#a16207' : '#94a3b8' }}>
                           {a.arrivee ? p + '/5' : '—'}
+                        </td>
+                        <td style={{ ...s.td, fontWeight: 700, color: !a.arrivee ? '#94a3b8' : hit3 === 3 ? '#15803d' : manque1er ? '#b91c1c' : '#a16207' }}>
+                          {!a.arrivee ? '—' : hit3 + '/3'}{manque1er ? ' ⚠1er' : ''}
                         </td>
                         <td style={s.td}>
                           <button onClick={async () => { await deleteArchive(a.date); rafraichirArchive() }}
@@ -999,6 +1008,17 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             <>
               <div style={{ fontSize: 13, color: '#475569', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
                 <span>{stats.nb} Quinté(s) dans l’archive — qui gagne, qui place.</span>
+                {(() => {
+                  const closes = archive.filter((a) => (a.arrivee || []).length > 0 && (a.ticket || []).length > 0)
+                  const avec3 = closes.filter((a) => (a.arrivee || []).slice(0, 3).every((n) => (a.ticket || []).includes(n))).length
+                  const sans1er = closes.filter((a) => !(a.ticket || []).includes(a.arrivee[0])).length
+                  return closes.length ? (
+                    <span style={{ fontWeight: 700 }}>
+                      Top3 : <span style={{ color: '#15803d' }}>{avec3}/{closes.length}</span>
+                      {' · '}1er manqué : <span style={{ color: sans1er ? '#b91c1c' : '#15803d' }}>{sans1er}/{closes.length}</span>
+                    </span>
+                  ) : null
+                })()}
                 {stats.nb < 10 && (
                   <span style={{ color: '#b45309', fontWeight: 600 }}>
                     ⚠ {stats.nb}/10 — chiffres trop faibles pour conclure
