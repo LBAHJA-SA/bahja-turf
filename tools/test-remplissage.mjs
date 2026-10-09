@@ -16,6 +16,11 @@
  *    V0 marché  : cote croissante (règle actuelle §11.17, sans surprise)
  *    V1 présence: P(top5) puis P(top3) puis P(1er) puis cote — attraper du monde
  *    V2 podium  : P(top3) puis P(top5) puis P(1er) puis cote — attraper le podium
+ *    V3 veto    : marche sauf ecart flagrant stats (30pts top5, n>=5)
+ *    V3 veto    : marché d'abord, MAIS si le meilleur-stats bat le meilleur-
+ *      marché de ≥30pts top5 (avec n≥5 courses), le stats prend sa place.
+ *      Hypothèse utilisateur du 09/10 : le moteur est « aveuglé par le
+ *      favori » — le veto ne corrige que les cas flagrants.
  *
  *    node tools\test-remplissage.mjs
  * ══════════════════════════════════════════════════════════════════════════ */
@@ -55,13 +60,19 @@ function jouer(course, stats, variante) {
   const pris = []
   for (const gr of g.groupes) {
     const q = QUOTAS[gr.id] ?? 0
+    const parCote = (x, y) => (course.cotes[x.num] ?? 999) - (course.cotes[y.num] ?? 999)
     const tri = gr.cases.slice().sort((a, b) => {
-      if (variante === 'V0') {
-        return (course.cotes[a.num] ?? 999) - (course.cotes[b.num] ?? 999)
-      }
+      if (variante === 'V0') return parCote(a, b)
       const sa = statCase(stats, a.slot), sb = statCase(stats, b.slot)
-      const ka = sa ? [-(variante === 'V1' ? sa.top5 : sa.top3), -(variante === 'V1' ? sa.top3 : sa.top5), -sa.p[0]] : [0, 0, 0]
-      const kb = sb ? [-(variante === 'V1' ? sb.top5 : sb.top3), -(variante === 'V1' ? sb.top3 : sb.top5), -sb.p[0]] : [0, 0, 0]
+      if (variante === 'V3') {
+        const ta = sa && sa.n >= 5 ? sa.top5 : -1, tb = sb && sb.n >= 5 ? sb.top5 : -1
+        const ca = course.cotes[a.num] ?? 999, cb = course.cotes[b.num] ?? 999
+        if (ca < cb && tb - ta >= 30) return 1
+        if (cb < ca && ta - tb >= 30) return -1
+        return parCote(a, b)
+      }
+      const cle = (s) => (s ? [-(variante === 'V1' ? s.top5 : s.top3), -(variante === 'V1' ? s.top3 : s.top5), -s.p[0]] : [0, 0, 0])
+      const ka = cle(sa), kb = cle(sb)
       for (let i = 0; i < 3; i++) if (ka[i] !== kb[i]) return ka[i] - kb[i]
       // sans stats (n=0) ou égalité : le marché départage, comme aujourd'hui
       return (course.cotes[a.num] ?? 999) - (course.cotes[b.num] ?? 999)
@@ -99,7 +110,7 @@ for (const [titre, liste] of [['TRAIN (66)', train], ['TEST  (28)', test]]) {
   console.log('  ' + titre)
   console.log('  ' + '─'.repeat(66))
   console.log('  variante      3/3      5/5      ≥4/5     1er manqué')
-  for (const v of ['V0', 'V1', 'V2']) {
+  for (const v of ['V0', 'V1', 'V2', 'V3']) {
     const r = mesurer(liste, stats, v)
     const f = (x) => String(x).padStart(3) + '  (' + String(Math.round(x / r.n * 100)).padStart(2) + '%)'
     console.log('  ' + v + '             ' + f(r.t3) + '  ' + f(r.c5) + '  ' + f(r.q4) + '   ' + f(r.sans1))
