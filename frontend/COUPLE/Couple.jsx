@@ -215,12 +215,53 @@ export default function Couple() {
 
 /* ───────────────────────────────────────────────────── la lecture ───────── */
 
+const LS_COTES = 'couple-cotes-'
+
+function lireCotesSaisies(cle) {
+  try {
+    const raw = localStorage.getItem(LS_COTES + cle)
+    if (!raw) return null
+    const t = JSON.parse(raw)
+    return t && typeof t === 'object' ? t : null
+  } catch { return null }
+}
+
 function Lecture({ course, base }) {
   const partants = course.partants || []
+  const arrivee = (course.arrivee || []).slice(0, 5)
+  /* Cotes saisies à la main (Geny / PMU définitif) : elles remplacent celles
+   * de reu.php, souvent effacées après la course. Sans elles, pas de
+   * familles, pas de rangs, pas d'empreinte (§7 : on n'invente rien — on
+   * demande à l'utilisateur, seule source fiable après coup). */
+  const [saisie, setSaisie] = useState(() => lireCotesSaisies(course.cle))
+  const [texte, setTexte] = useState(() =>
+    saisie ? partants.map((p) => saisie[p.num] ?? '').join(' ') : '')
+  const avecSaisie = partants.map((p) => ({
+    ...p,
+    coteRef: saisie?.[p.num] ?? p.coteRef,
+    cote: saisie?.[p.num] ?? p.cote,
+  }))
   /* L'empreinte de CETTE course : le trio candidat, sa forme complète et
      sa personnalité (combien de fois vue, ce qui s'est passé). */
-  const v = partants.length >= 3 && base ? verdict(partants, base) : null
+  const v = avecSaisie.length >= 3 && base ? verdict(avecSaisie, base) : null
   const emp = v?.empreinte
+  /* Vérification contre l'arrivée réelle, quand on l'a. */
+  const verif = v?.trio?.length && arrivee.length >= 3
+    ? {
+        exact: arrivee[0] === v.trio[0] && arrivee[1] === v.trio[1] && arrivee[2] === v.trio[2],
+        nb: [v.trio[0] === arrivee[0], v.trio[1] === arrivee[1], v.trio[2] === arrivee[2]].filter(Boolean).length,
+        dansTop3: v.trio.filter((n) => arrivee.slice(0, 3).includes(n)).length,
+      }
+    : null
+  const sauverSaisie = () => {
+    const nums = texte.trim().split(/\s+/).map((x) => Number(String(x).replace(',', '.')))
+    const obj = {}
+    partants.forEach((p, i) => {
+      if (Number.isFinite(nums[i]) && nums[i] > 0) obj[p.num] = nums[i]
+    })
+    try { localStorage.setItem(LS_COTES + course.cle, JSON.stringify(obj)) } catch { /* quota */ }
+    setSaisie(obj)
+  }
   return (
     <>
       <div style={{ ...S.box, padding: 16, marginBottom: 12 }}>
@@ -233,6 +274,30 @@ function Lecture({ course, base }) {
           {course.discipline ? ` · ${course.discipline}` : ''}
           {course.heure ? ` · ${course.heure}` : ''}
           {course.pays && course.pays !== 'FRANCE' ? ` · ${course.pays}` : ''}
+        </div>
+        {arrivee.length > 0 && (
+          <div style={{ fontSize: 14, fontWeight: 800, fontFamily: TE.mono, marginTop: 8, color: '#15803d' }}>
+            Arrivée : {arrivee.join('  ·  ')}
+          </div>
+        )}
+      </div>
+
+      {/* ── les cotes définitives, saisies à la main ── */}
+      <div style={{ ...S.box, padding: 12, marginBottom: 12 }}>
+        <div style={{ fontSize: 12, fontWeight: 800, color: TE.accentSombre, marginBottom: 6 }}>
+          COTES DÉFINITIVES (ordre des n°) {saisie ? <span style={{ color: '#15803d' }}>✓ saisies</span> : ''}
+        </div>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <input value={texte} onChange={(e) => setTexte(e.target.value)}
+            placeholder={partants.map((p) => p.num).join(' ') + ' → ex: 4.9 14.4 8.2 …'}
+            style={{ flex: 1, padding: '7px 10px', borderRadius: 8, border: '1px solid #d6d3c8', fontFamily: TE.mono, fontSize: 12 }} />
+          <button onClick={sauverSaisie}
+            style={{ padding: '7px 16px', borderRadius: 8, border: '2px solid ' + TE.accent, background: TE.accent, color: '#fff', fontWeight: 700, cursor: 'pointer', fontSize: 12 }}>
+            OK
+          </button>
+        </div>
+        <div style={{ fontSize: 11, color: '#78716c', marginTop: 4 }}>
+          Une cote par n°, dans l'ordre du tableau. Prends-les sur Geny / PMU après la course.
         </div>
       </div>
 
@@ -256,6 +321,16 @@ function Lecture({ course, base }) {
           <div style={{ fontSize: 14, fontWeight: 800, fontFamily: TE.mono, marginTop: 6 }}>
             Top 3 : {v.trio.join('  ·  ')}
           </div>
+          {verif && (
+            <div style={{
+              marginTop: 8, fontSize: 14, fontWeight: 800,
+              color: verif.exact ? '#15803d' : verif.dansTop3 >= 2 ? '#a16207' : '#b91c1c',
+            }}>
+              {verif.exact
+                ? '★ 3/3 EXACT'
+                : `${verif.nb}/3 aux bonnes places · ${verif.dansTop3}/3 dans le Top3`}
+            </div>
+          )}
           {v.coherence && (
             <>
               <div style={{ fontSize: 12, color: '#57534e', marginTop: 6 }}>

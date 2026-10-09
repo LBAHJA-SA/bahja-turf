@@ -130,6 +130,7 @@ function lireDetailArchive(date, rNum, cNum, pays) {
         distance: j.race?.distance ?? null,
         discipline: j.race?.type || '',
         partants: parts.map((p) => normaliserPartant(p)),
+        arrivee: Array.isArray(j.arrivee) ? j.arrivee.slice(0, 5) : [],
       }
     } catch { /* fichier absent : on tente le direct */ }
   }
@@ -237,7 +238,15 @@ async function lireDetailDirect(date, rNum, cNum, pays) {
   }
   if (!sortie.length) throw new Error('aucun partant lu')
   sortie.sort((a, b) => a.num - b.num)
-  return sortie
+  /* L'arrivée quand la course est finie (« - Arrivée - 2 - 4 - 3 - 5 »).
+   * reu.php l'affiche même quand les cotes ont été effacées — c'est elle
+   * qui permet la vérification d'un trio sur une course terminée. */
+  let arrivee = []
+  const mArr = html.match(/-\s*Arriv[eé]e\s*-\s*([\d\s\-/]+)/i)
+  if (mArr) {
+    arrivee = mArr[1].split(/[\s-]+/).map((x) => Number(x)).filter((n) => Number.isFinite(n) && n > 0).slice(0, 5)
+  }
+  return { partants: sortie, arrivee }
 }
 
 /* ─────────────────────────────────────────────────────── handler ──────── */
@@ -261,6 +270,7 @@ export default async function handler(req, res) {
 
       let meta = { hippodrome: '', nom: '', heure: '', distance: null, discipline: '' }
       let partants = []
+      let arrivee = []
       let source = ''
       let erreur = null
 
@@ -270,16 +280,25 @@ export default async function handler(req, res) {
         if (arch && arch.partants.length) {
           meta = { hippodrome: arch.hippodrome, nom: arch.nom, heure: '', distance: arch.distance, discipline: arch.discipline }
           partants = arch.partants
+          if (arch.arrivee?.length) arrivee = arch.arrivee
           source = 'archive'
         }
       } catch (e) { /* on tente le direct */ }
 
-      // ② reu.php en direct : les partants du jour
+      // ② reu.php en direct : les partants du jour (+ l'arrivée si finie)
       if (!partants.length) {
         try {
-          partants = await lireDetailDirect(cDate, rNum, cNum, pays)
+          const det = await lireDetailDirect(cDate, rNum, cNum, pays)
+          partants = det.partants
+          if (det.arrivee?.length) arrivee = det.arrivee
           source = 'reu.php'
         } catch (e) { erreur = e.message }
+      } else if (!arrivee.length) {
+        // l'archive d'avant-course n'a pas l'arrivée : on la lit en direct
+        try {
+          const det = await lireDetailDirect(cDate, rNum, cNum, pays)
+          if (det.arrivee?.length) arrivee = det.arrivee
+        } catch (e) { /* pas encore courue */ }
       }
 
       res.statusCode = 200
@@ -289,7 +308,7 @@ export default async function handler(req, res) {
           reunion: 'R' + rNum, code: 'C' + cNum, pays,
           hippodrome: meta.hippodrome, nom: meta.nom, heure: meta.heure,
           distance: meta.distance, discipline: meta.discipline,
-          arrivee: [],
+          arrivee,
           partants,
           erreur,
         },
