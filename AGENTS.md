@@ -1494,3 +1494,30 @@ p.chrono     p.def         p.silk          p.dernierPassage
 **Les deux noms sont écrits** (`cheval` ET `nom`, `driver` ET `jockey`) parce
 que les sources ne s'accordent pas sur le vocabulaire — et une page qui lit un
 champ absent affiche `—` sans dire pourquoi.
+
+---
+
+## 20. ⭐ L'ARCHIVE COMME MATIÈRE PREMIÈRE DU MOTEUR (09/10/2026)
+
+> Décision de l'utilisateur : les indicateurs Top3 / 1er-manqué restent de
+> la MATIÈRE PREMIÈRE. L'archive grossit, le moteur se renforce avec elle —
+> mais pas avant d'avoir de quoi conclure.
+
+### 20.1 Ce qui est affiché (depuis le 09/10)
+
+| Colonne / zone | Contenu | Rôle |
+|---|---|---|
+| Archive → `Top3` | `3/3` vert · `x/3` ambre · `⚠1er` rouge si le gagnant manque | constat |
+| Stats → `Top3 : n/N · 1er manqué : m/N` | agrégats sur les courses clôturées | constat |
+
+Un 4/5 qui rate le 1er est une feuille perdante : le x/5 seul mentirait.
+
+### 20.2 Ce qui est INTERDIT tant que l'archive est petite
+
+- Les indicateurs **ne choisissent rien** : `remplirGrille()` + quotas
+  intacts. Ce sont des compteurs, pas une force de sélection.
+- Aucun feedback vers le moteur sous **30 courses clôturées**.
+- Ensuite : labo d'abord (`tools/test-top3.mjs`, train/test), approbation
+  ensuite, production en dernier. §11.16 (quotas 3-2-1-1-1) ne se discute
+  pas sans levée explicite — testé le 09/10 sur 94 courses : la règle
+  proposée 3-2-2-1 ne gagne pas clairement (écart ±1-3 = bruit).
