@@ -5,7 +5,7 @@ import {
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
   scorePhysique, filtres, ordonnerParStats,
   saveArchive, listArchive, deleteArchive, attachResult, attachTicket,
-  loadCarriere, syncDepuisDisque,
+  loadCarriere, syncDepuisDisque, getArchive,
   clearArchive,
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
@@ -300,6 +300,26 @@ export default function QuinteGrille() {
           placeholder: rec.placeholder,
         }
         depuisArchive = true
+      }
+      /* Repli localStorage (09/10/2026) : le disque déployé peut être PÉRIMÉ
+       * (token Vercel mort → pas de deploy) alors que ce navigateur a déjà
+       * la synthèse + le ticket gelé (collectés le matin quand le site les
+       * montrait). Sans ce repli, la page affiche « synthèse par défaut »
+       * et un ticket live, pendant que l'Archive montre le gelé : la
+       * contradiction vue le 09/10. Clé = la date exacte demandée, donc
+       * pas de mélange (§13.3 règle 1 respectée). */
+      if ((!rec?.ticket?.length || !j)) {
+        let local = null
+        try { local = await getArchive(d) } catch (e) { /* pas de local */ }
+        if (!rec?.ticket?.length && local?.ticket?.length) setTicketManuel(local.ticket)
+        if (!j && local?.synthese?.length) {
+          j = {
+            date: d, found: true, race: local.race, source: 'archive locale (navigateur)',
+            synthese: local.synthese, fois: local.fois, arrivee: local.arrivee,
+            placeholder: local.placeholder,
+          }
+          depuisArchive = true
+        }
       }
 
       // 2. le site — SECOURS seulement (pas d'entrée d'archive), et seulement si la
