@@ -611,18 +611,19 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
     await clearArchive(); await rafraichirArchive(); setMsg('Archive vidée')
   }
 
-  // 🔒 RAFRAÎCHIR = FIGER — mais SEULEMENT LE JOUR, JAMAIS LA NUIT.
+  // 🔒 RAFRAÎCHIR = FIGER — mais SEULEMENT SUR MARCHÉ OUVERT, JAMAIS AVANT.
   //   Au premier clic, le ticket affiché est enregistré, et le premier figé
   //   ne bouge plus jamais (attachTicket) — sauf le re-gel FINAL du job.
   //   ⚠ 09/10/2026 : les gels à 01:55, 02:33, 03:02 figeaient un marché de
-  //   nuit sans valeur. Entre 21:00 et 05:00 (heure de Paris), on affiche
-  //   le ticket LIVE sans le figer : la nuit ne décide de rien.
-  const heureParis = () => {
+  //   nuit sans valeur. Le PMU ouvre à 04:00 GMT : avant, il n'y a RIEN à
+  //   figer (ni cotes du jour, ni argent). On affiche le ticket LIVE sans
+  //   le figer — un marché fermé ne décide de rien.
+  const heureGMT = () => {
     try {
-      return new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' })).getHours()
+      return new Date().getUTCHours() + new Date().getUTCMinutes() / 60
     } catch { return 12 }
   }
-  const gelAutorise = () => { const h = heureParis(); return h >= 5 && h < 21 }
+  const gelAutorise = () => { const h = heureGMT(); return h >= 4.5 && h < 22 }
   const figerPuisRafraichir = async () => {
     try {
       if (ticket && ticket.length && gelAutorise()) await attachTicket(date, ticket, 'page')

@@ -1021,8 +1021,9 @@ bilan          → N courses, N avec résultat, N en 5/5
    avec le marché du moment (`ticketSource: 'final'`, le matin gardé dans
    `ticketMatin`). Après : verrouillé. Niveaux : page < auto < final <
    manuel — un niveau n'écrase que les niveaux inférieurs, jamais l'inverse.
-   La nuit (21:00→05:00 Paris), la page affiche SANS figer : la nuit ne
-   décide de rien.
+   La page ne fige que sur marché ouvert (≥04:30 GMT — le PMU ouvre à
+   04:00 GMT ; avant il n'y a ni cotes ni argent). Hors de [04:30, 22:00[
+   GMT, elle affiche SANS figer.
    ⭐ GMT PARTOUT (09/10/2026) : toutes les heures affichées et loggées sont
    en GMT (ISO `Z`, colonne `Posé le (GMT)`, logs du job). La fenêtre
    [départ-90, départ-10] se calcule en heure de Paris (fuseau de la course)
