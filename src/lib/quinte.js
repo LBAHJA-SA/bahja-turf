@@ -1279,16 +1279,23 @@ export async function clearArchive() {
  *    `new Date()` ici est l'horloge du navigateur de l'utilisateur : c'est
  *    exactement ce qu'on veut (le moment où il a vu le ticket pour la
  *    première fois). Une fois écrit, cette heure ne bouge plus. */
-export async function attachTicket(date, ticket) {
+/* Niveaux de gel : page < auto < final < manuel. Un niveau n'écrase que les
+ * niveaux strictement inférieurs — jamais l'inverse (09/10/2026 : le re-gel
+ * FINAL du job passe devant le gel de la page, mais rien ne passe devant
+ * le FINAL ; le manuel reste intouchable, §13.3). */
+const RANG_SOURCE = { page: 0, auto: 1, final: 2, manuel: 3 }
+export async function attachTicket(date, ticket, source = 'page') {
   const all = lireTout()
   if (!all[date]) return null
-  if (all[date].ticket && all[date].ticket.length) return all[date]
+  const precedent = all[date].ticketSource || null
+  const dejaPose = !!(all[date].ticket && all[date].ticket.length)
+  if (dejaPose && (RANG_SOURCE[precedent] ?? 0) >= (RANG_SOURCE[source] ?? 0)) return all[date]
   if (!ticket || !ticket.length) return all[date]
   all[date] = {
     ...all[date],
     ticket: [...ticket],
-    ticketSource: all[date].ticketSource || 'auto',
-    ticketPoseLe: all[date].ticketPoseLe || new Date().toISOString(),
+    ticketSource: source,
+    ticketPoseLe: new Date().toISOString(),
   }
   ecrireTout(all)
   return all[date]

@@ -562,9 +562,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
 
   useEffect(() => {
     if (!ticketAuto || !ticketAuto.length) return
+    if (!gelAutorise()) return   // la nuit, on affiche sans figer (09/10/2026)
     let annule = false
     ;(async () => {
-      const res = await attachTicket(date, [...ticketAuto])
+      const res = await attachTicket(date, [...ticketAuto], 'page')
       if (annule || !res) return
       setArchive(await listArchive())
       if (res.ticket && res.ticket.length) setTicketManuel(res.ticket)
@@ -610,11 +611,21 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
     await clearArchive(); await rafraichirArchive(); setMsg('Archive vidée')
   }
 
-  // 🔒 RAFRAÎCHIR = FIGER : au premier clic, le ticket affiché est enregistré
-  //   dans l'archive, et le premier figé ne bouge plus jamais (attachTicket).
+  // 🔒 RAFRAÎCHIR = FIGER — mais SEULEMENT LE JOUR, JAMAIS LA NUIT.
+  //   Au premier clic, le ticket affiché est enregistré, et le premier figé
+  //   ne bouge plus jamais (attachTicket) — sauf le re-gel FINAL du job.
+  //   ⚠ 09/10/2026 : les gels à 01:55, 02:33, 03:02 figeaient un marché de
+  //   nuit sans valeur. Entre 21:00 et 05:00 (heure de Paris), on affiche
+  //   le ticket LIVE sans le figer : la nuit ne décide de rien.
+  const heureParis = () => {
+    try {
+      return new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' })).getHours()
+    } catch { return 12 }
+  }
+  const gelAutorise = () => { const h = heureParis(); return h >= 5 && h < 21 }
   const figerPuisRafraichir = async () => {
     try {
-      if (ticket && ticket.length) await attachTicket(date, ticket)
+      if (ticket && ticket.length && gelAutorise()) await attachTicket(date, ticket, 'page')
     } catch (e) { /* on rafraîchit quand même */ }
     await rafraichirArchive()
   }
@@ -649,7 +660,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
         return
       }
       // le ticket est figé d'abord : le résultat se mesure sur le ticket gelé
-      if (ticket && ticket.length) await attachTicket(date, ticket)
+      if (ticket && ticket.length) await attachTicket(date, ticket, 'auto')
       await attachResult(date, {
         arrivee: arr,
         discipline: res.discipline,

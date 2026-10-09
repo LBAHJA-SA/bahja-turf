@@ -98,5 +98,30 @@ console.log('\n  GEL DE LA TICKET — tools\\daily.mjs > figerTicket()\n')
     x([9, 12, 13, 3, 7, 8, 5, 1]) === 4, `${x([9, 12, 13, 3, 7, 8, 5, 1])}/5`)
 }
 
+/* 8. LE RE-GEL FINAL (09/10/2026) : UNE fois, avant-course, puis verrouille.
+ *    Le gel du matin fige un marche de nuit sans valeur : entre depart-90 et
+ *    depart-10, on re-gele avec le marche du moment. Apres : verrouille. */
+{
+  const matin = { ticket: [1, 13, 4, 3, 7, 9, 15, 5], ticketMode: 'defaut', ticketSource: 'auto', ticketPoseLe: '2026-10-01T02:33:32.000Z' }
+  const f = figerTicket(matin, t([3, 4, 1, 13, 7, 9, 6, 15], 'auto+marche'), { final: true })
+  verifie('8. final ecrase auto (UNE fois)',
+    M(f.ticket) === '3 4 1 13 7 9 6 15' && f.ticketSource === 'final', `${M(f.ticket || [])} / ${f.ticketSource}`)
+  verifie('8b. le matin est garde dans ticketMatin',
+    M(f.ticketMatin) === '1 13 4 3 7 9 15 5', `${M(f.ticketMatin || [])}`)
+  verifie('8c. ticketPoseLe re-note', f.ticketPoseLe !== matin.ticketPoseLe)
+}
+{
+  const fin = { ticket: [3, 4, 1, 13, 7, 9, 6, 15], ticketMode: 'auto+marche', ticketSource: 'final', ticketPoseLe: '2026-10-01T13:20:00.000Z', ticketMatin: [1, 13, 4, 3, 7, 9, 15, 5] }
+  const f = figerTicket(fin, t([2, 4, 6, 8, 10, 12, 14, 1], 'auto+marche'), { final: true })
+  verifie('8d. final verrouille : meme --final ne re-ecrase pas',
+    M(f.ticket) === '3 4 1 13 7 9 6 15' && f.ticketSource === 'final', `${M(f.ticket || [])} / ${f.ticketSource}`)
+}
+{
+  const man = { ticket: [2, 4, 6, 8, 10, 12, 14, 1], ticketSource: 'manuel' }
+  const f = figerTicket(man, t([3, 4, 1, 13, 7, 9, 6, 15], 'auto+marche'), { final: true })
+  verifie('8e. --final ne touche jamais au manuel',
+    M(f.ticket) === '2 4 6 8 10 12 14 1' && f.ticketSource === 'manuel')
+}
+
 console.log(`\n  ${ok} OK · ${ko} KO\n`)
 process.exit(ko ? 1 : 0)

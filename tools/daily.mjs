@@ -180,6 +180,7 @@ export async function trouverCourse(date, synthese, courseIdForce) {
   log(`     casacourses : ${det.hippodrome} ${det.raw?.code || '? '} · ${det.nbPartants} partants · ${det.distance}m · cover ${det.cover}`)
   return {
     courseId: fid,
+    heure: det.raw?.time_hm || det.raw?.time || det.heure || null,
     arrivee: det.arrivee,
     participants: parts,
     discipline: det.discipline,
@@ -353,7 +354,7 @@ async function cloturer(date) {
  *            ticketSource:string|null, surprises:number[], ticketPoseLe:string|null,
  *            ticketMoteur:number[]|null, log:string[]}}
  */
-export function figerTicket(avant, t) {
+export function figerTicket(avant, t, opts = {}) {
   const dejaPose = Array.isArray(avant.ticket) && avant.ticket.length > 0
   const out = {
     ticket: avant.ticket || null,
@@ -363,15 +364,35 @@ export function figerTicket(avant, t) {
     surprises: avant.surprises || [],
     ticketPoseLe: avant.ticketPoseLe || null,
     ticketMoteur: avant.ticketMoteur || null,
+    ticketMatin: avant.ticketMatin || null,
     log: [],
   }
   if (t) out.ticketMoteur = t.ticket
+
+  /* ⭐ LE REGEL D'AVANT-COURSE (09/10/2026) : UNE fois, pas plus.
+   *   Le gel du matin fige un marché de nuit (01:55, 02:33…) qui n'a aucune
+   *   valeur. Entre 90 et 10 min avant le départ, on RE-gèle UNE fois avec
+   *   le marché du moment — puis c'est verrouillé comme le reste.
+   *   Écrasable : rien / auto / page. Intouchable : manuel / final. */
+  const ecrasable = !out.ticketSource || out.ticketSource === 'auto' || out.ticketSource === 'page'
+  if (opts.final && dejaPose && t && ecrasable && out.ticketSource !== 'manuel' && out.ticketSource !== 'final') {
+    if (!out.ticketMatin) out.ticketMatin = avant.ticket
+    out.ticket = t.ticket
+    out.ticketMode = t.mode
+    out.groupes = t.groupes
+    out.ticketSource = 'final'
+    out.surprises = t.surprises || []
+    out.ticketPoseLe = new Date().toISOString()
+    out.log.push(`     ticket FINAL : ${t.ticket.join(' ')}  (${t.mode})`)
+    out.log.push(`     ticket matin conserve : ${(out.ticketMatin || []).join(' ')}`)
+    return out
+  }
 
   if (!dejaPose && t) {
     out.ticket = t.ticket
     out.ticketMode = t.mode
     out.groupes = t.groupes
-    out.ticketSource = 'auto'
+    out.ticketSource = opts.final ? 'final' : 'auto'
     out.surprises = t.surprises || []
     out.ticketPoseLe = new Date().toISOString()
   }
@@ -379,6 +400,8 @@ export function figerTicket(avant, t) {
   const same = t && JSON.stringify(t.ticket) === JSON.stringify(avant.ticket)
   if (out.ticketSource === 'manuel') {
     out.log.push('     ticket manuel conserve')
+  } else if (out.ticketSource === 'final' && !opts.final) {
+    out.log.push(`     ticket FINAL conserve : ${(out.ticket || []).join(' ')}`)
   } else if (dejaPose && t && !same) {
     out.log.push(`     ticket conserve    : ${(avant.ticket || []).join(' ')}`)
     out.log.push(`     moteur aujourd'hui : ${t.ticket.join(' ')}  (${t.mode}) - NON ecrase`)
@@ -386,6 +409,70 @@ export function figerTicket(avant, t) {
     out.log.push(`     marche lu - surprises ${(out.surprises || []).join(' ') || '-'}`)
   }
   return out
+}
+
+/* Heure actuelle à Paris (fuseau du Quinté), en minutes depuis minuit. */
+function minutesParis(d = new Date()) {
+  const p = new Date(d.toLocaleString('en-US', { timeZone: 'Europe/Paris' }))
+  return p.getHours() * 60 + p.getMinutes()
+}
+
+function enMinutes(hhmm) {
+  const m = String(hhmm || '').match(/(\d{1,2})[:hH]?(\d{2})/)
+  return m ? Number(m[1]) * 60 + Number(m[2]) : null
+}
+
+/** Re-gel d'avant-course : UNE fois, dans la fenêtre [départ-90, départ-10].
+ *  Le gel du matin fige un marché de nuit sans valeur (01:55, 02:33…) : on
+ *  re-gèle avec le marché du moment, puis c'est verrouillé (final > auto).
+ *  Hors fenêtre, course déjà courue, déjà final ou manuel : on ne touche à
+ *  rien et on le dit. */
+async function finaliserJour(date) {
+  const db = lire(F_SYN, {})
+  const avant = db[date]
+  if (!avant || !avant.synthese || !avant.synthese.length) { log(`  ${date}  rien à finaliser (pas de Synthèse)`); return null }
+  if (avant.arrivee && avant.arrivee.length) { log(`  ${date}  déjà courue (${avant.arrivee.join('-')}) — pas de re-gel`); return null }
+  if (avant.ticketSource === 'final') { log(`  ${date}  déjà FINAL (${(avant.ticket || []).join(' ')}) — verrouillé`); return null }
+  if (avant.ticketSource === 'manuel') { log(`  ${date}  ticket manuel — intouchable`); return null }
+
+  let heure = avant.heure || null
+  let course = null
+  try {
+    course = await trouverCourse(date, avant.synthese, avant.courseId)
+    if (course && !heure) heure = course.heure || null
+  } catch (e) { log(`  ${date}  course introuvable : ${e.message}`); return null }
+  if (!course) return null
+  const depart = enMinutes(heure)
+  if (depart == null) { log(`  ${date}  heure de départ inconnue — pas de re-gel`); return null }
+  const now = minutesParis()
+  const hh = (m) => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0')
+  if (now < depart - 90 || now > depart - 10) {
+    log(`  ${date}  hors fenêtre (départ ${hh(depart)}, il est ${hh(now)} — fenêtre ${hh(depart - 90)}→${hh(depart - 10)})`)
+    return null
+  }
+
+  const cars = lire(F_CAR, {})
+  const t = await construireTicket(avant.synthese, course, cars[date] || null, avant.courseId || course.courseId)
+  if (!t) { log(`  ${date}  moteur indisponible — pas de re-gel`); return null }
+  const f = figerTicket(avant, t, { final: true })
+  for (const l of f.log) log(l)
+  if (f.ticketSource !== 'final') { log(`  ${date}  re-gel refusé (source ${avant.ticketSource})`); return null }
+
+  const rec = {
+    ...avant, date,
+    ticket: f.ticket, ticketMode: f.ticketMode, groupes: f.groupes,
+    ticketSource: f.ticketSource, surprises: f.surprises, ticketPoseLe: f.ticketPoseLe,
+    ticketMatin: f.ticketMatin, ticketMoteur: f.ticketMoteur,
+    scores: (t.scores && t.scores.length ? t.scores : avant.scores) || null,
+    collecte: new Date().toISOString(),
+  }
+  db[date] = rec
+  const tri = {}
+  for (const k of Object.keys(db).sort().reverse()) tri[k] = db[k]
+  ecrire(F_SYN, tri)
+  try { fs.mkdirSync(PUB, { recursive: true }); fs.writeFileSync(path.join(PUB, 'synthese.json'), JSON.stringify(tri, null, 2)) } catch (e) {}
+  log(`  ${date}  FINAL gelé à ${hh(now)} (départ ${hh(depart)})`)
+  return rec
 }
 
 /** Journée du jour : lit la Synthèse sur le site, construit le ticket, enregistre. */
@@ -599,6 +686,10 @@ if (args.includes('--install')) {
   console.log('  2) le soir 20:30   (on r\u00e9cup\u00e8re le r\u00e9sultat, on calcule le bilan) :')
   console.log('     schtasks /Create /TN "Quinte PM" /TR "' + bat + '" /SC DAILY /ST 20:30')
   console.log('')
+  console.log('  3) avant-course     (on re-g\u00e8le le ticket avec le march\u00e9 du moment, UNE fois) :')
+  console.log('     schtasks /Create /TN "Quinte Final" /TR "' + bat + ' --final" /SC DAILY /ST 11:00 /RI 30 /DU 540')
+  console.log('     (toutes les 30 min 11:00->20:00 ; le job ne g\u00e8le que dans [depart-90, depart-10])')
+  console.log('')
   console.log('  Pour tout effacer :')
   console.log('     schtasks /Delete /TN "Quinte AM" /F')
   console.log('     schtasks /Delete /TN "Quinte PM" /F')
@@ -609,7 +700,10 @@ if (args.includes('--install')) {
   process.exit(0)
 }
 
-if (args.includes('--watch')) {
+if (args.includes('--final')) {
+  log('===== final (re-gel avant-course) =====')
+  await finaliserJour(aujourdhui())
+} else if (args.includes('--watch')) {
   console.log('Mode watch : toutes les 20 minutes. Ctrl+C pour arreter.' + nl)
   await cycle()
   setInterval(async () => { try { await cycle() } catch (e) { log('echec : ' + e.message) } }, 20 * 60 * 1000)
