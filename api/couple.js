@@ -211,16 +211,20 @@ async function lireDetailDirect(date, rNum, cNum, pays) {
     if (c.length <= besoin) continue
     const n = Number(c[carte.num])
     if (!Number.isFinite(n) || n < 1) continue
+    /* ⚠ SEULE coteRef (08/10/2026) : la colonne « Cotes » du jour est d'un
+     *   autre type (74% éloignées de ×1.5, parfois inversées) — on ne la lit
+     *   même plus. Et on la PASSE en coteRef à normaliserPartant, sinon elle
+     *   recalcule depuis des champs absents et la cote tombe à null (le bug
+     *   qui vidait toutes les cotes du jour : 0/15). */
     const cRef = carte.coteRef != null ? nombre(c[carte.coteRef]) : null
-    const cDir = carte.cote != null ? nombre(c[carte.cote]) : null
-    const cote = (cDir != null && cDir > 1 ? cDir : null) ?? (cRef != null && cRef > 1 ? cRef : null)
+    const cote = cRef != null && cRef > 1 ? cRef : null
     sortie.push(normaliserPartant({
       num: n,
       cheval: lit(c, 'cheval'),
       driver: lit(c, 'driver'),
       entraineur: lit(c, 'entraineur'),
       poids: carte.poids != null ? nombre(c[carte.poids]) : null,
-      cote,
+      coteRef: cote,
       gains: carte.gains != null ? nombre(c[carte.gains]) : null,
       musique: lit(c, 'musique'),
       corde: carte.corde != null ? nombre(c[carte.corde]) : null,

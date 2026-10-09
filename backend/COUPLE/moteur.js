@@ -245,8 +245,12 @@ export function verdict(partants, db) {
   if (!index || !index.full) return { trio: null, raison: 'index introuvable' }
   /* ⚠ D'abord les cotes : sans 3 cotes valides il n'y a pas de trio à
    *   tester — ce n'est pas « aucun antécédent », c'est « pas de cotes »
-   *   (le matin, reu.php ne les publie pas encore). */
-  if (!trioCandidat(partants)) return { trio: null, raison: 'pas assez de cotes' }
+   *   (reu.php les publie progressivement dans la journée : à 08h00 il
+   *   manque souvent la moitié du champ). On dit COMBIEN il en manque. */
+  const nCotes = (partants || []).filter((p) => coteValide(coteDe(p))).length
+  if (!trioCandidat(partants)) {
+    return { trio: null, raison: 'pas assez de cotes', cotes: '' + nCotes + '/' + (partants || []).length }
+  }
   const best = meilleurTrio(partants, index)
   if (!best) return { trio: null, raison: 'aucun antécédent' }
   const r = best.resume

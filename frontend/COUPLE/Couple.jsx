@@ -280,7 +280,9 @@ function Lecture({ course, base }) {
         <div style={{ fontSize: 12, color: '#78716c', marginTop: 6 }}>
           {v.raison === 'aucun antécédent'
             ? 'Aucun antécédent pour les trios de cette course.'
-            : v.raison || 'Base des empreintes introuvable.'}
+            : v.raison === 'pas assez de cotes'
+              ? `Pas assez de cotes publiées (${v.cotes || '?'}) — reu.php les publie progressivement dans la journée. Re-clique la course plus tard.`
+              : v.raison || 'Base des empreintes introuvable.'}
         </div>
       )}
 
