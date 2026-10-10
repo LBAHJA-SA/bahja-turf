@@ -818,17 +818,19 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
 
   const rang = grille?.parNum || {}
   const parPlace = stats?.parPlace || []
-  /** P(place) d'un cheval, d'après son rang de presse ; null si l'archive l'ignore */
-  const pDe = (num) => {
-    const d = parPlace[(rang[num] ?? 0) - 1]
-    return Array.isArray(d?.p) ? d.p : null
-  }
-  const cote = (num) => {
-    const v = cotes?.[num]
-    const n = typeof v === 'object' ? (v?.cote ?? v?.odds ?? null) : v
-    const x = Number(n)
-    return Number.isFinite(x) && x > 0 ? x : Infinity
-  }
+  /* ⚠ 10/10/2026 — LE P EST CELUI DE L'ONGLET STATISTIQUES, PAS LE RANG
+   * DE PRESSE. computeStats construit son tableau « Place P1…P20 » avec
+   * les PAIRS en haut (P1, P3, P5…) et les IMPAIRS en bas (P2, P4, P6…),
+   * dans l'ordre de la Récapitulative (§11.13). grille.parNum, lui, est
+   * le RANG de presse (1er cité = P1). Les mêler lisait la mauvaise
+   * statistique pour presque chaque cheval — l'ordre ne suivait pas le
+   * tableau Statistiques. On reconstruit ici le mapping exact de
+   * computeStats ; grille.parNum ne sert plus qu'au repli des absents. */
+  const synthe = (grille?.synthe || []).filter((n) => Number.isFinite(n))
+  const rangStats = {}
+  synthe.filter((n) => n % 2 === 0).forEach((n, i) => { rangStats[n] = 2 * i + 1 })
+  synthe.filter((n) => n % 2 !== 0).forEach((n, i) => { rangStats[n] = 2 * i + 2 })
+  const pDeNum = (num) => rangStats[num] ?? rang[num] ?? 999
 
   /* ── L'ORDRE : LA PLACE EST CELLE OÙ LE P EST LE PLUS FORT ──
    * Règle de l'utilisateur (07/10/2026) : chaque cheval du ticket se
@@ -836,39 +838,49 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
    * Statistiques. P1 à 100 % au 1er → première case. P4 à 50 % au 5e →
    * cinquième case. Puis les autres, sans place.
    *
+   * ⚠ CORRIGÉ le 10/10 : l'ancien code prenait pour CHAQUE case le
+   * cheval restant le plus FORT (max global, départage par le carnet).
+   * Un cheval fort en 3e (P2 à 60 %) pouvait s'asseoir en 2e case et
+   * faire descendre le vrai 2e (P10 à 60 % au 2e) — vu par
+   * l'utilisateur le 10/10 : « le 2e doit être P10 ». Désormais chaque
+   * cheval déclare SA place (son argmax) et une place n'accueille QUE
+   * le plus fort de ceux qui la revendiquent. Les perdants et les
+   * chevaux sans force suivent « sans place », au rang du carnet.
+   *
    * ⚠ Un P avec n=1 (une seule course) affiche des pourcentages de
    *   100 % qui ne veulent rien dire. On les traite comme nuls : sans
    *   historique, pas de force — c'est le même principe que « physique
    *   > forme » : le fait bat la supposition. */
-  const force = (num) => {
-    const st = parPlace[(rang[num] ?? 0) - 1]
-    if (!st || !st.n || st.n < 2) return null
+  const signature = (num) => {
+    const st = parPlace[pDeNum(num) - 1]
+    if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return null
     let best = 0
     for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
-    return st.p[best]
+    return (st.p[best] ?? 0) > 0 ? { place: best, force: st.p[best] } : null
   }
 
-  /* ⚠ LE DÉPARTAGE EST LE RANG DU CARNET, PAS LA COTE.
+  /* ⚠ LE DÉPARTAGE EST LE RANG DU CARNET (le P de la grille), PAS LA COTE.
    * Avec la cote, le même ticket donnait un ordre différent en local
    * (pas de marché) et en production (marché lu) : la page et
    * l'archive ne se ressemblaient plus. Or l'ordre doit être le même
    * partout — c'est l'archive qui fait foi. On départage donc par le
    * P le plus proche du début du carnet, ce qui est stable. */
-  const rangDe = (num) => rang[num] ?? 999
+  const rangDe = (num) => pDeNum(num)
 
-  const reste = nums.slice()
-  const ordre = []
-  for (let pos = 0; pos < 5 && reste.length; pos++) {
-    let meilleur = 0
-    for (let i = 1; i < reste.length; i++) {
-      const a = force(reste[i]) ?? -1
-      const b = force(reste[meilleur]) ?? -1
-      if (a > b || (a === b && rangDe(reste[i]) < rangDe(reste[meilleur]))) meilleur = i
-    }
-    ordre.push(reste.splice(meilleur, 1)[0])
+  const s = nums.map((n) => ({ n, sig: signature(n), rang: rangDe(n) }))
+  /* chaque place : le plus fort de ses candidats (force, puis carnet) */
+  const places = new Array(5).fill(null)
+  const pris = new Set()
+  const candidats = s.filter((x) => x.sig)
+    .sort((a, b) => (b.sig.force - a.sig.force) || (a.rang - b.rang))
+  for (const x of candidats) {
+    if (places[x.sig.place] == null) { places[x.sig.place] = x.n; pris.add(x.n) }
   }
-  while (reste.length) ordre.push(reste.shift())
-  return ordre
+  /* les autres, sans place, dans l'ordre du carnet */
+  const sansPlace = s.filter((x) => !pris.has(x.n))
+    .sort((a, b) => a.rang - b.rang)
+    .map((x) => x.n)
+  return [...places.filter((n) => n != null), ...sansPlace]
 }
 
 /* ------------------------------------------------------- CARRIÈRE (B) --- */

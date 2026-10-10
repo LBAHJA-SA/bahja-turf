@@ -1043,7 +1043,13 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                           {a.placeholder && <span style={{ color: '#b91c1c', fontWeight: 700 }}> ⚠ par défaut</span>}
                         </td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>{(a.arrivee || []).join('-') || '—'}</td>
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>{(a.ticket || []).join(' ') || '—'}</td>
+                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>
+  {/* ⭐ ORDRE VIVANT (10/10) : l'archive affiche les MÊMES chevaux, remis
+      dans l'ordre que donnent les Statistiques AUJOURD'HUI — le gel fige
+      la SÉLECTION, jamais l'ordre (§17.2). Sans ça, la ligne montrait
+      l'ordre brut du gel, qui ne suit pas la logique des résultats. */}
+  {ordonnerParStats(a.ticket || [], buildGrid(a.synthese || []), stats).join(' ') || '—'}
+</td>
                         {/* ⭐ UN SEUL TEMPS : l'heure où le ticket a été POSÉ (le gel).
                             Pas l'heure d'enregistrement de la Synthèse — ce
                             sont deux moments différents, et n'en afficher
