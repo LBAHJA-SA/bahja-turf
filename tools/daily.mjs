@@ -468,7 +468,7 @@ export function figerTicket(avant, t, opts = {}) {
 
   /* ⭐ LE REGEL D'AVANT-COURSE (09/10/2026) : UNE fois, pas plus.
    *   Le gel du matin fige un marché de nuit (01:55, 02:33…) qui n'a aucune
-   *   valeur. Entre 90 et 10 min avant le départ, on RE-gèle UNE fois avec
+   *   valeur. 2 h avant le départ (10/10/2026), on RE-gèle UNE fois avec
    *   le marché du moment — puis c'est verrouillé comme le reste.
    *   Écrasable : rien / auto / page. Intouchable : manuel / final. */
   const ecrasable = !out.ticketSource || out.ticketSource === 'auto' || out.ticketSource === 'page'
@@ -516,8 +516,7 @@ function minutesParis(d = new Date()) {
 
 /* ⭐ TOUT S'AFFICHE EN GMT (09/10/2026, instruction utilisateur).
  *   Les heures de course arrivent en heure de Paris : on convertit pour
- *   l'affichage. La fenêtre [départ-90, départ-10] se calcule en Paris
- *   (fuseau de la course), mais se LIT en GMT. */
+ *   l'affichage. Le gel 2 h avant (fuseau de la course) se LIT en GMT. */
 function minutesGMT(d = new Date()) {
   return d.getUTCHours() * 60 + d.getUTCMinutes()
 }
@@ -576,9 +575,12 @@ function enMinutes(hhmm) {
   return m ? Number(m[1]) * 60 + Number(m[2]) : null
 }
 
-/** Re-gel d'avant-course : UNE fois, dans la fenêtre [départ-90, départ-10].
- *  Le gel du matin fige un marché de nuit sans valeur (01:55, 02:33…) : on
- *  re-gèle avec le marché du moment, puis c'est verrouillé (final > auto).
+/** Re-gel d'avant-course : UNE fois, 2 h avant le départ.
+ *  10/10/2026 (instruction utilisateur) : la ticket se fige 2 h avant —
+ *  le temps d'aller la jouer. Au premier run ≥ départ-120 on gèle avec le
+ *  marché du moment (sur la grille 30 min : entre 2h00 et 1h30 avant),
+ *  puis c'est verrouillé (final > auto). Avant : trop tôt, le marché de
+ *  nuit ne vaut rien. Après départ-10 : trop tard, injouable.
  *  Hors fenêtre, course déjà courue, déjà final ou manuel : on ne touche à
  *  rien et on le dit. */
 async function finaliserJour(date) {
@@ -605,8 +607,8 @@ async function finaliserJour(date) {
    * label (le premier qui passe) : après, c'est verrouillé comme le reste. */
   if (now >= depart - 195 && now <= depart - 165) await snapshotMarche(date, 'h_moins_3')
   if (now >= depart - 135 && now <= depart - 105) await snapshotMarche(date, 'h_moins_2')
-  if (now < depart - 90 || now > depart - 10) {
-    log(`  ${date}  hors fenêtre (départ ${hh(parisVersGMT(depart))} GMT, il est ${hh(minutesGMT())} GMT — fenêtre ${hh(parisVersGMT(depart - 90))}→${hh(parisVersGMT(depart - 10))} GMT)`)
+  if (now < depart - 120 || now > depart - 10) {
+    log(`  ${date}  hors fenêtre (départ ${hh(parisVersGMT(depart))} GMT, il est ${hh(minutesGMT())} GMT — gel à ${hh(parisVersGMT(depart - 120))} GMT au plus tôt)`)
     return null
   }
 
@@ -861,7 +863,7 @@ if (args.includes('--install')) {
   console.log('')
   console.log('  4) avant-course     (on re-g\u00e8le le ticket avec le march\u00e9 du moment, UNE fois) :')
   console.log('     schtasks /Create /TN "Quinte Final" /TR "' + bat + ' --final" /SC DAILY /ST 08:00 /RI 30 /DU 13:00')
-  console.log('     (toutes les 30 min 11:00->20:00 ; le job ne g\u00e8le que dans [depart-90, depart-10])')
+  console.log('     (toutes les 30 min ; le job ne g\u00e8le qu une fois, 2 h avant le d\u00e9part)')
   console.log('')
   console.log('  Pour tout effacer :')
   console.log('     schtasks /Delete /TN "Quinte AM" /F')
