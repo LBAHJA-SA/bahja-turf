@@ -70,30 +70,39 @@ export function aDesCotes(courseId) {
  * Les cotes d'une course, en `{ num : {...} }` — la forme qu'attend
  * remplirGrille. Va sur equidia.fr si le cache ne l'a pas encore.
  * Renvoie {} si le réseau échoue : le moteur retombe alors sur le score.
+ *
+ * ⚠ 10/10/2026 — `opts.force` : le re-gel FINAL doit VOIR le marché de
+ * l'instant, pas celui du matin. Sans force, le cache était réutilisé tel
+ * quel par `chargerCotes()` → le FINAL == ticket du matin, et le marché
+ * n'avait AUCUN effet (exactement ce que l'utilisateur a constaté : « le
+ * marché ne change rien »). Avec force, on relit equidia.fr ; en cas
+ * d'échec réseau on retombe sur le cache (jamais rien d'inventé).
  */
-export async function chargerCotes(courseId) {
+export async function chargerCotes(courseId, opts = {}) {
   const m = String(courseId || '').match(/^(\d{4}-\d{2}-\d{2})_R(\d+)_C(\d+)$/)
   if (!m) return {}
   const [, d, r, c] = m
   let cc = cacheCotes()[courseId]
-  if (!aDesCotes(courseId)) {
-    try {
-      const etat = await chargerEquidia(d, r, c)
-      if (etat) {
-        const cotes = lireCourse(etat, d, r, c)
-        if (cotes.length > 4) {
-          const cache = cacheCotes()
-          /* ⚠ 09/10/2026 : ne jamais écraser les snapshots (ouverture /
-           *   h_moins_3 / h_moins_2) : la racine `cotes` suit le dernier
-           *   marché lu, mais l'historique reste. Sans ça, chaque lecture
-           *   du moteur effaçait les 3 instants à comparer. */
-          const prec = cache[courseId] || {}
-          cache[courseId] = { ...prec, source: 'equidia.fr', favori: cotes.find((x) => x.favori)?.num ?? prec.favori ?? null, cotes }
-          fs.writeFileSync(FILE, JSON.stringify(cache, null, 1))
-          cc = cache[courseId]
-        }
-      }
-    } catch (e) { return {} }
+  const lireFraiche = async () => {
+    const etat = await chargerEquidia(d, r, c)
+    if (!etat) return false
+    const cotes = lireCourse(etat, d, r, c)
+    if (cotes.length <= 4) return false
+    const cache = cacheCotes()
+    /* ⚠ 09/10/2026 : ne jamais écraser les snapshots (ouverture /
+     *   h_moins_3 / h_moins_2) : la racine `cotes` suit le dernier
+     *   marché lu, mais l'historique reste. Sans ça, chaque lecture
+     *   du moteur effaçait les 3 instants à comparer. */
+    const prec = cache[courseId] || {}
+    cache[courseId] = { ...prec, source: 'equidia.fr', favori: cotes.find((x) => x.favori)?.num ?? prec.favori ?? null, cotes }
+    fs.writeFileSync(FILE, JSON.stringify(cache, null, 1))
+    cc = cache[courseId]
+    return true
+  }
+  if (opts.force) {
+    try { await lireFraiche() } catch { /* repli cache ci-dessous */ }
+  } else if (!aDesCotes(courseId)) {
+    try { await lireFraiche() } catch { return {} }
   }
   if (!cc || !cc.cotes?.length) return {}
   return Object.fromEntries(cc.cotes.map((x) => [x.num, x]))

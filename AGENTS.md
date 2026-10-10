@@ -1053,6 +1053,22 @@ l'ouverture PMU 04:00 GMT), `h_moins_3` ([H-3h15, H-2h45], runs --final),
 `h_moins_2` ([H-2h15, H-1h45]). Un seul snapshot par label (le premier).
 La racine `cotes` suit toujours le DERNIER marché lu (compat : moteur +
 repli page inchangés) — `chargerCotes()` ne les écrase plus (testé).
+
+⭐ MARCHÉ FRAIS AU FINAL (10/10/2026) : le re-gel d'avant-course FORCE la
+relecture d'equidia (`chargerCotes(courseId, {force:true})`). Avant, le
+cache du matin était réutilisé tel quel → FINAL == ticket du matin, le
+marché n'avait AUCUN effet (« le marché ne change rien », constaté par
+l'utilisateur le 10/10). Depuis, le FINAL voit le marché de l'instant ;
+repli sur le cache seulement si le réseau échoue.
+
+⭐ PLAN B CASA-COURSES (10/10/2026) : casacourses peut manquer la réunion
+du Quinté (le 10/10, CAEN était absent — seul Pontchâteau R12 sortait —
+et le matin le ticket est resté `null`). `trouverCourse()` bascule alors
+sur Equidia : la redirection `quinte` du JSON de la page programme donne
+`R{n}/C{m}`, puis la fiche `v2/courses/…` fournit partants, distance,
+heure (fuseau Paris). Jamais de données inventées : si ni casacourses ni
+equidia ne répondent, le moteur dit « pas de ticket » plutôt que de
+fabriquer un ordre.
 (final : toutes les 30 min 11:00→20:00 ; le job ne gèle que dans
 [départ-90, départ-10], une fois — test : `node tools\test-gel.mjs`, 19 OK)
 

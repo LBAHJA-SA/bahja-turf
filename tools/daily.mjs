@@ -171,11 +171,81 @@ function lireSynthese(html) {
   return { synthese: rows.map((r) => r.num), fois: rows.map((r) => r.fois), datePage: dateDansPage(html) }
 }
 
+/* ⚠ 10/10/2026 — casacourses N'A PAS toutes les réunions (aujourd'hui il ne
+ * sort que Pontchâteau R12 alors que le Quinté est à CAEN R1 C4 → ticket
+ * null le matin). Equidia, lui, publie la redirection `quinte` dans le JSON
+ * de toute page : on identifie la course (R/C) puis on la recharge. */
+async function cleQuinteEquidia(date) {
+  const candidats = [
+    `https://www.equidia.fr/programme-courses/${date}`,
+    `https://www.equidia.fr/courses/${date}/R1/C1`,
+  ]
+  for (const u of candidats) {
+    try {
+      const rep = await fetch(u, { headers: { 'User-Agent': UA, Accept: 'text/html' } })
+      if (rep.status >= 500) continue
+      const html = await rep.text()
+      const m = html.match(/<script id="serverApp-state" type="application\/json">([\s\S]*?)<\/script>/)
+      if (!m) continue
+      const txt = m[1]
+        .replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+        .replace(/&nbsp;/g, ' ').replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+      const j = JSON.parse(txt)
+      const redir = j?.quinte?.redirection || ''
+      const mm = redir.match(/\/courses\/\d{4}-\d{2}-\d{2}\/R(\d+)\/C(\d+)/)
+      if (mm) return { r: mm[1], c: mm[2] }
+    } catch { /* candidat suivant */ }
+  }
+  return null
+}
+
+async function trouverCourseEquidia(date) {
+  const cle = await cleQuinteEquidia(date)
+  if (!cle) { log(`     equidia : pas de clé Quinté pour ${date}`); return null }
+  const { r, c } = cle
+  const courseId = `${date}_R${r}_C${c}`
+  let etat = null
+  try { etat = await chargerEquidia(date, r, c) } catch (e) { log(`     equidia KO : ${e.message}`); return null }
+  if (!etat) { log(`     equidia : page illisible`); return null }
+  const v = etat[`v2/courses/${date}/R${r}/C${c}`]
+  if (!v) { log(`     equidia : fiche course absente`); return null }
+  const course = v.course || v
+  const partants = (course.partants || []).map((p) => ({
+    num: Number(p.num_partant),
+    horse: p.cheval?.nom_cheval || '',
+    corde: Number(p.num_partant),
+  }))
+  if (!partants.length) { log(`     equidia : pas de partants`); return null }
+  const hippo = v.reunion?.lib_reunion || v.reunion?.hippodrome?.name || '?'
+  const reelle = (course.real_heure_course || '').match(/T(\d{2}:\d{2})/)
+  const heure = reelle ? reelle[1] : (course.heure_depart_course || null)
+  log(`     equidia : ${hippo} C${c} · ${partants.length} partants · ${course.distance}m · départ ${heure} (Paris)`)
+  return {
+    courseId,
+    heure,
+    arrivee: null,
+    participants: partants,
+    discipline: course.discipline || 'PLAT',
+    distance: Number(course.distance) || 0,
+    nbPartants: partants.length,
+    hippodrome: hippo,
+    cover: null,
+    source: 'equidia',
+  }
+}
+
 export async function trouverCourse(date, synthese, courseIdForce) {
   let det = null
-  try { det = await chargerCourseCC(date, synthese) } catch (e) { log(`     casacourses KO : ${e.message}`); return null }
+  try { det = await chargerCourseCC(date, synthese) } catch (e) { log(`     casacourses KO : ${e.message}`) }
   const parts = det?.participants || []
-  if (!parts.length) return null
+  if (!parts.length) {
+    /* plan B (10/10/2026) : la réunion du Quinté peut manquer chez
+     * casacourses (CAEN absent aujourd'hui → ticket null le matin). On
+     * bascule sur equidia — jamais de données inventées : si equidia ne
+     * donne rien non plus, on retourne null et le moteur dit « pas de
+     * ticket » plutôt que de fabriquer un ordre fantaisiste. */
+    return trouverCourseEquidia(date)
+  }
   // autoCarriere veut un id « AAAA-MM-JJ_Rn_Cm » : on le reconstruit
   const fid = det.raw?.reunion_code && det.raw?.code ? `${date}_${det.raw.reunion_code}_${det.raw.code}` : (det.courseId || null)
   log(`     casacourses : ${det.hippodrome} ${det.raw?.code || '? '} · ${det.nbPartants} partants · ${det.distance}m · cover ${det.cover}`)
@@ -243,7 +313,10 @@ export async function construireTicket(synthese, course, carriere, courseId, opt
   // 📈 LE MARCHÉ — equidia.fr. S'il a la cote de tous les partants, c'est
   //    elle qui remplit les quotas (les quota meilleures cotes).
   //    Sinon on retombe sur le classement physique.
-  const cotes = opts.sansMarche ? {} : await chargerCotes(courseId)
+  //    ⚠ 10/10/2026 : `opts.frais` (re-gel FINAL) FORCE la relecture du
+  //    marché — sinon chargerCotes renvoie le cache du matin et le FINAL
+  //    ne change jamais rien (le marché devient un décor).
+  const cotes = opts.sansMarche ? {} : await chargerCotes(courseId, { force: !!opts.frais })
   if (Object.keys(cotes).length >= 4) mode += '+marche'
 
   // 📊 l'ORDRE du ticket vient des probabilités de place de l'archive.
@@ -515,7 +588,7 @@ async function finaliserJour(date) {
   }
 
   const cars = lire(F_CAR, {})
-  const t = await construireTicket(avant.synthese, course, cars[date] || null, avant.courseId || course.courseId)
+  const t = await construireTicket(avant.synthese, course, cars[date] || null, avant.courseId || course.courseId, { frais: true })
   if (!t) { log(`  ${date}  moteur indisponible — pas de re-gel`); return null }
   const f = figerTicket(avant, t, { final: true })
   for (const l of f.log) log(l)
