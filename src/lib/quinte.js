@@ -706,14 +706,18 @@ function coteDe(cotes, num) {
  * G3 est obligatoire : si son score est faible, on le prend quand même.
  * Renvoie la liste des numéros retenus + le détail.
  *
- * ── QUAND ON A LE MARCHÉ (`cotes`), ON NE TRIE PLUS PAR LE SCORE ──────────
+ * ── QUAND ON A LE MARCHÉ (`cotes`), QUI ENTRE ? ────────────────────────────
  * Le score physique n'a aucun pouvoir de tri à l'intérieur d'un bloc (§11.16).
- * La cote, elle, en a un. Donc, si on connaît la cote de TOUS les partants
- * d'un bloc :
  *
- *   bloc de quota q   →  les q meilleures cotes du bloc. Rien d'autre.
+ *   bloc de quota ≥ 2  →  les q meilleures cotes du bloc. Rien d'autre.
+ *   bloc de quota 1    →  ⭐ R2 (10/10/2026) : le plus fort aux STATISTIQUES
+ *      (signature : argmax du P, n≥2 ; égalité ou sans historique → la cote
+ *      départage). Labo tools/lab-g3.mjs, 6 Quintés rejoués en leave-one-out
+ *      avec le même marché des deux côtés : R2 = 23/30 · 1er 6/6 contre
+ *      R1 (petite cote) = 21/30 · 1er 5/6 — approuvé par l'utilisateur.
+ *      Le 10/10 a tranché en vrai : G3 8@13 pris, 9@14 écarté, et le 9 gagne.
  *
- * Mesuré sur 280 vrais Quintés Global PMU France (2026-01-01 → 2026-10-05),
+ * Mesure historique sur 280 vrais Quintés Global PMU France (2026-01-01 → 2026-10-05),
  * Archives + casacourses, avec la vraie Synthèse de la presse :
  *
  *   règle                       % où le 1-2-3 est complet dans la grille
@@ -743,6 +747,24 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
   const ticket = []
   const detail = []
 
+  /* Force aux STATISTIQUES d'un numéro (même mapping que ordonnerParStats) :
+   * le P est celui de l'onglet Statistiques — pairs en haut (P1, P3…),
+   * impairs en bas — PAS le rang de presse. null = sans historique (n<2). */
+  const synthe = (grille?.synthe || []).filter((n) => Number.isFinite(n))
+  const rangStats = {}
+  synthe.filter((n) => n % 2 === 0).forEach((n, i) => { rangStats[n] = 2 * i + 1 })
+  synthe.filter((n) => n % 2 !== 0).forEach((n, i) => { rangStats[n] = 2 * i + 2 })
+  const parNumRang = grille?.parNum || {}
+  const pDeNum = (num) => rangStats[num] ?? parNumRang[num] ?? 999
+  const parPlaceStats = stats?.parPlace || []
+  const forceDe = (num) => {
+    const st = parPlaceStats[pDeNum(num) - 1]
+    if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return null
+    let best = 0
+    for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
+    return (st.p[best] ?? 0) > 0 ? { place: best, force: st.p[best] } : null
+  }
+
   for (const g of grille.groupes) {
     const cases = g.cases.map((c) => ({ ...c, s: parNum.get(c.num)?.s || null, ok: parNum.get(c.num)?.ok ?? null }))
 
@@ -767,7 +789,21 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
     // le marché prime : s'il a la cote de TOUS les partants du bloc
     const surLeMarche = cases.every((c) => coteDe(cotes, c.num) != null)
     const retenus = new Set()
-    if (surLeMarche) {
+    /* ⭐ R2 (10/10/2026, labo tools/lab-g3.mjs : 23/30 contre 21/30, 1er
+     * 6/6 contre 5/6 — approuvé par l'utilisateur) : sur un bloc à UNE
+     * place avec le marché complet, on ne prend plus la plus petite cote.
+     * Prendre la cote la plus basse, le 10/10 ça a coûté le gagnant
+     * (G3 : 8@13 pris, 9@14 écarté — et c'est le 9 qui gagne). On prend
+     * le plus fort aux STATISTIQUES ; égalité ou sans historique → la
+     * cote départage (elle reste le repli, plus le choix). */
+    const parStats = surLeMarche && quota === 1 && parPlaceStats.length > 0
+    if (parStats) {
+      const gagnant = cases.slice().sort((a, b) =>
+        ((forceDe(b.num)?.force ?? -1) - (forceDe(a.num)?.force ?? -1)) ||
+        (coteDe(cotes, a.num) - coteDe(cotes, b.num))
+      )[0]
+      retenus.add(gagnant.place)
+    } else if (surLeMarche) {
       const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
       parCote.slice(0, quota).forEach((c) => retenus.add(c.place))
     } else {
@@ -778,6 +814,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
       ...g,
       surprise: null,
       surLeMarche,
+      parStats,
       cases: cases.map((c) => ({
         ...c,
         cote: coteDe(cotes, c.num),
