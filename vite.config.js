@@ -109,6 +109,44 @@ function proxiesApi() {
           res.end(JSON.stringify({ erreur: String(e && e.message ? e.message : e) }));
         }
       });
+      /* /api/archive-push : le navigateur RENVOIE son archive au disque,
+       * SANS CLIC (10/10/2026 — fin des « deux archives » qui divergent).
+       * POST JSON {date: record} → fusionné dans data/synthese.json avec
+       * les mêmes règles sûres que tools/merge-archive.mjs (disque gagne
+       * pour l'arrivée et le ticket, sauf MANUEL explicite). Répond le
+       * rapport de fusion. DEV UNIQUEMENT : en production Vercel cette
+       * route n'existe pas (404, ignoré en silence par la page). */
+      server.middlewares.use((req, res, next) => {
+        const u = new URL(req.url || "/", "http://localhost");
+        if (u.pathname !== "/api/archive-push" || req.method !== "POST") return next();
+        let taille = 0;
+        const morceaux = [];
+        req.on("data", (c) => {
+          taille += c.length;
+          if (taille > 2 * 1024 * 1024) { res.statusCode = 413; res.end("trop gros"); req.destroy(); return; }
+          morceaux.push(c);
+        });
+        req.on("end", async () => {
+          try {
+            const obj = JSON.parse(Buffer.concat(morceaux).toString("utf8"));
+            if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("forme invalide");
+            const { writeFileSync, mkdirSync } = await import("node:fs");
+            const { default: path } = await import("node:path");
+            mkdirSync("data", { recursive: true });
+            const tmp = "data/archive-push.json";
+            writeFileSync(tmp, JSON.stringify(obj));
+            const mod = await import("./tools/merge-archive.mjs");
+            const r = mod.fusionnerImport(tmp);
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "application/json; charset=utf-8");
+            res.end(JSON.stringify({ ok: r.ok, rapport: r.rapport }));
+          } catch (e) {
+            res.statusCode = 400;
+            res.setHeader("Content-Type", "application/json; charset=utf-8");
+            res.end(JSON.stringify({ ok: false, erreur: String((e && e.message) || e) }));
+          }
+        });
+      });
     },
   };
 }

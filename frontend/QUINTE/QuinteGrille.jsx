@@ -5,7 +5,7 @@ import {
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
   scorePhysique, filtres, ordonnerParStats,
   saveArchive, listArchive, deleteArchive, attachResult, attachTicket,
-  loadCarriere, syncDepuisDisque, getArchive, telechargerArchive,
+  loadCarriere, syncDepuisDisque, getArchive,
   clearArchive,
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
@@ -409,8 +409,28 @@ export default function QuinteGrille() {
     } catch (e) { setArchive([]) }
   }, [])
 
+  /* 10/10/2026 — SYNCHRO AUTO, ZÉRO CLIC : après chaque rafraîchissement,
+   * le navigateur renvoie son archive au disque local (route dev
+   * /api/archive-push). En production la route n'existe pas (404) et
+   * l'échec est avalé en silence : rien ne change à l'affichage. */
+  const pousserArchive = useCallback(async () => {
+    try {
+      const tout = await listArchive()
+      if (!tout.length) return
+      const obj = {}
+      for (const r of tout) if (r && r.date) obj[r.date] = r
+      const ctl = new AbortController()
+      const t = setTimeout(() => ctl.abort(), 15000)
+      await fetch('/api/archive-push', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(obj), signal: ctl.signal,
+      }).catch(() => null)
+      clearTimeout(t)
+    } catch (e) { /* silencieux */ }
+  }, [])
+
   useEffect(() => { charger(date) }, [date])
-  useEffect(() => { rafraichirArchive() }, [])
+  useEffect(() => { rafraichirArchive().then(() => pousserArchive()) }, [])
   useEffect(() => {
     loadCarriere(date).then((d) => setCarriere(d || {})).catch(() => setCarriere({}))
   }, [date])
@@ -705,6 +725,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
       setInfos(res)
       setParticipants((res.participants || []).filter((p) => p.statut !== 'NON_PARTANT'))
       await rafraichirArchive()
+      await pousserArchive() // la clôture manuelle remonte au disque, zéro clic
       const t = new Set(ticket)
       const p = arr.filter((n) => t.has(n)).length
       setMsg(`✓ Arrivée enregistrée : ${arr.join(' - ')}  →  ${p}/5`)
@@ -1008,15 +1029,6 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             </button>
             <button onClick={() => figerPuisRafraichir()} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: 'pointer', fontFamily: SK.police }}>
               Rafraîchir
-            </button>
-            {/* ⭐ 10/10/2026 — REMÈDE AU « DEUX ARCHIVES » : le navigateur
-                voit des courses que le disque n'a pas (jours ratés par le
-                job, résultats fermés à la main). Un clic télécharge
-                archive-import.json → à poser dans C:\bahja-TURF\data\ →
-                le job le fusionne tout seul. Sans ça, la page et les
-                tests ne parlent plus de la même archive. */}
-            <button onClick={() => { const r = telechargerArchive(); setMsg((r.ok ? '✓ ' : '⚠ ') + r.msg) }} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: 'pointer', fontFamily: SK.police }}>
-              ⬇ archive.json
             </button>
           </div>
 
