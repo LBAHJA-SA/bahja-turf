@@ -99,9 +99,10 @@ const THEME = {
 
 const TABS = [['grille', 'La grille'], ['ticket', 'Le ticket'], ['archive', 'Archive'], ['stats', 'Statistiques']]
 
-function Boite({ n, pris, presse, couleur, score, cote, onClick }) {
+function Boite({ n, pris, presse, couleur, score, cote, slot, onClick }) {
   // boule 3D : dégradé radial + ombres portées/incrustées.
-  // seul le NUMÉRO est visible — ni P ni groupe (secret du carnet).
+  // le NUMÉRO au centre, le n° de CASE (P1, P2…) au-dessus — demandé le
+  // 10/10/2026 (fini le « secret du carnet » : on lit P et numéro ensemble).
   const c = couleur || { base: '#16a34a', sombre: false }
   const txt = c.sombre ? '#422006' : '#fff'
   return (
@@ -127,6 +128,13 @@ function Boite({ n, pris, presse, couleur, score, cote, onClick }) {
       }}
     >
       {n}
+      {slot != null && (
+        <span style={{
+          position: 'absolute', top: 1, left: 0, right: 0, textAlign: 'center',
+          fontSize: 9, fontWeight: 800, color: txt, opacity: .9,
+          textShadow: '0 1px 1px rgba(0,0,0,.35)', letterSpacing: .3,
+        }}>P{slot}</span>
+      )}
       {pris && (
         <span style={{ position: 'absolute', top: 3, left: 7, fontSize: 12, fontWeight: 800, color: txt }}>✓</span>
       )}
@@ -545,7 +553,7 @@ const carnet = (detail) => {
 }
 const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   <Boite key={cellule.slot} n={cellule.num} pris={cellule.pris}
-    presse={cellule.presse} score={cellule.s} cote={cellule.cote}
+    presse={cellule.presse} score={cellule.s} cote={cellule.cote} slot={cellule.slot}
     couleur={COULEUR_GROUPE[cellule.groupe]} />
 ) : (
   <div style={{ width: 54, height: 54 }} />
