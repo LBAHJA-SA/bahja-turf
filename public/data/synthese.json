@@ -1,4 +1,288 @@
 {
+  "2026-10-10": {
+    "date": "2026-10-10",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      4,
+      18,
+      2,
+      15,
+      10,
+      3,
+      1,
+      11,
+      9,
+      8,
+      7,
+      12,
+      6,
+      17,
+      14,
+      5,
+      16
+    ],
+    "runners": [],
+    "nbPartants": null,
+    "hippodrome": null,
+    "arrivee": null,
+    "ticket": [
+      4,
+      2,
+      15,
+      10,
+      7,
+      18,
+      8,
+      6
+    ],
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          4,
+          15,
+          18
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          2,
+          10
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          7
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          6
+        ]
+      }
+    ],
+    "ticketSource": "final",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-10T12:00:05.897Z",
+    "ticketMoteur": [
+      4,
+      2,
+      15,
+      10,
+      7,
+      18,
+      8,
+      6
+    ],
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-10-10T12:00:05.900Z",
+    "ticketMatin": [
+      4,
+      18,
+      2,
+      10,
+      15,
+      9,
+      7,
+      6
+    ]
+  },
+  "2026-10-09": {
+    "date": "2026-10-09",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      14,
+      10,
+      15,
+      6,
+      5,
+      13,
+      12,
+      2,
+      8,
+      7,
+      3,
+      9,
+      11,
+      0
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "nbPartants": 15,
+    "discipline": "ATTELE",
+    "hippodrome": "VINCENNES",
+    "distance": 2850,
+    "courseId": "2026-10-09_R1_C4",
+    "arrivee": [
+      14,
+      6,
+      15,
+      7,
+      10
+    ],
+    "ticket": [
+      14,
+      15,
+      10,
+      6,
+      2,
+      13,
+      8,
+      4
+    ],
+    "ticketMode": "defaut",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          14,
+          15,
+          10
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          6,
+          13
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          2
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          4
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-09T08:45:05.371Z",
+    "ticketMoteur": [
+      14,
+      15,
+      10,
+      6,
+      2,
+      13,
+      8,
+      4
+    ],
+    "cloture": "2026-10-10T11:54:06.319Z",
+    "scores": null,
+    "collecte": "2026-10-09T22:28:27.677Z",
+    "cle": "2026-10-09_R1_C4"
+  },
+  "2026-10-08": {
+    "date": "2026-10-08",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      8,
+      5,
+      1,
+      9,
+      3,
+      6,
+      16,
+      4,
+      12,
+      10,
+      11,
+      15,
+      2,
+      13,
+      7
+    ],
+    "savedAt": "2026-10-08T05:35:53.653Z",
+    "arrivee": [
+      1,
+      5,
+      8,
+      4,
+      15
+    ],
+    "ticket": [
+      8,
+      5,
+      4,
+      15,
+      6,
+      3,
+      12,
+      17
+    ],
+    "ticketSource": "auto",
+    "ticketPoseLe": "2026-10-07T23:09:07.774Z",
+    "discipline": "Plat",
+    "distance": 2000,
+    "nbPartants": 16,
+    "hippodrome": "Saint-Cloud",
+    "prix": "5280000 DH",
+    "courseId": 145899,
+    "cle": "2026-10-08_R1_C1",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "sourceImport": "page"
+  },
   "2026-10-07": {
     "date": "2026-10-07",
     "found": true,
@@ -74,7 +358,8 @@
     "surprises": [],
     "ticketMoteur": null,
     "cloture": "2026-10-08T23:43:11.057Z",
-    "scores": null
+    "scores": null,
+    "cle": "2026-10-07_R1_C1"
   },
   "2026-10-06": {
     "date": "2026-10-06",
@@ -145,7 +430,8 @@
       3,
       15
     ],
-    "cloture": "2026-10-07T21:13:23.269Z"
+    "cloture": "2026-10-07T21:13:23.269Z",
+    "cle": "2026-10-06_R1_C1"
   },
   "2026-10-05": {
     "date": "2026-10-05",
@@ -578,7 +864,8 @@
         ]
       }
     ],
-    "note": "ticket de 00h32 (premier run du jour) remise en archive ; les 3 autres runs du matin sont dans ticketVariantes. Le marche est arrive apres et a propose autre chose - la regle dit que la premiere ticket ne bouge plus."
+    "note": "ticket de 00h32 (premier run du jour) remise en archive ; les 3 autres runs du matin sont dans ticketVariantes. Le marche est arrive apres et a propose autre chose - la regle dit que la premiere ticket ne bouge plus.",
+    "cle": "2026-10-05_R1_C1"
   },
   "2026-10-04": {
     "date": "2026-10-04",
@@ -1393,7 +1680,8 @@
         "pris": true
       }
     ],
-    "ticketPoseLe": "2026-10-03T16:04:24.544Z"
+    "ticketPoseLe": "2026-10-03T16:04:24.544Z",
+    "cle": "2026-10-03_R1_C4"
   },
   "2026-10-02": {
     "date": "2026-10-02",
@@ -1736,7 +2024,8 @@
         "pris": true
       }
     ],
-    "ticketPoseLe": "2026-10-03T03:02:51.835Z"
+    "ticketPoseLe": "2026-10-03T03:02:51.835Z",
+    "cle": "2026-10-02_R1_C4"
   },
   "2026-10-01": {
     "date": "2026-10-01",
@@ -2061,6 +2350,7 @@
       }
     ],
     "ticketPoseLe": "2026-10-03T02:33:32.280Z",
-    "ticketMode": "defaut"
+    "ticketMode": "defaut",
+    "cle": "2026-10-01_R1_C1"
   }
 }
