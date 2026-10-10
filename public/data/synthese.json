@@ -23,10 +23,34 @@
       5,
       16
     ],
-    "runners": [],
-    "nbPartants": null,
-    "hippodrome": null,
-    "arrivee": null,
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "nbPartants": 18,
+    "hippodrome": "CAEN",
+    "arrivee": [
+      9,
+      10,
+      4,
+      3,
+      2
+    ],
     "ticket": [
       4,
       2,
@@ -86,7 +110,7 @@
       8,
       6
     ],
-    "cloture": null,
+    "cloture": "2026-10-10T13:25:48.950Z",
     "scores": null,
     "collecte": "2026-10-10T12:00:05.900Z",
     "ticketMatin": [
@@ -98,7 +122,10 @@
       9,
       7,
       6
-    ]
+    ],
+    "discipline": "ATTELE",
+    "distance": 2450,
+    "courseId": "2026-10-10_R1_C4"
   },
   "2026-10-09": {
     "date": "2026-10-09",
