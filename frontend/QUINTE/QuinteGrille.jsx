@@ -5,7 +5,7 @@ import {
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
   scorePhysique, filtres, ordonnerParStats,
   saveArchive, listArchive, deleteArchive, attachResult, attachTicket,
-  loadCarriere, syncDepuisDisque, getArchive,
+  loadCarriere, syncDepuisDisque, getArchive, telechargerArchive,
   clearArchive,
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
@@ -1008,6 +1008,15 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             </button>
             <button onClick={() => figerPuisRafraichir()} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: 'pointer', fontFamily: SK.police }}>
               Rafraîchir
+            </button>
+            {/* ⭐ 10/10/2026 — REMÈDE AU « DEUX ARCHIVES » : le navigateur
+                voit des courses que le disque n'a pas (jours ratés par le
+                job, résultats fermés à la main). Un clic télécharge
+                archive-import.json → à poser dans C:\bahja-TURF\data\ →
+                le job le fusionne tout seul. Sans ça, la page et les
+                tests ne parlent plus de la même archive. */}
+            <button onClick={() => { const r = telechargerArchive(); setMsg((r.ok ? '✓ ' : '⚠ ') + r.msg) }} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: 'pointer', fontFamily: SK.police }}>
+              ⬇ archive.json
             </button>
           </div>
 

@@ -1209,6 +1209,28 @@ export function telechargerCarriere() {
   return { ok: true, msg: `carriere.json téléchargé — ${nDates} date(s), ${nChev} chevaux. Pose-le dans C:\\bahja-TURF\\data\\` }
 }
 
+/** Déclenche le téléchargement de l'archive locale (un clic).
+ *  10/10/2026 — REMÈDE AU « DEUX ARCHIVES » : le navigateur collecte des
+ *  courses que le disque rate (08/10 jamais collecté, 09/10 fermé à la
+ *  main via turf-france). Sans retour, les deux divergent pour toujours
+ *  et aucun test local ne reproduit la page — d'où des tickets qui ne
+ *  « correspondent à rien ». Le fichier téléchargé se pose dans
+ *  C:\bahja-TURF\data\archive-import.json et le job le fusionne tout
+ *  seul au cycle suivant (tools/merge-archive.mjs). */
+export function telechargerArchive() {
+  const data = lireTout()
+  const dates = Object.keys(data)
+  if (!dates.length) return { ok: false, msg: 'Archive vide — rien à envoyer.' }
+  const blob = new Blob([JSON.stringify(data, null, 1)], { type: 'application/json' })
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = 'archive-import.json'
+  a.click()
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000)
+  const fermees = dates.filter((d) => (data[d].arrivee || []).length).length
+  return { ok: true, msg: `archive-import.json téléchargé — ${dates.length} course(s) dont ${fermees} avec résultat. Pose-le dans C:\\bahja-TURF\\data\\` }
+}
+
 // Stockage local (localStorage) : quelques centaines d'octets par course,
 // largement sous la limite de 5 Mo. Pas d'IndexedDB : moins de pièges.
 

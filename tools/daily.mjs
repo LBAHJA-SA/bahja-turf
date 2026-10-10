@@ -24,6 +24,12 @@ import {
   autoCarriere, chargerCourseCC, computeStats,
 } from '../src/lib/quinte.js'
 import { chargerCotes, chargerEquidia, lireCourse } from './cotes.mjs'
+import { fusionnerImport } from './merge-archive.mjs'
+/* repli turf-france pour la CLÔTURE : casacourses ne publie pas toujours
+ * l'arrivée (09/10 : CLOSED mais has_results=false) alors que la page la
+ * lit sur turf-france. Sans ce repli, le disque ne ferme jamais et
+ * diverge du navigateur — le « deux archives » du 10/10. */
+import { chargerDetailReu } from '../backend/ARTICLE/turfFrance.js'
 
 const DATA = path.resolve('data')
 const F_SYN = path.join(DATA, 'synthese.json')
@@ -357,6 +363,23 @@ async function cloturer(date) {
   let course = null
   try { course = await trouverCourse(date, avant.synthese, avant.courseId) } catch (e) { log(`  ${date}  course introuvable : ${e.message}`) }
   if (!course) return null
+  /* repli turf-france (10/10/2026) : casacourses laisse des courses sans
+   * arrivée (09/10 : status CLOSED mais has_results=false) que la page,
+   * elle, ferme via turf-france. Sans ce repli, le disque accumule les
+   * « pas encore disputée » et diverge du navigateur. La clé R/C vient
+   * de casacourses lui-même : c'est la même course, rien d'inventé. */
+  if (!course.arrivee && course.courseId) {
+    const m = String(course.courseId).match(/_R(\d+)_C(\d+)$/)
+    if (m) {
+      try {
+        const det = await chargerDetailReu(date, Number(m[1]), Number(m[2]), 'FRANCE')
+        if (det && det.arrivee && det.arrivee.length) {
+          course.arrivee = det.arrivee
+          log(`  ${date}  arrivée turf-france : ${det.arrivee.join('-')}`)
+        }
+      } catch (e) { log(`  ${date}  turf-france KO : ${e.message}`) }
+    }
+  }
   if (!course.arrivee) { log(`  ${date}  pas encore disputée — on repassera`); return null }
   const rec = { ...avant,
     runners: course.participants.map((p) => p.num).sort((a, b) => a - b),
@@ -783,6 +806,17 @@ function publier() {
 
 async function cycle() {
   log('===== cycle =====')
+  /* 10/10/2026 — on réunit les deux archives AVANT tout : si l'utilisateur
+   * a posé data/archive-import.json (bouton « ⬇ archive.json » de la page),
+   * on le fusionne puis on le range. Sinon la page et le disque divergent
+   * pour toujours et aucun test local ne reproduit ce qu'il voit. */
+  try {
+    if (existsSync(path.join(DATA, 'archive-import.json'))) {
+      log(' fusion import page (archive-import.json)')
+      const f = fusionnerImport()
+      for (const l of f.rapport || []) log(l)
+    }
+  } catch (e) { log(` fusion import impossible : ${e.message}`) }
   log(` cloture ${hier()}`)
   await cloturer(hier())
   log(` jour ${aujourdhui()}`)
