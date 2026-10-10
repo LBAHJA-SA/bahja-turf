@@ -709,13 +709,16 @@ function coteDe(cotes, num) {
  * ── QUAND ON A LE MARCHÉ (`cotes`), QUI ENTRE ? ────────────────────────────
  * Le score physique n'a aucun pouvoir de tri à l'intérieur d'un bloc (§11.16).
  *
- *   bloc de quota ≥ 2  →  les q meilleures cotes du bloc. Rien d'autre.
+ *   bloc de quota ≥ 2 (hors G1) →  les q meilleures cotes du bloc. Rien d'autre.
  *   bloc de quota 1    →  ⭐ R2 (10/10/2026) : le plus fort aux STATISTIQUES
  *      (signature : argmax du P, n≥2 ; égalité ou sans historique → la cote
  *      départage). Labo tools/lab-g3.mjs, 6 Quintés rejoués en leave-one-out
  *      avec le même marché des deux côtés : R2 = 23/30 · 1er 6/6 contre
  *      R1 (petite cote) = 21/30 · 1er 5/6 — approuvé par l'utilisateur.
- *      Le 10/10 a tranché en vrai : G3 8@13 pris, 9@14 écarté, et le 9 gagne.
+ *   G1 (quota 3)       →  ⭐ R5 (10/10/2026) : les 2 meilleures cotes + le cas
+ *      en DROUGHT le plus long (stats.drought, égalité → cote). Principe de
+ *      l'utilisateur (« chaque P attend son tour »), labo : R5 = 25/30 ·
+ *      1er 6/6 contre R4 (moins-cité) = 24/30 — 5/5 sur le 10/10 (9 ET 3).
  *
  * Mesure historique sur 280 vrais Quintés Global PMU France (2026-01-01 → 2026-10-05),
  * Archives + casacourses, avec la vraie Synthèse de la presse :
@@ -795,14 +798,28 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
      * Prendre la cote la plus basse, le 10/10 ça a coûté le gagnant
      * (G3 : 8@13 pris, 9@14 écarté — et c'est le 9 qui gagne). On prend
      * le plus fort aux STATISTIQUES ; égalité ou sans historique → la
-     * cote départage (elle reste le repli, plus le choix). */
+     * cote départage (elle reste le repli, plus le choix).
+     * ⭐ R5 (10/10/2026, labo : 25/30 · 1er 6/6 — approuvé) : en G1, le
+     * 3e siège va au cas en DROUGHT le plus long (stats.drought, égalité
+     * → cote). « Chaque P attend son tour » : le 10/10 ça a pris le 3
+     * (5/5) sans perdre le 13 du 02/10. */
     const parStats = surLeMarche && quota === 1 && parPlaceStats.length > 0
+    const parDrought = surLeMarche && g.id === 'G1' && quota > 1 && stats?.drought
     if (parStats) {
       const gagnant = cases.slice().sort((a, b) =>
         ((forceDe(b.num)?.force ?? -1) - (forceDe(a.num)?.force ?? -1)) ||
         (coteDe(cotes, a.num) - coteDe(cotes, b.num))
       )[0]
       retenus.add(gagnant.place)
+    } else if (parDrought) {
+      const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
+      parCote.slice(0, quota - 1).forEach((c) => retenus.add(c.place))
+      const elu = cases.slice().sort((a, b) =>
+        ((stats.drought[b.slot] ?? 0) - (stats.drought[a.slot] ?? 0)) ||
+        (coteDe(cotes, a.num) - coteDe(cotes, b.num))
+      )[0]
+      if (!retenus.has(elu.place)) retenus.add(elu.place)
+      else parCote.slice(quota - 1, quota).forEach((c) => retenus.add(c.place))
     } else if (surLeMarche) {
       const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
       parCote.slice(0, quota).forEach((c) => retenus.add(c.place))
@@ -815,6 +832,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
       surprise: null,
       surLeMarche,
       parStats,
+      parDrought: !!parDrought,
       cases: cases.map((c) => ({
         ...c,
         cote: coteDe(cotes, c.num),
@@ -1491,7 +1509,7 @@ export function computeStats(records) {
     const pl = rec.arrivee.slice(0, 5).map((n) => placeOfNum[n]).filter((r) => r != null)
     if (pl.length < 5) continue
     courses.push(pl)
-    detailCourses.push({ synthe, pl })
+    detailCourses.push({ synthe, pl, date: rec.date || null })
     pl.forEach((r, i) => { if (r <= MAX) tab[r][i]++ })
   }
 
@@ -1612,7 +1630,27 @@ export function computeStats(records) {
     return { id: b.label, n, pct: courses.length ? Math.round(n / courses.length * 100) : 0, detail }
   })
 
-  return { nb: courses.length, parPlace, parGroupe, vainqueur, BORNES, parPosition, parPlaceBloc, podiumBloc, courses, detailCourses }
+  /* ⭐ DROUGHT PAR CASE — R5 (10/10/2026, principe de l'utilisateur :
+   * « chaque P attend son tour »). drought[s] = courses fermées
+   * CONSÉCUTIVES sans arrivée à la case s, en partant de la plus récente.
+   * L'ordre compte : on trie par date desc quand toutes les courses ont
+   * une date, sinon on garde l'ordre d'entrée (tous les appelants
+   * passent du plus récent au plus ancien : listArchive, fichiers triés).
+   * Même périmètre que `tab` (courses à 5 arrivants mappés) : pas de fuite. */
+  const ordonnées = detailCourses.every((d) => d.date)
+    ? detailCourses.slice().sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+    : detailCourses
+  const drought = {}
+  for (let s = 1; s <= MAX; s++) {
+    let d = 0
+    for (const dc of ordonnées) {
+      if ((dc.pl || []).includes(s)) break
+      d++
+    }
+    drought[s] = d
+  }
+
+  return { nb: courses.length, parPlace, parGroupe, vainqueur, BORNES, parPosition, parPlaceBloc, podiumBloc, courses, detailCourses, drought }
 }
 
 /**
