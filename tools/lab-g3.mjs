@@ -22,6 +22,10 @@
  * [large] rejetée : quota≥2 → (q-1) meilleures cotes + le MOINS CITÉ
  * de TOUT le bloc (max rang presse). Si R3 paie son 3 au prix fort
  * ailleurs, le chiffre le dira.
+ *
+ * R4 (ajouté 10/10, même protocole) : surprise [large] SEULEMENT en G1
+ * (là où le 3 est sorti) ; G2 et autres quota≥2 restent aux meilleures
+ * cotes ; quota-1 = R2. Cible : attraper le 3 sans perdre le 13 du 05/10.
  * ============================================================================= */
 
 import { buildGrid, computeStats } from '../src/lib/quinte.js'
@@ -52,7 +56,7 @@ const rangStats = (synthe) => {
 const closed = Object.values(db).filter((r) => r && (r.arrivee || []).length && (r.synthese || []).length)
 console.log('courses fermées :', closed.map((r) => r.date).join(' '))
 
-let tot1 = 0, tot2 = 0, tot3 = 0, win1 = 0, win2 = 0, win3 = 0, n = 0
+let tot1 = 0, tot2 = 0, tot3 = 0, tot4 = 0, win1 = 0, win2 = 0, win3 = 0, win4 = 0, n = 0
 for (const rec of closed) {
   const syn = rec.synthese.filter(Number.isFinite)
   const cid = Object.keys(cache).find((k) => k.startsWith(rec.date + '_'))
@@ -70,7 +74,7 @@ for (const rec of closed) {
     for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
     return (st.p[best] ?? 0) > 0 ? { place: best, force: st.p[best] } : null
   }
-  const sel1 = [], sel2 = [], sel3 = []
+  const sel1 = [], sel2 = [], sel3 = [], sel4 = []
   let complet = true
   for (const g of GROUPES) {
     const cases = grille.groupes.flatMap((x) => x.cases).filter((c) => c.slot >= g.min && c.slot <= g.max)
@@ -78,6 +82,9 @@ for (const rec of closed) {
     if (!cases.every((c) => coteDe(cotes, c.num) != null)) { complet = false; break }
     const q = Math.min(QUOTAS[g.id], cases.length)
     const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
+    const rangPresse = {}
+    syn.forEach((num, i) => { rangPresse[num] = i + 1 })
+    const moinsCite = cases.slice().sort((a, b) => (rangPresse[b.num] ?? 0) - (rangPresse[a.num] ?? 0))[0]
     parCote.slice(0, q).forEach((c) => sel1.push(c.num))
     if (q === 1) {
       // R2 : le plus fort aux stats, égalité → cote, rien → cote
@@ -85,15 +92,21 @@ for (const rec of closed) {
         .sort((a, b) => ((b.s?.force ?? -1) - (a.s?.force ?? -1)) || (coteDe(cotes, a.c.num) - coteDe(cotes, b.c.num)))
       sel2.push(cand[0].c.num)
       sel3.push(cand[0].c.num)
+      sel4.push(cand[0].c.num)
     } else {
       parCote.slice(0, q).forEach((c) => sel2.push(c.num))
       // R3 : (q-1) meilleures cotes + le moins cité DE TOUT LE BLOC
       parCote.slice(0, q - 1).forEach((c) => sel3.push(c.num))
-      const rangPresse = {}
-      syn.forEach((num, i) => { rangPresse[num] = i + 1 })
-      const surprise = cases.slice().sort((a, b) => (rangPresse[b.num] ?? 0) - (rangPresse[a.num] ?? 0))[0]
-      if (!sel3.includes(surprise.num)) sel3.push(surprise.num)
+      if (!sel3.includes(moinsCite.num)) sel3.push(moinsCite.num)
       else parCote.slice(q - 1, q).forEach((c) => sel3.push(c.num))
+      // R4 : surprise [large] SEULEMENT en G1, le reste aux cotes
+      if (g.id === 'G1') {
+        parCote.slice(0, q - 1).forEach((c) => sel4.push(c.num))
+        if (!sel4.includes(moinsCite.num)) sel4.push(moinsCite.num)
+        else parCote.slice(q - 1, q).forEach((c) => sel4.push(c.num))
+      } else {
+        parCote.slice(0, q).forEach((c) => sel4.push(c.num))
+      }
     }
   }
   if (!complet) { console.log(`${rec.date} : marché incomplet — sautée`); continue }
@@ -102,10 +115,12 @@ for (const rec of closed) {
   const h1 = arr.filter((x) => sel1.includes(x)).length
   const h2 = arr.filter((x) => sel2.includes(x)).length
   const h3 = arr.filter((x) => sel3.includes(x)).length
-  tot1 += h1; tot2 += h2; tot3 += h3
+  const h4 = arr.filter((x) => sel4.includes(x)).length
+  tot1 += h1; tot2 += h2; tot3 += h3; tot4 += h4
   if (sel1.includes(arr[0])) win1++
   if (sel2.includes(arr[0])) win2++
   if (sel3.includes(arr[0])) win3++
-  console.log(`${rec.date}  R1 ${h1}/5${sel1.includes(arr[0]) ? ' ★1er' : ''}  |   R2 ${h2}/5${sel2.includes(arr[0]) ? ' ★1er' : ''}  |   R3 ${h3}/5${sel3.includes(arr[0]) ? ' ★1er' : ''} [${sel3.join(' ')}]   |   arr ${arr.join('-')}`)
+  if (sel4.includes(arr[0])) win4++
+  console.log(`${rec.date}  R1 ${h1}/5${sel1.includes(arr[0]) ? ' ★1er' : ''}  |   R2 ${h2}/5${sel2.includes(arr[0]) ? ' ★1er' : ''}  |   R3 ${h3}/5${sel3.includes(arr[0]) ? ' ★1er' : ''}  |   R4 ${h4}/5${sel4.includes(arr[0]) ? ' ★1er' : ''} [${sel4.join(' ')}]   |   arr ${arr.join('-')}`)
 }
-console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   |   R2 = ${tot2}/${n * 5} · 1er ${win2}/${n}   |   R3 = ${tot3}/${n * 5} · 1er ${win3}/${n}`)
+console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   |   R2 = ${tot2}/${n * 5} · 1er ${win2}/${n}   |   R3 = ${tot3}/${n * 5} · 1er ${win3}/${n}   |   R4 = ${tot4}/${n * 5} · 1er ${win4}/${n}`)
