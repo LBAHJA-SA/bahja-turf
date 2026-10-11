@@ -370,16 +370,14 @@ export default async function handler(req, res) {
         } catch (e) { /* pas encore courue */ }
       }
 
-      // ③ bouche-trous Equidia (11/10) : partants SANS toutes les cotes.
-      //    Deux cas : reu.php direct avant publication du matin, et ARCHIVES
-      //    collectées sans cotes (10/10 : 0/13 cote_pmu). Le marché Equidia
-      //    figé après la course donne les définitives : seule source auto
-      //    pour les courses d'hier, sans saisie manuelle. Enrichissement EN
-      //    MÉMOIRE seulement : le disque n'est jamais réécrit (§18.4 OK).
-      let cotesEq = 0
-      {
-        try { cotesEq = await boucherCotesEquidia(partants, cDate, rNum, cNum) } catch { /* repli honnête */ }
-      }
+      // ③ bouche-trous Equidia : DÉSACTIVÉ le 11/10 (mesure tête-à-tête :
+      //    ref-archive 3.7-19.2 vs PMU figé 2.5-96, avec RÉORDREMENT 8.7→96
+      //    contre 7.4→2.5 — deux ÉCHELLES différentes, pas deux moments.
+      //    Injecter du PMU dans des familles calibrées turf-france CORROMPT
+      //    l'empreinte : pire que l'aveugle. En attente d'une source de la
+      //    même échelle. La vraie réparation = le collecteur archive-reu
+      //    doit capturer les cotesRef COMPLÈTES à l'heure de publication.)
+      let cotesEq = 0 /* fill désactivé, voir ci-dessus — champ gardé pour la page */
 
       res.statusCode = 200
       res.end(JSON.stringify({
