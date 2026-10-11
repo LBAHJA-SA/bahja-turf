@@ -1237,12 +1237,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         <span style={{ fontSize: 12 }}>
                           {(b.detail || []).map((d) => {
                             /* ⭐ 3 COULEURS PAR FORCE DU P (11/10/2026, demande utilisateur) :
-                             *   vert ≥ 40 % des courses · jaune ≥ 20 % · rouge < 20 %.
-                             *   Fractions → seuils valables quand l'archive grossit.
-                             *   0 reste gris atténué (absence, pas faiblesse). */
+                             *   vert ≥ 40 % des courses · jaune ≥ 20 % · rouge < 20 %,
+                             *   ZÉRO COMPRIS (11/10 : « même les 0 en rouge »). */
                             const f = stats.nb ? d.n / stats.nb : 0
-                            const chip = !d.n ? { color: '#cbd5e1', background: 'transparent', fontWeight: 400 }
-                              : f >= 0.4 ? { color: '#15803d', background: '#dcfce7', fontWeight: 800 }
+                            const chip = f >= 0.4 ? { color: '#15803d', background: '#dcfce7', fontWeight: 800 }
                               : f >= 0.2 ? { color: '#a16207', background: '#fef9c3', fontWeight: 800 }
                               : { color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }
                             return (
