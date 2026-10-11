@@ -65,9 +65,15 @@ for (const c of extraction) {
     N[t]++
     const k = cles[t](r)
     let e = tables[t].get(k)
-    if (!e) { e = { n: 0, exemples: [] }; tables[t].set(k, e) }
+    if (!e) { e = { n: 0, exemples: [], nbP: [], disc: {}, dist: [] }; tables[t].set(k, e) }
     e.n++
     if (e.exemples.length < 5) e.exemples.push(c.date + ' ' + c.cle)
+    /* Phase 4 (11/10) : caractéristiques de LA course où le config est apparu.
+     * Descriptif seulement : taille du champ, discipline, distance. Aucun
+     * poids, aucun mélange — chaque propriété se lit séparément. */
+    e.nbP.push(c.partants.length)
+    e.disc[c.discipline || '?'] = (e.disc[c.discipline || '?'] || 0) + 1
+    if (c.distance != null) e.dist.push(c.distance)
   }
 }
 // vérification : hits par config, par moitié (stabilité) + échecs
@@ -112,14 +118,24 @@ for (const t of Object.keys(tables)) {
   const lignes = [...tables[t].entries()].sort((a, b) => b[1].n - a[1].n)
   console.log('')
   console.log('══ ' + nom + ' (extraction n=' + N[t] + ') : ' + lignes.length + ' configs ══')
-  artefact.tests[t] = { n: N[t], configs: lignes.map(([k, e]) => ({
-    config: k, n: e.n, taux: pct(e.n, N[t]),
-    verifA: e.v1 || 0, verifB: e.v2 || 0, exemples: e.exemples,
-  })) }
+  artefact.tests[t] = { n: N[t], configs: lignes.map(([k, e]) => {
+    const tri = [...e.nbP].sort((a, b) => a - b)
+    const med = (tt) => { const s = [...tt].sort((a, b) => a - b); return s.length ? s[s.length >> 1] : null }
+    return {
+      config: k, n: e.n, taux: pct(e.n, N[t]),
+      verifA: e.v1 || 0, verifB: e.v2 || 0, exemples: e.exemples,
+      champMed: med(e.nbP), champMin: tri[0] ?? null, champMax: tri[tri.length - 1] ?? null,
+      disciplines: e.disc, distanceMed: med(e.dist),
+    }
+  }) }
   for (const [k, e] of lignes.slice(0, 25)) {
     const nV = (e.v1 || 0) + (e.v2 || 0)
+    const triP = [...e.nbP].sort((a, b) => a - b)
+    const topD = Object.entries(e.disc).sort((a, b) => b[1] - a[1])[0]
     console.log('  (' + k + ')  ext ' + e.n + ' ' + pct(e.n, N[t])
-      + '  |  vérif ' + nV + ' (A:' + (e.v1 || 0) + ' B:' + (e.v2 || 0) + ')')
+      + '  |  vérif ' + nV + ' (A:' + (e.v1 || 0) + ' B:' + (e.v2 || 0) + ')'
+      + '  |  champ ' + triP[0] + '-' + triP[triP.length - 1] + ' méd ' + triP[triP.length >> 1]
+      + '  |  ' + (topD ? topD[0] + ' ' + topD[1] + '/' + e.n : '?'))
   }
 }
 console.log('')
