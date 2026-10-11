@@ -1230,21 +1230,20 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   <b style={{ color: SK.accent }}>Le podium (1er + 2e + 3e) vient de…</b>
                   <div style={{ marginTop: 6 }}>
                     {stats.podiumBloc.map((b) => {
-                      /* ⭐ COULEURS PAR RANG DANS LA LIGNE (11/10/2026) : chaque
-                       * bloc se colore tout seul — le max en vert, le min en
-                       * rouge, l'entre-deux en jaune (ex-aequo partagent).
-                       * Ligne toute à 0 → tout rouge (rien n'en sort jamais). */
-                      const vals = [b.n, ...(b.detail || []).map((d) => d.n)]
-                      const mx = Math.max(...vals), mn = Math.min(...vals)
+                      /* ⭐ COULEURS DES P DANS LA LIGNE (11/10/2026) : le total
+                       * du bloc reste neutre (pas de couleur). Chaque P : max
+                       * de la ligne en vert, 0 en rouge, l'entre-deux en jaune.
+                       * Ex-aequo au max → tous verts. */
+                      const vals = (b.detail || []).map((d) => d.n)
+                      const mx = vals.length ? Math.max(...vals) : 0
                       const coul = (v) =>
-                        mx === 0 ? { color: '#b91c1c', background: '#fee2e2' }
-                        : v === mx ? { color: '#15803d', background: '#dcfce7' }
-                        : v === mn ? { color: '#b91c1c', background: '#fee2e2' }
+                        v === mx ? { color: '#15803d', background: '#dcfce7' }
+                        : v < 1 ? { color: '#b91c1c', background: '#fee2e2' }
                         : { color: '#a16207', background: '#fef9c3' }
                       const chip = { fontSize: 12, fontWeight: 800, padding: '1px 7px', borderRadius: 10, marginRight: 6 }
                       return (
                         <div key={b.id} style={{ marginBottom: 6 }}>
-                          <span style={{ ...chip, marginRight: 12, ...coul(b.n) }}>
+                          <span style={{ marginRight: 12 }}>
                             <b>{b.id}</b> : {b.n}/{stats.nb} = {b.pct}%
                           </span>
                           <span style={{ fontSize: 12 }}>
@@ -1261,10 +1260,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
                     Le tableau du dessus détaille chaque position P1 → P20.
                     Ici on compte les courses où <b>au moins un</b> des trois premiers sort du bloc.
-                    {' '}Couleurs <b>dans chaque ligne</b> :
+                    {' '}Couleurs <b>des P dans chaque ligne</b> (le total reste neutre) :
                     {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#15803d', background: '#dcfce7', fontWeight: 800 }}>le + fort</span>
                     {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#a16207', background: '#fef9c3', fontWeight: 800 }}>au milieu</span>
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }}>le + faible</span>
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }}>0</span>
                   </div>
                 </div>
 
