@@ -29,6 +29,7 @@ import path from 'node:path'
 const RACINE = process.cwd()
 const REU = path.join(RACINE, 'public', 'data', 'reu')
 const TF = 'https://www.turf-france.com'
+const EQ = 'https://www.equidia.fr'
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
 
 /* ──────────────────────────────────────────────────────────── texte ───── */
@@ -249,6 +250,74 @@ async function lireDetailDirect(date, rNum, cNum, pays) {
   return { partants: sortie, arrivee }
 }
 
+/* ─────────────────────────────────────────────── remplissage Equidia ──── */
+/* 11/10/2026 — reu.php publie coteRef PROGRESSIVEMENT (0/12 le matin =
+ * verdict impossible : « re-clique plus tard », refusé par l'utilisateur
+ * car inacceptable). Le marché Equidia ouvre à 04h00 GMT : on bouche les
+ * trous avec rapp_evol (même type : PMU simple gagnant — pas la colonne
+ * « Cotes » de reu.php, prouvée d'un autre type le 08/10). On n'écrase
+ * JAMAIS une cote lue (coteRef comme cote_pmu). Garde-fou : ≥50% des noms
+ * de chevaux doivent coïncider (sinon ce n'est pas la même course).
+ * Chaque cote bouchée est marquée coteEq:true → la page affiche
+ * « provisoire ». Enrichissement en mémoire seulement : aucun fichier
+ * d'archive n'est réécrit (y compris quand la réponse vient d'une archive
+ * collectée sans cotes — 10/10 : 0/13 cote_pmu). */
+
+function normNom(s) {
+  return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+/* Bouche les coteRef manquantes avec le marché Equidia (même type : PMU
+ * simple gagnant). N'écrase JAMAIS une coteRef lue. Garde-fou : ≥50% des
+ * noms doivent coïncider, sinon ce n'est pas la même course → 0.
+ * `lire` injectable pour les tests (jamais de réseau dans les tests). */
+export async function boucherCotesEquidia(partants, date, rNum, cNum, lire = lireMarcheEquidia) {
+  if (!Array.isArray(partants) || !partants.some((p) => p.coteRef == null)) return 0
+  let eq = null
+  try { eq = await lire(date, rNum, cNum) } catch { return 0 }
+  const nomsReu = partants.map((p) => normNom(p.cheval)).filter(Boolean)
+  const nomsEq = new Set((eq?.noms || []))
+  const communs = nomsReu.filter((n) => nomsEq.has(n)).length
+  if (!eq || !nomsReu.length || communs / nomsReu.length < 0.5) return 0
+  let n = 0
+  for (const p of partants) {
+    if (p.coteRef == null && eq.cotes[p.num] != null) {
+      p.coteRef = eq.cotes[p.num]
+      p.cote = eq.cotes[p.num]
+      p.coteEq = true
+      n++
+    }
+  }
+  return n
+}
+
+async function lireMarcheEquidia(date, rNum, cNum) {
+  try {
+    const r = await fetch(`${EQ}/courses/${date}/R${rNum}/C${cNum}`, {
+      headers: { 'User-Agent': UA, Accept: 'text/html' },
+      signal: AbortSignal.timeout(20000),
+    })
+    if (!r.ok) return null
+    const html = await r.text()
+    const m = html.match(/<script id="serverApp-state" type="application\/json">([\s\S]*?)<\/script>/)
+    if (!m) return null
+    const txt = m[1]
+      .replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+      .replace(/&nbsp;/g, ' ').replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+    const st = JSON.parse(txt)
+    const brut = st[`courses/${date}/R${rNum}/C${cNum}/pari_simple`] || []
+    const cotes = {}, noms = []
+    for (const x of brut) {
+      const n = Number(x.num_partant), c = Number(x.rapp_evol)
+      if (Number.isFinite(n) && n > 0 && Number.isFinite(c) && c > 0) cotes[n] = c
+      const nm = normNom(x.cheval?.nom_cheval || '')
+      if (nm) noms.push(nm)
+    }
+    return { cotes, noms }
+  } catch { return null }
+}
+
 /* ─────────────────────────────────────────────────────── handler ──────── */
 
 export default async function handler(req, res) {
@@ -301,6 +370,17 @@ export default async function handler(req, res) {
         } catch (e) { /* pas encore courue */ }
       }
 
+      // ③ bouche-trous Equidia (11/10) : partants SANS toutes les cotes.
+      //    Deux cas : reu.php direct avant publication du matin, et ARCHIVES
+      //    collectées sans cotes (10/10 : 0/13 cote_pmu). Le marché Equidia
+      //    figé après la course donne les définitives : seule source auto
+      //    pour les courses d'hier, sans saisie manuelle. Enrichissement EN
+      //    MÉMOIRE seulement : le disque n'est jamais réécrit (§18.4 OK).
+      let cotesEq = 0
+      {
+        try { cotesEq = await boucherCotesEquidia(partants, cDate, rNum, cNum) } catch { /* repli honnête */ }
+      }
+
       res.statusCode = 200
       res.end(JSON.stringify({
         course: {
@@ -311,6 +391,7 @@ export default async function handler(req, res) {
           arrivee,
           partants,
           erreur,
+          cotesEq,
         },
         source,
       }))

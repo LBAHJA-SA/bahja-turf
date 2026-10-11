@@ -301,6 +301,15 @@ function Lecture({ course, base }) {
         </div>
       </div>
 
+      {/* ⭐ 11/10/2026 — cotes bouchées par le marché (Equidia) : le verdict
+          est provisoire (familles calculées sur le marché du matin, pas la
+          ref). Marqué, jamais caché. */}
+      {(course.cotesEq || 0) > 0 && (
+        <div style={{ ...S.box, padding: '8px 12px', marginBottom: 12, background: '#fffbeb', borderColor: '#fcd34d', fontSize: 12, color: '#92400e' }}>
+          ⏳ {course.cotesEq}/{partants.length} cotes provisoires (marché du matin) — le verdict suivra la ref dès publication.
+        </div>
+      )}
+
       {v && v.trio && (
         <div style={{
           ...S.box, padding: 14, marginBottom: 12,
