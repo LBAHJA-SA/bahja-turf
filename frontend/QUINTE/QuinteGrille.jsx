@@ -1229,36 +1229,42 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 <div style={{ fontSize: 13, marginTop: 10, paddingTop: 10, borderTop: '1px solid #e2e8f0' }}>
                   <b style={{ color: SK.accent }}>Le podium (1er + 2e + 3e) vient de…</b>
                   <div style={{ marginTop: 6 }}>
-                    {stats.podiumBloc.map((b) => (
-                      <div key={b.id} style={{ marginBottom: 6 }}>
-                        <span style={{ marginRight: 12 }}>
-                          <b>{b.id}</b> : {b.n}/{stats.nb} = {b.pct}%
-                        </span>
-                        <span style={{ fontSize: 12 }}>
-                          {(b.detail || []).map((d) => {
-                            /* ⭐ 3 COULEURS PAR FORCE DU P (11/10/2026, demande utilisateur) :
-                             *   vert ≥ 40 % des courses · jaune ≥ 20 % · rouge < 20 %,
-                             *   ZÉRO COMPRIS (11/10 : « même les 0 en rouge »). */
-                            const f = stats.nb ? d.n / stats.nb : 0
-                            const chip = f >= 0.4 ? { color: '#15803d', background: '#dcfce7', fontWeight: 800 }
-                              : f >= 0.2 ? { color: '#a16207', background: '#fef9c3', fontWeight: 800 }
-                              : { color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }
-                            return (
-                              <span key={d.p} style={{ marginRight: 6, padding: '1px 7px', borderRadius: 10, ...chip }}>
+                    {stats.podiumBloc.map((b) => {
+                      /* ⭐ COULEURS PAR RANG DANS LA LIGNE (11/10/2026) : chaque
+                       * bloc se colore tout seul — le max en vert, le min en
+                       * rouge, l'entre-deux en jaune (ex-aequo partagent).
+                       * Ligne toute à 0 → tout rouge (rien n'en sort jamais). */
+                      const vals = [b.n, ...(b.detail || []).map((d) => d.n)]
+                      const mx = Math.max(...vals), mn = Math.min(...vals)
+                      const coul = (v) =>
+                        mx === 0 ? { color: '#b91c1c', background: '#fee2e2' }
+                        : v === mx ? { color: '#15803d', background: '#dcfce7' }
+                        : v === mn ? { color: '#b91c1c', background: '#fee2e2' }
+                        : { color: '#a16207', background: '#fef9c3' }
+                      const chip = { fontSize: 12, fontWeight: 800, padding: '1px 7px', borderRadius: 10, marginRight: 6 }
+                      return (
+                        <div key={b.id} style={{ marginBottom: 6 }}>
+                          <span style={{ ...chip, marginRight: 12, ...coul(b.n) }}>
+                            <b>{b.id}</b> : {b.n}/{stats.nb} = {b.pct}%
+                          </span>
+                          <span style={{ fontSize: 12 }}>
+                            {(b.detail || []).map((d) => (
+                              <span key={d.p} style={{ ...chip, ...coul(d.n) }}>
                                 P{d.p} : {d.n}/{stats.nb}
                               </span>
-                            )
-                          })}
-                        </span>
-                      </div>
-                    ))}
+                            ))}
+                          </span>
+                        </div>
+                      )
+                    })}
                   </div>
                   <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
                     Le tableau du dessus détaille chaque position P1 → P20.
                     Ici on compte les courses où <b>au moins un</b> des trois premiers sort du bloc.
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#15803d', background: '#dcfce7', fontWeight: 800 }}>≥40%</span>
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#a16207', background: '#fef9c3', fontWeight: 800 }}>≥20%</span>
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }}>&lt;20%</span>
+                    {' '}Couleurs <b>dans chaque ligne</b> :
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#15803d', background: '#dcfce7', fontWeight: 800 }}>le + fort</span>
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#a16207', background: '#fef9c3', fontWeight: 800 }}>au milieu</span>
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }}>le + faible</span>
                   </div>
                 </div>
 
