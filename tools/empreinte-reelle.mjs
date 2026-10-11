@@ -9,8 +9,9 @@
  *   test trio : (r1, r2, r3) ORDONNÉ — (2,5,1) ≠ (1,2,5), jamais moyennés.
  * Chaque test a son N valide (un top3 sans cote = course invalide POUR CE
  * TEST). Extraction 70% chrono → vérification 30% (2 moitiés : stabilité),
- * baselines favori + hasard, ÉCHECS enregistrés. Sorties : console + CSV
- * (Excel) dans data/empreinte-reelle/.
+ * baselines favori + hasard, ÉCHECS enregistrés. Sortie : console +
+ * artefact JSON data/empreinte-reelle/empreinte-reelle.json (moteur).
+ * (11/10 : export CSV refusé par l'utilisateur — supprimé.)
  * Usage : node tools/empreinte-reelle.mjs
  * ============================================================================= */
 
@@ -104,26 +105,29 @@ for (const c of [...verif1, ...verif2]) {
 }
 
 fs.mkdirSync(SORTIE, { recursive: true })
-const csv = (nom, lignes) => fs.writeFileSync(path.join(SORTIE, nom), '\uFEFF' + lignes.join('\n'), 'utf8')
+const artefact = { genere: new Date().toISOString(), corpus: tout.length, N, tests: {} }
 const pct = (x, n) => (x / Math.max(1, n) * 100).toFixed(2) + '%'
 for (const t of Object.keys(tables)) {
   const nom = { p12: 'P1-P2', p13: 'P1-P3', p23: 'P2-P3', trio: 'trio P1-P2-P3' }[t]
   const lignes = [...tables[t].entries()].sort((a, b) => b[1].n - a[1].n)
   console.log('')
   console.log('══ ' + nom + ' (extraction n=' + N[t] + ') : ' + lignes.length + ' configs ══')
-  const rows = ['config;n_extraction;taux_extraction;n_verifA;taux_verifA;n_verifB;taux_verifB;exemples']
+  artefact.tests[t] = { n: N[t], configs: lignes.map(([k, e]) => ({
+    config: k, n: e.n, taux: pct(e.n, N[t]),
+    verifA: e.v1 || 0, verifB: e.v2 || 0, exemples: e.exemples,
+  })) }
   for (const [k, e] of lignes.slice(0, 25)) {
     const nV = (e.v1 || 0) + (e.v2 || 0)
     console.log('  (' + k + ')  ext ' + e.n + ' ' + pct(e.n, N[t])
       + '  |  vérif ' + nV + ' (A:' + (e.v1 || 0) + ' B:' + (e.v2 || 0) + ')')
-    rows.push([k, e.n, pct(e.n, N[t]), e.v1 || 0, pct(e.v1 || 0, Nv.v1[t]), e.v2 || 0, pct(e.v2 || 0, Nv.v2[t]), '"' + e.exemples.join(' | ') + '"'].join(';'))
   }
-  csv(t + '.csv', rows)
 }
 console.log('')
 console.log('══ VÉRIFICATION GLOBALE ══')
 console.log('  favori exact (trio rangs 1-2-3) : ' + fav + '/' + nFav + ' = ' + pct(fav, nFav))
 console.log('  hasard théorique exact : ' + pct(espHasard, nH))
+artefact.baselines = { favori: { n: nFav, exact: fav }, hasard: { n: nH, espérance: espHasard } }
+fs.writeFileSync(path.join(SORTIE, 'empreinte-reelle.json'), JSON.stringify(artefact))
 console.log('')
-console.log('  CSV : data/empreinte-reelle/ (p12, p13, p23, trio — top25 + exemples)')
+console.log('  artefact : data/empreinte-reelle/empreinte-reelle.json')
 console.log('')
