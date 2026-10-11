@@ -1235,11 +1235,22 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                           <b>{b.id}</b> : {b.n}/{stats.nb} = {b.pct}%
                         </span>
                         <span style={{ fontSize: 12 }}>
-                          {(b.detail || []).map((d) => (
-                            <span key={d.p} style={{ marginRight: 8, color: d.n ? '#0f172a' : '#cbd5e1', fontWeight: d.n ? 700 : 400 }}>
-                              P{d.p} : {d.n}/{stats.nb}
-                            </span>
-                          ))}
+                          {(b.detail || []).map((d) => {
+                            /* ⭐ 3 COULEURS PAR FORCE DU P (11/10/2026, demande utilisateur) :
+                             *   vert ≥ 40 % des courses · jaune ≥ 20 % · rouge < 20 %.
+                             *   Fractions → seuils valables quand l'archive grossit.
+                             *   0 reste gris atténué (absence, pas faiblesse). */
+                            const f = stats.nb ? d.n / stats.nb : 0
+                            const chip = !d.n ? { color: '#cbd5e1', background: 'transparent', fontWeight: 400 }
+                              : f >= 0.4 ? { color: '#15803d', background: '#dcfce7', fontWeight: 800 }
+                              : f >= 0.2 ? { color: '#a16207', background: '#fef9c3', fontWeight: 800 }
+                              : { color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }
+                            return (
+                              <span key={d.p} style={{ marginRight: 6, padding: '1px 7px', borderRadius: 10, ...chip }}>
+                                P{d.p} : {d.n}/{stats.nb}
+                              </span>
+                            )
+                          })}
                         </span>
                       </div>
                     ))}
@@ -1247,6 +1258,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
                     Le tableau du dessus détaille chaque position P1 → P20.
                     Ici on compte les courses où <b>au moins un</b> des trois premiers sort du bloc.
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#15803d', background: '#dcfce7', fontWeight: 800 }}>≥40%</span>
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#a16207', background: '#fef9c3', fontWeight: 800 }}>≥20%</span>
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }}>&lt;20%</span>
                   </div>
                 </div>
 
