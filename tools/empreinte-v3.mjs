@@ -176,7 +176,8 @@ function resumer(g) {
   }
 }
 
-function construireIndex(courses) {
+/* Exporté pour tools/test-couple.mjs (backtest causal) — l'artefact reste identique. */
+export function construireIndex(courses) {
   const full = new Map(), fam = new Map(), coarseM = new Map()
   for (const c of courses) {
     const trio = c.arrivee.slice(0, 3)
