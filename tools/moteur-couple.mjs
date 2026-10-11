@@ -44,7 +44,8 @@ const FACTEUR = 2
 
 /* ───────────────────────────────────────────────────────── les couches ── */
 
-function formeScore(mus) {
+/* Exporté pour tools/basmah.mjs (surfaces OUT/TOC au score de forme). */
+export function formeScore(mus) {
   const s = String(mus || '')
   if (!s) return 0
   const pts = { 1: 10, 2: 7, 3: 5, 4: 3, 5: 2 }
@@ -259,6 +260,12 @@ function principale() {
 
 const args = process.argv.slice(2)
 const dem = args.find((a) => a.startsWith('--course='))
+/* 11/10/2026 — garde-fou import : ce module est aussi importé (formeScore)
+ * par tools/basmah.mjs. Sans ça, l'import lançait principale() et
+ * RÉÉCRIVAIT public/data/empreinte.json par surprise (constaté le 11/10).
+ * Le run ne part que si CE FICHIER est le lanceur (cf. daily.mjs). */
+const EST_LANCEUR = !!process.argv[1]
+  && path.resolve(process.argv[1]) === path.join(path.dirname(fileURLToPath(import.meta.url)), 'moteur-couple.mjs')
 if (dem) {
   const tout = charger()
   const c = tout.find((x) => x.cle === dem.split('=')[1])
@@ -272,4 +279,4 @@ if (dem) {
     console.log('  arrivée : ' + c.arrivee.slice(0, 5).join(' - '))
     console.log('')
   }
-} else principale()
+} else if (EST_LANCEUR) principale()
