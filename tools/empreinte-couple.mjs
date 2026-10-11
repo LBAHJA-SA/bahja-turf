@@ -38,7 +38,10 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const RACINE = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
-const DOSSIER = path.join(RACINE, 'archives')
+/* 11/10/2026 (instruction utilisateur) : les motifs se tirent de
+ * archivecouple/ UNIQUEMENT — l'arbre propre (4526 courses), sans les
+ * ~100 fichiers vagabonds à la racine de archives/. Rien d'autre ne change. */
+const DOSSIER = path.join(RACINE, 'archivecouple')
 
 /* ───────────────────────────────────────────────────────── le corpus ──── */
 
