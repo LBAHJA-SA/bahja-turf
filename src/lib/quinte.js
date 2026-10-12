@@ -805,13 +805,17 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
      * (5/5) sans perdre le 13 du 02/10. */
     const parStats = surLeMarche && quota === 1 && parPlaceStats.length > 0
     const parDrought = surLeMarche && g.id === 'G1' && quota > 1 && stats?.drought
-    if (parStats) {
+    /* ⚠ 12/10/2026 — garde bloc vide : sans partants (réseau lent), un groupe
+     * peut n'avoir AUCUNE case (G5 à 12 cités). [0].place plantait la page
+     * (« Cannot read properties of undefined »). L'ancien tri ne plantait
+     * pas (slice sur vide = rien). */
+    if (parStats && cases.length) {
       const gagnant = cases.slice().sort((a, b) =>
         ((forceDe(b.num)?.force ?? -1) - (forceDe(a.num)?.force ?? -1)) ||
         (coteDe(cotes, a.num) - coteDe(cotes, b.num))
       )[0]
       retenus.add(gagnant.place)
-    } else if (parDrought) {
+    } else if (parDrought && cases.length) {
       const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
       parCote.slice(0, quota - 1).forEach((c) => retenus.add(c.place))
       const elu = cases.slice().sort((a, b) =>

@@ -792,26 +792,21 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
     // le marché prime : s'il a la cote de TOUS les partants du bloc
     const surLeMarche = cases.every((c) => coteDe(cotes, c.num) != null)
     const retenus = new Set()
-    /* ⭐ R2 (10/10/2026, labo tools/lab-g3.mjs : 23/30 contre 21/30, 1er
-     * 6/6 contre 5/6 — approuvé par l'utilisateur) : sur un bloc à UNE
-     * place avec le marché complet, on ne prend plus la plus petite cote.
-     * Prendre la cote la plus basse, le 10/10 ça a coûté le gagnant
-     * (G3 : 8@13 pris, 9@14 écarté — et c'est le 9 qui gagne). On prend
-     * le plus fort aux STATISTIQUES ; égalité ou sans historique → la
-     * cote départage (elle reste le repli, plus le choix).
-     * ⭐ R5 (10/10/2026, labo : 25/30 · 1er 6/6 — approuvé) : en G1, le
-     * 3e siège va au cas en DROUGHT le plus long (stats.drought, égalité
-     * → cote). « Chaque P attend son tour » : le 10/10 ça a pris le 3
-     * (5/5) sans perdre le 13 du 02/10. */
+    /* ⭐ R2 + R5 (10/10, labo, approuvés) : quota-1 = stats, G1 = 2 cotes +
+     * drought. Détail dans src/lib/quinte.js (référence).
+     * ⚠ 12/10/2026 — garde bloc vide : sans partants (réseau lent), un groupe
+     * peut n'avoir AUCUNE case (G5 à 12 cités). [0].place plantait la page
+     * (« Cannot read properties of undefined »). L'ancien tri ne plantait
+     * pas (slice sur vide = rien). */
     const parStats = surLeMarche && quota === 1 && parPlaceStats.length > 0
     const parDrought = surLeMarche && g.id === 'G1' && quota > 1 && stats?.drought
-    if (parStats) {
+    if (parStats && cases.length) {
       const gagnant = cases.slice().sort((a, b) =>
         ((forceDe(b.num)?.force ?? -1) - (forceDe(a.num)?.force ?? -1)) ||
         (coteDe(cotes, a.num) - coteDe(cotes, b.num))
       )[0]
       retenus.add(gagnant.place)
-    } else if (parDrought) {
+    } else if (parDrought && cases.length) {
       const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
       parCote.slice(0, quota - 1).forEach((c) => retenus.add(c.place))
       const elu = cases.slice().sort((a, b) =>
