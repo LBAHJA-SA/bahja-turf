@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { execFile } from "node:child_process";
 
 /* ──────────────────────────────────────────────────────────────────────────
  * LES 3 PROXIES — local ET production, le MEME code.
@@ -30,6 +31,20 @@ const ORIGINES = {
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
 
+/** curl système en repli (12/10/2026) : turf-france black-hole la pile TLS
+ * de Node depuis ce PC (curl passe, Node stall). Ne sert que si fetch
+ * échoue ; sinon comportement inchangé. */
+function curlTexte(url, delai = 55000) {
+  return new Promise((resolve) => {
+    execFile(process.platform === "win32" ? "curl.exe" : "curl",
+      ["-sS", "-m", String(Math.ceil(delai / 1000)), "-A", UA, "--compressed", url],
+      { timeout: delai, maxBuffer: 12 * 1024 * 1024 }, (err, stdout) => {
+        if (err) resolve(null);
+        else resolve(String(stdout || ""));
+      });
+  });
+}
+
 /** Le même corps que api/_proxy.js : /api/<nom>/<suite> -> <origine>/<suite> */
 async function relayer(label, cheminComplet, res) {
   try {
@@ -47,23 +62,38 @@ async function relayer(label, cheminComplet, res) {
      *   déjà pour la production ; on aligne le middleware de dev dessus. */
     const query = u.search && u.search !== "?" ? u.search : "";
     const cible = ORIGINES[label] + chemin + query;
-    const r = await fetch(cible, {
-      headers: {
-        "User-Agent": UA,
-        "Accept-Language": "fr-FR,fr;q=0.9",
-        Accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
-      },
-      redirect: "follow",
-      signal: AbortSignal.timeout(25000),
-    });
-    const body = await r.text();
-    res.setHeader(
-      "Content-Type",
-      r.headers.get("content-type") || "text/html; charset=utf-8"
-    );
+    let body = null;
+    let statut = 502;
+    let typeContenu = "text/html; charset=utf-8";
+    try {
+      const r = await fetch(cible, {
+        headers: {
+          "User-Agent": UA,
+          "Accept-Language": "fr-FR,fr;q=0.9",
+          Accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+        },
+        redirect: "follow",
+        signal: AbortSignal.timeout(25000),
+      });
+      body = await r.text();
+      statut = r.status;
+      typeContenu = r.headers.get("content-type") || typeContenu;
+    } catch (e) {
+      body = await curlTexte(cible);
+      if (body == null) {
+        res.setHeader("Content-Type", "text/html; charset=utf-8");
+        res.setHeader("Cache-Control", "no-store");
+        res.setHeader("X-Bahja-Proxy", label + "-ERREUR");
+        res.statusCode = 502;
+        res.end(`proxy ${label} : ${e && e.message ? e.message : e}`);
+        return;
+      }
+      statut = 200;
+    }
+    res.setHeader("Content-Type", typeContenu);
     res.setHeader("Cache-Control", "no-store");
     res.setHeader("X-Bahja-Proxy", label);
-    res.statusCode = r.status;
+    res.statusCode = statut;
     res.end(body);
   } catch (e) {
     res.setHeader("Content-Type", "text/html; charset=utf-8");

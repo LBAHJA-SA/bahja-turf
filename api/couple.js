@@ -25,6 +25,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { execFile } from 'node:child_process'
 
 const RACINE = process.cwd()
 const REU = path.join(RACINE, 'public', 'data', 'reu')
@@ -61,6 +62,32 @@ function nombre(x) {
   return m ? Number(m[0]) : null
 }
 
+/* ────────────────────────────────────────────── repli curl ──────────── */
+/* 12/10/2026 — turf-france black-hole la pile TLS de Node DEPUIS CE PC
+ * (curl passe en 11-15 s, Node stall puis ETIMEDOUT ; Vercel OK car autre
+ * IP : blocage IP×empreinte, pas panne). Repli : curl système (60 s), puis
+ * échec honnête. Ne change rien quand fetch réussit (cas Vercel). */
+const CURL_BIN = process.platform === 'win32' ? 'curl.exe' : 'curl'
+function curlTexte(url, delai = 55000) {
+  return new Promise((resolve) => {
+    execFile(CURL_BIN, ['-sS', '-m', String(Math.ceil(delai / 1000)), '-A', UA, '--compressed', url],
+      { timeout: delai, maxBuffer: 12 * 1024 * 1024 }, (err, stdout) => {
+        if (err) resolve(null)
+        else resolve(String(stdout || ''))
+      })
+  })
+}
+async function fetchTF(url) {
+  try {
+    const r = await fetch(url, {
+      headers: { 'User-Agent': UA, 'Accept-Language': 'fr-FR,fr;q=0.9' },
+      signal: AbortSignal.timeout(25000),
+    })
+    return await r.text()
+  } catch { /* repli curl ci-dessous */ }
+  return curlTexte(url)
+}
+
 /* ─────────────────────────────────────────────────────── programme ────── */
 
 function lireProgrammeArchive(date) {
@@ -84,11 +111,8 @@ function lireProgrammeArchive(date) {
 }
 
 async function lireProgrammeDirect(date) {
-  const r = await fetch(`${TF}/php/reu.php?view=program&date=${date}`, {
-    headers: { 'User-Agent': UA, 'Accept-Language': 'fr-FR,fr;q=0.9' },
-    signal: AbortSignal.timeout(25000),
-  })
-  const html = await r.text()
+  const html = await fetchTF(`${TF}/php/reu.php?view=program&date=${date}`)
+  if (!html) throw new Error('programme indisponible')
   // §18.2 ① : la page d'accueil fait 3 935 o et passe pour un HTTP 200
   if (!/view=detail/i.test(html) || html.length < 20000) throw new Error('programme indisponible')
   const reunions = []
@@ -168,11 +192,8 @@ function normaliserPartant(p) {
 }
 
 async function lireDetailDirect(date, rNum, cNum, pays) {
-  const r = await fetch(`${TF}/php/reu.php?view=detail&date=${date}&reunion=R${rNum}&course=C${cNum}&pays=${pays}`, {
-    headers: { 'User-Agent': UA, 'Accept-Language': 'fr-FR,fr;q=0.9' },
-    signal: AbortSignal.timeout(25000),
-  })
-  const html = await r.text()
+  const html = await fetchTF(`${TF}/php/reu.php?view=detail&date=${date}&reunion=R${rNum}&course=C${cNum}&pays=${pays}`)
+  if (!html) throw new Error('détail indisponible')
   // la carte des colonnes, lue PAR LEUR NOM — jamais par position, car
   // chaque réunion a sa mise en page (R1-C1 ≠ R1-C2, mesuré le 07/10)
   let carte = null
