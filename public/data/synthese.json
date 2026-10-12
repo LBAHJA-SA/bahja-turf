@@ -1,4 +1,164 @@
 {
+  "2026-10-13": {
+    "date": "2026-10-13",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      14,
+      12,
+      10,
+      3,
+      9,
+      16,
+      8,
+      5,
+      1,
+      7,
+      2,
+      4,
+      6,
+      15,
+      11,
+      13
+    ],
+    "savedAt": "2026-10-12T23:37:29.514Z",
+    "arrivee": null,
+    "ticket": null,
+    "discipline": "Plat",
+    "distance": 1600,
+    "nbPartants": 16,
+    "hippodrome": "Parislongchamp",
+    "prix": "5090000 DH",
+    "courseId": 146177,
+    "cle": "2026-10-13_R1_C1",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "sourceImport": "page"
+  },
+  "2026-10-11": {
+    "date": "2026-10-11",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      2,
+      14,
+      15,
+      1,
+      6,
+      3,
+      16,
+      8,
+      11,
+      10,
+      4,
+      7,
+      9,
+      5,
+      12
+    ],
+    "savedAt": "2026-10-10T23:28:14.285Z",
+    "arrivee": [
+      15,
+      2,
+      3,
+      12,
+      1
+    ],
+    "ticket": [
+      2,
+      6,
+      15,
+      11,
+      9,
+      1,
+      8,
+      13
+    ],
+    "discipline": "Steeple chase",
+    "distance": 4700,
+    "nbPartants": 16,
+    "hippodrome": "Auteuil",
+    "prix": "15200000 DH",
+    "courseId": "2026-10-11_R1_C3",
+    "cle": "2026-10-11_R1_C3",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "sourceImport": "page",
+    "cloture": "2026-10-12T23:30:35.594Z",
+    "ticketMode": "defaut",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          2,
+          15,
+          1
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          6,
+          11
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          9
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          13
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-12T23:30:38.357Z"
+  },
   "2026-10-10": {
     "date": "2026-10-10",
     "found": true,
@@ -36,13 +196,10 @@
       10,
       11,
       12,
-      14,
-      15,
-      16,
-      17,
-      18
+      13,
+      14
     ],
-    "nbPartants": 18,
+    "nbPartants": 14,
     "hippodrome": "CAEN",
     "arrivee": [
       9,
@@ -112,7 +269,7 @@
     ],
     "cloture": "2026-10-10T13:25:48.950Z",
     "scores": null,
-    "collecte": "2026-10-10T12:00:05.900Z",
+    "collecte": "2026-10-10T23:30:59.674Z",
     "ticketMatin": [
       4,
       18,
@@ -123,9 +280,9 @@
       7,
       6
     ],
-    "discipline": "ATTELE",
-    "distance": 2450,
-    "courseId": "2026-10-10_R1_C4"
+    "discipline": "Attelé",
+    "distance": 2200,
+    "courseId": "2026-10-10_R1_C3"
   },
   "2026-10-09": {
     "date": "2026-10-09",
@@ -236,7 +393,7 @@
       8,
       4
     ],
-    "cloture": "2026-10-10T11:54:06.319Z",
+    "cloture": "2026-10-10T23:30:52.198Z",
     "scores": null,
     "collecte": "2026-10-09T22:28:27.677Z",
     "cle": "2026-10-09_R1_C4"
