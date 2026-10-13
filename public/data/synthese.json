@@ -24,13 +24,22 @@
     ],
     "savedAt": "2026-10-12T23:37:29.514Z",
     "arrivee": null,
-    "ticket": null,
+    "ticket": [
+      14,
+      10,
+      12,
+      16,
+      3,
+      8,
+      2,
+      4
+    ],
     "discipline": "Plat",
     "distance": 1600,
     "nbPartants": 16,
     "hippodrome": "Parislongchamp",
     "prix": "5090000 DH",
-    "courseId": 146177,
+    "courseId": "2026-10-13_R1_C1",
     "cle": "2026-10-13_R1_C1",
     "runners": [
       1,
@@ -50,7 +59,17 @@
       15,
       16
     ],
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "ticketSource": "page",
+    "ticketPoseLe": null,
+    "ticketMode": null,
+    "placeholder": false,
+    "groupes": null,
+    "surprises": [],
+    "ticketMoteur": null,
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-10-13T08:45:05.816Z"
   },
   "2026-10-11": {
     "date": "2026-10-11",
