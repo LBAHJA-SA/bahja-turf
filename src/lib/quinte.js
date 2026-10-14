@@ -316,6 +316,30 @@ export async function fetchProgrammeCC(date) {
   return j.meetings || []
 }
 
+/** Redirection Quinté d'Equidia (R/C + date), via le proxy /eq (navigateur).
+ *  null si illisible. La DATE est renvoyée avec : ne croire la redirection
+ *  que si elle est datée du JOUR demandé (le matin elle pointe encore hier).
+ *  14/10/2026 : second départage quand la Synthèse manque. */
+export async function redirectionQuinteEQ(date) {
+  const urls = [`${EQ_BASE}/programme-courses/${date}`, `${EQ_BASE}/courses/${date}/R1/C1`]
+  for (const u of urls) {
+    try {
+      const rep = await fetch(u, { headers: { Accept: 'text/html' } })
+      if (!rep.ok && rep.status >= 500) continue
+      const html = await rep.text()
+      const m = String(html).match(/<script id="serverApp-state" type="application\/json">([\s\S]*?)<\/script>/)
+      if (!m) continue
+      const txt = m[1].replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+        .replace(/&nbsp;/g, ' ').replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+      const j = JSON.parse(txt)
+      const redir = (j && j.quinte && j.quinte.redirection) || ''
+      const mm = String(redir).match(/\/courses\/(\d{4}-\d{2}-\d{2})\/R(\d+)\/C(\d+)/)
+      if (mm) return { date: mm[1], r: mm[2], c: mm[3] }
+    } catch (e) { /* URL suivante */ }
+  }
+  return null
+}
+
 /** La course Quinté d'une date (available_bet_types contient sorec_quinte). */
 /** La course Quinté FRANÇAISE d'une date (available_bet_types contient sorec_quinte).
  *  ⚠ le Maroc sort aussi avec sorec_quinte : on le jette sur meeting.country. */
@@ -329,16 +353,22 @@ export async function chercherQuinteCC(date) {
   const fr = ms.filter((m) => (m.country || '').toUpperCase() === 'FR')
 
   // ── 1. le cas nominal : la course annonce sorec_quinte
-  const francs = []
-  for (const m of fr) {
+  //   ⚠ 14/10/2026 : casacourses étiquette Reims (le Quinté, FR) en country
+  //   MA. L'ancien filtre FR jetait le vrai Quinté et ne gardait que
+  //   Cabourg → conditions + ticket faux. On collecte D'ABORD partout, et :
+  //     ① la Synthèse départage (le Maroc ne couvre rien face à la vraie) ;
+  //     ② Equidia (redirection datée du jour seulement) ;
+  //     ③ on jette les hippodromes marocains connus, R1 d'abord.
+  const tous = []
+  for (const m of ms) {
     for (const r of m.races || []) {
-      if ((r.available_bet_types || []).includes('sorec_quinte')) francs.push({ m, r })
+      if ((r.available_bet_types || []).includes('sorec_quinte')) tous.push({ m, r })
     }
   }
-  if (francs.length) {
+  if (tous.length) {
     if (synthe.size) {
       let best = null
-      for (const c of francs) {
+      for (const c of tous) {
         const nums = new Set((c.r.runners || []).map((x) => Number(x.number)))
         let cover = 0
         for (const x of synthe) if (nums.has(x)) cover++
@@ -347,7 +377,19 @@ export async function chercherQuinteCC(date) {
       }
       if (best.ratio > 0) return best
     }
-    const p1 = francs.find((c) => (c.m.reunion_code || 'R9') <= 'R2') || francs[0]
+    try {
+      const redir = await redirectionQuinteEQ(date)
+      if (redir && redir.date === date) {
+        const cand = tous.find((c) => String(c.m.reunion_code || '') === 'R' + redir.r)
+        if (cand) return { ...cand, ratio: 0 }
+      }
+    } catch (e) { /* repli ci-dessous */ }
+    const piste = (s) => String(s || '').toUpperCase().normalize('NFD')
+      .replace(/[̀-ͯ]/g, '').replace(/[^A-Z]/g, '')
+    const MA = new Set(['KHEMISSET', 'CASABLANCA', 'MARRAKECH', 'MEKNES', 'RABAT', 'ELJADIDA', 'SETTAT', 'KHOURIBGA', 'BENGUERIR', 'SAFI', 'KENITRA', 'FES', 'OUJDA', 'TANGER', 'AGADIR'])
+    const pool = tous.filter((c) => !MA.has(piste(c.m.track)))
+    const vivier = pool.length ? pool : tous
+    const p1 = vivier.find((c) => (c.m.reunion_code || 'R9') <= 'R2') || vivier[0]
     return { ...p1, ratio: 0 }
   }
 
