@@ -205,12 +205,14 @@ for (const rec of closed) {
 }
 console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   |   R2 = ${tot2}/${n * 5} · 1er ${win2}/${n}   |   R5 = ${tot5}/${n * 5} · 1er ${win5}/${n}   |   R7 = ${tot7}/${n * 5} · 1er ${win7}/${n}`)
 
-/* R8 (15/10) : 0.9 × podium + 0.1 × marché sur TOUTES les 14 fermées, SANS
- * saut (cote manquante → 0.5 neutre). Référence : le ticket GELÉ réel de
- * chaque jour (ce qu'on a vraiment joué). Stats LOO par course. */
+/* R8 VRAIE (15/10, spec utilisateur LITTÉRALE) : 0.9 × FORCE(P) + 0.1 × marché.
+ * FORCE(P) = max des P(1er..5e) de la case (table PLACES, pas podium —
+ * l'ancienne version podium était MA FAUTE, corrigée ici). n<2 → 0,
+ * égalité → carnet, cote absente → 0.5 (conventions visibles, à confirmer).
+ * R9 = force seule. Référence GELÉ. Stats LOO par course. */
 {
-  console.log('\n══ R8 : 0.9 podium + 0.1 marché, TOUTES les 14 vs GELÉ ══')
-  console.log('══ R9 : 1.0 podium (SANS marché) — la différence R8−R9 = apport du 10% marché ══')
+  console.log('\n══ R8 VRAIE : 0.9 force(P) + 0.1 marché, TOUTES les 14 vs GELÉ ══')
+  console.log('══ R9 : force seule (tie → carnet) ══')
   let t8 = 0, w8 = 0, tF = 0, wF = 0, n8 = 0, t9 = 0, w9 = 0
   let flipOk = 0, flipKo = 0
   for (const rec of closed) {
@@ -218,9 +220,16 @@ console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   
     const cid = Object.keys(cache).find((k) => k.startsWith(rec.date + '_'))
     const cotes = cid && cache[cid].cotes ? Object.fromEntries(cache[cid].cotes.map((x) => [x.num, x])) : {}
     const stats = computeStats(closed.filter((r) => r.date !== rec.date))
-    const pod = new Map()
-    for (const b of stats.podiumBloc || []) for (const d of b.detail || []) pod.set(d.p, (d.n || 0) / Math.max(1, stats.nb))
+    const parPlace = stats.parPlace || []
     const grille = buildGrid(syn, rec.runners || [])
+    const ps = grille.slotParNum || {}
+    const forceDe = (num) => {
+      const st = parPlace[(ps[num] ?? 0) - 1]
+      if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return 0
+      let best = 0
+      for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
+      return (st.p[best] ?? 0) > 0 ? st.p[best] / 100 : 0
+    }
     const sel = [], sel9 = []
     for (const g of GROUPES) {
       const cases = grille.groupes.flatMap((x) => x.cases).filter((c) => c.slot >= g.min && c.slot <= g.max)
@@ -234,10 +243,10 @@ console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   
         return (cMax - v) / (cMax - cMin)
       }
       cases.slice()
-        .sort((a, b) => ((0.9 * (pod.get(b.slot) ?? 0) + 0.1 * mkt(b)) - (0.9 * (pod.get(a.slot) ?? 0) + 0.1 * mkt(a))) || (a.slot - b.slot))
+        .sort((a, b) => ((0.9 * forceDe(b.num) + 0.1 * mkt(b)) - (0.9 * forceDe(a.num) + 0.1 * mkt(a))) || (a.slot - b.slot))
         .slice(0, q).forEach((c) => sel.push(c.num))
       cases.slice()
-        .sort((a, b) => ((pod.get(b.slot) ?? 0) - (pod.get(a.slot) ?? 0)) || (a.slot - b.slot))
+        .sort((a, b) => (forceDe(b.num) - forceDe(a.num)) || (a.slot - b.slot))
         .slice(0, q).forEach((c) => sel9.push(c.num))
     }
     const arr = rec.arrivee.slice(0, 5)
