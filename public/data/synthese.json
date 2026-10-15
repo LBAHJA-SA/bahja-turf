@@ -23,7 +23,13 @@
       3
     ],
     "savedAt": "2026-10-14T09:20:08.499Z",
-    "arrivee": null,
+    "arrivee": [
+      10,
+      15,
+      13,
+      5,
+      9
+    ],
     "ticket": [
       10,
       8,
@@ -36,13 +42,13 @@
     ],
     "ticketSource": "page",
     "ticketPoseLe": "2026-10-14T09:20:08.534Z",
-    "discipline": "Monté",
-    "distance": 2750,
-    "nbPartants": 15,
-    "hippodrome": "Cabourg",
-    "prix": "1950000 DH",
-    "courseId": "2026-10-14_R4_C8",
-    "cle": "2026-10-14_R4_C8",
+    "discipline": "Attelé",
+    "distance": 2550,
+    "nbPartants": 16,
+    "hippodrome": "Reims",
+    "prix": "9000000 DH",
+    "courseId": "2026-10-14_R1_C1",
+    "cle": "2026-10-14_R1_C1",
     "runners": [
       1,
       2,
@@ -58,7 +64,8 @@
       12,
       13,
       14,
-      15
+      15,
+      16
     ],
     "sourceImport": "page",
     "placeholder": false,
@@ -66,9 +73,13 @@
     "groupes": null,
     "surprises": [],
     "ticketMoteur": null,
-    "cloture": null,
+    "cloture": "2026-10-15T13:02:01.436Z",
     "scores": null,
-    "collecte": "2026-10-14T09:23:40.365Z"
+    "collecte": "2026-10-14T09:23:40.365Z",
+    "pays": "FRA",
+    "devisee": "€",
+    "piste": "Corde à droite",
+    "note": "14/10 12hxx GMT : course re-pointée Reims (casacourses annonçait MA) — ticket gelé INTACT (non touché)"
   },
   "2026-10-13": {
     "date": "2026-10-13",
