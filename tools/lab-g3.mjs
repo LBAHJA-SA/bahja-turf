@@ -46,19 +46,19 @@ const db = JSON.parse(readFileSync('./data/synthese.json', 'utf8'))
 const cache = JSON.parse(readFileSync('./data/cotes.json', 'utf8'))
 
 const QUOTAS = { G1: 3, G2: 2, G3: 1, G4: 1, G5: 1 }
+// 15/10 : P = CASE du carnet (slotParNum de buildGrid, §11.13) — PARTOUT,
+// comme computeStats, remplirGrille et l'affichage. Grilles en cache.
 // P d'un numéro (mapping EXACT de computeStats, manquants inclus)
-const pDeRec = (rr, num) => {
-  const syn = (rr.synthese || []).filter(Number.isFinite)
-  const m = {}
-  syn.filter((n) => n % 2 === 0).forEach((n, i) => { m[n] = 2 * i + 1 })
-  syn.filter((n) => n % 2 !== 0).forEach((n, i) => { m[n] = 2 * i + 2 })
-  if (m[num] != null) return m[num]
-  const cites = new Set(syn)
-  const manq = ((rr.runners || []).filter((n) => Number.isFinite(n) && !cites.has(n))).sort((a, b) => a - b)
-  const apres = Math.max(0, ...Object.values(m))
-  const k = manq.indexOf(num)
-  return k >= 0 ? apres + 1 + k : null
+const gridCache = new Map()
+const gridDe = (rr) => {
+  const k = rr.date || JSON.stringify(rr.synthese)
+  if (!gridCache.has(k)) {
+    const syn = (rr.synthese || []).filter(Number.isFinite)
+    gridCache.set(k, buildGrid(syn, rr.runners || []))
+  }
+  return gridCache.get(k)
 }
+const pDeRec = (rr, num) => gridDe(rr).slotParNum[num] ?? null
 const GROUPES = [
   { id: 'G1', min: 1, max: 4 }, { id: 'G2', min: 5, max: 8 }, { id: 'G3', min: 9, max: 10 },
   { id: 'G4', min: 11, max: 12 }, { id: 'G5', min: 13, max: 20 },
@@ -69,13 +69,8 @@ const coteDe = (cotes, num) => {
   const x = Number(typeof v === 'object' ? (v?.cote ?? null) : v)
   return Number.isFinite(x) && x > 0 ? x : null
 }
-// mapping P EXACT de computeStats : pairs en haut (P1, P3…), impairs en bas
-const rangStats = (synthe) => {
-  const m = {}
-  synthe.filter((n) => n % 2 === 0).forEach((n, i) => { m[n] = 2 * i + 1 })
-  synthe.filter((n) => n % 2 !== 0).forEach((n, i) => { m[n] = 2 * i + 2 })
-  return m
-}
+// P = CASE du carnet (slotParNum) — voir ci-dessus.
+const rangStats = (synthe, runners = []) => buildGrid(synthe.filter(Number.isFinite), runners).slotParNum
 
 const closed = Object.values(db).filter((r) => r && (r.arrivee || []).length && (r.synthese || []).length)
 console.log('courses fermées :', closed.map((r) => r.date).join(' '))
@@ -90,7 +85,7 @@ for (const rec of closed) {
   const grille = buildGrid(syn, rec.runners || [])
   const stats = computeStats(closed.filter((r) => r.date !== rec.date)) // LOO : sans la course testée
   const parPlace = stats.parPlace || []
-  const rs = rangStats(syn)
+  const rs = rangStats(syn, rec.runners || [])
   const force = (num) => {
     const st = parPlace[(rs[num] ?? 0) - 1]
     if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return null
@@ -209,3 +204,59 @@ for (const rec of closed) {
   console.log(`${rec.date}  R1 ${h1}/5  |   R5 ${h5}/5${sel5.includes(arr[0]) ? ' ★1er' : ''}  |   R7 ${h7}/5${sel7.includes(arr[0]) ? ' ★1er' : ''} [${sel7.join(' ')}]   |   arr ${arr.join('-')}`)
 }
 console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   |   R2 = ${tot2}/${n * 5} · 1er ${win2}/${n}   |   R5 = ${tot5}/${n * 5} · 1er ${win5}/${n}   |   R7 = ${tot7}/${n * 5} · 1er ${win7}/${n}`)
+
+/* R8 (15/10) : 0.9 × podium + 0.1 × marché sur TOUTES les 14 fermées, SANS
+ * saut (cote manquante → 0.5 neutre). Référence : le ticket GELÉ réel de
+ * chaque jour (ce qu'on a vraiment joué). Stats LOO par course. */
+{
+  console.log('\n══ R8 : 0.9 podium + 0.1 marché, TOUTES les 14 vs GELÉ ══')
+  console.log('══ R9 : 1.0 podium (SANS marché) — la différence R8−R9 = apport du 10% marché ══')
+  let t8 = 0, w8 = 0, tF = 0, wF = 0, n8 = 0, t9 = 0, w9 = 0
+  let flipOk = 0, flipKo = 0
+  for (const rec of closed) {
+    const syn = rec.synthese.filter(Number.isFinite)
+    const cid = Object.keys(cache).find((k) => k.startsWith(rec.date + '_'))
+    const cotes = cid && cache[cid].cotes ? Object.fromEntries(cache[cid].cotes.map((x) => [x.num, x])) : {}
+    const stats = computeStats(closed.filter((r) => r.date !== rec.date))
+    const pod = new Map()
+    for (const b of stats.podiumBloc || []) for (const d of b.detail || []) pod.set(d.p, (d.n || 0) / Math.max(1, stats.nb))
+    const grille = buildGrid(syn, rec.runners || [])
+    const sel = [], sel9 = []
+    for (const g of GROUPES) {
+      const cases = grille.groupes.flatMap((x) => x.cases).filter((c) => c.slot >= g.min && c.slot <= g.max)
+      if (!cases.length) continue
+      const q = Math.min(QUOTAS[g.id], cases.length)
+      const connues = cases.filter((c) => coteDe(cotes, c.num) != null).map((c) => coteDe(cotes, c.num))
+      const cMin = Math.min(...connues), cMax = Math.max(...connues)
+      const mkt = (c) => {
+        const v = coteDe(cotes, c.num)
+        if (v == null || !(cMax > cMin)) return 0.5
+        return (cMax - v) / (cMax - cMin)
+      }
+      cases.slice()
+        .sort((a, b) => ((0.9 * (pod.get(b.slot) ?? 0) + 0.1 * mkt(b)) - (0.9 * (pod.get(a.slot) ?? 0) + 0.1 * mkt(a))) || (a.slot - b.slot))
+        .slice(0, q).forEach((c) => sel.push(c.num))
+      cases.slice()
+        .sort((a, b) => ((pod.get(b.slot) ?? 0) - (pod.get(a.slot) ?? 0)) || (a.slot - b.slot))
+        .slice(0, q).forEach((c) => sel9.push(c.num))
+    }
+    const arr = rec.arrivee.slice(0, 5)
+    const froz = rec.ticket || []
+    const h8 = arr.filter((x) => sel.includes(x)).length
+    const h9 = arr.filter((x) => sel9.includes(x)).length
+    const hF = arr.filter((x) => froz.includes(x)).length
+    // picks changés par le 10% marché : bons ou mauvais ?
+    const only8 = sel.filter((x) => !sel9.includes(x))
+    const only9 = sel9.filter((x) => !sel.includes(x))
+    const gain = only8.filter((x) => arr.includes(x)).length
+    const perte = only9.filter((x) => arr.includes(x)).length
+    flipOk += gain; flipKo += perte
+    t8 += h8; t9 += h9; tF += hF; n8++
+    if (sel.includes(arr[0])) w8++
+    if (sel9.includes(arr[0])) w9++
+    if (froz.includes(arr[0])) wF++
+    console.log(`${rec.date}  R8 ${h8}/5${sel.includes(arr[0]) ? ' ★1er' : ''}  |  R9 ${h9}/5${sel9.includes(arr[0]) ? ' ★1er' : ''}${only8.length ? '  (marché: +' + only8.filter((x) => arr.includes(x)).join(',') + ' −' + only9.filter((x) => arr.includes(x)).join(',') + ')' : ''}  |  arr ${arr.join('-')}`)
+  }
+  console.log(`\nTOTAL ${n8} : R8 = ${t8}/${n8 * 5} · 1er ${w8}/${n8}  |  R9 (sans marché) = ${t9}/${n8 * 5} · 1er ${w9}/${n8}  |  GELÉ = ${tF}/${n8 * 5} · 1er ${wF}/${n8}`)
+  console.log(`marché (10%) : picks gagnants ajoutés ${flipOk} · picks gagnants retirés ${flipKo} · NET ${flipOk >= flipKo ? '+' : ''}${flipOk - flipKo}`)
+}

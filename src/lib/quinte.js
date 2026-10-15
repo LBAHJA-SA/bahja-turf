@@ -792,18 +792,13 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
   const ticket = []
   const detail = []
 
-  /* Force aux STATISTIQUES d'un numéro (même mapping que ordonnerParStats) :
-   * le P est celui de l'onglet Statistiques — pairs en haut (P1, P3…),
-   * impairs en bas — PAS le rang de presse. null = sans historique (n<2). */
-  const synthe = (grille?.synthe || []).filter((n) => Number.isFinite(n))
-  const rangStats = {}
-  synthe.filter((n) => n % 2 === 0).forEach((n, i) => { rangStats[n] = 2 * i + 1 })
-  synthe.filter((n) => n % 2 !== 0).forEach((n, i) => { rangStats[n] = 2 * i + 2 })
-  const parNumRang = grille?.parNum || {}
-  const pDeNum = (num) => rangStats[num] ?? parNumRang[num] ?? 999
+  /* Force aux STATISTIQUES d'un numéro : le P est la CASE du carnet
+   * (slotParNum de la grille, §11.13) — PAS le rang presse. null = sans
+   * historique (n<2). 15/10 : même mapping que computeStats et l'affichage. */
+  const ps = grille?.slotParNum || {}
   const parPlaceStats = stats?.parPlace || []
   const forceDe = (num) => {
-    const st = parPlaceStats[pDeNum(num) - 1]
+    const st = parPlaceStats[(ps[num] ?? 0) - 1]
     if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return null
     let best = 0
     for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
@@ -917,21 +912,14 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
   const nums = [...new Set(ticket || [])]
   if (nums.length < 2) return nums
 
-  const rang = grille?.parNum || {}
   const parPlace = stats?.parPlace || []
-  /* ⚠ 10/10/2026 — LE P EST CELUI DE L'ONGLET STATISTIQUES, PAS LE RANG
-   * DE PRESSE. computeStats construit son tableau « Place P1…P20 » avec
-   * les PAIRS en haut (P1, P3, P5…) et les IMPAIRS en bas (P2, P4, P6…),
-   * dans l'ordre de la Récapitulative (§11.13). grille.parNum, lui, est
-   * le RANG de presse (1er cité = P1). Les mêler lisait la mauvaise
-   * statistique pour presque chaque cheval — l'ordre ne suivait pas le
-   * tableau Statistiques. On reconstruit ici le mapping exact de
-   * computeStats ; grille.parNum ne sert plus qu'au repli des absents. */
-  const synthe = (grille?.synthe || []).filter((n) => Number.isFinite(n))
-  const rangStats = {}
-  synthe.filter((n) => n % 2 === 0).forEach((n, i) => { rangStats[n] = 2 * i + 1 })
-  synthe.filter((n) => n % 2 !== 0).forEach((n, i) => { rangStats[n] = 2 * i + 2 })
-  const pDeNum = (num) => rangStats[num] ?? rang[num] ?? 999
+  /* ⚠ 15/10/2026 — LE P EST LA CASE DU CARNET (slotParNum de la grille,
+   * §11.13), PARTOUT : sélection, stats, ordre, affichage. Le 10/10 on
+   * avait mis « pairs en haut toujours » : les jours à P1 impair, chaque
+   * cheval lisait la statistique d'un AUTRE P. grille.parNum (rang presse)
+   * ne sert plus : absent de la grille → sans place. */
+  const ps = grille?.slotParNum || {}
+  const pDeNum = (num) => ps[num] ?? 999
 
   /* ── L'ORDRE : LA PLACE EST CELLE OÙ LE P EST LE PLUS FORT ──
    * Règle de l'utilisateur (07/10/2026) : chaque cheval du ticket se
@@ -1472,17 +1460,12 @@ export function joint(positions, records) {
   for (const rec of records || []) {
     if (!rec.arrivee || rec.arrivee.length < 3) continue
     const synthe = (rec.synthese || []).filter(Number.isFinite)
-    // placeOf[p] = le numéro du cheval à la position de presse p
-    // numOf[n]  = la position de presse du cheval n   (les deux sens)
-    const placeOf = {}
-    const numOf = {}
-    synthe.forEach((num, i) => { placeOf[i + 1] = num; numOf[num] = i + 1 })
-    // les partants non cités par la presse occupent les positions suivantes
-    const runners = rec.runners || synthe
-    const absents = runners.filter((x) => numOf[x] == null).sort((a, b) => a - b)
-    absents.forEach((x, i) => { placeOf[synthe.length + 1 + i] = x; numOf[x] = synthe.length + 1 + i })
-
-    const places = p.map((x) => (placeOf[x] != null ? rec.arrivee.indexOf(placeOf[x]) + 1 : 99))
+    // 15/10 : cases du carnet (buildGrid), comme partout — PAS les rangs presse.
+    const grille = buildGrid(synthe, rec.runners || [])
+    const places = p.map((x) => {
+      const num = grille.numAtPlace[x]
+      return num != null ? rec.arrivee.indexOf(num) + 1 : 99
+    })
     // une position absente de la grille (99) = non partant : la course ne compte pas.
     // un cheval partant mais arrivé 6e ou au-delà (0 après le +1) = un ÉCHEC,
     // pas une course à écarter : c'est justement ce qu'on veut mesurer.
@@ -1529,28 +1512,18 @@ export function computeStats(records) {
 
   for (const rec of records || []) {
     if (!rec.arrivee || !rec.arrivee.length) continue
-    // ⚠ BUG CORRIGÉ le 05/10 : on lisait numAtPlace[numéro] (le cheval EN place n)
+    // ⚠ 05/10 : on lisait numAtPlace[numéro] (le cheval EN place n)
     //   au lieu du rang presse DU cheval. Résultat : rangs faux, et les courses
     //   dont un arrivant dépassait la Synthèse étaient JETÉES (04/10 : 4 valeurs).
-    //   numéro → rang presse (P1, P2…), manquants à la suite par n° croissant.
-    const placeOfNum = {}
-    // ⚠ LE P EST CELUI DU CARNET, PAS LE RANG DE LA SYNTHÈSE.
-    //   La grille place les PAIRS en haut (P1, P3, P5…) et les IMPAIRS en
-    //   bas (P2, P4, P6…), dans l'ordre de la Récapitulative — la règle du
-    //   carnet (§11.13). Lire « le n-ième cité » ici donnait des P différents
-    //   de ceux de la grille : le tableau Statistiques décrivait une autre
-    //   grille que celle affichée.
+    // ⚠ 15/10 : LE P EST LA CASE DU CARNET (§11.13 : ligne du haut = parité
+    //   du 1er cité, dans l'ordre presse — PAS « pairs en haut toujours »).
+    //   L'ancien code mettait les pairs en haut TOUJOURS : les jours à P1
+    //   impair, chaque cheval lisait la statistique d'UN AUTRE P (15/10 :
+    //   stats-P1 = le 12, grille-P1 = le 3 ; sélection et stats se contredisaient
+    //   en G1/G2). Ici on prend slotParNum de buildGrid : sélection, stats,
+    //   ordre et affichage parlent du MÊME P. Manquants inclus, comme la grille.
     const synthe = (rec.synthese || []).filter(Number.isFinite)
-    const pairs = synthe.filter((n) => n % 2 === 0)
-    const impairs = synthe.filter((n) => n % 2 !== 0)
-    pairs.forEach((num, i) => { placeOfNum[num] = 2 * i + 1 })     // P1, P3, P5…
-    impairs.forEach((num, i) => { placeOfNum[num] = 2 * i + 2 })   // P2, P4, P6…
-    // les partants non cités occupent les places suivantes, par n° croissant
-    const manquants = (rec.runners || [])
-      .filter((n) => Number.isFinite(n) && placeOfNum[n] == null)
-      .sort((a, b) => a - b)
-    const apres = Math.max(0, ...Object.values(placeOfNum))
-    manquants.forEach((num, k) => { placeOfNum[num] = apres + 1 + k })
+    const placeOfNum = { ...buildGrid(synthe, rec.runners || []).slotParNum }
 
     const pl = rec.arrivee.slice(0, 5).map((n) => placeOfNum[n]).filter((r) => r != null)
     if (pl.length < 5) continue
@@ -1707,7 +1680,7 @@ export function computeStats(records) {
  *   moyen     : combien de mes chevaux dans le top 5, en moyenne
  *   gagnant   : combien de fois mon 1er choix tombe le premier
  *
- * `detailCourses` = [{ synthe, pl }] où pl = les 5 places de presse d'arrivée.
+ * `detailCourses` = [{ synthe, pl }] où pl = les 5 CASES du carnet à l'arrivée.
  */
 export function combo(detailCourses, positions) {
   const set = new Set((positions || []).filter((p) => p >= 1 && p <= 20))
