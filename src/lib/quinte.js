@@ -748,31 +748,17 @@ function coteDe(cotes, num) {
  * G3 est obligatoire : si son score est faible, on le prend quand même.
  * Renvoie la liste des numéros retenus + le détail.
  *
- * ── QUAND ON A LE MARCHÉ (`cotes`), QUI ENTRE ? ────────────────────────────
+ * ── QUI ENTRE ? ───────────────────────────────────────────────────────────
+ * ⭐ R8 (15/10/2026, labo 43/70 · 1er 11/14 vs GELÉ 47/70 · 1er 9/14 —
+ * appliqué : FAVORI D'ABORD). score = 0.9 × taux_podium(P) + 0.1 × marché
+ * (cote inversée normalisée dans le bloc, 0.5 si absente). Le taux_podium
+ * vient de la table podium P1..P20 (podiums du P / N). Top quota au score,
+ * égalité → carnet. Le 10% marché n'a jamais nui en labo (+3/−0).
+ * Sans stats → repli exact ancien comportement (cotes puis tries).
+ * Tripwire : si le taux de 1er repasse sous le gelé, on revient en arrière.
+ *
+ * Règles précédentes (R1→R7) : voir tools/lab-g3.mjs + historique git.
  * Le score physique n'a aucun pouvoir de tri à l'intérieur d'un bloc (§11.16).
- *
- *   bloc de quota ≥ 2 (hors G1) →  les q meilleures cotes. Rien d'autre.
- *   bloc de quota 1    →  ⭐ R2 (10/10/2026) : le plus fort aux STATISTIQUES
- *      (signature : argmax du P, n≥2 ; égalité ou sans historique → la cote
- *      départage). Labo tools/lab-g3.mjs, 6 Quintés rejoués en leave-one-out
- *      avec le même marché des deux côtés : R2 = 23/30 · 1er 6/6 contre
- *      R1 (petite cote) = 21/30 · 1er 5/6 — approuvé par l'utilisateur.
- *   G1 (quota 3)       →  ⭐ R5 (10/10/2026) : les 2 meilleures cotes + le cas
- *      en DROUGHT le plus long (stats.drought, égalité → cote). Principe de
- *      l'utilisateur (« chaque P attend son tour »), labo : R5 = 25/30 ·
- *      1er 6/6 contre R4 (moins-cité) = 24/30 — 5/5 sur le 10/10 (9 ET 3).
- *
- * Mesure historique sur 280 vrais Quintés Global PMU France (2026-01-01 → 2026-10-05),
- * Archives + casacourses, avec la vraie Synthèse de la presse :
- *
- *   règle                       % où le 1-2-3 est complet dans la grille
- *   les q meilleures cotes         30 %       ← celle-ci
- *   (q-1) cotes + ★ surprise       13 %       ← retirée le 05/10/2026
- *   marché seul, top 8 des cotes   43 %       ← le plafond sans grille
- *
- * La ★ surprise coûtait la moitié : elle remplaçait des cotes à 8 et 14 par
- * une à 50. On ne la remet pas (§11.17 était mesuré sur 4 courses avec la
- * mauvaise métrique).
  *
  * ⚠ LE MARCHÉ BOUGE. Les cotes sont relues en continu (toutes les 60 s) :
  * la grille ci-dessus est un instantané. Le ticket à jouer est celui affiché
@@ -792,18 +778,11 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
   const ticket = []
   const detail = []
 
-  /* Force aux STATISTIQUES d'un numéro : le P est la CASE du carnet
-   * (slotParNum de la grille, §11.13) — PAS le rang presse. null = sans
-   * historique (n<2). 15/10 : même mapping que computeStats et l'affichage. */
-  const ps = grille?.slotParNum || {}
-  const parPlaceStats = stats?.parPlace || []
-  const forceDe = (num) => {
-    const st = parPlaceStats[(ps[num] ?? 0) - 1]
-    if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return null
-    let best = 0
-    for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
-    return (st.p[best] ?? 0) > 0 ? { place: best, force: st.p[best] } : null
-  }
+  /* ⭐ R8 : table podium P → taux (podiums/N), calculée UNE fois ici —
+   * même définition que le labo (stats LOO là-bas, archive ici). */
+  const pod = new Map()
+  for (const b of stats?.podiumBloc || []) for (const d of b.detail || []) pod.set(d.p, (d.n || 0) / Math.max(1, stats.nb))
+  const aStats = pod.size > 0
 
   for (const g of grille.groupes) {
     const cases = g.cases.map((c) => ({ ...c, s: parNum.get(c.num)?.s || null, ok: parNum.get(c.num)?.ok ?? null }))
@@ -826,41 +805,21 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
 
     const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
 
-    // le marché prime : s'il a la cote de TOUS les partants du bloc
+    // score R8 : 0.9 podium + 0.1 marché (cote inversée normalisée,
+    // 0.5 si absente) ; sans stats → repli ancien (cotes puis tries)
     const surLeMarche = cases.every((c) => coteDe(cotes, c.num) != null)
     const retenus = new Set()
-    /* ⭐ R2 (10/10/2026, labo tools/lab-g3.mjs : 23/30 contre 21/30, 1er
-     * 6/6 contre 5/6 — approuvé par l'utilisateur) : sur un bloc à UNE
-     * place avec le marché complet, on ne prend plus la plus petite cote.
-     * Prendre la cote la plus basse, le 10/10 ça a coûté le gagnant
-     * (G3 : 8@13 pris, 9@14 écarté — et c'est le 9 qui gagne). On prend
-     * le plus fort aux STATISTIQUES ; égalité ou sans historique → la
-     * cote départage (elle reste le repli, plus le choix).
-     * ⭐ R5 (10/10/2026, labo : 25/30 · 1er 6/6 — approuvé) : en G1, le
-     * 3e siège va au cas en DROUGHT le plus long (stats.drought, égalité
-     * → cote). « Chaque P attend son tour » : le 10/10 ça a pris le 3
-     * (5/5) sans perdre le 13 du 02/10. */
-    const parStats = surLeMarche && quota === 1 && parPlaceStats.length > 0
-    const parDrought = surLeMarche && g.id === 'G1' && quota > 1 && stats?.drought
-    /* ⚠ 12/10/2026 — garde bloc vide : sans partants (réseau lent), un groupe
-     * peut n'avoir AUCUNE case (G5 à 12 cités). [0].place plantait la page
-     * (« Cannot read properties of undefined »). L'ancien tri ne plantait
-     * pas (slice sur vide = rien). */
-    if (parStats && cases.length) {
-      const gagnant = cases.slice().sort((a, b) =>
-        ((forceDe(b.num)?.force ?? -1) - (forceDe(a.num)?.force ?? -1)) ||
-        (coteDe(cotes, a.num) - coteDe(cotes, b.num))
-      )[0]
-      retenus.add(gagnant.place)
-    } else if (parDrought && cases.length) {
-      const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
-      parCote.slice(0, quota - 1).forEach((c) => retenus.add(c.place))
-      const elu = cases.slice().sort((a, b) =>
-        ((stats.drought[b.slot] ?? 0) - (stats.drought[a.slot] ?? 0)) ||
-        (coteDe(cotes, a.num) - coteDe(cotes, b.num))
-      )[0]
-      if (!retenus.has(elu.place)) retenus.add(elu.place)
-      else parCote.slice(quota - 1, quota).forEach((c) => retenus.add(c.place))
+    if (aStats && cases.length) {
+      const connues = cases.filter((c) => coteDe(cotes, c.num) != null).map((c) => coteDe(cotes, c.num))
+      const cMin = Math.min(...connues), cMax = Math.max(...connues)
+      const mkt = (c) => {
+        const v = coteDe(cotes, c.num)
+        if (v == null || !(cMax > cMin)) return 0.5
+        return (cMax - v) / (cMax - cMin)
+      }
+      cases.slice()
+        .sort((a, b) => ((0.9 * (pod.get(b.slot) ?? 0) + 0.1 * mkt(b)) - (0.9 * (pod.get(a.slot) ?? 0) + 0.1 * mkt(a))) || (a.slot - b.slot))
+        .slice(0, quota).forEach((c) => retenus.add(c.place))
     } else if (surLeMarche) {
       const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
       parCote.slice(0, quota).forEach((c) => retenus.add(c.place))
@@ -872,8 +831,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
       ...g,
       surprise: null,
       surLeMarche,
-      parStats,
-      parDrought: !!parDrought,
+      r8: aStats,
       cases: cases.map((c) => ({
         ...c,
         cote: coteDe(cotes, c.num),

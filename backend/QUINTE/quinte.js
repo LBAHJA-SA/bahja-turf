@@ -792,18 +792,11 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
   const ticket = []
   const detail = []
 
-  /* Force aux STATISTIQUES d'un numéro : le P est la CASE du carnet
-   * (slotParNum de la grille, §11.13) — PAS le rang presse. null = sans
-   * historique (n<2). 15/10 : même mapping que computeStats et l'affichage. */
-  const ps = grille?.slotParNum || {}
-  const parPlaceStats = stats?.parPlace || []
-  const forceDe = (num) => {
-    const st = parPlaceStats[(ps[num] ?? 0) - 1]
-    if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return null
-    let best = 0
-    for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
-    return (st.p[best] ?? 0) > 0 ? { place: best, force: st.p[best] } : null
-  }
+  /* ⭐ R8 : table podium P → taux (podiums/N), calculée UNE fois ici —
+   * même définition que le labo (stats LOO là-bas, archive ici). */
+  const pod = new Map()
+  for (const b of stats?.podiumBloc || []) for (const d of b.detail || []) pod.set(d.p, (d.n || 0) / Math.max(1, stats.nb))
+  const aStats = pod.size > 0
 
   for (const g of grille.groupes) {
     const cases = g.cases.map((c) => ({ ...c, s: parNum.get(c.num)?.s || null, ok: parNum.get(c.num)?.ok ?? null }))
@@ -826,32 +819,21 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
 
     const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
 
-    // le marché prime : s'il a la cote de TOUS les partants du bloc
+    // score R8 : 0.9 podium + 0.1 marché (cote inversée normalisée,
+    // 0.5 si absente) ; sans stats → repli ancien (cotes puis tries)
     const surLeMarche = cases.every((c) => coteDe(cotes, c.num) != null)
     const retenus = new Set()
-    /* ⭐ R2 + R5 (10/10, labo, approuvés) : quota-1 = stats, G1 = 2 cotes +
-     * drought. Détail dans src/lib/quinte.js (référence).
-     * ⚠ 12/10/2026 — garde bloc vide : sans partants (réseau lent), un groupe
-     * peut n'avoir AUCUNE case (G5 à 12 cités). [0].place plantait la page
-     * (« Cannot read properties of undefined »). L'ancien tri ne plantait
-     * pas (slice sur vide = rien). */
-    const parStats = surLeMarche && quota === 1 && parPlaceStats.length > 0
-    const parDrought = surLeMarche && g.id === 'G1' && quota > 1 && stats?.drought
-    if (parStats && cases.length) {
-      const gagnant = cases.slice().sort((a, b) =>
-        ((forceDe(b.num)?.force ?? -1) - (forceDe(a.num)?.force ?? -1)) ||
-        (coteDe(cotes, a.num) - coteDe(cotes, b.num))
-      )[0]
-      retenus.add(gagnant.place)
-    } else if (parDrought && cases.length) {
-      const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
-      parCote.slice(0, quota - 1).forEach((c) => retenus.add(c.place))
-      const elu = cases.slice().sort((a, b) =>
-        ((stats.drought[b.slot] ?? 0) - (stats.drought[a.slot] ?? 0)) ||
-        (coteDe(cotes, a.num) - coteDe(cotes, b.num))
-      )[0]
-      if (!retenus.has(elu.place)) retenus.add(elu.place)
-      else parCote.slice(quota - 1, quota).forEach((c) => retenus.add(c.place))
+    if (aStats && cases.length) {
+      const connues = cases.filter((c) => coteDe(cotes, c.num) != null).map((c) => coteDe(cotes, c.num))
+      const cMin = Math.min(...connues), cMax = Math.max(...connues)
+      const mkt = (c) => {
+        const v = coteDe(cotes, c.num)
+        if (v == null || !(cMax > cMin)) return 0.5
+        return (cMax - v) / (cMax - cMin)
+      }
+      cases.slice()
+        .sort((a, b) => ((0.9 * (pod.get(b.slot) ?? 0) + 0.1 * mkt(b)) - (0.9 * (pod.get(a.slot) ?? 0) + 0.1 * mkt(a))) || (a.slot - b.slot))
+        .slice(0, quota).forEach((c) => retenus.add(c.place))
     } else if (surLeMarche) {
       const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
       parCote.slice(0, quota).forEach((c) => retenus.add(c.place))
@@ -863,8 +845,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
       ...g,
       surprise: null,
       surLeMarche,
-      parStats,
-      parDrought: !!parDrought,
+      r8: aStats,
       cases: cases.map((c) => ({
         ...c,
         cote: coteDe(cotes, c.num),
