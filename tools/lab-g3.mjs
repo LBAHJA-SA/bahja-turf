@@ -75,7 +75,7 @@ const rangStats = (synthe, runners = []) => buildGrid(synthe.filter(Number.isFin
 const closed = Object.values(db).filter((r) => r && (r.arrivee || []).length && (r.synthese || []).length)
 console.log('courses fermées :', closed.map((r) => r.date).join(' '))
 
-let tot1 = 0, tot2 = 0, tot3 = 0, tot4 = 0, tot5 = 0, tot6 = 0, tot7 = 0, tot12 = 0, win1 = 0, win2 = 0, win3 = 0, win4 = 0, win5 = 0, win6 = 0, win7 = 0, win12 = 0, n = 0
+let tot1 = 0, tot2 = 0, tot3 = 0, tot4 = 0, tot5 = 0, tot6 = 0, tot7 = 0, tot12 = 0, tot13 = 0, win1 = 0, win2 = 0, win3 = 0, win4 = 0, win5 = 0, win6 = 0, win7 = 0, win12 = 0, win13 = 0, n = 0
 for (const rec of closed) {
   const syn = rec.synthese.filter(Number.isFinite)
   const cid = Object.keys(cache).find((k) => k.startsWith(rec.date + '_'))
@@ -93,7 +93,7 @@ for (const rec of closed) {
     for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
     return (st.p[best] ?? 0) > 0 ? { place: best, force: st.p[best] } : null
   }
-  const sel1 = [], sel2 = [], sel3 = [], sel4 = [], sel5 = [], sel6 = [], sel7 = [], sel12 = []
+  const sel1 = [], sel2 = [], sel3 = [], sel4 = [], sel5 = [], sel6 = [], sel7 = [], sel12 = [], sel13 = []
   let complet = true
   // droughts causaux : courses fermées AVANT la course testée (jamais elle, jamais après)
   const avant = closed.filter((r) => r.date < rec.date)
@@ -126,6 +126,25 @@ for (const rec of closed) {
       if (g.id === 'G1') candF.slice(0, q).forEach((x) => sel12.push(x.c.num))
       else if (g.id === 'G2') parCote.slice(0, q).forEach((c) => sel12.push(c.num))
       else sel12.push(candF[0].c.num)
+    }
+    /* R13 (15/10) : ÉLIMINATION d'abord (méthode utilisateur : écarter avant
+     * retenir). Par groupe : on jette le plus mauvais (force nulle, sinon
+     * pire cote), puis top-quota à la force parmi les survivants. Quota-1 :
+     * même R2-force (inchangé). */
+    {
+      const candF = cases.map((c) => ({ c, s: force(c.num) }))
+        .sort((a, b) => ((b.s?.force ?? -1) - (a.s?.force ?? -1)) || (a.c.slot - b.c.slot))
+      if (q === 1) {
+        sel13.push(candF[0].c.num)
+      } else {
+        const pire = cases.slice().sort((a, b) =>
+          (((force(a.num) == null) ? 0 : 1) - ((force(b.num) == null) ? 0 : 1)) ||
+          (coteDe(cotes, b.num) - coteDe(cotes, a.num)))[0]
+        const vivants = cases.filter((c) => c.num !== pire.num)
+        vivants.map((c) => ({ c, s: force(c.num) }))
+          .sort((a, b) => ((b.s?.force ?? -1) - (a.s?.force ?? -1)) || (a.c.slot - b.c.slot))
+          .slice(0, q).forEach((x) => sel13.push(x.c.num))
+      }
     }
     if (q === 1) {
       // R2 : le plus fort aux stats, égalité → cote, rien → cote
@@ -204,7 +223,8 @@ for (const rec of closed) {
   const h6 = arr.filter((x) => sel6.includes(x)).length
   const h7 = arr.filter((x) => sel7.includes(x)).length
   const h12 = arr.filter((x) => sel12.includes(x)).length
-  tot1 += h1; tot2 += h2; tot3 += h3; tot4 += h4; tot5 += h5; tot6 += h6; tot7 += h7; tot12 += h12
+  const h13 = arr.filter((x) => sel13.includes(x)).length
+  tot1 += h1; tot2 += h2; tot3 += h3; tot4 += h4; tot5 += h5; tot6 += h6; tot7 += h7; tot12 += h12; tot13 += h13
   if (sel1.includes(arr[0])) win1++
   if (sel2.includes(arr[0])) win2++
   if (sel3.includes(arr[0])) win3++
@@ -213,9 +233,10 @@ for (const rec of closed) {
   if (sel6.includes(arr[0])) win6++
   if (sel7.includes(arr[0])) win7++
   if (sel12.includes(arr[0])) win12++
-  console.log(`${rec.date}  R1 ${h1}/5  |   R5 ${h5}/5${sel5.includes(arr[0]) ? ' ★1er' : ''}  |   R7 ${h7}/5${sel7.includes(arr[0]) ? ' ★1er' : ''}  |   R12 ${h12}/5${sel12.includes(arr[0]) ? ' ★1er' : ''} [${sel12.join(' ')}]   |   arr ${arr.join('-')}`)
+  if (sel13.includes(arr[0])) win13++
+  console.log(`${rec.date}  R1 ${h1}/5  |   R5 ${h5}/5${sel5.includes(arr[0]) ? ' ★1er' : ''}  |   R7 ${h7}/5${sel7.includes(arr[0]) ? ' ★1er' : ''}  |   R12 ${h12}/5${sel12.includes(arr[0]) ? ' ★1er' : ''}  |   R13 ${h13}/5${sel13.includes(arr[0]) ? ' ★1er' : ''} [${sel13.join(' ')}]   |   arr ${arr.join('-')}`)
 }
-console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   |   R2 = ${tot2}/${n * 5} · 1er ${win2}/${n}   |   R5 = ${tot5}/${n * 5} · 1er ${win5}/${n}   |   R7 = ${tot7}/${n * 5} · 1er ${win7}/${n}   |   R12 = ${tot12}/${n * 5} · 1er ${win12}/${n}`)
+console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   |   R2 = ${tot2}/${n * 5} · 1er ${win2}/${n}   |   R5 = ${tot5}/${n * 5} · 1er ${win5}/${n}   |   R7 = ${tot7}/${n * 5} · 1er ${win7}/${n}   |   R12 = ${tot12}/${n * 5} · 1er ${win12}/${n}   |   R13 = ${tot13}/${n * 5} · 1er ${win13}/${n}`)
 
 /* R8 VRAIE (15/10, spec utilisateur LITTÉRALE) : 0.9 × FORCE(P) + 0.1 × marché.
  * FORCE(P) = max des P(1er..5e) de la case (table PLACES, pas podium —
