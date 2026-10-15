@@ -80,7 +80,7 @@ const rangStats = (synthe) => {
 const closed = Object.values(db).filter((r) => r && (r.arrivee || []).length && (r.synthese || []).length)
 console.log('courses fermées :', closed.map((r) => r.date).join(' '))
 
-let tot1 = 0, tot2 = 0, tot3 = 0, tot4 = 0, tot5 = 0, tot6 = 0, win1 = 0, win2 = 0, win3 = 0, win4 = 0, win5 = 0, win6 = 0, n = 0
+let tot1 = 0, tot2 = 0, tot3 = 0, tot4 = 0, tot5 = 0, tot6 = 0, tot7 = 0, win1 = 0, win2 = 0, win3 = 0, win4 = 0, win5 = 0, win6 = 0, win7 = 0, n = 0
 for (const rec of closed) {
   const syn = rec.synthese.filter(Number.isFinite)
   const cid = Object.keys(cache).find((k) => k.startsWith(rec.date + '_'))
@@ -98,7 +98,7 @@ for (const rec of closed) {
     for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
     return (st.p[best] ?? 0) > 0 ? { place: best, force: st.p[best] } : null
   }
-  const sel1 = [], sel2 = [], sel3 = [], sel4 = [], sel5 = [], sel6 = []
+  const sel1 = [], sel2 = [], sel3 = [], sel4 = [], sel5 = [], sel6 = [], sel7 = []
   let complet = true
   // droughts causaux : courses fermées AVANT la course testée (jamais elle, jamais après)
   const avant = closed.filter((r) => r.date < rec.date)
@@ -173,6 +173,20 @@ for (const rec of closed) {
         parCote.slice(0, q).forEach((c) => sel6.push(c.num))
       }
     }
+    /* R7 (15/10) : 0.7 × taux_podium(P) + 0.3 × marché, TOUS les blocs
+     * (y compris quota-1 : hors du if/else ci-dessus, au niveau du groupe).
+     * taux_podium = podiums du P / N (stats LOO) ; marché = cote inversée
+     * normalisée (1 = meilleure). Top quota, égalité → carnet. */
+    {
+      const pod = new Map()
+      for (const b of stats.podiumBloc || []) for (const d of b.detail || []) pod.set(d.p, (d.n || 0) / Math.max(1, stats.nb))
+      const scat = cases.map((c) => coteDe(cotes, c.num))
+      const cMin = Math.min(...scat), cMax = Math.max(...scat)
+      const mkt = (c) => (cMax > cMin ? (cMax - coteDe(cotes, c.num)) / (cMax - cMin) : 0.5)
+      cases.slice()
+        .sort((a, b) => ((0.7 * (pod.get(b.slot) ?? 0) + 0.3 * mkt(b)) - (0.7 * (pod.get(a.slot) ?? 0) + 0.3 * mkt(a))) || (a.slot - b.slot))
+        .slice(0, q).forEach((c) => sel7.push(c.num))
+    }
   }
   if (!complet) { console.log(`${rec.date} : marché incomplet — sautée`); continue }
   n++
@@ -183,13 +197,15 @@ for (const rec of closed) {
   const h4 = arr.filter((x) => sel4.includes(x)).length
   const h5 = arr.filter((x) => sel5.includes(x)).length
   const h6 = arr.filter((x) => sel6.includes(x)).length
-  tot1 += h1; tot2 += h2; tot3 += h3; tot4 += h4; tot5 += h5; tot6 += h6
+  const h7 = arr.filter((x) => sel7.includes(x)).length
+  tot1 += h1; tot2 += h2; tot3 += h3; tot4 += h4; tot5 += h5; tot6 += h6; tot7 += h7
   if (sel1.includes(arr[0])) win1++
   if (sel2.includes(arr[0])) win2++
   if (sel3.includes(arr[0])) win3++
   if (sel4.includes(arr[0])) win4++
   if (sel5.includes(arr[0])) win5++
   if (sel6.includes(arr[0])) win6++
-  console.log(`${rec.date}  R1 ${h1}/5${sel1.includes(arr[0]) ? ' ★1er' : ''}  |   R2 ${h2}/5${sel2.includes(arr[0]) ? ' ★1er' : ''}  |   R3 ${h3}/5${sel3.includes(arr[0]) ? ' ★1er' : ''}  |   R4 ${h4}/5${sel4.includes(arr[0]) ? ' ★1er' : ''}  |   R5 ${h5}/5${sel5.includes(arr[0]) ? ' ★1er' : ''}  |   R6 ${h6}/5${sel6.includes(arr[0]) ? ' ★1er' : ''} [${sel6.join(' ')}]   |   arr ${arr.join('-')}`)
+  if (sel7.includes(arr[0])) win7++
+  console.log(`${rec.date}  R1 ${h1}/5  |   R5 ${h5}/5${sel5.includes(arr[0]) ? ' ★1er' : ''}  |   R7 ${h7}/5${sel7.includes(arr[0]) ? ' ★1er' : ''} [${sel7.join(' ')}]   |   arr ${arr.join('-')}`)
 }
-console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   |   R2 = ${tot2}/${n * 5} · 1er ${win2}/${n}   |   R3 = ${tot3}/${n * 5} · 1er ${win3}/${n}   |   R4 = ${tot4}/${n * 5} · 1er ${win4}/${n}   |   R5 = ${tot5}/${n * 5} · 1er ${win5}/${n}   |   R6 = ${tot6}/${n * 5} · 1er ${win6}/${n}`)
+console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   |   R2 = ${tot2}/${n * 5} · 1er ${win2}/${n}   |   R5 = ${tot5}/${n * 5} · 1er ${win5}/${n}   |   R7 = ${tot7}/${n * 5} · 1er ${win7}/${n}`)
