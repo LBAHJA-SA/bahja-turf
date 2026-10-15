@@ -1,4 +1,461 @@
 {
+  "2026-10-16": {
+    "date": "2026-10-16",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      3,
+      12,
+      6,
+      4,
+      7,
+      11,
+      13,
+      15,
+      1,
+      5,
+      14,
+      9,
+      8,
+      2,
+      10
+    ],
+    "savedAt": "2026-10-15T13:15:05.015Z",
+    "arrivee": null,
+    "ticket": [
+      12,
+      15,
+      6,
+      14,
+      1,
+      7,
+      11,
+      16
+    ],
+    "ticketSource": "page",
+    "ticketPoseLe": "2026-10-15T13:15:05.039Z",
+    "discipline": "Attelé",
+    "distance": 2850,
+    "nbPartants": 15,
+    "hippodrome": "Paris-Vincennes",
+    "prix": "6800000 DH",
+    "courseId": 146350,
+    "cle": "2026-10-16_R1_C4",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "sourceImport": "page"
+  },
+  "2026-10-15": {
+    "date": "2026-10-15",
+    "found": true,
+    "source": "utilisateur",
+    "synthese": [
+      3,
+      12,
+      7,
+      6,
+      11,
+      4,
+      13,
+      14,
+      15,
+      8,
+      1,
+      2,
+      5,
+      10,
+      9
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "Plat",
+    "distance": 1200,
+    "hippodrome": "Chantilly",
+    "courseId": 146279,
+    "cle": "2026-10-15_R1_C1",
+    "prix": "5090000 DH",
+    "ticket": [
+      5,
+      4,
+      6,
+      7,
+      1,
+      3,
+      11,
+      8
+    ],
+    "collecte": "2026-10-15T13:21:57.262Z",
+    "ticketMode": "auto",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          3,
+          7,
+          6
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          11,
+          4
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          1
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          5
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-15T13:22:32.757Z",
+    "scores": [
+      {
+        "num": 1,
+        "nom": "SWEET CHOP",
+        "global": 7.02,
+        "forme": 3.3,
+        "dist": 9.73,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 2,
+        "nom": "LESSLEPASSER",
+        "global": 6.4,
+        "forme": 0.45,
+        "dist": 9.78,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 3,
+        "nom": "MISTER CHANG",
+        "global": 7.01,
+        "forme": 3.01,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 4,
+        "nom": "GRAND SCOOP",
+        "global": 7,
+        "forme": 2.95,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 5,
+        "nom": "HELLO CAREL",
+        "global": 7.42,
+        "forme": 6.56,
+        "dist": 8.31,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 6,
+        "nom": "MAI DIRE MAI",
+        "global": 6.81,
+        "forme": 2.35,
+        "dist": 9.73,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 7,
+        "nom": "SILK ROADSTER",
+        "global": 7.8,
+        "forme": 7.68,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 8,
+        "nom": "PRINCE AUBOIS",
+        "global": 6.58,
+        "forme": 3.67,
+        "dist": 8.46,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 9,
+        "nom": "AWAITING CHRISTMAS",
+        "global": 6.94,
+        "forme": 4.74,
+        "dist": 9.44,
+        "piste": 6.51,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 10,
+        "nom": "ROYALWOOD",
+        "global": 6.18,
+        "forme": 0.34,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 11,
+        "nom": "SCHUMAN",
+        "global": 6.42,
+        "forme": 1.58,
+        "dist": 10,
+        "piste": 6.78,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 12,
+        "nom": "HEROISTE",
+        "global": 6.03,
+        "forme": 2.88,
+        "dist": 8.38,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 13,
+        "nom": "ASHERAH",
+        "global": 5.97,
+        "forme": 3,
+        "dist": 8,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 14,
+        "nom": "YOKEN",
+        "global": 5.82,
+        "forme": 1.51,
+        "dist": 9.07,
+        "piste": 6.66,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 15,
+        "nom": "ROZARION",
+        "global": 5.76,
+        "forme": 0.96,
+        "dist": 9.07,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 16,
+        "nom": "SIMPLY LOVELY",
+        "global": 5.9,
+        "forme": 2.52,
+        "dist": 9.27,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 3,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      }
+    ],
+    "arrivee": [
+      12,
+      11,
+      8,
+      9,
+      15
+    ],
+    "cloture": "2026-10-15T13:22:32.757Z"
+  },
   "2026-10-14": {
     "date": "2026-10-14",
     "found": true,
