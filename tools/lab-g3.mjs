@@ -269,3 +269,63 @@ console.log(`\nTOTAL ${n} courses : R1 = ${tot1}/${n * 5} · 1er ${win1}/${n}   
   console.log(`\nTOTAL ${n8} : R8 = ${t8}/${n8 * 5} · 1er ${w8}/${n8}  |  R9 (sans marché) = ${t9}/${n8 * 5} · 1er ${w9}/${n8}  |  GELÉ = ${tF}/${n8 * 5} · 1er ${wF}/${n8}`)
   console.log(`marché (10%) : picks gagnants ajoutés ${flipOk} · picks gagnants retirés ${flipKo} · NET ${flipOk >= flipKo ? '+' : ''}${flipOk - flipKo}`)
 }
+
+/* R11 (15/10) : VALUE = podium(P) − attendu(rang-marché). Le rang-marché
+ * (1er/2e/3e/4e moins cher du bloc) a son propre taux LOO ; value = ce que
+ * la case rapporte AU-DELÀ de ce que son rang promet. Top quota à value,
+ * égalité → carnet. 6 courses à marché (même protocole). */
+{
+  console.log('\n══ R11 : value = podium(P) − attendu(rang-marché) ══')
+  let t11 = 0, w11 = 0, n11 = 0
+  for (const rec of closed) {
+    const syn = rec.synthese.filter(Number.isFinite)
+    const cid = Object.keys(cache).find((k) => k.startsWith(rec.date + '_'))
+    const cotes = cid && cache[cid].cotes ? Object.fromEntries(cache[cid].cotes.map((x) => [x.num, x])) : null
+    if (!cotes) continue
+    const LOO = closed.filter((r) => r.date !== rec.date)
+    const stats = computeStats(LOO)
+    const pod = new Map()
+    for (const b of stats.podiumBloc || []) for (const d of b.detail || []) pod.set(d.p, (d.n || 0) / Math.max(1, stats.nb))
+    // attendu[rang-marché] sur le même LOO : le rang r du bloc podium combien ?
+    const att = new Map()
+    for (const rr of LOO) {
+      const s2 = rr.synthese.filter(Number.isFinite)
+      const c2 = Object.keys(cache).find((k) => k.startsWith(rr.date + '_'))
+      const co2 = c2 && cache[c2].cotes ? Object.fromEntries(cache[c2].cotes.map((x) => [x.num, x.cote])) : null
+      if (!co2) continue
+      const g2 = buildGrid(s2, rr.runners || [])
+      for (const gg of GROUPES) {
+        const cs = g2.groupes.flatMap((x) => x.cases).filter((c) => c.slot >= gg.min && c.slot <= gg.max)
+        if (cs.length < 2 || !cs.every((c) => coteDe(co2, c.num) != null)) continue
+        const ord = cs.slice().sort((a, b) => coteDe(co2, a.num) - coteDe(co2, b.num))
+        ord.forEach((c, i) => {
+          const k = 'r' + (i + 1)
+          if (!att.has(k)) att.set(k, { n: 0, hit: 0 })
+          const e = att.get(k)
+          e.n++
+          if ((rr.arrivee || []).slice(0, 3).includes(c.num)) e.hit++
+        })
+      }
+    }
+    const exp = new Map([...att.entries()].map(([k, v]) => [k, v.hit / Math.max(1, v.n)]))
+    const grille = buildGrid(syn, rec.runners || [])
+    const sel = []
+    for (const g of GROUPES) {
+      const cases = grille.groupes.flatMap((x) => x.cases).filter((c) => c.slot >= g.min && c.slot <= g.max)
+      if (!cases.length || !cases.every((c) => coteDe(cotes, c.num) != null)) continue
+      const q = Math.min(QUOTAS[g.id], cases.length)
+      const ord = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
+      const rk = new Map(ord.map((c, i) => [c.num, i + 1]))
+      cases.slice()
+        .sort((a, b) => (((pod.get(b.slot) ?? 0) - (exp.get('r' + rk.get(b.num)) ?? 0)) - (((pod.get(a.slot) ?? 0) - (exp.get('r' + rk.get(a.num)) ?? 0)))) || (a.slot - b.slot))
+        .slice(0, q).forEach((c) => sel.push(c.num))
+    }
+    if (!sel.length) continue
+    const arr = rec.arrivee.slice(0, 5)
+    const h = arr.filter((x) => sel.includes(x)).length
+    t11 += h; n11++
+    if (sel.includes(arr[0])) w11++
+    console.log(`${rec.date}  R11 ${h}/5${sel.includes(arr[0]) ? ' ★1er' : ''} [${sel.join(' ')}]  |  arr ${arr.join('-')}`)
+  }
+  console.log(`\nTOTAL R11 = ${t11}/${n11 * 5} · 1er ${w11}/${n11}`)
+}
