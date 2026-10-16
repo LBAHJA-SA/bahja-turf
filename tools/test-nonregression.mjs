@@ -45,7 +45,7 @@ for (const d of Object.keys(db).sort()) {
   const grille = buildGrid(r.synthese, r.runners)
   const brut = (r.scores || []).map((s) => ({ p: { num: s.num }, s, ok: (s.filtres || []).every((x) => x) }))
   const classement = brut.length ? classerPhysique(brut) : []
-  const cotes = Object.fromEntries((eq[r.courseId]?.cotes || []).map((x) => [x.num, x]))
+  const cotes = Object.fromEntries((eq[r.cle || r.courseId]?.cotes || []).map((x) => [x.num, x]))
   /* ⚠ ANTI-FUITE : on juge chaque course avec les stats SANS elle (leave-one-out),
    * comme en production — la course à jouer n'est jamais dans son propre apprentissage. */
   const statsLOO = computeStats(archive.filter((x) => x !== r))

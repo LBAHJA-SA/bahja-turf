@@ -1,9 +1,9 @@
 {
  "2026-10-01_R1_C1": {
   "source": "equidia.fr",
-  "hippodrome": null,
-  "distance": null,
-  "discipline": null,
+  "hippodrome": "AUTEUIL",
+  "distance": 3600,
+  "discipline": "HAIE",
   "favori": 3,
   "cotes": [
    {
@@ -14,7 +14,7 @@
     "tendance": "+",
     "favori": true,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 4,
@@ -24,7 +24,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 1,
@@ -34,7 +34,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 13,
@@ -43,8 +43,8 @@
     "ouverture": 8.4,
     "tendance": "-",
     "favori": false,
-    "enjeu": 435226,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 7,
@@ -54,7 +54,7 @@
     "tendance": "-",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 15,
@@ -63,8 +63,8 @@
     "ouverture": 16,
     "tendance": "-",
     "favori": false,
-    "enjeu": 435226,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 12,
@@ -73,8 +73,8 @@
     "ouverture": 11,
     "tendance": "-",
     "favori": false,
-    "enjeu": 435226,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 14,
@@ -83,8 +83,8 @@
     "ouverture": 11,
     "tendance": "+",
     "favori": false,
-    "enjeu": 435226,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 9,
@@ -94,7 +94,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 6,
@@ -104,7 +104,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 5,
@@ -114,7 +114,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 11,
@@ -123,8 +123,8 @@
     "ouverture": 28,
     "tendance": "+",
     "favori": false,
-    "enjeu": 435226,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 2,
@@ -134,7 +134,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 10,
@@ -144,7 +144,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    },
    {
     "num": 8,
@@ -154,15 +154,16 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T13:58:00+02:00"
+    "heure": "2026-10-16T13:58:00+02:00"
    }
-  ]
+  ],
+  "backfill": "2026-10-16"
  },
  "2026-10-02_R1_C4": {
   "source": "equidia.fr",
-  "hippodrome": null,
-  "distance": null,
-  "discipline": null,
+  "hippodrome": "VINCENNES",
+  "distance": 2700,
+  "discipline": "ATTELE",
   "favori": 4,
   "cotes": [
    {
@@ -173,7 +174,7 @@
     "tendance": "-",
     "favori": true,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 11,
@@ -182,8 +183,8 @@
     "ouverture": 6.1,
     "tendance": "-",
     "favori": false,
-    "enjeu": 442195,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 6,
@@ -193,7 +194,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 13,
@@ -202,8 +203,8 @@
     "ouverture": 6.7,
     "tendance": "+",
     "favori": false,
-    "enjeu": 442195,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 9,
@@ -213,7 +214,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 5,
@@ -223,7 +224,7 @@
     "tendance": "-",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 14,
@@ -232,8 +233,8 @@
     "ouverture": 15,
     "tendance": "+",
     "favori": false,
-    "enjeu": 442195,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 3,
@@ -243,7 +244,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 12,
@@ -252,8 +253,8 @@
     "ouverture": 18,
     "tendance": "+",
     "favori": false,
-    "enjeu": 442195,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 10,
@@ -263,7 +264,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 7,
@@ -273,7 +274,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 2,
@@ -283,7 +284,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 8,
@@ -293,7 +294,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    },
    {
     "num": 1,
@@ -303,15 +304,16 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T20:15:00+02:00"
+    "heure": "2026-10-16T20:15:00+02:00"
    }
-  ]
+  ],
+  "backfill": "2026-10-16"
  },
  "2026-10-03_R1_C4": {
   "source": "equidia.fr",
-  "hippodrome": null,
-  "distance": null,
-  "discipline": null,
+  "hippodrome": "PARISLONGCHAMP",
+  "distance": 2500,
+  "discipline": "Plat",
   "favori": 4,
   "cotes": [
    {
@@ -322,7 +324,7 @@
     "tendance": "+",
     "favori": true,
     "enjeu": 0,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "heure": "2026-10-16T15:17:00+02:00"
    },
    {
     "num": 8,
@@ -332,7 +334,7 @@
     "tendance": "-",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "heure": "2026-10-16T15:17:00+02:00"
    },
    {
     "num": 13,
@@ -341,8 +343,8 @@
     "ouverture": 7.9,
     "tendance": "+",
     "favori": false,
-    "enjeu": 571139,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 11,
@@ -351,8 +353,8 @@
     "ouverture": 12,
     "tendance": "+",
     "favori": false,
-    "enjeu": 571139,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 18,
@@ -361,8 +363,8 @@
     "ouverture": 8.1,
     "tendance": "+",
     "favori": false,
-    "enjeu": 571139,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 5,
@@ -371,8 +373,8 @@
     "ouverture": 12,
     "tendance": "+",
     "favori": false,
-    "enjeu": 571139,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T15:17:00+02:00"
    },
    {
     "num": 6,
@@ -382,7 +384,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 9,
@@ -392,7 +394,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 17,
@@ -401,8 +403,8 @@
     "ouverture": 28,
     "tendance": "-",
     "favori": false,
-    "enjeu": 571139,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 16,
@@ -411,8 +413,8 @@
     "ouverture": 20,
     "tendance": "+",
     "favori": false,
-    "enjeu": 571139,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 3,
@@ -422,7 +424,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "heure": "2026-10-16T15:17:00+02:00"
    },
    {
     "num": 15,
@@ -431,8 +433,8 @@
     "ouverture": 46,
     "tendance": "-",
     "favori": false,
-    "enjeu": 571139,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 14,
@@ -441,8 +443,8 @@
     "ouverture": 34,
     "tendance": "-",
     "favori": false,
-    "enjeu": 571139,
-    "heure": "2026-10-05T15:16:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T15:16:00+02:00"
    },
    {
     "num": 7,
@@ -452,7 +454,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "heure": "2026-10-16T15:17:00+02:00"
    },
    {
     "num": 2,
@@ -462,7 +464,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "heure": "2026-10-16T15:17:00+02:00"
    },
    {
     "num": 1,
@@ -472,7 +474,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "heure": "2026-10-16T15:17:00+02:00"
    },
    {
     "num": 10,
@@ -482,7 +484,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "heure": "2026-10-16T15:17:00+02:00"
    },
    {
     "num": 12,
@@ -492,15 +494,16 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T15:17:00+02:00"
+    "heure": "2026-10-16T15:17:00+02:00"
    }
-  ]
+  ],
+  "backfill": "2026-10-16"
  },
  "2026-10-04_R1_C5": {
   "source": "equidia.fr",
-  "hippodrome": null,
-  "distance": null,
-  "discipline": null,
+  "hippodrome": "Parislongchamp",
+  "distance": 2400,
+  "discipline": "Plat",
   "favori": 1,
   "cotes": [
    {
@@ -511,7 +514,7 @@
     "tendance": "-",
     "favori": true,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 9,
@@ -521,7 +524,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 14,
@@ -530,8 +533,8 @@
     "ouverture": 8.4,
     "tendance": "+",
     "favori": false,
-    "enjeu": 2202391,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 15,
@@ -540,8 +543,8 @@
     "ouverture": 16,
     "tendance": "+",
     "favori": false,
-    "enjeu": 2202391,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 11,
@@ -550,8 +553,8 @@
     "ouverture": 14,
     "tendance": "-",
     "favori": false,
-    "enjeu": 2202391,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 16,
@@ -560,8 +563,8 @@
     "ouverture": 14,
     "tendance": "+",
     "favori": false,
-    "enjeu": 2153339,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 12,
@@ -570,8 +573,8 @@
     "ouverture": 27,
     "tendance": "-",
     "favori": false,
-    "enjeu": 2202391,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 10,
@@ -581,7 +584,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 5,
@@ -591,7 +594,7 @@
     "tendance": "-",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 8,
@@ -601,7 +604,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 7,
@@ -611,7 +614,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 2,
@@ -621,7 +624,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 4,
@@ -631,7 +634,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 6,
@@ -641,7 +644,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 13,
@@ -651,7 +654,7 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    },
    {
     "num": 3,
@@ -661,66 +664,67 @@
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T16:08:00+02:00"
+    "heure": "2026-10-16T16:08:00+02:00"
    }
-  ]
+  ],
+  "backfill": "2026-10-16"
  },
  "2026-10-05_R1_C1": {
   "source": "equidia.fr",
-  "hippodrome": null,
-  "distance": null,
-  "discipline": null,
+  "hippodrome": "Enghien",
+  "distance": 2875,
+  "discipline": "Attelé",
   "favori": 9,
   "cotes": [
    {
     "num": 9,
     "nom": "BLACK HEUVELLAND",
-    "cote": 3.1,
-    "ouverture": 3.1,
-    "tendance": "+",
-    "favori": true,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
-   },
-   {
-    "num": 12,
-    "nom": "TAURUS CROWN",
-    "cote": 6.1,
-    "ouverture": 6.1,
+    "cote": 2.3,
+    "ouverture": 2.8,
     "tendance": "-",
-    "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 5,
     "nom": "SOKRATES",
-    "cote": 6.7,
+    "cote": 7,
+    "ouverture": 6.8,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "TAURUS CROWN",
+    "cote": 7.4,
     "ouverture": 6.7,
     "tendance": "+",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 8,
     "nom": "LORD ON WAY",
-    "cote": 7.1,
-    "ouverture": 7.1,
+    "cote": 8,
+    "ouverture": 7.4,
     "tendance": "+",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 11,
     "nom": "LONGWOOD D'HERIPRE",
-    "cote": 8.7,
-    "ouverture": 8.7,
+    "cote": 9.2,
+    "ouverture": 8.2,
     "tendance": "-",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 13,
@@ -729,90 +733,91 @@
     "ouverture": 12,
     "tendance": "-",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 3,
     "nom": "OLIVER SCHERMER",
-    "cote": 17,
-    "ouverture": 17,
-    "tendance": "-",
+    "cote": 22,
+    "ouverture": 19,
+    "tendance": "+",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 7,
     "nom": "LUCIUS DE PUCH",
-    "cote": 26,
-    "ouverture": 26,
+    "cote": 23,
+    "ouverture": 27,
     "tendance": "-",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
-   },
-   {
-    "num": 10,
-    "nom": "LORD SUN DRALIAM",
-    "cote": 40,
-    "ouverture": 40,
-    "tendance": "+",
-    "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 2,
     "nom": "FRISEE KB FONT",
-    "cote": 44,
-    "ouverture": 44,
+    "cote": 59,
+    "ouverture": 39,
     "tendance": "+",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "LORD SUN DRALIAM",
+    "cote": 62,
+    "ouverture": 44,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 1,
     "nom": "FABIUS ORS",
-    "cote": 50,
-    "ouverture": 50,
-    "tendance": "-",
+    "cote": 82,
+    "ouverture": 63,
+    "tendance": "+",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 6,
     "nom": "LEAD ME ON",
-    "cote": 56,
-    "ouverture": 56,
+    "cote": 98,
+    "ouverture": 68,
     "tendance": "+",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 14,
     "nom": "L'INTOUCHABLE",
-    "cote": 61,
-    "ouverture": 61,
-    "tendance": "-",
+    "cote": 129,
+    "ouverture": 79,
+    "tendance": "+",
     "favori": false,
-    "enjeu": 14162,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
    },
    {
     "num": 4,
     "nom": "LOOK DE VALAILLES",
-    "cote": 96,
-    "ouverture": 96,
+    "cote": 163,
+    "ouverture": 113,
     "tendance": "+",
     "favori": false,
     "enjeu": 0,
-    "heure": "2026-10-05T09:00:00+02:00"
+    "heure": "2026-10-16T13:56:00+02:00"
    }
-  ]
+  ],
+  "backfill": "2026-10-16"
  },
  "2026-10-05_R2_C7": {
   "source": "equidia.fr",
@@ -830,153 +835,2155 @@
    {
     "num": 10,
     "nom": "IRISH NICE ELGE",
-    "cote": 4.4,
-    "ouverture": 4.3,
-    "tendance": "+",
+    "cote": 3.1,
+    "ouverture": 4.4,
+    "tendance": "-",
     "favori": true,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 13,
     "nom": "I STILL LOVING YOU",
-    "cote": 6.2,
-    "ouverture": 6.1,
+    "cote": 5.4,
+    "ouverture": 5.6,
     "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 14,
     "nom": "INDIEN DE FONTAINE",
-    "cote": 6.6,
-    "ouverture": 6.6,
-    "tendance": "-",
+    "cote": 7.1,
+    "ouverture": 7.1,
+    "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 5,
     "nom": "JYTRACE DE HOUELLE",
-    "cote": 8.2,
-    "ouverture": 8.3,
+    "cote": 8.5,
+    "ouverture": 7.4,
     "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 6,
     "nom": "JANNIG D'EREVAN",
-    "cote": 9.1,
-    "ouverture": 9.7,
+    "cote": 8.6,
+    "ouverture": 9.1,
     "tendance": "-",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 15,
     "nom": "ILEO PIERJI",
     "cote": 10,
-    "ouverture": 10,
-    "tendance": "-",
+    "ouverture": 9.5,
+    "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 2,
     "nom": "HEAVEN D'ECAJEUL",
-    "cote": 13,
-    "ouverture": 13,
-    "tendance": "-",
+    "cote": 19,
+    "ouverture": 14,
+    "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 12,
     "nom": "INHERIT",
-    "cote": 16,
-    "ouverture": 16,
-    "tendance": "+",
+    "cote": 21,
+    "ouverture": 17,
+    "tendance": "-",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 7,
     "nom": "IZIJAL",
-    "cote": 19,
-    "ouverture": 19,
-    "tendance": "-",
+    "cote": 27,
+    "ouverture": 21,
+    "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 8,
     "nom": "HORIZON DU THAY",
-    "cote": 31,
-    "ouverture": 31,
-    "tendance": "-",
+    "cote": 50,
+    "ouverture": 34,
+    "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 9,
     "nom": "INEDIT DU PAVILLON",
-    "cote": 34,
-    "ouverture": 33,
+    "cote": 67,
+    "ouverture": 40,
     "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 3,
     "nom": "HORACIO DE CERISY",
-    "cote": 59,
-    "ouverture": 55,
+    "cote": 108,
+    "ouverture": 68,
     "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 4,
     "nom": "HISTORY MAJYC",
-    "cote": 82,
-    "ouverture": 89,
-    "tendance": "-",
-    "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
-   },
-   {
-    "num": 1,
-    "nom": "IGLOO DE BEAULIEU",
-    "cote": 87,
-    "ouverture": 80,
+    "cote": 139,
+    "ouverture": 96,
     "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    },
    {
     "num": 11,
     "nom": "HOVE PONT VAUTIER",
-    "cote": 94,
-    "ouverture": 89,
+    "cote": 156,
+    "ouverture": 100,
     "tendance": "+",
     "favori": false,
-    "enjeu": 45225,
-    "heure": "2026-10-09T12:00:00+02:00"
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "IGLOO DE BEAULIEU",
+    "cote": 158,
+    "ouverture": 105,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T20:17:00+02:00"
    }
-  ]
+  ],
+  "hippodrome": "VINCENNES",
+  "distance": 2850,
+  "discipline": "ATTELE",
+  "backfill": "2026-10-16"
+ },
+ "2026-10-10_R1_C4": {
+  "source": "equidia.fr",
+  "favori": 2,
+  "cotes": [
+   {
+    "num": 2,
+    "nom": "KASSYA",
+    "cote": 5.2,
+    "ouverture": 5.3,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 18,
+    "nom": "KAPTAIN DU LIAMONE",
+    "cote": 6.3,
+    "ouverture": 6.4,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "KASH DES CAILLONS",
+    "cote": 7.1,
+    "ouverture": 6.7,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "KALINE DU LOCHEUR",
+    "cote": 8.5,
+    "ouverture": 8.8,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "IGUANE DE CAPONET",
+    "cote": 10,
+    "ouverture": 10,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "HORUS DE VAL",
+    "cote": 13,
+    "ouverture": 13,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "ISIA DU CHENE",
+    "cote": 13,
+    "ouverture": 14,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "KNOCKONWOOD",
+    "cote": 14,
+    "ouverture": 14,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "JAMAIS",
+    "cote": 16,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "KORONA DELADOU",
+    "cote": 17,
+    "ouverture": 17,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "IASELMA",
+    "cote": 32,
+    "ouverture": 30,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "JUDY MATIDY",
+    "cote": 40,
+    "ouverture": 38,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "IL PLEUT BERGERE",
+    "cote": 45,
+    "ouverture": 47,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "KALITA D'HENINEL",
+    "cote": 80,
+    "ouverture": 73,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "HABIT DE SOIREE",
+    "cote": 83,
+    "ouverture": 75,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 17,
+    "nom": "GINO VIVA",
+    "cote": 91,
+    "ouverture": 87,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "JANE AIMEE",
+    "cote": 102,
+    "ouverture": 94,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "INDICE DELADOU",
+    "cote": 135,
+    "ouverture": 133,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-10T13:45:00+02:00"
+   }
+  ],
+  "snapshots": {
+   "h_moins_3": {
+    "heure": "2026-10-10T10:00:07.241Z",
+    "cotes": [
+     {
+      "num": 2,
+      "nom": "KASSYA",
+      "cote": 5.2,
+      "ouverture": 5.3,
+      "tendance": "-",
+      "favori": true,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 18,
+      "nom": "KAPTAIN DU LIAMONE",
+      "cote": 6.3,
+      "ouverture": 6.2,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 10,
+      "nom": "KASH DES CAILLONS",
+      "cote": 6.8,
+      "ouverture": 6.7,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 4,
+      "nom": "KALINE DU LOCHEUR",
+      "cote": 8.8,
+      "ouverture": 8.8,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 15,
+      "nom": "IGUANE DE CAPONET",
+      "cote": 10,
+      "ouverture": 10,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 1,
+      "nom": "HORUS DE VAL",
+      "cote": 14,
+      "ouverture": 14,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 8,
+      "nom": "ISIA DU CHENE",
+      "cote": 14,
+      "ouverture": 14,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 9,
+      "nom": "KNOCKONWOOD",
+      "cote": 14,
+      "ouverture": 14,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 11,
+      "nom": "JAMAIS",
+      "cote": 16,
+      "ouverture": 17,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 3,
+      "nom": "KORONA DELADOU",
+      "cote": 17,
+      "ouverture": 17,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 7,
+      "nom": "IASELMA",
+      "cote": 30,
+      "ouverture": 29,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 12,
+      "nom": "JUDY MATIDY",
+      "cote": 42,
+      "ouverture": 43,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 6,
+      "nom": "IL PLEUT BERGERE",
+      "cote": 45,
+      "ouverture": 43,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 5,
+      "nom": "KALITA D'HENINEL",
+      "cote": 71,
+      "ouverture": 69,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 16,
+      "nom": "HABIT DE SOIREE",
+      "cote": 71,
+      "ouverture": 71,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 17,
+      "nom": "GINO VIVA",
+      "cote": 85,
+      "ouverture": 84,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 13,
+      "nom": "JANE AIMEE",
+      "cote": 94,
+      "ouverture": 94,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     },
+     {
+      "num": 14,
+      "nom": "INDICE DELADOU",
+      "cote": 129,
+      "ouverture": 121,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 76009,
+      "heure": "2026-10-10T11:45:00+02:00"
+     }
+    ]
+   },
+   "h_moins_2": {
+    "heure": "2026-10-10T11:00:06.313Z",
+    "cotes": [
+     {
+      "num": 2,
+      "nom": "KASSYA",
+      "cote": 5.3,
+      "ouverture": 5.3,
+      "tendance": "+",
+      "favori": true,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 18,
+      "nom": "KAPTAIN DU LIAMONE",
+      "cote": 6.4,
+      "ouverture": 6.4,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 105351,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 10,
+      "nom": "KASH DES CAILLONS",
+      "cote": 6.8,
+      "ouverture": 6.7,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 4,
+      "nom": "KALINE DU LOCHEUR",
+      "cote": 8.8,
+      "ouverture": 8.8,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 15,
+      "nom": "IGUANE DE CAPONET",
+      "cote": 10,
+      "ouverture": 10,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 105351,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 1,
+      "nom": "HORUS DE VAL",
+      "cote": 13,
+      "ouverture": 13,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 105351,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 8,
+      "nom": "ISIA DU CHENE",
+      "cote": 13,
+      "ouverture": 14,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 9,
+      "nom": "KNOCKONWOOD",
+      "cote": 14,
+      "ouverture": 14,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 11,
+      "nom": "JAMAIS",
+      "cote": 16,
+      "ouverture": 16,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 105351,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 3,
+      "nom": "KORONA DELADOU",
+      "cote": 17,
+      "ouverture": 17,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 7,
+      "nom": "IASELMA",
+      "cote": 31,
+      "ouverture": 30,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 12,
+      "nom": "JUDY MATIDY",
+      "cote": 38,
+      "ouverture": 38,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 105351,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 6,
+      "nom": "IL PLEUT BERGERE",
+      "cote": 46,
+      "ouverture": 47,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 5,
+      "nom": "KALITA D'HENINEL",
+      "cote": 73,
+      "ouverture": 73,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 16,
+      "nom": "HABIT DE SOIREE",
+      "cote": 77,
+      "ouverture": 75,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 17,
+      "nom": "GINO VIVA",
+      "cote": 88,
+      "ouverture": 87,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 13,
+      "nom": "JANE AIMEE",
+      "cote": 98,
+      "ouverture": 94,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     },
+     {
+      "num": 14,
+      "nom": "INDICE DELADOU",
+      "cote": 134,
+      "ouverture": 133,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-10T12:45:00+02:00"
+     }
+    ]
+   }
+  }
+ },
+ "2026-10-06_R1_C1": {
+  "source": "equidia.fr",
+  "hippodrome": "Auteuil",
+  "distance": 3600,
+  "discipline": "Haies",
+  "favori": 3,
+  "cotes": [
+   {
+    "num": 3,
+    "nom": "MASKINA",
+    "cote": 3.7,
+    "ouverture": 6.2,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "DINADAME",
+    "cote": 5.3,
+    "ouverture": 7.8,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "PASCIALELLA",
+    "cote": 5.5,
+    "ouverture": 5,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "EMSILORD",
+    "cote": 10,
+    "ouverture": 9.7,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "OVALIE",
+    "cote": 11,
+    "ouverture": 9.5,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "GABISON",
+    "cote": 14,
+    "ouverture": 10,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "FALCON JET",
+    "cote": 15,
+    "ouverture": 18,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "ROMAN SKIES",
+    "cote": 21,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "MEMERHON",
+    "cote": 22,
+    "ouverture": 17,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "OPTIMUS",
+    "cote": 24,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "LOUMINOS",
+    "cote": 38,
+    "ouverture": 23,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "RAFFLES PRINCESS",
+    "cote": 46,
+    "ouverture": 29,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "CHATEAU ESQUIULE",
+    "cote": 61,
+    "ouverture": 33,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "LE PROFESSIONNEL",
+    "cote": 95,
+    "ouverture": 55,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "LE TREZY",
+    "cote": 113,
+    "ouverture": 59,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:58:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
+ },
+ "2026-10-07_R1_C1": {
+  "source": "equidia.fr",
+  "hippodrome": "Enghien",
+  "distance": 2875,
+  "discipline": "Attelé",
+  "favori": 17,
+  "cotes": [
+   {
+    "num": 17,
+    "nom": "IMAGE D'ATALANTE",
+    "cote": 3.8,
+    "ouverture": 4.3,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "JAIN MAB",
+    "cote": 7.5,
+    "ouverture": 9.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "JEUNE ORANGE COTON",
+    "cote": 7.9,
+    "ouverture": 27,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "IDOLE ELDE",
+    "cote": 9.3,
+    "ouverture": 11,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "JUSTICIA SMART",
+    "cote": 10,
+    "ouverture": 13,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "IXELLE BLEUE",
+    "cote": 13,
+    "ouverture": 12,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 18,
+    "nom": "JOIE DE LA COTE",
+    "cote": 14,
+    "ouverture": 11,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "JALOUZ D'OLIVERIE",
+    "cote": 15,
+    "ouverture": 14,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "INES DE LA ROUVRE",
+    "cote": 15,
+    "ouverture": 13,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "JOYCE PILE",
+    "cote": 23,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "JET GIRL",
+    "cote": 24,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "JAHIA DU TRIO",
+    "cote": 36,
+    "ouverture": 56,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "JURELLA DE PALM",
+    "cote": 57,
+    "ouverture": 58,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "JAMAICA D'OYSE",
+    "cote": 70,
+    "ouverture": 51,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "JULIE DU CLOS",
+    "cote": 76,
+    "ouverture": 60,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "ICONE PONT VAUTIER",
+    "cote": 141,
+    "ouverture": 98,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "JONQUILLETE CREPIN",
+    "cote": 185,
+    "ouverture": 131,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:55:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
+ },
+ "2026-10-08_R1_C1": {
+  "source": "equidia.fr",
+  "hippodrome": "Saint-Cloud",
+  "distance": 2000,
+  "discipline": "Plat",
+  "favori": 1,
+  "cotes": [
+   {
+    "num": 1,
+    "nom": "DARZAKIR",
+    "cote": 3.2,
+    "ouverture": 6.6,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "MISTER BLACK",
+    "cote": 6.2,
+    "ouverture": 5.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "VICTORY PACE",
+    "cote": 8,
+    "ouverture": 9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "STAN LE GRAND",
+    "cote": 10,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "FAOLIO",
+    "cote": 12,
+    "ouverture": 11,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "LAPENTY",
+    "cote": 14,
+    "ouverture": 11,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "ENTLEBUCH",
+    "cote": 16,
+    "ouverture": 13,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "SAGARMATHA",
+    "cote": 19,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "ARANYANI",
+    "cote": 23,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "DERAWAR",
+    "cote": 25,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "MY HABITUDE",
+    "cote": 29,
+    "ouverture": 20,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "FRENCH COLORADO",
+    "cote": 34,
+    "ouverture": 22,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "LE FUTUR",
+    "cote": 39,
+    "ouverture": 22,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "CHILL Y FLAMA",
+    "cote": 56,
+    "ouverture": 34,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "STARGATOR",
+    "cote": 70,
+    "ouverture": 42,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "IKOTOFETSY",
+    "cote": 71,
+    "ouverture": 52,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:59:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
+ },
+ "2026-10-11_R1_C3": {
+  "source": "equidia.fr",
+  "hippodrome": "Auteuil",
+  "distance": 4700,
+  "discipline": "Steeple chase",
+  "favori": 15,
+  "cotes": [
+   {
+    "num": 15,
+    "nom": "KALIBRE",
+    "cote": 3.9,
+    "ouverture": 5.3,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 479936,
+    "heure": "2026-10-16T15:20:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "PASCARD DE BEAUSSE",
+    "cote": 5.2,
+    "ouverture": 6.6,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:21:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "TANTE ZENA",
+    "cote": 6,
+    "ouverture": 8.5,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 479936,
+    "heure": "2026-10-16T15:20:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "LE PETIT CHEVAL",
+    "cote": 13,
+    "ouverture": 10,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:21:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "ILLAHO",
+    "cote": 14,
+    "ouverture": 10,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:20:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "JOHNNY ROQUE",
+    "cote": 15,
+    "ouverture": 11,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:21:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "AMY DU KIFF",
+    "cote": 17,
+    "ouverture": 13,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:21:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "CALIGRAMME",
+    "cote": 24,
+    "ouverture": 21,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:21:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "QUEL PATRON",
+    "cote": 26,
+    "ouverture": 19,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:21:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "GINJA DES TAILLONS",
+    "cote": 26,
+    "ouverture": 19,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:20:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "LUMINO BELLO",
+    "cote": 27,
+    "ouverture": 20,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 479936,
+    "heure": "2026-10-16T15:20:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "MASTER NONANTAIS",
+    "cote": 28,
+    "ouverture": 22,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 479936,
+    "heure": "2026-10-16T15:20:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "LEBRIO DES MOTTES",
+    "cote": 30,
+    "ouverture": 22,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 479936,
+    "heure": "2026-10-16T15:20:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "PICKLAND",
+    "cote": 32,
+    "ouverture": 37,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T15:21:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "BENOU",
+    "cote": 49,
+    "ouverture": 37,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 479936,
+    "heure": "2026-10-16T15:20:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "KUCHARSKY",
+    "cote": 78,
+    "ouverture": 52,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 479936,
+    "heure": "2026-10-16T15:20:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
+ },
+ "2026-10-13_R1_C1": {
+  "source": "equidia.fr",
+  "hippodrome": "Parislongchamp",
+  "distance": 1600,
+  "discipline": "Plat",
+  "favori": 12,
+  "cotes": [
+   {
+    "num": 12,
+    "nom": "DUTY",
+    "cote": 5.3,
+    "ouverture": 7.5,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 410697,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "GALORD",
+    "cote": 5.5,
+    "ouverture": 5.5,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 414737,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "MUENCHEN",
+    "cote": 6.1,
+    "ouverture": 5.8,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 414737,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "BOTICELLI",
+    "cote": 11,
+    "ouverture": 14,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "BOLKHOV",
+    "cote": 11,
+    "ouverture": 10,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "MR FLEURANT",
+    "cote": 17,
+    "ouverture": 13,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "REVE DE VALLARSA",
+    "cote": 17,
+    "ouverture": 22,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "WOOD MING",
+    "cote": 17,
+    "ouverture": 14,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "HERMES WOOD",
+    "cote": 20,
+    "ouverture": 20,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 414737,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "MONTGAUDRY",
+    "cote": 23,
+    "ouverture": 19,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "FELIX AUX ORMES",
+    "cote": 26,
+    "ouverture": 27,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "PUMALIN PARK",
+    "cote": 27,
+    "ouverture": 20,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 410697,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "JUSEARTH FAL",
+    "cote": 29,
+    "ouverture": 46,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "LORD OF WAR",
+    "cote": 30,
+    "ouverture": 22,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 414737,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "REVERSO",
+    "cote": 35,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "AQUITAIN",
+    "cote": 36,
+    "ouverture": 31,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T13:56:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
+ },
+ "2026-10-14_R1_C1": {
+  "source": "equidia.fr",
+  "hippodrome": "Reims",
+  "distance": 2550,
+  "discipline": "Attelé",
+  "favori": 2,
+  "cotes": [
+   {
+    "num": 2,
+    "nom": "KOUREAS D'ELA",
+    "cote": 3.2,
+    "ouverture": 3.3,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "JUST DE L'OISON",
+    "cote": 3.3,
+    "ouverture": 4.5,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "KATCHI QUICK",
+    "cote": 4.6,
+    "ouverture": 5.5,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "JENTIL DIESCHOOT",
+    "cote": 11,
+    "ouverture": 10,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "KELLE BEAUTE",
+    "cote": 16,
+    "ouverture": 13,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "HEUREUX DE FLEUR",
+    "cote": 22,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "JACOMO BELLO",
+    "cote": 27,
+    "ouverture": 18,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "IALTO D'HERTALS",
+    "cote": 29,
+    "ouverture": 18,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "HECTOR DE BASSIERE",
+    "cote": 58,
+    "ouverture": 32,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "INDUS VAL",
+    "cote": 77,
+    "ouverture": 46,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "KOTKIE",
+    "cote": 78,
+    "ouverture": 48,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "JINGLE DU PONT",
+    "cote": 111,
+    "ouverture": 67,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "IF I TELL YOU",
+    "cote": 162,
+    "ouverture": 104,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "LORD DELO",
+    "cote": 179,
+    "ouverture": 113,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "HORATIUS D'ELA",
+    "cote": 206,
+    "ouverture": 125,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "JANGO VICI",
+    "cote": 211,
+    "ouverture": 115,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 372747,
+    "heure": "2026-10-16T13:55:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
+ },
+ "2026-10-15_R1_C1": {
+  "source": "equidia.fr",
+  "hippodrome": "Chantilly",
+  "distance": 1200,
+  "discipline": "Plat",
+  "favori": 1,
+  "cotes": [
+   {
+    "num": 1,
+    "nom": "SWEET CHOP",
+    "cote": 5.2,
+    "ouverture": 8.7,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "AWAITING CHRISTMAS",
+    "cote": 6.2,
+    "ouverture": 5.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "SILK ROADSTER",
+    "cote": 8.1,
+    "ouverture": 5.9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "GRAND SCOOP",
+    "cote": 10,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "SCHUMAN",
+    "cote": 10,
+    "ouverture": 9.7,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "ROZARION",
+    "cote": 12,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "LESSLEPASSER",
+    "cote": 14,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "ROYALWOOD",
+    "cote": 14,
+    "ouverture": 12,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "HEROISTE",
+    "cote": 14,
+    "ouverture": 21,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "MISTER CHANG",
+    "cote": 17,
+    "ouverture": 20,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:55:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "HELLO CAREL",
+    "cote": 29,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "MAI DIRE MAI",
+    "cote": 29,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "YOKEN",
+    "cote": 35,
+    "ouverture": 29,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "PRINCE AUBOIS",
+    "cote": 37,
+    "ouverture": 34,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "ASHERAH",
+    "cote": 44,
+    "ouverture": 33,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "SIMPLY LOVELY",
+    "cote": 80,
+    "ouverture": 53,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 448990,
+    "heure": "2026-10-16T13:56:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
+ },
+ "2026-10-16_R1_C4": {
+  "source": "equidia.fr",
+  "hippodrome": "Paris-Vincennes",
+  "distance": 2850,
+  "discipline": "Attelé",
+  "favori": 3,
+  "cotes": [
+   {
+    "num": 3,
+    "nom": "EMINENT KRONOS",
+    "cote": 2.5,
+    "ouverture": null,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "DOMENIK JET",
+    "cote": 3.1,
+    "ouverture": null,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "JALENDRA DE MALAC",
+    "cote": 8.3,
+    "ouverture": null,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "KOMERE DE CORDAY",
+    "cote": 12,
+    "ouverture": null,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "KEROSEN DU GERS",
+    "cote": 12,
+    "ouverture": null,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "KISS ME AGAIN",
+    "cote": 13,
+    "ouverture": null,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "KERALDO",
+    "cote": 23,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": false,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "READLY LAVEC",
+    "cote": 23,
+    "ouverture": null,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "COLBERT WF",
+    "cote": 47,
+    "ouverture": null,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 110,
+    "heure": "2026-10-16T05:13:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
+ },
+ "2026-10-10_R1_C3": {
+  "source": "equidia.fr",
+  "hippodrome": "CAEN",
+  "distance": 2200,
+  "discipline": "Attelé",
+  "favori": 6,
+  "cotes": [
+   {
+    "num": 6,
+    "nom": "MALIBU",
+    "cote": 2.6,
+    "ouverture": 3.8,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "MAN ON THE MOON",
+    "cote": 5.1,
+    "ouverture": 5.9,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:34:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "MODEVY",
+    "cote": 9.4,
+    "ouverture": 7.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "MY NAME IS CHENU",
+    "cote": 11,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "MAFIOSO DREAM",
+    "cote": 11,
+    "ouverture": 13,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "MIRAGE DU CAIEU",
+    "cote": 11,
+    "ouverture": 13,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "MAESTRO D'IDEF",
+    "cote": 13,
+    "ouverture": 6.7,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "MARC AURELE",
+    "cote": 19,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:34:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "MAMBO DU MIREL",
+    "cote": 23,
+    "ouverture": 18,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "MILLESIME GWEN",
+    "cote": 40,
+    "ouverture": 35,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:34:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "MAMBO DE CAHOT",
+    "cote": 59,
+    "ouverture": 23,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:34:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "MOONLIGHT DJOC",
+    "cote": 124,
+    "ouverture": 61,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "MILANO BOCNEUF",
+    "cote": 176,
+    "ouverture": 69,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "MANDELA SEVEN",
+    "cote": 237,
+    "ouverture": 129,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-16T14:35:00+02:00"
+   }
+  ],
+  "backfill": "2026-10-16"
  }
 }

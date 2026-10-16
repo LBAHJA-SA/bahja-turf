@@ -786,6 +786,61 @@ Demandé le 05/10/2026 : **le numéro de chaque case est celui du moteur.**
 
 ---
 
+### 11.21 ⭐ AUDIT DU 16/10/2026 — la 9ᵉ place, et deux défauts de donnée
+
+> Mesuré avec la métrique §11.18 (PAYANTE), en LOO. Détail complet et
+> commandes : `RAPPORT-AUDIT-2026-10-16.md`. Outil : `tools/mesure-moteur.mjs`.
+
+#### ① Le seul levier qui reste : la 9ᵉ place
+
+96 Quintés à **presse réelle**, cotes **d'ouverture**, LOO :
+
+| méthode | PAYANTE | +4 | Quinté | ch. |
+|---|---|---|---|---|
+| marché seul — top 9 | **50 %** | 31 % | 19 % | 9 |
+| quotas **4-2-1-1-1** | **47 %** | 30 % | 16 % | 9 |
+| retenue + 1 cheval (le 4ᵉ de G1) | **47 %** | 31 % | 14 % | 9 |
+| marché seul — top 8 | 41 % | 24 % | 13 % | 8 |
+| code actuel (R8) | 34 % | 16 % | 7 % | 8 |
+| **règle retenue** (q meilleures cotes) | **31 %** | 18 % | 8 % | 8 |
+
+**Ajouter un 9ᵉ cheval = +13 à +18 points de « course payante ».** C'est la
+réponse mesurée à « comment élever les résultats ? ». La méthode autorise 6 à 9
+chevaux (§11.3) ; à 9, `3-2-1-1-1` devient `4-2-1-1-1`.
+⚠ **Les quotas ne se modifient pas seuls (§11.16) : c'est une décision de
+l'utilisateur.** La mesure dit ce que coûte le refus, pas ce qu'il faut décider.
+
+#### ② LA SURPRISE, re-mesurée : à ne jamais réintroduire
+
+Sur les mêmes 96 courses : `q meilleures cotes` = **31 %**, `(q−1) + ★ surprise`
+= **14 %**. Elle **coûte 17 points**. Confirmation indépendante de §11.18
+(ticket de 8 chevaux : 30 % contre 12 %).
+
+#### ③ Deux défauts de DONNÉE corrigés
+
+| défaut | portée | correctif |
+|---|---|---|
+| **Non-partants cités par la presse** gardés dans la grille (chevaux **fantômes** : un `0` au 09/10, un **18** au 10/10) | **37 / 96 courses** (46 citations). Le harnais `mesure-quintes.mjs` les filtrait déjà, `buildGrid()` non | `buildGrid()` ne garde que les `runners` réels, et ignore toute valeur ≤ 0 |
+| **Marché manquant** : `courseId` numérique (id casacourses) ou clé pointant la mauvaise course (`10/10` : `R1_C4` au lieu de `R1_C3`) | **7 dates / 14** | `tools/backfill-cotes.mjs` redérive la clé (`cleEquidia`) et **vérifie le nombre de partants** avant d'écrire → **15/15** |
+
+#### ④ Le code suit-il la méthode ? — non, mais sans coût
+
+§11.19 dit : **`stats` ne change PAS la sélection**. Or `remplirGrille()` a une
+branche `aStats` (R8 = 0,9 force + 0,1 marché) qui **sélectionne** avec les
+statistiques dès qu'une archive existe — donc **toujours** sur la page.
+Mesure : R8 = 31-34 %, la règle documentée = 28-31 %. **Écart de +3 points = bruit.**
+La divergence est **de forme**, pas de performance : à corriger pour que la page
+et la mesure parlent du même moteur, mais **rien à gagner** (§6 : on ne réécrit
+pas un moteur pour +3 points sur 96 courses).
+
+#### ⑤ Rappel de méthode
+
+`x/5` **ne sert plus à décider** (§11.18). L'outil `tools/audit-engine.mjs`
+continue de le calculer pour l'archive, mais sa sortie est étiquetée
+« SUPERSEDED ». La seule mesure de décision est **PAYANTE**.
+
+---
+
 ## 12. 🖥️ L'OUTIL — page `/quinte` (C:\bahja-TURF)
 
 Fichiers :

@@ -1,0 +1,138 @@
+{
+ "2026-10-01": {
+  "cleRetenue": "2026-10-01_R1_C1",
+  "cleStockee": "2026-10-01_R1_C1",
+  "candidats": [
+   "2026-10-01_R1_C1"
+  ],
+  "partantsEquidia": 15,
+  "partantsArchive": 15
+ },
+ "2026-10-02": {
+  "cleRetenue": "2026-10-02_R1_C4",
+  "cleStockee": "2026-10-02_R1_C4",
+  "candidats": [
+   "2026-10-02_R1_C4"
+  ],
+  "partantsEquidia": 14,
+  "partantsArchive": 14
+ },
+ "2026-10-03": {
+  "cleRetenue": "2026-10-03_R1_C4",
+  "cleStockee": "2026-10-03_R1_C4",
+  "candidats": [
+   "2026-10-03_R1_C4"
+  ],
+  "partantsEquidia": 18,
+  "partantsArchive": 18
+ },
+ "2026-10-04": {
+  "cleRetenue": "2026-10-04_R1_C5",
+  "cleStockee": "2026-10-04_R1_C5",
+  "candidats": [
+   "2026-10-04_R1_C5"
+  ],
+  "partantsEquidia": 16,
+  "partantsArchive": 16
+ },
+ "2026-10-05": {
+  "cleRetenue": "2026-10-05_R1_C1",
+  "cleStockee": "2026-10-05_R1_C1",
+  "candidats": [
+   "2026-10-05_R1_C1"
+  ],
+  "partantsEquidia": 14,
+  "partantsArchive": 14
+ },
+ "2026-10-06": {
+  "cleRetenue": "2026-10-06_R1_C1",
+  "cleStockee": "2026-10-06_R1_C1",
+  "candidats": [
+   "2026-10-06_R1_C1"
+  ],
+  "partantsEquidia": 15,
+  "partantsArchive": 16
+ },
+ "2026-10-07": {
+  "cleRetenue": "2026-10-07_R1_C1",
+  "cleStockee": "2026-10-07_R1_C1",
+  "candidats": [
+   "2026-10-07_R1_C1"
+  ],
+  "partantsEquidia": 17,
+  "partantsArchive": 18
+ },
+ "2026-10-08": {
+  "cleRetenue": "2026-10-08_R1_C1",
+  "cleStockee": "145899",
+  "candidats": [
+   "2026-10-08_R1_C1"
+  ],
+  "partantsEquidia": 16,
+  "partantsArchive": 16
+ },
+ "2026-10-09": {
+  "cleRetenue": "2026-10-09_R1_C4",
+  "cleStockee": "2026-10-09_R1_C4",
+  "candidats": [
+   "2026-10-09_R1_C4"
+  ],
+  "partantsEquidia": 15,
+  "partantsArchive": 15
+ },
+ "2026-10-10": {
+  "cleRetenue": "2026-10-10_R1_C3",
+  "cleStockee": "2026-10-10_R1_C3",
+  "candidats": [
+   "2026-10-10_R1_C3",
+   "2026-10-10_R1_C4"
+  ],
+  "partantsEquidia": 14,
+  "partantsArchive": 14
+ },
+ "2026-10-11": {
+  "cleRetenue": "2026-10-11_R1_C3",
+  "cleStockee": "2026-10-11_R1_C3",
+  "candidats": [
+   "2026-10-11_R1_C3"
+  ],
+  "partantsEquidia": 16,
+  "partantsArchive": 16
+ },
+ "2026-10-13": {
+  "cleRetenue": "2026-10-13_R1_C1",
+  "cleStockee": "2026-10-13_R1_C1",
+  "candidats": [
+   "2026-10-13_R1_C1"
+  ],
+  "partantsEquidia": 16,
+  "partantsArchive": 16
+ },
+ "2026-10-14": {
+  "cleRetenue": "2026-10-14_R1_C1",
+  "cleStockee": "2026-10-14_R1_C1",
+  "candidats": [
+   "2026-10-14_R1_C1"
+  ],
+  "partantsEquidia": 16,
+  "partantsArchive": 16
+ },
+ "2026-10-15": {
+  "cleRetenue": "2026-10-15_R1_C1",
+  "cleStockee": "146279",
+  "candidats": [
+   "2026-10-15_R1_C1"
+  ],
+  "partantsEquidia": 16,
+  "partantsArchive": 16
+ },
+ "2026-10-16": {
+  "cleRetenue": "2026-10-16_R1_C4",
+  "cleStockee": "146350",
+  "candidats": [
+   "2026-10-16_R1_C4"
+  ],
+  "partantsEquidia": 9,
+  "partantsArchive": 15
+ }
+}

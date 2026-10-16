@@ -591,7 +591,14 @@ export function quotasEffectifs() {
  *                  C'est le cas de n°10 aujourd'hui : jamais cité, mais partant.
  */
 export function buildGrid(synthese, runners = []) {
-  const synthe = (synthese || []).filter((n) => Number.isFinite(n))
+  /* ⭐ 16/10/2026 — la presse cite parfois des NON-PARTANTS (retirés) et des
+   * cases vides (un littéral `0`). Les garder fabriquait des chevaux fantômes
+   * en plein ticket : `0` au 09/10, `18` au 10/10 — des chevaux qui ne courent
+   * pas, donc des sièges perdus et des blocs faussés (marché « incomplet »).
+   * On ne garde que les partants réels, et on ignore toute valeur ≤ 0. */
+  const partants = new Set((runners || []).filter((n) => Number.isFinite(n) && n > 0))
+  const synthe = (synthese || [])
+    .filter((n) => Number.isFinite(n) && n > 0 && (partants.size === 0 || partants.has(n)))
 
   const numAtPlace = {}
   const placeOfNum = {}
