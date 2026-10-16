@@ -297,6 +297,62 @@ export async function fetchCotes(courseId) {
   } catch (e) { return {} }
 }
 
+/* ⭐ LE BADGE MARCHÉ — le rang de cote de chaque partant (16/10/2026).
+ *
+ * §11.22 : le marché n'entre PAS dans la sélection (c'est le rang de presse qui
+ * choisit) — il informe. Mais il informe FORT. Mesuré sur 96 Quintés à presse
+ * réelle (tools/fiabilite.mjs), parmi les chevaux CITÉS PAR LA PRESSE, ceux que
+ * le marché place dans ses 3 premières cotes finissent dans les 5 premiers :
+ *
+ *     top 3 du marché ....... 52,1 %   |   6e-12e ............ 34,0 / 28,7 %
+ *     4e-5e du marché ....... 42,7 %   |   13e et au-delà .... 13,1 %
+ *     tous les cités ........ 32,9 %
+ *
+ * Le badge le dit sur la boule, le panneau de mesure montre la table entière.
+ * Rien de tout cela ne change QUI entre dans la grille : c'est un repère.
+ * Chiffres : tools/fiabilite.mjs → data/fiabilite.json (jamais saisis à la main).
+ */
+export function rangsMarche(cotes) {
+  if (!cotes) return {}
+  const nums = Object.keys(cotes).map(Number).filter((n) => coteDe(cotes, n) != null)
+  nums.sort((a, b) => coteDe(cotes, a) - coteDe(cotes, b) || a - b)
+  return Object.fromEntries(nums.map((n, i) => [n, i + 1]))
+}
+
+/** Les 4 bandes du badge — les seuils sortent de la mesure, pas de l'intuition. */
+export function bandeMarche(rang) {
+  if (rang == null) return null
+  if (rang <= 3) return 'fort'
+  if (rang <= 5) return 'bon'
+  if (rang <= 12) return 'moyen'
+  return 'faible'
+}
+
+export const BANDE_MARCHE = {
+  fort: { lib: 'top 3 du marché', court: 'M≤3', couleur: '#15803d', fond: '#dcfce7' },
+  bon: { lib: '4e-5e du marché', court: 'M≤5', couleur: '#0369a1', fond: '#e0f2fe' },
+  moyen: { lib: '6e-12e du marché', court: 'M6-12', couleur: '#a16207', fond: '#fef9c3' },
+  faible: { lib: '13e et au-delà', court: 'M13+', couleur: '#b91c1c', fond: '#fee2e2' },
+}
+
+/** La fiabilité mesurée du moteur — tools/fiabilite.mjs. La page la lit telle quelle. */
+export async function fetchFiabilite() {
+  try {
+    const r = await fetch('/data/fiabilite.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}
+
+/** Les écarts des places P1..P20 — tools/ecarts.mjs. */
+export async function fetchEcarts() {
+  try {
+    const r = await fetch('/data/ecarts.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}
+
 /* =========================================================== CASACOURSES ===
  * ⚠ SEULE SOURCE de données de Bahja-TURF. pro.casacourses.com répond en
  *   CORS '*' et donne TOUT : partants, distance, piste, arrivée, formes,

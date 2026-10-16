@@ -1,0 +1,165 @@
+/* =============================================================================
+ * tools/experience-g5.mjs — L'EXPÉRIENCE DU SIÈGE DE G5 (16/10/2026)
+ *
+ * §11.16 : les quotas 3-2-1-1-1 ne se modifient pas. Mais la méthode elle-même
+ * déclare une LATITUDE, §11.2 / §11.6 / §11.9 :
+ *
+ *     B1 ······ 2 ou 3      B3 ······ 1 OBLIGATOIRE     B5 ······ 1 ou 0
+ *     B2 ······ 2 ou 3      B4 ······ 1
+ *
+ * Et §11.6 dit du dernier bloc : « B5 : 1 ou 0 — le 1 seulement si un cheval de
+ * B5 a une configuration physique irréprochable ». Le code, lui, prend ce siège
+ * SANS CONDITION (quota = 1).
+ *
+ * Cette expérience ne touche QUE ce siège : on le laisse à G5 sous condition,
+ * ou on le déplace vers le bloc qui a les arrivants. Rien d'autre ne bouge —
+ * mêmes blocs (buildGrid), même choix (§11.22 — G1 carnet · G2 marché · G3-G5
+ * carnet), même métrique §11.18 (PAYANTE = le 1-2-3 complet dans la grille).
+ *
+ *   96 Quintés à presse RÉELLE (data/quintes.json), cotes finales ET ouverture.
+ *
+ *   node tools\experience-g5.mjs              cotes finales
+ *   node tools\experience-g5.mjs ouverture    cotes du matin (proxy d'un run à 07 h)
+ *
+ * ⚠ Ce fichier est aussi le MODULE de l'expérience : tools/fiabilite.mjs importe
+ *   `chargerEchantillon`, `VARIANTES` et `jouer` d'ici, pour que le panneau de
+ *   mesure de la page et ce rapport ne puissent jamais diverger.
+ * ============================================================================= */
+import fs from 'node:fs'
+import { pathToFileURL } from 'node:url'
+import { buildGrid, computeStats, remplirGrille } from '../src/lib/quinte.js'
+
+/* ───────────────────────────── l'échantillon ───────────────────────────── */
+/** les Quintés à presse RÉELLE — même filtre que tools/mesure-moteur.mjs */
+export function chargerEchantillon(champ = 'cotes') {
+  const TOUT = JSON.parse(fs.readFileSync('data/quintes.json', 'utf8'))
+  return TOUT
+    .map((q) => {
+      const cotes = q[champ]
+      if (!cotes || Object.keys(cotes).length < 12) return null
+      if (!q.arrivee || q.arrivee.length < 5) return null
+      const nums = Object.keys(cotes).map(Number)
+      if (nums.some((n) => !(cotes[n] > 1))) return null
+      const presse = (q.presse?.length >= 10 ? [...q.presse] : []).filter((n) => cotes[n] > 1)
+      if (presse.length < 10) return null
+      return {
+        date: q.date,
+        discipline: q.discipline,
+        cotes: Object.fromEntries(nums.map((n) => [n, { cote: cotes[n] }])),
+        synthese: presse,
+        runners: nums,
+        arrivee: q.arrivee.slice(0, 5),
+      }
+    })
+    .filter(Boolean)
+    .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0))
+}
+
+/** le rang de marché de chaque partant : 1 = la cote la plus basse */
+export function rangMarche(c) {
+  const ordre = Object.keys(c.cotes).map(Number).sort((a, b) => c.cotes[a].cote - c.cotes[b].cote || a - b)
+  return Object.fromEntries(ordre.map((n, i) => [n, i + 1]))
+}
+
+/** les quotas de référence (le code en production) */
+export const Q_BASE = { G1: 3, G2: 2, G3: 1, G4: 1, G5: 1 }
+/** le siège de G5 part vers `secours` (G2 par défaut) */
+export const Q_SANS_G5 = (secours = 'G2') => ({ G1: 3, G2: 2, G3: 1, G4: 1, G5: 0, [secours]: 3 })
+
+const classementDe = (grille) => grille.groupes
+  .flatMap((g) => g.cases).slice().sort((a, b) => a.slot - b.slot)
+  .map((x) => ({ p: { num: x.num }, s: null, ok: true }))
+
+/** rejoue la course avec un vecteur de quotas ; renvoie { ticket, g5 } */
+export function jouer(c, quotas) {
+  const grille = buildGrid(c.synthese, c.runners)
+  const g2 = { groupes: grille.groupes.map((g) => ({ ...g, quota: quotas[g.id] ?? g.quota })) }
+  const { ticket, detail } = remplirGrille(g2, classementDe(grille), c.discipline, c.cotes, c.stats)
+  const g5 = detail?.find((d) => d.id === 'G5')
+  return { ticket, g5: g5?.cases?.find((x) => x.pris)?.num ?? null }
+}
+
+/** ⭐ les variantes — chacune reste dans la latitude déclarée par la méthode */
+export const VARIANTES = [
+  { cle: 'courante', nom: '3-2-1-1-1 — G5 inconditionnel (le code actuel)' },
+  { cle: 'A3',  nom: 'G5 garde son siège si top-3 marché, sinon G2', cond: 3 },
+  { cle: 'A5',  nom: 'G5 garde son siège si top-5 marché, sinon G2', cond: 5 },
+  { cle: 'A8',  nom: 'G5 garde son siège si top-8 marché, sinon G2', cond: 8 },
+  { cle: 'A10', nom: 'G5 garde son siège si top-10 marché, sinon G2', cond: 10 },
+  { cle: 'A16', nom: 'G5 garde son siège si top-16 marché, sinon G2', cond: 16 },
+  { cle: 'B2',  nom: '3-3-1-1-0 — le siège va à G2, toujours' },
+  { cle: 'B3',  nom: '3-2-2-1-0 — le siège va à G3, toujours' },
+  { cle: 'B4',  nom: '3-2-1-2-0 — le siège va à G4, toujours' },
+]
+
+export const kpi = (t, arr) => { let k = 0; for (const x of arr) { if (!t.includes(x)) break; k++ } return k }
+export const pct = (a, b) => (b ? Math.round((100 * a) / b) + ' %' : '—')
+const pad = (s, n) => String(s).padEnd(n)
+
+/** joue une variante sur une course ; renvoie { ticket, garde } */
+function tirer(c, v, base) {
+  if (!v.cond) {
+    const q = v.cle === 'B2' ? Q_SANS_G5('G2') : v.cle === 'B3' ? Q_SANS_G5('G3') : Q_SANS_G5('G4')
+    return { ticket: jouer(c, q).ticket, garde: false }
+  }
+  const rang = rangMarche(c)
+  const garde = base.g5 != null && rang[base.g5] <= v.cond
+  return { ticket: (garde ? base : jouer(c, Q_SANS_G5('G2'))).ticket, garde }
+}
+
+/** mesure toutes les variantes sur une liste de courses → { cle: {n,p3,p4,p5,ch,garde} } */
+export function mesurer(courses) {
+  const out = {}
+  for (const c of courses) {
+    c.stats = computeStats(courses.filter((x) => x !== c))
+    const base = jouer(c, Q_BASE)
+    for (const v of VARIANTES) {
+      const r = (out[v.cle] = out[v.cle] || { n: 0, p3: 0, p4: 0, p5: 0, ch: 0, garde: 0 })
+      const { ticket, garde } = v.cle === 'courante' ? { ticket: base.ticket, garde: false } : tirer(c, v, base)
+      const k = kpi(ticket, c.arrivee)
+      r.n++
+      if (k >= 3) r.p3++
+      if (k >= 4) r.p4++
+      if (k >= 5) r.p5++
+      r.ch += ticket.length
+      if (garde) r.garde++
+    }
+  }
+  return out
+}
+
+/* ─────────────────────────────── le rapport ─────────────────────────────── */
+function rapport(champ) {
+  const CASES = chargerEchantillon(champ)
+  const N = CASES.length
+  const R = mesurer(CASES)
+  const milieu = Math.floor(N / 2)
+  const H1 = mesurer(CASES.slice(0, milieu))
+  const H2 = mesurer(CASES.slice(milieu))
+
+  console.log('\n  LE SIÈGE DE G5 — cotes ' + (champ === 'cotes' ? 'finales' : "d'ouverture"))
+  console.log('  ' + N + ' Quintés à presse réelle · blocs buildGrid · choix §11.22 · métrique §11.18 (PAYANTE)')
+  console.log('  quotas de la méthode 3-2-1-1-1 — on ne déplace QUE le siège du dernier bloc (§11.2 : B5 = 1 ou 0)\n')
+  console.log('  ' + pad('variante', 50) + pad('PAYANTE', 10) + pad('couvre +4', 12) + pad('5/5', 10) + pad('ch.', 6) + 'siège gardé')
+  console.log('  ' + '-'.repeat(96))
+  const ordre = Object.entries(R).sort((a, b) => (b[1].p3 / b[1].n) - (a[1].p3 / a[1].n))
+  for (const [cle, r] of ordre) {
+    const nom = VARIANTES.find((v) => v.cle === cle)?.nom || cle
+    console.log('  ' + pad(nom, 50) + pad(pct(r.p3, r.n), 10) + pad(pct(r.p4, r.n), 12) + pad(pct(r.p5, r.n), 10) +
+      pad((r.ch / r.n).toFixed(1), 6) + (r.garde ? pct(r.garde, r.n) : '—'))
+  }
+  console.log('\n  stabilité — PAYANTE sur chaque moitié chronologique de ' + milieu + ' courses')
+  console.log('  ' + pad('variante', 50) + pad('1re moitié', 12) + '2e moitié')
+  console.log('  ' + '-'.repeat(96))
+  for (const [cle] of ordre) {
+    console.log('  ' + pad(VARIANTES.find((v) => v.cle === cle)?.nom || cle, 50) +
+      pad(pct(H1[cle].p3, H1[cle].n), 12) + pct(H2[cle].p3, H2[cle].n))
+  }
+  console.log('\n  La variante « courante » est le code en production. Toute autre ligne est une')
+  console.log('  expérience : rien n\'est appliqué tant que le choix n\'est pas fait.\n')
+  return { N, R, H1, H2, ordre }
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  rapport(process.argv[2] === 'ouverture' ? 'ouverture' : 'cotes')
+}

@@ -9,6 +9,7 @@ import {
   clearArchive,
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
+  rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
@@ -95,21 +96,42 @@ const THEME = {
     th: { padding: '8px 9px', fontSize: 11, fontWeight: 800, letterSpacing: 0.5, color: '#ede9fe', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '8px 9px', fontSize: 13 },
   },
+  ecarts: {
+    titre: 'Écarts',
+    sousTitre: 'Les cases P1..P20 — qui donne, qui ne donne plus',
+    fond: 'linear-gradient(180deg,#ecfeff 0%,#f0fdfa 55%,#ffffff 100%)',
+    entete: 'linear-gradient(120deg,#083344 0%,#0e7490 55%,#22d3ee 100%)',
+    accent: '#0e7490', accentSombre: '#155e75', accentClair: '#cffafe',
+    bord: '#67e8f9', carte: '#ffffff', ligne: '#ffffff', alt: '#f0fdff',
+    on: '#a5f3fc', danger: '#fee2e2', texte: '#155e75', muted: '#6b8f9c',
+    ombre: 'rgba(14,116,144,.35)', ombreD: '0 2px 10px rgba(14,116,144,.14)',
+    police: 'system-ui, -apple-system, sans-serif',
+    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
+    box: { border: '1px solid #67e8f9', borderRadius: 8, background: '#ffffff' },
+    hdrStyle: { background: 'linear-gradient(180deg,#0e7490,#083344)', color: '#ecfeff' },
+    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase', color: '#ecfeff', fontFamily: 'system-ui, sans-serif' },
+    td: { padding: '6px 9px', fontSize: 13 },
+  },
 }
 
-const TABS = [['grille', 'La grille'], ['ticket', 'Le ticket'], ['archive', 'Archive'], ['stats', 'Statistiques']]
+const TABS = [['grille', 'La grille'], ['ticket', 'Le ticket'], ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts']]
 
-function Boite({ n, pris, presse, couleur, score, cote, slot, onClick }) {
+function Boite({ n, pris, presse, couleur, score, cote, slot, marche, onClick }) {
   // boule 3D : dégradé radial + ombres portées/incrustées.
   // le NUMÉRO au centre, le n° de CASE (P1, P2…) au-dessus — demandé le
   // 10/10/2026 (fini le « secret du carnet » : on lit P et numéro ensemble).
+  // le BADGE MARCHÉ en haut à droite (16/10/2026) : le RANG DE COTE, sur un
+  // fond qui dit ce que ce rang vaut (52 % / 43 % / 34 % / 13 % de top-5,
+  // mesuré sur 96 Quintés — voir le panneau de mesure de l'onglet La grille).
   const c = couleur || { base: '#16a34a', sombre: false }
   const txt = c.sombre ? '#422006' : '#fff'
+  const bd = marche != null ? BANDE_MARCHE[bandeMarche(marche)] : null
   return (
     <button
       onClick={onClick}
       title={
         (cote ? `cote ${cote}\n` : '') +
+        (bd ? `rang de marché ${marche} — ${bd.lib}\n` : '') +
         (presse === false ? 'Non cité par la presse (ajouté à la suite)\n' : '') +
         (score ? `score ${score.global} · forme ${score.score} · série ${score.serie.join(' ')}` : 'données indisponibles')
       }
@@ -146,6 +168,14 @@ function Boite({ n, pris, presse, couleur, score, cote, slot, onClick }) {
       )}
       {presse === false && (
         <span style={{ position: 'absolute', bottom: 3, left: 7, fontSize: 10, fontWeight: 800, color: txt }} title="non cité par la presse">+</span>
+      )}
+      {bd && (
+        <span title={`rang de marché ${marche} — ${bd.lib}`} style={{
+          position: 'absolute', top: 1, right: 1, minWidth: 15, height: 15, borderRadius: 999,
+          background: bd.fond, color: bd.couleur, border: `1px solid ${bd.couleur}`,
+          fontSize: 9, fontWeight: 800, lineHeight: '13px', textAlign: 'center',
+          boxShadow: '0 1px 2px rgba(0,0,0,.35)',
+        }}>{marche}</span>
       )}
     </button>
   )
@@ -267,6 +297,10 @@ export default function QuinteGrille() {
   const [carriere, setCarriere] = useState({})      // { n° : [runs] }
   // 📈 LE MARCHÉ — equidia.fr, lu en direct. { n° : { cote, ouverture, … } }
   const [cotes, setCotes] = useState({})
+  // 📊 LES DEUX MESURES ÉCRITES SUR DISQUE (tools/fiabilite.mjs, tools/ecarts.mjs).
+  //    La page les AFFICHE telles quelles : aucun chiffre saisi à la main (§7).
+  const [fiabilite, setFiabilite] = useState(null)
+  const [ecarts, setEcarts] = useState(null)
   // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
   //   (AGENTS.md §13.3) : la page doit le montrer tel quel, pas le recalculer.
   const [ticketManuel, setTicketManuel] = useState(null)
@@ -279,6 +313,12 @@ export default function QuinteGrille() {
   /* ------------------------------------------------------ chargement --- */
 
   useEffect(() => { document.title = 'Quinté — Bahja TURF' }, [])
+
+  // les deux mesures écrites par les outils — statiques, lues une fois.
+  useEffect(() => {
+    fetchFiabilite().then((x) => x && setFiabilite(x)).catch(() => {})
+    fetchEcarts().then((x) => x && setEcarts(x)).catch(() => {})
+  }, [])
 
   const charger = useCallback(async (d) => {
     setBusy(true); setMsg(''); setSyn(null); setTicketManuel(null); setCle(null); setCotes({})
@@ -524,6 +564,11 @@ export default function QuinteGrille() {
   //   décident de l'ordre du ticket. Doit être calculé AVANT `rempli`.
   const stats = useMemo(() => computeStats(archive), [archive])
 
+  // 📍 le RANG DE MARCHÉ de chaque partant (1 = la cote la plus basse) — c'est
+  //   le badge des boules. Il n'entre PAS dans la sélection (§11.22).
+  const rangs = useMemo(() => rangsMarche(cotes), [cotes])
+  const bandes = useMemo(() => Object.fromEntries(Object.entries(rangs).map(([n, r]) => [n, bandeMarche(r)])), [rangs])
+
   const rempli = useMemo(() => {
     if (!grille) return null
     return remplirGrille(grille, classementFinal, 'PLAT', cotes, stats)
@@ -539,9 +584,11 @@ export default function QuinteGrille() {
       cases: g.cases.map((c) => ({
         ...c,
         pris: pose ? pose.has(c.num) : c.pris,
+        marche: rangs[c.num] ?? null,
+        bande: bandes[c.num] ?? null,
       })),
     }))
-  }, [rempli, ticketManuel])
+  }, [rempli, ticketManuel, rangs, bandes])
 
 /* Couleurs des 5 groupes — les mêmes que sur le carnet papier. */
 const COULEUR_GROUPE = {
@@ -571,9 +618,228 @@ const carnet = (detail) => {
   }
   return { colonnes, pariteHaut }
 }
+
+/* ══════════════════ LE PANNEAU DE MESURE — la fiabilité, pas une opinion ═══
+ * ⚠ TOUS les chiffres viennent de `data/fiabilite.json`, écrit par
+ *   tools/fiabilite.mjs. La page n'en calcule aucun et n'en invente aucun (§7).
+ *   Métrique §11.18 : « PAYANTE » = le 1-2-3 (gagnant, 2e, 3e) est COMPLET dans
+ *   la grille. Le repère honnête, à 8 chevaux, est le marché seul.
+ * ⚠ `experience` liste les variantes TESTÉES du siège de G5. Une seule est
+ *   appliquée (`appliquee`) ; les autres attendent la décision de l'utilisateur
+ *   (§11.16 : les quotas n'appartiennent pas au moteur).
+ * ═════════════════════════════════════════════════════════════════════════ */
+function PanneauMesure({ sk, fiabilite, detail }) {
+  const [ouvert, setOuvert] = useState(true)
+  if (!fiabilite) return (
+    <div style={{ border: '1px dashed ' + sk.bord, borderRadius: sk.box.borderRadius, padding: '8px 12px', marginTop: 12, fontSize: 12, color: sk.muted }}>
+      Panneau de mesure : écrire <b>public/data/fiabilite.json</b> (node tools\fiabilite.mjs) pour l'afficher ici.
+    </div>
+  )
+  const M = fiabilite.mesure
+  const L = (x) => (x == null ? '—' : x + ' %')
+  const ligne = (lab, r, gras) => (
+    <tr key={lab} style={{ borderBottom: '1px solid ' + sk.bord, background: gras ? sk.accentClair : sk.ligne }}>
+      <td style={{ ...sk.td, fontWeight: gras ? 800 : 500 }}>{lab}</td>
+      <td style={{ ...sk.td, fontWeight: 800, fontFamily: sk.nb.td, color: sk.accentSombre }}>{L(r.payante)}</td>
+      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{L(r.couvre4)}</td>
+      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{L(r.q5)}</td>
+      <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{r.chevaux}</td>
+    </tr>
+  )
+  const pris = (detail || []).flatMap((g) => g.cases.filter((c) => c.pris && c.bande).map((c) => c.bande))
+  const dansTicket = (cle) => pris.filter((b) => b === cle).length
+  const nb = { fontFamily: sk.nb.td, fontWeight: 700 }
+  return (
+    <div style={{ ...sk.box, padding: '12px 14px', marginTop: 12, boxShadow: sk.ombreD }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+        <b style={{ fontSize: 13, letterSpacing: 1.2, textTransform: 'uppercase', color: sk.accentSombre }}>Fiabilité mesurée</b>
+        <span style={{ fontSize: 12, color: sk.muted }}>
+          {M.echantillon.n} Quintés à presse réelle ({M.echantillon.du} → {M.echantillon.au}) · {M.metrique}
+        </span>
+        <button onClick={() => setOuvert((v) => !v)}
+          style={{ marginLeft: 'auto', padding: '2px 10px', borderRadius: 999, border: '1px solid ' + sk.bord, background: sk.carte, color: sk.accent, cursor: 'pointer', fontSize: 11, fontWeight: 700 }}>
+          {ouvert ? 'plier' : 'déplier'}
+        </button>
+      </div>
+      {ouvert && (
+        <>
+          <div style={{ overflowX: 'auto', marginTop: 8 }}>
+            <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 13 }}>
+              <thead>
+                <tr style={sk.hdrStyle}>
+                  {['méthode', 'PAYANTE (1-2-3)', 'couvre +4', '5/5', 'ch.'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {ligne('⭐ le moteur — cotes finales', fiabilite.code.finales, true)}
+                {ligne('le moteur — cotes d’ouverture', fiabilite.code.ouverture)}
+                {ligne('le marché seul — 8 meilleures cotes', fiabilite.baselines.marche8)}
+                {ligne('le marché seul — 9 meilleures cotes', fiabilite.baselines.marche9)}
+              </tbody>
+            </table>
+          </div>
+
+          <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
+            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accentSombre }}>Le badge des boules</b>{' '}
+            — le rang de cote des chevaux <b>cités par la presse</b> : ce que ce rang vaut.
+            <div style={{ overflowX: 'auto', marginTop: 6 }}>
+              <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
+                <thead>
+                  <tr style={sk.hdrStyle}>
+                    {['rang de marché', 'chevaux', 'top-5', 'top-3', 'dans votre ticket'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {fiabilite.badge.map((b) => {
+                    const cle = b.lib.startsWith('top 3') ? 'fort' : b.lib.startsWith('4e-5e') ? 'bon'
+                      : (b.lib.startsWith('6e-8e') || b.lib.startsWith('9e-12e')) ? 'moyen'
+                      : b.cle === '13+' ? 'faible' : null
+                    const bd = cle ? BANDE_MARCHE[cle] : null
+                    return (
+                      <tr key={b.cle} style={{ borderBottom: '1px solid ' + sk.bord, background: bd ? bd.fond : sk.alt }}>
+                        <td style={{ ...sk.td, fontWeight: 700, color: bd ? bd.couleur : sk.texte }}>
+                          {bd ? bd.court + ' · ' : ''}{b.lib}
+                        </td>
+                        <td style={{ ...sk.td, ...nb, color: sk.muted }}>{b.n}</td>
+                        <td style={{ ...sk.td, ...nb }}>{b.top5} %</td>
+                        <td style={{ ...sk.td, ...nb }}>{b.top3} %</td>
+                        <td style={{ ...sk.td, ...nb }}>{cle ? dansTicket(cle) : '—'}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <span style={{ color: sk.muted }}>
+              Le badge de la boule porte ce rang, sur le fond de sa bande (M≤3 · M≤5 · M6-12 · M13+).
+              Rien de tout cela ne choisit à votre place : §11.22, c’est le rang de presse qui remplit les blocs.
+            </span>
+          </div>
+
+          <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
+            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accentSombre }}>L’expérience du siège de G5</b>{' '}
+            — la méthode dit « B5 : 1 ou 0 » (§11.6). Le moteur prend ce siège <b>sans condition</b>. Voici ce que
+            les autres lectures donnent, sur les <b>mêmes 8 chevaux</b> (tools/experience-g5.mjs).
+            <div style={{ overflowX: 'auto', marginTop: 6 }}>
+              <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
+                <thead>
+                  <tr style={sk.hdrStyle}>
+                    {['variante', 'PAYANTE', 'ouverture', '1re moitié', '2e moitié', 'état'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {fiabilite.experience.map((v) => (
+                    <tr key={v.cle} style={{ borderBottom: '1px solid ' + sk.bord, background: v.appliquee ? sk.on : sk.ligne }}>
+                      <td style={{ ...sk.td, fontWeight: v.appliquee ? 800 : 500 }}>{v.nom}</td>
+                      <td style={{ ...sk.td, ...nb, fontWeight: 800, color: v.appliquee ? sk.accentSombre : sk.texte }}>{L(v.payante)}</td>
+                      <td style={{ ...sk.td, ...nb }}>{L(v.payanteOuverture)}</td>
+                      <td style={{ ...sk.td, ...nb, color: sk.muted }}>{L(v.payante1re)}</td>
+                      <td style={{ ...sk.td, ...nb, color: sk.muted }}>{L(v.payante2e)}</td>
+                      <td style={{ ...sk.td }}>
+                        {v.appliquee
+                          ? <span style={{ fontWeight: 800, color: sk.accentSombre }}>appliquée</span>
+                          : <span style={{ color: sk.muted }}>non appliquée</span>}
+                        {v.garde != null && <span style={{ color: sk.muted }}> · siège gardé {v.garde} %</span>}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <span style={{ color: sk.muted }}>
+              Aucune de ces variantes n’est en production tant que le choix n’est pas fait (§11.16 — les quotas
+              n’appartiennent pas au moteur). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
+            </span>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
+/* ══════════════════════════ L'ONGLET ÉCARTS — les cases P1..P20 ════════════
+ * ⚠ « P » = le RANG DE PRESSE (P1 = le 1er cité), pas la colonne du carnet
+ *   papier : mesuré le 16/10, c'est le rang de presse qui suit l'arrivée.
+ *   Une case DONNE quand le cheval qui l'occupe finit dans les cinq premiers.
+ *   Chiffres : data/ecarts.json (tools/ecarts.mjs).
+ * ═════════════════════════════════════════════════════════════════════════ */
+function TabEcarts({ sk, ecarts, detail }) {
+  if (!ecarts) return (
+    <div style={{ fontSize: 13, color: sk.muted }}>
+      Pas encore de mesure : écrire <b>public/data/ecarts.json</b> (node tools\ecarts.mjs).
+    </div>
+  )
+  const M = ecarts.mesure
+  const parPlace = {}
+  for (const g of detail || []) for (const c of g.cases) if (c.place) parPlace[c.place] = c
+  const etat = (x) => {
+    if (!x.n || x.dernierHit == null) return { lib: 'jamais', couleur: '#b91c1c', fond: '#fee2e2' }
+    if (x.coursesDepuis != null && x.coursesDepuis >= 5) return { lib: 'froide', couleur: '#b91c1c', fond: '#fee2e2' }
+    if (x.pctTop5 >= 40 || (x.coursesDepuis != null && x.coursesDepuis <= 1)) return { lib: 'chaude', couleur: '#15803d', fond: '#dcfce7' }
+    return { lib: 'tiède', couleur: '#a16207', fond: '#fef9c3' }
+  }
+  return (
+    <div>
+      <div style={{ fontSize: 13, color: sk.texte, lineHeight: 1.6, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', marginBottom: 12 }}>
+        <b>{M.courses} courses à presse réelle</b> ({M.du} → {M.au}) · {M.definition}
+        <br />
+        <span style={{ color: sk.muted }}>
+          « courses depuis » = depuis combien de courses de ce registre la case n’a plus rien donné.
+          « jours depuis » se compte depuis la dernière course du registre ({M.au}), pas depuis aujourd’hui.
+        </span>
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ ...sk.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: sk.ombreD }}>
+          <thead>
+            <tr style={sk.hdrStyle}>
+              {['case', 'la course du jour', 'P donne', '% top-5', '% top-3', 'gagne', 'dernier hit', 'courses depuis', 'état', 'les 6 dernières'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {ecarts.places.filter((x) => x.n).map((x, i) => {
+              const e = etat(x)
+              const c = parPlace[x.p]
+              return (
+                <tr key={x.p} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
+                  <td style={{ ...sk.td, fontWeight: 800 }}>P{x.p}</td>
+                  <td style={{ ...sk.td, fontWeight: 700, color: sk.accentSombre }}>
+                    {c ? <>{c.num}{c.pris ? ' ✓' : ''}{c.marche != null ? <span style={{ color: sk.muted, fontWeight: 500 }}> · M{c.marche}</span> : null}</> : <span style={{ color: sk.muted }}>—</span>}
+                  </td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{x.top5}/{x.n}</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700, color: x.pctTop5 >= 40 ? '#15803d' : x.pctTop5 >= 25 ? sk.texte : '#b91c1c' }}>{x.pctTop5} %</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{x.pctTop3} %</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{x.victoires}</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{x.dernierHit || '—'}</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: x.coursesDepuis != null && x.coursesDepuis >= 5 ? 800 : 500, color: x.coursesDepuis != null && x.coursesDepuis >= 5 ? '#b91c1c' : sk.texte }}>
+                    {x.coursesDepuis == null ? '—' : x.coursesDepuis}
+                  </td>
+                  <td style={{ ...sk.td }}>
+                    <span style={{ padding: '1px 8px', borderRadius: 999, fontWeight: 800, fontSize: 11, color: e.couleur, background: e.fond, border: '1px solid ' + e.couleur }}>{e.lib}</span>
+                  </td>
+                  <td style={{ ...sk.td }}>
+                    {(x.serie || []).map((v, k) => (
+                      <span key={k} title={v ? 'la case a donné' : 'rien'} style={{ display: 'inline-block', width: 9, height: 9, borderRadius: 2, marginRight: 2, background: v ? '#22c55e' : '#e2e8f0', border: '1px solid ' + (v ? '#15803d' : '#cbd5e1') }} />
+                    ))}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ fontSize: 12, color: sk.muted, marginTop: 10 }}>
+        « la course du jour » = le cheval qui occupe la case dans la grille affichée (✓ = retenu par le moteur, M = son rang de marché).
+        La pastille d’état : <b style={{ color: '#15803d' }}>chaude</b> (≥ 40 % de top-5 ou un hit à la dernière course),
+        <b style={{ color: '#b91c1c' }}> froide</b> (rien depuis 5 courses ou plus), <b style={{ color: '#a16207' }}>tiède</b> entre les deux.
+        C’est un repère de lecture, jamais une raison d’écarter un cheval (§6 : on écarte sur le physique).
+      </div>
+    </div>
+  )
+}
 const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   <Boite key={cellule.slot} n={cellule.num} pris={cellule.pris}
     presse={cellule.presse} score={cellule.s} cote={cellule.cote} slot={cellule.slot}
+    marche={cellule.marche}
     couleur={COULEUR_GROUPE[cellule.groupe]} />
 ) : (
   <div style={{ width: 54, height: 54 }} />
@@ -848,9 +1114,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             <br />
             {Object.keys(cotes).length >= 4 ? (
               <>📈 <b>Marché lu sur equidia.fr</b>, relevé à {heureCote ? heureCote.slice(11, 16) : '?'} — rafraîchi toutes les minutes.
-                Dans chaque bloc on prend les <b>quota meilleures cotes</b>. Rien d'autre.
-                Mesuré sur <b>280 vrais Quintés France</b> : 30 % de courses où le 1·2·3 est complet
-                (contre 13 % avec l'ancienne « surprise »).</>
+                Le badge de chaque boule (en haut à droite) est son <b>rang de cote</b> :
+                il <b>informe</b>, il ne choisit pas (§11.22 — c'est le rang de presse qui remplit les blocs).
+                Ce que ce rang vaut, et ce que vaut le moteur, sont mesurés dans le
+                <b> panneau de mesure</b> sous le ticket.</>
             ) : (
               <>⚠ Pas de cote marché — le moteur trie sur le score physique.{'\n'}          La cote arrive vers 07 h ; relance la page après.</>
             )}
@@ -878,6 +1145,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             <span style={{ fontSize: 12, color: '#64748b', marginLeft: 12 }}>{ticket.length} chevaux</span>
             {'  '}
           </div>
+          <PanneauMesure sk={SK} fiabilite={fiabilite} detail={detail} />
         </div>
       )}
 
@@ -1370,6 +1638,11 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             </>
           )}
         </div>
+      )}
+
+      {/* ----------------------------------------------------------- écarts */}
+      {onglet === 'ecarts' && (
+        <TabEcarts sk={SK} ecarts={ecarts} detail={detail} />
       )}
     </div>
     </>

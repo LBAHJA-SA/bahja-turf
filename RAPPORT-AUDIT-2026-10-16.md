@@ -108,6 +108,36 @@ reste un avertissement. Retour arrière = une ligne (`CHOIX_DU_BLOC`).
 
 ---
 
+### 1.6 ⭐ LE SIÈGE DE G5 — mesuré, PAS appliqué (§11.23)
+
+§11.6 dit « **B5 : 1 ou 0** ». Le code prend ce siège **sans condition**. On a
+mesuré ce que vaut ce siège, **sur les mêmes 8 chevaux** (96 courses, LOO,
+`tools/experience-g5.mjs`), cotes finales **et** ouverture :
+
+| où va le 9ᵉ siège | PAYANTE | ouverture | 1re moitié | 2e moitié |
+|---|---|---|---|---|
+| à **G2**, toujours (`3-3-1-1-0`) | **42,7 %** | **42,7 %** | 41,7 % | 43,8 % |
+| à G2 **si** G5 n'est pas « backé » (top-10 marché) | **42,7 %** | **42,7 %** | 43,8 % | 41,7 % |
+| à G3 (`3-2-2-1-0`) | 40,6 % | 38,5 % | 39,6 % | 41,7 % |
+| à G4 (`3-2-1-2-0`) | 39,6 % | 38,5 % | 37,5 % | 41,7 % |
+| ▶ il **reste** à G5 *(le code)* | 38,5 % | 37,5 % | 37,5 % | 39,6 % |
+
+**+4 points** de PAYANTE, **monotones sur les deux mesures**, stables sur les
+deux moitiés. La **condition** de marché (garder le siège seulement si le cheval
+de G5 est dans les T premières cotes) donne **exactement le même** résultat quel
+que soit T (3, 5, 8, 10) : elle est **gratuite mais inutile**.
+
+⚠ **Non appliqué** : §11.16 — les quotas n'appartiennent pas au moteur.
+Caveat : n = 96, l'écart ≈ **0,6 σ**. C'est un argument de **monotonie**, pas de
+significativité seule. Le panneau de mesure de la page affiche les deux lignes
+`appliquée` / `non appliquée` et se réécrit par `node tools\fiabilite.mjs`.
+
+**À ne pas confondre** : ce siège est un **9ᵉ cheval** — la même famille de
+levier que §3.2 (« acheter une 9ᵉ place »), avec la contrainte supplémentaire
+que le quota reste dans la latitude déclarée par la méthode (§11.2 : B5 = 1 ou 0).
+
+---
+
 ## 2. Le code suit-il la méthode ? — 96 Quintés, LOO, PAYANTE
 
 Mêmes courses pour toutes les lignes (96 Quintés à Synthèse de presse réelle),
@@ -268,6 +298,12 @@ confirmation de §11.16.
 - ❌ **Décider sur `x/5`** : le piège qui a produit la première version de ce rapport.
 - ❌ **Juger le code au-delà du bruit** : +3 points entre R8 et la règle retenue =
   bruit ; on ne réécrit pas un moteur pour +3 points sur 96 courses.
+- ❌ **Déplacer le siège de G5** (§1.6) : mesuré à **+4 points** de PAYANTE, mais
+  il touche une **borne déclarée par la méthode** (§11.6 : « B5 : 1 ou 0 »).
+  Le choix appartient à l'utilisateur — le moteur ne le prend pas seul.
+- ❌ **Créer le moindre lien avec bahja-pmu** (§15) : l'exploration de l'autre
+  application s'est faite en **lecture seule**, sans import, sans URL, sans
+  donnée partagée.
 
 ---
 
@@ -288,6 +324,19 @@ node tools\backfill-cotes.mjs
 # l'archive : intégrité + empreinte + marchés (x/5 = archivé, plus décisionnel)
 node tools\audit-engine.mjs
 
+# §11.23 — l'expérience du siège de G5 (rapport console)
+node tools\experience-g5.mjs                 # cotes finales
+node tools\experience-g5.mjs ouverture
+
+# §11.23 — le panneau de mesure de la page (écrit les 2 JSON)
+node tools\fiabilite.mjs                     # → data/fiabilite.json + public/data/fiabilite.json
+
+# §11.23 — l'onglet Écarts (les places P1..P20)
+node tools\ecarts.mjs                        # → data/ecarts.json + public/data/ecarts.json
+
+# src/lib/quinte.js == backend/QUINTE/quinte.js ?
+node tools\verif-parite.mjs
+
 npm run build
 ```
 
@@ -295,10 +344,14 @@ npm run build
 
 | fichier | rôle |
 |---|---|
-| `src/lib/quinte.js` · `backend/QUINTE/quinte.js` | `buildGrid` : plus de non-partants dans la grille (37/96 courses concernées) |
+| `src/lib/quinte.js` · `backend/QUINTE/quinte.js` | `buildGrid` : plus de non-partants dans la grille (37/96 courses concernées) ; + `rangsMarche` / `bandeMarche` / `BANDE_MARCHE` / `fetchFiabilite` / `fetchEcarts` (§11.23) |
+| `frontend/QUINTE/QuinteGrille.jsx` | + le **badge marché** sur la boule · le **panneau « Fiabilité mesurée »** · le **5ᵉ onglet Écarts** (§11.23) |
 | `tools/backfill-cotes.mjs` | **nouveau** — répare le marché (15/15), vérifie les partants |
 | `tools/mesure-moteur.mjs` | **nouveau** — le code vs la méthode, métrique §11.18, LOO |
 | `tools/audit-engine.mjs` | **nouveau** — intégrité, 4 tests d'empreinte, dissection |
+| `tools/experience-g5.mjs` | **nouveau** — l'expérience du siège de G5 (rapport + module) |
+| `tools/fiabilite.mjs` | **nouveau** — le panneau de mesure → `data/fiabilite.json` + `public/data/fiabilite.json` |
+| `tools/ecarts.mjs` | **nouveau** — les écarts des places → `data/ecarts.json` + `public/data/ecarts.json` |
 | `data/cotes.json` · `public/data/cotes.json` | marché complété (15 dates) |
 | `data/cles-equidia.json` | **nouveau** — clé retenue par date |
 | `tools/test-nonregression.mjs` | clé de marché corrigée (`cle`, pas `courseId`) |
@@ -317,3 +370,25 @@ npm run build
    places — est **épuisé** : la force statistique n'apporte rien, et les quotas
    `3-2-1-1-1` dépensent 3 de leurs 8 places sur des cotes que le marché ne donne
    qu'à 6-10 %.
+
+---
+
+## 9. Ce qui a été LIVRÉ dans la page (§11.23)
+
+Les trois livraisons du 16/10 **ne changent pas la sélection** — la grille reste
+remplie par §11.22. Elles rendent la décision **visible** :
+
+1. **Le badge marché** sur chaque boule — le rang de cote, sur le fond de sa
+   bande. Mesuré sur les chevaux cités par la presse : `M≤3` → **52,1 %** de
+   top-5, `M≤5` → 42,7 %, `M6-12` → 34,0 / 28,7 %, `M13+` → **13,1 %**.
+2. **Le panneau « Fiabilité mesurée »** (onglet La grille, sous le ticket) —
+   le code (38,5 %), le marché à 8 (39,6 %) et à 9 (51,0 %), la table du badge,
+   et **l'expérience G5** avec `appliquée` / `non appliquée`.
+3. **L'onglet Écarts** — les places P1..P20 sur **109 courses** : `P donne`,
+   dernier hit, **courses depuis**, chaud/tiède/froid. `P7` : 33,0 %, rien depuis
+   **7 courses**. `P14` : 9,4 %, rien depuis 16.
+
+Tous les chiffres de la page viennent de `data/fiabilite.json` et
+`data/ecarts.json` (`tools/fiabilite.mjs`, `tools/ecarts.mjs`) : **la page ne
+calcule rien** (§7) et son panneau ne peut pas diverger du rapport console,
+`fiabilite.mjs` **important** les variantes de `experience-g5.mjs`.

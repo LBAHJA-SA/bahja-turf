@@ -1,0 +1,407 @@
+{
+ "mesure": {
+  "outil": "tools/ecarts.mjs",
+  "le": "2026-10-16",
+  "sources": [
+   "data/quintes.json (96 Quintés à presse réelle)",
+   "data/synthese.json (registre du site)"
+  ],
+  "courses": 109,
+  "du": "2026-02-09",
+  "au": "2026-10-15",
+  "definition": "une case P donne quand LE CHEVAL QUI L'OCCUPE finit dans les cinq premiers. P = rang de presse.",
+  "note": "« joursDepuis » compte depuis la dernière course du registre, pas depuis aujourd'hui."
+ },
+ "places": [
+  {
+   "p": 1,
+   "n": 109,
+   "top5": 74,
+   "top3": 60,
+   "victoires": 30,
+   "pctTop5": 67.9,
+   "pctTop3": 55,
+   "dernierHit": "2026-10-14",
+   "coursesDepuis": 1,
+   "joursDepuis": 1,
+   "serie": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "p": 2,
+   "n": 109,
+   "top5": 56,
+   "top3": 41,
+   "victoires": 11,
+   "pctTop5": 51.4,
+   "pctTop3": 37.6,
+   "dernierHit": "2026-10-14",
+   "coursesDepuis": 1,
+   "joursDepuis": 1,
+   "serie": [
+    1,
+    0,
+    0,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "p": 3,
+   "n": 109,
+   "top5": 53,
+   "top3": 39,
+   "victoires": 13,
+   "pctTop5": 48.6,
+   "pctTop3": 35.8,
+   "dernierHit": "2026-10-11",
+   "coursesDepuis": 3,
+   "joursDepuis": 4,
+   "serie": [
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 4,
+   "n": 109,
+   "top5": 45,
+   "top3": 31,
+   "victoires": 11,
+   "pctTop5": 41.3,
+   "pctTop3": 28.4,
+   "dernierHit": "2026-10-15",
+   "coursesDepuis": 0,
+   "joursDepuis": 0,
+   "serie": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "p": 5,
+   "n": 109,
+   "top5": 45,
+   "top3": 24,
+   "victoires": 9,
+   "pctTop5": 41.3,
+   "pctTop3": 22,
+   "dernierHit": "2026-10-15",
+   "coursesDepuis": 0,
+   "joursDepuis": 0,
+   "serie": [
+    0,
+    1,
+    0,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "p": 6,
+   "n": 109,
+   "top5": 45,
+   "top3": 23,
+   "victoires": 7,
+   "pctTop5": 41.3,
+   "pctTop3": 21.1,
+   "dernierHit": "2026-10-14",
+   "coursesDepuis": 1,
+   "joursDepuis": 1,
+   "serie": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "p": 7,
+   "n": 109,
+   "top5": 36,
+   "top3": 17,
+   "victoires": 5,
+   "pctTop5": 33,
+   "pctTop3": 15.6,
+   "dernierHit": "2026-10-07",
+   "coursesDepuis": 7,
+   "joursDepuis": 8,
+   "serie": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 8,
+   "n": 109,
+   "top5": 39,
+   "top3": 22,
+   "victoires": 6,
+   "pctTop5": 35.8,
+   "pctTop3": 20.2,
+   "dernierHit": "2026-10-15",
+   "coursesDepuis": 0,
+   "joursDepuis": 0,
+   "serie": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ]
+  },
+  {
+   "p": 9,
+   "n": 109,
+   "top5": 32,
+   "top3": 12,
+   "victoires": 3,
+   "pctTop5": 29.4,
+   "pctTop3": 11,
+   "dernierHit": "2026-10-13",
+   "coursesDepuis": 2,
+   "joursDepuis": 2,
+   "serie": [
+    0,
+    1,
+    0,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 10,
+   "n": 109,
+   "top5": 27,
+   "top3": 11,
+   "victoires": 1,
+   "pctTop5": 24.8,
+   "pctTop3": 10.1,
+   "dernierHit": "2026-10-15",
+   "coursesDepuis": 0,
+   "joursDepuis": 0,
+   "serie": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "p": 11,
+   "n": 108,
+   "top5": 33,
+   "top3": 20,
+   "victoires": 6,
+   "pctTop5": 30.6,
+   "pctTop3": 18.5,
+   "dernierHit": "2026-10-13",
+   "coursesDepuis": 2,
+   "joursDepuis": 2,
+   "serie": [
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 12,
+   "n": 108,
+   "top5": 22,
+   "top3": 7,
+   "victoires": 2,
+   "pctTop5": 20.4,
+   "pctTop3": 6.5,
+   "dernierHit": "2026-10-08",
+   "coursesDepuis": 6,
+   "joursDepuis": 7,
+   "serie": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 13,
+   "n": 108,
+   "top5": 13,
+   "top3": 8,
+   "victoires": 2,
+   "pctTop5": 12,
+   "pctTop3": 7.4,
+   "dernierHit": "2026-10-15",
+   "coursesDepuis": 0,
+   "joursDepuis": 0,
+   "serie": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "p": 14,
+   "n": 96,
+   "top5": 9,
+   "top3": 5,
+   "victoires": 1,
+   "pctTop5": 9.4,
+   "pctTop3": 5.2,
+   "dernierHit": "2026-06-19",
+   "coursesDepuis": 16,
+   "joursDepuis": 118,
+   "serie": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 15,
+   "n": 76,
+   "top5": 8,
+   "top3": 4,
+   "victoires": 0,
+   "pctTop5": 10.5,
+   "pctTop3": 5.3,
+   "dernierHit": "2026-10-11",
+   "coursesDepuis": 3,
+   "joursDepuis": 4,
+   "serie": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 16,
+   "n": 51,
+   "top5": 7,
+   "top3": 3,
+   "victoires": 2,
+   "pctTop5": 13.7,
+   "pctTop3": 5.9,
+   "dernierHit": "2026-06-15",
+   "coursesDepuis": 9,
+   "joursDepuis": 122,
+   "serie": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 17,
+   "n": 9,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pctTop5": 0,
+   "pctTop3": 0,
+   "dernierHit": null,
+   "coursesDepuis": null,
+   "joursDepuis": null,
+   "serie": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 18,
+   "n": 5,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pctTop5": 0,
+   "pctTop3": 0,
+   "dernierHit": null,
+   "coursesDepuis": null,
+   "joursDepuis": null,
+   "serie": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "p": 19,
+   "n": 2,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pctTop5": 0,
+   "pctTop3": 0,
+   "dernierHit": null,
+   "coursesDepuis": null,
+   "joursDepuis": null,
+   "serie": [
+    0,
+    0
+   ]
+  },
+  {
+   "p": 20,
+   "n": 1,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pctTop5": 0,
+   "pctTop3": 0,
+   "dernierHit": null,
+   "coursesDepuis": null,
+   "joursDepuis": null,
+   "serie": [
+    0
+   ]
+  }
+ ]
+}

@@ -956,13 +956,148 @@ ligne** (`CHOIX_DU_BLOC`, §11.22).
 
 ---
 
+### 11.23 ⭐ LE BADGE MARCHÉ, LE PANNEAU DE MESURE, L'ONGLET ÉCARTS (16/10/2026)
+
+Trois livraisons du 16/10 sur la page `/quinte`. **Aucune ne change la
+sélection** : la grille reste remplie par §11.22 (le rang de presse). Elles
+servent à **voir** et à **décider**.
+
+#### ① Le badge des boules — le rang de cote
+
+Chaque boule porte, **en haut à droite**, le **rang de marché** du cheval
+(1 = la cote la plus basse), sur le fond de sa bande :
+
+| Bande | Seuils | Badge | top-5 mesuré | top-3 mesuré |
+|---|---|---|---|---|
+| **fort** | rang ≤ 3 | `M≤3` vert | **52,1 %** | 38,2 % |
+| **bon** | rang 4 – 5 | `M≤5` bleu | **42,7 %** | 30,2 % |
+| **moyen** | rang 6 – 12 | `M6-12` ambre | 34,0 % / 28,7 % | 17,4 % / 14,2 % |
+| **faible** | rang ≥ 13 | `M13+` rouge | **13,1 %** | 5,2 % |
+| — | tous les cités | — | 32,9 % | 19,8 % |
+
+*(96 Quintés à presse réelle, `tools/fiabilite.mjs`. La mesure porte sur les
+chevaux **cités par la presse** — les 8 bandes sont des bandes de rang de cote,
+pas des groupes de la méthode.)*
+
+- code : `rangsMarche(cotes)` + `bandeMarche(rang)` + `BANDE_MARCHE`
+  (`src/lib/quinte.js` **et** `backend/QUINTE/quinte.js`, §12) ;
+- le badge est **informatif** : il n'entre ni dans le score, ni dans le
+  remplissage. §11.22 reste seul maître du choix.
+
+#### ② Le panneau « Fiabilité mesurée » (onglet **La grille**, sous le ticket)
+
+Il affiche **`public/data/fiabilite.json`**, écrit par `tools/fiabilite.mjs` :
+la fiabilité du code, la baseline du marché, la table du badge, et
+l'expérience G5 ci-dessous. **La page ne calcule aucun chiffre** (§7).
+
+```
+96 Quintés à presse réelle (2026-02-09 → 2026-07-07) · §11.18 PAYANTE
+──────────────────────────────────────────────────────────────
+le moteur — cotes finales            38,5 %   17,7 %   7,3 %   8 ch.
+le moteur — cotes d'ouverture        37,5 %   17,7 %  10,4 %   8 ch.
+le marché seul — 8 meilleures cotes  39,6 %   18,8 %   9,4 %   8 ch.
+le marché seul — 9 meilleures cotes  51,0 %   31,3 %  17,7 %   9 ch.
+```
+
+⚠ **Le moteur à 8 chevaux ≈ le marché à 8 chevaux** (38,5 vs 39,6). Le gain
+du moteur n'est pas dans son score : il est dans le **choix dans les blocs**
+(§11.22) et dans le **découpage** (G1 prend 2,0 arrivants par course). Le
+top-9 du marché (51 %) est un **repère**, pas une alternative : il ne tient pas
+aucun quota.
+
+#### ③ ⚠ L'EXPÉRIENCE DU SIÈGE DE G5 — mesurée, **NON APPLIQUÉE**
+
+§11.6 dit du dernier bloc : « **B5 : 1 ou 0** — le 1 seulement si un cheval de
+B5 a une configuration physique irréprochable ». Le code, lui, prend ce siège
+**sans condition**. On a donc mesuré ce que vaut ce siège, **sur les mêmes
+8 chevaux** (`tools/experience-g5.mjs`, 96 courses, LOO) :
+
+| variante | PAYANTE | ouverture | 1re moitié | 2e moitié | siège gardé |
+|---|---|---|---|---|---|
+| G5 garde son siège si top-3 marché, sinon G2 | **42,7 %** | **42,7 %** | 43,8 % | 41,7 % | 3 % |
+| G5 garde son siège si top-5 marché, sinon G2 | **42,7 %** | 41,7 % | 43,8 % | 41,7 % | 8 % |
+| G5 garde son siège si top-8 marché, sinon G2 | **42,7 %** | **42,7 %** | 43,8 % | 41,7 % | 20 % |
+| G5 garde son siège si top-10 marché, sinon G2 | **42,7 %** | **42,7 %** | 43,8 % | 41,7 % | 37 % |
+| **3-3-1-1-0 — le siège va à G2, toujours** | **42,7 %** | **42,7 %** | 41,7 % | 43,8 % | — |
+| 3-2-2-1-0 — le siège va à G3 | 40,6 % | 38,5 % | 39,6 % | 41,7 % | — |
+| 3-2-1-2-0 — le siège va à G4 | 39,6 % | 38,5 % | 37,5 % | 41,7 % | — |
+| ▶ **3-2-1-1-1 — G5 inconditionnel (le code)** | **38,5 %** | 37,5 % | 37,5 % | 39,6 % | — |
+| G5 garde son siège si top-16 marché (≈ toujours) | 38,5 % | 37,5 % | 37,5 % | 39,6 % | 99 % |
+
+**Ce que ça dit, en trois lignes :**
+
+1. **Le siège de G5 est le mauvais siège** : le laisser à G5 coûte ~4 points de
+   PAYANTE ; le donner à **G2** les rend (G3 moins, G4 encore moins).
+2. **La condition ne sert à rien — mais elle ne coûte rien** : garder le siège
+   pour un cheval « backé » (top-3 / top-5 / top-8 / top-10) donne **exactement
+   le même 42,7 %** qu'un déplacement systématique.
+3. Donc **deux lectures équivalentes**, au choix de l'utilisateur :
+   **(a)** `3-3-1-1-0` — G5 = 0, le plus simple ; **(b)** G5 garde son siège
+   **seulement si son cheval est dans les 10 premières cotes** — même résultat,
+   et ça respecte la lettre de §11.6 (« B5 : 1 ou 0 »).
+
+⚠ **Rien n'est appliqué.** §11.16 : **les quotas n'appartiennent pas au moteur.**
+3-3-1-1-0 ne sort d'aucune borne déclarée (G1 3 ≤ 3, G2 3 ≤ 3, G3 1, G4 1,
+B5 0 ✔) mais **c'est le choix de l'utilisateur**, pas du code. Le panneau affiche
+`appliquée` / `non appliquée` et se réécrit seul (`node tools\fiabilite.mjs`).
+Rappel du caveat : n = 96, l'écart 42,7 vs 38,5 ≈ **0,6 σ** ; la force de
+l'argument est la **monotonie sur deux mesures indépendantes** (cotes finales
+**et** ouverture) et la stabilité sur les deux moitiés.
+
+#### ④ L'onglet **Écarts** — les cases P1..P20
+
+5ᵉ onglet, **peau cyan** (§12.1 : une identité visuelle par onglet), alimenté par
+`public/data/ecarts.json` (`tools/ecarts.mjs`).
+
+> ⚠ « **P** » = le **RANG DE PRESSE** (P1 = le 1er cité), **pas** la colonne du
+> carnet papier. Mesuré le 16/10 (§11.16, `tools/choix-grille.mjs`) : c'est le
+> rang de presse qui suit l'arrivée.
+
+Une case **donne** quand **le cheval qui l'occupe finit dans les cinq premiers**.
+109 courses à presse réelle (96 + le registre du site, doublons retirés) :
+
+```
+case   n    P donne    % top-5   % top-3   gagne   dernier hit   courses depuis
+P1    109    74/109     67,9 %    55,0 %     30     2026-10-14        1   chaude
+P3    109    53/109     48,6 %    35,8 %     13     2026-10-11        3   chaude
+P7    109    36/109     33,0 %    15,6 %      5     2026-10-07        7   FROIDE
+P12   108    22/108     20,4 %     6,5 %      2     2026-10-08        6   FROIDE
+P14    96     9/96       9,4 %     5,2 %      1     2026-06-19       16   FROIDE
+```
+
+- colonnes : la course du jour (`n° · M<rang>`), `P donne`, `% top-5`,
+  `% top-3`, `gagne`, **dernier hit**, **courses depuis**, **état**
+  (chaude ≥ 40 % ou hit à la dernière course · froide = rien depuis ≥ 5 courses),
+  et **les 6 dernières** (pastilles).
+- « courses depuis » est en **courses**, pas en jours : le registre n'est pas
+  régulier. « jours depuis » se compterait depuis la **dernière course du
+  registre**, pas depuis aujourd'hui.
+- c'est un **repère de lecture**, ❌ **jamais** une raison d'écarter un cheval
+  (§6 : on écarte sur le **physique**).
+
+#### Les fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `tools/experience-g5.mjs` | **l'expérience du siège de G5** — rapport console + **module** (exporte `chargerEchantillon`, `VARIANTES`, `jouer`, `mesurer`) |
+| `tools/fiabilite.mjs` | écrit `data/fiabilite.json` + `public/data/fiabilite.json` (code · baselines · badge · expérience). **Seule source** du panneau |
+| `tools/ecarts.mjs` | écrit `data/ecarts.json` + `public/data/ecarts.json` (les places P1..P20) |
+| `src/lib/quinte.js` | + `rangsMarche()` · `bandeMarche()` · `BANDE_MARCHE` · `fetchFiabilite()` · `fetchEcarts()` |
+| `frontend/QUINTE/QuinteGrille.jsx` | + le badge sur la boule · `<PanneauMesure/>` · `<TabEcarts/>` + la 5ᵉ peau `THEME.ecarts` |
+
+> `tools/fiabilite.mjs` **importe** les variantes de `tools/experience-g5.mjs` :
+> le panneau et le rapport console **ne peuvent pas diverger**. Les deux fichiers
+> JSON se régénèrent par une seule commande, et l'onglet Écarts par une autre.
+
+---
+
 ## 12. 🖥️ L'OUTIL — page `/quinte` (C:\bahja-TURF)
 
 Fichiers :
 
 | Fichier | Rôle |
 |---|---|
-| `frontend/QUINTE/QuinteGrille.jsx` | la page : grille, carrière, ticket, archive, stats |
+| `frontend/QUINTE/QuinteGrille.jsx` | la page — **5 onglets** (§12.1) : grille · ticket · archive · statistiques · **écarts** ; + le **badge marché** et le **panneau de mesure** (§11.23) |
 | `src/lib/quinte.js` | toute la logique : API, grille, **moteur + marché**, archive, stats |
 | ~~`backend/QUINTE/quinte.js`~~ | **SUPPRIMÉ le 05/10/2026.** C'était une copie à l'octet près de `src/lib/quinte.js`, faite pour l'API bahja-pmu. La page importe désormais `src/lib/quinte` directement : plus de copie, plus de désynchronisation. |
 | `tools/collect-synthese.mjs` | le collecteur quotidien pronostics-turf.info |
@@ -974,6 +1109,9 @@ Fichiers :
 | `tools/choix-grille.mjs` | ⭐ **LA mesure décisive du choix** (§11.22) : qui remplit chaque bloc (carnet / marché / colonne), blocs du **vrai `buildGrid`** |
 | `tools/choix-blocs.mjs` | le même choix, blocs définis par les **rangs de presse** (garde-fou : un autre découpage) |
 | `tools/choix-combos.mjs` | les **32 combinaisons** carnet/marché par bloc + LOO honnête |
+| `tools/fiabilite.mjs` | ⭐ **le panneau de mesure** (§11.23) → `data/fiabilite.json` + `public/data/fiabilite.json` : la fiabilité du code, les baselines du marché, la table du badge, l'expérience G5 |
+| `tools/experience-g5.mjs` | ⭐ **l'expérience du siège de G5** (§11.23) — rapport console **et module** (importé par `fiabilite.mjs` : une seule définition des variantes) |
+| `tools/ecarts.mjs` | ⭐ **les écarts des places P1..P20** (§11.23) → `data/ecarts.json` + `public/data/ecarts.json` |
 | `tools/test-nonregression.mjs` | le harnais avant/après sur l'archive réelle (`--out`, `--diff`) — **sert de témoin au 5/5 de §11.22** |
 | `tools/verif-parite.mjs` | **`src/lib/quinte.js` == `backend/QUINTE/quinte.js` ?** — compare les deux, commentaires ignorés, fonction par fonction (§12) |
 | `tools/surprise.mjs` | ⚠ **obsolète** (4 courses, métrique x/5) — la mesure de référence est **§11.18** |
@@ -1026,9 +1164,9 @@ relayerait vers une origine étrangère.
 
 Vérification : `node tools\test-proxy.mjs` (10 appels réels, 2 formes × 3 proxies).
 
-### 12.1 Les 4 onglets — une identité visuelle PAR onglet (05/10/2026)
+### 12.1 Les 5 onglets — une identité visuelle PAR onglet (05/10/2026 · 5ᵉ le 16/10/2026)
 
-Les quatre onglets ne doivent jamais se confondre : fond, en-tête, cadre,
+Les onglets ne doivent jamais se confondre : fond, en-tête, cadre,
 police et en-têtes de tableau changent d'un onglet à l'autre.
 
 | Onglet | Couleur | Fond | Caractère |
@@ -1037,14 +1175,18 @@ police et en-têtes de tableau changent d'un onglet à l'autre.
 | **Le ticket** | 🔵 bleu nuit `#1d4ed8` | dégradé `#eef2ff → #fff` | tableur plat, coins carrés, chiffres monospace, **zéro ombre** |
 | **Archive** | 🟠 ambre parchemin `#b45309` | dégradé `#fef6e7 → #fffcf5` | registre : police **serif**, bordure pleine 2 px, lignes crème |
 | **Statistiques** | 🟣 violet prune `#7c3aed` | dégradé `#f5f3ff → #fff` | tableau de bord, cartes 16 px, ombre violette |
+| **Écarts** | 🩵 cyan froid `#0e7490` | dégradé `#ecfeff → #fff` | relevé de températures : chiffres monospace, en-têtes capitales (§11.23) |
 
-**Le mécanisme** : un objet `THEME` (4 peaux) + `TABS`. Dans le composant,
+**Le mécanisme** : un objet `THEME` (5 peaux) + `TABS`. Dans le composant,
 `const SK = THEME[onglet]` puis `const s = { box: SK.box, hdr: SK.hdrStyle, th: SK.th, td: SK.td }`
 → **toutes** les tables, tous les cadres et tous les en-têtes suivent l'onglet actif.
-Un seulbouton d'onglet = la couleur de sa peau quand il est actif.
+Un seul bouton d'onglet = la couleur de sa peau quand il est actif.
 
 > Règle : les couleurs **sémantiques** (vert = bon, rouge = mauvais, ambre = doute)
-> ne changent JAMAIS d'un onglet à l'autre. Seul le *chrome* est=iosé par onglet.
+> ne changent JAMAIS d'un onglet à l'autre. Seul le *chrome* est isolé par onglet.
+> ⚠ **Les 4 couleurs sémantiques du badge marché** (§11.23 — `M≤3` vert,
+> `M≤5` bleu, `M6-12` ambre, `M13+` rouge) sont **dans** cette règle : elles ne
+> dépendent pas de l'onglet.
 
 ### 12.2 D'où vient la Synthèse — 3 sources, dans cet ordre
 

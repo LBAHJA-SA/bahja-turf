@@ -1,0 +1,241 @@
+{
+ "mesure": {
+  "outil": "tools/fiabilite.mjs",
+  "le": "2026-10-16",
+  "source": "data/quintes.json — Quinté Global PMU France",
+  "echantillon": {
+   "n": 96,
+   "du": "2026-02-09",
+   "au": "2026-07-07"
+  },
+  "metrique": "§11.18 PAYANTE = le 1-2-3 (gagnant, 2e, 3e) complet dans la grille",
+  "note": "aucun chiffre de ce fichier n'est saisi à la main : relancer le script pour le rafraîchir."
+ },
+ "code": {
+  "finales": {
+   "n": 96,
+   "p3": 37,
+   "p4": 17,
+   "p5": 7,
+   "ch": 768,
+   "payante": 38.5,
+   "couvre4": 17.7,
+   "q5": 7.3,
+   "chevaux": 8
+  },
+  "ouverture": {
+   "n": 96,
+   "p3": 36,
+   "p4": 17,
+   "p5": 10,
+   "ch": 768,
+   "payante": 37.5,
+   "couvre4": 17.7,
+   "q5": 10.4,
+   "chevaux": 8
+  }
+ },
+ "baselines": {
+  "marche8": {
+   "n": 96,
+   "p3": 38,
+   "p4": 18,
+   "p5": 9,
+   "ch": 768,
+   "payante": 39.6,
+   "couvre4": 18.8,
+   "q5": 9.4,
+   "chevaux": 8
+  },
+  "marche9": {
+   "n": 96,
+   "p3": 49,
+   "p4": 30,
+   "p5": 17,
+   "ch": 864,
+   "payante": 51,
+   "couvre4": 31.3,
+   "q5": 17.7,
+   "chevaux": 9
+  }
+ },
+ "badge": [
+  {
+   "cle": "1-3",
+   "lib": "top 3 du marché",
+   "n": 288,
+   "top5": 52.1,
+   "top3": 38.2,
+   "courses": 96
+  },
+  {
+   "cle": "4-5",
+   "lib": "4e-5e du marché",
+   "n": 192,
+   "top5": 42.7,
+   "top3": 30.2,
+   "courses": 96
+  },
+  {
+   "cle": "6-8",
+   "lib": "6e-8e du marché",
+   "n": 288,
+   "top5": 34,
+   "top3": 17.4,
+   "courses": 96
+  },
+  {
+   "cle": "9-12",
+   "lib": "9e-12e du marché",
+   "n": 380,
+   "top5": 28.7,
+   "top3": 14.2,
+   "courses": 96
+  },
+  {
+   "cle": "13+",
+   "lib": "13e et au-delà",
+   "n": 306,
+   "top5": 13.1,
+   "top3": 5.2,
+   "courses": 96
+  },
+  {
+   "cle": "tous",
+   "lib": "tous les partants cités",
+   "n": 1454,
+   "top5": 32.9,
+   "top3": 19.8,
+   "courses": 96
+  }
+ ],
+ "experience": [
+  {
+   "cle": "A3",
+   "nom": "G5 garde son siège si top-3 marché, sinon G2",
+   "condition": "rang de marché ≤ 3",
+   "payante": 42.7,
+   "couvre4": 24,
+   "q5": 9.4,
+   "chevaux": 8,
+   "garde": 3.1,
+   "payanteOuverture": 42.7,
+   "payante1re": 43.8,
+   "payante2e": 41.7,
+   "appliquee": false
+  },
+  {
+   "cle": "A5",
+   "nom": "G5 garde son siège si top-5 marché, sinon G2",
+   "condition": "rang de marché ≤ 5",
+   "payante": 42.7,
+   "couvre4": 24,
+   "q5": 9.4,
+   "chevaux": 8,
+   "garde": 8.3,
+   "payanteOuverture": 41.7,
+   "payante1re": 43.8,
+   "payante2e": 41.7,
+   "appliquee": false
+  },
+  {
+   "cle": "A8",
+   "nom": "G5 garde son siège si top-8 marché, sinon G2",
+   "condition": "rang de marché ≤ 8",
+   "payante": 42.7,
+   "couvre4": 22.9,
+   "q5": 8.3,
+   "chevaux": 8,
+   "garde": 19.8,
+   "payanteOuverture": 42.7,
+   "payante1re": 43.8,
+   "payante2e": 41.7,
+   "appliquee": false
+  },
+  {
+   "cle": "A10",
+   "nom": "G5 garde son siège si top-10 marché, sinon G2",
+   "condition": "rang de marché ≤ 10",
+   "payante": 42.7,
+   "couvre4": 24,
+   "q5": 8.3,
+   "chevaux": 8,
+   "garde": 36.5,
+   "payanteOuverture": 42.7,
+   "payante1re": 43.8,
+   "payante2e": 41.7,
+   "appliquee": false
+  },
+  {
+   "cle": "B2",
+   "nom": "3-3-1-1-0 — le siège va à G2, toujours",
+   "condition": null,
+   "payante": 42.7,
+   "couvre4": 22.9,
+   "q5": 9.4,
+   "chevaux": 8,
+   "garde": null,
+   "payanteOuverture": 42.7,
+   "payante1re": 41.7,
+   "payante2e": 43.8,
+   "appliquee": false
+  },
+  {
+   "cle": "B3",
+   "nom": "3-2-2-1-0 — le siège va à G3, toujours",
+   "condition": null,
+   "payante": 40.6,
+   "couvre4": 18.8,
+   "q5": 8.3,
+   "chevaux": 8,
+   "garde": null,
+   "payanteOuverture": 38.5,
+   "payante1re": 39.6,
+   "payante2e": 41.7,
+   "appliquee": false
+  },
+  {
+   "cle": "B4",
+   "nom": "3-2-1-2-0 — le siège va à G4, toujours",
+   "condition": null,
+   "payante": 39.6,
+   "couvre4": 15.6,
+   "q5": 6.3,
+   "chevaux": 8,
+   "garde": null,
+   "payanteOuverture": 38.5,
+   "payante1re": 37.5,
+   "payante2e": 41.7,
+   "appliquee": false
+  },
+  {
+   "cle": "courante",
+   "nom": "3-2-1-1-1 — G5 inconditionnel (le code actuel)",
+   "condition": null,
+   "payante": 38.5,
+   "couvre4": 17.7,
+   "q5": 7.3,
+   "chevaux": 8,
+   "garde": null,
+   "payanteOuverture": 37.5,
+   "payante1re": 37.5,
+   "payante2e": 39.6,
+   "appliquee": true
+  },
+  {
+   "cle": "A16",
+   "nom": "G5 garde son siège si top-16 marché, sinon G2",
+   "condition": "rang de marché ≤ 16",
+   "payante": 38.5,
+   "couvre4": 17.7,
+   "q5": 7.3,
+   "chevaux": 8,
+   "garde": 99,
+   "payanteOuverture": 37.5,
+   "payante1re": 37.5,
+   "payante2e": 39.6,
+   "appliquee": false
+  }
+ ],
+ "experienceAppliquee": "courante"
+}
