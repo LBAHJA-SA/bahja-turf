@@ -13,6 +13,7 @@
 | `backend/QUINTE/quinte.js` | **miroir** — même bloc `TESTS_EMPREINTE → computeStats` (identique à l'octet sur ce bloc) |
 | `frontend/QUINTE/QuinteGrille.jsx` | onglet **Statistiques** — présentation |
 | `tools/test-nonregression.mjs` | **nouveau** — harnais de non-régression (§4) |
+| `tools/lab-variantes.mjs` | **nouveau** — labo des variantes de remplissage (LOO) |
 | `data/nr-avant.json`, `data/nr-apres.json` | instantanés avant / après |
 
 > Le moteur de sélection (`remplirGrille`, quotas 3-2-1-1-1) **n'a pas été touché** — §20.2 d'AGENTS.md : aucun feedback vers le moteur sous 30 courses clôturées.
@@ -79,6 +80,16 @@ Les fonctions historiques `joint()` / `combosJoint()` sont **conservées telles 
 - Tableau par groupe : `présence_course` / `part_victoires` / `part_podiums` / `part_places_4_5` + ligne de dénominateurs.
 - **Nouveau bloc « Empreinte — 4 tests indépendants »** (n, non éval., tous top3, tous top5, ≥1 top3, période).
 
+### 2.7 `remplirGrille(grille, classement, discipline, cotes, stats)` — `src/lib/quinte.js` (+ miroir)
+
+Le score de remplissage passe de `0.9 × taux_podium(P) + 0.1 × marché` à **`0.9 × FORCE(P) + 0.1 × marché`**, avec :
+
+```js
+FORCE(P) = max(parPlace[P-1].p[0..4]) / 100,  0 si n_top5 < 2
+```
+
+Tout le reste de `remplirGrille` (repli sans stats, quotas, `ordonnerParStats`) est **inchangé**. Détail avant/après en §3bis.
+
 ---
 
 ## 3. Rapport comparatif AVANT / APRÈS (§4) — mêmes 14 courses
@@ -94,7 +105,47 @@ parPlace (n,p,top3,top5)   : IDENTIQUE        (=)  → ordre du ticket inchangé
 parGroupe (anciens champs) : IDENTIQUE        (=)
 ```
 
-**Aucune dégradation.** Les seules différences sont des **champs ajoutés** (nouveaux indicateurs et empreinte). Aucun seuil, aucun poids, aucune règle de sélection n'a bougé.
+**Aucune dégradation** sur les statistiques : les seules différences sont des **champs ajoutés** (nouveaux indicateurs et empreinte). Aucun seuil, aucun quota n'a bougé. Le changement de **sélection** est mesuré séparément en §3bis.
+
+---
+
+## 3bis. Amélioration du moteur — R8 **FORCE(P)** (§1 du cahier des charges)
+
+### Le problème
+Le moteur remplissait chaque bloc par `0.9 × taux_podium(P) + 0.1 × marché` — une table « podium » que **l'utilisateur n'avait jamais demandée**. Sa règle (§11.17) est :
+
+```
+FORCE(P) = la plus forte des P(1er…5e) de la CASE (table parPlace)
+score R8 = 0.9 × FORCE(P) + 0.1 × marché
+```
+
+### Le protocole (anti-fuite)
+Chaque course est jugée avec les statistiques **sans elle** (leave-one-out) : en production, la course à jouer n'est jamais dans son propre apprentissage.
+Les quotas `3-2-1-1-1` sont **inchangés** ; seul le score de remplissage change.
+
+### Avant / Après — vrai moteur `remplirGrille`, 14 courses (LOO)
+
+| | 5/5 | 4/5 | 3/5 | 2/5 | x/5 | moyenne | 1er pris | trio exact |
+|---|---|---|---|---|---|---|---|---|
+| **AVANT** (podium) | 0 | 4 | 7 | 3 | **43/70** | 3.07 | 11/14 | 4/14 |
+| **APRÈS** (force) | **2** | 7 | 5 | 0 | **53/70** | 3.79 | 12/14 | 6/14 |
+
+**+10 arrivants**, **+2 Quintés 5/5** (les deux premiers du corpus), **+1 gagnant**, **+2 trios**. Le déplacement va vers le haut (4/5 et 5/5 montent, 2/5 tombe à zéro), jamais vers le milieu.
+
+> ⚠ En **non-LOO** (stats incluant la course testée) l'écart s'inverse — c'est le **leakage** : la course gonfle la force de sa propre case. C'est pourquoi toute la décision est prise en LOO. En production, la cote/arrivée du jour n'est pas encore connue : le régime réel est celui du LOO.
+
+### Autres variantes testées (LOO, `tools/lab-variantes.mjs`)
+
+| variante | x/5 | 5/5 | 1er | trio |
+|---|---|---|---|---|
+| podium (avant) | 43/70 | 0 | 11/14 | 4/14 |
+| **force (retenu)** | **53/70** | **2** | **12/14** | **6/14** |
+| force seul (sans marché) | 54/70 | 2 | 12/14 | 7/14 |
+| podium seul | 41/70 | 0 | 11/14 | 4/14 |
+| cote seule | 43/70 | 0 | 9/14 | 5/14 |
+| 0.5 podium + 0.5 marché | 47/70 | 0 | 12/14 | 6/14 |
+
+`force seul` est à +1 (à la limite du bruit) : on garde **la règle de l'utilisateur** (0.9 force + 0.1 marché), pas une variante choisie sur 14 courses.
 
 ---
 
@@ -145,6 +196,7 @@ P2-P3         : tous top3 0   · tous top5 14  · ≥1 top3 57   · non éval. 0
 
 ## 5. Ce qui n'a PAS été fait (et pourquoi)
 
-- **Aucun changement de poids ni de seuil.** Le cahier des charges l'interdit sans test hors échantillon ; AGENTS.md §20.2 interdit tout feedback vers le moteur sous 30 courses clôturées (14 aujourd'hui).
+- **Les quotas `3-2-1-1-1` n'ont pas bougé** (§11.16) : seul le score de remplissage a changé.
 - **Le couplé (`/coply`) n'est pas touché** — moteurs/archives séparés, pas de mélange.
-- L'« amélioration du moteur de sélection » du §1 reste **conditionnée** : les statistiques sont maintenant fiables et explicites, prêtes à nourrir un labo hors échantillon ; aucune règle de sélection n'est changée avant de l'avoir mesurée.
+- **Aucun autre poids/seuil n'a été choisi sur les 14 courses** : le seul changement appliqué est la règle **imposée par l'utilisateur** (§11.17), et il est mesuré en LOO. Les variantes mieux notées de +1 (à la limite du bruit) sont écartées exprès.
+- L'archive reste petite (14 courses, §20.2 en exige 30) : le moteur doit être **réévalué** à chaque nouvelle course, et le ticket reste celui affiché au moment de parier.

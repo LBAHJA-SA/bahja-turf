@@ -792,15 +792,27 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
   const ticket = []
   const detail = []
 
-  /* ⭐ R8 : table podium P → taux (podiums/N), calculée UNE fois ici —
-   * même définition que le labo (stats LOO là-bas, archive ici).
-   * ⭐ 15/10/2026 — CONSTAT (d دستور utilisateur) : le problème est la
-   * SÉLECTION dans le quota, PAS le quota. G1 : max 3/4 (6×), jamais 4.
-   * G2 : max 3/4 une fois. 16 ratés G1/G2 tous dans le quota. Le travail
-   * est 100% : QUI entre. */
-  const pod = new Map()
-  for (const b of stats?.podiumBloc || []) for (const d of b.detail || []) pod.set(d.p, (d.n || 0) / Math.max(1, stats.nb))
-  const aStats = pod.size > 0
+  /* ⭐ 15/10/2026 — CONSTAT MESURÉ (14 courses) : le problème est la
+   * SÉLECTION dans le quota, PAS le quota. G1 : max 3 arrivants/4 (6×),
+   * jamais 4. G2 : max 3/4 une fois (15/10). 16 ratés G1/G2, TOUS dans
+   * le quota (12 prenables cote ou stats, 4 par l'autre lecture). Aucun
+   * 9e siège ne se justifie : même à 9, le 15/10 restait incomplet
+   * (3 manquants). Le travail est 100% : QUI entre. */
+  /* ⭐ 16/10/2026 — R8 « FORCE P » (spécification utilisateur, §11.17).
+   * FORCE(P) = la PLUS FORTE des P(1er…5e) de la CASE (table `parPlace`,
+   * dénominateur conditionnel n_top5). On remplace la version « taux de
+   * podium du P » : l'interprétation podium était une ERREUR, pas la règle.
+   * Conventions visibles : n < 2 → 0 (force inexploitable) ; cote absente →
+   * terme marché à 0.5. Mesuré par tools/test-nonregression.mjs. */
+  const parPlace = stats?.parPlace || []
+  const force = (slot) => {
+    const st = parPlace[slot - 1]
+    if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return 0
+    let best = 0
+    for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
+    return (st.p[best] ?? 0) > 0 ? st.p[best] / 100 : 0
+  }
+  const aStats = parPlace.some((st) => st && st.n >= 2)
 
   for (const g of grille.groupes) {
     const cases = g.cases.map((c) => ({ ...c, s: parNum.get(c.num)?.s || null, ok: parNum.get(c.num)?.ok ?? null }))
@@ -823,7 +835,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
 
     const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
 
-    // score R8 : 0.9 podium + 0.1 marché (cote inversée normalisée,
+    // score R8 : 0.9 FORCE(P) + 0.1 marché (cote inversée normalisée,
     // 0.5 si absente) ; sans stats → repli ancien (cotes puis tries)
     const surLeMarche = cases.every((c) => coteDe(cotes, c.num) != null)
     const retenus = new Set()
@@ -836,7 +848,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
         return (cMax - v) / (cMax - cMin)
       }
       cases.slice()
-        .sort((a, b) => ((0.9 * (pod.get(b.slot) ?? 0) + 0.1 * mkt(b)) - (0.9 * (pod.get(a.slot) ?? 0) + 0.1 * mkt(a))) || (a.slot - b.slot))
+        .sort((a, b) => ((0.9 * force(b.slot) + 0.1 * mkt(b)) - (0.9 * force(a.slot) + 0.1 * mkt(a))) || (a.slot - b.slot))
         .slice(0, quota).forEach((c) => retenus.add(c.place))
     } else if (surLeMarche) {
       const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))

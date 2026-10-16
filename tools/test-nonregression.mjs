@@ -46,7 +46,10 @@ for (const d of Object.keys(db).sort()) {
   const brut = (r.scores || []).map((s) => ({ p: { num: s.num }, s, ok: (s.filtres || []).every((x) => x) }))
   const classement = brut.length ? classerPhysique(brut) : []
   const cotes = Object.fromEntries((eq[r.courseId]?.cotes || []).map((x) => [x.num, x]))
-  const { ticket } = remplirGrille(grille, classement, r.discipline, cotes, stats)
+  /* ⚠ ANTI-FUITE : on juge chaque course avec les stats SANS elle (leave-one-out),
+   * comme en production — la course à jouer n'est jamais dans son propre apprentissage. */
+  const statsLOO = computeStats(archive.filter((x) => x !== r))
+  const { ticket } = remplirGrille(grille, classement, r.discipline, cotes, statsLOO)
   const arrivee = (r.arrivee || []).slice(0, 5)
   const hits = arrivee.filter((n) => ticket.includes(n)).length
   const trio = (r.arrivee || []).slice(0, 3)
