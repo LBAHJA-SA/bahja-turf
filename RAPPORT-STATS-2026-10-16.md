@@ -199,4 +199,4 @@ P2-P3         : tous top3 0   · tous top5 14  · ≥1 top3 57   · non éval. 0
 - **Les quotas `3-2-1-1-1` n'ont pas bougé** (§11.16) : seul le score de remplissage a changé.
 - **Le couplé (`/coply`) n'est pas touché** — moteurs/archives séparés, pas de mélange.
 - **Aucun autre poids/seuil n'a été choisi sur les 14 courses** : le seul changement appliqué est la règle **imposée par l'utilisateur** (§11.17), et il est mesuré en LOO. Les variantes mieux notées de +1 (à la limite du bruit) sont écartées exprès.
-- L'archive reste petite (14 courses, §20.2 en exige 30) : le moteur doit être **réévalué** à chaque nouvelle course, et le ticket reste celui affiché au moment de parier.
+- **Le seuil « 30 courses » est aboli (16/10/2026, AGENTS.md §20.2)** : on itère sur le moteur dès maintenant, à condition que chaque mesure soit faite **hors apprentissage (LOO)**. Le ticket reste celui affiché au moment de parier.

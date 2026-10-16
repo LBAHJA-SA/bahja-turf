@@ -1551,6 +1551,7 @@ champ absent affiche `—` sans dire pourquoi.
 > Décision de l'utilisateur : les indicateurs Top3 / 1er-manqué restent de
 > la MATIÈRE PREMIÈRE. L'archive grossit, le moteur se renforce avec elle —
 > mais pas avant d'avoir de quoi conclure.
+> ⚠ 16/10/2026 : le seuil « 30 courses clôturées » est **ABOLI** (§20.2).
 
 ### 20.1 Ce qui est affiché (depuis le 09/10)
 
@@ -1561,12 +1562,17 @@ champ absent affiche `—` sans dire pourquoi.
 
 Un 4/5 qui rate le 1er est une feuille perdante : le x/5 seul mentirait.
 
-### 20.2 Ce qui est INTERDIT tant que l'archive est petite
+### 20.2 Ce qui est INTERDIT — ⚠ révisé le 16/10/2026
 
 - Les indicateurs **ne choisissent rien** : `remplirGrille()` + quotas
   intacts. Ce sont des compteurs, pas une force de sélection.
-- Aucun feedback vers le moteur sous **30 courses clôturées**.
-- Ensuite : labo d'abord (`tools/test-top3.mjs`, train/test), approbation
-  ensuite, production en dernier. §11.16 (quotas 3-2-1-1-1) ne se discute
-  pas sans levée explicite — testé le 09/10 sur 94 courses : la règle
-  proposée 3-2-2-1 ne gagne pas clairement (écart ±1-3 = bruit).
+- ~~Aucun feedback vers le moteur sous **30 courses clôturées**.~~
+  **16/10/2026 — ABOLI** (demande de l'utilisateur) : plus de seuil
+  d'archive. On itère sur le moteur quel que soit le nombre de courses
+  clôturées, **dès lors que la mesure est hors de l'apprentissage**
+  (`tools/test-nonregression.mjs`, `tools/lab-variantes.mjs` — LOO).
+- Le processus : labo d'abord, mesure LOO ensuite, production en dernier,
+  approbation de l'utilisateur avant tout changement de règle. §11.16
+  (quotas 3-2-1-1-1) ne se discute pas sans levée explicite — testé le
+  09/10 sur 94 courses : la règle proposée 3-2-2-1 ne gagne pas clairement
+  (écart ±1-3 = bruit).
