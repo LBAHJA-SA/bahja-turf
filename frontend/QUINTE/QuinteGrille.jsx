@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   fetchRecapSite, fetchArchiveDisque,
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
-  scorePhysique, filtres, ordonnerParStats,
+  scorePhysique, filtres, ordonnerParStats, ticketValide, ticketAffiche,
   saveArchive, listArchive, deleteArchive, attachResult, attachTicket,
   loadCarriere, syncDepuisDisque, getArchive,
   clearArchive,
@@ -362,7 +362,14 @@ export default function QuinteGrille() {
       //   (arrivee connue). Tant qu'elle n'a pas couru, c'est le ticket LIVE
       //   qu'on joue : le marche bouge, l'archive est un instantane de 08h45
       //   ou 20h30 qui ne vaut plus rien (\u00a713.3 regle 5).
-      if (rec?.ticket?.length) setTicketManuel(rec.ticket)
+      //   \u26a0 16/10/2026 : cette ligne ne suivait PAS son propre commentaire —
+      //   elle posait le ticket gelé dès qu'il existait. D'où le ticket du
+      //   16/10, figé la veille sur 16 DÉCLARÉS, qui portait un `16` dans une
+      //   course de 15 partants. Seule exception : un ticket MANUEL est
+      //   intouchable (\u00a713.3 règle 4).
+      if (rec?.ticket?.length && ((rec.arrivee || []).length > 0 || rec.ticketSource === 'manuel')) {
+        setTicketManuel(rec.ticket)
+      }
       if (rec?.synthese?.length) {
         j = {
           date: d, found: true, race: rec.race, source: rec.source || 'archive locale',
@@ -381,7 +388,10 @@ export default function QuinteGrille() {
       if ((!rec?.ticket?.length || !j)) {
         let local = null
         try { local = await getArchive(d) } catch (e) { /* pas de local */ }
-        if (!rec?.ticket?.length && local?.ticket?.length) setTicketManuel(local.ticket)
+        if (!rec?.ticket?.length && local?.ticket?.length
+          && ((local.arrivee || []).length > 0 || local.ticketSource === 'manuel')) {
+          setTicketManuel(local.ticket)
+        }
         if (!j && local?.synthese?.length) {
           j = {
             date: d, found: true, race: local.race, source: 'archive locale (navigateur)',
@@ -598,9 +608,21 @@ export default function QuinteGrille() {
 
   // 🔒 le choix est celui du moteur. Seul le ticket ARCHIVÉ passe devant
   //   (il est intouchable, §13.3) — mais on ne peut pas le modifier à la main.
+  //   ⚠ 16/10/2026 : le gel passe devant, mais SANS ses fantômes. On marque
+  //   donc `ticketAffiche` : la grille et le ticket montrent alors la MÊME
+  //   sélection. Course COURUE → le ticket est un CONSTAT (on retire les
+  //   non-partants, on ne complète pas) ; course OUVERTE → la place du
+  //   fantôme est reprise par la case du moteur, quota tenu.
+  const courseFinie = useMemo(
+    () => !!archive.find((a) => a.date === date && (a.arrivee || []).length > 0),
+    [archive, date],
+  )
+
   const detail = useMemo(() => {
     if (!rempli) return null
-    const pose = ticketManuel && ticketManuel.length ? new Set(ticketManuel) : null
+    const sel = (ticketManuel && ticketManuel.length)
+      ? ticketAffiche(ticketManuel, rempli, !courseFinie) : null
+    const pose = sel ? new Set(sel) : null
     return rempli.detail.map((g) => ({
       ...g,
       cases: g.cases.map((c) => ({
@@ -610,7 +632,7 @@ export default function QuinteGrille() {
         bande: bandes[c.num] ?? null,
       })),
     }))
-  }, [rempli, ticketManuel, rangs, bandes])
+  }, [rempli, ticketManuel, rangs, bandes, courseFinie])
 
 /* Couleurs des 5 groupes — les mêmes que sur le carnet papier. */
 const COULEUR_GROUPE = {
@@ -1086,16 +1108,21 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   const ticket = useMemo(() => {
     if (!rempli) return ticketManuel && ticketManuel.length ? ticketManuel : []
     const base = (ticketManuel && ticketManuel.length) ? ticketManuel : rempli.ticket
-    return ordonnerParStats(base, grille, stats, cotes)
-  }, [rempli, ticketManuel, grille, stats, cotes])
+    /* ⚠ 16/10/2026 — un cheval qui ne PART pas ne peut pas être au ticket :
+     *   `ticketAffiche` retire les numéros absents de la grille du jour et,
+     *   la course encore ouverte, remplit la place dans le même groupe
+     *   (quota §11.19). Course courue : constat, sans invention (§7). */
+    return ordonnerParStats(ticketAffiche(base, rempli, !courseFinie), grille, stats, cotes)
+  }, [rempli, ticketManuel, grille, stats, cotes, courseFinie])
 
   // ⚠ L'AUTO-FIGEAGE : dès que le moteur produit un ticket, on l'écrit dans
   //   l'archive. L'archive doit montrer le ticket DÈS LE PREMIER ANALYSE —
   //   pas seulement après un clic « Rafraîchir ». `attachTicket` ne fige que
   //   le PREMIER (un ticket déjà posé est intouchable, §13.3).
   //
-  //   Puis on recharge le ticket FIGÉ dans `ticketManuel` : dès lors l'affichage
-  //   lit l'archive, pas le marché — le marché peut bouger, la ticket reste.
+  //   ⚠ 16/10/2026 : on NE recharge PAS le gel dans `ticketManuel`. Le gel
+  //   est une TRACE d'archive ; l'affichage, lui, doit rester le marché du
+  //   moment (§11.17) — c'est ce ticket-là qu'on joue, pas celui du matin.
   const ticketAuto = useMemo(() => {
     if (ticketManuel && ticketManuel.length) return null   // déjà figé
     if (!rempli || !rempli.ticket.length) return null
@@ -1110,7 +1137,6 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
       const res = await attachTicket(date, [...ticketAuto], 'page')
       if (annule || !res) return
       setArchive(await listArchive())
-      if (res.ticket && res.ticket.length) setTicketManuel(res.ticket)
     })()
     return () => { annule = true }
   }, [date, ticketAuto])
@@ -1403,9 +1429,15 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 </span>
               )
               const src = rec?.ticketSource || null
-              const conf = !src ? ['LIVE', '#94a3b8']
-                : src === 'final' ? ['DÉFINITIF', '#4ade80']
+              /* ⚠ 16/10/2026 — le badge dit ce que le TICKET AFFICHÉ est, pas
+               *   ce que l'archive a gelé. Tant que la course n'a pas couru, la
+               *   page joue le marché en direct (§11.17) : afficher « gelé à
+               *   10:15 » au-dessus d'un ticket qui bouge était un mensonge.
+               *   Le gel vit dans l'onglet Archive, avec sa source et son heure. */
+              const gele = !!(ticketManuel && ticketManuel.length)
+              const conf = !gele || !src ? ['LIVE', '#94a3b8']
                 : src === 'manuel' ? ['MANUEL', '#93c5fd']
+                : src === 'final' ? ['DÉFINITIF', '#4ade80']
                 : ['PROVISOIRE', '#fcd34d']
               return (
                 <span style={{
@@ -1541,14 +1573,14 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 </thead>
                 <tbody>
                   {archive.map((a) => {
-                    const t = new Set(a.ticket || [])
+                    const t = new Set(ticketValide(a))
                     const p = (a.arrivee || []).filter((n) => t.has(n)).length
                     /* ⭐ Les 3 indicateurs (09/10/2026) : le x/5 ne suffit pas.
                      *   Un 4/5 qui rate le 1er est une feuille perdante : on
                      *   compte le Top3 à part, et on signale le 1er manqué. */
                     const top3 = (a.arrivee || []).slice(0, 3)
                     const hit3 = top3.filter((n) => t.has(n)).length
-                    const manque1er = (a.arrivee || []).length > 0 && (a.ticket || []).length > 0 && !t.has(a.arrivee[0])
+                    const manque1er = (a.arrivee || []).length > 0 && ticketValide(a).length > 0 && !t.has(a.arrivee[0])
                     return (
                       <tr key={a.date} style={{ borderBottom: '1px solid #f1f5f9',                         background: a.placeholder ? SK.danger : (a.found ? SK.ligne : SK.alt) }}>
                         <td style={{ ...s.td, fontWeight: 700 }}>{a.date}</td>
@@ -1565,7 +1597,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
       dans l'ordre que donnent les Statistiques AUJOURD'HUI — le gel fige
       la SÉLECTION, jamais l'ordre (§17.2). Sans ça, la ligne montrait
       l'ordre brut du gel, qui ne suit pas la logique des résultats. */}
-  {ordonnerParStats(a.ticket || [], buildGrid(a.synthese || []), stats).join(' ') || '—'}
+  {ordonnerParStats(ticketValide(a), buildGrid(a.synthese || [], a.runners || []), stats).join(' ') || '—'}
 </td>
                         {/* ⭐ UN SEUL TEMPS : l'heure où le ticket a été POSÉ (le gel).
                             Pas l'heure d'enregistrement de la Synthèse — ce
@@ -1578,7 +1610,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                           {(() => {
                             if ((a.arrivee || []).length > 0) return <span style={{ color: '#57534e' }}>CLÔTURÉ</span>
                             const src = a.ticketSource || null
-                            if (!src || !(a.ticket || []).length) return <span style={{ color: '#94a3b8' }}>—</span>
+                            if (!src || !ticketValide(a).length) return <span style={{ color: '#94a3b8' }}>—</span>
                             const conf = src === 'final' ? ['DÉFINITIF', '#15803d']
                               : src === 'manuel' ? ['MANUEL', '#1d4ed8']
                               : ['PROVISOIRE', '#b45309']
@@ -1627,9 +1659,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </span>
                 )}
                 {(() => {
-                  const closes = archive.filter((a) => (a.arrivee || []).length > 0 && (a.ticket || []).length > 0)
-                  const avec3 = closes.filter((a) => (a.arrivee || []).slice(0, 3).every((n) => (a.ticket || []).includes(n))).length
-                  const sans1er = closes.filter((a) => !(a.ticket || []).includes(a.arrivee[0])).length
+                  const closes = archive.filter((a) => (a.arrivee || []).length > 0 && ticketValide(a).length > 0)
+                  const avec3 = closes.filter((a) => (a.arrivee || []).slice(0, 3).every((n) => ticketValide(a).includes(n))).length
+                  const sans1er = closes.filter((a) => !ticketValide(a).includes(a.arrivee[0])).length
                   return closes.length ? (
                     <span style={{ fontWeight: 700 }}>
                       Top3 : <span style={{ color: '#15803d' }}>{avec3}/{closes.length}</span>

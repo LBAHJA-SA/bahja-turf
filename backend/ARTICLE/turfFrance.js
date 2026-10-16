@@ -64,6 +64,8 @@ export const TF_ALIAS = {
   topentraineurs: 'topEntraineurs',
   toptrainer: 'topEntraineurs',
   aptitudeplace: 'aptitudePlace',
+  aptitude1er: 'aptitudeGagnant',
+  aptitudegagnant: 'aptitudeGagnant',
   topchronos: 'topChronos',
   topcordes: 'topCordes',
   topcordespmu: 'topCordes',

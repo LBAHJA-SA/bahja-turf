@@ -1,4 +1,1036 @@
 {
+  "2026-10-16": {
+    "date": "2026-10-16",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      3,
+      12,
+      6,
+      4,
+      7,
+      11,
+      13,
+      15,
+      1,
+      5,
+      14,
+      9,
+      8,
+      2,
+      10
+    ],
+    "savedAt": "2026-10-15T13:15:05.015Z",
+    "arrivee": null,
+    "discipline": "Attelé",
+    "distance": 2850,
+    "nbPartants": 15,
+    "hippodrome": "Paris-Vincennes",
+    "prix": "6800000 DH",
+    "courseId": 146350,
+    "cle": "2026-10-16_R1_C4",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "sourceImport": "page",
+    "ticket": [
+      5,
+      11,
+      1,
+      3,
+      12,
+      6,
+      4,
+      15
+    ],
+    "ticketSource": "page",
+    "ticketPoseLe": null,
+    "ticketMode": null
+  },
+  "2026-10-15": {
+    "date": "2026-10-15",
+    "found": true,
+    "source": "utilisateur (corrigée le 15/10)",
+    "synthese": [
+      1,
+      7,
+      2,
+      11,
+      9,
+      4,
+      10,
+      12,
+      3,
+      15,
+      6,
+      13,
+      8,
+      5,
+      14,
+      16
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "Plat",
+    "distance": 1200,
+    "hippodrome": "Chantilly",
+    "courseId": 146279,
+    "cle": "2026-10-15_R1_C1",
+    "prix": "5090000 DH",
+    "ticket": [
+      6,
+      11,
+      15,
+      1,
+      2,
+      4,
+      10,
+      13
+    ],
+    "collecte": "2026-10-15T13:21:57.262Z",
+    "ticketMode": "auto",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          11,
+          10
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          6
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          15
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          13
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-15T16:34:38.569Z",
+    "scores": [
+      {
+        "num": 1,
+        "nom": "SWEET CHOP",
+        "global": 7.02,
+        "forme": 3.3,
+        "dist": 9.73,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 2,
+        "nom": "LESSLEPASSER",
+        "global": 6.4,
+        "forme": 0.45,
+        "dist": 9.78,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 3,
+        "nom": "MISTER CHANG",
+        "global": 7.01,
+        "forme": 3.01,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 4,
+        "nom": "GRAND SCOOP",
+        "global": 7,
+        "forme": 2.95,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 5,
+        "nom": "HELLO CAREL",
+        "global": 7.42,
+        "forme": 6.56,
+        "dist": 8.31,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 6,
+        "nom": "MAI DIRE MAI",
+        "global": 6.81,
+        "forme": 2.35,
+        "dist": 9.73,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 7,
+        "nom": "SILK ROADSTER",
+        "global": 7.8,
+        "forme": 7.68,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 8,
+        "nom": "PRINCE AUBOIS",
+        "global": 6.58,
+        "forme": 3.67,
+        "dist": 8.46,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 9,
+        "nom": "AWAITING CHRISTMAS",
+        "global": 6.94,
+        "forme": 4.74,
+        "dist": 9.44,
+        "piste": 6.51,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          true,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 10,
+        "nom": "ROYALWOOD",
+        "global": 6.18,
+        "forme": 0.34,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 11,
+        "nom": "SCHUMAN",
+        "global": 6.42,
+        "forme": 1.58,
+        "dist": 10,
+        "piste": 6.78,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 12,
+        "nom": "HEROISTE",
+        "global": 6.03,
+        "forme": 2.88,
+        "dist": 8.38,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 13,
+        "nom": "ASHERAH",
+        "global": 5.97,
+        "forme": 3,
+        "dist": 8,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 14,
+        "nom": "YOKEN",
+        "global": 5.82,
+        "forme": 1.51,
+        "dist": 9.07,
+        "piste": 6.66,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 15,
+        "nom": "ROZARION",
+        "global": 5.76,
+        "forme": 0.96,
+        "dist": 9.07,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 16,
+        "nom": "SIMPLY LOVELY",
+        "global": 5.9,
+        "forme": 2.52,
+        "dist": 9.27,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 3,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      }
+    ],
+    "arrivee": [
+      12,
+      11,
+      8,
+      9,
+      15
+    ],
+    "cloture": "2026-10-15T13:22:32.757Z",
+    "note": "| 15/10 : synthèse CORRIGÉE par utilisateur, ticket reconstruit"
+  },
+  "2026-10-14": {
+    "date": "2026-10-14",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      15,
+      10,
+      2,
+      8,
+      5,
+      13,
+      6,
+      9,
+      16,
+      12,
+      1,
+      4,
+      7,
+      11,
+      14,
+      3
+    ],
+    "savedAt": "2026-10-14T09:20:08.499Z",
+    "arrivee": [
+      10,
+      15,
+      13,
+      5,
+      9
+    ],
+    "ticket": [
+      10,
+      8,
+      2,
+      15,
+      13,
+      16,
+      12,
+      4
+    ],
+    "ticketSource": "page",
+    "ticketPoseLe": "2026-10-14T09:20:08.534Z",
+    "discipline": "Attelé",
+    "distance": 2550,
+    "nbPartants": 16,
+    "hippodrome": "Reims",
+    "prix": "9000000 DH",
+    "courseId": "2026-10-14_R1_C1",
+    "cle": "2026-10-14_R1_C1",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "sourceImport": "page",
+    "placeholder": false,
+    "ticketMode": null,
+    "groupes": null,
+    "surprises": [],
+    "ticketMoteur": null,
+    "cloture": "2026-10-15T13:02:01.436Z",
+    "scores": null,
+    "collecte": "2026-10-14T09:23:40.365Z",
+    "pays": "FRA",
+    "devisee": "€",
+    "piste": "Corde à droite",
+    "note": "14/10 12hxx GMT : course re-pointée Reims (casacourses annonçait MA) — ticket gelé INTACT (non touché)"
+  },
+  "2026-10-13": {
+    "date": "2026-10-13",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      14,
+      12,
+      10,
+      3,
+      9,
+      16,
+      8,
+      5,
+      1,
+      7,
+      2,
+      4,
+      6,
+      15,
+      11,
+      13
+    ],
+    "savedAt": "2026-10-12T23:37:29.514Z",
+    "arrivee": [
+      9,
+      16,
+      2,
+      14,
+      1
+    ],
+    "ticket": [
+      14,
+      10,
+      12,
+      16,
+      3,
+      8,
+      2,
+      4
+    ],
+    "discipline": "Plat",
+    "distance": 1600,
+    "nbPartants": 16,
+    "hippodrome": "Parislongchamp",
+    "prix": "5090000 DH",
+    "courseId": "2026-10-13_R1_C1",
+    "cle": "2026-10-13_R1_C1",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "sourceImport": "page",
+    "ticketSource": "page",
+    "ticketPoseLe": null,
+    "ticketMode": null,
+    "placeholder": false,
+    "groupes": null,
+    "surprises": [],
+    "ticketMoteur": null,
+    "cloture": "2026-10-14T09:23:11.146Z",
+    "scores": null,
+    "collecte": "2026-10-13T08:45:05.816Z"
+  },
+  "2026-10-11": {
+    "date": "2026-10-11",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      2,
+      14,
+      15,
+      1,
+      6,
+      3,
+      16,
+      8,
+      11,
+      10,
+      4,
+      7,
+      9,
+      5,
+      12
+    ],
+    "savedAt": "2026-10-10T23:28:14.285Z",
+    "arrivee": [
+      15,
+      2,
+      3,
+      12,
+      1
+    ],
+    "ticket": [
+      2,
+      6,
+      15,
+      11,
+      9,
+      1,
+      8,
+      13
+    ],
+    "discipline": "Steeple chase",
+    "distance": 4700,
+    "nbPartants": 16,
+    "hippodrome": "Auteuil",
+    "prix": "15200000 DH",
+    "courseId": "2026-10-11_R1_C3",
+    "cle": "2026-10-11_R1_C3",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "sourceImport": "page",
+    "cloture": "2026-10-12T23:30:35.594Z",
+    "ticketMode": "defaut",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          2,
+          15,
+          1
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          6,
+          11
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          9
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          13
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-12T23:30:38.357Z"
+  },
+  "2026-10-10": {
+    "date": "2026-10-10",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      4,
+      18,
+      2,
+      15,
+      10,
+      3,
+      1,
+      11,
+      9,
+      8,
+      7,
+      12,
+      6,
+      17,
+      14,
+      5,
+      16
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "nbPartants": 14,
+    "hippodrome": "CAEN",
+    "arrivee": [
+      9,
+      10,
+      4,
+      3,
+      2
+    ],
+    "ticket": [
+      4,
+      2,
+      10,
+      7,
+      8,
+      6
+    ],
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          4,
+          15,
+          18
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          2,
+          10
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          7
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          6
+        ]
+      }
+    ],
+    "ticketSource": "final",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-10T12:00:05.897Z",
+    "ticketMoteur": [
+      4,
+      2,
+      15,
+      10,
+      7,
+      18,
+      8,
+      6
+    ],
+    "cloture": "2026-10-10T13:25:48.950Z",
+    "scores": null,
+    "collecte": "2026-10-10T23:30:59.674Z",
+    "ticketMatin": [
+      4,
+      18,
+      2,
+      10,
+      15,
+      9,
+      7,
+      6
+    ],
+    "discipline": "Attelé",
+    "distance": 2200,
+    "courseId": "2026-10-10_R1_C3"
+  },
+  "2026-10-09": {
+    "date": "2026-10-09",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      14,
+      10,
+      15,
+      6,
+      5,
+      13,
+      12,
+      2,
+      8,
+      7,
+      3,
+      9,
+      11,
+      0
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "nbPartants": 15,
+    "discipline": "ATTELE",
+    "hippodrome": "VINCENNES",
+    "distance": 2850,
+    "courseId": "2026-10-09_R1_C4",
+    "arrivee": [
+      14,
+      6,
+      15,
+      7,
+      10
+    ],
+    "ticket": [
+      14,
+      15,
+      10,
+      6,
+      2,
+      13,
+      8,
+      4
+    ],
+    "ticketMode": "defaut",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          14,
+          15,
+          10
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          6,
+          13
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          2
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          4
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-09T08:45:05.371Z",
+    "ticketMoteur": [
+      14,
+      15,
+      10,
+      6,
+      2,
+      13,
+      8,
+      4
+    ],
+    "cloture": "2026-10-10T23:30:52.198Z",
+    "scores": null,
+    "collecte": "2026-10-09T22:28:27.677Z",
+    "cle": "2026-10-09_R1_C4"
+  },
+  "2026-10-08": {
+    "date": "2026-10-08",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      8,
+      5,
+      1,
+      9,
+      3,
+      6,
+      16,
+      4,
+      12,
+      10,
+      11,
+      15,
+      2,
+      13,
+      7
+    ],
+    "savedAt": "2026-10-08T05:35:53.653Z",
+    "arrivee": [
+      1,
+      5,
+      8,
+      4,
+      15
+    ],
+    "ticket": [
+      8,
+      5,
+      4,
+      15,
+      6,
+      3,
+      12
+    ],
+    "ticketSource": "auto",
+    "ticketPoseLe": "2026-10-07T23:09:07.774Z",
+    "discipline": "Plat",
+    "distance": 2000,
+    "nbPartants": 16,
+    "hippodrome": "Saint-Cloud",
+    "prix": "5280000 DH",
+    "courseId": 145899,
+    "cle": "2026-10-08_R1_C1",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "sourceImport": "page"
+  },
   "2026-10-07": {
     "date": "2026-10-07",
     "found": true,
@@ -73,8 +1105,9 @@
     "groupes": null,
     "surprises": [],
     "ticketMoteur": null,
-    "cloture": "2026-10-07T21:13:25.539Z",
-    "scores": null
+    "cloture": "2026-10-08T23:43:11.057Z",
+    "scores": null,
+    "cle": "2026-10-07_R1_C1"
   },
   "2026-10-06": {
     "date": "2026-10-06",
@@ -145,7 +1178,8 @@
       3,
       15
     ],
-    "cloture": "2026-10-07T21:13:23.269Z"
+    "cloture": "2026-10-07T21:13:23.269Z",
+    "cle": "2026-10-06_R1_C1"
   },
   "2026-10-05": {
     "date": "2026-10-05",
@@ -578,7 +1612,8 @@
         ]
       }
     ],
-    "note": "ticket de 00h32 (premier run du jour) remise en archive ; les 3 autres runs du matin sont dans ticketVariantes. Le marche est arrive apres et a propose autre chose - la regle dit que la premiere ticket ne bouge plus."
+    "note": "ticket de 00h32 (premier run du jour) remise en archive ; les 3 autres runs du matin sont dans ticketVariantes. Le marche est arrive apres et a propose autre chose - la regle dit que la premiere ticket ne bouge plus.",
+    "cle": "2026-10-05_R1_C1"
   },
   "2026-10-04": {
     "date": "2026-10-04",
@@ -1393,7 +2428,8 @@
         "pris": true
       }
     ],
-    "ticketPoseLe": "2026-10-03T16:04:24.544Z"
+    "ticketPoseLe": "2026-10-03T16:04:24.544Z",
+    "cle": "2026-10-03_R1_C4"
   },
   "2026-10-02": {
     "date": "2026-10-02",
@@ -1736,7 +2772,8 @@
         "pris": true
       }
     ],
-    "ticketPoseLe": "2026-10-03T03:02:51.835Z"
+    "ticketPoseLe": "2026-10-03T03:02:51.835Z",
+    "cle": "2026-10-02_R1_C4"
   },
   "2026-10-01": {
     "date": "2026-10-01",
@@ -2061,6 +3098,7 @@
       }
     ],
     "ticketPoseLe": "2026-10-03T02:33:32.280Z",
-    "ticketMode": "defaut"
+    "ticketMode": "defaut",
+    "cle": "2026-10-01_R1_C1"
   }
 }

@@ -18,9 +18,9 @@ import { pctPodium, pctVictoire, nb2e, nb3e, nbCourses, formeCourte, classerPart
 
 /** Les 19 lignes de « Top10 des Cotes de Références », dans l'ordre de la source. */
 const LIGNES_TOPS = [
-  ['Chevaux :',        'chevaux'],
-  ['Drivers :',        'drivers'],
-  ['Entraineurs :',    'entraineurs'],
+  ['Chevaux :',        'top10chevaux'],
+  ['Drivers :',        'top10drivers'],
+  ['Entraineurs :',    'top10entraineurs'],
   ['Top Cotes Direct', 'topCotesDirect'],
   ['Top Chevaux',      'topChevaux'],
   ['Top Palmares',     'topPalmares'],

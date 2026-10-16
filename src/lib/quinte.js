@@ -1032,6 +1032,63 @@ export function ordonnerParStats(ticket, grille, stats, cotes = null) {
   return [...places.filter((n) => n != null), ...sansPlace]
 }
 
+/* ------------------------------------------------ LE TICKET & LES PARTANTS --- */
+
+/**
+ * ⚠ 16/10/2026 — UN CHEVAL QUI NE PART PAS NE PEUT PAS ÊTRE AU TICKET.
+ *
+ * Le ticket est figé le matin sur la liste des DÉCLARÉS. Si un cheval est
+ * retiré dans la journée, le ticket garde un numéro FANTÔME : le 16/10 le
+ * ticket du Quinté de Vincennes portait un `16` et la course n'avait plus
+ * que 15 partants. Le gel n'est jamais une raison de garder un non-partant.
+ *
+ * `ticketValide(rec)` = le ticket d'une archive, privé des numéros qui ne
+ * sont pas dans `rec.runners`. On ne COMPLÈTE pas : l'archive dit ce qui a
+ * été joué, pas ce qu'on aurait dû jouer (§7 : on n'invente rien).
+ * Quand la liste des partants manque, on ne juge pas — on rend le ticket.
+ */
+export function ticketValide(rec) {
+  const t = (rec?.ticket || []).map(Number).filter(Number.isFinite)
+  const r = (rec?.runners || []).map(Number).filter(Number.isFinite)
+  if (!t.length || !r.length) return t
+  /* On ne juge QUE si la liste des partants est cohérente avec l'arrivée :
+   * une liste tronquée ferait sortir des chevaux qui ont bel et bien couru. */
+  const arr = (rec?.arrivee || []).map(Number).filter(Number.isFinite)
+  if (arr.length && !arr.every((n) => r.includes(n))) return t
+  return t.filter((n) => r.includes(n))
+}
+
+/**
+ * `ticketAffiche(ticket, rempli)` = le ticket AFFICHÉ (§11.17).
+ *
+ * Même règle : les numéros absents de la grille du jour sont des fantômes,
+ * on les retire. Mais ici on COMPLÈTE — la place libérée est reprise par la
+ * case que le moteur a retenue dans ce groupe, sans jamais dépasser le quota
+ * (§11.19) ni prendre deux fois le même cheval. Le ticket jouable garde donc
+ * ses 8 chevaux, et chaque groupe son quota.
+ */
+export function ticketAffiche(ticket, rempli, complet = true) {
+  const base = (ticket || []).map(Number).filter(Number.isFinite)
+  if (!rempli || !Array.isArray(rempli.detail)) return base
+  const dansGrille = new Set()
+  for (const g of rempli.detail) for (const c of g.cases) dansGrille.add(c.num)
+  const garde = base.filter((n) => dansGrille.has(n))
+  /* `complet = false` : la course est courue, le ticket est un CONSTAT — on
+   * retire les fantômes et on s'arrête là (§7 : on n'invente rien). */
+  if (!complet || garde.length >= base.length) return garde
+  for (const g of rempli.detail) {
+    const deja = garde.filter((n) => g.cases.some((c) => c.num === n)).length
+    let reste = (g.quota || 0) - deja
+    if (reste <= 0) continue
+    for (const c of g.cases) {
+      if (reste <= 0) break
+      if (!c.pris || garde.includes(c.num)) continue
+      garde.push(c.num); reste--
+    }
+  }
+  return garde
+}
+
 /* ------------------------------------------------------- CARRIÈRE (B) --- */
 
 // Hippodromes : code → { nom, sens (D/G), surface }
@@ -1312,6 +1369,24 @@ export async function syncDepuisDisque() {
       ticketMode: rec.ticketMode || local.ticketMode || null,
       savedAt: local.savedAt || rec.collecte || null,
       syntheseChangee: synthChange ? true : (local.syntheseChangee || false),
+    }
+
+    /* 🔒 16/10/2026 — UN FANTÔME NE SURVIT PAS À LA SYNCHRO.
+     *   Un ticket figé la veille porte parfois un numéro qui n'est PLUS
+     *   partant (le cheval a été retiré après le gel) : 16 au 16/10,
+     *   18 au 10/10, 17 au 08/10. On le corrige ici, une fois pour toutes :
+     *     · course pas encore courue → on EFFACE le gel : il se refera juste ;
+     *     · course courue            → on ne garde que les partants réels. */
+    const q = all[date]
+    if (q && (q.ticket || []).length && (q.runners || []).length) {
+      const val = ticketValide(q)
+      if (val.length !== q.ticket.length) {
+        if ((q.arrivee || []).length === 0) {
+          q.ticket = null; q.ticketSource = null; q.ticketPoseLe = null; q.ticketMode = null
+        } else {
+          q.ticket = val
+        }
+      }
     }
     n++
   }

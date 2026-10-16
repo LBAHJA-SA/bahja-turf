@@ -1512,7 +1512,7 @@ bilan          → N courses, N avec résultat, N en 5/5
 > l'empreinte : sans ça, chaque run publierait un site identique.
 > Test : `node tools\test-empreinte.mjs`.
 
-### 13.3 ⚠ Les 5 règles de sécurité (learned the hard way)
+### 13.3 ⚠ Les 7 règles de sécurité (learned the hard way)
 
 1. **Jamais de Synthèse pour une date passée.** Le site n'affiche QUE la course du
    jour. Collecter `hier()` écrase l'archive avec la Synthèse d'aujourd'hui.
@@ -1548,6 +1548,34 @@ bilan          → N courses, N avec résultat, N en 5/5
    MANUEL (bleu), LIVE (rien de gelé, gris). Colonne `Statut` dans
    l'Archive + badge dans l'onglet Ticket. Course courue (arrivée connue) :
    CLÔTURÉ — le ticket est jugé, la question provisoire/définitif ne se pose plus.
+   ⚠ **révisé le 16/10/2026 : le badge dit l'état du ticket AFFICHÉ, pas
+   l'état du gel — voir règle 8.**
+7. **AUCUN NON-PARTANT DANS UN TICKET (16/10/2026).** Le ticket est figé sur la
+   liste des **DÉCLARÉS** ; si un cheval est retiré ensuite, le figé garde un
+   numéro FANTÔME — **16 au 16/10** (course à 15 partants), **18 au 10/10**,
+   **17 au 08/10**. Trois verrous, dans `src/lib/quinte.js` (et son miroir
+   `backend/QUINTE/quinte.js`) :
+   - `ticketValide(rec)` — un ticket d'archive ne cite que `rec.runners`. On ne
+     **complète pas** : l'archive dit ce qui a été joué, pas ce qu'on aurait dû
+     jouer (§7 : on n'invente rien). On ne juge que si la liste est cohérente
+     avec l'arrivée (arrivée ⊆ partants).
+   - `ticketAffiche(ticket, rempli)` — le ticket **affiché** retire les fantômes
+     et reprend la case que le moteur a retenue **dans le même groupe**, quota
+     tenu (§11.19). Le ticket jouable garde ses 8 chevaux.
+   - `syncDepuisDisque()` — la correction se fait à la **synchro** : course pas
+     encore courue → le gel est **effacé** (il se refera juste) ; course courue
+     → seuls les partants réels restent.
+   ⚠ `buildGrid(synthese, runners)` filtrait DÉJÀ la liste de presse (§11.21) :
+   le trou venait du **ticket gelé**, pas de la grille.
+8. **L'AFFICHAGE SUIT LE MARCHÉ, LE GEL RESTE DANS L'ARCHIVE (16/10/2026).**
+   Tant que la course n'est pas courue, l'onglet Ticket montre le ticket
+   **LIVE** (relu toutes les minutes) — seule exception : `ticketSource:
+   'manuel'`. Le gel du matin / de la page / final est une **trace d'archive** :
+   il vit dans l'onglet Archive, avec sa source et son heure. « Le ticket ne
+   change jamais » venait de là : la page rechargeait le gel dans l'affichage
+   (ligne `setTicketManuel(res.ticket)` du gel auto) et se figeait sur le
+   premier ticket de la journée. C'est exactement ce que §11.17 interdit — on
+   parie sur le ticket du moment, pas sur celui du matin.
 
 ### 13.4 L'automatisation Windows
 
@@ -1597,6 +1625,30 @@ La page les garde dans localStorage. Pour que le job autonome puisse recalculer 
 ticket physique : bouton **⬇ carriere.json** (onglet Carrière) → poser le fichier
 téléchargé dans `C:\bahja-TURF\data\`. Ensuite `daily.mjs` lit `data/carriere.json`
 et bascule en mode `physique`.
+
+### 13.6 ⭐ LES 3 OBSERVATIONS DU 16/10/2026 — ce qui a été corrigé
+
+L'utilisateur a donné trois défauts, tous vérifiés dans le code puis dans le
+navigateur. Aucun ne touche la méthode (quotas `3-2-1-1-1` intacts).
+
+| # | Le défaut vu | La cause | Le correctif |
+|---|---|---|---|
+| ① | « le ticket ne change jamais » | la page rechargeait le gel auto dans l'affichage (`setTicketManuel(res.ticket)`) : le 1er ticket de la journée restait affiché toute la journée | §13.3 règle 8 : l'affichage suit le marché ; le gel reste dans l'Archive |
+| ② | le ticket porte un **16** et la course n'a que **15** partants | le ticket a été figé la veille sur la liste des **déclarés** (16) ; le 16 a été retiré ensuite, le figé ne l'a pas vu | §13.3 règle 7 (`ticketValide`, `ticketAffiche`, synchro) + archive réparée |
+| ③ | la page de course (Programme → Analyse) n'affiche pas le **Top10 des Cotes de Références** | `frontend/ARTICLE/Article.jsx` lisait `tops.chevaux` / `drivers` / `entraineurs` alors que le parseur range sous `top10chevaux` / `top10drivers` / `top10entraineurs` ; et `TF_ALIAS` n'avait pas `aptitude1er` (ligne « Aptitude 1er » vide) | clés alignées dans `Article.jsx` + alias `aptitude1er` / `aptitudegagnant` → `aptitudeGagnant` dans `backend/ARTICLE/turfFrance.js` |
+
+**Preuve ③** (16/10, Vincennes R1C4, `tqqjour.php`) — les 3 lignes vides :
+
+```
+Chevaux     : 6 - 3 - 7 - 11 - 2 - 8 - 15 - 14 - 12 - 10     (était « — »)
+Drivers     : 13 - 15 - 8 - 12 - 6 - 11 - 1 - 4 - 3 - 5      (était « — »)
+Entraineurs : 13 - 1 - 12 - 11 - 6 - 15 - 9 - 2 - 5 - 7      (était « — »)
+Aptitude 1er: 4 - 5                                          (était « — »)
+```
+
+⚠ La page **Programme** (`/`, liste des réunions via `reu.php`) n'a **pas** de
+Top10 : cette donnée n'existe que sur la page de course (`/r/:slug`,
+`tqqjour.php`). Le Top10 est donc affiché là où la source le donne.
 
 ---
 

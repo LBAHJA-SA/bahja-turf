@@ -23,18 +23,6 @@
     ],
     "savedAt": "2026-10-15T13:15:05.015Z",
     "arrivee": null,
-    "ticket": [
-      12,
-      15,
-      6,
-      14,
-      1,
-      7,
-      11,
-      16
-    ],
-    "ticketSource": "page",
-    "ticketPoseLe": "2026-10-15T13:15:05.039Z",
     "discipline": "Attelé",
     "distance": 2850,
     "nbPartants": 15,
@@ -59,7 +47,20 @@
       14,
       15
     ],
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "ticket": [
+      5,
+      11,
+      1,
+      3,
+      12,
+      6,
+      4,
+      15
+    ],
+    "ticketSource": "page",
+    "ticketPoseLe": null,
+    "ticketMode": null
   },
   "2026-10-15": {
     "date": "2026-10-15",
@@ -777,10 +778,8 @@
     "ticket": [
       4,
       2,
-      15,
       10,
       7,
-      18,
       8,
       6
     ],
@@ -1001,8 +1000,7 @@
       15,
       6,
       3,
-      12,
-      17
+      12
     ],
     "ticketSource": "auto",
     "ticketPoseLe": "2026-10-07T23:09:07.774Z",
