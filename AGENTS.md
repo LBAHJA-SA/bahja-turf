@@ -190,12 +190,17 @@ https://www.equidia.fr/courses/{YYYY-MM-DD}/R{n}/C{m}
 | `pro.casacourses.com/api/programme` | ✅ **Quinté réel** via `available_bet_types.includes('sorec_quinte')` |
 | `pro.casacourses.com/api/programme` | ✅ `meeting.reunion_code` + l'index de la course dans `meeting.races` → la clé `{date}_R{n}_C{m}` (`cleEquidia`) |
 | `equidia.fr` (§8.1) | ✅ **LE MARCHÉ EN DIRECT** avant le départ — `rapp_evol` = la cote |
+| `online.turfinfo.api.pmu.fr` `programme/{JJMMAAAA}` | ✅ **le terrain** (`penetrometre.intitule`), **le sens** (`corde`), la distance, la discipline, le `categorieParticularite` — **tout l'historique** (§14.6) |
+| idem `…/R{n}/C{m}/participants` | ✅ **le VH** (`handicapValeur`), la corde de départ (`placeCorde`), la place (`ordreArrivee`), le nom, la musique — **par cheval et par course** (§14.6) |
+| idem `…/participants/{n}/performances-detaillees` | ❌ **HTTP 420** (l'historique détaillé d'un cheval est fermé) |
 | `pronostics-turf.info` | ✅ Récapitulative presse (parser : ignorer la 1re cellule, elle contient un `<img alt="Pronostic N">`) |
 | `turfomania.fr` | ❌ **403 Cloudflare** sur fetch, tableaux vides dans le navigateur |
 | `geny.com` | ❌ 404 (redesign) |
 | endpoint cheval du backend | ❌ n'existe pas |
 
-→ **L'utilisateur est la seule source pour la carrière détaillée.**
+→ **L'utilisateur n'est plus la seule source** : le terrain, le sens et le VH de
+chaque course passée se **collectent** (§14.6). La carrière détaillée à la main
+(§12.3) ne sert plus que de secours.
 
 ---
 
@@ -1190,6 +1195,83 @@ Toute règle nouvelle devra passer **le LOO avant** d'être appliquée.
 
 ---
 
+### 11.25 ⭐ LES 6 CRITÈRES §4 AU COMPLET — TERRAIN, SENS, VH : TOUJOURS RIEN (16/10/2026)
+
+> Suite de §11.24. §11.24 laissait **une** porte ouverte : « terrain, type et VH
+> ne sont pas dans l'archive ». Le 16/10 on est allé les chercher **dans PMU**
+> (§14.6) — **plus aucune saisie manuelle**. Réponse : **la porte était fermée.**
+
+#### ① La carrière est maintenant COMPLÈTE
+
+`tools/collect-terrain.mjs` (terrain + sens) et `tools/collect-vh.mjs` (VH, corde,
+place) remplissent les trois trous du §4. Couverture sur les 1 509 chevaux des 96
+Quintés :
+
+| critère §4 | poids | couverture |
+|---|---|---|
+| terrain | 13 % | **58 %** |
+| sens de la piste | 18 % (dont 40 % le sens) | **84 %** |
+| VH (niveau) | 13 % | **52 %** (le trot n'a pas de VH) — **58 %** pour le VH du jour |
+
+#### ② Le résultat — les 6 critères ne trient PAS le bloc
+
+| règle (seule, dans G1 et G2) | PAYANTE | vs le code |
+|---|---|---|
+| **le code** (G1 presse · G2 marché) | **38,5 %** | — |
+| `filPiste` — jamais cet hippodrome → derrière | **40,6 %** | +2,1 |
+| `presse + âge` | 39,6 % | +1,1 |
+| **TERRAIN §4** — le terrain du jour a-t-il été couru | **35,4 %** | −3,1 |
+| **NIVEAU §4** — le VH du jour vs ses 2 dernières | **34,4 %** | −4,1 |
+| `filNiveau` — qui monte de niveau (+1,5) → derrière | 34,4 % | −4,1 |
+| **piste §4** — 60 % le lieu + 40 % le sens | **27,1 %** | −11,4 |
+| **piste — le SENS** seul | **26,0 %** | −12,5 |
+| **★ LE SCORE §4 COMPLET** (forme+dist+piste+niveau+terrain+corde) | **21,9 %** | **−16,6** |
+| hasard | 22,8 % | −15,7 |
+
+**Le score §4 complet est SOUS le hasard.** Ce n'est pas « neutre » : classifier
+un bloc par le physique **détruit** l'information qu'il contient.
+
+#### ③ Pourquoi — et ce que ça veut dire
+
+1. **Le bloc est déjà un filtre.** G1 = P1-P4 : la presse a **déjà** appliqué le
+   physique. Re-trier les 4 par le physique revient à ignorer son travail — et
+   le physique est plus bruité que le rang de presse.
+2. **Le LOO le confirme** : la meilleure case du tableau (`pAge`/`filPiste`,
+   40,6 %) choisie sur les 95 autres courses retombe à **22,9 %**, sous le code.
+3. **La stabilité est nulle** : `TERRAIN` 39,6 % → 31,3 % entre les deux moitiés,
+   `NIVEAU` 27,1 % → 41,7 %, `★ §4` 20,8 % → 22,9 %.
+4. **Le seul tri qui tient est la presse** : 35,4 % / 41,7 % sur les deux moitiés.
+
+#### ④ Le verdict
+
+**Rien n'est appliqué.** La règle en production reste **§11.22** (G1 presse ·
+G2 marché · G3-G5 carnet), les quotas **3-2-1-1-1** ne bougent pas (§11.16).
+Le physique §4 sert à **lire une course** (écarter un cheval qui n'a jamais la
+distance, §6) — **pas** à classer les 4 chevaux d'une même boîte. La porte que
+§11.24 laissait ouverte est **fermée par la mesure** : ce n'est pas un manque de
+données, c'est la structure du découpage.
+
+#### ⑤ Les fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `tools/collect-terrain.mjs` | terrain + sens des courses passées (PMU) → `data/terrain.json` (`runs` + `jour`) |
+| `tools/collect-vh.mjs` | VH + corde + place par cheval et par course (PMU) → `data/vh.json` |
+| `data/terrain.json` · `data/vh.json` | les deux caches PMU — **committés** (PMU peut purger) |
+| `tools/choix-g1g2.mjs` | + terrain · sens · piste2 · niveau · VH · le **score §4 complet** — 40 règles, `verdict` généré depuis les chiffres, `choisir` **mémoïsé** |
+
+#### ⑥ ⚠ Le piège, renforcé
+
+§11.24 disait : « la meilleure règle (40,6 %) est du bruit, LOO 18,8 % ». Cette
+fois le tableau contient **tout §4** — et **la meilleure règle est encore
+`filPiste`** (40,6 %), pendant que le score complet tombe à **21,9 %**. Autrement
+dit : **plus on met de physique, plus on perd.** Toute règle nouvelle devra passer
+**le LOO avant** d'être appliquée.
+
+---
+
+---
+
 ## 12. 🖥️ L'OUTIL — page `/quinte` (C:\bahja-TURF)
 
 Fichiers :
@@ -1212,7 +1294,10 @@ Fichiers :
 | `tools/experience-g5.mjs` | ⭐ **l'expérience du siège de G5** (§11.23) — rapport console **et module** (importé par `fiabilite.mjs` : une seule définition des variantes) |
 | `tools/ecarts.mjs` | ⭐ **les écarts des places P1..P20** (§11.23) → `data/ecarts.json` + `public/data/ecarts.json` |
 | `tools/collect-forms.mjs` | ⭐ **la carrière des 96 Quintés archivés** (§11.24) — 1 appel casacourses par course → `data/forms.json` (anti-fuite : courses strictement antérieures) |
-| `tools/choix-g1g2.mjs` | ⭐ **LA mesure du choix dans G1/G2** (§11.24) : diagnostic · levier · 29 règles · grille G1×G2 · oracle · LOO · stabilité → `data/choix.json` + `public/data/choix.json` |
+| `tools/choix-g1g2.mjs` | ⭐ **LA mesure du choix dans G1/G2** (§11.24, §14.6) : diagnostic · levier · les règles · grille G1×G2 · oracle · LOO · stabilité → `data/choix.json` + `public/data/choix.json` |
+| `tools/collect-terrain.mjs` | ⭐ **le terrain + le sens des courses passées** (§14.6) — PMU `programme/{JJMMAAAA}` (`penetrometre.intitule`, `corde`) → `data/terrain.json` (`runs` + `jour`) |
+| `tools/collect-vh.mjs` | ⭐ **le VH, la corde, la place par cheval et par course** (§14.6) — PMU `…/R{n}/C{m}/participants` (`handicapValeur`, `placeCorde`, `ordreArrivee`) → `data/vh.json` |
+| `data/terrain.json` · `data/vh.json` | les deux caches PMU du §14.6 — **committés** (comme `data/forms.json`) car PMU peut purger |
 | `tools/test-nonregression.mjs` | le harnais avant/après sur l'archive réelle (`--out`, `--diff`) — **sert de témoin au 5/5 de §11.22** |
 | `tools/verif-parite.mjs` | **`src/lib/quinte.js` == `backend/QUINTE/quinte.js` ?** — compare les deux, commentaires ignorés, fonction par fonction (§12) |
 | `tools/surprise.mjs` | ⚠ **obsolète** (4 courses, métrique x/5) — la mesure de référence est **§11.18** |
@@ -1572,6 +1657,59 @@ règle ces deux-là.
 | Test | `node tools/test-auto.mjs 2026-10-03_R1_C4` |
 
 Durée : ~45 s (1 appel course + ~56 appels programmes, 6 en parallèle).
+
+---
+
+### 14.6 ⭐ LA CARRIÈRE COMPLÈTE PAR PMU — terrain, sens, VH (16/10/2026)
+
+> Question de l'utilisateur : « كيفاش الكاريير باش نقدر نساعدك » — comment fournir
+> la carrière. **Réponse : il n'y a rien à fournir.** PMU porte tout, sur tout
+> l'historique, et deux collecteurs le récupèrent seuls.
+
+`data/forms.json` (casacourses) ne donne que **date, hippodrome, distance, place,
+racetype, poids**. Il manquait les trois critères du §4 qui ne se devinent pas :
+
+| Manquait | §4 | Où c'est — dans PMU |
+|---|---|---|
+| **le terrain** | TERRAIN 13 % | `programme/{JJMMAAAA}` → `reunions[].courses[].penetrometre.intitule` (« PSF STANDARD », « Très souple », « Lourd », « Collant »…) |
+| **le sens de la piste** | PISTE 18 % (40 %) | idem → `courses[].corde` = `CORDE_DROITE` / `CORDE_GAUCHE` |
+| **le VH** | NIVEAU 13 % + filtre ③ | `…/R{n}/C{m}/participants` → `handicapValeur` **par cheval et par course** |
+| *(bonus)* corde de départ, place, type | CORDE 12 % | idem → `placeCorde`, `ordreArrivee` · `courses[].categorieParticularite` |
+
+⚠️ **casacourses ne va que ~10 mois en arrière** (avant : `meetings` vide) ; il
+donnait 1 121/2 813 courses passées. **PMU a tout** et rend, en un appel par
+journée, toutes les réunions du jour.
+
+| Outil | Ce qu'il écrit | Durée |
+|---|---|---|
+| `tools/collect-terrain.mjs [--force]` | `data/terrain.json` : `{ runs, jour }` — `date\|hippo\|n°` → `{terrain, sens, type, dist}` | ~2 min |
+| `tools/collect-vh.mjs [--force]` | `data/vh.json` : `date\|hippo\|n°` → `{ nomNorm: {vh, place, corde, num} }` | ~4 min |
+
+**Le joint** (`tools/choix-g1g2.mjs`) :
+
+```
+forms (casacourses)  donne, par cheval : date · hippodrome · n° de course · distance · place
+        ↓  clé date|hippo|n°            ↓  + le nom du cheval (infos[n].nom)
+terrain.json         terrain · sens      vh.json   vh · corde · place
+```
+
+- La clé est `date|hippodrome|n°`, l'hippodrome **normalisé sans séparateurs**.
+- L'appariement des hippodromes se fait par **tokens** (`Cagnes-Sur-Mer` {cagnes,mer}
+  = `HIPPODROME DE CAGNES/MER` ; `Bordeaux` {bordeaux} ⊂ `HIPPODROME BORDEAUX LE BOUSCAT`).
+- Le cheval est identifié **par son nom** dans les partants PMU (normalisé). Mesure :
+  **6 639 / 6 642** courses retrouvées jointes (100 %), 3 289 avec un VH (49 % — le
+  trot n'a pas de VH).
+
+**Couverture sur les 96 Quintés** : 2 528 / 2 768 courses passées retrouvées ·
+1 479 avec terrain · 2 086 avec sens · 26 623 partants · 13 769 VH.
+Le **terrain du jour** : 95/96 courses, dont 56 avec terrain et 83 avec sens (les
+courses de trot n'ont ni pénéfromètre ni corde).
+
+**Anti-fuite** : les `forms` sont filtrés à la collecte (`date < date du jour`,
+`place != null`) ; les clés PMU ne portent que ces mêmes courses passées ; le VH
+« du jour » est une déclaration d'avant-course. Rien de l'arrivée n'entre dans les
+profils.
+
 
 ---
 

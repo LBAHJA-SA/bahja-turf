@@ -36,6 +36,40 @@ try { F = JSON.parse(fs.readFileSync('data/forms.json', 'utf8')) } catch (e) {
 const CH = process.argv[2] === 'ouverture' ? 'ouverture' : 'cotes'
 const UTILISE_FORMS = Object.keys(F).length > 0
 
+/* LE TERRAIN ET LE SENS de chaque course passée — tools/collect-terrain.mjs.
+ * La clé est `date|hippodrome|n°` (normés). `jour` porte la course DU JOUR
+ * des 96 Quintés (le terrain du jour, que casacourses ne donne pas toujours). */
+let TERRAIN = {}, TERRAIN_JOUR = {}
+try {
+  const j = JSON.parse(fs.readFileSync('data/terrain.json', 'utf8'))
+  TERRAIN = j.runs || {}; TERRAIN_JOUR = j.jour || {}
+} catch (e) { /* pas encore collecté */ }
+const UTILISE_TERRAIN = Object.keys(TERRAIN).length > 0
+/** La famille d'un terrain : « PSF STANDARD - 14:00 » → PSF. */
+const famT = (s) => {
+  if (!s) return null
+  const t = String(s).toUpperCase().replace(/\(.*/, '').split(/[-–]/)[0].trim()
+  if (/PSF|FIBRE|SABLE|CENDREE|MACHEFER|DIRT/.test(t)) return 'PSF'
+  if (/TR[EÈ]S\s*SOUPLE/.test(t)) return 'TRES SOUPLE'
+  if (/SOUPLE/.test(t)) return 'SOUPLE'
+  if (/LOURD/.test(t)) return 'LOURD'
+  if (/COLLANT/.test(t)) return 'COLLANT'
+  if (/BON/.test(t)) return 'BON'
+  return t || null
+}
+const famS = (s) => {
+  if (!s) return null
+  const t = String(s).toUpperCase()
+  if (t === 'D' || t === 'G') return t
+  return /GAUCHE/.test(t) ? 'G' : /DROITE/.test(t) ? 'D' : null
+}
+
+/* LE VH, LA CORDE, LA PLACE par cheval et par course — tools/collect-vh.mjs.
+ * Clé `date|hippodrome|n°`, puis le nom du cheval normalisé. */
+let VH = {}
+try { VH = JSON.parse(fs.readFileSync('data/vh.json', 'utf8')) } catch (e) { VH = {} }
+const UTILISE_VH = Object.keys(VH).length > 0
+
 const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z]/g, '')
 
 const CASES = Q.filter((q) => q.presse?.length >= 10 && (q.arrivee || []).length)
@@ -49,12 +83,18 @@ const CASES = Q.filter((q) => q.presse?.length >= 10 && (q.arrivee || []).length
     nums.slice().sort((a, b) => c[a] - c[b] || a - b).forEach((n, i) => { rangs[n] = i + 1 })
     const f = F[`${q.date}_${q.id}`] || {}
     const g = buildGrid(presse, nums)
+    /* le terrain + le sens DU JOUR : PMU (tous les 96), sinon casacourses. */
+    const nC = parseInt(String(q.code || '').replace(/\D/g, ''), 10)
+    const tj = TERRAIN_JOUR[`${q.date}|${norm(q.track)}|${nC}`] || null
     return {
       date: q.date, id: q.id, c, o, rangs, presse,
       arrivee: q.arrivee.slice(0, 5),
       jour: f.distance || q.distance || null,
       hippo: norm(f.track),
       type: f.type || q.discipline || null,
+      terrainJour: famT(tj?.terrain || f.terrain),
+      sensJour: (tj?.sens === 'D' || tj?.sens === 'G') ? tj.sens : famS(f.piste),
+      vhJour: VH[`${q.date}|${norm(q.track)}|${nC}`] || null,
       infos: f.infos || {},
       runs: f.chevaux || {},
       grp: g.groupes.map((x) => ({
@@ -65,6 +105,7 @@ const CASES = Q.filter((q) => q.presse?.length >= 10 && (q.arrivee || []).length
   }).filter(Boolean)
 
 const N = CASES.length
+CASES.forEach((k, i) => { k.__i = i })
 const pct = (a, b) => (b ? ((100 * a) / b).toFixed(1) + ' %' : '—')
 const num = (a, b) => (b ? Math.round((1000 * a) / b) / 10 : null)
 const pad = (s, n) => String(s).padEnd(n)
@@ -79,18 +120,48 @@ function profil(k, n) {
   const cle = `${k.date}_${k.id}_${n}`
   if (PROFIL.has(cle)) return PROFIL.get(cle)
   const runs = k.runs[n] || []
-  const p = { n: runs.length, dist: Infinity, piste: 0, podium: 0, jours: null }
+  const nomN = norm(k.infos[n]?.nom)
+  const p = { n: runs.length, dist: Infinity, piste: 0, podium: 0, jours: null, terrainOK: 0, terrainConnu: 0, sensOK: 0, sensConnu: 0, vhJour: null, vhList: [] }
+  if (nomN && k.vhJour) p.vhJour = k.vhJour[nomN]?.vh ?? null
   for (const r of runs) {
     if (r.dist && k.jour) p.dist = Math.min(p.dist, Math.abs(r.dist - k.jour))
     if (norm(r.track) === k.hippo) p.piste += 1
     if (r.place >= 1 && r.place <= 3) p.podium += 1
+    /* le terrain et le sens de CETTE course passée (data/terrain.json) */
+    const t = TERRAIN[`${r.date}|${norm(r.track)}|${r.race}`]
+    if (t) {
+      const ft = famT(t.terrain), fs2 = famS(t.sens)
+      if (ft) { p.terrainConnu += 1; if (k.terrainJour && ft === k.terrainJour) p.terrainOK += 1 }
+      if (fs2) { p.sensConnu += 1; if (k.sensJour && fs2 === k.sensJour) p.sensOK += 1 }
+    }
+    /* le VH de CETTE course passée (data/vh.json) */
+    const m = nomN ? VH[`${r.date}|${norm(r.track)}|${r.race}`] : null
+    const x = m ? m[nomN] : null
+    if (x && x.vh != null) p.vhList.push(x.vh)
   }
   if (runs.length) p.jours = Math.round((new Date(k.date) - new Date(runs[0].date)) / 86400000)
   p.sDist = !Number.isFinite(p.dist) ? 0 : p.dist <= 100 ? 10 : p.dist <= 200 ? 8 : p.dist <= 400 ? 5 : p.dist <= 600 ? 3 : 0
   p.sPiste = p.piste >= 2 ? 10 : p.piste === 1 ? 6 : 0
   p.sJours = p.jours == null ? 4 : p.jours <= 20 ? 6 : p.jours <= 45 ? 10 : p.jours <= 90 ? 8 : p.jours <= 180 ? 4 : 1
   p.sPodium = Math.min(10, p.podium * 4)
+  /* §4 TERRAIN (13 %) : le terrain du jour a-t-il été couru ? (neutre si inconnu) */
+  p.sTerrain = (!k.terrainJour || p.terrainConnu === 0) ? 4 : Math.min(10, Math.round((10 * p.terrainOK) / Math.min(p.terrainConnu, 5)))
+  /* §4 PISTE (18 %) : 60 % le lieu + 40 % le SENS */
+  p.sSens = (!k.sensJour || p.sensConnu === 0) ? 4 : Math.min(10, Math.round((10 * p.sensOK) / Math.min(p.sensConnu, 5)))
+  p.sPiste2 = 0.6 * Math.min(10, p.piste * 5) + 0.4 * p.sSens
+  /* §4 FORME (22 %) : la place pondérée, du plus récent (0-10) */
+  let mN = 0, mD = 0
+  runs.forEach((r, i) => { const w = 1 / (1 + i * 0.55); mD += w; mN += w * (r.place >= 1 && r.place <= 9 ? 11 - r.place : 0) })
+  p.sForme = mD ? Math.min(10, mN / mD) : 4
+  /* §4 CORDE (12 %) : le n° de départ */
+  p.sCorde = n <= 6 ? 10 : n <= 11 ? 8 : n <= 15 ? 5 : 3
+  /* §4 NIVEAU (13 %) — filtre ③ : le VH du jour vs celui des 2 dernières courses. */
+  p.vhRef = p.vhList.length ? (p.vhList[0] + (p.vhList[1] ?? p.vhList[0])) / 2 : null
+  p.deltaVh = (p.vhJour != null && p.vhRef != null) ? Math.round((p.vhJour - p.vhRef) * 10) / 10 : null
+  p.sNiveau = p.deltaVh == null ? 4 : p.deltaVh <= 0 ? 10 : p.deltaVh <= 1.5 ? 8 : p.deltaVh <= 3 ? 4 : 0
   p.sPhys = 0.35 * p.sDist + 0.25 * p.sPiste + 0.20 * p.sJours + 0.20 * p.sPodium
+  /* LE SCORE §4 aux poids de la méthode — les 6 critères (le VH vient de PMU). */
+  p.sPhys2 = (22 * p.sForme + 22 * p.sDist + 18 * p.sPiste2 + 13 * p.sNiveau + 13 * p.sTerrain + 12 * p.sCorde) / 100
   PROFIL.set(cle, p)
   return p
 }
@@ -129,6 +200,16 @@ export const REGLES = [
   { id: 'disc', label: 'discipline — a déjà couru ce type', sc: (k, x) => discOK(k, x.num) },
   { id: 'dist', label: 'distance — la distance du jour a-t-elle été courue', sc: (k, x) => profil(k, x.num).sDist },
   { id: 'piste', label: 'piste — cet hippodrome a-t-il été couru', sc: (k, x) => profil(k, x.num).sPiste },
+  { id: 'sens', label: 'piste — le SENS (corde à droite / à gauche)', sc: (k, x) => profil(k, x.num).sSens },
+  { id: 'piste2', label: 'piste §4 — 60 % le lieu + 40 % le sens', sc: (k, x) => profil(k, x.num).sPiste2 },
+  { id: 'terrain', label: 'TERRAIN §4 — le terrain du jour a-t-il été couru', sc: (k, x) => profil(k, x.num).sTerrain },
+  { id: 'physT', label: 'PHYSIQUE + TERRAIN + SENS (combiné)', sc: (k, x) => profil(k, x.num).sPhys2 },
+  { id: 'methode', label: '★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)', sc: (k, x) => profil(k, x.num).sPhys2 },
+  { id: 'niveau', label: 'NIVEAU §4 — le VH du jour vs ses 2 dernières', sc: (k, x) => profil(k, x.num).sNiveau },
+  { id: 'vhHaut', label: 'VH — le plus haut VH d’abord', sc: (k, x) => profil(k, x.num).vhJour ?? -99 },
+  { id: 'vhBas', label: 'VH — le plus bas VH d’abord', sc: (k, x) => -(profil(k, x.num).vhJour ?? 99) },
+  { id: 'filNiveau', label: 'presse, mais qui MONTE de niveau (+1,5) passe derrière', filtre: (k, x) => profil(k, x.num).deltaVh != null && profil(k, x.num).deltaVh > 1.5 },
+  { id: 'formeP', label: 'forme §4 — la place pondérée', sc: (k, x) => profil(k, x.num).sForme },
   { id: 'jours', label: 'jours — l’absence depuis la dernière course', sc: (k, x) => profil(k, x.num).sJours },
   { id: 'podium', label: 'podium — les podiums récents', sc: (k, x) => profil(k, x.num).sPodium },
   { id: 'phys', label: 'PHYSIQUE — distance + piste + jours + podium', sc: (k, x) => profil(k, x.num).sPhys },
@@ -146,6 +227,8 @@ export const REGLES = [
   { id: 'filPodium', label: 'presse, mais SANS podium récent passe derrière', filtre: (k, x) => profil(k, x.num).sPodium === 0 },
   { id: 'filDist', label: 'presse, mais sans distance courue passe derrière', filtre: (k, x) => profil(k, x.num).sDist === 0 },
   { id: 'filPiste', label: 'presse, mais jamais cet hippodrome passe derrière', filtre: (k, x) => profil(k, x.num).sPiste === 0 },
+  { id: 'filTerrain', label: 'presse, mais jamais ce terrain passe derrière', filtre: (k, x) => profil(k, x.num).terrainConnu > 0 && profil(k, x.num).terrainOK === 0 },
+  { id: 'filSens', label: 'presse, mais jamais ce sens passe derrière', filtre: (k, x) => profil(k, x.num).sensConnu > 0 && profil(k, x.num).sensOK === 0 },
 ]
 const PAR_ID = Object.fromEntries(REGLES.map((r) => [r.id, r]))
 
@@ -168,12 +251,18 @@ function classer(grp, k, id) {
   return arr
 }
 
-export function choisir(grp, k, id) {
-  return classer(grp, k, id).slice(0, grp.quota).map((x) => x.num)
+/** Le classement d'une case d'un bloc — MÉMOÏSÉ (le LOO le redemande 200 000 fois). */
+const MEMO = new Map()
+export function choisir(grp, k, id, gIdx) {
+  const cle = gIdx === undefined ? null : `${k.__i}|${gIdx}|${id}`
+  if (cle) { const v = MEMO.get(cle); if (v) return v }
+  const r = classer(grp, k, id).slice(0, grp.quota).map((x) => x.num)
+  if (cle) MEMO.set(cle, r)
+  return r
 }
 export function ticket(k, m1, m2) {
   const t = []
-  k.grp.forEach((g, i) => { for (const n of choisir(g, k, i === 0 ? m1 : i === 1 ? m2 : 'p')) if (!t.includes(n)) t.push(n) })
+  k.grp.forEach((g, i) => { for (const n of choisir(g, k, i === 0 ? m1 : i === 1 ? m2 : 'p', i)) if (!t.includes(n)) t.push(n) })
   return t
 }
 const couverts = (t, arr) => arr.slice(0, 3).filter((n) => t.includes(n)).length
@@ -252,7 +341,8 @@ const PAR_ID2 = Object.fromEntries(resDeux.map((r) => [r.id, r]))
 const courant = mesurer('p', 'm')
 
 /* ═══════════ ④ LA GRILLE G1 × G2 ═══════════════════════════════════════ */
-const tete = ['p', 'm', 'phys', 'pAge', 'corde', 'trend', 'mus', 'swapPhys', 'filPiste']
+const tete = ['p', 'm', 'phys', 'pAge', 'corde', 'mus',
+  'terrain', 'sens', 'niveau', 'methode', 'filPiste', 'filTerrain', 'filNiveau', 'swapPhys']
 const grille = tete.map((m1) => ({ m1, lignes: tete.map((m2) => mesurer(m1, m2).taux) }))
 let bestG = { taux: -1 }
 for (const m1 of tete) for (const m2 of tete) { const r = mesurer(m1, m2); if (r.taux > bestG.taux) bestG = { m1, m2, taux: r.taux, couv: r.couv } }
@@ -271,13 +361,29 @@ const looTaux = num(loo, N)
 /* ═══════════ ⑥ LA STABILITÉ — les deux moitiés chronologiques ══════════ */
 const M = Math.floor(N / 2)
 const H1 = CASES.slice(0, M), H2 = CASES.slice(M)
-const stabilite = ['p', 'm', 'phys', 'pAge', 'swapPhys', 'filPiste'].map((id) => {
+const stabilite = ['p', 'm', 'phys', 'pAge', 'swapPhys', 'filPiste', 'terrain', 'sens', 'niveau', 'methode', 'filNiveau'].map((id) => {
   const a = mesurer(id, id, H1), b = mesurer(id, id, H2)
   return { id, label: (PAR_ID[id] || {}).label || id, h1: a.taux, h2: b.taux }
 })
 
 /* ═════════════════════════════ L'AFFICHAGE ═════════════════════════════ */
-console.log(`\n  ${N} Quintés à presse réelle · cotes ${CH}${UTILISE_FORMS ? ' · carrière casacourses' : ' · SANS carrière'}`)
+/* la couverture de la carrière collectée : sans elle, les critères sont muets. */
+const COUV = (() => {
+  let cT = 0, cS = 0, cV = 0, cBV = 0, tot = 0
+  for (const k of CASES) {
+    for (const n of Object.keys(k.runs || {})) {
+      tot++
+      const p = profil(k, Number(n))
+      if (p.terrainConnu) cT++
+      if (p.sensConnu) cS++
+      if (k.vhJour && k.vhJour[norm(k.infos[n]?.nom)]?.vh != null) cV++
+      if (p.vhList.length) cBV++
+    }
+  }
+  return { tot, terrain: cT, sens: cS, vhJour: cV, vhPasse: cBV, cotes: CH, carriere: UTILISE_FORMS }
+})()
+console.log(`\n  ${N} Quintés à presse réelle · cotes ${CH}${UTILISE_FORMS ? ' · carrière collectée' : ' · SANS carrière'}`)
+console.log(`  carrière : ${COUV.tot} chevaux · terrain ${Math.round(100 * COUV.terrain / COUV.tot)} % · sens ${Math.round(100 * COUV.sens / COUV.tot)} % · VH passé ${Math.round(100 * COUV.vhPasse / COUV.tot)} % · VH du jour ${Math.round(100 * COUV.vhJour / COUV.tot)} %`)
 console.log(`  le code actuel (G1 presse · G2 marché) = ${courant.taux} %  (top-3 ${courant.couv.toFixed(3)} · 5/5 ${pct(courant.p5, N)})`)
 
 console.log(`\n  ① OÙ SONT LES 1-2-3 — le diagnostic`)
@@ -327,13 +433,30 @@ console.log('  ' + pad('règle', 50) + rp('1re', 12) + rp('2e', 12))
 for (const s of stabilite) console.log('  ' + pad(s.label.slice(0, 48), 50) + rp(s.h1 + ' %', 12) + rp(s.h2 + ' %', 12))
 
 /* ═════════════════════════════ L'ARCHIVE ═══════════════════════════════ */
+const VERDICT = (() => {
+  const r = (id) => (fusion.find((x) => x.id === id) || {}).deux
+  const pc = (x) => String(x).replace('.', ',') + ' %'
+  const d = (x) => (x - courant.taux >= 0 ? '+' : '') + (x - courant.taux).toFixed(1).replace('.', ',')
+  const pctC = (a) => Math.round((100 * a) / COUV.tot)
+  return 'LES 6 CRITÈRES DE §4 SONT TOUS MESURÉS (terrain ' + pctC(COUV.terrain) + ' %, sens ' + pctC(COUV.sens) +
+    ' %, VH passé ' + pctC(COUV.vhPasse) + ' % — collectés de PMU, §14.6) : aucun ne trie l’intérieur d’un bloc. ' +
+    'Le SCORE §4 complet vaut ' + pc(r('methode')) + ' (' + d(r('methode')) + ' pts) contre ' + pc(courant.taux) +
+    ' pour la presse ; le terrain ' + pc(r('terrain')) + ', le sens ' + pc(r('sens')) + ' et le niveau ' + pc(r('niveau')) +
+    ' sont tous SOUS le code. La meilleure règle reste filPiste (' + pc(r('filPiste')) + ', ' + d(r('filPiste')) +
+    ') et le LOO la ramène à ' + pc(looTaux) + ' — SOUS le code : c’est du bruit. Le choix a une marge réelle (+' +
+    (levier.oracle - levier.code).toFixed(1).replace('.', ',') + ' pts à l’oracle) que RIEN ne prend. ' +
+    'La presse reste le seul tri : rien n’est appliqué au moteur.'
+})()
+
 const sortie = {
   genere: new Date().toISOString(),
   date: '2026-10-16',
   n: N,
   cotes: CH,
   carriere: UTILISE_FORMS,
-  source: 'data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses)',
+  couverture: COUV,
+  source: 'data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses) ' +
+    '× data/terrain.json (terrain + sens PMU, tools/collect-terrain.mjs) × data/vh.json (VH PMU, tools/collect-vh.mjs)',
   code: courant.taux,
   diagnostic: { blocs: Object.values(diag), totalEcartes, partG1G2 },
   levier,
@@ -341,12 +464,7 @@ const sortie = {
   grille: { tete, lignes: grille, meilleure: bestG },
   loo: looTaux,
   stabilite,
-  verdict:
-    'Aucune règle — presse, cote, mouvement, corde, âge, musique, discipline, distance, ' +
-    'hippodrome, absence, podium — ne bat le choix actuel de plus de 1 point, et le LOO ' +
-    'passe SOUS le code : les différences sont du bruit. Le choix a une marge réelle ' +
-    `(+${(levier.oracle - levier.code).toFixed(1)} pts, l'oracle) mais AUCUNE variable mesurable ne la prend : ` +
-    'à l’intérieur d’une même boîte les 4 chevaux sont interchangeables.',
+  verdict: VERDICT,
 }
 fs.writeFileSync('data/choix.json', JSON.stringify(sortie, null, 1))
 try { fs.writeFileSync('public/data/choix.json', JSON.stringify(sortie, null, 1)) } catch (e) { /* public absent */ }

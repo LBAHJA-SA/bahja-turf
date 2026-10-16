@@ -1,10 +1,19 @@
 {
- "genere": "2026-10-16T06:16:38.245Z",
+ "genere": "2026-10-16T06:54:59.445Z",
  "date": "2026-10-16",
  "n": 96,
  "cotes": "cotes",
  "carriere": true,
- "source": "data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses)",
+ "couverture": {
+  "tot": 1509,
+  "terrain": 876,
+  "sens": 1268,
+  "vhJour": 877,
+  "vhPasse": 792,
+  "cotes": "cotes",
+  "carriere": true
+ },
+ "source": "data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses) × data/terrain.json (terrain + sens PMU, tools/collect-terrain.mjs) × data/vh.json (VH PMU, tools/collect-vh.mjs)",
  "code": 38.5,
  "diagnostic": {
   "blocs": [
@@ -138,6 +147,14 @@
    "couv": 2.1770833333333335
   },
   {
+   "id": "vhHaut",
+   "label": "VH — le plus haut VH d’abord",
+   "g1": 38.5,
+   "g2": 36.5,
+   "deux": 36.5,
+   "couv": 2.15625
+  },
+  {
    "id": "filPodium",
    "label": "presse, mais SANS podium récent passe derrière",
    "g1": 38.5,
@@ -146,12 +163,44 @@
    "couv": 2.15625
   },
   {
+   "id": "filSens",
+   "label": "presse, mais jamais ce sens passe derrière",
+   "g1": 36.5,
+   "g2": 38.5,
+   "deux": 36.5,
+   "couv": 2.1770833333333335
+  },
+  {
+   "id": "terrain",
+   "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+   "g1": 34.4,
+   "g2": 38.5,
+   "deux": 35.4,
+   "couv": 2.1458333333333335
+  },
+  {
    "id": "disc",
    "label": "discipline — a déjà couru ce type",
    "g1": 33.3,
    "g2": 38.5,
    "deux": 34.4,
    "couv": 2.15625
+  },
+  {
+   "id": "niveau",
+   "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+   "g1": 34.4,
+   "g2": 37.5,
+   "deux": 34.4,
+   "couv": 2.1041666666666665
+  },
+  {
+   "id": "filNiveau",
+   "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+   "g1": 35.4,
+   "g2": 35.4,
+   "deux": 34.4,
+   "couv": 2.09375
   },
   {
    "id": "m",
@@ -186,6 +235,14 @@
    "couv": 2.1145833333333335
   },
   {
+   "id": "filTerrain",
+   "label": "presse, mais jamais ce terrain passe derrière",
+   "g1": 35.4,
+   "g2": 36.5,
+   "deux": 33.3,
+   "couv": 2.09375
+  },
+  {
    "id": "dist",
    "label": "distance — la distance du jour a-t-elle été courue",
    "g1": 35.4,
@@ -218,6 +275,14 @@
    "couv": 2.0520833333333335
   },
   {
+   "id": "vhBas",
+   "label": "VH — le plus bas VH d’abord",
+   "g1": 34.4,
+   "g2": 33.3,
+   "deux": 30.2,
+   "couv": 2.0729166666666665
+  },
+  {
    "id": "jours",
    "label": "jours — l’absence depuis la dernière course",
    "g1": 34.4,
@@ -234,12 +299,36 @@
    "couv": 2.1041666666666665
   },
   {
+   "id": "piste2",
+   "label": "piste §4 — 60 % le lieu + 40 % le sens",
+   "g1": 29.2,
+   "g2": 34.4,
+   "deux": 27.1,
+   "couv": 2.0520833333333335
+  },
+  {
    "id": "slot",
    "label": "carnet — la colonne (slot) du carnet",
    "g1": 32.3,
    "g2": 33.3,
    "deux": 26,
    "couv": 2.0833333333333335
+  },
+  {
+   "id": "sens",
+   "label": "piste — le SENS (corde à droite / à gauche)",
+   "g1": 31.3,
+   "g2": 33.3,
+   "deux": 26,
+   "couv": 2.0208333333333335
+  },
+  {
+   "id": "formeP",
+   "label": "forme §4 — la place pondérée",
+   "g1": 35.4,
+   "g2": 31.3,
+   "deux": 26,
+   "couv": 2.0520833333333335
   },
   {
    "id": "phys",
@@ -274,6 +363,22 @@
    "couv": 1.96875
   },
   {
+   "id": "physT",
+   "label": "PHYSIQUE + TERRAIN + SENS (combiné)",
+   "g1": 28.1,
+   "g2": 31.3,
+   "deux": 21.9,
+   "couv": 1.90625
+  },
+  {
+   "id": "methode",
+   "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+   "g1": 28.1,
+   "g2": 31.3,
+   "deux": 21.9,
+   "couv": 1.90625
+  },
+  {
    "id": "trendSeul",
    "label": "MOUVEMENT seul (sans départage presse)",
    "g1": 30.2,
@@ -297,10 +402,15 @@
    "phys",
    "pAge",
    "corde",
-   "trend",
    "mus",
-   "swapPhys",
-   "filPiste"
+   "terrain",
+   "sens",
+   "niveau",
+   "methode",
+   "filPiste",
+   "filTerrain",
+   "filNiveau",
+   "swapPhys"
   ],
   "lignes": [
    {
@@ -311,10 +421,15 @@
      32.3,
      38.5,
      31.3,
-     29.2,
      30.2,
+     38.5,
+     33.3,
      37.5,
-     39.6
+     31.3,
+     39.6,
+     36.5,
+     35.4,
+     37.5
     ]
    },
    {
@@ -325,10 +440,15 @@
      29.2,
      31.3,
      26,
-     27.1,
      26,
      32.3,
-     34.4
+     30.2,
+     33.3,
+     27.1,
+     34.4,
+     31.3,
+     31.3,
+     32.3
     ]
    },
    {
@@ -339,10 +459,15 @@
      26,
      32.3,
      29.2,
-     26,
      25,
-     29.2,
-     32.3
+     33.3,
+     30.2,
+     32.3,
+     28.1,
+     32.3,
+     32.3,
+     30.2,
+     29.2
     ]
    },
    {
@@ -354,9 +479,14 @@
      39.6,
      33.3,
      30.2,
-     30.2,
+     39.6,
+     34.4,
+     38.5,
+     31.3,
+     40.6,
      37.5,
-     40.6
+     36.5,
+     37.5
     ]
    },
    {
@@ -367,24 +497,15 @@
      28.1,
      37.5,
      30.2,
-     30.2,
      29.2,
-     34.4,
-     37.5
-    ]
-   },
-   {
-    "m1": "trend",
-    "lignes": [
+     35.4,
+     33.3,
+     38.5,
      31.3,
-     30.2,
-     25,
-     30.2,
-     24,
-     21.9,
-     24,
-     30.2,
-     30.2
+     37.5,
+     35.4,
+     34.4,
+     34.4
     ]
    },
    {
@@ -395,24 +516,91 @@
      25,
      33.3,
      28.1,
-     27.1,
      24,
      30.2,
+     30.2,
+     31.3,
+     27.1,
+     33.3,
+     32.3,
+     30.2,
+     30.2
+    ]
+   },
+   {
+    "m1": "terrain",
+    "lignes": [
+     35.4,
+     34.4,
+     30.2,
+     34.4,
+     30.2,
+     27.1,
+     35.4,
+     32.3,
+     34.4,
+     29.2,
+     36.5,
+     33.3,
+     34.4,
      33.3
     ]
    },
    {
-    "m1": "swapPhys",
+    "m1": "sens",
     "lignes": [
-     40.6,
-     39.6,
-     33.3,
-     39.6,
-     32.3,
      30.2,
      31.3,
-     38.5,
-     40.6
+     27.1,
+     30.2,
+     26,
+     25,
+     32.3,
+     26,
+     33.3,
+     27.1,
+     32.3,
+     29.2,
+     29.2,
+     29.2
+    ]
+   },
+   {
+    "m1": "niveau",
+    "lignes": [
+     34.4,
+     34.4,
+     28.1,
+     34.4,
+     27.1,
+     26,
+     33.3,
+     30.2,
+     34.4,
+     27.1,
+     35.4,
+     32.3,
+     33.3,
+     33.3
+    ]
+   },
+   {
+    "m1": "methode",
+    "lignes": [
+     28.1,
+     28.1,
+     21.9,
+     29.2,
+     24,
+     20.8,
+     26,
+     25,
+     27.1,
+     21.9,
+     29.2,
+     25,
+     27.1,
+     25
     ]
    },
    {
@@ -423,10 +611,72 @@
      33.3,
      40.6,
      31.3,
-     30.2,
      31.3,
+     38.5,
+     34.4,
+     38.5,
+     31.3,
+     40.6,
+     37.5,
+     37.5,
+     39.6
+    ]
+   },
+   {
+    "m1": "filTerrain",
+    "lignes": [
+     35.4,
+     35.4,
+     30.2,
+     35.4,
+     30.2,
+     28.1,
+     36.5,
+     31.3,
+     34.4,
+     29.2,
+     36.5,
+     33.3,
+     33.3,
+     34.4
+    ]
+   },
+   {
+    "m1": "filNiveau",
+    "lignes": [
+     35.4,
+     35.4,
+     29.2,
+     35.4,
+     28.1,
+     27.1,
+     34.4,
+     31.3,
+     35.4,
+     28.1,
+     36.5,
+     33.3,
+     34.4,
+     34.4
+    ]
+   },
+   {
+    "m1": "swapPhys",
+    "lignes": [
+     40.6,
      39.6,
-     40.6
+     33.3,
+     39.6,
+     32.3,
+     31.3,
+     38.5,
+     35.4,
+     38.5,
+     32.3,
+     40.6,
+     38.5,
+     37.5,
+     38.5
     ]
    }
   ],
@@ -437,7 +687,7 @@
    "couv": 2.2395833333333335
   }
  },
- "loo": 18.8,
+ "loo": 22.9,
  "stabilite": [
   {
    "id": "p",
@@ -474,7 +724,37 @@
    "label": "presse, mais jamais cet hippodrome passe derrière",
    "h1": 37.5,
    "h2": 43.8
+  },
+  {
+   "id": "terrain",
+   "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+   "h1": 39.6,
+   "h2": 31.3
+  },
+  {
+   "id": "sens",
+   "label": "piste — le SENS (corde à droite / à gauche)",
+   "h1": 20.8,
+   "h2": 31.3
+  },
+  {
+   "id": "niveau",
+   "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+   "h1": 27.1,
+   "h2": 41.7
+  },
+  {
+   "id": "methode",
+   "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+   "h1": 20.8,
+   "h2": 22.9
+  },
+  {
+   "id": "filNiveau",
+   "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+   "h1": 27.1,
+   "h2": 41.7
   }
  ],
- "verdict": "Aucune règle — presse, cote, mouvement, corde, âge, musique, discipline, distance, hippodrome, absence, podium — ne bat le choix actuel de plus de 1 point, et le LOO passe SOUS le code : les différences sont du bruit. Le choix a une marge réelle (+33.4 pts, l'oracle) mais AUCUNE variable mesurable ne la prend : à l’intérieur d’une même boîte les 4 chevaux sont interchangeables."
+ "verdict": "LES 6 CRITÈRES DE §4 SONT TOUS MESURÉS (terrain 58 %, sens 84 %, VH passé 52 % — collectés de PMU, §14.6) : aucun ne trie l’intérieur d’un bloc. Le SCORE §4 complet vaut 21,9 % (-16,6 pts) contre 38,5 % pour la presse ; le terrain 35,4 %, le sens 26 % et le niveau 34,4 % sont tous SOUS le code. La meilleure règle reste filPiste (40,6 %, +2,1) et le LOO la ramène à 22,9 % — SOUS le code : c’est du bruit. Le choix a une marge réelle (+33,4 pts à l’oracle) que RIEN ne prend. La presse reste le seul tri : rien n’est appliqué au moteur."
 }

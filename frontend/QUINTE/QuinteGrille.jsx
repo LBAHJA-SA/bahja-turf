@@ -879,7 +879,19 @@ function TabChoix({ sk, choix }) {
     <div>
       <div style={{ fontSize: 13, color: sk.texte, lineHeight: 1.6, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', marginBottom: 12 }}>
         <b>{choix.n} Quintés à presse réelle</b> · cotes {choix.cotes === 'ouverture' ? 'du matin (ouverture)' : 'finales (Equidia)'}
-        {choix.carriere ? ' · carrière casacourses' : ' · sans carrière'} — la mesure du <b>choix dans G1 et G2</b>.
+        {choix.carriere ? ' · carrière collectée (casacourses + PMU)' : ' · sans carrière'} — la mesure du <b>choix dans G1 et G2</b>.
+        {choix.couverture ? (
+          <>
+            <br />
+            <span style={{ color: sk.muted }}>
+              carrière enrichie <b>PMU</b> : terrain {Math.round((100 * choix.couverture.terrain) / choix.couverture.tot)} % ·
+              sens {Math.round((100 * choix.couverture.sens) / choix.couverture.tot)} % ·
+              VH passé {Math.round((100 * choix.couverture.vhPasse) / choix.couverture.tot)} % ·
+              VH du jour {Math.round((100 * choix.couverture.vhJour) / choix.couverture.tot)} %
+              {' '}({choix.couverture.tot} chevaux)
+            </span>
+          </>
+        ) : null}
         <br />
         <span style={{ color: sk.muted }}>
           ⛔ Les quotas ne bougent pas (§11.16) : <b>3-2-1-1-1</b>. On ne mesure QUE qui entre
@@ -1043,7 +1055,9 @@ function TabChoix({ sk, choix }) {
         <br />
         <span style={{ color: sk.muted }}>
           Mesure écrite par <b>tools/choix-g1g2.mjs</b> (rejouer : <code>node tools\choix-g1g2.mjs</code>).
-          La carrière vient de <b>tools/collect-forms.mjs</b> → <code>data/forms.json</code>.
+          La carrière vient de <b>tools/collect-forms.mjs</b> (<code>data/forms.json</code>),
+          enrichie par <b>tools/collect-terrain.mjs</b> (<code>data/terrain.json</code>) et
+          <b>tools/collect-vh.mjs</b> (<code>data/vh.json</code>) — terrain, sens et VH collectés de PMU (§14.6).
           La règle en production reste <b>G1 presse · G2 marché · G3-G5 carnet</b> (§11.22) : rien n’est appliqué.
         </span>
       </div>

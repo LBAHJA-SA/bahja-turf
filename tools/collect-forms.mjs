@@ -52,6 +52,7 @@ for (let i = 0; i < aFaire.length; i += PARALLELE) {
         const n = parseInt(r.number, 10)
         if (!Number.isFinite(n)) continue
         infos[n] = {
+          nom: r.horse_name || null,
           age: r.horse_age ?? null,
           poids: r.weight ?? null,
           musique: r.performance || null,
@@ -65,6 +66,7 @@ for (let i = 0; i < aFaire.length; i += PARALLELE) {
           .map((f) => ({
             date: f.date,
             track: f.track || null,
+            race: f.race == null ? null : Number(f.race),
             dist: f.distance == null ? null : Number(f.distance),
             place: parseInt(f.place, 10) || 0,
             type: f.racetype || null,

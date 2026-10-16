@@ -191,6 +191,41 @@ Le tableau des 29 règles **invite à prendre la meilleure — ne pas le faire**
 
 ---
 
+### 1.8 ⭐ LES 6 CRITÈRES §4 AU COMPLET — ET TOUJOURS RIEN (§11.25)
+
+§1.7 laissait une porte ouverte : terrain, sens et VH manquaient. Le 16/10 ils ont
+été **collectés dans PMU** (`tools/collect-terrain.mjs` → `data/terrain.json`,
+`tools/collect-vh.mjs` → `data/vh.json` — `penetrometre.intitule`, `corde`,
+`handicapValeur`), donc **plus aucune saisie manuelle**. Couverture : terrain
+**58 %**, sens **84 %**, VH **52 %** des 1 509 chevaux.
+
+**La porte était fermée.** Le score §4 **complet** (forme+dist+piste+niveau+
+terrain+corde), appliqué **dans** G1 et G2 :
+
+| règle (seule) | PAYANTE | vs le code |
+|---|---|---|
+| **le code** (G1 presse · G2 marché) | **38,5 %** | — |
+| `filPiste` (jamais cet hippodrome → derrière) | 40,6 % | +2,1 |
+| **TERRAIN §4** | 35,4 % | −3,1 |
+| **NIVEAU §4** (VH) | 34,4 % | −4,1 |
+| **piste §4** (lieu + sens) | 27,1 % | −11,4 |
+| **le SENS seul** | 26,0 % | −12,5 |
+| **★ LE SCORE §4 COMPLET** | **21,9 %** | **−16,6** |
+| hasard pur | 22,8 % | −15,7 |
+
+**Le score §4 complet est SOUS le hasard** : classer un bloc par le physique
+détruit l'information qu'il contient. La raison est structurelle — G1 = P1-P4, la
+presse **a déjà** appliqué le physique ; re-trier ses 4 chevaux par un score plus
+bruité que le rang de presse ne peut que dégrader. Le **LOO** retombe à **22,9 %**
+(sous le code), et la stabilité est nulle (`TERRAIN` 39,6 → 31,3 entre les deux
+moitiés, `NIVEAU` 27,1 → 41,7). Le seul tri qui tient est **la presse**.
+
+**Rien n'est appliqué** : la production reste §11.22, quotas `3-2-1-1-1`. La
+conclusion de §1.7 est **renforcée**, plus fermée : ce n'était pas un manque de
+données. Détail : `AGENTS.md` §11.25, collecte : §14.6.
+
+---
+
 ## 2. Le code suit-il la méthode ? — 96 Quintés, LOO, PAYANTE
 
 Mêmes courses pour toutes les lignes (96 Quintés à Synthèse de presse réelle),
