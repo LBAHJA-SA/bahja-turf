@@ -1576,6 +1576,14 @@ bilan          → N courses, N avec résultat, N en 5/5
    (ligne `setTicketManuel(res.ticket)` du gel auto) et se figeait sur le
    premier ticket de la journée. C'est exactement ce que §11.17 interdit — on
    parie sur le ticket du moment, pas sur celui du matin.
+   ⚠ **le gel doit donc être BORNÉ** : `attachTicket` ne fige que le premier
+   ticket, mais `listArchive()` rend un tableau **neuf** à chaque appel —
+   `setArchive` relançait `stats` (`computeStats` sur toute l'archive) →
+   `rempli` → `ticketAuto` → l'effet → `setArchive`… et l'onglet bouclait,
+   CPU à 100 % (« l'appli est quasi gelée », 16/10/2026). Cette boucle était
+   coupée par `setTicketManuel(res.ticket)` ; celui-ci étant supprimé, il
+   faut un garde explicite : `gelFait = useRef(null)` → **un seul gel par
+   date et par session**.
 
 ### 13.4 L'automatisation Windows
 

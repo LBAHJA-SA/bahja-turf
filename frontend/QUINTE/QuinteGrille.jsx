@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import {
   fetchRecapSite, fetchArchiveDisque,
@@ -1129,9 +1129,21 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
     return rempli.ticket
   }, [rempli, ticketManuel])
 
+  /* ⚠ 16/10/2026 — LE GEL NE SE REPOSE PAS EN BOUCLE.
+   *   `attachTicket` ne fige que le PREMIER ticket de la date, mais
+   *   `listArchive()` rend un tableau NEUF à chaque appel : `setArchive`
+   *   relançait `stats` (computeStats sur toute l'archive) → `rempli` →
+   *   `ticketAuto` (tableau neuf lui aussi) → l'effet → `setArchive`…
+   *   et l'onglet bouclait, CPU à 100 % (« l'appli est quasi gelée »).
+   *   Avant, la boucle était coupée par `setTicketManuel(res.ticket)` —
+   *   supprimé exprès (le ticket AFFICHÉ suit le marché, §13.3 règle 8).
+   *   Le gel est donc borné : UNE fois par date et par session. */
+  const gelFait = useRef(null)
   useEffect(() => {
     if (!ticketAuto || !ticketAuto.length) return
+    if (gelFait.current === date) return
     if (!gelAutorise()) return   // la nuit, on affiche sans figer (09/10/2026)
+    gelFait.current = date
     let annule = false
     ;(async () => {
       const res = await attachTicket(date, [...ticketAuto], 'page')
