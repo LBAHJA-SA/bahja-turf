@@ -67,7 +67,7 @@ valeur ≤ 0 — **le code fait maintenant ce que fait déjà le harnais de la m
 `tools/test-nonregression.mjs` chargeait le marché par `eq[r.courseId]` alors que
 la page l'identifie par **`cle`** → 2 courses comptaient sans cote. Corrigé.
 
-### 1.4 ⭐ Le CODE ne suit pas la MÉTHODE (mais ça ne coûte rien)
+### 1.4 ⭐ Le CODE ne suit pas la MÉTHODE — corrigé le 16/10 (§11.22)
 
 §11.19 est explicite :
 
@@ -77,12 +77,34 @@ Or `remplirGrille()` a une branche `aStats` (**R8 = 0,9 × FORCE(P) + 0,1 × mar
 qui fait exactement le contraire : dès qu'une archive existe (c'est-à-dire
 **toujours** sur la page), ce sont les statistiques qui **choisissent** les
 chevaux, plus le marché. La §11.17 « les q meilleures cotes du bloc » ne
-s'applique donc **jamais** en pratique sur la page.
+s'appliquait donc **jamais** en pratique sur la page.
 
-Mesure §2 : ce détour ne coûte **rien** (R8 ≈ la règle documentée, à ±3 points).
-Ce n'est pas un problème de performance — mais **le code n'est pas la méthode
-écrite**, et c'est à corriger pour que la mesure et la production parlent du même
-moteur.
+Le rapport du matin concluait « ça ne coûte rien (±3 points) ». **La mesure de
+l'après-midi dit le contraire** (§1.5) : R8 est la **moins bonne** des règles
+testées. La branche a été **retirée de la sélection** — `aStats` reste calculé
+pour l'information, plus pour choisir.
+
+### 1.5 ⭐ LE CHOIX DANS LES BLOCS — appliqué (§11.22)
+
+Les quotas `3-2-1-1-1` sont protégés (§11.16). Le levier restant, c'est **QUI
+remplit chaque bloc**. Mesuré sur les 96 Quintés à presse réelle, blocs du vrai
+`buildGrid()`, LOO, métrique PAYANTE :
+
+| qui remplit le bloc | PAYANTE | couvre +4 | 5/5 |
+|---|---|---|---|
+| **G1 carnet · G2 marché · G3-G5 carnet** ⭐ *(appliqué)* | **39 %** | 18 % | 7 % |
+| le carnet partout | 39 % | 20 % | 8 % |
+| R8 partout *(l'ancien code)* | 31 % | 14 % | 6 % |
+| le marché partout *(§11.17)* | 28 % | 15 % | 6 % |
+
+**+11 points de PAYANTE** contre la règle §11.17, **+8** contre l'ancien code.
+L'ordre du **rang de presse** (`place`) fait 38,5 %, celui des **colonnes du
+carnet** (`slot`) 25,0 % : ce n'est pas la même chose (§11.14).
+
+⚠ **Le témoin qui n'est pas d'accord** : sur les **14 courses réelles** LOO,
+PAYANTE = 5/14 avant → 5/14 après, et le **5/5 recule de 4/14 à 1/14**. La
+métrique de décision (§11.18) tranche pour la nouvelle règle ; le 5/5 des 14
+reste un avertissement. Retour arrière = une ligne (`CHOIX_DU_BLOC`).
 
 ---
 

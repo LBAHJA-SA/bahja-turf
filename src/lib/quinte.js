@@ -792,21 +792,31 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
    * le quota (12 prenables cote ou stats, 4 par l'autre lecture). Aucun
    * 9e siège ne se justifie : même à 9, le 15/10 restait incomplet
    * (3 manquants). Le travail est 100% : QUI entre. */
-  /* ⭐ 16/10/2026 — R8 « FORCE P » (spécification utilisateur, §11.17).
-   * FORCE(P) = la PLUS FORTE des P(1er…5e) de la CASE (table `parPlace`,
-   * dénominateur conditionnel n_top5). On remplace la version « taux de
-   * podium du P » : l'interprétation podium était une ERREUR, pas la règle.
-   * Conventions visibles : n < 2 → 0 (force inexploitable) ; cote absente →
-   * terme marché à 0.5. Mesuré par tools/test-nonregression.mjs. */
-  const parPlace = stats?.parPlace || []
-  const force = (slot) => {
-    const st = parPlace[slot - 1]
-    if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return 0
-    let best = 0
-    for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
-    return (st.p[best] ?? 0) > 0 ? st.p[best] / 100 : 0
-  }
-  const aStats = parPlace.some((st) => st && st.n >= 2)
+  /* ⭐ 16/10/2026 — R8 « FORCE P » (0,9 force + 0,1 marché) : RETIRÉ DE LA
+   * SÉLECTION. §11.19 l'exige : `stats` ne change PAS quels chevaux entrent —
+   * seulement l'ORDRE du ticket (`ordonnerParStats`). Mesuré sur 96 Quintés à
+   * presse réelle : R8 = 31 % de 1-2-3, le choix ci-dessous = 38,5 % : le R8
+   * n'apportait rien et violait la règle. `aStats` reste calculé pour
+   * l'information et n'entre plus dans le choix. */
+  const aStats = (stats?.parPlace || []).some((st) => st && st.n >= 2)
+
+  /* ⭐ 16/10/2026 — LE CHOIX DANS LE BLOC (tools/choix-blocs.mjs).
+   * Les quotas 3-2-1-1-1 ne bougent JAMAIS (§11.16) : c'est QUI on prend
+   * à l'intérieur du bloc qui change. Mesuré sur les 96 Quintés à presse
+   * RÉELLE, en ne répartissant QUE le choix (mêmes blocs `buildGrid`, mêmes
+   * 8 places), métrique §11.18 = « le 1-2-3 est complet dans la grille » :
+   *
+   *     G1 carnet · G2 marché · G3-G5 carnet   1-2-3 = 38,5 %   (38,5 % ouverture)
+   *     le carnet partout                      1-2-3 = 38,5 %   (38,5 %)
+   *     la cote partout (§11.17)               1-2-3 = 28,1 %   (31,3 %)
+   *     l'ordre des cases du carnet (`slot`)   1-2-3 = 25,0 %   (25,0 %)
+   *
+   * → le RANG DE PRESSE est ce qui suit l'arrivée, pas la cote (§11.16).
+   *   Le marché garde deux rôles : choisir dans G2, et ordonner le ticket
+   *   (§11.19) ; il n'entre nulle part ailleurs dans la sélection.
+   *   `carnet` = la place de presse P1..P20 de la case (et non son `slot`,
+   *   qui est le numéro de colonne du carnet papier — mesuré moins bon). */
+  const CHOIX_DU_BLOC = { G1: 'carnet', G2: 'marche', G3: 'carnet', G4: 'carnet', G5: 'carnet' }
 
   for (const g of grille.groupes) {
     const cases = g.cases.map((c) => ({ ...c, s: parNum.get(c.num)?.s || null, ok: parNum.get(c.num)?.ok ?? null }))
@@ -829,24 +839,21 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
 
     const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
 
-    // score R8 : 0.9 FORCE(P) + 0.1 marché (cote inversée normalisée,
-    // 0.5 si absente) ; sans stats → repli ancien (cotes puis tries)
+    /* le choix du bloc : le carnet (rang de presse) ou la cote du marché.
+     * Sans cote complète sur le bloc, `marche` retombe sur `tries` — le
+     * comportement carrière/forme d'avant, jamais modifié. */
     const surLeMarche = cases.every((c) => coteDe(cotes, c.num) != null)
+    const choix = CHOIX_DU_BLOC[g.id] || 'carnet'
+    const effectif = choix === 'marche' && !surLeMarche ? 'classement' : choix
     const retenus = new Set()
-    if (aStats && cases.length) {
-      const connues = cases.filter((c) => coteDe(cotes, c.num) != null).map((c) => coteDe(cotes, c.num))
-      const cMin = Math.min(...connues), cMax = Math.max(...connues)
-      const mkt = (c) => {
-        const v = coteDe(cotes, c.num)
-        if (v == null || !(cMax > cMin)) return 0.5
-        return (cMax - v) / (cMax - cMin)
-      }
+    if (choix === 'marche' && surLeMarche) {
       cases.slice()
-        .sort((a, b) => ((0.9 * force(b.slot) + 0.1 * mkt(b)) - (0.9 * force(a.slot) + 0.1 * mkt(a))) || (a.slot - b.slot))
+        .sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num) || a.place - b.place)
         .slice(0, quota).forEach((c) => retenus.add(c.place))
-    } else if (surLeMarche) {
-      const parCote = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num))
-      parCote.slice(0, quota).forEach((c) => retenus.add(c.place))
+    } else if (choix === 'carnet') {
+      cases.slice()
+        .sort((a, b) => a.place - b.place)
+        .slice(0, quota).forEach((c) => retenus.add(c.place))
     } else {
       tries.slice(0, quota).forEach((c) => retenus.add(c.place))
     }
@@ -855,7 +862,8 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
       ...g,
       surprise: null,
       surLeMarche,
-      r8: aStats,
+      choix: effectif,
+      stats: aStats,
       cases: cases.map((c) => ({
         ...c,
         cote: coteDe(cotes, c.num),

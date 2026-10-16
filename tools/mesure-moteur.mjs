@@ -2,15 +2,16 @@
  * tools/mesure-moteur.mjs — LE CODE SUIT-IL LA MÉTHODE ? (16/10/2026)
  *
  * §11.18 mesure « la course est PAYANTE » (le 1-2-3 complet dans la grille)
- * sur 280 vrais Quintés. §11.19 dit : **`stats` ne change PAS la sélection,
- * seulement l'ordre d'affichage**.
+ * sur 280 vrais Quintés. Sur les 96 qui ont une presse RÉELLE, ce script
+ * compare les façons de REMPLIR les blocs (les quotas 3-2-1-1-1 ne bougent
+ * pas, §11.16), en LOO (les statistiques d'une course ne contiennent jamais
+ * cette course) :
  *
- * Or le code a une branche `aStats` (R8 = 0,9 FORCE(P) + 0,1 marché) qui
- * fait EXACTEMENT le contraire : dès qu'une archive existe, ce sont les
- * statistiques qui choisissent les chevaux — plus le marché.
- *
- * Ce script mesure les deux, sur les MÊMES courses, avec la MÊME métrique,
- * en LOO (les statistiques d'une course ne contiennent jamais cette course).
+ *   · le VRAI code — `remplirGrille()` appelé pour de vrai (§11.22)
+ *   · le carnet partout          — le rang de presse
+ *   · le marché partout          — l'ancienne règle §11.17
+ *   · R8 partout                 — 0,9 FORCE(P) + 0,1 marché (l'ancien code)
+ *   · les baselines : top 8 / top 9 des cotes
  *
  *   node tools\mesure-moteur.mjs             cotes finales
  *   node tools\mesure-moteur.mjs ouverture   cotes du matin
@@ -66,31 +67,78 @@ const classementDe = (grille) => grille.groupes
   .sort((a, b) => a.slot - b.slot)
   .map((c) => ({ p: { num: c.num }, s: null, ok: true }))
 
+const coteDe = (cotes, num) => {
+  const v = cotes?.[num]
+  if (v == null) return null
+  const n = typeof v === 'object' ? (v.cote ?? v.odds ?? null) : v
+  const x = Number(n)
+  return Number.isFinite(x) && x > 0 ? x : null
+}
+
+/* les 3 façons de remplir un bloc : le carnet, le marché, R8 (0,9 force + 0,1 marché) */
+function ticketModes(grille, cotes, stats, modes) {
+  const parPlace = stats?.parPlace || []
+  const force = (slot) => {
+    const st = parPlace[slot - 1]
+    if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return 0
+    let b = 0
+    for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[b] ?? 0)) b = k
+    return (st.p[b] ?? 0) > 0 ? st.p[b] / 100 : 0
+  }
+  const t = []
+  grille.groupes.forEach((g, i) => {
+    const cases = g.cases.map((x) => ({ ...x }))
+    const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
+    const m = modes[i]
+    const surLeMarche = cases.every((x) => coteDe(cotes, x.num) != null)
+    let ordre
+    if (m === 'marche' && surLeMarche) {
+      ordre = cases.slice().sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num) || a.place - b.place)
+    } else if (m === 'carnet') {
+      ordre = cases.slice().sort((a, b) => a.place - b.place)
+    } else {
+      const connues = cases.filter((x) => coteDe(cotes, x.num) != null).map((x) => coteDe(cotes, x.num))
+      const cMin = Math.min(...connues), cMax = Math.max(...connues)
+      const mkt = (x) => {
+        const v = coteDe(cotes, x.num)
+        if (v == null || !(cMax > cMin)) return 0.5
+        return (cMax - v) / (cMax - cMin)
+      }
+      ordre = cases.slice().sort((a, b) => ((0.9 * force(b.slot) + 0.1 * mkt(b)) - (0.9 * force(a.slot) + 0.1 * mkt(a))) || (a.slot - b.slot))
+    }
+    ordre.slice(0, quota).forEach((x) => { if (!t.includes(x.num)) t.push(x.num) })
+  })
+  return t
+}
+
 for (let i = 0; i < N; i++) {
   const c = CASES[i]
   const grille = buildGrid(c.synthese, c.runners)
   const classement = classementDe(grille)
   const statsLOO = computeStats(CASES.filter((_, k) => k !== i))
 
-  // ① le marché seul — le plafond à 8 chevaux
+  // ① le marché seul — le plafond à 8 et 9 chevaux
   bump('marché seul — top 8 des cotes', kpi(parCote8(c).slice(0, 8), c.arrivee))
   bump('marché seul — top 9 des cotes', kpi(parCote8(c).slice(0, 9), c.arrivee))
 
-  // ② la règle RETENUE (§11.17) : les q meilleures cotes du bloc — stats = null
-  const tMkt = remplirGrille(grille, classement, c.discipline, c.cotes, null).ticket
-  bump('RÈGLE RETENUE  q meilleures cotes  (stats=null)', kpi(tMkt, c.arrivee))
-  R['RÈGLE RETENUE  q meilleures cotes  (stats=null)'].ch += tMkt.length
+  // ② ⭐ LE VRAI CODE (§11.22) : G1 carnet · G2 marché · G3-G5 carnet
+  const tCode = remplirGrille(grille, classement, c.discipline, c.cotes, statsLOO).ticket
+  bump('⭐ LE CODE — G1 carnet · G2 marché · G3-G5 carnet', kpi(tCode, c.arrivee))
+  R['⭐ LE CODE — G1 carnet · G2 marché · G3-G5 carnet'].ch += tCode.length
 
-  // ③ le VRAI chemin de la page : avec les statistiques → branche R8
-  const tR8 = remplirGrille(grille, classement, c.discipline, c.cotes, statsLOO).ticket
-  bump('CODE ACTUEL  R8 = 0,9 force + 0,1 marché', kpi(tR8, c.arrivee))
-  R['CODE ACTUEL  R8 = 0,9 force + 0,1 marché'].ch += tR8.length
+  // ③ le carnet partout — le rang de presse choisit dans chaque bloc
+  const tCar = ticketModes(grille, c.cotes, statsLOO, ['carnet', 'carnet', 'carnet', 'carnet', 'carnet'])
+  bump('le carnet partout (rang de presse)', kpi(tCar, c.arrivee))
 
-  // ④ R8 sans marché (pour isoler ce qu'apporte le marché dans R8)
-  const tF = remplirGrille(grille, classement, c.discipline, null, statsLOO).ticket
-  bump('R8 sans marché (force seule)', kpi(tF, c.arrivee))
+  // ④ le marché partout — l'ancienne règle §11.17
+  const tMkt = ticketModes(grille, c.cotes, statsLOO, ['marche', 'marche', 'marche', 'marche', 'marche'])
+  bump('le marché partout (§11.17)', kpi(tMkt, c.arrivee))
 
-  /* ⑤ LA TAILLE DU TICKET — le seul levier qui reste si les quotas ne bougent pas.
+  // ⑤ R8 partout — 0,9 FORCE(P) + 0,1 marché, l'ancien code
+  const tR8 = ticketModes(grille, c.cotes, statsLOO, ['r8', 'r8', 'r8', 'r8', 'r8'])
+  bump('R8 partout (0,9 force + 0,1 marché, l\'ancien code)', kpi(tR8, c.arrivee))
+
+  /* ⑥ LA TAILLE DU TICKET — le seul levier qui reste si les quotas ne bougent pas.
    * Blocs de la grille, meilleures cotes de chaque bloc, puis on AJOUTE le
    * meilleur cheval restant (le 4e de G1 dans l'immense majorité des cas). */
   const bloc = (g) => g.cases.slice().sort((a, b) => c.cotes[a.num].cote - c.cotes[b.num].cote)
@@ -122,5 +170,5 @@ for (const [nom, r] of ordre) {
 }
 console.log('')
 console.log('  LOO = les statistiques de la course testée n\'entrent jamais dans les siennes.')
-console.log('  La règle retenue ne lit QUE le marché ; le code actuel lit FORCE(P) quand il a une archive.')
+console.log('  Quotas 3-2-1-1-1 dans TOUS les cas (§11.16) : on ne change que QUI remplit le bloc.')
 console.log('')

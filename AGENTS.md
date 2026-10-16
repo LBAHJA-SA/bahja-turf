@@ -556,6 +556,12 @@ case P2 → 1/4 █
 
 ### 11.17 ⭐ LA RÈGLE DU MARCHÉ — appliquée dans le moteur le 05/10/2026
 
+> ⚠ **SUPERSEDED le 16/10/2026 par §11.22.** La cote ne remplit plus qu'un seul
+> bloc (G2) ; G1, G3, G4 et G5 sont remplis par le **rang de presse**. Mesure :
+> la cote partout = 28 % de PAYANTE, le rang de presse = 38,5 % (96 courses).
+> Cette section reste comme **trace de la mesure du 05/10** (4 courses, métrique
+> `x/5`) — elle n'est plus la règle.
+
 > Les quotas **ne bougent pas**. Ce qui change, c'est **comment on remplit chaque
 > bloc**. Le score physique n'a aucun pouvoir de tri (§11.16) ; la cote, elle, en a un.
 
@@ -841,6 +847,115 @@ continue de le calculer pour l'archive, mais sa sortie est étiquetée
 
 ---
 
+### 11.22 ⭐ LE CHOIX DANS LE BLOC — appliqué au moteur le 16/10/2026
+
+> **Les quotas 3-2-1-1-1 ne bougent pas (§11.16). Ce qui change, c'est QUI on
+> prend à l'intérieur d'un bloc.** Et la réponse est : **le rang de presse**,
+> pas la cote.
+
+#### La règle (dans `remplirGrille()`, `src/lib/quinte.js`)
+
+```js
+const CHOIX_DU_BLOC = { G1: 'carnet', G2: 'marche', G3: 'carnet', G4: 'carnet', G5: 'carnet' }
+```
+
+| Bloc | Qui choisit | Ce que ça veut dire |
+|---|---|---|
+| **G1 · P1-P4** | **le carnet** | les 3 meilleures **places de presse** du bloc |
+| **G2 · P5-P8** | **le marché** | les 2 **meilleures cotes** du bloc |
+| **G3 · P9-P10** | **le carnet** | la meilleure place de presse |
+| **G4 · P11-P12** | **le carnet** | la meilleure place de presse |
+| **G5 · P13-P20** | **le carnet** | la meilleure place de presse |
+
+- **`carnet` = `place`, la place de presse P1..P20 de la case** — ⚠ **pas**
+  `slot`, qui est le numéro de colonne du carnet papier (§11.14). Les deux
+  donnent des résultats très différents : `place` = 38,5 %, `slot` = 25,0 %.
+- **Le marché ne choisit plus qu'en G2.** Il garde ses deux autres rôles :
+  **l'ordre du ticket** (§11.19, `ordonnerParStats`) et l'affichage.
+- **Sans cotes**, rien ne change : c'est `tries` qui décide (carrière → forme),
+  exactement comme avant. Si **une seule** cote manque dans G2, G2 retombe sur
+  le classement — le détail affiche alors `choix: 'classement'`.
+
+#### La règle R8 est RETIRÉE de la sélection
+
+Le code avait une branche `aStats` (R8 = 0,9 × force(P) + 0,1 × marché) qui
+**sélectionnait** dès qu'une archive existait — donc **toujours** sur la page.
+§11.19 l'interdisait déjà (« `stats` ne change PAS quels chevaux entrent ») ;
+§11.21 avait vu la divergence mais l'avait classée « bruit, rien à gagner ».
+
+**Mesure du 16/10 sur 96 courses (LOO) : ce n'est pas du bruit.**
+
+| qui remplit le bloc (96 Quintés) | PAYANTE | couvre +4 | 5/5 |
+|---|---|---|---|
+| ⭐ **la règle §11.22** | **39 %** | 18 % | **7 %** |
+| le carnet partout | 39 % | 20 % | 8 % |
+| **R8 partout** (l'ancien code) | 31 % | 14 % | 6 % |
+| le marché partout (§11.17) | 28 % | 15 % | 6 % |
+
+`aStats` reste calculé (information), mais **n'entre plus dans le choix**.
+
+#### La mesure — `tools/choix-grille.mjs` (LA mesure décisive)
+
+96 Quintés à presse RÉELLE, blocs du **vrai `buildGrid()`**, mêmes 8 places,
+on ne redistribue que le **choix**. Métrique §11.18 = **PAYANTE** (le 1-2-3
+complet dans la grille) :
+
+| Qui choisit dans le bloc | cotes finales | cotes d'ouverture |
+|---|---|---|
+| **G1 carnet · G2 marché · G3-G5 carnet** ⭐ | **38,5 %** | **38,5 %** |
+| le carnet partout | 38,5 % | 38,5 % |
+| G1 carnet · G2-G5 marché | 33,3 % | 32,3 % |
+| G1 marché · G2 marché · G3-G5 carnet | 33,3 % | 33,3 % |
+| **la cote partout** (l'ancienne §11.17) | **28,1 %** | 31,3 % |
+| l'ordre des colonnes (`slot`) | 25,0 % | 25,0 % |
+
+- **+10,4 points de PAYANTE** sur les cotes finales (28,1 % → 38,5 %), et
+  **+7,2** sur les cotes du matin. La règle est **stable dans les deux
+  régimes** — c'est ce qui la rend crédible.
+- **Les 8 combinaisons de tête sur 32 commencent toutes par `c…`** (G1 au
+  carnet) : c'est **G1 qui décide**, tout le reste est un plateau.
+- LOO honnête (combinaison choisie sur les 95 autres) : 31-34 %. La règle
+  retenue est **fixe**, elle n'est pas ajustée aux 96.
+
+#### L'effet dans le VRAI moteur — `tools/mesure-moteur.mjs`
+
+```
+                            96 Quintés, LOO        cotes finales   ouverture
+  ⭐ la règle §11.22                             39 %            38 %
+     le carnet partout                          39 %            39 %
+     R8 partout (0,9 force + 0,1 marché)        31 %            34 %
+     le marché partout (§11.17)                 28 %            31 %
+```
+
+#### ⚠ Ce qui n'est PAS démontré — et comment on le dit
+
+Sur les **14 courses réelles du 1er→15/10** (carrière + presse pronostics-turf
++ marché Equidia, `tools/test-nonregression.mjs`, LOO) :
+
+| | PAYANTE | couvre +4 | Quinté 5/5 | gagnant |
+|---|---|---|---|---|
+| avant (R8) | **5/14 = 36 %** | 4/14 | **4/14** | 11/14 |
+| après (§11.22) | **5/14 = 36 %** | 1/14 | 1/14 | 11/14 |
+
+→ **sur les 14 : le 1-2-3 ne bouge pas, mais le 5/5 recule (4 → 1)**.
+Les deux échantillons ne disent pas la même chose :
+
+```
+                              1-2-3                     5/5
+  96 courses (02→07)   carnet 39 % > R8 31 %     carnet 8 % ≈ R8 6 %
+  14 courses (10/2026) carnet 36 % = R8 36 %     carnet 1/14 < R8 4/14
+  ------------------------------------------------------------------
+  les 110 réunies      carnet 38 % > R8 32 %     carnet 9 ≈ R8 10
+```
+
+**La métrique de décision est PAYANTE (§11.18) : elle tranche pour la règle
+§11.22**, sur les deux échantillons pris ensemble. Mais **le 5/5 sur les 14
+reste un avertissement** : 14 courses = 7 points par course, ça ne prouve rien
+seul. À re-mesurer quand l'archive aura grossi. **Le retour arrière est une
+ligne** (`CHOIX_DU_BLOC`, §11.22).
+
+---
+
 ## 12. 🖥️ L'OUTIL — page `/quinte` (C:\bahja-TURF)
 
 Fichiers :
@@ -852,9 +967,15 @@ Fichiers :
 | ~~`backend/QUINTE/quinte.js`~~ | **SUPPRIMÉ le 05/10/2026.** C'était une copie à l'octet près de `src/lib/quinte.js`, faite pour l'API bahja-pmu. La page importe désormais `src/lib/quinte` directement : plus de copie, plus de désynchronisation. |
 | `tools/collect-synthese.mjs` | le collecteur quotidien pronostics-turf.info |
 | `tools/cotes.mjs` | **le marché Equidia** → `data/cotes.json`. `chargerCotes(courseId)`, `--force` pour rafraîchir |
-| `tools/aujourdhui.mjs` | la grille d'un jour : cotes par bloc, quota rempli, ticket |
+| `tools/aujourdhui.mjs` | la grille d'un jour : cotes par bloc, quota rempli, ticket — **appelle le vrai `remplirGrille()`** (§11.22) |
 | `tools/collecte-quintes.mjs` | **le jeu de données de §11.18** → `data/quintes.json` (vrais Quintés France) |
 | `tools/mesure-quintes.mjs` | **la mesure de référence** : payable / couvre / Quinté, sur 280 Quintés |
+| `tools/mesure-moteur.mjs` | **le code contre les règles de choix** (§11.22) : le code, le carnet, le marché, R8, les baselines — 96 courses, LOO |
+| `tools/choix-grille.mjs` | ⭐ **LA mesure décisive du choix** (§11.22) : qui remplit chaque bloc (carnet / marché / colonne), blocs du **vrai `buildGrid`** |
+| `tools/choix-blocs.mjs` | le même choix, blocs définis par les **rangs de presse** (garde-fou : un autre découpage) |
+| `tools/choix-combos.mjs` | les **32 combinaisons** carnet/marché par bloc + LOO honnête |
+| `tools/test-nonregression.mjs` | le harnais avant/après sur l'archive réelle (`--out`, `--diff`) — **sert de témoin au 5/5 de §11.22** |
+| `tools/verif-parite.mjs` | **`src/lib/quinte.js` == `backend/QUINTE/quinte.js` ?** — compare les deux, commentaires ignorés, fonction par fonction (§12) |
 | `tools/surprise.mjs` | ⚠ **obsolète** (4 courses, métrique x/5) — la mesure de référence est **§11.18** |
 | `tools/verif-marche.mjs` | rejoue l'archive avec le **vrai** `remplirGrille`, avant / après cote |
 | `tools/zones.mjs` | **autopsie des zones** : presse ET case de chaque arrivant, périmètre P→P, audit des quotas |
@@ -968,15 +1089,22 @@ forme 22 %  distance 22 %  piste 18 %  niveau 13 %  terrain 13 %  corde 12 %
 
 ### 12.4 bis ⭐ LE MARCHÉ, dans le moteur (05/10/2026)
 
-`remplirGrille(grille, classement, discipline, cotes)` a un **4ᵉ argument**.
+> ⚠ **Depuis le 16/10/2026 (§11.22), la cote ne remplit plus qu'un seul bloc :
+> G2.** Les autres blocs sont remplis par le **rang de presse** (`place`).
+> Ce qui suit décrit le mécanisme de bout en bout (clé, proxy, repli) — il n'a
+> pas changé ; seule la règle de choix l'a.
+
+`remplirGrille(grille, classement, discipline, cotes, stats)` a un **4ᵉ argument**.
 
 ```
 cotes = { n° : { cote, ouverture, tendance, favori, heure } }
 ```
 
-- **Si un bloc a la cote de TOUS ses partants** → c'est la cote qui le remplit
-  (les **quota** meilleures cotes, rien d'autre). Le classement n'est pas consulté.
-- **Sinon** → le classement (physique → forme → carnet), comme avant.
+- **Si un bloc a la cote de TOUS ses partants ET que c'est un bloc « marché »**
+  (aujourd'hui : G2) → c'est la cote qui le remplit (les **quota** meilleures
+  cotes, rien d'autre). Le classement n'est pas consulté.
+- **Sinon** → le carnet (G1, G3, G4, G5) ou le classement (physique → forme),
+  comme avant.
 - La page appelle `fetchCotes(cle)` avec la clé `{date}_R{n}_C{m}` (§8.1) via le
   proxy `/eq`, **rafraîchit toutes les 60 s**, et affiche la cote sur chaque
   boule + l'heure du relevé.
