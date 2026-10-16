@@ -145,15 +145,18 @@ export default function Article() {
 
     setTops(data.tops || {})
     setSource(data.source || '')
-    // les 18 tableaux sont déjà revenus avec la course ; cet appel ne sert
-    // qu'à les rafraîchir si la course est arrivée d'une autre source.
-    // rappel avec LA MÊME date que la course (jamais date=0 en dur)
-    if (!Object.keys(data.tops || {}).length) {
-      const off = offsetJour(cible.date)
-      chargerTopsTurfFrance(off)
-        .then((t) => setTops(t))
-        .catch(() => setSource((data.source || 'source') + ' · tops indisponibles'))
-    }
+    /* ⚠ 16/10/2026 — LES TABLEAUX SE RELISENT À LA SOURCE, toujours.
+     *   Le parseur a été corrigé (les 3 lignes du « Top10 des Cotes de
+     *   Références » étaient lues sous le mauvais nom, et « Aptitude 1er »
+     *   n'avait pas d'alias) : l'archive du navigateur gardait les anciens
+     *   tableaux et la page continuait d'afficher des lignes vides. On
+     *   affiche d'abord l'archive (instantané), puis la source prend la
+     *   main dès qu'elle répond. Si elle ne répond pas, l'archive reste —
+     *   même date que la course, jamais `date=0` en dur. */
+    const off = offsetJour(cible.date)
+    chargerTopsTurfFrance(off, cible.date)
+      .then((t) => { if (t && Object.keys(t).length) setTops(t) })
+      .catch(() => setSource((data.source || 'source') + ' · tops : archive locale'))
   }, [slug, id, location.search])
 
   useEffect(() => { charger() }, [charger])

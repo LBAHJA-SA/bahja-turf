@@ -298,11 +298,24 @@ export function parsePartantsTqq(html) {
   return sortie.sort((a, b) => a.num - b.num)
 }
 
-/** 0 = aujourd hui, -1 = hier, 1 = demain. */
-export async function chargerTopsTurfFrance(dateOffset = 0) {
+/** 0 = aujourd hui, -1 = hier, 1 = demain.
+ *
+ *  ⚠ 16/10/2026 — `dateAttendue` (facultatif) : la page renvoyée doit être
+ *  celle de CETTE date. Le site accepte les offsets négatifs (vérifié : -1,
+ *  -6, -30 servent bien le jour demandé) mais rien ne l'y oblige : sans ce
+ *  garde, un offset refusé collait les tableaux d'aujourd'hui sous une date
+ *  passée (§13.3 règle 1). */
+export async function chargerTopsTurfFrance(dateOffset = 0, dateAttendue = null) {
   const chemin = `/php/tqqjour.php?date=${dateOffset}`
   const r = await lirePageTqq(chemin)
-  const tops = parseTqqJour(await r.text())
+  const html = await r.text()
+  if (dateAttendue) {
+    const idn = parseIdentiteTqq(html)
+    if (idn && idn.date && idn.date !== dateAttendue) {
+      throw new Error(`tqqjour.php sert le ${idn.date}, pas le ${dateAttendue}`)
+    }
+  }
+  const tops = parseTqqJour(html)
   if (!Object.keys(tops).length) throw new Error('aucun tableau lu')
   return tops
 }

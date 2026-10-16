@@ -1636,6 +1636,21 @@ navigateur. Aucun ne touche la méthode (quotas `3-2-1-1-1` intacts).
 | ① | « le ticket ne change jamais » | la page rechargeait le gel auto dans l'affichage (`setTicketManuel(res.ticket)`) : le 1er ticket de la journée restait affiché toute la journée | §13.3 règle 8 : l'affichage suit le marché ; le gel reste dans l'Archive |
 | ② | le ticket porte un **16** et la course n'a que **15** partants | le ticket a été figé la veille sur la liste des **déclarés** (16) ; le 16 a été retiré ensuite, le figé ne l'a pas vu | §13.3 règle 7 (`ticketValide`, `ticketAffiche`, synchro) + archive réparée |
 | ③ | la page de course (Programme → Analyse) n'affiche pas le **Top10 des Cotes de Références** | `frontend/ARTICLE/Article.jsx` lisait `tops.chevaux` / `drivers` / `entraineurs` alors que le parseur range sous `top10chevaux` / `top10drivers` / `top10entraineurs` ; et `TF_ALIAS` n'avait pas `aptitude1er` (ligne « Aptitude 1er » vide) | clés alignées dans `Article.jsx` + alias `aptitude1er` / `aptitudegagnant` → `aptitudeGagnant` dans `backend/ARTICLE/turfFrance.js` |
+| ③b | …et même corrigé, la page restait vide : **l'archive du navigateur** gardait les anciens tableaux (parsés avant le correctif) | les tableaux étaient servis par le cache localStorage, jamais relus | `Article.jsx` **relit les tableaux à la source à chaque affichage** (`chargerTopsTurfFrance(off, date)`), l'archive devient le repli ; `chargerTopsTurfFrance` refuse une page dont la **date** n'est pas celle demandée (le site accepte les offsets -1/-6/-30, vérifié) |
+
+⚠ **Les lignes qui restent à « — » sont vides À LA SOURCE**, ce n'est pas un
+défaut d'affichage. Vérifié dans le HTML du 16/10 :
+
+```html
+<td>Aptitude 1er</td><td>4 - 5</td>   ← la valeur existe (affichée depuis le correctif)
+<td>Aptitude placé</td><td></td>       ← vide chez turf-france
+<td>Pour une place</td><td></td>       ← vide chez turf-france
+                                       ← « Top Cordes » : la ligne n'existe pas du tout ce jour-là
+```
+
+Les 19 lignes sont **toujours affichées**, même vides : on voit ce que
+turf-france publie réellement, et ce qu'il ne publie pas (choix assumé dans
+`Article.jsx`).
 
 **Preuve ③** (16/10, Vincennes R1C4, `tqqjour.php`) — les 3 lignes vides :
 
