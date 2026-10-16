@@ -353,6 +353,17 @@ export async function fetchEcarts() {
   } catch (e) { return null }
 }
 
+/** LE CHOIX DANS G1 ET G2 — tools/choix-g1g2.mjs (16/10/2026).
+ *  Où sont les 1-2-3 écartés, ce que vaut le choix contre la quota (§11.16 :
+ *  les quotas ne bougent pas), et les 29 règles de choix mesurées une à une. */
+export async function fetchChoix() {
+  try {
+    const r = await fetch('/data/choix.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}
+
 /* =========================================================== CASACOURSES ===
  * ⚠ SEULE SOURCE de données de Bahja-TURF. pro.casacourses.com répond en
  *   CORS '*' et donne TOUT : partants, distance, piste, arrivée, formes,

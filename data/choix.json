@@ -1,0 +1,480 @@
+{
+ "genere": "2026-10-16T06:16:38.245Z",
+ "date": "2026-10-16",
+ "n": 96,
+ "cotes": "cotes",
+ "carriere": true,
+ "source": "data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses)",
+ "code": 38.5,
+ "diagnostic": {
+  "blocs": [
+   {
+    "id": "G2",
+    "arrivees": 75,
+    "gardes": 47,
+    "ecartes": 28,
+    "tauxGarde": 62.7
+   },
+   {
+    "id": "G1",
+    "arrivees": 144,
+    "gardes": 123,
+    "ecartes": 21,
+    "tauxGarde": 85.4
+   },
+   {
+    "id": "G3",
+    "arrivees": 24,
+    "gardes": 16,
+    "ecartes": 8,
+    "tauxGarde": 66.7
+   },
+   {
+    "id": "G4",
+    "arrivees": 26,
+    "gardes": 19,
+    "ecartes": 7,
+    "tauxGarde": 73.1
+   },
+   {
+    "id": "G5",
+    "arrivees": 19,
+    "gardes": 6,
+    "ecartes": 13,
+    "tauxGarde": 31.6
+   }
+  ],
+  "totalEcartes": 77,
+  "partG1G2": 63.6
+ },
+ "levier": {
+  "code": 38.5,
+  "oracle": 71.9,
+  "oracleG1": 52.1,
+  "oracleG2": 54.2,
+  "hasard": 22.8,
+  "quotaG5versG2": 42.7,
+  "note": "le siège de G5 vers G2 (§11.23, 95 courses) = 42,7 %"
+ },
+ "regles": [
+  {
+   "id": "filPiste",
+   "label": "presse, mais jamais cet hippodrome passe derrière",
+   "g1": 39.6,
+   "g2": 39.6,
+   "deux": 40.6,
+   "couv": 2.2291666666666665
+  },
+  {
+   "id": "pAge",
+   "label": "presse + âge",
+   "g1": 39.6,
+   "g2": 38.5,
+   "deux": 39.6,
+   "couv": 2.2291666666666665
+  },
+  {
+   "id": "p",
+   "label": "presse — le rang P (le code actuel)",
+   "g1": 38.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.1979166666666665
+  },
+  {
+   "id": "piste",
+   "label": "piste — cet hippodrome a-t-il été couru",
+   "g1": 37.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.1875
+  },
+  {
+   "id": "pDisc",
+   "label": "presse + discipline",
+   "g1": 37.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.1770833333333335
+  },
+  {
+   "id": "swapPhys",
+   "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+   "g1": 39.6,
+   "g2": 37.5,
+   "deux": 38.5,
+   "couv": 2.1979166666666665
+  },
+  {
+   "id": "swapPodium",
+   "label": "presse, mais le 1er écarté cède s’il a un podium récent",
+   "g1": 39.6,
+   "g2": 37.5,
+   "deux": 38.5,
+   "couv": 2.1770833333333335
+  },
+  {
+   "id": "filJours",
+   "label": "presse, mais +180 j d’absence passe derrière",
+   "g1": 38.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.1979166666666665
+  },
+  {
+   "id": "filDist",
+   "label": "presse, mais sans distance courue passe derrière",
+   "g1": 38.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.2083333333333335
+  },
+  {
+   "id": "pMus",
+   "label": "presse + musique",
+   "g1": 38.5,
+   "g2": 37.5,
+   "deux": 37.5,
+   "couv": 2.1770833333333335
+  },
+  {
+   "id": "filPodium",
+   "label": "presse, mais SANS podium récent passe derrière",
+   "g1": 38.5,
+   "g2": 37.5,
+   "deux": 36.5,
+   "couv": 2.15625
+  },
+  {
+   "id": "disc",
+   "label": "discipline — a déjà couru ce type",
+   "g1": 33.3,
+   "g2": 38.5,
+   "deux": 34.4,
+   "couv": 2.15625
+  },
+  {
+   "id": "m",
+   "label": "marché — la cote",
+   "g1": 33.3,
+   "g2": 38.5,
+   "deux": 33.3,
+   "couv": 2.1354166666666665
+  },
+  {
+   "id": "age",
+   "label": "âge — le plus jeune d’abord",
+   "g1": 36.5,
+   "g2": 36.5,
+   "deux": 33.3,
+   "couv": 2.125
+  },
+  {
+   "id": "ageG",
+   "label": "âge à l’envers — le plus vieux",
+   "g1": 38.5,
+   "g2": 29.2,
+   "deux": 33.3,
+   "couv": 2.125
+  },
+  {
+   "id": "pTrend",
+   "label": "presse + mouvement",
+   "g1": 37.5,
+   "g2": 34.4,
+   "deux": 33.3,
+   "couv": 2.1145833333333335
+  },
+  {
+   "id": "dist",
+   "label": "distance — la distance du jour a-t-elle été courue",
+   "g1": 35.4,
+   "g2": 35.4,
+   "deux": 32.3,
+   "couv": 2.1145833333333335
+  },
+  {
+   "id": "swapTrend",
+   "label": "presse, mais le 1er écarté cède si mieux soutenu",
+   "g1": 36.5,
+   "g2": 33.3,
+   "deux": 32.3,
+   "couv": 2.09375
+  },
+  {
+   "id": "swapCorde",
+   "label": "presse, mais une corde ≥ 11 cède à une corde ≤ 10",
+   "g1": 38.5,
+   "g2": 34.4,
+   "deux": 31.3,
+   "couv": 2.125
+  },
+  {
+   "id": "corde",
+   "label": "corde — le numéro de départ (§4 n°6)",
+   "g1": 34.4,
+   "g2": 31.3,
+   "deux": 30.2,
+   "couv": 2.0520833333333335
+  },
+  {
+   "id": "jours",
+   "label": "jours — l’absence depuis la dernière course",
+   "g1": 34.4,
+   "g2": 34.4,
+   "deux": 30.2,
+   "couv": 2.1354166666666665
+  },
+  {
+   "id": "podium",
+   "label": "podium — les podiums récents",
+   "g1": 34.4,
+   "g2": 33.3,
+   "deux": 29.2,
+   "couv": 2.1041666666666665
+  },
+  {
+   "id": "slot",
+   "label": "carnet — la colonne (slot) du carnet",
+   "g1": 32.3,
+   "g2": 33.3,
+   "deux": 26,
+   "couv": 2.0833333333333335
+  },
+  {
+   "id": "phys",
+   "label": "PHYSIQUE — distance + piste + jours + podium",
+   "g1": 31.3,
+   "g2": 32.3,
+   "deux": 26,
+   "couv": 2.0729166666666665
+  },
+  {
+   "id": "mus",
+   "label": "musique — la forme (§11.16 : sans pouvoir)",
+   "g1": 32.3,
+   "g2": 30.2,
+   "deux": 24,
+   "couv": 2.0416666666666665
+  },
+  {
+   "id": "physSeul",
+   "label": "PHYSIQUE seul (sans départage presse)",
+   "g1": 29.2,
+   "g2": 32.3,
+   "deux": 22.9,
+   "couv": 2.0520833333333335
+  },
+  {
+   "id": "trend",
+   "label": "mouvement — la cote qui baisse (ouverture ÷ cote)",
+   "g1": 30.2,
+   "g2": 29.2,
+   "deux": 21.9,
+   "couv": 1.96875
+  },
+  {
+   "id": "trendSeul",
+   "label": "MOUVEMENT seul (sans départage presse)",
+   "g1": 30.2,
+   "g2": 29.2,
+   "deux": 21.9,
+   "couv": 1.96875
+  },
+  {
+   "id": "cordeG",
+   "label": "corde à l’envers — le plus grand numéro",
+   "g1": 24,
+   "g2": 28.1,
+   "deux": 16.7,
+   "couv": 1.8541666666666667
+  }
+ ],
+ "grille": {
+  "tete": [
+   "p",
+   "m",
+   "phys",
+   "pAge",
+   "corde",
+   "trend",
+   "mus",
+   "swapPhys",
+   "filPiste"
+  ],
+  "lignes": [
+   {
+    "m1": "p",
+    "lignes": [
+     38.5,
+     38.5,
+     32.3,
+     38.5,
+     31.3,
+     29.2,
+     30.2,
+     37.5,
+     39.6
+    ]
+   },
+   {
+    "m1": "m",
+    "lignes": [
+     32.3,
+     33.3,
+     29.2,
+     31.3,
+     26,
+     27.1,
+     26,
+     32.3,
+     34.4
+    ]
+   },
+   {
+    "m1": "phys",
+    "lignes": [
+     32.3,
+     31.3,
+     26,
+     32.3,
+     29.2,
+     26,
+     25,
+     29.2,
+     32.3
+    ]
+   },
+   {
+    "m1": "pAge",
+    "lignes": [
+     39.6,
+     39.6,
+     32.3,
+     39.6,
+     33.3,
+     30.2,
+     30.2,
+     37.5,
+     40.6
+    ]
+   },
+   {
+    "m1": "corde",
+    "lignes": [
+     36.5,
+     34.4,
+     28.1,
+     37.5,
+     30.2,
+     30.2,
+     29.2,
+     34.4,
+     37.5
+    ]
+   },
+   {
+    "m1": "trend",
+    "lignes": [
+     31.3,
+     30.2,
+     25,
+     30.2,
+     24,
+     21.9,
+     24,
+     30.2,
+     30.2
+    ]
+   },
+   {
+    "m1": "mus",
+    "lignes": [
+     33.3,
+     32.3,
+     25,
+     33.3,
+     28.1,
+     27.1,
+     24,
+     30.2,
+     33.3
+    ]
+   },
+   {
+    "m1": "swapPhys",
+    "lignes": [
+     40.6,
+     39.6,
+     33.3,
+     39.6,
+     32.3,
+     30.2,
+     31.3,
+     38.5,
+     40.6
+    ]
+   },
+   {
+    "m1": "filPiste",
+    "lignes": [
+     40.6,
+     39.6,
+     33.3,
+     40.6,
+     31.3,
+     30.2,
+     31.3,
+     39.6,
+     40.6
+    ]
+   }
+  ],
+  "meilleure": {
+   "m1": "pAge",
+   "m2": "filPiste",
+   "taux": 40.6,
+   "couv": 2.2395833333333335
+  }
+ },
+ "loo": 18.8,
+ "stabilite": [
+  {
+   "id": "p",
+   "label": "presse — le rang P (le code actuel)",
+   "h1": 35.4,
+   "h2": 41.7
+  },
+  {
+   "id": "m",
+   "label": "marché — la cote",
+   "h1": 35.4,
+   "h2": 31.3
+  },
+  {
+   "id": "phys",
+   "label": "PHYSIQUE — distance + piste + jours + podium",
+   "h1": 22.9,
+   "h2": 29.2
+  },
+  {
+   "id": "pAge",
+   "label": "presse + âge",
+   "h1": 33.3,
+   "h2": 45.8
+  },
+  {
+   "id": "swapPhys",
+   "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+   "h1": 31.3,
+   "h2": 45.8
+  },
+  {
+   "id": "filPiste",
+   "label": "presse, mais jamais cet hippodrome passe derrière",
+   "h1": 37.5,
+   "h2": 43.8
+  }
+ ],
+ "verdict": "Aucune règle — presse, cote, mouvement, corde, âge, musique, discipline, distance, hippodrome, absence, podium — ne bat le choix actuel de plus de 1 point, et le LOO passe SOUS le code : les différences sont du bruit. Le choix a une marge réelle (+33.4 pts, l'oracle) mais AUCUNE variable mesurable ne la prend : à l’intérieur d’une même boîte les 4 chevaux sont interchangeables."
+}

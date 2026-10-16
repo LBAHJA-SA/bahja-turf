@@ -9,7 +9,7 @@ import {
   clearArchive,
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
-  rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts,
+  rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
@@ -112,9 +112,28 @@ const THEME = {
     th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase', color: '#ecfeff', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '6px 9px', fontSize: 13 },
   },
+  /* 🩸 LE CHOIX — le laboratoire. Rouge carmin, rapport d'expérience : coins
+     nets, chiffres monospace, encadrés de résultat. C'est l'onglet où l'on
+     regarde EN FACE les 4 chevaux de G1 et les 4 de G2 (16/10/2026). */
+  choix: {
+    titre: 'Choix',
+    sousTitre: 'G1 et G2 — ce que coûte le choix, règle par règle',
+    fond: 'linear-gradient(180deg,#fff1f2 0%,#fdf2f8 55%,#ffffff 100%)',
+    entete: 'linear-gradient(120deg,#4c0519 0%,#be123c 55%,#fb7185 100%)',
+    accent: '#be123c', accentSombre: '#881337', accentClair: '#ffe4e6',
+    bord: '#fda4af', carte: '#ffffff', ligne: '#ffffff', alt: '#fff1f2',
+    on: '#fecdd3', danger: '#fee2e2', texte: '#881337', muted: '#a1797f',
+    ombre: 'rgba(190,18,60,.35)', ombreD: '0 2px 10px rgba(190,18,60,.14)',
+    police: 'system-ui, -apple-system, sans-serif',
+    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
+    box: { border: '1px solid #fda4af', borderRadius: 4, background: '#ffffff' },
+    hdrStyle: { background: 'linear-gradient(180deg,#be123c,#881337)', color: '#ffe4e6' },
+    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#ffe4e6', fontFamily: 'system-ui, sans-serif' },
+    td: { padding: '6px 9px', fontSize: 13 },
+  },
 }
 
-const TABS = [['grille', 'La grille'], ['ticket', 'Le ticket'], ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts']]
+const TABS = [['grille', 'La grille'], ['ticket', 'Le ticket'], ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts'], ['choix', 'Choix']]
 
 function Boite({ n, pris, presse, couleur, score, cote, slot, marche, onClick }) {
   // boule 3D : dégradé radial + ombres portées/incrustées.
@@ -301,6 +320,8 @@ export default function QuinteGrille() {
   //    La page les AFFICHE telles quelles : aucun chiffre saisi à la main (§7).
   const [fiabilite, setFiabilite] = useState(null)
   const [ecarts, setEcarts] = useState(null)
+  // 🩸 LA MESURE DU CHOIX dans G1/G2 (tools/choix-g1g2.mjs, 16/10/2026).
+  const [choix, setChoix] = useState(null)
   // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
   //   (AGENTS.md §13.3) : la page doit le montrer tel quel, pas le recalculer.
   const [ticketManuel, setTicketManuel] = useState(null)
@@ -318,6 +339,7 @@ export default function QuinteGrille() {
   useEffect(() => {
     fetchFiabilite().then((x) => x && setFiabilite(x)).catch(() => {})
     fetchEcarts().then((x) => x && setEcarts(x)).catch(() => {})
+    fetchChoix().then((x) => x && setChoix(x)).catch(() => {})
   }, [])
 
   const charger = useCallback(async (d) => {
@@ -832,6 +854,198 @@ function TabEcarts({ sk, ecarts, detail }) {
         La pastille d’état : <b style={{ color: '#15803d' }}>chaude</b> (≥ 40 % de top-5 ou un hit à la dernière course),
         <b style={{ color: '#b91c1c' }}> froide</b> (rien depuis 5 courses ou plus), <b style={{ color: '#a16207' }}>tiède</b> entre les deux.
         C’est un repère de lecture, jamais une raison d’écarter un cheval (§6 : on écarte sur le physique).
+      </div>
+    </div>
+  )
+}
+function TabChoix({ sk, choix }) {
+  if (!choix) return (
+    <div style={{ fontSize: 13, color: sk.muted }}>
+      Pas encore de mesure : écrire <b>public/data/choix.json</b> (node tools\choix-g1g2.mjs).
+    </div>
+  )
+  const D = choix.diagnostic || {}
+  const L = choix.levier || {}
+  const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
+  const bar = (v, max) => (
+    <span style={{ display: 'inline-block', verticalAlign: 'middle', width: 120, height: 9, background: sk.alt, border: '1px solid ' + sk.bord, borderRadius: 999, overflow: 'hidden' }}>
+      <span style={{ display: 'block', width: Math.max(2, Math.round((100 * v) / max)) + '%', height: '100%', background: sk.accent }} />
+    </span>
+  )
+  const blocs = (D.blocs || []).slice().sort((a, b) => (b.ecartes || 0) - (a.ecartes || 0))
+  const meilleure = choix.grille?.meilleure || {}
+  const enTete = (choix.regles || []).filter((r) => r.deux >= (choix.code || 0)).slice(0, 6)
+  return (
+    <div>
+      <div style={{ fontSize: 13, color: sk.texte, lineHeight: 1.6, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', marginBottom: 12 }}>
+        <b>{choix.n} Quintés à presse réelle</b> · cotes {choix.cotes === 'ouverture' ? 'du matin (ouverture)' : 'finales (Equidia)'}
+        {choix.carriere ? ' · carrière casacourses' : ' · sans carrière'} — la mesure du <b>choix dans G1 et G2</b>.
+        <br />
+        <span style={{ color: sk.muted }}>
+          ⛔ Les quotas ne bougent pas (§11.16) : <b>3-2-1-1-1</b>. On ne mesure QUE qui entre
+          dans G1 (3 gardés sur 4) et dans G2 (2 gardés sur 4). Métrique = <b>PAYANTE</b>,
+          le 1-2-3 complet dans la grille.
+        </span>
+      </div>
+
+      {/* ① OÙ SONT LES 1-2-3 */}
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '14px 0 6px' }}>
+        ① Où sont les 1-2-3 — quel bloc les écarte
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ ...sk.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: sk.ombreD }}>
+          <thead>
+            <tr style={sk.hdrStyle}>
+              {['bloc', 'chevaux du top-3 arrivés là', 'gardés', 'écartés', 'taux de garde'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {blocs.map((b, i) => (
+              <tr key={b.id} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
+                <td style={{ ...sk.td, fontWeight: 800 }}>{b.id}</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{b.arrivees}</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, color: '#15803d', fontWeight: 700 }}>{b.gardes}</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, color: b.ecartes >= 20 ? '#b91c1c' : sk.texte, fontWeight: b.ecartes >= 20 ? 800 : 500 }}>{b.ecartes}</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700, color: b.tauxGarde >= 80 ? '#15803d' : b.tauxGarde <= 40 ? '#b91c1c' : sk.texte }}>{nb(b.tauxGarde)} %</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ fontSize: 12, color: sk.texte, marginTop: 8, lineHeight: 1.6 }}>
+        <b>{nb(D.partG1G2)} %</b> des <b>{D.totalEcartes}</b> chevaux du top-3 écartés le sont dans
+        <b> G1 ou G2</b>. Le trou est bien là — et pas dans la queue.
+      </div>
+
+      {/* ② LE LEVIER */}
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
+        ② Le levier — le choix contre la quota
+      </div>
+      <div style={{ ...sk.box, padding: '10px 12px', boxShadow: sk.ombreD, fontSize: 13 }}>
+        {[
+          ['le code actuel (G1 presse · G2 marché)', L.code, sk.muted],
+          ['le choix PARFAIT dans G1 et G2 (oracle)', L.oracle, sk.accent],
+          ['le choix parfait dans G1 seul', L.oracleG1, sk.accent],
+          ['le choix parfait dans G2 seul', L.oracleG2, sk.accent],
+          ['le hasard pur', L.hasard, sk.muted],
+          ['déplacer le siège de G5 vers G2 (§11.23)', L.quotaG5versG2, sk.muted],
+        ].map(([lib, v, col]) => (
+          <div key={lib} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '3px 0' }}>
+            <span style={{ width: 300, color: sk.texte }}>{lib}</span>
+            {bar(v, L.oracle)}
+            <b style={{ fontFamily: sk.nb.td, color: col, width: 64, textAlign: 'right' }}>{nb(v)} %</b>
+            <span style={{ fontFamily: sk.nb.td, fontSize: 11, color: v > L.code ? '#15803d' : sk.muted, width: 56 }}>
+              {v === L.code ? '' : (v > L.code ? '+' : '') + nb(Math.round(10 * (v - L.code)) / 10)}
+            </span>
+          </div>
+        ))}
+        <div style={{ marginTop: 8, fontSize: 12, color: sk.texte, borderTop: '1px dashed ' + sk.bord, paddingTop: 8, lineHeight: 1.6 }}>
+          Le <b>choix</b> vaut <b style={{ color: sk.accent }}>+{nb(Math.round(10 * (L.oracle - L.code)) / 10)} pts</b>,
+          la <b>quota</b> <b>+{nb(Math.round(10 * (L.quotaG5versG2 - L.code)) / 10)} pts</b> :
+          le levier est bien dans le choix, comme l’utilisateur le dit.
+        </div>
+      </div>
+
+      {/* ③ LES RÈGLES */}
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
+        ③ Chaque règle, seule — G1 puis G2 puis les deux ({(choix.regles || []).length} règles)
+      </div>
+      <div style={{ overflowX: 'auto', maxHeight: 420, overflowY: 'auto' }}>
+        <table style={{ ...sk.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 12.5, overflow: 'hidden' }}>
+          <thead style={{ position: 'sticky', top: 0 }}>
+            <tr style={sk.hdrStyle}>
+              {['règle de choix', 'G1', 'G2', 'les deux', 'top-3'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {(choix.regles || []).map((r, i) => {
+              const gain = r.deux > (choix.code || 0)
+              return (
+                <tr key={r.id} style={{ borderBottom: '1px solid ' + sk.bord, background: r.id === 'p' ? sk.on : i % 2 ? sk.alt : sk.ligne }}>
+                  <td style={{ ...sk.td, fontSize: 12.5 }}>{r.label}{r.id === 'p' ? ' ← le code actuel' : ''}</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(r.g1)} %</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(r.g2)} %</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: gain ? 800 : 500, color: gain ? '#15803d' : sk.texte }}>{nb(r.deux)} %</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{nb(Math.round(1000 * r.couv) / 1000)}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ fontSize: 12, color: sk.texte, marginTop: 8, lineHeight: 1.6 }}>
+        Au-dessus du code : <b>{enTete.map((r) => r.id).join(', ') || 'rien'}</b>.
+        Le <b>LOO</b> — la meilleure règle choisie sur les {choix.n - 1} autres courses — vaut
+        <b style={{ color: sk.loo < choix.code ? '#b91c1c' : '#15803d' }}> {nb(choix.loo)} %</b>
+        {choix.loo < choix.code ? ' , soit SOUS le code : les différences sont du bruit.' : '.'}
+      </div>
+
+      {/* ④ LA GRILLE */}
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
+        ④ La grille G1 × G2 — PAYANTE
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ ...sk.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 12.5, overflow: 'hidden' }}>
+          <thead>
+            <tr style={sk.hdrStyle}>
+              <th style={sk.th}>G1 \ G2</th>
+              {choix.grille.tete.map((m) => <th key={m} style={{ ...sk.th, fontFamily: sk.nb.th }}>{m}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {choix.grille.lignes.map((l, i) => (
+              <tr key={l.m1} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700 }}>{l.m1}</td>
+                {l.lignes.map((v, k) => (
+                  <td key={k} style={{ ...sk.td, fontFamily: sk.nb.td, textAlign: 'center', fontWeight: v >= (meilleure.taux || 0) ? 800 : 500, color: v >= 40 ? '#15803d' : v < 30 ? '#b91c1c' : sk.texte }}>
+                    {nb(v)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div style={{ fontSize: 12, color: sk.texte, marginTop: 8 }}>
+        Meilleure case : <b>{nb(meilleure.taux)} %</b> ({meilleure.m1} / {meilleure.m2}) — contre
+        <b> {nb(choix.code)} %</b> pour le code. L’écart est de
+        <b> {nb(Math.round(10 * ((meilleure.taux || 0) - choix.code)) / 10)} pt</b>.
+      </div>
+
+      {/* ⑤ STABILITÉ */}
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
+        ⑤ Stabilité — les deux moitiés de l’archive
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ ...sk.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 12.5, overflow: 'hidden' }}>
+          <thead>
+            <tr style={sk.hdrStyle}>
+              {['règle', '1re moitié', '2e moitié', 'écart'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {(choix.stabilite || []).map((x, i) => (
+              <tr key={x.id} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
+                <td style={{ ...sk.td, fontSize: 12.5 }}>{x.label}</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(x.h1)} %</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(x.h2)} %</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: Math.abs(x.h1 - x.h2) >= 8 ? 800 : 500, color: Math.abs(x.h1 - x.h2) >= 8 ? '#b91c1c' : sk.muted }}>
+                  {nb(Math.abs(Math.round(10 * (x.h1 - x.h2)) / 10))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div style={{ marginTop: 12, fontSize: 12.5, color: sk.texte, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', lineHeight: 1.6 }}>
+        <b>Verdict.</b> {choix.verdict}
+        <br />
+        <span style={{ color: sk.muted }}>
+          Mesure écrite par <b>tools/choix-g1g2.mjs</b> (rejouer : <code>node tools\choix-g1g2.mjs</code>).
+          La carrière vient de <b>tools/collect-forms.mjs</b> → <code>data/forms.json</code>.
+          La règle en production reste <b>G1 presse · G2 marché · G3-G5 carnet</b> (§11.22) : rien n’est appliqué.
+        </span>
       </div>
     </div>
   )
@@ -1643,6 +1857,11 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
       {/* ----------------------------------------------------------- écarts */}
       {onglet === 'ecarts' && (
         <TabEcarts sk={SK} ecarts={ecarts} detail={detail} />
+      )}
+
+      {/* ------------------------------------------------------------ choix */}
+      {onglet === 'choix' && (
+        <TabChoix sk={SK} choix={choix} />
       )}
     </div>
     </>

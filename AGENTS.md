@@ -1091,13 +1091,112 @@ P14    96     9/96       9,4 %     5,2 %      1     2026-06-19       16   FROIDE
 
 ---
 
+### 11.24 ⭐ LE CHOIX DANS G1 ET G2 — MESURÉ, RIEN À PRENDRE (16/10/2026)
+
+> **Décision de l'utilisateur, 16/10/2026** : « الكوطة لا اريد تغييرها … المشكل
+> في الاختيارات داخل G1 G2 ». Les quotas sont **fermés** (§11.16) et l'expérience
+> du siège de G5 (§11.23) reste **refusée**. Reste donc à mesurer **le choix
+> à l'intérieur de G1 (3 gardés sur 4) et de G2 (2 gardés sur 4)** — G3-G5
+> inchangés, au carnet.
+
+#### ① Où sont les 1-2-3 — le diagnostic
+
+Les **288 chevaux** qui ont formé les 1-2-3 des 96 Quintés à presse réelle, et
+ce que le ticket (§11.22) en fait :
+
+| bloc | arrivés là | gardés | **écartés** | taux de garde |
+|---|---|---|---|---|
+| G1 · P1-P4 | 144 | 123 | **21** | 85,4 % |
+| G2 · P5-P8 | 75 | 47 | **28** | 62,7 % |
+| G3 · P9-P10 | 24 | 16 | 8 | 66,7 % |
+| G4 · P11-P12 | 26 | 19 | 7 | 73,1 % |
+| G5 · P13+ | 19 | 6 | 13 | 31,6 % |
+
+**63,6 %** des **77** chevaux du top-3 écartés le sont dans **G1 ou G2**.
+→ **L'utilisateur a raison : le trou est dans G1 et G2, pas dans la queue.**
+Dans G1, la presse trie parfaitement P1, P2, P3 (elles ne sont **jamais**
+perdues : 51/51, 39/39, 28/28) ; c'est **P4** qui paie (4 gardés sur 15).
+
+#### ② Le levier — le choix contre la quota
+
+| | PAYANTE | écart |
+|---|---|---|
+| le code actuel (G1 presse · G2 marché) | 38,5 % | — |
+| **le choix PARFAIT dans G1 et G2** (oracle) | **71,9 %** | **+33,4** |
+| le choix parfait dans G1 seul | 52,1 % | +13,6 |
+| le choix parfait dans G2 seul | 54,2 % | +15,7 |
+| le hasard pur (moyenne des 24 combinaisons) | 22,8 % | −15,7 |
+| déplacer le siège de G5 vers G2 (§11.23) | 42,7 % | +4,2 |
+
+**Le choix vaut +33,4 pts, la quota +4,2 pts.** L'intuition de l'utilisateur est
+quantitativement juste : c'est bien dans G1/G2 que se trouve le levier.
+
+#### ③ Les 29 règles de choix, mesurées une à une
+
+`tools/choix-g1g2.mjs` essaie **chaque** variable, seule, dans G1 puis dans G2 :
+presse, cote, **mouvement du marché** (ouverture ÷ cote), **corde**, **âge**,
+musique, **discipline** (a-t-elle déjà couru ce type ?), **distance déjà courue**,
+**hippodrome déjà couru**, **jours d'absence**, **podiums récents**, un
+**physique** combiné, des **échanges** (le dernier gardé cède au 1er écarté) et
+des **filtres** (§6 : un cheval fautif passe derrière).
+
+```
+code actuel (G1 presse · G2 marché)                    38,5 %
+presse, mais jamais cet hippodrome passe derrière      40,6 %   ← la meilleure
+presse + âge                                           39,6 %
+marché — la cote (dans G1)                             33,3 %
+mouvement — la cote qui baisse (dans G1)               30,2 %
+PHYSIQUE — distance + piste + jours + podium           26,0 %
+musique — la forme (§11.16)                            24,0 %
+```
+
+- **Toutes** ces règles sont dans une bande de **±2 points**. La meilleure
+  (`filPiste`, +2,1 pt) est de l'ordre du **bruit**.
+- **Le LOO le prouve** : la meilleure case choisie sur les 95 autres courses vaut
+  **18,8 %** — **sous** le code. Choisir la meilleure ligne du tableau est
+  choisir du bruit.
+- À l'intérieur d'une boîte, **tous les feux physiques sont plats** : dans G1,
+  chaque indicateur (distance courue, hippodrome, absence, podium) donne
+  **48 à 56 %** de top-5 pour **51,0 %** de moyenne. Seul repère réel : en G2,
+  « a déjà couru cet hippodrome » = **40,3 %** contre **34,9 %**.
+
+#### ④ Le verdict — et ce qui reste à faire
+
+**Le choix a une marge réelle (+33 pts) mais aucune variable mesurable ne la
+prend : à l'intérieur d'une même boîte, les 4 chevaux sont interchangeables.**
+Trois champs de la méthode (§4 : terrain 13 %, type, niveau/VH 13 %) **ne sont
+pas dans l'archive** — `pro.casacours.com` ne rend que date, hippodrome,
+distance et place (§14.2). Ils n'existent que dans la **carrière saisie à la
+main** : c'est la piste qui reste ouverte. **Rien n'est appliqué** — la règle en
+production reste §11.22 (G1 presse · G2 marché · G3-G5 carnet).
+
+#### ⑤ Les fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `tools/collect-forms.mjs` | la carrière des **96 Quintés archivés** : 1 appel casacourses par course → `data/forms.json` (1509 chevaux, 97 % avec ≥ 1 course passée). **Filtre anti-fuite** : courses strictement antérieures à la date du jour |
+| `tools/choix-g1g2.mjs` | **LA mesure du choix** : diagnostic · levier · les 29 règles · la grille G1×G2 · oracle · hasard · LOO · stabilité. Écrit `data/choix.json` + `public/data/choix.json` |
+| `data/forms.json` | la carrière (cache) — relançable par `node tools\collect-forms.mjs` (`--force` pour tout refaire) |
+| `data/choix.json` · `public/data/choix.json` | lus par l'**onglet Choix** |
+| `src/lib/quinte.js` | + `fetchChoix()` (miroir dans `backend/QUINTE/quinte.js`) |
+| `frontend/QUINTE/QuinteGrille.jsx` | + l'onglet **Choix** (6ᵉ peau `THEME.choix`, rouge carmin) |
+
+#### ⑥ ⚠ Le piège à éviter
+
+Le tableau des 29 règles **invite** à prendre la meilleure (40,6 %). **Ne pas le
+faire** : c'est +2,1 pts sur 96 courses, et le LOO la fait tomber à 18,8 %.
+La règle `filPiste` retenue sur l'archive **ne se reproduira pas** en course.
+Toute règle nouvelle devra passer **le LOO avant** d'être appliquée.
+
+---
+
 ## 12. 🖥️ L'OUTIL — page `/quinte` (C:\bahja-TURF)
 
 Fichiers :
 
 | Fichier | Rôle |
 |---|---|
-| `frontend/QUINTE/QuinteGrille.jsx` | la page — **5 onglets** (§12.1) : grille · ticket · archive · statistiques · **écarts** ; + le **badge marché** et le **panneau de mesure** (§11.23) |
+| `frontend/QUINTE/QuinteGrille.jsx` | la page — **6 onglets** (§12.1) : grille · ticket · archive · statistiques · écarts · **choix** ; + le **badge marché** et le **panneau de mesure** (§11.23) |
 | `src/lib/quinte.js` | toute la logique : API, grille, **moteur + marché**, archive, stats |
 | ~~`backend/QUINTE/quinte.js`~~ | **SUPPRIMÉ le 05/10/2026.** C'était une copie à l'octet près de `src/lib/quinte.js`, faite pour l'API bahja-pmu. La page importe désormais `src/lib/quinte` directement : plus de copie, plus de désynchronisation. |
 | `tools/collect-synthese.mjs` | le collecteur quotidien pronostics-turf.info |
@@ -1112,6 +1211,8 @@ Fichiers :
 | `tools/fiabilite.mjs` | ⭐ **le panneau de mesure** (§11.23) → `data/fiabilite.json` + `public/data/fiabilite.json` : la fiabilité du code, les baselines du marché, la table du badge, l'expérience G5 |
 | `tools/experience-g5.mjs` | ⭐ **l'expérience du siège de G5** (§11.23) — rapport console **et module** (importé par `fiabilite.mjs` : une seule définition des variantes) |
 | `tools/ecarts.mjs` | ⭐ **les écarts des places P1..P20** (§11.23) → `data/ecarts.json` + `public/data/ecarts.json` |
+| `tools/collect-forms.mjs` | ⭐ **la carrière des 96 Quintés archivés** (§11.24) — 1 appel casacourses par course → `data/forms.json` (anti-fuite : courses strictement antérieures) |
+| `tools/choix-g1g2.mjs` | ⭐ **LA mesure du choix dans G1/G2** (§11.24) : diagnostic · levier · 29 règles · grille G1×G2 · oracle · LOO · stabilité → `data/choix.json` + `public/data/choix.json` |
 | `tools/test-nonregression.mjs` | le harnais avant/après sur l'archive réelle (`--out`, `--diff`) — **sert de témoin au 5/5 de §11.22** |
 | `tools/verif-parite.mjs` | **`src/lib/quinte.js` == `backend/QUINTE/quinte.js` ?** — compare les deux, commentaires ignorés, fonction par fonction (§12) |
 | `tools/surprise.mjs` | ⚠ **obsolète** (4 courses, métrique x/5) — la mesure de référence est **§11.18** |
@@ -1164,7 +1265,7 @@ relayerait vers une origine étrangère.
 
 Vérification : `node tools\test-proxy.mjs` (10 appels réels, 2 formes × 3 proxies).
 
-### 12.1 Les 5 onglets — une identité visuelle PAR onglet (05/10/2026 · 5ᵉ le 16/10/2026)
+### 12.1 Les 6 onglets — une identité visuelle PAR onglet (05/10/2026 · 6ᵉ le 16/10/2026)
 
 Les onglets ne doivent jamais se confondre : fond, en-tête, cadre,
 police et en-têtes de tableau changent d'un onglet à l'autre.
@@ -1176,8 +1277,9 @@ police et en-têtes de tableau changent d'un onglet à l'autre.
 | **Archive** | 🟠 ambre parchemin `#b45309` | dégradé `#fef6e7 → #fffcf5` | registre : police **serif**, bordure pleine 2 px, lignes crème |
 | **Statistiques** | 🟣 violet prune `#7c3aed` | dégradé `#f5f3ff → #fff` | tableau de bord, cartes 16 px, ombre violette |
 | **Écarts** | 🩵 cyan froid `#0e7490` | dégradé `#ecfeff → #fff` | relevé de températures : chiffres monospace, en-têtes capitales (§11.23) |
+| **Choix** | 🩸 rouge carmin `#be123c` | dégradé `#fff1f2 → #fff` | rapport d'expérience : coins nets, encadrés de résultat, chiffres monospace (§11.24) |
 
-**Le mécanisme** : un objet `THEME` (5 peaux) + `TABS`. Dans le composant,
+**Le mécanisme** : un objet `THEME` (6 peaux) + `TABS`. Dans le composant,
 `const SK = THEME[onglet]` puis `const s = { box: SK.box, hdr: SK.hdrStyle, th: SK.th, td: SK.td }`
 → **toutes** les tables, tous les cadres et tous les en-têtes suivent l'onglet actif.
 Un seul bouton d'onglet = la couleur de sa peau quand il est actif.

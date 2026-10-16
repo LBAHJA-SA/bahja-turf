@@ -138,6 +138,59 @@ que le quota reste dans la latitude déclarée par la méthode (§11.2 : B5 = 1 
 
 ---
 
+### 1.7 ⭐ LE CHOIX DANS G1 ET G2 — mesuré, rien à prendre (§11.24)
+
+Décision de l'utilisateur (16/10) : **les quotas ne bougent pas**, le problème
+est **le choix à l'intérieur de G1 et G2**. Vérification sur les 96 Quintés à
+presse réelle, avec la **carrière** collectée automatiquement
+(`tools/collect-forms.mjs` → `data/forms.json` : 1509 chevaux, 97 % avec au
+moins une course passée, courses strictement antérieures = anti-fuite).
+
+**① L'utilisateur a raison.** Sur les **288** chevaux qui ont formé les 1-2-3 :
+
+| bloc | arrivés là | gardés | **écartés** | taux de garde |
+|---|---|---|---|---|
+| G1 | 144 | 123 | **21** | 85,4 % |
+| G2 | 75 | 47 | **28** | 62,7 % |
+| G3 | 24 | 16 | 8 | 66,7 % |
+| G4 | 26 | 19 | 7 | 73,1 % |
+| G5 | 19 | 6 | 13 | 31,6 % |
+
+**63,6 % des 77 écartés le sont dans G1 ou G2.** Dans G1, P1/P2/P3 ne sont
+**jamais** perdus (51/51, 39/39, 28/28) : c'est toujours **P4** qui paie.
+
+**② Le levier est bien dans le choix.**
+
+| | PAYANTE | écart |
+|---|---|---|
+| le code (G1 presse · G2 marché) | 38,5 % | — |
+| **le choix PARFAIT dans G1 et G2** (oracle) | **71,9 %** | **+33,4** |
+| le choix parfait dans G1 seul | 52,1 % | +13,6 |
+| le choix parfait dans G2 seul | 54,2 % | +15,7 |
+| le hasard pur | 22,8 % | −15,7 |
+| le siège de G5 vers G2 (§1.6) | 42,7 % | +4,2 |
+
+**③ Mais aucune règle ne le prend.** `tools/choix-g1g2.mjs` essaie **29 règles**
+(presse, cote, **mouvement du marché** ouverture÷cote, **corde**, **âge**,
+musique, **discipline**, **distance courue**, **hippodrome**, **absence**,
+**podiums**, un **physique** combiné, des échanges, des filtres). Toutes sont
+dans une bande de **±2 points** ; la meilleure (`filPiste`, 40,6 %) vaut
+**+2,1 pt**… et le **LOO la ramène à 18,8 %**, **sous** le code.
+
+**④ Le fait physique.** Dans G1, **chaque** indicateur est **plat** : distance
+courue, hippodrome, absence, podium → **48-56 %** de top-5 pour 51,0 % de
+moyenne. Un seul repère réel : en G2, « a déjà couru cet hippodrome » = 40,3 %
+contre 34,9 %.
+
+**⑤ Le verdict.** Le choix a **une marge réelle (+33 pts)** mais **aucune
+variable mesurable ne la prend** : dans une même boîte, les 4 chevaux sont
+interchangeables. Trois champs de §4 (**terrain, type, VH**) **ne sont pas dans
+l'archive** (casacourses ne rend que date / hippodrome / distance / place) : ils
+n'existent que dans la **carrière saisie à la main**. **Rien n'est appliqué.**
+Le tableau des 29 règles **invite à prendre la meilleure — ne pas le faire**.
+
+---
+
 ## 2. Le code suit-il la méthode ? — 96 Quintés, LOO, PAYANTE
 
 Mêmes courses pour toutes les lignes (96 Quintés à Synthèse de presse réelle),
