@@ -1120,7 +1120,16 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           ) : (
             <>
               <div style={{ fontSize: 13, color: '#475569', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                <span>{stats.nb} Quinté(s) dans l’archive — qui gagne, qui place.</span>
+                <span>
+                  <b>{stats.nb}</b> Quinté(s) <b>valide(s)</b> retenu(s)
+                  {stats.diagnostic ? ` · ${stats.diagnostic.coursesExaminees} examinée(s) · ${stats.diagnostic.coursesEcartees} écartée(s)` : ''}
+                  {' '}— qui gagne, qui place.
+                </span>
+                {stats.diagnostic && (stats.diagnostic.doublons > 0 || stats.diagnostic.chevauxAbsents > 0) && (
+                  <span style={{ color: '#b91c1c', fontWeight: 600 }}>
+                    ⚠ doublons {stats.diagnostic.doublons} · chevaux absents de la Synthèse {stats.diagnostic.chevauxAbsents} — exclus
+                  </span>
+                )}
                 {(() => {
                   const closes = archive.filter((a) => (a.arrivee || []).length > 0 && (a.ticket || []).length > 0)
                   const avec3 = closes.filter((a) => (a.arrivee || []).slice(0, 3).every((n) => (a.ticket || []).includes(n))).length
@@ -1154,9 +1163,21 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </thead>
                   <tbody>
                     <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
-                      <td style={{ ...s.td, fontWeight: 700 }}>n</td>
+                      <td style={{ ...s.td, fontWeight: 700 }}>n_top5</td>
                       {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
                         <td key={r.place} style={{ ...s.td, fontWeight: 700 }}>{r.n}</td>
+                      ))}
+                    </tr>
+                    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                      <td style={{ ...s.td, fontWeight: 700, color: SK.muted }}>victoires</td>
+                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
+                        <td key={r.place} style={{ ...s.td, color: SK.muted }}>{r.victoires ?? '—'}</td>
+                      ))}
+                    </tr>
+                    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                      <td style={{ ...s.td, fontWeight: 700, color: SK.muted }}>podiums</td>
+                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
+                        <td key={r.place} style={{ ...s.td, color: SK.muted }}>{r.podiums ?? '—'}</td>
                       ))}
                     </tr>
                     {['1er', '2e', '3e', '4e', '5e'].map((lbl, k) => (
@@ -1173,7 +1194,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                       </tr>
                     ))}
                     <tr style={{ borderBottom: '1px solid ' + SK.bord, background: SK.accentClair }}>
-                      <td style={{ ...s.td, fontWeight: 800, color: SK.accent }}>1er+2e+3e</td>
+                      <td style={{ ...s.td, fontWeight: 800, color: SK.accent }}>P(podium | top5)</td>
                       {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
                         <td key={r.place} style={{
                           ...s.td, fontWeight: 800,
@@ -1185,7 +1206,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                       ))}
                     </tr>
                     <tr style={{ borderBottom: '1px solid ' + SK.bord, background: SK.on }}>
-                      <td style={{ ...s.td, fontWeight: 800 }}>P(top5)</td>
+                      <td style={{ ...s.td, fontWeight: 800 }}>P(top5 | N)</td>
                       {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
                         <td key={r.place} style={{ ...s.td, fontWeight: 800 }}>{r.n ? r.top5 + '%' : '—'}</td>
                       ))}
@@ -1193,28 +1214,106 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </tbody>
                 </table>
               </div>
+              <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
+                Ligne <b>1er…5e</b> et <b>P(podium | top5)</b> : dénominateur <b>conditionnel</b> = <b>n_top5</b> (les courses où le P finit dans les 5).
+                {' '}Ligne <b>P(top5 | N)</b> : dénominateur <b>global</b> = <b>N</b> (courses valides). Les deux ne sont pas comparables.
+              </div>
+
+              {/* §2.2 — les indicateurs EXPLICITES, dénominateur nommé, « — » si dénominateur nul */}
+              <div style={{ overflowX: 'auto', marginTop: 16 }}>
+                <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', boxShadow: SK.ombreD }}>
+                  <thead>
+                    <tr style={s.hdr}>
+                      <th style={s.th}>Indicateur explicite</th>
+                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
+                        <th key={r.place} style={{ ...s.th, background: r.n === 0 ? SK.muted : SK.accentSombre }}>P{r.place}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(() => {
+                      const f = (x) => (x == null ? '—' : x)
+                      const p = (x) => (x == null ? '—' : x + '%')
+                      const L = stats.parPlace.slice(0, toutLesP ? 20 : 5)
+                      const lignes = [
+                        ['courses_valides', (r) => f(r.courses_valides), false],
+                        ['n_top5', (r) => f(r.n_top5), false],
+                        ['victoires', (r) => f(r.victoires), false],
+                        ['podiums', (r) => f(r.podiums), false],
+                        ['P(victoire | top5)', (r) => p(r.p_victoire_conditionnel), true],
+                        ['P(victoire | N)', (r) => p(r.p_victoire_global), true],
+                        ['P(podium | top5)', (r) => p(r.p_podium_conditionnel), true],
+                        ['P(top5 | N)', (r) => p(r.p_top5_global), true],
+                      ]
+                      return lignes.map(([lbl, get, pct], k) => (
+                        <tr key={lbl} style={{ borderBottom: '1px solid #f1f5f9', background: k % 2 ? SK.alt : SK.ligne }}>
+                          <td style={{ ...s.td, fontWeight: 700, color: pct ? SK.accent : '#334155' }}>{lbl}</td>
+                          {L.map((r) => (
+                            <td key={r.place} style={{ ...s.td, color: r.n === 0 ? '#cbd5e1' : '#334155' }}>{get(r)}</td>
+                          ))}
+                        </tr>
+                      ))
+                    })()}
+                  </tbody>
+                </table>
+              </div>
 
               <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
                 <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Par groupe</b>
+                <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>
+                  Dénominateurs : <b>présence_course</b> = courses valides · <b>part_victoires</b> = total des 1res (1/course) ·
+                  {' '}<b>part_podiums</b> = total des podiums (3/course) · <b>part_places_4_5</b> = total des 4e+5e (2/course).
+                  {' '}<b>présence_course</b> compte des courses, les trois autres comptent des places : ne pas les comparer directement.
+                </div>
                 <table style={{ borderCollapse: 'separate', borderSpacing: 0, marginTop: 10, fontSize: 13, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8 }}>
                   <thead>
                     <tr style={s.hdr}>
-                      {['Groupe', '1er', '2-3e', '4-5e', 'présent dans au moins 1 course'].map((h) => <th key={h} style={s.th}>{h}</th>)}
+                      {['Groupe', 'présence_course', 'part_victoires', 'part_podiums', 'part_places_4_5'].map((h) => <th key={h} style={s.th}>{h}</th>)}
                     </tr>
                   </thead>
                   <tbody>
                     {stats.parGroupe.map((g) => (
                       <tr key={g.id} style={{ borderBottom: '1px solid ' + SK.bord }}>
                         <td style={{ ...s.td, fontWeight: 700 }}>{g.label}</td>
-                        <td style={s.td}>{g.part1}%</td>
-                        <td style={s.td}>{g.part23}%</td>
-                        <td style={s.td}>{g.part45}%</td>
-                        <td style={{ ...s.td, fontWeight: 700 }}>{g.present}%</td>
+                        <td style={s.td}>{g.presence_course == null ? '—' : g.presence_course + '%'}</td>
+                        <td style={s.td}>{g.part_victoires == null ? '—' : g.part_victoires + '%'}</td>
+                        <td style={s.td}>{g.part_podiums == null ? '—' : g.part_podiums + '%'}</td>
+                        <td style={{ ...s.td, fontWeight: 700 }}>{g.part_places_4_5 == null ? '—' : g.part_places_4_5 + '%'}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+
+                {stats.empreinte && (
+                  <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
+                    <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Empreinte — 4 tests indépendants</b>
+                    <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 8 }}>
+                      Chaque test a SON N, ses cas non évaluables et sa période. Les quatre restent <b>séparés</b> :
+                      aucune moyenne entre eux, aucune fusion.
+                    </div>
+                    <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8, width: '100%' }}>
+                      <thead>
+                        <tr style={s.hdr}>
+                          {['Test', 'n', 'non éval.', 'tous top3', 'tous top5', '≥1 top3', 'période'].map((h) => <th key={h} style={s.th}>{h}</th>)}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {stats.empreinte.map((t, k) => (
+                          <tr key={t.id} style={{ borderBottom: '1px solid ' + SK.bord, background: k % 2 ? SK.alt : SK.ligne }}>
+                            <td style={{ ...s.td, fontWeight: 700 }}>{t.label}</td>
+                            <td style={s.td}>{t.n}</td>
+                            <td style={{ ...s.td, color: t.nonEvaluables ? SK.muted : '#94a3b8' }}>{t.nonEvaluables}</td>
+                            <td style={{ ...s.td, color: t.top3 == null ? '#cbd5e1' : '#15803d', fontWeight: 700 }}>{t.top3 == null ? '—' : t.top3 + '%'}</td>
+                            <td style={{ ...s.td, fontWeight: 700 }}>{t.top5 == null ? '—' : t.top5 + '%'}</td>
+                            <td style={s.td}>{t.un == null ? '—' : t.un + '%'}</td>
+                            <td style={{ ...s.td, color: '#64748b' }}>{t.debut && t.fin ? t.debut + ' → ' + t.fin : '—'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
 
                 <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
                 <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Le vainqueur vient de…</b>

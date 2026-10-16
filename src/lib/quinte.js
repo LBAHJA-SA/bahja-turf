@@ -758,6 +758,7 @@ function coteDe(cotes, num) {
  * Tripwire : si le taux de 1er repasse sous le gelé, on revient en arrière.
  *
  * Règles précédentes (R1→R7) : voir tools/lab-g3.mjs + historique git.
+ * Constat 15/10 : SÉLECTION pas quota (voir note au calcul du score).
  * Le score physique n'a aucun pouvoir de tri à l'intérieur d'un bloc (§11.16).
  *
  * ⚠ LE MARCHÉ BOUGE. Les cotes sont relues en continu (toutes les 60 s) :
@@ -778,8 +779,12 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
   const ticket = []
   const detail = []
 
-  /* ⭐ R8 : table podium P → taux (podiums/N), calculée UNE fois ici —
-   * même définition que le labo (stats LOO là-bas, archive ici). */
+  /* ⭐ 15/10/2026 — CONSTAT MESURÉ (14 courses) : le problème est la
+   * SÉLECTION dans le quota, PAS le quota. G1 : max 3 arrivants/4 (6×),
+   * jamais 4. G2 : max 3/4 une fois (15/10). 16 ratés G1/G2, TOUS dans
+   * le quota (12 prenables cote ou stats, 4 par l'autre lecture). Aucun
+   * 9e siège ne se justifie : même à 9, le 15/10 restait incomplet
+   * (3 manquants). Le travail est 100% : QUI entre. */
   const pod = new Map()
   for (const b of stats?.podiumBloc || []) for (const d of b.detail || []) pod.set(d.p, (d.n || 0) / Math.max(1, stats.nb))
   const aStats = pod.size > 0
@@ -1459,8 +1464,39 @@ export function combosJoint(records, tailleMax = 3) {
 }
 
 /**
+ * ⭐ §3 — LES QUATRE TESTS INDÉPENDANTS (« l'empreinte », méthode historique).
+ *
+ *   trio : (P1, P2, P3) ORDONNÉ   — les trois entrent-ils ENSEMBLE ?
+ *   p12  : (P1, P2)               — la paire P1-P2
+ *   p13  : (P1, P3)               — la paire P1-P3
+ *   p23  : (P2, P3)               — la paire P2-P3
+ *
+ * ⚠ RÈGLE FONDAMENTALE (cahier des charges, §3) : ces quatre tests restent
+ *   DISTINCTS. On ne les fusionne JAMAIS dans une moyenne unique, et on ne
+ *   remplace pas la méthode par « la moyenne des trois premiers chevaux ».
+ *   Chacun a son N, ses cas non évaluables, ses résultats et sa période.
+ *   Ce sont des COMPTEURS : ils ne choisissent rien (§20.2).
+ */
+export const TESTS_EMPREINTE = [
+  { id: 'trio', label: 'Trio ordonné P1-P2-P3', positions: [1, 2, 3] },
+  { id: 'p12', label: 'Paire ordonnée P1-P2', positions: [1, 2] },
+  { id: 'p13', label: 'Paire ordonnée P1-P3', positions: [1, 3] },
+  { id: 'p23', label: 'Paire ordonnée P2-P3', positions: [2, 3] },
+]
+
+/**
  * P(1er) P(2e) P(3e) P(4e) P(5e) par position de presse P1..P20,
  * calculé sur l'archive locale (chaque record = un Quinté avec son arrivée).
+ *
+ * ⚠ 16/10/2026 — correction des dénominateurs (§2.1/2.2 du cahier des
+ *   charges). Historiquement :
+ *     · `p[]` et `top3` = CONDITIONNELS (base = n_top5 : les courses où le
+ *       cheval de cette position finit dans les 5 premiers) ;
+ *     · `top5`         = GLOBAL (base = courses_valides).
+ *   Les deux dénominateurs ne sont PAS les mêmes — l'interface doit le dire.
+ *   On ajoute donc les champs explicites (courses_valides, n_top5, victoires,
+ *   podiums, p_*_conditionnel, p_*_global) SANS toucher aux champs lus par le
+ *   moteur (`n`, `p`, `top3`, `top5`) : `ordonnerParStats` ne change pas.
  */
 export function computeStats(records) {
   const MAX = 20
@@ -1468,8 +1504,15 @@ export function computeStats(records) {
   const courses = []
   const detailCourses = []
 
+  /* §3 — l'empreinte : 4 tests indépendants, chacun ses compteurs + sa période. */
+  const emp = {}
+  for (const t of TESTS_EMPREINTE) emp[t.id] = { n: 0, nonEvaluables: 0, t3: 0, t5: 0, un: 0, dates: [] }
+  /* §2.3 — cohérence des données : doublons + chevaux absents de la Synthèse. */
+  const diag = { coursesExaminees: 0, coursesRetenues: 0, coursesEcartees: 0, doublons: 0, chevauxAbsents: 0, doublonsDetail: [], absentsDetail: [] }
+
   for (const rec of records || []) {
     if (!rec.arrivee || !rec.arrivee.length) continue
+    diag.coursesExaminees++
     // ⚠ 05/10 : on lisait numAtPlace[numéro] (le cheval EN place n)
     //   au lieu du rang presse DU cheval. Résultat : rangs faux, et les courses
     //   dont un arrivant dépassait la Synthèse étaient JETÉES (04/10 : 4 valeurs).
@@ -1481,28 +1524,69 @@ export function computeStats(records) {
     //   en G1/G2). Ici on prend slotParNum de buildGrid : sélection, stats,
     //   ordre et affichage parlent du MÊME P. Manquants inclus, comme la grille.
     const synthe = (rec.synthese || []).filter(Number.isFinite)
-    const placeOfNum = { ...buildGrid(synthe, rec.runners || []).slotParNum }
+    const grille = buildGrid(synthe, rec.runners || [])
+    const placeOfNum = { ...grille.slotParNum }
+
+    /* §2.3 — doublons dans l'arrivée + chevaux de l'arrivée absents de la grille. */
+    const vus = new Set()
+    const doublons = []
+    for (const n of rec.arrivee) { if (vus.has(n)) doublons.push(n); else vus.add(n) }
+    if (doublons.length) { diag.doublons++; diag.doublonsDetail.push({ date: rec.date || null, nums: doublons }) }
+    const absents = rec.arrivee.slice(0, 5).filter((n) => placeOfNum[n] == null)
+    if (absents.length) { diag.chevauxAbsents++; diag.absentsDetail.push({ date: rec.date || null, nums: absents }) }
 
     const pl = rec.arrivee.slice(0, 5).map((n) => placeOfNum[n]).filter((r) => r != null)
-    if (pl.length < 5) continue
+    if (pl.length < 5) { diag.coursesEcartees++; continue }
+    diag.coursesRetenues++
     courses.push(pl)
     detailCourses.push({ synthe, pl, date: rec.date || null })
     pl.forEach((r, i) => { if (r <= MAX) tab[r][i]++ })
+
+    /* §3 — l'empreinte : le rang d'arrivée de chaque CASE du carnet.
+     * Même P que partout (slotParNum) ; une case sans partant = non évaluable
+     * pour CE test, un partant arrivé 6e ou au-delà = un ÉCHEC (99). */
+    const rangParSlot = {}
+    pl.forEach((slot, i) => { rangParSlot[slot] = i + 1 })
+    const numAtSlot = {}
+    for (const k of Object.keys(grille.slotParNum)) numAtSlot[grille.slotParNum[k]] = Number(k)
+    for (const t of TESTS_EMPREINTE) {
+      const e = emp[t.id]
+      const rangs = t.positions.map((x) => (numAtSlot[x] == null ? null : (rangParSlot[x] ?? 99)))
+      if (rangs.some((x) => x == null)) { e.nonEvaluables++; continue }
+      e.n++
+      if (rangs.every((x) => x <= 3)) e.t3++
+      if (rangs.every((x) => x <= 5)) e.t5++
+      if (rangs.some((x) => x <= 3)) e.un++
+      if (rec.date) e.dates.push(rec.date)
+    }
   }
 
+  const coursesValides = courses.length
   const parPlace = []
   for (let r = 1; r <= MAX; r++) {
     const t = tab[r]
-    const tot = t.reduce((a, b) => a + b, 0)
-    if (!tot) { parPlace.push({ place: r, n: 0, p: [0, 0, 0, 0, 0], top3: 0, top5: 0 }); continue }
+    const tot = t.reduce((a, b) => a + b, 0)          // = n_top5
+    const victoires = t[0]
+    const podiums = t[0] + t[1] + t[2]
+    const pct1 = (x, d) => (d > 0 ? +(x / d * 100).toFixed(1) : null)
     parPlace.push({
       place: r,
+      // ── champs historiques — le moteur les lit : NE PAS CHANGER ──────────
       n: tot,
-      p: t.map((v) => +(v / tot * 100).toFixed(0)),
-      // le podium : 1er + 2e + 3e réunis — la statistique qui compte vraiment,
-      // parce qu'une course se gagne sur les trois premiers.
-      top3: +((t[0] + t[1] + t[2]) / tot * 100).toFixed(0),
-      top5: +(tot / courses.length * 100).toFixed(0),
+      p: tot ? t.map((v) => +(v / tot * 100).toFixed(0)) : [0, 0, 0, 0, 0],
+      // le podium : 1er + 2e + 3e réunis — CONDITIONNEL (base n_top5).
+      top3: tot ? +((t[0] + t[1] + t[2]) / tot * 100).toFixed(0) : 0,
+      // GLOBAL (base courses_valides) — l'autre dénominateur.
+      top5: coursesValides ? +(tot / coursesValides * 100).toFixed(0) : 0,
+      // ── §2.2 champs explicites, dénominateurs NOMMÉS ─────────────────────
+      courses_valides: coursesValides,
+      n_top5: tot,
+      victoires,
+      podiums,
+      p_victoire_conditionnel: pct1(victoires, tot),
+      p_victoire_global: pct1(victoires, coursesValides),
+      p_podium_conditionnel: pct1(podiums, tot),
+      p_top5_global: pct1(tot, coursesValides),
     })
   }
 
@@ -1516,13 +1600,37 @@ export function computeStats(records) {
       for (const x of h) { if (x.p === 1) c1++; else if (x.p <= 3) c23++; else c45++ }
     }
     const tot = c1 + c23 + c45
+    /* §2.4 — chaque indicateur a SON dénominateur, explicite.
+     *   présence_course  : courses où ≥1 cheval du groupe est dans le top 5
+     *                      / courses_valides
+     *   part_victoires   : 1res places du groupe / total des 1res places
+     *                      (= 1 par course → courses_valides)
+     *   part_podiums     : podiums du groupe / total des podiums (= 3/course)
+     *   part_places_4_5  : 4e+5e du groupe / total des 4e+5e (= 2/course)
+     *   ⚠ NE PAS comparer `presence_course` à la distribution des places :
+     *     le premier compte des COURSES, les autres comptent des PLACES. */
+    const denPres = coursesValides
+    const denVic = coursesValides
+    const denPod = coursesValides * 3
+    const denP45 = coursesValides * 2
+    const pct = (x, d) => (d > 0 ? Math.round(x / d * 100) : null)
     return {
       id: g.id, label: g.label, min: g.min, max: g.max,
       n, total: tot,
+      // ── champs historiques (compat) ──────────────────────────────────────
       part1: tot ? Math.round(c1 / tot * 100) : 0,
       part23: tot ? Math.round(c23 / tot * 100) : 0,
       part45: tot ? Math.round(c45 / tot * 100) : 0,
-      present: courses.length ? Math.round(n / courses.length * 100) : 0,
+      present: coursesValides ? Math.round(n / coursesValides * 100) : 0,
+      // ── §2.4 champs explicites, dénominateurs NOMMÉS ─────────────────────
+      presence_course: pct(n, denPres),
+      part_victoires: pct(c1, denVic),
+      part_podiums: pct(c1 + c23, denPod),
+      part_places_4_5: pct(c45, denP45),
+      denom_presence: denPres,
+      denom_victoires: denVic,
+      denom_podiums: denPod,
+      denom_places_4_5: denP45,
     }
   })
 
@@ -1627,7 +1735,39 @@ export function computeStats(records) {
     drought[s] = d
   }
 
-  return { nb: courses.length, parPlace, parGroupe, vainqueur, BORNES, parPosition, parPlaceBloc, podiumBloc, courses, detailCourses, drought }
+  /* §3 — l'empreinte : les 4 tests, exposés SÉPARÉMENT (jamais fusionnés).
+   * Chaque test : nb de configurations, nb de courses, cas non évaluables,
+   * résultats observés (tous top3 / tous top5 / ≥1 top3) et période couverte. */
+  const empreinte = TESTS_EMPREINTE.map((t) => {
+    const e = emp[t.id]
+    const dates = e.dates.slice().sort()
+    const pctE = (x, d) => (d > 0 ? Math.round(x / d * 100) : null)
+    return {
+      id: t.id, label: t.label, positions: t.positions,
+      configurations: 1,
+      n: e.n,
+      nonEvaluables: e.nonEvaluables,
+      top3: pctE(e.t3, e.n),
+      top5: pctE(e.t5, e.n),
+      un: pctE(e.un, e.n),
+      brut: { t3: e.t3, t5: e.t5, un: e.un },
+      debut: dates[0] || null,
+      fin: dates[dates.length - 1] || null,
+    }
+  })
+
+  /* §2.3 — cohérence des données, exposée telle quelle. */
+  const diagnostic = {
+    coursesExaminees: diag.coursesExaminees,
+    coursesRetenues: diag.coursesRetenues,
+    coursesEcartees: diag.coursesEcartees,
+    doublons: diag.doublons,
+    chevauxAbsents: diag.chevauxAbsents,
+    doublonsDetail: diag.doublonsDetail,
+    absentsDetail: diag.absentsDetail,
+  }
+
+  return { nb: courses.length, parPlace, parGroupe, vainqueur, BORNES, parPosition, parPlaceBloc, podiumBloc, courses, detailCourses, drought, empreinte, diagnostic }
 }
 
 /**
