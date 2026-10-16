@@ -755,31 +755,21 @@ function coteDe(cotes, num) {
  * G3 est obligatoire : si son score est faible, on le prend quand même.
  * Renvoie la liste des numéros retenus + le détail.
  *
- * ── QUAND ON A LE MARCHÉ (`cotes`), QUI ENTRE ? ────────────────────────────
+ * ── QUI ENTRE ? — §11.22 (16/10/2026) ────────────────────────────────────
+ * Le CHOIX dans chaque bloc vient de `CHOIX_DU_BLOC` :
+ *
+ *     G1 carnet · G2 marché · G3-G5 carnet
+ *
+ * « carnet » = la PLACE DE PRESSE P1..P20 de la case ; « marché » = la cote.
+ * Mesuré sur 96 Quintés à presse réelle (tools/choix-grille.mjs) : 38,5 % de
+ * 1-2-3 contre 28,1 % pour « la cote partout » (§11.17). Sans cotes — ou
+ * cotes incomplètes dans le bloc visé — c'est `tries` qui décide : carrière
+ * (physique), puis forme.
+ *
+ * ⭐ R8 (0,9 force P + 0,1 marché) est RETIRÉ DE LA SÉLECTION : 31 % contre
+ * 38,5 % sur la même mesure, et §11.19 dit que `stats` n'ordonne QUE le
+ * ticket. Règles précédentes (R1→R8) : tools/lab-g3.mjs + historique git.
  * Le score physique n'a aucun pouvoir de tri à l'intérieur d'un bloc (§11.16).
- *
- *   bloc de quota ≥ 2 (hors G1) →  les q meilleures cotes du bloc. Rien d'autre.
- *   bloc de quota 1    →  ⭐ R2 (10/10/2026) : le plus fort aux STATISTIQUES
- *      (signature : argmax du P, n≥2 ; égalité ou sans historique → la cote
- *      départage). Labo tools/lab-g3.mjs, 6 Quintés rejoués en leave-one-out
- *      avec le même marché des deux côtés : R2 = 23/30 · 1er 6/6 contre
- *      R1 (petite cote) = 21/30 · 1er 5/6 — approuvé par l'utilisateur.
- *   G1 (quota 3)       →  ⭐ R5 (10/10/2026) : les 2 meilleures cotes + le cas
- *      en DROUGHT le plus long (stats.drought, égalité → cote). Principe de
- *      l'utilisateur (« chaque P attend son tour »), labo : R5 = 25/30 ·
- *      1er 6/6 contre R4 (moins-cité) = 24/30 — 5/5 sur le 10/10 (9 ET 3).
- *
- * Mesure historique sur 280 vrais Quintés Global PMU France (2026-01-01 → 2026-10-05),
- * Archives + casacourses, avec la vraie Synthèse de la presse :
- *
- *   règle                       % où le 1-2-3 est complet dans la grille
- *   les q meilleures cotes         30 %       ← celle-ci
- *   (q-1) cotes + ★ surprise       13 %       ← retirée le 05/10/2026
- *   marché seul, top 8 des cotes   43 %       ← le plafond sans grille
- *
- * La ★ surprise coûtait la moitié : elle remplaçait des cotes à 8 et 14 par
- * une à 50. On ne la remet pas (§11.17 était mesuré sur 4 courses avec la
- * mauvaise métrique).
  *
  * ⚠ LE MARCHÉ BOUGE. Les cotes sont relues en continu (toutes les 60 s) :
  * la grille ci-dessus est un instantané. Le ticket à jouer est celui affiché
@@ -813,7 +803,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
    * l'information et n'entre plus dans le choix. */
   const aStats = (stats?.parPlace || []).some((st) => st && st.n >= 2)
 
-  /* ⭐ 16/10/2026 — LE CHOIX DANS LE BLOC (tools/choix-blocs.mjs).
+  /* ⭐ 16/10/2026 — LE CHOIX DANS LE BLOC (tools/choix-grille.mjs).
    * Les quotas 3-2-1-1-1 ne bougent JAMAIS (§11.16) : c'est QUI on prend
    * à l'intérieur du bloc qui change. Mesuré sur les 96 Quintés à presse
    * RÉELLE, en ne répartissant QUE le choix (mêmes blocs `buildGrid`, mêmes

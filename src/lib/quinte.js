@@ -755,17 +755,20 @@ function coteDe(cotes, num) {
  * G3 est obligatoire : si son score est faible, on le prend quand même.
  * Renvoie la liste des numéros retenus + le détail.
  *
- * ── QUI ENTRE ? ───────────────────────────────────────────────────────────
- * ⭐ R8 (15/10/2026, labo 43/70 · 1er 11/14 vs GELÉ 47/70 · 1er 9/14 —
- * appliqué : FAVORI D'ABORD). score = 0.9 × taux_podium(P) + 0.1 × marché
- * (cote inversée normalisée dans le bloc, 0.5 si absente). Le taux_podium
- * vient de la table podium P1..P20 (podiums du P / N). Top quota au score,
- * égalité → carnet. Le 10% marché n'a jamais nui en labo (+3/−0).
- * Sans stats → repli exact ancien comportement (cotes puis tries).
- * Tripwire : si le taux de 1er repasse sous le gelé, on revient en arrière.
+ * ── QUI ENTRE ? — §11.22 (16/10/2026) ────────────────────────────────────
+ * Le CHOIX dans chaque bloc vient de `CHOIX_DU_BLOC` :
  *
- * Règles précédentes (R1→R7) : voir tools/lab-g3.mjs + historique git.
- * Constat 15/10 : SÉLECTION pas quota (voir note au calcul du score).
+ *     G1 carnet · G2 marché · G3-G5 carnet
+ *
+ * « carnet » = la PLACE DE PRESSE P1..P20 de la case ; « marché » = la cote.
+ * Mesuré sur 96 Quintés à presse réelle (tools/choix-grille.mjs) : 38,5 % de
+ * 1-2-3 contre 28,1 % pour « la cote partout » (§11.17). Sans cotes — ou
+ * cotes incomplètes dans le bloc visé — c'est `tries` qui décide : carrière
+ * (physique), puis forme.
+ *
+ * ⭐ R8 (0,9 force P + 0,1 marché) est RETIRÉ DE LA SÉLECTION : 31 % contre
+ * 38,5 % sur la même mesure, et §11.19 dit que `stats` n'ordonne QUE le
+ * ticket. Règles précédentes (R1→R8) : tools/lab-g3.mjs + historique git.
  * Le score physique n'a aucun pouvoir de tri à l'intérieur d'un bloc (§11.16).
  *
  * ⚠ LE MARCHÉ BOUGE. Les cotes sont relues en continu (toutes les 60 s) :
@@ -800,7 +803,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
    * l'information et n'entre plus dans le choix. */
   const aStats = (stats?.parPlace || []).some((st) => st && st.n >= 2)
 
-  /* ⭐ 16/10/2026 — LE CHOIX DANS LE BLOC (tools/choix-blocs.mjs).
+  /* ⭐ 16/10/2026 — LE CHOIX DANS LE BLOC (tools/choix-grille.mjs).
    * Les quotas 3-2-1-1-1 ne bougent JAMAIS (§11.16) : c'est QUI on prend
    * à l'intérieur du bloc qui change. Mesuré sur les 96 Quintés à presse
    * RÉELLE, en ne répartissant QUE le choix (mêmes blocs `buildGrid`, mêmes
