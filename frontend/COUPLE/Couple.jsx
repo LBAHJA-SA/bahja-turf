@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { chargerProgramme, chargerCourse, grouperParReunion } from '../../backend/COUPLE/donnees.js'
-import { verdict } from '../../backend/COUPLE/moteur.js'
+import { selectionCoply, repliMarche } from '../../backend/COUPLE/moteur-coply.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  frontend/COUPLE/Couple.jsx — LES COURSES DU JOUR, UNE PAR UNE.
@@ -45,17 +45,6 @@ export default function Couple() {
   const [cle, setCle] = useState(null)
   const [detail, setDetail] = useState(null)
   const [errDetail, setErrDetail] = useState(null)
-  /* La base des empreintes : UNE requête, au chargement. Sans elle le
-     moteur ne peut pas parler — la page l'affiche, elle ne l'invente pas. */
-  const [base, setBase] = useState(null)
-  useEffect(() => {
-    let mort = false
-    fetch('/data/empreinte-v3.json', { headers: { Accept: 'application/json' } })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
-      .then((d) => { if (!mort) setBase(d) })
-      .catch(() => { if (!mort) setBase(null) })
-    return () => { mort = true }
-  }, [])
 
   /* ① le programme du jour */
   useEffect(() => {
@@ -77,6 +66,20 @@ export default function Couple() {
       .catch((e) => { if (!mort) setErrDetail(e.message || 'course illisible') })
     return () => { mort = true }
   }, [cle])
+
+  /* ②bis re-lecture auto quand les cotes manquent (13/10/2026) : reu.php
+     publie la ref progressivement, course par course — la page réessaie
+     seule toutes les 2 min au lieu d'exiger un re-clic. S'arrête dès
+     ≥3 cotes valides ou arrivée publiée. Lecture seule, aucun remplissage. */
+  useEffect(() => {
+    if (!cle || !detail) return
+    const nb = (detail.partants || []).filter((p) => Number(p.coteRef) > 0).length
+    if (nb >= 3 || (detail.arrivee || []).length) return
+    const t = setInterval(() => {
+      chargerCourse(cle).then((d) => setDetail(d.course)).catch(() => {})
+    }, 120000)
+    return () => clearInterval(t)
+  }, [cle, detail])
 
   const groupes = grouperParReunion(programme?.courses)
   /* Accordéon : une seule réunion ouverte à la fois. 8 réunions × 8 courses
@@ -201,12 +204,12 @@ export default function Couple() {
                 ⚠ {errDetail}
               </div>
             )}
-            {detail && <Lecture course={detail} base={base} />}
+            {detail && <Lecture course={detail} />}
           </div>
         </div>
 
         <div style={{ marginTop: 18, fontSize: 11, color: '#94a3b8', textAlign: 'center' }}>
-          ⚠ Laboratoire — lecture seule. Le moteur « 1er + 2e + 3e » viendra quand cette vue sera validée.
+          ⚠ Moteur prédictif actif — régression logistique sur P(top-3), entraînée sur l'archive. Le couplé gagnant = (1er,2e) ou (1er,3e) ou (2e,3e).
         </div>
       </div>
     </>
@@ -215,23 +218,21 @@ export default function Couple() {
 
 /* ───────────────────────────────────────────────────── la lecture ───────── */
 
-function Lecture({ course, base }) {
+function Lecture({ course }) {
   const partants = course.partants || []
   const arrivee = (course.arrivee || []).slice(0, 5)
-  /* L'empreinte de CETTE course : le trio candidat, sa forme complète et
-     sa personnalité (combien de fois vue, ce qui s'est passé). Les cotes
-     viennent du serveur (reu.php, complétées par le marché Equidia quand
-     reu les a effacées — badge « provisoire »). Plus aucune saisie. */
-  const v = partants.length >= 3 && base ? verdict(partants, base) : null
-  const emp = v?.empreinte
-  /* Vérification contre l'arrivée réelle, quand on l'a. */
-  const verif = v?.trio?.length && arrivee.length >= 3
-    ? {
-        exact: arrivee[0] === v.trio[0] && arrivee[1] === v.trio[1] && arrivee[2] === v.trio[2],
-        nb: [v.trio[0] === arrivee[0], v.trio[1] === arrivee[1], v.trio[2] === arrivee[2]].filter(Boolean).length,
-        dansTop3: v.trio.filter((n) => arrivee.slice(0, 3).includes(n)).length,
-      }
-    : null
+  const [sel, setSel] = useState(null)
+  const nbCotes = partants.filter((p) => Number(p.coteRef) > 0).length
+
+  useEffect(() => {
+    if (partants.length >= 3) {
+      let mort = false
+      selectionCoply(partants, course)
+        .then((s) => { if (!mort) setSel(s) })
+        .catch(() => { if (!mort) setSel({ trio: repliMarche(partants), repli: true }) })
+      return () => { mort = true }
+    }
+  }, [partants, course])
   return (
     <>
       <div style={{ ...S.box, padding: 16, marginBottom: 12 }}>
@@ -252,74 +253,46 @@ function Lecture({ course, base }) {
         )}
       </div>
 
-      {/* ── le verdict (cotes serveur, dont bouche-trous Equidia marqué ⏳) ── */}
-
-      {/* ⭐ 11/10/2026 — cotes bouchées par le marché (Equidia) : le verdict
-          est provisoire (familles calculées sur le marché du matin, pas la
-          ref). Marqué, jamais caché. */}
+      {/* ── cotes provisoires ── */}
       {(course.cotesEq || 0) > 0 && (
         <div style={{ ...S.box, padding: '8px 12px', marginBottom: 12, background: '#fffbeb', borderColor: '#fcd34d', fontSize: 12, color: '#92400e' }}>
-          ⏳ {course.cotesEq}/{partants.length} cotes provisoires (marché du matin) — le verdict suivra la ref dès publication.
+          ⏳ {course.cotesEq}/{partants.length} cotes provisoires (marché du matin) — la sélection suivra la ref dès publication.
         </div>
       )}
 
-      {v && v.trio && (
-        <div style={{
-          ...S.box, padding: 14, marginBottom: 12,
-          borderLeft: '5px solid ' + (v.niveau === 'FULL' ? '#16a34a' : v.niveau === 'FAM' ? '#d97706' : '#d6d3d1'),
-          background: v.niveau === 'FULL' ? '#f0fdf4' : '#fff',
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
-            <b style={{ fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', color: TE.accentSombre }}>
-              Empreinte : {v.empreinte || '—'}
-            </b>
-            {v.niveau !== 'FULL' && v.empreinteJour && v.empreinteJour !== v.empreinte && (
-              <span style={{ fontSize: 11, color: '#78716c' }}>· jour : {v.empreinteJour}</span>
-            )}
-            <span style={{ fontSize: 12, fontWeight: 800, color: '#78716c' }}>
-              {v.niveau}{v.support ? ` · ${v.support} courses` : ''}
-            </span>
-          </div>
-          <div style={{ fontSize: 14, fontWeight: 800, fontFamily: TE.mono, marginTop: 6 }}>
-            Top 3 : {v.trio.join('  ·  ')}
-          </div>
-          {verif && (
-            <div style={{
-              marginTop: 8, fontSize: 14, fontWeight: 800,
-              color: verif.exact ? '#15803d' : verif.dansTop3 >= 2 ? '#a16207' : '#b91c1c',
-            }}>
-              {verif.exact
-                ? '★ 3/3 EXACT'
-                : `${verif.nb}/3 aux bonnes places · ${verif.dansTop3}/3 dans le Top3`}
-            </div>
-          )}
-          {v.coherence && (
-            <>
-              <div style={{ fontSize: 12, color: '#57534e', marginTop: 6 }}>
-                Cohérence — rang : <b>{v.coherence.rankDev}</b>
-                {' · '}profil : <b>{v.coherence.profDev}</b>
-                {' · '}relations : <b>{Math.round(v.coherence.relFreq * 100)}%</b>
-              </div>
-              {v.profil && (
-                <div style={{ fontSize: 12, color: '#57534e', marginTop: 6 }}>
-                  Historique — rangs médians : <b>{(v.profil.medRangs || []).join('-')}</b>
-                  {' · '}cotes médianes : <b>{(v.profil.medCote || []).join('-')}</b>
-                  {v.profil.paires.map((p) => (
-                    <span key={p.paire} style={{ marginLeft: 10 }}>{p.paire} : <b>{p.habituelle}</b></span>
-                  ))}
-                </div>
-              )}
-            </>
-          )}
+      {!sel && partants.length >= 3 && (
+        <div style={{ fontSize: 12, color: '#78716c', marginTop: 6 }}>
+          {nbCotes < 3
+            ? `Pas assez de cotes publiées (${nbCotes}/${partants.length}) — la page réessaie seule toutes les 2 min.`
+            : 'Sélection impossible.'}
         </div>
       )}
-      {v && !v.trio && (
-        <div style={{ fontSize: 12, color: '#78716c', marginTop: 6 }}>
-          {v.raison === 'aucun antécédent'
-            ? 'Aucun antécédent pour les trios de cette course.'
-            : v.raison === 'pas assez de cotes'
-              ? `Pas assez de cotes publiées (${v.cotes || '?'}) — reu.php les publie progressivement dans la journée. Re-clique la course plus tard.`
-              : v.raison || 'Base des empreintes introuvable.'}
+
+      {sel && (
+        <div style={{ ...S.box, padding: 14, marginBottom: 12, borderLeft: '5px solid #16a34a', background: '#f0fdf4' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
+            <b style={{ fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', color: '#166534' }}>
+              {sel.repli ? 'Sélection 3 chevaux (repli marché)' : 'Sélection 3 chevaux (modèle prédictif)'}
+            </b>
+            {sel.modele && (
+              <span style={{ fontSize: 11, color: '#15803d' }}>
+                entraîné sur {sel.modele.fenetre} courses · validation {(sel.modele.validation.taux * 100).toFixed(1)} %
+              </span>
+            )}
+          </div>
+          <div style={{ fontSize: 14, fontWeight: 800, fontFamily: TE.mono, marginTop: 6 }}>
+            {sel.trio.join('  ·  ')}
+          </div>
+          {sel.paires && (
+            <div style={{ fontSize: 12, fontFamily: TE.mono, marginTop: 6, color: '#166534' }}>
+              Paires : {sel.paires.map(([a, b]) => `${a}-${b}`).join('  ·  ')}
+            </div>
+          )}
+          <div style={{ fontSize: 11, color: '#78716c', marginTop: 6 }}>
+            {sel.repli
+              ? 'Modèle indisponible — repli sur les 3 plus petites cotes.'
+              : 'Régression logistique sur P(top-3) : marché + forme + valeur + âge + corde + gains + sexe + distance. Le couplé gagnant = (1er,2e) ou (1er,3e) ou (2e,3e) — les 3 paires du trio.'}
+          </div>
         </div>
       )}
 
