@@ -317,7 +317,19 @@ export async function programmeDuJour(date) {
 /* ----------------------------------------------------------------- partants -- */
 
 const INC_PARTANT = 'include=horse&include=jockey&include=trainer&include=owner&include=breeder' +
-  '&include=oddsSimpleGagnant&include=race&include=race.meeting'
+  '&include=oddsSimpleGagnant&include=race&include=race.meeting&include=race.replay'
+
+/** Le replay d'une course — `id` sert à construire l'URL du relais (`?v=`). */
+export function replayDe(c) {
+  const rp = c && c.replay
+  if (!rp || !rp._videoLink) return null
+  return {
+    id: rp.id || null,
+    video: rp._videoLink,
+    image: rp._thumbnailLink || null,
+    duree: rp.duration || null,
+  }
+}
 
 /** Un partant → l'objet que la page affiche. */
 export function normaliserPartant(r, course) {
@@ -344,7 +356,7 @@ export function normaliserPartant(r, course) {
     shoeing: r.shoeing || '',
     fer: marquesFer(r.shoeing),
     ferTexte: texteFer(r.shoeing),
-    replay: (r.race && r.race.replay && r.race.replay._videoLink) ? { video: r.race.replay._videoLink, image: r.race.replay._thumbnailLink || null } : null,
+    replay: replayDe(r.race),
     jockey: nomPersonne(r.jockey),
     entraineur: nomPersonne(r.trainer),
     proprietaire: nomPersonne(r.owner),
@@ -456,6 +468,8 @@ export function normaliserLigneCarriere(r) {
   return {
     id: r.id,
     courseId: r.raceId,
+    horseId: r.horseId,
+    numero: c.number != null ? c.number : null,
     date: c.datetime,
     hippodrome: m.name || '',
     reunion: m.pmuNumber != null ? m.pmuNumber : null,
@@ -497,7 +511,7 @@ export function normaliserLigneCarriere(r) {
     commentaire: r.comment || '',
     nonPartant: r.isRunning === false,
     aVenir: !c.datetime ? false : (r.ranking == null && !c.winnerTime),
-    replay: c.replay && c.replay._videoLink ? { video: c.replay._videoLink, image: c.replay._thumbnailLink || null } : null,
+    replay: replayDe(c),
   }
 }
 

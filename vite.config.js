@@ -87,21 +87,132 @@ function getHttp2(url, entetes, delai = 20000) {
     let statut = 0;
     let type = "";
     let corps = "";
-    req.on("response", (h) => { statut = h[":status"] || 0; type = h["content-type"] || ""; });
+    let emplacement = "";
+    req.on("response", (h) => {
+      statut = h[":status"] || 0;
+      type = h["content-type"] || "";
+      emplacement = h["location"] || "";
+    });
     req.setEncoding("utf8");
     req.on("data", (d) => { corps += d; });
-    req.on("end", () => terminer(() => resolve({ statut, type, corps })));
+    req.on("end", () => terminer(() => resolve({ statut, type, corps, emplacement })));
     req.on("error", (e) => terminer(() => reject(e)));
     req.end();
   });
 }
 
+/* ─────────────────────────────────────────────────────────── LE REPLAY ──────
+ * Mêmes règles qu'`api/ptf.js` (§ la vidéo) : /api/replays/{id}/video répond
+ * 302 vers un m3u8 chez vide.io, que le CDN sert SANS en-tête CORS. On réécrit
+ * donc les playlists pour que le lecteur ne parle qu'à nous.
+ * ────────────────────────────────────────────────────────────────────────── */
+const HOTES_MEDIA = [".vide.io", "horse-racing-api.paris-turf.com"];
+const estPlayliste = (type, url) => /mpegurl|m3u8/i.test(type || "") || /\.m3u8(\?|$)/i.test(url || "");
+
+function hoteAutorise(url) {
+  try {
+    const h = new URL(url).host;
+    return HOTES_MEDIA.some((x) => h === x || h.endsWith(x));
+  } catch { return false; }
+}
+
+function reecrirePlaylist(texte, base, origine) {
+  const absolue = (x) => origine + "/api/ptf?hls=" + encodeURIComponent(new URL(x, base).href);
+  return String(texte).split("\n").map((ligne) => {
+    const t = ligne.trim();
+    if (!t) return ligne;
+    if (t.startsWith("#")) {
+      return /URI="/.test(t) ? t.replace(/URI="([^"]+)"/g, (_, x) => 'URI="' + absolue(x) + '"') : ligne;
+    }
+    return absolue(t);
+  }).join("\n");
+}
+
+const ENTETES_MEDIA = {
+  "user-agent": UA,
+  "accept-language": "fr-FR,fr;q=0.9",
+  accept: "*/*",
+  "x-api-key": CLE_PTF,
+  origin: "http://localhost",
+  referer: "http://localhost/",
+  "sec-ch-ua": '"Chromium";v="141", "Not?A_Brand";v="24"',
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": '"Windows"',
+  "sec-fetch-dest": "video",
+  "sec-fetch-mode": "no-cors",
+  "sec-fetch-site": "cross-site",
+};
+
+async function relayerVideo(u, res, origine) {
+  const entetes = {
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "public, max-age=600",
+    "Accept-Ranges": "bytes",
+  };
+  try {
+    const id = u.searchParams.get("v");
+    if (id) {
+      /* la playlist maîtresse : l'API renvoie un 302, http2 ne le suit pas */
+      const r = await getHttp2(
+        ORIGINES.ptf + "/api/replays/" + encodeURIComponent(id) + "/video",
+        ENTETES_MEDIA
+      );
+      if (r.statut !== 302 || !r.emplacement) {
+        res.statusCode = r.statut || 502;
+        res.setHeader("Content-Type", "text/plain; charset=utf-8");
+        res.end(r.statut === 404 ? "replay introuvable" : "replay indisponible (" + r.statut + ")");
+        return;
+      }
+      const p = await fetch(r.emplacement, { headers: { "user-agent": UA, accept: "*/*" } });
+      const texte = await p.text();
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/vnd.apple.mpegurl");
+      for (const [k, v] of Object.entries(entetes)) res.setHeader(k, v);
+      res.end(reecrirePlaylist(texte, r.emplacement, origine));
+      return;
+    }
+
+    const cible = u.searchParams.get("hls");
+    if (!hoteAutorise(cible)) {
+      res.statusCode = 400;
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+      res.end("hôte refusé");
+      return;
+    }
+    const m = await fetch(cible, { headers: { "user-agent": UA, accept: "*/*" } });
+    const type = m.headers.get("content-type") || "application/octet-stream";
+    /* ⚠ ne JAMAIS réécrire une page d'erreur comme si c'était une playlist :
+       un 403 du CDN arrivait déguisé en playlist (le corps était du HTML). */
+    if (!m.ok) {
+      res.statusCode = m.status;
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+      res.end("média indisponible (" + m.status + ")");
+      return;
+    }
+    const playlist = estPlayliste(type, cible);
+    const buf = Buffer.from(await m.arrayBuffer());
+    res.statusCode = m.status;
+    res.setHeader("Content-Type", playlist ? "application/vnd.apple.mpegurl" : type);
+    for (const [k, v] of Object.entries(entetes)) res.setHeader(k, v);
+    res.end(playlist ? reecrirePlaylist(buf.toString("utf8"), cible, origine) : buf);
+  } catch (e) {
+    res.statusCode = 502;
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.end("replay : " + (e && e.message ? e.message : e));
+  }
+}
+
 /** Le même corps que api/_proxy.js : /api/<nom>/<suite> -> <origine>/<suite> */
-async function relayer(label, cheminComplet, res) {
+async function relayer(label, cheminComplet, res, origine = "") {
   try {
     // le sous-chemin peut venir du chemin (/api/tf/tqqjour.php) ou de la
     // requete (?p=tqqjour.php) : c'est la forme que produit le rewrite Vercel.
     const u = new URL(cheminComplet, "http://localhost");
+    /* la vidéo d'un replay : sa propre forme d'URL (?v= / ?hls=) */
+    if (label === "ptf" && (u.searchParams.get("v") || u.searchParams.get("hls"))) {
+      await relayerVideo(u, res, origine || u.origin);
+      return;
+    }
     const depuisRequete = u.searchParams.get("p") || "";
     const chemin = depuisRequete
       ? "/" + depuisRequete.replace(/^\/+/, "")
@@ -228,15 +339,19 @@ function proxiesApi() {
       // /api/eq/<suite> en /api/eq?p=<suite>. On accepte donc les DEUX formes
       // en local comme en ligne — meme code, meme comportement.
       server.middlewares.use((req, res, next) => {
-        const u = new URL(req.url || "/", "http://localhost");
+        const base = "http://" + (req.headers.host || "localhost:3003");
+        const u = new URL(req.url || "/", base);
         const m = /^\/api\/(ptf|pt|tf|eq)$/.exec(u.pathname);
         if (!m) return next();
-        relayer(m[1], "/api/" + m[1] + "/" + (u.searchParams.get("p") || ""), res);
+        /* /api/ptf?v=… ou ?hls=… : la requête entière (la vidéo garde sa query) */
+        const video = u.searchParams.get("v") || u.searchParams.get("hls");
+        const cible = video ? req.url : "/api/" + m[1] + "/" + (u.searchParams.get("p") || "");
+        relayer(m[1], cible, res, base);
       });
       server.middlewares.use((req, res, next) => {
         const m = /^\/api\/(ptf|pt|tf|eq)(\/.*)?$/.exec(req.url || "");
         if (!m) return next();
-        relayer(m[1], req.url, res);
+        relayer(m[1], req.url, res, "http://" + (req.headers.host || "localhost:3003"));
       });
       /* /api/couple : les courses du jour pour la page Couplé. C'est une
        * FONCTION (elle lit reu.php + prog-{date}.json sur le disque), pas

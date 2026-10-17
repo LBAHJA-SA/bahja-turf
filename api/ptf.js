@@ -94,15 +94,112 @@ const ENTETES = {
 const ESSAIS = 4
 
 /** Le GET amont, réessayé tant que Cloudflare défie. */
-async function chercher(cible) {
+async function chercher(cible, entetes = ENTETES) {
   let dernier = null
   for (let i = 0; i < ESSAIS; i++) {
-    const r = await fetch(cible, { headers: ENTETES })
+    const r = await fetch(cible, { headers: entetes })
     const corps = await r.text()
-    if (!estDefi(corps)) return { statut: r.status, type: r.headers.get('content-type'), corps, essais: i + 1 }
-    dernier = { statut: r.status, type: r.headers.get('content-type'), corps, essais: i + 1 }
+    if (!estDefi(corps)) return { statut: r.status, type: r.headers.get('content-type'), corps, url: r.url, essais: i + 1 }
+    dernier = { statut: r.status, type: r.headers.get('content-type'), corps, url: r.url, essais: i + 1 }
   }
   return dernier
+}
+
+/* ─────────────────────────────────────────────────────────── LE REPLAY ──────
+ * `race.replay._videoLink` = /api/replays/{id}/video → **302 vers un m3u8**
+ * chez vide.io. Deux raisons pour que la vidéo passe par ici :
+ *
+ *   1) l'API exige la clé ET l'origine `http://localhost` — un `<a href>` ne
+ *      les envoie pas, donc le clic tombait sur un 403 ;
+ *   2) même résolu, le CDN ne renvoie **aucun en-tête CORS** (mesuré : pas
+ *      d'`access-control-allow-origin`) : hls.js ne peut pas le lire depuis la
+ *      page, et Chrome ne lit pas le HLS tout seul.
+ *
+ * Ce relais réécrit donc les playlists pour que le lecteur ne parle qu'à nous.
+ * Les segments (…m4s) sont simplement traversés.
+ * ────────────────────────────────────────────────────────────────────────── */
+const HOTES_MEDIA = ['.vide.io', 'horse-racing-api.paris-turf.com']
+
+const estPlayliste = (type, url) => /mpegurl|m3u8/i.test(type || '') || /\.m3u8(\?|$)/i.test(url || '')
+
+function hoteAutorise(url) {
+  try {
+    const h = new URL(url).host
+    return HOTES_MEDIA.some((x) => h === x || h.endsWith(x))
+  } catch { return false }
+}
+
+/** Chaque URL de la playlist (segment, init, clé) repasse par nous. */
+function reecrirePlaylist(texte, base, origine) {
+  const absolue = (x) => origine + '/api/ptf?hls=' + encodeURIComponent(new URL(x, base).href)
+  return String(texte).split('\n').map((ligne) => {
+    const t = ligne.trim()
+    if (!t) return ligne
+    if (t.startsWith('#')) {
+      return /URI="/.test(t) ? t.replace(/URI="([^"]+)"/g, (_, x) => 'URI="' + absolue(x) + '"') : ligne
+    }
+    return absolue(t)
+  }).join('\n')
+}
+
+const ENTETES_MEDIA = {
+  ...ENTETES,
+  accept: '*/*',
+  'sec-fetch-dest': 'video',
+  'sec-fetch-mode': 'no-cors',
+}
+
+/** `?v={id}` → la playlist maîtresse ; `?hls={url}` → un média traversé.
+ *  Renvoie `null` si la requête n'est pas une requête vidéo. */
+async function servirVideo(u, req) {
+  const origine = u.origin
+
+  const id = u.searchParams.get('v')
+  if (id) {
+    const r = await chercher(BASE + '/api/replays/' + encodeURIComponent(id) + '/video', ENTETES_MEDIA)
+    if (r.statut >= 400) return new Response('replay indisponible', { status: r.statut })
+    return new Response(reecrirePlaylist(r.corps, r.url || BASE, origine), {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/vnd.apple.mpegurl',
+        'Cache-Control': 'public, max-age=300',
+      },
+    })
+  }
+
+  const cible = u.searchParams.get('hls')
+  if (!cible) return null
+  if (!hoteAutorise(cible)) return new Response('hôte refusé', { status: 400 })
+
+  const entetes = { ...ENTETES_MEDIA }
+  const plage = req.headers.get('range')
+  if (plage) entetes.range = plage
+
+  const r = await fetch(cible, { headers: entetes, redirect: 'follow' })
+  const type = r.headers.get('content-type') || ''
+  const sortie = {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': type || 'application/octet-stream',
+    'Cache-Control': 'public, max-age=600',
+    'Accept-Ranges': 'bytes',
+  }
+  if (r.status === 206) sortie['Content-Range'] = r.headers.get('content-range') || ''
+
+  /* ⚠ ne JAMAIS réécrire une page d'erreur comme une playlist : un 403 du CDN
+     arrive déguisé en playlist (son corps est du HTML). */
+  if (!r.ok) {
+    return new Response('média indisponible (' + r.status + ')', {
+      status: r.status,
+      headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'text/plain; charset=utf-8' },
+    })
+  }
+  if (estPlayliste(type, cible)) {
+    const texte = await r.text()
+    sortie['Content-Type'] = 'application/vnd.apple.mpegurl'
+    return new Response(reecrirePlaylist(texte, r.url || cible, origine), { status: 200, headers: sortie })
+  }
+  return new Response(r.body, { status: r.status, headers: sortie })
 }
 
 export default async function handler(req) {
@@ -117,6 +214,16 @@ export default async function handler(req) {
   }
 
   const u = new URL(req.url)
+
+  /* La vidéo d'abord : elle a sa propre forme d'URL (?v= / ?hls=). */
+  if (u.searchParams.get('v') || u.searchParams.get('hls')) {
+    try {
+      return await servirVideo(u, req)
+    } catch (e) {
+      return new Response('replay : ' + String(e && e.message), { status: 502 })
+    }
+  }
+
   /* Le sous-chemin vient soit de la requête (?p=…), soit du chemin
      (/api/ptf/api/runners…) — cette seconde forme est produite par le
      rewrite vercel.json. */

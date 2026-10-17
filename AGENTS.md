@@ -2427,3 +2427,63 @@ npx --yes vercel@latest curl -i "https://<apercu>.vercel.app/api/ptf?p=api%2Fmee
 > l'authentification Vercel. Le CLI est **authentifié sur ce poste**
 > (`%APPDATA%\com.vercel.cli\Data\auth.json`), donc un aperçu est déployable
 > sans toucher à la production.
+
+### 21.8 ⭐ LA COURSE PASSÉE — la carte s'ouvre, la vidéo se lit (17/10/2026)
+
+> Demande : « quand on clique sur les courses passées, ça ne répond pas ».
+> Deux choses ne répondaient pas, pour deux raisons différentes.
+
+#### ① La carte n'était pas cliquable
+
+`CarteCarriere` était un `<div>` inerte ; seul le ▶ était un lien. Maintenant
+**toute la carte ouvre la course** (`title="Voir la course"`, `cursor:pointer`)
+et le ▶ fait la même chose — plus d'onglet qui s'ouvre dans le vide.
+
+L'écran `CoursePassee` **remplace** la liste des cartes (bouton
+« ← carrière de <cheval> » pour revenir) et montre :
+
+```
+en-tête      hippodrome · R?C? · date · Q+ · nom de la course
+             discipline · distance · sens · terrain · catégorie · partants · allocation
+             Arrivée : 1 · 6 · 4 · 11 · 2 · 5'10''66      ← les 5 premiers + le chrono du gagnant
+le replay    ▶ Revoir la course (durée) — lu DANS la page
+l'arrivée    Place · N° · Cheval · Jockey · Poids · VH · Corde · Artifices · Cote · Chrono · Écart
+             les 20 partants, ta ligne surlignée + badge « ici », les NP en gris à la fin
+```
+
+Données : `partantsDeCourse(l.courseId)` — chaque partant d'une course passée
+porte son `ranking`, donc **le tri par `ranking` EST l'arrivée**. `race.replay`
+a été ajouté à `INC_PARTANT`.
+
+#### ② Le replay ne pouvait pas se lire — deux verrous de plus
+
+`race.replay._videoLink` = `/api/replays/{id}/video` → **302** vers un m3u8
+chez `vide.io` (et non un mp4, malgré `format: "mp4"` dans les métadonnées).
+
+| Le verrou | Mesuré |
+|---|---|
+| l'URL vidéo exige la **clé** ET l'origine `http://localhost` | un `<a href>` n'envoie ni l'une ni l'autre → 403 |
+| le CDN `vide.io` ne renvoie **aucun** `access-control-allow-origin` | hls.js ne peut pas le lire, et Chrome ne lit pas le HLS seul |
+| le corps de la vidéo est un **HLS multi-débits** | `playlist.m3u8` → 240p…720p |
+
+⇒ Le relais sert aussi la vidéo, avec deux paramètres :
+
+```
+/api/ptf?v={id}     → la playlist maîtresse, RÉÉCRITE : chaque URL (sous-playlist,
+                      segment, #EXT-X-MAP) repasse par /api/ptf?hls=<url absolue>
+/api/ptf?hls={url}  → un média traversé tel quel (CORS: *, Range transmis)
+```
+
+- **liste blanche d'hôtes** (`.vide.io`, l'API) : sans elle, ce serait un proxy
+  ouvert.
+- ⚠ **ne jamais réécrire une page d'erreur comme une playlist** : un 403 du CDN
+  arrive avec un corps HTML — la première version le réécrivait ligne par ligne.
+  D'où le `if (!r.ok)` explicite.
+- côté page, `hls.js` est chargé **à la demande** (`import('hls.js')`) : le
+  chunk (`hls-*.js`, 186 ko gzip) ne coûte rien tant qu'aucune course à vidéo
+  n'est ouverte. Safari lit le HLS nativement, sans hls.js.
+
+**Vérifié dans un vrai navigateur** (`localhost:3003`) : clic sur la carte
+« 17 oct 2026 Auteuil » de Kirikou des Mers → l'arrivée des 20 partants
+s'affiche, `videoSrc = /api/ptf?v=20261017_R01C03`, `readyState` 0 → **4** en 4 s,
+`duration = 378 s` = `00:06:18` (la durée annoncée), zéro erreur vidéo.

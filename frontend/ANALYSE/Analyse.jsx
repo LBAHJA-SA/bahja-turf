@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import {
   programmeDuJour, partantsDeCourse, carriereCheval, identiteCheval, statsCheval, terrainSimple,
@@ -361,11 +361,12 @@ function EcranCarriere({ course, partant, onRetour }) {
   const [erreur, setErreur] = useState('')
   const [sel, setSel] = useState(null)
   const [voirCom, setVoirCom] = useState(false)
+  const [courseOuverte, setCourseOuverte] = useState(null)
   const [tentative, setTentative] = useState(0)
 
   useEffect(() => {
     let vivant = true
-    setBusy(true); setErreur(''); setCarriere([]); setStats(null); setIdentite(null); setSel(null)
+    setBusy(true); setErreur(''); setCarriere([]); setStats(null); setIdentite(null); setSel(null); setCourseOuverte(null)
     Promise.all([
       identiteCheval(partant.horseId).catch(() => null),
       statsCheval(partant.horseId).catch(() => null),
@@ -486,7 +487,11 @@ function EcranCarriere({ course, partant, onRetour }) {
       {busy && <div style={{ padding: 18, fontSize: 13, color: SK.muet }}>Lecture de la carrière…</div>}
       {erreur && <div style={{ padding: 12 }}><Bandeau texte={erreur} onReessayer={() => setTentative((n) => n + 1)} /></div>}
 
-      {!busy && !erreur && (
+      {!busy && !erreur && courseOuverte && (
+        <CoursePassee ligne={courseOuverte} cheval={partant} onRetour={() => setCourseOuverte(null)} />
+      )}
+
+      {!busy && !erreur && !courseOuverte && (
         <>
           {/* ── les filtres ── */}
           {sel && (
@@ -547,7 +552,7 @@ function EcranCarriere({ course, partant, onRetour }) {
           <div style={{ padding: '11px 15px 15px', background: '#f8fafc' }}>
             {!carriere.length && <div style={{ fontSize: 13, color: SK.muet }}>Carrière non publiée pour ce cheval.</div>}
             {carriere.length > 0 && !lignes.length && <div style={{ fontSize: 13, color: SK.muet }}>Aucune course ne correspond aux filtres — clique « tout effacer ».</div>}
-            {lignes.map((l) => <CarteCarriere key={l.id} l={l} voirCom={voirCom} />)}
+            {lignes.map((l) => <CarteCarriere key={l.id} l={l} voirCom={voirCom} onOuvrir={setCourseOuverte} />)}
           </div>
         </>
       )}
@@ -555,12 +560,13 @@ function EcranCarriere({ course, partant, onRetour }) {
   )
 }
 
-/** Une course de la carrière — la carte de l'app. */
-function CarteCarriere({ l, voirCom }) {
+/** Une course de la carrière — la carte de l'app. Un clic OUVRE la course. */
+function CarteCarriere({ l, voirCom, onOuvrir }) {
   const d = dateBloc(l.date)
   const marques = l.fer || []
   return (
-    <div style={{ display: 'flex', border: '1px solid ' + SK.ligne, borderRadius: 10, overflow: 'hidden', marginBottom: 9, background: l.rang === 1 ? '#f0fdf4' : '#fff' }}>
+    <div onClick={() => onOuvrir(l)} title="Voir la course"
+      style={{ display: 'flex', border: '1px solid ' + SK.ligne, borderRadius: 10, overflow: 'hidden', marginBottom: 9, background: l.rang === 1 ? '#f0fdf4' : '#fff', cursor: 'pointer' }}>
       <div style={{ width: 56, flex: '0 0 56px', background: '#0f172a', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '8px 2px' }}>
         <div style={{ fontSize: 21, fontWeight: 800, lineHeight: 1 }}>{d.j}</div>
         <div style={{ fontSize: 11.5, opacity: 0.9 }}>{d.m}</div>
@@ -605,13 +611,186 @@ function CarteCarriere({ l, voirCom }) {
         )}
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 5, padding: '6px 9px' }}>
-        {l.replay ? (
-          <a href={l.replay.video} target="_blank" rel="noreferrer" title="revoir la course"
-            style={{ width: 38, height: 38, borderRadius: '50%', border: '2px solid ' + SK.accent, color: SK.accent, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', fontSize: 15, background: '#fff' }}>▶</a>
-        ) : <span style={{ fontSize: 11, color: SK.muet }}>—</span>}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4, padding: '6px 9px' }}>
+        <span title="voir la course" style={{ width: 38, height: 38, borderRadius: '50%', border: '2px solid ' + SK.accent, color: SK.accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, background: '#fff' }}>
+          {l.replay ? '▶' : '›'}
+        </span>
         <span style={{ fontSize: 10.5, color: SK.muet, fontFamily: SK.mono }}>{l.chrono != null ? chrono(l.chrono) : ''}</span>
       </div>
+    </div>
+  )
+}
+
+/* ═════════════ ④ LA COURSE PASSÉE — l'arrivée complète + le replay ═════════ */
+
+const TH = { padding: '6px 8px', fontSize: 11, fontWeight: 800, letterSpacing: 0.4, textTransform: 'uppercase', color: '#fff', background: SK.accentSombre, whiteSpace: 'nowrap', textAlign: 'left' }
+const TD = { padding: '5px 8px', fontSize: 12.5, borderBottom: '1px solid ' + SK.ligne, verticalAlign: 'middle' }
+
+/** Une course du passé, telle qu'elle s'est courue : l'arrivée en entier. */
+function CoursePassee({ ligne, cheval, onRetour }) {
+  const [partants, setPartants] = useState([])
+  const [busy, setBusy] = useState(true)
+  const [erreur, setErreur] = useState('')
+  const [tentative, setTentative] = useState(0)
+
+  useEffect(() => {
+    let vivant = true
+    setBusy(true); setErreur(''); setPartants([])
+    partantsDeCourse(ligne.courseId, { datetime: ligne.date })
+      .then((p) => { if (!vivant) return; setPartants(p); setBusy(false) })
+      .catch(() => { if (!vivant) return; setErreur("L'arrivée de cette course n'a pas pu être lue."); setBusy(false) })
+    return () => { vivant = false }
+  }, [ligne.courseId, ligne.date, tentative])
+
+  const arrives = partants.filter((p) => p.rang != null && !p.nonPartant).sort((a, b) => a.rang - b.rang)
+  const autres = partants.filter((p) => p.rang == null || p.nonPartant)
+  const gagnant = arrives[0]
+
+  return (
+    <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 15px', borderBottom: '1px solid ' + SK.ligne, background: '#fff', flexWrap: 'wrap' }}>
+        <button onClick={onRetour} style={{ ...btnPlein, background: SK.accent }}>← carrière de {cheval.nom}</button>
+        <span style={{ fontSize: 12.5, color: SK.doux, fontWeight: 600 }}>la course s'affiche ici — une autre carte remplace celle-ci</span>
+      </div>
+
+      {/* ── l'en-tête de la course ── */}
+      <div style={{ padding: '12px 15px', background: SK.entete, color: '#fff' }}>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', flexWrap: 'wrap' }}>
+          <b style={{ fontSize: 17 }}>{ligne.hippodrome}</b>
+          <span style={{ fontFamily: SK.mono, fontSize: 12.5 }}>
+            {ligne.reunion ? `R${ligne.reunion}` : ''}{ligne.numero != null ? `C${ligne.numero}` : ''}
+          </span>
+          <span style={{ fontFamily: SK.mono, fontSize: 12.5 }}>{D2(ligne.date)}</span>
+          {ligne.isTQQ && <span style={{ fontSize: 10, fontWeight: 800, background: '#fff', color: ROUGE, borderRadius: 5, padding: '2px 6px' }}>QUINTÉ+</span>}
+        </div>
+        <div style={{ fontSize: 14.5, fontWeight: 700, marginTop: 3 }}>{ligne.course || ligne.libelle}</div>
+        <div style={{ fontSize: 12, opacity: 0.92, marginTop: 2 }}>
+          {ligne.libelle} · {ligne.distance || '—'} m · {ligne.sens || '—'} · {ligne.terrain || ligne.surface || '—'}
+          {ligne.categorieCourte ? ` · ${ligne.categorieCourte}` : ''}
+          {ligne.nbPartants ? ` · ${ligne.nbPartants} partants` : ''}
+          {ligne.montant ? ` · ${gains(ligne.montant)}` : ''}
+        </div>
+        {arrives.length > 0 && (
+          <div style={{ fontSize: 12.5, fontWeight: 800, marginTop: 5, color: '#fef08a' }}>
+            Arrivée : {arrives.slice(0, 5).map((p) => p.num).join(' · ')}
+            {gagnant && gagnant.chrono != null && <span style={{ fontWeight: 600, opacity: 0.9 }}> · {chrono(gagnant.chrono)}</span>}
+          </div>
+        )}
+      </div>
+
+      {ligne.replay && <LecteurReplay replay={ligne.replay} />}
+
+      {busy && <div style={{ padding: 18, fontSize: 13, color: SK.muet }}>Lecture de la course…</div>}
+      {erreur && <div style={{ padding: 12 }}><Bandeau texte={erreur} onReessayer={() => setTentative((n) => n + 1)} /></div>}
+
+      {!busy && !erreur && (
+        <div style={{ overflowX: 'auto', background: SK.carte }}>
+          <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+            <thead>
+              <tr>
+                <th style={TH}>Place</th><th style={TH}>N°</th><th style={TH}>Cheval</th><th style={TH}>Jockey</th>
+                <th style={TH}>Poids</th><th style={TH}>VH</th><th style={TH}>Corde</th><th style={TH}>Artifices</th>
+                <th style={TH}>Cote</th><th style={TH}>Chrono</th><th style={TH}>Écart</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...arrives, ...autres].map((p) => (
+                <LigneArrivee key={p.id} p={p} moi={!!(ligne.id && p.id === ligne.id)} />
+              ))}
+            </tbody>
+          </table>
+          {!partants.length && <div style={{ padding: 14, fontSize: 13, color: SK.muet }}>Aucun partant publié pour cette course.</div>}
+          <div style={{ padding: '7px 12px', fontSize: 11, color: SK.muet }}>
+            L'arrivée complète de la course — ta ligne est surlignée. Écart = distance au cheval de devant.
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/** Une ligne de l'arrivée. */
+function LigneArrivee({ p, moi }) {
+  return (
+    <tr style={{ background: moi ? '#ecfeff' : p.nonPartant ? '#fafafa' : '#fff', opacity: p.nonPartant ? 0.55 : 1 }}>
+      <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 800, color: p.rang === 1 ? VERT : p.rang ? SK.texte : SK.muet }}>{p.nonPartant ? 'NP' : rang(p.rang)}</td>
+      <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 800 }}>{p.num}</td>
+      <td style={{ ...TD, minWidth: 190 }}>
+        <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
+          {p.casaque && <img src={p.casaque} alt="" width={18} height={18} style={{ borderRadius: 4, background: '#fff', border: '1px solid #e2e8f0' }} onError={(e) => { e.currentTarget.style.display = 'none' }} />}
+          <b style={{ fontSize: 12.5 }}>{p.nom}</b>
+          {moi && <span style={{ fontSize: 9.5, fontWeight: 800, background: SK.accent, color: '#fff', borderRadius: 4, padding: '0 4px' }}>ici</span>}
+        </div>
+      </td>
+      <td style={{ ...TD, whiteSpace: 'nowrap' }}>{p.jockey || '—'}</td>
+      <td style={{ ...TD, fontFamily: SK.mono }}>{p.poids != null ? p.poids + ' kg' : '—'}</td>
+      <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 700, color: SK.accentSombre }}>{p.vh != null ? p.vh : '—'}</td>
+      <td style={{ ...TD, fontFamily: SK.mono }}>{p.corde != null ? p.corde : '—'}</td>
+      <td style={TD}><Artifices p={p} /></td>
+      <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 700 }}>{p.cote != null ? p.cote : '—'}</td>
+      <td style={{ ...TD, fontFamily: SK.mono, color: SK.doux }}>{p.chrono != null ? chrono(p.chrono) : '—'}</td>
+      <td style={{ ...TD, fontSize: 11.5, color: SK.doux }}>{p.marge || '—'}</td>
+    </tr>
+  )
+}
+
+/** Le replay, LU DANS LA PAGE.
+ *
+ *  `race.replay._videoLink` renvoie un 302 vers un flux HLS (m3u8) : Chrome ne
+ *  le lit pas seul, et le CDN ne donne aucun en-tête CORS. Le relais réécrit
+ *  donc la playlist (`/api/ptf?v=…`), et hls.js — chargé seulement quand une
+ *  course avec vidéo est ouverte — fait le reste. */
+function LecteurReplay({ replay }) {
+  const ref = useRef(null)
+  const [etat, setEtat] = useState('chargement')
+  const [tentative, setTentative] = useState(0)
+
+  useEffect(() => {
+    const v = ref.current
+    if (!v || !replay) return undefined
+    const src = replay.id ? '/api/ptf?v=' + encodeURIComponent(replay.id) : replay.video
+    let hls = null
+    let vivant = true
+    setEtat('chargement')
+
+    /* Safari lit le HLS tout seul ; les autres ont besoin de hls.js. */
+    if (!replay.id || v.canPlayType('application/vnd.apple.mpegurl')) {
+      v.src = src
+      setEtat('pret')
+      return () => { vivant = false; v.removeAttribute('src'); v.load() }
+    }
+    import('hls.js').then(({ default: Hls }) => {
+      if (!vivant) return
+      if (!Hls.isSupported()) { setEtat('erreur'); return }
+      hls = new Hls({ maxBufferLength: 20 })
+      hls.on(Hls.Events.MANIFEST_PARSED, () => { if (vivant) setEtat('pret') })
+      hls.on(Hls.Events.ERROR, (_e, d) => { if (vivant && d && d.fatal) setEtat('erreur') })
+      hls.loadSource(src)
+      hls.attachMedia(v)
+    }).catch(() => { if (vivant) setEtat('erreur') })
+
+    return () => { vivant = false; if (hls) hls.destroy() }
+  }, [replay, tentative])
+
+  return (
+    <div style={{ padding: '12px 15px', background: '#0f172a' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, color: '#fff', flexWrap: 'wrap' }}>
+        <b style={{ fontSize: 14 }}>▶ Revoir la course</b>
+        {replay.duree && <span style={{ fontSize: 12, opacity: 0.75, fontFamily: SK.mono }}>{replay.duree}</span>}
+        {etat === 'erreur' && (
+          <button onClick={() => setTentative((n) => n + 1)} style={{ ...btnPlein, background: ROUGE, marginLeft: 'auto' }}>↻ Réessayer</button>
+        )}
+      </div>
+      <video ref={ref} controls playsInline preload="metadata" poster={replay.image || undefined}
+        style={{ width: '100%', maxHeight: 430, borderRadius: 10, background: '#000', display: 'block' }} />
+      {etat === 'erreur' && (
+        <div style={{ color: '#fecaca', fontSize: 12, marginTop: 6 }}>
+          La vidéo n'a pas pu être lue — clique « Réessayer ».
+        </div>
+      )}
+      {etat === 'chargement' && (
+        <div style={{ color: '#cbd5e1', fontSize: 12, marginTop: 6 }}>Mise en lecture…</div>
+      )}
     </div>
   )
 }
