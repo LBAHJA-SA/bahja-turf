@@ -29,6 +29,52 @@ export const ORIGINES = {
   eq: 'https://www.equidia.fr',              // le marche
 }
 
+/**
+ * `base=1` — la page d'origine servie SOUS notre origine (un aperçu dans la
+ * page). Sans <base>, ses chemins relatifs se résoudraient chez NOUS et la
+ * page sortirait nue.
+ */
+function injecterBase(html, origine) {
+  const s = String(html)
+  if (!/<head[^>]*>/i.test(s)) return s
+  return s.replace(/<head([^>]*)>/i, `<head$1><base href="${origine}/">`)
+}
+
+/**
+ * LE NOM DE LA SOURCE NE DOIT JAMAIS APPARAÎTRE (règle de l'utilisateur,
+ * 17/10/2026) : il s'affiche « LBAHJA-TURF ».
+ *
+ * On réécrit le TEXTE AFFICHÉ, jamais les URL :
+ *   · le contenu des <script> / <style> est laissé INTACT (il porte les URL) ;
+ *   · dans une balise, seuls title / alt / value / placeholder / content sont
+ *     touchés, et seulement s'ils ne contiennent aucun « / » (donc pas une
+ *     adresse) ;
+ *   · un mot précédé de « / . : » est une URL → intact ; précédé d'une LETTRE
+ *     (« RépartiTurf-France »), on met une espace : « Réparti LBAHJA-TURF ».
+ *
+ * ⚠ Réservé à `base=1` (§22). Les parseurs de la page cherchent des marqueurs
+ *   LITTÉRAUX (« Pronostic, une analyse Turf-France et IA ») : relire la page
+ *   en mode habillé les casserait.
+ */
+function habiller(html) {
+  const MOT = /(^|[^/.:])turf[\s-]?france(\.com)?/gi
+  const HABIT = (t) => String(t).replace(MOT, (m, avant) => (/[\w]/.test(avant) ? avant + ' ' : avant) + 'LBAHJA-TURF')
+  return String(html)
+    .split(/(<script[\s\S]*?<\/script\s*>|<style[\s\S]*?<\/style\s*>)/gi)
+    .map((bloc) => {
+      if (/^<(script|style)/i.test(bloc)) return bloc            // intact
+      return bloc.split(/(<[^>]*>)/).map((part) => {
+        if (!part) return part
+        if (part[0] === '<') {
+          return part.replace(/\b(title|alt|value|placeholder|content)=(["'])([\s\S]*?)\2/gi,
+            (m, attr, q, val) => (val.includes('/') ? m : `${attr}=${q}${HABIT(val)}${q}`))
+        }
+        return HABIT(part)
+      }).join('')
+    })
+    .join('')
+}
+
 /** Construit un handler Vercel : /api/<nom><chemin>  ->  <origine><chemin> */
 export function proxy(label) {
   const origine = ORIGINES[label]
@@ -63,8 +109,12 @@ export function proxy(label) {
         redirect: 'follow',
         signal: AbortSignal.timeout(25000),
       })
-      const body = await r.text()
-      res.setHeader('Content-Type', r.headers.get('content-type') || 'text/html; charset=utf-8')
+      let body = await r.text()
+      const type = r.headers.get('content-type') || 'text/html; charset=utf-8'
+      if (u.searchParams.get('base') === '1' && /text\/html/i.test(type)) {
+        body = injecterBase(habiller(body), origine)
+      }
+      res.setHeader('Content-Type', type)
       res.setHeader('Cache-Control', 'no-store')
       res.setHeader('X-Bahja-Proxy', label)
       res.statusCode = r.status

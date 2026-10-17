@@ -112,7 +112,7 @@ export async function meetingsDepuisReu(date, base = '/api/tf') {
       dernier = 'page d\'accueil (' + t.length + ' o)'
     } catch (e) { dernier = e.message }
   }
-  if (!html) throw new Error('reu.php : programme indisponible — ' + (dernier || 'sans réponse'))
+  if (!html) throw new Error('programme indisponible - ' + (dernier || 'sans réponse'))
   const reunions = parseProgrammeReu(html)
   const out = []
   for (const re of reunions) {

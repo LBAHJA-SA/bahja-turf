@@ -106,9 +106,9 @@ export async function chargerCourse(fetchId, pays = 'FRANCE', hippoSlug = '') {
   try {
     const det = await chargerDetailReu(dateDemandee, rNum, cNum, pays)
     if (hippoSlug && slugNorm(det.identite?.hippodrome) !== hippoSlug) {
-      throw new Error(`reu.php affiche ${det.identite.hippodrome} (R${det.identite.reunion}-C${det.identite.course}), pas « ${hippoSlug} »`)
+      throw new Error(`la course affichée est ${det.identite.hippodrome} (R${det.identite.reunion}-C${det.identite.course}), pas « ${hippoSlug} »`)
     }
-    const obj = normaliserDetailReu(det, rNum, cNum, pays, 'Turf-France · reu.php')
+    const obj = normaliserDetailReu(det, rNum, cNum, pays, 'LBAHJA-TURF')
     try { sauverCourse(dateDemandee, rNum, cNum, pays, obj) } catch (e) {}
     return obj
   } catch (e1) {
@@ -119,13 +119,13 @@ export async function chargerCourse(fetchId, pays = 'FRANCE', hippoSlug = '') {
         if (chargerPageTqq) {
           const page = await chargerPageTqq(offsetJour(dateDemandee), dateDemandee)
           const idn = page.identite
-          if (!idn) throw new Error('course non identifiée sur turf-france')
+          if (!idn) throw new Error('course non identifiée sur LBAHJA-TURF')
           if (idn.reunion !== rNum || idn.course !== cNum) {
             throw new Error(`le Quinté du ${dateDemandee} est R${idn.reunion}-C${idn.course}, pas R${rNum}-C${cNum}`)
           }
           const obj = {
             v: 2, pv: 4,
-            source: 'Turf-France · tqqjour.php',
+            source: 'LBAHJA-TURF',
             race: { numOrdre: idn.course, nom: page.entete?.nom || '', prix: page.entete?.nom || '', heure: page.entete?.heure || '', distance: page.entete?.distance ?? null, discipline: page.entete?.discipline || '', corde: page.entete?.corde || '', classe: page.entete?.classe || '', conditions: page.entete?.conditions || '', montant: page.entete?.montant ?? null, arrivee: null, dateLongue: idn.dateLongue || '', jour: idn.jour || '' },
             meeting: { num: idn.reunion, hippodrome: idn.hippodrome || 'Hippodrome', pays: 'FR' },
             participants: (page.partants || []).map((p) => ({ num: p.num, cheval: p.cheval, driver: p.driver, entraineur: p.entraineur, cote: p.cote, coteRef: p.coteRef, musique: p.musique, gains: p.gains, age: p.age, sexe: p.sexe, poids: p.poids, valeur: p.valeur, chrono: p.chrono, coteRefJockey: p.coteRefJockey ?? null, coteRefEntraineur: p.coteRefEntraineur ?? null, silk: p.silk ?? null, proprietaire: p.proprietaire, dernierPassage: p.dernierPassage, depart: p.corde })),
@@ -142,7 +142,7 @@ export async function chargerCourse(fetchId, pays = 'FRANCE', hippoSlug = '') {
     // (5) supprime le 05/10/2026 : Bahja-TURF ne parle a PERSONNE (AGENTS.md section 15).
     // Les 4 paliers ci-dessus sont les seules sources ; sinon on le dit clairement.
     const msg = e1 && e1.message ? e1.message : 'source inconnue'
-    throw new Error(msg === 'injoignable' ? 'turf-france injoignable' : msg)
+    throw new Error(msg === 'injoignable' ? 'LBAHJA-TURF injoignable' : msg)
   }
 }
 
@@ -163,7 +163,7 @@ export async function chargerProgramme(date) {
   const reunions = await chargerProgrammeReu(date)
   if (!reunions.length) throw new Error('programme vide')
   try { sauverProgramme(date, reunions) } catch (e) {}
-  return { date, reunions, source: 'Turf-France · reu.php' }
+  return { date, reunions, source: 'LBAHJA-TURF' }
 }
 /** Les pronostics : sauvegarde locale de l'Admin (aucun serveur). */
 export async function chargerPronos(fetchId) {

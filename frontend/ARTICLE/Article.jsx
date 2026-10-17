@@ -447,7 +447,7 @@ export default function Article() {
           </div>
         ) : null}
 
-        {/* ── les 18 lignes de turf-france ── */}
+        {/* ── les 18 lignes publiées par la source, habillées « LBAHJA-TURF » ── */}
         <h2 style={{ marginTop: 18, fontSize: 15, fontWeight: 800, color: '#111111', borderBottom: '2px solid #d4af37', paddingBottom: 6 }}>
           Etudes, Analyses, Synthèse et Pronostics
         </h2>

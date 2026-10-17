@@ -202,6 +202,53 @@ async function relayerVideo(u, res, origine) {
   }
 }
 
+/**
+ * `base=1` — sert la page d'origine SOUS notre origine.
+ * Les chemins relatifs de la page (« /php/… », « //hôte/images/… ») doivent
+ * se résoudre chez l'ORIGINE, pas chez nous. Un <base> le fait pour le
+ * document ET pour tout ce qu'il charge.
+ */
+function injecterBase(html, origine) {
+  const s = String(html);
+  if (!/<head[^>]*>/i.test(s)) return s;
+  return s.replace(/<head([^>]*)>/i, `<head$1><base href="${origine}/">`);
+}
+
+/**
+ * LE NOM DE LA SOURCE NE DOIT JAMAIS APPARAÎTRE (règle de l'utilisateur,
+ * 17/10/2026) : il s'affiche « LBAHJA-TURF ».
+ *
+ * On réécrit le TEXTE AFFICHÉ, jamais les URL :
+ *   · le contenu des <script> / <style> est laissé INTACT (il porte les URL) ;
+ *   · dans une balise, seuls title / alt / value / placeholder / content sont
+ *     touchés, et seulement s'ils ne contiennent aucun « / » (donc pas une
+ *     adresse) ;
+ *   · un mot précédé de « / . : » est une URL → intact ; précédé d'une LETTRE
+ *     (« RépartiTurf-France »), on met une espace : « Réparti LBAHJA-TURF ».
+ *
+ * ⚠ Réservé à `base=1` (§22) : les parseurs cherchent des marqueurs LITTÉRAUX
+ *   (« Pronostic, une analyse Turf-France et IA ») — relire la page en mode
+ *   habillé les casserait. Même code que `api/_proxy.js`.
+ */
+function habiller(html) {
+  const MOT = /(^|[^/.:])turf[\s-]?france(\.com)?/gi;
+  const HABIT = (t) => String(t).replace(MOT, (m, avant) => (/[\w]/.test(avant) ? avant + " " : avant) + "LBAHJA-TURF");
+  return String(html)
+    .split(/(<script[\s\S]*?<\/script\s*>|<style[\s\S]*?<\/style\s*>)/gi)
+    .map((bloc) => {
+      if (/^<(script|style)/i.test(bloc)) return bloc;            // intact
+      return bloc.split(/(<[^>]*>)/).map((part) => {
+        if (!part) return part;
+        if (part[0] === "<") {
+          return part.replace(/\b(title|alt|value|placeholder|content)=(["'])([\s\S]*?)\2/gi,
+            (m, attr, q, val) => (val.includes("/") ? m : `${attr}=${q}${HABIT(val)}${q}`));
+        }
+        return HABIT(part);
+      }).join("");
+    })
+    .join("");
+}
+
 /** Le même corps que api/_proxy.js : /api/<nom>/<suite> -> <origine>/<suite> */
 async function relayer(label, cheminComplet, res, origine = "") {
   try {
@@ -221,8 +268,13 @@ async function relayer(label, cheminComplet, res, origine = "") {
     /* ⚠ 07/10/2026 : la query string fait partie de la cible. reu.php
      *   ?view=program&date=… sans la query retombait sur la page d'accueil
      *   (3 935 o) au lieu du programme (132 165 o). `api/_proxy.js` le fait
-     *   déjà pour la production ; on aligne le middleware de dev dessus. */
-    const query = u.search && u.search !== "?" ? u.search : "";
+     *   déjà pour la production ; on aligne le middleware de dev dessus.
+     * ⚠ 17/10/2026 : quand `?p=` porte DÉJÀ la query (la forme Vercel), le
+     *   `u.search` de la requête n'est que l'enveloppe « ?p=… » : l'ajouter
+     *   collait « ?p=… » à la FIN de la query de la cible (donc `mode=standard
+     *   ?p=…`). `api/_proxy.js` ne le faisait pas — les deux transports
+     *   divergeaient. Même règle des deux côtés. */
+    const query = depuisRequete ? "" : (u.search && u.search !== "?" ? u.search : "");
     const cible = ORIGINES[label] + chemin + query;
     const entetes = {
       "user-agent": UA,
@@ -298,6 +350,12 @@ async function relayer(label, cheminComplet, res, origine = "") {
     res.setHeader("Cache-Control", "no-store");
     res.setHeader("X-Bahja-Proxy", label);
     res.statusCode = statut;
+    /* `base=1` : la page d'origine est servie SOUS notre origine (un aperçu
+     * dans la page, §22). Sans <base>, ses chemins relatifs (« /php/… »,
+     * « //hôte/images/… ») se résoudraient chez NOUS et la page sortirait nue. */
+    if (u.searchParams.get("base") === "1" && /text\/html/i.test(typeContenu)) {
+      body = injecterBase(habiller(body), ORIGINES[label]);
+    }
     res.end(body);
   } catch (e) {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
@@ -343,10 +401,11 @@ function proxiesApi() {
         const u = new URL(req.url || "/", base);
         const m = /^\/api\/(ptf|pt|tf|eq)$/.exec(u.pathname);
         if (!m) return next();
-        /* /api/ptf?v=… ou ?hls=… : la requête entière (la vidéo garde sa query) */
-        const video = u.searchParams.get("v") || u.searchParams.get("hls");
-        const cible = video ? req.url : "/api/" + m[1] + "/" + (u.searchParams.get("p") || "");
-        relayer(m[1], cible, res, base);
+        /* La requête ENTIÈRE : `relayer` reconnaît les trois formes —
+         *   /api/tf?p=…            (Vercel) · /api/ptf?v=… ou ?hls=… (la vidéo).
+         * On ne pré-construit plus « /api/tf/<p> » : ça mélangeait la query
+         * de la cible et celle de l'enveloppe (voir la note dans `relayer`). */
+        relayer(m[1], req.url, res, base);
       });
       server.middlewares.use((req, res, next) => {
         const m = /^\/api\/(ptf|pt|tf|eq)(\/.*)?$/.exec(req.url || "");

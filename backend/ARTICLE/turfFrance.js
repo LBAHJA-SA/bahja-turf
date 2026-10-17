@@ -50,7 +50,7 @@ async function lirePageTqq(chemin) {
     }
     if (essai < 3) await new Promise((r) => setTimeout(r, 800 * essai))
   }
-  throw new Error(`turf-france injoignable après 3 essais${dernierStatut ? ` (dernier HTTP ${dernierStatut})` : ''}`)
+  throw new Error(`LBAHJA-TURF injoignable après 3 essais${dernierStatut ? ` (dernier HTTP ${dernierStatut})` : ''}`)
 }
 
 export const TF_ALIAS = {
@@ -312,7 +312,7 @@ export async function chargerTopsTurfFrance(dateOffset = 0, dateAttendue = null)
   if (dateAttendue) {
     const idn = parseIdentiteTqq(html)
     if (idn && idn.date && idn.date !== dateAttendue) {
-      throw new Error(`tqqjour.php sert le ${idn.date}, pas le ${dateAttendue}`)
+      throw new Error(`le Quinté servi est celui du ${idn.date}, pas du ${dateAttendue}`)
     }
   }
   const tops = parseTqqJour(html)
@@ -400,7 +400,7 @@ export async function chargerPageTqq(dateOffset = 0, dateAttendee = null) {
   if (!partants.length) throw new Error('aucun partant lu')
   const identite = parseIdentiteTqq(html)
   if (dateAttendee && identite && identite.date !== dateAttendee) {
-    throw new Error(`turf-france affiche le Quinté du ${identite.date}, pas du ${dateAttendee}`)
+    throw new Error(`LBAHJA-TURF affiche le Quinté du ${identite.date}, pas du ${dateAttendee}`)
   }
   return { entete: parseEnteteTqq(html), partants, tops: parseTqqJour(html), identite }
 }
@@ -526,11 +526,11 @@ export async function chargerDetailReu(date, rNum, cNum, pays = 'FRANCE') {
   const r = await lirePageTqq(chemin)
   const html = await r.text()
   const partants = parsePartantsTqq(html)
-  if (!partants.length) throw new Error('reu.php : aucun partant lu')
+  if (!partants.length) throw new Error('aucun partant lu')
   const identite = parseIdentiteReu(html)
-  if (!identite) throw new Error('reu.php : course non identifiée')
+  if (!identite) throw new Error('course non identifiée')
   if (identite.date !== date || identite.reunion !== Number(rNum) || identite.course !== Number(cNum)) {
-    throw new Error(`reu.php affiche ${identite.hippodrome} R${identite.reunion}-C${identite.course} du ${identite.date}, pas R${rNum}-C${cNum} du ${date}`)
+    throw new Error(`la course affichée est ${identite.hippodrome} R${identite.reunion}-C${identite.course} du ${identite.date}, pas R${rNum}-C${cNum} du ${date}`)
   }
   return { entete: parseEnteteTqq(html), partants, tops: parseTqqJour(html), identite, arrivee: parseArriveeReu(html), aptitudes: parseAptitudesTqq(html), synthesePct: parseSynthesePct(html), pronos: parsePronosTf(html) }
 }

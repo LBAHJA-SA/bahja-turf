@@ -1354,6 +1354,26 @@ relayerait vers une origine étrangère.
 
 Vérification : `node tools\test-proxy.mjs` (10 appels réels, 2 formes × 3 proxies).
 
+#### ✅ Deux corrections du 17/10/2026 (mesurées, pas supposées)
+
+**① `?p=` ne double plus la query.** Quand `p` porte **déjà** la query (la forme
+Vercel), `u.search` n'est que l'enveloppe « `?p=…` ». Le middleware de dev
+l'ajoutait **quand même** à la fin de la cible :
+`…&mode=standard` + `?p=php%2Foscar…` → `mode=standard?p=…`. Sur `reu.php` le
+dégât était invisible (le junk tombait sur `pays`, que la page ignore) ; sur un
+**outil** (`oscarv2.php`), `mode` devenait `standard?p=…`.
+`api/_proxy.js` ne le faisait pas → **les deux transports divergeaient**.
+Corrigé : `const query = depuisRequete ? "" : u.search`. Le middleware de dev
+passe désormais `req.url` tel quel à `relayer()` (plus de « `/api/tf/<p>` »
+pré-construit).
+
+**② `&base=1` — servir une page de l'origine SOUS notre origine.** Pour montrer
+un outil **dans** la page (une visionneuse `<iframe>`, §22), la page est relue
+par le proxy. Sans `<base>`, ses chemins relatifs (`/php/…`,
+`//hôte/pictures/…`) se résolvent **chez nous** et la page sort nue. `base=1`
+injecte `<base href="<origine>/">` juste après `<head>` — uniquement quand la
+réponse est du `text/html`. Réservé à ce cas : aucun autre appel ne l'utilise.
+
 ### 12.1 Les 6 onglets — une identité visuelle PAR onglet (05/10/2026 · 6ᵉ le 16/10/2026)
 
 Les onglets ne doivent jamais se confondre : fond, en-tête, cadre,
@@ -2487,3 +2507,161 @@ chez `vide.io` (et non un mp4, malgré `format: "mp4"` dans les métadonnées).
 « 17 oct 2026 Auteuil » de Kirikou des Mers → l'arrivée des 20 partants
 s'affiche, `videoSrc = /api/ptf?v=20261017_R01C03`, `readyState` 0 → **4** en 4 s,
 `duration = 378 s` = `00:06:18` (la durée annoncée), zéro erreur vidéo.
+
+---
+
+## 22. ⭐ LE BLOC « ÉTUDES, ANALYSES, SYNTHÈSE ET PRONOSTICS » (17/10/2026)
+
+Sous **chaque course** de la page Chevaux : le bloc d'études de la course, et
+ses **boutons colorés qui marchent**. L'ancien onglet « Article » portait déjà ce
+bloc pour le **Quinté** ; ici il est sous **toutes** les courses.
+
+### 22.1 Les fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `backend/ANALYSE/turfFrance.js` | **le parseur de la page Chevaux** — copie privée de celui de l'ARTICLE, étendue : `parseTopsTf`, `parseAptitudesTf`, `parseSynthesePctTf`, `parsePronosTf`, `parseOutilsTf`, `parseProgrammeTf`, `chargerProgrammeTf`, `indexTf`, `reunionSource`, `chargerEtudesTf` |
+| `frontend/ANALYSE/Analyse.jsx` | `BlocEtudes` (les tableaux, les 10 pastilles, les 4 outils en vedette, 9 « autres études », le pronostic, le basculeur « Aptitude des N partants ») et `Visionneuse` (la fenêtre `<iframe>`) |
+| `api/_proxy.js` · `vite.config.js` | les relais — `&base=1` et l'habillage (§22.3) |
+
+⚠ **copie privée** : `backend/ARTICLE/turfFrance.js` n'est pas modifié dans sa
+logique de lecture (elle cherche des chaînes littérales de la source, dont le
+marqueur `Pronostic, une analyse Turf-France et IA`). Les deux parseurs vivent
+leur vie.
+
+### 22.2 Comment on trouve la course
+
+Deux clés seulement, et **le pays n'est pas devinable** (FRANCE, ROYAUME-UNI,
+PAYS-BAS, ETATS-UNIS, ESPAGNE, ARGENTINE, URUGUAY, SUISSE…) : `reu.php` le refuse
+s'il est faux. C'est `reu.php?view=program&date=…` qui le donne.
+
+```
+/php/reu.php?view=program&date=AAAA-MM-JJ     → la carte « R1-C1 » → pays
+/php/reu.php?view=detail&date=…&reunion=Rn&course=Cm&pays=XX
+```
+
+### 22.3 ⭐ AUCUN NOM DE SOURCE À L'ÉCRAN — « LBAHJA-TURF »
+
+> Règle de l'utilisateur : sur la page, **jamais** le nom de la source.
+
+Deux endroits, deux méthodes :
+
+| Endroit | Comment |
+|---|---|
+| nos propres libellés | renommés dans le code (aucune chaîne de la source dans l'interface) |
+| le **texte affiché** des pages relues | `habiller()` réécrit `Turf-France` → `LBAHJA-TURF`, **jamais** dans les URL, les `<script>` ni les `<style>` |
+
+Le `habiller()` de `api/_proxy.js` (et celui, identique, du middleware de dev) :
+
+- découpe d'abord sur `<script>|<style>` : **blocs intacts** ;
+- puis sur les balises : seuls `title|alt|value|placeholder|content` sont
+  touchés, et seulement si la valeur **ne contient pas de `/`** (une URL n'est
+  jamais réécrite) ;
+- dans le texte : `/(^|[^/.:])turf[\s-]?france(\.com)?/gi`, avec une espace
+  insérée quand un mot précède (`RépartiTurf-France` → `Réparti LBAHJA-TURF`),
+  et `.com` absorbé.
+
+L'habillage n'est appliqué **que** sur `&base=1` : les parseurs, eux, lisent la
+page **brute** (le marqueur ci-dessus doit rester lisible).
+
+### 22.4 Les outils s'ouvrent DANS la page
+
+Un bouton d'outil ouvre une **visionneuse** (`<iframe>` relayée par
+`/api/tf?p=…&base=1`) : **jamais un nouvel onglet**. Sans `&base=1`, les chemins
+relatifs de la page (`/php/…`, `//hôte/pictures/…`) se résolvaient **chez nous**
+et la page sortait nue — d'où l'injection de `<base href="<origine>/">` juste
+après `<head>`, uniquement quand la réponse est du `text/html`.
+(Voir §12.6 pour la correction du `?p=` qui doublait la query.)
+
+### 22.5 La vérification
+
+| Test | Ce qu'il mesure |
+|---|---|
+| `hab-test.mjs` (contre le **vrai** `api/_proxy.js`) | 4 pages réelles (detail, oscar, zonetri, sdin) : **0 « turf-france » visible**, 0 URL cassée |
+| `e2e.mjs` (données, par le relais de dev) | 18/10 Quinté, 17/10 Auteuil, 04/10 Arc, **ASCOT** (ROYAUME-UNI), date ancienne → tops, aptitudes, %, 2 pronos, 10 pastilles, 13 boutons, 4 vedettes en 0,6–1,7 s |
+
+---
+
+## 23. ⭐ LE PROGRAMME PMU — la liste des réunions (18/10/2026)
+
+> Demande : « **les réunions ne sont pas comme celles des sites**
+> (`turf-france.com`, `equidia.fr/courses-hippique`), et leur présentation n'est
+> pas attrayante ».
+
+### 23.1 Le problème, mesuré
+
+La page lisait le programme de sa **source de chevaux** : elle couvre le monde
+entier, pas le programme des paris.
+
+| Date | la page (source de chevaux) | le programme PMU (les sites) |
+|---|---|---|
+| 17/10/2026 | **19** réunions · 148 courses | **12** réunions · 93 cours |
+| 18/10/2026 | **20** réunions · 169 courses | **11** réunions · 87 cours |
+
+Et le n° de réunion manque : `pmuNumber` vaut **0** pour 16 des 20 réunions du
+18/10 (Dielsdorf, Angers, Hyères, Maure-de-Bretagne…). Seules 4 réunions sur 20
+portaient un numéro — d'où l'impression que « ça ne marche que pour le Quinté ».
+
+Réunions **hors programme PMU** (donc non jouables) : Solvalla, Hagmyren,
+Momarken, Visby, Gavle, Bornholm, Jägersro, Leipzig, Baden-Baden, Gelsenkirchen,
+Waregem, Chepstow, Fairyhouse, Hexham, York, Naas, Machecroy…
+
+### 23.2 La règle — `backend/ANALYSE/programme.js`
+
+```
+programmePmu(date) → { date, reference, reunions: [ { id, nom, hippodrome,
+                        reunion, pays, heure, depart, chevaux, courses } ] }
+```
+
+1. **la liste affichée est CELLE DU PROGRAMME PMU** : R1 → Rn, dans l'ordre,
+   chaque réunion avec son numéro, son hippodrome et son pays ;
+2. **appariement** : le n° de réunion d'abord (`pmuNumber` > 0 — il est
+   identique à celui des sites, vérifié R1 ParisLongchamp, R2 Dielsdorf, R3 Caen,
+   R6 Tarbes), **l'hippodrome ensuite** (`reunionSource()` : l'un contient
+   l'autre — « Bordeaux - Le Bouscat » = « LE BOUSCAT ») ;
+3. chaque course déjà connue de la source de chevaux est **enrichie** (partants,
+   conditions, arrivée, Quinté+) : c'est elle qui remplit le tableau ;
+4. les **courses** de la réunion sont **celles du programme** : une course que la
+   source connaît mais que le PMU ne programme pas n'est **pas** ajoutée.
+   Mesuré le 10/10 : 13 courses à Solvalla côté source, **2** au programme
+   (C10, C12) — les sites en montrent 2, on en montre 2 ;
+5. une réunion du programme que la source ignore (Amiens et Maronas, le 18/10)
+   **reste affichée** : ses courses viennent du programme et **son bloc d'études
+   fonctionne** ; seuls les partants manquent, et la page l'écrit.
+6. **repli** : programme PMU injoignable → l'ancienne liste, telle quelle.
+   Jamais une page vide.
+
+### 23.3 La présentation
+
+La colonne de gauche a été refaite : une **carte par réunion** — badge `R1`,
+hippodrome, `N courses · 1ʳᵉ à HH:MM`, pastille du pays, badge `Q+` quand la
+réunion porte le Quinté — et, dépliée, une **grille de pastilles `C1 13:58 / Plat ·
+1800 m`** (la course sélectionnée en bleu). La course ouverte affiche son
+en-tête complet à droite.
+
+⚠ **pas de drapeau emoji** : Windows ne dessine pas les drapeaux (🇨🇭 sort
+« CH »). On écrit le pays — `Suisse`, `Uruguay`, `Royaume-Uni`.
+
+### 23.4 Un bug corrigé au passage — le pays tronqué
+
+`parseProgrammeTf` lisait `pays=([A-Z- ]+)` : sur un pays **accentué et donc
+encodé**, `pays=SU%C3%88DE` ne donnait que **`SU`** (les fichiers d'archive
+s'appelaient `…_R8_C12_SU.json`). Corrigé : capture jusqu'au séparateur puis
+`decodeURIComponent`. La source accepte les deux formes, donc rien n'était cassé
+— mais `SU` s'affichait tel quel.
+
+> ⚠ reste à faire côté ARTICLE : `backend/ARTICLE/turfFrance.js` a la même
+> capture (`pays=([A-Z ]+)`) → les archives continuent de nommer `_SU_`.
+
+### 23.5 Vérifié
+
+`node` + le relais de dev, et le navigateur (`localhost:3003/analyse`) :
+
+```
+18/10 : 11 réunions · 87 courses   ← exactement les sites (Amiens et Maronas
+                                     sont là, avec « partants indisponibles »)
+17/10 : 12 réunions · 94 courses   ← les sites en ont 12
+Amiens R4C1 → « partants indisponibles » + le bloc d'études ✅
+Tarbes R6C1 → le tableau des partants ✅ + le bloc d'études ✅
+Quinté    → R1C3 ouvert, Top Chevaux, « Aptitude des 16 partants » ✅
+```
