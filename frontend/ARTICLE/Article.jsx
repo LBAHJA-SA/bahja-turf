@@ -188,6 +188,7 @@ export default function Article() {
           <nav style={{ display: 'flex', gap: 16 }}>
             <Link to="/" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
             <Link to="/quinte" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
+            <Link to="/analyse" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Chevaux</Link>
           </nav>
         </div>
       </header>
@@ -208,6 +209,7 @@ export default function Article() {
           <nav style={{ display: 'flex', gap: 16 }}>
             <Link to="/" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
             <Link to="/quinte" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
+            <Link to="/analyse" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Chevaux</Link>
           </nav>
         </div>
       </header>
@@ -255,6 +257,7 @@ export default function Article() {
           <nav style={{ display: 'flex', gap: 16 }}>
             <Link to="/" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
             <Link to="/quinte" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
+            <Link to="/analyse" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Chevaux</Link>
           </nav>
         </div>
       </header>

@@ -194,6 +194,9 @@ https://www.equidia.fr/courses/{YYYY-MM-DD}/R{n}/C{m}
 | idem `…/R{n}/C{m}/participants` | ✅ **le VH** (`handicapValeur`), la corde de départ (`placeCorde`), la place (`ordreArrivee`), le nom, la musique — **par cheval et par course** (§14.6) |
 | idem `…/participants/{n}/performances-detaillees` | ❌ **HTTP 420** (l'historique détaillé d'un cheval est fermé) |
 | `pronostics-turf.info` | ✅ Récapitulative presse (parser : ignorer la 1re cellule, elle contient un `<img alt="Pronostic N">`) |
+| `horse-racing-api.paris-turf.com/api/` (§21) | ✅ **TOUT SUR LE CHEVAL** : programme du jour, partants, **CARRIÈRE COMPLÈTE** (date · hippodrome · discipline · distance · sens · terrain · catégorie · jockey · poids/VH · fer D/F/P · œillères · place · chrono · cote · commentaire · replay). CORS ouvert + en-tête `X-API-KEY` (clé **publique**, livrée dans le bundle du site) |
+| idem, hors navigateur | ❌ **403 Cloudflare** (`Cf-Mitigated: challenge`) sur `curl`/Node — **seul un navigateur passe** → l'appel se fait **CÔTÉ CLIENT** (§21) |
+| `www.paris-turf.com` (HTML) | ❌ 403 Cloudflare sur fetch ; l'app « ParisTurf Live » lit exactement la même API |
 | `turfomania.fr` | ❌ **403 Cloudflare** sur fetch, tableaux vides dans le navigateur |
 | `geny.com` | ❌ 404 (redesign) |
 | endpoint cheval du backend | ❌ n'existe pas |
@@ -2216,3 +2219,108 @@ Un 4/5 qui rate le 1er est une feuille perdante : le x/5 seul mentirait.
   (quotas 3-2-1-1-1) ne se discute pas sans levée explicite — testé le
   09/10 sur 94 courses : la règle proposée 3-2-2-1 ne gagne pas clairement
   (écart ±1-3 = bruit).
+
+---
+
+## 21. ⭐ LA PAGE « CHEVAUX » — tout sur le cheval, toutes les courses (17/10/2026)
+
+> Demande de l'utilisateur : **« toutes les courses »**, et pour chaque cheval
+> **« les informations des courses passées »** — la fiche de l'app
+> « ParisTurf Live » (captures du 17/10/2026 : écran *Carrière* de
+> **Kel Story** et de **Rock And Roll**).
+>
+> **Aucun nom de source ne doit apparaître à l'écran.**
+
+### 21.1 Les fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `backend/ANALYSE/parisTurf.js` | **tout le client de la source** : programme, partants, carrière, identité, stats + les normalisateurs |
+| `frontend/ANALYSE/Analyse.jsx` | la page : programme → partants → **écran carrière** |
+| `src/App.jsx` | routes `/analyse` et `/chevaux` |
+| la nav des 5 pages | un lien **Chevaux** (Programme, Coply, Quinté, Articles, Chevaux) |
+
+### 21.2 La source, et pourquoi CÔTÉ CLIENT
+
+```
+https://horse-racing-api.paris-turf.com/api/
+en-tête   X-API-KEY: <clé publique du site>
+```
+
+- La clé est **publique** : elle est livrée dans le bundle du site sous
+  `NEXT_PUBLIC_HORSERACINGV2_CSR_API_KEY` (chunk `main-app-…`). Ce n'est pas
+  un secret — `x-api-key` **et** `X-API-KEY` passent (200) ; `?apiKey=` renvoie 401.
+- **CORS ouvert** : la page de `localhost:3003` lit l'API directement.
+- ⚠ **curl et Node reçoivent un défi Cloudflare** (`Cf-Mitigated: challenge`,
+  HTTP 403). **Un proxy serveur ne peut donc pas relayer cette API** — contrairement
+  à `/api/eq`, `/api/tf`, `/api/pt`. L'appel est **client**, comme casacourses.
+  (Vérifié aussi : le fichier vidéo du replay refuse le fetch cross-origin →
+  le bouton ▶ ouvre un onglet.)
+
+### 21.3 Les 5 appels (tous paresseux)
+
+| Fonction | Appel | Ce qu'elle rend |
+|---|---|---|
+| `programmeDuJour(date)` | `meetings?dateRange=<jour Parisien>&include=races&include=races.arrival` | **19 réunions · 148 courses** (17/10/2026), triées R1, R2… |
+| `partantsDeCourse(id)` | `runners?raceId=…&include=horse,jockey,trainer,owner,breeder,oddsSimpleGagnant,race,race.meeting` | les partants, triés par **numéro porté** |
+| `carriereCheval(id)` | `runners?horseId=…&include=race,race.meeting,race.replay,jockey,trainer,oddsSimpleGagnant&orderBy=race.datetime` | **toutes les courses passées** |
+| `identiteCheval(id)` | `horses?id=…&include=sire,dam,breeders,currentTrainer,currentOwner` | père, mère, éleveur, propriétaire |
+| `statsCheval(id)` | `stats/entity-stats?entityId=…&entityType=horse` | **musique** + courses/victoires/places/gains |
+
+- `orderBy` n'accepte que `id` et `race.datetime` (`orderBy=number` → 422).
+- Le **jour parisien** se calcule en UTC (`plageJourParis`) : l'API filtre sur `datetime`.
+- Les champs nuls sont **omis** par l'API (d'où un `shoeing` qui n'apparaît que sur le trot).
+
+### 21.4 La correspondance des champs — ⭐ vérifiée sur les tableaux du site
+
+| Affiché | Champ | Preuve du 17/10/2026 |
+|---|---|---|
+| **VH** | `handicapKg` | Goliath d'Aunou : VH 66,5 = `handicapKg` 66.5 ; Rock And Roll : **VH 60** (l'app affiche 60) |
+| **Poids** | `handicapTotalKg` | Rock And Roll : **67 kg** (l'app affiche 67) |
+| Corde | `draw` | 0 = pas de corde (obstacle) |
+| Place | `ranking` | `null` tant que la course n'est pas courue |
+| Cote | `oddsSimpleGagnant` | PMU · PMU_FR · BET365 · GENCLIC · GENYBET · ZETURF |
+| Commentaire | `comment` | l'analyse de la course, par cheval |
+| Chrono | `chrono` / `redkm` | en secondes (`260.07` → `4'20''07`) |
+| Replay | `race.replay._videoLink` | + `_thumbnailLink` |
+
+### 21.5 Le fer (`shoeing`) et les artifices
+
+`shoeing` = **deux lettres** `[antérieurs][postérieurs]`. La légende vient du site
+lui-même (chunk `matchem-component`) :
+
+```
+D = Déferré      F = Ferré      P = Plaqué
+```
+
+- **Trot** : `shoeing` est publié (`"DD"`, `"DF"`…). **Obstacle : souvent absent.**
+- La carte n'affiche **que** ce qui n'est pas ferré (comme l'app) + les outils :
+  `hood` → 👓 (œillères), `tongueTie` → 👅 (attache-langue), `blinkers` = `BLINKERS`/`VISOR`.
+
+### 21.6 L'écran « Carrière » — la copie de l'app
+
+```
+en-tête    n° · nom · artifices · « par <père> et <mère> » · Entraîneur · Jockey
+           SA · POIDS · VH · CORDE   puis   « N j · <musique> »
+filtres    ≈distance · hippodrome · discipline · terrain · type · Œil
+           + bouton « 🎯 mêmes conditions que ce jour »
+totaux     n courses · n victoires · n places   (sur la liste filtrée)
+bascule    « Afficher les commentaires »
+cartes     date (jour/mois/année) · hippodrome · place « 3e/14 »
+           « Haies · 3900m · Très souple · List · Hand »
+           « B. Le Clerc · 68kg · VH61 · D »   + ▶ replay + commentaire
+```
+
+**Les contrôles de fidélité (17/10/2026, Quinté d'Auteuil) :**
+
+| Cheval | L'app | La page |
+|---|---|---|
+| Kel Story | SA H6 · Poids 68 · VH 61 · **21 j** · `1h2h7h5h10hAh6hA…` | identique |
+| Kel Story | **37 courses · 6 victoires · 6 places** | **37c · 6v · 6p** ✅ |
+| Rock And Roll | SA H8 · Poids 67 · VH 60 | identique · 56c 8v 11p |
+
+- ⚠ Le « N j » compte depuis la **dernière course jouée** — celle du jour ne compte pas.
+- ⚠ **Aucun filtre par défaut** : on montre d'abord TOUTE la carrière (c'est la demande),
+  la présélection « mêmes conditions » est un **bouton**.
+- La liste des partants porte **la musique + `Nc Nv Np` de chaque cheval** (6 requêtes
+  à la fois, en tâche de fond) : « chaque cheval » se lit sans cliquer.

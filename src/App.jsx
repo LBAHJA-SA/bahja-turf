@@ -3,8 +3,9 @@ import Programme from '../frontend/PROGRAMME/Programme.jsx'
 import Article from '../frontend/ARTICLE/Article.jsx'
 import QuinteGrille from '../frontend/QUINTE/QuinteGrille.jsx'
 import Couple from '../frontend/COUPLE/Couple.jsx'
+import Analyse from '../frontend/ANALYSE/Analyse.jsx'
 
-/* 4 pages, chacune son lien et ses dossiers.
+/* 5 pages, chacune son lien et ses dossiers.
  * Navigation autorisée (menu) ; PARTAGE des moteurs/sources interdit.
  *   frontend/<PAGE>/ = son affichage · backend/<PAGE>/ = ses données.
  * /articles et /race/:id sont des alias (même page, pas des liens).
@@ -21,6 +22,8 @@ export default function App(){
         <Route path="/couple" element={<Couple />} />
         {/* alias : l'ancien nom reste valable (les bookmarks ne cassent pas) */}
         <Route path="/coply" element={<Couple />} />
+        <Route path="/analyse" element={<Analyse />} />
+        <Route path="/chevaux" element={<Analyse />} />
       </Routes>
     </BrowserRouter>
   )
