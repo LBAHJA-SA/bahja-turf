@@ -144,6 +144,8 @@ export default function Analyse() {
     setBusyPartants(false)
 
     /* La musique et les compteurs de CHAQUE cheval, en tâche de fond (6 à la fois). */
+    /* 3 requêtes à la fois, une petite pause entre chaque : on ne veut pas
+       ressembler à un robot. (Le cache fait le reste à la 2ᵉ visite.) */
     let i = 0
     const suivante = async () => {
       while (i < liste.length) {
@@ -152,9 +154,10 @@ export default function Analyse() {
           const s = await statsCheval(p.horseId)
           setStatsChevaux((m) => ({ ...m, [p.horseId]: s }))
         } catch (e) { /* un cheval sans stats ne casse rien */ }
+        await new Promise((res) => setTimeout(res, 150))
       }
     }
-    await Promise.all(Array.from({ length: Math.min(6, liste.length) }, suivante))
+    await Promise.all(Array.from({ length: Math.min(3, liste.length) }, suivante))
   }, [])
 
   const reunionsVues = useMemo(
@@ -209,7 +212,7 @@ export default function Analyse() {
           )}
         </div>
 
-        {errProg && <div style={bandeau(ROUGE)}>{errProg}</div>}
+        {errProg && <Bandeau texte={errProg} onReessayer={() => chargerProgramme(date)} />}
 
         <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
@@ -281,7 +284,7 @@ export default function Analyse() {
                 </div>
 
                 {busyPartants && <div style={{ padding: 16, fontSize: 13, color: SK.muet }}>Lecture des partants…</div>}
-                {errPartants && <div style={{ padding: 12 }}><div style={bandeau(ROUGE)}>{errPartants}</div></div>}
+                {errPartants && <div style={{ padding: 12 }}><Bandeau texte={errPartants} onReessayer={() => ouvrirCourse(course)} /></div>}
 
                 {!busyPartants && partants.length > 0 && (
                   <div style={{ overflowX: 'auto' }}>
@@ -358,6 +361,7 @@ function EcranCarriere({ course, partant, onRetour }) {
   const [erreur, setErreur] = useState('')
   const [sel, setSel] = useState(null)
   const [voirCom, setVoirCom] = useState(false)
+  const [tentative, setTentative] = useState(0)
 
   useEffect(() => {
     let vivant = true
@@ -373,7 +377,7 @@ function EcranCarriere({ course, partant, onRetour }) {
       setBusy(false)
     })
     return () => { vivant = false }
-  }, [partant.horseId])
+  }, [partant.horseId, tentative])
 
   /* ---- les valeurs présentes, pour n'offrir que des filtres utiles ---- */
   const valeurs = useMemo(() => {
@@ -480,7 +484,7 @@ function EcranCarriere({ course, partant, onRetour }) {
       </div>
 
       {busy && <div style={{ padding: 18, fontSize: 13, color: SK.muet }}>Lecture de la carrière…</div>}
-      {erreur && <div style={{ padding: 12 }}><div style={bandeau(ROUGE)}>{erreur}</div></div>}
+      {erreur && <div style={{ padding: 12 }}><Bandeau texte={erreur} onReessayer={() => setTentative((n) => n + 1)} /></div>}
 
       {!busy && !erreur && (
         <>
@@ -652,4 +656,16 @@ function Puce({ on, children, onClick }) {
 const lienNav = { color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }
 const btnPlein = { padding: '7px 14px', borderRadius: 8, border: 0, cursor: 'pointer', fontWeight: 800, fontSize: 12.5, background: '#0e7490', color: '#fff' }
 const btnGhost = { padding: '5px 12px', borderRadius: 8, border: '1px solid rgba(255,255,255,.6)', cursor: 'pointer', background: 'transparent', color: '#fff', fontWeight: 700, fontSize: 12.5 }
-const bandeau = (couleur) => ({ background: '#fff', border: '1px solid ' + couleur, color: couleur, borderRadius: 8, padding: '8px 12px', fontSize: 13 })
+/** Un bandeau d'erreur AVEC de quoi réessayer — jamais une page morte. */
+function Bandeau({ texte, onReessayer }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: '#fff', border: '1px solid ' + ROUGE, color: ROUGE, borderRadius: 8, padding: '9px 12px', fontSize: 13 }}>
+      <span style={{ flex: '1 1 320px' }}>{texte}</span>
+      {onReessayer && (
+        <button onClick={onReessayer} style={{ padding: '5px 13px', borderRadius: 8, border: 0, cursor: 'pointer', fontWeight: 800, fontSize: 12.5, background: ROUGE, color: '#fff' }}>
+          ↻ Réessayer
+        </button>
+      )}
+    </div>
+  )
+}

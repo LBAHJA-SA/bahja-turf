@@ -45,27 +45,85 @@ const BASE = 'https://horse-racing-api.paris-turf.com/api/'
 /** Clé publique du site (NEXT_PUBLIC_… : publiée dans son bundle, pas un secret). */
 export const CLE_PT = 'cd347f33-9dc3-4294-865e-f5d6ee7558ac'
 
-/* ---------------------------------------------------------------- l'appel --- */
+/* ------------------------------------------------ l'appel, les essais, le cache ---
+ *
+ * ⚠ LE 403 N'EST PAS UNE ERREUR DE REQUÊTE — c'est un « reviens ».
+ *
+ *   La source est derrière Cloudflare. De temps en temps la réponse est un
+ *   défi (HTTP 403, en-tête `Cf-Mitigated: challenge`) au lieu du JSON. La
+ *   même requête, une seconde plus tard, passe. Mesuré le 17/10/2026 :
+ *   42 requêtes de suite → 42×200 ; puis un 403 isolé quelques minutes après.
+ *
+ *   Donc : on RÉESSAIE les 403, les 429 et les 5xx (5 essais, en espaçant),
+ *   et on ne renonce que pour un vrai refus (401, 404, 422).
+ *
+ * ⚠ LE CACHE — solidarité avec la source : chaque appel réussi est gardé
+ *   10 minutes (mémoire + sessionStorage). On ne redemande pas deux fois la
+ *   même chose : moins de requêtes = moins de défis. Si un appel échoue
+ *   quand même, ce qu'on a déjà lu reste affiché.
+ *
+ * ------------------------------------------------------------------------- */
 
-/** Un GET JSON, 3 essais. Un raté réseau isolé ne doit pas condamner la page. */
-async function appel(chemin, essais = 3) {
+const TTL_CACHE = 10 * 60 * 1000
+const MEM = new Map()
+const SS = (() => { try { return window.sessionStorage } catch (e) { return null } })()
+
+function cacheLire(url) {
+  const m = MEM.get(url)
+  if (m && Date.now() - m.t < TTL_CACHE) return m.v
+  if (SS) {
+    try {
+      const brut = SS.getItem('pt:' + url)
+      if (brut) {
+        const { t, v } = JSON.parse(brut)
+        if (Date.now() - t < TTL_CACHE) { MEM.set(url, { t, v }); return v }
+      }
+    } catch (e) { /* cache illisible ou quota : on l'ignore */ }
+  }
+  return undefined
+}
+
+function cacheEcrire(url, v) {
+  const t = Date.now()
+  MEM.set(url, { t, v })
+  if (SS) {
+    try {
+      const s = JSON.stringify({ t, v })
+      if (s.length < 200000) SS.setItem('pt:' + url, s)
+    } catch (e) { /* quota dépassé : le cache mémoire suffit */ }
+  }
+}
+
+/** Un GET JSON : cache, puis 5 essais. Un 403/5xx passager ne condamne pas la page. */
+async function appel(chemin, essais = 5) {
+  const url = BASE + chemin
+  const garde = cacheLire(url)
+  if (garde !== undefined) return garde
+
   let dernier = 'inconnu'
   for (let i = 0; i < essais; i++) {
     try {
-      const r = await fetch(BASE + chemin, {
+      const r = await fetch(url, {
         headers: { 'X-API-KEY': CLE_PT, Accept: 'application/json' },
+        cache: 'no-store',
         signal: AbortSignal.timeout(20000),
       })
-      if (r.ok) return await r.json()
+      if (r.ok) {
+        const j = await r.json()
+        cacheEcrire(url, j)
+        return j
+      }
       dernier = 'HTTP ' + r.status
-      /* 4xx = la requête est fautive : réessayer ne changera rien. */
-      if (r.status >= 400 && r.status < 500) break
+      /* 401 / 404 / 422 = requête fautive → inutile d'insister. */
+      if (r.status !== 403 && r.status !== 429 && r.status < 500) break
     } catch (e) {
       dernier = e && e.message ? e.message : String(e)
     }
-    if (i < essais - 1) await new Promise((res) => setTimeout(res, 400 * (i + 1)))
+    if (i < essais - 1) await new Promise((res) => setTimeout(res, 500 * (i + 1) + Math.random() * 400))
   }
-  throw new Error('paris-turf : ' + dernier)
+  throw new Error(dernier === 'HTTP 403'
+    ? 'la source a refusé la requête pour l’instant — réessaie dans quelques secondes'
+    : dernier)
 }
 
 /* ------------------------------------------------------------- le calendrier - */
@@ -414,7 +472,7 @@ export async function carriereCheval(horseId, limite = 60) {
 export async function identiteCheval(horseId) {
   const j = await appel(`horses?id=${horseId}&include=sire&include=dam&include=breeders&include=currentTrainer&include=currentOwner&skip=0`)
   const h = (j.data || j || [])[0]
-  if (!h) throw new Error('paris-turf : cheval introuvable')
+  if (!h) throw new Error('cheval introuvable')
   return {
     id: h.id,
     nom: h.name || '',
