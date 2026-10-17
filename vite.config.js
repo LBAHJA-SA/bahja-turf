@@ -120,9 +120,24 @@ async function relayer(label, cheminComplet, res) {
     let statut = 502;
     let typeContenu = "text/html; charset=utf-8";
     try {
-      /* `ptf` passe par HTTP/2 : en HTTP/1.1, Cloudflare défie tout serveur. */
+      /* `ptf` : HTTP/2 + une origine que la clé autorise (Cloudflare défie
+         HTTP/1.1 et les requêtes sans origine — voir api/_proxy.js). */
       if (label === "ptf") {
-        const r = await getHttp2(cible, entetes);
+        const entetesPtf = { ...entetes, origin: "http://localhost", referer: "http://localhost/" };
+        let r = await getHttp2(cible, entetesPtf);
+        if (/Just a moment|_cf_chl_opt|__cf_chl/i.test(r.corps.slice(0, 4000))) {
+          try {
+            const r2 = await fetch(cible, {
+              headers: { ...entetesPtf, Origin: "http://localhost", Referer: "http://localhost/" },
+              redirect: "follow",
+              signal: AbortSignal.timeout(25000),
+            });
+            const c2 = await r2.text();
+            if (!/Just a moment|_cf_chl_opt|__cf_chl/i.test(c2.slice(0, 4000))) {
+              r = { statut: r2.status, type: r2.headers.get("content-type"), corps: c2 };
+            }
+          } catch (e) { /* on garde le premier résultat */ }
+        }
         body = r.corps;
         statut = r.statut;
         typeContenu = r.type || "application/json; charset=utf-8";

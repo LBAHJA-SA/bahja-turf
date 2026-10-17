@@ -16,17 +16,19 @@
  *   en query string (`?apiKey=`) renvoie 401.
  *
  *   ⚠ POURQUOI PAS UN APPEL DIRECT DEPUIS LA PAGE EN LIGNE
- *     Mesuré le 17/10/2026. L'API tient une LISTE BLANCHE d'origines :
+ *     Mesuré le 17/10/2026. La clé publique est RESTREINTE PAR ORIGINE. Le
+ *     préflight, lui, passe toujours (204, CORS réfléchi) : c'est le GET qui
+ *     est refusé.
  *
- *       depuis `localhost`            → 200 (nos essais passaient donc)
- *       depuis `bahja-turf.vercel.app` → {"error":"ForbiddenError",
- *                                        "message":"Origin 'https://bahja-turf.
- *                                        vercel.app' is not allowed"}
+ *       Origin : https://bahja-turf.vercel.app → 403 « Origin … is not
+ *                                                    allowed for this API key »
+ *       Origin : http://localhost              → 200
+ *       Origin : https://www.paris-turf.com    → 200
+ *       Origin : https://bahja-turf.com        → 403
+ *       Origin : null (iframe sandbox)         → 403
  *
- *     Et le refus tombe sur le PREFLIGHT : `X-API-KEY` est un en-tête
- *     personnalisé, donc le navigateur demande d'abord l'autorisation, que
- *     l'API refuse sans en-tête CORS — la requête n'est jamais envoyée.
- *     Aucun réglage côté page ne lève ça.
+ *     Une page ne peut pas mentir sur son origine ; un serveur, si. D'où le
+ *     relais, qui déclare l'origine que la clé autorise.
  *
  *   ⭐ LA SOLUTION : LE RELAIS `/api/ptf` (api/_proxy.js en ligne, middleware
  *     identique dans vite.config.js en local → même chemin, deux
