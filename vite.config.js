@@ -32,9 +32,14 @@ const ORIGINES = {
   ptf: "https://horse-racing-api.paris-turf.com",
 };
 /** La clé de l'API ParisTurf (publique : livrée dans son bundle). Elle vit ici,
- *  côté serveur, pour la même raison qu'en production : l'API refuse le
- *  domaine Vercel par son en-tête `Origin` (403 au preflight, mesuré le
- *  17/10/2026). Le relais serveur n'envoie pas cet en-tête. */
+ *  côté serveur, pour la même raison qu'en production : l'API tient une liste
+ *  blanche d'origines PAR CLÉ et refuse le domaine Vercel (« Origin … is not
+ *  allowed for this API key », mesuré le 17/10/2026 — le préflight passe, c'est
+ *  le GET qui tombe). Le relais déclare l'origine que la clé autorise.
+ *
+ *  ⚠ En production ce n'est PAS ce middleware qui sert `/api/ptf` : c'est
+ *  `api/ptf.js`, en runtime edge (Cloudflare défie tout client Node depuis
+ *  Vercel — détail en tête de ce fichier-là, et au §21.7 de AGENTS.md). */
 const CLE_PTF = "cd347f33-9dc3-4294-865e-f5d6ee7558ac";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
@@ -54,9 +59,10 @@ function curlTexte(url, delai = 55000) {
 }
 
 /** Un GET en HTTP/2 — la seule façon de traverser Cloudflare depuis un serveur
- *  (mesuré le 17/10/2026 : HTTP/1.1 → 403 « Just a moment… », HTTP/2 → 200).
- *  Même rôle que `getHttp2` dans api/_proxy.js : le développement et la
- *  production doivent se comporter pareil. */
+ *  Node (mesuré le 17/10/2026 : HTTP/1.1 → 403 « Just a moment… », HTTP/2
+ *  depuis un poste de travail → 200). Le relais de production, lui, n'est pas
+ *  Node : c'est `api/ptf.js`, en runtime edge — c'est ce que Cloudflare laisse
+ *  passer depuis Vercel. Ici on reste en Node, sur la machine de l'utilisateur. */
 function getHttp2(url, entetes, delai = 20000) {
   return new Promise((resolve, reject) => {
     const u = new URL(url);
@@ -112,7 +118,7 @@ async function relayer(label, cheminComplet, res) {
       "accept-language": "fr-FR,fr;q=0.9",
       accept:
         label === "ptf"
-          ? "application/json"
+          ? "application/json, text/plain, */*"
           : "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
       ...(label === "ptf" ? { "x-api-key": CLE_PTF } : {}),
     };
@@ -120,10 +126,22 @@ async function relayer(label, cheminComplet, res) {
     let statut = 502;
     let typeContenu = "text/html; charset=utf-8";
     try {
-      /* `ptf` : HTTP/2 + une origine que la clé autorise (Cloudflare défie
-         HTTP/1.1 et les requêtes sans origine — voir api/_proxy.js). */
+      /* `ptf` : HTTP/2 + l'origine que la clé autorise + les en-têtes d'un vrai
+         navigateur — le même profil d'appel que `api/ptf.js`, qui sert en
+         ligne (voir §21.7 de AGENTS.md : Cloudflare défie tout client Node
+         depuis Vercel, et une partie des requêtes depuis un poste). */
       if (label === "ptf") {
-        const entetesPtf = { ...entetes, origin: "http://localhost", referer: "http://localhost/" };
+        const entetesPtf = {
+          ...entetes,
+          origin: "http://localhost",
+          referer: "http://localhost/",
+          "sec-ch-ua": '"Chromium";v="141", "Not?A_Brand";v="24"',
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": '"Windows"',
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "cross-site",
+        };
         let r = await getHttp2(cible, entetesPtf);
         if (/Just a moment|_cf_chl_opt|__cf_chl/i.test(r.corps.slice(0, 4000))) {
           try {

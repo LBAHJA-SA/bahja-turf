@@ -9,41 +9,35 @@
  *
  *       https://horse-racing-api.paris-turf.com/api/
  *
- *   Elle répond en JSON, en CORS OUVERT, à condition d'envoyer l'en-tête
- *   `X-API-KEY`. Cette clé n'est PAS un secret : elle est livrée dans le
- *   bundle public du site, sous le nom NEXT_PUBLIC_HORSERACINGV2_CSR_API_KEY.
- *   Mesuré le 17/10/2026 : `x-api-key` et `X-API-KEY` passent (200) ; la clé
- *   en query string (`?apiKey=`) renvoie 401.
+ *   Elle répond en JSON à condition d'envoyer l'en-tête `X-API-KEY`. Cette clé
+ *   n'est PAS un secret : elle est livrée dans le bundle public du site, sous le
+ *   nom NEXT_HORSERACINGV2_CSR_API_KEY. Mais elle est RESTREINTE PAR ORIGINE, et
+ *   la source est derrière Cloudflare. Trois verrous, mesurés le 17/10/2026 :
  *
- *   ⚠ POURQUOI PAS UN APPEL DIRECT DEPUIS LA PAGE EN LIGNE
- *     Mesuré le 17/10/2026. La clé publique est RESTREINTE PAR ORIGINE. Le
- *     préflight, lui, passe toujours (204, CORS réfléchi) : c'est le GET qui
- *     est refusé.
+ *     ① L'ORIGINE — le préflight passe toujours (204, CORS réfléchi) ; c'est le
+ *        GET qui est refusé, selon l'origine :
  *
- *       Origin : https://bahja-turf.vercel.app → 403 « Origin … is not
- *                                                    allowed for this API key »
- *       Origin : http://localhost              → 200
- *       Origin : https://www.paris-turf.com    → 200
- *       Origin : https://bahja-turf.com        → 403
- *       Origin : null (iframe sandbox)         → 403
+ *          Origin https://bahja-turf.vercel.app → 403 « Origin … is not allowed
+ *                                                       for this API key »
+ *          Origin http://localhost              → 200
+ *          Origin https://www.paris-turf.com    → 200
+ *          Origin null (iframe sandbox)         → 403
  *
- *     Une page ne peut pas mentir sur son origine ; un serveur, si. D'où le
- *     relais, qui déclare l'origine que la clé autorise.
+ *        Une page ne peut pas mentir sur son origine ; un serveur, si.
  *
- *   ⭐ LA SOLUTION : LE RELAIS `/api/ptf` (api/_proxy.js en ligne, middleware
- *     identique dans vite.config.js en local → même chemin, deux
- *     environnements). Il appelle depuis le serveur, sans en-tête `Origin`,
- *     avec la clé : la liste blanche ne s'applique pas. La page ne parle plus
- *     qu'à sa propre origine — aucun CORS nulle part.
+ *     ② CLOUDFLARE — il défie tout client SERVEUR Node : curl, `fetch` HTTP/1.1,
+ *        et même `node:http2` depuis Vercel (5 essais sur 5, 403 « Just a
+ *        moment… »). Le runtime EDGE de Vercel passe, lui, mais 56 % du temps
+ *        seulement — il est distribué, certains POP sont notés, d'autres non.
  *
- *     ⚠ ET CE RELAIS DOIT APPELER EN HTTP/2. En HTTP/1.1, Cloudflare défie
- *     tout client serveur (`Cf-Mitigated: challenge`, « Just a moment… ») :
- *     curl, Node, la fonction Vercel — tous. En HTTP/2, la même requête,
- *     mêmes en-têtes, passe : 200, 303 541 octets. Mesuré le 17/10/2026.
+ *     ③ LE CHEMIN — le relais ne connaît que l'origine : le sous-chemin relayé
+ *        doit donc porter le `/api`.
  *
- *     L'appel direct reste en SECOURS dans `adresses()` : les deux voies
- *     coexistent, la première qui répond gagne (et le résultat est mis en
- *     cache, donc une seule fois).
+ *   ⭐ LA SOLUTION : LE RELAIS `/api/ptf` — `api/ptf.js` (runtime edge) en ligne,
+ *     middleware de vite.config.js en local. Il déclare l'origine que la clé
+ *     autorise, et il réessaie quatre fois quand Cloudflare défie. La page ne
+ *     parle plus qu'à sa propre origine — aucun CORS nulle part — et la clé ne
+ *     part JAMAIS dans son bundle.
  *
  * ⭐ LES 4 APPELS
  *   programmeDuJour(date)  1 appel  → réunions + TOUTES leurs courses
@@ -66,25 +60,24 @@
 
 const BASE = 'https://horse-racing-api.paris-turf.com/api/'
 
-/** Clé publique du site (NEXT_PUBLIC_… : publiée dans son bundle, pas un secret). */
-export const CLE_PT = 'cd347f33-9dc3-4294-865e-f5d6ee7558ac'
-
 /* ------------------------------------------------ l'appel, les essais, le cache ---
  *
  * ⚠ LE 403 N'EST PAS UNE ERREUR DE REQUÊTE — c'est un « reviens ».
  *
  *   La source est derrière Cloudflare. De temps en temps la réponse est un
  *   défi (HTTP 403, en-tête `Cf-Mitigated: challenge`) au lieu du JSON. La
- *   même requête, une seconde plus tard, passe. Mesuré le 17/10/2026 :
- *   42 requêtes de suite → 42×200 ; puis un 403 isolé quelques minutes après.
+ *   même requête, une seconde plus tard, passe. Le relais (api/ptf.js)
+ *   réessaie DÉJÀ quatre fois de son côté ; ces essais-ci sont la seconde
+ *   couche, pour le cas où les quatre portes du relais tomberaient sur un POP
+ *   noté. Mesuré le 17/10/2026 : 9 appels sur 16 passaient du premier coup.
  *
- *   Donc : on RÉESSAIE les 403, les 429 et les 5xx (5 essais, en espaçant),
- *   et on ne renonce que pour un vrai refus (401, 404, 422).
+ *   Donc : on RÉESSAIE les 403, les 429 et les 5xx (en espaçant), et on ne
+ *   renonce que pour un vrai refus (401, 404, 422).
  *
  * ⚠ LE CACHE — solidarité avec la source : chaque appel réussi est gardé
  *   10 minutes (mémoire + sessionStorage). On ne redemande pas deux fois la
- *   même chose : moins de requêtes = moins de défis. Si un appel échoue
- *   quand même, ce qu'on a déjà lu reste affiché.
+ *    même chose : moins de requêtes = moins de défis. Si un appel échoue
+ *    quand même, ce qu'on a déjà lu reste affiché.
  *
  * ------------------------------------------------------------------------- */
 
@@ -118,15 +111,15 @@ function cacheEcrire(url, v) {
   }
 }
 
-/* ⭐ LES ADRESSES — deux voies pour le même contenu.
+/* ⭐ LES ADRESSES — notre relais, en deux formes.
  *
- *   1) NOTRE PROXY `/api/ptf`  →  même origine. Aucune question de CORS, donc
- *      la seule voie qui fonctionne en ligne (voir l'en-tête du fichier).
- *   2) L'API EN DIRECT           →  ce que lit le site paris-turf.com lui-même.
- *      Elle répond depuis `localhost` (origine autorisée) ; on la garde en
- *      secours, et le développement reste possible sans le proxy.
+ *   `/api/ptf` est le SEUL chemin vers cette source : la clé est restreinte par
+ *   origine et Cloudflare défie les clients non-navigateur (détail en tête de
+ *   api/ptf.js). En développement, c'est le middleware de vite.config.js qui le
+ *   sert ; en ligne, la fonction edge. La page ne parle donc qu'à sa propre
+ *   origine — et la clé ne part JAMAIS dans le bundle.
  *
- *   Les deux formes d'appel du proxy sont nécessaires : le rewrite Vercel
+ *   Les deux formes sont nécessaires : le rewrite Vercel
  *   (`/api/ptf/<x>` → `/api/ptf?p=<x>`) CONSOMME la query string, alors que le
  *   middleware de dev lit le chemin. Mesuré sur `/api/tf` le 07/10/2026.
  */
@@ -136,17 +129,13 @@ function adresses(chemin) {
    *   chemin relayé doit donc porter le `/api` que `BASE` porte déjà. Sans lui
    *   l'API répond « NOT_FOUND » (mesuré le 17/10/2026). */
   const complet = 'api/' + nu
-  /* Le relais d'abord, PARTOUT : c'est le même code en local et en ligne
-   * (middleware Vite / fonction Vercel), et le seul qui traverse Cloudflare.
-   * L'appel direct reste le secours — il ne vaut que depuis `localhost`. */
   return [
     '/api/ptf?p=' + encodeURIComponent(complet),
     '/api/ptf/' + complet,
-    BASE + nu,
   ]
 }
 
-/** Un GET JSON : cache, puis 5 essais. Un 403/5xx passager ne condamne pas la page. */
+/** Un GET JSON : cache, puis des essais. Un 403/5xx passager ne condamne pas la page. */
 async function appel(chemin, essais = 3) {
   const garde = cacheLire(chemin)
   if (garde !== undefined) return garde
@@ -156,9 +145,9 @@ async function appel(chemin, essais = 3) {
     for (let i = 0; i < essais; i++) {
       try {
         const r = await fetch(url, {
-          headers: { 'X-API-KEY': CLE_PT, Accept: 'application/json' },
+          headers: { Accept: 'application/json' },
           cache: 'no-store',
-          signal: AbortSignal.timeout(20000),
+          signal: AbortSignal.timeout(25000),
         })
         if (r.ok) {
           const j = await r.json()

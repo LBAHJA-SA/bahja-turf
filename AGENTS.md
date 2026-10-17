@@ -194,9 +194,10 @@ https://www.equidia.fr/courses/{YYYY-MM-DD}/R{n}/C{m}
 | idem `…/R{n}/C{m}/participants` | ✅ **le VH** (`handicapValeur`), la corde de départ (`placeCorde`), la place (`ordreArrivee`), le nom, la musique — **par cheval et par course** (§14.6) |
 | idem `…/participants/{n}/performances-detaillees` | ❌ **HTTP 420** (l'historique détaillé d'un cheval est fermé) |
 | `pronostics-turf.info` | ✅ Récapitulative presse (parser : ignorer la 1re cellule, elle contient un `<img alt="Pronostic N">`) |
-| `horse-racing-api.paris-turf.com/api/` (§21) | ✅ **TOUT SUR LE CHEVAL** : programme du jour, partants, **CARRIÈRE COMPLÈTE** (date · hippodrome · discipline · distance · sens · terrain · catégorie · jockey · poids/VH · fer D/F/P · œillères · place · chrono · cote · commentaire · replay). CORS ouvert + en-tête `X-API-KEY` (clé **publique**, livrée dans le bundle du site) |
-| idem, hors navigateur | ❌ **403 Cloudflare** (`Cf-Mitigated: challenge`) sur `curl`/Node — **seul un navigateur passe** → l'appel se fait **CÔTÉ CLIENT** (§21) |
-| `www.paris-turf.com` (HTML) | ❌ 403 Cloudflare sur fetch ; l'app « ParisTurf Live » lit exactement la même API |
+| `horse-racing-api.paris-turf.com/api/` (§21) | ✅ **TOUT SUR LE CHEVAL** : programme du jour, partants, **CARRIÈRE COMPLÈTE** (date · hippodrome · discipline · distance · sens · terrain · catégorie · jockey · poids/VH · fer D/F/P · œillères · place · chrono · cote · commentaire · replay). En-tête `X-API-KEY` — clé **publique** mais **RESTREINTE PAR ORIGINE** (`paris-turf.com` et `http://localhost` seulement) |
+| idem, depuis la page en ligne | ❌ 403 « Origin … is not allowed for this API key » (le *préflight* passe, le GET non) → **relais obligatoire** |
+| idem, depuis un serveur | ❌ 403 Cloudflare pour **tout client Node**, y compris une fonction Vercel (Node **et** HTTP/2) ; ✅ **le runtime EDGE de Vercel passe**, ~30-56 % du temps → `/api/ptf` réessaie 4× (§21.7) |
+| `www.paris-turf.com` (HTML) | ❌ 403 Cloudflare (h1 comme h2) ; l'app « ParisTurf Live » lit exactement la même API |
 | `turfomania.fr` | ❌ **403 Cloudflare** sur fetch, tableaux vides dans le navigateur |
 | `geny.com` | ❌ 404 (redesign) |
 | endpoint cheval du backend | ❌ n'existe pas |
@@ -2240,22 +2241,33 @@ Un 4/5 qui rate le 1er est une feuille perdante : le x/5 seul mentirait.
 | `src/App.jsx` | routes `/analyse` et `/chevaux` |
 | la nav des 5 pages | un lien **Chevaux** (Programme, Coply, Quinté, Articles, Chevaux) |
 
-### 21.2 La source, et pourquoi CÔTÉ CLIENT
+### 21.2 La source, et pourquoi un RELAIS SERVEUR en runtime EDGE
 
 ```
 https://horse-racing-api.paris-turf.com/api/
 en-tête   X-API-KEY: <clé publique du site>
+relais    /api/ptf  →  api/ptf.js, `export const config = { runtime: 'edge' }`
 ```
 
-- La clé est **publique** : elle est livrée dans le bundle du site sous
-  `NEXT_PUBLIC_HORSERACINGV2_CSR_API_KEY` (chunk `main-app-…`). Ce n'est pas
-  un secret — `x-api-key` **et** `X-API-KEY` passent (200) ; `?apiKey=` renvoie 401.
-- **CORS ouvert** : la page de `localhost:3003` lit l'API directement.
-- ⚠ **curl et Node reçoivent un défi Cloudflare** (`Cf-Mitigated: challenge`,
-  HTTP 403). **Un proxy serveur ne peut donc pas relayer cette API** — contrairement
-  à `/api/eq`, `/api/tf`, `/api/pt`. L'appel est **client**, comme casacourses.
-  (Vérifié aussi : le fichier vidéo du replay refuse le fetch cross-origin →
-  le bouton ▶ ouvre un onglet.)
+La clé est **publique** (bundle du site, `NEXT_HORSERACINGV2_CSR_API_KEY`), mais
+elle est **restreinte par origine** — et Cloudflare défie les clients serveur.
+Trois verrous, tous **mesurés le 17/10/2026**, détaillés au **§21.7** :
+
+| Chemin | Résultat |
+|---|---|
+| Appel direct depuis la page (vercel.app) | ❌ 403 « Origin … is not allowed **for this API key** » |
+| Appel direct depuis `localhost` | ✅ 200 (le développement marchait donc) |
+| Relais Node hors navigateur (curl, Node h1/h2) | ❌ 403 Cloudflare « Just a moment… » |
+| **Relais `/api/ptf` en runtime EDGE** | ✅ **200** |
+
+⇒ La page ne parle **qu'à sa propre origine** (`/api/ptf…`) : aucun CORS nulle
+part, et le défi Cloudflare n'existe plus. En **développement**, c'est le
+middleware de `vite.config.js` qui relaie (Node + HTTP/2, qui passe depuis un
+poste de travail). **Même contrat, deux transports.**
+
+- ⚠ Un `?apiKey=` en query ne marche pas (401) : la clé doit être un en-tête.
+- Le fichier vidéo du replay, lui, refuse toujours le fetch cross-origin →
+  le bouton ▶ ouvre un onglet.
 
 ### 21.3 Les 5 appels (tous paresseux)
 
@@ -2324,3 +2336,94 @@ cartes     date (jour/mois/année) · hippodrome · place « 3e/14 »
   la présélection « mêmes conditions » est un **bouton**.
 - La liste des partants porte **la musique + `Nc Nv Np` de chaque cheval** (6 requêtes
   à la fois, en tâche de fond) : « chaque cheval » se lit sans cliquer.
+
+### 21.7 ⭐ POURQUOI LA PAGE NE MARCHAIT PAS EN LIGNE — l'enquête du 17/10/2026
+
+> Symptôme : la page marche sur `localhost:3003` et **pas** sur
+> `bahja-turf.vercel.app`. Trois verrous s'empilaient, tous mesurés.
+
+#### ① LA CLÉ EST RESTREINTE PAR ORIGINE
+
+Le **préflight passe toujours** (204, `Access-Control-Allow-Origin` réfléchi) —
+c'est le **GET** qui est refusé, selon l'origine envoyée :
+
+| `Origin` | Préflight | GET |
+|---|---|---|
+| `https://bahja-turf.vercel.app` | 204 ✅ | **403** « Origin … is not allowed **for this API key** » |
+| `http://localhost` (n'importe quel port) | 204 ✅ | **200** ✅ |
+| `https://www.paris-turf.com` | 204 ✅ | **200** ✅ |
+| `https://bahja-turf.com` | 204 ✅ | 403 |
+| `null` (iframe `sandbox`) | — | 403 |
+
+⇒ Aucun réglage côté page ne peut lever ça (une page ne ment pas sur son
+origine). Un **relais serveur**, si : il déclare `http://localhost`.
+⇒ Le `?apiKey=` en query string n'existe pas (brute-force de 14 noms → 401).
+
+#### ② CLOUDFLARE DÉFIE LES CLIENTS SERVEUR — sauf le runtime EDGE
+
+Mêmes en-têtes, mêmes données, seul le transport change :
+
+| Client | Résultat |
+|---|---|
+| `curl` HTTP/1.1 | ❌ 403 `Cf-Mitigated: challenge` |
+| Node `fetch` (HTTP/1.1) | ❌ 403 |
+| Node `node:http2` **depuis un poste de travail** | ✅ 200 |
+| Node `node:http2` **depuis Vercel** | ❌ 403 (5 essais sur 5) — **une fonction Vercel Node ne peut pas** |
+| **Runtime EDGE de Vercel** (`api/ptf.js`) | ✅ 200 … **mais seulement ~30-56 % du temps** |
+| Navigateur headless d'un service tiers (datacenter) | ✅ 200 |
+
+⇒ Le défi tombe sur l'**empreinte du client**, pas sur l'IP : un datacenter
+passe s'il présente une pile TLS de navigateur. Le runtime edge n'a pas celle de
+Node — d'où son succès. Il est **distribué** : certains POP sont notés, d'autres
+non, d'où le hasard. Mesuré : `meetings` 1/4 · `runners` 2/4 · `horses` 3/4 ·
+`stats` 3/4 → **9/16 = 56 %**.
+
+⇒ **La parade : réessayer.** Le relais fait `ESSAIS = 4` tentatives et s'arrête
+sur la première réponse sans défi, et le client réessaie 3 fois de plus sur 403
+(donc jusqu'à 12 tentatives amont pour un même appel).
+
+```
+                           appels aboutis    tentatives amont par appel
+avant (4 essais)               7/10           1 2 4 1 4 1 4 4 2 2
+avec les en-têtes navigateur  11/12           2 4 3 3 3 3 3 1 1 4 1 2
+```
+
+Les en-têtes `sec-ch-ua*` et `sec-fetch-*` (ceux d'un vrai navigateur, voir
+`ENTETES` dans `api/ptf.js`) doublent presque le taux : sans eux, l'empreinte
+TLS de navigateur du runtime edge et des en-têtes qui ne le sont pas se
+contredisent.
+
+#### ③ LE SOUS-CHEMIN RELAYÉ DOIT PORTER `/api`
+
+Le relais ne connaît que l'**origine** : sans le préfixe, l'API répond
+`{"error":"Not Found","message":"Error: NOT_FOUND"}`.
+
+#### La règle qui en sort — *une page, trois transports*
+
+| Où | Qui relaie | Comment |
+|---|---|---|
+| **En ligne** | `api/ptf.js` | `export const config = { runtime: 'edge' }` — **pas** `api/_proxy.js` |
+| **En développement** | `vite.config.js` | middleware, `node:http2` (passe depuis un poste) |
+| **La page** | — | ne parle qu'à `/api/ptf` : même origine, zéro CORS, et **la clé ne part plus dans le bundle** |
+
+⚠ **Ne pas remettre `ptf` dans `api/_proxy.js`** : c'est le runtime Node, et
+Cloudflare le défie systématiquement (5/5). Le label y a été retiré.
+
+#### Les en-têtes de diagnostic (sans effet sur l'affichage)
+
+| En-tête | Ce qu'il dit |
+|---|---|
+| `X-Bahja-Runtime` | `edge` (attendu) ou `inconnu` |
+| `X-Bahja-Cf` | `challenge` si Cloudflare a défié la dernière tentative |
+| `X-Bahja-Essais` | combien de tentatives ont été nécessaires |
+
+```powershell
+# vérifier l'aperçu avant de pousser (jamais la production) :
+npx --yes vercel@latest deploy --yes      # -> une URL d'aperçu
+npx --yes vercel@latest curl -i "https://<apercu>.vercel.app/api/ptf?p=api%2Fmeetings%3F..."
+```
+
+> ⚠ `vercel curl` est nécessaire : les aperçus sont protégés par
+> l'authentification Vercel. Le CLI est **authentifié sur ce poste**
+> (`%APPDATA%\com.vercel.cli\Data\auth.json`), donc un aperçu est déployable
+> sans toucher à la production.
