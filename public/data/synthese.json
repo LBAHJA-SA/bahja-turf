@@ -23,7 +23,13 @@
       17
     ],
     "savedAt": "2026-10-17T10:13:32.560Z",
-    "arrivee": null,
+    "arrivee": [
+      1,
+      6,
+      4,
+      11,
+      2
+    ],
     "ticket": [
       16,
       3,
@@ -34,14 +40,14 @@
       2,
       19
     ],
-    "ticketSource": "page",
-    "ticketPoseLe": "2026-10-17T10:13:32.616Z",
+    "ticketSource": "final",
+    "ticketPoseLe": "2026-10-17T10:30:08.389Z",
     "discipline": "HAIE",
     "distance": 4300,
     "nbPartants": 20,
     "hippodrome": "AUTEUIL",
     "prix": "PRIX PRINCE D'ECOUEN - GRAND HANDICAP D'AUTOMNE",
-    "courseId": "pmu-R1C3",
+    "courseId": "2026-10-17_R1_C3",
     "cle": "2026-10-17_R1_C3",
     "runners": [
       1,
@@ -65,7 +71,68 @@
       19,
       20
     ],
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "placeholder": false,
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          12,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          2,
+          19
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          3
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          1
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          16
+        ]
+      }
+    ],
+    "surprises": [],
+    "ticketMoteur": [
+      16,
+      3,
+      1,
+      12,
+      5,
+      6,
+      2,
+      19
+    ],
+    "cloture": "2026-10-17T13:56:21.886Z",
+    "scores": null,
+    "collecte": "2026-10-17T10:30:08.414Z",
+    "ticketMatin": [
+      16,
+      3,
+      1,
+      12,
+      5,
+      6,
+      2,
+      19
+    ]
   },
   "2026-10-16": {
     "date": "2026-10-16",
@@ -90,7 +157,13 @@
       10
     ],
     "savedAt": "2026-10-15T13:15:05.015Z",
-    "arrivee": null,
+    "arrivee": [
+      4,
+      11,
+      7,
+      6,
+      13
+    ],
     "discipline": "Attelé",
     "distance": 2850,
     "nbPartants": 15,
@@ -133,7 +206,7 @@
     "groupes": null,
     "surprises": [],
     "ticketMoteur": null,
-    "cloture": null,
+    "cloture": "2026-10-17T10:19:08.654Z",
     "scores": null,
     "collecte": "2026-10-16T08:45:28.136Z"
   },
@@ -2066,7 +2139,8 @@
         "pris": false
       }
     ],
-    "ticketPoseLe": "2026-10-04T23:13:23.230Z"
+    "ticketPoseLe": "2026-10-04T23:13:23.230Z",
+    "cle": "2026-10-04_R1_C5"
   },
   "2026-10-03": {
     "date": "2026-10-03",
