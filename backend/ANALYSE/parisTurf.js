@@ -15,11 +15,28 @@
  *   Mesuré le 17/10/2026 : `x-api-key` et `X-API-KEY` passent (200) ; la clé
  *   en query string (`?apiKey=`) renvoie 401.
  *
- *   ⚠ POURQUOI PAS UN PROXY — mesuré le 17/10/2026 :
- *     curl et Node reçoivent un **défi Cloudflare** (`Cf-Mitigated: challenge`,
- *     HTTP 403). Seul un navigateur qui exécute le JS passe. Un proxy serveur
- *     ne peut donc pas relayer cette API : l'appel se fait CÔTÉ CLIENT, comme
- *     casacourses. C'est aussi ce qui rend la page utilisable en production.
+ *   ⚠ POURQUOI PAS UN APPEL DIRECT DEPUIS LA PAGE EN LIGNE
+ *     Mesuré le 17/10/2026. L'API tient une LISTE BLANCHE d'origines :
+ *
+ *       depuis `localhost`            → 200 (nos essais passaient donc)
+ *       depuis `bahja-turf.vercel.app` → {"error":"ForbiddenError",
+ *                                        "message":"Origin 'https://bahja-turf.
+ *                                        vercel.app' is not allowed"}
+ *
+ *     Et le refus tombe sur le PREFLIGHT : `X-API-KEY` est un en-tête
+ *     personnalisé, donc le navigateur demande d'abord l'autorisation, que
+ *     l'API refuse sans en-tête CORS — la requête n'est jamais envoyée.
+ *     Aucun réglage côté page ne lève ça.
+ *
+ *   ⭐ LA SOLUTION : LE RELAIS `/api/ptf` (api/_proxy.js en ligne, middleware
+ *     identique dans vite.config.js en local → même chemin, deux
+ *     environnements). Il appelle depuis le serveur, sans en-tête `Origin`,
+ *     avec la clé : la liste blanche ne s'applique pas. La page ne parle plus
+ *     qu'à sa propre origine — aucun CORS nulle part.
+ *
+ *     L'appel direct reste en SECOURS dans `adresses()` : les deux voies
+ *     coexistent, la première qui répond gagne (et le résultat est mis en
+ *     cache, donc une seule fois).
  *
  * ⭐ LES 4 APPELS
  *   programmeDuJour(date)  1 appel  → réunions + TOUTES leurs courses
@@ -41,6 +58,11 @@
  * ============================================================================= */
 
 const BASE = 'https://horse-racing-api.paris-turf.com/api/'
+
+/** Sommes-nous sur un poste de développement ? (voir `adresses`) */
+const MEME_ORIGINE_DEV = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(
+  (typeof location !== 'undefined' && location.hostname) || '',
+)
 
 /** Clé publique du site (NEXT_PUBLIC_… : publiée dans son bundle, pas un secret). */
 export const CLE_PT = 'cd347f33-9dc3-4294-865e-f5d6ee7558ac'
@@ -94,32 +116,55 @@ function cacheEcrire(url, v) {
   }
 }
 
+/* ⭐ LES ADRESSES — deux voies pour le même contenu.
+ *
+ *   1) NOTRE PROXY `/api/ptf`  →  même origine. Aucune question de CORS, donc
+ *      la seule voie qui fonctionne en ligne (voir l'en-tête du fichier).
+ *   2) L'API EN DIRECT           →  ce que lit le site paris-turf.com lui-même.
+ *      Elle répond depuis `localhost` (origine autorisée) ; on la garde en
+ *      secours, et le développement reste possible sans le proxy.
+ *
+ *   Les deux formes d'appel du proxy sont nécessaires : le rewrite Vercel
+ *   (`/api/ptf/<x>` → `/api/ptf?p=<x>`) CONSOMME la query string, alors que le
+ *   middleware de dev lit le chemin. Mesuré sur `/api/tf` le 07/10/2026.
+ */
+function adresses(chemin) {
+  const nu = String(chemin).replace(/^\/+/, '')
+  const relais = ['/api/ptf?p=' + encodeURIComponent(nu), '/api/ptf/' + nu]
+  const direct = [BASE + nu]
+  /* Sur un poste de développement, `localhost` est dans la liste blanche de
+   * l'API : l'appel direct passe (c'est la voie du site lui-même), et il est
+   * plus court. En ligne, c'est l'inverse. Le reste est le secours. */
+  return MEME_ORIGINE_DEV ? [...direct, ...relais] : [...relais, ...direct]
+}
+
 /** Un GET JSON : cache, puis 5 essais. Un 403/5xx passager ne condamne pas la page. */
-async function appel(chemin, essais = 5) {
-  const url = BASE + chemin
-  const garde = cacheLire(url)
+async function appel(chemin, essais = 3) {
+  const garde = cacheLire(chemin)
   if (garde !== undefined) return garde
 
   let dernier = 'inconnu'
-  for (let i = 0; i < essais; i++) {
-    try {
-      const r = await fetch(url, {
-        headers: { 'X-API-KEY': CLE_PT, Accept: 'application/json' },
-        cache: 'no-store',
-        signal: AbortSignal.timeout(20000),
-      })
-      if (r.ok) {
-        const j = await r.json()
-        cacheEcrire(url, j)
-        return j
+  for (const url of adresses(chemin)) {
+    for (let i = 0; i < essais; i++) {
+      try {
+        const r = await fetch(url, {
+          headers: { 'X-API-KEY': CLE_PT, Accept: 'application/json' },
+          cache: 'no-store',
+          signal: AbortSignal.timeout(20000),
+        })
+        if (r.ok) {
+          const j = await r.json()
+          cacheEcrire(chemin, j)
+          return j
+        }
+        dernier = 'HTTP ' + r.status
+        /* 401 / 404 / 422 = requête fautive → inutile d'insister sur CETTE adresse. */
+        if (r.status !== 403 && r.status !== 429 && r.status < 500) break
+      } catch (e) {
+        dernier = e && e.message ? e.message : String(e)
       }
-      dernier = 'HTTP ' + r.status
-      /* 401 / 404 / 422 = requête fautive → inutile d'insister. */
-      if (r.status !== 403 && r.status !== 429 && r.status < 500) break
-    } catch (e) {
-      dernier = e && e.message ? e.message : String(e)
+      if (i < essais - 1) await new Promise((res) => setTimeout(res, 500 * (i + 1) + Math.random() * 400))
     }
-    if (i < essais - 1) await new Promise((res) => setTimeout(res, 500 * (i + 1) + Math.random() * 400))
   }
   throw new Error(dernier === 'HTTP 403'
     ? 'la source a refusé la requête pour l’instant — réessaie dans quelques secondes'

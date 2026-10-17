@@ -8,6 +8,7 @@ import { execFile } from "node:child_process";
  *   /api/pt  →  pronostics-turf.info   la Synthèse de la presse
  *   /api/tf  →  turf-france.com         reu.php, tqqjour.php
  *   /api/eq  →  equidia.fr              le marché (rapp_evol = la cote)
+ *   /api/ptf →  horse-racing-api.paris-turf.com   la carrière des chevaux
  *
  * ⚠ POURQUOI /api ET PAS /pt, /tf, /eq
  *   Ces trois-là ne sont pas de vrais fichiers du projet : en production,
@@ -27,7 +28,13 @@ const ORIGINES = {
   pt: "https://www.pronostics-turf.info",
   tf: "https://www.turf-france.com",
   eq: "https://www.equidia.fr",
+  ptf: "https://horse-racing-api.paris-turf.com",
 };
+/** La clé de l'API ParisTurf (publique : livrée dans son bundle). Elle vit ici,
+ *  côté serveur, pour la même raison qu'en production : l'API refuse le
+ *  domaine Vercel par son en-tête `Origin` (403 au preflight, mesuré le
+ *  17/10/2026). Le relais serveur n'envoie pas cet en-tête. */
+const CLE_PTF = "cd347f33-9dc3-4294-865e-f5d6ee7558ac";
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
 
@@ -70,7 +77,11 @@ async function relayer(label, cheminComplet, res) {
         headers: {
           "User-Agent": UA,
           "Accept-Language": "fr-FR,fr;q=0.9",
-          Accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+          Accept:
+            label === "ptf"
+              ? "application/json"
+              : "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+          ...(label === "ptf" ? { "X-API-KEY": CLE_PTF } : {}),
         },
         redirect: "follow",
         signal: AbortSignal.timeout(25000),
@@ -108,17 +119,40 @@ function proxiesApi() {
   return {
     name: "proxies-api",
     configureServer(server) {
+      // 1) Fichiers statiques /data/* — handler explicite pour éviter le SPA fallback
+      server.middlewares.use(async (req, res, next) => {
+        const u = new URL(req.url || "/", "http://localhost");
+        if (u.pathname.startsWith("/data/")) {
+          const fs = await import("node:fs");
+          const path = await import("node:path");
+          const filePath = path.join("public", u.pathname);
+          if (fs.existsSync(filePath)) {
+            const content = fs.readFileSync(filePath);
+            const ext = path.extname(filePath).toLowerCase();
+            const mime = ext === ".json" ? "application/json" : 
+                         ext === ".js" ? "application/javascript" :
+                         ext === ".css" ? "text/css" : "text/plain";
+            res.setHeader("Content-Type", mime + "; charset=utf-8");
+            res.setHeader("Cache-Control", "no-store");
+            res.statusCode = 200;
+            res.end(content);
+            return;
+          }
+        }
+        next();
+      });
+
       // Vercel ne route que le chemin EXACT (/api/eq) : son rewrite transforme
       // /api/eq/<suite> en /api/eq?p=<suite>. On accepte donc les DEUX formes
       // en local comme en ligne — meme code, meme comportement.
       server.middlewares.use((req, res, next) => {
         const u = new URL(req.url || "/", "http://localhost");
-        const m = /^\/api\/(pt|tf|eq)$/.exec(u.pathname);
+        const m = /^\/api\/(ptf|pt|tf|eq)$/.exec(u.pathname);
         if (!m) return next();
         relayer(m[1], "/api/" + m[1] + "/" + (u.searchParams.get("p") || ""), res);
       });
       server.middlewares.use((req, res, next) => {
-        const m = /^\/api\/(pt|tf|eq)(\/.*)?$/.exec(req.url || "");
+        const m = /^\/api\/(ptf|pt|tf|eq)(\/.*)?$/.exec(req.url || "");
         if (!m) return next();
         relayer(m[1], req.url, res);
       });
@@ -189,4 +223,5 @@ export default defineConfig({
     strictPort: true,
     watch: { ignored: ["**/archives/**", "**/data-cache.json", "**/*.json"] },
   },
+  publicDir: "public",
 });
