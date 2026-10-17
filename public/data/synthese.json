@@ -1,4 +1,72 @@
 {
+  "2026-10-17": {
+    "date": "2026-10-17",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      12,
+      6,
+      5,
+      7,
+      2,
+      19,
+      11,
+      4,
+      3,
+      1,
+      10,
+      14,
+      16,
+      9,
+      13,
+      17
+    ],
+    "savedAt": "2026-10-17T10:13:32.560Z",
+    "arrivee": null,
+    "ticket": [
+      16,
+      3,
+      1,
+      12,
+      5,
+      6,
+      2,
+      19
+    ],
+    "ticketSource": "page",
+    "ticketPoseLe": "2026-10-17T10:13:32.616Z",
+    "discipline": "HAIE",
+    "distance": 4300,
+    "nbPartants": 20,
+    "hippodrome": "AUTEUIL",
+    "prix": "PRIX PRINCE D'ECOUEN - GRAND HANDICAP D'AUTOMNE",
+    "courseId": "pmu-R1C3",
+    "cle": "2026-10-17_R1_C3",
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "sourceImport": "page"
+  },
   "2026-10-16": {
     "date": "2026-10-16",
     "found": true,
@@ -28,7 +96,7 @@
     "nbPartants": 15,
     "hippodrome": "Paris-Vincennes",
     "prix": "6800000 DH",
-    "courseId": 146350,
+    "courseId": "2026-10-16_R1_C4",
     "cle": "2026-10-16_R1_C4",
     "runners": [
       1,
@@ -60,7 +128,14 @@
     ],
     "ticketSource": "page",
     "ticketPoseLe": null,
-    "ticketMode": null
+    "ticketMode": null,
+    "placeholder": false,
+    "groupes": null,
+    "surprises": [],
+    "ticketMoteur": null,
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-10-16T08:45:28.136Z"
   },
   "2026-10-15": {
     "date": "2026-10-15",
@@ -106,7 +181,7 @@
     "discipline": "Plat",
     "distance": 1200,
     "hippodrome": "Chantilly",
-    "courseId": 146279,
+    "courseId": "2026-10-15_R1_C1",
     "cle": "2026-10-15_R1_C1",
     "prix": "5090000 DH",
     "ticket": [
@@ -456,7 +531,7 @@
       9,
       15
     ],
-    "cloture": "2026-10-15T13:22:32.757Z",
+    "cloture": "2026-10-16T08:45:25.374Z",
     "note": "| 15/10 : synthèse CORRIGÉE par utilisateur, ticket reconstruit"
   },
   "2026-10-14": {
