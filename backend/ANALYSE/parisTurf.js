@@ -34,6 +34,11 @@
  *     avec la clé : la liste blanche ne s'applique pas. La page ne parle plus
  *     qu'à sa propre origine — aucun CORS nulle part.
  *
+ *     ⚠ ET CE RELAIS DOIT APPELER EN HTTP/2. En HTTP/1.1, Cloudflare défie
+ *     tout client serveur (`Cf-Mitigated: challenge`, « Just a moment… ») :
+ *     curl, Node, la fonction Vercel — tous. En HTTP/2, la même requête,
+ *     mêmes en-têtes, passe : 200, 303 541 octets. Mesuré le 17/10/2026.
+ *
  *     L'appel direct reste en SECOURS dans `adresses()` : les deux voies
  *     coexistent, la première qui répond gagne (et le résultat est mis en
  *     cache, donc une seule fois).
@@ -58,11 +63,6 @@
  * ============================================================================= */
 
 const BASE = 'https://horse-racing-api.paris-turf.com/api/'
-
-/** Sommes-nous sur un poste de développement ? (voir `adresses`) */
-const MEME_ORIGINE_DEV = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(
-  (typeof location !== 'undefined' && location.hostname) || '',
-)
 
 /** Clé publique du site (NEXT_PUBLIC_… : publiée dans son bundle, pas un secret). */
 export const CLE_PT = 'cd347f33-9dc3-4294-865e-f5d6ee7558ac'
@@ -130,12 +130,18 @@ function cacheEcrire(url, v) {
  */
 function adresses(chemin) {
   const nu = String(chemin).replace(/^\/+/, '')
-  const relais = ['/api/ptf?p=' + encodeURIComponent(nu), '/api/ptf/' + nu]
-  const direct = [BASE + nu]
-  /* Sur un poste de développement, `localhost` est dans la liste blanche de
-   * l'API : l'appel direct passe (c'est la voie du site lui-même), et il est
-   * plus court. En ligne, c'est l'inverse. Le reste est le secours. */
-  return MEME_ORIGINE_DEV ? [...direct, ...relais] : [...relais, ...direct]
+  /* ⚠ Le relais ne connaît que l'ORIGINE (`https://horse-racing-api…`) : le
+   *   chemin relayé doit donc porter le `/api` que `BASE` porte déjà. Sans lui
+   *   l'API répond « NOT_FOUND » (mesuré le 17/10/2026). */
+  const complet = 'api/' + nu
+  /* Le relais d'abord, PARTOUT : c'est le même code en local et en ligne
+   * (middleware Vite / fonction Vercel), et le seul qui traverse Cloudflare.
+   * L'appel direct reste le secours — il ne vaut que depuis `localhost`. */
+  return [
+    '/api/ptf?p=' + encodeURIComponent(complet),
+    '/api/ptf/' + complet,
+    BASE + nu,
+  ]
 }
 
 /** Un GET JSON : cache, puis 5 essais. Un 403/5xx passager ne condamne pas la page. */

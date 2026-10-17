@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { execFile } from "node:child_process";
+import http2 from "node:http2";
 
 /* ──────────────────────────────────────────────────────────────────────────
  * LES 3 PROXIES — local ET production, le MEME code.
@@ -52,6 +53,43 @@ function curlTexte(url, delai = 55000) {
   });
 }
 
+/** Un GET en HTTP/2 — la seule façon de traverser Cloudflare depuis un serveur
+ *  (mesuré le 17/10/2026 : HTTP/1.1 → 403 « Just a moment… », HTTP/2 → 200).
+ *  Même rôle que `getHttp2` dans api/_proxy.js : le développement et la
+ *  production doivent se comporter pareil. */
+function getHttp2(url, entetes, delai = 20000) {
+  return new Promise((resolve, reject) => {
+    const u = new URL(url);
+    const client = http2.connect(u.origin);
+    let fini = false;
+    const terminer = (f) => {
+      if (fini) return;
+      fini = true;
+      clearTimeout(minuteur);
+      try { client.close(); } catch (e) { /* déjà fermé */ }
+      f();
+    };
+    const minuteur = setTimeout(() => terminer(() => reject(new Error("délai dépassé"))), delai);
+    client.on("error", (e) => terminer(() => reject(e)));
+    const req = client.request({
+      ":method": "GET",
+      ":path": u.pathname + u.search,
+      ":authority": u.host,
+      ":scheme": "https",
+      ...entetes,
+    });
+    let statut = 0;
+    let type = "";
+    let corps = "";
+    req.on("response", (h) => { statut = h[":status"] || 0; type = h["content-type"] || ""; });
+    req.setEncoding("utf8");
+    req.on("data", (d) => { corps += d; });
+    req.on("end", () => terminer(() => resolve({ statut, type, corps })));
+    req.on("error", (e) => terminer(() => reject(e)));
+    req.end();
+  });
+}
+
 /** Le même corps que api/_proxy.js : /api/<nom>/<suite> -> <origine>/<suite> */
 async function relayer(label, cheminComplet, res) {
   try {
@@ -69,28 +107,39 @@ async function relayer(label, cheminComplet, res) {
      *   déjà pour la production ; on aligne le middleware de dev dessus. */
     const query = u.search && u.search !== "?" ? u.search : "";
     const cible = ORIGINES[label] + chemin + query;
+    const entetes = {
+      "user-agent": UA,
+      "accept-language": "fr-FR,fr;q=0.9",
+      accept:
+        label === "ptf"
+          ? "application/json"
+          : "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+      ...(label === "ptf" ? { "x-api-key": CLE_PTF } : {}),
+    };
     let body = null;
     let statut = 502;
     let typeContenu = "text/html; charset=utf-8";
     try {
-      const r = await fetch(cible, {
-        headers: {
-          "User-Agent": UA,
-          "Accept-Language": "fr-FR,fr;q=0.9",
-          Accept:
-            label === "ptf"
-              ? "application/json"
-              : "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
-          ...(label === "ptf" ? { "X-API-KEY": CLE_PTF } : {}),
-        },
-        redirect: "follow",
-        signal: AbortSignal.timeout(25000),
-      });
-      body = await r.text();
-      statut = r.status;
-      typeContenu = r.headers.get("content-type") || typeContenu;
+      /* `ptf` passe par HTTP/2 : en HTTP/1.1, Cloudflare défie tout serveur. */
+      if (label === "ptf") {
+        const r = await getHttp2(cible, entetes);
+        body = r.corps;
+        statut = r.statut;
+        typeContenu = r.type || "application/json; charset=utf-8";
+      } else {
+        const r = await fetch(cible, {
+          headers: entetes,
+          redirect: "follow",
+          signal: AbortSignal.timeout(25000),
+        });
+        body = await r.text();
+        statut = r.status;
+        typeContenu = r.headers.get("content-type") || typeContenu;
+      }
     } catch (e) {
-      body = await curlTexte(cible);
+      /* curl est un repli utile pour turf-france ; il ne sait pas HTTP/2 ici,
+         donc il ne peut rien pour `ptf` (Cloudflare le défierait). */
+      body = label === "ptf" ? null : await curlTexte(cible);
       if (body == null) {
         res.setHeader("Content-Type", "text/html; charset=utf-8");
         res.setHeader("Cache-Control", "no-store");
