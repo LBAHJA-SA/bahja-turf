@@ -19,6 +19,10 @@
  *    un visiteur qui ouvre /admin sans clé est renvoyé à l'accueil, sans un
  *    mot. Ce n'est PAS de la sécurité — c'est de la discrétion, et c'est
  *    assumé tant que le login n'existe pas.
+ *
+ *  ⏸️ PRÉPARÉ, NON ACTIVÉ (consigne du 18/10/2026) : on ne branche RIEN tant que
+ *    l'utilisateur ne l'a pas demandé — ni login, ni base, ni page filtrée.
+ *    La marche à suivre de l'activation est dans AGENTS.md §25.6.
  * ══════════════════════════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────────────────── LE CATALOGUE DES PAGES

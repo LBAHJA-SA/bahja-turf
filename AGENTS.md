@@ -3377,3 +3377,41 @@ site le jour où le journal devient permanent.
 | `backend/ADMIN/donnees.js` | catalogue des pages, comptes (localStorage), mots de passe, import/export, lecture d'un visiteur |
 | `backend/ADMIN/visites.js` | `pointerVisite()` — le ping d'une page vue |
 | `src/App.jsx` | la route `/admin` + `<NoterPage />` (le ping à chaque changement d'adresse) |
+
+### 25.6 ⏸️ EN ATTENTE — NE PAS ACTIVER SANS DEMANDE (18/10/2026)
+
+> **Consigne de l'utilisateur, le 18/10/2026** : « سجل عندك إلى أن أطلب منك تفعيل
+> صفحة الأدمن لتقوم بالمهمة » — *note-le : tu n'actives la page d'administration
+> que quand je te le demanderai.*
+
+**La console est PRÉPARÉE, elle n'est PAS active.** Rien ne filtre l'entrée du
+site, et il ne faut **pas** l'anticiper : l'activation est une décision de
+l'utilisateur, pas une amélioration technique à prendre seule.
+
+**État au 18/10/2026 :**
+
+| | |
+|---|---|
+| ✅ la console `/admin` | en ligne, invisible, 3 onglets — testée (403 du journal, 204 de la visite) |
+| ✅ les comptes et les pages | saisissables dans le navigateur, exportables en `comptes.json` |
+| ✅ les 2 routes du journal | déployées, **fermées par défaut** (403 sans `ADMIN_JETON`) |
+| ⏸️ **la clé de la console** | pas encore choisie par l'utilisateur |
+| ⏸️ **le login** | pas commencé — aucune page n'est filtrée |
+| ⏸️ **la base Redis** | pas créée → aucune adresse IP n'est enregistrée (le site n'en souffre pas) |
+| ⏸️ **`ADMIN_JETON`** | pas posé |
+| ⏸️ **Vercel Analytics** | pas encore activé (projet → Analytics → Enable) |
+
+**Ce que « activer » voudra dire, le jour venu — dans cet ordre :**
+
+1. **Le login** : une vérification **côté serveur** (les comptes ne peuvent plus
+   vivre dans le navigateur). Le `comptes.json` exporté par la console est
+   exactement l'entrée attendue — sa forme ne changera pas.
+2. **Les droits par page** : chaque compte ne voit que son `pages[]`. Le
+   catalogue `PAGES` (`backend/ADMIN/donnees.js`) et les routes de `src/App.jsx`
+   sont déjà alignés : la garde se posera sur le routeur.
+3. **Le journal des visites** : base Redis + `ADMIN_JETON` (§25.3), puis
+   l'onglet Visiteurs se remplit (IP, pays, page, appareil).
+4. **La mention RGPD** sur le site, si le journal devient permanent.
+
+⚠ **Ne rien brancher « en passant »** : pas de login partiel, pas de base créée
+sans le dire, pas de page bloquée sans que l'utilisateur l'ait demandé.

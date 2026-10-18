@@ -33,6 +33,11 @@ import {
  *    ses propres comptes vides. Le vrai login viendra plus tard — cette page
  *    en prépare les comptes et les droits.
  *
+ *  ⏸️ PRÉPARÉE, NON ACTIVÉE — NE RIEN BRANCHER SANS LA DEMANDE DE L'UTILISATEUR
+ *    Consigne du 18/10/2026 : aucune entrée du site n'est filtrée, aucune base
+ *    n'est créée, aucun login n'est posé. Le jour où l'utilisateur demandera
+ *    l'activation, la marche à suivre est écrite dans AGENTS.md §25.6.
+ *
  *  TROIS ONGLETS
  *    Utilisateurs : qui entre, avec quel mot de passe, et QUELLES PAGES.
  *    Pages        : le catalogue du site, et qui a le droit d'y aller.
