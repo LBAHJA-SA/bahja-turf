@@ -266,12 +266,12 @@ export default function Analyse() {
                       <span style={{ flex: 1, minWidth: 0 }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                           <span style={{ fontSize: 13.5, fontWeight: 800, color: SK.accentSombre, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.nom}</span>
-                          {aLeQuinte && <span style={{ fontSize: 9, fontWeight: 800, background: '#fee2e2', color: ROUGE, borderRadius: 4, padding: '1px 4px' }}>Q+</span>}
+                          {aLeQuinte && <span style={{ flex: '0 0 auto', fontSize: 9, fontWeight: 800, background: '#fee2e2', color: ROUGE, borderRadius: 4, padding: '1px 4px' }}>Q+</span>}
+                          {m.chevaux === false && <span style={{ flex: '0 0 auto', fontSize: 9, fontWeight: 800, background: '#fef3c7', color: AMBRE, borderRadius: 4, padding: '1px 4px' }}>sans partants</span>}
                         </span>
                         <span style={{ display: 'block', fontSize: 10.5, color: SK.doux, marginTop: 1 }}>
                           {m.courses.length} course{m.courses.length > 1 ? 's' : ''}
                           {m.depart ? ` · 1ʳᵉ à ${m.depart}` : ''}
-                          {m.chevaux === false ? ' · partants indisponibles' : ''}
                         </span>
                       </span>
                       {paysLisible(m.pays) && (
