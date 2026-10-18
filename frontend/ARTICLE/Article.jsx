@@ -11,6 +11,8 @@
  * ========================================================================== */
 import { useLocation, useParams, useNavigate, Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
+import Drapeau from '../../src/Drapeau.jsx'
+import ParisListe from '../../src/Paris.jsx'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { lireCible, chargerCourse, chargerPronos, chargerMeteo, chargerProgramme } from '../../backend/ARTICLE/backend.js'
 import { exporterArchive, importerArchive, tailleArchive } from '../../backend/ARTICLE/archive.js'
@@ -276,17 +278,21 @@ export default function Article() {
         <div style={{ fontSize: 12, color: '#9fb3d1', marginTop: 4 }}>
           {c.dateLongue || dateCourante}
           {c.heure ? ' • ' + heureGMT(dateCourante, c.heure) : ''}
-          {m.pays && m.pays !== 'FR' ? ' • 🌍 ' : ' • 🇫🇷 '}{m.hippodrome}
+          {' • '}
+          {/* le drapeau du pays, en VRAIE image (pas d'emoji : Windows ne les
+              dessine pas) */}
+          <Drapeau pays={m.pays || 'FR'} titre={m.pays || 'France'} h={12}
+            style={{ display: 'inline-block', verticalAlign: '-2px' }} />
+          {' '}{m.hippodrome}
           {' • '}{partants.length}{' partants'}
           {c.distance ? ' • ' + c.distance + 'm' : ''}
           {c.discipline ? ' • ' + c.discipline : ''}
           {meteo && meteo.temp != null ? ` • ${meteo.temp}° ${meteo.label || ''}` : ''}
         </div>
         {/quinte\+/i.test((c.nom || '') + ' ' + (c.prix || '')) ? (
-          <div style={{ display: 'flex', gap: 6, marginTop: 10, flexWrap: 'wrap' }}>
-            <span style={{ display: 'inline-block', transform: 'skewX(-14deg)', borderRadius: 3, padding: '2px 10px', color: '#fff', fontWeight: 800, fontSize: 11, background: '#b91c1c', boxShadow: '0 1px 2px rgba(0,0,0,.25)', textShadow: '0 1px 1px rgba(0,0,0,.35)' }}>
-              <span style={{ display: 'inline-block', transform: 'skewX(14deg)' }}>Quinté+</span>
-            </span>
+          /* la pastille rouge du carnet — le même composant que partout (§src/Paris.jsx) */
+          <div style={{ marginTop: 10 }}>
+            <ParisListe paris={['quinte']} />
           </div>
         ) : null}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>

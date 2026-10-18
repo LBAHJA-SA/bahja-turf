@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
+import Drapeau from '../../src/Drapeau.jsx'
 import { chargerProgramme, chargerCourse, grouperParReunion } from '../../backend/COUPLE/donnees.js'
 import { selectionCoply, repliMarche } from '../../backend/COUPLE/moteur-coply.js'
 
@@ -145,8 +146,12 @@ export default function Couple() {
                     background: TE.entete, padding: '8px 13px', border: 'none',
                     borderRadius: '8px 8px 0 0', fontFamily: TE.police,
                   }}>
-                  <b style={{ color: '#fff', fontSize: 13 }}>
-                    {ouvert === gi ? '▾' : '▸'} {g.reunion} · {g.hippodrome}
+                  <b style={{ color: '#fff', fontSize: 13, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                    <span>{ouvert === gi ? '▾' : '▸'}</span>
+                    {/* le drapeau du pays — une VRAIE image (Windows ne dessine
+                        pas les drapeaux emoji) */}
+                    <Drapeau pays={g.pays} titre={g.pays || 'France'} h={12} style={{ display: 'inline-block' }} />
+                    <span>{g.reunion} · {g.hippodrome}</span>
                   </b>
                   {g.pays && g.pays !== 'FRANCE' && (
                     <span style={{ marginLeft: 8, fontSize: 11, color: '#fed7aa' }}>· {g.pays}</span>
@@ -233,6 +238,8 @@ function Lecture({ course }) {
           {course.reunion}-{course.code}{course.nom ? ' · ' + course.nom : ''}
         </div>
         <div style={{ fontSize: 13, color: '#57534e', marginTop: 4 }}>
+          <Drapeau pays={course.pays} titre={course.pays || 'France'} h={12}
+            style={{ display: 'inline-block', verticalAlign: '-2px', marginRight: 5 }} />
           {course.hippodrome}
           {course.distance ? ` · ${course.distance}m` : ''}
           {course.discipline ? ` · ${course.discipline}` : ''}

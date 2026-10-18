@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
+import Drapeau from '../../src/Drapeau.jsx'
 import {
   fetchRecapSite, fetchArchiveDisque,
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
@@ -259,7 +260,11 @@ function ConditionsCourse({ course, date, sk }) {
           {c.time ? ' · ' + c.time + ' h' : ''}
           {'   ·   '}
           {c.reunion_code ? <b style={{ color: '#e7f1ff' }}>{c.reunion_code}</b> : null}
-          {course.hippodrome ? ' ' + course.hippodrome : ''}
+          {/* le drapeau du pays de la réunion — une VRAIE image (Windows ne
+              dessine pas les drapeaux emoji) */}
+          <Drapeau pays={course.pays || 'FR'} titre={course.pays || 'France'} h={12}
+            style={{ display: 'inline-block', verticalAlign: '-2px', marginLeft: 6, marginRight: 4 }} />
+          {course.hippodrome || ''}
           {c.code ? '  ·  ' + c.code : ''}
         </div>
         <div style={{ fontSize: 14, fontWeight: 800, marginTop: 2 }}>{c.name || course.hippodrome}</div>

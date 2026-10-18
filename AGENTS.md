@@ -2633,11 +2633,15 @@ programmePmu(date) → { date, reference, reunions: [ { id, nom, hippodrome,
 
 ### 23.3 La présentation
 
-La colonne de gauche a été refaite : une **carte par réunion** — badge `R1`,
-hippodrome, `N courses · <terrain> · 1ʳᵉ à HH:MM`, pastille du pays, badge `Q+`
-quand la réunion porte le Quinté — et, dépliée, une **grille de pastilles
-`C1 13:58 / Plat · 1800 m`** (la course sélectionnée en bleu). La course ouverte
-affiche son en-tête complet à droite.
+La colonne de gauche a été refaite : une **carte par réunion** — drapeau du pays,
+badge `R1`, hippodrome, `N courses · <terrain> · 1ʳᵉ à HH:MM`, pastille du pays,
+badge `Q+` quand la réunion porte le Quinté — et, dépliée, **une ligne par
+course** : `C1 · 13:58 · Plat · 1800 m` puis **ses pastilles de paris**
+(`src/Paris.jsx`), la course sélectionnée en bleu. ⚠ c'était une grille de
+3 colonnes jusqu'au 18/10 : une case de ~105 px ne peut pas porter sept
+pastilles — la ligne, si. Le nom de la course reste dans l'infobulle. La course
+ouverte affiche son en-tête complet à droite, avec la **rangée complète des
+pastilles**.
 
 Le **terrain par réunion** (`Bon`, `Très souple 4.0`, `Collant 4.2`…) vient de la
 barre de `reu.php` elle-même : `parseReunionsTf` lit son en-tête collant
@@ -2645,8 +2649,22 @@ barre de `reu.php` elle-même : `parseReunionsTf` lit son en-tête collant
 Courses / Disciplines / Types*). La source ne le donne que quand elle le
 connaît — ParisLongchamp et Tarbes l'ont vide, on n'affiche alors rien.
 
-⚠ **pas de drapeau emoji** : Windows ne dessine pas les drapeaux (🇨🇭 sort
-« CH »). On écrit le pays — `Suisse`, `Uruguay`, `Royaume-Uni`.
+⚠ **le drapeau est une VRAIE image, jamais un emoji** : Windows ne dessine pas
+les drapeaux emoji (🇨🇭 sort « CH »). On affiche donc `public/drapeaux/<iso2>.svg`
+(les SVG de `flag-icons`, copiés une fois — le paquet livre 271 drapeaux, on n'en
+garde que les pays qui jouent au PMU). Le composant est `src/Drapeau.jsx` :
+`<Drapeau pays={m.pays} />` accepte le nom français (« ETATS-UNIS ») **et** le code
+ISO2 (« FR », « CH ») ; pays inconnu → rien. Le pays reste écrit en toutes lettres
+à côté (`Suisse`, `Uruguay`, `Royaume-Uni`) : la réunion française porte le
+drapeau français, seule, sans le mot « France » (qui ne dit rien).
+
+⚠ **les pastilles de paris** — Simple Gagnant, Simple Placé, Jumelé Gagnant,
+Jumelé Placé, Tiercé, Quarté, Quinté+ — viennent de `src/Paris.jsx` (le ruban
+penché, la couleur du carnet) et de `backend/ANALYSE/paris.js` (quels paris la
+course propose). ⚠ **on n'invente jamais une pastille** : le 18/10, R1C1 n'ouvre
+que Simple et Jumelé, R1C3 (le Quinté) ouvre aussi Tiercé, Quarté et Quinté+. La
+liste est lue course par course, et une source injoignable ne casse rien (les
+courses s'affichent sans pastilles).
 
 ### 23.3 bis ⭐ LE NOM DES RÉUNIONS — celui de la référence
 

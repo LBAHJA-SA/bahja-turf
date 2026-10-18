@@ -206,6 +206,40 @@ body::before{
 .badge-rouge  { background: rgba(244,63,94,.14);  border-color: rgba(244,63,94,.42);  color: #fda4af }
 .badge-violet { background: rgba(167,139,250,.14); border-color: rgba(167,139,250,.42); color: #c4b5fd }
 
+/* ── LES PASTILLES DES PARIS (18/10/2026) ─────────────────────────────────
+ *  Le ruban penché du carnet : Simple Gagnant, Jumelé Placé, Tiercé, Quarté,
+ *  Quinté+… Voir src/Paris.jsx pour le catalogue et l'ordre d'affichage.
+ *  La couleur est SÉMANTIQUE (violet = Simple, orange = Jumelé, vert = Tiercé,
+ *  bleu = Quarté, rouge = Quinté+) : elle ne change pas d'une page à l'autre.
+ *  Le `transform: skewX` penche le ruban ; le texte est redressé à l'intérieur.
+ * ────────────────────────────────────────────────────────────────────────── */
+.paris{ display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap }
+.pari{
+  display: inline-flex; align-items: center;
+  padding: 2px 9px; border-radius: 3px;
+  transform: skewX(-15deg);
+  font-style: italic; font-weight: 900; color: #fff; line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0,0,0,.45);
+  box-shadow: 0 2px 0 rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.30), 0 0 14px rgba(0,0,0,.30);
+}
+.pari-in{ display: inline-flex; flex-direction: column; align-items: flex-end; transform: skewX(15deg) }
+.pari-haut{ font-size: 11.5px }
+.pari-bas{ font-size: 8px; margin-top: -1px }
+.pari-violet{ background: linear-gradient(135deg,#4c1d95 0%,#7c3aed 62%,#a855f7 100%) }
+.pari-prune { background: linear-gradient(135deg,#5b21b6 0%,#7e22ce 58%,#a21caf 100%) }
+.pari-orange{ background: linear-gradient(135deg,#b45309 0%,#ea580c 62%,#fb923c 100%) }
+.pari-ambre { background: linear-gradient(135deg,#92400e 0%,#c2410c 60%,#f97316 100%) }
+.pari-vert  { background: linear-gradient(135deg,#15803d 0%,#22c55e 60%,#4ade80 100%) }
+.pari-bleu  { background: linear-gradient(135deg,#1e40af 0%,#2563eb 60%,#60a5fa 100%) }
+.pari-rouge { background: linear-gradient(135deg,#991b1b 0%,#dc2626 62%,#f87171 100%) }
+
+/* la version MINI — les cases étroites de la liste des courses */
+.paris-mini{ gap: 3px }
+.paris-mini .pari{ padding: 1px 5px; border-radius: 2px; box-shadow: 0 1px 0 rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25) }
+.paris-mini .pari-haut{ font-size: 7.5px }
+.paris-mini .pari-bas{ font-size: 5.5px }
+
 /* ── LES BOUTONS ─────────────────────────────────────────────────────────── */
 .btn{
   display: inline-flex; align-items: center; gap: 7px;

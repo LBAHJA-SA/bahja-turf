@@ -1,11 +1,14 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
+import ParisListe from '../../src/Paris.jsx'
+import Drapeau from '../../src/Drapeau.jsx'
 import {
   partantsDeCourse, carriereCheval, identiteCheval, statsCheval, terrainSimple,
 } from '../../backend/ANALYSE/parisTurf.js'
 import { chargerEtudesTf } from '../../backend/ANALYSE/turfFrance.js'
 import { programmePmu, paysLisible } from '../../backend/ANALYSE/programme.js'
+import { parisDuJour, parisDe } from '../../backend/ANALYSE/paris.js'
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * frontend/ANALYSE/Analyse.jsx — TOUTES LES COURSES, TOUS LES CHEVAUX.
@@ -131,7 +134,20 @@ export default function Analyse() {
 
   const [outil, setOutil] = useState(null)       // { libelle, url } → la visionneuse
 
+  /* les paris de chaque course du jour : « R1C3 » → [tierce, quarte, quinte] */
+  const [paris, setParis] = useState({})
+
   useEffect(() => { document.title = 'Analyse course — Bahja TURF' }, [])
+
+  /* ---------------------------------------------------- les pastilles des paris --- */
+  useEffect(() => {
+    let mort = false
+    setParis({})
+    parisDuJour(date)
+      .then((p) => { if (!mort) setParis(p || {}) })
+      .catch(() => { if (!mort) setParis({}) })
+    return () => { mort = true }
+  }, [date])
 
   /* ------------------------------------------------ ① le programme du jour --- */
   const chargerProgramme = useCallback(async (d) => {
@@ -192,6 +208,9 @@ export default function Analyse() {
     for (const m of reunionsVues) { reunions++; courses += m.courses.length; if (!tqq) tqq = m.courses.find((c) => c.isTQQ) || null }
     return { reunions, courses, tqq }
   }, [reunionsVues])
+
+  /* les paris de la course ouverte (voir backend/ANALYSE/paris.js) */
+  const parisCourse = parisDe(paris, course)
 
   const th = { padding: '6px 8px', fontSize: 11, fontWeight: 800, letterSpacing: 0.4, textTransform: 'uppercase', color: '#fff', background: SK.accentSombre, whiteSpace: 'nowrap', textAlign: 'left' }
   const td = { padding: '5px 8px', fontSize: 12.5, borderBottom: '1px solid ' + SK.ligne, verticalAlign: 'middle' }
@@ -278,6 +297,9 @@ export default function Analyse() {
                       }}>{m.reunion ? 'R' + m.reunion : '–'}</span>
                       <span style={{ flex: 1, minWidth: 0 }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                          {/* le drapeau du pays — une VRAIE image : Windows ne
+                              dessine pas les drapeaux emoji (🇨🇭 sort « CH ») */}
+                          <Drapeau pays={m.pays} titre={paysLisible(m.pays) || 'France'} h={13} />
                           <span style={{ fontSize: 13.5, fontWeight: 800, color: SK.accentTexte, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.nom}</span>
                           {aLeQuinte && <span style={{ flex: '0 0 auto', fontSize: 9, fontWeight: 800, background: 'rgba(244,63,94,.16)', color: ROUGE, borderRadius: 4, padding: '1px 4px' }}>Q+</span>}
                           {m.chevaux === false && <span style={{ flex: '0 0 auto', fontSize: 9, fontWeight: 800, background: 'rgba(251,191,36,.16)', color: AMBRE, borderRadius: 4, padding: '1px 4px' }}>sans partants</span>}
@@ -295,25 +317,34 @@ export default function Analyse() {
                     </button>
 
                     {ouverte && (
-                      <div style={{ padding: '0 8px 9px', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 5 }}>
+                      /* Une course = UNE LIGNE. La grille 3 colonnes était plus
+                         compacte mais une case ne fait que ~105 px : les 7
+                         pastilles du carnet n'y tenaient pas. Ici elles tiennent
+                         sur une ligne, et le nom reste dans l'infobulle. */
+                      <div style={{ padding: '0 8px 9px', display: 'flex', flexDirection: 'column', gap: 4 }}>
                         {m.courses.map((c) => {
                           const sel = course && course.id === c.id && !partant
+                          const pp = parisDe(paris, c)
                           return (
                             <button key={c.id || 'pmu-' + m.id + '-' + c.num} onClick={() => ouvrirCourse(c)} title={c.nom}
                               style={{
-                                textAlign: 'left', cursor: 'pointer', padding: '5px 6px', borderRadius: 8,
+                                textAlign: 'left', cursor: 'pointer', padding: '5px 7px', borderRadius: 8,
+                                display: 'flex', flexDirection: 'column', gap: 2,
                                 background: sel ? 'rgba(34,211,238,.18)' : 'rgba(255,255,255,.03)',
                                 border: '1px solid ' + (sel ? SK.accent : SK.ligne),
                                 color: sel ? '#67e8f9' : SK.texte,
                               }}>
-                              <span style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                                <b style={{ fontFamily: SK.mono, fontSize: 11.5 }}>C{c.num}</b>
-                                <span style={{ fontSize: 10, fontFamily: SK.mono, color: sel ? 'rgba(34,211,238,.85)' : SK.muet }}>{heureDe(c)}</span>
-                                {c.isTQQ && <span style={{ marginLeft: 'auto', fontSize: 8.5, fontWeight: 800, background: sel ? 'rgba(255,255,255,.92)' : 'rgba(244,63,94,.16)', color: sel ? '#0b3b4d' : ROUGE, borderRadius: 3, padding: '0 3px' }}>Q+</span>}
+                              <span style={{ display: 'flex', alignItems: 'baseline', gap: 5, width: '100%' }}>
+                                <b style={{ flex: '0 0 auto', fontFamily: SK.mono, fontSize: 11.5 }}>C{c.num}</b>
+                                <span style={{ flex: '0 0 auto', fontSize: 10, fontFamily: SK.mono, color: sel ? 'rgba(34,211,238,.85)' : SK.muet }}>{heureDe(c)}</span>
+                                <span style={{ flex: 1, minWidth: 0, fontSize: 9.5, color: sel ? 'rgba(34,211,238,.85)' : SK.muet, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                  {c.libelle}{c.distance ? ` · ${c.distance} m` : ''}
+                                </span>
+                                {/* le « Q+ » ne sert que si les paris n'ont pas pu être lus
+                                    (la pastille rouge « Quinté+ » le dit alors mieux) */}
+                                {!pp.length && c.isTQQ && <span style={{ flex: '0 0 auto', fontSize: 8.5, fontWeight: 800, background: sel ? 'rgba(255,255,255,.92)' : 'rgba(244,63,94,.16)', color: sel ? '#0b3b4d' : ROUGE, borderRadius: 3, padding: '0 3px' }}>Q+</span>}
                               </span>
-                              <span style={{ display: 'block', fontSize: 9.5, color: sel ? 'rgba(34,211,238,.85)' : SK.muet, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                                {c.libelle}{c.distance ? ` · ${c.distance} m` : ''}
-                              </span>
+                              {pp.length > 0 && <ParisListe paris={pp} mini />}
                             </button>
                           )
                         })}
@@ -346,9 +377,10 @@ export default function Analyse() {
                     <b style={{ fontSize: 16 }}>{course.hippodrome}</b>
                     <span style={{ fontFamily: SK.mono, fontSize: 12.5 }}>{course.reunion ? `R${course.reunion}` : ''}C{course.num}</span>
                     <span style={{ fontFamily: SK.mono, fontSize: 12.5 }}>{heureDe(course)}</span>
-                    {course.isTQQ && <span style={{ fontSize: 10, fontWeight: 800, background: 'rgba(244,63,94,.22)', color: '#fda4af', border: '1px solid rgba(244,63,94,.55)', borderRadius: 5, padding: '2px 6px' }}>QUINTÉ+</span>}
+                    {course.isTQQ && !parisCourse.length && <span style={{ fontSize: 10, fontWeight: 800, background: 'rgba(244,63,94,.22)', color: '#fda4af', border: '1px solid rgba(244,63,94,.55)', borderRadius: 5, padding: '2px 6px' }}>QUINTÉ+</span>}
                   </div>
                   <div style={{ fontSize: 14, fontWeight: 700, marginTop: 3 }}>{course.nom}</div>
+                  {parisCourse.length > 0 && <ParisListe paris={parisCourse} style={{ marginTop: 7 }} />}
                   <div style={{ fontSize: 12, opacity: 0.92, marginTop: 2 }}>
                     {course.libelle} · {course.distance || '—'} m · {course.sens || '—'} · {course.terrain || course.surface || '—'}
                     {course.nbPartants ? ` · ${course.nbPartants} partants` : ''}{course.prix ? ` · ${gains(course.prix)}` : ''}
