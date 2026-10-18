@@ -4,6 +4,8 @@
 > La navigation (menu, boutons) est autorisée : elle ne transporte
 > aucune donnée — chaque page recharge tout depuis SA source. `src/App.jsx`
 > ne fait qu'associer chaque URL à sa page.
+> Seul autre morceau partagé : **`src/temps.js`** — l'affichage de l'heure, tout
+> en GMT (18/10/2026). Il ne transporte aucune donnée, il ne lit qu'une date.
 
 | Page | Lien | Affichage | Données | Sources |
 |---|---|---|---|---|

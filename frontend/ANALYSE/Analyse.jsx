@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
 import ParisListe from '../../src/Paris.jsx'
 import Drapeau from '../../src/Drapeau.jsx'
+import { heureCourseGMT } from '../../src/temps.js'
 import {
   partantsDeCourse, carriereCheval, identiteCheval, statsCheval, terrainSimple,
 } from '../../backend/ANALYSE/parisTurf.js'
@@ -64,9 +65,9 @@ const p2 = (x) => String(x).padStart(2, '0')
 function jourParis() {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
 }
-const H = (iso) => (iso ? new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit' }).format(new Date(iso)) : '—')
-/** L'heure d'une course : celle du programme, sinon celle de la fiche. */
-const heureDe = (c) => (c && c.heureTf) || H(c && c.heure)
+/* ⭐ L'HEURE D'UNE COURSE SE CALCULE DANS LA PAGE, EN GMT (18/10/2026) :
+   `heureDe` a besoin de la DATE affichée (elle porte l'heure d'été), elle est
+   donc définie dans le composant — voir `src/temps.js`. */
 const D2 = (iso) => (iso ? new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', day: '2-digit', month: '2-digit', year: '2-digit' }).format(new Date(iso)) : '—')
 const DLc = (d) => {
   if (!d) return '—'
@@ -116,6 +117,10 @@ function joursDepuis(carriere, quand) {
 
 export default function Analyse() {
   const [date, setDate] = useState(jourParis())
+  /* ⭐ L'HEURE D'UNE COURSE, EN GMT (18/10/2026) : le programme publie l'heure
+     de PARIS (« 15:15 ») → on affiche « 13:15 GMT ». Un instant (date ISO) est
+     lu tel quel, en UTC. `date` porte l'heure d'été — voir `src/temps.js`. */
+  const heureDe = (c) => heureCourseGMT(date, (c && (c.heureTf || c.heure)) || '')
   const [prog, setProg] = useState([])
   const [refPmu, setRefPmu] = useState(false)     // le programme PMU a-t-il répondu ?
   const [busyProg, setBusyProg] = useState(false)

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
 import Drapeau from '../../src/Drapeau.jsx'
+import { heureParisGMT } from '../../src/temps.js'
 import { chargerProgramme, chargerCourse, grouperParReunion } from '../../backend/COUPLE/donnees.js'
 import { selectionCoply, repliMarche } from '../../backend/COUPLE/moteur-coply.js'
 
@@ -172,7 +173,7 @@ export default function Couple() {
                         fontFamily: TE.police,
                       }}>
                       <div style={{ fontSize: 12, fontWeight: 800, color: TE.accent }}>
-                        {c.code}{c.heure ? ` · ${c.heure}` : ''}
+                        {c.code}{c.heure ? ` · ${heureParisGMT(date, c.heure)}` : ''}
                         {c.distance ? <span style={{ fontWeight: 600, color: '#8fa3bf' }}> · {c.distance}m</span> : null}
                         {c.partants ? <span style={{ fontWeight: 600, color: '#8fa3bf' }}> · {c.partants}p</span> : null}
                       </div>
@@ -243,7 +244,7 @@ function Lecture({ course }) {
           {course.hippodrome}
           {course.distance ? ` · ${course.distance}m` : ''}
           {course.discipline ? ` · ${course.discipline}` : ''}
-          {course.heure ? ` · ${course.heure}` : ''}
+          {course.heure ? ` · ${heureParisGMT(date, course.heure)}` : ''}
           {course.pays && course.pays !== 'FRANCE' ? ` · ${course.pays}` : ''}
         </div>
         {arrivee.length > 0 && (

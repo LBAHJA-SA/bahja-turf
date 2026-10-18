@@ -11,6 +11,7 @@ import {
   telechargerJson, lireFichierJson, paquetComptes,
   appareil, paysLisible, ilYA,
 } from '../../backend/ADMIN/donnees.js'
+import { heureGMT } from '../../src/temps.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  frontend/ADMIN/Admin.jsx — LA CONSOLE D'ADMINISTRATION (18/10/2026)
@@ -590,7 +591,7 @@ export default function Admin() {
                           {journal.visites.map((v, i) => (
                             <tr key={i} style={{ background: i % 2 ? 'rgba(148,163,184,.03)' : 'transparent' }}>
                               <td style={{ padding: '6px 9px', borderBottom: '1px solid ' + T.ligne, color: T.doux, whiteSpace: 'nowrap' }}>
-                                {ilYA(v.t)}
+                                {heureGMT(v.t)} <span style={{ color: T.muet }}>· {ilYA(v.t)}</span>
                               </td>
                               <td style={{ padding: '6px 9px', borderBottom: '1px solid ' + T.ligne, fontFamily: mono, color: '#e2e8f0' }}>
                                 {v.ip || '—'}

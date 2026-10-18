@@ -3415,3 +3415,86 @@ l'utilisateur, pas une amélioration technique à prendre seule.
 
 ⚠ **Ne rien brancher « en passant »** : pas de login partiel, pas de base créée
 sans le dire, pas de page bloquée sans que l'utilisateur l'ait demandé.
+
+---
+
+## 26. 🕐 TOUT S'AFFICHE EN GMT (18/10/2026)
+
+> **Demande de l'utilisateur** : « اجعل كل التوقيتات تعرض بتوقيت GMT » — toutes
+> les heures affichées le sont en GMT, **et elles le disent** (« 13:15 GMT »).
+> Même règle que le job quotidien, qui l'applique depuis le 09/10/2026 (§13.2).
+
+### 26.1 Les TROIS natures d'heure — les confondre coûte 1 ou 2 heures
+
+| Nature | Écrit comme | Nos sources | Comment on l'affiche |
+|---|---|---|---|
+| **① un instant** | ISO 8601 **avec** son décalage | `2026-10-16T13:58:00+02:00` (Equidia) · `2026-10-03T03:02:51.835Z` (notre gel) · `…T14:04:00.000Z` (CSS) | lu en UTC, point |
+| **② une heure murale FRANÇAISE** | `« 15:15 »`, sans fuseau | Equidia · turf-france · reu.php · programme PMU | `parisVersGMT(date, …)`, heure d'été comprise |
+| **③ une heure murale MAROCAINE** | `« 14:15 »`, sans fuseau | **casacourses** (site marocain, UTC+1 **fixe**) | une heure en moins, **sans** passer par Paris |
+
+⚠ **③ n'est pas ②** : en **hiver** Paris vaut UTC+1 comme le Maroc — le décalage
+est alors **nul**. Appliquer la règle de Paris à une heure marocaine date la
+course d'une heure.
+
+### 26.2 La mesure du 18/10/2026 (le Quinté de ParisLongchamp, R1C3)
+
+```
+casacourses  (la fiche de la page Quinté)   14:15   ← heure du Maroc
+Equidia      (le programme officiel)        15:15   real_heure_course
+                                                    = 2026-10-18T15:15:00+02:00
+turf-france / PMU / Couple                  15:15   ← heure de Paris
+                                     ─────────────────
+                        les trois disent   13:15 GMT
+```
+
+Contrôle dans les pages : Quinté `13:15 GMT` · Analyse `C3 13:15 GMT` ·
+Coply `C3 · 13:15 GMT` · Presse `13:15 GMT`.
+**Avant** : `14:15 h` (Quinté, non étiqueté) · `15:15` (Analyse et Couple, non
+étiquetées) · et un relevé de marché annoncé `13:58 GMT` alors qu'il était de
+`11:58 GMT`.
+
+### 26.3 ⭐ Le bug corrigé : `slice(11, 16)` sur une date à décalage
+
+Le relevé du marché s'écrit `« 2026-10-16T13:58:00+02:00 »`. Un `slice(11, 16)`
+rend `« 13:58 »` — c'est l'heure **de Paris** qu'on étiquetait « GMT » : **2 h
+d'erreur** en été, 1 h en hiver. (Sur une chaîne en `Z` le raccourci tombait
+juste, d'où des affichages corrects à côté d'affichages faux.) Tout passe
+désormais par `src/temps.js`.
+
+### 26.4 Le fichier, et qui s'en sert
+
+| Fichier | Rôle |
+|---|---|
+| **`src/temps.js`** | LE formateur du site : `heureGMT` · `jourHeureGMT` · `jourLongHeureGMT` · `parisVersGMT` · `heureParisGMT` · **`heureMarocGMT`** · `heureCourseGMT` · `hhmmGMT` · `maintenantGMT` |
+
+| Page | Ce qui est passé en GMT |
+|---|---|
+| **Quinté** `/quinte` | les conditions de la course (`c.time` = **Maroc**) · le relevé du marché · le gel du ticket (« gelé à … », colonne « Posé le (GMT) ») |
+| **Analyse** `/` | l'heure de chaque course du programme (murale de Paris) et l'en-tête de la course ouverte |
+| **Coply** `/coply` | l'heure de chaque course (Equidia = Paris) |
+| **Presse** `/presse` | l'heure du Quinté (Equidia) · la date et l'heure des articles et du papier du jour |
+| **Article** `/r/:slug` | déjà en GMT (outil hérité de la page) ; la ligne « mis à jour » l'est aussi |
+| **Administration** `/admin` | le « Quand » du journal des visites : l'heure GMT, puis « il y a … » |
+
+⚠ **Les DATES restent des dates.** La journée de course est une notion
+**parisienne** (une course de 23 h 30 est encore « celle du 18 ») : les colonnes
+de dates (carrières, archive, en-têtes) gardent donc le calendrier de Paris.
+Seule la *date+heure d'un instant* (un article, un relevé) suit l'instant → GMT.
+
+### 26.5 Le job : 1 h d'erreur sur le départ — corrigée aussi
+
+`trouverCourse` a deux sources, et elles ne parlaient pas du même fuseau. Le job
+prenait l'heure de **casacourses** (Maroc) et lui appliquait la conversion de
+**Paris** (heure d'été) :
+
+```
+AVANT : « départ 12:15 GMT »  (faux de 1 h)  →  gel 3 h avant la course
+APRÈS : « heure casacourses 14:15 (heure du Maroc, UTC+1) -> depart 13:15 GMT »
+        →  le gel tombe bien à H−2 (11:15 GMT, heure de Paris 13:15)
+```
+
+`tools/daily.mjs` transporte maintenant **la zone avec l'heure** (`heureZone` :
+`'maroc'` | `'paris'`, `'paris'` par défaut sur une vieille ligne d'archive) et
+`departEnGMT()` convertit **une seule fois**, au bon endroit. Les comparaisons se
+font en minutes **GMT** (`depart` et `now` dans le même fuseau) : les fenêtres de
+snapshot (`−195`, `−135`) et la fenêtre de gel (`−120` … `−10`) sont donc justes.

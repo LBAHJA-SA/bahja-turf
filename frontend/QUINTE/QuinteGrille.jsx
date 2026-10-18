@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
 import Drapeau from '../../src/Drapeau.jsx'
+import { hhmmGMT, heureGMT, heureMarocGMT } from '../../src/temps.js'
 import {
   fetchRecapSite, fetchArchiveDisque,
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
@@ -257,7 +258,7 @@ function ConditionsCourse({ course, date, sk }) {
       <div style={{ marginTop: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,.07)' }}>
         <div style={{ fontSize: 12, color: '#475569' }}>
           <b style={{ color: '#e7f1ff' }}>{c.date_formatted || date}</b>
-          {c.time ? ' · ' + c.time + ' h' : ''}
+          {c.time ? ' · ' + (heureMarocGMT(c.time) || c.time + ' h') : ''}
           {'   ·   '}
           {c.reunion_code ? <b style={{ color: '#e7f1ff' }}>{c.reunion_code}</b> : null}
           {/* le drapeau du pays de la réunion — une VRAIE image (Windows ne
@@ -1379,7 +1380,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             Les boîtes se lisent <b>en travers</b> : ligne du haut puis ligne du bas.{carnet(detail) && <> Les cases sont numérotées <b>P1, P2… en colonnes</b> : la ligne du haut porte la parité du P1.</>}
             <br />
             {Object.keys(cotes).length >= 4 ? (
-              <>📈 <b>Marché lu sur equidia.fr</b>, relevé à {heureCote ? heureCote.slice(11, 16) : '?'} — rafraîchi toutes les minutes.
+              <>📈 <b>Marché lu sur equidia.fr</b>, relevé à {heureCote ? (hhmmGMT(heureCote) || '?') + ' GMT' : '?'} — rafraîchi toutes les minutes.
                 Le badge de chaque boule (en haut à droite) est son <b>rang de cote</b> :
                 il <b>informe</b>, il ne choisit pas (§11.22 — c'est le rang de presse qui remplit les blocs).
                 Ce que ce rang vaut, et ce que vaut le moteur, sont mesurés dans le
@@ -1458,7 +1459,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   padding: '2px 12px', verticalAlign: 'middle',
                 }}>
                   {conf[0]}
-                  {rec?.ticketPoseLe && src && src !== null ? ` · gelé à ${rec.ticketPoseLe.slice(11, 16)} GMT` : ''}
+                  {rec?.ticketPoseLe && src && src !== null ? ` · gelé à ${heureGMT(rec.ticketPoseLe)}` : ''}
                 </span>
               )
             })()}
@@ -1616,7 +1617,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                             sont deux moments différents, et n'en afficher
                             qu'un évite toute ambiguïté. */}
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11, color: a.ticketPoseLe ? SK.accent : '#7a8ea9' }}>
-                          {a.ticketPoseLe ? a.ticketPoseLe.slice(11, 16) : '—'}
+                          {a.ticketPoseLe ? (hhmmGMT(a.ticketPoseLe) || '—') : '—'}
                         </td>
                         <td style={{ ...s.td, fontSize: 11, fontWeight: 800 }}>
                           {(() => {

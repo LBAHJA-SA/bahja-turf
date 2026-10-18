@@ -231,6 +231,7 @@ async function trouverCourseEquidia(date) {
   return {
     courseId,
     heure,
+    heureZone: 'paris',
     arrivee: null,
     participants: partants,
     discipline: course.discipline || 'PLAT',
@@ -257,9 +258,16 @@ export async function trouverCourse(date, synthese, courseIdForce) {
   // autoCarriere veut un id « AAAA-MM-JJ_Rn_Cm » : on le reconstruit
   const fid = det.raw?.reunion_code && det.raw?.code ? `${date}_${det.raw.reunion_code}_${det.raw.code}` : (det.courseId || null)
   log(`     casacourses : ${det.hippodrome} ${det.raw?.code || '? '} · ${det.nbPartants} partants · ${det.distance}m · cover ${det.cover}`)
+  /* ⭐ LA ZONE DE L'HEURE EST TRANSPORTÉE (18/10/2026) : casacourses est un
+   *    site MAROCAIN, son `time_hm` est l'heure du Maroc (UTC+1) — il annonce
+   *    14:15 la course que Paris annonce à 15:15. On le dit ici pour que la
+   *    conversion ne soit faite qu'une fois, au bon endroit (`finaliserJour`). */
+  const hCC = det.raw?.time_hm || det.raw?.time || det.heure || null
+  if (hCC) log(`     heure casacourses ${hCC} (heure du Maroc, UTC+1) -> depart ${hh(departEnGMT(hCC, 'maroc'))} GMT`)
   return {
     courseId: fid,
-    heure: det.raw?.time_hm || det.raw?.time || det.heure || null,
+    heure: hCC,
+    heureZone: 'maroc',
     arrivee: det.arrivee,
     participants: parts,
     discipline: det.discipline,
@@ -577,6 +585,30 @@ function enMinutes(hhmm) {
   return m ? Number(m[1]) * 60 + Number(m[2]) : null
 }
 
+/** Des minutes depuis minuit -> « 11:15 » (l'heure telle qu'on la LIT). */
+function hh(m) {
+  const x = ((Math.round(m) % 1440) + 1440) % 1440
+  return String(Math.floor(x / 60)).padStart(2, '0') + ':' + String(x % 60).padStart(2, '0')
+}
+
+/* ⭐ LE DÉPART EN GMT (18/10/2026) — 1 h d'erreur corrigée.
+ *   `trouverCourse` a DEUX sources, et elles ne parlent PAS du même fuseau :
+ *
+ *     ① casacourses (site MAROCAIN) : « time_hm » est l'heure du Maroc = UTC+1
+ *        FIXE. Mesuré le 18/10/2026 : 14:15 chez lui = 15:15 chez Equidia
+ *        (`real_heure_course = 2026-10-18T15:15:00+02:00`) = 13:15 GMT.
+ *        Avant, on lui appliquait la conversion de Paris : le job croyait le
+ *        départ à 12:15 GMT et gelait donc 3 h avant au lieu de 2 h.
+ *     ② equidia (site FRANÇAIS) : l'heure de PARIS, heure d'été comprise.
+ *
+ *   Sans zone (une ligne d'archive ancienne), on suppose Paris : c'est l'ancien
+ *   comportement, jamais une invention. */
+function departEnGMT(heure, zone) {
+  const m = enMinutes(heure)
+  if (m == null) return null
+  return zone === 'maroc' ? m - 60 : parisVersGMT(m)
+}
+
 /** Re-gel d'avant-course : UNE fois, 2 h avant le départ.
  *  10/10/2026 (instruction utilisateur) : la ticket se fige 2 h avant —
  *  le temps d'aller la jouer. Au premier run ≥ départ-120 on gèle avec le
@@ -600,17 +632,18 @@ async function finaliserJour(date) {
     if (course && !heure) heure = course.heure || null
   } catch (e) { log(`  ${date}  course introuvable : ${e.message}`); return null }
   if (!course) return null
-  const depart = enMinutes(heure)
+  /* ⚠ le départ est en GMT, donc « maintenant » aussi : les deux se comparent
+     dans le MÊME fuseau (c'est le sens de « tout s'affiche en GMT »). */
+  const depart = departEnGMT(heure, course?.heureZone || 'paris')
   if (depart == null) { log(`  ${date}  heure de départ inconnue — pas de re-gel`); return null }
-  const now = minutesParis()
-  const hh = (m) => String(Math.floor(((m % 1440) + 1440) % 1440 / 60)).padStart(2, '0') + ':' + String(((m % 1440) + 1440) % 1440 % 60).padStart(2, '0')
+  const now = minutesGMT()
   /* Les 2 snapshots intermédiaires : fenêtres de 30 min (cadence des runs),
    * bornes incluses — un run tombe toujours dedans. Un seul snapshot par
    * label (le premier qui passe) : après, c'est verrouillé comme le reste. */
   if (now >= depart - 195 && now <= depart - 165) await snapshotMarche(date, 'h_moins_3')
   if (now >= depart - 135 && now <= depart - 105) await snapshotMarche(date, 'h_moins_2')
   if (now < depart - 120 || now > depart - 10) {
-    log(`  ${date}  hors fenêtre (départ ${hh(parisVersGMT(depart))} GMT, il est ${hh(minutesGMT())} GMT — gel à ${hh(parisVersGMT(depart - 120))} GMT au plus tôt)`)
+    log(`  ${date}  hors fenêtre (départ ${hh(depart)} GMT, il est ${hh(minutesGMT())} GMT — gel à ${hh(depart - 120)} GMT au plus tôt)`)
     return null
   }
 
@@ -634,7 +667,7 @@ async function finaliserJour(date) {
   for (const k of Object.keys(db).sort().reverse()) tri[k] = db[k]
   ecrire(F_SYN, tri)
   try { fs.mkdirSync(PUB, { recursive: true }); fs.writeFileSync(path.join(PUB, 'synthese.json'), JSON.stringify(tri, null, 2)) } catch (e) {}
-  log(`  ${date}  FINAL gelé à ${hh(minutesGMT())} GMT (départ ${hh(parisVersGMT(depart))} GMT)`)
+  log(`  ${date}  FINAL gelé à ${hh(minutesGMT())} GMT (départ ${hh(depart)} GMT)`)
   return rec
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Entete from '../../src/Entete.jsx'
+import { jourHeureGMT, heureParisGMT } from '../../src/temps.js'
 import {
   aujourdhui, quinteDuJour, declarations, analyse, revueDePresse, articles, htmlSur,
   videosJournaux, partagerVideos, papierDuJour,
@@ -101,17 +102,15 @@ const texteNu = (h) => String(h || '')
 
 const jour = (d) => {
   if (!d) return ''
-  const x = new Date(String(d).length <= 10 ? d + 'T12:00:00' : d)
+  /* Une DATE (pas une heure) : on la fixe en UTC pour que tous les visiteurs
+     lisent le même jour — midi évite tout basculement de date. */
+  const x = new Date(String(d).length <= 10 ? d + 'T12:00:00Z' : d)
   if (Number.isNaN(x.getTime())) return ''
-  return x.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+  return x.toLocaleDateString('fr-FR', { timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
 }
-const heure = (d) => {
-  if (!d) return ''
-  const x = new Date(d)
-  if (Number.isNaN(x.getTime())) return ''
-  return x.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' }) + ' · ' +
-    x.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-}
+/* ⭐ L'HEURE, EN GMT (18/10/2026) — voir `src/temps.js`. Un instant (date ISO
+ * de la revue de presse, du papier du jour) se lit en UTC : « 18/10 · 05:12 GMT ». */
+const heure = (d) => jourHeureGMT(d)
 
 function teinteNote(n) {
   if (n == null) return { c: SK.doux, f: 'rgba(255,255,255,.05)' }
@@ -469,7 +468,7 @@ export default function Presse() {
               <span style={{ fontWeight: 800, fontSize: 14.5 }}>{quinte.hippodrome}</span>
               <span style={{ fontSize: 13, color: SK.texte }}>{quinte.nom}</span>
               <span style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: 12, color: SK.doux }}>
-                {quinte.heure && <span><i className="bi bi-clock" /> {quinte.heure}</span>}
+                {quinte.heure && <span><i className="bi bi-clock" /> {heureParisGMT(quinte.date, quinte.heure)}</span>}
                 {quinte.distance ? <span><i className="bi bi-rulers" /> {quinte.distance} m</span> : null}
                 {quinte.partants ? <span><i className="bi bi-people" /> {quinte.partants} partants</span> : null}
                 {quinte.discipline ? <span><i className="bi bi-flag" /> {quinte.discipline}</span> : null}

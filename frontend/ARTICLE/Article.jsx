@@ -17,6 +17,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { lireCible, chargerCourse, chargerPronos, chargerMeteo, chargerProgramme } from '../../backend/ARTICLE/backend.js'
 import { exporterArchive, importerArchive, tailleArchive } from '../../backend/ARTICLE/archive.js'
 import { chargerTopsTurfFrance, offsetJour, slugNorm, heureGMT } from '../../backend/ARTICLE/turfFrance.js'
+import { jourHeureGMT, hhmmGMT } from '../../src/temps.js'
 import { pctPodium, pctVictoire, nb2e, nb3e, nbCourses, formeCourte, classerPartants } from '../../backend/ARTICLE/score.js'
 
 /** Les 19 lignes de « Top10 des Cotes de Références », dans l'ordre de la source. */
@@ -219,9 +220,11 @@ export default function Article() {
   const j = (v) => (Array.isArray(v) && v.length ? v.join(' - ') : '')
   const formatHeure = (t) => {
     if (!t) return ''
-    const n = Number(t)
-    if (!Number.isFinite(n)) return String(t).slice(0, 5)
-    try { return new Date(n).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) } catch (e) { return '' }
+    /* ⭐ EN GMT (18/10/2026) : un instant se lit en UTC — voir `src/temps.js`.
+       (Une heure murale sans fuseau reste affichée telle quelle : on ne devine
+       pas une zone qu'on ne connaît pas.) */
+    const h = hhmmGMT(t)
+    return h ? h + ' GMT' : String(t).slice(0, 5)
   }
 
   return (
@@ -476,7 +479,7 @@ export default function Article() {
               </div>
               {pronostics._updated_at ? (
                 <div style={{ marginTop: 6, fontSize: 11, opacity: 0.8 }}>
-                  mis à jour : {new Date(pronostics._updated_at).toLocaleString('fr-FR')}
+                  mis à jour : {jourHeureGMT(pronostics._updated_at)}
                 </div>
               ) : null}
             </>
