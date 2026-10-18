@@ -2746,95 +2746,312 @@
    {
     "num": 3,
     "nom": "EMINENT KRONOS",
-    "cote": 2.5,
-    "ouverture": null,
-    "tendance": "+",
+    "cote": 2.8,
+    "ouverture": 2.9,
+    "tendance": "-",
     "favori": true,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
    },
    {
     "num": 6,
     "nom": "DOMENIK JET",
-    "cote": 3.1,
-    "ouverture": null,
+    "cote": 6.3,
+    "ouverture": 7.3,
     "tendance": "+",
     "favori": false,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
    },
    {
     "num": 12,
     "nom": "JALENDRA DE MALAC",
-    "cote": 8.3,
-    "ouverture": null,
+    "cote": 9.8,
+    "ouverture": 10,
     "tendance": "-",
     "favori": false,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
-   },
-   {
-    "num": 5,
-    "nom": "KOMERE DE CORDAY",
-    "cote": 12,
-    "ouverture": null,
-    "tendance": "+",
-    "favori": false,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
    },
    {
     "num": 7,
     "nom": "KEROSEN DU GERS",
-    "cote": 12,
-    "ouverture": null,
+    "cote": 10,
+    "ouverture": 10,
     "tendance": "+",
     "favori": false,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
    },
    {
     "num": 4,
     "nom": "KISS ME AGAIN",
-    "cote": 13,
-    "ouverture": null,
+    "cote": 11,
+    "ouverture": 10,
     "tendance": "-",
     "favori": false,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
-   },
-   {
-    "num": 8,
-    "nom": "KERALDO",
-    "cote": 23,
-    "ouverture": null,
-    "tendance": "=",
-    "favori": false,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
-   },
-   {
-    "num": 11,
-    "nom": "READLY LAVEC",
-    "cote": 23,
-    "ouverture": null,
-    "tendance": "+",
-    "favori": false,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
    },
    {
     "num": 13,
     "nom": "COLBERT WF",
-    "cote": 47,
-    "ouverture": null,
+    "cote": 12,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "READLY LAVEC",
+    "cote": 13,
+    "ouverture": 13,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "ELEGANCE KRONOS",
+    "cote": 18,
+    "ouverture": 18,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "TRETIAK",
+    "cote": 25,
+    "ouverture": 23,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "KAMEHAMEHA",
+    "cote": 27,
+    "ouverture": 27,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "KOMERE DE CORDAY",
+    "cote": 32,
+    "ouverture": 30,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "MAX OCCAGNES",
+    "cote": 42,
+    "ouverture": 38,
     "tendance": "+",
     "favori": false,
-    "enjeu": 110,
-    "heure": "2026-10-16T05:13:00+02:00"
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "KERALDO",
+    "cote": 58,
+    "ouverture": 55,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "RED HOT ROADSTER",
+    "cote": 65,
+    "ouverture": 59,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "KIPHYLE DESBOIS",
+    "cote": 91,
+    "ouverture": 80,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 107354,
+    "heure": "2026-10-16T16:45:00+02:00"
    }
   ],
-  "backfill": "2026-10-16"
+  "backfill": "2026-10-16",
+  "snapshots": {
+   "h_moins_3": {
+    "heure": "2026-10-16T15:00:05.783Z",
+    "cotes": [
+     {
+      "num": 3,
+      "nom": "EMINENT KRONOS",
+      "cote": 2.8,
+      "ouverture": 2.9,
+      "tendance": "-",
+      "favori": true,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 6,
+      "nom": "DOMENIK JET",
+      "cote": 6.3,
+      "ouverture": 7.3,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 12,
+      "nom": "JALENDRA DE MALAC",
+      "cote": 9.8,
+      "ouverture": 10,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 7,
+      "nom": "KEROSEN DU GERS",
+      "cote": 10,
+      "ouverture": 10,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 4,
+      "nom": "KISS ME AGAIN",
+      "cote": 11,
+      "ouverture": 10,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 13,
+      "nom": "COLBERT WF",
+      "cote": 12,
+      "ouverture": 11,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 11,
+      "nom": "READLY LAVEC",
+      "cote": 13,
+      "ouverture": 13,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 15,
+      "nom": "ELEGANCE KRONOS",
+      "cote": 18,
+      "ouverture": 18,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 1,
+      "nom": "TRETIAK",
+      "cote": 25,
+      "ouverture": 23,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 14,
+      "nom": "KAMEHAMEHA",
+      "cote": 27,
+      "ouverture": 27,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 5,
+      "nom": "KOMERE DE CORDAY",
+      "cote": 32,
+      "ouverture": 30,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 9,
+      "nom": "MAX OCCAGNES",
+      "cote": 42,
+      "ouverture": 38,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 8,
+      "nom": "KERALDO",
+      "cote": 58,
+      "ouverture": 55,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 10,
+      "nom": "RED HOT ROADSTER",
+      "cote": 65,
+      "ouverture": 59,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     },
+     {
+      "num": 2,
+      "nom": "KIPHYLE DESBOIS",
+      "cote": 91,
+      "ouverture": 80,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 107354,
+      "heure": "2026-10-16T16:45:00+02:00"
+     }
+    ]
+   }
+  }
  },
  "2026-10-10_R1_C3": {
   "source": "equidia.fr",
@@ -2985,5 +3202,378 @@
    }
   ],
   "backfill": "2026-10-16"
+ },
+ "2026-10-17_R1_C3": {
+  "source": "equidia.fr",
+  "favori": 6,
+  "snapshots": {
+   "h_moins_2": {
+    "heure": "2026-10-17T10:30:05.299Z",
+    "cotes": [
+     {
+      "num": 6,
+      "nom": "GREY FIGHTER",
+      "cote": 4.8,
+      "ouverture": 4.8,
+      "tendance": "+",
+      "favori": true,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 2,
+      "nom": "LOQUAS",
+      "cote": 7.9,
+      "ouverture": 7.8,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 19,
+      "nom": "CHANT DE GARDE",
+      "cote": 8.8,
+      "ouverture": 8.7,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 12,
+      "nom": "INTERDIT DE JEU",
+      "cote": 9.5,
+      "ouverture": 9.6,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 11,
+      "nom": "ROBIN HILL",
+      "cote": 9.8,
+      "ouverture": 9.5,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 5,
+      "nom": "KEL STORY",
+      "cote": 10,
+      "ouverture": 10,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 7,
+      "nom": "ROCK AND ROLL",
+      "cote": 13,
+      "ouverture": 14,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 1,
+      "nom": "GOLIATH D'AUNOU",
+      "cote": 14,
+      "ouverture": 14,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 3,
+      "nom": "KIRIKOU DES MERS",
+      "cote": 15,
+      "ouverture": 16,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 4,
+      "nom": "GARDONS LE SOURIRE",
+      "cote": 17,
+      "ouverture": 17,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 9,
+      "nom": "NEVER RISK",
+      "cote": 25,
+      "ouverture": 26,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 13,
+      "nom": "KARAFON",
+      "cote": 27,
+      "ouverture": 29,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 15,
+      "nom": "MOHICAN",
+      "cote": 62,
+      "ouverture": 62,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 17,
+      "nom": "THE MUST",
+      "cote": 70,
+      "ouverture": 75,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 20,
+      "nom": "PARFUM D'UNE REINE",
+      "cote": 71,
+      "ouverture": 75,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 8,
+      "nom": "ALERIC",
+      "cote": 73,
+      "ouverture": 67,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 18,
+      "nom": "LILETTE",
+      "cote": 78,
+      "ouverture": 81,
+      "tendance": "-",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     },
+     {
+      "num": 16,
+      "nom": "L'AZIZA DES PLACES",
+      "cote": 87,
+      "ouverture": 93,
+      "tendance": "+",
+      "favori": false,
+      "enjeu": 0,
+      "heure": "2026-10-17T12:16:00+02:00"
+     }
+    ]
+   }
+  },
+  "cotes": [
+   {
+    "num": 6,
+    "nom": "GREY FIGHTER",
+    "cote": 4.8,
+    "ouverture": 4.8,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 2,
+    "nom": "LOQUAS",
+    "cote": 7.9,
+    "ouverture": 7.8,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 19,
+    "nom": "CHANT DE GARDE",
+    "cote": 8.8,
+    "ouverture": 8.7,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "INTERDIT DE JEU",
+    "cote": 9.5,
+    "ouverture": 9.6,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "ROBIN HILL",
+    "cote": 9.8,
+    "ouverture": 9.5,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "KEL STORY",
+    "cote": 10,
+    "ouverture": 10,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "ROCK AND ROLL",
+    "cote": 13,
+    "ouverture": 14,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "GOLIATH D'AUNOU",
+    "cote": 14,
+    "ouverture": 14,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "KIRIKOU DES MERS",
+    "cote": 15,
+    "ouverture": 16,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "GARDONS LE SOURIRE",
+    "cote": 17,
+    "ouverture": 17,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "NEVER RISK",
+    "cote": 25,
+    "ouverture": 26,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "KARAFON",
+    "cote": 27,
+    "ouverture": 29,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "MOHICAN",
+    "cote": 62,
+    "ouverture": 62,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 17,
+    "nom": "THE MUST",
+    "cote": 70,
+    "ouverture": 75,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 20,
+    "nom": "PARFUM D'UNE REINE",
+    "cote": 71,
+    "ouverture": 75,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "ALERIC",
+    "cote": 73,
+    "ouverture": 67,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 18,
+    "nom": "LILETTE",
+    "cote": 78,
+    "ouverture": 81,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "L'AZIZA DES PLACES",
+    "cote": 87,
+    "ouverture": 93,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-17T12:16:00+02:00"
+   }
+  ]
  }
 }

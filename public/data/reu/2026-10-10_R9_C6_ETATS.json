@@ -1,0 +1,383 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 6,
+  "nom": "CLAIMING (3 YO & UP - DIRT)",
+  "prix": "CLAIMING (3 YO & UP - DIRT)",
+  "heure": "20:50",
+  "distance": 1200,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 5 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
+  "montant": 72134,
+  "arrivee": [
+   5,
+   6,
+   7,
+   2,
+   4
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 9,
+  "hippodrome": "Belmont Park",
+  "pays": "ETATS"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "GOLD LUCK",
+   "driver": "D DAVIS",
+   "entraineur": "R ATRAS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "7p(25)7p6p6p",
+   "gains": 503924,
+   "age": 6,
+   "sexe": "M",
+   "poids": 56,
+   "valeur": 39,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/6/20261010-BED-6-1.png",
+   "proprietaire": "BELLABLUE RACING STABLE",
+   "dernierPassage": null,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "RUN CLASSIC",
+   "driver": "E J ZAYAS",
+   "entraineur": "W POTTS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p3p2p4p4p",
+   "gains": 586277,
+   "age": 8,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 42.5,
+   "chrono": "1'09\"8",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/6/20261010-BED-6-2.png",
+   "proprietaire": "BUNSRAJ, JASEN",
+   "dernierPassage": 72,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "PAIR OF SOCKS",
+   "driver": "C ELLIOTT",
+   "entraineur": "J W FERRARO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p9p5p2p3p",
+   "gains": 230366,
+   "age": 4,
+   "sexe": "M",
+   "poids": 57,
+   "valeur": 37.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/6/20261010-BED-6-3.png",
+   "proprietaire": "FIRST RODEO RACING AND MASSIMO S",
+   "dernierPassage": 72,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "TWENTY FOUR MAMBA",
+   "driver": "R SANTANA, JR.",
+   "entraineur": "F ABREU",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p5p1p3p(25)",
+   "gains": 712662,
+   "age": 7,
+   "sexe": "H",
+   "poids": 57,
+   "valeur": 40.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/6/20261010-BED-6-4.png",
+   "proprietaire": "PATERPOP RACING",
+   "dernierPassage": 408,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "PARADISE VALLEY",
+   "driver": "S MARIN",
+   "entraineur": "I KANTARMACI",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p3p2p6p6p",
+   "gains": 342070,
+   "age": 6,
+   "sexe": "H",
+   "poids": 57,
+   "valeur": 41,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/6/20261010-BED-6-5.png",
+   "proprietaire": "KANTARMACI, ILKAY, ZILLA RACING",
+   "dernierPassage": 126,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "BABY YODA",
+   "driver": "K CARMOUCHE",
+   "entraineur": "M GIANGIULIO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p2p(25)5p8p",
+   "gains": 1046980,
+   "age": 8,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 42,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/6/20261010-BED-6-6.png",
+   "proprietaire": "FOUR CORNERS RACING, BROADVIEW S",
+   "dernierPassage": 448,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "LUNAR MODULE",
+   "driver": "M FRANCO",
+   "entraineur": "J C ENGLEHART",
+   "cote": null,
+   "coteRef": null,
+   "musique": "6p7p1p2p5p",
+   "gains": 323664,
+   "age": 6,
+   "sexe": "H",
+   "poids": 57,
+   "valeur": 36.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/6/20261010-BED-6-7.png",
+   "proprietaire": "TEAM PENNEY RACING",
+   "dernierPassage": 324,
+   "depart": 7,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "3"
+  ],
+  "drivers": [],
+  "entraineurs": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "7"
+  ],
+  "top10chevaux": [
+   "3"
+  ],
+  "top10entraineurs": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "7"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "4",
+   "7"
+  ],
+  "topPalmares": [
+   "2",
+   "3",
+   "5",
+   "4",
+   "7",
+   "6",
+   "1"
+  ],
+  "topForme": [
+   "2",
+   "3",
+   "4",
+   "5",
+   "7",
+   "6",
+   "1"
+  ],
+  "topClasse": [
+   "6",
+   "4",
+   "2",
+   "1",
+   "5",
+   "7",
+   "3"
+  ],
+  "topJockeys": [
+   "2",
+   "7",
+   "1",
+   "4",
+   "6",
+   "3",
+   "5"
+  ],
+  "topEntraineurs": [
+   "4",
+   "5",
+   "3",
+   "1",
+   "2",
+   "7"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "2"
+  ],
+  "topCordes": [
+   "1",
+   "7",
+   "2",
+   "3"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "4",
+   "7",
+   "2",
+   "6",
+   "3"
+  ],
+  "incontournables": [
+   "3",
+   "5",
+   "4",
+   "2",
+   "7",
+   "6"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "7",
+   "2"
+  ],
+  "syntheseTf": [
+   "3",
+   "5",
+   "4",
+   "6",
+   "1"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "GOLD LUCK",
+   "courses": 36,
+   "victoires": 6,
+   "places": 17,
+   "pctV": "16.67",
+   "pctP": "63.89",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "RUN CLASSIC",
+   "courses": 27,
+   "victoires": 5,
+   "places": 19,
+   "pctV": "18.52",
+   "pctP": "88.89",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "PAIR OF SOCKS",
+   "courses": 18,
+   "victoires": 4,
+   "places": 9,
+   "pctV": "22.22",
+   "pctP": "72.22",
+   "aptG": null,
+   "aptP": "1400"
+  },
+  {
+   "num": 4,
+   "cheval": "TWENTY FOUR MAMBA",
+   "courses": 47,
+   "victoires": 9,
+   "places": 28,
+   "pctV": "19.15",
+   "pctP": "78.72",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "PARADISE VALLEY",
+   "courses": 32,
+   "victoires": 8,
+   "places": 21,
+   "pctV": "25",
+   "pctP": "90.63",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "BABY YODA",
+   "courses": 36,
+   "victoires": 11,
+   "places": 20,
+   "pctV": "30.56",
+   "pctP": "86.11",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "LUNAR MODULE",
+   "courses": 33,
+   "victoires": 5,
+   "places": 21,
+   "pctV": "15.15",
+   "pctP": "78.79",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "6 - 4 - 5 - 1 - 7 - 2 - 3",
+ "pronosTf": [
+  "2 - 3 - 5 - 4 - 7"
+ ],
+ "collecteLe": "2026-10-10T23:33:09.237Z"
+}

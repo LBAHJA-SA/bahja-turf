@@ -1,0 +1,373 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 2,
+  "nom": "PRIX SARACA",
+  "prix": "PRIX SARACA",
+  "heure": "14:15",
+  "distance": 1400,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "",
+  "conditions": "Pour poulains entiers, hongres et pouliches de 2 ans, n'ayant jamais gagné u Listed. Poids : 58 kg. Versement à la poule des propriétaires : 390 à l'engagement ou 4.320 à l'engagement supplémentaire. Un souvenir sera offert au propriétaire du cheval gagnant par FRANCE GALOP.",
+  "montant": 54900,
+  "arrivee": [
+   1,
+   6,
+   4,
+   5,
+   2
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 4,
+  "hippodrome": "Chantilly",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "ZEN POETRY",
+   "driver": "PC. BOUDOT",
+   "entraineur": "A & L. FABRE",
+   "cote": 1.7,
+   "coteRef": null,
+   "musique": "1p2p2p",
+   "gains": 24816,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58,
+   "valeur": 45,
+   "chrono": "1'27\"2",
+   "coteRefJockey": "04,9",
+   "coteRefEntraineur": "07,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/2/20261010-CHA-2-1.png",
+   "proprietaire": "GODOLPHIN SNC",
+   "dernierPassage": 29,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "SIDEWALKOFBROADWAY",
+   "driver": "C. SOUMILLON",
+   "entraineur": "N. GEORGE & A. ZETTERHOLM",
+   "cote": 7.7,
+   "coteRef": null,
+   "musique": "3p",
+   "gains": 6398,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "06,2",
+   "coteRefEntraineur": "07,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/2/20261010-CHA-2-2.png",
+   "proprietaire": "A. JATHIERE",
+   "dernierPassage": 63,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "DREAM OF GLORY",
+   "driver": "E. VERHESTRAETEN",
+   "entraineur": "A. MURPHY",
+   "cote": 27,
+   "coteRef": 10,
+   "musique": "4p1p2p5p3p",
+   "gains": 28882,
+   "age": 2,
+   "sexe": "F",
+   "poids": 56.5,
+   "valeur": 39.5,
+   "chrono": "1'27\"7",
+   "coteRefJockey": "10,5",
+   "coteRefEntraineur": "09,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/2/20261010-CHA-2-3.png",
+   "proprietaire": "D. MACAULIFFE/A. DON/D. HAYES",
+   "dernierPassage": 15,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "HINATA GREY",
+   "driver": "C. DEMURO",
+   "entraineur": "V. HEAD",
+   "cote": 7,
+   "coteRef": 10,
+   "musique": "4p4p3p1p",
+   "gains": 40330,
+   "age": 2,
+   "sexe": "F",
+   "poids": 56.5,
+   "valeur": 43.5,
+   "chrono": "1'26\"0",
+   "coteRefJockey": "07,0",
+   "coteRefEntraineur": "08,2",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/2/20261010-CHA-2-4.png",
+   "proprietaire": "ECURIE GEORGINIO",
+   "dernierPassage": 48,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "CELTIC MOON",
+   "driver": "T. PICCONE",
+   "entraineur": "A. MURPHY",
+   "cote": 44,
+   "coteRef": null,
+   "musique": "9p7p1p4p",
+   "gains": 15975,
+   "age": 2,
+   "sexe": "F",
+   "poids": 56.5,
+   "valeur": null,
+   "chrono": "1'29\"7",
+   "coteRefJockey": "09,8",
+   "coteRefEntraineur": "09,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/2/20261010-CHA-2-5.png",
+   "proprietaire": "DK. KELLY",
+   "dernierPassage": 57,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "EVENEMENTIELLE",
+   "driver": "O. MURPHY",
+   "entraineur": "FH. GRAFFARD",
+   "cote": 3.6,
+   "coteRef": null,
+   "musique": "1p4p",
+   "gains": 16166,
+   "age": 2,
+   "sexe": "F",
+   "poids": 56.5,
+   "valeur": null,
+   "chrono": "1'26\"7",
+   "coteRefJockey": "07,5",
+   "coteRefEntraineur": "04,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/2/20261010-CHA-2-6.png",
+   "proprietaire": "QATAR RACING/EC DES MONCEAUX",
+   "dernierPassage": 17,
+   "depart": 1,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "1",
+   "3",
+   "4"
+  ],
+  "drivers": [
+   1,
+   2,
+   4,
+   6,
+   5,
+   3
+  ],
+  "entraineurs": [
+   "6",
+   "1",
+   "2",
+   "4",
+   "3",
+   "5"
+  ],
+  "top10chevaux": [
+   "1",
+   "3",
+   "4"
+  ],
+  "top10entraineurs": [
+   "6",
+   "1",
+   "2",
+   "4",
+   "3",
+   "5"
+  ],
+  "topCotesDirect": [
+   "1",
+   "6",
+   "4",
+   "2",
+   "3",
+   "5"
+  ],
+  "topChevaux": [
+   "1",
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "topPalmares": [
+   "3",
+   "1",
+   "4",
+   "5",
+   "6",
+   "2"
+  ],
+  "topForme": [
+   "3",
+   "1",
+   "4",
+   "5",
+   "6",
+   "2"
+  ],
+  "topClasse": [
+   "4",
+   "3",
+   "1",
+   "6",
+   "5",
+   "2"
+  ],
+  "topJockeys": [
+   "4",
+   "2",
+   "5",
+   "1",
+   "3",
+   "6"
+  ],
+  "topEntraineurs": [
+   "6",
+   "4",
+   "3",
+   "5",
+   "1",
+   "2"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "4",
+   "6",
+   "1",
+   "3",
+   "5"
+  ],
+  "topCordes": [
+   "3",
+   "1",
+   "4",
+   "6",
+   "2",
+   "5"
+  ],
+  "ecartsChevaux": [
+   "4",
+   "5",
+   "3",
+   "1",
+   "2",
+   "6"
+  ],
+  "incontournables": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "6",
+   "5"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "3",
+   "5"
+  ],
+  "syntheseTf": [
+   "1",
+   "4",
+   "6",
+   "2"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "ZEN POETRY",
+   "courses": 3,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "33.33",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": "1600"
+  },
+  {
+   "num": 2,
+   "cheval": "SIDEWALKOFBROADWAY",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "DREAM OF GLORY",
+   "courses": 5,
+   "victoires": 1,
+   "places": 4,
+   "pctV": "20",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": "1100"
+  },
+  {
+   "num": 4,
+   "cheval": "HINATA GREY",
+   "courses": 4,
+   "victoires": 1,
+   "places": 3,
+   "pctV": "25",
+   "pctP": "100",
+   "aptG": "1200",
+   "aptP": "1200"
+  },
+  {
+   "num": 5,
+   "cheval": "CELTIC MOON",
+   "courses": 4,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "25",
+   "pctP": "50",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "EVENEMENTIELLE",
+   "courses": 2,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "3 - 4 - 1 - 5 - 6 - 2",
+ "pronosTf": [
+  "3 - 1 - 4 - 5",
+  "1 - 2 - 3 - 4"
+ ],
+ "collecteLe": "2026-10-10T23:31:50.879Z"
+}

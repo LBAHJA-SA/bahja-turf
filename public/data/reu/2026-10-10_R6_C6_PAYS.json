@@ -1,0 +1,379 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 6,
+  "nom": "PRIX WIERINGERMEERRUITERS PAYS BAS",
+  "prix": "PRIX WIERINGERMEERRUITERS PAYS BAS",
+  "heure": "20:52",
+  "distance": 2100,
+  "discipline": "ATTELE",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "PRIX WIERINGERMEERRUITERS Course 06 Départ à l'Autostart 3.300 - Attelé. - 2.100 mètres. 1.350, 600, 350, 250, 200, 150, 100. - 300 au fonds d'élevage. Pour 5 à 7 ans n'ayant pas gagné 82.000.",
+  "montant": 3300,
+  "arrivee": [
+   7,
+   5,
+   4,
+   6,
+   1
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 6,
+  "hippodrome": "Wolvega",
+  "pays": "PAYS"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "MISTRAL RICARDO",
+   "driver": "KEVIN VAN DER LINDEN",
+   "entraineur": "A. W. BOSSCHA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4a0a3a5a0a",
+   "gains": 40895,
+   "age": 7,
+   "sexe": "F",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'14\"4",
+   "coteRefJockey": "01,2",
+   "coteRefEntraineur": "08,8",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/6/20261010-WOL-6-1.png",
+   "proprietaire": "DE GELE KANARIES",
+   "dernierPassage": 14,
+   "depart": null,
+   "def": "D4"
+  },
+  {
+   "num": 2,
+   "cheval": "MARK SCHERMER",
+   "driver": "INGRID VAN DEN AKKER",
+   "entraineur": "Y. WAGENAAR",
+   "cote": null,
+   "coteRef": 6.4,
+   "musique": "0a2a2a0a0a",
+   "gains": 67187,
+   "age": 7,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'11\"6",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "05,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/6/20261010-WOL-6-2.png",
+   "proprietaire": "STAL INGRID EN MARC VAN DEN AKKER",
+   "dernierPassage": 22,
+   "depart": null,
+   "def": "D4"
+  },
+  {
+   "num": 3,
+   "cheval": "MISS WIZZ",
+   "driver": "ROSALIE JANSSEN",
+   "entraineur": "R. C. M. JANSSEN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3a5a3a5a4a",
+   "gains": 22243,
+   "age": 7,
+   "sexe": "F",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'15\"1",
+   "coteRefJockey": "33,0",
+   "coteRefEntraineur": "12,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/6/20261010-WOL-6-3.png",
+   "proprietaire": "DE GELE KANARIES",
+   "dernierPassage": 23,
+   "depart": null,
+   "def": "DP"
+  },
+  {
+   "num": 4,
+   "cheval": "NIKE R",
+   "driver": "JOHN DEKKER",
+   "entraineur": "C. P. M. ROODENRIJS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1a1a2a1a1a",
+   "gains": 35027,
+   "age": 6,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'16\"6",
+   "coteRefJockey": "12,5",
+   "coteRefEntraineur": "11,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/6/20261010-WOL-6-4.png",
+   "proprietaire": "P. C. ROODENRIJS",
+   "dernierPassage": 36,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "SAMMY BOY",
+   "driver": "MICHA BROUWER",
+   "entraineur": "D. BROUWER",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3a0a5a0a0a",
+   "gains": 36818,
+   "age": 5,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'16\"6",
+   "coteRefJockey": "04,3",
+   "coteRefEntraineur": "03,6",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/6/20261010-WOL-6-5.png",
+   "proprietaire": "NALEKI STABLES B. V.",
+   "dernierPassage": 171,
+   "depart": null,
+   "def": "D4"
+  },
+  {
+   "num": 6,
+   "cheval": "MOST WANTED PK",
+   "driver": "JAAP VAN RIJN",
+   "entraineur": "C. H. LOMAN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "0a0a0a4a0a",
+   "gains": 52748,
+   "age": 7,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'13\"4",
+   "coteRefJockey": "02,9",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/6/20261010-WOL-6-6.png",
+   "proprietaire": "C. H. LOMAN",
+   "dernierPassage": 90,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "ONANA BOKO",
+   "driver": "MICHEL ROTHENGATTER",
+   "entraineur": "M. F. ROTHENGATTER",
+   "cote": null,
+   "coteRef": null,
+   "musique": "0a4a5a0a3a",
+   "gains": 81009,
+   "age": 5,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'09\"9",
+   "coteRefJockey": "02,4",
+   "coteRefEntraineur": "02,6",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/6/20261010-WOL-6-7.png",
+   "proprietaire": "CARPE DIEM STABLES",
+   "dernierPassage": 141,
+   "depart": null,
+   "def": "D4"
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "5",
+   "2"
+  ],
+  "drivers": [
+   "2",
+   "1",
+   "7",
+   "6",
+   "5",
+   "4",
+   "3"
+  ],
+  "entraineurs": [
+   "7",
+   "5",
+   "2",
+   "1",
+   "4",
+   "3"
+  ],
+  "top10chevaux": [
+   "5",
+   "2"
+  ],
+  "top10drivers": [
+   "2",
+   "1",
+   "7",
+   "6",
+   "5",
+   "4",
+   "3"
+  ],
+  "top10entraineurs": [
+   "7",
+   "5",
+   "2",
+   "1",
+   "4",
+   "3"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "4"
+  ],
+  "topPalmares": [
+   "4",
+   "3",
+   "2",
+   "1",
+   "7",
+   "5",
+   "6"
+  ],
+  "topForme": [
+   "4",
+   "3",
+   "1",
+   "2",
+   "7",
+   "5",
+   "6"
+  ],
+  "topClasse": [
+   "7",
+   "2",
+   "6",
+   "1",
+   "5",
+   "4",
+   "3"
+  ],
+  "topJockeys": [
+   "6",
+   "7",
+   "5",
+   "4",
+   "1",
+   "3"
+  ],
+  "topEntraineurs": [
+   "5",
+   "7",
+   "1",
+   "3",
+   "4",
+   "2"
+  ],
+  "aptitudePlace": [
+   "7",
+   "3"
+  ],
+  "topChronos": [
+   "7",
+   "2",
+   "6",
+   "1",
+   "3",
+   "4"
+  ],
+  "topPosition": [
+   "5",
+   "8",
+   "2",
+   "4",
+   "6",
+   "7"
+  ],
+  "ecartsChevaux": [
+   "6",
+   "7",
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "incontournables": [
+   "4",
+   "2",
+   "3",
+   "1",
+   "5",
+   "7"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "1",
+   "3"
+  ],
+  "syntheseTf": [
+   "4",
+   "2",
+   "7",
+   "5",
+   "6",
+   "8"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 2,
+   "cheval": "MARK SCHERMER",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": "2100",
+   "aptP": "2100"
+  },
+  {
+   "num": 5,
+   "cheval": "SAMMY BOY",
+   "courses": 5,
+   "victoires": 1,
+   "places": 3,
+   "pctV": "20",
+   "pctP": "80",
+   "aptG": null,
+   "aptP": "2100"
+  },
+  {
+   "num": 6,
+   "cheval": "MOST WANTED PK",
+   "courses": 4,
+   "victoires": 0,
+   "places": 3,
+   "pctV": "0",
+   "pctP": "75",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "ONANA BOKO",
+   "courses": 8,
+   "victoires": 0,
+   "places": 4,
+   "pctV": "0",
+   "pctP": "50",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "5 - 7 - 6 - 2",
+ "pronosTf": [
+  "4 - 3 - 1 - 7 - 5",
+  "5 - 4 - 3"
+ ],
+ "collecteLe": "2026-10-10T23:32:34.181Z"
+}

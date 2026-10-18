@@ -1,0 +1,399 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 3,
+  "nom": "EMIRATES AUTUMN STAKES (GROUP 3) - WORLD POOL",
+  "prix": "EMIRATES AUTUMN STAKES (GROUP 3) - WORLD POOL",
+  "heure": "15:25",
+  "distance": 1600,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "GROUPE III",
+  "conditions": "Pour pur sang males, hongres et femelles de deux ans (Allocations distribuée aux 6 premiers). Les informations concernant les partants sont communiquées us la responsabilité de l'autorité hippique du pays dans lequel la course es organisée.",
+  "montant": 90359,
+  "arrivee": [
+   5,
+   6,
+   1,
+   4,
+   7
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 7,
+  "hippodrome": "Newmarket",
+  "pays": "ROYAUME"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "AL JABBAR",
+   "driver": "BILLY LOUGHNANE",
+   "entraineur": "CHARLIE APPLEBY",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p2p",
+   "gains": 28912,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58.5,
+   "valeur": null,
+   "chrono": "1'41\"0",
+   "coteRefJockey": "04,6",
+   "coteRefEntraineur": "01,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/3/20261010-MKT-3-1.png",
+   "proprietaire": "GODOLPHIN",
+   "dernierPassage": 28,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "CLASH OF HEARTS",
+   "driver": "M. P. SHEEHY",
+   "entraineur": "ADRIAN KEATLEY",
+   "cote": null,
+   "coteRef": null,
+   "musique": "6p5p8p1p3p",
+   "gains": 27098,
+   "age": 2,
+   "sexe": "H",
+   "poids": 58.5,
+   "valeur": 43.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/3/20261010-MKT-3-2.png",
+   "proprietaire": "ANDY FINNERAN AND PARTNERS",
+   "dernierPassage": 52,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "MIA FANTASIA",
+   "driver": "JAMES DOYLE",
+   "entraineur": "HUGO PALMER",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p1p6p3p1p",
+   "gains": 64031,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58.5,
+   "valeur": 39.5,
+   "chrono": "1'42\"1",
+   "coteRefJockey": "04,5",
+   "coteRefEntraineur": "11,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/3/20261010-MKT-3-3.png",
+   "proprietaire": "SOUTH BY NORTHWEST PARTNERSHIP",
+   "dernierPassage": 42,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "NOTABLE DREAM",
+   "driver": "SILVESTRE DE SOUSA",
+   "entraineur": "MARCO BOTTI",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p6p1p3p",
+   "gains": 26101,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58.5,
+   "valeur": 43,
+   "chrono": "",
+   "coteRefJockey": "02,0",
+   "coteRefEntraineur": "03,5",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/3/20261010-MKT-3-4.png",
+   "proprietaire": "SCUDERIA SAGAM SRLS",
+   "dernierPassage": 91,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "ROCK MONTREAL",
+   "driver": "WILLIAM BUICK",
+   "entraineur": "ROGER VARIAN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p1p",
+   "gains": 20995,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58.5,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "02,0",
+   "coteRefEntraineur": "03,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/3/20261010-MKT-3-5.png",
+   "proprietaire": "GODOLPHIN",
+   "dernierPassage": null,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "SERGEI DIAGHILEV",
+   "driver": "RYAN MOORE",
+   "entraineur": "AIDAN O'BRIEN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p1p9p1p",
+   "gains": 70663,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58.5,
+   "valeur": null,
+   "chrono": "1'38\"4",
+   "coteRefJockey": "02,8",
+   "coteRefEntraineur": "04,2",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/3/20261010-MKT-3-6.png",
+   "proprietaire": "WESTERBERG/MRS J MAGNIER/M TABOR",
+   "dernierPassage": 28,
+   "depart": 7,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "SOLE AMBITION",
+   "driver": "KIERAN SHOEMARK",
+   "entraineur": "ED WALKER",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p3p3p",
+   "gains": 21089,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58.5,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/3/20261010-MKT-3-7.png",
+   "proprietaire": "TBT RACING",
+   "dernierPassage": 50,
+   "depart": 1,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "2",
+   "6"
+  ],
+  "drivers": [
+   4,
+   5,
+   6,
+   3,
+   1
+  ],
+  "entraineurs": [
+   "2",
+   "1",
+   "5",
+   "4",
+   "6",
+   "3"
+  ],
+  "top10chevaux": [
+   "2",
+   "6"
+  ],
+  "top10entraineurs": [
+   "2",
+   "1",
+   "5",
+   "4",
+   "6",
+   "3"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "3",
+   "6",
+   "1",
+   "2",
+   "4",
+   "5",
+   "7"
+  ],
+  "topPalmares": [
+   "3",
+   "6",
+   "4",
+   "7",
+   "1",
+   "2",
+   "5"
+  ],
+  "topForme": [
+   "3",
+   "6",
+   "4",
+   "7",
+   "2",
+   "1",
+   "5"
+  ],
+  "topClasse": [
+   "6",
+   "3",
+   "1",
+   "2",
+   "4",
+   "7",
+   "5"
+  ],
+  "topJockeys": [
+   "1",
+   "5",
+   "6",
+   "4",
+   "3",
+   "2"
+  ],
+  "topEntraineurs": [
+   "6",
+   "1",
+   "5",
+   "3",
+   "4",
+   "2"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "6",
+   "1",
+   "3"
+  ],
+  "topCordes": [
+   "1",
+   "4",
+   "3",
+   "2"
+  ],
+  "ecartsChevaux": [
+   "2",
+   "3",
+   "1",
+   "4",
+   "5",
+   "6"
+  ],
+  "incontournables": [
+   "1",
+   "5",
+   "7",
+   "4",
+   "6",
+   "3",
+   "2"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "2",
+   "3"
+  ],
+  "syntheseTf": [
+   "6",
+   "4",
+   "7",
+   "1",
+   "5"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "AL JABBAR",
+   "courses": 2,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "CLASH OF HEARTS",
+   "courses": 6,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "16.67",
+   "pctP": "50",
+   "aptG": null,
+   "aptP": "1200"
+  },
+  {
+   "num": 3,
+   "cheval": "MIA FANTASIA",
+   "courses": 5,
+   "victoires": 2,
+   "places": 1,
+   "pctV": "40",
+   "pctP": "60",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "NOTABLE DREAM",
+   "courses": 4,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "25",
+   "pctP": "75",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "ROCK MONTREAL",
+   "courses": 2,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "SERGEI DIAGHILEV",
+   "courses": 4,
+   "victoires": 2,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "75",
+   "aptG": "1200",
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "SOLE AMBITION",
+   "courses": 3,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "33.33",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "3 - 6 - 2 - 4 - 7 - 1 - 5",
+ "pronosTf": [
+  "3 - 6 - 4 - 1 - 2",
+  "1 - 7 - 6 - 2"
+ ],
+ "collecteLe": "2026-10-10T23:32:43.545Z"
+}

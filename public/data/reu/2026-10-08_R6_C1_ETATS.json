@@ -1,0 +1,343 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 1,
+  "nom": "MAIDEN SPECIAL WEIGHT (3 YO & UP - FILLIES & MARES - DIRT)",
+  "prix": "MAIDEN SPECIAL WEIGHT (3 YO & UP - FILLIES & MARES - DIRT)",
+  "heure": "19:10",
+  "distance": 1600,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "Pour pur sang femelle de trois ans et plus (Allocations distribuées aux 5 pr iers). Les informations concernant les partants sont communiquées sous la re onsabilité de l'autorité hippique du pays dans lequel la course est organisé",
+  "montant": 96179,
+  "arrivee": [
+   2,
+   4,
+   6,
+   5,
+   3
+  ],
+  "dateLongue": "jeudi 8 octobre 2026",
+  "jour": "jeudi"
+ },
+ "meeting": {
+  "num": 6,
+  "hippodrome": "Belmont Park",
+  "pays": "ETATS"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "HEDGE BOOK",
+   "driver": "M FRANCO",
+   "entraineur": "C C BROWN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p5p7p2p3p",
+   "gains": 25444,
+   "age": 3,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 34,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BED/1/20261008-BED-1-1.png",
+   "proprietaire": "KLARAVICH STABLES, INC.",
+   "dernierPassage": 160,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "MOONLIT",
+   "driver": "S MARIN",
+   "entraineur": "M CLEMENT",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p3p2p3p",
+   "gains": 47300,
+   "age": 3,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 33,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BED/1/20261008-BED-1-2.png",
+   "proprietaire": "LJSS THOROUGHBREDS, TANGO UNIFOR",
+   "dernierPassage": 84,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "FLYING HAWLEY",
+   "driver": "E J ZAYAS",
+   "entraineur": "C R MCGAUGHEY III",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p4p",
+   "gains": 9400,
+   "age": 3,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 28,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BED/1/20261008-BED-1-3.png",
+   "proprietaire": "DATTT STABLE",
+   "dernierPassage": null,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "NOBLE GLOW",
+   "driver": "F PRAT",
+   "entraineur": "C C BROWN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "7p2p(25)6p",
+   "gains": 24881,
+   "age": 3,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 29.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BED/1/20261008-BED-1-4.png",
+   "proprietaire": "JUDDMONTE",
+   "dernierPassage": null,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "FULL OF TACT",
+   "driver": "J LEZCANO",
+   "entraineur": "O S BARRERA III",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p6p4p5p5p",
+   "gains": 56635,
+   "age": 3,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 32,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BED/1/20261008-BED-1-5.png",
+   "proprietaire": "NOVA STABLES AND ANDERSON II, WI",
+   "dernierPassage": 84,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "GUNS OF ROSES",
+   "driver": "D DAVIS",
+   "entraineur": "S A JOSEPH, JR.",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p2p",
+   "gains": 15930,
+   "age": 3,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 32.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BED/1/20261008-BED-1-6.png",
+   "proprietaire": "FAMOUSSTYLE STABLES, LLC",
+   "dernierPassage": 88,
+   "depart": 6,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "2",
+   "6"
+  ],
+  "drivers": [],
+  "entraineurs": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "top10chevaux": [
+   "2",
+   "6"
+  ],
+  "top10entraineurs": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [],
+  "topPalmares": [
+   "2",
+   "1",
+   "5",
+   "6",
+   "4",
+   "3"
+  ],
+  "topForme": [
+   "2",
+   "1",
+   "5",
+   "6",
+   "3",
+   "4"
+  ],
+  "topClasse": [
+   "5",
+   "2",
+   "1",
+   "4",
+   "6",
+   "3"
+  ],
+  "topJockeys": [
+   "3",
+   "1",
+   "4",
+   "6",
+   "5",
+   "2"
+  ],
+  "topEntraineurs": [
+   "6",
+   "1",
+   "4",
+   "2",
+   "3",
+   "5"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [],
+  "topCordes": [
+   "5",
+   "4",
+   "1",
+   "2",
+   "3",
+   "6"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "3",
+   "2",
+   "4",
+   "6",
+   "5"
+  ],
+  "incontournables": [
+   "2",
+   "6",
+   "1",
+   "4",
+   "5"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "1",
+   "5"
+  ],
+  "syntheseTf": [
+   "2",
+   "6",
+   "4",
+   "3"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "HEDGE BOOK",
+   "courses": 5,
+   "victoires": 0,
+   "places": 4,
+   "pctV": "0",
+   "pctP": "80",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "MOONLIT",
+   "courses": 4,
+   "victoires": 0,
+   "places": 4,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": "1800"
+  },
+  {
+   "num": 3,
+   "cheval": "FLYING HAWLEY",
+   "courses": 2,
+   "victoires": 0,
+   "places": 2,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "NOBLE GLOW",
+   "courses": 3,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "33.33",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "FULL OF TACT",
+   "courses": 9,
+   "victoires": 0,
+   "places": 6,
+   "pctV": "0",
+   "pctP": "66.67",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "GUNS OF ROSES",
+   "courses": 2,
+   "victoires": 0,
+   "places": 2,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": "1200"
+  }
+ ],
+ "synthesePct": "5 - 1 - 2 - 3 - 6 - 4",
+ "pronosTf": [
+  "2 - 1 - 5 - 6"
+ ],
+ "collecteLe": "2026-10-08T23:44:36.124Z"
+}

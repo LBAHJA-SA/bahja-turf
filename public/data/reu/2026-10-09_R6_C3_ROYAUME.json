@@ -1,0 +1,355 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 3,
+  "nom": "THOROUGHBRED I.E.A. CHALLENGE STAKES (GR 2) - WORLD POOL",
+  "prix": "THOROUGHBRED I.E.A. CHALLENGE STAKES (GR 2) - WORLD POOL",
+  "heure": "15:25",
+  "distance": 1400,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "GROUPE II",
+  "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 6 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
+  "montant": 198789,
+  "arrivee": [
+   2,
+   5,
+   4,
+   3,
+   6
+  ],
+  "dateLongue": "vendredi 9 octobre 2026",
+  "jour": "vendredi"
+ },
+ "meeting": {
+  "num": 6,
+  "hippodrome": "Newmarket",
+  "pays": "ROYAUME"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "HOLGUIN",
+   "driver": "CALLUM RODRIGUEZ",
+   "entraineur": "HAMAD AL JEHANI",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p5p3p6p",
+   "gains": 274392,
+   "age": 6,
+   "sexe": "H",
+   "poids": 59.5,
+   "valeur": 49.5,
+   "chrono": "1'21\"4",
+   "coteRefJockey": "01,8",
+   "coteRefEntraineur": "07,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261009/MKT/3/20261009-MKT-3-1.png",
+   "proprietaire": "WATHNAN RACING",
+   "dernierPassage": 40,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "NEVER SO BRAVE",
+   "driver": "OISIN MURPHY",
+   "entraineur": "ANDREW BALDING",
+   "cote": null,
+   "coteRef": null,
+   "musique": "6p5p6p2p5p",
+   "gains": 624604,
+   "age": 5,
+   "sexe": "H",
+   "poids": 59.5,
+   "valeur": 51.5,
+   "chrono": "",
+   "coteRefJockey": "03,0",
+   "coteRefEntraineur": "05,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261009/MKT/3/20261009-MKT-3-2.png",
+   "proprietaire": "SAEED SUHAIL",
+   "dernierPassage": 27,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "WITNESS STAND",
+   "driver": "KIERAN SHOEMARK",
+   "entraineur": "DR RICHARD NEWLAND",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p5p6p3p6p",
+   "gains": 331468,
+   "age": 5,
+   "sexe": "H",
+   "poids": 59.5,
+   "valeur": 50.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261009/MKT/3/20261009-MKT-3-3.png",
+   "proprietaire": "SCOTT TURNER & PARTNER",
+   "dernierPassage": 27,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "TIME TO TURN",
+   "driver": "WILLIAM BUICK",
+   "entraineur": "CHARLIE APPLEBY",
+   "cote": null,
+   "coteRef": null,
+   "musique": "6p2p(25)1p8p",
+   "gains": 81949,
+   "age": 3,
+   "sexe": "M",
+   "poids": 58.5,
+   "valeur": 48.5,
+   "chrono": "1'30\"6",
+   "coteRefJockey": "02,0",
+   "coteRefEntraineur": "01,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261009/MKT/3/20261009-MKT-3-4.png",
+   "proprietaire": "GODOLPHIN",
+   "dernierPassage": 89,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "FLORA OF BERMUDA",
+   "driver": "JAMES DOYLE",
+   "entraineur": "ANDREW BALDING",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p0p1p1p0p",
+   "gains": 596658,
+   "age": 5,
+   "sexe": "F",
+   "poids": 58,
+   "valeur": 50.5,
+   "chrono": "1'25\"6",
+   "coteRefJockey": "04,5",
+   "coteRefEntraineur": "05,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261009/MKT/3/20261009-MKT-3-5.png",
+   "proprietaire": "WATHNAN RACING",
+   "dernierPassage": 27,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "PINA SONATA",
+   "driver": "DANIEL MUSCUTT",
+   "entraineur": "JAMES FANSHAWE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p5p7p1p",
+   "gains": 101395,
+   "age": 4,
+   "sexe": "F",
+   "poids": 58,
+   "valeur": 46.5,
+   "chrono": "1'25\"7",
+   "coteRefJockey": "03,8",
+   "coteRefEntraineur": "04,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261009/MKT/3/20261009-MKT-3-6.png",
+   "proprietaire": "MRS MARY SLACK",
+   "dernierPassage": 76,
+   "depart": 3,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "3",
+   "5"
+  ],
+  "drivers": [
+   1,
+   4,
+   2,
+   6,
+   5
+  ],
+  "entraineurs": [
+   "4",
+   "6",
+   "2",
+   "5",
+   "1"
+  ],
+  "top10chevaux": [
+   "3",
+   "5"
+  ],
+  "top10entraineurs": [
+   "4",
+   "6",
+   "2",
+   "5",
+   "1"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "5",
+   "6",
+   "1",
+   "4"
+  ],
+  "topPalmares": [
+   "5",
+   "6",
+   "1",
+   "4",
+   "3",
+   "2"
+  ],
+  "topForme": [
+   "5",
+   "6",
+   "1",
+   "3",
+   "4",
+   "2"
+  ],
+  "topClasse": [
+   "2",
+   "5",
+   "3",
+   "1",
+   "6",
+   "4"
+  ],
+  "topJockeys": [
+   "2",
+   "4",
+   "5",
+   "1",
+   "6"
+  ],
+  "topEntraineurs": [
+   "2",
+   "5",
+   "4",
+   "1",
+   "6"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "1",
+   "5",
+   "6",
+   "4"
+  ],
+  "topCordes": [
+   "5",
+   "2",
+   "3",
+   "6"
+  ],
+  "ecartsChevaux": [
+   "2",
+   "4",
+   "1",
+   "3",
+   "5",
+   "6"
+  ],
+  "incontournables": [
+   "5",
+   "1",
+   "4",
+   "6",
+   "3",
+   "2"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "2",
+   "3"
+  ],
+  "syntheseTf": [
+   "5",
+   "6",
+   "1",
+   "4"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "HOLGUIN",
+   "courses": 26,
+   "victoires": 5,
+   "places": 10,
+   "pctV": "19.23",
+   "pctP": "57.69",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "NEVER SO BRAVE",
+   "courses": 19,
+   "victoires": 5,
+   "places": 5,
+   "pctV": "26.32",
+   "pctP": "52.63",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "WITNESS STAND",
+   "courses": 27,
+   "victoires": 4,
+   "places": 10,
+   "pctV": "14.81",
+   "pctP": "51.85",
+   "aptG": null,
+   "aptP": "1400"
+  },
+  {
+   "num": 4,
+   "cheval": "TIME TO TURN",
+   "courses": 8,
+   "victoires": 3,
+   "places": 3,
+   "pctV": "37.5",
+   "pctP": "75",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "FLORA OF BERMUDA",
+   "courses": 24,
+   "victoires": 5,
+   "places": 8,
+   "pctV": "20.83",
+   "pctP": "54.17",
+   "aptG": "1200",
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "PINA SONATA",
+   "courses": 9,
+   "victoires": 4,
+   "places": 0,
+   "pctV": "44.44",
+   "pctP": "44.44",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "1 - 3 - 5 - 2 - 6 - 4",
+ "pronosTf": [
+  "5 - 6 - 1 - 4",
+  "3 - 5 - 2 - 6"
+ ],
+ "collecteLe": "2026-10-09T22:29:53.526Z"
+}

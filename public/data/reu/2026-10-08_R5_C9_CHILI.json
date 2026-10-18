@@ -1,0 +1,369 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 9,
+  "nom": "RUCACURA",
+  "prix": "RUCACURA",
+  "heure": "22:48",
+  "distance": 900,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "HANDICAP",
+  "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 4 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
+  "montant": 1090,
+  "arrivee": [
+   6,
+   5,
+   7,
+   1,
+   4
+  ],
+  "dateLongue": "jeudi 8 octobre 2026",
+  "jour": "jeudi"
+ },
+ "meeting": {
+  "num": 5,
+  "hippodrome": "Concepcion",
+  "pays": "CHILI"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "KALANIT",
+   "driver": "BENJAMIN DIAZ",
+   "entraineur": "ALEX S. CEA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "9p0p5p",
+   "gains": 3099600,
+   "age": 4,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/9/20261008-S87-9-1.png",
+   "proprietaire": "MOROCO",
+   "dernierPassage": 23,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "HEY NINA",
+   "driver": "CRISTIAN ALEJANDRO MUNOZ ROJAS",
+   "entraineur": "REINALDO BELLO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p6p2p",
+   "gains": 32462100,
+   "age": 8,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": null,
+   "proprietaire": "J. J. FREIRE",
+   "dernierPassage": null,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "SEKOTI",
+   "driver": "JELY BRAYAN BARRIL CURIN",
+   "entraineur": "LUIS G. SOTO E.",
+   "cote": null,
+   "coteRef": null,
+   "musique": "8p8p3p",
+   "gains": 5565600,
+   "age": 4,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": null,
+   "proprietaire": "FUSTA Y PONCHA",
+   "dernierPassage": null,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "SUENO DEL PIBE",
+   "driver": "LUIS AROS HARVEY",
+   "entraineur": "EDUARDO N. CONCHA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p3p3p",
+   "gains": 17621100,
+   "age": 8,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "0'52\"3",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/9/20261008-S87-9-4.png",
+   "proprietaire": "LOS DE NONGUEN",
+   "dernierPassage": 37,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "KOSANTA",
+   "driver": "CARLOS PAVEZ",
+   "entraineur": "ARTURO R ACEVEDO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p7p7p",
+   "gains": 11043900,
+   "age": 5,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/9/20261008-S87-9-5.png",
+   "proprietaire": "MATOTO TOMITOMI",
+   "dernierPassage": 9,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "YERKO",
+   "driver": "VICENTE ALEXANDER MARDONES GONZA",
+   "entraineur": "EDUARDO S. GONZALEZ",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p7p7p",
+   "gains": 7179300,
+   "age": 4,
+   "sexe": "M",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "02,1",
+   "coteRefEntraineur": "01,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/9/20261008-S87-9-6.png",
+   "proprietaire": "GUILLERMON",
+   "dernierPassage": 2,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "CHILLY WILLY",
+   "driver": "JUAN A. CAMPOS",
+   "entraineur": "NELSON NORAMBUENA BRAVO",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p5p2p",
+   "gains": 21803400,
+   "age": 7,
+   "sexe": "M",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "03,0",
+   "coteRefEntraineur": "01,8",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/9/20261008-S87-9-7.png",
+   "proprietaire": "VITACARE",
+   "dernierPassage": 2,
+   "depart": 7,
+   "def": null
+  },
+  {
+   "num": 8,
+   "cheval": "PIRI REVOLTOSO",
+   "driver": "GUSTAVO VERA",
+   "entraineur": "HECTOR CH ARTEAGA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "8p2p5p",
+   "gains": 1276200,
+   "age": 6,
+   "sexe": "M",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": null,
+   "proprietaire": "JANNY E HIJOS",
+   "dernierPassage": null,
+   "depart": 8,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "4",
+   "5"
+  ],
+  "drivers": [
+   6,
+   7
+  ],
+  "entraineurs": [
+   "1",
+   "4",
+   "5",
+   "6",
+   "7"
+  ],
+  "top10chevaux": [
+   "4",
+   "5"
+  ],
+  "top10entraineurs": [
+   "1",
+   "4",
+   "5",
+   "6",
+   "7"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [],
+  "topPalmares": [
+   "4",
+   "7",
+   "5",
+   "6",
+   "1"
+  ],
+  "topForme": [
+   "4",
+   "7",
+   "5",
+   "1",
+   "6"
+  ],
+  "topClasse": [
+   "7",
+   "4",
+   "5",
+   "6",
+   "1"
+  ],
+  "topJockeys": [
+   "6",
+   "5",
+   "7",
+   "1",
+   "4"
+  ],
+  "topEntraineurs": [
+   "1",
+   "6",
+   "7",
+   "5",
+   "4"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "4"
+  ],
+  "topCordes": [
+   "5",
+   "6",
+   "1",
+   "4",
+   "7"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "6",
+   "4",
+   "5",
+   "7"
+  ],
+  "incontournables": [
+   "4",
+   "7",
+   "5"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "1",
+   "6"
+  ],
+  "syntheseTf": [
+   "4",
+   "7",
+   "5"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "KALANIT",
+   "courses": 19,
+   "victoires": 1,
+   "places": 0,
+   "pctV": "5.26",
+   "pctP": "5.26",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "SUENO DEL PIBE",
+   "courses": 72,
+   "victoires": 10,
+   "places": 17,
+   "pctV": "13.89",
+   "pctP": "37.5",
+   "aptG": null,
+   "aptP": "1000"
+  },
+  {
+   "num": 5,
+   "cheval": "KOSANTA",
+   "courses": 71,
+   "victoires": 6,
+   "places": 16,
+   "pctV": "8.45",
+   "pctP": "30.99",
+   "aptG": "1300",
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "YERKO",
+   "courses": 16,
+   "victoires": 3,
+   "places": 3,
+   "pctV": "18.75",
+   "pctP": "37.5",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "CHILLY WILLY",
+   "courses": 165,
+   "victoires": 8,
+   "places": 26,
+   "pctV": "4.85",
+   "pctP": "20.61",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "4 - 7 - 5 - 6 - 1",
+ "pronosTf": [
+  "4 - 7 - 5 - 6 - 1"
+ ],
+ "collecteLe": "2026-10-08T23:44:32.526Z"
+}

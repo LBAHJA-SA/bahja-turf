@@ -1,0 +1,312 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 1,
+  "nom": "DARLEY STAKES (GROUP 3) - WORLD POOL",
+  "prix": "DARLEY STAKES (GROUP 3) - WORLD POOL",
+  "heure": "14:15",
+  "distance": 1800,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "GROUPE III",
+  "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 5 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
+  "montant": 114454,
+  "arrivee": [
+   5,
+   4,
+   3,
+   2,
+   1
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 7,
+  "hippodrome": "Newmarket",
+  "pays": "ROYAUME"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "HAATEM",
+   "driver": "RYAN MOORE",
+   "entraineur": "RICHARD HANNON",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p5p0p7p",
+   "gains": 948928,
+   "age": 5,
+   "sexe": "M",
+   "poids": 60.5,
+   "valeur": 50.5,
+   "chrono": "1'52\"3",
+   "coteRefJockey": "02,8",
+   "coteRefEntraineur": "04,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/1/20261010-MKT-1-1.png",
+   "proprietaire": "WATHNAN RACING",
+   "dernierPassage": 71,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "BOILING POINT",
+   "driver": "CLIFFORD LEE",
+   "entraineur": "K. R. BURKE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p6p2p4p3p",
+   "gains": 310472,
+   "age": 5,
+   "sexe": "M",
+   "poids": 59.5,
+   "valeur": 50.5,
+   "chrono": "1'54\"3",
+   "coteRefJockey": "03,4",
+   "coteRefEntraineur": "04,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/1/20261010-MKT-1-2.png",
+   "proprietaire": "EXORS OF THE LATE SHEIKH MOHAMME",
+   "dernierPassage": 42,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "HIGH STOCK",
+   "driver": "ROB HORNBY",
+   "entraineur": "ANDREW BALDING",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p5p7p(25)4p",
+   "gains": 42232,
+   "age": 4,
+   "sexe": "M",
+   "poids": 59.5,
+   "valeur": 47.5,
+   "chrono": "",
+   "coteRefJockey": "06,1",
+   "coteRefEntraineur": "05,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/1/20261010-MKT-1-3.png",
+   "proprietaire": "SHEIKH HAMED DALMOOK AL MAKTOUM",
+   "dernierPassage": 141,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "THE LOST KING",
+   "driver": "WILLIAM BUICK",
+   "entraineur": "ANDREW BALDING",
+   "cote": null,
+   "coteRef": 8.5,
+   "musique": "2p2p1p1p0p",
+   "gains": 234450,
+   "age": 4,
+   "sexe": "H",
+   "poids": 59.5,
+   "valeur": 50,
+   "chrono": "1'52\"7",
+   "coteRefJockey": "02,0",
+   "coteRefEntraineur": "05,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/1/20261010-MKT-1-4.png",
+   "proprietaire": "KING POWER RACING CO LTD",
+   "dernierPassage": 35,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "HUMIDITY",
+   "driver": "JAMES DOYLE",
+   "entraineur": "ANDREW BALDING",
+   "cote": null,
+   "coteRef": null,
+   "musique": "(25)2p2p7p1p",
+   "gains": 111592,
+   "age": 3,
+   "sexe": "H",
+   "poids": 57.5,
+   "valeur": 46.5,
+   "chrono": "1'52\"0",
+   "coteRefJockey": "04,5",
+   "coteRefEntraineur": "05,0",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MKT/1/20261010-MKT-1-5.png",
+   "proprietaire": "WATHNAN RACING",
+   "dernierPassage": 378,
+   "depart": 1,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "2",
+   "4"
+  ],
+  "drivers": [
+   4,
+   1,
+   2,
+   5,
+   3
+  ],
+  "entraineurs": [
+   "2",
+   "1",
+   "3",
+   "4",
+   "5"
+  ],
+  "top10chevaux": [
+   "2",
+   "4"
+  ],
+  "top10entraineurs": [
+   "2",
+   "1",
+   "3",
+   "4",
+   "5"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "4",
+   "1",
+   "5"
+  ],
+  "topPalmares": [
+   "4",
+   "2",
+   "5",
+   "1",
+   "3"
+  ],
+  "topForme": [
+   "4",
+   "2",
+   "5",
+   "1",
+   "3"
+  ],
+  "topClasse": [
+   "1",
+   "2",
+   "4",
+   "5",
+   "3"
+  ],
+  "topJockeys": [
+   "4",
+   "1",
+   "5",
+   "2",
+   "3"
+  ],
+  "topEntraineurs": [
+   "3",
+   "4",
+   "5",
+   "2",
+   "1"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "5",
+   "1",
+   "4",
+   "2"
+  ],
+  "topCordes": [
+   "1",
+   "2",
+   "3"
+  ],
+  "ecartsChevaux": [
+   "3",
+   "1",
+   "2",
+   "4",
+   "5"
+  ],
+  "incontournables": [
+   "4",
+   "5",
+   "2",
+   "1"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "2",
+   "4"
+  ],
+  "syntheseTf": [
+   "5",
+   "1",
+   "3"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "HAATEM",
+   "courses": 22,
+   "victoires": 6,
+   "places": 6,
+   "pctV": "27.27",
+   "pctP": "54.55",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "BOILING POINT",
+   "courses": 20,
+   "victoires": 4,
+   "places": 9,
+   "pctV": "20",
+   "pctP": "65",
+   "aptG": null,
+   "aptP": "1700"
+  },
+  {
+   "num": 3,
+   "cheval": "HIGH STOCK",
+   "courses": 8,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "12.5",
+   "pctP": "25",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "THE LOST KING",
+   "courses": 15,
+   "victoires": 5,
+   "places": 5,
+   "pctV": "33.33",
+   "pctP": "66.67",
+   "aptG": "1400",
+   "aptP": "1600"
+  },
+  {
+   "num": 5,
+   "cheval": "HUMIDITY",
+   "courses": 5,
+   "victoires": 2,
+   "places": 2,
+   "pctV": "40",
+   "pctP": "80",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "1 - 4 - 2 - 5 - 3",
+ "pronosTf": [
+  "4 - 2 - 5"
+ ],
+ "collecteLe": "2026-10-10T23:32:39.802Z"
+}

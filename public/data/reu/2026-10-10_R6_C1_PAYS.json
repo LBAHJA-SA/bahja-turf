@@ -1,0 +1,421 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 1,
+  "nom": "PRIX KING HEUVELLAND PAYS BAS",
+  "prix": "PRIX KING HEUVELLAND PAYS BAS",
+  "heure": "18:15",
+  "distance": 3100,
+  "discipline": "ATTELE",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "PRIX KING HEUVELLAND Course 01 Départ à l'Autostart 3.000 - Attelé. - 3.100 mètres. 1.350, 600, 350, 250, 200, 150, 100. Pour 4 à 9 ans n'ayant pas gagné 20.000.",
+  "montant": 3000,
+  "arrivee": [
+   3,
+   1,
+   8,
+   7,
+   6
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 6,
+  "hippodrome": "Wolvega",
+  "pays": "PAYS"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "LANTANA DE HOUELLE",
+   "driver": "LEO GUENET",
+   "entraineur": "J. P. DARONDEL",
+   "cote": null,
+   "coteRef": null,
+   "musique": "0a0a(25)0a2a0a",
+   "gains": 3500,
+   "age": 5,
+   "sexe": "F",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'16\"2",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/1/20261010-WOL-1-1.png",
+   "proprietaire": "J. P. DARONDEL",
+   "dernierPassage": 132,
+   "depart": null,
+   "def": "D4"
+  },
+  {
+   "num": 2,
+   "cheval": "HAMORI MEMORY TF",
+   "driver": "NIKITA MENGER",
+   "entraineur": "M. K. MENGER",
+   "cote": null,
+   "coteRef": null,
+   "musique": "0a0a0a0a0a",
+   "gains": 4030,
+   "age": 9,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'18\"8",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/1/20261010-WOL-1-2.png",
+   "proprietaire": "STALL ROYAL MEMORY",
+   "dernierPassage": 23,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "LITTEE MAMS",
+   "driver": "FLORIS VANDENABEELE",
+   "entraineur": "R. FEELDERS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1a0a(25)0a0a2a",
+   "gains": 7650,
+   "age": 5,
+   "sexe": "F",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'14\"9",
+   "coteRefJockey": "13,2",
+   "coteRefEntraineur": "13,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/1/20261010-WOL-1-3.png",
+   "proprietaire": "H. FEELDERS",
+   "dernierPassage": 64,
+   "depart": null,
+   "def": "DA"
+  },
+  {
+   "num": 4,
+   "cheval": "MEURSAULT DE VETRE",
+   "driver": "DION TESSELAAR",
+   "entraineur": "J. H. JANSSEN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "0a3a0a0a5a",
+   "gains": 9400,
+   "age": 4,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'18\"2",
+   "coteRefJockey": "03,6",
+   "coteRefEntraineur": "06,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/1/20261010-WOL-1-4.png",
+   "proprietaire": "J. H. JANSSEN",
+   "dernierPassage": 14,
+   "depart": null,
+   "def": "D4"
+  },
+  {
+   "num": 5,
+   "cheval": "LOKI DU CARMA",
+   "driver": "FLORIAN DECRUYENAERE",
+   "entraineur": "D. DECRUYENAERE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "0a0a0a4a0a",
+   "gains": 13625,
+   "age": 5,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/1/20261010-WOL-1-5.png",
+   "proprietaire": "D. DECRUYENAERE",
+   "dernierPassage": 14,
+   "depart": null,
+   "def": "DA"
+  },
+  {
+   "num": 6,
+   "cheval": "LIONEL ECUS",
+   "driver": "FRANS VAN DER BLONK",
+   "entraineur": "F. W. VAN DER BLONK",
+   "cote": null,
+   "coteRef": null,
+   "musique": "0a0a0a0a0a",
+   "gains": 15805,
+   "age": 5,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "31,8",
+   "coteRefEntraineur": "25,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/1/20261010-WOL-1-6.png",
+   "proprietaire": "W. LAMMERS",
+   "dernierPassage": 14,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "JUST BETWEEN US",
+   "driver": "JELLIS VETS",
+   "entraineur": "J. VETS",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5a5a0a5a0a",
+   "gains": 16827,
+   "age": 7,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'18\"0",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/1/20261010-WOL-1-7.png",
+   "proprietaire": "J. VETS",
+   "dernierPassage": 14,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 8,
+   "cheval": "HORSE WOOD PASS",
+   "driver": "DANIEL DECRUYENAERE",
+   "entraineur": "D. DECRUYENAERE",
+   "cote": null,
+   "coteRef": 1.5,
+   "musique": "2a3a0a3a3a",
+   "gains": 18235,
+   "age": 9,
+   "sexe": "H",
+   "poids": null,
+   "valeur": null,
+   "chrono": "1'17\"8",
+   "coteRefJockey": "01,0",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/WOL/1/20261010-WOL-1-8.png",
+   "proprietaire": "D. DECRUYENAERE",
+   "dernierPassage": 14,
+   "depart": null,
+   "def": "DA"
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "8"
+  ],
+  "drivers": [
+   "1",
+   "2",
+   "5",
+   "7",
+   "8",
+   "4",
+   "3",
+   "6"
+  ],
+  "entraineurs": [
+   "4",
+   "3",
+   "6"
+  ],
+  "top10chevaux": [
+   "8"
+  ],
+  "top10drivers": [
+   "1",
+   "2",
+   "5",
+   "7",
+   "8",
+   "4",
+   "3",
+   "6"
+  ],
+  "top10entraineurs": [
+   "4",
+   "3",
+   "6"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "3"
+  ],
+  "topPalmares": [
+   "8",
+   "3",
+   "1",
+   "4",
+   "7",
+   "5",
+   "2",
+   "6"
+  ],
+  "topForme": [
+   "8",
+   "3",
+   "4",
+   "7",
+   "1",
+   "5",
+   "2",
+   "6"
+  ],
+  "topClasse": [
+   "8",
+   "7",
+   "6",
+   "5",
+   "4",
+   "3",
+   "2",
+   "1"
+  ],
+  "topJockeys": [
+   "4",
+   "3",
+   "6",
+   "8"
+  ],
+  "topEntraineurs": [
+   "6",
+   "3",
+   "4"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "3",
+   "1",
+   "8",
+   "7",
+   "4",
+   "2"
+  ],
+  "topPosition": [
+   "5",
+   "8",
+   "2",
+   "4",
+   "6",
+   "7"
+  ],
+  "ecartsChevaux": [
+   "2",
+   "5",
+   "6",
+   "7",
+   "1",
+   "4"
+  ],
+  "incontournables": [
+   "8",
+   "3",
+   "1",
+   "4"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "7",
+   "8"
+  ],
+  "syntheseTf": [
+   "3",
+   "1",
+   "4",
+   "5",
+   "2",
+   "6"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "LANTANA DE HOUELLE",
+   "courses": 5,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "20",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "LITTEE MAMS",
+   "courses": 6,
+   "victoires": 1,
+   "places": 3,
+   "pctV": "16.67",
+   "pctP": "66.67",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "MEURSAULT DE VETRE",
+   "courses": 28,
+   "victoires": 0,
+   "places": 17,
+   "pctV": "0",
+   "pctP": "60.71",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "LOKI DU CARMA",
+   "courses": 28,
+   "victoires": 0,
+   "places": 13,
+   "pctV": "0",
+   "pctP": "46.43",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "LIONEL ECUS",
+   "courses": 36,
+   "victoires": 0,
+   "places": 16,
+   "pctV": "0",
+   "pctP": "44.44",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "JUST BETWEEN US",
+   "courses": 51,
+   "victoires": 2,
+   "places": 39,
+   "pctV": "3.92",
+   "pctP": "80.39",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 8,
+   "cheval": "HORSE WOOD PASS",
+   "courses": 53,
+   "victoires": 4,
+   "places": 33,
+   "pctV": "7.55",
+   "pctP": "69.81",
+   "aptG": null,
+   "aptP": "2600"
+  }
+ ],
+ "synthesePct": "8 - 7 - 4 - 6 - 3 - 5 - 1",
+ "pronosTf": [
+  "3 - 4 - 8 - 6 - 1",
+  "3 - 8 - 4 - 2 - 5 - 7"
+ ],
+ "collecteLe": "2026-10-10T23:32:20.142Z"
+}

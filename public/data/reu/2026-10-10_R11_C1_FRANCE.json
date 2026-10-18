@@ -1,0 +1,311 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 1,
+  "nom": "PRIX FEST'Y PARC CLUNY (PRIX MARC BOUDOT)",
+  "prix": "PRIX FEST'Y PARC CLUNY (PRIX MARC BOUDOT)",
+  "heure": "14:00",
+  "distance": 2400,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "",
+  "conditions": "Pour poulains entiers et hongres de 3 ans n'étant pas de race pur-sang, nés élevés en France et n'ayant jamais gagné. Poids : 65 kg. Surcharges accumulées pour les sommes reçues en places : 1 kg par 1.000. En outre, les poulains n'ayant jamais couru recevront 2 kg. Les remises de poids prévues à l'Article 104 du Code des Courses au Galop ne sont pas applicables à l'exception du paragraphe relatif aux femmes-jockeys.",
+  "montant": 14000,
+  "arrivee": [
+   3,
+   1,
+   2,
+   4,
+   6
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 11,
+  "hippodrome": "Moulins",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "NOBLE DE CHOEUR",
+   "driver": "H. LEBOUC",
+   "entraineur": "D. COTTIN",
+   "cote": 4.3,
+   "coteRef": null,
+   "musique": "0p8p",
+   "gains": 0,
+   "age": 3,
+   "sexe": "H",
+   "poids": 65,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "10,5",
+   "coteRefEntraineur": "08,6",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/1/20261010-MOU-1-1.png",
+   "proprietaire": "D. D. COTTIN",
+   "dernierPassage": 13,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "NAVIRE AMIRAL",
+   "driver": "T. SPORLI",
+   "entraineur": "E. CLAYEUX",
+   "cote": 17,
+   "coteRef": null,
+   "musique": "9p8p",
+   "gains": 0,
+   "age": 3,
+   "sexe": "H",
+   "poids": 65,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "06,4",
+   "coteRefEntraineur": "06,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/1/20261010-MOU-1-2.png",
+   "proprietaire": "B. JUHEN/J. ESPINASSE",
+   "dernierPassage": 22,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "NEGRESKOWE",
+   "driver": "C. GUITRAUD",
+   "entraineur": "E. CLAYEUX",
+   "cote": 4.9,
+   "coteRef": null,
+   "musique": "7p",
+   "gains": 240,
+   "age": 3,
+   "sexe": "H",
+   "poids": 65,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "12,2",
+   "coteRefEntraineur": "06,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/1/20261010-MOU-1-3.png",
+   "proprietaire": "LORD DARESBURY/EC J. CYPRES",
+   "dernierPassage": 22,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "NIKANOR",
+   "driver": "C. CLAYEUX",
+   "entraineur": "E. CLAYEUX",
+   "cote": 1.8,
+   "coteRef": null,
+   "musique": "5p",
+   "gains": 640,
+   "age": 3,
+   "sexe": "H",
+   "poids": 65,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "11,9",
+   "coteRefEntraineur": "06,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/1/20261010-MOU-1-4.png",
+   "proprietaire": "LORD DARESBURY/EC J. CYPRES",
+   "dernierPassage": 22,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "NIGHTINGAL BURGOND",
+   "driver": "W. LEVESQUE",
+   "entraineur": "N. MURE-RAVAUD",
+   "cote": 25,
+   "coteRef": null,
+   "musique": "",
+   "gains": 0,
+   "age": 3,
+   "sexe": "H",
+   "poids": 63,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "16,7",
+   "coteRefEntraineur": "17,8",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/1/20261010-MOU-1-5.png",
+   "proprietaire": "F. DEBARNOT",
+   "dernierPassage": null,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "NEWKAY",
+   "driver": "S. BEROUD",
+   "entraineur": "E. CLAYEUX",
+   "cote": 9.4,
+   "coteRef": null,
+   "musique": "",
+   "gains": 0,
+   "age": 3,
+   "sexe": "H",
+   "poids": 63,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "06,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/1/20261010-MOU-1-6.png",
+   "proprietaire": "EC J. CYPRES/L. COUETIL",
+   "dernierPassage": null,
+   "depart": 2,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [],
+  "drivers": [
+   2,
+   1,
+   4,
+   3,
+   5
+  ],
+  "entraineurs": [
+   "2",
+   "3",
+   "4",
+   "6",
+   "1",
+   "5"
+  ],
+  "top10chevaux": [],
+  "top10entraineurs": [
+   "2",
+   "3",
+   "4",
+   "6",
+   "1",
+   "5"
+  ],
+  "topCotesDirect": [
+   "4",
+   "1",
+   "3",
+   "6",
+   "2",
+   "5"
+  ],
+  "topChevaux": [],
+  "topPalmares": [
+   "4",
+   "1",
+   "2",
+   "3"
+  ],
+  "topForme": [
+   "4",
+   "1",
+   "2",
+   "3"
+  ],
+  "topClasse": [
+   "4",
+   "3"
+  ],
+  "topJockeys": [
+   "1",
+   "3",
+   "5",
+   "2",
+   "4"
+  ],
+  "topEntraineurs": [
+   "2",
+   "3",
+   "4",
+   "6",
+   "5",
+   "1"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [],
+  "topCordes": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "incontournables": [],
+  "pourUnePlace": [],
+  "outiders": [
+   "2",
+   "1"
+  ],
+  "syntheseTf": [
+   "4",
+   "3",
+   "5",
+   "6"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "NOBLE DE CHOEUR",
+   "courses": 2,
+   "victoires": 0,
+   "places": 0,
+   "pctV": "0",
+   "pctP": "0",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "NAVIRE AMIRAL",
+   "courses": 2,
+   "victoires": 0,
+   "places": 0,
+   "pctV": "0",
+   "pctP": "0",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "NEGRESKOWE",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "NIKANOR",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "3 - 4",
+ "pronosTf": [
+  "4 - 1 - 2 - 3"
+ ],
+ "collecteLe": "2026-10-10T23:33:33.842Z"
+}

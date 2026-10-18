@@ -1,0 +1,367 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 4,
+  "nom": "CRITERIUM DE MAISONS-LAFFITTE",
+  "prix": "CRITERIUM DE MAISONS-LAFFITTE",
+  "heure": "15:32",
+  "distance": 1200,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "GROUPE II",
+  "conditions": "Pour poulains entiers, hongres et pouliches de 2 ans. Poids : 57 kg. Les chevaux ayant gagné un Groupe II porteront 1, 5 kg ; un Groupe I, 2, 5 kg Versement à la poule des propriétaires : 1.235 à l'engagement le 9 septembre ou 3.800 à l'engagement le 29 septembre ou 13.680 à l'engagement supplémentaire le 7 octobre. Un souvenir sera offert au propriétaire du chev gagnant par FRANCE GALOP.",
+  "montant": 173800,
+  "arrivee": [
+   3,
+   4,
+   1,
+   2,
+   5
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 4,
+  "hippodrome": "Chantilly",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "SCYTHE",
+   "driver": "C. SOUMILLON",
+   "entraineur": "BJ. MEEHAN",
+   "cote": 3.4,
+   "coteRef": null,
+   "musique": "2p1p",
+   "gains": 22066,
+   "age": 2,
+   "sexe": "H",
+   "poids": 57,
+   "valeur": null,
+   "chrono": "1'11\"9",
+   "coteRefJockey": "06,2",
+   "coteRefEntraineur": "10,6",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/4/20261010-CHA-4-1.png",
+   "proprietaire": "COLIN DAY/SAM SANGSTER",
+   "dernierPassage": 21,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "VIGNELLI",
+   "driver": "M. BARZALONA",
+   "entraineur": "FH. GRAFFARD",
+   "cote": 8.1,
+   "coteRef": 2.8,
+   "musique": "1p5p1p",
+   "gains": 32910,
+   "age": 2,
+   "sexe": "M",
+   "poids": 57,
+   "valeur": 43,
+   "chrono": "1'15\"0",
+   "coteRefJockey": "05,2",
+   "coteRefEntraineur": "04,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/4/20261010-CHA-4-2.png",
+   "proprietaire": "EC. LAYANI/HOLLYMOUNT/JJ. TAIEB",
+   "dernierPassage": 15,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "AL HAMAAD",
+   "driver": "O. MURPHY",
+   "entraineur": "A & L. FABRE",
+   "cote": 3.7,
+   "coteRef": null,
+   "musique": "1p2p",
+   "gains": 18906,
+   "age": 2,
+   "sexe": "M",
+   "poids": 57,
+   "valeur": null,
+   "chrono": "1'15\"1",
+   "coteRefJockey": "07,5",
+   "coteRefEntraineur": "07,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/4/20261010-CHA-4-3.png",
+   "proprietaire": "PRCE A. FAISAL",
+   "dernierPassage": 22,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "ACCLAMATION STAR",
+   "driver": "PC. BOUDOT",
+   "entraineur": "J. OWEN",
+   "cote": 14,
+   "coteRef": null,
+   "musique": "1p7p2p6p0p1p",
+   "gains": 66708,
+   "age": 2,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 44.5,
+   "chrono": "1'15\"0",
+   "coteRefJockey": "04,9",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/4/20261010-CHA-4-4.png",
+   "proprietaire": "FIVE STAR DREAMERS",
+   "dernierPassage": 37,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "JOLIVETTE",
+   "driver": "C. KEANE",
+   "entraineur": "A. BALDING",
+   "cote": 2.5,
+   "coteRef": null,
+   "musique": "2p3p5p9p1p",
+   "gains": 101425,
+   "age": 2,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 47,
+   "chrono": "1'11\"8",
+   "coteRefJockey": "06,3",
+   "coteRefEntraineur": "12,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/4/20261010-CHA-4-5.png",
+   "proprietaire": "JUDDMONTE FARMS LTD",
+   "dernierPassage": 21,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "VALENTINA BELLA",
+   "driver": "M. GRANDIN",
+   "entraineur": "M. BRASME",
+   "cote": 42,
+   "coteRef": 9.4,
+   "musique": "4p6p7p1p1p",
+   "gains": 45270,
+   "age": 2,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 43.5,
+   "chrono": "1'10\"3",
+   "coteRefJockey": "08,7",
+   "coteRefEntraineur": "09,6",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/CHA/4/20261010-CHA-4-6.png",
+   "proprietaire": "NB RACING",
+   "dernierPassage": 37,
+   "depart": 1,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "2",
+   "6"
+  ],
+  "drivers": [
+   4,
+   2,
+   1,
+   5,
+   3,
+   6
+  ],
+  "entraineurs": [
+   "2",
+   "3",
+   "6",
+   "1",
+   "5"
+  ],
+  "top10chevaux": [
+   "2",
+   "6"
+  ],
+  "top10entraineurs": [
+   "2",
+   "3",
+   "6",
+   "1",
+   "5"
+  ],
+  "topCotesDirect": [
+   "5",
+   "1",
+   "3",
+   "2",
+   "4",
+   "6"
+  ],
+  "topChevaux": [
+   "2",
+   "4",
+   "6",
+   "1",
+   "3",
+   "5"
+  ],
+  "topPalmares": [
+   "4",
+   "5",
+   "6",
+   "2",
+   "1",
+   "3"
+  ],
+  "topForme": [
+   "4",
+   "5",
+   "2",
+   "6",
+   "1",
+   "3"
+  ],
+  "topClasse": [
+   "5",
+   "4",
+   "6",
+   "2",
+   "1",
+   "3"
+  ],
+  "topJockeys": [
+   "2",
+   "1",
+   "6",
+   "4",
+   "3",
+   "5"
+  ],
+  "topEntraineurs": [
+   "2",
+   "6",
+   "1",
+   "3",
+   "5"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "6",
+   "5",
+   "1",
+   "2",
+   "4",
+   "3"
+  ],
+  "topCordes": [
+   "4",
+   "1",
+   "6"
+  ],
+  "ecartsChevaux": [
+   "6",
+   "1",
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "incontournables": [
+   "1",
+   "3",
+   "2",
+   "5",
+   "4",
+   "6"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "4",
+   "6"
+  ],
+  "syntheseTf": [
+   "5",
+   "2",
+   "1",
+   "3"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "SCYTHE",
+   "courses": 2,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "VIGNELLI",
+   "courses": 3,
+   "victoires": 2,
+   "places": 1,
+   "pctV": "66.67",
+   "pctP": "100",
+   "aptG": "1200",
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "AL HAMAAD",
+   "courses": 2,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "ACCLAMATION STAR",
+   "courses": 6,
+   "victoires": 2,
+   "places": 2,
+   "pctV": "33.33",
+   "pctP": "66.67",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "JOLIVETTE",
+   "courses": 5,
+   "victoires": 1,
+   "places": 3,
+   "pctV": "20",
+   "pctP": "80",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "VALENTINA BELLA",
+   "courses": 5,
+   "victoires": 2,
+   "places": 1,
+   "pctV": "40",
+   "pctP": "60",
+   "aptG": "1000",
+   "aptP": null
+  }
+ ],
+ "synthesePct": "4 - 2 - 6 - 5 - 1 - 3",
+ "pronosTf": [
+  "5 - 6 - 2 - 1",
+  "1 - 2 - 6"
+ ],
+ "collecteLe": "2026-10-10T23:31:54.585Z"
+}

@@ -1,0 +1,316 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 7,
+  "nom": "RIO ABAJO",
+  "prix": "RIO ABAJO",
+  "heure": "21:45",
+  "distance": 1300,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "HANDICAP",
+  "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 4 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
+  "montant": 2180,
+  "arrivee": [
+   4,
+   3,
+   5,
+   1,
+   2
+  ],
+  "dateLongue": "jeudi 8 octobre 2026",
+  "jour": "jeudi"
+ },
+ "meeting": {
+  "num": 5,
+  "hippodrome": "Concepcion",
+  "pays": "CHILI"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "LOCO Y DEMENTE",
+   "driver": "LUIS EDUARDO ROJAS ARANGUREN",
+   "entraineur": "EVARISTO ALARCON J.",
+   "cote": null,
+   "coteRef": 2.6,
+   "musique": "1p0p0p",
+   "gains": 47670300,
+   "age": 6,
+   "sexe": "M",
+   "poids": 59,
+   "valeur": null,
+   "chrono": "1'14\"6",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/7/20261008-S87-7-1.png",
+   "proprietaire": "DIENACH",
+   "dernierPassage": 30,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "CORONADO",
+   "driver": "LUIS AROS HARVEY",
+   "entraineur": "CARLOS MIGUEL NORAMBUENA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p3p3p",
+   "gains": 45369000,
+   "age": 7,
+   "sexe": "H",
+   "poids": 59,
+   "valeur": null,
+   "chrono": "1'15\"5",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/7/20261008-S87-7-2.png",
+   "proprietaire": "ONE HORSE POWER",
+   "dernierPassage": 310,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "KASHGAR",
+   "driver": "GUSTAVO VERA",
+   "entraineur": "CARLOS MIGUEL NORAMBUENA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p1p2p",
+   "gains": 18740700,
+   "age": 5,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "1'13\"6",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/7/20261008-S87-7-3.png",
+   "proprietaire": "ALCANZANDO UN SUENO",
+   "dernierPassage": 9,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "PECADO INCONFESABLE",
+   "driver": "VICENTE ALEXANDER MARDONES GONZA",
+   "entraineur": "CARLOS MARCELO CORDOVA ARAYA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p1p3p",
+   "gains": 37070100,
+   "age": 7,
+   "sexe": "M",
+   "poids": 53,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "02,1",
+   "coteRefEntraineur": "01,6",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/7/20261008-S87-7-4.png",
+   "proprietaire": "DANPOCH",
+   "dernierPassage": 30,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "MUY DONOSO",
+   "driver": "JOSE MANUEL MOYA SEPULVEDA",
+   "entraineur": "EDUARDO S. GONZALEZ",
+   "cote": null,
+   "coteRef": 3.2,
+   "musique": "3p2p2p",
+   "gains": 51741900,
+   "age": 7,
+   "sexe": "M",
+   "poids": 57,
+   "valeur": null,
+   "chrono": "1'14\"7",
+   "coteRefJockey": "01,0",
+   "coteRefEntraineur": "01,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/S87/7/20261008-S87-7-5.png",
+   "proprietaire": "VENI VIDI VICI",
+   "dernierPassage": 30,
+   "depart": 5,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "4",
+   "3",
+   "1",
+   "5"
+  ],
+  "drivers": [
+   5,
+   4
+  ],
+  "entraineurs": [
+   "1",
+   "2",
+   "3",
+   "5",
+   "4"
+  ],
+  "top10chevaux": [
+   "4",
+   "3",
+   "1",
+   "5"
+  ],
+  "top10entraineurs": [
+   "1",
+   "2",
+   "3",
+   "5",
+   "4"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "3",
+   "1",
+   "2",
+   "4"
+  ],
+  "topPalmares": [
+   "3",
+   "2",
+   "5",
+   "4",
+   "1"
+  ],
+  "topForme": [
+   "3",
+   "2",
+   "4",
+   "5",
+   "1"
+  ],
+  "topClasse": [
+   "5",
+   "1",
+   "2",
+   "4",
+   "3"
+  ],
+  "topJockeys": [
+   "5",
+   "3",
+   "1",
+   "4",
+   "2"
+  ],
+  "topEntraineurs": [
+   "5",
+   "4",
+   "3",
+   "2",
+   "1"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "3",
+   "1",
+   "5",
+   "2"
+  ],
+  "topCordes": [
+   "1",
+   "4",
+   "2",
+   "3"
+  ],
+  "ecartsChevaux": [
+   "4",
+   "1",
+   "2",
+   "3",
+   "5"
+  ],
+  "incontournables": [
+   "3",
+   "2",
+   "5",
+   "4",
+   "1"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "4",
+   "5"
+  ],
+  "syntheseTf": [
+   "3",
+   "2",
+   "1"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "LOCO Y DEMENTE",
+   "courses": 68,
+   "victoires": 6,
+   "places": 32,
+   "pctV": "8.82",
+   "pctP": "55.88",
+   "aptG": null,
+   "aptP": "1200"
+  },
+  {
+   "num": 2,
+   "cheval": "CORONADO",
+   "courses": 64,
+   "victoires": 8,
+   "places": 26,
+   "pctV": "12.5",
+   "pctP": "53.13",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "KASHGAR",
+   "courses": 44,
+   "victoires": 8,
+   "places": 14,
+   "pctV": "18.18",
+   "pctP": "50",
+   "aptG": null,
+   "aptP": "1200"
+  },
+  {
+   "num": 4,
+   "cheval": "PECADO INCONFESABLE",
+   "courses": 64,
+   "victoires": 11,
+   "places": 22,
+   "pctV": "17.19",
+   "pctP": "51.56",
+   "aptG": "1300",
+   "aptP": "1300"
+  },
+  {
+   "num": 5,
+   "cheval": "MUY DONOSO",
+   "courses": 66,
+   "victoires": 10,
+   "places": 27,
+   "pctV": "15.15",
+   "pctP": "56.06",
+   "aptG": "1300",
+   "aptP": "1300"
+  }
+ ],
+ "synthesePct": "4 - 5 - 2 - 3 - 1",
+ "pronosTf": [
+  "3 - 2 - 5"
+ ],
+ "collecteLe": "2026-10-08T23:44:28.769Z"
+}

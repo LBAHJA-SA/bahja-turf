@@ -1,0 +1,341 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 2,
+  "nom": "PRIX BARON DE MONTESQUIEU",
+  "prix": "PRIX BARON DE MONTESQUIEU",
+  "heure": "11:22",
+  "distance": 1600,
+  "discipline": "PLAT",
+  "corde": "droite",
+  "classe": "",
+  "conditions": "Pour poulains entiers et hongres de 2 ans n'ayant jamais gagné (A Réclamer excepté). Poids : 58 kg. Les poulains n'ayant jamais couru recevront 2 kg.",
+  "montant": 21000,
+  "arrivee": [
+   3,
+   1,
+   5,
+   6,
+   7
+  ],
+  "dateLongue": "jeudi 8 octobre 2026",
+  "jour": "jeudi"
+ },
+ "meeting": {
+  "num": 3,
+  "hippodrome": "Le Bouscat",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "COSMICAL O'CLOCK",
+   "driver": "E. HARDOUIN",
+   "entraineur": "A. WATRIGANT",
+   "cote": 1.4,
+   "coteRef": null,
+   "musique": "2p",
+   "gains": 6080,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "11,7",
+   "coteRefEntraineur": "08,8",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BOU/2/20261008-BOU-2-1.png",
+   "proprietaire": "ANNUA RACING SL",
+   "dernierPassage": 26,
+   "depart": 7,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "MARIONO",
+   "driver": "S. LE QUILLEUC",
+   "entraineur": "M. ALONSO ROLDAN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "8p4p",
+   "gains": 600,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/b.gif",
+   "proprietaire": "I.. ARRUTI CORTA",
+   "dernierPassage": null,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "SPACE'X",
+   "driver": "G. GUEDJ-GAY",
+   "entraineur": "S. GAVILAN",
+   "cote": 4.4,
+   "coteRef": null,
+   "musique": "3p",
+   "gains": 4480,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "07,7",
+   "coteRefEntraineur": "11,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BOU/2/20261008-BOU-2-3.png",
+   "proprietaire": "Harivel Guindon",
+   "dernierPassage": 26,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "BISOUS SINCERES",
+   "driver": "H. LEBOUC",
+   "entraineur": "CH. PLISSON",
+   "cote": 31,
+   "coteRef": null,
+   "musique": "6p6p9p9p",
+   "gains": 365,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58,
+   "valeur": 29,
+   "chrono": "",
+   "coteRefJockey": "10,5",
+   "coteRefEntraineur": "14,6",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BOU/2/20261008-BOU-2-4.png",
+   "proprietaire": "CH. CH. PLISSON",
+   "dernierPassage": 11,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "JIEPIE ET JO",
+   "driver": "D. SANTIAGO",
+   "entraineur": "CH. PLISSON",
+   "cote": 16,
+   "coteRef": null,
+   "musique": "7p7p6p5p",
+   "gains": 2390,
+   "age": 2,
+   "sexe": "M",
+   "poids": 58,
+   "valeur": 31,
+   "chrono": "",
+   "coteRefJockey": "10,1",
+   "coteRefEntraineur": "14,6",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BOU/2/20261008-BOU-2-5.png",
+   "proprietaire": "JP. VANDEN HEEDE",
+   "dernierPassage": 27,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "DULCINA CHOP",
+   "driver": "A. WERLE",
+   "entraineur": "CH. GOURDAIN",
+   "cote": 24,
+   "coteRef": null,
+   "musique": "",
+   "gains": 0,
+   "age": 2,
+   "sexe": "M",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "11,4",
+   "coteRefEntraineur": "10,7",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BOU/2/20261008-BOU-2-6.png",
+   "proprietaire": "H. TASSIN/B. ORY LAVOLLLEE/T. FAURE",
+   "dernierPassage": null,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "WESTMINSTER FLASH",
+   "driver": "M. PROTTI",
+   "entraineur": "HA. PANTALL",
+   "cote": 7.6,
+   "coteRef": null,
+   "musique": "",
+   "gains": 0,
+   "age": 2,
+   "sexe": "M",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "12,4",
+   "coteRefEntraineur": "08,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/BOU/2/20261008-BOU-2-7.png",
+   "proprietaire": "WESTMINSTER RACE HORSES S",
+   "dernierPassage": null,
+   "depart": 4,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [],
+  "drivers": [
+   3,
+   5,
+   4,
+   6,
+   1,
+   7
+  ],
+  "entraineurs": [
+   "7",
+   "1",
+   "6",
+   "3",
+   "4",
+   "5"
+  ],
+  "top10chevaux": [],
+  "top10entraineurs": [
+   "7",
+   "1",
+   "6",
+   "3",
+   "4",
+   "5"
+  ],
+  "topCotesDirect": [
+   "1",
+   "3",
+   "7",
+   "5",
+   "6",
+   "4"
+  ],
+  "topChevaux": [],
+  "topPalmares": [
+   "1",
+   "3",
+   "5",
+   "4"
+  ],
+  "topForme": [
+   "1",
+   "3",
+   "5",
+   "4"
+  ],
+  "topClasse": [
+   "1",
+   "3",
+   "5",
+   "4"
+  ],
+  "topJockeys": [
+   "1",
+   "5",
+   "4",
+   "3",
+   "6",
+   "7"
+  ],
+  "topEntraineurs": [
+   "7",
+   "4",
+   "5",
+   "6",
+   "3",
+   "1"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [],
+  "topCordes": [
+   "1",
+   "3",
+   "4",
+   "5"
+  ],
+  "ecartsChevaux": [
+   "4",
+   "5",
+   "1",
+   "3"
+  ],
+  "incontournables": [
+   "1",
+   "3"
+  ],
+  "pourUnePlace": [
+   "7"
+  ],
+  "outiders": [
+   "5",
+   "4"
+  ],
+  "syntheseTf": [
+   "1",
+   "3",
+   "7",
+   "6"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "COSMICAL O'CLOCK",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "SPACE'X",
+   "courses": 1,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "BISOUS SINCERES",
+   "courses": 4,
+   "victoires": 0,
+   "places": 1,
+   "pctV": "0",
+   "pctP": "25",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "JIEPIE ET JO",
+   "courses": 4,
+   "victoires": 0,
+   "places": 4,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "5 - 1 - 3 - 4",
+ "pronosTf": [
+  "1 - 3 - 5 - 4 - 6",
+  "1 - 3 - 4 - 5"
+ ],
+ "collecteLe": "2026-10-08T23:43:45.309Z"
+}

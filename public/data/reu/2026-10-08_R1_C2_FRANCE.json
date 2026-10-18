@@ -1,0 +1,387 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 2,
+  "nom": "PRIX ESMERALDA",
+  "prix": "PRIX ESMERALDA",
+  "heure": "14:34",
+  "distance": 1600,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "Pour poulains entiers, hongres et pouliches de 2 ans ayant couru en France o n'ayant jamais couru et n'ayant jamais gagné une Classe 2. Poids : 57 kg. Le chevaux ayant été classées 2 e ou 3 e d'une Listed porteront 2 kg. Les cheva n'ayant jamais gagné recevront 2, 5 kg ; ceux n'ayant jamais couru, 3, 5 kg Cette course est qualificative aux Handicaps Classe 1.",
+  "montant": 31100,
+  "arrivee": [
+   4,
+   2,
+   5,
+   1,
+   3
+  ],
+  "dateLongue": "jeudi 8 octobre 2026",
+  "jour": "jeudi"
+ },
+ "meeting": {
+  "num": 1,
+  "hippodrome": "Saint-Cloud",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "TCHERKANOV",
+   "driver": "C. DEMURO",
+   "entraineur": "M. BLANCPAIN",
+   "cote": 9.2,
+   "coteRef": null,
+   "musique": "1p6p",
+   "gains": 11277,
+   "age": 2,
+   "sexe": "M",
+   "poids": 57,
+   "valeur": null,
+   "chrono": "1'41\"5",
+   "coteRefJockey": "07,0",
+   "coteRefEntraineur": "09,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/SAI/2/20261008-SAI-2-1.png",
+   "proprietaire": "A. JATHIERE",
+   "dernierPassage": 33,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "JUMEAU",
+   "driver": "M. GUYON",
+   "entraineur": "A & L. FABRE",
+   "cote": 1.8,
+   "coteRef": null,
+   "musique": "1p",
+   "gains": 22850,
+   "age": 2,
+   "sexe": "M",
+   "poids": 57,
+   "valeur": null,
+   "chrono": "1'42\"7",
+   "coteRefJockey": "05,8",
+   "coteRefEntraineur": "07,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/SAI/2/20261008-SAI-2-2.png",
+   "proprietaire": "WERTHEIMER & FRERE",
+   "dernierPassage": 35,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "VENEZIA QUEEN",
+   "driver": "C. SOUMILLON",
+   "entraineur": "M. DELCHER SANCHEZ",
+   "cote": 10,
+   "coteRef": null,
+   "musique": "4p4p1p",
+   "gains": 19298,
+   "age": 2,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 39.5,
+   "chrono": "1'41\"7",
+   "coteRefJockey": "06,2",
+   "coteRefEntraineur": "09,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/SAI/2/20261008-SAI-2-3.png",
+   "proprietaire": "ECURIE JCM RACING",
+   "dernierPassage": 44,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "MONEEFA",
+   "driver": "O. MURPHY",
+   "entraineur": "A & L. FABRE",
+   "cote": 3.8,
+   "coteRef": null,
+   "musique": "1p",
+   "gains": 22850,
+   "age": 2,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": null,
+   "chrono": "1'42\"6",
+   "coteRefJockey": "07,5",
+   "coteRefEntraineur": "07,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/SAI/2/20261008-SAI-2-4.png",
+   "proprietaire": "PRCE A. FAISAL",
+   "dernierPassage": 20,
+   "depart": 7,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "LA CARMEN",
+   "driver": "T. PICCONE",
+   "entraineur": "HA. PANTALL",
+   "cote": 6.6,
+   "coteRef": null,
+   "musique": "2p2p1p",
+   "gains": 18538,
+   "age": 2,
+   "sexe": "F",
+   "poids": 55.5,
+   "valeur": 38.5,
+   "chrono": "1'39\"6",
+   "coteRefJockey": "09,8",
+   "coteRefEntraineur": "08,3",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/SAI/2/20261008-SAI-2-5.png",
+   "proprietaire": "OTI MANAGEMENT PTY LTD",
+   "dernierPassage": 36,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "PACOEUR",
+   "driver": "C. GROSBOIS",
+   "entraineur": "C. SCHIFF",
+   "cote": 50,
+   "coteRef": null,
+   "musique": "7p6p",
+   "gains": 584,
+   "age": 2,
+   "sexe": "H",
+   "poids": 54.5,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "13,3",
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261008/SAI/2/20261008-SAI-2-6.png",
+   "proprietaire": "M. SCHIFF",
+   "dernierPassage": 11,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "DUBLIN CALLING",
+   "driver": "S. PASQUIER",
+   "entraineur": "A. BOTTI",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p3p",
+   "gains": 4818,
+   "age": 2,
+   "sexe": "M",
+   "poids": 54.5,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://www.turf-france.com/pictures/d.gif",
+   "proprietaire": "P. ZAMBELLI/SCUDERIA DEI DUEPI",
+   "dernierPassage": null,
+   "depart": 6,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "3",
+   "5"
+  ],
+  "drivers": [
+   2,
+   3,
+   1,
+   4,
+   5,
+   6
+  ],
+  "entraineurs": [
+   "2",
+   "4",
+   "5",
+   "3",
+   "1"
+  ],
+  "top10chevaux": [
+   "3",
+   "5"
+  ],
+  "top10entraineurs": [
+   "2",
+   "4",
+   "5",
+   "3",
+   "1"
+  ],
+  "topCotesDirect": [
+   "2",
+   "4",
+   "5",
+   "1",
+   "3",
+   "6"
+  ],
+  "topChevaux": [
+   "1",
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "topPalmares": [
+   "5",
+   "3",
+   "1",
+   "2",
+   "4",
+   "6"
+  ],
+  "topForme": [
+   "5",
+   "3",
+   "1",
+   "2",
+   "4",
+   "6"
+  ],
+  "topClasse": [
+   "2",
+   "4",
+   "3",
+   "5",
+   "1",
+   "6"
+  ],
+  "topJockeys": [
+   "2",
+   "1",
+   "3",
+   "5",
+   "6",
+   "4"
+  ],
+  "topEntraineurs": [
+   "5",
+   "3",
+   "2",
+   "4",
+   "1"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "5",
+   "1",
+   "3",
+   "4",
+   "2"
+  ],
+  "topCordes": [
+   "1",
+   "5",
+   "4",
+   "3",
+   "2"
+  ],
+  "ecartsChevaux": [
+   "3",
+   "6",
+   "1",
+   "2",
+   "4",
+   "5"
+  ],
+  "incontournables": [
+   "2",
+   "4",
+   "5",
+   "1",
+   "3"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "3",
+   "5"
+  ],
+  "syntheseTf": [
+   "1",
+   "2",
+   "4",
+   "6"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "TCHERKANOV",
+   "courses": 2,
+   "victoires": 1,
+   "places": 1,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "JUMEAU",
+   "courses": 1,
+   "victoires": 1,
+   "places": 0,
+   "pctV": "100",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "VENEZIA QUEEN",
+   "courses": 3,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "33.33",
+   "pctP": "100",
+   "aptG": "1400",
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "MONEEFA",
+   "courses": 1,
+   "victoires": 1,
+   "places": 0,
+   "pctV": "100",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "LA CARMEN",
+   "courses": 3,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "33.33",
+   "pctP": "100",
+   "aptG": "1600",
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "PACOEUR",
+   "courses": 2,
+   "victoires": 0,
+   "places": 2,
+   "pctV": "0",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "3 - 5 - 1 - 2 - 4 - 6",
+ "pronosTf": [
+  "5 - 3 - 1 - 2 - 4"
+ ],
+ "collecteLe": "2026-10-08T23:43:15.831Z"
+}

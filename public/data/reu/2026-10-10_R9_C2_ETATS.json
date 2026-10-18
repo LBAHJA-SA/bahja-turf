@@ -1,0 +1,385 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 2,
+  "nom": "CLAIMING (3 YO & UP - TURF)",
+  "prix": "CLAIMING (3 YO & UP - TURF)",
+  "heure": "18:38",
+  "distance": 1700,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "",
+  "conditions": "Pour pur sang males, hongres et femelles de trois ans et plus (Allocations d tribuées aux 5 premiers). Les informations concernant les partants sont comm iquées sous la responsabilité de l'autorité hippique du pays dans lequel la urse est organisée.",
+  "montant": 55784,
+  "arrivee": [
+   1,
+   8,
+   4,
+   7,
+   5
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 9,
+  "hippodrome": "Belmont Park",
+  "pays": "ETATS"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "ICE CHOCOLAT",
+   "driver": "K CARMOUCHE",
+   "entraineur": "L RICE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p6p2p3p1p",
+   "gains": 726033,
+   "age": 8,
+   "sexe": "H",
+   "poids": 57,
+   "valeur": 41.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/2/20261010-BED-2-1.png",
+   "proprietaire": "RICCIO, JAMES, A.",
+   "dernierPassage": 560,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "HIGH TIDE",
+   "driver": "O HERNANDEZ MORENO",
+   "entraineur": "N CHATTERPAUL",
+   "cote": null,
+   "coteRef": null,
+   "musique": "9p0p7p4p3p",
+   "gains": 396173,
+   "age": 9,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 23.5,
+   "chrono": "1'41\"9",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/2/20261010-BED-2-2.png",
+   "proprietaire": "CHATTERPAUL, NAIPAUL",
+   "dernierPassage": 16,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "OCEAN ATLANTIQUE",
+   "driver": "S MARIN",
+   "entraineur": "O NODA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "9p6p3p1p1p",
+   "gains": 784416,
+   "age": 9,
+   "sexe": "H",
+   "poids": 57,
+   "valeur": 39.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": null,
+   "proprietaire": "FINAL TURN RACING STABLE LLC AND",
+   "dernierPassage": null,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "LATE CALL",
+   "driver": "R SANTANA, JR.",
+   "entraineur": "I KANTARMACI",
+   "cote": null,
+   "coteRef": null,
+   "musique": "7p3p3p6p3p",
+   "gains": 197057,
+   "age": 7,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 40.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/2/20261010-BED-2-4.png",
+   "proprietaire": "GOLDFARB, SANFORD J. AND KANTARM",
+   "dernierPassage": 112,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "BELOUNI",
+   "driver": "D DAVIS",
+   "entraineur": "J R ABREU",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p3p8p2p3p",
+   "gains": 310812,
+   "age": 6,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 41.5,
+   "chrono": "1'50\"0",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/2/20261010-BED-2-5.png",
+   "proprietaire": "PHOTOS FINISH LLC",
+   "dernierPassage": 308,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "RAMBLIN' WRECK",
+   "driver": "J LEZCANO",
+   "entraineur": "D GARGAN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "9p0p3p6p9p",
+   "gains": 468880,
+   "age": 6,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 41,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": null,
+   "proprietaire": "REEVES THOROUGHBRED RACING, SEAR",
+   "dernierPassage": null,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "HEATHGUARD",
+   "driver": "M FRANCO",
+   "entraineur": "I KANTARMACI",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p2p5p7p5p",
+   "gains": 156006,
+   "age": 6,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 41,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/2/20261010-BED-2-7.png",
+   "proprietaire": "GOLDFARB, SANFORD J., KANTARMACI",
+   "dernierPassage": 128,
+   "depart": 7,
+   "def": null
+  },
+  {
+   "num": 8,
+   "cheval": "CLASSIC CREATION",
+   "driver": "A FRESU",
+   "entraineur": "J P TERRANOVA II",
+   "cote": null,
+   "coteRef": null,
+   "musique": "6p4p4p5p7p",
+   "gains": 164283,
+   "age": 6,
+   "sexe": "H",
+   "poids": 56,
+   "valeur": 40.5,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/BED/2/20261010-BED-2-8.png",
+   "proprietaire": "FUNBELLY STABLES, LLC",
+   "dernierPassage": 156,
+   "depart": 8,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "4"
+  ],
+  "drivers": [],
+  "entraineurs": [
+   "1",
+   "4",
+   "5",
+   "7",
+   "8"
+  ],
+  "top10chevaux": [
+   "4"
+  ],
+  "top10entraineurs": [
+   "1",
+   "4",
+   "5",
+   "7",
+   "8"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "1"
+  ],
+  "topPalmares": [
+   "1",
+   "5",
+   "4",
+   "7",
+   "2",
+   "8"
+  ],
+  "topForme": [
+   "1",
+   "5",
+   "4",
+   "7",
+   "2",
+   "8"
+  ],
+  "topClasse": [
+   "1",
+   "2",
+   "5",
+   "4",
+   "8",
+   "7"
+  ],
+  "topJockeys": [
+   "7",
+   "5",
+   "4",
+   "1",
+   "8"
+  ],
+  "topEntraineurs": [
+   "1",
+   "4",
+   "7",
+   "5",
+   "8"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "2",
+   "5"
+  ],
+  "topCordes": [
+   "7",
+   "1",
+   "4",
+   "8",
+   "2"
+  ],
+  "ecartsChevaux": [
+   "8",
+   "2",
+   "1",
+   "4",
+   "5",
+   "7"
+  ],
+  "incontournables": [
+   "1",
+   "4",
+   "5",
+   "2",
+   "7"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "2",
+   "4"
+  ],
+  "syntheseTf": [
+   "1",
+   "5",
+   "7",
+   "8"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "ICE CHOCOLAT",
+   "courses": 37,
+   "victoires": 8,
+   "places": 22,
+   "pctV": "21.62",
+   "pctP": "81.08",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "HIGH TIDE",
+   "courses": 51,
+   "victoires": 9,
+   "places": 28,
+   "pctV": "17.65",
+   "pctP": "72.55",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "LATE CALL",
+   "courses": 37,
+   "victoires": 6,
+   "places": 22,
+   "pctV": "16.22",
+   "pctP": "75.68",
+   "aptG": null,
+   "aptP": "1700"
+  },
+  {
+   "num": 5,
+   "cheval": "BELOUNI",
+   "courses": 26,
+   "victoires": 6,
+   "places": 11,
+   "pctV": "23.08",
+   "pctP": "65.38",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "HEATHGUARD",
+   "courses": 25,
+   "victoires": 4,
+   "places": 11,
+   "pctV": "16",
+   "pctP": "60",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 8,
+   "cheval": "CLASSIC CREATION",
+   "courses": 27,
+   "victoires": 3,
+   "places": 14,
+   "pctV": "11.11",
+   "pctP": "62.96",
+   "aptG": null,
+   "aptP": null
+  }
+ ],
+ "synthesePct": "2 - 1 - 4 - 5 - 7 - 8",
+ "pronosTf": [
+  "1 - 5 - 4 - 7 - 8"
+ ],
+ "collecteLe": "2026-10-10T23:32:59.634Z"
+}

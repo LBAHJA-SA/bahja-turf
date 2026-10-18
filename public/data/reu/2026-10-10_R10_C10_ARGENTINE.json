@@ -1,0 +1,388 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 10,
+  "nom": "GRAN PREMIO SELECCION (GRADE I)",
+  "prix": "GRAN PREMIO SELECCION (GRADE I)",
+  "heure": "23:02",
+  "distance": 2000,
+  "discipline": "PLAT",
+  "corde": "gauche",
+  "classe": "GROUPE I",
+  "conditions": "Pour pur sang femelle de trois ans (Allocations distribuées aux 5 premiers). es informations concernant les partants sont communiquées sous la responsabi té de l'autorité hippique du pays dans lequel la course est organisée.",
+  "montant": 121716,
+  "arrivee": [
+   7,
+   5,
+   2,
+   3,
+   1
+  ],
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 10,
+  "hippodrome": "Palermo",
+  "pays": "ARGENTINE"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "CONI CHIC",
+   "driver": "TOMAS DANIEL BAEZ",
+   "entraineur": "MATIAS ZANETTIN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "4p9p1p7p8p",
+   "gains": 10115000,
+   "age": 3,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/PMO/10/20261010-PMO-10-1.png",
+   "proprietaire": "STUD SANTA LUCIA",
+   "dernierPassage": 188,
+   "depart": 1,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "THE GREAT FUNNY",
+   "driver": "MARTIN JAVIER VALLE",
+   "entraineur": "LUCAS F GAITAN",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p1p3p",
+   "gains": 18543000,
+   "age": 3,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/PMO/10/20261010-PMO-10-2.png",
+   "proprietaire": "FIRMAMENTO",
+   "dernierPassage": null,
+   "depart": 2,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "TANTAS VECES",
+   "driver": "CRISTIAN ERNESTO VELAZQUEZ",
+   "entraineur": "LUIS ALBERTO SANCHEZ",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p",
+   "gains": 12000800,
+   "age": 3,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/PMO/10/20261010-PMO-10-3.png",
+   "proprietaire": "EL OLIMPO",
+   "dernierPassage": null,
+   "depart": 3,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "CANDY UNICA",
+   "driver": "KEVIN BANEGAS",
+   "entraineur": "PEDRO OMAR ARMADA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "5p4p1p4p3p",
+   "gains": 39909800,
+   "age": 3,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/PMO/10/20261010-PMO-10-4.png",
+   "proprietaire": "PATERO",
+   "dernierPassage": 307,
+   "depart": 4,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "LOOK AT TO ME",
+   "driver": "WILLIAM PEREYRA",
+   "entraineur": "JUAN FRANCO SALDIVIA",
+   "cote": null,
+   "coteRef": null,
+   "musique": "1p2p1p2p",
+   "gains": 67778200,
+   "age": 3,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/PMO/10/20261010-PMO-10-5.png",
+   "proprietaire": "AL ADIYAAT",
+   "dernierPassage": null,
+   "depart": 5,
+   "def": null
+  },
+  {
+   "num": 6,
+   "cheval": "DERRY",
+   "driver": "WILFREDO ANDRES TORRES MALDONADO",
+   "entraineur": "GASTON OSCAR VILLARROEL",
+   "cote": null,
+   "coteRef": null,
+   "musique": "3p6p1p6p6p",
+   "gains": 17306800,
+   "age": 3,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": null,
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/PMO/10/20261010-PMO-10-6.png",
+   "proprietaire": "STUD EL TATITA",
+   "dernierPassage": null,
+   "depart": 6,
+   "def": null
+  },
+  {
+   "num": 7,
+   "cheval": "ROBATE UN BESO",
+   "driver": "ADRIAN MAXIMILIANO GIANNETTI",
+   "entraineur": "ALFREDO FRANCISCO GAITAN DASSIE",
+   "cote": null,
+   "coteRef": null,
+   "musique": "2p1p1p",
+   "gains": 52309600,
+   "age": 3,
+   "sexe": "F",
+   "poids": 56,
+   "valeur": null,
+   "chrono": "2'05\"7",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "02,2",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/PMO/10/20261010-PMO-10-7.png",
+   "proprietaire": "BONNE CHANCE FARM",
+   "dernierPassage": 118,
+   "depart": 7,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "7"
+  ],
+  "drivers": [],
+  "entraineurs": [
+   "3",
+   "4",
+   "5",
+   "6",
+   "7"
+  ],
+  "top10chevaux": [
+   "7"
+  ],
+  "top10entraineurs": [
+   "3",
+   "4",
+   "5",
+   "6",
+   "7"
+  ],
+  "topCotesDirect": [],
+  "topChevaux": [
+   "7",
+   "5",
+   "1",
+   "2",
+   "3",
+   "4",
+   "6"
+  ],
+  "topPalmares": [
+   "5",
+   "7",
+   "4",
+   "2",
+   "6",
+   "1",
+   "3"
+  ],
+  "topForme": [
+   "5",
+   "4",
+   "7",
+   "2",
+   "6",
+   "1",
+   "3"
+  ],
+  "topClasse": [
+   "5",
+   "7",
+   "4",
+   "2",
+   "6",
+   "3",
+   "1"
+  ],
+  "topJockeys": [
+   "5",
+   "4",
+   "2",
+   "7",
+   "3",
+   "1",
+   "6"
+  ],
+  "topEntraineurs": [
+   "5",
+   "7",
+   "3",
+   "4",
+   "6"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "7"
+  ],
+  "topCordes": [
+   "4",
+   "1",
+   "2",
+   "3",
+   "5",
+   "6"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "4",
+   "2",
+   "3",
+   "5",
+   "6"
+  ],
+  "incontournables": [
+   "2",
+   "3",
+   "5",
+   "7",
+   "4",
+   "6",
+   "1"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "4",
+   "1"
+  ],
+  "syntheseTf": [
+   "5",
+   "7",
+   "2",
+   "6",
+   "3"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "CONI CHIC",
+   "courses": 8,
+   "victoires": 1,
+   "places": 6,
+   "pctV": "12.5",
+   "pctP": "87.5",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 2,
+   "cheval": "THE GREAT FUNNY",
+   "courses": 3,
+   "victoires": 1,
+   "places": 2,
+   "pctV": "33.33",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 3,
+   "cheval": "TANTAS VECES",
+   "courses": 1,
+   "victoires": 1,
+   "places": 0,
+   "pctV": "100",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 4,
+   "cheval": "CANDY UNICA",
+   "courses": 9,
+   "victoires": 3,
+   "places": 6,
+   "pctV": "33.33",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "LOOK AT TO ME",
+   "courses": 4,
+   "victoires": 2,
+   "places": 2,
+   "pctV": "50",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 6,
+   "cheval": "DERRY",
+   "courses": 7,
+   "victoires": 1,
+   "places": 6,
+   "pctV": "14.29",
+   "pctP": "100",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 7,
+   "cheval": "ROBATE UN BESO",
+   "courses": 3,
+   "victoires": 2,
+   "places": 1,
+   "pctV": "66.67",
+   "pctP": "100",
+   "aptG": "1400",
+   "aptP": null
+  }
+ ],
+ "synthesePct": "4 - 5 - 7 - 1 - 6 - 2 - 3",
+ "pronosTf": [
+  "5 - 7 - 4 - 6 - 3"
+ ],
+ "collecteLe": "2026-10-10T23:33:30.199Z"
+}

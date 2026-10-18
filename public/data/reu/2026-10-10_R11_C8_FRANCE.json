@@ -1,0 +1,309 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "Turf-France · reu.php",
+ "race": {
+  "numOrdre": 8,
+  "nom": "PRIX DANIEL BLANCHARD",
+  "prix": "PRIX DANIEL BLANCHARD",
+  "heure": "17:30",
+  "distance": 4800,
+  "discipline": "CROSS",
+  "corde": "",
+  "classe": "",
+  "conditions": "Pour tous chevaux de 5 ans et au-dessus, n'ayant pas, cette année, en steeple-chase, reçu 7.000 (victoires et places). Poids : 5 ans, 67 kg ; 6 an et au-dessus, 68 kg. Surcharges accumulées pour les sommes reçues en steeple-chase (victoires et places) : 1 kg par 3.000 cette année et par 6.00 l'année dernière.",
+  "montant": 16000,
+  "arrivee": null,
+  "dateLongue": "samedi 10 octobre 2026",
+  "jour": "samedi"
+ },
+ "meeting": {
+  "num": 11,
+  "hippodrome": "Moulins",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": 1,
+   "cheval": "KOSSOVO",
+   "driver": "T. BEAURAIN",
+   "entraineur": "G. BLOT",
+   "cote": 6.3,
+   "coteRef": 6.5,
+   "musique": "Ac7c2c8sAc4cAc(25)Js6c",
+   "gains": 21090,
+   "age": 7,
+   "sexe": "H",
+   "poids": 71,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "10,1",
+   "coteRefEntraineur": "14,4",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/8/20261010-MOU-8-1.png",
+   "proprietaire": "G. BLOT",
+   "dernierPassage": 22,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 2,
+   "cheval": "MAITRE D'HOTEL",
+   "driver": "L. ZULIANI",
+   "entraineur": "LAGENESTE & MACAIRE",
+   "cote": 1.3,
+   "coteRef": 2.4,
+   "musique": "(25)1c2c5cTc(24)2c7s5h3h",
+   "gains": 84375,
+   "age": 6,
+   "sexe": "H",
+   "poids": 70,
+   "valeur": null,
+   "chrono": "6'28\"7",
+   "coteRefJockey": "05,9",
+   "coteRefEntraineur": "04,1",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/8/20261010-MOU-8-2.png",
+   "proprietaire": "EARL HARAS DE L'HOTELLERI",
+   "dernierPassage": 545,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 3,
+   "cheval": "GARALUI DE BALME",
+   "driver": "E. LABAISSE",
+   "entraineur": "A. BOISBRUNET",
+   "cote": 11,
+   "coteRef": 6.1,
+   "musique": "5c3s5c(25)Js3sTsJc(24)2s",
+   "gains": 68270,
+   "age": 10,
+   "sexe": "H",
+   "poids": 69,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "12,9",
+   "coteRefEntraineur": "07,9",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/8/20261010-MOU-8-3.png",
+   "proprietaire": "M. HENRY",
+   "dernierPassage": 41,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 4,
+   "cheval": "KLELIA SPORT",
+   "driver": "J. DEROUET",
+   "entraineur": "CH. HERPIN",
+   "cote": 17,
+   "coteRef": null,
+   "musique": "2c(25)3c6s6s4s0h(23)8h",
+   "gains": 7365,
+   "age": 6,
+   "sexe": "F",
+   "poids": 67,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": null,
+   "coteRefEntraineur": "09,8",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/8/20261010-MOU-8-4.png",
+   "proprietaire": "P. MATZINGER",
+   "dernierPassage": 27,
+   "depart": null,
+   "def": null
+  },
+  {
+   "num": 5,
+   "cheval": "ETOILE DE PRETOT",
+   "driver": "Q. DEFONTAINE",
+   "entraineur": "CH. HERPIN",
+   "cote": 7.5,
+   "coteRef": 3.6,
+   "musique": "(24)2c5c1c(23)3c2c(22)Ac2c",
+   "gains": 80453,
+   "age": 12,
+   "sexe": "F",
+   "poids": 66,
+   "valeur": null,
+   "chrono": "",
+   "coteRefJockey": "06,2",
+   "coteRefEntraineur": "09,8",
+   "silk": "https://assets.racingdata.pmu.fr/silks/20261010/MOU/8/20261010-MOU-8-5.png",
+   "proprietaire": "P. CHEMIN",
+   "dernierPassage": 755,
+   "depart": null,
+   "def": null
+  }
+ ],
+ "tops": {
+  "chevaux": [
+   "2",
+   "5",
+   "3",
+   "1"
+  ],
+  "drivers": [
+   2,
+   5,
+   1,
+   3
+  ],
+  "entraineurs": [
+   "2",
+   "3",
+   "4",
+   "5",
+   "1"
+  ],
+  "top10chevaux": [
+   "2",
+   "5",
+   "3",
+   "1"
+  ],
+  "top10entraineurs": [
+   "2",
+   "3",
+   "4",
+   "5",
+   "1"
+  ],
+  "topCotesDirect": [
+   "2",
+   "1",
+   "5",
+   "3",
+   "4"
+  ],
+  "topChevaux": [
+   "2",
+   "5"
+  ],
+  "topPalmares": [
+   "5",
+   "2",
+   "3",
+   "4",
+   "1"
+  ],
+  "topForme": [
+   "5",
+   "2",
+   "3",
+   "4",
+   "1"
+  ],
+  "topClasse": [
+   "2",
+   "5",
+   "3",
+   "1",
+   "4"
+  ],
+  "topJockeys": [
+   "1",
+   "2",
+   "5",
+   "3"
+  ],
+  "topEntraineurs": [
+   "2",
+   "4",
+   "5",
+   "3",
+   "1"
+  ],
+  "aptitudePlace": [],
+  "topChronos": [
+   "2"
+  ],
+  "topCordes": [
+   "5"
+  ],
+  "ecartsChevaux": [
+   "1",
+   "3",
+   "2",
+   "4",
+   "5"
+  ],
+  "incontournables": [
+   "5",
+   "3",
+   "2",
+   "4",
+   "1"
+  ],
+  "pourUnePlace": [],
+  "outiders": [
+   "1",
+   "4"
+  ],
+  "syntheseTf": [
+   "5",
+   "2",
+   "3"
+  ]
+ },
+ "aptitudes": [
+  {
+   "num": 1,
+   "cheval": "KOSSOVO",
+   "courses": 20,
+   "victoires": 0,
+   "places": 9,
+   "pctV": "0",
+   "pctP": "45",
+   "aptG": null,
+   "aptP": "4700"
+  },
+  {
+   "num": 2,
+   "cheval": "MAITRE D'HOTEL",
+   "courses": 14,
+   "victoires": 4,
+   "places": 7,
+   "pctV": "28.57",
+   "pctP": "78.57",
+   "aptG": "3500",
+   "aptP": "4200"
+  },
+  {
+   "num": 3,
+   "cheval": "GARALUI DE BALME",
+   "courses": 25,
+   "victoires": 2,
+   "places": 19,
+   "pctV": "8",
+   "pctP": "84",
+   "aptG": null,
+   "aptP": "3900"
+  },
+  {
+   "num": 4,
+   "cheval": "KLELIA SPORT",
+   "courses": 7,
+   "victoires": 0,
+   "places": 3,
+   "pctV": "0",
+   "pctP": "42.86",
+   "aptG": null,
+   "aptP": null
+  },
+  {
+   "num": 5,
+   "cheval": "ETOILE DE PRETOT",
+   "courses": 21,
+   "victoires": 7,
+   "places": 12,
+   "pctV": "33.33",
+   "pctP": "90.48",
+   "aptG": null,
+   "aptP": "5200"
+  }
+ ],
+ "synthesePct": "5 - 3 - 2 - 1 - 4",
+ "pronosTf": [
+  "5 - 2 - 3"
+ ],
+ "collecteLe": "2026-10-10T23:33:46.923Z"
+}
