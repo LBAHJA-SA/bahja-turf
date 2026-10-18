@@ -289,14 +289,56 @@ export function parseProgrammeTf(html) {
   return out
 }
 
+/**
+ * LA BARRE DES RÉUNIONS — l'en-tête collant de LA MÊME page (reu.php). Elle
+ * donne, pour chaque réunion :
+ *
+ *   · son NOM tel que le site l'écrit (« ZURICH », pas « Dielsdorf » — la source
+ *     de chevaux nomme certains hippodromes autrement) ;
+ *   · son TERRAIN du jour (« Très souple 4.0 »), son nombre de courses, ses
+ *     disciplines, et si elle porte le Quinté (`class="quinte"`).
+ *
+ * → [{ nom, terrain, courses, disciplines, quinte }]  dans l'ordre des R.
+ */
+export function parseReunionsTf(html) {
+  const h = String(html).replace(/&amp;/g, '&')
+  const out = []
+  const re = /<a class="([^"]*)" href="#[^"]*">([^<]*)<\/a>\s*<div class="tooltip-content">([\s\S]*?)<\/div>/g
+  for (const m of h.matchAll(re)) {
+    const nom = texte(m[2])
+    if (!nom) continue
+    const corps = m[3]
+    const champ = (libelle) => {
+      const mm = corps.match(new RegExp('<' + 'strong>' + libelle + '[^<]*</strong>\\s*</td>\\s*<td>([\\s\\S]*?)</td>', 'i'))
+      return mm ? texte(mm[1].replace(/<[^>]+>/g, ' ')).trim() : ''
+    }
+    out.push({
+      nom,
+      terrain: champ('Terrain'),
+      courses: Number(champ('Courses')) || null,
+      disciplines: champ('Disciplines'),
+      quinte: /quinte/i.test(m[1]),
+    })
+  }
+  return out
+}
+
 /** Le programme du jour : UN appel, gardé en mémoire pour la session. */
-const cacheProg = new Map()
-export async function chargerProgrammeTf(date) {
+const cacheProg = new Map()          // date → { prog, reunions }
+async function pageProgTf(date) {
   if (cacheProg.has(date)) return cacheProg.get(date)
   const r = await lirePage(`/php/reu.php?view=program&date=${date}`)
-  const m = parseProgrammeTf(await r.text())
-  cacheProg.set(date, m)
-  return m
+  const html = await r.text()
+  const v = { prog: parseProgrammeTf(html), reunions: parseReunionsTf(html) }
+  cacheProg.set(date, v)
+  return v
+}
+export async function chargerProgrammeTf(date) {
+  return (await pageProgTf(date)).prog
+}
+/** La barre des réunions du jour : le nom, le terrain, les disciplines. */
+export async function reunionsTf(date) {
+  return (await pageProgTf(date)).reunions
 }
 /* ═════════════════════ RETROUVER LA COURSE DANS LA SOURCE ══════════════════
  *
@@ -332,11 +374,12 @@ function memeCourseTf(ligne, nom, distance) {
   return a.includes(b) || b.includes(a) || a.slice(0, 14) === b.slice(0, 14)
 }
 
-/** Index du programme du jour : par réunion et par hippodrome. */
+/** Index du programme du jour : par réunion, par hippodrome, et sa barre. */
 const cacheIndex = new Map()
 export async function indexTf(date) {
   if (cacheIndex.has(date)) return cacheIndex.get(date)
   const prog = await chargerProgrammeTf(date)
+  const reunions = await reunionsTf(date).catch(() => [])
   const parReunion = new Map()
   const parHippo = new Map()
   for (const c of prog.values()) {
@@ -345,9 +388,16 @@ export async function indexTf(date) {
     const h = normHippo(c.hippodrome)
     if (h && !parHippo.has(h)) parHippo.set(h, c.reunion)
   }
-  const idx = { prog, parReunion, parHippo }
+  const idx = { prog, reunions, parReunion, parHippo }
   cacheIndex.set(date, idx)
   return idx
+}
+
+/** Les infos de la barre pour un hippodrome donné : terrain, disciplines, nom. */
+export function metaReunion(idx, hippodrome) {
+  const h = normHippo(hippodrome)
+  if (!h) return null
+  return (idx.reunions || []).find((r) => normHippo(r.nom) === h) || null
 }
 
 /**

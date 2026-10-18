@@ -271,6 +271,7 @@ export default function Analyse() {
                         </span>
                         <span style={{ display: 'block', fontSize: 10.5, color: SK.doux, marginTop: 1 }}>
                           {m.courses.length} course{m.courses.length > 1 ? 's' : ''}
+                          {m.terrain ? ` · ${m.terrain}` : ''}
                           {m.depart ? ` · 1ʳᵉ à ${m.depart}` : ''}
                         </span>
                       </span>
@@ -476,7 +477,7 @@ function EcranCarriere({ course, partant, onRetour }) {
   const conditionsDuJour = () => {
     const garde = (liste, v) => (v && liste.some((x) => x.v === v) ? [v] : [])
     setSel({
-      hippodrome: garde(valeurs.hippodrome, course.hippodrome),
+      hippodrome: garde(valeurs.hippodrome, course.hippodromePt || course.hippodrome),
       terrain: garde(valeurs.terrain, terrainSimple(course.terrain)),
       discipline: garde(valeurs.discipline, course.libelle),
       type: [],

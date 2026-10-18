@@ -35,7 +35,7 @@
  * ============================================================================= */
 
 import { programmeDuJour } from './parisTurf.js'
-import { indexTf, reunionSource } from './turfFrance.js'
+import { indexTf, reunionSource, metaReunion, normHippo } from './turfFrance.js'
 
 /** Le pays, écrit comme un lecteur français l'écrit. ⚠ PAS de drapeau emoji :
  *  Windows ne dessine pas les drapeaux (🇨🇭 s'affiche « CH »). */
@@ -78,16 +78,45 @@ function joliesConditions(txt) {
     .replace(/^(.*)$/, (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : s))
 }
 
-/** « PARISLONGCHAMP » → « ParisLongchamp » — pour les réunions ignorées de l'autre source. */
+/** « PARISLONGCHAMP » → « ParisLongchamp », « LES SABLES D OLONNE » → « Les Sables d'Olonne ». */
 const PETITS = new Set(['de', 'du', 'des', 'la', 'le', 'les', 'sur', 'sous', 'en', 'et', 'au', 'aux'])
+const NOMS = { parislongchamp: 'ParisLongchamp' }
 export function joliNom(s) {
   const t = String(s || '').trim().toLowerCase()
   if (!t) return ''
-  if (t.replace(/[^a-z]/g, '') === 'parislongchamp') return 'ParisLongchamp'
+  if (NOMS[t.replace(/[^a-z]/g, '')]) return NOMS[t.replace(/[^a-z]/g, '')]
+  let premier = true
   return t
     .split(/([\s-]+)/)
-    .map((m) => (/^[\s-]+$/.test(m) || !m ? m : PETITS.has(m) ? m : m.charAt(0).toUpperCase() + m.slice(1)))
+    .map((w) => {
+      if (!w || /^[\s-]+$/.test(w)) return w
+      const debut = premier
+      premier = false
+      /* le PREMIER mot prend toujours sa majuscule, même « la », « le », « les » */
+      return debut || !PETITS.has(w) ? w.charAt(0).toUpperCase() + w.slice(1) : w
+    })
     .join('')
+}
+
+/**
+ * ⭐ LE NOM DE LA RÉUNION — celui de la source de référence.
+ *
+ *   Le 18/10, la page écrivait « Dielsdorf » (le nom de la source de chevaux)
+ *   là où le PMU, equidia et turf-france écrivent **ZURICH**. Le nom affiché est
+ *   donc celui de la référence.
+ *
+ *   ⚠ Sauf quand la source de chevaux écrit le MÊME nom, en plus complet :
+ *   « BORELY » (référence) / « Marseille-Borély » (source) → on garde le second,
+ *   mieux orthographié, et l'on garde ainsi « Bordeaux - Le Bouscat »,
+ *   « Maure-de-Bretagne », « Hyères », « Mülheim ».
+ */
+export function nomReunion(siteNom, ptNom) {
+  const site = joliNom(siteNom)
+  if (!ptNom) return site
+  const a = normHippo(siteNom)
+  const b = normHippo(ptNom)
+  if (a.length >= 5 && b.includes(a)) return ptNom
+  return site
 }
 
 /** Une course que seule la liste PMU connaît : tout vient d'elle sauf les partants. */
@@ -154,7 +183,9 @@ export async function programmePmu(date) {
     if (!ref.length) continue
     const m = parR.get(r) || null
     const pays = ref[0].pays || ''
-    const nom = m ? m.nom : joliNom(ref[0].hippodrome)
+    const meta = metaReunion(idx, ref[0].hippodrome)
+    const nom = nomReunion(ref[0].hippodrome, m && m.nom)
+    const nomPt = (m && m.nom) || ''
 
     /* ⚠ LA LISTE EST CELLE DU PROGRAMME : une course que la source de chevaux
        connaît mais que le PMU ne programme pas n'est PAS ajoutée. Mesuré le
@@ -165,7 +196,10 @@ export async function programmePmu(date) {
     for (const c of ref) {
       const p = connues.get(c.course)
       courses.push(p
-        ? { ...p, reunion: r, tf: { reunion: r, course: c.course, pays, heure: c.heure || '' } }
+        /* `hippodrome` = le nom AFFICHÉ (celui de la référence) ; `hippodromePt`
+           garde celui de la source de chevaux, dont les carrières portent
+           l'orthographe — c'est lui qui sert à retrouver les courses passées. */
+        ? { ...p, reunion: r, hippodrome: nom, hippodromePt: p.hippodrome || nomPt, tf: { reunion: r, course: c.course, pays, heure: c.heure || '' } }
         : courseDuProgramme(r, c, pays, nom))
     }
 
@@ -176,6 +210,8 @@ export async function programmePmu(date) {
       reunion: r,
       pmu: r,
       pays,
+      terrain: (meta && meta.terrain) || '',
+      disciplines: (meta && meta.disciplines) || '',
       heure: m ? m.heure : null,
       depart: ref[0].heure || '',
       chevaux: !!m,

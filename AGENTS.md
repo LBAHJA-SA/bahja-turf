@@ -2634,13 +2634,47 @@ programmePmu(date) → { date, reference, reunions: [ { id, nom, hippodrome,
 ### 23.3 La présentation
 
 La colonne de gauche a été refaite : une **carte par réunion** — badge `R1`,
-hippodrome, `N courses · 1ʳᵉ à HH:MM`, pastille du pays, badge `Q+` quand la
-réunion porte le Quinté — et, dépliée, une **grille de pastilles `C1 13:58 / Plat ·
-1800 m`** (la course sélectionnée en bleu). La course ouverte affiche son
-en-tête complet à droite.
+hippodrome, `N courses · <terrain> · 1ʳᵉ à HH:MM`, pastille du pays, badge `Q+`
+quand la réunion porte le Quinté — et, dépliée, une **grille de pastilles
+`C1 13:58 / Plat · 1800 m`** (la course sélectionnée en bleu). La course ouverte
+affiche son en-tête complet à droite.
+
+Le **terrain par réunion** (`Bon`, `Très souple 4.0`, `Collant 4.2`…) vient de la
+barre de `reu.php` elle-même : `parseReunionsTf` lit son en-tête collant
+(`<a href="#ZURICH">ZURICH</a>` + `<div class="tooltip-content">` → *Terrain /
+Courses / Disciplines / Types*). La source ne le donne que quand elle le
+connaît — ParisLongchamp et Tarbes l'ont vide, on n'affiche alors rien.
 
 ⚠ **pas de drapeau emoji** : Windows ne dessine pas les drapeaux (🇨🇭 sort
 « CH »). On écrit le pays — `Suisse`, `Uruguay`, `Royaume-Uni`.
+
+### 23.3 bis ⭐ LE NOM DES RÉUNIONS — celui de la référence
+
+> « كاين مشكل بعض اسماء الاجتماعات متل عندنا Dielsdorf … وفالمواقع ZURICH »
+> (« problème sur certains noms de réunions : chez nous Dielsdorf, sur les sites
+> ZURICH »).
+
+Le nom affiché est celui de **`reu.php`**. Le 18/10 la page écrivait « Dielsdorf »
+(orthographe de la source de chevaux) là où le PMU, equidia et turf-france
+écrivent **ZURICH** — c'est le même hippodrome, mais c'est un autre nom.
+
+```
+nom affiché = nom de la référence
+              ⚠ SAUF si la source de chevaux écrit LE MÊME nom, en plus complet
+                (« BORELY » ⊂ « Marseille-Borély ») : on garde alors le sien,
+                mieux orthographié.
+```
+
+Conséquence mesurée : **Zurich** (et non Dielsdorf), **Mülheim**, **Pontchâteau**,
+**Hyères**, **Maure-de-Bretagne**, **Marseille-Borély**, **Bordeaux - Le Bouscat**
+— et à l'inverse « Amiens » ou « Maronas », que la source de chevaux ne connaît
+pas, viennent de la référence.
+
+Le nom **de la référence** part dans `course.hippodrome` (ce qui s'affiche) ;
+celui de la **source de chevaux** reste dans `course.hippodromePt` — c'est lui qui
+retrouve les courses passées (les carrières portent son orthographe), donc le
+raccourci « mêmes conditions que la course du jour » de l'écran carrière l'utilise
+(`conditionsDuJour`).
 
 ### 23.4 Un bug corrigé au passage — le pays tronqué
 
