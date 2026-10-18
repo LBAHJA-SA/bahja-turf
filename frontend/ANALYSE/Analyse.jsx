@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import Entete from '../../src/Entete.jsx'
 import {
   partantsDeCourse, carriereCheval, identiteCheval, statsCheval, terrainSimple,
 } from '../../backend/ANALYSE/parisTurf.js'
@@ -34,17 +35,25 @@ import { programmePmu, paysLisible } from '../../backend/ANALYSE/programme.js'
  *   3 par cheval ouvert. Les 148 courses du jour ne sont jamais tirées d'un coup.
  * ═══════════════════════════════════════════════════════════════════════════ */
 
+/* ══ LE THÈME DE LA PAGE — cyan sur nuit (18/10/2026) ══════════════════════
+ *  La page a SA couleur : le cyan. Le fond est transparent — c'est le fond
+ *  néon de src/index.css qui passe dessous (nuit + halos).
+ *  `accentSombre` reste SOMBRE : il sert de fond aux en-têtes de tableau
+ *  (texte blanc par-dessus). Partout où il servait de COULEUR DE TEXTE, on
+ *  utilise `accent` ou `accentTexte` (clair), sinon le texte disparaît.
+ * ═════════════════════════════════════════════════════════════════════════ */
 const SK = {
-  accent: '#0e7490', accentSombre: '#155e75', accentClair: '#cffafe',
-  entete: 'linear-gradient(120deg,#083344 0%,#0e7490 55%,#22d3ee 100%)',
-  fiche: 'linear-gradient(120deg,#0f172a 0%,#155e75 70%,#0e7490 100%)',
-  fond: 'linear-gradient(180deg,#ecfeff 0%,#f8fafc 60%,#ffffff 100%)',
-  bord: '#67e8f9', carte: '#fff', ligne: '#e2e8f0', alt: '#f8fafc',
-  texte: '#0f172a', doux: '#475569', muet: '#94a3b8',
+  accent: '#22d3ee', accentSombre: '#0b3b4d', accentClair: 'rgba(34,211,238,.14)',
+  accentTexte: '#67e8f9',
+  entete: 'linear-gradient(120deg,#06131f 0%,#0b3b4d 55%,#0e7490 100%)',
+  fiche: 'linear-gradient(120deg,#061019 0%,#0b3b4d 70%,#0e7490 100%)',
+  fond: 'transparent',
+  bord: 'rgba(34,211,238,.35)', carte: 'rgba(12,20,37,.72)', ligne: 'rgba(125,205,255,.16)', alt: 'rgba(255,255,255,.035)',
+  texte: '#e7f1ff', doux: '#a4b8d6', muet: '#6d82a2',
   police: 'system-ui, -apple-system, "Segoe UI", sans-serif',
   mono: 'ui-monospace, Consolas, monospace',
 }
-const VERT = '#15803d', ROUGE = '#b91c1c', AMBRE = '#b45309'
+const VERT = '#34d399', ROUGE = '#fb7185', AMBRE = '#fbbf24'
 
 const p2 = (x) => String(x).padStart(2, '0')
 
@@ -122,7 +131,7 @@ export default function Analyse() {
 
   const [outil, setOutil] = useState(null)       // { libelle, url } → la visionneuse
 
-  useEffect(() => { document.title = 'Chevaux — Bahja TURF' }, [])
+  useEffect(() => { document.title = 'Analyse course — Bahja TURF' }, [])
 
   /* ------------------------------------------------ ① le programme du jour --- */
   const chargerProgramme = useCallback(async (d) => {
@@ -190,40 +199,43 @@ export default function Analyse() {
   return (
     <div dir="ltr" style={{ minHeight: '100vh', background: SK.fond, fontFamily: SK.police, color: SK.texte }}>
 
-      <header className="header" style={{ background: SK.entete, borderBottom: '2px solid #22d3ee' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: 1400 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="/logo-horse.png" alt="Bahja TURF" style={{ height: 44, background: 'white', borderRadius: 8, padding: 2 }} />
-            <img src="/logo.svg" alt="Bahja TURF" style={{ height: 42, borderRadius: 8 }} />
-          </div>
-          <nav style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <Link to="/" style={lienNav}>Programme</Link>
-            <Link to="/coply" style={lienNav}>Coply</Link>
-            <Link to="/quinte" style={lienNav}>Quinté</Link>
-            <Link to="/analyse" style={{ ...lienNav, background: 'rgba(255,255,255,.18)', borderRadius: 8, padding: '6px 12px' }}>Chevaux</Link>
-          </nav>
-        </div>
-      </header>
+      <Entete page="analyse" />
 
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '14px 16px 48px' }}>
 
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
-          <h1 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: SK.accentSombre }}>Chaque cheval — toutes les courses</h1>
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
-            style={{ padding: '6px 10px', borderRadius: 8, border: '1px solid ' + SK.bord, fontFamily: SK.police }} />
-          <span style={{ fontSize: 12, color: SK.doux }}>{DLc(date)}</span>
-          <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: SK.doux, cursor: 'pointer' }}>
-            <input type="checkbox" checked={tqqSeul} onChange={(e) => setTqqSeul(e.target.checked)} />
-            Quinté+ seulement
-          </label>
-          <span style={{ fontSize: 12.5, fontWeight: 700, color: SK.accent }}>
-            {busyProg ? 'chargement…' : `${compteurs.reunions} réunion(s) · ${compteurs.courses} course(s)`}
-          </span>
-          {compteurs.tqq && (
-            <button onClick={() => { setTqqSeul(true); setReunionOuverte(compteurs.tqq.meetingId); ouvrirCourse(compteurs.tqq) }} style={btnPlein}>
-              🎯 Le Quinté du jour
-            </button>
-          )}
+        {/* ── L'EN-TÊTE DE LA PAGE : le titre qui luit + les outils ───────── */}
+        <div style={{
+          display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap', marginBottom: 14,
+          padding: '12px 16px', borderRadius: 16,
+          background: 'linear-gradient(120deg, rgba(34,211,238,.13), rgba(167,139,250,.09) 60%, rgba(255,255,255,.02))',
+          border: '1px solid rgba(34,211,238,.28)',
+          boxShadow: '0 0 34px rgba(34,211,238,.12), inset 0 1px 0 rgba(255,255,255,.07)',
+        }}>
+          <div>
+            <span className="ruban"><i className="bi bi-clipboard2-pulse" /> Analyse course</span>
+            <h1 className="titre-page" style={{ margin: '7px 0 0', fontSize: 21 }}>
+              Toutes les courses · tous les chevaux
+            </h1>
+          </div>
+
+          <div style={{ marginLeft: 'auto', display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
+              style={{ padding: '7px 11px', borderRadius: 10, border: '1px solid ' + SK.bord, fontFamily: SK.police }} />
+            <span style={{ fontSize: 12, color: SK.doux }}>{DLc(date)}</span>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12.5, color: SK.doux, cursor: 'pointer' }}>
+              <input type="checkbox" checked={tqqSeul} onChange={(e) => setTqqSeul(e.target.checked)} />
+              Quinté+ seulement
+            </label>
+            <span className="badge">
+              <i className="bi bi-broadcast" />
+              {busyProg ? 'chargement…' : `${compteurs.reunions} réunion(s) · ${compteurs.courses} course(s)`}
+            </span>
+            {compteurs.tqq && (
+              <button onClick={() => { setTqqSeul(true); setReunionOuverte(compteurs.tqq.meetingId); ouvrirCourse(compteurs.tqq) }} style={btnPlein}>
+                🎯 Le Quinté du jour
+              </button>
+            )}
+          </div>
         </div>
 
         {errProg && <Bandeau texte={errProg} onReessayer={() => chargerProgramme(date)} />}
@@ -231,7 +243,7 @@ export default function Analyse() {
         <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
           {/* ── colonne gauche : LE PROGRAMME PMU ── */}
-          <div style={{ flex: '0 0 340px', maxWidth: '100%', background: SK.carte, border: '1px solid ' + SK.bord, borderRadius: 14, overflow: 'hidden', maxHeight: '84vh', display: 'flex', flexDirection: 'column', boxShadow: '0 6px 22px rgba(8,51,68,.08)' }}>
+          <div style={{ flex: '0 0 340px', maxWidth: '100%', background: SK.carte, border: '1px solid ' + SK.bord, borderRadius: 14, overflow: 'hidden', maxHeight: '84vh', display: 'flex', flexDirection: 'column', boxShadow: '0 18px 44px rgba(0,0,0,.45), 0 0 30px rgba(34,211,238,.10)' }}>
 
             <div style={{ padding: '9px 12px', background: SK.entete, color: '#fff', display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8 }}>
               <b style={{ fontSize: 12.5, letterSpacing: 0.6 }} title={refPmu ? 'Le programme PMU du jour' : 'Liste de secours'}>LE PROGRAMME</b>
@@ -251,8 +263,8 @@ export default function Analyse() {
                   <div key={m.id} style={{
                     marginBottom: 8, borderRadius: 11, overflow: 'hidden',
                     border: '1px solid ' + (ouverte ? SK.accent : SK.ligne),
-                    background: ouverte ? '#f2feff' : '#fff',
-                    boxShadow: ouverte ? '0 3px 12px rgba(14,116,144,.16)' : '0 1px 2px rgba(15,23,42,.04)',
+                    background: ouverte ? 'rgba(34,211,238,.12)' : 'rgba(255,255,255,.03)',
+                    boxShadow: ouverte ? '0 0 22px rgba(34,211,238,.22)' : 'none',
                     transition: 'box-shadow .15s, border-color .15s',
                   }}>
                     <button onClick={() => setReunionOuverte(ouverte ? null : m.id)}
@@ -260,14 +272,15 @@ export default function Analyse() {
                       <span style={{
                         flex: '0 0 auto', width: 32, height: 27, borderRadius: 8, display: 'grid', placeItems: 'center',
                         fontFamily: SK.mono, fontWeight: 900, fontSize: 12,
-                        color: ouverte ? '#fff' : SK.accentSombre,
-                        background: ouverte ? SK.accent : SK.accentClair,
+                        color: ouverte ? '#04121a' : SK.accentTexte,
+                        background: ouverte ? 'linear-gradient(135deg,#22d3ee,#67e8f9)' : SK.accentClair,
+                        boxShadow: ouverte ? '0 0 16px rgba(34,211,238,.55)' : 'none',
                       }}>{m.reunion ? 'R' + m.reunion : '–'}</span>
                       <span style={{ flex: 1, minWidth: 0 }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                          <span style={{ fontSize: 13.5, fontWeight: 800, color: SK.accentSombre, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.nom}</span>
-                          {aLeQuinte && <span style={{ flex: '0 0 auto', fontSize: 9, fontWeight: 800, background: '#fee2e2', color: ROUGE, borderRadius: 4, padding: '1px 4px' }}>Q+</span>}
-                          {m.chevaux === false && <span style={{ flex: '0 0 auto', fontSize: 9, fontWeight: 800, background: '#fef3c7', color: AMBRE, borderRadius: 4, padding: '1px 4px' }}>sans partants</span>}
+                          <span style={{ fontSize: 13.5, fontWeight: 800, color: SK.accentTexte, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.nom}</span>
+                          {aLeQuinte && <span style={{ flex: '0 0 auto', fontSize: 9, fontWeight: 800, background: 'rgba(244,63,94,.16)', color: ROUGE, borderRadius: 4, padding: '1px 4px' }}>Q+</span>}
+                          {m.chevaux === false && <span style={{ flex: '0 0 auto', fontSize: 9, fontWeight: 800, background: 'rgba(251,191,36,.16)', color: AMBRE, borderRadius: 4, padding: '1px 4px' }}>sans partants</span>}
                         </span>
                         <span style={{ display: 'block', fontSize: 10.5, color: SK.doux, marginTop: 1 }}>
                           {m.courses.length} course{m.courses.length > 1 ? 's' : ''}
@@ -276,7 +289,7 @@ export default function Analyse() {
                         </span>
                       </span>
                       {paysLisible(m.pays) && (
-                        <span style={{ fontSize: 9.5, fontWeight: 700, color: SK.accentSombre, background: SK.accentClair, borderRadius: 6, padding: '2px 5px', whiteSpace: 'nowrap' }}>{paysLisible(m.pays)}</span>
+                        <span style={{ fontSize: 9.5, fontWeight: 700, color: SK.accentTexte, background: SK.accentClair, borderRadius: 6, padding: '2px 5px', whiteSpace: 'nowrap' }}>{paysLisible(m.pays)}</span>
                       )}
                       <span style={{ fontSize: 9, color: SK.muet, transform: ouverte ? 'rotate(90deg)' : 'none', transition: 'transform .15s' }}>▶</span>
                     </button>
@@ -289,16 +302,16 @@ export default function Analyse() {
                             <button key={c.id || 'pmu-' + m.id + '-' + c.num} onClick={() => ouvrirCourse(c)} title={c.nom}
                               style={{
                                 textAlign: 'left', cursor: 'pointer', padding: '5px 6px', borderRadius: 8,
-                                background: sel ? SK.accent : '#fff',
+                                background: sel ? 'rgba(34,211,238,.18)' : 'rgba(255,255,255,.03)',
                                 border: '1px solid ' + (sel ? SK.accent : SK.ligne),
-                                color: sel ? '#fff' : SK.texte,
+                                color: sel ? '#67e8f9' : SK.texte,
                               }}>
                               <span style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
                                 <b style={{ fontFamily: SK.mono, fontSize: 11.5 }}>C{c.num}</b>
-                                <span style={{ fontSize: 10, fontFamily: SK.mono, color: sel ? '#dbf4fb' : SK.muet }}>{heureDe(c)}</span>
-                                {c.isTQQ && <span style={{ marginLeft: 'auto', fontSize: 8.5, fontWeight: 800, background: sel ? '#fff' : '#fee2e2', color: sel ? SK.accent : ROUGE, borderRadius: 3, padding: '0 3px' }}>Q+</span>}
+                                <span style={{ fontSize: 10, fontFamily: SK.mono, color: sel ? 'rgba(34,211,238,.85)' : SK.muet }}>{heureDe(c)}</span>
+                                {c.isTQQ && <span style={{ marginLeft: 'auto', fontSize: 8.5, fontWeight: 800, background: sel ? 'rgba(255,255,255,.92)' : 'rgba(244,63,94,.16)', color: sel ? '#0b3b4d' : ROUGE, borderRadius: 3, padding: '0 3px' }}>Q+</span>}
                               </span>
-                              <span style={{ display: 'block', fontSize: 9.5, color: sel ? '#dbf4fb' : SK.muet, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                              <span style={{ display: 'block', fontSize: 9.5, color: sel ? 'rgba(34,211,238,.85)' : SK.muet, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                 {c.libelle}{c.distance ? ` · ${c.distance} m` : ''}
                               </span>
                             </button>
@@ -333,7 +346,7 @@ export default function Analyse() {
                     <b style={{ fontSize: 16 }}>{course.hippodrome}</b>
                     <span style={{ fontFamily: SK.mono, fontSize: 12.5 }}>{course.reunion ? `R${course.reunion}` : ''}C{course.num}</span>
                     <span style={{ fontFamily: SK.mono, fontSize: 12.5 }}>{heureDe(course)}</span>
-                    {course.isTQQ && <span style={{ fontSize: 10, fontWeight: 800, background: '#fff', color: ROUGE, borderRadius: 5, padding: '2px 6px' }}>QUINTÉ+</span>}
+                    {course.isTQQ && <span style={{ fontSize: 10, fontWeight: 800, background: 'rgba(244,63,94,.22)', color: '#fda4af', border: '1px solid rgba(244,63,94,.55)', borderRadius: 5, padding: '2px 6px' }}>QUINTÉ+</span>}
                   </div>
                   <div style={{ fontSize: 14, fontWeight: 700, marginTop: 3 }}>{course.nom}</div>
                   <div style={{ fontSize: 12, opacity: 0.92, marginTop: 2 }}>
@@ -341,7 +354,7 @@ export default function Analyse() {
                     {course.nbPartants ? ` · ${course.nbPartants} partants` : ''}{course.prix ? ` · ${gains(course.prix)}` : ''}
                   </div>
                   {arriveeNums(course.arrivee).length > 0 && (
-                    <div style={{ fontSize: 12.5, fontWeight: 800, marginTop: 4, color: '#fef08a' }}>Arrivée : {arriveeNums(course.arrivee).join(' · ')}</div>
+                    <div style={{ fontSize: 12.5, fontWeight: 800, marginTop: 4, color: '#fbbf24' }}>Arrivée : {arriveeNums(course.arrivee).join(' · ')}</div>
                   )}
                   {course.conditions && <div style={{ fontSize: 11, opacity: 0.8, marginTop: 4, lineHeight: 1.4 }}>{course.conditions}</div>}
                 </div>
@@ -349,7 +362,7 @@ export default function Analyse() {
                 {busyPartants && <div style={{ padding: 16, fontSize: 13, color: SK.muet }}>Lecture des partants…</div>}
                 {errPartants && <div style={{ padding: 12 }}><Bandeau texte={errPartants} onReessayer={() => ouvrirCourse(course)} /></div>}
                 {!busyPartants && !course.id && (
-                  <div style={{ padding: '11px 14px', fontSize: 12.5, color: SK.doux, background: '#fffbeb', borderBottom: '1px solid #fde68a' }}>
+                  <div style={{ padding: '11px 14px', fontSize: 12.5, color: SK.doux, background: 'rgba(251,191,36,.10)', borderBottom: '1px solid rgba(251,191,36,.30)' }}>
                     Les <b>partants</b> de cette réunion ne sont pas disponibles — les <b>études de la course</b> restent ci-dessous.
                   </div>
                 )}
@@ -367,11 +380,11 @@ export default function Analyse() {
                       <tbody>
                         {partants.map((p) => (
                           <tr key={p.id} onClick={() => setPartant(p)}
-                            style={{ background: p.nonPartant ? '#fafafa' : '#fff', cursor: 'pointer', opacity: p.nonPartant ? 0.55 : 1 }}>
+                            style={{ background: p.nonPartant ? 'rgba(255,255,255,.02)' : 'rgba(255,255,255,.04)', cursor: 'pointer', opacity: p.nonPartant ? 0.55 : 1 }}>
                             <td style={{ ...td, fontFamily: SK.mono, fontWeight: 800 }}>{p.num}</td>
                             <td style={{ ...td, minWidth: 210 }}>
                               <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
-                                {p.casaque && <img src={p.casaque} alt="" width={20} height={20} style={{ borderRadius: 4, background: '#fff', border: '1px solid #e2e8f0' }} onError={(e) => { e.currentTarget.style.display = 'none' }} />}
+                                {p.casaque && <img src={p.casaque} alt="" width={20} height={20} style={{ borderRadius: 4, background: '#fff', border: '1px solid rgba(255,255,255,.25)' }} onError={(e) => { e.currentTarget.style.display = 'none' }} />}
                                 <b style={{ fontSize: 13 }}>{p.nom}</b>
                                 {p.nonPartant && <span style={{ fontSize: 9.5, fontWeight: 800, color: ROUGE }}>NP</span>}
                                 {p.supplemente && <span style={{ fontSize: 9.5, fontWeight: 800, color: AMBRE }}>+</span>}
@@ -390,7 +403,7 @@ export default function Analyse() {
                             </td>
                             <td style={{ ...td, whiteSpace: 'nowrap' }}>{p.sexe}{p.age != null ? p.age : ''}</td>
                             <td style={{ ...td, fontFamily: SK.mono }}>{p.poids != null ? p.poids + ' kg' : '—'}</td>
-                            <td style={{ ...td, fontFamily: SK.mono, fontWeight: 700, color: SK.accentSombre }}>{p.vh != null ? p.vh : '—'}</td>
+                            <td style={{ ...td, fontFamily: SK.mono, fontWeight: 700, color: SK.accentTexte }}>{p.vh != null ? p.vh : '—'}</td>
                             <td style={{ ...td }}><Artifices p={p} /></td>
                             <td style={{ ...td, whiteSpace: 'nowrap' }}>{p.jockey || '—'}</td>
                             <td style={{ ...td, whiteSpace: 'nowrap' }}>{p.entraineur || '—'}</td>
@@ -569,11 +582,11 @@ function EcranCarriere({ course, partant, onRetour }) {
         <>
           {/* ── les filtres ── */}
           {sel && (
-            <div style={{ padding: '12px 15px', borderBottom: '1px solid ' + SK.ligne, background: '#fff' }}>
+            <div style={{ padding: '12px 15px', borderBottom: '1px solid ' + SK.ligne, background: 'transparent' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 9, flexWrap: 'wrap' }}>
                 <b style={{ fontSize: 17 }}>Filtrer la carrière</b>
                 {nbFiltres > 0 && <span style={{ background: ROUGE, color: '#fff', borderRadius: 999, fontSize: 11, fontWeight: 800, padding: '1px 7px' }}>{nbFiltres}</span>}
-                <button onClick={conditionsDuJour} style={{ border: '1px solid ' + SK.accent, background: '#fff', color: SK.accent, fontWeight: 700, fontSize: 12.5, cursor: 'pointer', borderRadius: 999, padding: '4px 11px' }}>
+                <button onClick={conditionsDuJour} style={{ border: '1px solid ' + SK.accent, background: 'rgba(34,211,238,.10)', color: SK.accentTexte, fontWeight: 700, fontSize: 12.5, cursor: 'pointer', borderRadius: 999, padding: '4px 11px' }}>
                   🎯 mêmes conditions que ce jour
                 </button>
                 {nbFiltres > 0 && (
@@ -617,13 +630,13 @@ function EcranCarriere({ course, partant, onRetour }) {
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 8, padding: '8px 15px', borderBottom: '1px solid ' + SK.ligne }}>
             <span style={{ fontSize: 12.5, color: SK.doux, fontWeight: 600 }}>Afficher les commentaires</span>
             <button onClick={() => setVoirCom(!voirCom)} title="commentaires des courses"
-              style={{ width: 44, height: 24, borderRadius: 999, border: 0, cursor: 'pointer', position: 'relative', background: voirCom ? SK.accent : '#cbd5e1' }}>
+              style={{ width: 44, height: 24, borderRadius: 999, border: 0, cursor: 'pointer', position: 'relative', background: voirCom ? SK.accent : 'rgba(255,255,255,.18)' }}>
               <span style={{ position: 'absolute', top: 3, left: voirCom ? 23 : 3, width: 18, height: 18, borderRadius: '50%', background: '#fff', transition: 'left .15s' }} />
             </button>
           </div>
 
           {/* ── les cartes ── */}
-          <div style={{ padding: '11px 15px 15px', background: '#f8fafc' }}>
+          <div style={{ padding: '11px 15px 15px', background: 'rgba(255,255,255,.02)' }}>
             {!carriere.length && <div style={{ fontSize: 13, color: SK.muet }}>Carrière non publiée pour ce cheval.</div>}
             {carriere.length > 0 && !lignes.length && <div style={{ fontSize: 13, color: SK.muet }}>Aucune course ne correspond aux filtres — clique « tout effacer ».</div>}
             {lignes.map((l) => <CarteCarriere key={l.id} l={l} voirCom={voirCom} onOuvrir={setCourseOuverte} />)}
@@ -640,7 +653,7 @@ function CarteCarriere({ l, voirCom, onOuvrir }) {
   const marques = l.fer || []
   return (
     <div onClick={() => onOuvrir(l)} title="Voir la course"
-      style={{ display: 'flex', border: '1px solid ' + SK.ligne, borderRadius: 10, overflow: 'hidden', marginBottom: 9, background: l.rang === 1 ? '#f0fdf4' : '#fff', cursor: 'pointer' }}>
+      style={{ display: 'flex', border: '1px solid ' + SK.ligne, borderRadius: 10, overflow: 'hidden', marginBottom: 9, background: l.rang === 1 ? 'rgba(52,211,153,.12)' : 'rgba(255,255,255,.03)', cursor: 'pointer' }}>
       <div style={{ width: 56, flex: '0 0 56px', background: '#0f172a', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '8px 2px' }}>
         <div style={{ fontSize: 21, fontWeight: 800, lineHeight: 1 }}>{d.j}</div>
         <div style={{ fontSize: 11.5, opacity: 0.9 }}>{d.m}</div>
@@ -660,18 +673,18 @@ function CarteCarriere({ l, voirCom, onOuvrir }) {
           {l.categorieCourte ? ` · ${l.categorieCourte}` : ''}
         </div>
 
-        <div style={{ fontSize: 12.5, color: '#334155', marginTop: 1, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+        <div style={{ fontSize: 12.5, color: SK.doux, marginTop: 1, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
           <span>{l.jockey || '—'}</span>
           <span>· {l.poids != null ? `${l.poids} kg` : '—'}</span>
           <span>· VH{l.vh != null ? l.vh : '—'}</span>
           {marques.length > 0 && (
-            <span title={l.ferTexte} style={{ fontFamily: SK.mono, fontWeight: 800, color: SK.accentSombre }}>
+            <span title={l.ferTexte} style={{ fontFamily: SK.mono, fontWeight: 800, color: SK.accentTexte }}>
               {marques.map((m) => m.code).join(' ')}
             </span>
           )}
-          {(l.oeilleres || l.blinkers) && <span title={l.blinkersLisible || 'Œillères'} style={{ color: SK.accentSombre }}>👓</span>}
+          {(l.oeilleres || l.blinkers) && <span title={l.blinkersLisible || 'Œillères'} style={{ color: SK.accentTexte }}>👓</span>}
           {l.langue && <span title="Attache-langue">👅</span>}
-          {l.isTQQ && <span style={{ fontSize: 9.5, fontWeight: 800, background: '#fee2e2', color: ROUGE, borderRadius: 4, padding: '0 4px' }}>Q+</span>}
+          {l.isTQQ && <span style={{ fontSize: 9.5, fontWeight: 800, background: 'rgba(244,63,94,.16)', color: ROUGE, borderRadius: 4, padding: '0 4px' }}>Q+</span>}
         </div>
 
         {voirCom && (
@@ -686,7 +699,7 @@ function CarteCarriere({ l, voirCom, onOuvrir }) {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4, padding: '6px 9px' }}>
-        <span title="voir la course" style={{ width: 38, height: 38, borderRadius: '50%', border: '2px solid ' + SK.accent, color: SK.accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, background: '#fff' }}>
+        <span title="voir la course" style={{ width: 38, height: 38, borderRadius: '50%', border: '2px solid ' + SK.accent, color: SK.accent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, background: 'rgba(255,255,255,.06)' }}>
           {l.replay ? '▶' : '›'}
         </span>
         <span style={{ fontSize: 10.5, color: SK.muet, fontFamily: SK.mono }}>{l.chrono != null ? chrono(l.chrono) : ''}</span>
@@ -722,7 +735,7 @@ function CoursePassee({ ligne, cheval, onRetour }) {
 
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 15px', borderBottom: '1px solid ' + SK.ligne, background: '#fff', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 15px', borderBottom: '1px solid ' + SK.ligne, background: 'transparent', flexWrap: 'wrap' }}>
         <button onClick={onRetour} style={{ ...btnPlein, background: SK.accent }}>← carrière de {cheval.nom}</button>
         <span style={{ fontSize: 12.5, color: SK.doux, fontWeight: 600 }}>la course s'affiche ici — une autre carte remplace celle-ci</span>
       </div>
@@ -735,7 +748,7 @@ function CoursePassee({ ligne, cheval, onRetour }) {
             {ligne.reunion ? `R${ligne.reunion}` : ''}{ligne.numero != null ? `C${ligne.numero}` : ''}
           </span>
           <span style={{ fontFamily: SK.mono, fontSize: 12.5 }}>{D2(ligne.date)}</span>
-          {ligne.isTQQ && <span style={{ fontSize: 10, fontWeight: 800, background: '#fff', color: ROUGE, borderRadius: 5, padding: '2px 6px' }}>QUINTÉ+</span>}
+          {ligne.isTQQ && <span style={{ fontSize: 10, fontWeight: 800, background: 'rgba(244,63,94,.22)', color: '#fda4af', border: '1px solid rgba(244,63,94,.55)', borderRadius: 5, padding: '2px 6px' }}>QUINTÉ+</span>}
         </div>
         <div style={{ fontSize: 14.5, fontWeight: 700, marginTop: 3 }}>{ligne.course || ligne.libelle}</div>
         <div style={{ fontSize: 12, opacity: 0.92, marginTop: 2 }}>
@@ -745,7 +758,7 @@ function CoursePassee({ ligne, cheval, onRetour }) {
           {ligne.montant ? ` · ${gains(ligne.montant)}` : ''}
         </div>
         {arrives.length > 0 && (
-          <div style={{ fontSize: 12.5, fontWeight: 800, marginTop: 5, color: '#fef08a' }}>
+          <div style={{ fontSize: 12.5, fontWeight: 800, marginTop: 5, color: '#fbbf24' }}>
             Arrivée : {arrives.slice(0, 5).map((p) => p.num).join(' · ')}
             {gagnant && gagnant.chrono != null && <span style={{ fontWeight: 600, opacity: 0.9 }}> · {chrono(gagnant.chrono)}</span>}
           </div>
@@ -786,19 +799,19 @@ function CoursePassee({ ligne, cheval, onRetour }) {
 /** Une ligne de l'arrivée. */
 function LigneArrivee({ p, moi }) {
   return (
-    <tr style={{ background: moi ? '#ecfeff' : p.nonPartant ? '#fafafa' : '#fff', opacity: p.nonPartant ? 0.55 : 1 }}>
+    <tr style={{ background: moi ? 'rgba(34,211,238,.12)' : p.nonPartant ? 'rgba(255,255,255,.02)' : 'transparent', opacity: p.nonPartant ? 0.55 : 1 }}>
       <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 800, color: p.rang === 1 ? VERT : p.rang ? SK.texte : SK.muet }}>{p.nonPartant ? 'NP' : rang(p.rang)}</td>
       <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 800 }}>{p.num}</td>
       <td style={{ ...TD, minWidth: 190 }}>
         <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
-          {p.casaque && <img src={p.casaque} alt="" width={18} height={18} style={{ borderRadius: 4, background: '#fff', border: '1px solid #e2e8f0' }} onError={(e) => { e.currentTarget.style.display = 'none' }} />}
+          {p.casaque && <img src={p.casaque} alt="" width={18} height={18} style={{ borderRadius: 4, background: '#fff', border: '1px solid rgba(255,255,255,.25)' }} onError={(e) => { e.currentTarget.style.display = 'none' }} />}
           <b style={{ fontSize: 12.5 }}>{p.nom}</b>
-          {moi && <span style={{ fontSize: 9.5, fontWeight: 800, background: SK.accent, color: '#fff', borderRadius: 4, padding: '0 4px' }}>ici</span>}
+          {moi && <span style={{ fontSize: 9.5, fontWeight: 800, background: SK.accent, color: '#04121a', borderRadius: 4, padding: '0 4px' }}>ici</span>}
         </div>
       </td>
       <td style={{ ...TD, whiteSpace: 'nowrap' }}>{p.jockey || '—'}</td>
       <td style={{ ...TD, fontFamily: SK.mono }}>{p.poids != null ? p.poids + ' kg' : '—'}</td>
-      <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 700, color: SK.accentSombre }}>{p.vh != null ? p.vh : '—'}</td>
+      <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 700, color: SK.accentTexte }}>{p.vh != null ? p.vh : '—'}</td>
       <td style={{ ...TD, fontFamily: SK.mono }}>{p.corde != null ? p.corde : '—'}</td>
       <td style={TD}><Artifices p={p} /></td>
       <td style={{ ...TD, fontFamily: SK.mono, fontWeight: 700 }}>{p.cote != null ? p.cote : '—'}</td>
@@ -898,8 +911,8 @@ function Puce({ on, children, onClick }) {
     <button onClick={onClick}
       style={{
         padding: '5px 12px', borderRadius: 999, cursor: 'pointer', fontSize: 12.5, fontWeight: 700,
-        border: '1.5px solid ' + (on ? SK.accent : '#cbd5e1'), background: on ? SK.accent : '#fff',
-        color: on ? '#fff' : SK.doux, whiteSpace: 'nowrap',
+        border: '1.5px solid ' + (on ? SK.accent : 'rgba(255,255,255,.18)'), background: on ? 'rgba(34,211,238,.18)' : 'transparent',
+        color: on ? '#67e8f9' : SK.doux, whiteSpace: 'nowrap',
       }}>{children}</button>
   )
 }
@@ -948,8 +961,8 @@ function Chiffres({ liste, fort }) {
       {a.map((n, i) => (
         <b key={i} style={{
           fontFamily: SK.mono, fontSize: 12, fontWeight: 800, lineHeight: '17px', padding: '0 5px', borderRadius: 4,
-          background: fort ? '#dcfce7' : '#f1f5f9', border: '1px solid ' + (fort ? '#86efac' : '#e2e8f0'),
-          color: fort ? '#14532d' : SK.texte,
+          background: fort ? 'rgba(52,211,153,.18)' : 'rgba(255,255,255,.04)', border: '1px solid ' + (fort ? 'rgba(52,211,153,.55)' : 'rgba(125,205,255,.18)'),
+          color: fort ? '#6ee7b7' : SK.texte,
         }}>{n}</b>
       ))}
     </span>
@@ -970,7 +983,7 @@ function BlocEtudes({ date, course, onOuvrir }) {
   const nomC = course && course.nom
   const distC = course && course.distance
 
-  const thA = { padding: '5px 7px', fontSize: 10.5, fontWeight: 800, letterSpacing: 0.3, textTransform: 'uppercase', color: '#fff', background: '#166534', textAlign: 'left', whiteSpace: 'nowrap' }
+  const thA = { padding: '5px 7px', fontSize: 10.5, fontWeight: 800, letterSpacing: 0.3, textTransform: 'uppercase', color: '#fff', background: '#065f46', textAlign: 'left', whiteSpace: 'nowrap' }
   const tdA = { padding: '4px 7px', fontSize: 12, borderBottom: '1px solid ' + SK.ligne, verticalAlign: 'middle', whiteSpace: 'nowrap' }
 
   useEffect(() => {
@@ -992,10 +1005,10 @@ function BlocEtudes({ date, course, onOuvrir }) {
   const apt = (et && et.aptitudes) || []
 
   return (
-    <div style={{ borderTop: '1px solid ' + SK.ligne, background: 'linear-gradient(180deg,#f8fdf9 0%,#ffffff 100%)' }}>
+    <div style={{ borderTop: '1px solid ' + SK.ligne, background: 'rgba(52,211,153,.03)' }}>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', padding: '10px 14px', background: '#e9f7ee', borderBottom: '1px solid #cde8d6' }}>
-        <b style={{ fontSize: 14, color: '#14532d' }}>Études, Analyses, Synthèse et Pronostics</b>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', padding: '10px 14px', background: 'rgba(52,211,153,.12)', borderBottom: '1px solid rgba(52,211,153,.30)' }}>
+        <b style={{ fontSize: 14, color: '#6ee7b7' }}>Études, Analyses, Synthèse et Pronostics</b>
         {busy && <span style={{ fontSize: 11.5, color: SK.muet }}>chargement…</span>}
         {et && et.pays && <span style={{ fontSize: 11, color: SK.muet }}>{et.pays}</span>}
       </div>
@@ -1017,25 +1030,25 @@ function BlocEtudes({ date, course, onOuvrir }) {
           <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
             <div style={{ flex: '1 1 330px', minWidth: 0 }}>
-              <table style={{ borderCollapse: 'collapse', width: '100%', border: '1px solid #cde8d6' }}>
+              <table style={{ borderCollapse: 'collapse', width: '100%', border: '1px solid rgba(52,211,153,.30)' }}>
                 <tbody>
                   {publiees.map(([lbl, k]) => (
                     <tr key={k}>
-                      <td style={{ padding: '4px 8px', fontSize: 12, fontWeight: 700, color: '#166534', background: '#f3faf5', border: '1px solid #e3f1e8', whiteSpace: 'nowrap' }}>{lbl}</td>
-                      <td style={{ padding: '4px 8px', border: '1px solid #e3f1e8' }}><Chiffres liste={tops[k]} /></td>
+                      <td style={{ padding: '4px 8px', fontSize: 12, fontWeight: 700, color: '#6ee7b7', background: 'rgba(52,211,153,.07)', border: '1px solid rgba(52,211,153,.20)', whiteSpace: 'nowrap' }}>{lbl}</td>
+                      <td style={{ padding: '4px 8px', border: '1px solid rgba(52,211,153,.20)' }}><Chiffres liste={tops[k]} /></td>
                     </tr>
                   ))}
                   {synth.length > 0 && (
                     <tr>
-                      <td style={{ padding: '5px 8px', fontSize: 12.5, fontWeight: 800, color: '#14532d', background: '#dcfce7', border: '2px solid #86efac', whiteSpace: 'nowrap' }}>La Synthèse</td>
-                      <td style={{ padding: '5px 8px', background: '#f0fdf4', border: '2px solid #86efac' }}><Chiffres liste={synth} fort /></td>
+                      <td style={{ padding: '5px 8px', fontSize: 12.5, fontWeight: 800, color: '#bbf7d0', background: 'rgba(52,211,153,.20)', border: '2px solid rgba(52,211,153,.60)', whiteSpace: 'nowrap' }}>La Synthèse</td>
+                      <td style={{ padding: '5px 8px', background: 'rgba(52,211,153,.10)', border: '2px solid rgba(52,211,153,.60)' }}><Chiffres liste={synth} fort /></td>
                     </tr>
                   )}
                 </tbody>
               </table>
               {et.synthesePct && (
-                <div style={{ marginTop: 8, display: 'inline-block', border: '2px solid #86efac', borderRadius: 8, padding: '6px 10px', fontSize: 12.5 }}>
-                  <b style={{ color: '#14532d' }}>Synthèse des % :</b> <Chiffres liste={et.synthesePct.split(/\D+/).filter(Boolean)} fort />
+                <div style={{ marginTop: 8, display: 'inline-block', border: '2px solid rgba(52,211,153,.60)', borderRadius: 8, padding: '6px 10px', fontSize: 12.5 }}>
+                  <b style={{ color: '#6ee7b7' }}>Synthèse des % :</b> <Chiffres liste={et.synthesePct.split(/\D+/).filter(Boolean)} fort />
                 </div>
               )}
             </div>
@@ -1050,7 +1063,7 @@ function BlocEtudes({ date, course, onOuvrir }) {
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 14 }}>
                     {pastilles.map((p, i) => (
                       <button key={i} title={habiller(p.titre)} onClick={() => onOuvrir({ libelle: habiller(p.nom), url: p.url })}
-                        style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', padding: '5px 9px', borderRadius: 8, border: '1px solid ' + SK.ligne, background: '#fff', fontFamily: SK.police }}>
+                        style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', padding: '5px 9px', borderRadius: 8, border: '1px solid ' + SK.ligne, background: 'rgba(255,255,255,.04)', fontFamily: SK.police }}>
                         <span style={{ width: 13, height: 13, borderRadius: 3, background: p.couleur, border: '1px solid rgba(0,0,0,.25)', display: 'inline-block' }} />
                         <span style={{ fontSize: 11.5, fontWeight: 700, color: SK.doux }}>{habiller(p.nom)}</span>
                       </button>
@@ -1063,7 +1076,7 @@ function BlocEtudes({ date, course, onOuvrir }) {
                 <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
                   {vedettes.map((b, i) => (
                     <button key={i} title={habiller(b.titre)} onClick={() => onOuvrir({ libelle: habiller(b.libelle).replace(/\.+$/, ''), url: b.url })}
-                      style={{ cursor: 'pointer', padding: '7px 12px', borderRadius: 8, border: '2px solid #15803d', background: '#fff', color: '#14532d', fontWeight: 800, fontSize: 12.5, fontFamily: SK.police }}>
+                      style={{ cursor: 'pointer', padding: '7px 12px', borderRadius: 8, border: '2px solid rgba(52,211,153,.55)', background: 'rgba(52,211,153,.10)', color: '#6ee7b7', fontWeight: 800, fontSize: 12.5, fontFamily: SK.police }}>
                       {habiller(b.libelle).replace(/\.+$/, '')}
                     </button>
                   ))}
@@ -1080,7 +1093,7 @@ function BlocEtudes({ date, course, onOuvrir }) {
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 7 }}>
                       {autres.map((b, i) => (
                         <button key={i} title={habiller(b.titre)} onClick={() => onOuvrir({ libelle: habiller(b.libelle), url: b.url })}
-                          style={{ cursor: 'pointer', padding: '5px 10px', borderRadius: 7, border: '1px solid ' + SK.bord, background: '#fff', color: SK.accentSombre, fontWeight: 700, fontSize: 11.5 }}>
+                          style={{ cursor: 'pointer', padding: '5px 10px', borderRadius: 7, border: '1px solid ' + SK.bord, background: 'rgba(255,255,255,.04)', color: SK.accentTexte, fontWeight: 700, fontSize: 11.5 }}>
                           {habiller(b.libelle)}
                         </button>
                       ))}
@@ -1093,11 +1106,11 @@ function BlocEtudes({ date, course, onOuvrir }) {
 
           {/* ── le pronostic ── */}
           {et.pronos && et.pronos.length > 0 && (
-            <div style={{ marginTop: 14, border: '1px solid #cde8d6', borderRadius: 10, padding: '10px 12px', background: '#fff' }}>
-              <div style={{ fontSize: 13, fontWeight: 800, color: '#14532d', marginBottom: 5 }}>Pronostic</div>
+            <div style={{ marginTop: 14, border: '1px solid rgba(52,211,153,.30)', borderRadius: 10, padding: '10px 12px', background: 'rgba(52,211,153,.06)' }}>
+              <div style={{ fontSize: 13, fontWeight: 800, color: '#6ee7b7', marginBottom: 5 }}>Pronostic</div>
               {et.pronos.map((l, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: i ? 5 : 0 }}>
-                  <span style={{ color: '#15803d' }}>►</span>
+                  <span style={{ color: '#34d399' }}>►</span>
                   <Chiffres liste={String(l).split(/\D+/).filter(Boolean)} fort={i === 0} />
                 </div>
               ))}
@@ -1123,7 +1136,7 @@ function BlocEtudes({ date, course, onOuvrir }) {
                     </thead>
                     <tbody>
                       {apt.map((a) => (
-                        <tr key={a.num} style={{ background: a.num % 2 ? '#fff' : SK.alt }}>
+                        <tr key={a.num} style={{ background: a.num % 2 ? 'rgba(255,255,255,.03)' : 'transparent' }}>
                           <td style={{ ...tdA, fontFamily: SK.mono, fontWeight: 800 }}>{a.num}</td>
                           <td style={{ ...tdA, fontWeight: 600 }}>{a.cheval || '—'}</td>
                           <td style={{ ...tdA, fontFamily: SK.mono }}>{a.courses ?? '—'}</td>
@@ -1164,7 +1177,7 @@ function Visionneuse({ outil, onFermer }) {
     <div style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(2,6,23,.78)', display: 'flex', flexDirection: 'column', padding: '12px 14px' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
         <b style={{ color: '#fff', fontSize: 15 }}>{outil.libelle}</b>
-        <button onClick={onFermer} style={{ marginLeft: 'auto', cursor: 'pointer', padding: '6px 14px', borderRadius: 8, border: 0, fontWeight: 800, fontSize: 13, background: '#fff', color: SK.accentSombre }}>
+        <button onClick={onFermer} style={{ marginLeft: 'auto', cursor: 'pointer', padding: '6px 14px', borderRadius: 8, border: 0, fontWeight: 800, fontSize: 13, background: 'rgba(255,255,255,.04)', color: SK.accentTexte }}>
           ✕ Fermer
         </button>
       </div>
@@ -1176,13 +1189,12 @@ function Visionneuse({ outil, onFermer }) {
 
 /* ------------------------------------------------------------- les styles --- */
 
-const lienNav = { color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }
-const btnPlein = { padding: '7px 14px', borderRadius: 8, border: 0, cursor: 'pointer', fontWeight: 800, fontSize: 12.5, background: '#0e7490', color: '#fff' }
+const btnPlein = { padding: '8px 15px', borderRadius: 10, border: '1px solid rgba(255,255,255,.22)', cursor: 'pointer', fontWeight: 800, fontSize: 12.5, background: 'linear-gradient(135deg,#0891b2,#22d3ee)', color: '#04121a', boxShadow: '0 0 20px rgba(34,211,238,.35)' }
 const btnGhost = { padding: '5px 12px', borderRadius: 8, border: '1px solid rgba(255,255,255,.6)', cursor: 'pointer', background: 'transparent', color: '#fff', fontWeight: 700, fontSize: 12.5 }
 /** Un bandeau d'erreur AVEC de quoi réessayer — jamais une page morte. */
 function Bandeau({ texte, onReessayer }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: '#fff', border: '1px solid ' + ROUGE, color: ROUGE, borderRadius: 8, padding: '9px 12px', fontSize: 13 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', background: 'rgba(244,63,94,.10)', border: '1px solid ' + ROUGE, color: ROUGE, borderRadius: 8, padding: '9px 12px', fontSize: 13 }}>
       <span style={{ flex: '1 1 320px' }}>{texte}</span>
       {onReessayer && (
         <button onClick={onReessayer} style={{ padding: '5px 13px', borderRadius: 8, border: 0, cursor: 'pointer', fontWeight: 800, fontSize: 12.5, background: ROUGE, color: '#fff' }}>

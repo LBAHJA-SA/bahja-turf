@@ -1,6 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+
+/* ── L'ORDRE COMPTE (18/10/2026) ────────────────────────────────────────────
+ * ① Bootstrap 5 : la grille, les utilitaires, les composants.
+ * ② les icônes (bi bi-trophy…).
+ * ③ NOTRE thème néon, chargé EN DERNIER : il redessine le fond sombre, les
+ *    cartes de verre, les halos, et il a le dernier mot sur les classes que
+ *    Bootstrap définit aussi (.container, .card, .btn, .badge, .nav).
+ *    Inverser ① et ③ rendrait les pages blanches — ne pas le faire.
+ */
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import './index.css'
 
 /* ══════════════════════════════════════════════════════════════════════════

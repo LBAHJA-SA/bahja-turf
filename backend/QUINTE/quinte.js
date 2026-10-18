@@ -329,10 +329,10 @@ export function bandeMarche(rang) {
 }
 
 export const BANDE_MARCHE = {
-  fort: { lib: 'top 3 du marché', court: 'M≤3', couleur: '#15803d', fond: '#dcfce7' },
-  bon: { lib: '4e-5e du marché', court: 'M≤5', couleur: '#0369a1', fond: '#e0f2fe' },
-  moyen: { lib: '6e-12e du marché', court: 'M6-12', couleur: '#a16207', fond: '#fef9c3' },
-  faible: { lib: '13e et au-delà', court: 'M13+', couleur: '#b91c1c', fond: '#fee2e2' },
+  fort: { lib: 'top 3 du marché', court: 'M≤3', couleur: '#34d399', fond: 'rgba(52,211,153,.18)' },
+  bon: { lib: '4e-5e du marché', court: 'M≤5', couleur: '#38bdf8', fond: 'rgba(56,189,248,.16)' },
+  moyen: { lib: '6e-12e du marché', court: 'M6-12', couleur: '#fbbf24', fond: 'rgba(251,191,36,.16)' },
+  faible: { lib: '13e et au-delà', court: 'M13+', couleur: '#fb7185', fond: 'rgba(244,63,94,.18)' },
 }
 
 /** La fiabilité mesurée du moteur — tools/fiabilite.mjs. La page la lit telle quelle. */

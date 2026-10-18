@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Entete from '../../src/Entete.jsx'
 import { chargerProgramme, chargerCourse, grouperParReunion } from '../../backend/COUPLE/donnees.js'
 import { selectionCoply, repliMarche } from '../../backend/COUPLE/moteur-coply.js'
 
@@ -18,15 +19,17 @@ import { selectionCoply, repliMarche } from '../../backend/COUPLE/moteur-coply.j
  *  Elle n'importe rien d'une autre page : le partage est interdit.
  * ══════════════════════════════════════════════════════════════════════════ */
 
+/* LE THÈME DE LA PAGE — orange sur nuit (18/10/2026). `fond` est transparent :
+   c'est le fond néon de src/index.css qui passe dessous. */
 const TE = {
-  fond: 'linear-gradient(180deg,#fff7ed 0%,#fef2f2 55%,#ffffff 100%)',
-  entete: 'linear-gradient(120deg,#7c2d12 0%,#c2410c 55%,#ea580c 100%)',
-  accent: '#c2410c',
+  fond: 'transparent',
+  entete: 'linear-gradient(120deg,#1a0a04 0%,#9a3412 55%,#fb923c 100%)',
+  accent: '#fb923c',
   accentSombre: '#7c2d12',
-  accentClair: '#ffedd5',
-  bord: '#fdba74',
-  carte: '#ffffff',
-  alt: '#fff7ed',
+  accentClair: 'rgba(251,146,60,.16)',
+  bord: 'rgba(251,146,60,.45)',
+  carte: 'rgba(22,14,8,.76)',
+  alt: 'rgba(251,146,60,.06)',
   police: 'system-ui, -apple-system, sans-serif',
   mono: 'ui-monospace, Consolas, monospace',
 }
@@ -45,6 +48,8 @@ export default function Couple() {
   const [cle, setCle] = useState(null)
   const [detail, setDetail] = useState(null)
   const [errDetail, setErrDetail] = useState(null)
+
+  useEffect(() => { document.title = 'Coply — Bahja TURF' }, [])
 
   /* ① le programme du jour */
   useEffect(() => {
@@ -92,20 +97,7 @@ export default function Couple() {
 
   return (
     <>
-      <header className="header" style={{ background: 'linear-gradient(135deg,#0f172a 0%,#7c2d12 70%,#0f172a 100%)', borderBottom: '2px solid #ea580c' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="/logo-horse.png" alt="Bahja TURF" style={{ height: 44, background: 'white', borderRadius: 8, padding: 2 }} />
-            <img src="/logo.svg" alt="Bahja TURF" style={{ height: 42, borderRadius: 8 }} />
-          </div>
-          <nav style={{ display: 'flex', gap: 16 }}>
-            <Link to="/" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
-            <Link to="/couple" style={{ color: '#fdba74', fontWeight: 800, fontSize: 14, textDecoration: 'none' }}>Couplé</Link>
-            <Link to="/quinte" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
-            <Link to="/analyse" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Chevaux</Link>
-          </nav>
-        </div>
-      </header>
+      <Entete page="couple" />
 
       <div dir="ltr" style={{
         maxWidth: 1280, margin: '0 auto', padding: '0 16px 40px', minHeight: '72vh',
@@ -121,9 +113,9 @@ export default function Couple() {
 
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 14 }}>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
-            style={{ padding: '7px 11px', borderRadius: 8, border: '1px solid #d6d3c8', fontFamily: TE.mono }} />
-          <span style={{ fontSize: 12, color: '#78716c' }}>
-            le programme du jour · source : reu.php
+            style={{ padding: '7px 11px', borderRadius: 8, border: '1px solid rgba(125,205,255,.28)', fontFamily: TE.mono }} />
+          <span style={{ fontSize: 12, color: '#8fa3bf' }}>
+            le programme officiel du jour
             {programme ? ` · ${programme.nb} courses` : ''}
           </span>
         </div>
@@ -141,7 +133,7 @@ export default function Couple() {
               visibles), l'en-tête restant fixe. */}
           <div style={{ flex: '1 1 360px', minWidth: 330, display: 'flex', flexDirection: 'column', gap: 12 }}>
             {!programme && !err && (
-              <div style={{ padding: 24, color: '#a8a29e', fontSize: 13, background: '#fff', borderRadius: 10, border: '1px solid ' + TE.bord }}>
+              <div style={{ padding: 24, color: '#8fa3bf', fontSize: 13, background: 'rgba(12,20,37,.72)', borderRadius: 10, border: '1px solid ' + TE.bord }}>
                 Chargement du programme…
               </div>
             )}
@@ -170,14 +162,14 @@ export default function Couple() {
                       style={{
                         display: 'block', width: '100%', textAlign: 'left', padding: '8px 13px',
                         border: 'none', borderBottom: '1px solid #f5f5f4', cursor: 'pointer',
-                        background: cle === c.cle ? TE.accentClair : '#fff',
+                        background: cle === c.cle ? TE.accentClair : 'rgba(255,255,255,.03)',
                         borderLeft: '4px solid ' + (cle === c.cle ? TE.accent : 'transparent'),
                         fontFamily: TE.police,
                       }}>
-                      <div style={{ fontSize: 12, fontWeight: 800, color: TE.accentSombre }}>
+                      <div style={{ fontSize: 12, fontWeight: 800, color: TE.accent }}>
                         {c.code}{c.heure ? ` · ${c.heure}` : ''}
-                        {c.distance ? <span style={{ fontWeight: 600, color: '#78716c' }}> · {c.distance}m</span> : null}
-                        {c.partants ? <span style={{ fontWeight: 600, color: '#78716c' }}> · {c.partants}p</span> : null}
+                        {c.distance ? <span style={{ fontWeight: 600, color: '#8fa3bf' }}> · {c.distance}m</span> : null}
+                        {c.partants ? <span style={{ fontWeight: 600, color: '#8fa3bf' }}> · {c.partants}p</span> : null}
                       </div>
                       <div style={{ fontSize: 11, color: '#57534e' }}>{c.nom || '—'}</div>
                     </button>
@@ -191,12 +183,12 @@ export default function Couple() {
           {/* ── la lecture ── */}
           <div style={{ flex: '3 1 600px', minWidth: 400 }}>
             {!cle && (
-              <div style={{ padding: 40, textAlign: 'center', background: '#fff', borderRadius: 12, border: '1px solid ' + TE.bord, color: '#78716c' }}>
+              <div style={{ padding: 40, textAlign: 'center', background: 'rgba(12,20,37,.72)', borderRadius: 12, border: '1px solid ' + TE.bord, color: '#8fa3bf' }}>
                 Choisis une course pour voir ses partants.
               </div>
             )}
             {cle && !detail && !errDetail && (
-              <div style={{ padding: 40, textAlign: 'center', background: '#fff', borderRadius: 12, border: '1px solid ' + TE.bord }}>
+              <div style={{ padding: 40, textAlign: 'center', background: 'rgba(12,20,37,.72)', borderRadius: 12, border: '1px solid ' + TE.bord }}>
                 Chargement de la course…
               </div>
             )}
@@ -237,7 +229,7 @@ function Lecture({ course }) {
   return (
     <>
       <div style={{ ...S.box, padding: 16, marginBottom: 12 }}>
-        <div style={{ fontSize: 16, fontWeight: 800, color: TE.accentSombre }}>
+        <div style={{ fontSize: 16, fontWeight: 800, color: TE.accent }}>
           {course.reunion}-{course.code}{course.nom ? ' · ' + course.nom : ''}
         </div>
         <div style={{ fontSize: 13, color: '#57534e', marginTop: 4 }}>
@@ -256,13 +248,13 @@ function Lecture({ course }) {
 
       {/* ── cotes provisoires ── */}
       {(course.cotesEq || 0) > 0 && (
-        <div style={{ ...S.box, padding: '8px 12px', marginBottom: 12, background: '#fffbeb', borderColor: '#fcd34d', fontSize: 12, color: '#92400e' }}>
+        <div style={{ ...S.box, padding: '8px 12px', marginBottom: 12, background: 'rgba(251,191,36,.10)', borderColor: 'rgba(251,191,36,.35)', fontSize: 12, color: '#fde68a' }}>
           ⏳ {course.cotesEq}/{partants.length} cotes provisoires (marché du matin) — la sélection suivra la ref dès publication.
         </div>
       )}
 
       {!sel && partants.length >= 3 && (
-        <div style={{ fontSize: 12, color: '#78716c', marginTop: 6 }}>
+        <div style={{ fontSize: 12, color: '#8fa3bf', marginTop: 6 }}>
           {nbCotes < 3
             ? `Pas assez de cotes publiées (${nbCotes}/${partants.length}) — la page réessaie seule toutes les 2 min.`
             : 'Sélection impossible.'}
@@ -270,7 +262,7 @@ function Lecture({ course }) {
       )}
 
       {sel && (
-        <div style={{ ...S.box, padding: 14, marginBottom: 12, borderLeft: '5px solid #16a34a', background: '#f0fdf4' }}>
+        <div style={{ ...S.box, padding: 14, marginBottom: 12, borderLeft: '5px solid #34d399', background: 'rgba(52,211,153,.10)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
             <b style={{ fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', color: '#166534' }}>
               {sel.repli ? 'Sélection 3 chevaux (repli marché)' : 'Sélection 3 chevaux (modèle prédictif)'}
@@ -289,7 +281,7 @@ function Lecture({ course }) {
               Paires : {sel.paires.map(([a, b]) => `${a}-${b}`).join('  ·  ')}
             </div>
           )}
-          <div style={{ fontSize: 11, color: '#78716c', marginTop: 6 }}>
+          <div style={{ fontSize: 11, color: '#8fa3bf', marginTop: 6 }}>
             {sel.repli
               ? 'Modèle indisponible — repli sur les 3 plus petites cotes.'
               : 'Régression logistique sur P(top-3) : marché + forme + valeur + âge + corde + gains + sexe + distance. Le couplé gagnant = (1er,2e) ou (1er,3e) ou (2e,3e) — les 3 paires du trio.'}
@@ -298,7 +290,7 @@ function Lecture({ course }) {
       )}
 
       {partants.length === 0 ? (
-        <div style={{ padding: 26, textAlign: 'center', background: '#fff', borderRadius: 12, border: '1px solid ' + TE.bord, color: '#78716c', fontSize: 13 }}>
+        <div style={{ padding: 26, textAlign: 'center', background: 'rgba(12,20,37,.72)', borderRadius: 12, border: '1px solid ' + TE.bord, color: '#8fa3bf', fontSize: 13 }}>
           {course.erreur
             ? `Les partants ne sont pas encore publiés (${course.erreur}).`
             : 'Les partants de cette course ne sont pas encore publiés.'}
@@ -319,8 +311,8 @@ function Lecture({ course }) {
               </thead>
               <tbody>
                 {partants.map((p, i) => (
-                  <tr key={p.num} style={{ background: i % 2 ? TE.alt : '#fff', borderBottom: '1px solid #f5f5f4' }}>
-                    <td style={{ ...S.td, fontWeight: 800, fontFamily: TE.mono, color: TE.accentSombre }}>{p.num}</td>
+                  <tr key={p.num} style={{ background: i % 2 ? TE.alt : 'transparent', borderBottom: '1px solid rgba(255,255,255,.07)' }}>
+                    <td style={{ ...S.td, fontWeight: 800, fontFamily: TE.mono, color: TE.accent }}>{p.num}</td>
                     <td style={{ ...S.td, fontWeight: 700 }}>{p.cheval || '—'}</td>
                     <td style={S.td}>{p.driver || '—'}</td>
                     <td style={S.td}>{p.entraineur || '—'}</td>

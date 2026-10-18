@@ -1,17 +1,325 @@
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,system-ui,Arial,sans-serif;background: linear-gradient(180deg,#f1f5f9 0%,#e0f2fe 100%) fixed;color:#0f172a; background-image: radial-gradient(circle at 20% 20%, rgba(34,197,94,0.06) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(30,58,138,0.05) 0%, transparent 50%)}
-.container{max-width:1100px;margin:0 auto;padding:0 16px}
-.header{position:sticky;top:0;z-index:50;background:#0f172a;color:white;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-.logo{font-weight:900;font-size:20px;letter-spacing:-0.5px}.logo span{color:#22c55e}
-.nav{display:flex;gap:6px}.nav a{color:rgba(255,255,255,0.7);padding:6px 12px;border-radius:8;text-decoration:none;font-size:13px;font-weight:600}
-.nav a.active{color:white;background:rgba(255,255,255,0.12)}
-.card{background:white;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.06);border:1px solid #e2e8f0;padding:16px}
-.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700}
-.btn{padding:8px 14px;border-radius:8;border:0;cursor:pointer;font-weight:700}
-.btn-primary{background:#1e3a8a;color:white}
-.btn-ghost{background:white;border:1px solid #e2e8f0}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:800px){.grid2{grid-template-columns:1fr}}
-body{background: linear-gradient(rgba(241,245,249,0.72),rgba(224,242,254,0.72)) fixed, url(/side-left.jpg) fixed;background-size:cover;background-position:center}
-.hero-banner{width:100%;height:220px;overflow:hidden;border-bottom:3px solid #22c55e}
-.hero-banner img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
-@media(max-width:800px){.hero-banner{height:130px}}
+/* ══════════════════════════════════════════════════════════════════════════
+ *  src/index.css — LE THÈME NÉON (18/10/2026)
+ *
+ *  Ce fichier est chargé APRÈS Bootstrap 5 (voir src/main.jsx) : il a donc le
+ *  dernier mot sur les classes que Bootstrap définit aussi (.container, .card,
+ *  .btn, .badge, .nav). Bootstrap reste disponible pour tout le reste
+ *  (grille, d-flex, gap-*, form-control, table, utilitaires…), et le look de
+ *  l'application est ici : fond sombre, cartes de verre, halos de couleur.
+ *
+ *  RÈGLE : les classes historiques (.header, .container, .nav, .card, .badge,
+ *  .btn) gardent leur NOM — les pages existantes continuent de fonctionner
+ *  sans être réécrites ; seul leur DESSIN change.
+ *
+ *  Chaque page a sa TEINTE (elle se reconnaît d'un coup d'œil) :
+ *      Analyse course → cyan   ·  Quinté → magenta  ·  Coply → orange
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ── les fonds ── */
+  --n-nuit:      #04070f;
+  --n-nuit2:     #070d1a;
+  --n-verre:     rgba(12, 20, 37, .72);
+  --n-verre2:    rgba(17, 28, 50, .88);
+  --n-verre3:    rgba(255, 255, 255, .04);
+  --n-ligne:     rgba(125, 205, 255, .16);
+  --n-bord:      rgba(125, 205, 255, .28);
+
+  /* ── les textes ── */
+  --n-txt:       #e7f1ff;
+  --n-txt2:      #a4b8d6;
+  --n-txt3:      #6d82a2;
+
+  /* ── les néons ── */
+  --n-cyan:      #22d3ee;
+  --n-cyan2:     #67e8f9;
+  --n-vert:      #34d399;
+  --n-ambre:     #fbbf24;
+  --n-rose:      #fb7185;
+  --n-rouge:     #f43f5e;
+  --n-violet:    #a78bfa;
+  --n-orange:    #fb923c;
+  --n-magenta:   #e879f9;
+
+  /* ── les halos ── */
+  --n-halo-cyan:   0 0 22px rgba(34, 211, 238, .28);
+  --n-halo-violet: 0 0 22px rgba(167, 139, 250, .28);
+  --n-halo-orange: 0 0 22px rgba(251, 146, 60, .28);
+  --n-halo-rose:   0 0 22px rgba(244, 63, 94, .28);
+  --n-ombre:       0 18px 44px rgba(0, 0, 0, .55);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box }
+
+/* ── LE FOND : nuit + trois halos + la photo, très assombrie ─────────────── */
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  color: var(--n-txt);
+  background-color: var(--n-nuit);
+  background-image:
+    radial-gradient(1100px 620px at 8% -8%,  rgba(34, 211, 238, .16), transparent 62%),
+    radial-gradient(900px 520px at 102% 2%,  rgba(167, 139, 250, .15), transparent 58%),
+    radial-gradient(900px 700px at 50% 118%, rgba(52, 211, 153, .11), transparent 62%),
+    linear-gradient(rgba(4, 7, 15, .90), rgba(4, 7, 15, .95)),
+    url(/side-left.jpg);
+  background-size: auto, auto, auto, auto, cover;
+  background-position: center, center, center, center, center 40%;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* une grille très discrète : la profondeur, sans bruit */
+body::before{
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(125, 205, 255, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 205, 255, .035) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(circle at 50% 20%, #000 0%, transparent 78%);
+}
+#root{ position:relative; z-index:1 }
+
+/* ── LES ASCENSEURS : fins, néon ─────────────────────────────────────────── */
+*::-webkit-scrollbar{ width:10px; height:10px }
+*::-webkit-scrollbar-track{ background: rgba(255,255,255,.03) }
+*::-webkit-scrollbar-thumb{
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(34,211,238,.55), rgba(167,139,250,.55));
+  border: 2px solid transparent; background-clip: content-box;
+}
+*{ scrollbar-color: rgba(34,211,238,.5) rgba(255,255,255,.04); scrollbar-width: thin }
+
+/* ── LE BANDEAU (l'ancien .header, et le nouveau .entete) ────────────────── */
+.header, .entete{
+  position: sticky; top: 0; z-index: 50;
+  background: linear-gradient(180deg, rgba(6, 11, 22, .97), rgba(6, 11, 22, .82));
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(34, 211, 238, .30);
+  box-shadow: 0 1px 0 rgba(34,211,238,.10) inset, 0 14px 40px rgba(0, 0, 0, .55);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  color: var(--n-txt);
+}
+.entete-in{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; width: 100%; max-width: 1400px; margin: 0 auto;
+}
+.entete-logo{ display: flex; align-items: center; gap: 10px; text-decoration: none }
+.entete-logo img{ height: 42px; border-radius: 10px; display: block }
+.entete-logo img:first-child{
+  background: #fff; padding: 2px; height: 44px;
+  box-shadow: 0 0 0 1px rgba(34,211,238,.45), 0 0 18px rgba(34,211,238,.35);
+}
+.entete-nav{ display: flex; align-items: center; gap: 8px; flex-wrap: wrap }
+
+.entete-lien{
+  --t: var(--n-cyan);
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 14px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: rgba(255, 255, 255, .035);
+  color: var(--n-txt2);
+  font-size: 13px; font-weight: 700; letter-spacing: .2px;
+  text-decoration: none; white-space: nowrap;
+  transition: color .18s, border-color .18s, box-shadow .18s, background .18s, transform .18s;
+}
+.entete-lien:hover{
+  color: #fff; transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--t) 60%, transparent);
+  background: color-mix(in srgb, var(--t) 12%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--t) 40%, transparent);
+}
+.entete-lien.actif{
+  color: #fff;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--t) 34%, transparent), color-mix(in srgb, var(--t) 12%, transparent));
+  border-color: color-mix(in srgb, var(--t) 75%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--t) 35%, transparent),
+              0 0 26px color-mix(in srgb, var(--t) 45%, transparent),
+              inset 0 0 18px color-mix(in srgb, var(--t) 18%, transparent);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--t) 70%, transparent);
+}
+.entete-lien .bi{ font-size: 15px; color: var(--t) }
+.entete-lien.actif .bi{ color: #fff; text-shadow: 0 0 12px var(--t) }
+
+/* la teinte de chaque page */
+.p-analyse{ --t: var(--n-cyan) }
+.p-quinte { --t: var(--n-magenta) }
+.p-couple { --t: var(--n-orange) }
+.p-article{ --t: var(--n-violet) }
+
+/* ── les anciens liens de nav (pages pas encore migrées) ─────────────────── */
+.nav{ display: flex; gap: 6px; flex-wrap: wrap }
+.nav a{
+  color: var(--n-txt2); padding: 7px 13px; border-radius: 999px;
+  text-decoration: none; font-size: 13px; font-weight: 700;
+  border: 1px solid transparent; transition: all .18s;
+}
+.nav a:hover{ color: #fff; background: rgba(34,211,238,.10); border-color: rgba(34,211,238,.35) }
+.nav a.active{ color: #fff; background: rgba(34,211,238,.16); border-color: rgba(34,211,238,.55); box-shadow: var(--n-halo-cyan) }
+
+/* ── LE CONTENEUR ────────────────────────────────────────────────────────── */
+.container{ max-width: 1400px; margin: 0 auto; padding: 0 16px }
+
+/* ── LES CARTES : du verre, une arête de lumière, un halo au survol ──────── */
+.card{
+  display: block;
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,0) 42%),
+    var(--n-verre);
+  border: 1px solid var(--n-bord);
+  border-radius: 16px;
+  padding: 16px;
+  color: var(--n-txt);
+  box-shadow: var(--n-ombre), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.card:hover{
+  border-color: rgba(34, 211, 238, .48);
+  box-shadow: var(--n-ombre), 0 0 30px rgba(34,211,238,.16), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* la classe .verre : un panneau sobre, sans halo */
+.verre{
+  background: var(--n-verre);
+  border: 1px solid var(--n-ligne);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+/* ── LES PASTILLES ───────────────────────────────────────────────────────── */
+.badge{
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 9px; border-radius: 999px;
+  font-size: 11px; font-weight: 800; letter-spacing: .3px;
+  background: rgba(34, 211, 238, .12);
+  border: 1px solid rgba(34, 211, 238, .35);
+  color: var(--n-cyan2);
+  line-height: 1.4;
+}
+.badge-vert   { background: rgba(52,211,153,.12); border-color: rgba(52,211,153,.40); color: #6ee7b7 }
+.badge-ambre  { background: rgba(251,191,36,.12); border-color: rgba(251,191,36,.40); color: #fde68a }
+.badge-rouge  { background: rgba(244,63,94,.14);  border-color: rgba(244,63,94,.42);  color: #fda4af }
+.badge-violet { background: rgba(167,139,250,.14); border-color: rgba(167,139,250,.42); color: #c4b5fd }
+
+/* ── LES BOUTONS ─────────────────────────────────────────────────────────── */
+.btn{
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 16px; border-radius: 11px; border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05); color: var(--n-txt);
+  cursor: pointer; font-weight: 800; font-size: 13px;
+  transition: all .18s;
+}
+.btn:hover{ background: rgba(255,255,255,.10); border-color: rgba(34,211,238,.55); box-shadow: var(--n-halo-cyan); transform: translateY(-1px) }
+.btn-primary{
+  background: linear-gradient(135deg, #0891b2, #22d3ee);
+  border-color: rgba(255,255,255,.22); color: #04121a;
+  box-shadow: 0 0 22px rgba(34,211,238,.35), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn-primary:hover{ filter: brightness(1.08); box-shadow: 0 0 30px rgba(34,211,238,.55) }
+.btn-ghost{ background: rgba(255,255,255,.04); border: 1px solid var(--n-bord); color: var(--n-txt) }
+.btn-ghost:hover{ border-color: rgba(34,211,238,.6); color: #fff }
+
+/* ── LES TITRES QUI LUISENT ──────────────────────────────────────────────── */
+.neon{
+  color: #fff;
+  text-shadow: 0 0 6px rgba(255,255,255,.35), 0 0 20px currentColor;
+}
+.titre-page{
+  font-size: 20px; font-weight: 900; letter-spacing: .3px; color: #fff;
+  text-shadow: 0 0 18px rgba(34,211,238,.55), 0 0 44px rgba(34,211,238,.25);
+}
+.ruban{
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 3px 12px 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 900; letter-spacing: 1.2px; text-transform: uppercase;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--n-bord);
+  color: var(--n-txt2);
+}
+
+/* ── LES TABLEAUX (classe opt-in) ────────────────────────────────────────── */
+.table-neon{ width: 100%; border-collapse: collapse; color: var(--n-txt); font-size: 13px }
+.table-neon th{
+  padding: 8px 10px; text-align: left; font-size: 10.5px; font-weight: 900;
+  letter-spacing: .8px; text-transform: uppercase;
+  color: var(--n-cyan2);
+  background: linear-gradient(180deg, rgba(34,211,238,.16), rgba(34,211,238,.05));
+  border-bottom: 1px solid rgba(34,211,238,.35);
+  white-space: nowrap;
+}
+.table-neon td{ padding: 8px 10px; border-bottom: 1px solid var(--n-ligne) }
+.table-neon tbody tr:hover td{ background: rgba(34,211,238,.07) }
+.table-neon tbody tr:nth-child(even) td{ background: rgba(255,255,255,.02) }
+
+/* ── LA GRILLE 2 COLONNES (historique) ───────────────────────────────────── */
+.grid2{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+@media(max-width:800px){ .grid2{ grid-template-columns: 1fr } }
+
+/* ── LA BANNIÈRE ─────────────────────────────────────────────────────────── */
+.hero-banner{ width: 100%; height: 220px; overflow: hidden; border-bottom: 1px solid rgba(34,211,238,.35) }
+.hero-banner img{ width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block }
+@media(max-width:800px){ .hero-banner{ height: 130px } }
+
+/* ── LES CHAMPS (date, recherche…) sur fond sombre ───────────────────────── */
+input, select, textarea, button{ font-family: inherit }
+input[type="date"], input[type="text"], input[type="number"], input[type="search"], select, textarea{
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid var(--n-bord);
+  color: var(--n-txt);
+  border-radius: 10px;
+  padding: 7px 11px;
+  font-size: 13px;
+  color-scheme: dark;
+  transition: border-color .18s, box-shadow .18s, background .18s;
+}
+input[type="date"]:focus, input[type="text"]:focus, input[type="number"]:focus,
+input[type="search"]:focus, select:focus, textarea:focus{
+  outline: none;
+  border-color: rgba(34,211,238,.7);
+  background: rgba(34,211,238,.08);
+  box-shadow: 0 0 0 3px rgba(34,211,238,.16), var(--n-halo-cyan);
+}
+input[type="checkbox"], input[type="radio"]{ accent-color: #22d3ee; cursor: pointer }
+::placeholder{ color: var(--n-txt3) }
+option{ background: #0b1424; color: var(--n-txt) }
+
+/* ── utilitaires de lumière ──────────────────────────────────────────────── */
+.lueur-cyan   { box-shadow: var(--n-halo-cyan)   !important; border-color: rgba(34,211,238,.55) !important }
+.lueur-violet { box-shadow: var(--n-halo-violet) !important; border-color: rgba(167,139,250,.55) !important }
+.lueur-orange { box-shadow: var(--n-halo-orange) !important; border-color: rgba(251,146,60,.55)  !important }
+.lueur-rose   { box-shadow: var(--n-halo-rose)   !important; border-color: rgba(244,63,94,.55)   !important }
+.txt-cyan   { color: var(--n-cyan2) }
+.txt-vert   { color: #6ee7b7 }
+.txt-ambre  { color: #fde68a }
+.txt-rouge  { color: #fda4af }
+.txt-violet { color: #c4b5fd }
+.txt-doux   { color: var(--n-txt2) }
+.txt-muet   { color: var(--n-txt3) }
+
+/* la ligne de néon qui sépare deux blocs */
+.fil{
+  height: 1px; border: 0;
+  background: linear-gradient(90deg, transparent, rgba(34,211,238,.55), rgba(167,139,250,.55), transparent);
+  margin: 14px 0;
+}
+
+/* ── LE MOUVEMENT (doux, désactivable) ───────────────────────────────────── */
+@keyframes n-respire{
+  0%, 100%{ opacity: .55 }
+  50%     { opacity: 1 }
+}
+.respire{ animation: n-respire 3.4s ease-in-out infinite }
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation: none !important; transition: none !important }
+}
+
+/* ── l'impression : on repasse en noir sur blanc ─────────────────────────── */
+@media print{
+  body{ background: #fff !important; color: #000 !important }
+  .entete, .header{ position: static }
+}

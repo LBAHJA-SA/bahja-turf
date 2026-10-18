@@ -10,6 +10,7 @@
  * ni le démo. Si ces pages changent, celle-ci ne bouge pas.
  * ========================================================================== */
 import { useLocation, useParams, useNavigate, Link } from 'react-router-dom'
+import Entete from '../../src/Entete.jsx'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { lireCible, chargerCourse, chargerPronos, chargerMeteo, chargerProgramme } from '../../backend/ARTICLE/backend.js'
 import { exporterArchive, importerArchive, tailleArchive } from '../../backend/ARTICLE/archive.js'
@@ -179,19 +180,7 @@ export default function Article() {
   if (etat === 'chargement') {
     return (<>
       {/* ── bandeau : logo + navigation. Les moteurs/sources restent privés à chaque page ── */}
-      <header className="header" style={{ background: 'linear-gradient(135deg,#000000 0%,#1c1917 60%,#000000 100%)', borderBottom: '3px solid #d4af37' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="/logo-horse.png" alt="Bahja TURF" style={{ height: 44, background: 'white', borderRadius: 8, padding: 2 }} />
-            <img src="/logo.svg" alt="Bahja TURF" style={{ height: 42, borderRadius: 8 }} />
-          </div>
-          <nav style={{ display: 'flex', gap: 16 }}>
-            <Link to="/" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
-            <Link to="/quinte" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
-            <Link to="/analyse" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Chevaux</Link>
-          </nav>
-        </div>
-      </header>
+      <Entete page="article" />
       <div style={{ textAlign: 'center', padding: 40, fontSize: 13 }}>Chargement de la course…</div>
     </>)
   }
@@ -200,28 +189,16 @@ export default function Article() {
     return (
       <>
       {/* ── bandeau : logo + navigation. Les moteurs/sources restent privés à chaque page ── */}
-      <header className="header" style={{ background: 'linear-gradient(135deg,#000000 0%,#1c1917 60%,#000000 100%)', borderBottom: '3px solid #d4af37' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="/logo-horse.png" alt="Bahja TURF" style={{ height: 44, background: 'white', borderRadius: 8, padding: 2 }} />
-            <img src="/logo.svg" alt="Bahja TURF" style={{ height: 42, borderRadius: 8 }} />
-          </div>
-          <nav style={{ display: 'flex', gap: 16 }}>
-            <Link to="/" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
-            <Link to="/quinte" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
-            <Link to="/analyse" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Chevaux</Link>
-          </nav>
-        </div>
-      </header>
+      <Entete page="article" />
       <div style={{ maxWidth: 700, margin: '40px auto', textAlign: 'center' }}>
-        <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 12, padding: 24 }}>
-          <h1 style={{ fontSize: 16, fontWeight: 800, color: '#b91c1c', margin: '0 0 8px' }}>
+        <div style={{ background: 'rgba(244,63,94,.10)', border: '1px solid rgba(244,63,94,.40)', borderRadius: 12, padding: 24 }}>
+          <h1 style={{ fontSize: 16, fontWeight: 800, color: '#fda4af', margin: '0 0 8px' }}>
             Cette course n'est pas disponible
           </h1>
-          <p style={{ fontSize: 13, color: '#7f1d1d', margin: '0 0 6px' }}>
+          <p style={{ fontSize: 13, color: '#fecdd3', margin: '0 0 6px' }}>
             <b>{fetchIdRef.current}</b> — course indisponible pour le moment.
           </p>
-          <p style={{ fontSize: 12, color: '#991b1b', margin: 0 }}>
+          <p style={{ fontSize: 12, color: '#fda4af', margin: 0 }}>
             Aucune donnée de remplacement n'est affichée : montrer une autre
             course serait pire que ne rien montrer.
           </p>
@@ -248,19 +225,7 @@ export default function Article() {
   return (
     <>
       {/* ── bandeau : logo + navigation. Les moteurs/sources restent privés à chaque page ── */}
-      <header className="header" style={{ background: 'linear-gradient(135deg,#000000 0%,#1c1917 60%,#000000 100%)', borderBottom: '3px solid #d4af37' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="/logo-horse.png" alt="Bahja TURF" style={{ height: 44, background: 'white', borderRadius: 8, padding: 2 }} />
-            <img src="/logo.svg" alt="Bahja TURF" style={{ height: 42, borderRadius: 8 }} />
-          </div>
-          <nav style={{ display: 'flex', gap: 16 }}>
-            <Link to="/" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
-            <Link to="/quinte" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
-            <Link to="/analyse" style={{ color: '#f5d76e', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Chevaux</Link>
-          </nav>
-        </div>
-      </header>
+      <Entete page="article" />
     <div style={{ maxWidth: 980, margin: '0 auto' }}>
       {/* ── fil d'ariane + date ── */}
       <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 10 }}>
@@ -268,9 +233,9 @@ export default function Article() {
           type="date"
           value={dateCourante}
           onChange={(e) => allerA(e.target.value)}
-          style={{ padding: '5px 8px', borderRadius: 8, border: '1px solid #e2e8f0', fontSize: 12 }}
+          style={{ padding: '5px 8px', borderRadius: 8, border: '1px solid rgba(125,205,255,.28)', background: 'rgba(255,255,255,.05)', color: '#e7f1ff', fontSize: 12 }}
         />
-        <span style={{ fontSize: 11, color: '#94a3b8', marginLeft: 'auto' }}>
+        <span style={{ fontSize: 11, color: '#8fa3bf', marginLeft: 'auto' }}>
           Bahja TURF › {m.hippodrome} › R{m.num}-C{c.numOrdre}
         </span>
       </div>
@@ -278,10 +243,10 @@ export default function Article() {
       {/* ── toutes les courses du jour (le programme reu.php, archivé) ── */}
       {programme?.reunions?.length ? (
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 10 }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#334155' }}>Toutes les courses du {dateCourante} :</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#c7d6ea' }}>Toutes les courses du {dateCourante} :</span>
           <select key={fetchIdRef.current} defaultValue={`${m.hippodrome}|C${c.numOrdre}|${new URLSearchParams(location.search).get('pays') || 'FRANCE'}`}
             onChange={(e) => { const [hh, cc, pp] = e.target.value.split('|'); allerCourseSel(hh, cc, pp) }}
-            style={{ padding: '5px 8px', borderRadius: 8, border: '1px solid #e2e8f0', fontSize: 12, maxWidth: '100%' }}>
+            style={{ padding: '5px 8px', borderRadius: 8, border: '1px solid rgba(125,205,255,.28)', background: 'rgba(255,255,255,.05)', color: '#e7f1ff', fontSize: 12, maxWidth: '100%' }}>
             {programme.reunions.map((r) => (
               <optgroup key={r.hippodrome} label={`${r.hippodrome} (${r.courses.length})`}>
                 {r.courses.map((cc) => (
@@ -295,10 +260,10 @@ export default function Article() {
         </div>
       ) : null}
       {/* ── notre archive : export / import ── */}
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 10, fontSize: 11, color: '#64748b' }}>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 10, fontSize: 11, color: '#9fb3d1' }}>
         <span>🗄 {taille.courses} courses + {taille.programmes} jours chez nous</span>
-        <button onClick={exporter} style={{ padding: '3px 10px', borderRadius: 7, border: '1px solid #cbd5e1', background: '#fff', fontSize: 11, cursor: 'pointer' }}>⬇ Exporter</button>
-        <button onClick={() => inputArchiveRef.current?.click()} style={{ padding: '3px 10px', borderRadius: 7, border: '1px solid #cbd5e1', background: '#fff', fontSize: 11, cursor: 'pointer' }}>⬆ Importer</button>
+        <button onClick={exporter} style={{ padding: '3px 10px', borderRadius: 7, border: '1px solid rgba(125,205,255,.28)', background: 'rgba(255,255,255,.05)', color: '#e7f1ff', fontSize: 11, cursor: 'pointer' }}>⬇ Exporter</button>
+        <button onClick={() => inputArchiveRef.current?.click()} style={{ padding: '3px 10px', borderRadius: 7, border: '1px solid rgba(125,205,255,.28)', background: 'rgba(255,255,255,.05)', color: '#e7f1ff', fontSize: 11, cursor: 'pointer' }}>⬆ Importer</button>
         <input ref={inputArchiveRef} type="file" accept="application/json,.json" style={{ display: 'none' }} onChange={importer} />
       </div>
 
@@ -308,7 +273,7 @@ export default function Article() {
           R{m.num}-C{c.numOrdre} | {(c.prix || c.nom || 'Course').toUpperCase()}
           {c.distance ? ' - ' + c.distance + 'm' : ''}{c.surface ? ' ' + c.surface : ''}
         </h1>
-        <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>
+        <div style={{ fontSize: 12, color: '#9fb3d1', marginTop: 4 }}>
           {c.dateLongue || dateCourante}
           {c.heure ? ' • ' + heureGMT(dateCourante, c.heure) : ''}
           {m.pays && m.pays !== 'FR' ? ' • 🌍 ' : ' • 🇫🇷 '}{m.hippodrome}
@@ -342,14 +307,14 @@ export default function Article() {
 
         {/* ── la table des partants ── */}
         {partants.length > 0 ? (
-          <div style={{ marginTop: 16, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, overflow: 'hidden' }}>
+          <div style={{ marginTop: 16, background: 'rgba(12,20,37,.66)', border: '1px solid rgba(125,205,255,.22)', borderRadius: 12, overflow: 'hidden' }}>
             <div style={{ background: 'linear-gradient(90deg,#09090b,#27272a)', color: '#f5d76e', padding: '8px 12px', fontWeight: 700, fontSize: 13 }}>
               Partants ({partants.length})
             </div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
                 <thead>
-                  <tr style={{ background: '#f8fafc', color: '#64748b' }}>
+                  <tr style={{ background: 'rgba(34,211,238,.10)', color: '#9fb3d1' }}>
                     <th style={{ padding: 8 }}>N°</th>
                     <th style={{ padding: 8 }}>Cas.</th>
                     <th style={{ padding: 8, textAlign: 'left' }}>Cheval</th>
@@ -373,16 +338,16 @@ export default function Article() {
                 </thead>
                 <tbody>
                   {classement.map(({ p, rang }) => (
-                    <tr key={p.num} style={{ borderTop: '1px solid #f1f5f9', background: p.depart <= 8 ? '#fef9e7' : '#fff' }}>
-                      <td style={{ padding: 8, fontWeight: 800, textAlign: 'center', color: '#b91c1c' }}>{p.num}</td>
+                    <tr key={p.num} style={{ borderTop: '1px solid rgba(255,255,255,.07)', background: p.depart <= 8 ? 'rgba(251,191,36,.10)' : 'transparent' }}>
+                      <td style={{ padding: 8, fontWeight: 800, textAlign: 'center', color: '#fda4af' }}>{p.num}</td>
                       <td style={{ padding: 8, textAlign: 'center' }}>{p.silk ? <img src={p.silk} alt="" style={{ width: 22, height: 22 }} /> : SANS}</td>
                       <td style={{ padding: 8, fontWeight: 600 }}>{p.cheval || SANS}</td>
-                      <td style={{ padding: 8, textAlign: 'center' }}>{p.driver || SANS}{p.coteRefJockey ? <span style={{ color: '#94a3b8' }}> ({p.coteRefJockey})</span> : null}</td>
-                      <td style={{ padding: 8, textAlign: 'center' }}>{p.entraineur || SANS}{p.coteRefEntraineur ? <span style={{ color: '#94a3b8' }}> ({p.coteRefEntraineur})</span> : null}</td>
-                      <td style={{ padding: 8, textAlign: 'center', fontWeight: 800, color: p.depart <= 8 ? '#92400e' : '#94a3b8' }}>{p.depart ?? p.def ?? SANS}</td>
+                      <td style={{ padding: 8, textAlign: 'center' }}>{p.driver || SANS}{p.coteRefJockey ? <span style={{ color: '#8fa3bf' }}> ({p.coteRefJockey})</span> : null}</td>
+                      <td style={{ padding: 8, textAlign: 'center' }}>{p.entraineur || SANS}{p.coteRefEntraineur ? <span style={{ color: '#8fa3bf' }}> ({p.coteRefEntraineur})</span> : null}</td>
+                      <td style={{ padding: 8, textAlign: 'center', fontWeight: 800, color: p.depart <= 8 ? '#fbbf24' : '#8fa3bf' }}>{p.depart ?? p.def ?? SANS}</td>
                       <td style={{ padding: 8, textAlign: 'center', fontWeight: 700 }}>{p.cote ?? SANS}</td>
                       <td style={{ padding: 8, textAlign: 'center' }}>{p.coteRef ?? SANS}</td>
-                      <td style={{ padding: 8, fontFamily: 'monospace', fontSize: 11, color: '#475569' }}>
+                      <td style={{ padding: 8, fontFamily: 'monospace', fontSize: 11, color: '#9fb3d1' }}>
                         {p.musique || formeCourte(p) || SANS}
                       </td>
                       <td style={{ padding: 8, textAlign: 'center' }}>{p.chrono || SANS}</td>
@@ -405,12 +370,12 @@ export default function Article() {
 
         {/* ── aptitudes : Courses · Victoires · Placés ── */}
         {aptitudes.length ? (
-          <div style={{ marginTop: 14, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, overflow: 'hidden' }}>
+          <div style={{ marginTop: 14, background: 'rgba(12,20,37,.66)', border: '1px solid rgba(125,205,255,.22)', borderRadius: 12, overflow: 'hidden' }}>
             <div style={{ background: 'linear-gradient(90deg,#09090b,#27272a)', color: '#f5d76e', padding: '8px 12px', fontWeight: 700, fontSize: 13 }}>Aptitudes — Courses · Victoires · Placés</div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
                 <thead>
-                  <tr style={{ background: '#f8fafc', color: '#64748b' }}>
+                  <tr style={{ background: 'rgba(34,211,238,.10)', color: '#9fb3d1' }}>
                     <th style={{ padding: 8 }}>N°</th>
                     <th style={{ padding: 8, textAlign: 'left' }}>Cheval</th>
                     <th style={{ padding: 8 }}>Courses</th>
@@ -424,8 +389,8 @@ export default function Article() {
                 </thead>
                 <tbody>
                   {aptitudes.map((a) => (
-                    <tr key={a.num} style={{ borderTop: '1px solid #f1f5f9' }}>
-                      <td style={{ padding: 8, fontWeight: 800, textAlign: 'center', color: '#b91c1c' }}>{a.num}</td>
+                    <tr key={a.num} style={{ borderTop: '1px solid rgba(255,255,255,.07)' }}>
+                      <td style={{ padding: 8, fontWeight: 800, textAlign: 'center', color: '#fda4af' }}>{a.num}</td>
                       <td style={{ padding: 8, fontWeight: 600 }}>{a.cheval}</td>
                       <td style={{ padding: 8, textAlign: 'center' }}>{a.courses ?? '—'}</td>
                       <td style={{ padding: 8, textAlign: 'center' }}>{a.victoires}</td>
@@ -448,10 +413,10 @@ export default function Article() {
         ) : null}
 
         {/* ── les 18 lignes publiées par la source, habillées « LBAHJA-TURF » ── */}
-        <h2 style={{ marginTop: 18, fontSize: 15, fontWeight: 800, color: '#111111', borderBottom: '2px solid #d4af37', paddingBottom: 6 }}>
+        <h2 style={{ marginTop: 18, fontSize: 15, fontWeight: 800, color: '#f5d76e', borderBottom: '2px solid rgba(212,175,55,.55)', paddingBottom: 6 }}>
           Etudes, Analyses, Synthèse et Pronostics
         </h2>
-        <div style={{ marginTop: 10, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 10, overflow: 'hidden' }}>
+        <div style={{ marginTop: 10, background: 'rgba(12,20,37,.66)', border: '1px solid rgba(125,205,255,.22)', borderRadius: 12, overflow: 'hidden' }}>
           <div style={{ background: 'linear-gradient(90deg,#09090b,#27272a)', color: '#f5d76e', padding: '8px 12px', fontWeight: 700, fontSize: 13 }}>
             Top10 des Cotes de Références
           </div>
@@ -462,11 +427,11 @@ export default function Article() {
             {LIGNES_TOPS.map(([label, cleTops]) => {
               const valeur = j(tops[cleTops])
               return (
-                <div key={label} style={{ display: 'flex', gap: 10, padding: '6px 0', borderBottom: '1px solid #f1f5f9' }}>
-                  <span style={{ minWidth: 180, fontWeight: 700, color: '#334155' }}>{label}</span>
+                <div key={label} style={{ display: 'flex', gap: 10, padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,.07)' }}>
+                  <span style={{ minWidth: 180, fontWeight: 700, color: '#c7d6ea' }}>{label}</span>
                   <span style={{
                     flex: 1, fontWeight: valeur ? 700 : 400,
-                    color: valeur ? '#0f172a' : '#cbd5e1', fontStyle: valeur ? 'normal' : 'italic',
+                    color: valeur ? '#e7f1ff' : '#6d82a2', fontStyle: valeur ? 'normal' : 'italic',
                   }}>{valeur || SANS}</span>
                 </div>
               )
@@ -479,10 +444,10 @@ export default function Article() {
         </div>
 
         {pronosTf.length ? (
-          <div style={{ marginTop: 14, background: '#faf5f0', border: '1px solid #d4af37', padding: 12, borderRadius: 12 }}>
-            <h3 style={{ color: '#7f1d1d', margin: 0, fontSize: 15 }}>Pronostic</h3>
+          <div style={{ marginTop: 14, background: 'rgba(251,191,36,.06)', border: '1px solid #d4af37', padding: 12, borderRadius: 12 }}>
+            <h3 style={{ color: '#fecdd3', margin: 0, fontSize: 15 }}>Pronostic</h3>
             {pronosTf.map((pr, i) => (
-              <div key={i} style={{ marginTop: 6, background: '#fff', border: '1px solid #e7e0cf', padding: 8, borderRadius: 8, fontWeight: 800, color: '#7f1d1d' }}>
+              <div key={i} style={{ marginTop: 6, background: 'rgba(255,255,255,.06)', border: '1px solid rgba(251,191,36,.30)', padding: 8, borderRadius: 8, fontWeight: 800, color: '#fde68a' }}>
                 ► {pr}
               </div>
             ))}
@@ -494,7 +459,7 @@ export default function Article() {
           <h3 style={{ color: '#fde68a', margin: 0, fontSize: 15 }}>Pronostic LBAHJA TURF</h3>
           {pronostics && (pronostics.prono1 || pronostics.prono2 || pronostics.prono3) ? (
             <>
-              <div style={{ marginTop: 8, background: '#fff', color: '#991b1b', padding: 10, borderRadius: 8, fontWeight: 800 }}>
+              <div style={{ marginTop: 8, background: 'rgba(255,255,255,.06)', color: '#fda4af', padding: 10, borderRadius: 8, fontWeight: 800 }}>
                 ► {pronostics.prono1 || SANS}
               </div>
               <div style={{ marginTop: 8, background: 'rgba(255,255,255,0.12)', padding: 10, borderRadius: 8, fontWeight: 800 }}>

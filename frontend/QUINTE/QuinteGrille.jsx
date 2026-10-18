@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import Entete from '../../src/Entete.jsx'
 import {
   fetchRecapSite, fetchArchiveDisque,
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
@@ -14,7 +15,7 @@ import {
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
 const s = {
-  box: { border: '1px solid #d7dce5', borderRadius: 6, background: '#fff' },
+  box: { border: '1px solid rgba(125,205,255,.28)', borderRadius: 10, background: 'rgba(12,20,37,.72)' },
   hdr: { background: '#0f172a', color: '#fff' },
   th: { padding: '5px 8px', fontSize: 12, fontWeight: 600 },
   td: { padding: '5px 8px', fontSize: 13 },
@@ -31,85 +32,91 @@ const s = {
  * Le composant reconstruit `s` (box/hdr/th/td) à chaque onglet : toutes les
  * tables, tous les cadres et tous les en-têtes suivent l'onglet actif.
  * ═══════════════════════════════════════════════════════════════════════════ */
+/* ── LES SIX PEAUX, VERSION NUIT (18/10/2026) ──────────────────────────────
+ *  Les six onglets ne se confondent toujours pas : chacun garde SA couleur,
+ *  SON dessin et SA police — mais sur fond sombre, avec des halos de néon.
+ *  `fond` est transparent : c'est le fond de src/index.css qui passe dessous.
+ *  `ligne` et `alt` sont des FONDS de ligne (zébrures) : jamais des bordures.
+ * ────────────────────────────────────────────────────────────────────────── */
 const THEME = {
   grille: {
     titre: 'La grille',
     sousTitre: 'Les 16 cases du carnet · lecture en colonnes',
-    fond: 'linear-gradient(180deg,#ecfdf5 0%,#f8fafc 60%,#ffffff 100%)',
-    entete: 'linear-gradient(120deg,#065f46 0%,#047857 55%,#10b981 100%)',
-    accent: '#047857', accentSombre: '#064e3b', accentClair: '#d1fae5',
-    bord: '#6ee7b7', carte: '#ffffff', ligne: '#ffffff', alt: '#f0fdf4',
-    on: '#a7f3d0', danger: '#fee2e2', texte: '#065f46', muted: '#7c9a8e',
-    ombre: 'rgba(4,120,87,.35)', ombreD: '0 2px 10px rgba(4,120,87,.10)',
+    fond: 'transparent',
+    entete: 'linear-gradient(120deg,#03140f 0%,#065f46 55%,#10b981 100%)',
+    accent: '#34d399', accentSombre: '#064e3b', accentClair: 'rgba(52,211,153,.18)',
+    bord: 'rgba(52,211,153,.45)', carte: 'rgba(8,26,22,.74)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(52,211,153,.07)',
+    on: 'rgba(52,211,153,.22)', danger: 'rgba(244,63,94,.18)', texte: '#d9fbe9', muted: '#7ba796',
+    ombre: 'rgba(52,211,153,.35)', ombreD: '0 0 22px rgba(52,211,153,.18)',
     police: 'system-ui, -apple-system, sans-serif',
     nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid #6ee7b7', borderRadius: 12, background: '#ffffff' },
-    hdrStyle: { background: 'linear-gradient(180deg,#047857,#064e3b)', color: '#ecfdf5' },
-    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#ecfdf5', fontFamily: 'system-ui, sans-serif' },
+    box: { border: '1px solid rgba(52,211,153,.45)', borderRadius: 14, background: 'rgba(8,26,22,.74)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.06), 0 0 26px rgba(52,211,153,.12)' },
+    hdrStyle: { background: 'linear-gradient(180deg,#065f46,#03140f)', color: '#d1fae5' },
+    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#a7f3d0', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '6px 9px', fontSize: 13 },
   },
   ticket: {
     titre: 'Le ticket',
     sousTitre: 'Les chevaux retenus et leurs scores',
-    fond: 'linear-gradient(180deg,#eef2ff 0%,#f8fafc 55%,#ffffff 100%)',
-    entete: 'linear-gradient(120deg,#1e293b 0%,#1e3a8a 60%,#3b82f6 100%)',
-    accent: '#1d4ed8', accentSombre: '#1e3a8a', accentClair: '#dbeafe',
-    bord: '#93c5fd', carte: '#ffffff', ligne: '#ffffff', alt: '#f1f5f9',
-    on: '#bfdbfe', danger: '#fee2e2', texte: '#1e3a8a', muted: '#64748b',
-    ombre: 'rgba(30,58,138,.30)', ombreD: 'none',
+    fond: 'transparent',
+    entete: 'linear-gradient(120deg,#070d1c 0%,#1e3a8a 60%,#3b82f6 100%)',
+    accent: '#60a5fa', accentSombre: '#1e3a8a', accentClair: 'rgba(96,165,250,.18)',
+    bord: 'rgba(96,165,250,.45)', carte: 'rgba(9,17,38,.76)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(96,165,250,.07)',
+    on: 'rgba(96,165,250,.22)', danger: 'rgba(244,63,94,.18)', texte: '#dbeafe', muted: '#7c8fb3',
+    ombre: 'rgba(59,130,246,.30)', ombreD: 'none',
     police: 'system-ui, -apple-system, sans-serif',
     nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid #1e3a8a', borderRadius: 2, background: '#ffffff' },
-    hdrStyle: { background: 'linear-gradient(180deg,#1e3a8a,#0f172a)', color: '#dbeafe' },
-    th: { padding: '7px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase', color: '#dbeafe', fontFamily: 'system-ui, sans-serif' },
+    box: { border: '1px solid rgba(96,165,250,.45)', borderRadius: 3, background: 'rgba(9,17,38,.76)' },
+    hdrStyle: { background: 'linear-gradient(180deg,#1e3a8a,#070d1c)', color: '#bfdbfe' },
+    th: { padding: '7px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase', color: '#93c5fd', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '7px 9px', fontSize: 13 },
   },
   archive: {
     titre: 'Archive',
     sousTitre: 'Le registre des Quintés · la mémoire de la méthode',
-    fond: 'linear-gradient(180deg,#fef6e7 0%,#fdfaf4 60%,#fffdf8 100%)',
-    entete: 'linear-gradient(120deg,#451a03 0%,#92400e 55%,#d97706 100%)',
-    accent: '#b45309', accentSombre: '#78350f', accentClair: '#fef3c7',
-    bord: '#d6a76a', carte: '#fffcf5', ligne: '#fffcf5', alt: '#fdf4e3',
-    on: '#fde68a', danger: '#fee2e2', texte: '#78350f', muted: '#a1806a',
-    ombre: 'rgba(120,53,15,.30)', ombreD: '0 2px 6px rgba(120,53,15,.14)',
+    fond: 'transparent',
+    entete: 'linear-gradient(120deg,#1c1206 0%,#92400e 55%,#d97706 100%)',
+    accent: '#fbbf24', accentSombre: '#78350f', accentClair: 'rgba(251,191,36,.18)',
+    bord: 'rgba(251,191,36,.45)', carte: 'rgba(28,20,8,.78)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(251,191,36,.06)',
+    on: 'rgba(251,191,36,.22)', danger: 'rgba(244,63,94,.18)', texte: '#fde9c3', muted: '#a98d63',
+    ombre: 'rgba(217,119,6,.30)', ombreD: '0 0 22px rgba(251,191,36,.14)',
     police: 'Georgia, "Times New Roman", serif',
     nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '2px solid #92400e', borderRadius: 3, background: '#fffcf5' },
-    hdrStyle: { background: 'linear-gradient(180deg,#92400e,#78350f)', color: '#fef3c7' },
-    th: { padding: '7px 9px', fontSize: 11, fontWeight: 700, letterSpacing: 1.1, textTransform: 'uppercase', color: '#fef3c7', fontFamily: 'Georgia, serif' },
+    box: { border: '1px solid rgba(251,191,36,.50)', borderRadius: 3, background: 'rgba(28,20,8,.78)' },
+    hdrStyle: { background: 'linear-gradient(180deg,#92400e,#1c1206)', color: '#fef3c7' },
+    th: { padding: '7px 9px', fontSize: 11, fontWeight: 700, letterSpacing: 1.1, textTransform: 'uppercase', color: '#fde68a', fontFamily: 'Georgia, serif' },
     td: { padding: '7px 9px', fontSize: 13 },
   },
   stats: {
     titre: 'Statistiques',
     sousTitre: 'Ce que l’archive prouve — encore trop peu de courses',
-    fond: 'linear-gradient(180deg,#f5f3ff 0%,#faf5ff 55%,#ffffff 100%)',
-    entete: 'linear-gradient(120deg,#4c1d95 0%,#7e22ce 60%,#c084fc 100%)',
-    accent: '#7c3aed', accentSombre: '#5b21b6', accentClair: '#ede9fe',
-    bord: '#c4b5fd', carte: '#ffffff', ligne: '#ffffff', alt: '#faf5ff',
-    on: '#ddd6fe', danger: '#fee2e2', texte: '#5b21b6', muted: '#8b7ba8',
-    ombre: 'rgba(124,58,237,.35)', ombreD: '0 4px 16px rgba(124,58,237,.16)',
+    fond: 'transparent',
+    entete: 'linear-gradient(120deg,#140a2e 0%,#7e22ce 60%,#c084fc 100%)',
+    accent: '#c4b5fd', accentSombre: '#5b21b6', accentClair: 'rgba(196,181,253,.18)',
+    bord: 'rgba(196,181,253,.45)', carte: 'rgba(20,14,40,.76)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(196,181,253,.07)',
+    on: 'rgba(196,181,253,.22)', danger: 'rgba(244,63,94,.18)', texte: '#ede9fe', muted: '#9385b8',
+    ombre: 'rgba(168,85,247,.35)', ombreD: '0 0 26px rgba(168,85,247,.18)',
     police: 'system-ui, -apple-system, sans-serif',
     nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid #c4b5fd', borderRadius: 16, background: '#ffffff' },
-    hdrStyle: { background: 'linear-gradient(180deg,#7c3aed,#4c1d95)', color: '#ede9fe' },
-    th: { padding: '8px 9px', fontSize: 11, fontWeight: 800, letterSpacing: 0.5, color: '#ede9fe', fontFamily: 'system-ui, sans-serif' },
+    box: { border: '1px solid rgba(196,181,253,.45)', borderRadius: 16, background: 'rgba(20,14,40,.76)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.06), 0 0 26px rgba(168,85,247,.14)' },
+    hdrStyle: { background: 'linear-gradient(180deg,#7e22ce,#140a2e)', color: '#ede9fe' },
+    th: { padding: '8px 9px', fontSize: 11, fontWeight: 800, letterSpacing: 0.5, color: '#ddd6fe', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '8px 9px', fontSize: 13 },
   },
   ecarts: {
     titre: 'Écarts',
     sousTitre: 'Les cases P1..P20 — qui donne, qui ne donne plus',
-    fond: 'linear-gradient(180deg,#ecfeff 0%,#f0fdfa 55%,#ffffff 100%)',
-    entete: 'linear-gradient(120deg,#083344 0%,#0e7490 55%,#22d3ee 100%)',
-    accent: '#0e7490', accentSombre: '#155e75', accentClair: '#cffafe',
-    bord: '#67e8f9', carte: '#ffffff', ligne: '#ffffff', alt: '#f0fdff',
-    on: '#a5f3fc', danger: '#fee2e2', texte: '#155e75', muted: '#6b8f9c',
-    ombre: 'rgba(14,116,144,.35)', ombreD: '0 2px 10px rgba(14,116,144,.14)',
+    fond: 'transparent',
+    entete: 'linear-gradient(120deg,#03141a 0%,#0e7490 55%,#22d3ee 100%)',
+    accent: '#22d3ee', accentSombre: '#155e75', accentClair: 'rgba(34,211,238,.16)',
+    bord: 'rgba(34,211,238,.45)', carte: 'rgba(7,24,33,.76)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(34,211,238,.07)',
+    on: 'rgba(34,211,238,.22)', danger: 'rgba(244,63,94,.18)', texte: '#cffafe', muted: '#6f97a6',
+    ombre: 'rgba(34,211,238,.35)', ombreD: '0 0 22px rgba(34,211,238,.16)',
     police: 'system-ui, -apple-system, sans-serif',
     nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid #67e8f9', borderRadius: 8, background: '#ffffff' },
-    hdrStyle: { background: 'linear-gradient(180deg,#0e7490,#083344)', color: '#ecfeff' },
-    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase', color: '#ecfeff', fontFamily: 'system-ui, sans-serif' },
+    box: { border: '1px solid rgba(34,211,238,.45)', borderRadius: 8, background: 'rgba(7,24,33,.76)' },
+    hdrStyle: { background: 'linear-gradient(180deg,#0e7490,#03141a)', color: '#cffafe' },
+    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase', color: '#a5f3fc', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '6px 9px', fontSize: 13 },
   },
   /* 🩸 LE CHOIX — le laboratoire. Rouge carmin, rapport d'expérience : coins
@@ -118,17 +125,17 @@ const THEME = {
   choix: {
     titre: 'Choix',
     sousTitre: 'G1 et G2 — ce que coûte le choix, règle par règle',
-    fond: 'linear-gradient(180deg,#fff1f2 0%,#fdf2f8 55%,#ffffff 100%)',
-    entete: 'linear-gradient(120deg,#4c0519 0%,#be123c 55%,#fb7185 100%)',
-    accent: '#be123c', accentSombre: '#881337', accentClair: '#ffe4e6',
-    bord: '#fda4af', carte: '#ffffff', ligne: '#ffffff', alt: '#fff1f2',
-    on: '#fecdd3', danger: '#fee2e2', texte: '#881337', muted: '#a1797f',
-    ombre: 'rgba(190,18,60,.35)', ombreD: '0 2px 10px rgba(190,18,60,.14)',
+    fond: 'transparent',
+    entete: 'linear-gradient(120deg,#1a0408 0%,#be123c 55%,#fb7185 100%)',
+    accent: '#fb7185', accentSombre: '#881337', accentClair: 'rgba(251,113,133,.16)',
+    bord: 'rgba(251,113,133,.45)', carte: 'rgba(32,10,18,.76)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(251,113,133,.07)',
+    on: 'rgba(251,113,133,.22)', danger: 'rgba(244,63,94,.18)', texte: '#ffe4e6', muted: '#b07d86',
+    ombre: 'rgba(244,63,94,.35)', ombreD: '0 0 22px rgba(251,113,133,.16)',
     police: 'system-ui, -apple-system, sans-serif',
     nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid #fda4af', borderRadius: 4, background: '#ffffff' },
-    hdrStyle: { background: 'linear-gradient(180deg,#be123c,#881337)', color: '#ffe4e6' },
-    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#ffe4e6', fontFamily: 'system-ui, sans-serif' },
+    box: { border: '1px solid rgba(251,113,133,.45)', borderRadius: 4, background: 'rgba(32,10,18,.76)' },
+    hdrStyle: { background: 'linear-gradient(180deg,#be123c,#1a0408)', color: '#ffe4e6' },
+    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#fecdd3', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '6px 9px', fontSize: 13 },
   },
 }
@@ -226,7 +233,7 @@ function ConditionsCourse({ course, date, sk }) {
       <span style={{
         fontSize: 13,
         fontWeight: fort ? 800 : 500,
-        color: v === NON_PUBLIE ? '#94a3b8' : '#0f172a',
+        color: v === NON_PUBLIE ? '#7a8ea9' : '#e7f1ff',
         fontStyle: v === NON_PUBLIE ? 'italic' : 'normal',
       }}>{v}</span>
     </div>
@@ -237,7 +244,7 @@ function ConditionsCourse({ course, date, sk }) {
       padding: 14, marginTop: 14, borderRadius: sk ? sk.box.borderRadius : 6,
       border: '1px solid ' + (sk ? sk.bord : '#d7dce5'),
       borderLeft: '5px solid ' + (sk ? sk.accent : '#0f172a'),
-      background: sk ? sk.alt : '#f8fafc',
+      background: sk ? sk.alt : 'rgba(255,255,255,.03)',
       boxShadow: sk ? sk.ombreD : 'none',
       fontFamily: sk ? sk.police : 'system-ui, sans-serif',
     }}>
@@ -246,18 +253,18 @@ function ConditionsCourse({ course, date, sk }) {
         
       </div>
 
-      <div style={{ marginTop: 8, paddingBottom: 8, borderBottom: '1px solid #e2e8f0' }}>
+      <div style={{ marginTop: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,.07)' }}>
         <div style={{ fontSize: 12, color: '#475569' }}>
-          <b style={{ color: '#0f172a' }}>{c.date_formatted || date}</b>
+          <b style={{ color: '#e7f1ff' }}>{c.date_formatted || date}</b>
           {c.time ? ' · ' + c.time + ' h' : ''}
           {'   ·   '}
-          {c.reunion_code ? <b style={{ color: '#0f172a' }}>{c.reunion_code}</b> : null}
+          {c.reunion_code ? <b style={{ color: '#e7f1ff' }}>{c.reunion_code}</b> : null}
           {course.hippodrome ? ' ' + course.hippodrome : ''}
           {c.code ? '  ·  ' + c.code : ''}
         </div>
         <div style={{ fontSize: 14, fontWeight: 800, marginTop: 2 }}>{c.name || course.hippodrome}</div>
         {c.class ? (
-          <div style={{ fontSize: 11, color: '#b91c1c', fontWeight: 700 }}>
+          <div style={{ fontSize: 11, color: '#fb7185', fontWeight: 700 }}>
             {c.class}{c.class.toUpperCase().includes('GROUPE') ? ' — COURSE DE GROUPE' : ''}
           </div>
         ) : null}
@@ -287,7 +294,7 @@ function ConditionsCourse({ course, date, sk }) {
           <summary style={{ fontSize: 11, color: '#1d4ed8', cursor: 'pointer' }}>
             Les conditions détaillées ({c.comment.length} caractères)
           </summary>
-          <div style={{ fontSize: 11, color: '#334155', lineHeight: 1.6, marginTop: 6, whiteSpace: 'pre-wrap' }}>
+          <div style={{ fontSize: 11, color: '#a4b8d6', lineHeight: 1.6, marginTop: 6, whiteSpace: 'pre-wrap' }}>
             {c.comment}
           </div>
         </details>
@@ -636,7 +643,7 @@ export default function QuinteGrille() {
 
 /* Couleurs des 5 groupes — les mêmes que sur le carnet papier. */
 const COULEUR_GROUPE = {
-  G1: { base: '#22c55e', sombre: false },
+  G1: { base: '#34d399', sombre: true },
   G2: { base: '#2563eb', sombre: false },
   G3: { base: '#eab308', sombre: true },
   G4: { base: '#7c3aed', sombre: false },
@@ -684,7 +691,7 @@ function PanneauMesure({ sk, fiabilite, detail }) {
   const ligne = (lab, r, gras) => (
     <tr key={lab} style={{ borderBottom: '1px solid ' + sk.bord, background: gras ? sk.accentClair : sk.ligne }}>
       <td style={{ ...sk.td, fontWeight: gras ? 800 : 500 }}>{lab}</td>
-      <td style={{ ...sk.td, fontWeight: 800, fontFamily: sk.nb.td, color: sk.accentSombre }}>{L(r.payante)}</td>
+      <td style={{ ...sk.td, fontWeight: 800, fontFamily: sk.nb.td, color: sk.accent }}>{L(r.payante)}</td>
       <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{L(r.couvre4)}</td>
       <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{L(r.q5)}</td>
       <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{r.chevaux}</td>
@@ -696,7 +703,7 @@ function PanneauMesure({ sk, fiabilite, detail }) {
   return (
     <div style={{ ...sk.box, padding: '12px 14px', marginTop: 12, boxShadow: sk.ombreD }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-        <b style={{ fontSize: 13, letterSpacing: 1.2, textTransform: 'uppercase', color: sk.accentSombre }}>Fiabilité mesurée</b>
+        <b style={{ fontSize: 13, letterSpacing: 1.2, textTransform: 'uppercase', color: sk.accent }}>Fiabilité mesurée</b>
         <span style={{ fontSize: 12, color: sk.muted }}>
           {M.echantillon.n} Quintés à presse réelle ({M.echantillon.du} → {M.echantillon.au}) · {M.metrique}
         </span>
@@ -724,7 +731,7 @@ function PanneauMesure({ sk, fiabilite, detail }) {
           </div>
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
-            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accentSombre }}>Le badge des boules</b>{' '}
+            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>Le badge des boules</b>{' '}
             — le rang de cote des chevaux <b>cités par la presse</b> : ce que ce rang vaut.
             <div style={{ overflowX: 'auto', marginTop: 6 }}>
               <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
@@ -761,7 +768,7 @@ function PanneauMesure({ sk, fiabilite, detail }) {
           </div>
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
-            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accentSombre }}>L’expérience du siège de G5</b>{' '}
+            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>L’expérience du siège de G5</b>{' '}
             — la méthode dit « B5 : 1 ou 0 » (§11.6). Le moteur prend ce siège <b>sans condition</b>. Voici ce que
             les autres lectures donnent, sur les <b>mêmes 8 chevaux</b> (tools/experience-g5.mjs).
             <div style={{ overflowX: 'auto', marginTop: 6 }}>
@@ -775,13 +782,13 @@ function PanneauMesure({ sk, fiabilite, detail }) {
                   {fiabilite.experience.map((v) => (
                     <tr key={v.cle} style={{ borderBottom: '1px solid ' + sk.bord, background: v.appliquee ? sk.on : sk.ligne }}>
                       <td style={{ ...sk.td, fontWeight: v.appliquee ? 800 : 500 }}>{v.nom}</td>
-                      <td style={{ ...sk.td, ...nb, fontWeight: 800, color: v.appliquee ? sk.accentSombre : sk.texte }}>{L(v.payante)}</td>
+                      <td style={{ ...sk.td, ...nb, fontWeight: 800, color: v.appliquee ? sk.accent : sk.texte }}>{L(v.payante)}</td>
                       <td style={{ ...sk.td, ...nb }}>{L(v.payanteOuverture)}</td>
                       <td style={{ ...sk.td, ...nb, color: sk.muted }}>{L(v.payante1re)}</td>
                       <td style={{ ...sk.td, ...nb, color: sk.muted }}>{L(v.payante2e)}</td>
                       <td style={{ ...sk.td }}>
                         {v.appliquee
-                          ? <span style={{ fontWeight: 800, color: sk.accentSombre }}>appliquée</span>
+                          ? <span style={{ fontWeight: 800, color: sk.accent }}>appliquée</span>
                           : <span style={{ color: sk.muted }}>non appliquée</span>}
                         {v.garde != null && <span style={{ color: sk.muted }}> · siège gardé {v.garde} %</span>}
                       </td>
@@ -817,10 +824,10 @@ function TabEcarts({ sk, ecarts, detail }) {
   const parPlace = {}
   for (const g of detail || []) for (const c of g.cases) if (c.place) parPlace[c.place] = c
   const etat = (x) => {
-    if (!x.n || x.dernierHit == null) return { lib: 'jamais', couleur: '#b91c1c', fond: '#fee2e2' }
-    if (x.coursesDepuis != null && x.coursesDepuis >= 5) return { lib: 'froide', couleur: '#b91c1c', fond: '#fee2e2' }
-    if (x.pctTop5 >= 40 || (x.coursesDepuis != null && x.coursesDepuis <= 1)) return { lib: 'chaude', couleur: '#15803d', fond: '#dcfce7' }
-    return { lib: 'tiède', couleur: '#a16207', fond: '#fef9c3' }
+    if (!x.n || x.dernierHit == null) return { lib: 'jamais', couleur: '#fb7185', fond: 'rgba(244,63,94,.18)' }
+    if (x.coursesDepuis != null && x.coursesDepuis >= 5) return { lib: 'froide', couleur: '#fb7185', fond: 'rgba(244,63,94,.18)' }
+    if (x.pctTop5 >= 40 || (x.coursesDepuis != null && x.coursesDepuis <= 1)) return { lib: 'chaude', couleur: '#34d399', fond: 'rgba(52,211,153,.18)' }
+    return { lib: 'tiède', couleur: '#fbbf24', fond: 'rgba(251,191,36,.16)' }
   }
   return (
     <div>
@@ -846,15 +853,15 @@ function TabEcarts({ sk, ecarts, detail }) {
               return (
                 <tr key={x.p} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
                   <td style={{ ...sk.td, fontWeight: 800 }}>P{x.p}</td>
-                  <td style={{ ...sk.td, fontWeight: 700, color: sk.accentSombre }}>
+                  <td style={{ ...sk.td, fontWeight: 700, color: sk.accent }}>
                     {c ? <>{c.num}{c.pris ? ' ✓' : ''}{c.marche != null ? <span style={{ color: sk.muted, fontWeight: 500 }}> · M{c.marche}</span> : null}</> : <span style={{ color: sk.muted }}>—</span>}
                   </td>
                   <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{x.top5}/{x.n}</td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700, color: x.pctTop5 >= 40 ? '#15803d' : x.pctTop5 >= 25 ? sk.texte : '#b91c1c' }}>{x.pctTop5} %</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700, color: x.pctTop5 >= 40 ? '#34d399' : x.pctTop5 >= 25 ? sk.texte : '#fb7185' }}>{x.pctTop5} %</td>
                   <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{x.pctTop3} %</td>
                   <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{x.victoires}</td>
                   <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{x.dernierHit || '—'}</td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: x.coursesDepuis != null && x.coursesDepuis >= 5 ? 800 : 500, color: x.coursesDepuis != null && x.coursesDepuis >= 5 ? '#b91c1c' : sk.texte }}>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: x.coursesDepuis != null && x.coursesDepuis >= 5 ? 800 : 500, color: x.coursesDepuis != null && x.coursesDepuis >= 5 ? '#fb7185' : sk.texte }}>
                     {x.coursesDepuis == null ? '—' : x.coursesDepuis}
                   </td>
                   <td style={{ ...sk.td }}>
@@ -862,7 +869,7 @@ function TabEcarts({ sk, ecarts, detail }) {
                   </td>
                   <td style={{ ...sk.td }}>
                     {(x.serie || []).map((v, k) => (
-                      <span key={k} title={v ? 'la case a donné' : 'rien'} style={{ display: 'inline-block', width: 9, height: 9, borderRadius: 2, marginRight: 2, background: v ? '#22c55e' : '#e2e8f0', border: '1px solid ' + (v ? '#15803d' : '#cbd5e1') }} />
+                      <span key={k} title={v ? 'la case a donné' : 'rien'} style={{ display: 'inline-block', width: 9, height: 9, borderRadius: 2, marginRight: 2, background: v ? '#34d399' : '#e2e8f0', border: '1px solid ' + (v ? '#34d399' : '#cbd5e1') }} />
                     ))}
                   </td>
                 </tr>
@@ -873,8 +880,8 @@ function TabEcarts({ sk, ecarts, detail }) {
       </div>
       <div style={{ fontSize: 12, color: sk.muted, marginTop: 10 }}>
         « la course du jour » = le cheval qui occupe la case dans la grille affichée (✓ = retenu par le moteur, M = son rang de marché).
-        La pastille d’état : <b style={{ color: '#15803d' }}>chaude</b> (≥ 40 % de top-5 ou un hit à la dernière course),
-        <b style={{ color: '#b91c1c' }}> froide</b> (rien depuis 5 courses ou plus), <b style={{ color: '#a16207' }}>tiède</b> entre les deux.
+        La pastille d’état : <b style={{ color: '#34d399' }}>chaude</b> (≥ 40 % de top-5 ou un hit à la dernière course),
+        <b style={{ color: '#fb7185' }}> froide</b> (rien depuis 5 courses ou plus), <b style={{ color: '#fbbf24' }}>tiède</b> entre les deux.
         C’est un repère de lecture, jamais une raison d’écarter un cheval (§6 : on écarte sur le physique).
       </div>
     </div>
@@ -923,7 +930,7 @@ function TabChoix({ sk, choix }) {
       </div>
 
       {/* ① OÙ SONT LES 1-2-3 */}
-      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '14px 0 6px' }}>
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accent, letterSpacing: .6, textTransform: 'uppercase', margin: '14px 0 6px' }}>
         ① Où sont les 1-2-3 — quel bloc les écarte
       </div>
       <div style={{ overflowX: 'auto' }}>
@@ -938,9 +945,9 @@ function TabChoix({ sk, choix }) {
               <tr key={b.id} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
                 <td style={{ ...sk.td, fontWeight: 800 }}>{b.id}</td>
                 <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{b.arrivees}</td>
-                <td style={{ ...sk.td, fontFamily: sk.nb.td, color: '#15803d', fontWeight: 700 }}>{b.gardes}</td>
-                <td style={{ ...sk.td, fontFamily: sk.nb.td, color: b.ecartes >= 20 ? '#b91c1c' : sk.texte, fontWeight: b.ecartes >= 20 ? 800 : 500 }}>{b.ecartes}</td>
-                <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700, color: b.tauxGarde >= 80 ? '#15803d' : b.tauxGarde <= 40 ? '#b91c1c' : sk.texte }}>{nb(b.tauxGarde)} %</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, color: '#34d399', fontWeight: 700 }}>{b.gardes}</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, color: b.ecartes >= 20 ? '#fb7185' : sk.texte, fontWeight: b.ecartes >= 20 ? 800 : 500 }}>{b.ecartes}</td>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700, color: b.tauxGarde >= 80 ? '#34d399' : b.tauxGarde <= 40 ? '#fb7185' : sk.texte }}>{nb(b.tauxGarde)} %</td>
               </tr>
             ))}
           </tbody>
@@ -952,7 +959,7 @@ function TabChoix({ sk, choix }) {
       </div>
 
       {/* ② LE LEVIER */}
-      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accent, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
         ② Le levier — le choix contre la quota
       </div>
       <div style={{ ...sk.box, padding: '10px 12px', boxShadow: sk.ombreD, fontSize: 13 }}>
@@ -968,7 +975,7 @@ function TabChoix({ sk, choix }) {
             <span style={{ width: 300, color: sk.texte }}>{lib}</span>
             {bar(v, L.oracle)}
             <b style={{ fontFamily: sk.nb.td, color: col, width: 64, textAlign: 'right' }}>{nb(v)} %</b>
-            <span style={{ fontFamily: sk.nb.td, fontSize: 11, color: v > L.code ? '#15803d' : sk.muted, width: 56 }}>
+            <span style={{ fontFamily: sk.nb.td, fontSize: 11, color: v > L.code ? '#34d399' : sk.muted, width: 56 }}>
               {v === L.code ? '' : (v > L.code ? '+' : '') + nb(Math.round(10 * (v - L.code)) / 10)}
             </span>
           </div>
@@ -981,7 +988,7 @@ function TabChoix({ sk, choix }) {
       </div>
 
       {/* ③ LES RÈGLES */}
-      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accent, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
         ③ Chaque règle, seule — G1 puis G2 puis les deux ({(choix.regles || []).length} règles)
       </div>
       <div style={{ overflowX: 'auto', maxHeight: 420, overflowY: 'auto' }}>
@@ -999,7 +1006,7 @@ function TabChoix({ sk, choix }) {
                   <td style={{ ...sk.td, fontSize: 12.5 }}>{r.label}{r.id === 'p' ? ' ← le code actuel' : ''}</td>
                   <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(r.g1)} %</td>
                   <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(r.g2)} %</td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: gain ? 800 : 500, color: gain ? '#15803d' : sk.texte }}>{nb(r.deux)} %</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: gain ? 800 : 500, color: gain ? '#34d399' : sk.texte }}>{nb(r.deux)} %</td>
                   <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{nb(Math.round(1000 * r.couv) / 1000)}</td>
                 </tr>
               )
@@ -1010,12 +1017,12 @@ function TabChoix({ sk, choix }) {
       <div style={{ fontSize: 12, color: sk.texte, marginTop: 8, lineHeight: 1.6 }}>
         Au-dessus du code : <b>{enTete.map((r) => r.id).join(', ') || 'rien'}</b>.
         Le <b>LOO</b> — la meilleure règle choisie sur les {choix.n - 1} autres courses — vaut
-        <b style={{ color: sk.loo < choix.code ? '#b91c1c' : '#15803d' }}> {nb(choix.loo)} %</b>
+        <b style={{ color: sk.loo < choix.code ? '#fb7185' : '#34d399' }}> {nb(choix.loo)} %</b>
         {choix.loo < choix.code ? ' , soit SOUS le code : les différences sont du bruit.' : '.'}
       </div>
 
       {/* ④ LA GRILLE */}
-      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accent, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
         ④ La grille G1 × G2 — PAYANTE
       </div>
       <div style={{ overflowX: 'auto' }}>
@@ -1031,7 +1038,7 @@ function TabChoix({ sk, choix }) {
               <tr key={l.m1} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
                 <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700 }}>{l.m1}</td>
                 {l.lignes.map((v, k) => (
-                  <td key={k} style={{ ...sk.td, fontFamily: sk.nb.td, textAlign: 'center', fontWeight: v >= (meilleure.taux || 0) ? 800 : 500, color: v >= 40 ? '#15803d' : v < 30 ? '#b91c1c' : sk.texte }}>
+                  <td key={k} style={{ ...sk.td, fontFamily: sk.nb.td, textAlign: 'center', fontWeight: v >= (meilleure.taux || 0) ? 800 : 500, color: v >= 40 ? '#34d399' : v < 30 ? '#fb7185' : sk.texte }}>
                     {nb(v)}
                   </td>
                 ))}
@@ -1047,7 +1054,7 @@ function TabChoix({ sk, choix }) {
       </div>
 
       {/* ⑤ STABILITÉ */}
-      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accentSombre, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
+      <div style={{ fontSize: 12, fontWeight: 800, color: sk.accent, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
         ⑤ Stabilité — les deux moitiés de l’archive
       </div>
       <div style={{ overflowX: 'auto' }}>
@@ -1063,7 +1070,7 @@ function TabChoix({ sk, choix }) {
                 <td style={{ ...sk.td, fontSize: 12.5 }}>{x.label}</td>
                 <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(x.h1)} %</td>
                 <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(x.h2)} %</td>
-                <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: Math.abs(x.h1 - x.h2) >= 8 ? 800 : 500, color: Math.abs(x.h1 - x.h2) >= 8 ? '#b91c1c' : sk.muted }}>
+                <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: Math.abs(x.h1 - x.h2) >= 8 ? 800 : 500, color: Math.abs(x.h1 - x.h2) >= 8 ? '#fb7185' : sk.muted }}>
                   {nb(Math.abs(Math.round(10 * (x.h1 - x.h2)) / 10))}
                 </td>
               </tr>
@@ -1272,20 +1279,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   return (
     <>
       {/* ── bandeau : logo + navigation. Les moteurs/sources restent privés à chaque page ── */}
-      <header className="header" style={{ background: 'linear-gradient(135deg,#0f172a 0%,#1e3a8a 60%,#0f172a 100%)', borderBottom: '2px solid #22c55e' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="/logo-horse.png" alt="Bahja TURF" style={{ height: 44, background: 'white', borderRadius: 8, padding: 2 }} />
-            <img src="/logo.svg" alt="Bahja TURF" style={{ height: 42, borderRadius: 8 }} />
-          </div>
-          <nav style={{ display: 'flex', gap: 16 }}>
-            <Link to="/" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Programme</Link>
-            <Link to="/coply" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Coply</Link>
-            <Link to="/quinte" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Quinté</Link>
-            <Link to="/analyse" style={{ color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none' }}>Chevaux</Link>
-          </nav>
-        </div>
-      </header>
+      <Entete page="quinte" />
     <div dir="ltr" style={{
       maxWidth: 1180, margin: '0 auto', padding: '0 16px 30px', minHeight: '72vh',
       fontFamily: SK.police, background: SK.fond,
@@ -1306,9 +1300,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
       {/* barre de commande */}
       <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
         <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
-          style={{ padding: '6px 10px', borderRadius: 8, border: '1px solid #cbd5e1' }} />
+          style={{ padding: '6px 10px', borderRadius: 8, border: '1px solid rgba(125,205,255,.28)' }} />
         <button onClick={() => charger(date)} disabled={busy}
-          style={{ padding: '6px 14px', borderRadius: 8, border: '2px solid #0f172a', background: busy ? '#94a3b8' : '#0f172a', color: '#fff', cursor: 'pointer' }}>
+          style={{ padding: '6px 14px', borderRadius: 8, border: '2px solid #0f172a', background: busy ? '#7a8ea9' : '#0f172a', color: '#fff', cursor: 'pointer' }}>
           {busy ? 'Chargement…' : 'Actualiser'}
         </button>
         {syn && (
@@ -1340,7 +1334,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
         })}
       </div>
 
-      {msg && <div style={{ color: '#b91c1c', marginBottom: 10, fontSize: 13 }}>{msg}</div>}
+      {msg && <div style={{ color: '#fb7185', marginBottom: 10, fontSize: 13 }}>{msg}</div>}
 
       {syn && (
           <div style={{ ...s.box, padding: '10px 12px', marginBottom: 12, fontSize: 12, borderLeft: '4px solid ' + SK.accent, background: SK.alt, borderRadius: SK.box.borderRadius }}>
@@ -1362,7 +1356,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
               )}
             </span>
             {new Set(syn.synthese || []).size !== (syn.synthese || []).length && (
-              <div style={{ color: '#b91c1c', marginTop: 4 }}>
+              <div style={{ color: '#fb7185', marginTop: 4 }}>
                 ⚠ doublons dans la réponse du backend
               </div>
             )}
@@ -1406,7 +1400,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           )}
           <div style={{ ...s.box, padding: '12px 14px', marginTop: 12, fontSize: 13, borderLeft: '5px solid ' + SK.accent, boxShadow: SK.ombreD }}>
             <b style={{ letterSpacing: 1.4 }}>TICKET</b>{'  '}
-            <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: 1.5, color: SK.accentSombre }}>
+            <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: 1.5, color: SK.accent }}>
               {ticket.length ? ticket.join('  ·  ') : '—'}
             </span>
             <span style={{ fontSize: 12, color: '#64748b', marginLeft: 12 }}>{ticket.length} chevaux</span>
@@ -1448,7 +1442,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                *   10:15 » au-dessus d'un ticket qui bouge était un mensonge.
                *   Le gel vit dans l'onglet Archive, avec sa source et son heure. */
               const gele = !!(ticketManuel && ticketManuel.length)
-              const conf = !gele || !src ? ['LIVE', '#94a3b8']
+              const conf = !gele || !src ? ['LIVE', '#7a8ea9']
                 : src === 'manuel' ? ['MANUEL', '#93c5fd']
                 : src === 'final' ? ['DÉFINITIF', '#4ade80']
                 : ['PROVISOIRE', '#fcd34d']
@@ -1501,7 +1495,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   La course n'est pas encore clôturée — ou le résultat n'a pas été lu.
                 </span>
                 <button onClick={() => chercherResultat()} disabled={busyResultat}
-                  style={{ padding: '8px 20px', borderRadius: 6, border: '2px solid ' + SK.accent, background: busyResultat ? '#94a3b8' : SK.accent, color: '#fff', cursor: busyResultat ? 'default' : 'pointer', fontWeight: 700, fontSize: 13, fontFamily: SK.police }}>
+                  style={{ padding: '8px 20px', borderRadius: 6, border: '2px solid ' + SK.accent, background: busyResultat ? '#7a8ea9' : SK.accent, color: '#fff', cursor: busyResultat ? 'default' : 'pointer', fontWeight: 700, fontSize: 13, fontFamily: SK.police }}>
                   {busyResultat ? 'Lecture en cours…' : '⚑ Chercher le résultat'}
                 </button>
               </>
@@ -1531,7 +1525,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         <td style={s.td}>{p.horse}</td>
                         <td style={s.td}>{grille ? ((grille.slotParNum && grille.slotParNum[p.num]) ?? grille.parNum?.[p.num] ?? '—') : '—'}</td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 12 }}>{p.musique}</td>
-                        <td style={{ ...s.td, fontWeight: 700, color: sc.score >= 5 ? '#15803d' : sc.score >= 3.5 ? '#a16207' : '#b91c1c' }}>
+                        <td style={{ ...s.td, fontWeight: 700, color: sc.score >= 5 ? '#34d399' : sc.score >= 3.5 ? '#fbbf24' : '#fb7185' }}>
                           {sc.score.toFixed(2)}
                         </td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 12 }}>{sc.serie.join(' ')}</td>
@@ -1565,7 +1559,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
       {onglet === 'archive' && (
         <div>
           <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
-            <button onClick={toutEffacer} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid #fca5a5', background: SK.carte, color: '#b91c1c', cursor: 'pointer', fontFamily: SK.police }}>
+            <button onClick={toutEffacer} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid rgba(244,63,94,.55)', background: SK.carte, color: '#fb7185', cursor: 'pointer', fontFamily: SK.police }}>
               Tout effacer
             </button>
             <button onClick={() => figerPuisRafraichir()} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: 'pointer', fontFamily: SK.police }}>
@@ -1574,7 +1568,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           </div>
 
           {archive.length === 0 ? (
-            <div style={{ fontSize: 13, color: '#94a3b8' }}>Archive vide. Ouvre cette page chaque jour : la Synthèse est enregistrée automatiquement.</div>
+            <div style={{ fontSize: 13, color: '#7a8ea9' }}>Archive vide. Ouvre cette page chaque jour : la Synthèse est enregistrée automatiquement.</div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
@@ -1595,14 +1589,14 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     const hit3 = top3.filter((n) => t.has(n)).length
                     const manque1er = (a.arrivee || []).length > 0 && ticketValide(a).length > 0 && !t.has(a.arrivee[0])
                     return (
-                      <tr key={a.date} style={{ borderBottom: '1px solid #f1f5f9',                         background: a.placeholder ? SK.danger : (a.found ? SK.ligne : SK.alt) }}>
+                      <tr key={a.date} style={{ borderBottom: '1px solid rgba(255,255,255,.07)',                         background: a.placeholder ? SK.danger : (a.found ? SK.ligne : SK.alt) }}>
                         <td style={{ ...s.td, fontWeight: 700 }}>{a.date}</td>
                         <td style={{ ...s.td, textTransform: 'capitalize' }}>{(a.hippodrome || a.race?.hippodrome || '—').toLowerCase()}</td>
                         <td style={s.td}>{({ PLAT: 'Plat', HAIE: 'Haies', ATTELE: 'Attelé', TROT: 'Trot', STEEPLECHASE: 'Steeple', STEEPLE: 'Steeple', HAIES: 'Haies', ATTELEE: 'Attelé' })[String(a.discipline || '').toUpperCase()] || (a.discipline && a.discipline !== 'N' ? a.discipline : '—')}</td>
                         <td style={s.td}>{a.distance ? a.distance + 'm' : '—'}</td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>
                           {(a.synthese || []).join(' ')}
-                          {a.placeholder && <span style={{ color: '#b91c1c', fontWeight: 700 }}> ⚠ par défaut</span>}
+                          {a.placeholder && <span style={{ color: '#fb7185', fontWeight: 700 }}> ⚠ par défaut</span>}
                         </td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>{(a.arrivee || []).join('-') || '—'}</td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>
@@ -1616,29 +1610,29 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                             Pas l'heure d'enregistrement de la Synthèse — ce
                             sont deux moments différents, et n'en afficher
                             qu'un évite toute ambiguïté. */}
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11, color: a.ticketPoseLe ? SK.accent : '#94a3b8' }}>
+                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11, color: a.ticketPoseLe ? SK.accent : '#7a8ea9' }}>
                           {a.ticketPoseLe ? a.ticketPoseLe.slice(11, 16) : '—'}
                         </td>
                         <td style={{ ...s.td, fontSize: 11, fontWeight: 800 }}>
                           {(() => {
                             if ((a.arrivee || []).length > 0) return <span style={{ color: '#57534e' }}>CLÔTURÉ</span>
                             const src = a.ticketSource || null
-                            if (!src || !ticketValide(a).length) return <span style={{ color: '#94a3b8' }}>—</span>
-                            const conf = src === 'final' ? ['DÉFINITIF', '#15803d']
+                            if (!src || !ticketValide(a).length) return <span style={{ color: '#7a8ea9' }}>—</span>
+                            const conf = src === 'final' ? ['DÉFINITIF', '#34d399']
                               : src === 'manuel' ? ['MANUEL', '#1d4ed8']
                               : ['PROVISOIRE', '#b45309']
                             return <span style={{ color: conf[1] }}>{conf[0]}</span>
                           })()}
                         </td>
-                        <td style={{ ...s.td, fontWeight: 700, color: p === 5 ? '#15803d' : p > 0 ? '#a16207' : '#94a3b8' }}>
+                        <td style={{ ...s.td, fontWeight: 700, color: p === 5 ? '#34d399' : p > 0 ? '#fbbf24' : '#7a8ea9' }}>
                           {a.arrivee ? p + '/5' : '—'}
                         </td>
-                        <td style={{ ...s.td, fontWeight: 700, color: !a.arrivee ? '#94a3b8' : hit3 === 3 ? '#15803d' : manque1er ? '#b91c1c' : '#a16207' }}>
+                        <td style={{ ...s.td, fontWeight: 700, color: !a.arrivee ? '#7a8ea9' : hit3 === 3 ? '#34d399' : manque1er ? '#fb7185' : '#fbbf24' }}>
                           {!a.arrivee ? '—' : hit3 + '/3'}{manque1er ? ' ⚠1er' : ''}
                         </td>
                         <td style={s.td}>
                           <button onClick={async () => { await deleteArchive(a.date); rafraichirArchive() }}
-                            style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#b91c1c' }}>✕</button>
+                            style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#fb7185' }}>✕</button>
                         </td>
                       </tr>
                     )
@@ -1654,7 +1648,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
       {onglet === 'stats' && (
         <div>
           {stats.nb === 0 ? (
-            <div style={{ fontSize: 13, color: '#94a3b8' }}>
+            <div style={{ fontSize: 13, color: '#7a8ea9' }}>
               Pas encore assez de données ({stats.nb} Quinté avec arrivée). L’archive se remplit
               automatiquement à chaque ouverture de page.
             </div>
@@ -1667,7 +1661,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   {' '}— qui gagne, qui place.
                 </span>
                 {stats.diagnostic && (stats.diagnostic.doublons > 0 || stats.diagnostic.chevauxAbsents > 0) && (
-                  <span style={{ color: '#b91c1c', fontWeight: 600 }}>
+                  <span style={{ color: '#fb7185', fontWeight: 600 }}>
                     ⚠ doublons {stats.diagnostic.doublons} · chevaux absents de la Synthèse {stats.diagnostic.chevauxAbsents} — exclus
                   </span>
                 )}
@@ -1677,8 +1671,8 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   const sans1er = closes.filter((a) => !ticketValide(a).includes(a.arrivee[0])).length
                   return closes.length ? (
                     <span style={{ fontWeight: 700 }}>
-                      Top3 : <span style={{ color: '#15803d' }}>{avec3}/{closes.length}</span>
-                      {' · '}1er manqué : <span style={{ color: sans1er ? '#b91c1c' : '#15803d' }}>{sans1er}/{closes.length}</span>
+                      Top3 : <span style={{ color: '#34d399' }}>{avec3}/{closes.length}</span>
+                      {' · '}1er manqué : <span style={{ color: sans1er ? '#fb7185' : '#34d399' }}>{sans1er}/{closes.length}</span>
                     </span>
                   ) : null
                 })()}
@@ -1688,7 +1682,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </span>
                 )}
                 <button onClick={() => setToutLesP((v) => !v)}
-                  style={{ padding: '3px 12px', borderRadius: 999, border: '1px solid ' + SK.bord, background: toutLesP ? SK.accent : '#fff', color: toutLesP ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
+                  style={{ padding: '3px 12px', borderRadius: 999, border: '1px solid ' + SK.bord, background: toutLesP ? 'rgba(255,255,255,.14)' : 'transparent', color: toutLesP ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
                   {toutLesP ? 'P1-P5 seulement' : 'Voir jusqu’à P20'}
                 </button>
               </div>
@@ -1703,31 +1697,31 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     </tr>
                   </thead>
                   <tbody>
-                    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
                       <td style={{ ...s.td, fontWeight: 700 }}>n_top5</td>
                       {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
                         <td key={r.place} style={{ ...s.td, fontWeight: 700 }}>{r.n}</td>
                       ))}
                     </tr>
-                    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
                       <td style={{ ...s.td, fontWeight: 700, color: SK.muted }}>victoires</td>
                       {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
                         <td key={r.place} style={{ ...s.td, color: SK.muted }}>{r.victoires ?? '—'}</td>
                       ))}
                     </tr>
-                    <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
                       <td style={{ ...s.td, fontWeight: 700, color: SK.muted }}>podiums</td>
                       {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
                         <td key={r.place} style={{ ...s.td, color: SK.muted }}>{r.podiums ?? '—'}</td>
                       ))}
                     </tr>
                     {['1er', '2e', '3e', '4e', '5e'].map((lbl, k) => (
-                      <tr key={lbl} style={{ borderBottom: '1px solid #f1f5f9', background: k % 2 ? SK.alt : SK.ligne }}>
+                      <tr key={lbl} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: k % 2 ? SK.alt : SK.ligne }}>
                         <td style={{ ...s.td, fontWeight: 700 }}>{lbl}</td>
                         {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
                           <td key={r.place} style={{
                             ...s.td, fontWeight: r.n && r.p[k] > 0 ? 800 : 400,
-                            color: r.n === 0 ? '#cbd5e1' : r.p[k] > 0 ? '#15803d' : '#94a3b8',
+                            color: r.n === 0 ? '#4a5a72' : r.p[k] > 0 ? '#34d399' : '#6d82a2',
                           }}>
                             {r.n ? r.p[k] + '%' : '—'}
                           </td>
@@ -1739,7 +1733,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                       {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
                         <td key={r.place} style={{
                           ...s.td, fontWeight: 800,
-                          color: r.n === 0 ? '#cbd5e1' : r.top3 >= 60 ? SK.accent : r.top3 > 0 ? SK.texte : '#94a3b8',
+                          color: r.n === 0 ? '#4a5a72' : r.top3 >= 60 ? SK.accent : r.top3 > 0 ? SK.texte : '#6d82a2',
                           background: r.n ? SK.accentClair : SK.alt,
                         }}>
                           {r.n ? r.top3 + '%' : '—'}
@@ -1787,10 +1781,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         ['P(top5 | N)', (r) => p(r.p_top5_global), true],
                       ]
                       return lignes.map(([lbl, get, pct], k) => (
-                        <tr key={lbl} style={{ borderBottom: '1px solid #f1f5f9', background: k % 2 ? SK.alt : SK.ligne }}>
-                          <td style={{ ...s.td, fontWeight: 700, color: pct ? SK.accent : '#334155' }}>{lbl}</td>
+                        <tr key={lbl} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: k % 2 ? SK.alt : SK.ligne }}>
+                          <td style={{ ...s.td, fontWeight: 700, color: pct ? SK.accent : '#a4b8d6' }}>{lbl}</td>
                           {L.map((r) => (
-                            <td key={r.place} style={{ ...s.td, color: r.n === 0 ? '#cbd5e1' : '#334155' }}>{get(r)}</td>
+                            <td key={r.place} style={{ ...s.td, color: r.n === 0 ? '#4a5a72' : '#c7d6ea' }}>{get(r)}</td>
                           ))}
                         </tr>
                       ))
@@ -1844,8 +1838,8 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                           <tr key={t.id} style={{ borderBottom: '1px solid ' + SK.bord, background: k % 2 ? SK.alt : SK.ligne }}>
                             <td style={{ ...s.td, fontWeight: 700 }}>{t.label}</td>
                             <td style={s.td}>{t.n}</td>
-                            <td style={{ ...s.td, color: t.nonEvaluables ? SK.muted : '#94a3b8' }}>{t.nonEvaluables}</td>
-                            <td style={{ ...s.td, color: t.top3 == null ? '#cbd5e1' : '#15803d', fontWeight: 700 }}>{t.top3 == null ? '—' : t.top3 + '%'}</td>
+                            <td style={{ ...s.td, color: t.nonEvaluables ? SK.muted : '#7a8ea9' }}>{t.nonEvaluables}</td>
+                            <td style={{ ...s.td, color: t.top3 == null ? '#4a5a72' : '#34d399', fontWeight: 700 }}>{t.top3 == null ? '—' : t.top3 + '%'}</td>
                             <td style={{ ...s.td, fontWeight: 700 }}>{t.top5 == null ? '—' : t.top5 + '%'}</td>
                             <td style={s.td}>{t.un == null ? '—' : t.un + '%'}</td>
                             <td style={{ ...s.td, color: '#64748b' }}>{t.debut && t.fin ? t.debut + ' → ' + t.fin : '—'}</td>
@@ -1866,7 +1860,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   ))}
                 </div>
 
-                <div style={{ fontSize: 13, marginTop: 10, paddingTop: 10, borderTop: '1px solid #e2e8f0' }}>
+                <div style={{ fontSize: 13, marginTop: 10, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,.07)' }}>
                   <b style={{ color: SK.accent }}>Le podium (1er + 2e + 3e) vient de…</b>
                   <div style={{ marginTop: 6 }}>
                     {stats.podiumBloc.map((b) => {
@@ -1877,9 +1871,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                       const vals = (b.detail || []).map((d) => d.n)
                       const mx = vals.length ? Math.max(...vals) : 0
                       const coul = (v) =>
-                        v === mx ? { color: '#15803d', background: '#dcfce7' }
-                        : v < 1 ? { color: '#b91c1c', background: '#fee2e2' }
-                        : { color: '#a16207', background: '#fef9c3' }
+                        v === mx ? { color: '#34d399', background: 'rgba(52,211,153,.18)' }
+                        : v < 1 ? { color: '#fb7185', background: 'rgba(244,63,94,.18)' }
+                        : { color: '#fbbf24', background: 'rgba(251,191,36,.16)' }
                       const chip = { fontSize: 12, fontWeight: 800, padding: '1px 7px', borderRadius: 10, marginRight: 6 }
                       return (
                         <div key={b.id} style={{ marginBottom: 6 }}>
@@ -1901,9 +1895,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     Le tableau du dessus détaille chaque position P1 → P20.
                     Ici on compte les courses où <b>au moins un</b> des trois premiers sort du bloc.
                     {' '}Couleurs <b>des P dans chaque ligne</b> (le total reste neutre) :
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#15803d', background: '#dcfce7', fontWeight: 800 }}>le + fort</span>
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#a16207', background: '#fef9c3', fontWeight: 800 }}>au milieu</span>
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#b91c1c', background: '#fee2e2', fontWeight: 800 }}>0</span>
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#34d399', background: 'rgba(52,211,153,.18)', fontWeight: 800 }}>le + fort</span>
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#fbbf24', background: 'rgba(251,191,36,.16)', fontWeight: 800 }}>au milieu</span>
+                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#fb7185', background: 'rgba(244,63,94,.18)', fontWeight: 800 }}>0</span>
                   </div>
                 </div>
 
