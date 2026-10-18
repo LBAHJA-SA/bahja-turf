@@ -24,13 +24,22 @@
     ],
     "savedAt": "2026-10-18T00:54:28.505Z",
     "arrivee": null,
-    "ticket": null,
+    "ticket": [
+      16,
+      2,
+      1,
+      14,
+      8,
+      3,
+      4,
+      12
+    ],
     "discipline": "PLAT",
     "distance": 3100,
     "nbPartants": 16,
     "hippodrome": "ParisLongchamp",
     "prix": "PRIX RIEUSSEC",
-    "courseId": "pmu-R1C3",
+    "courseId": "2026-10-18_R1_C3",
     "cle": "2026-10-18_R1_C3",
     "runners": [
       1,
@@ -50,7 +59,60 @@
       15,
       16
     ],
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "placeholder": false,
+    "ticketMode": "defaut",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          8,
+          3,
+          4
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          2,
+          1
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          12
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          14
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          16
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-18T04:38:57.140Z",
+    "ticketMoteur": [
+      16,
+      2,
+      1,
+      14,
+      8,
+      3,
+      4,
+      12
+    ],
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-10-18T04:38:57.140Z"
   },
   "2026-10-17": {
     "date": "2026-10-17",
@@ -173,7 +235,7 @@
       2,
       19
     ],
-    "cloture": "2026-10-17T13:56:21.886Z",
+    "cloture": "2026-10-18T04:38:56.178Z",
     "scores": null,
     "collecte": "2026-10-17T21:58:36.079Z",
     "ticketMatin": [
