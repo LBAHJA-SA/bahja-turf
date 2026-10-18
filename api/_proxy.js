@@ -117,7 +117,18 @@ export function proxy(label) {
       if (!chemin.startsWith('/') || chemin.startsWith('//')) {
         throw new Error('chemin refuse')
       }
-      const cible = origine + chemin + (depuisRequete ? '' : (u.search || ''))
+      /* ⚠ 18/10/2026 — LA QUERY DU CLIENT DOIT SUIVRE, `p` EXCLU.
+       *   vercel.json réécrit /api/tf/php/reu.php?view=program&date=… en
+       *   /api/tf?p=php/reu.php&view=program&date=… : le chemin arrive dans
+       *   `p` ET la query du client reste à côté (vérifié en ligne : `base=1`
+       *   y est). On la jetait → turf-france servait son accueil (3 936 o) au
+       *   lieu du programme (202 425 o), et la carrière retombait sur le
+       *   corpus de 2022. On remet tout, `p` en moins. */
+      const params = [...u.searchParams].filter(([k]) => k !== 'p')
+      const query = params.length
+        ? '?' + params.map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v)).join('&')
+        : ''
+      const cible = origine + chemin + query
 
       const entetes = {
         'user-agent': UA,

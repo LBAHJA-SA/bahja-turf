@@ -238,8 +238,19 @@ export default async function handler(req) {
     })
   }
 
+  /* ⚠ 18/10/2026 — LA QUERY DU CLIENT DOIT SUIVRE, `p` EXCLU.
+   *   Vercel réécrit /api/ptf/api/articles?orderBy=publishedAt&limit=25 en
+   *   /api/ptf?p=api/articles&orderBy=publishedAt&limit=25 : le chemin arrive
+   *   dans `p`, la query du client reste à côté. On la jetait → l'API rendait
+   *   son corpus par défaut (mesuré en ligne : 56 383 o, articles de 2022).
+   *   On remet tout, `p` en moins. */
+  const params = [...u.searchParams].filter(([k]) => k !== 'p')
+  const query = params.length
+    ? '?' + params.map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v)).join('&')
+    : ''
+
   try {
-    const { statut, type, corps, essais } = await chercher(BASE + chemin)
+    const { statut, type, corps, essais } = await chercher(BASE + chemin + query)
     return new Response(corps, {
       status: statut,
       headers: {

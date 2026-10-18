@@ -305,14 +305,16 @@ function decoderTexte(octets, type = "") {
     if (!chemin.startsWith("/") || chemin.startsWith("//")) throw new Error("chemin refuse");
     /* ⚠ 07/10/2026 : la query string fait partie de la cible. reu.php
      *   ?view=program&date=… sans la query retombait sur la page d'accueil
-     *   (3 935 o) au lieu du programme (132 165 o). `api/_proxy.js` le fait
-     *   déjà pour la production ; on aligne le middleware de dev dessus.
-     * ⚠ 17/10/2026 : quand `?p=` porte DÉJÀ la query (la forme Vercel), le
-     *   `u.search` de la requête n'est que l'enveloppe « ?p=… » : l'ajouter
-     *   collait « ?p=… » à la FIN de la query de la cible (donc `mode=standard
-     *   ?p=…`). `api/_proxy.js` ne le faisait pas — les deux transports
-     *   divergeaient. Même règle des deux côtés. */
-    const query = depuisRequete ? "" : (u.search && u.search !== "?" ? u.search : "");
+     *   (3 935 o) au lieu du programme (132 165 o).
+     * ⚠ 18/10/2026 : quand le chemin vient de `?p=` (la forme que produit le
+     *   rewrite Vercel), la query du client n'est PAS dans `p` — elle est à
+     *   côté, telle quelle. La jeter servait l'accueil de turf-france EN LIGNE
+     *   (3 936 o) au lieu du programme (202 425 o). On garde donc tous les
+     *   paramètres SAUF `p`. Même règle qu'`api/_proxy.js` et `api/ptf.js`. */
+    const params = [...u.searchParams].filter(([k]) => k !== "p");
+    const query = params.length
+      ? "?" + params.map(([k, v]) => encodeURIComponent(k) + "=" + encodeURIComponent(v)).join("&")
+      : "";
     const cible = ORIGINES[label] + chemin + query;
     const entetes = {
       "user-agent": UA,
