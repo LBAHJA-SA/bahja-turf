@@ -3,11 +3,11 @@
  *
  *  Ce que le parieur lit sur son carnet, en haut de chaque course :
  *
- *      Simple Gagnant · Simple Placé · Jumelé Gagnant · Jumelé Placé
+ *      Simple Gagnant · Simple Placé · Couplé Gagnant · Couplé Placé
  *      Tiercé · Quarté · Quinté+
  *
  *  Une pastille = un ruban penché, sa couleur, son nom. Les couleurs suivent
- *  l'usage et ne changent JAMAIS : violet (Simple), orange (Jumelé), vert
+ *  l'usage et ne changent JAMAIS : violet (Simple), orange (Couplé), vert
  *  (Tiercé), bleu (Quarté), rouge (Quinté+).
  *
  *  Usage :
@@ -26,8 +26,11 @@
 export const PARIS = {
   'simple-gagnant': { lib: 'Simple Gagnant', haut: 'Simple', bas: 'Gagnant', teinte: 'violet' },
   'simple-place':   { lib: 'Simple Placé',   haut: 'Simple', bas: 'Placé',   teinte: 'prune' },
-  'jumele-gagnant': { lib: 'Jumelé Gagnant', haut: 'Jumelé', bas: 'Gagnant', teinte: 'orange' },
-  'jumele-place':   { lib: 'Jumelé Placé',   haut: 'Jumelé', bas: 'Placé',   teinte: 'ambre' },
+  /* ⚠ Les DEUX clés gardent « jumele- » : c'est la donnée du PMU et celle de
+   *   backend/ANALYSE/paris.js. Seul le LIBELLÉ lu par l'utilisateur change :
+   *   « Couplé », le nom du pari sur la feuille de course (décidé le 18/10). */
+  'jumele-gagnant': { lib: 'Couplé Gagnant', haut: 'Couplé', bas: 'Gagnant', teinte: 'orange' },
+  'jumele-place':   { lib: 'Couplé Placé',   haut: 'Couplé', bas: 'Placé',   teinte: 'ambre' },
   'tierce':         { lib: 'Tiercé',         haut: 'Tiercé', bas: '',        teinte: 'vert' },
   'quarte':         { lib: 'Quarté',         haut: 'Quarté', bas: '',        teinte: 'bleu' },
   'quinte':         { lib: 'Quinté+',        haut: 'Quinté+', bas: '',       teinte: 'rouge' },

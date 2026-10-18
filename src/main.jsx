@@ -2,6 +2,24 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 
+/* ══════════════════════════════════════════════════════════════════════════
+ *  LES VISITES (18/10/2026) — combien de monde lit le site, et d'où
+ *
+ *  Le site n'a ni compte ni base de données : jusqu'ici on ne savait RIEN des
+ *  visiteurs. Ce composant envoie une vue anonyme à Vercel à chaque page
+ *  (et à chaque changement de page du routeur), ce qui donne :
+ *
+ *      · les vues par page        · les visiteurs uniques
+ *      · les visiteurs « en direct »  · le pays, l'appareil, le référent
+ *
+ *  ⚠ IL FAUT L'ACTIVER UNE FOIS DANS VERCEL, sinon l'envoi reste sans effet :
+ *      vercel.com → projet bahja-turf → onglet Analytics → Enable
+ *
+ *  ⚠ AUCUN NOM, AUCUN COOKIE D'IDENTITÉ : Vercel compte des visites, pas des
+ *    personnes (mesure agrégée et sans cookie). Rien n'est envoyé au site.
+ * ══════════════════════════════════════════════════════════════════════════ */
+import { Analytics } from '@vercel/analytics/react'
+
 /* ── L'ORDRE COMPTE (18/10/2026) ────────────────────────────────────────────
  * ① Bootstrap 5 : la grille, les utilitaires, les composants.
  * ② les icônes (bi bi-trophy…).
@@ -116,4 +134,9 @@ class Garde extends React.Component {
   }
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<Garde><App /></Garde>)
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Garde>
+    <App />
+    <Analytics />
+  </Garde>,
+)

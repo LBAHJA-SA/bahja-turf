@@ -9,6 +9,7 @@
     "preview": "vite preview --port 3003"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "axios": "^1.7.0",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.2",
