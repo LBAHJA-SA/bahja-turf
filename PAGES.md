@@ -1,4 +1,4 @@
-# Les pages — 4 pages dans le menu, plus la page d'une course
+# Les pages — 4 pages dans le menu, plus la page d'une course et la console
 
 > Règle : **les pages ne partagent ni moteur d'analyse, ni source d'affichage.**
 > La navigation (menu, boutons) est autorisée : elle ne transporte
@@ -12,6 +12,22 @@
 | **Coply** | `/coply` | `frontend/COUPLE/` | `backend/COUPLE/` | l'archive des couples (`archivecouple/`) + le programme |
 | **Presse** | `/presse` | `frontend/PRESSE/` | `backend/PRESSE/` | ① déclarations et ② analyse du jour (`api.equidia.fr`) · ③ revue de presse (`pronostics-turf.info`, 18 journaux × 8 chevaux) · ④ **le papier du jour, en texte** (le journal qui le publie) puis **les articles des journaux** (Paris-Turf, Le Veinard) · ⑤ **les journaux en vidéo** : la chaîne qui les feuillette chaque matin |
 | **Article** (une course) | `/r/:slug` (`/race/:id` = alias) | `frontend/ARTICLE/` | `backend/ARTICLE/` | reu.php detail (course EXACTE + 19 colonnes + aptitude + tops + arrivée) → tqqjour → API bahja. **Pas dans le menu** : on y arrive en cliquant une course. |
+
+## La console d'administration — hors menu, invisible
+
+| Page | Lien | Affichage | Données |
+|---|---|---|---|
+| **Administration** | `/admin` (avec `?cle=…`) | `frontend/ADMIN/` | `backend/ADMIN/` |
+
+- **Jamais dans le bandeau** : `src/Entete.jsx` ne la connaît pas.
+- **Sans clé, elle renvoie à l'accueil** — un visiteur qui tape `/admin` voit la
+  page d'une adresse inconnue, sans un mot d'explication.
+- La clé se pose une fois par l'URL : `/admin?cle=<ta clé>` (6 caractères),
+  puis elle est mémorisée dans le navigateur et retirée de l'URL.
+- Elle prépare le **futur login** : les comptes et les pages de chacun. Rien
+  n'est encore filtré à l'entrée du site.
+
+Détail complet : AGENTS.md §25.
 
 ## Pourquoi des copies ?
 

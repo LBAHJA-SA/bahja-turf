@@ -476,6 +476,24 @@ function proxiesApi() {
           res.end(JSON.stringify({ erreur: String(e && e.message ? e.message : e) }));
         }
       });
+      /* /api/visite et /api/visiteurs — LE JOURNAL DES VISITEURS (18/10/2026).
+       * En DEV, il n'y a pas de base : on répond exactement comme le ferait
+       * Vercel sans les variables KV_* — `{configure:false}` — pour que la
+       * console /admin se dessine pareil au poste et en ligne (sinon la page
+       * reçoit du HTML et affiche une erreur rouge). Aucune visite n'est
+       * écrite en développement : `curl` et les rechargements ne polluent pas
+       * le vrai journal. */
+      server.middlewares.use((req, res, next) => {
+        const u = new URL(req.url || "/", "http://localhost");
+        if (u.pathname === "/api/visite") { res.statusCode = 204; res.end(); return; }
+        if (u.pathname === "/api/visiteurs") {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json; charset=utf-8");
+          res.end(JSON.stringify({ configure: false, dev: true }));
+          return;
+        }
+        next();
+      });
       /* /api/archive-push : le navigateur RENVOIE son archive au disque,
        * SANS CLIC (10/10/2026 — fin des « deux archives » qui divergent).
        * POST JSON {date: record} → fusionné dans data/synthese.json avec

@@ -1730,13 +1730,16 @@ collecte  →  public/data/* écrit
 | `public/data/cotes.json` | le marché (repli hors-ligne) |
 | `public/data/fiabilite.json` · `ecarts.json` · `choix.json` | l'onglet Statistiques |
 | `public/data/reu/` | les fiches de courses + `prog-{date}.json` |
+| `public/data/coply-modele.json` · `contextual-selection.json` · `empreinte*.json` · `ticket-groupe.json` | la page Coply |
 
 Le pas existe aussi **hors du cycle** : `--final` (re-gel avant-course) et
 `--cotes` (photo d'ouverture) réécrivent `public/data/*`, donc ils publient
 aussi — sans quoi le site garderait le ticket du matin jusqu'au run de 20 h 30.
 
-⚠ Les fichiers du **Coply** (`coply-modele`, `contextual-selection`,
-`empreinte*`, `ticket-groupe`) ne partent que sur `--coply` : recherches en cours.
+⚠ Le **Coply** (`coply-modele`, `contextual-selection`, `empreinte*`,
+`ticket-groupe`) est entré dans le lot le 18/10/2026, à la demande de
+l'utilisateur : ses pages lisent ces fichiers en direct, ils voyagent donc comme
+les autres. La liste complète est en tête de `tools\publier-archive.mjs`.
 
 **Les 3 garde-fous :**
 
@@ -3269,3 +3272,108 @@ le job quotidien (§13)       → 08 h 45 et 20 h 30, il archive le marché et l
 ⚠ Comme le papier sort **la veille au soir**, à 07 h on lit déjà le papier du
 jour ; et si le journal n'a rien publié, le bloc le dit : « le journal n'a rien
 publié sur ce Quinté pour l'instant ».
+
+---
+
+## 25. 🛡️ LA CONSOLE D'ADMINISTRATION `/admin` (18/10/2026) — invisible, et ce qu'elle prépare
+
+> **Demande de l'utilisateur** : « أريد أن أضيف صفحة الإدارة لكن لا تظهر عند
+> الزوار » (une page d'administration, mais qui ne se montre pas aux visiteurs),
+> pour préparer un futur **accès par login** (c'est lui qui donne les
+> utilisateurs et les mots de passe), et **savoir qui vient sur le site**.
+
+### 25.1 Les trois règles d'invisibilité
+
+| | |
+|---|---|
+| **Aucun lien** | `src/Entete.jsx` ne connaît pas la console. Aucune page ne pointe vers elle. |
+| **Sans clé → accueil** | `/admin` sans clé renvoie à `/` : un visiteur qui tape l'adresse voit **exactement** ce que voit celui qui tape n'importe quelle adresse inconnue. Rien ne trahit son existence. |
+| **La clé vit dans le navigateur** | Première ouverture par l'adresse : `/admin?cle=<ta clé>` (6 caractères minimum). Elle est mémorisée, puis **retirée de l'URL** aussitôt (pas d'historique, pas de lien partagé). |
+
+⚠ **Ce n'est pas de la sécurité, c'est de la discrétion** — et c'est dit tel quel
+dans la page. Les comptes vivent dans `localStorage` : un visiteur qui forcerait
+l'entrée ne verrait que **ses propres comptes vides**. La protection réelle
+viendra avec le login.
+
+### 25.2 Les trois onglets
+
+```
+Utilisateurs  →  qui entre, quel mot de passe, QUELLES PAGES
+Pages         →  le catalogue du site + qui a le droit d'y aller
+Visiteurs     →  le journal (IP, pays, page, appareil) + la mesure Vercel
+```
+
+**Utilisateurs** — chaque compte : nom, mot de passe (généré **lisible** : sans
+`0/O` ni `1/l/I`, on le relit au téléphone), une pastille par page (clic =
+autoriser/refuser), `rien` / `tout`, actif-suspendu, suppression.
+`comptes.json` s'exporte — **c'est ce fichier qu'on donnera au serveur le jour du
+login** — et s'importe.
+
+**Pages** — le catalogue est une **constante** (`PAGES`, `backend/ADMIN/donnees.js`)
+alignée sur `src/App.jsx` : analyse `/` · quinte `/quinte` · couple `/coply` ·
+presse `/presse` · article `/r/:slug` · admin `/admin`. La colonne « qui y a
+accès » se remplit depuis les comptes : c'est la matrice des droits.
+
+> ⚠ La `cle` d'une page est une **clé de permission** : la renommer effacerait
+> les droits déjà saisis. Les pages inconnues d'un compte importé sont
+> **signalées**, jamais transformées en droit.
+
+### 25.3 ⭐ Les adresses IP — oui, c'est possible, et voici comment
+
+**Ce que Vercel Analytics donne (déjà en place, gratuit, sans cookie)** :
+les vues par page, les visiteurs uniques, les visiteurs « en direct », le pays,
+l'appareil, le site référent. **Il ne donne PAS les IP** — c'est une mesure
+agrégée, et il faut l'**activer une fois** (projet → Analytics → Enable).
+
+**L'IP, elle, ne peut venir que du serveur** : le navigateur ne connaît pas
+l'adresse des autres visiteurs (et c'est heureux). D'où deux routes nouvelles :
+
+```
+POST /api/visite?p=/presse   →  le serveur lit x-forwarded-for, le pays
+                                (x-vercel-ip-country) et écrit UNE ligne
+GET  /api/visiteurs?jeton=…  →  le journal, réservé au propriétaire
+```
+
+| Fichier | Rôle |
+|---|---|
+| `api/visite.js` | écrit une visite. **Sans base : 204, rien n'est écrit** — le site ne casse pas. |
+| `api/visiteurs.js` | lit le journal. **Fermé par défaut** : sans `ADMIN_JETON`, 403. Comparaison du jeton à **temps constant**. |
+| `backend/ADMIN/visites.js` | le ping côté page : `pointerVisite()`, appelé par `NoterPage` (`src/App.jsx`) **à chaque changement de page**. |
+| `backend/ADMIN/donnees.js` | `lireVisites()`, `appareil()`, `paysLisible()`, `ilYA()` — la lecture d'un visiteur. |
+
+**Les trois étapes pour l'activer** (une seule fois) :
+
+1. `vercel.com` → projet **bahja-turf** → **Storage** → créer un **Redis** (offre gratuite) ;
+2. le relier au projet → Vercel pose `KV_REST_API_URL` et `KV_REST_API_TOKEN` ;
+3. ajouter la variable **`ADMIN_JETON`** (un mot de passe de ton choix) → redéployer.
+
+Puis, dans l'onglet **Visiteurs** : coller ce jeton une fois (il reste dans le
+navigateur), et le journal se remplit tout seul — il se relit toutes les minutes,
+et le bouton **Test** écrit une ligne marquée « test » pour vérifier la chaîne.
+
+**Ce qui est gardé** : les **2000 dernières** visites (`LTRIM`), rien d'autre :
+date, IP, page, pays, ville, appareil, référent. ⚠ **Une IP est une donnée
+personnelle (RGPD)** : prévoir une durée de conservation et une mention sur le
+site le jour où le journal devient permanent.
+
+### 25.4 Pourquoi le ping est inoffensif
+
+- **jamais bloquant** : `keepalive`, erreurs avalées — un journal en panne ne
+  ralentit ni ne casse une page ;
+- **le propriétaire n'est pas compté** : si la clé de la console est présente
+  dans le navigateur, `pointerVisite()` ne fait rien (ses propres tournées ne
+  polluent pas les statistiques) ;
+- **rien en développement** : le middleware de `vite.config.js` répond
+  `{configure:false}` (et 204 pour la visite) exactement comme Vercel sans base,
+  pour que la console se dessine pareil au poste et en ligne ;
+- **la page ne voit jamais l'IP** : elle l'envoie pas, elle ne la reçoit pas —
+  c'est le serveur qui l'écrit.
+
+### 25.5 Les fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `frontend/ADMIN/Admin.jsx` | la console : porte, 3 onglets, peau « ardoise » (hors des 4 peaux des onglets publics) |
+| `backend/ADMIN/donnees.js` | catalogue des pages, comptes (localStorage), mots de passe, import/export, lecture d'un visiteur |
+| `backend/ADMIN/visites.js` | `pointerVisite()` — le ping d'une page vue |
+| `src/App.jsx` | la route `/admin` + `<NoterPage />` (le ping à chaque changement d'adresse) |

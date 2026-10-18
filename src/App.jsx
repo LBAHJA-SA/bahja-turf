@@ -1,9 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Article from '../frontend/ARTICLE/Article.jsx'
 import QuinteGrille from '../frontend/QUINTE/QuinteGrille.jsx'
 import Couple from '../frontend/COUPLE/Couple.jsx'
 import Analyse from '../frontend/ANALYSE/Analyse.jsx'
 import Presse from '../frontend/PRESSE/Presse.jsx'
+import Admin from '../frontend/ADMIN/Admin.jsx'
+import { pointerVisite } from '../backend/ADMIN/visites.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  Une page, un lien, ses dossiers.
@@ -24,6 +27,7 @@ import Presse from '../frontend/PRESSE/Presse.jsx'
 export default function App(){
   return (
     <BrowserRouter>
+      <NoterPage />
       <Routes>
         {/* ── l'accueil : l'analyse de toutes les courses du jour ── */}
         <Route path="/" element={<Analyse />} />
@@ -43,9 +47,35 @@ export default function App(){
         {/* la presse du jour : déclarations, analyse, revue de presse, articles */}
         <Route path="/presse" element={<Presse />} />
 
+        {/* ══════════════════════════════════════════════════════════════════════
+         *  ⚠ LA CONSOLE D'ADMINISTRATION — INVISIBLE POUR LES VISITEURS.
+         *  Elle n'est dans AUCUN menu (src/Entete.jsx ne la connaît pas) et,
+         *  sans clé, elle renvoie à l'accueil : un visiteur qui taperait
+         *  /admin par hasard voit exactement la page d'une adresse inconnue.
+         *  La clé se pose une fois par l'adresse : /admin?cle=<ta clé>
+         *  (6 caractères minimum). Elle est ensuite mémorisée dans le
+         *  navigateur, et retirée de l'URL aussitôt.
+         * ══════════════════════════════════════════════════════════════════════ */}
+        <Route path="/admin" element={<Admin />} />
+
         {/* une adresse inconnue ne laisse jamais un écran vide */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   )
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ *  NOTER LA PAGE VUE — une ligne par page, c'est le journal des visiteurs.
+ *
+ *  Le serveur ajoute l'IP (en-tête `x-forwarded-for`) et le pays : la page ne
+ *  les voit jamais, et elle n'a rien à envoyer. Le propriétaire, lui, n'est
+ *  pas compté (sa clé d'accès est présente) — voir backend/ADMIN/visites.js.
+ *
+ *  ⚠ Jamais bloquant : si l'appel échoue, la page s'affiche quand même.
+ * ══════════════════════════════════════════════════════════════════════════ */
+function NoterPage() {
+  const { pathname } = useLocation()
+  useEffect(() => { pointerVisite(pathname) }, [pathname])
+  return null
 }
