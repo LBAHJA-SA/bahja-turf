@@ -910,9 +910,15 @@ if (args.includes('--install')) {
 if (args.includes('--final')) {
   log('===== final (re-gel avant-course) =====')
   await finaliserJour(aujourdhui())
+  /* ⚠ le re-gel RÉÉCRIT public/data/synthese.json : il doit partir au site
+   *   TOUT DE SUITE — c'est le ticket qu'on joue (§11.17). Sans ce pas, le
+   *   site garderait le ticket du matin jusqu'au run de 20 h 30. */
+  await publierDonnees()
 } else if (args.includes('--cotes')) {
   log('===== cotes (snapshot ouverture) =====')
   await snapshotMarche(aujourdhui(), 'ouverture')
+  /* même raison : le snapshot change public/data/cotes.json */
+  await publierDonnees()
 } else if (args.includes('--watch')) {
   console.log('Mode watch : toutes les 20 minutes. Ctrl+C pour arreter.' + nl)
   await cycle()

@@ -1731,6 +1731,10 @@ collecte  →  public/data/* écrit
 | `public/data/fiabilite.json` · `ecarts.json` · `choix.json` | l'onglet Statistiques |
 | `public/data/reu/` | les fiches de courses + `prog-{date}.json` |
 
+Le pas existe aussi **hors du cycle** : `--final` (re-gel avant-course) et
+`--cotes` (photo d'ouverture) réécrivent `public/data/*`, donc ils publient
+aussi — sans quoi le site garderait le ticket du matin jusqu'au run de 20 h 30.
+
 ⚠ Les fichiers du **Coply** (`coply-modele`, `contextual-selection`,
 `empreinte*`, `ticket-groupe`) ne partent que sur `--coply` : recherches en cours.
 
@@ -1751,10 +1755,12 @@ fiches de courses du 08/10 au 13/10, jamais envoyées), puis **1 seul** fichier
 au run suivant (le ticket du jour gelé). En ligne après ~40 s :
 `/data/synthese.json` = **17 dates** · `/data/reu/prog-2026-10-13.json` = 200.
 
-⚠ **Le job doit TOURNER.** Le 18/10, la tâche de 08 h 45 n'a **laissé aucune
-ligne** au journal (dernière collecte : 17/10 21:59) : la machine était absente
-au déclencheur. Une publication automatique ne répare pas un planificateur qui
-dort.
+⚠ **La collecte, elle, tournait très bien — et c'est le piège.** La tâche de
+08 h 45 a bien tourné le 17/10 (dernière exécution **10:16:14**, résultat 0) et
+le dernier cycle complet est celui du **17/10 à 21:59**. Ce n'était donc pas le
+planificateur qu'il fallait réparer : c'était le **canal d'envoi**, mort en
+silence depuis le 07/10. Leçon : **un pas qui échoue sans le dire laisse croire
+que tout va bien** — d'où la ligne de journal à chaque publication, désormais.
 
 ---
 
