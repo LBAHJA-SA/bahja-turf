@@ -10,10 +10,12 @@
 //    data/carriere.json   les carrières saisies (clé = date)
 //    data/daily.log       journal
 //
-//  ⭐ CE JOB NE PUBLIE RIEN. Il écrit public/data/synthese.json (le site le
-//    lit en direct), mais ne fait NI commit NI push : l'archive ne part sur
-//    le site que par `node tools\publier-archive.mjs`. Sans ça, chaque run
-//    du matin remplacerait le site sans que personne l'ait demandé.
+//  ⭐ CE JOB NE PUBLIE PAS DE CODE — mais il PUBLIE LES DONNÉES.
+//    Il écrit public/data/*, puis appelle `tools\publier-archive.mjs`
+//    (pas de commit à la main, pas de surprise : ce script est la seule porte
+//    de sortie des données, et son commit est limité à ces chemins).
+//    Le site est ainsi à jour deux fois par jour sans intervention.
+//    Pour sauter ce pas : BAHJA_SANS_PUBLICATION=1
 // ============================================================================
 import fs, { existsSync } from 'node:fs'
 import path from 'node:path'
@@ -789,6 +791,35 @@ function archiverLesCourses(date) {
  *
  *  ⚠ ne fait jamais tomber le job : c'est le dernier pas, après l'écriture
  *  de public/data/* ; un échec de deploy ne peut pas casser l'archive. */
+/** Publie les DONNÉES du site : l'archive, le marché et les fiches de courses.
+ *  Le site les lit par le réseau (`fetch('/data/…')`) : elles doivent vivre
+ *  dans le dépôt, sinon la page affiche la version du dernier envoi de code.
+ *  C'est `publier-archive.mjs` qui s'en occupe — il commite UNIQUEMENT ses
+ *  chemins, donc le travail en cours sur le disque ne part jamais.
+ *
+ *  ⚠ ne fait jamais tomber le job : la collecte est déjà écrite, un échec de
+ *  publication (réseau, droits git) finit au journal, pas en exception. */
+function publierDonnees() {
+  return new Promise((res) => {
+    if (process.env.BAHJA_SANS_PUBLICATION === '1') {
+      log(' publication des donnees : sautee (BAHJA_SANS_PUBLICATION=1)')
+      return res()
+    }
+    const p = spawn(process.execPath, [path.join(ICI, 'publier-archive.mjs'), '--auto'], {
+      cwd: RACINE, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true,
+    })
+    let sortie = ''
+    p.stdout.on('data', (d) => { sortie += String(d) })
+    p.stderr.on('data', (d) => { sortie += String(d) })
+    p.on('close', (code) => {
+      const dernier = (sortie.trim().split('\n').filter(Boolean).slice(-1)[0] || '').replace(/^\s+/, '')
+      log(code === 0 ? `     ${dernier}` : `     donnees : ECHEC (code ${code}) ${dernier}`)
+      res()
+    })
+    p.on('error', (e) => { log('     donnees : impossible : ' + e.message); res() })
+  })
+}
+
 function publier() {
   return new Promise((res) => {
     if (process.env.BAHJA_SANS_DEPLOY === '1') { log(' publication : sautee (BAHJA_SANS_DEPLOY=1)'); return res() }
@@ -824,6 +855,7 @@ async function cycle() {
   log(` jour ${aujourdhui()}`)
   await collecterJour(aujourdhui())
   await archiverLesCourses(aujourdhui())
+  await publierDonnees()
   await publier()
   const db = lire(F_SYN, {})
   const avec = Object.values(db).filter((r) => r.ticket && r.arrivee)

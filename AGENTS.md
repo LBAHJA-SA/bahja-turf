@@ -1515,6 +1515,9 @@ marché         → chargerCotes(courseId) sur equidia.fr → data/cotes.json
                  (si la cote est complète : mode `+marche`, le ticket change)
 archive-reu    → node tools\archive-reu.mjs <date>  (enfant, jamais bloquant)
                  → public/data/reu/<date>_R.._C.._<PAYS>.json
+publier données→ node tools\publier-archive.mjs --auto  (enfant, jamais bloquant)
+                 commit limité aux chemins de données + push → Vercel redéploie
+                 BAHJA_SANS_PUBLICATION=1 → saute ce pas (voir §13.7)
 publier        → node tools\deploy.mjs  (enfant, dernier pas)
                  build + vercel deploy --prod + vérification en ligne
                  BAHJA_SANS_DEPLOY=1 → saute la publication (tests)
@@ -1696,6 +1699,62 @@ Aptitude 1er: 4 - 5                                          (était « — »)
 ⚠ La page **Programme** (`/`, liste des réunions via `reu.php`) n'a **pas** de
 Top10 : cette donnée n'existe que sur la page de course (`/r/:slug`,
 `tqqjour.php`). Le Top10 est donc affiché là où la source le donne.
+
+---
+
+### 13.7 ⭐ LA PUBLICATION DES DONNÉES EST AUTOMATIQUE (18/10/2026)
+
+**Le problème mesuré le 18/10.** Le site servait une archive périmée. La cause
+n'était pas la collecte : `data/deploy.json` datait du **07/10 21:17** — le pas
+`publier` (Vercel CLI) était **mort depuis 11 jours, sans le dire**. Le site
+n'était plus tenu à jour que par les envois de code à la main, qui poussent la
+version du **dépôt** : donc une archive ancienne, à chaque fois plus ancienne.
+
+**La règle maintenant.** Les données voyagent par **git**, pas par la CLI.
+`tools\publier-archive.mjs` est la seule porte de sortie ; le cycle du job
+l'appelle après la collecte (`publierDonnees()`, juste avant `publier()`) :
+
+```
+collecte  →  public/data/* écrit
+          →  publier-archive.mjs --auto
+               git add -f -A -- <chemins de données>
+               git commit -m "donnees : …" -- <chemins de données>
+               git push origin main        →  Vercel redéploie tout seul
+```
+
+**Ce qui est publié** — et rien d'autre :
+
+| Chemin | Ce que la page en fait |
+|---|---|
+| `public/data/synthese.json` | l'archive : tickets, arrivées, x/5 |
+| `public/data/cotes.json` | le marché (repli hors-ligne) |
+| `public/data/fiabilite.json` · `ecarts.json` · `choix.json` | l'onglet Statistiques |
+| `public/data/reu/` | les fiches de courses + `prog-{date}.json` |
+
+⚠ Les fichiers du **Coply** (`coply-modele`, `contextual-selection`,
+`empreinte*`, `ticket-groupe`) ne partent que sur `--coply` : recherches en cours.
+
+**Les 3 garde-fous :**
+
+1. **Le commit est limité à ces chemins** (`git commit -m … -- <chemins>`).
+   Le travail en cours sur le disque — autre fichier modifié, index déjà garni,
+   1000 fichiers non suivis — **ne part jamais**. Vérifié le 18/10 : après
+   publication, `api/couple.js`, `data/nr-*.json` et `archivecouple/` étaient
+   toujours locaux.
+2. **Un échec ne casse rien** : processus enfant, `stdio` capturé, journalisé
+   en une ligne (`donnees : 1 fichier(s) publie(s)` ou `donnees : ECHEC …`).
+   La collecte est déjà écrite. `BAHJA_SANS_PUBLICATION=1` saute le pas.
+3. **`--dry-run` montre sans publier** (liste des fichiers, sortie 1).
+
+**Mesure du 18/10** : **290 fichiers** publiés d'un coup (essentiellement les
+fiches de courses du 08/10 au 13/10, jamais envoyées), puis **1 seul** fichier
+au run suivant (le ticket du jour gelé). En ligne après ~40 s :
+`/data/synthese.json` = **17 dates** · `/data/reu/prog-2026-10-13.json` = 200.
+
+⚠ **Le job doit TOURNER.** Le 18/10, la tâche de 08 h 45 n'a **laissé aucune
+ligne** au journal (dernière collecte : 17/10 21:59) : la machine était absente
+au déclencheur. Une publication automatique ne répare pas un planificateur qui
+dort.
 
 ---
 
