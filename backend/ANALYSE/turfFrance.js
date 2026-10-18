@@ -2,8 +2,8 @@
  * backend/ANALYSE/turfFrance.js
  *
  * ⛔ COPIÉ de `backend/ARTICLE/turfFrance.js` — « chaque page ses outils »
- *    (même règle que le `parisVersGMT` de backend/PROGRAMME/donnees.js).
- *    La page Chevaux a besoin des mêmes extractions — tops, aptitudes,
+ *    (même règle que le `parisVersGMT` de backend/ARTICLE/turfFrance.js).
+ *    La page « Analyse course » a besoin des mêmes extractions — tops, aptitudes,
  *    synthèse des %, pronostics — PLUS les OUTILS (les pastilles de couleur et
  *    les boutons) qu'elle affiche sous CHAQUE course.
  *    ⚠ On ne touche JAMAIS à la copie de l'ARTICLE.

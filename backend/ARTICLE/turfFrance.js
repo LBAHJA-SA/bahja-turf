@@ -347,7 +347,7 @@ export function slugNorm(t) {
   return String(t || 'course').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 }
 
-/** Paris → GMT (COPIE de backend/PROGRAMME/donnees.js : chaque page ses outils). */
+/** Paris → GMT (règle historique héritée de l'ancienne page Programme : chaque page ses outils). */
 export function parisVersGMT(dateAAAA_MM_JJ, h, mi) {
   const part = String(dateAAAA_MM_JJ).split('-').map(Number)
   const mur = Date.UTC(part[0], part[1] - 1, part[2], Number(h), Number(mi))
