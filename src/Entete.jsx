@@ -22,6 +22,7 @@ const LIENS = [
   { cle: 'analyse', to: '/', libelle: 'Analyse course', icone: 'bi-clipboard2-pulse' },
   { cle: 'quinte', to: '/quinte', libelle: 'Quinté', icone: 'bi-trophy' },
   { cle: 'couple', to: '/coply', libelle: 'Coply', icone: 'bi-people' },
+  { cle: 'presse', to: '/presse', libelle: 'Presse', icone: 'bi-newspaper' },
 ]
 
 export default function Entete({ page }) {

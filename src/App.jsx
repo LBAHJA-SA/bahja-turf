@@ -3,9 +3,10 @@ import Article from '../frontend/ARTICLE/Article.jsx'
 import QuinteGrille from '../frontend/QUINTE/QuinteGrille.jsx'
 import Couple from '../frontend/COUPLE/Couple.jsx'
 import Analyse from '../frontend/ANALYSE/Analyse.jsx'
+import Presse from '../frontend/PRESSE/Presse.jsx'
 
 /* ══════════════════════════════════════════════════════════════════════════
- *  4 pages, chacune son lien et ses dossiers.
+ *  Une page, un lien, ses dossiers.
  *  Navigation autorisée (le bandeau src/Entete.jsx) ; PARTAGE des moteurs et
  *  des sources interdit.
  *     frontend/<PAGE>/ = son affichage · backend/<PAGE>/ = ses données.
@@ -15,6 +16,10 @@ import Analyse from '../frontend/ANALYSE/Analyse.jsx'
  *  du jour, tous les chevaux, l'étude sous chaque course (c'est l'ancienne
  *  page « Chevaux », qui perd son nom au profit de celui du menu).
  *  Les anciennes adresses restent valables : /articles mène à l'accueil.
+ *
+ *  ⚠ 18/10/2026 — LA PAGE « PRESSE » ARRIVE.
+ *  /presse rassemble les déclarations des entraîneurs et des drivers, l'analyse
+ *  de la course, les pronostics des journaux et les nouvelles des chevaux.
  * ══════════════════════════════════════════════════════════════════════════ */
 export default function App(){
   return (
@@ -34,6 +39,9 @@ export default function App(){
 
         <Route path="/couple" element={<Couple />} />
         <Route path="/coply" element={<Couple />} />
+
+        {/* la presse du jour : déclarations, analyse, revue de presse, articles */}
+        <Route path="/presse" element={<Presse />} />
 
         {/* une adresse inconnue ne laisse jamais un écran vide */}
         <Route path="*" element={<Navigate to="/" replace />} />

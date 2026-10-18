@@ -2717,3 +2717,490 @@ Amiens R4C1 → « partants indisponibles » + le bloc d'études ✅
 Tarbes R6C1 → le tableau des partants ✅ + le bloc d'études ✅
 Quinté    → R1C3 ouvert, Top Chevaux, « Aptitude des 16 partants » ✅
 ```
+
+---
+
+## 24. ⭐ LA PAGE « PRESSE » — ce que dit la presse, ce que disent les hommes, ce que publient les journaux (18/10/2026)
+
+Demande de l'utilisateur, mot pour mot :
+
+> « une page de la presse : les nouvelles du jour sur ce que dit la presse,
+>   leurs pronostics, les déclarations des entraîneurs et des drivers,
+>   les articles et les nouvelles des chevaux. »
+
+Puis, le même jour, une **précision qui a changé le ④** :
+
+> « لا اريد الاخبار من ايكيديا اريد اخبار الجرائد اليومية و الاسبوعية ك
+>   LA GAZETTE DES COURSES . LE VEINARD AVEC COURSES PAR COURSES .
+>   JOURNAUX WEEKEND PARIS TURF PARISIEN TIERCÉ MAGAZINE »
+
+→ **je ne veux pas les nouvelles d'Equidia, je veux celles des journaux.**
+Ce n'est donc plus un fil d'actualité de chaîne : ce sont les journaux eux-mêmes,
+qu'on va chercher un par un (§24.6).
+
+### 24.1 L'adresse, les fichiers, la couleur
+
+| | |
+|---|---|
+| Adresse | `/presse` |
+| La page | `frontend/PRESSE/Presse.jsx` |
+| Les données | `backend/PRESSE/donnees.js` |
+| La couleur | ambre papier journal `--n-ambre` `#fbbf24`, classe `.p-presse` |
+| L'onglet de nav | `<i class="bi bi-newspaper"> Presse` (`src/Entete.jsx`) |
+| La route | `src/App.jsx` → `<Route path="/presse" element={<Presse />} />` |
+
+C'est la **4ᵉ teinte** de la maison (cyan = Analyse, magenta = Quinté,
+orange = Coply, ambre = Presse) : la pastille active, les en-têtes de tableau et
+les badges suivent la couleur de la page où l'on est.
+
+### 24.2 Les 4 onglets et leurs sources
+
+| # | Onglet | Source | Relais |
+|---|---|---|---|
+| ① | **Déclarations** | `api.equidia.fr/…/courses/{date}/R{n}/C{m}/interview` | **aucun** (CORS ouvert) |
+| ② | **L'analyse** | `api.equidia.fr/…/courses/{date}/R{n}/C{m}/pronostic` | **aucun** (CORS ouvert) |
+| ③ | **La revue de presse** | `www.pronostics-turf.info/presse.php` | `/api/pt` |
+| ④ | **Les journaux** | Paris-Turf (son API) + Le Veinard | `/api/ptf` + `/api/lv` |
+| ⑤ | **Les journaux en vidéo** | la chaîne qui les **feuillette** chaque matin | `/api/yt` |
+
+**La course du jour** (les 4 onglets en dépendent) est trouvée par
+`quinteDuJour()` : `pro.casacourses.com/api/programme?date=` filtré sur
+`available_bet_types.includes('sorec_quinte')`, **France d'abord**. Puis
+`api.equidia.fr/…/v2/courses/{date}/R{r}/C{c}` donne `heure_depart_course`,
+`distance`, `discipline` et le nombre de partants.
+
+> ⚠ `time_hm` de casacourses est en **heure du Maroc** : le Quinté du 18/10 y
+>   était à **14 h 15** au lieu de **15 h 15**. L'heure affichée est celle
+>   d'Equidia, jamais l'autre.
+
+### 24.3 ① Les déclarations — la plus belle matière de la page
+
+C'est exactement « les déclarations des entraîneurs et des drivers » : par
+cheval, la personne, **son métier**, sa **note sur 10** et son **texte entier**.
+
+```
+{
+  num: 2, cheval: "DON'T SHUT ME DOWN", personne: "Joakim Brandt",
+  role: "ENTRAÎNEUR", note: 8, auteur: "…", texte: "Don't Shut Me Down (2) est très courageux…"
+}
+```
+
+Le rôle est lu tel quel (`ENTRAÎNEUR` / `DRIVER` / `JOCKEY`) et se colore :
+violet pour l'entraîneur, bleu pour le pilote. La page affiche la **note
+moyenne** de la course sous le titre du bloc.
+
+#### ⚠️ « تتمة القراءة لا تعمل » — le faux chevron (18/10/2026)
+
+Signalé par l'utilisateur, capture à l'appui : il cliquait sur le **guillemet
+fermant `»`** en fin de déclaration, cerclé sur sa capture… et rien ne se
+passait.
+
+**Ce n'était pas un bouton** : `«` et `»` étaient écrits en **amber, gras**
+(`SK.accent`), en fin de citation — ils ressemblaient trait pour trait à un
+chevron. Et il n'y avait rien à ouvrir : les 16 déclarations **tiennent toutes
+en 4 lignes** (mesuré : `scrollHeight == clientHeight`, aucune n'était coupée).
+
+Ce qui a été changé :
+
+| Avant | Après |
+|---|---|
+| `«` `»` en **amber gras** → l'air d'un bouton | `«` `»` en **gris acier fin** (`#8798ad`) → une ponctuation |
+| rien à ouvrir (texte entier) | **`TextePliable`** : plié à 5 lignes, avec un **vrai bouton** « Lire la suite » / « Replier » — et il **n'apparaît que si le texte dépasse réellement** (comparaison `scrollHeight` / `clientHeight`, mesurée au montage et au redimensionnement) |
+
+> **La leçon :** sur cette page, un glyphe décoratif ne doit jamais pouvoir
+> passer pour un bouton. L'amber est réservé aux commandes.
+
+### 24.4 ② L'analyse du jour
+
+`/pronostic` rend, dans l'ordre : le **chapeau**, la **présentation**, les
+**bases**, les **belles chances**, les **outsiders**, les **délaissés**, puis
+l'analyse **cheval par cheval** avec la note du journaliste, sa cote et son rang.
+Les quatre étages s'affichent en boules colorées, le reste en tableau.
+
+### 24.5 ③ La revue de presse — chaque journal et ses 8 chevaux
+
+Le tableau de la source est en `<th>` **non fermés** (HTML tolérant) : le
+lecteur travaille donc **ligne par ligne**, jamais avec un parseur DOM.
+
+```
+pour chaque <tr> :
+  le nom du journal  = son lien (detail-rentabilite-…) sinon la cellule class="cr"
+  les chiffres       = tous les nombres de la ligne
+  garde-fous         ① 8 à 12 nombres (le nom peut en contenir un : « Canal 2 »,
+                        « Europe 1 ») — au-delà, ce n'est pas une sélection
+                     ② aucun n° > 30 — les lignes de rentabilité
+                        (« 204 COUPLE : 230 ») tombent d'elles-mêmes
+                     ③ doublon de nom → ignoré
+  picks = les 8 DERNIERS nombres
+```
+
+Puis le **consensus** : combien de journaux citent chaque numéro, en barres.
+18 journaux × 8 chevaux quand la source répond.
+
+> ⚠ **La source est actuellement vide (18/10/2026).** `presse.php` ne rend que
+>   `yes118 October 2026 [ 05:10:05]` — **31 octets**, et elle rend la même chose
+>   dans un vrai navigateur. Ce n'est donc pas le relais, ce n'est pas le frein
+>   (`Crawl-delay: 10`) : **la page est vide côté source**. L'onglet le dit
+>   (« le site … n'a rien livré ») et propose **Réessayer**. À vérifier quand la
+>   source revient.
+
+### 24.6 ⭐ ④ Les journaux — le tour complet des titres, un par un
+
+Tous les titres que l'utilisateur a cités ont été essayés le 18/10/2026.
+
+| Titre | Verdict mesuré |
+|---|---|
+| **Paris-Turf** | ✅ **son API de contenu rend ses articles, texte entier** — voir ci-dessous |
+| **Le Veinard** | ✅ `leveinard.com/les-actualites` publie ses articles en clair |
+| La Gazette des Courses | ❌ journal **payant** (Cafeyn, journaux.fr, kiosque) : rien en clair |
+| Courses par Courses | ❌ domaines **inexistants** (DNS : courses-par-courses.com, coursesparcourses.com) |
+| Tiercé Magazine | ❌ domaines **inexistants** (DNS : tiercemagazine.fr, tierce-magazine.fr) |
+| Week-End (les « Journaux ») | ❌ domaines **inexistants** (DNS : journalweekend.fr, weekend.fr) |
+| Parisien | ❌ `course-parisien.fr` ne résout pas |
+| Geny | ❌ `geny.com` → 404 ; `geny-courses.com` → un **blog d'articles SEO** (« Best Wireless Earbuds », gaming, fashion), aucune actualité hippique |
+| Turfoo | ❌ 403 Cloudflare |
+| Jour de Galop | ❌ joignable (WordPress, REST en CORS ouvert) mais ses articles sont des **biographies** (Bernard Cyprès, Right Royal, 2025) : rien de quotidien, le journal est payant |
+| Zone-Turf | ❌ RSS joignable, mais c'est un **site**, pas un journal — non retenu |
+| Equidia | ❌ **écarté sur demande** |
+
+> ⚠ Ces titres ne sont **pas** « en panne » : ils n'existent pas ou sont payants.
+>   La page ne les liste donc pas — elle ne promet pas ce qu'elle n'a pas.
+>   Si l'un s'ouvre un jour, il s'ajoute en trois lignes (§24.10).
+
+#### Paris-Turf — l'API de contenu
+
+```
+GET /api/ptf/api/articles?orderBy=publishedAt&order=desc&limit=N
+    → { data: [ { id, title, teaser, content, slug, publishedAt, authorName,
+                  category, subCategory, media[] } ], pagination }
+```
+
+- `content` est le **texte entier en HTML** (1 à 3 Ko) — on n'a donc **pas**
+  besoin d'ouvrir le site (dont la page est derrière Cloudflare, 403 depuis Node).
+- Les paramètres, **mesurés** (tous ne marchent pas) :
+
+```
+✅ ?limit=24                        la taille du lot
+✅ ?skip=20                         la pagination
+✅ ?orderBy=publishedAt&order=desc  LES ARTICLES RÉCENTS  ← celui qu'on utilise
+❌ ?orderBy=publishedAt             ordre bâtard (2022, 2009, « 0026-08-11 »)
+❌ ?orderBy=publishedAt:desc        422
+❌ ?category=FRANCE / ?subCategory=  ignorés (mêmes résultats)
+❌ api/news · api/actualites · api/posts · api/categories · api/tags · api/magazine
+    → 404
+✅ api/articles/{id}                un article seul
+```
+
+- Les rubriques rencontrées : `FRANCE`/`GALLOP`, `FRANCE`/`TROT`,
+  `FRANCE`/`FLAT`, `FRANCE`/`HURDLE`, `INTERNATIONAL`/`…`, `OPERATORS_GAMES`/`NEWS`,
+  `MAJOR_ISSUES`/`GALLOP` → traduites (`France · Plat`, `Jeu & opérateurs · Actualité`).
+- **La source préprogramme ses séries** : le 18/10 au matin, l'API rendait déjà
+  « La stat de 15 h 64 » des **19, 20, 21 et 22 octobre**. Un journal du jour ne
+  publie pas après-demain → les articles **datés à venir sont écartés**
+  (`AVANCE_TOLEREE = 12 h`, pour ne pas perdre un article du soir à cause d'un
+  fuseau). Mesuré : 24 → **19 articles** de Paris-Turf.
+
+#### Le Veinard — la page d'actualités
+
+```
+https://www.leveinard.com/les-actualites        (via /api/lv)
+  <b style="font-size: 16px;">LE TITRE</b><br>
+  Publié le SAMEDI 17 OCTOBRE 2026<br>
+  <img src="./actualites/images/2026-10-17-1.jpg">
+  <div style="text-align: justify;">LE TEXTE ENTIER</div>
+  … et le lien de la semaine précédente : ./actualites-2026-semaine-41
+```
+
+- **On lit la semaine en cours ET la précédente** → 7 articles le 18/10
+  (17/10, 14/10, 13/10, 11/10, 10/10, 07/10, 06/10).
+- La date est **écrite en toutes lettres** : elle est convertie en ISO par une
+  table de mois (accents retirés via `NFD`). Une date illisible → l'article
+  **descend** au lieu de se croire récent.
+- ⚠ `leveinard.fr` est un **autre site** (web/astuces) : le quotidien hippique
+  est `leveinard.com`.
+
+#### Les images se chargent en direct — mesuré
+
+```
+✅ https://horse-racing-api.paris-turf.com/api/articles/{id}/images/{n}   900×600
+✅ https://www.leveinard.com/actualites/images/2026-10-17-1.jpg           617×582
+❌ /api/ptf/api/articles/…/images/{n}     le relais rend un 302 → image cassée
+```
+
+→ une balise `<img>` **n'a pas besoin de CORS** : on garde l'adresse d'origine,
+on ne relaie pas les images. (Et si elle tombe, `onError` la retire au lieu de
+laisser un carré vide.)
+
+#### Le nettoyage du HTML — `htmlSur()`
+
+Le texte d'un journal est affiché **dans la page** (`dangerouslySetInnerHTML`),
+jamais dans un onglet, jamais dans une iframe. Avant, il passe par `htmlSur()` :
+
+```
+① <script> et <style>            retirés
+② on…="…" (onclick, onerror…)    retirés
+③ <a href> → <span>              un lien cliqué emmènerait la page ailleurs
+④ javascript: dans href/src      retirés
+```
+
+Les images, elles, **restent** (voir au-dessus). Vérifié en direct : dans le
+lecteur, `0` script, `0` lien, les images chargées.
+
+### 24.7 La règle des pannes — et le bouton « Réessayer »
+
+Chaque bloc est **indépendant** : un bloc qui tombe n'emporte pas les autres.
+L'état est porté par `etats` (`attente` / `ok` / `vide` / `erreur`) et la panne
+par `pannes`, deux objets séparés. L'écran affiche alors **une ligne** :
+
+```
+⏳ Chargement…
+⚠ <ce qui manque, et pourquoi>
+ℹ <ou : « aucun article publié pour l'instant » — ce n'est pas une panne>
+                                            [↻ Réessayer]
+```
+
+Le bouton **Réessayer** incrémente un compteur `relance` : les trois `useEffect`
+se relancent (la course + ses deux appels, la revue de presse, les journaux).
+Il n'y a **pas** de bouton par bloc : un seul suffit, et il relance tout.
+
+### 24.8 Le cache et les pannes partielles
+
+- Les journaux sont cachés **10 minutes** dans `localStorage`
+  (`presse.journaux.v1`) : on ne redemande pas 26 articles à chaque
+  rechargement. Un cache vide n'écrit **jamais** (sinon on figerait un écran nul).
+- Les deux journaux sont appelés en **`Promise.allSettled`** : si l'un tombe,
+  l'autre s'affiche quand même, et la ligne d'état **le nomme**.
+  Un écran vide se mérite.
+
+### 24.9 Le bug corrigé au passage — le jeu de caractères
+
+Le relais relayait les octets tels quels : `pronostics-turf.info` est en
+**windows-1252**, et « Assiduité », « L'Indépendant », « La Dépêche »
+arrivaient en « Assiduit� », « L'Ind�pendant », « La D�p�che ».
+
+Corrigé **dans les deux relais** :
+
+```
+vite.config.js   decoderTexte()   décode (en-tête → UTF-8 strict → windows-1252)
+api/_proxy.js    idem             puis re-sert avec `charset=utf-8` FORCÉ
+```
+
+Le relais dit maintenant ce qu'il sert, au lieu de laisser le navigateur
+deviner. C'est `htmlTexte()` côté page qui lit l'en-tête et décode en
+conséquence.
+
+### 24.10 Ce qu'il faut savoir avant de toucher à cette page
+
+1. **Ne pas réessayer `api.equidia.fr/api/public/articles`** : cet endpoint rend
+   **403 à tout le poste** après une rafale — y compris côté serveur, y compris
+   depuis un autre range. C'est un blocage par adresse, pas une pagination.
+   On ne l'appelle plus du tout (les articles viennent des journaux).
+2. **Ne jamais nommer nos sources à l'écran** (pronostics-turf.info, api.equidia.fr,
+   casacourses) : la règle de la maison tient. **Les journaux, eux, sont le
+   contenu** — c'est leur nom qu'on veut lire sous un article.
+3. Une signature d'article qui porte le nom de notre source (equidia) est
+   réécrite en « La rédaction » (`nomAuteur`). Le chapô d'un tiers, lui, n'est
+   pas retouché : c'est le texte de quelqu'un d'autre.
+4. **Ajouter un journal = trois lignes** : une fonction qui rend
+   `{ journal, titre, texte, date, image, … }`, un `push` dans `articles()`, et
+   la teinte du titre dans `TEINTE_JOURNAL` (`Presse.jsx`). Si le site n'a pas
+   de CORS, un relais de plus (`ORIGINES` dans `vite.config.js` **et**
+   `api/_proxy.js`, `api/<nom>.js`, le rewrite dans `vercel.json`).
+5. **Un seul bouton pour recharger**, `relance`. Ne pas en ajouter un par bloc :
+   la page a trois appels, ils repartent ensemble.
+
+### 24.11 Vérifié le 18/10/2026 (navigateur, `localhost:3003/presse`)
+
+```
+Course du jour   R1C3 ParisLongchamp · PRIX RIEUSSEC · 15:15 · 3100 m · 16 partants · Plat
+① Déclarations   16 cartes · note moyenne 7.1/10
+② L'analyse      16 lignes · chapeau + 4 étages + tableau
+③ Revue de presse  ⚠ source vide le matin (31 octets, mesuré aussi sans relais)
+                 ✅ REVENUE dans l'après-midi : 18 journaux × 8 chevaux, 8/8 partout
+④ Les journaux   ⭐ le papier du jour : 3 chevaux du Quinté (BLACK SAXON n°3 notre
+                 coup de cœur · STEP MORNING n°7 dernière heure · PRINCESSE D'AMOUR
+                 n°4 outsider), commentaire entier, lecteur crème dans la page
+                 + 26 articles : Paris-Turf 19 · Le Veinard 7
+⑤ En vidéo       30 vidéos · 4 du jour (Pyramide des chances, Le Veinard avec Courses
+                 par Courses, 05 cinq journaux, La Gazette des Courses) + 26 précédentes
+                 lecteur : youtube-nocookie dans la page, videoplayback confirmé
+Badges          16 déclarations · 18 journaux · 26 articles · 3 chevaux du papier · 30 vidéos
+Débordement horizontal : 0 px
+npm run build   ✅
+```
+
+---
+
+### 24.12 ⭐ ⑤ LES JOURNAUX EN VIDÉO — ce qu'il cherchait vraiment
+
+Deux liens de l'utilisateur, et rien d'autre :
+
+```
+https://www.youtube.com/watch?v=RhhTRuVCwTM
+  « PRIX RIEUSSEC 05 CINQ JOURNAUX WEEKEND PARIS TURF GENY
+    COURSE PARISIEN TIERCÉ MAGAZINE 18/1/26 »
+https://www.youtube.com/watch?v=Ahsn-YJs1lg
+  « DIMANCHE 18 OCTOBRE 26 LE VEINARD AVEC COURSES PAR COURSES
+    PRIX RIEUSSEC PARIS LONGCHAMP »
+```
+
+> « هذه هي الاخبار التي ابحث عنها من الجرائد » —
+> **les nouvelles des journaux, c'est ÇA.**
+
+Les deux liens viennent de la **même chaîne** (`RETRO-QUINTES`,
+`@TUBE_CHEVAL1966`, `UCinyN5Q6efFgWevTqklFi3w`), qui **filme et feuillette les
+journaux chaque matin**, et dont les titres portent **exactement** la liste
+qu'il avait donnée :
+
+| Ce que le canal publie | Ce que l'utilisateur demandait |
+|---|---|
+| « 05 CINQ JOURNAUX WEEKEND PARIS TURF GENY COURSE PARISIEN TIERCÉ MAGAZINE » | JOURNAUX WEEK-END · PARIS TURF · COURSE PARISIEN · TIERCÉ MAGAZINE |
+| « LA GAZETTE DES COURSES QUINTÉ DE … » | LA GAZETTE DES COURSES |
+| « LE VEINARD AVEC COURSES PAR COURSES … » | LE VEINARD AVEC COURSES PAR COURSES |
+| « PYRAMIDE DES CHANCES TURFOMANIA … » | (en bonus) · « COUP SÛR ET VEINARD … » pour les autres jours |
+
+**Le raisonnement, en une ligne :** les journaux eux-mêmes sont payants ou
+introuvables (§24.6) — mais leur **revue existe en clair, en vidéo, tous les
+jours**. On ne remplace pas la presse : on prend celle qu'il regarde déjà.
+
+#### Comment on lit la chaîne
+
+```
+GET /api/yt/channel/UCinyN5Q6efFgWevTqklFi3w/videos   (relais → www.youtube.com)
+  → 1,3 Mo de HTML ; TOUT l'état est dans `ytInitialData`
+  → on l'extrait par COMPTAGE D'ACCOLADES, jamais par regex sur 1,3 Mo
+  → on lit DEUX formes, YouTube sert l'une ou l'autre :
+       · videoRenderer     (la forme historique)
+       · lockupViewModel   (la forme récente — titre dans metadata, durée en badge)
+```
+
+```
+❌ /feeds/videos.xml?channel_id=…   → 404 (le flux RSS est MORT, mesuré le 18/10)
+❌ /api/… public de la chaîne       → il n'y en a pas sans clé d'API
+✅ la page /videos + ytInitialData  → 30 vidéos, avec titre, « il y a 6 h », vues, durée
+```
+
+#### Quelles vidéos sont « du jour »
+
+Deux signaux, **et rien d'autre** — on ne devine jamais :
+
+```
+① LE NOM DE LA COURSE  « PRIX RIEUSSEC » → le mot distinctif (RIEUSSEC ;
+   « PRIX », « GRAND », « HANDICAP »… sont des mots vides). C'est le signal
+   le plus sûr : le canal met le nom du Quinté dans ses titres.
+② LA DATE DU JOUR, toutes ses écritures : 18/10/2026 · 18/10/26 · 18-10-26 ·
+   18.10.26 · 18 OCTOBRE 26 · 18 OCTOBRE 2026
+```
+
+Le partage se fait **dans la page** (`partagerVideos`), parce que c'est le seul
+endroit qui connaît **la course** *et* **les vidéos**. Sans nom ni date, tout
+part dans « Les jours précédents » : mieux vaut ne rien mettre en avant que de
+mettre en avant la course d'hier.
+
+#### Le lecteur
+
+La vidéo se joue **dans la page** (`youtube-nocookie.com/embed/{id}`, 16/9,
+Échap pour fermer), comme l'article — **jamais dans un onglet**, jamais un lien
+qui sort. Vérifié au réseau : `videoplayback` part bien, la vidéo joue vraiment.
+
+> ⚠ Exception assumée, la même que pour l'article relayé : **la vidéo garde sa
+>   marque** (celle du journal et celle de la chaîne). C'est le contenu, pas
+>   notre habillage. Nos sources à nous ne s'écrivent toujours nulle part à
+>   l'écran.
+
+#### Pour ajouter une autre chaîne
+
+Une ligne dans `donnees.js` (`CHAINE_VIDEO`), ou une liste. Rien d'autre ne
+change : le partage du jour et le lecteur sont déjà génériques.
+
+---
+
+### 24.13 ⭐ LE PAPIER DU JOUR, EN TEXTE — « ما تعرضه تلك الفيديوهات من موقعها الرسمي »
+
+La demande, mot pour mot :
+
+> « الا يمكنك ان تجلب اخبار الصحف المعروضة بالفيديو وعرضها فقط بدون عرض
+>   الفيديوهات … انا افضل ان ناخد ما تعرضه تلك الفيديوهات من موقعها الرسمي
+>   وتحدث تلقائيا كل يوم »
+
+→ **le CONTENU des journaux, en texte, pris à la source, sans les vidéos, et
+qui se met à jour tout seul.** Ce qui suit a été mesuré le 18/10/2026.
+
+#### ⭐ La Gazette des Courses publie son papier du jour — en clair
+
+`lagazettedescourses.fr` est un **WordPress dont le REST est OUVERT** :
+
+```
+GET /api/gz/wp-json/wp/v2/posts?per_page=60&orderby=date&order=desc
+    &after={J-3}T00:00:00&_fields=id,date,title,categories,content
+```
+
+- **chaque papier est UN CHEVAL** : le titre EST le nom du cheval,
+  `content.rendered` EST le commentaire du journal ;
+- **chaque papier est rangé dans une rubrique** (les catégories) :
+
+| Catégorie | Rubrique du journal |
+|---|---|
+| 125 | **Notre coup de cœur** |
+| 127 | **Dernière heure** |
+| 124 | **Outsider** |
+| 123 | **Repéré sur les pistes** |
+| 122 | **Stop info** |
+
+**La preuve que c'est bien le papier de la course du jour** (18/10, PRIX
+RIEUSSEC, R1C3) : les papiers publiés le 17/10 à 15:30 portent **Step Morning
+(n°7)**, **Princesse d'Amour (n°4)** et **Black Saxon (n°3)** — les trois
+courent bien le Quinté du jour. Le lot du 16/10 (Kirikou des Mers, Loquas,
+Gardons Le Sourire) courait le Quinté du **17/10**.
+
+→ **Rattachement par le NOM du cheval**, jamais par la date : un papier de la
+veille pour une autre course ne peut pas entrer.
+
+⚠ **Le piège corrigé au passage** : WordPress abîme les apostrophes en
+`&rsquo;` — « Princesse d&rsquo;Amour » ne reconnaissait pas « PRINCESSE
+D'AMOUR » et le n°4 **disparaissait du papier** (2 chevaux sur 3, vu à
+l'écran). `cleNom()` décode donc les entités (`dec()`) AVANT de comparer.
+
+#### Ce qui n'existe PAS en texte (et pourquoi les vidéos restent)
+
+| Journal | Verdict mesuré le 18/10/2026 |
+|---|---|
+| **La Gazette des Courses** | ✅ **publie son papier du jour**, texte entier, rubrique par rubrique |
+| **La Gazette · sélection** | ✅ ses 8 chevaux sont AUSSI dans la revue de presse (③) |
+| Week-End Turf | ❌ même plateforme, mais **mort** : dernier papier **avril 2025** |
+| Tiercé Magazine | ❌ idem : dernier papier **avril 2025** |
+| Bilto | ❌ site de foot ; 7 papiers turf au total |
+| Le Veinard | ❌ pas de page Quinté (`/pronostics` → 404) ; ses « unes »
+(`images/quotidien/enorme/VE{AAAAMMJJ}.jpg`) ont **deux jours de retard**
+(le 18/10 : VE20261016.jpg ✅, VE20261018.jpg → 404) |
+| Paris-Turf | ❌ Cloudflare 403 sur le site (seule son API répond → onglet ④) |
+| Course Parisien / Geny | ❌ kiosque payant (Cafeyn / journaux.fr) |
+
+> **Conclusion :** on ne prétend pas servir « les 5 journaux ». On sert **le
+> journal qui publie son papier du jour**, on dit lequel, et l'onglet vidéo
+> reste en dessous pour ce que le texte ne donne pas.
+
+#### Où ça s'affiche
+
+Onglet **④ Les journaux**, **avant** les articles : « **Le papier du jour** »,
+une carte par cheval — `Boule(n° du Quinté)` + nom + corde + VH + le
+commentaire, groupé par rubrique (chacune sa couleur, `teinteRubrique`), et un
+bouton **« Lire en entier »** qui ouvre la visionneuse crème DANS la page.
+
+#### ⏱️ Et la mise à jour, alors ?
+
+**Automatique, sans rien toucher** :
+
+```
+chaque ouverture de /presse  → les 4 sources sont relues (cache 10 min)
+le papier du jour            → /wp-json relu à chaque fois : dès que le journal
+                               publie (la veille au soir), il apparaît
+les vidéos                   → même chose : la chaîne est relue, les nouvelles
+                               vidéos arrivent seules
+le job quotidien (§13)       → 08 h 45 et 20 h 30, il archive le marché et la
+                               Synthèse
+```
+
+⚠ Comme le papier sort **la veille au soir**, à 07 h on lit déjà le papier du
+jour ; et si le journal n'a rien publié, le bloc le dit : « le journal n'a rien
+publié sur ce Quinté pour l'instant ».

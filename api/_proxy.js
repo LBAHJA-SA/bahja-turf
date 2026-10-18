@@ -27,6 +27,27 @@ export const ORIGINES = {
   pt: 'https://www.pronostics-turf.info',   // la Synthese de la presse
   tf: 'https://www.turf-france.com',         // reu.php, tqqjour.php
   eq: 'https://www.equidia.fr',              // le marche
+  lv: 'https://www.leveinard.com',           // LE VEINARD — les actualites des courses
+  yt: 'https://www.youtube.com',             // la revue de presse EN VIDEO
+  gz: 'https://www.lagazettedescourses.fr',  // le papier du jour, en texte (WordPress REST)
+}
+
+/**
+ * Décode un corps selon le VRAI jeu de caractères annoncé.
+ * ⚠ `r.text()` décode toujours en UTF-8 : la revue de presse est en
+ *   windows-1252, « Assiduité » y devenait « Assiduit� ». Même code que
+ *   `vite.config.js`.
+ */
+function decoderTexte(octets, type = '') {
+  const declare = /charset\s*=\s*["']?([\w-]+)/i.exec(type || '')
+  if (declare) {
+    try { return new TextDecoder(declare[1]).decode(octets) } catch (e) { /* charset inconnu */ }
+  }
+  try {
+    return new TextDecoder('utf-8', { fatal: true }).decode(octets)
+  } catch (e) {
+    return new TextDecoder('windows-1252').decode(octets)
+  }
 }
 
 /**
@@ -109,12 +130,17 @@ export function proxy(label) {
         redirect: 'follow',
         signal: AbortSignal.timeout(25000),
       })
-      let body = await r.text()
+      let body = decoderTexte(await r.arrayBuffer(), r.headers.get('content-type') || '')
       const type = r.headers.get('content-type') || 'text/html; charset=utf-8'
       if (u.searchParams.get('base') === '1' && /text\/html/i.test(type)) {
         body = injecterBase(habiller(body), origine)
       }
-      res.setHeader('Content-Type', type)
+      /* le corps est une chaîne écrite en UTF-8 : l'en-tête doit le dire */
+      let typeSortie = type
+      if (/^(text\/|application\/json)/i.test(typeSortie)) {
+        typeSortie = typeSortie.replace(/;\s*charset=[^;]*/i, '') + '; charset=utf-8'
+      }
+      res.setHeader('Content-Type', typeSortie)
       res.setHeader('Cache-Control', 'no-store')
       res.setHeader('X-Bahja-Proxy', label)
       res.statusCode = r.status

@@ -148,6 +148,47 @@ body::before{
 .p-quinte { --t: var(--n-magenta) }
 .p-couple { --t: var(--n-orange) }
 .p-article{ --t: var(--n-violet) }
+.p-presse{ --t: var(--n-ambre) }
+
+/* ── LE TEXTE D'UN ARTICLE DE JOURNAL, dans la visionneuse de la page Presse ─
+ * On lit l'article sur son papier : fond crème, encre sombre, sérif pour le
+ * corps. Ce qui vient du journal garde ses images (elles se chargent en direct,
+ * mesuré le 18/10/2026) et rien d'autre ne déborde de la colonne. */
+.p-presse-article{
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px; line-height: 1.72;
+}
+.p-presse-article > *:first-child{ margin-top: 0 }
+.p-presse-article p{ margin: 0 0 13px }
+.p-presse-article h1,
+.p-presse-article h2,
+.p-presse-article h3,
+.p-presse-article h4{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 20px 0 9px; line-height: 1.3;
+}
+.p-presse-article h1{ font-size: 21px }
+.p-presse-article h2{ font-size: 18px }
+.p-presse-article h3{ font-size: 16px }
+.p-presse-article h4{ font-size: 14.5px }
+.p-presse-article img{
+  max-width: 100%; height: auto; display: block; margin: 14px auto;
+  border-radius: 8px;
+}
+.p-presse-article figure{ margin: 14px 0 }
+.p-presse-article figcaption{ font-size: 12px; color: #6b5b45; font-family: system-ui, sans-serif }
+.p-presse-article ul,
+.p-presse-article ol{ margin: 0 0 13px; padding-left: 22px }
+.p-presse-article li{ margin: 4px 0 }
+.p-presse-article blockquote{
+  margin: 14px 0; padding: 2px 0 2px 14px; border-left: 3px solid #fbbf24;
+  font-style: italic; color: #3b2f1e;
+}
+.p-presse-article table{ width: 100%; border-collapse: collapse; font-family: system-ui, sans-serif; font-size: 13px }
+.p-presse-article th,
+.p-presse-article td{ border: 1px solid #e6dcc6; padding: 6px 8px; text-align: left }
+.p-presse-article strong{ font-weight: 700 }
+.p-presse-article a{ color: #92400e; text-decoration: none }
 
 /* ── les anciens liens de nav (pages pas encore migrées) ─────────────────── */
 .nav{ display: flex; gap: 6px; flex-wrap: wrap }

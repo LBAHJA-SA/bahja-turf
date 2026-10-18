@@ -29,7 +29,21 @@ const ORIGINES = {
   pt: "https://www.pronostics-turf.info",
   tf: "https://www.turf-france.com",
   eq: "https://www.equidia.fr",
+  /* LE VEINARD — « quotidien hippique, un tuyau et une dernière minute pour
+   * chaque quinté ». Son site ne donne AUCUN en-tête CORS : la page ne peut
+   * pas le lire en direct (mesuré le 18/10/2026). On relaie. */
+  lv: "https://www.leveinard.com",
+  /* YOUTUBE — le canal qui FEUILLETTE les journaux chaque matin (la revue de
+   * presse en vidéo : « 05 cinq journaux », « La Gazette des Courses »,
+   * « Le Veinard avec Courses par Courses »). Ses pages n'ont pas de CORS :
+   * on relaie, et la page lit l'état `ytInitialData` de la chaîne. */
+  yt: "https://www.youtube.com",
   ptf: "https://horse-racing-api.paris-turf.com",
+  /* LA GAZETTE DES COURSES — c'est un WordPress, et son REST est OUVERT :
+   * `/wp-json/wp/v2/posts?categories=…` rend le papier du jour EN TEXTE (le
+   * coup de cœur, l'outsider, la dernière heure… et le commentaire du cheval).
+   * ⚠ Le site n'envoie AUCUN en-tête CORS (mesuré le 18/10/2026) : on relaie. */
+  gz: "https://www.lagazettedescourses.fr",
 };
 /** La clé de l'API ParisTurf (publique : livrée dans son bundle). Elle vit ici,
  *  côté serveur, pour la même raison qu'en production : l'API tient une liste
@@ -249,8 +263,32 @@ function habiller(html) {
     .join("");
 }
 
-/** Le même corps que api/_proxy.js : /api/<nom>/<suite> -> <origine>/<suite> */
-async function relayer(label, cheminComplet, res, origine = "") {
+/**
+ * Décode un corps HTML/JSON selon le VRAI jeu de caractères annoncé.
+ *
+ * ⚠ POURQUOI (18/10/2026) : `Response.text()` décode TOUJOURS en UTF-8. La page
+ *   de la revue de presse est en windows-1252 : « Assiduité » devenait
+ *   « Assiduit� » (l'octet 0xE9 remplacé par U+FFFD — l'information est perdue
+ *   et rien en aval ne peut la retrouver).
+ *
+ *   Ordre de décision :
+ *     1. le charset est DÉCLARÉ dans l'en-tête → on le respecte ;
+ *     2. sinon on essaie l'UTF-8 en mode strict — s'il passe, c'est de l'UTF-8 ;
+ *     3. sinon windows-1252 (le latin-1 des journaux hippiques).
+ */
+function decoderTexte(octets, type = "") {
+  const declare = /charset\s*=\s*["']?([\w-]+)/i.exec(type || "");
+  if (declare) {
+    try { return new TextDecoder(declare[1]).decode(octets); } catch (e) { /* charset inconnu */ }
+  }
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(octets);
+  } catch (e) {
+    return new TextDecoder("windows-1252").decode(octets);
+  }
+}
+
+/** Le même corps que api/_proxy.js : /api/<nom>/<suite> -> <origine>/<suite> */async function relayer(label, cheminComplet, res, origine = "") {
   try {
     // le sous-chemin peut venir du chemin (/api/tf/tqqjour.php) ou de la
     // requete (?p=tqqjour.php) : c'est la forme que produit le rewrite Vercel.
@@ -328,7 +366,7 @@ async function relayer(label, cheminComplet, res, origine = "") {
           redirect: "follow",
           signal: AbortSignal.timeout(25000),
         });
-        body = await r.text();
+        body = decoderTexte(await r.arrayBuffer(), r.headers.get("content-type"));
         statut = r.status;
         typeContenu = r.headers.get("content-type") || typeContenu;
       }
@@ -345,6 +383,13 @@ async function relayer(label, cheminComplet, res, origine = "") {
         return;
       }
       statut = 200;
+    }
+    /* ⚠ le corps est maintenant une CHAÎNE (décodée du bon charset) et
+     * `res.end` l'écrit en UTF-8 : l'en-tête doit donc dire utf-8, quel que
+     * soit le charset de l'origine — sinon le navigateur relit des octets
+     * UTF-8 comme du latin-1 (« AssiduitÃ© »). */
+    if (/^(text\/|application\/json)/i.test(typeContenu)) {
+      typeContenu = typeContenu.replace(/;\s*charset=[^;]*/i, "") + "; charset=utf-8";
     }
     res.setHeader("Content-Type", typeContenu);
     res.setHeader("Cache-Control", "no-store");
@@ -399,7 +444,7 @@ function proxiesApi() {
       server.middlewares.use((req, res, next) => {
         const base = "http://" + (req.headers.host || "localhost:3003");
         const u = new URL(req.url || "/", base);
-        const m = /^\/api\/(ptf|pt|tf|eq)$/.exec(u.pathname);
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq)$/.exec(u.pathname);
         if (!m) return next();
         /* La requête ENTIÈRE : `relayer` reconnaît les trois formes —
          *   /api/tf?p=…            (Vercel) · /api/ptf?v=… ou ?hls=… (la vidéo).
@@ -408,7 +453,7 @@ function proxiesApi() {
         relayer(m[1], req.url, res, base);
       });
       server.middlewares.use((req, res, next) => {
-        const m = /^\/api\/(ptf|pt|tf|eq)(\/.*)?$/.exec(req.url || "");
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq)(\/.*)?$/.exec(req.url || "");
         if (!m) return next();
         relayer(m[1], req.url, res, "http://" + (req.headers.host || "localhost:3003"));
       });
