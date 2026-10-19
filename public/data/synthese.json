@@ -1,4 +1,120 @@
 {
+  "2026-10-19": {
+    "date": "2026-10-19",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      2,
+      1,
+      4,
+      10,
+      3,
+      13,
+      14,
+      5,
+      9,
+      8,
+      12,
+      11,
+      15,
+      6,
+      16,
+      7
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "PLAT",
+    "hippodrome": "DEAUVILLE",
+    "distance": 1900,
+    "courseId": "2026-10-19_R1_C1",
+    "arrivee": [
+      4,
+      2,
+      6,
+      1,
+      13
+    ],
+    "ticket": [
+      2,
+      9,
+      13,
+      12,
+      1,
+      4,
+      10,
+      15
+    ],
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          2,
+          1,
+          4
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          10,
+          13
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          9
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          12
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          15
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-19T13:21:21.742Z",
+    "ticketMoteur": [
+      2,
+      9,
+      13,
+      12,
+      1,
+      4,
+      10,
+      15
+    ],
+    "cloture": "2026-10-19T13:21:21.743Z",
+    "scores": null,
+    "collecte": "2026-10-19T13:21:21.743Z"
+  },
   "2026-10-18": {
     "date": "2026-10-18",
     "found": true,
@@ -116,7 +232,7 @@
       4,
       12
     ],
-    "cloture": "2026-10-18T16:58:38.586Z",
+    "cloture": "2026-10-19T13:21:18.853Z",
     "scores": null,
     "collecte": "2026-10-18T20:30:09.299Z"
   },

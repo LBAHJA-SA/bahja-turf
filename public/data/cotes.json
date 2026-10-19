@@ -3575,5 +3575,171 @@
     "heure": "2026-10-17T12:16:00+02:00"
    }
   ]
+ },
+ "2026-10-19_R1_C1": {
+  "source": "equidia.fr",
+  "favori": 2,
+  "cotes": [
+   {
+    "num": 2,
+    "nom": "ZELORO",
+    "cote": 3.5,
+    "ouverture": 3.5,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "TIEGO THE FIRST",
+    "cote": 7.3,
+    "ouverture": 8.4,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 384586,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "EVERSTAR",
+    "cote": 7.8,
+    "ouverture": 10,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "FEARLESS CHEETAH",
+    "cote": 8.7,
+    "ouverture": 8,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "CELESTIAL",
+    "cote": 10,
+    "ouverture": 10,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "EAST GREY",
+    "cote": 10,
+    "ouverture": 16,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "ROCK BLANC",
+    "cote": 20,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "SENORITO",
+    "cote": 23,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "GUILLERETTE",
+    "cote": 27,
+    "ouverture": 21,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "AL MAX",
+    "cote": 28,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "ALLURRE",
+    "cote": 30,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "ROMAN FORUM",
+    "cote": 33,
+    "ouverture": 35,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "CICCIO BOY",
+    "cote": 33,
+    "ouverture": 23,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "NOLITO",
+    "cote": 36,
+    "ouverture": 26,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "WEDGEWOOD PEARL",
+    "cote": 50,
+    "ouverture": 36,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 384586,
+    "heure": "2026-10-19T13:58:00+02:00"
+   },
+   {
+    "num": 7,
+    "nom": "WAKABURN",
+    "cote": 56,
+    "ouverture": 40,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-19T13:58:00+02:00"
+   }
+  ]
  }
 }
