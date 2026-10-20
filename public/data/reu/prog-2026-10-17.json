@@ -18,7 +18,7 @@
      "partants": 11,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "4-5-2-11-6-7-8"
     },
     {
      "date": "2026-10-17",
@@ -33,7 +33,7 @@
      "partants": 7,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "7-1-3-4-2-5"
     },
     {
      "date": "2026-10-17",
@@ -48,7 +48,7 @@
      "partants": 20,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-6-4-11-2-5-12-20-17-10-14"
     },
     {
      "date": "2026-10-17",
@@ -63,7 +63,7 @@
      "partants": 14,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "5-2-7-12-1-4-14-9-3-13"
     },
     {
      "date": "2026-10-17",
@@ -78,7 +78,7 @@
      "partants": 7,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-2-4-1-3-7-5"
     },
     {
      "date": "2026-10-17",
@@ -93,7 +93,7 @@
      "partants": 10,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "7-4-9-3-8-2-1-6"
     },
     {
      "date": "2026-10-17",
@@ -108,7 +108,7 @@
      "partants": 18,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-11-10-7-2-6-15-18-12-5-14-9-16-3-17"
     },
     {
      "date": "2026-10-17",
@@ -123,7 +123,7 @@
      "partants": 9,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-7-4-3-9-2-5"
     }
    ]
   },
@@ -144,7 +144,7 @@
      "partants": 9,
      "hippodrome": "SON PARDO",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "2-9-1-5-6-3-8-7"
     },
     {
      "date": "2026-10-17",
@@ -159,7 +159,7 @@
      "partants": 11,
      "hippodrome": "SON PARDO",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "5-6-8-4-1-10-11-2-9-3"
     },
     {
      "date": "2026-10-17",
@@ -174,7 +174,7 @@
      "partants": 10,
      "hippodrome": "SON PARDO",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-3-8-10-7-5-9-4-2-6"
     },
     {
      "date": "2026-10-17",
@@ -189,7 +189,7 @@
      "partants": 9,
      "hippodrome": "SON PARDO",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-5-4-8-9-2-7-3-1"
     },
     {
      "date": "2026-10-17",
@@ -204,7 +204,7 @@
      "partants": 10,
      "hippodrome": "SON PARDO",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "4-9-5-8-3-2-10-7-6-1"
     }
    ]
   },
@@ -225,7 +225,7 @@
      "partants": 10,
      "hippodrome": "BORELY",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "5-2-6-7-3-4-8-9-1"
     },
     {
      "date": "2026-10-17",
@@ -240,7 +240,7 @@
      "partants": 5,
      "hippodrome": "BORELY",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-4-5-2-3"
     },
     {
      "date": "2026-10-17",
@@ -255,7 +255,7 @@
      "partants": 7,
      "hippodrome": "BORELY",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-4-2-5-7-3-1"
     },
     {
      "date": "2026-10-17",
@@ -270,7 +270,7 @@
      "partants": 6,
      "hippodrome": "BORELY",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "5-6-2-4-1-3"
     },
     {
      "date": "2026-10-17",
@@ -285,7 +285,7 @@
      "partants": 10,
      "hippodrome": "BORELY",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "3-8-2-4-7-9-10-6-5-1"
     },
     {
      "date": "2026-10-17",
@@ -300,7 +300,7 @@
      "partants": 6,
      "hippodrome": "BORELY",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "2-3-1-4-6-5"
     },
     {
      "date": "2026-10-17",
@@ -315,7 +315,7 @@
      "partants": 10,
      "hippodrome": "BORELY",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "10-9-2-5-8-3-4-6-7-1"
     },
     {
      "date": "2026-10-17",
@@ -330,7 +330,7 @@
      "partants": 10,
      "hippodrome": "BORELY",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "5-1-4-2-6-8-10-9-7-3"
     }
    ]
   },
@@ -351,7 +351,7 @@
      "partants": 16,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "10-15-8-6-9-13-1-7"
     },
     {
      "date": "2026-10-17",
@@ -366,7 +366,7 @@
      "partants": 12,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-2-5-1-7-9"
     },
     {
      "date": "2026-10-17",
@@ -381,7 +381,7 @@
      "partants": 12,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "2-11-5-7-8-10-12-9-6-3"
     },
     {
      "date": "2026-10-17",
@@ -396,7 +396,7 @@
      "partants": 9,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "9-4-2-7-6-8"
     },
     {
      "date": "2026-10-17",
@@ -411,7 +411,7 @@
      "partants": 14,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "14-1-12-2-13-10-6-5-11-7"
     },
     {
      "date": "2026-10-17",
@@ -426,7 +426,7 @@
      "partants": 16,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "12-15-5-13-3-8-16-10-1-14"
     },
     {
      "date": "2026-10-17",
@@ -441,7 +441,7 @@
      "partants": 14,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "10-12-6-2-5-7-9-1-8-14"
     },
     {
      "date": "2026-10-17",
@@ -456,7 +456,7 @@
      "partants": 14,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "9-10-11-3-13-8-1-14-5-2"
     },
     {
      "date": "2026-10-17",
@@ -471,7 +471,7 @@
      "partants": 14,
      "hippodrome": "GRAIGNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "10-6-7-2-12-5-11-4-13-8-3"
     }
    ]
   },
@@ -492,7 +492,7 @@
      "partants": 12,
      "hippodrome": "LA CAPELLE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "3-12-8-11-2-1-7-10-6"
     },
     {
      "date": "2026-10-17",
@@ -507,7 +507,7 @@
      "partants": 16,
      "hippodrome": "LA CAPELLE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-3-2-15-4-11-7-1-9-12"
     },
     {
      "date": "2026-10-17",
@@ -522,7 +522,7 @@
      "partants": 16,
      "hippodrome": "LA CAPELLE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "14-13-12-6-5-7-15-1-4-16"
     },
     {
      "date": "2026-10-17",
@@ -537,7 +537,7 @@
      "partants": 16,
      "hippodrome": "LA CAPELLE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "11-5-2-10-6-4-16-1-9-14-8-15"
     },
     {
      "date": "2026-10-17",
@@ -552,7 +552,7 @@
      "partants": 14,
      "hippodrome": "LA CAPELLE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "12-1-10-9-11-3-13-4-8-6-2"
     },
     {
      "date": "2026-10-17",
@@ -567,7 +567,7 @@
      "partants": 15,
      "hippodrome": "LA CAPELLE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "2-9-5-13-7-8-11-3-6-4"
     },
     {
      "date": "2026-10-17",
@@ -582,7 +582,7 @@
      "partants": 11,
      "hippodrome": "LA CAPELLE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "10-5-7-2-8-6-3-4-11-1"
     }
    ]
   },
@@ -603,7 +603,7 @@
      "partants": 11,
      "hippodrome": "ASCOT",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-2-8-3-9-5-1-7-11-10-4"
     },
     {
      "date": "2026-10-17",
@@ -618,7 +618,7 @@
      "partants": 10,
      "hippodrome": "ASCOT",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "5-7-9-4-6-10-1-2-3-8"
     },
     {
      "date": "2026-10-17",
@@ -633,7 +633,7 @@
      "partants": 16,
      "hippodrome": "ASCOT",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-9-12-11-10-14-13-3-15-6-4-2-16-5-7-8"
     },
     {
      "date": "2026-10-17",
@@ -648,7 +648,7 @@
      "partants": 13,
      "hippodrome": "ASCOT",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "4-7-10-12-6-13-3-1-8-11-5-9"
     },
     {
      "date": "2026-10-17",
@@ -658,12 +658,12 @@
      "nom": "QUEEN ELIZABETH II STAKES (SPONS. BY QATAR RACING) (GR 1) - WORLD POOL",
      "heure": "15:20",
      "distance": 1600,
-     "type": "PLAT",
-     "dist": 1600,
-     "partants": 16,
+     "type": "Plat",
+     "dist": null,
+     "partants": 11,
      "hippodrome": "ASCOT",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "10-4-9-8-11-2-3-6-1-5-7"
     },
     {
      "date": "2026-10-17",
@@ -673,12 +673,12 @@
      "nom": "QATAR RACING CHAMPION STAKES (GR 1) - WORLD POOL",
      "heure": "16:00",
      "distance": 2000,
-     "type": "PLAT",
-     "dist": 2000,
-     "partants": 13,
+     "type": "Plat",
+     "dist": null,
+     "partants": 6,
      "hippodrome": "ASCOT",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "5-3-2-1-6-4"
     },
     {
      "date": "2026-10-17",
@@ -688,12 +688,12 @@
      "nom": "BALMORAL HANDICAP (SPONS. BY QATAR RACING) - WORLD POOL",
      "heure": "16:35",
      "distance": 1600,
-     "type": "PLAT",
-     "dist": 1600,
-     "partants": 15,
+     "type": "Plat",
+     "dist": null,
+     "partants": 23,
      "hippodrome": "ASCOT",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "17-5-6-15-3-2-18-20-21-16-14-9-7-1-19-12-11-8-13-10-4-22-23"
     }
    ]
   },
@@ -709,8 +709,12 @@
      "nom": "PRIX ISOPANI",
      "heure": "12:59",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Haies",
+     "partants": 11,
+     "dist": null,
+     "hippodrome": "AUTEUIL",
+     "source": "Equidia",
+     "arrivee": "4-5-2-11-6-7-8"
     },
     {
      "date": "2026-10-17",
@@ -720,8 +724,12 @@
      "nom": "PRIX ORCADA",
      "heure": "13:33",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Steeple Chase",
+     "partants": 7,
+     "dist": null,
+     "hippodrome": "AUTEUIL",
+     "source": "Equidia",
+     "arrivee": "7-1-3-4-2-5"
     },
     {
      "date": "2026-10-17",
@@ -731,8 +739,12 @@
      "nom": "PRIX PRINCE D'ECOUEN - GRAND HANDICAP D'AUTOMNE",
      "heure": "14:15",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Haies",
+     "partants": 20,
+     "dist": null,
+     "hippodrome": "AUTEUIL",
+     "source": "Equidia",
+     "arrivee": "1-6-4-11-2-5-12-20-17-10-14"
     },
     {
      "date": "2026-10-17",
@@ -742,8 +754,12 @@
      "nom": "PRIX ADRIEN BESNOUIN",
      "heure": "14:51",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Haies",
+     "partants": 14,
+     "dist": null,
+     "hippodrome": "AUTEUIL",
+     "source": "Equidia",
+     "arrivee": "5-2-7-12-1-4-14-9-3-13"
     },
     {
      "date": "2026-10-17",
@@ -753,8 +769,12 @@
      "nom": "PRIX PIERRE DE LASSUS",
      "heure": "15:35",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Haies",
+     "partants": 7,
+     "dist": null,
+     "hippodrome": "AUTEUIL",
+     "source": "Equidia",
+     "arrivee": "6-2-4-1-3-7-5"
     },
     {
      "date": "2026-10-17",
@@ -764,8 +784,12 @@
      "nom": "PRIX HEROS XII",
      "heure": "16:18",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Steeple Chase",
+     "partants": 10,
+     "dist": null,
+     "hippodrome": "AUTEUIL",
+     "source": "Equidia",
+     "arrivee": "7-4-9-3-8-2-1-6"
     },
     {
      "date": "2026-10-17",
@@ -775,8 +799,12 @@
      "nom": "PRIX SOULANGE-BODIN",
      "heure": "16:53",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Haies",
+     "partants": 18,
+     "dist": null,
+     "hippodrome": "AUTEUIL",
+     "source": "Equidia",
+     "arrivee": "8-11-10-7-2-6-15-18-12-5-14-9-16-3-17"
     },
     {
      "date": "2026-10-17",
@@ -786,8 +814,12 @@
      "nom": "PRIX FERDINAND RIANT",
      "heure": "17:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Steeple Chase",
+     "partants": 9,
+     "dist": null,
+     "hippodrome": "AUTEUIL",
+     "source": "Equidia",
+     "arrivee": "8-7-4-3-9-2-5"
     }
    ]
   },
@@ -803,8 +835,12 @@
      "nom": "PRIX ARAGORN D'ALALIA",
      "heure": "13:00",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Steeple Chase",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "DAX",
+     "source": "Equidia",
+     "arrivee": "2-1-6-4-8-7-3-5"
     },
     {
      "date": "2026-10-17",
@@ -814,8 +850,12 @@
      "nom": "PRIX DE LA VILLE DE LA COURONNE",
      "heure": "13:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 9,
+     "dist": null,
+     "hippodrome": "DAX",
+     "source": "Equidia",
+     "arrivee": "4-9-6-8-5-2-3-7-1"
     },
     {
      "date": "2026-10-17",
@@ -825,8 +865,12 @@
      "nom": "PRIX DE MOUTHIERS-SUR-BOEME",
      "heure": "14:00",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Steeple Chase",
+     "partants": 5,
+     "dist": null,
+     "hippodrome": "DAX",
+     "source": "Equidia",
+     "arrivee": "3-4-1-5"
     },
     {
      "date": "2026-10-17",
@@ -836,8 +880,12 @@
      "nom": "PRIX DE LA COMMUNAUTE D'AGGLOMERATION DU GRAND ANGOULEME",
      "heure": "14:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 10,
+     "dist": null,
+     "hippodrome": "DAX",
+     "source": "Equidia",
+     "arrivee": "9-5-2-1-8-6-4-10-7-3"
     },
     {
      "date": "2026-10-17",
@@ -847,8 +895,12 @@
      "nom": "PRIX DES DONNEURS DE SANG",
      "heure": "15:00",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Steeple Chase",
+     "partants": 9,
+     "dist": null,
+     "hippodrome": "DAX",
+     "source": "Equidia",
+     "arrivee": "4-5-1-6-7-9-8-2"
     },
     {
      "date": "2026-10-17",
@@ -858,8 +910,12 @@
      "nom": "PRIX DU GOND-POUTOUVRE",
      "heure": "15:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 9,
+     "dist": null,
+     "hippodrome": "DAX",
+     "source": "Equidia",
+     "arrivee": "5-7-8-4-3-6-9-1-2"
     },
     {
      "date": "2026-10-17",
@@ -869,8 +925,12 @@
      "nom": "PRIX JACQUES DELAYE",
      "heure": "16:00",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Haies",
+     "partants": 4,
+     "dist": null,
+     "hippodrome": "DAX",
+     "source": "Equidia",
+     "arrivee": "3-4-2-1"
     }
    ]
   },
@@ -886,8 +946,12 @@
      "nom": "PRIX DE FAY (GR.A)",
      "heure": "13:00",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 14,
+     "dist": null,
+     "hippodrome": "LE MANS",
+     "source": "Equidia",
+     "arrivee": "12-3-13-5-14-8-10-11-7-2-4-6"
     },
     {
      "date": "2026-10-17",
@@ -897,8 +961,12 @@
      "nom": "PRIX DE FAY (GR.B)",
      "heure": "13:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 14,
+     "dist": null,
+     "hippodrome": "LE MANS",
+     "source": "Equidia",
+     "arrivee": "5-9-14-10-6-7-12-3-8-13-1"
     },
     {
      "date": "2026-10-17",
@@ -908,8 +976,12 @@
      "nom": "PRIX DU PERCHE SARTHOIS (GR.A)",
      "heure": "14:00",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 14,
+     "dist": null,
+     "hippodrome": "LE MANS",
+     "source": "Equidia",
+     "arrivee": "2-1-14-5-13-12-9-3-10-8-6-7"
     },
     {
      "date": "2026-10-17",
@@ -919,8 +991,12 @@
      "nom": "PRIX DU PERCHE SARTHOIS (GR.B)",
      "heure": "14:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 14,
+     "dist": null,
+     "hippodrome": "LE MANS",
+     "source": "Equidia",
+     "arrivee": "14-11-13-9-1-3-2-5-7"
     },
     {
      "date": "2026-10-17",
@@ -930,8 +1006,12 @@
      "nom": "PRIX ASD CHARPENTE COUVERTURE (GR.A)",
      "heure": "15:00",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 14,
+     "dist": null,
+     "hippodrome": "LE MANS",
+     "source": "Equidia",
+     "arrivee": "13-4-7-12-5-10-8"
     },
     {
      "date": "2026-10-17",
@@ -941,8 +1021,12 @@
      "nom": "PRIX ASD CHARPENTE COUVERTURE (GR.B)",
      "heure": "15:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 14,
+     "dist": null,
+     "hippodrome": "LE MANS",
+     "source": "Equidia",
+     "arrivee": "12-13-6-4-8-1-5-10"
     },
     {
      "date": "2026-10-17",
@@ -952,8 +1036,12 @@
      "nom": "PRIX DE FATINES (GR.A)",
      "heure": "16:00",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Monté",
+     "partants": 16,
+     "dist": null,
+     "hippodrome": "LE MANS",
+     "source": "Equidia",
+     "arrivee": "14-10-5-7-11-4-8-16-3-1"
     },
     {
      "date": "2026-10-17",
@@ -963,8 +1051,12 @@
      "nom": "PRIX DE FATINES (GR.B)",
      "heure": "16:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Monté",
+     "partants": 16,
+     "dist": null,
+     "hippodrome": "LE MANS",
+     "source": "Equidia",
+     "arrivee": "5-7-10-4-6-9-13-16-14-8-2-12"
     }
    ]
   },
@@ -980,12 +1072,12 @@
      "nom": "PRIX DE LA PLACE SAINT-CHARLES",
      "heure": "15:09",
      "distance": 2150,
-     "type": "ATTELE",
-     "dist": 2150,
-     "partants": 10,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 14,
      "hippodrome": "ENGHIEN",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "1-4-5-10-9-2-6-7-13-8-12"
     },
     {
      "date": "2026-10-17",
@@ -995,12 +1087,12 @@
      "nom": "PRIX DU CHAMP DE MARS",
      "heure": "15:52",
      "distance": 2150,
-     "type": "ATTELE",
-     "dist": 2150,
+     "type": "Attelé",
+     "dist": null,
      "partants": 10,
      "hippodrome": "ENGHIEN",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "6-7-9-4-10-1"
     },
     {
      "date": "2026-10-17",
@@ -1010,12 +1102,12 @@
      "nom": "PRIX DE LA PLACE DES VOSGES",
      "heure": "16:35",
      "distance": 2150,
-     "type": "ATTELE",
-     "dist": 2150,
-     "partants": 9,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 11,
      "hippodrome": "ENGHIEN",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "1-4-3-5-7-9-2-6-10-11-8"
     },
     {
      "date": "2026-10-17",
@@ -1025,12 +1117,12 @@
      "nom": "PRIX DE LA PLACE DES FETES",
      "heure": "17:11",
      "distance": 2875,
-     "type": "MONTE",
-     "dist": 2875,
-     "partants": 12,
+     "type": "Monté",
+     "dist": null,
+     "partants": 14,
      "hippodrome": "ENGHIEN",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "11-10-3-12-5-4-1-2-9-7"
     },
     {
      "date": "2026-10-17",
@@ -1040,12 +1132,12 @@
      "nom": "PRIX DE LA PLACE MAUBERT",
      "heure": "17:47",
      "distance": 2875,
-     "type": "ATTELE",
-     "dist": 2875,
-     "partants": 10,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 13,
      "hippodrome": "ENGHIEN",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "2-11-3-10-9-12-8-13-4-7"
     },
     {
      "date": "2026-10-17",
@@ -1055,8 +1147,12 @@
      "nom": "PRIX DE LA COTE D'OR",
      "heure": "18:23",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 10,
+     "dist": null,
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "4-5-7-3-10"
     },
     {
      "date": "2026-10-17",
@@ -1066,8 +1162,12 @@
      "nom": "PRIX DU MAINE",
      "heure": "18:54",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 16,
+     "dist": null,
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "2-11-4-5-12-7-13-15-6-3-14-8-9"
     },
     {
      "date": "2026-10-17",
@@ -1077,8 +1177,12 @@
      "nom": "PRIX DE NEUILLY EN THELLE",
      "heure": "19:27",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Monté",
+     "partants": 10,
+     "dist": null,
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "3-5-7-6-8-4"
     }
    ]
   },
@@ -1094,8 +1198,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - DIRT)",
      "heure": "17:06",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 6,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "6-2-4-5-1-3"
     },
     {
      "date": "2026-10-17",
@@ -1105,8 +1213,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - FILLIES & MARES - DIRT)",
      "heure": "17:39",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 6,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "3-4-1-2-5-6"
     },
     {
      "date": "2026-10-17",
@@ -1116,8 +1228,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - DIRT)",
      "heure": "18:12",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 6,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "1-5-4-2-6-3"
     },
     {
      "date": "2026-10-17",
@@ -1127,8 +1243,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - FILLES & MARES - TURF)",
      "heure": "18:45",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "6-4-8-5-7-1-2-3"
     },
     {
      "date": "2026-10-17",
@@ -1138,8 +1258,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - TURF)",
      "heure": "19:18",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "5-3-4-1-8-6-2-7"
     },
     {
      "date": "2026-10-17",
@@ -1149,8 +1273,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - FILLIES & MARES - DIRT)",
      "heure": "19:51",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "1-5-6-8-7-4-3-2"
     },
     {
      "date": "2026-10-17",
@@ -1160,8 +1288,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - TURF)",
      "heure": "20:24",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 7,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "1-6-4-3-7-5-2"
     },
     {
      "date": "2026-10-17",
@@ -1171,8 +1303,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - FILLIES & MARES - DIRT)",
      "heure": "20:57",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 9,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "1-4-7-5-2-3-8-6-9"
     },
     {
      "date": "2026-10-17",
@@ -1182,8 +1318,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - DIRT)",
      "heure": "21:30",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "1-6-3-5-7-2-4-8"
     },
     {
      "date": "2026-10-17",
@@ -1193,8 +1333,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - TURF)",
      "heure": "22:03",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 9,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "7-4-1-6-8-2-3-5-9"
     },
     {
      "date": "2026-10-17",
@@ -1204,8 +1348,12 @@
      "nom": "STARTER ALLOWANCE (3 YO & UP - DIRT)",
      "heure": "22:37",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 10,
+     "dist": null,
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "9-10-2-4-5-1-3-7-6-8"
     }
    ]
   },
@@ -1221,8 +1369,12 @@
      "nom": "BREEDERS CROWN 4 T/M 7 JARIGE HENGSTEN  PAYS BAS",
      "heure": "17:35",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 5,
+     "dist": null,
+     "hippodrome": "WOLVEGA",
+     "source": "Equidia",
+     "arrivee": "4-2-3-5"
     },
     {
      "date": "2026-10-17",
@@ -1232,8 +1384,12 @@
      "nom": "JOFFERPRIJS S.                           PAYS BAS",
      "heure": "18:05",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Attelé",
+     "partants": 13,
+     "dist": null,
+     "hippodrome": "WOLVEGA",
+     "source": "Equidia",
+     "arrivee": "6-3-1-4-5-10-12-13-11-2-9"
     },
     {
      "date": "2026-10-17",
@@ -1243,12 +1399,12 @@
      "nom": "BREEDERS CROWN 4- T/M 7-JARIGE MERRIES  PAYS BAS",
      "heure": "18:39",
      "distance": 2100,
-     "type": "ATTELE",
-     "dist": 2100,
-     "partants": 6,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 9,
      "hippodrome": "WOLVEGA",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "6-9-8-3-7-2-4-5-1"
     },
     {
      "date": "2026-10-17",
@@ -1258,12 +1414,12 @@
      "nom": "REVANCHE FINALE GRAS CUP                PAYS BAS",
      "heure": "19:10",
      "distance": 2100,
-     "type": "ATTELE",
-     "dist": 2100,
-     "partants": 7,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 10,
      "hippodrome": "WOLVEGA",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "2-9-3-6-8-10-1-4-7"
     },
     {
      "date": "2026-10-17",
@@ -1273,12 +1429,12 @@
      "nom": "PRIX RICHARD WESTERINK                  PAYS BAS",
      "heure": "19:42",
      "distance": 2100,
-     "type": "ATTELE",
-     "dist": 2100,
-     "partants": 11,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 8,
      "hippodrome": "WOLVEGA",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "5-3-7-2-6-8-4"
     },
     {
      "date": "2026-10-17",
@@ -1288,12 +1444,12 @@
      "nom": "JONKERPRIJS S.                           PAYS BAS",
      "heure": "20:10",
      "distance": 1609,
-     "type": "ATTELE",
-     "dist": 1609,
-     "partants": 8,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 10,
      "hippodrome": "WOLVEGA",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "6-2-4-9-5-3-7-1-10"
     },
     {
      "date": "2026-10-17",
@@ -1303,12 +1459,12 @@
      "nom": "PRIX TIMOKO                             PAYS BAS",
      "heure": "20:40",
      "distance": 2600,
-     "type": "ATTELE",
-     "dist": 2600,
-     "partants": 10,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 8,
      "hippodrome": "WOLVEGA",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "5-2-6-4-8-3-7"
     },
     {
      "date": "2026-10-17",
@@ -1318,12 +1474,12 @@
      "nom": "PRIX ETONNANT                           PAYS BAS",
      "heure": "21:10",
      "distance": 2600,
-     "type": "ATTELE",
-     "dist": 2600,
-     "partants": 11,
+     "type": "Attelé",
+     "dist": null,
+     "partants": 7,
      "hippodrome": "WOLVEGA",
-     "source": "pro.casacourses.com (fallback)",
-     "arrivee": null
+     "source": "Equidia",
+     "arrivee": "6-1-3-2-7-5-4"
     }
    ]
   },
@@ -1339,8 +1495,12 @@
      "nom": "PREMIO CHIQUILINA PAZ 2017 (2 TURNO) (ALTERNATIVA) (OPCIONAL)",
      "heure": "19:15",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 10,
+     "dist": null,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": "5-1-6-10-3-9-8-7-4-2"
     },
     {
      "date": "2026-10-17",
@@ -1350,8 +1510,12 @@
      "nom": "PREMIO EMPERATRIZ FITZ 2013 (2Ø TURNO)",
      "heure": "19:45",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": "3-2-5-7-4-1-6-8"
     },
     {
      "date": "2026-10-17",
@@ -1361,8 +1525,12 @@
      "nom": "HANDICAP JERRY HONOR",
      "heure": "20:15",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 7,
+     "dist": null,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": "5-3-6-4-7-2-1"
     },
     {
      "date": "2026-10-17",
@@ -1372,8 +1540,12 @@
      "nom": "PREMIO BELLEZA DE ARTEAGA 2022",
      "heure": "20:45",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 11,
+     "dist": null,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": "8-2-4-3-5-6-1-7-11-10-9"
     },
     {
      "date": "2026-10-17",
@@ -1383,8 +1555,12 @@
      "nom": "PREMIO BUENA BRUJULA 2021",
      "heure": "21:25",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": "1-3-7-4-8-6-2-5"
     },
     {
      "date": "2026-10-17",
@@ -1394,8 +1570,12 @@
      "nom": "PREMIO PERPETUAL LIGHT 2014",
      "heure": "21:55",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": "5-7-3-4-2-6-8-1"
     },
     {
      "date": "2026-10-17",
@@ -1405,11 +1585,15 @@
      "nom": "PREMIO VOLCANA 2008",
      "heure": "22:25",
      "distance": null,
-     "type": "",
-     "partants": null
+     "type": "Plat",
+     "partants": 8,
+     "dist": null,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": "3-4-6-2-1-7-8-5"
     }
    ]
   }
  ],
- "collecteLe": "2026-10-20T14:36:15.047Z"
+ "collecteLe": "2026-10-20T22:38:59.924Z"
 }

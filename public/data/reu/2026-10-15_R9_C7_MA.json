@@ -29,7 +29,7 @@
    "age": 6,
    "couleur": "BFR",
    "proprietaire": "ABBOU MOHAMMED",
-   "cote": null,
+   "cote": 4000,
    "coteRef": 2000,
    "depart": 9,
    "def": null,
@@ -37,7 +37,7 @@
    "dernierPassage": "10p10p8p6p6p11p9p8p(25)8p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 10
   },
   {
    "num": 2,
@@ -52,7 +52,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "ROUCHDI HICHAM (A)",
-   "cote": null,
+   "cote": 200,
    "coteRef": 430,
    "depart": 2,
    "def": null,
@@ -60,7 +60,7 @@
    "dernierPassage": "2p4p2p6p7p2p4p3p2p5p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 3,
@@ -75,7 +75,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "AL SSAKAB RACING",
-   "cote": null,
+   "cote": 760,
    "coteRef": 110,
    "depart": 4,
    "def": null,
@@ -83,7 +83,7 @@
    "dernierPassage": "5p4p4p6p3p3p5p9p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   },
   {
    "num": 4,
@@ -98,7 +98,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "BOUAHDA MOHAMED",
-   "cote": null,
+   "cote": 1470,
    "coteRef": 190,
    "depart": 8,
    "def": null,
@@ -106,7 +106,7 @@
    "dernierPassage": "10p",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 9
   },
   {
    "num": 5,
@@ -121,7 +121,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "BOUAHDA MOHAMED",
-   "cote": null,
+   "cote": 4700,
    "coteRef": 200,
    "depart": 5,
    "def": null,
@@ -129,7 +129,7 @@
    "dernierPassage": "12p5p11p4p9p(25)6p12p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 6
   },
   {
    "num": 6,
@@ -144,7 +144,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "OUARDI MAROUANE",
-   "cote": null,
+   "cote": 690,
    "coteRef": 220,
    "depart": 3,
    "def": null,
@@ -152,7 +152,7 @@
    "dernierPassage": "3p8p",
    "gains": null,
    "musique": " ",
-   "place": null
+   "place": 1
   },
   {
    "num": 7,
@@ -167,7 +167,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "CHAFQANE EL MEHDI (A)",
-   "cote": null,
+   "cote": 1010,
    "coteRef": 250,
    "depart": 1,
    "def": null,
@@ -175,7 +175,7 @@
    "dernierPassage": "3p",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 8
   },
   {
    "num": 8,
@@ -190,7 +190,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "ZERGANE BOUCHAIB",
-   "cote": null,
+   "cote": 6310,
    "coteRef": 930,
    "depart": 7,
    "def": null,
@@ -198,7 +198,7 @@
    "dernierPassage": "5p9p8p5p5p6p11p5p9p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 9,
@@ -213,7 +213,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "AMMAR MOHAMMED",
-   "cote": null,
+   "cote": 8470,
    "coteRef": 230,
    "depart": 10,
    "def": null,
@@ -221,7 +221,7 @@
    "dernierPassage": "2p6p7p2p13p11p8p13p9p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 5
   },
   {
    "num": 10,
@@ -236,7 +236,7 @@
    "age": 3,
    "couleur": "BLB",
    "proprietaire": "SAIS STUD",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 260,
    "depart": 6,
    "def": null,
@@ -244,10 +244,21 @@
    "dernierPassage": "6p8p8p11p",
    "gains": null,
    "musique": "   ",
-   "place": null
+   "place": 7
   }
  ],
- "arrivee": [],
- "collecteLe": "2026-10-20T14:25:58.626Z",
+ "arrivee": [
+  6,
+  2,
+  8,
+  3,
+  9,
+  5,
+  10,
+  7,
+  4,
+  1
+ ],
+ "collecteLe": "2026-10-20T22:29:42.092Z",
  "collecteApresCourse": true
 }

@@ -29,7 +29,7 @@
    "age": 5,
    "couleur": "BAI",
    "proprietaire": "BENNANI MOHAMMED AZIZ",
-   "cote": null,
+   "cote": 330,
    "coteRef": 1000,
    "depart": 9,
    "def": null,
@@ -37,7 +37,7 @@
    "dernierPassage": "3p2p1p2p1p4p3p3p5p5p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 1
   },
   {
    "num": 2,
@@ -52,7 +52,7 @@
    "age": 4,
    "couleur": "ALE",
    "proprietaire": "ATLAS STUD",
-   "cote": null,
+   "cote": 330,
    "coteRef": 110,
    "depart": 5,
    "def": null,
@@ -60,7 +60,7 @@
    "dernierPassage": "2p1p5p5p5p3p1p4p3p5p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 5
   },
   {
    "num": 3,
@@ -75,7 +75,7 @@
    "age": 5,
    "couleur": "BAI",
    "proprietaire": "FAL STUD",
-   "cote": null,
+   "cote": 400,
    "coteRef": 250,
    "depart": 4,
    "def": null,
@@ -83,7 +83,7 @@
    "dernierPassage": "1p3p4p2p1p4p3p2p1p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 4,
@@ -98,7 +98,7 @@
    "age": 5,
    "couleur": "ALE",
    "proprietaire": "BAYOUD ABDERRAHIM",
-   "cote": null,
+   "cote": 3350,
    "coteRef": 1200,
    "depart": 1,
    "def": null,
@@ -106,7 +106,7 @@
    "dernierPassage": "4p4p6p5p8p1p1p7p3p8p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 6
   },
   {
    "num": 5,
@@ -121,7 +121,7 @@
    "age": 4,
    "couleur": "BAI",
    "proprietaire": "ZAK STUD",
-   "cote": null,
+   "cote": 920,
    "coteRef": 880,
    "depart": 7,
    "def": null,
@@ -129,7 +129,7 @@
    "dernierPassage": "1p3p2p1p1p8p3p1p1p(25)1p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 6,
@@ -144,7 +144,7 @@
    "age": 4,
    "couleur": "ALE",
    "proprietaire": "BENDAMOU NOREDDINE",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 1800,
    "depart": 2,
    "def": null,
@@ -167,7 +167,7 @@
    "age": 5,
    "couleur": "ALE",
    "proprietaire": "SAMIE TAHAR",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 1600,
    "depart": 6,
    "def": null,
@@ -190,7 +190,7 @@
    "age": 6,
    "couleur": "BAI",
    "proprietaire": "AMENAI ZOUHAIR",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 2000,
    "depart": 3,
    "def": null,
@@ -198,7 +198,7 @@
    "dernierPassage": "6p2p7p8p6p7p7p2p(25)12p9p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   },
   {
    "num": 9,
@@ -213,7 +213,7 @@
    "age": 6,
    "couleur": "ALE",
    "proprietaire": "ZINOUNE ABDELKADER",
-   "cote": null,
+   "cote": 9900,
    "coteRef": 3800,
    "depart": 8,
    "def": null,
@@ -221,10 +221,18 @@
    "dernierPassage": "3p9p3p5p8p2p2p3p6p8p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 7
   }
  ],
- "arrivee": [],
- "collecteLe": "2026-10-20T14:25:55.872Z",
+ "arrivee": [
+  1,
+  5,
+  3,
+  8,
+  2,
+  4,
+  9
+ ],
+ "collecteLe": "2026-10-20T22:29:38.986Z",
  "collecteApresCourse": true
 }

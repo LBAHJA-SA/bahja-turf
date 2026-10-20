@@ -29,7 +29,7 @@
    "age": 3,
    "couleur": "GRO",
    "proprietaire": "BENDAMOU NOREDDINE",
-   "cote": 1520,
+   "cote": 1580,
    "coteRef": 1200,
    "depart": 1,
    "def": null,
@@ -37,7 +37,7 @@
    "dernierPassage": "6p11p2p8p4p5p6p4p3p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 7
   },
   {
    "num": 2,
@@ -52,7 +52,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "BEJTIT TARIK",
-   "cote": 1790,
+   "cote": 1370,
    "coteRef": 1300,
    "depart": 17,
    "def": null,
@@ -60,7 +60,7 @@
    "dernierPassage": "4p5p8p6p2p4p6p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 4
   },
   {
    "num": 3,
@@ -75,7 +75,7 @@
    "age": 3,
    "couleur": "ALE",
    "proprietaire": "FAL STUD",
-   "cote": 740,
+   "cote": 540,
    "coteRef": 160,
    "depart": 16,
    "def": null,
@@ -83,7 +83,7 @@
    "dernierPassage": "3p8p6p4p2p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 6
   },
   {
    "num": 4,
@@ -98,7 +98,7 @@
    "age": 3,
    "couleur": "GRO",
    "proprietaire": "ALLAGA YOUNES (A)",
-   "cote": 4900,
+   "cote": 4120,
    "coteRef": 1500,
    "depart": 4,
    "def": null,
@@ -106,7 +106,7 @@
    "dernierPassage": "8p7p3p3p2p7p3p6p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 13
   },
   {
    "num": 5,
@@ -121,7 +121,7 @@
    "age": 3,
    "couleur": "ALE",
    "proprietaire": "AL MORTAJEZ RACING",
-   "cote": 3080,
+   "cote": 3060,
    "coteRef": 870,
    "depart": 12,
    "def": null,
@@ -129,7 +129,7 @@
    "dernierPassage": "8p4p4p5p11p3p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 3
   },
   {
    "num": 6,
@@ -144,7 +144,7 @@
    "age": 3,
    "couleur": "BLR",
    "proprietaire": "TALEB RABIA",
-   "cote": 700,
+   "cote": 640,
    "coteRef": 110,
    "depart": 15,
    "def": null,
@@ -152,7 +152,7 @@
    "dernierPassage": "2p4p2p2p4p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 10
   },
   {
    "num": 7,
@@ -167,7 +167,7 @@
    "age": 3,
    "couleur": "ALE",
    "proprietaire": "ATLAS STUD",
-   "cote": 380,
+   "cote": 390,
    "coteRef": 1100,
    "depart": 8,
    "def": null,
@@ -175,7 +175,7 @@
    "dernierPassage": "3p2p2p2p3p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 2
   },
   {
    "num": 8,
@@ -190,7 +190,7 @@
    "age": 3,
    "couleur": "AAU",
    "proprietaire": "KARIMINE AHMED",
-   "cote": 2200,
+   "cote": 2720,
    "coteRef": 1400,
    "depart": 6,
    "def": null,
@@ -198,7 +198,7 @@
    "dernierPassage": "3p2p3p9p9p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 5
   },
   {
    "num": 9,
@@ -213,7 +213,7 @@
    "age": 3,
    "couleur": "GTR",
    "proprietaire": "SSOUNI SAID",
-   "cote": 680,
+   "cote": 960,
    "coteRef": 1300,
    "depart": 3,
    "def": null,
@@ -221,7 +221,7 @@
    "dernierPassage": "2p5p2p",
    "gains": null,
    "musique": "  ",
-   "place": null
+   "place": 1
   },
   {
    "num": 10,
@@ -236,7 +236,7 @@
    "age": 3,
    "couleur": "BFR",
    "proprietaire": "BAATI TAHAR",
-   "cote": 9900,
+   "cote": 8380,
    "coteRef": 1300,
    "depart": 9,
    "def": null,
@@ -244,7 +244,7 @@
    "dernierPassage": "10p6p7p5p4p6p11p11p13p2p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 14
   },
   {
    "num": 11,
@@ -259,7 +259,7 @@
    "age": 3,
    "couleur": "BLR",
    "proprietaire": "ROUCHDI HICHAM (A)",
-   "cote": 4990,
+   "cote": 6100,
    "coteRef": 1100,
    "depart": 18,
    "def": null,
@@ -267,7 +267,7 @@
    "dernierPassage": "7p4p10p2p4p2p",
    "gains": null,
    "musique": "    ",
-   "place": null
+   "place": 12
   },
   {
    "num": 12,
@@ -305,7 +305,7 @@
    "age": 3,
    "couleur": "ALE",
    "proprietaire": "LACHQER MOHAMED",
-   "cote": 5500,
+   "cote": 7460,
    "coteRef": 1200,
    "depart": 14,
    "def": null,
@@ -313,7 +313,7 @@
    "dernierPassage": "",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 15
   },
   {
    "num": 14,
@@ -328,7 +328,7 @@
    "age": 3,
    "couleur": "BAI",
    "proprietaire": "NASSIF ISMAIL",
-   "cote": 4560,
+   "cote": 8190,
    "coteRef": 1300,
    "depart": 5,
    "def": null,
@@ -336,7 +336,7 @@
    "dernierPassage": "6p",
    "gains": null,
    "musique": "",
-   "place": null
+   "place": 8
   },
   {
    "num": 15,
@@ -351,7 +351,7 @@
    "age": 3,
    "couleur": "AAU",
    "proprietaire": "TANALE YASSIR (A)",
-   "cote": 4820,
+   "cote": 9580,
    "coteRef": 1200,
    "depart": 2,
    "def": null,
@@ -359,7 +359,7 @@
    "dernierPassage": "5p12p",
    "gains": null,
    "musique": " ",
-   "place": null
+   "place": 9
   },
   {
    "num": 16,
@@ -405,7 +405,7 @@
    "dernierPassage": "2p11p",
    "gains": null,
    "musique": " ",
-   "place": null
+   "place": 16
   },
   {
    "num": 18,
@@ -428,10 +428,27 @@
    "dernierPassage": "5p9p9p",
    "gains": null,
    "musique": "  ",
-   "place": null
+   "place": 11
   }
  ],
- "arrivee": [],
- "collecteLe": "2026-10-20T14:22:28.720Z",
+ "arrivee": [
+  9,
+  7,
+  5,
+  2,
+  8,
+  3,
+  1,
+  14,
+  15,
+  6,
+  18,
+  11,
+  4,
+  10,
+  13,
+  17
+ ],
+ "collecteLe": "2026-10-20T22:26:19.849Z",
  "collecteApresCourse": true
 }
