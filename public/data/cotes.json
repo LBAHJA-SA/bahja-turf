@@ -3741,5 +3741,161 @@
     "heure": "2026-10-19T13:58:00+02:00"
    }
   ]
+ },
+ "2026-10-20_R1_C1": {
+  "source": "equidia.fr",
+  "favori": 2,
+  "cotes": [
+   {
+    "num": 2,
+    "nom": "NITY GALESTE",
+    "cote": 5.2,
+    "ouverture": 5.3,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 4,
+    "nom": "ZARLAND",
+    "cote": 9.2,
+    "ouverture": 9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 9,
+    "nom": "TAKERYA",
+    "cote": 9.3,
+    "ouverture": 9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 3,
+    "nom": "MAKAN",
+    "cote": 10,
+    "ouverture": 10,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 11,
+    "nom": "ENTLEBUCH",
+    "cote": 11,
+    "ouverture": 12,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 14,
+    "nom": "EXELMANS",
+    "cote": 11,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 15,
+    "nom": "ZARABABY",
+    "cote": 11,
+    "ouverture": 11,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 10,
+    "nom": "BABADOO",
+    "cote": 14,
+    "ouverture": 14,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 13,
+    "nom": "ADICTA",
+    "cote": 15,
+    "ouverture": 15,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 8,
+    "nom": "MARIE LA CROIX",
+    "cote": 16,
+    "ouverture": 17,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 16,
+    "nom": "MICKAEL D'OO",
+    "cote": 18,
+    "ouverture": 17,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 6,
+    "nom": "ARANYANI",
+    "cote": 19,
+    "ouverture": 18,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 5,
+    "nom": "MY HABITUDE",
+    "cote": 21,
+    "ouverture": 21,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 1,
+    "nom": "YACOMO",
+    "cote": 33,
+    "ouverture": 31,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   },
+   {
+    "num": 12,
+    "nom": "SORELINO",
+    "cote": 48,
+    "ouverture": 45,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 132522,
+    "heure": "2026-10-20T13:15:00+02:00"
+   }
+  ]
  }
 }

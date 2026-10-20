@@ -179,9 +179,9 @@
    "place": null
   },
   {
-   "num": 1,
-   "cheval": "ILCAR QUARTMA",
-   "nom": "ILCAR QUARTMA",
+   "num": 3,
+   "cheval": "JET DE LA FERME",
+   "nom": "JET DE LA FERME",
    "poids": null,
    "driver": "",
    "jockey": "",
@@ -202,9 +202,9 @@
    "place": null
   },
   {
-   "num": 3,
-   "cheval": "JET DE LA FERME",
-   "nom": "JET DE LA FERME",
+   "num": 1,
+   "cheval": "ILCAR QUARTMA",
+   "nom": "ILCAR QUARTMA",
    "poids": null,
    "driver": "",
    "jockey": "",
@@ -387,5 +387,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-10-20T14:42:18.273Z"
+ "collecteLe": "2026-10-20T22:16:58.267Z"
 }
