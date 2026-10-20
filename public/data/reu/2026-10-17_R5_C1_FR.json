@@ -1,0 +1,143 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "pro.casacourses.com (fallback)",
+ "race": {
+  "numOrdre": 1,
+  "nom": "PRIX DE LA PLACE SAINT-CHARLES",
+  "distance": 2150,
+  "type": "ATTELE",
+  "date": "2026-10-17",
+  "nbPartants": 10
+ },
+ "meeting": {
+  "num": 5,
+  "hippodrome": "ENGHIEN",
+  "pays": "FR"
+ },
+ "participants": [
+  {
+   "num": "1",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "2",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "3",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "4",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "5",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "6",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "7",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "8",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "9",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "10",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  }
+ ],
+ "arrivee": [],
+ "collecteLe": "2026-10-20T14:34:46.875Z",
+ "collecteApresCourse": true
+}

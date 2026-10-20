@@ -1,0 +1,179 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "pro.casacourses.com (fallback)",
+ "race": {
+  "numOrdre": 6,
+  "nom": "QATAR RACING CHAMPION STAKES (GR 1) - WORLD POOL",
+  "distance": 2000,
+  "type": "PLAT",
+  "date": "2026-10-17",
+  "nbPartants": 13
+ },
+ "meeting": {
+  "num": 4,
+  "hippodrome": "ASCOT",
+  "pays": "GB"
+ },
+ "participants": [
+  {
+   "num": "1",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "2",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "3",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "4",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "5",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "6",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "7",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "8",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "9",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "10",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "11",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "12",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "13",
+   "cheval": "",
+   "nom": "",
+   "poids": null,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  }
+ ],
+ "arrivee": [],
+ "collecteLe": "2026-10-20T14:32:47.161Z",
+ "collecteApresCourse": true
+}

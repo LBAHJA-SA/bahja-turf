@@ -523,5 +523,6 @@
   "1 - 6 - 8 - 9 - 10 - 5",
   "10 - 5 - 9"
  ],
- "collecteLe": "2026-10-04T08:16:34.962Z"
+ "collecteLe": "2026-10-04T08:16:34.962Z",
+ "collecteApresCourse": true
 }

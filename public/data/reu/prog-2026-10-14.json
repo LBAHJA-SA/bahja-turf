@@ -13,7 +13,12 @@
      "nom": "PRIX DES CONSCRITS",
      "heure": "10:00",
      "distance": 3500,
-     "type": "HAIE"
+     "type": "Haies",
+     "dist": null,
+     "partants": 15,
+     "hippodrome": "Nantes",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -23,7 +28,12 @@
      "nom": "PRIX DE DISTRE",
      "heure": "10:30",
      "distance": 3500,
-     "type": "HAIE"
+     "type": "Haies",
+     "dist": null,
+     "partants": 14,
+     "hippodrome": "Nantes",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -33,7 +43,12 @@
      "nom": "PRIX DES SOCIETAIRES",
      "heure": "11:07",
      "distance": 3900,
-     "type": "HAIE"
+     "type": "Haies",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "Nantes",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -43,7 +58,12 @@
      "nom": "GRAND PRIX ANJOU BRETAGNE - FONDS EUROPEEN DE L'ELEVAGE",
      "heure": "11:39",
      "distance": 1600,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 8,
+     "hippodrome": "Nantes",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -53,7 +73,12 @@
      "nom": "PRIX MADHMOON",
      "heure": "12:12",
      "distance": 1600,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 13,
+     "hippodrome": "Nantes",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -63,7 +88,12 @@
      "nom": "PRIX DE BRETAGNE",
      "heure": "12:43",
      "distance": 1600,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "Nantes",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -73,7 +103,12 @@
      "nom": "PRIX COURANT D'AIR",
      "heure": "13:15",
      "distance": 2400,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 5,
+     "hippodrome": "Nantes",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -83,7 +118,12 @@
      "nom": "PRIX ARCHY BALD",
      "heure": "13:47",
      "distance": 3800,
-     "type": "STEEPLECHASE"
+     "type": "Steeple Chase",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "Nantes",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -99,7 +139,12 @@
      "nom": "PRIX TANERKO",
      "heure": "10:50",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 6,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -109,7 +154,12 @@
      "nom": "PRIX GLORIEUSE",
      "heure": "11:25",
      "distance": 2500,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 8,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -119,7 +169,12 @@
      "nom": "PRIX TORNADO",
      "heure": "11:57",
      "distance": 2500,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 7,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -129,7 +184,12 @@
      "nom": "PRIX MAURICE LARRAUN",
      "heure": "12:27",
      "distance": 2400,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -139,7 +199,12 @@
      "nom": "PRIX DE LA FONTAINE",
      "heure": "13:12",
      "distance": 1600,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -149,7 +214,12 @@
      "nom": "PRIX GUEMUL",
      "heure": "13:53",
      "distance": 1600,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -159,7 +229,12 @@
      "nom": "PRIX DE LA POINTE DU HODE",
      "heure": "14:22",
      "distance": 2000,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 15,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -169,7 +244,12 @@
      "nom": "PRIX DES FALAISES DE CRAIE",
      "heure": "14:57",
      "distance": 2000,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 16,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -179,7 +259,12 @@
      "nom": "PRIX DES BOUCLES DE LA SEINE",
      "heure": "15:33",
      "distance": 2000,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 16,
+     "hippodrome": "Saint-Cloud",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -195,7 +280,12 @@
      "nom": "D'AGUILAR HANDICAP",
      "heure": "11:35",
      "distance": 1650,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -205,7 +295,12 @@
      "nom": "ELGIN HANDICAP - SECTION 2",
      "heure": "12:05",
      "distance": 1650,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -215,7 +310,12 @@
      "nom": "ELGIN HANDICAP - SECTION 1",
      "heure": "12:35",
      "distance": 1650,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -225,7 +325,12 @@
      "nom": "FINANCE HANDICAP - SECTION 1",
      "heure": "13:05",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -235,7 +340,12 @@
      "nom": "FINANCE HANDICAP - SECTION 3",
      "heure": "13:35",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -245,7 +355,12 @@
      "nom": "THE HKEX TECH 100 CUP (HANDICAP)",
      "heure": "14:10",
      "distance": 1800,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -255,7 +370,12 @@
      "nom": "FINANCE HANDICAP - SECTION 2",
      "heure": "14:45",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -265,7 +385,12 @@
      "nom": "GAGE HANDICAP",
      "heure": "15:15",
      "distance": 1800,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -275,7 +400,12 @@
      "nom": "HARBOUR VIEW HANDICAP",
      "heure": "15:50",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "HAPPY VALLEY",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -291,7 +421,12 @@
      "nom": "MARGUERIDE",
      "heure": "12:05",
      "distance": 1800,
-     "type": "N"
+     "type": "T",
+     "dist": 3500,
+     "partants": 5,
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (fallback Maghreb)",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -301,7 +436,12 @@
      "nom": "RANNAN",
      "heure": "12:40",
      "distance": 1700,
-     "type": "N"
+     "type": "T",
+     "dist": 1900,
+     "partants": 4,
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (fallback Maghreb)",
+     "arrivee": "2-1-3-4"
     },
     {
      "date": "2026-10-14",
@@ -311,7 +451,12 @@
      "nom": "LOUARDE",
      "heure": "13:15",
      "distance": 1900,
-     "type": "N"
+     "type": "T",
+     "dist": 1200,
+     "partants": 8,
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (fallback Maghreb)",
+     "arrivee": "4-6-5-2-8-1-3"
     },
     {
      "date": "2026-10-14",
@@ -321,7 +466,12 @@
      "nom": "LAROUI",
      "heure": "13:50",
      "distance": 1900,
-     "type": "N"
+     "type": "T",
+     "dist": 1700,
+     "partants": 9,
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (fallback Maghreb)",
+     "arrivee": "6-8-7-5-2-3-4-9-1"
     },
     {
      "date": "2026-10-14",
@@ -331,7 +481,12 @@
      "nom": "OROS BIS",
      "heure": "14:25",
      "distance": 2000,
-     "type": "N"
+     "type": "T",
+     "dist": 1700,
+     "partants": 18,
+     "hippodrome": "Khemisset",
+     "source": "e-sorec (fallback Maghreb)",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -341,7 +496,12 @@
      "nom": "ELISA II",
      "heure": "15:00",
      "distance": 1700,
-     "type": "N"
+     "type": "Plat",
+     "dist": null,
+     "partants": 8,
+     "hippodrome": "Khemisset",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -351,7 +511,12 @@
      "nom": "MARZOUK",
      "heure": "15:35",
      "distance": 1800,
-     "type": "N"
+     "type": "Plat",
+     "dist": null,
+     "partants": 11,
+     "hippodrome": "Khemisset",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -361,7 +526,12 @@
      "nom": "MARISA",
      "heure": "16:10",
      "distance": 1300,
-     "type": "N"
+     "type": "Plat",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "Khemisset",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -371,7 +541,12 @@
      "nom": "OROS",
      "heure": "16:40",
      "distance": 2000,
-     "type": "N"
+     "type": "Plat",
+     "dist": null,
+     "partants": 7,
+     "hippodrome": "Khemisset",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -387,7 +562,12 @@
      "nom": "GRAND NATIONAL DU TROT",
      "heure": "12:55",
      "distance": 2550,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 16,
+     "hippodrome": "Reims",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -397,7 +577,12 @@
      "nom": "GRAND NATIONAL DES AMATEURS PRIX DE L'UNAT",
      "heure": "13:30",
      "distance": 2550,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 11,
+     "hippodrome": "Reims",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -407,7 +592,12 @@
      "nom": "PRIX OSCAR COLLARD",
      "heure": "14:08",
      "distance": 2550,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 16,
+     "hippodrome": "Reims",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -417,7 +607,12 @@
      "nom": "PRIX DU CHAMPAGNE CASTELNAU",
      "heure": "14:40",
      "distance": 2500,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 14,
+     "hippodrome": "Reims",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -427,7 +622,12 @@
      "nom": "PRIX GILBERT CORNET",
      "heure": "15:15",
      "distance": 2500,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "Reims",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -437,7 +637,12 @@
      "nom": "GRAND NATIONAL DES JOCKEYS",
      "heure": "15:50",
      "distance": 2550,
-     "type": "MONTE"
+     "type": "Monté",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "Reims",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -447,7 +652,12 @@
      "nom": "PRIX PMU LE BON ACCUEIL-TINQUEUX",
      "heure": "16:28",
      "distance": 2550,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "Reims",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -457,7 +667,12 @@
      "nom": "PRIX DES NOUVEAUX PARTENAIRES PMU",
      "heure": "17:02",
      "distance": 2550,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 14,
+     "hippodrome": "Reims",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -473,7 +688,12 @@
      "nom": "PRIX DES HERONS",
      "heure": "16:10",
      "distance": 2750,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 16,
+     "hippodrome": "Cabourg",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -483,7 +703,12 @@
      "nom": "PRIX DES ROITELETS",
      "heure": "16:44",
      "distance": 2750,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 16,
+     "hippodrome": "Cabourg",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -493,7 +718,12 @@
      "nom": "PRIX DES TOURTERELLES",
      "heure": "17:17",
      "distance": 2725,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 14,
+     "hippodrome": "Cabourg",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -503,7 +733,12 @@
      "nom": "PRIX DES CIGOGNES",
      "heure": "17:45",
      "distance": 2750,
-     "type": "MONTE"
+     "type": "Monté",
+     "dist": null,
+     "partants": 14,
+     "hippodrome": "Cabourg",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -513,7 +748,12 @@
      "nom": "PRIX DES ROSSIGNOLS",
      "heure": "18:15",
      "distance": 2050,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "Cabourg",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -523,7 +763,12 @@
      "nom": "PRIX D'AMMEVILLE",
      "heure": "18:45",
      "distance": 2750,
-     "type": "MONTE"
+     "type": "Monté",
+     "dist": null,
+     "partants": 16,
+     "hippodrome": "Cabourg",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -533,7 +778,12 @@
      "nom": "PRIX DES SAGINES",
      "heure": "19:15",
      "distance": 2050,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 14,
+     "hippodrome": "Cabourg",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -543,7 +793,12 @@
      "nom": "PRIX DES MESANGES",
      "heure": "19:45",
      "distance": 2750,
-     "type": "MONTE"
+     "type": "Monté",
+     "dist": null,
+     "partants": 15,
+     "hippodrome": "Cabourg",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -559,7 +814,12 @@
      "nom": "BRITISH STALLION STUDS EBF NOVICE STAKES (CLASS 4)",
      "heure": "16:25",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 8,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -569,7 +829,12 @@
      "nom": "NURSERY HANDICAP (CLASS 4)",
      "heure": "17:00",
      "distance": 1600,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 7,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -579,7 +844,12 @@
      "nom": "HANDICAP (CLASS 5) (LONDON MILE SERIES QUALIFIER) (DIV I)",
      "heure": "17:30",
      "distance": 1600,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -589,7 +859,12 @@
      "nom": "HANDICAP (CLASS 5) (LONDON MILE SERIES QUALIFIER) (DIV II)",
      "heure": "18:00",
      "distance": 1600,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -599,7 +874,12 @@
      "nom": "JUDDMONTE EBF NOVICE FILLIES' RESTRICTED NOVICE STAKES (CLASS 2)",
      "heure": "18:30",
      "distance": 1400,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -609,7 +889,12 @@
      "nom": "RACING TV HANDICAP (CLASS 4)",
      "heure": "19:00",
      "distance": 1400,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 14,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -619,7 +904,12 @@
      "nom": "LONDON SPRINT SERIES FINAL HANDICAP (CLASS 2)",
      "heure": "19:30",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -629,7 +919,12 @@
      "nom": "HANDICAP (CLASS 4) (LONDON MIDDLE DISTANCE QUALIFIER)",
      "heure": "20:00",
      "distance": 2220,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 13,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -639,7 +934,12 @@
      "nom": "FILLIES' HANDICAP (CLASS 5) (LONDON MIDDLE DISTANCE SERIES QUALIFIER)",
      "heure": "20:30",
      "distance": 2220,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "kempton",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -655,7 +955,12 @@
      "nom": "PRIX DE PARIS                           SUEDE",
      "heure": "17:18",
      "distance": 2140,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -665,7 +970,12 @@
      "nom": "PRIX DE MARSEILLE                       SUEDE",
      "heure": "17:42",
      "distance": 2140,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 8,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -675,7 +985,12 @@
      "nom": "PRIX DE VERSAILLES                      SUEDE",
      "heure": "18:06",
      "distance": 1640,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -685,7 +1000,12 @@
      "nom": "PRIX DE STRASBOURG                      SUEDE",
      "heure": "18:27",
      "distance": 1640,
-     "type": "MONTE"
+     "type": "Monté",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -695,7 +1015,12 @@
      "nom": "PRIX DE CARNAC                          SUEDE",
      "heure": "18:51",
      "distance": 2140,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 7,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -705,7 +1030,12 @@
      "nom": "PRIX DE TOULOUSE                        SUEDE",
      "heure": "19:13",
      "distance": 2140,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -715,7 +1045,12 @@
      "nom": "PRIX DE TOULON                          SUEDE",
      "heure": "19:41",
      "distance": 2140,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -725,7 +1060,12 @@
      "nom": "PRIX DE BORDEAUX                        SUEDE",
      "heure": "20:03",
      "distance": 2140,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -735,7 +1075,12 @@
      "nom": "PRIX DE BIARRITZ                        SUEDE",
      "heure": "20:26",
      "distance": 2140,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -745,7 +1090,12 @@
      "nom": "PRIX DE LILLE                           SUEDE",
      "heure": "20:51",
      "distance": 2140,
-     "type": "ATTELE"
+     "type": "Attelé",
+     "dist": null,
+     "partants": 12,
+     "hippodrome": "ABY GOTEBORG",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -760,8 +1110,9 @@
      "pays": "FR",
      "nom": "Race 3",
      "heure": "19:11",
-     "distance": 1207,
-     "type": "Plat"
+     "distance": null,
+     "type": "",
+     "partants": null
     },
     {
      "date": "2026-10-14",
@@ -770,8 +1121,9 @@
      "pays": "FR",
      "nom": "Race 4",
      "heure": "19:45",
-     "distance": 1709,
-     "type": "Plat"
+     "distance": null,
+     "type": "",
+     "partants": null
     },
     {
      "date": "2026-10-14",
@@ -780,8 +1132,9 @@
      "pays": "FR",
      "nom": "Race 5",
      "heure": "20:19",
-     "distance": 1207,
-     "type": "Plat"
+     "distance": null,
+     "type": "",
+     "partants": null
     },
     {
      "date": "2026-10-14",
@@ -790,8 +1143,9 @@
      "pays": "FR",
      "nom": "Race 6",
      "heure": "20:53",
-     "distance": 1609,
-     "type": "Plat"
+     "distance": null,
+     "type": "",
+     "partants": null
     }
    ]
   },
@@ -806,8 +1160,9 @@
      "pays": "US",
      "nom": "Race 6",
      "heure": "19:57",
-     "distance": 1307,
-     "type": "Plat"
+     "distance": null,
+     "type": "",
+     "partants": null
     },
     {
      "date": "2026-10-14",
@@ -816,8 +1171,9 @@
      "pays": "US",
      "nom": "Race 7",
      "heure": "20:31",
-     "distance": 1810,
-     "type": "Plat"
+     "distance": null,
+     "type": "",
+     "partants": null
     },
     {
      "date": "2026-10-14",
@@ -826,8 +1182,9 @@
      "pays": "US",
      "nom": "Race 8",
      "heure": "21:05",
-     "distance": 1709,
-     "type": "Plat"
+     "distance": null,
+     "type": "",
+     "partants": null
     }
    ]
   },
@@ -843,7 +1200,12 @@
      "nom": "MISS CARRY STEP 2016",
      "heure": "20:00",
      "distance": 1400,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 15,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -853,7 +1215,12 @@
      "nom": "PECADORA JOY 2025",
      "heure": "20:30",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 8,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -863,7 +1230,12 @@
      "nom": "CIPAYO",
      "heure": "21:00",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 6,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -873,7 +1245,12 @@
      "nom": "ANGIE 2018",
      "heure": "21:30",
      "distance": 1400,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 10,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -883,7 +1260,12 @@
      "nom": "BETA LINDA 2024",
      "heure": "22:00",
      "distance": 1400,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "SAN ISIDRO",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   },
@@ -899,7 +1281,12 @@
      "nom": "ZARAGOZA H.",
      "heure": "20:15",
      "distance": 1100,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 8,
+     "hippodrome": "VALPARAISO",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -909,7 +1296,12 @@
      "nom": "SEVILLA H.",
      "heure": "20:45",
      "distance": 1100,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 11,
+     "hippodrome": "VALPARAISO",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -919,7 +1311,12 @@
      "nom": "MURCIA H.",
      "heure": "21:15",
      "distance": 1200,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 9,
+     "hippodrome": "VALPARAISO",
+     "source": "Equidia",
+     "arrivee": null
     },
     {
      "date": "2026-10-14",
@@ -929,10 +1326,15 @@
      "nom": "ESPANA S.",
      "heure": "21:45",
      "distance": 1300,
-     "type": "PLAT"
+     "type": "Plat",
+     "dist": null,
+     "partants": 7,
+     "hippodrome": "VALPARAISO",
+     "source": "Equidia",
+     "arrivee": null
     }
    ]
   }
  ],
- "collecteLe": "2026-10-20T14:21:03.367Z"
+ "collecteLe": "2026-10-20T14:25:06.398Z"
 }

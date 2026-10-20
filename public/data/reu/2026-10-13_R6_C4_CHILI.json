@@ -203,5 +203,6 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-10-13T08:46:38.501Z"
+ "collecteLe": "2026-10-13T08:46:38.501Z",
+ "collecteApresCourse": true
 }

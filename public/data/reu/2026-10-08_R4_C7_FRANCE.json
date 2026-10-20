@@ -603,5 +603,6 @@
  "pronosTf": [
   "7 - 3 - 2 - 6 - 9 - 12 - 5"
  ],
- "collecteLe": "2026-10-08T23:44:13.889Z"
+ "collecteLe": "2026-10-08T23:44:13.889Z",
+ "collecteApresCourse": true
 }
