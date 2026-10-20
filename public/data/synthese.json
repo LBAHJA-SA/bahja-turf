@@ -23,7 +23,13 @@
       12
     ],
     "savedAt": "2026-10-19T23:12:23.677Z",
-    "arrivee": null,
+    "arrivee": [
+      5,
+      13,
+      14,
+      3,
+      15
+    ],
     "ticket": [
       2,
       1,
@@ -122,7 +128,8 @@
       13,
       14,
       15
-    ]
+    ],
+    "arriveeSource": "casacourses (PROVISIONAL) 20/10 12:05 GMT"
   },
   "2026-10-19": {
     "date": "2026-10-19",
