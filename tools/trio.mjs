@@ -414,7 +414,7 @@ const out = {
       presse: 'le rang de presse (la Synthèse) — la référence',
       fusion: 'la moyenne des deux rangs (mesurée : elle PERD contre le carnet)',
     },
-    note: 'Mesure seule. N\'entre PAS dans le ticket du Quinté (quotas 3-2-1-1-1 fermés).',
+    note: 'Mesure seule. N\'entre PAS dans le ticket du Quinté — chiffré séparément (§15.3), quotas 4-3-1-1-0 depuis le 21/10/2026 (§11.34).',
   },
   derniers,
   positions,
