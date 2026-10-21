@@ -95,17 +95,27 @@ const sigmoid = (z) => 1 / (1 + Math.exp(-Math.max(-30, Math.min(30, z))))
  *   l'utilisateur) : « عطي غير تلاتة الارقام فقط ». `n` reste un paramètre
  *   pour les tests, il n'est pas exposé dans l'interface.
  *
- * ⚠ 21/10/2026 — L'ORDRE DU CARNET PASSE DEVANT LE MARCHÉ.
- *   Mesuré en EUROS (`tools/coply-trio-euros.mjs` + `tools/couple-euros.mjs`,
- *   94 Quintés, 1 € par course) :
- *       trio du marché 1-3   : −74 %   (quand il gagne, il paie 8 €)
- *       trio du carnet 1-3   : −56 %
- *       couplé placé marché  : −22,4 %
- *       couplé placé carnet  : −3,4 %
- *   Le balayage de TOUTES les fenêtres de 3 rangs (marché et carnet, 1-3 à
- *   10-12) ne donne aucune ligne positive : sous le rang 4, on ne touche
- *   JAMAIS (0/92). Le trio à 3 numéros est une loterie — le carnet est
- *   simplement l'ordre qui perd le moins.
+ * ⚠ 21/10/2026 — LE CARNET, PLUS LE DÉSACCORD DU MARCHÉ.
+ *   Mesuré en EUROS (`tools/coply-trio-euros.mjs` + `tools/coply-typique.mjs`,
+ *   1 € par course, 1 seul trio, vrai rapport TIERCE Désordre) :
+ *
+ *        trio du marché 1-3 (les 3 favoris)             −74 %
+ *        trio du carnet P1·P2·P3                        −56 %
+ *        trio P1·P2 + 1er du marché HORS carnet 2       −14 %   (moitiés −14 / −13)
+ *
+ *   → le 3ᵉ numéro n'est pas P3 : c'est le cheval que le marché paie le plus
+ *     court et que la presse ne met PAS dans ses deux premiers. C'est là que
+ *     les deux ordres se contredisent — et c'est le seul endroit qui paie.
+ *   Couplé placé des 3 mêmes numéros : +4,1 % (carnet pur −3,4 %, marché −22,4 %).
+ *
+ *   Et dans le CAS NORMAL — 86 % des courses, celles où 4 des 5 du marché
+ *   n'arrivent pas (ce cas n'est que 13,9 %) : marché −83 %, carnet −63 %,
+ *   la règle ci-dessus −14 %.
+ *
+ *   Le balayage de TOUTES les fenêtres de 3 rangs (marché et carnet, rangs
+ *   1-3 à 10-12) ne donne aucune autre ligne au-dessus de −40 % : sous le
+ *   rang 4, on ne touche JAMAIS (0/92). Le trio à 3 numéros reste une
+ *   loterie — cette règle est simplement celle qui rend le moins.
  *   `course.presse` = l'ordre de la presse (P1, P2, …). Il n'existe QUE pour
  *   le Quinté ; ailleurs le marché reste la seule donnée disponible.
  */
@@ -114,19 +124,29 @@ export async function selectionCoply(partants, course, n = 3) {
   if (chevaux.length < 3) return null
   const taille = Math.max(3, Math.min(Number(n) || 3, chevaux.length))
 
-  /* ① LE CARNET, quand il est publié */
+  /* ① LE CARNET + LE DÉSACCORD DU MARCHÉ, quand la presse est publiée */
   const nums = new Set(chevaux.map((p) => p.num))
   const carnet = (Array.isArray(course && course.presse) ? course.presse : [])
     .map(Number)
     .filter((x) => nums.has(x))
   if (carnet.length >= 3) {
-    const sel = carnet.slice(0, taille)
+    const deux = carnet.slice(0, 2)
+    const cote = (p) => Number(p.coteRef ?? p.cote_pmu ?? p.cote)
+    const desaccord = chevaux
+      .map((p) => ({ num: p.num, c: cote(p) }))
+      .filter((x) => Number.isFinite(x.c) && x.c > 0)
+      .sort((a, b) => a.c - b.c || a.num - b.num)
+      .find((x) => !deux.includes(x.num))
+    const sel = desaccord ? [...deux, desaccord.num] : carnet.slice(0, 3)
+    if (sel.length < taille) {
+      for (const x of carnet) { if (sel.length >= taille) break; if (!sel.includes(x)) sel.push(x) }
+    }
     return {
-      chevaux: sel,
-      trios: combinaisons(sel, 3),
-      paires: combinaisons(sel, 2),
+      chevaux: sel.slice(0, taille),
+      trios: combinaisons(sel.slice(0, taille), 3),
+      paires: combinaisons(sel.slice(0, taille), 2),
       probas: [],
-      modele: { regle: 'carnet', presse: carnet.slice(0, taille) },
+      modele: { regle: 'carnet', presse: carnet.slice(0, taille), desaccord: desaccord ? desaccord.num : null },
     }
   }
 

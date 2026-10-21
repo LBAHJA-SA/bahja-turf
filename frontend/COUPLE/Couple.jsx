@@ -317,7 +317,7 @@ function Lecture({ course, date }) {
             {sel.repli
               ? 'cotes — moteur indisponible'
               : sel.modele?.regle === 'carnet'
-                ? 'ordre du carnet (presse)'
+                ? 'carnet P1·P2 + le désaccord du marché'
                 : 'cotes — pas de presse publiée pour cette course'}
           </div>
         </div>
