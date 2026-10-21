@@ -4738,3 +4738,121 @@ pas un placement, c'est un pari choisi (§15.6).
 `tools/coply-trio-euros.mjs` (le trio en euros, balayage des fenêtres) ·
 `tools/coply-typique.mjs` (le cas normal contre le cas logique) ·
 `tools/couple-euros.mjs` (le couplé en euros).
+
+---
+
+### 11.39 ⭐ LA BASSMAT NE CHOISIT PAS — ELLE DÉCRIT (21/10/2026)
+
+> Question de l'utilisateur : **« يعني البصمة لاتستعمل والمحرك اعمى »** — la
+> bassmat n'est pas utilisée, donc le moteur est aveugle.
+
+#### ① Le constat était juste : la bassmat ne servait à rien
+
+Le panneau « Empreinte du Trio » de `/coply` affichait la **fréquence** des
+motifs (2·1·0·0·0 = 26 %…) et **jamais ce qu'ils paient**. Aucun moteur ne la
+lisait. C'était bien du decor.
+
+#### ② La mesure — 1 € joué sur TOUS les trios d'un motif
+
+Il faut distinguer deux choses que le panneau mélangeait :
+
+```
+le motif dit COMBIEN de chevaux de chaque groupe   (2 de G1 + 1 de G2)
+il ne dit pas LESQUELS
+```
+
+Or un motif contient beaucoup de trios :
+
+```
+2·1·0·0·0  →  C(4,2) × C(4,1)      =    24 trios par course
+1·1·1·0·0  →  4 × 4 × 2            =    32
+3·0·0·0·0  →  C(4,3)               =     4
+1·1·0·0·1  →  4 × 4 × 4            =    64
+```
+
+On rejoue donc chaque Quinté en jouant **tous** les trios du motif, et on
+divise le total gagné par le total misé. `tools/empreinte-trio.mjs`, bloc
+`euros` — **93 Quintés avec rapport réel**, 1 € par trio :
+
+| motif | arrive | paye | trios joués | **par 1 €** |
+|---|---|---|---|---|
+| **2·0·0·1·0** | 11,8 % | 88 € | 1 140 | **0,85 €** ← le meilleur |
+| 0·2·0·1·0 | 2,2 % | 311 € | 1 140 | 0,55 € |
+| 2·0·0·0·1 | 4,3 % | 264 € | 2 100 | 0,50 € |
+| 0·2·0·0·1 | 2,2 % | 486 € | 2 100 | 0,46 € |
+| **2·1·0·0·0** | 24,7 % | 45 € | 2 304 | **0,45 €** ← le plus fréquent |
+| 1·1·0·0·1 | 7,5 % | 360 € | 5 600 | 0,45 € |
+| **3·0·0·0·0** | 8,6 % | 14 € | 384 | **0,30 €** |
+| 1·1·1·0·0 | 9,7 % | 98 € | 3 072 | 0,29 € |
+| 2·0·1·0·0 | 5,4 % | 54 € | 1 152 | 0,23 € |
+| 1·1·0·1·0 | 4,3 % | 158 € | 3 040 | 0,21 € |
+| 1·2·0·0·0 | 7,5 % | 68 € | 2 304 | 0,21 € |
+
+**Aucune forme n'atteint 1,00 € : 0 sur 13.** La meilleure rend **0,85 €**
+par euro, et elle ne pèse que 11,8 % des trios.
+
+Contrôle par les bandes du **marché** (211 Quintés, même calcul) : `2001`
+0,58 € · `1110` 0,52 € · `2010` 0,48 € · `2100` 0,39 € · **`3000` (les 3
+favoris) 0,16 €**. Même conclusion, plus gros échantillon.
+
+#### ③ Le moteur n'est pas aveugle — il est PLUS FIN que la bassmat
+
+```
+la meilleure forme            0,85 € par euro
+le moteur (production)        0,84 € par euro      (5,4 % touchés, −15,8 %)
+la forme qu'il produit       3·0·0·0·0 dans 59,1 % des courses → 0,30 €
+```
+
+Le moteur choisit **1 trio** ; la bassmat agrège **384 à 5 600 trios**.
+Son choix bat donc le motif qu'il produit (0,84 contre 0,30) et vaut la
+meilleure forme de toutes. **Utiliser la bassmat reviendrait à jeter le
+signal fin pour un signal grossier.**
+
+C'est aussi la réponse arithmétique à « البصمة ديال الكوبلي عمرها ماكاتعطي
+نتيجة ايجابية » : ce n'est pas une question de règle, c'est le nombre de
+combinaisons. Une forme = 4 à 64 trios ; à 3 numéros on n'en joue qu'**un**.
+
+#### ④ 15 règles de bassmat testées, toutes ≤ la production
+
+7 règles de motifs (carnet) + 8 règles de bandes (marché) :
+
+```
+E4 P1·P5·P9 (1 de G1,G2,G3)   +47,7 %  mais moitiés +121,7 / −27,8  → 1 seule
+                                        touche sur 90 : bruit
+P1·P2 + mieux coté hors G1    −48,7 %      2 de G1 + 1 hors G1  −71,1 %
+P1·P2 + G3 (P9-P10)           −34,2 %      1A+1B+1C (marché)     −16,4 %
+production                    −16,7 %      ancre 9-10            −100 %
+```
+
+`1A+1B+1C` fait −16,4 % contre −16,7 % : égalité dans le bruit, et instable
+(+68 / −100). Rien ne bat la production de façon stable.
+
+#### ⑤ ✅ APPLIQUÉ — le panneau montre le prix, plus la fréquence seule
+
+`tools/empreinte-trio.mjs` écrit désormais un bloc `euros` :
+
+```
+euros.base            les Quintés qui ont un rapport réel (93)
+euros.formes[]        { motif, cours, pct, paie, trios, parEuro }  trié par parEuro
+euros.meilleure       la meilleure forme et son prix
+euros.moteur          { touche, roi, parEuro, forme, formePct, regle }
+```
+
+Le panneau « Empreinte du Trio » de `/coply` ajoute **une colonne : par 1 €**,
+en ambre sous 1,00 € et en vert au-dessus, plus la comparaison :
+
+```
+équilibre 1,00 € · aucune forme n'atteint l'équilibre : 0 sur 13
+la meilleure forme 2·0·0·1·0 → 0,85 € · le moteur → 0,84 €
+le moteur produit 3·0·0·0·0 dans 59,1 % des courses :
+la forme ne choisit pas, elle décrit
+```
+
+**Le moteur, lui, ne change pas** : `P1 · P2 + le désaccord du marché` (§11.38)
+reste la meilleure règle mesurée — 0,84 € par euro.
+
+> ⚠ Ce n'est pas un abandon de la bassmat : c'est sa **place**. Elle décrit
+> les formes qui existent et ce qu'elles paient (§15.8 : empreinte du podium,
+> du quinté, du trio). Elle ne peut pas choisir, parce qu'un motif est un
+> panier de 4 à 64 trios. Le choix se joue **à l'intérieur** du panier, et
+> c'est là que les 15 règles testées perdent toutes.

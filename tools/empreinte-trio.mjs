@@ -52,7 +52,7 @@ for (const q of lire('data/quintes.json')) {
   const nums = Object.keys(cotes).map(Number).filter(Number.isFinite)
   if (presse.length < 10 || arrivee.length < 5 || nums.length < 10) continue
   if (nums.some((n) => !(cotes[n] > 1))) continue
-  recs.push({ date: q.date, synthese: presse, runners: nums, arrivee })
+  recs.push({ date: q.date, synthese: presse, runners: nums, arrivee, cotes, div: q.dividends })
 }
 recs.sort((a, b) => String(a.date).localeCompare(String(b.date)))
 
@@ -64,7 +64,7 @@ for (const r of recs) {
   const trois = r.arrivee.slice(0, 3)
   const cases = trois.map((n) => g.slotParNum[n])
   if (cases.some((x) => !Number.isFinite(x))) continue
-  lignes.push({ date: r.date, trois, cases: [...cases].sort((a, b) => a - b), groupes: cases.map(groupeDe) })
+  lignes.push({ date: r.date, trois, cases: [...cases].sort((a, b) => a - b), groupes: cases.map(groupeDe), presse: r.synthese, cotes: r.cotes, div: r.div })
 }
 const N = lignes.length
 
@@ -135,6 +135,115 @@ for (let k = 3; k <= 14; k++) {
   courbe.push({ k, trio: pct(d, N), n: d, couple: pct(d2, N), n2: d2 })
 }
 
+/* ⑤ CE QUE CHAQUE MOTIF PAIE — la bassmat peut-elle choisir ? (21/10/2026)
+ *
+ * Instruction de l'utilisateur : « يعني البصمة لاتستعمل والمحرك اعمى ».
+ *
+ * Le motif dit « combien de chevaux de chaque groupe ». Il ne dit PAS lesquels.
+ * Or un motif contient beaucoup de trios : 2·1·0·0·0 = C(4,2)·C(4,1) = 24 ;
+ * 1·1·1·0·0 = 4·4·2 = 32 ; 3·0·0·0·0 = C(4,3) = 4. Donc « jouer le motif »
+ * veut dire jouer 4 à 80 trios par course.
+ *
+ * On mesure donc, motif par motif, ce que rend 1 € joué sur TOUS les trios de
+ * ce motif — et on compare au moteur, qui ne joue qu'UN trio. */
+const valsDiv = (d) => (d ? (Array.isArray(d) ? d : Object.values(d)) : [])
+const rapportTrio = (d) => {
+  for (const e of valsDiv(d)) {
+    if (e && e.bet_type === 'TIERCE_ORDRE' && /désordre/i.test(String(e.sub_type))) {
+      const v = Number(e.payout)
+      if (v > 0) return v
+    }
+  }
+  return 0
+}
+const cNb = (n, k) => {
+  if (k > n || k < 0) return 0
+  let r = 1
+  for (let i = 0; i < k; i++) r = (r * (n - i)) / (i + 1)
+  return Math.round(r)
+}
+/* taille de chaque groupe pour une presse de longueur n */
+const tailles = (n) => [Math.min(4, n), Math.min(4, Math.max(0, n - 4)), Math.min(2, Math.max(0, n - 8)), Math.min(2, Math.max(0, n - 10)), Math.max(0, n - 12)]
+const numDuGroupe = (c) => (c ? ['G1', 'G2', 'G3', 'G4', 'G5'].find((g) => groupeDe(c) === g) : null)
+const rangPresse = (presse, num) => presse.indexOf(num) + 1
+
+const avecRapport = lignes.filter((l) => rapportTrio(l.div) > 0)
+const mEuros = new Map()
+for (const l of avecRapport) {
+  const t = tailles(l.presse.length)
+  const c = { G1: 0, G2: 0, G3: 0, G4: 0, G5: 0 }
+  for (const n of l.trois) { const g = numDuGroupe(rangPresse(l.presse, n)); if (g) c[g]++ }
+  const motif = [c.G1, c.G2, c.G3, c.G4, c.G5].join('·')
+  const e = mEuros.get(motif) || { motif, cours: 0, paye: 0 }
+  e.cours++
+  e.paye += rapportTrio(l.div)
+  mEuros.set(motif, e)
+}
+/* le nombre de trios du motif, compté sur TOUTES les courses (on joue chaque course) */
+const mTrios = new Map()
+for (const l of lignes) {
+  const t = tailles(l.presse.length)
+  for (const [motif, e] of mEuros) {
+    const f = motif.split('·').map(Number)
+    const combos = cNb(t[0], f[0]) * cNb(t[1], f[1]) * cNb(t[2], f[2]) * cNb(t[3], f[3]) * cNb(t[4], f[4])
+    mTrios.set(motif, (mTrios.get(motif) || 0) + combos)
+  }
+}
+const formes = [...mEuros.values()]
+  .map((e) => {
+    const trios = mTrios.get(e.motif) || 0
+    return {
+      motif: e.motif,
+      cours: e.cours,
+      pct: pct(e.cours, avecRapport.length),
+      paie: +(e.paye / e.cours).toFixed(0),
+      trios,
+      parEuro: trios ? +(e.paye / trios).toFixed(2) : 0,
+    }
+  })
+  .filter((x) => x.cours >= 2)
+  .sort((a, b) => b.parEuro - a.parEuro)
+
+/* le moteur : P1 · P2 + le mieux coté que la presse ne met pas dans son top 2 */
+const moteur = (() => {  let n = 0, touche = 0, paye = 0
+  const mForme = new Map()
+  for (const l of avecRapport) {
+    const car = l.presse.filter((x) => l.cotes[x] != null)
+    if (car.length < 3) continue
+    const deux = car.slice(0, 2)
+    const dis = Object.keys(l.cotes)
+      .map(Number)
+      .filter((x) => l.cotes[x] > 0 && !deux.includes(x))
+      .sort((a, b) => l.cotes[a] - l.cotes[b] || a - b)[0]
+    if (!dis) continue
+    const pick = [...deux, dis]
+    n++
+    const motif = [0, 0, 0, 0, 0]
+    for (const x of pick) { const g = numDuGroupe(rangPresse(l.presse, x)); if (g) motif[['G1', 'G2', 'G3', 'G4', 'G5'].indexOf(g)]++ }
+    const cle = motif.join('·')
+    mForme.set(cle, (mForme.get(cle) || 0) + 1)
+    if (l.trois.every((x) => pick.includes(x))) { touche++; paye += rapportTrio(l.div) }
+  }
+  const top = [...mForme.entries()].sort((a, b) => b[1] - a[1])[0] || ['—', 0]
+  return {
+    n,
+    touche: pct(touche, n),
+    roi: +(100 * (paye / n - 1)).toFixed(1),
+    parEuro: +(paye / n).toFixed(2),
+    forme: top[0],
+    formePct: pct(top[1], n),
+    regle: 'P1 · P2 + le mieux coté que la presse ne met pas dans son top 2',
+  }
+})()
+
+const euros = {
+  base: avecRapport.length,
+  equilibre: 1,
+  formes,
+  meilleure: formes[0] ? { motif: formes[0].motif, parEuro: formes[0].parEuro } : null,
+  moteur,
+}
+
 const out = {
   ecrit: new Date().toISOString().slice(0, 10),
   outil: 'tools/empreinte-trio.mjs',
@@ -150,6 +259,7 @@ const out = {
   pairesCases,
   paires,
   courbe,
+  euros,
 }
 
 fs.writeFileSync(path.join(RACINE, 'data', 'empreinte-trio.json'), JSON.stringify(out))
@@ -179,5 +289,16 @@ for (const p of paires) console.log('     ' + p.blocs.padEnd(12) + rp(p.n, 4) + 
 
 console.log('\n  COMBIEN DE CASES — le couplé (≥ 2 des 3) et le trio (les 3)')
 for (const c of courbe) console.log('     P1..P' + String(c.k).padEnd(3) + rp('couplé ' + c.couple + ' %', 16) + rp('trio ' + c.trio + ' %', 14))
+
+console.log('\n  CE QUE CHAQUE MOTIF PAIE — ' + euros.base + ' Quintés avec rapport (1 € par trio joué)')
+for (const f of euros.formes) {
+  console.log('     ' + f.motif.padEnd(12) + rp(f.cours, 4) + rp(f.pct + ' %', 8)
+    + rp(f.paie + ' €', 8) + rp(f.trios + ' trios', 12) + rp(f.parEuro.toFixed(2).replace('.', ',') + ' € / 1 €', 14))
+}
+if (euros.meilleure) console.log('     → la meilleure forme rend ' + euros.meilleure.parEuro.toFixed(2).replace('.', ',') + ' € par euro (équilibre = 1,00 €)')
+console.log('\n  LE MOTEUR — ' + moteur.regle)
+console.log('     ' + moteur.n + ' courses · ' + moteur.touche + ' % touchés · ' + moteur.roi + ' % · '
+  + moteur.parEuro.toFixed(2).replace('.', ',') + ' € par euro')
+console.log('     forme produite : ' + moteur.forme + ' dans ' + moteur.formePct + ' % des courses')
 
 console.log('\n  → data/empreinte-trio.json + public/data/empreinte-trio.json\n')

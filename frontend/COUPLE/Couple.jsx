@@ -387,13 +387,18 @@ function EmpreinteTrio({ emp }) {
   const nb = { ...td, textAlign: 'right', color: '#c7d6ea' }
   const pctd = { ...td, textAlign: 'right', fontWeight: 800, color: TE.accent }
 
-  /* une colonne = une liste (motif ou empreinte) : valeur · n · % · barre */
-  const colonne = (titre, liste, cle, pied) => (
+  /* une colonne = une liste (motif ou empreinte) : valeur · n · % · barre
+   * `avecEuros` ajoute la colonne qui compte : ce que rend 1 € joué sur TOUS
+   * les trios de la forme (emp.euros, écrit par tools/empreinte-trio.mjs). */
+  const parEuro = new Map(((emp.euros && emp.euros.formes) || []).map((f) => [f.motif, f.parEuro]))
+  const colonne = (titre, liste, cle, pied, avecEuros) => (
     <div style={{ flex: '1 1 300px', minWidth: 280 }}>
       <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: .8, textTransform: 'uppercase', color: TE.accent, marginBottom: 6 }}>{titre}</div>
       <table style={{ borderCollapse: 'collapse', width: '100%' }}>
         <tbody>
-          {liste.slice(0, 8).map((m) => (
+          {liste.slice(0, 8).map((m) => {
+            const pe = avecEuros ? parEuro.get(m[cle]) : undefined
+            return (
             <tr key={m[cle]} style={{ borderBottom: '1px solid rgba(255,255,255,.06)' }}>
               <td style={{ ...td, fontWeight: 800, color: '#fff' }}>{m[cle]}</td>
               <td style={nb}>{m.n}</td>
@@ -401,8 +406,13 @@ function EmpreinteTrio({ emp }) {
               <td style={{ padding: '3px 6px', width: 84 }}>
                 <div style={{ height: 7, borderRadius: 4, background: TE.accent, opacity: .8, width: Math.max(2, m.pct * 3.2) }} />
               </td>
+              {avecEuros && (
+                <td style={{ ...nb, fontWeight: 800, color: pe == null ? '#8fa3bf' : pe >= 1 ? '#22c55e' : '#f59e0b' }}>
+                  {pe == null ? '—' : nbx(pe.toFixed(2)) + ' €'}
+                </td>
+              )}
             </tr>
-          ))}
+          )})}
         </tbody>
       </table>
       <div style={{ fontSize: 10.5, color: '#8fa3bf', marginTop: 7, lineHeight: 1.55 }}>{pied}</div>
@@ -429,9 +439,9 @@ function EmpreinteTrio({ emp }) {
         {colonne('① Le motif', emp.motifs, 'motif', (
           <>
             moyenne par course · <b>G1 {nbx(moy.G1)}</b> · G2 {nbx(moy.G2)} · G3 {nbx(moy.G3)} · G4 {nbx(moy.G4)} · G5 {nbx(moy.G5)}
-            <br />{emp.motifs.length} motifs sur {emp.n} courses
+            <br />{emp.motifs.length} motifs sur {emp.n} courses · dernière colonne = ce que rend <b>1 €</b> joué sur <b>tous</b> les trios de la forme
           </>
-        ))}
+        ), true)}
         {colonne('② Les 3 paires', emp.pairesCases, 'paire', (
           <>
             <b>{emp.pairesCases.length}</b> paires distinctes · la plus fréquente : <b>{emp.pairesCases[0]?.paire}</b> ({pc(emp.pairesCases[0]?.pct)})
@@ -447,6 +457,22 @@ function EmpreinteTrio({ emp }) {
       <div style={{ marginTop: 8, fontSize: 11, color: '#8fa3bf', fontFamily: TE.mono }}>
         P1..Pk — <b>couplé ≥ 2</b> / trio : {(emp.courbe || []).slice(0, 10).map((c) => `P${c.k} ${pc(c.couple)} / ${pc(c.trio)}`).join(' · ')}
       </div>
+
+      {emp.euros && (
+        <div style={{ marginTop: 10, paddingTop: 9, borderTop: '1px solid rgba(251,146,60,.3)', fontSize: 11.5, color: '#c7d6ea', fontFamily: TE.mono, lineHeight: 1.8 }}>
+          <div>
+            <b>1 €</b> joué rapporte <b>1,00 €</b> à l'équilibre · {emp.euros.base} Quintés avec rapport ·
+            aucune forme n'atteint l'équilibre : <b style={{ color: '#f59e0b' }}>{emp.euros.formes.filter((f) => f.parEuro >= 1).length} sur {emp.euros.formes.length}</b>
+          </div>
+          <div>
+            la meilleure forme <b>{emp.euros.meilleure?.motif}</b> → <b style={{ color: '#f59e0b' }}>{nbx(emp.euros.meilleure?.parEuro)} €</b>
+            {' · '}le moteur (<b>{emp.euros.moteur?.touche} %</b> touchés, <b>{nbx(emp.euros.moteur?.roi)} %</b>) → <b style={{ color: '#22c55e' }}>{nbx(emp.euros.moteur?.parEuro)} €</b>
+          </div>
+          <div style={{ color: '#8fa3bf' }}>
+            le moteur produit <b>{emp.euros.moteur?.forme}</b> dans {nbx(emp.euros.moteur?.formePct)} % des courses : la forme ne choisit pas, elle décrit
+          </div>
+        </div>
+      )}
     </div>
   )
 }
