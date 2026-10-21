@@ -32,8 +32,8 @@
       11,
       13
     ],
-    "ticketSource": "page",
-    "ticketPoseLe": "2026-10-20T19:14:57.753Z",
+    "ticketSource": "final",
+    "ticketPoseLe": "2026-10-21T10:54:21.674Z",
     "discipline": "ATTELE",
     "distance": 2950,
     "nbPartants": 13,
@@ -58,13 +58,66 @@
     ],
     "sourceImport": "page",
     "placeholder": false,
-    "ticketMode": null,
-    "groupes": null,
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          12,
+          1,
+          13
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          8,
+          7
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          6
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          9
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          11
+        ]
+      }
+    ],
     "surprises": [],
-    "ticketMoteur": null,
+    "ticketMoteur": [
+      12,
+      1,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13
+    ],
     "cloture": null,
     "scores": null,
-    "collecte": "2026-10-21T09:24:27.635Z"
+    "collecte": "2026-10-21T10:54:21.677Z",
+    "ticketMatin": [
+      12,
+      1,
+      6,
+      7,
+      8,
+      9,
+      11,
+      13
+    ]
   },
   "2026-10-20": {
     "date": "2026-10-20",
