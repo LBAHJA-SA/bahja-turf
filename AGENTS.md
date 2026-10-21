@@ -3871,6 +3871,10 @@ Moitiés : 37,5 % / 8,3 % puis 39,6 % / 8,3 %.
 Bascule vérifiée : `backend/QUINTE/quinte.js` identique à l'octet,
 `npm run build` OK (15,39 s).
 
+> ⚠ **Remplacé le 21/10/2026 — voir §11.37.** Les 8,3 % de quinté entier ci-dessus
+> sont les bons : les 11,5 % qu'annonçait `tools/test-quotas.mjs` venaient d'un
+> remplissage RÉIMPLÉMENTÉ (sans `computeStats`), pas du vrai moteur.
+
 ### 11.34 ⭐ LE CARNET DU JOUEUR — le protocole de preuve (20/10/2026)
 
 `tools/joueur.mjs` : l'utilisateur affirme dépasser 75 % de 5/5 avec 8
@@ -4509,3 +4513,91 @@ Le 21/10 : `C44CWptn` (ancien, sans `/lives`) → après le push, `i8fqLx4Y`
 `https://bahja-turf-xxxxxxxx-woorckflow-4697.vercel.app` renvoie la **page de
 protection Vercel** (≈ 332 Ko de HTML sans `assets/index-…`). Seul l'alias
 `bahja-turf.vercel.app` est public : c'est **lui** qu'on sonde.
+
+---
+
+### 11.37 ⭐ 4-3-1-1-0 — LE SIÈGE VA AU 4ᵉ DE G1 (21/10/2026, décision de l'utilisateur, appliqué)
+
+> L'utilisateur : **« المشكل هو عدم القدرة على الانتقاء الجيد »** — 8 chevaux
+> suffisent, ce qui manque c'est l'aptitude à bien choisir.
+> Puis : **« 4-3-1-1-0 · 9 خيول »** (son choix, entre trois options chiffrées).
+
+#### ① Ce que la mesure a montré — le siège était au mauvais bloc
+
+96 Quintés à presse réelle, `data/quintes.json`. Fréquence d'arrivée **dans les 5**
+de chaque cheval coupé par la grille d'alors (3-2-1-1-1) :
+
+| le cheval qu'un quota de plus aurait fait entrer | arrive top-5 | arrive top-3 |
+|---|---|---|
+| **4ᵉ de G1** (P4) — **on le jetait** | **36,5 %** | **21,9 %** |
+| 4ᵉ de G2 (P8) | 26,0 % | 11,5 % |
+| 2ᵉ de G3 (P10) | 26,0 % | 8,3 % |
+| 2ᵉ de G4 (P12) | 18,9 % | 12,6 % |
+| 1ᵉʳ de G5 (P13) — **il avait un siège** | 12,5 % | 6,3 % |
+
+La grille donnait donc **trois sièges** (G3 · G4 · G5) à des chevaux qui arrivent
+**moins souvent** que le seul qu'elle écartait. Ce n'était pas un problème de
+choix **dans** le bloc (fermé, §11.24), c'était un problème de **place attribuée**.
+
+#### ② Le test — le VRAI moteur, 8→9 chevaux, rien d'autre ne change
+
+`tools/test-apparie.mjs` : le vrai `buildGrid` + le vrai `remplirGrille` +
+`computeStats` en leave-one-out. Même corpus, mêmes cotes, même règle de choix.
+
+| répartition | chevaux | podium entier | quinté entier | ≥4 |
+|---|---|---|---|---|
+| 3-2-1-1-1 (le moteur d'avant) | 8,00 | 38,5 % (37/96) | 8,3 % (8/96) | 43,8 % |
+| 4-2-1-1-0 | 8,00 | 47,9 % (46/96) | 12,5 % (12/96) | 56,3 % |
+| 4-2-1-1-1 | 9,00 | 52,1 % (50/96) | 16,7 % (16/96) | 63,5 % |
+| **4-3-1-1-0 (retenu)** | **9,00** | **57,3 % (55/96)** | **22,9 % (22/96)** | **72,9 %** |
+
+Bootstrap apparié 10 000 tirages, 4-3-1-1-0 contre 3-2-1-1-1 :
+
+```
+podium entier   100,0 % mieux   (pire 0,0 %)   écart par course +0,188  IC90 [0,115 ; 0,271]
+quinté entier   100,0 % mieux   (pire 0,0 %)   écart par course +0,146  IC90 [0,083 ; 0,219]
+arrivants du top 5 trouvés                     écart par course +0,584  IC90 [0,448 ; 0,719]
+```
+
+Les trois intervalles **excluent 0**. Moitiés : 58,3 % / 25,0 % puis 56,3 % / 20,8 %.
+
+#### ③ ⚠ L'erreur d'instrument qui a coûté cinq jours
+
+`tools/test-quotas.mjs` — l'outil sur lequel **§11.26** a été décidé — n'appelle
+**pas** le moteur : il **réimplémente** le remplissage (sa propre fonction
+`remplir()`), sans `computeStats`. Il annonçait **11,5 %** de quinté entier pour
+3-2-1-1-1 quand le vrai `remplirGrille` en donne **8,3 %**. Trois outils qui, eux,
+appellent le moteur (`verif-production` · `egaler` · `bloc-pm`) donnent 38,5 / 8,3
+— c'est la valeur retenue.
+
+> **La leçon est celle de §11.24, retournée contre nous :** une mesure sur 96
+> courses ne vaut que si l'outil rejoue **le** moteur. `tools/test-apparie.mjs`
+> et `tools/verif-production.mjs` sont désormais les deux références.
+
+#### ④ Ce qui a été appliqué
+
+`GROUPES` dans `src/lib/quinte.js` **et** `backend/QUINTE/quinte.js` (copie
+byte-identique, sha `75BB928EAC71`) :
+
+```
+G1 quota 3 → 4   ·   G2 2 → 3   ·   G3 1   ·   G4 1   ·   G5 1 → 0
+```
+
+- **G5 n'a plus de siège** → le marché n'y décide plus rien ; toutes les boîtes
+  se remplissent au **carnet**, la règle de choix §11.23/§11.32 est inchangée.
+- **9 chevaux** — décision assumée : ce n'est pas une dilution, c'est le siège
+  qui change de bloc (§11.29 : 4-3-1-1-0 était déjà le meilleur des 9).
+- Sortie du moteur (`node tools/verif-production.mjs`) :
+  `quotas lus dans GROUPES : 4-3-1-1-0` · `longueur du ticket : 9 chevaux × 96`.
+- `data/fiabilite.json` + `public/data/fiabilite.json` réécrits
+  (`node tools/fiabilite.mjs`) : **PAYANTE 57,3 % · 5/5 22,9 % · 9 chevaux**.
+- `data/bloc-pm.json` + `public/data/bloc-pm.json` réécrits (`node tools/bloc-pm.mjs`) :
+  aucune règle de remplissage ne bat plus la production (carnet partout ≡
+  production, le marché perd 2,5 points de quinté).
+- Textes de la page (`QuinteGrille.jsx`) : les 7 mentions de `4-2-1-1-0` / « 8
+  chevaux » passent à `4-3-1-1-0` / « 9 chevaux » ; la courbe d'empreinte
+  surligne **k = 9**.
+
+**Ce qui ne bouge pas :** les cinq BOÎTES (P1-P4 · P5-P8 · P9-P10 · P11-P12 ·
+P13+) et la règle de choix dans le bloc. Seul le REMPLISSAGE des quotas change,
+et seulement parce que G5 n'a plus de siège.

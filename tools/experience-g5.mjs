@@ -10,9 +10,9 @@
  * Et §11.6 dit du dernier bloc : « B5 : 1 ou 0 — le 1 seulement si un cheval de
  * B5 a une configuration physique irréprochable ».
  *
- * ⭐ 20/10/2026 — §11.26 : la mesure a tranché, le siège de G5 est passé à G2.
- * La production est donc 3-3-1-1-0, et cette expérience mesure désormais
- * l'inverse : que vaut le siège quand on le remet, et où ?
+ * ⭐ 21/10/2026 — §11.34 : la production est 4-3-1-1-0 (G1 prend ses 4, G2 ses 3,
+ * le siège sort de G5 — 9 chevaux). Cette expérience mesure désormais l'inverse :
+ * ce que valent les répartitions d'avant et le siège quand on le remet, et où.
  *
  *   96 Quintés à presse RÉELLE (data/quintes.json), cotes finales ET ouverture.
  *
@@ -59,17 +59,19 @@ export function rangMarche(c) {
   return Object.fromEntries(ordre.map((n, i) => [n, i + 1]))
 }
 
-/* ⭐ 20/10/2026 (§11.27) — la production est 4-2-1-1-0 : G1 prend ses 4 (plus
- * de choix là où il coûte le plus), G2 redescend à 2. L'expérience compare les
- * répartitions à 8 chevaux, et la seule qui AJOUTE un siège (9) à part. */
-export const Q_BASE = { G1: 4, G2: 2, G3: 1, G4: 1, G5: 0 }
+/* ⭐ 21/10/2026 (§11.34) — la production est 4-3-1-1-0 : G1 prend ses 4 et G2
+ * ses 3 (plus de choix là où il coûte le plus cher), le siège sort de G5.
+ * 9 chevaux — c'est la seule variante à 9 avec « C1 », et elle est décidée. */
+export const Q_BASE = { G1: 4, G2: 3, G3: 1, G4: 1, G5: 0 }
+/** 4-2-1-1-0 — la production du 20/10 au soir (§11.27), 8 chevaux */
+export const Q_4_2_1_1_0 = { G1: 4, G2: 2, G3: 1, G4: 1, G5: 0 }
 /** la règle d'avant : le siège de G5, inconditionnel */
 export const Q_AVANT = { G1: 3, G2: 2, G3: 1, G4: 1, G5: 1 }
 /** 3-3-1-1-0 — la production du 20/10 au matin (§11.26) */
 export const Q_3_3_1_1_0 = { G1: 3, G2: 3, G3: 1, G4: 1, G5: 0 }
 /** le siège de G2 part vers `secours` (8 chevaux, base 4-2-1-1-0) */
 export const Q_SANS_G5 = (secours = 'G3') => ({ G1: 4, G2: 1, G3: 1, G4: 1, G5: 0, [secours]: 2 })
-/** le siège est AJOUTÉ (9 chevaux) */
+/** le siège est AJOUTÉ à G5 (9 chevaux, base 4-2-1-1-0) */
 export const Q_PLUS_G5 = { G1: 4, G2: 2, G3: 1, G4: 1, G5: 1 }
 
 const classementDe = (grille) => grille.groupes
@@ -87,12 +89,13 @@ export function jouer(c, quotas) {
 
 /** ⭐ les variantes — toutes restent dans la latitude déclarée par la méthode */
 export const VARIANTES = [
-  { cle: 'courante', nom: '4-2-1-1-0 — en production depuis le 20/10 (§11.27)' },
+  { cle: 'courante', nom: '4-3-1-1-0 — en production depuis le 21/10 (§11.34), 9 ch.' },
+  { cle: '42110', nom: '4-2-1-1-0 — la production du 20/10 au soir (§11.27)' },
   { cle: 'g5g2', nom: '3-3-1-1-0 — la production du matin (§11.26)' },
   { cle: 'avant', nom: '3-2-1-1-1 — la règle d’avant (G5 inconditionnel)' },
   { cle: 'B3', nom: '4-1-2-1-0 — le siège de G2 va à G3' },
   { cle: 'B4', nom: '4-1-1-2-0 — le siège de G2 va à G4' },
-  { cle: 'C1', nom: '3-3-1-1-1 — 9 chevaux (le siège AJOUTÉ à G5)' },
+  { cle: 'C1', nom: '4-2-1-1-1 — le siège AJOUTÉ à G5 (9 chevaux)' },
 ]
 
 export const kpi = (t, arr) => { let k = 0; for (const x of arr) { if (!t.includes(x)) break; k++ } return k }
@@ -102,6 +105,7 @@ const pad = (s, n) => String(s).padEnd(n)
 /** joue une variante sur une course ; renvoie { ticket, garde } */
 function tirer(c, v, base) {
   if (v.cle === 'courante') return { ticket: base.ticket, garde: false }
+  if (v.cle === '42110') return { ticket: jouer(c, Q_4_2_1_1_0).ticket, garde: false }
   if (v.cle === 'g5g2') return { ticket: jouer(c, Q_3_3_1_1_0).ticket, garde: false }
   if (v.cle === 'avant') return { ticket: jouer(c, Q_AVANT).ticket, garde: false }
   if (v.cle === 'B3') return { ticket: jouer(c, Q_SANS_G5('G3')).ticket, garde: false }
@@ -142,7 +146,7 @@ function rapport(champ) {
 
   console.log('\n  LE SIÈGE DE G5 — cotes ' + (champ === 'cotes' ? 'finales' : "d'ouverture"))
   console.log('  ' + N + ' Quintés à presse réelle · blocs buildGrid · choix §11.22 · métrique §11.18 (PAYANTE)')
-  console.log('  quotas 3-3-1-1-0 (en production, §11.26) — on ne touche QUE le siège de G5 (§11.2 : B5 = 1 ou 0)\n')
+  console.log('  quotas 4-3-1-1-0 (en production, §11.34) — le siège de G5 est mesuré ici, §11.2 : B5 = 1 ou 0\n')
   console.log('  ' + pad('variante', 50) + pad('PAYANTE', 10) + pad('couvre +4', 12) + pad('5/5', 10) + pad('ch.', 6) + 'siège gardé')
   console.log('  ' + '-'.repeat(96))
   const ordre = Object.entries(R).sort((a, b) => (b[1].p3 / b[1].n) - (a[1].p3 / a[1].n))
@@ -158,7 +162,7 @@ function rapport(champ) {
     console.log('  ' + pad(VARIANTES.find((v) => v.cle === cle)?.nom || cle, 50) +
       pad(pct(H1[cle].p3, H1[cle].n), 12) + pct(H2[cle].p3, H2[cle].n))
   }
-  console.log('\n  La variante « courante » est le code en production (§11.26) : 3-3-1-1-0.')
+  console.log('\n  La variante « courante » est le code en production (§11.34) : 4-3-1-1-0.')
   console.log('  Les autres lignes sont mesurées sur les mêmes courses, jamais appliquées.\n')
   return { N, R, H1, H2, ordre }
 }

@@ -13,6 +13,7 @@ import {
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
   rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix, fetchEmpreinte,
+  fetchBlocPm,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
@@ -338,6 +339,9 @@ export default function QuinteGrille() {
   // ⭐ LES DEUX EMPREINTES (tools/empreinte.mjs, 19/10/2026) — la bassmat du
   //    podiums et du quinté, par case du carnet. Lu tel quel.
   const [empreinte, setEmpreinte] = useState(null)
+  // ⭐ LA BASSMAT DU BLOC (tools/bloc-pm.mjs, 21/10/2026) — la case CROISÉE avec
+  //    la bande du marché. Lu tel quel.
+  const [blocPm, setBlocPm] = useState(null)
   // 🩸 LA MESURE DU CHOIX dans G1/G2 (tools/choix-g1g2.mjs, 16/10/2026).
   const [choix, setChoix] = useState(null)
   // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
@@ -358,6 +362,7 @@ export default function QuinteGrille() {
     fetchEcarts().then((x) => x && setEcarts(x)).catch(() => {})
     fetchChoix().then((x) => x && setChoix(x)).catch(() => {})
     fetchEmpreinte().then((x) => x && setEmpreinte(x)).catch(() => {})
+    fetchBlocPm().then((x) => x && setBlocPm(x)).catch(() => {})
   }, [])
 
   const charger = useCallback(async (d) => {
@@ -685,7 +690,7 @@ const carnet = (detail) => {
  * ⚠ TOUS les chiffres viennent de `data/fiabilite.json`, écrit par
  *   tools/fiabilite.mjs. La page n'en calcule aucun et n'en invente aucun (§7).
  *   Métrique §11.18 : « PAYANTE » = le 1-2-3 (gagnant, 2e, 3e) est COMPLET dans
- *   la grille. Le repère honnête, à 8 chevaux, est le marché seul.
+ *   la grille. Le repère honnête est le marché seul, à nombre de chevaux ÉGAL.
  * ⚠ `experience` liste les variantes TESTÉES du siège de G5. Une seule est
  *   appliquée (`appliquee`) ; les autres attendent la décision de l'utilisateur
  *   (§11.16 : les quotas n'appartiennent pas au moteur).
@@ -742,8 +747,8 @@ function PanneauMesure({ sk, fiabilite, detail }) {
           </div>
           <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6, lineHeight: 1.6 }}>
             Depuis le 19/10/2026 (§11.23), la <b>queue</b> du ticket se remplit à la cote — aujourd'hui
-            <b> G4</b> seulement. Depuis le 20/10/2026 (§11.27) G1 prend ses <b>4</b> et G2 redescend à <b>2</b> :
-            quotas <b>4-2-1-1-0</b>, toujours 8 chevaux. G1-G3 restent au rang de presse.
+            <b> G4</b> seulement. Depuis le 21/10/2026 (§11.34) G1 prend ses <b>4</b> et G2 ses <b>3</b> :
+            quotas <b>4-3-1-1-0</b>, <b>9 chevaux</b>. G1-G4 restent au rang de presse.
           </div>
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
@@ -786,9 +791,10 @@ function PanneauMesure({ sk, fiabilite, detail }) {
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
             <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>L’expérience du siège de G5</b>{' '}
-            — la méthode dit « B5 : 1 ou 0 » (§11.6). Le 20/10/2026, le siège a été <b>déplacé vers G2</b>
-            (§11.26) : la ligne marquée « appliquée » est celle du moteur. Les autres lectures sont
-            mesurées sur les <b>mêmes 8 chevaux</b> (tools/experience-g5.mjs).
+            — la méthode dit « B5 : 1 ou 0 » (§11.6). Le 21/10/2026, le siège est <b>sorti de G5</b>
+            (§11.34) : la ligne marquée « appliquée » est celle du moteur. Les autres lectures sont
+            mesurées sur les <b>mêmes courses</b>, chacune à sa taille de ticket
+            (tools/experience-g5.mjs).
             <div style={{ overflowX: 'auto', marginTop: 6 }}>
               <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
                 <thead>
@@ -816,8 +822,8 @@ function PanneauMesure({ sk, fiabilite, detail }) {
               </table>
             </div>
             <span style={{ color: sk.muted }}>
-              Une seule de ces variantes est en production — celle qui porte « appliquée » (4-2-1-1-0,
-              §11.27). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
+              Une seule de ces variantes est en production — celle qui porte « appliquée » (4-3-1-1-0,
+              §11.34). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
             </span>
           </div>
         </>
@@ -941,10 +947,10 @@ function TabChoix({ sk, choix }) {
         ) : null}
         <br />
         <span style={{ color: sk.muted }}>
-          ⛔ Les quotas sont fixés (§11.16) : <b>4-2-1-1-0</b> depuis le 20/10/2026
-          (§11.27 — G1 prend ses 4, G2 redescend à 2). On ne mesure QUE qui entre
-          dans G2 (2 gardés sur 4) et dans G4 (1 gardé sur 2). Métrique = <b>PAYANTE</b>,
-          le 1-2-3 complet dans la grille.
+          ⛔ Les quotas sont fixés (§11.16) : <b>4-3-1-1-0</b> depuis le 21/10/2026
+          (§11.34 — G1 prend ses 4, G2 ses 3, le siège sort de G5). On ne mesure QUE
+          qui entre dans G2 (3 gardés sur 4) et dans G4 (1 gardé sur 2). Métrique =
+          <b>PAYANTE</b>, le 1-2-3 complet dans la grille.
         </span>
       </div>
 
@@ -988,7 +994,7 @@ function TabChoix({ sk, choix }) {
           ['le choix parfait dans G1 seul', L.oracleG1, sk.accent],
           ['le choix parfait dans G2 seul', L.oracleG2, sk.accent],
           ['le hasard pur', L.hasard, sk.muted],
-          ['3-3-1-1-0 (§11.26 — remplacé le 20/10 par 4-2-1-1-0, §11.27)', L.quotaG5versG2, sk.accent],
+          ['3-3-1-1-0 (§11.26 — écarté depuis le 21/10, §11.34 : 4-3-1-1-0)', L.quotaG5versG2, sk.accent],
         ].map(([lib, v, col]) => (
           <div key={lib} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '3px 0' }}>
             <span style={{ width: 300, color: sk.texte }}>{lib}</span>
@@ -1107,8 +1113,8 @@ function TabChoix({ sk, choix }) {
           La carrière vient de <b>tools/collect-forms.mjs</b> (<code>data/forms.json</code>),
           enrichie par <b>tools/collect-terrain.mjs</b> (<code>data/terrain.json</code>) et
           <b>tools/collect-vh.mjs</b> (<code>data/vh.json</code>) — terrain, sens et VH collectés de PMU (§14.6).
-          La règle en production est <b>G1-G3 carnet · G4 marché</b>, sur les quotas
-          <b> 4-2-1-1-0</b> (§11.23 + §11.27).
+          La règle en production est <b>G1-G4 carnet</b> (G5 sans siège), sur les quotas
+          <b> 4-3-1-1-0</b> (§11.23 + §11.34).
         </span>
       </div>
     </div>
@@ -1395,8 +1401,8 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           <div style={{ fontSize: 12, color: SK.texte, margin: '12px 0 8px', lineHeight: 1.6, background: SK.alt, border: '1px solid ' + SK.bord, borderLeft: '4px solid ' + SK.accent, borderRadius: SK.box.borderRadius, padding: '10px 12px' }}>
             MA MÉTHODE — cinq groupes, un quota chacun. Le moteur remplit les quotas :
             le ticket est fixé, il ne se modifie pas à la main.
-            Depuis le 20/10/2026 les quotas sont <b>4-2-1-1-0</b> (§11.27) : G1 prend ses 4
-            et G2 redescend à 2 — <b>toujours 8 chevaux</b>.
+            Depuis le 21/10/2026 les quotas sont <b>4-3-1-1-0</b> (§11.34) : G1 prend ses 4
+            et G2 ses 3, le siège sort de G5 — <b>9 chevaux</b>.
             Les boîtes se lisent <b>en travers</b> : ligne du haut puis ligne du bas.{carnet(detail) && <> Les cases sont numérotées <b>P1, P2… en colonnes</b> : la ligne du haut porte la parité du P1.</>}
             <br />
             {Object.keys(cotes).length >= 4 ? (
@@ -1931,18 +1937,123 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                           </thead>
                           <tbody>
                             {E.courbe.map((c) => (
-                              <tr key={c.k} style={{ borderTop: '1px solid rgba(255,255,255,.06)', background: c.k === 8 ? SK.accentClair : 'transparent' }}>
+                              <tr key={c.k} style={{ borderTop: '1px solid rgba(255,255,255,.06)', background: c.k === 9 ? SK.accentClair : 'transparent' }}>
                                 <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800 }}>{c.k}</td>
                                 <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td }}>{nb(c.podium)} %</td>
-                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: c.k === 8 ? 800 : 400, color: c.k === 8 ? SK.accent : '#c7d6ea' }}>{nb(c.quinte)} %</td>
+                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: c.k === 9 ? 800 : 400, color: c.k === 9 ? SK.accent : '#c7d6ea' }}>{nb(c.quinte)} %</td>
                               </tr>
                             ))}
                           </tbody>
                         </table>
                         <div style={{ fontSize: 11, color: SK.muted, marginTop: 6 }}>
-                          La ligne surlignée = le ticket du Quinté (8 chevaux, quotas 4-2-1-1-0).
+                          La ligne surlignée = le ticket du Quinté (9 chevaux, quotas 4-3-1-1-0).
                           Écrire les chiffres : <code>node tools\empreinte.mjs</code>.
                         </div>
+                      </div>
+                    </div>
+                  )
+                })()}
+
+                {/* ⭐ LA BASSMAT DU BLOC (21/10/2026) — tools/bloc-pm.mjs.
+                    La CASE de la grille (P1..P20) CROISÉE avec la BANDE DU
+                    MARCHÉ. C'est la seule table qui dit QUI prendre À
+                    L'INTÉRIEUR d'un bloc — et la mesure qui dit si ça paie. */}
+                {blocPm && (() => {
+                  const BP = blocPm
+                  const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
+                  const BLOCS = ['G1', 'G2', 'G3', 'G4', 'G5']
+                  const BANDES = ['fort', 'bon', 'moyen', 'faible']
+                  // la couleur dit la force du taux — jamais la bande (la bande
+                  // a déjà sa teinte de fond, on ne mélange pas deux codes)
+                  const coul = (p, n) => (n < 15 ? SK.muted : p >= 45 ? '#34d399' : p >= 25 ? '#fbbf24' : '#fb7185')
+                  const th = { padding: '4px 7px', fontSize: 11, color: SK.muted, fontWeight: 800, textAlign: 'right', whiteSpace: 'nowrap' }
+                  const cell = { padding: '4px 7px', textAlign: 'right', fontFamily: SK.nb.td, whiteSpace: 'nowrap' }
+                  const A = (BP.autopsies || []).find((x) => x.code === 'blocM12')
+                  return (
+                    <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
+                      <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>La bassmat du bloc — la case × la bande du marché</b>
+                      <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 10 }}>
+                        <b>{BP.n}</b> Quintés à <b>presse réelle</b> ({BP.periode.debut} → {BP.periode.fin}).
+                        <b> P</b> = la case de la grille (P1..P20, le même P que la grille).
+                        <b> Bande</b> = le rang de cote : M≤3 fort · M≤5 bon · M6-12 moyen · M13+ faible.
+                      </div>
+                      <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12.5, width: 'auto' }}>
+                        <thead>
+                          <tr>
+                            <th style={{ ...th, textAlign: 'left', width: 40 }}>bloc</th>
+                            {BANDES.map((b) => (
+                              <th key={b} style={{ ...th, background: BANDE_MARCHE[b].fond, color: BANDE_MARCHE[b].couleur }}>{BANDE_MARCHE[b].court}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {BLOCS.map((g) => (
+                            <tr key={g} style={{ borderTop: '1px solid rgba(255,255,255,.06)' }}>
+                              <td style={{ ...cell, fontWeight: 800, textAlign: 'left' }}>{g}</td>
+                              {BANDES.map((b) => {
+                                const c = BP.bassmatBloc.find((x) => x.cle === g + '|' + b)
+                                return (
+                                  <td key={b} style={{ ...cell, color: c ? coul(c.top5, c.n) : SK.muted }}>
+                                    {c ? nb(c.top5) + ' %' : '—'}
+                                    <span style={{ color: SK.muted, fontWeight: 400 }}> · {c ? c.n : 0}</span>
+                                  </td>
+                                )
+                              })}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <div style={{ fontSize: 11, color: SK.muted, marginTop: 6 }}>
+                        % arrivés dans les 5 · le chiffre après le point = <b>n</b> — sous 15, le taux est gris : trop peu pour voter.
+                        Lecture : <b style={{ color: '#34d399' }}>G1 en bande forte arrive 56,7 %</b>, en bande moyenne 41,6 %.
+                      </div>
+
+                      <div style={{ marginTop: 14, borderTop: '1px solid ' + SK.bord, paddingTop: 10 }}>
+                        <div style={{ fontSize: 12, fontWeight: 800, color: SK.accent, letterSpacing: .6, textTransform: 'uppercase', marginBottom: 4 }}>La mesure — même ticket (9 chevaux, 4-3-1-1-0), seule la règle de choix change</div>
+                        <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6 }}>
+                          Chaque règle est jugée <b>hors d'elle-même</b> (leave-one-out) : la table d'une course ne contient jamais cette course.
+                        </div>
+                        <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, width: '100%' }}>
+                          <thead>
+                            <tr style={s.hdr}>
+                              <th style={{ ...s.th, textAlign: 'left' }}>règle de choix</th>
+                              {['chev.', 'podium entier', 'quinté entier', '1re moitié', '2ᵉ moitié'].map((h) => (
+                                <th key={h} style={{ ...s.th, textAlign: 'right', whiteSpace: 'nowrap' }}>{h}</th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {BP.mesure.map((m) => (
+                              <tr key={m.code} style={{ borderTop: '1px solid ' + SK.bord, background: m.code === 'production' ? SK.accentClair : 'transparent' }}>
+                                <td style={{ ...s.td, fontWeight: m.code === 'production' ? 800 : 400 }}>{m.nom}</td>
+                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td }}>{nb(m.chevaux)}</td>
+                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800 }}>{nb(m.podium)} %</td>
+                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800, color: m.code === 'production' ? SK.accent : '#c7d6ea' }}>{nb(m.quinte)} %</td>
+                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td }}>{nb(m.m1q)} %</td>
+                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td }}>{nb(m.m2q)} %</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                        <div style={{ fontSize: 11, color: SK.muted, marginTop: 6 }}>
+                          <b>podium entier</b> = les 3 premiers sont tous dans le ticket · <b>quinté entier</b> = les 5.
+                          Les deux dernières colonnes = le quinté entier, moitié par moitié.
+                        </div>
+                      </div>
+
+                      <div style={{ marginTop: 14, borderTop: '1px solid ' + SK.bord, paddingTop: 10, fontSize: 12, lineHeight: 1.6 }}>
+                        <b style={{ color: SK.accent }}>Verdict ({nb(BP.verdict.production.podium)} % podium · {nb(BP.verdict.production.quinte)} % quinté pour le moteur)</b> — {BP.verdict.texte}
+                        {A && (
+                          <>
+                            <br />La bassmat « seulement G1·G2 » change le ticket dans <b>{A.coursesChangees}</b> courses sur {A.cours}
+                            {' '}({A.blocsChanges} blocs).
+                            {A.blocs.filter((x) => x.changes).map((x) => (
+                              <span key={x.bloc}> <b>{x.bloc}</b> : {x.changes} courses → {x.bassmat} arrivants dans les 5 contre {x.production} pour le moteur ·</span>
+                            ))}
+                            <br />Les deux bandes et la place de presse désignent déjà les mêmes chevaux la plupart du temps : quand elles divergent, c'est un échange pour un autre, pas un gain.
+                          </>
+                        )}
+                        <br /><span style={{ color: SK.muted }}>Écrire les chiffres : <code>node tools\bloc-pm.mjs</code> — ils ne sont jamais saisis à la main.</span>
                       </div>
                     </div>
                   )

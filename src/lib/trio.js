@@ -2,8 +2,8 @@
  * src/lib/trio.js — LE TRIO ET LE COUPLÉ : l'ordre, les jeux, les zones.
  *
  * POURQUOI CE FICHIER EXISTE
- *   Le Quinté se joue sur 8 chevaux (le ticket 3-2-1-1-1 qu'on ne change pas).
- *   Le Trio et le Couplé, NON : le 2e et le 3e sortent souvent du top 8.
+ *   Le Quinté se joue sur un ticket FIXÉ (4-3-1-1-0 depuis le 21/10/2026, §11.34).
+ *   Le Trio et le Couplé, NON : le 2e et le 3e sortent souvent de ce ticket.
  *   Mesuré sur les 347 Quintés de data/corpus/fusion.json (tools/trio.mjs) :
  *
  *       le 2e est hors du top 8 du marché :  21,9 %

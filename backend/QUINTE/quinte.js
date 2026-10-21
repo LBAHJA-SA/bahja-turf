@@ -365,6 +365,21 @@ export async function fetchEmpreinte() {
   } catch (e) { return null }
 }
 
+/** ⭐ LA BASSMAT DU BLOC — tools/bloc-pm.mjs (21/10/2026).
+ *  La CASE (P1..P20) croisée avec la BANDE DU MARCHÉ (M≤3 · M≤5 · M6-12 ·
+ *  M13+) : la seule table qui dit QUI prendre À L'INTÉRIEUR d'un bloc — dans
+ *  G1, la case P2 en bande « moyen » arrive-t-elle plus souvent que la case P3
+ *  en bande « fort » ? Elle porte aussi la mesure : les règles de remplissage
+ *  essayées et leur score (podium entier · quinté entier). La page l'affiche
+ *  telle quelle — aucun chiffre saisi à la main. */
+export async function fetchBlocPm() {
+  try {
+    const r = await fetch('/data/bloc-pm.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}
+
 /** LE CHOIX DANS G1 ET G2 — tools/choix-g1g2.mjs (16/10/2026).
  *  Où sont les 1-2-3 écartés, ce que vaut le choix contre la quota (§11.16 :
  *  les quotas ne bougent pas), et les 29 règles de choix mesurées une à une. */
@@ -645,32 +660,45 @@ export function groupeDeSlot(slot) {
  * G4 1 · G5 0 ou 1. Le seul travail permis est le CHOIX du cheval À L'INTÉRIEUR
  * d'un bloc. Toute modification des quotas est une décision de l'utilisateur.
  *
- * ⭐ 20/10/2026 — 4-2-1-1-0 (§11.27, décidé par l'utilisateur) : le CHOIX le plus
- * cher est celui de G1 — le cheval écarté y arrive dans les 5 une fois sur trois
- * (36,5 %), alors que dans G2 il n'arrive qu'une fois sur quatre (26,0 %).
- * Donc on SUPPRIME le choix de G1 : on prend les 4. Le siège est repris en G2
- * (3 → 2). Toujours 8 chevaux — ce n'est pas un 9ᵉ siège.
+ * ⭐ 21/10/2026 — 4-3-1-1-0 (§11.34, DÉCISION DE L'UTILISATEUR après mesure).
  *
- *   presse (96)    podium 40,6 → 46,9 % · quinté 12,5 → 16,7 % · ≥4 47,9 → 50,0 %
- *   archives (123) podium 32,5 → 44,7 % · quinté 11,4 → 12,2 %
+ * Le 4ᵉ de G1 est le cheval le plus rentable de toute la grille — mesuré sur
+ * 96 Quintés à presse réelle, sa fréquence d'arrivée dans les 5 premières :
  *
- * Les deux moitiés du corpus progressent (47,9/18,8 · 45,8/14,6 contre
- * 37,5/12,5 · 43,8/12,5). Bootstrap apparié 10 000 tirages : podium 11 gagnées
- * / 5 perdues, quinté 7 / 3. Mesure : tools/sans-choix.mjs. */
-/* ⭐ 20/10/2026 (soir) — RETOUR À 3-2-1-1-1 SUR INSTRUCTION DE L'UTILISATEUR.
- * C'est SA méthode : elle ne se discute pas. 4-2-1-1-0 est abandonné.
- * Mesure au moment du retour (114 Quintés, tools/verif-production.mjs) :
- *   4-2-1-1-0 → podium 48,2 % · quinté 11,4 % · ≥4 55,3 %
- *   3-2-1-1-1 → podium 37,7 % · quinté  7,9 % · ≥4 41,2 %
- * Le choix dans les blocs reste celui de §11.23/§11.32 : G1-G4 carnet,
- * G5 marché. Seuls les QUOTAS reviennent à 3-2-1-1-1 — toujours 8 chevaux
- * (3+2+1+1+1), pas 9. */
+ *   4ᵉ de G1 (P4)   36,5 %      ← on le JETAIT
+ *   4ᵉ de G2 (P8)   26,0 %
+ *   2ᵉ de G3 (P10)  26,0 %
+ *   2ᵉ de G4 (P12)  18,9 %
+ *   1ᵉʳ de G5 (P13) 12,5 %      ← on lui donnait un siège
+ *
+ * La grille donnait donc 3 sièges (G3 · G4 · G5) à des chevaux qui arrivent
+ * moins souvent que le seul qu'elle écartait. Correction : on ne CHOISIT plus
+ * dans G1 (les 4 entrent), G2 prend son 4ᵉ aussi, et le siège sort de G5.
+ * Le ticket passe à 9 chevaux — décision assumée, mesurée, pas un ajout sec.
+ *
+ *   presse (96)   podium entier 38,5 → 57,3 % · quinté entier 8,3 → 22,9 %
+ *                 ≥4 du quinté  43,8 → 72,9 %
+ *
+ * Bootstrap apparié 10 000 tirages (tools/test-apparie.mjs) : 4-3-1-1-0 fait
+ * mieux dans 100,0 % des tirages, pire dans 0,0 %.
+ *   podiums gagnés par course : +0,188  IC 90 % [0,115 ; 0,271]
+ *   quintés gagnés par course : +0,146  IC 90 % [0,083 ; 0,219]
+ *   arrivants du top 5 trouvés: +0,584  IC 90 % [0,448 ; 0,719]
+ * Les trois intervalles excluent 0.
+ *
+ * ⚠ Historique, pour ne pas refaire l'erreur :
+ *   · §11.26 avait retenu 3-3-1-1-0 sur les chiffres de tools/test-quotas.mjs,
+ *     qui RÉIMPLÉMENTE le remplissage (sans computeStats) : il annonçait 11,5 %
+ *     de quinté pour 3-2-1-1-1 là où le VRAI remplirGrille en donne 8,3 %.
+ *   · La règle de choix dans les blocs, elle, ne bouge pas (§11.23/§11.32) :
+ *     G1-G3 carnet, G4 carnet, G5 marché (G5 n'ayant plus de siège, la question
+ *     y est sans objet). */
 export const GROUPES = [
-  { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 3, alt: 4 },
-  { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 2, alt: 3 },
+  { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 4, alt: 3 },
+  { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 3, alt: 2 },
   { id: 'G3', label: 'G3 · P9-P10', min: 9, max: 10, quota: 1, alt: 2, obligatoire: true },
   { id: 'G4', label: 'G4 · P11-P12', min: 11, max: 12, quota: 1, alt: 2 },
-  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 1, alt: 0 },
+  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 0, alt: 1 },
 ]
 
 /** Le « ticket fixé » : le moteur remplit les quotas, on ne modifie pas à la main. */
@@ -941,9 +969,9 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
    * `carnet` = la place de presse P1..P20 de la case (et non son `slot`,
    * qui est le numéro de colonne du carnet papier — mesuré moins bon).
    *
-   * ⭐ 20/10/2026 (§11.27) — G5 a quota 0 : plus de siège à remplir, le marché
-   * n'y décide plus rien. G1 prend ses 4 (aucun choix là où il coûte le plus)
-   * et G2 redescend à 2 : 4-2-1-1-0, toujours 8 chevaux.
+   * ⭐ 21/10/2026 (§11.34) — G5 a quota 0 : plus de siège à remplir, le marché
+   * n'y décide plus rien. G1 prend ses 4 et G2 ses 3 : aucun choix là où il
+   * coûte le plus cher. Ticket 4-3-1-1-0 = 9 chevaux.
    *
    * ⭐ 20/10/2026 (soir) — G4 PASSE AU CARNET (§11.32). Mesure sur le TRIO,
    * c'est-à-dire les 3 premiers ENSEMBLE dans le ticket (pas place par place) :
@@ -1042,7 +1070,7 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
  *
  * Entre le 2e et le 4e, l'écart est dans le bruit : afficher 2·3·4 comme s'ils
  * étaient prédits, c'est mentir. On ne garde donc QUE la 1re case (le P1 de la
- * presse, dans le ticket par construction) et on rend les 7 autres par numéro.
+ * presse, dans le ticket par construction) et on rend les autres par numéro.
  *
  * AUC de l'ordre complet : 0,61 (hasard 0,50) — un pouvoir de tri réel mais
  * faible, insuffisant pour annoncer une place 2, 3, 4 ou 5.
@@ -1152,7 +1180,7 @@ export function ticketValide(rec) {
  * on les retire. Mais ici on COMPLÈTE — la place libérée est reprise par la
  * case que le moteur a retenue dans ce groupe, sans jamais dépasser le quota
  * (§11.19) ni prendre deux fois le même cheval. Le ticket jouable garde donc
- * ses 8 chevaux, et chaque groupe son quota.
+ * sa taille (la somme des quotas — 9 avec 4-3-1-1-0), et chaque groupe son quota.
  */
 export function ticketAffiche(ticket, rempli, complet = true) {
   const base = (ticket || []).map(Number).filter(Number.isFinite)
