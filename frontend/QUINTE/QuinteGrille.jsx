@@ -928,6 +928,11 @@ function TabChoix({ sk, choix }) {
   const blocs = (D.blocs || []).slice().sort((a, b) => (b.ecartes || 0) - (a.ecartes || 0))
   const meilleure = choix.grille?.meilleure || {}
   const enTete = (choix.regles || []).filter((r) => r.deux >= (choix.code || 0)).slice(0, 6)
+  /* ⚠ 21/10/2026 — depuis 4-3-1-1-0, l'écart quota est NÉGATIF (3-3-1-1-0
+   * perd 14,6 points) : le signe doit s'afficher, pas un « + » aveugle. */
+  const plus = (v) => (v > 0 ? '+' : v < 0 ? '\u2212' : '\u00b1') + nb(Math.round(10 * Math.abs(v)) / 10)
+  const gainChoix = (L.oracle || 0) - (L.code || 0)
+  const gainQuota = (L.quotaG5versG2 || 0) - (L.code || 0)
   return (
     <div>
       <div style={{ fontSize: 13, color: sk.texte, lineHeight: 1.6, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', marginBottom: 12 }}>
@@ -989,7 +994,7 @@ function TabChoix({ sk, choix }) {
       </div>
       <div style={{ ...sk.box, padding: '10px 12px', boxShadow: sk.ombreD, fontSize: 13 }}>
         {[
-          ['le code actuel (G1 presse · G2 marché)', L.code, sk.muted],
+          ['le code actuel (carnet G1-G4 · G5 sans siège)', L.code, sk.muted],
           ['le choix PARFAIT dans G1 et G2 (oracle)', L.oracle, sk.accent],
           ['le choix parfait dans G1 seul', L.oracleG1, sk.accent],
           ['le choix parfait dans G2 seul', L.oracleG2, sk.accent],
@@ -1006,10 +1011,11 @@ function TabChoix({ sk, choix }) {
           </div>
         ))}
         <div style={{ marginTop: 8, fontSize: 12, color: sk.texte, borderTop: '1px dashed ' + sk.bord, paddingTop: 8, lineHeight: 1.6 }}>
-          Le <b>choix</b> vaut <b style={{ color: sk.accent }}>+{nb(Math.round(10 * (L.oracle - L.code)) / 10)} pts</b>,
-          la <b>quota</b> <b>+{nb(Math.round(10 * (L.quotaG5versG2 - L.code)) / 10)} pts</b>.
-          Le choix parfait reste hors d'atteinte ; le déplacement du siège, lui, a été
-          <b> appliqué</b> le 20/10/2026 : c'est le premier levier qui gagne sur les deux corpus (§11.26).
+          Le <b>choix</b> qui reste (G2 seul) vaut <b style={{ color: sk.accent }}>{plus(gainChoix)} pts</b>,
+          et le <b>choix parfait</b> reste hors d’atteinte. Le siège repris à G1
+          (3-3-1-1-0) <b style={{ color: '#fb7185' }}>coûte {plus(gainQuota)} pts</b> — c’est
+          exactement ce que 4-3-1-1-0 corrige (§11.34) : G1 prend ses <b>4</b>, il n’y a
+          plus rien à choisir là où le choix coûtait le plus cher. Seul G2 garde un choix.
         </div>
       </div>
 
