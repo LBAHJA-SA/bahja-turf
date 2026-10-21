@@ -1274,6 +1274,347 @@ dit : **plus on met de physique, plus on perd.** Toute règle nouvelle devra pas
 
 ---
 
+### 11.26 ⭐ QUI SORT DU BLOC — LE POUVOIR RÉEL DU CHOIX (20/10/2026)
+
+> Demande de l'utilisateur : **« الاختيار الصحيح هو علاش كانقلب »** — le vrai
+> sujet n'est pas l'ordre global, c'est **qui on enlève de chaque bloc**.
+
+§11.24 et §11.25 mesuraient le choix avec le **5/5** — **12 événements** sur 96
+courses. Trop peu pour lire quoi que ce soit. Ici la métrique est **dense** :
+
+```
+BASE   chaque cheval du bloc arrive-t-il dans les 5 ?          (le hasard)
+SORTI  le cheval qu'on jette arrive-t-il ?                     (ce que coûte la règle)
+ORACLE le plancher : le jeté n'arrive jamais — possible seulement si
+       TOUS les chevaux du bloc arrivent (alors on perd forcément)
+
+POUVOIR = (BASE − SORTI) / (BASE − ORACLE)
+          0 % = la règle jette au hasard · 100 % = elle jette toujours un non-arrivant
+```
+
+Outil : `tools\pouvoir.mjs` — **la vraie grille** (`buildGrid`), 96 Quintés à
+presse réelle, la carrière réelle (`data\corpus\carriere96.json`), les poids
+(`data\corpus\poids-presse.json`) et `data\vh.json` (corde, VH).
+
+#### ① La marge existe — et elle est énorme
+
+| bloc | BASE (hasard) | ORACLE (choix parfait) | **marge à prendre** |
+|---|---|---|---|
+| **G1** | **51,0 %** | **2,1 %** | **49,0 pts** |
+| **G2** | 36,7 % | 0,0 % | 36,7 pts |
+| **G3** | 29,2 % | 7,3 % | 21,9 pts |
+| **G4** | 24,7 % | 3,1 % | 21,6 pts |
+
+Dans G1, chaque cheval arrive **une fois sur deux**. Le choix parfait ramènerait
+le jeté à **2,1 %**. L'intuition de l'utilisateur est juste : **il y a 49 points
+à prendre.**
+
+#### ② Ce que chaque variable en prend — G1
+
+| ce qui décide dans G1 | le jeté arrive | pouvoir |
+|---|---|---|
+| **le carnet — le rang de presse (production)** | **36,5 %** | **+30 %** |
+| la forme (places récentes, pondérées) | 37,6 % | +27 % |
+| le taux de podium en carrière | 38,7 % | +25 % |
+| **presse − marché (le désaccord des deux ordres)** | 43,8 % | +15 % |
+| les jours d'absence | 44,1 % | +14 % |
+| la cote | 44,8 % | +13 % |
+| l'aptitude à la distance | 45,2 % | +12 % |
+| la piste (hippodrome déjà couru) | 45,2 % | +12 % |
+| le poids (44 courses de plat) | 63,6 % | −26 % |
+
+#### ③ Les autres blocs
+
+| bloc | meilleur | pouvoir | la production |
+|---|---|---|---|
+| **G2** | carnet **=** cote (ex æquo exact, 26,0 %) | +29 % | carnet — identique |
+| **G3** | carnet 26,0 % (+14 %) · poids 22,7 % mais n = 44 | +14 % | carnet |
+| **G4** | carnet 15,8 % (+41 %) · **cote 18,9 % (+27 %)** | — | **cote** |
+
+**G4 tranché par l'événement, pas par la densité** : passer G4 au carnet donne
+**0 quinté gagné / 3 perdu** (bootstrap 0,0 %), même si le cheval jeté arrive
+moins souvent. C'est le seul bloc où les deux métriques divergent — et c'est le
+5/5 qui paie. **La cote reste en G4.**
+
+#### ④ Le verdict
+
+> **La meilleure règle de choix disponible prend 30 % de la marge. Les 70 %
+> restants ne sont dans aucune variable mesurable.**
+
+Onze variables ont été passées dans le même crible — presse, cote, forme,
+distance, piste, podium, jours, poids, VH, corde, et **le désaccord presse/marché**
+(le seul signal qui utilise les deux ordres sans les additionner) : **aucune ne
+bat le rang de presse**. La structure du bloc est un tirage presque uniforme une
+fois la presse passée.
+
+**Conséquence pratique, et c'est la seule :** dans G1·G2·G3 on garde **par le
+rang de presse** — pas à l'œil, pas par la carrière. Le physique §4 sert à
+**écarter un cheval de la course**, jamais à classer les 4 d'une même boîte.
+
+**Rien n'est appliqué** : la règle reste §11.22/§11.23 (carnet G1-G3 · marché G4),
+quotas **3-3-1-1-0**.
+
+#### ⑤ ⚠ Le piège — le bloc doit être LE bloc de la méthode
+
+Un premier essai (`tools\qui-sort.mjs`, `qui-sort-paire.mjs`, `regle-poids.mjs`)
+portait sur les **123 Quintés français des archives**, sans presse : les blocs y
+étaient reconstruits en **tranches de marché** (G1 = les 4 cotes les plus basses).
+Le **poids** y sortait vainqueur — le plus lourd arrive **39,0 %** contre **50,8 %**
+pour le choix de la cote, `+2,4` points de 5/5, les deux moitiés d'accord.
+
+**Repassé sur les vrais blocs presse (`tools\poids-presse.mjs`) :**
+
+```
+quinté entier   gagnées 0   · perdues 3   · bootstrap : 0,0 %
+podium entier   gagnées 3   · perdues 5   · bootstrap : 19,1 %
+```
+
+> **Leçon :** une tranche de marché n'est pas un bloc P1-P4 / P5-P8. Un signal
+> validé sur un découpage qui n'est pas celui de la méthode **ne se transpose
+> jamais**. Toute mesure de choix passe par `buildGrid`.
+
+#### ⑥ Les fichiers
+
+| fichier | rôle |
+|---|---|
+| `tools\pouvoir.mjs` | **LA mesure du choix** : base · oracle · pouvoir des 11 variables, vraie grille |
+| `tools\qui-sort-presse.mjs` | qui sort, combinaisons de deux signaux, moitiés |
+| `tools\poids-presse.mjs` | le poids sur les vrais blocs — le contrôle négatif |
+| `tools\qui-sort.mjs` · `qui-sort-paire.mjs` · `regle-poids.mjs` | mesures sur tranches de marché — **ne pas réutiliser pour décider** |
+| `data\corpus\poids-presse.json` | les poids casacourses des 45 courses de plat à presse |
+
+---
+
+### 11.31 ⭐ 4-2-1-1-0 — ON SUPPRIME LE CHOIX LE PLUS CHER (20/10/2026, appliqué)
+
+> Question de l'utilisateur, après l'autopsie des pertes : « le problème c'est
+> le CHOIX dans le bloc ». La réponse n'est pas un meilleur chooser — il n'y en
+> a pas (§11.30) — c'est de **ne plus avoir à choisir là où le choix coûte le plus**.
+
+#### ① Le prix du siège, mesuré bloc par bloc
+
+`tools/sans-choix.mjs`, 96 Quintés à presse réelle, vrai `buildGrid` :
+
+| bloc | le cheval écarté arrive top-5 |
+|---|---|
+| **G1** (3 gardés sur 4) | **36,5 %** ← le plus cher |
+| G2 | 26,0 % |
+| G4 (1 gardé sur 2, au marché) | 18,9 % |
+
+G1 est le seul bloc où le jeté arrive **une fois sur trois**. Prendre les 4 de G1
+ne coûte donc rien : **ça supprime le choix le plus cher**. Le siège est repris
+en G2 (3 → 2), là où le jeté n'arrive qu'une fois sur quatre.
+
+```
+3-3-1-1-0  →  4-2-1-1-0        toujours 8 chevaux
+```
+
+#### ② Le résultat
+
+| répartition | podium | quinté | ≥4 | chevaux |
+|---|---|---|---|---|
+| 3-3-1-1-0 (avant) | 40,6 % | 12,5 % | 47,9 % | 8,00 |
+| **4-2-1-1-0 (production)** | **46,9 %** | **16,7 %** | **50,0 %** | **8,00** |
+| 4-3-1-0-0 (9ᵉ interdit) | 46,9 % | 10,4 % | 60,4 % | 8,00 |
+
+**+6,3 points de podium · +4,2 points de quinté complet**, à nombre de chevaux
+constant. Vérifié dans le vrai moteur (`tools/verif-production.mjs`) :
+8 chevaux sur **96 / 96** courses.
+
+#### ③ Stabilité et significativité
+
+| | 3-3-1-1-0 | 4-2-1-1-0 |
+|---|---|---|
+| 1ʳᵉ moitié | 37,5 % · 12,5 % | **47,9 % · 18,8 %** |
+| 2ᵈᵉ moitié | 43,8 % · 12,5 % | **45,8 % · 14,6 %** |
+| archives (123, blocs = tranches de marché) | 32,5 % · 11,4 % | **44,7 % · 12,2 %** |
+
+Bootstrap apparié, 10 000 tirages, contre 3-3-1-1-0 :
+**podium 11 gagnées / 5 perdues (92,0 %)** · **quinté 7 / 3 (86,7 %)**.
+
+Les deux corpus et les deux moitiés vont dans le même sens, et le mécanisme est
+structurel (on déplace le siège du bloc le plus cher vers le bloc le moins cher),
+pas un ajustement sur l'échantillon.
+
+#### ④ Ce qui a été appliqué
+
+`GROUPES` dans `src/lib/quinte.js` **et** `backend/QUINTE/quinte.js` (copie à
+l'octet près — hachée identique) :
+
+```
+G1 quota 4 · G2 quota 2 · G3 quota 1 · G4 quota 1 · G5 quota 0
+```
+
+`remplirGrille` ne change pas : **G1-G2-G3 au carnet · G4 au marché** (§11.23).
+G1 n'a plus de choix à faire (4 cases, quota 4), G5 n'a plus de siège.
+
+⚠ **C'est une décision de l'utilisateur**, pas du moteur : 4 dépasse la latitude
+écrite de §11.9 (G1 = 2 ou 3). Elle est prise sur la mesure, et elle reste à
+8 chevaux.
+
+#### ⑤ Une piste fermée le même jour
+
+`tools/arbitrage.mjs` — garder la presse **sauf si** le cheval écarté est
+nettement plus court au marché (seuils ×1,2 / ×1,5 / ×2 / ×3), puis échanger :
+
+```
+seuil ×1,2 : quinté 2 gagnées · 5 perdues   (bootstrap 8,2 %)
+seuil ×2   : 1 gagnée  · 0 perdue           (bootstrap 63 %, une seule course)
+```
+
+→ **le veto du marché sur la presse perd.** Refermé.
+
+#### ⑥ La dérive de la cote — mesurée, elle aussi perd (20/10/2026)
+
+> L'utilisateur, après §11.31 ①②③ : « c'est la même chose, tu n'as fait
+> qu'ajouter une case — le moteur reste aveugle ». Vrai. 4-2-1-1-0 supprime le
+> choix le plus cher, il ne fait pas **voir**. Pour voir, il faut un signal que
+> la presse n'a pas. Le seul jamais mesuré était là, dans les données :
+
+```
+ouverture  →  cote finale      (279 courses sur 280 ont l'ouverture)
+```
+
+Un cheval qui **raccourcit** est joué ; un cheval qui **s'allonge** est lâché.
+C'est la *direction* de la cote — pas son niveau (« marche », déjà mort).
+
+`tools/derive.mjs`, vraie grille, 96 Quintés à presse réelle — `SORTI` = le
+jeté arrive (bas = bon) :
+
+| bloc | carnet | ouverture | marche | **derive** | BASE |
+|---|---|---|---|---|---|
+| G1 | **36,5 %** | 40,6 % | 44,8 % | 46,9 % | 51,0 % |
+| G2 | **26,0 %** | 28,1 % | 26,0 % | 38,5 % | 36,7 % |
+| G3 | **26,0 %** | 25,0 % | 30,2 % | 31,3 % | 29,2 % |
+| G4 | **15,8 %** | 17,9 % | 18,9 % | 25,3 % | 24,7 % |
+
+Et sur le ticket 4-2-1-1-0, le choix de G2 par la dérive : **quinté 16,7 → 11,5 %**
+(bootstrap contre la production : 5 gagnées / 10 perdues, 7,6 %).
+
+→ **la dérive est pire que la presse dans les quatre blocs.** L'argent non plus
+ne sait pas. **Refermé.**
+
+#### ⑦ JOCKEY · ENTRAÎNEUR · ÂGE — les trois derniers, mesurés (20/10/2026)
+
+Derniers signaux jamais testés, et les seuls absents des 15 variables déjà
+fermées. `tools\collect-jockeys.mjs` va chercher `jockey_name`, `horse_trainer`
+et `horse_age` des 96 Quintés à presse réelle (**96/96 collectés**) ;
+`tools\jockey.mjs` mesure avec le protocole de §11.30 : taux lissé, la course
+mesurée exclue du calcul (LOO), vraie grille.
+
+| bloc | carnet | entraîneur | jockey | âge (le plus jeune) | BASE |
+|---|---|---|---|---|---|
+| G1 | **36,5 %** | 45,8 % | 51,0 % | 52,1 % | 51,0 % |
+| G2 | **26,0 %** | **21,9 %** | 39,6 % | 40,6 % | 36,7 % |
+| G3 | **26,0 %** | 26,0 % | 29,2 % | 24,0 % | 29,2 % |
+| G4 | **15,8 %** | 25,3 % | 25,3 % | 20,0 % | 24,7 % |
+
+Un seul chiffre bat le carnet : **l'entraîneur en G2 — 21,9 % contre 26,0 %**.
+Sur le ticket il ne tient pas : quinté **16,7 → 12,5 %** (bootstrap 6 gagnées /
+10 perdues, 12,6 %). Le jockey : **11,5 %**. L'âge : **6,3 %** (le plus jeune),
+15,6 % (le plus vieux), contre 16,7 %.
+
+→ **les trois sont refermés.** **18 signaux** mesurés depuis le début : aucun
+ne bat le rang de presse dans un bloc.
+
+#### ⑧ Les fichiers
+
+| fichier | rôle |
+|---|---|
+| `tools\sans-choix.mjs` | le prix du siège + la comparaison 3-3-1-1-0 / 4-2-1-1-0 |
+| `tools\verif-production.mjs` | **le ticket réel du moteur** (lit `quotasEffectifs()`), longueur + métriques |
+| `tools\derive.mjs` | **la dérive de la cote** (ouverture → finale) — mesurée, rejetée |
+| `tools\collect-jockeys.mjs` · `tools\jockey.mjs` | jockey · entraîneur · âge des 96 — mesurés, rejetés |
+| `tools\arbitrage.mjs` | le veto du marché — mesuré, rejeté |
+| `data\corpus\jockeys96.json` | jockey / entraîneur / âge / poids / ouverture des 96 courses |
+
+---
+
+### 11.32 ⭐ LE TRIO ET L'ORDRE — DEUX CHANGEMENTS MESURÉS (20/10/2026, appliqués)
+
+> Question de l'utilisateur : « ① les 3 premiers ENSEMBLE 46,9 % · ② le bon
+> ordre 1-2-3 0 % — il faut un développement. » Réponse mesurée, puis appliquée.
+
+#### ① Le trio : G4 repasse au carnet — `4-2-1-1-0`, G1-G4 carnet
+
+`tools/ameliorer.mjs` énumère **62 répartitions de 8 × 6 règles de choix = 372
+combinaisons**. Le trio (les 3 premiers ensemble, n'importe quel ordre) :
+
+| règle | P96 | moitiés | R18 | 5/5 P96 |
+|---|---|---|---|---|
+| **4-2-1-1-0 · G1-G4 carnet** ← retenu | **47,9 %** | **47,9 / 47,9** | **50,0 %** | 12,5 % |
+| 4-2-1-1-0 · G4 marché (avant) | 46,9 % | 47,9 / 45,8 | 44,4 % | **16,7 %** |
+| 4-3-1-0-0 | 46,9 % | 50,0 / 43,8 | 44,4 % | 10,4 % |
+
+**Rien ne dépasse 47,9 % sur les 372 combinaisons.** Le prix est nommé : le
+quinté complet passe de 16,7 % à 12,5 % (le carnet couvre mieux le trio, le
+marché signait mieux les quintés — §11.30 reste vrai pour le 5/5).
+
+#### ② L'ordre du ticket : UNE case prédit, les sept autres non
+
+`tools/ordre2.mjs`, même jeu de 8 chevaux, seule la place change :
+
+| ordre | 1-2-3 exact | **les 3 en tête** | le 1er en case 1 |
+|---|---|---|---|
+| presse (P croissant) | 2,1 % | 5,2 % | 27,1 % |
+| marché (cote croissante) | 0,0 % | 3,1 % | **28,1 %** |
+| statistiques de podium (§11.27) | 0,0 % | **0,0 %** | 27,1 % |
+
+⚠ **REFUSÉ PAR L'UTILISATEUR le 20/10** : « cet ordre est trompeur ». Il a raison
+— `tools/discrimination.mjs` montre que seul le **1er** du ticket a un pouvoir
+mesuré :
+
+```
+rang prédit   gagne    dans les 3   dans les 5
+1er           27,1 %      53,1 %       65,6 %    ← le seul écart net
+2e            10,4 %      40,6 %       53,1 %
+3e            11,5 %      37,5 %       50,0 %    ← plat
+4e            10,4 %      26,0 %       38,5 %    ← plat
+8e             4,2 %      19,8 %       32,3 %
+```
+
+AUC de l'ordre complet : **0,61** (hasard 0,50). Réel mais faible.
+
+**Décision (§11.33)** : `ordonnerTicket(ticket, grille)` →
+**1re case = le P1 de la presse** (dans le ticket par construction, 4-2-1-1-0
+prend les 4 cases de G1), **les 7 autres = un bloc trié par numéro**. La page
+l'écrit noir sur blanc sous le ticket. On n'annonce plus de 2e, 3e, 4e, 5e.
+
+Le gain « 3 en tête » (5,2 %) est abandonné : il reposait sur un ordre complet
+que les données ne soutiennent pas.
+
+#### ③ Ce que ça change dans le code
+
+| fichier | changement |
+|---|---|
+| `src/lib/quinte.js` | `CHOIX_DU_BLOC` → `G4: 'carnet'` · `ordonnerTicket(ticket, grille)` (1 case prédit, 7 en bloc) · `remplirGrille` l'appelle |
+| `backend/QUINTE/quinte.js` | copie à l'octet près (vérifiée) |
+| `frontend/QUINTE/QuinteGrille.jsx` | ticket + colonne Archive triés par `ordonnerTicket` · mention sous le ticket |
+| `ordonnerParStats` | **conservé et exporté**, plus appelé par le moteur |
+
+#### ④ Les chiffres du moteur après application
+
+```
+P96 · 96 Quintés : podium entier 47,9 %  ·  quinté 12,5 %  ·  ≥4  56,3 %
+                   1re moitié 47,9 / 14,6  ·  2e moitié 47,9 / 10,4
+R18 · 18 courses : podium entier 50,0 %  ·  ticket 8,00 × 96 et × 18
+ordre            : 3 en tête 5,2 % (96) · 1-2-3 exact 2,1 %
+```
+
+⚠ **Ce qui n'a PAS changé** : les cinq boîtes P1-P4 / P5-P8 / P9-P10 /
+P11-P12 / P13+ (§11.16), la répartition `4-2-1-1-0` (§11.31), et l'interdiction
+d'ajouter un cheval. Le trio est le plafond mesuré à 8 chevaux : **47,9 %**.
+
+| outil | question |
+|---|---|
+| `tools\ameliorer.mjs` | les 372 combinaisons, triées par le trio |
+| `tools\ordre2.mjs` | 9 façons d'ordonner le même ticket |
+| `tools\verif-trio.mjs` | la preuve course par course : les 3 **ensemble** |
+| `tools\top3.mjs` | A contre top-8 presse / marché / fusion, à 8 chevaux |
+
+---
+
+---
 ---
 
 ## 12. 🖥️ L'OUTIL — page `/quinte` (C:\bahja-TURF)
@@ -1452,6 +1793,9 @@ forme 22 %  distance 22 %  piste 18 %  niveau 13 %  terrain 13 %  corde 12 %
 ```
 cotes = { n° : { cote, ouverture, tendance, favori, heure } }
 ```
+
+⭐ **6ᵉ argument `choixDuBloc`** (mesure seule, `null` = production) : permet de
+tester une autre règle de choix sans toucher à la page.
 
 - **Si un bloc a la cote de TOUS ses partants ET que c'est un bloc « marché »**
   (aujourd'hui : G2) → c'est la cote qui le remplit (les **quota** meilleures
@@ -3498,3 +3842,610 @@ APRÈS : « heure casacourses 14:15 (heure du Maroc, UTC+1) -> depart 13:15 GMT 
 `departEnGMT()` convertit **une seule fois**, au bon endroit. Les comparaisons se
 font en minutes **GMT** (`depart` et `now` dans le même fuseau) : les fenêtres de
 snapshot (`−195`, `−135`) et la fenêtre de gel (`−120` … `−10`) sont donc justes.
+
+### 11.33 ⭐ RETOUR À 3-2-1-1-1 — INSTRUCTION DE L'UTILISATEUR (20/10/2026, appliqué)
+
+> **« رجع 3-2-1-1-1 »** — c'est SA méthode, elle ne se discute pas.
+> §11.31 (4-2-1-1-0) est **abandonné**.
+
+`GROUPES` dans `src/lib/quinte.js` et `backend/QUINTE/quinte.js` :
+
+```
+G1 quota 4 → 3   ·   G2 2   ·   G3 1   ·   G4 1   ·   G5 0 → 1
+```
+
+**Toujours 8 chevaux** (3+2+1+1+1), pas 9.
+Le choix dans les blocs ne bouge pas (§11.23/§11.32) : G1-G4 `carnet`,
+G5 `marche` — le siège de G5 revient donc au marché.
+
+Mesure au moment du retour (`node tools/verif-production.mjs`, 96 Quintés
+à presse réelle) :
+
+| quotas | podium | quinté | ≥4 |
+|---|---|---|---|
+| 4-2-1-1-0 (abandonné) | 47,9 % | 12,5 % | 56,3 % |
+| **3-2-1-1-1 (appliqué)** | **38,5 %** | **8,3 %** | **43,8 %** |
+
+Moitiés : 37,5 % / 8,3 % puis 39,6 % / 8,3 %.
+
+Bascule vérifiée : `backend/QUINTE/quinte.js` identique à l'octet,
+`npm run build` OK (15,39 s).
+
+### 11.34 ⭐ LE CARNET DU JOUEUR — le protocole de preuve (20/10/2026)
+
+`tools/joueur.mjs` : l'utilisateur affirme dépasser 75 % de 5/5 avec 8
+chevaux. On ne discute pas, on compte.
+
+```
+node tools\joueur.mjs add <date_Rn_Cm> <8 numéros>   ← AVANT le départ
+node tools\joueur.mjs liste
+node tools\joueur.mjs bilan
+```
+
+- Les 8 sont horodatés dans `data/joueur.json` au moment de la saisie.
+- La note est lue dans `data/synthese.json` (arrivée réelle) : 5/5, trio, x/5.
+- Référence moteur affichée sous le bilan.
+- Déjà enregistrés : 14/10 et 19/10 (post-hoc, 2/2) et 20/10 (07:23, avant
+  le départ de 13:55).
+- Critère : **15/20 (75 %) = la règle entre dans le moteur le jour même** ;
+  moins de 12/20 = le moteur ne bouge pas.
+
+---
+
+## 16. 📺 LES LIVES — les hippodromes régionaux d'Equidia (20/10/2026)
+
+> Demande de l'utilisateur : **« واش ممكن تزيدني صفحة Lives en cours
+> https://regions.equidia.fr/ »**
+
+Page **`/lives`** (alias `/live`), lien **Lives** dans `src/Entete.jsx`
+(couleur `--n-vert`, classe `.p-lives` dans `src/index.css`).
+
+| Fichier | Rôle |
+|---|---|
+| `frontend/LIVES/Lives.jsx` | la page : liste des réunions + lecteur |
+| `backend/LIVES/lives.js` | les appels : `chargerLives`, `fluxHLS`, `normaliser`, `lienEquidia` |
+
+### 16.1 L'API — mesurée, aucun proxy
+
+```
+GET https://regions-api.equidia.fr/meetings?fromDate=…&toDate=…&offset=0&limit=50
+GET https://regions-api.equidia.fr/live/{fluxUrl}?type=hls     → { url: …m3u8 }
+GET https://regions-api.equidia.fr/live/{fluxUrl}?type=player  → player.php (INUTILE, voir 16.3)
+```
+
+- `access-control-allow-origin: *` sur l'API **et sur toute la chaîne HLS**
+  (playlist, sous-playlist, segment `.ts`) → **aucun proxy**, ni en local ni en
+  production. Même code des deux côtés.
+- La réunion porte tout : `num`, `startAt`, `finishAt`, `isQuinte`,
+  `isQuarte`, `isPmh`, `isCsi`, `isPremium`, `fluxUrl` (`racing1`,
+  `racing3`…), `fluxType`, `fluxActive`, `raceCourse.{code,name,slug,place,
+  federation, defaultImage}`, `disciplines`.
+- **`type`** n'est ni `RACING` ni `racing` : c'est **`hls`** ou `player`
+  (lu dans le bundle Angular : `getFluxUrl(flux, useClappr ? 'hls' : 'player')`).
+  `type=RACING` répond `400 invalid-param-type`.
+- Les adresses de flux portent un **jeton qui expire** → on les redemande à
+  chaque lecture et à chaque échec, jamais on ne les garde.
+
+### 16.2 ⚠ LE PIÈGE DU CDN — le `Referer` (le vrai blocage)
+
+hexaglobe refuse tout ce dont le **`Referer`** n'est pas un domaine equidia.
+Mesuré sur `racing3` le 20/10/2026 :
+
+| en-têtes envoyés | playlist | segment |
+|---|---|---|
+| aucun | 200 | 200 |
+| `Origin` seul | 200 | — |
+| `Referer: https://regions.equidia.fr/` | 200 | — |
+| **`Referer: localhost` / `vercel`** | **406** | **406** |
+
+→ Le navigateur envoyait `Referer` + `Origin` ⇒ **406 partout**, flux mort.
+**Correctif appliqué** : la page pose une balise
+`<meta name="referrer" content="no-referrer">` **au rendu du parent** (via
+`useMemo`, donc avant les effets du lecteur) et la **retire en quittant** la
+page. Vérifié : après la balise, playlist 200, segments 200, `readyState 4`,
+`videoWidth 1920`.
+
+### 16.3 ⚠ L'iframe `player.php` est GÉOBLOQUÉE
+
+`type=player` renvoie `player.php` sur hexaglobe, qui répond :
+
+```
+{"status":"ko","msg":"geoblocking error country: MA ip: …"}
+```
+
+Le **HLS**, lui, passe depuis le Maroc. Donc : lecteur **hls.js**, jamais
+d'iframe. Et **hls.js d'abord** : Chromium répond « maybe » à
+`canPlayType('application/vnd.apple.mpegurl')` sans savoir lire le HLS — il
+posait un `range: bytes=0-` que le CDN refuse (406). Le natif ne sert que si
+`Hls.isSupported()` est faux (Safari).
+
+### 16.4 Ce que la page fait
+
+- liste du jour (date modifiable), triée **en direct → à venir → terminé** ;
+- compteur **« N en direct »**, badge par réunion (En direct / À venir /
+  Terminé / Sans flux), badges Quinté+ · Quarté+ · Premium · PMH · CSI ;
+- **relecture toutes les 60 s** (une réunion bascule « en direct » pendant
+  qu'on regarde, et les jetons expirent) ;
+- heures **en GMT** (`heureGMT` de `src/temps.js`, règle du site) ;
+- lecteur 16:9, muet par défaut, bouton **↻ Réessayer** + lien
+  **Equidia Régions ↗**.
+
+⚠ Aucun chiffre ni horaire écrit à la main : tout vient de l'API.
+
+### 11.35 ⭐ RÉSULTAT RÉEL DU 20/10 — 3-2-1-1-1 tient, et pourquoi
+
+> Arrivée **5 · 13 · 14 · 3 · 15** (Clairefontaine R1C1, 2400 m plat).
+> Source : `pro.casacourses.com/api/race/pmu-R1C1?date=2026-10-20`
+> (`status: PROVISIONAL`, 5 arrivants complets). Écrite dans
+> `data/synthese.json` (champ `arrivee` seulement — §13.3-①).
+
+| ticket | chevaux | note | manque |
+|---|---|---|---|
+| **moteur 3-2-1-1-1** | 2 · 1 · 3 · 5 · 9 · 11 · 13 · 15 | **4/5** | 14 |
+| 4-2-1-1-0 (abandonné le matin) | 2 · 1 · 3 · 9 · 11 · 13 · 14 · 15 | **4/5** | 5 |
+| le joueur (protocole §11.34) | 8 · 6 · 2 · 10 · 5 · 3 · 9 · 11 | **2/5** | 13 · 14 · 15 |
+
+**Les deux configurations font 4/5, et elles ne perdent pas le même cheval.**
+Le retour à 3-2-1-1-1 n'a donc **rien coûté** sur ce quinté :
+
+- il perd **14** (P3, le 4ᵉ de G1 que 4-2-1-1-0 prenait) ;
+- il gagne **5** (P14), le siège de G5 — et le **5 a gagné la course** (cote 29).
+
+C'est exactement l'échange mesuré en §11.26 (le siège de G5 vaut moins que le
+4ᵉ de G1) : ici les deux se sont compensés au cheval près.
+
+**Le jeu du joueur** : il a retiré 1 · 13 · 15 et ajouté 8 · 6 · 10. Les trois
+retirés sont **exactement** les trois qui manquent (13 est 2ᵉ, 15 est 5ᵉ) ;
+aucun des trois ajoutés n'arrive. Bilan du protocole : **0/5 sur 1 course
+enregistrée avant le départ** (les 2/2 de 14/10 et 19/10 étaient post-hoc).
+
+Trio : moteur **2/3** (5, 13) · joueur 1/3 (5).
+
+### 11.36 ⭐ LA RÈGLE DE NOTATION — sans le trio, la note est 0/5 (20/10/2026)
+
+> Instruction de l'utilisateur : **« الى ماكاينش صاحب المركز التالت والتاني
+> والاول معا في التذكرة فتعتبر التذكرة 0/5 »**.
+
+Un ticket qui ne contient pas **les trois premiers ensemble** vaut **zéro**,
+même avec 4 chevaux sur 5. C'est cohérent avec le paiement : sans le trio, le
+Quinté n'est pas payable.
+
+```
+note = 5/5  si les 5 arrivants sont dans le ticket   (⇒ le trio y est forcément)
+note = 0/5  dès qu'un des trois premiers manque
+```
+
+**Conséquences appliquées :**
+
+- `tools/joueur.mjs` : `note = trio === 3 ? pris : 0`. Le brut (4/5) reste
+  affiché à côté pour la lecture, mais **n'entre dans aucun pourcentage**.
+- La métrique **« ≥4 du quinté » est retirée** de la notation : elle valait
+  0 de toute façon. Restent **5/5** (le seul qui paie) et **trio entier**
+  (la condition d'accès).
+- Relecture du 20/10 sous la règle : moteur **0/5** (le trio manquait de 14),
+  joueur **0/5**. Les deux 4/5 de §11.35 ne valent plus rien.
+
+**Le chiffre du moteur ne change pas** — 5/5 l'impliquait déjà :
+11,4 % sur 114 Quintés (12,5 % sur les 96 à presse réelle). Ce qui change,
+c'est ce qu'on regarde : **4-2-1-1-0 et 3-2-1-1-1 ne se départagent plus par
+le podium (48,2 % contre 37,7 %) mais par le 5/5 (12,5 % contre 8,3 %)**.
+
+---
+
+### 15.9 ⭐ L'EMPREINTE DU TRIO — la page `/coply` (20/10/2026)
+
+> Demande de l'utilisateur : **« دابا بغيت بصمة حقيقية للتريو في هذه الصفحة
+> Coply — الامر يختلف عن سباقات الكانتي لان الاول والتاني يربح والتاني والتالت
+> يربح والاول والتالت يربح »**.
+
+Le Trio n'est **pas** un quinté réduit aux trois premières places. Avec
+**3 numéros on joue 3 paires** :
+
+| niveau | condition | ce que ça paie |
+|---|---|---|
+| **couplé gagnant** | (1er, 2e) dans mes 3 | la paire exacte des deux premiers |
+| **couplé placé** | **2 des 3** dans le top 3 | n'importe laquelle des 3 paires |
+| **trio** | les 3 dans le top 3 | les trois, dans n'importe quel ordre |
+
+L'empreinte doit donc mesurer **les trois niveaux**, pas « qui arrive ». C'est
+pourquoi les tableaux ont trois colonnes et non une.
+
+#### Les deux corpus
+
+| corpus | source | n | pourquoi |
+|---|---|---|---|
+| **marché** | `data/corpus/fusion.json` (`ordreCote`) | **347** | c'est la lecture **applicable sur /coply** : la page a les cotes, pas la presse |
+| **carnet** | `data/quintes.json` (vrai `buildGrid`) | **96** | la référence de la méthode (§11.13) — jamais `fusion.json` pour les cases (§11.23) |
+
+- **marché** : Z1 = rangs 1-3 · Z2 = 4-8 · Z3 = 9+
+- **carnet** : G1 = P1-P4 · G2 = P5-P8 · G3 = P9-P10 · G4 = P11-P12 · G5 = P13+
+
+#### ① La forme des 3 premiers
+
+| marché | % | carnet | % |
+|---|---|---|---|
+| **1·1·1** | **24,5 %** | **2·1·0·0·0** | **26,0 %** |
+| 1·2·0 | 19,9 % | 1·1·1·0·0 | 12,5 % |
+| 2·1·0 | 18,4 % | 1·1·0·1·0 | 9,4 % |
+| 2·0·1 | 11,5 % | 2·0·0·0·1 | 7,3 % |
+| 0·2·1 | 9,8 % | 3·0·0·0·0 | 7,3 % |
+| 1·0·2 | 5,2 % | 1·1·0·0·1 | 6,3 % |
+
+- moyenne **marché** : Z1 **1,19** · Z2 **1,14** · Z3 **0,67**
+- moyenne **carnet** : G1 **1,50** · G2 **0,78** · G3 **0,25** · G4 **0,27** · G5 **0,20**
+
+> ⚠ **Les trois favoris (`3·0·0`) ne font que 3,2 %.** Le trio dominant n'est
+> pas « le haut du marché » : c'est **un de chaque zone** (`1·1·1`, 24,5 %).
+
+#### ② Les 3 paires — d'où viennent les paires qui paient
+
+| marché | % | carnet | % |
+|---|---|---|---|
+| **Z1-Z2** | **33,7 %** | **G1-G2** | **30,9 %** |
+| Z1-Z3 | 19,3 % | G1-G1 | 22,2 % |
+| Z2-Z3 | 17,2 % | G1-G4 | 9,4 % |
+| Z1-Z1 | 13,2 % | G1-G3 | 8,0 % |
+| Z2-Z2 | 12,5 % | G1-G5 | 7,3 % |
+| Z3-Z3 | 4,1 % | G2-G3 | 4,9 % |
+
+Une paire payante **touche presque toujours Z1** (Z1-Z2 + Z1-Z3 + Z1-Z1 =
+**66,2 %**) ; **deux chevaux hors du top 3 du marché** (Z2-Z2, Z3-Z3, Z2-Z3) =
+33,8 %. Le carnet dit la même chose : **G1-G2 = 30,9 %**, et G1 apparaît dans
+4 des 6 premières lignes.
+
+#### ③ Ce que paient vraiment 3 numéros
+
+| règle | trio | couplé ≥2 | gagnant | moitiés (≥2) |
+|---|---|---|---|---|
+| **marché top-3** | 3,2 % | **33,1 %** | 17,6 % | 34,1 / 32,2 |
+| marché 1·2·4 | 1,7 % | 32,6 % | 13,8 % | 35,3 / 29,9 |
+| marché 1·3·5 | 1,7 % | 26,2 % | 11,5 % | 29,5 / 23,0 |
+| **presse P1·P2·P3** (96) | **5,2 %** | **38,5 %** | 15,6 % | 37,5 / 39,6 |
+| presse P1·P2·P4 (96) | 1,0 % | 34,4 % | **17,7 %** | 35,4 / 33,3 |
+| presse P1·P5·P9 (96) | 2,1 % | 14,6 % | 7,3 % | 10,4 / 18,8 |
+| **le hasard (3 au sort)** | **0,2 %** | **8,4 %** | 0,2 % | — |
+
+- **le carnet bat le marché à 3 numéros** : 38,5 % contre 33,1 % (≥2), et c'est
+  stable sur les deux moitiés (37,5 / 39,6). Pour le trio : 5,2 % contre 3,2 %.
+- le hasard est à 8,4 % → les trois premiers du carnet valent **4,6×** le hasard
+  sur le couplé placé, **26×** sur le trio.
+- **le couplé gagnant est ~2× plus rare que le couplé placé** (17,6 % contre
+  33,1 %) : c'est le prix des 3 paires.
+
+#### ④ Combien de numéros (top-k du marché)
+
+| k | trio | couplé ≥2 | gagnant | paires à jouer |
+|---|---|---|---|---|
+| 3 | 3,2 % | 33,1 % | 17,6 % | 3 |
+| 4 | 7,8 % | 50,7 % | 28,2 % | 6 |
+| 5 | 16,1 % | 67,7 % | 39,2 % | 10 |
+| 6 | 27,1 % | 75,8 % | 48,7 % | 15 |
+| 8 | 44,1 % | 89,9 % | 65,7 % | 28 |
+
+Le trio entier tombe dans les k premiers du marché : 4 → 7,8 % · 5 → 16,1 % ·
+6 → 27,1 % · 8 → 44,1 % · 10 → 66,9 % · 12 → 84,4 %.
+(carnet : 4 → 7,3 % · 8 → 39,6 % · 12 → 81,3 %.)
+
+#### Ce qui est affiché sur `/coply`
+
+| où | quoi |
+|---|---|
+| panneau **Empreinte du Trio** (bas de page) | ① la forme · ② les 3 paires · ③ les 3 numéros · ④ combien de numéros |
+| sous la **Sélection** | `profil 3·0·0 · rangs marché 1 · 2 · 3 · cette forme = 3,2 % des trios` |
+
+- Le profil n'est calculé que si **≥ 80 % des partants ont une cote** ; sinon la
+  page écrit `profil indisponible — cotes incomplètes (13/16)`. Un rang faux
+  serait pire que pas de rang.
+- Quand le jeu **est** exactement le top-k du marché, la ligne ajoute sa note
+  mesurée (`= top-3 marché : trio 3,2 % · couplé ≥2 33,1 %`). Avec des cotes
+  incomplètes, cette mention est supprimée.
+- **La sélection du modèle n'est pas modifiée** : on affiche sa forme, on ne la
+  change pas (l'utilisateur a demandé la mesure, pas le remplacement).
+
+#### Les fichiers
+
+| fichier | rôle |
+|---|---|
+| `tools/empreinte-trio.mjs` | la mesure → `data/trio-empreinte.json` + `public/data/trio-empreinte.json` |
+| `frontend/COUPLE/Couple.jsx` | `EmpreinteTrio` (le panneau) + le profil sous la Sélection |
+| `data/trio-empreinte.json` | l'artefact publié — **aucun chiffre saisi dans la page** |
+
+⚠ Mesure seule : elle **n'entre pas** dans le ticket du Quinté (quotas 3-2-1-1-1
+fermés, §11.16).
+
+---
+
+### 15.10 🚫 « هادي راه ماشي بصمة » — le panneau à 4 tableaux est REFUSÉ (20/10/2026)
+
+> Réaction de l'utilisateur au §15.9 livré :
+> **« هادي راه ماشي بصمة هادي راه تخربيقة »**.
+
+**Ce qui était faux :** le panneau montrait **quatre tableaux** (forme · paires ·
+règles · top-k), deux corpus mêlés (marché 347 + carnet 96), et une ligne de
+profil sous la Sélection. Ce n'était pas une empreinte : c'était un dossier de
+mesures. Le mot « تخربيقة » est le **même** que celui du §15.3 (« عطي غير
+تلاتة الارقام فقط هادشي راه غير تخربيق ») — la leçon est claire :
+
+> **Une empreinte = UN objet. Le même que celui validé au §15.8 pour le podium
+> et le quinté : motif + n + % + barre, la moyenne par groupe, les empreintes
+> exactes, « N distinctes · la plus fréquente ».**
+
+#### Ce qui est affiché maintenant, et rien d'autre
+
+| bloc | contenu |
+|---|---|
+| **① Le motif** | G1·G2·G3·G4·G5 des 3 premiers · n · % · **barre** · moyenne par course · nb de motifs |
+| **② L'empreinte** | la case exacte triée (`1-2-4`) · n · % · **barre** · *N distinctes · la plus fréquente* · « 1-2-4 = 1-2 · 1-4 · 2-4 » |
+| une ligne | les 3 paires par bloc (G1-G2 30,9 % · G1-G1 22,2 % …) |
+| une ligne | le trio entier dans P1..Pk (4 → 7,3 % · 8 → 39,6 % · 12 → 81,3 %) |
+
+- **Un seul corpus : le carnet (96 Quintés à presse réelle)** — le même P que la
+  grille, la même langue que la méthode. Le marché sort de ce panneau.
+- **La ligne de profil sous la Sélection est retirée** : elle mélangeait rang de
+  marché et fréquence de carnet, deux choses qui ne se parlent pas.
+- `tools/empreinte-trio.mjs` réécrit dans la forme du §15.8 →
+  **`data/empreinte-trio.json`** (l'ancien `trio-empreinte.json` est supprimé).
+- Le Trio se lit **en 3 paires** : l'empreinte `1-2-4` donne `1-2 · 1-4 · 2-4`,
+  c'est-à-dire exactement ce que paie le couplé — la remarque de l'utilisateur
+  (« الاول والتاني يربح والتاني والتالت يربح ») est portée par la ligne sous
+  le tableau, pas par un tableau de plus.
+
+#### ✅ ② = LES 3 PAIRES, chacune avec son % (20/10/2026)
+
+Instruction : **« 1-2 · 1-4 · 2-4 كل واحد بنسبتو »**. La case exacte (`1-2-4`)
+sort de l'affichage ; à sa place, **les paires de cases, une par ligne** :
+
+| paire | n | % des courses |
+|---|---|---|
+| **1-2** | 14 | **14,6 %** |
+| **1-5** | 14 | **14,6 %** |
+| 1-3 | 13 | 13,5 % |
+| 1-4 | 13 | 13,5 % |
+| **2-4** | 12 | **12,5 %** |
+| 1-6 | 9 | 9,4 % |
+| 1-7 | 8 | 8,3 % |
+| 1-8 · 2-3 · 2-5 · 3-9 | 7 | 7,3 % |
+
+- **Définition du %** (écrite sous le tableau) : *si je joue ces deux cases, le
+  couplé paie dans X % des courses*. C'est un choix de **paire**, pas un rang.
+- **86 paires distinctes** sur 96 courses ; la plus fréquente `1-2` = 14,6 %.
+  La distribution est **plate** : 5 paires entre 12,5 et 14,6 %, aucune ne
+  domine — le trio se gagne sur **plusieurs paires**, pas sur une.
+- `pairesCases` = la liste des paires ; `paires` (par bloc : G1-G2 30,9 %,
+  G1-G1 22,2 %) reste affichée en **une ligne** sous le tableau.
+- La dernière ligne donne **les deux niveaux** : `P1..Pk — couplé ≥ 2 / trio` :
+  P4 52,1 / 7,3 · P6 75 / 26 · P8 90,6 / 39,6 · P10 95,8 / 57,3 · P12 99 / 81,3.
+  → le couplé sature à **P1..P8 (90,6 %)**, le trio non (39,6 %).
+
+---
+
+## 16. 🗄️ L'ARCHIVE DES PARTANTS — `public/data/reu` (20/10/2026)
+
+> Question de l'utilisateur : **« لماذا السباقات الماضية تعطي ⚠ Aucune source de
+> partants disponible (Equidia + fallbacks) »**.
+
+### 16.1 La cause, exacte
+
+`api/couple.js` ne lit **jamais** Equidia en direct pour une date passée :
+
+```
+cDate < aujourd'hui  →  partants = archive SEULEMENT
+                        (le direct serait post-course : arrivée + musiques
+                         incluant la course → hindsight)
+```
+
+Si `public/data/reu/{date}_R{n}_C{m}_{pays}.json` n'existe pas → `partants`
+vide → `throw new Error('Aucune source de partants disponible …')`.
+
+Or l'archive s'arrêtait au **13/10/2026** :
+
+| | |
+|---|---|
+| Dernier fichier de course | **13/10/2026** |
+| Cause | `tools/archive-reu.mjs` appelait `chargerProgrammeReu()` — **fonction jamais importée** → `ReferenceError` au premier jour sans `prog-*.json` local |
+| Aggravant | **aucune tâche planifiée** ne lançait le collecteur (la seule tâche « archive » pointait sur `C:\turf\bahja-pmu`) |
+
+→ toute course du **14/10 au 20/10** répondait l'erreur. Le Quinté (R1C1)
+marchait encore le jour même, parce que `cDate == aujourd'hui` autorise le direct.
+
+### 16.2 Les trois correctifs
+
+1. **Le collecteur réparé** : `chargerProgrammeEquidia(date)` (même parseur que
+   la page) + repli `chargerProgrammeCasacourses(date)` — Equidia ne sert
+   `/courses/{date}` que le jour même, casacourses liste encore le passé.
+2. **Le trou rebouché** : 14 → 20/10 collectés (**442 courses**).
+3. **La tâche planifiée** : `Bahja Archives` → `tools\archives-daily.bat`,
+   tous les jours à **09:30**, journal dans `data/archives.log`.
+
+### 16.3 Le drapeau d'honnêteté
+
+Tout fichier collecté **après** la course porte `collecteApresCourse: true`
+(arrivée déjà connue → cotes et musiques d'après). 1 230 fichiers sur 1 982.
+→ une « sélection » recalculée sur ces fichiers **n'est pas une prédiction**.
+
+### 16.4 Utilisation
+
+```
+node tools\archive-reu.mjs 2026-10-14              (un jour)
+node tools\archive-reu.mjs 2026-10-14 2026-10-15   (plusieurs jours)
+tools\archives-daily.bat                           (le jour, comme la tâche)
+```
+
+
+---
+
+## 17. 💶 LE COUPLÉ EN EUROS — la réponse chiffrée (20/10/2026)
+
+> Question de l'utilisateur : **« واش دابا قاديتي شي خوارزمية تعطينا الكوبلي بنسبة
+> مزيانة ولا غير الهضرة »**.
+
+Outil : **`node tools/couple-euros.mjs`** — 1 € par paire, **vrais rapports**
+`JUMELE_PLACE` / `JUMELE_GAGNANT` de `data/quintes.json` (272 Quintés avec
+dividendes). On ne compte pas « combien de fois », on compte **ce qui rentre**.
+
+| règle | n | couplé placé | ROI placé | couplé gagnant | ROI gagnant |
+|---|---|---|---|---|---|
+| **carnet top-3** (P1·P2·P3) | 93 | **37,6 %** | **+2,4 %** | 15,1 % | −27,0 % |
+| marché top-3 | 272 | 34,6 % | −21,0 % | 18,0 % | −8,6 % |
+| carnet top-4 | 93 | 54,8 % | −10,0 % | 29,0 % | −9,6 % |
+| marché top-4 | 272 | 52,6 % | −25,8 % | 29,0 % | −12,8 % |
+| carnet top-5 | 93 | 63,4 % | −24,4 % | 38,7 % | −26,4 % |
+| marché top-5 | 272 | 69,1 % | −16,7 % | 39,3 % | −8,3 % |
+| le hasard (8,4 %) | — | 8,4 % | — | 0,2 % | — |
+
+**carnet top-3** : mise **279 €** → retour **286 €** sur 93 Quintés
+(médiane par course **−3 €**, c'est-à-dire : on perd ses 3 € les 2/3 du temps
+et on touche 16 à 26 € quand ça passe).
+
+### 17.1 Ce que ça dit — et ce que ça ne dit pas
+
+1. **Ce n'est pas de la parole** : 37,6 % de couplé placé avec 3 numéros,
+   contre **8,4 % au hasard** = **4,5 ×** le hasard, sur rapports réels.
+2. **Mais ce n'est pas une machine à argent** : +2,4 % = l'équilibre, dans le
+   bruit d'un échantillon de 93 courses. Moitié 1 : −0,6 % · moitié 2 : +5,4 %.
+3. **Le marché perd** (−21,0 %) là où le carnet est à l'équilibre : l'écart ne
+   vient pas du hasard, il vient de l'ordre de la presse.
+4. **Le couplé gagnant perd toujours** (−8 à −31 %) : c'est le placé qui paie,
+   parce que 3 numéros = **3 paires** et qu'une seule suffit.
+5. ⚠ **Le carnet n'existe que pour le Quinté** — c'est la seule course dont la
+   presse publie l'ordre (P1..P20). Sur toutes les autres courses de `/coply`
+   (R1C2, R2C1, R3C3…), il ne reste que le marché : **34,6 % et −21 %**.
+
+### 17.2 La seule amélioration mesurée, à appliquer
+
+Sur la course du Quinté, remplacer le choix du marché par **P1·P2·P3** :
+**34,6 % → 37,6 %** de couplé placé, ROI **−21 % → +2,4 %**.
+Ailleurs (pas de presse), rien à changer — le marché est tout ce qu'on a.
+
+
+---
+
+## 18. ⭐ LA MARQUE SUR LE LIVE — le logo de la chaîne est dans le flux (20/10/2026)
+
+> Demande de l'utilisateur : **« هل يمكن تعويض او اخفاء شعار القناة بلوغو موقعنا او اسمه »**
+> (captures : le banneau « EQUIDIA RACING » plein cadre au démarrage, et le petit
+> logo de la chaîne en haut à droite pendant la course).
+
+### 18.1 Le fait : ces deux marques sont PIXELISÉES
+
+Le flux est un **HLS d'éditeur** : le banneau d'ouverture et le logo de la
+chaîne sont **dans les images** du flux. Aucun lecteur, aucun CSS, aucune
+watermark du site ne peut les **retirer** — on peut seulement les **couvrir**.
+
+### 18.2 Ce qui est fait (`frontend/LIVES/Lives.jsx`, composant `Lecteur`)
+
+| | quoi | comment |
+|---|---|---|
+| ① **le voile de marque** | ⛔ **SUPPRIMÉ le 21/10/2026** — voir §18.3 | — |
+| ② **le bandeau de marque** | un bandeau **opaque** de 250×56 px en haut à droite, dégradé vers la droite, avec le badge « B · Bahja TURF » | masque le logo de la chaîne **quelle que soit sa position exacte** dans l'image (on ne peut pas mesurer le pixel : le flux est variable) |
+
+- Le badge a `pointerEvents: none` → il ne gêne pas les commandes du lecteur.
+- Le bandeau est en `position: absolute` **par-dessus** le `<video>`, `zIndex` 12 ;
+  l'état d'erreur est passé à 13 pour rester visible.
+- ⚠ Rappel : cette marque appartient à l'éditeur du flux. La couvrir est une
+  question de présentation, pas de technique — à vérifier avec les conditions
+  d'utilisation d'Equidia / Le Trot avant publication.
+
+### 18.3 ⛔ LE VOILE PLEIN ÉCRAN A ÉTÉ RETIRÉ (21/10/2026)
+
+> Instruction de l'utilisateur : **« هاد الصورة حيدها كاتعيقني فالمشاهدة في كل
+> مرة تضهر اتناء البت »** — la capture montrait le plein écran vert
+> « BAHJA TURF · R2 · LYON · CARRE DE SOIE · EN DIRECT ».
+
+- Cause : le voile se posait sur `playing` **7 secondes**, et **se reposait à
+  chaque reprise de lecture** après une pause → il revenait pendant le pari.
+- Retiré : l'état `voile`, l'effet ③ de 7 s, et le bloc de rendu. La string
+  `radial-gradient(120% 120% at 50% 40%…)` a disparu du bundle.
+- **Conservé** : le bandeau 250×56 en haut à droite (choix de l'utilisateur,
+  « خليه »).
+- L'effet `playing` / `pause` / `ended` reste, mais il ne pilote plus que
+  l'état `joue` (le volet « ▶ Lire » disparaît dès que le flux démarre).
+
+
+
+---
+
+## 19. ⭐ LE DIRECT DE LETROT — dans la page `/lives` (20/10/2026)
+
+> Demande de l'utilisateur : **« الم تجد طريقة لجعلها تعمل داخل موقعنا »** —
+> le live de letrot.com doit jouer DANS la page, pas dans un onglet à côté.
+
+### 19.1 Pourquoi ce n'était pas un iframe
+
+| | |
+|---|---|
+| `www.letrot.com` | renvoie **`X-Frame-Options: SAMEORIGIN`** → l'intégration refusée |
+| `/v1/api/videos/*` | **aucun en-tête CORS** → le navigateur ne peut pas l'appeler |
+| `player_v3.php` (hexaglobe) | page HTML, **sans CORS** non plus |
+
+### 19.2 La chaîne mesurée (4 étapes)
+
+```
+1. GET https://www.letrot.com/v1/api/videos/meeting
+     → [{ meetingNumber, time, videoUrl, hippodrome: { place, label,
+         meeting: { totalRaces, status, races: [...] } } }]
+2. GET <videoUrl>   (player_v3.php)
+     → HTML qui contient  UrlStreamInfo: '…/stream_info.php'
+3. GET <stream_info.php>
+     → { status:"LIVE", protocol:"HLS",
+         stream_url_pri:"https://…-cdn.hexaglobe.net/…/playlist.m3u8",
+         stream_url_bkp:"…" }
+4. le .m3u8 est lu DIRECTEMENT par hls.js dans la page
+     → `access-control-allow-origin` = l'origine du navigateur (mesuré) ;
+     → et surtout : PAS de lecteur hexaglobe → PAS de logo « occultation »
+       (img/trot.svg) posé par-dessus l'image.
+```
+
+### 19.3 Les fichiers
+
+| fichier | rôle |
+|---|---|
+| `api/lt-live.js` | **la fonction** : lit l'API de letrot, résout le .m3u8, rend du JSON. `?flux=4` = la réunion 4 · `?flux=0` = le multiplex (toutes régions) |
+| `vite.config.js` | en dev, `/api/lt-live` appelle la MÊME fonction (`ssrLoadModule`) — local et en ligne, même code |
+| `backend/LIVES/letrot.js` | côté navigateur : `chargerLivesLetrot()` · `fluxLetrot(num)` |
+| `frontend/LIVES/Lives.jsx` | la section « Le Trot — le direct » + le lecteur (le `Lecteur` accepte maintenant `urlDirecte`) |
+
+- Les adresses de flux portent un jeton qui expire → on les redemande à chaque
+  changement de réunion et à chaque relire (60 s).
+- Le pied du lecteur affiche « Le Trot ↗ » (le lien externe) au lieu d'
+  « Equidia Régions ↗ ».
+
+### 19.4 ⚠ LA PUBLICATION EST BLOQUÉE — le jeton Vercel ne marche plus
+
+`node tools/deploy.mjs` échoue depuis **le 15/10** (`data/daily.log` :
+« deploy ECHEC (code 1) » tous les jours) → **le site en ligne est périmé
+depuis le 15/10**.
+
+```
+Not authorized: Trying to access resource under scope "woorckflow-4697".
+You must re-authenticate to this scope or use a token with access to this scope.
+   → "saml": true   (le compte est passé en SAML/SSO)
+```
+
+- `GET /v2/user` marche encore (le jeton est lu) mais `GET /v9/projects` est
+  refusé → **il faut un jeton neuf** :
+  Vercel → *Account Settings → Tokens → Create* (scope : l'équipe `woorckflow-4697`)
+  puis le mettre dans `.deploy-env` : `VERCEL_TOKEN=vcp_…`
+- Ensuite : `node tools\deploy.mjs` (build + deploy + vérification).
+- ⚠ Ne pas supprimer `.vercel/` : il porte le lien vers le projet
+  (`prj_FZFNbBzmLKfzQeAfNa6SNjXt3q2q`, équipe `team_hNLmwUkmGtwVFYfSED5UMvpr`).
+
+
+---
+
+## 19.5 ⛔ SUPPRIMÉ le 20/10/2026 — le direct de Le Trot ne tourne pas dans la page
+
+> Le live de Le Trot **ne jouait pas de façon fiable** dans le navigateur
+> (autoplay bloqué, segments qui s'arrêtent, voile qui restait). L'utilisateur
+> a demandé : « اذا لم تستطع تشغيله داخل تطبيقنا احدفه ».
+
+- **La section in-page est retirée** de `frontend/LIVES/Lives.jsx` (plus de
+  `Lecteur` pour Le Trot, plus d'état `trot*`, plus de `urlDirecte`).
+- **`api/lt-live.js` et `backend/LIVES/letrot.js` supprimés** — la chaîne
+  mesurée (4 étapes) reste documentée dans §19.1-19.2 au cas où on la
+  réutilise un jour.
+- **Ce qui reste** : la carte « **Autres directs** » avec le lien
+  `https://www.letrot.com/videos ↗` (ouvre un nouvel onglet) — c'est le seul
+  moyen fiable de voir le live du trot.
+- La marque (voile 7 s + badge top-droite) reste pour les lives d'Equidia Régions.
+

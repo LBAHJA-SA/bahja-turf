@@ -23,6 +23,7 @@ const LIENS = [
   { cle: 'quinte', to: '/quinte', libelle: 'Quinté', icone: 'bi-trophy' },
   { cle: 'couple', to: '/coply', libelle: 'Coply', icone: 'bi-people' },
   { cle: 'presse', to: '/presse', libelle: 'Presse', icone: 'bi-newspaper' },
+  { cle: 'lives', to: '/lives', libelle: 'Lives', icone: 'bi-broadcast' },
 ]
 
 export default function Entete({ page }) {

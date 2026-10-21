@@ -1,350 +1,251 @@
-/* ---------------------------------------------------------------
- * tools\sept.mjs  —  ⭐ 7 CHEVAUX → 5/5 — LA VRAIE BOUSSOLE
+/* =============================================================================
+ * tools/sept.mjs — 7 CHEVAUX : LA RÉPARTITION, PUIS LE CHOIX DANS CHAQUE BLOC
+ * (20/10/2026)
+ *
+ * L'utilisateur : « je cherche seulement 7 chevaux, j'ai trouvé le meilleur
+ * découpage — ce qui me manque c'est LE CHOIX dans chaque bloc ».
+ * Et il a écarté l'idée d'ajouter un cheval.
+ *
+ * Deux questions, deux mesures :
+ *
+ *   ① À 7 CHEVAUX, quelle répartition ? (G3 reste obligatoire)
+ *   ② À cette répartition, QUI prend-on dans chaque bloc : le carnet (rang de
+ *      presse P) ou le marché (la cote) ? 2⁴ combinaisons, mesurées une à une.
+ *
+ * Métriques DENSES (jamais le cheval isolé) : podium entier (3/3) et quinté
+ * entier (5/5).
+ *
+ * ⚠ Le corpus à presse réelle est `data/quintes.json` (96 courses) : c'est le
+ * seul qui porte les places P1..P20. Les 123 archives n'ont pas la presse, donc
+ * elles ne peuvent pas départager carnet contre marché. Pour ne pas conclure
+ * sur un échantillon, tout est rejoué en DEUX MOITIÉS chronologiques : la règle
+ * choisie sur une moitié est notée sur l'autre.
  *
  *   node tools\sept.mjs
- *
- * ⚠ LABORATOIRE UNIQUEMENT. AUCUN SYSTÈME N EST MODIFIÉ.
- *
- * LE BUT RÉEL, ÉNONCÉ CLAIREMENT
- *   7 chevaux. Dans 75 % des courses, au moins 5 des 5 premiers
- *   doivent être dans ces 7. Ce n'est PAS 8, ce n'est PAS 9.
- *   Ajouter un cheval facilite la tâche sans la résoudre.
- *
- * POURQUOI CE SCRIPT EXISTE
- *   tous les tests faits jusqu'ici、优化لا la répartition des sièges.
- *   Or le problème n'est peut-être pas « quel siège à quel bloc »
- *   mais « quels chevaux on jette, et où étaient les vrais gagnants ».
- *
- * CE QU IL FAIT
- *   ① le score brut : 7 chevaux → 5/5, sur 347 courses et sur 4 périodes
- *   ② la CARTE DE LA PERTE : où étaient les chevaux du Top 5
- *      qui ne sont pas dans les 7 ?  (position de presse, bloc)
- *   ③ le « Cinquième manquant » : quand on est à 4/5, qui manque ?
- *   ④ le point de bascule : à partir de quand le 5/5 devient-il perdu ?
- *   ⑤ le plafond théorique : quelle taille de ticket atteindrait 75 % ?
- * ------------------------------------------------------------- */
-
+ * ============================================================================= */
 import fs from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { buildGrid, computeStats, remplirGrille } from '../src/lib/quinte.js'
 
-const RACINE = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
-const FF = path.join(RACINE, 'data', 'corpus', 'fusion.json')
-const F94 = path.join(RACINE, 'data', 'corpus', 'archive-94.json')
+const pct = (a, b) => (b ? (100 * a / b).toFixed(1).replace('.', ',') + ' %' : '—')
+const pad = (s, n) => String(s).padEnd(n)
+const padL = (s, n) => String(s).padStart(n)
 
-const BLOCS = [
-  { id: 'G1', min: 1, max: 4 }, { id: 'G2', min: 5, max: 8 },
-  { id: 'G3', min: 9, max: 10 }, { id: 'G4', min: 11, max: 12 },
-  { id: 'G5', min: 13, max: 99 },
-]
-const PERIODES = [
-  ['P1 · 2024-09 → 2025-10', '2024-01-01', '2025-12-31'],
-  ['P2 · 2026-01 → 2026-03', '2026-01-01', '2026-03-31'],
-  ['P3 · 2026-04 → 2026-06', '2026-04-01', '2026-06-30'],
-  ['P4 · 2026-07 → 2026-10', '2026-07-01', '2026-12-31'],
-]
+/* ─────────────────────────────── l'échantillon ─────────────────────────── */
+const TOUT = JSON.parse(fs.readFileSync('data/quintes.json', 'utf8'))
+const BRUT = []
+for (const q of TOUT) {
+  const cotes = q.cotes
+  if (!cotes || Object.keys(cotes).length < 12) continue
+  if (!q.arrivee || q.arrivee.length < 5) continue
+  const nums = Object.keys(cotes).map(Number)
+  if (nums.some((n) => !(cotes[n] > 1))) continue
+  const syn = (q.presse?.length >= 10 ? [...q.presse] : []).filter((n) => cotes[n] > 1)
+  if (syn.length < 10) continue
+  BRUT.push({ q, nums, syn, cotes: Object.fromEntries(nums.map((n) => [n, { cote: cotes[n] }])) })
+}
+const REC = BRUT.map((c) => ({
+  date: c.q.date, discipline: c.q.discipline,
+  synthese: c.syn, runners: c.nums, arrivee: c.q.arrivee.slice(0, 5),
+}))
+/* tout est pré-calculé une fois : grille, classement, stats LOO, arrivée */
+const C = BRUT.map((c, i) => {
+  const grille = buildGrid(c.syn, c.nums)
+  const cl = grille.groupes.flatMap((g) => g.cases).slice().sort((a, b) => a.slot - b.slot)
+    .map((x) => ({ p: { num: x.num }, s: null, ok: true }))
+  return { c, grille, cl, stats: computeStats(REC.filter((_, k) => k !== i)), arr: c.q.arrivee }
+})
 
-const FUS = JSON.parse(fs.readFileSync(FF, 'utf8')).courses
-const base = FUS.map((k) => ({ ...k, arrivee: (k.arrivee || []).slice() }))
-  .filter((k) => k.arrivee.length >= 5 && (k.ordreCote || []).length >= 10)
-  .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0))
-const n = base.length
-const pDe = base.map((k) => new Map(k.presse.map((x, i) => [x, i + 1])))
+/* ─────────────────────────────── le moteur ─────────────────────────────── */
+function jouer(c, quotas, choix, { ordonner = false } = {}) {
+  const g2 = { groupes: c.grille.groupes.map((g, k) => ({ ...g, quota: Math.min(quotas[k], g.cases.length) })) }
+  const r = remplirGrille(g2, c.cl, c.c.q.discipline, c.c.cotes, c.stats, choix)
+  return r.ticket
+}
+function noter(liste, quotas, choix) {
+  let pod = 0, qui = 0, q4 = 0, ch = 0
+  for (const c of liste) {
+    const t = jouer(c, quotas, choix)
+    const s = new Set(t)
+    ch += t.length
+    if (c.arr.slice(0, 3).every((x) => s.has(x))) pod++
+    if (c.arr.slice(0, 5).every((x) => s.has(x))) qui++
+    if (c.arr.slice(0, 5).filter((x) => s.has(x)).length >= 4) q4++
+  }
+  return { pod, qui, q4, n: liste.length, ch: ch / (liste.length || 1) }
+}
 
-const cands = base.map((k) => BLOCS.map((b, i) =>
-  k.ordreCote.filter((x, r) => r + 1 >= b.min && r + 1 <= b.max)
-    .slice().sort((a, c) => (k.cotes[a] || 999) - (k.cotes[c] || 999))))
+/* ═════════════ ① TOUTES LES RÉPARTITIONS DE 7 (G3 obligatoire) ═══════════ */
+const SEPT = []
+for (let q1 = 0; q1 <= 4; q1++)
+  for (let q2 = 0; q2 <= 4; q2++)
+    for (let q3 = 1; q3 <= 2; q3++)
+      for (let q4 = 0; q4 <= 2; q4++) {
+        const q5 = 7 - q1 - q2 - q3 - q4
+        if (q5 < 0 || q5 > 7) continue
+        SEPT.push([q1, q2, q3, q4, q5])
+      }
+const cle = (q) => q.join('-')
 
-/** les N meilleurs chevaux du moteur, par ordre de bloc puis par cote */
-const ordreBloc = BLOCS.flatMap((b) => Array.from({ length: 6 }, (_, r) => ({ b: b.id, rang: r + 1 })))
-function sept(ki, N) {
+console.log('\n  ① À 7 CHEVAUX — ' + SEPT.length + ' répartitions possibles (G3 ≥ 1 : il est obligatoire)')
+const noteSept = SEPT.map((q) => ({ q, r: noter(C, q, null) }))
+noteSept.sort((a, b) => (b.r.qui - a.r.qui) || (b.r.pod - a.r.pod))
+console.log('  ' + pad('répartition', 13) + pad('chev.', 7) + pad('podium entier', 15) + pad('quinté entier', 15) + '≥4 quinté')
+for (const { q, r } of noteSept.slice(0, 10)) {
+  console.log('  ' + pad(cle(q), 13) + pad(r.ch.toFixed(2), 7) + pad(pct(r.pod, r.n), 15) + pad(pct(r.qui, r.n), 15) + pct(r.q4, r.n))
+}
+const prod7 = noteSept.findIndex((x) => cle(x.q) === '3-2-1-1-0') + 1
+console.log('  …\n  le classique 3-2-1-1-0 : rang ' + (prod7 || 'absent') + ' / ' + SEPT.length)
+/* la même question, moitié par moitié : le rang tient-il ? */
+{
+  const mh = Math.floor(C.length / 2)
+  const rangSur = (liste) => {
+    const notes = SEPT.map((q) => ({ q, r: noter(liste, q, null) }))
+    notes.sort((a, b) => (b.r.qui - a.r.qui) || (b.r.pod - a.r.pod))
+    return notes.findIndex((x) => cle(x.q) === '3-2-1-1-0') + 1
+  }
+  console.log('  moitié par moitié, 3-2-1-1-0 est : rang ' + rangSur(C.slice(0, mh)) +
+    ' / ' + SEPT.length + ' sur la 1ʳᵉ · rang ' + rangSur(C.slice(mh)) + ' / ' + SEPT.length + ' sur la 2ᵈᵉ')
+}
+
+/* ═════════ ② À 3-2-1-1-0 — LE CHOIX DANS CHAQUE BLOC (16 combos) ════════ */
+const SPLIT = [3, 2, 1, 1, 0]
+const IDS = ['G1', 'G2', 'G3', 'G4', 'G5']
+const ACTIFS = IDS.filter((id) => SPLIT[IDS.indexOf(id)] > 0)
+const COMBOS = []
+for (let m = 0; m < 16; m++) {
+  const ch = {}
+  ACTIFS.forEach((id, k) => { ch[id] = (m >> k) & 1 ? 'marche' : 'carnet' })
+  COMBOS.push(ch)
+}
+const nom = (ch) => ACTIFS.map((id) => (ch[id] === 'carnet' ? 'C' : 'M')).join('')
+const PROD = { G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'marche', G5: 'marche' }
+
+console.log('\n  ② À 3-2-1-1-0 — QUI PREND-ON DANS CHAQUE BLOC ? (C = carnet · M = marché)')
+console.log('  ' + pad('règle', 9) + pad('G1', 5) + pad('G2', 5) + pad('G3', 5) + pad('G4', 5) +
+  pad('podium entier', 15) + pad('quinté entier', 15) + '≥4 quinté')
+const noteChoix = COMBOS.map((ch) => ({ ch, r: noter(C, SPLIT, ch) }))
+noteChoix.sort((a, b) => (b.r.qui - a.r.qui) || (b.r.pod - a.r.pod))
+for (const { ch, r } of noteChoix.slice(0, 8)) {
+  console.log('  ' + pad(nom(ch), 9) + pad(ch.G1 === 'carnet' ? 'C' : 'M', 5) + pad(ch.G2 === 'carnet' ? 'C' : 'M', 5) +
+    pad(ch.G3 === 'carnet' ? 'C' : 'M', 5) + pad(ch.G4 === 'carnet' ? 'C' : 'M', 5) +
+    pad(pct(r.pod, r.n), 15) + pad(pct(r.qui, r.n), 15) + pct(r.q4, r.n))
+}
+const prodRang = noteChoix.findIndex((x) => ACTIFS.every((id) => x.ch[id] === PROD[id])) + 1
+console.log('  …\n  la règle de production (carnet partout sauf G4) : rang ' + prodRang + ' / ' + COMBOS.length)
+
+/* ═════════ ③ L'EFFET D'UN SEUL BLOC, TOUTES CHOSES ÉGALES ═══════════════ */
+/* On ne change QU'UN bloc à la fois en partant de la production, et on rejoue
+ * les 96 courses. Le test est apparié : la même course est comparée à elle-même.
+ * ⚠ Le bootstrap porte sur les ÉVÉNEMENTS qui paient (5/5 et ≥4), pas sur le
+ * simple décompte d'arrivants : les deux peuvent diverger (voir G4). */
+const evts = (liste, quotas, choix) => liste.map((c) => {
+  const s = new Set(jouer(c, quotas, choix))
+  const k = c.arr.slice(0, 5).filter((x) => s.has(x)).length
+  return { c5: k === 5 ? 1 : 0, c4: k >= 4 ? 1 : 0 }
+})
+const boot = (d) => {
+  let m = 0
+  for (let t = 0; t < 10000; t++) {
+    let s = 0
+    for (let k = 0; k < d.length; k++) s += d[Math.floor(Math.random() * d.length)]
+    if (s > 0) m++
+  }
+  return m / 100
+}
+const A0 = evts(C, SPLIT, PROD)
+
+console.log('\n  ③ L’EFFET D’UN BLOC SEUL — on ne change QUE ce bloc, depuis la production')
+console.log('  ' + pad('bloc', 7) + pad('production', 12) + pad('l’autre', 10) + pad('quinté 5/5', 16) +
+  pad('l’autre gagne (5/5)', 20) + 'l’autre gagne (≥4)')
+for (const id of ACTIFS) {
+  const autre = { ...PROD, [id]: PROD[id] === 'carnet' ? 'marche' : 'carnet' }
+  const B0 = evts(C, SPLIT, autre)
+  const d5 = A0.map((x, i) => B0[i].c5 - x.c5)
+  const d4 = A0.map((x, i) => B0[i].c4 - x.c4)
+  const p5 = d5.filter((x) => x > 0).length, m5 = d5.filter((x) => x < 0).length
+  const nC = noter(C, SPLIT, PROD), nA = noter(C, SPLIT, autre)
+  const g5 = boot(d5), g4 = boot(d4)
+  const verdict = g5 < 10 ? 'production ✓' : g5 > 90 ? '⚠ l’autre est mieux' : 'indécis'
+  console.log('  ' + pad(id, 7) + pad(PROD[id], 12) + pad(autre[id], 10) +
+    pad(pct(nC.qui, nC.n) + ' → ' + pct(nA.qui, nA.n), 16) +
+    pad((g5.toFixed(1) + ' %').padEnd(8) + '(' + p5 + ' / ' + m5 + ')', 20) +
+    (g4.toFixed(1) + ' %').padEnd(18) + verdict)
+}
+
+/* ═════════ ⑤ UNE TROISIÈME OPTION PAR BLOC : LA FUSION CARNET + MARCHÉ ═══ */
+/* Dans un bloc, on classe les cases par : le carnet (P), le marché (cote), ou
+ * la FUSION (P + rang de marché). 3⁴ = 81 règles. C'est la seule famille qui
+ * n'avait jamais été testée : jusqu'ici on n'opposait que deux ordres. */
+for (const c of C) {
+  const ordre = c.c.nums.slice().sort((a, b) => c.c.cotes[a].cote - c.c.cotes[b].cote || a - b)
+  c.rm = Object.fromEntries(ordre.map((x, k) => [x, k + 1]))
+}
+function jouerLocal(c, quotas, modes) {
   const out = []
-  const siege = new Map()
-  for (let i = 0; i < BLOCS.length; i++) {
-    for (const num of cands[ki][i]) {
-      if (out.length >= N) break
-      out.push(num)
-      siege.set(num, BLOCS[i].id + '[' + (cands[ki][i].indexOf(num) + 1) + ']')
-    }
+  c.grille.groupes.forEach((g, k) => {
+    const q = Math.min(quotas[IDS.indexOf(g.id)], g.cases.length)
+    const cle2 = (x) => (modes[g.id] === 'marche' ? c.rm[x.num]
+      : modes[g.id] === 'fusion' ? x.place + c.rm[x.num] : x.place)
+    g.cases.slice().sort((a, b) => cle2(a) - cle2(b) || a.place - b.place)
+      .slice(0, q).forEach((x) => out.push(x.num))
+  })
+  return out
+}
+const OPTIONS = ['carnet', 'marche', 'fusion']
+const M81 = []
+for (let m = 0; m < 81; m++) {
+  const ch = {}
+  ACTIFS.forEach((id, k) => { ch[id] = OPTIONS[Math.floor(m / Math.pow(3, k)) % 3] })
+  M81.push(ch)
+}
+const note81 = M81.map((ch) => {
+  let pod = 0, qui = 0
+  for (const c of C) {
+    const s = new Set(jouerLocal(c, SPLIT, ch))
+    if (c.arr.slice(0, 3).every((x) => s.has(x))) pod++
+    if (c.arr.slice(0, 5).every((x) => s.has(x))) qui++
   }
-  return { nums: out.slice(0, N), siege }
-}
-const T7 = base.map((k, ki) => sept(ki, 7))
-const T8 = base.map((k, ki) => sept(ki, 8))
-const T9 = base.map((k, ki) => sept(ki, 9))
-const TOUT = base.map((k, ki) => sept(ki, 99))
-
-const place = (k, num) => k.arrivee.indexOf(num) + 1
-const blocDu = (k, num) => {
-  const r = pDe[ki0].get(num)
-  return r
-}
-let ki0 = 0
-
-/* ══════════════════════════════════════════════════════════════════ */
-console.log('')
-console.log('  ⭐⭐⭐  7  C H E V A U X  →  5 / 5    L E   V R A I   B O U S S O L E')
-console.log('     ' + n + ' Quintés · ' + base[0].date + ' → ' + base[n - 1].date)
-console.log('')
-console.log('  L objectif : ≥5/5 dans 75 % des courses.')
-console.log('  Pas 8 chevaux. Pas 9 chevaux. SEPT.')
-console.log('')
-
-const score = (T) => {
-  const par = [0, 0, 0, 0, 0, 0]
-  let som = 0
-  for (let ki = 0; ki < n; ki++) {
-    const k = base[ki]
-    const c = k.arrivee.slice(0, 5).filter((x) => T[ki].nums.includes(x)).length
-    par[c]++
-    som += c
-  }
-  return { par, taux: par[5] / n * 100, ge5: (par[5] + par[4] + par[3]) / n * 100, moy: som / n }
-}
-
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('  ║  ① LE SCORE BRUT — combien de chevaux du Top 5 dans le ticket')
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('')
-console.log('  ticket      5/5    4/5    3/5    2/5    1/5    0/5   |   ≥5/5    moyenne')
-console.log('  ' + '-'.repeat(80))
-const lignes = []
-for (const [lib, T] of [['7 chevaux', T7], ['8 chevaux', T8], ['9 chevaux', T9]]) {
-  const s = score(T)
-  lignes.push({ lib, T, s })
-  console.log('  ' + lib.padEnd(12)
-    + s.par.slice(0, 6).map((v) => (v / n * 100).toFixed(1).padStart(6)).join('')
-    + '   |  ' + s.taux.toFixed(1).padStart(5) + ' %  ' + s.moy.toFixed(2).padStart(6))
-}
-console.log('  ' + '-'.repeat(80))
-console.log('')
-console.log('  ⭐ Avec 7 chevaux : 5/5 dans ' + lignes[0].s.taux.toFixed(1)
-  + ' % des courses.  L objectif est 75 %.')
-console.log('     Il manque ' + (75 - lignes[0].s.taux).toFixed(1) + ' points.')
-console.log('')
-console.log('  Pour information, avec les meilleurs chevaux possibles (tous) :')
-{
-  let cinq = 0
-  for (const k of base) cinq += k.arrivee.slice(0, 5).filter((x) => TOUT[ki0].nums.includes(x)).length
-  void cinq
-}
-console.log('')
-
-/* ══════════════════════════════════════════════════════════════════
- *  ② LA CARTE DE LA PERTE
- * ════════════════════════════════════════════════════════════════ */
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('  ║  ② LA CARTE DE LA PERTE — où étaient les vrais gagnants ?')
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('')
-console.log('  Pour chaque place du Top 5 (1er à 5e), on demande :')
-console.log('    · était-il dans les 7 ?')
-console.log('    · si non, à quel RANG de presse était-il ? (le 347 a la cote')
-console.log('      comme ordre de référence : le « rang » est donc celui de la cote)')
-console.log('')
-
-const parPlace = [0, 1, 2, 3, 4].map((pi) => {
-  let dans = 0
-  const hors = new Map()
-  for (let ki = 0; ki < n; ki++) {
-    const k = base[ki]
-    const num = k.arrivee[pi]
-    if (num == null) continue
-    if (T7[ki].nums.includes(num)) { dans++; continue }
-    const r = k.ordreCote.indexOf(num) + 1
-    const bloc = BLOCS.find((b) => r >= b.min && r <= b.max)
-    const cle = (bloc ? bloc.id : '?') + (bloc && r > bloc.max - bloc.quota ? ' (hors quota)' : '')
-    hors.set(cle, (hors.get(cle) || 0) + 1)
-  }
-  return { place: pi + 1, dans, hors, total: dans + [...hors.values()].reduce((a, b) => a + b, 0) }
+  return { ch, pod, qui }
 })
-console.log('  place   dans les 7    rate   |   où étaient les absents')
-console.log('  ' + '-'.repeat(74))
-parPlace.forEach((x) => {
-  const liste = [...x.hors.entries()].sort((a, b) => b[1] - a[1])
-    .map(([k, v]) => k + ' ×' + v).join('  ')
-  console.log('  ' + (x.place + (x.place === 1 ? 'er' : 'e')).padEnd(7)
-    + String(x.dans).padStart(9) + String(x.total - x.dans).padStart(8)
-    + '   |  ' + (liste || '—'))
-})
-console.log('')
-
-const absents = parPlace.map((x) => x.total - x.dans)
-console.log('  ⭐ LES CHEVAUX DU TOP 5 ABSENTS DES 7 :')
-console.log('     1er : ' + absents[0] + '   ·   2e : ' + absents[1] + '   ·   3e : ' + absents[2]
-  + '   ·   4e : ' + absents[3] + '   ·   5e : ' + absents[4])
-console.log('     total : ' + absents.reduce((a, b) => a + b, 0) + ' chevaux perdus sur ' + (n * 5) + ' places')
-console.log('')
-console.log('  ⭐ LE POINT DE BASCULE :')
-console.log('     le 1er manque ' + (absents[0] / n * 100).toFixed(1) + ' % des fois')
-console.log('     le 3e manque ' + (absents[2] / n * 100).toFixed(1) + ' % des fois')
-console.log('     le 5e manque ' + (absents[4] / n * 100).toFixed(1) + ' % des fois')
-console.log('     ⇒ ' + absents.slice(0, 3).reduce((a, b) => a + b, 0) + ' des '
-  + absents.reduce((a, b) => a + b, 0) + ' pertes sont sur les 3 premiers.')
-console.log('       Et les 3 premiers sont, par construction, DANS les 7.')
-console.log('       C est la définition même d un ticket qui couvre bien le podium.')
-console.log('')
-
-/* ══════════════════════════════════════════════════════════════════
- *  ③ LE CINQUIÈME MANQUANT
- * ════════════════════════════════════════════════════════════════ */
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('  ║  ③ LE 5e MANQUANT — quand on est à 4/5, qui est-ce ?')
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('')
-const quatre = []
-for (let ki = 0; ki < n; ki++) {
-  const k = base[ki]
-  const c = k.arrivee.slice(0, 5).filter((x) => T7[ki].nums.includes(x)).length
-  if (c === 4) {
-    const num = k.arrivee[4]
-    quatre.push({ ki, num, r: k.ordreCote.indexOf(num) + 1 })
+note81.sort((a, b) => (b.qui - a.qui) || (b.pod - a.pod))
+const sigle = (ch) => ACTIFS.map((id) => ({ carnet: 'C', marche: 'M', fusion: 'F' }[ch[id]])).join('')
+console.log('\n  ④ TROIS OPTIONS PAR BLOC — carnet (C) · marché (M) · fusion P+cote (F) — 81 règles')
+console.log('  ' + pad('règle', 8) + pad('podium entier', 15) + pad('quinté entier', 15) + '≥4')
+for (const x of note81.slice(0, 8)) {
+  console.log('  ' + pad(sigle(x.ch), 8) + pad(pct(x.pod, C.length), 15) + pad(pct(x.qui, C.length), 15) +
+    pct(C.filter((c) => {
+      const s = new Set(jouerLocal(c, SPLIT, x.ch))
+      return c.arr.slice(0, 5).filter((y) => s.has(y)).length >= 4
+    }).length, C.length))
+}
+const rangProd81 = note81.findIndex((x) => ACTIFS.every((id) => x.ch[id] === PROD[id])) + 1
+console.log('  …\n  la production (CCCM) : rang ' + rangProd81 + ' / 81')
+console.log('\n  ⑤ HORS ÉCHANTILLON — la règle choisie sur une moitié, notée sur l’autre')
+const m = Math.floor(C.length / 2)
+const H = [C.slice(0, m), C.slice(m)]
+const noterLocal = (liste, ch) => {
+  let pod = 0, qui = 0
+  for (const c of liste) {
+    const s = new Set(jouerLocal(c, SPLIT, ch))
+    if (c.arr.slice(0, 3).every((x) => s.has(x))) pod++
+    if (c.arr.slice(0, 5).every((x) => s.has(x))) qui++
   }
+  return { pod, qui, n: liste.length }
 }
-const parRang = new Map()
-quatre.forEach((x) => {
-  const b = BLOCS.find((b) => x.r >= b.min && x.r <= b.max)
-  const cle = 'rang ' + x.r + (b ? '  (' + b.id + (x.r > b.max - b.quota ? ', hors quota' : ', dans le quota') + ')' : '')
-  parRang.set(cle, (parRang.get(cle) || 0) + 1)
-})
-console.log('  ' + quatre.length + ' courses sont à 4/5. Voici le 5e, par rang de cote :')
-console.log('')
-;[...parRang.entries()].sort((a, b) => b[1] - a[1]).forEach(([cle, v]) => {
-  console.log('     ' + cle.padEnd(34) + String(v).padStart(4) + '  ' + '█'.repeat(Math.ceil(v / 2))
-    + '  ' + (v / quatre.length * 100).toFixed(0) + ' %')
-})
-console.log('')
-const horsQuota = quatre.filter((x) => {
-  const b = BLOCS.find((b) => x.r >= b.min && x.r <= b.max)
-  return b && x.r > b.max - b.quota
-})
-console.log('  ⭐ dont HORS QUOTA (le bloc en avait un, mais pas celui-là) : ' + horsQuota.length
-  + ' / ' + quatre.length + ' = ' + (horsQuota.length / quatre.length * 100).toFixed(0) + ' %')
-console.log('')
-
-/* ══════════════════════════════════════════════════════════════════
- *  ④ LES 4 PÉRIODES
- * ════════════════════════════════════════════════════════════════ */
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('  ║  ④ LE SCORE PAR PÉRIODE')
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('')
-console.log('  période                  5/5    ≥4/5   moyenne    (7 chevaux)')
-console.log('  ' + '-'.repeat(58))
-for (const [lib, a, b] of PERIODES) {
-  const idx = base.map((_, i) => i).filter((i) => base[i].date >= a && base[i].date <= b)
-  if (!idx.length) continue
-  let c5 = 0; let ge4 = 0; let s = 0
-  for (const ki of idx) {
-    const c = base[ki].arrivee.slice(0, 5).filter((x) => T7[ki].nums.includes(x)).length
-    if (c === 5) c5++
-    if (c >= 4) ge4++
-    s += c
-  }
-  console.log('  ' + lib.padEnd(26) + (c5 / idx.length * 100).toFixed(1).padStart(6)
-    + (ge4 / idx.length * 100).toFixed(1).padStart(8) + (s / idx.length).toFixed(2).padStart(10))
+const meilleurSur = (liste) => {
+  const notes = M81.map((ch) => ({ ch, r: noterLocal(liste, ch) }))
+  notes.sort((a, b) => (b.r.qui - a.r.qui) || (b.r.pod - a.r.pod))
+  return notes[0].ch
 }
-console.log('')
-
-/* ══════════════════════════════════════════════════════════════════
- *  ⑤ LE PLAFOND THÉORIQUE
- * ════════════════════════════════════════════════════════════════ */
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('  ║  ⑤ LE PLAFOND — que faudrait-il pour atteindre 75 % ?')
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('')
-console.log('  Si on prenait les 7 meilleurs chevaux PAR ORDRE DE COTE')
-console.log('  (donc la copie parfaite du marché) :')
-{
-  const idx = base.map((_, i) => i)
-  const par = [0, 0, 0, 0, 0, 0]
-  for (const ki of idx) {
-    const k = base[ki]
-    const septM = k.ordreCote.slice(0, 7)
-    const c = k.arrivee.slice(0, 5).filter((x) => septM.includes(x)).length
-    par[c]++
-  }
-  console.log('     5/5 : ' + (par[5] / n * 100).toFixed(1) + ' %   4/5 : ' + (par[4] / n * 100).toFixed(1)
-    + ' %   3/5 : ' + (par[3] / n * 100).toFixed(1) + ' %   moyenne ' + ((par[1] + par[2] * 2 + par[3] * 3 + par[4] * 4 + par[5] * 5) / n).toFixed(2))
-  console.log('')
-  console.log('     ⭐ même la COPIE PARFAITE du marché ne fait que ' + (par[5] / n * 100).toFixed(1) + ' % de 5/5.')
-  console.log('     ⇒ 75 % de 5/5 avec 7 chevaux est peut-être au-dessus')
-  console.log('       de ce qu un rang de cote peut faire. Il faudrait une')
-  console.log('       information que le marché n a pas.')
+let totalAuto = 0, totalProd = 0, totalN = 0
+for (const [a, b] of [[0, 1], [1, 0]]) {
+  const ch = meilleurSur(H[a])
+  const rA = noterLocal(H[b], ch)
+  const rP = noterLocal(H[b], PROD)
+  totalAuto += rA.qui; totalProd += rP.qui; totalN += rA.n
+  console.log('  choisi sur ' + (a === 0 ? 'la 1ʳᵉ' : 'la 2ᵈᵉ') + ' moitié → ' + sigle(ch) +
+    '   noté sur l’autre : ' + pct(rA.pod, rA.n) + ' / ' + pct(rA.qui, rA.n) +
+    '   (production : ' + pct(rP.pod, rP.n) + ' / ' + pct(rP.qui, rP.n) + ')')
 }
-console.log('')
-console.log('  Le nombre de chevaux nécessaires pour 75 % de 5/5,')
-console.log('  en prenant les N meilleurs par cote :')
-console.log('')
-console.log('   taille      5/5      ≥4/5    moyenne')
-console.log('  ' + '-'.repeat(48))
-for (const N of [7, 8, 9, 10, 11, 12]) {
-  const par = [0, 0, 0, 0, 0, 0]
-  let s = 0
-  for (let ki = 0; ki < n; ki++) {
-    const k = base[ki]
-    const sel = k.ordreCote.slice(0, N)
-    const c = k.arrivee.slice(0, 5).filter((x) => sel.includes(x)).length
-    par[c]++
-    s += c
-  }
-  console.log('   ' + (N + ' chevaux').padEnd(12) + (par[5] / n * 100).toFixed(1).padStart(5)
-    + ' %  ' + ((par[4] + par[5]) / n * 100).toFixed(1).padStart(6) + ' %  ' + (s / n).toFixed(2).padStart(8))
-}
-console.log('')
-console.log('  ─────────────────────────────────────────────────────────────')
-console.log('  ⚠ Le corpus 347 n a pas de presse : « les 7 » est ici le')
-console.log('    meilleur par BLOC puis par cote, pas les 7 premiers de la')
-console.log('    presse. Sur les 94 courses avec presse, la même mesure est')
-console.log('    faite en fin de script.')
-console.log('  ─────────────────────────────────────────────────────────────')
-
-/* ══════════════════════════════════════════════════════════════════
- *  ⑥ LE MÊME SUR LES 94, AVEC LA PRESSE
- * ════════════════════════════════════════════════════════════════ */
-const c94 = JSON.parse(fs.readFileSync(F94, 'utf8')).courses
-  .map((k) => ({ ...k, pDe: new Map(k.presse.map((x, i) => [x, i + 1])) }))
-  .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0))
-const n94 = c94.length
-const cd = c94.map((k) => BLOCS.map((b, i) =>
-  k.presse.filter((x) => { const r = k.pDe.get(x); return r >= b.min && r <= b.max })
-    .slice().sort((a, c) => (k.cotes[a] || 999) - (k.cotes[c] || 999))))
-const sept94 = c94.map((k, ki) => {
-  const out = []
-  for (let i = 0; i < BLOCS.length; i++) for (const num of cd[ki][i]) { if (out.length >= 7) break; out.push(num) }
-  return out.slice(0, 7)
-})
-const par94 = [0, 0, 0, 0, 0, 0]
-let s94 = 0
-for (let ki = 0; ki < n94; ki++) {
-  const c = c94[ki].arrivee.slice(0, 5).filter((x) => sept94[ki].includes(x)).length
-  par94[c]++
-  s94 += c
-}
-console.log('')
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('  ║  ⑥ LE MÊME SUR LES ' + n94 + ' COURSES AVEC PRESSE')
-console.log('  ══════════════════════════════════════════════════════════════')
-console.log('')
-console.log('   5/5 : ' + (par94[5] / n94 * 100).toFixed(1) + ' %   4/5 : ' + (par94[4] / n94 * 100).toFixed(1)
-  + ' %   3/5 : ' + (par94[3] / n94 * 100).toFixed(1)
-  + ' %   2/5 : ' + (par94[2] / n94 * 100).toFixed(1)
-  + ' %   moyenne ' + (s94 / n94).toFixed(2))
-console.log('')
-console.log('   Les 7 meilleurs par COTE sur ces 94 courses :')
-{
-  const par2 = [0, 0, 0, 0, 0, 0]
-  let s2 = 0
-  for (let ki = 0; ki < n94; ki++) {
-    const k = c94[ki]
-    const sel = Object.keys(k.cotes).map(Number).filter((x) => k.cotes[x] > 0)
-      .sort((a, b) => k.cotes[a] - k.cotes[b]).slice(0, 7)
-    const c = k.arrivee.slice(0, 5).filter((x) => sel.includes(x)).length
-    par2[c]++
-    s2 += c
-  }
-  console.log('   5/5 : ' + (par2[5] / n94 * 100).toFixed(1) + ' %   4/5 : ' + (par2[4] / n94 * 100).toFixed(1)
-    + ' %   3/5 : ' + (par2[3] / n94 * 100).toFixed(1)
-    + ' %   moyenne ' + (s2 / n94).toFixed(2))
-}
+console.log('  ' + pad('TOTAL hors échantillon', 38) + 'règle choisie ' + pct(totalAuto, totalN) + ' de quinté · production ' + pct(totalProd, totalN))
 console.log('')

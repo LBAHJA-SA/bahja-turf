@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
 import Drapeau from '../../src/Drapeau.jsx'
-import { heureParisGMT } from '../../src/temps.js'
+import { heureParisGMT, heureGMTParPays } from '../../src/temps.js'
 import { chargerProgramme, chargerCourse, grouperParReunion } from '../../backend/COUPLE/donnees.js'
 import { selectionCoply, repliMarche } from '../../backend/COUPLE/moteur-coply.js'
 
@@ -50,8 +50,20 @@ export default function Couple() {
   const [cle, setCle] = useState(null)
   const [detail, setDetail] = useState(null)
   const [errDetail, setErrDetail] = useState(null)
+  const [emp, setEmp] = useState(null)
 
   useEffect(() => { document.title = 'Coply — Bahja TURF' }, [])
+
+  /* ⓪ L'EMPREINTE DU TRIO — lue telle quelle, jamais recalculée dans la page.
+     Écrite par `node tools/empreinte-trio.mjs` (data + public/data). */
+  useEffect(() => {
+    let mort = false
+    fetch('/data/empreinte-trio.json', { headers: { Accept: 'application/json' } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => { if (!mort) setEmp(j) })
+      .catch(() => {})
+    return () => { mort = true }
+  }, [])
 
   /* ① le programme du jour */
   useEffect(() => {
@@ -173,7 +185,7 @@ export default function Couple() {
                         fontFamily: TE.police,
                       }}>
                       <div style={{ fontSize: 12, fontWeight: 800, color: TE.accent }}>
-                        {c.code}{c.heure ? ` · ${heureParisGMT(date, c.heure)}` : ''}
+                        {c.code}{c.heure ? ` · ${heureGMTParPays(c.pays, date, c.heure)}` : ''}
                         {c.distance ? <span style={{ fontWeight: 600, color: '#8fa3bf' }}> · {c.distance}m</span> : null}
                         {c.partants ? <span style={{ fontWeight: 600, color: '#8fa3bf' }}> · {c.partants}p</span> : null}
                       </div>
@@ -203,12 +215,14 @@ export default function Couple() {
                 ⚠ {errDetail}
               </div>
             )}
-            {detail && <Lecture course={detail} />}
+            {detail && <Lecture course={detail} date={date} />}
           </div>
         </div>
 
+        <EmpreinteTrio emp={emp} />
+
         <div style={{ marginTop: 18, fontSize: 11, color: '#94a3b8', textAlign: 'center' }}>
-          ⚠ Moteur prédictif actif — régression logistique sur P(top-3), entraînée sur l'archive. Le couplé gagnant = (1er,2e) ou (1er,3e) ou (2e,3e).
+          ⚠ Moteur prédictif actif — régression logistique sur P(top-3), entraînée sur l'archive.
         </div>
       </div>
     </>
@@ -217,7 +231,7 @@ export default function Couple() {
 
 /* ───────────────────────────────────────────────────── la lecture ───────── */
 
-function Lecture({ course }) {
+function Lecture({ course, date }) {
   const partants = course.partants || []
   const arrivee = (course.arrivee || []).slice(0, 5)
   const [sel, setSel] = useState(null)
@@ -226,12 +240,13 @@ function Lecture({ course }) {
   useEffect(() => {
     if (partants.length >= 3) {
       let mort = false
-      selectionCoply(partants, course)
+      selectionCoply(partants, course, 3)
         .then((s) => { if (!mort) setSel(s) })
-        .catch(() => { if (!mort) setSel({ trio: repliMarche(partants), repli: true }) })
+        .catch(() => { if (!mort) setSel({ chevaux: repliMarche(partants, 3), repli: true }) })
       return () => { mort = true }
     }
   }, [partants, course])
+
   return (
     <>
       <div style={{ ...S.box, padding: 16, marginBottom: 12 }}>
@@ -244,7 +259,7 @@ function Lecture({ course }) {
           {course.hippodrome}
           {course.distance ? ` · ${course.distance}m` : ''}
           {course.discipline ? ` · ${course.discipline}` : ''}
-          {course.heure ? ` · ${heureParisGMT(date, course.heure)}` : ''}
+          {course.heure ? ` · ${heureGMTParPays(course.pays, date, course.heure)}` : ''}
           {course.pays && course.pays !== 'FRANCE' ? ` · ${course.pays}` : ''}
         </div>
         {arrivee.length > 0 && (
@@ -270,29 +285,12 @@ function Lecture({ course }) {
       )}
 
       {sel && (
-        <div style={{ ...S.box, padding: 14, marginBottom: 12, borderLeft: '5px solid #34d399', background: 'rgba(52,211,153,.10)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 8 }}>
-            <b style={{ fontSize: 13, letterSpacing: 1, textTransform: 'uppercase', color: '#166534' }}>
-              {sel.repli ? 'Sélection 3 chevaux (repli marché)' : 'Sélection 3 chevaux (modèle prédictif)'}
-            </b>
-            {sel.modele && (
-              <span style={{ fontSize: 11, color: '#15803d' }}>
-                entraîné sur {sel.modele.fenetre} courses · validation {(sel.modele.validation.taux * 100).toFixed(1)} %
-              </span>
-            )}
+        <div style={{ ...S.box, padding: '14px 16px', marginBottom: 12, borderLeft: '5px solid #34d399', background: 'rgba(52,211,153,.10)' }}>
+          <div style={{ fontSize: 12, letterSpacing: 1.5, textTransform: 'uppercase', color: '#166534', fontWeight: 800 }}>
+            Sélection
           </div>
-          <div style={{ fontSize: 14, fontWeight: 800, fontFamily: TE.mono, marginTop: 6 }}>
-            {sel.trio.join('  ·  ')}
-          </div>
-          {sel.paires && (
-            <div style={{ fontSize: 12, fontFamily: TE.mono, marginTop: 6, color: '#166534' }}>
-              Paires : {sel.paires.map(([a, b]) => `${a}-${b}`).join('  ·  ')}
-            </div>
-          )}
-          <div style={{ fontSize: 11, color: '#8fa3bf', marginTop: 6 }}>
-            {sel.repli
-              ? 'Modèle indisponible — repli sur les 3 plus petites cotes.'
-              : 'Régression logistique sur P(top-3) : marché + forme + valeur + âge + corde + gains + sexe + distance. Le couplé gagnant = (1er,2e) ou (1er,3e) ou (2e,3e) — les 3 paires du trio.'}
+          <div style={{ fontSize: 34, fontWeight: 800, fontFamily: TE.mono, letterSpacing: 6, color: '#fff', marginTop: 6 }}>
+            {sel.chevaux.join(' · ')}
           </div>
         </div>
       )}
@@ -336,5 +334,91 @@ function Lecture({ course }) {
         </div>
       )}
     </>
+  )
+}
+
+/* ─────────────────────────────────────── l'empreinte du Trio ─────────────── */
+
+/* Les chiffres viennent de /data/empreinte-trio.json, écrit par
+ * `node tools/empreinte-trio.mjs`. AUCUN nombre n'est saisi ici.
+ *
+ * Même objet que l'empreinte du podium (§15.8) : la case du carnet (P1..P20)
+ * des TROIS premiers, et rien d'autre. Le Trio se joue en désordre — une
+ * empreinte « 1-2-4 » se lit donc en TROIS paires : 1-2 · 1-4 · 2-4. */
+function EmpreinteTrio({ emp }) {
+  if (!emp?.motifs || !emp?.pairesCases) return null
+  const nbx = (x) => (x == null ? '—' : String(x).replace('.', ','))
+  const pc = (x) => nbx(x) + ' %'
+
+  const h = {
+    padding: '5px 6px', fontSize: 10, fontWeight: 800, letterSpacing: 0.5,
+    textTransform: 'uppercase', color: '#8fa3bf', textAlign: 'left',
+    borderBottom: '1px solid rgba(251,146,60,.35)', whiteSpace: 'nowrap',
+  }
+  const td = { padding: '3px 6px', fontSize: 12.5, fontFamily: TE.mono, color: '#e7e5e4', whiteSpace: 'nowrap' }
+  const nb = { ...td, textAlign: 'right', color: '#c7d6ea' }
+  const pctd = { ...td, textAlign: 'right', fontWeight: 800, color: TE.accent }
+
+  /* une colonne = une liste (motif ou empreinte) : valeur · n · % · barre */
+  const colonne = (titre, liste, cle, pied) => (
+    <div style={{ flex: '1 1 300px', minWidth: 280 }}>
+      <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: .8, textTransform: 'uppercase', color: TE.accent, marginBottom: 6 }}>{titre}</div>
+      <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+        <tbody>
+          {liste.slice(0, 8).map((m) => (
+            <tr key={m[cle]} style={{ borderBottom: '1px solid rgba(255,255,255,.06)' }}>
+              <td style={{ ...td, fontWeight: 800, color: '#fff' }}>{m[cle]}</td>
+              <td style={nb}>{m.n}</td>
+              <td style={pctd}>{pc(m.pct)}</td>
+              <td style={{ padding: '3px 6px', width: 84 }}>
+                <div style={{ height: 7, borderRadius: 4, background: TE.accent, opacity: .8, width: Math.max(2, m.pct * 3.2) }} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div style={{ fontSize: 10.5, color: '#8fa3bf', marginTop: 7, lineHeight: 1.55 }}>{pied}</div>
+    </div>
+  )
+
+  const moy = emp.moyenne || {}
+  const paires = (emp.paires || []).slice(0, 5)
+
+  return (
+    <div style={{ ...S.box, padding: 14, marginTop: 18 }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap', marginBottom: 4 }}>
+        <b style={{ fontSize: 15, color: '#fff' }}>L'empreinte du Trio — les 3 premières places</b>
+        <span style={{ fontSize: 11, color: '#8fa3bf' }}>
+          {emp.n} Quintés à presse réelle ({emp.periode?.debut} → {emp.periode?.fin}) · lus par <b>case du carnet</b> (P1..P20), le même P que la grille.
+        </span>
+      </div>
+      <div style={{ fontSize: 11, color: '#8fa3bf', marginBottom: 12 }}>
+        Un <b>motif</b> = combien de chevaux de chaque groupe : <b>G1·G2·G3·G4·G5</b>.
+        {' '}3 numéros = <b>3 paires</b> : les deux premiers paient le <b>gagnant</b>, deux des trois paient le <b>placé</b>, les trois paient le <b>trio</b>.
+      </div>
+
+      <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap' }}>
+        {colonne('① Le motif', emp.motifs, 'motif', (
+          <>
+            moyenne par course · <b>G1 {nbx(moy.G1)}</b> · G2 {nbx(moy.G2)} · G3 {nbx(moy.G3)} · G4 {nbx(moy.G4)} · G5 {nbx(moy.G5)}
+            <br />{emp.motifs.length} motifs sur {emp.n} courses
+          </>
+        ))}
+        {colonne('② Les 3 paires', emp.pairesCases, 'paire', (
+          <>
+            <b>{emp.pairesCases.length}</b> paires distinctes · la plus fréquente : <b>{emp.pairesCases[0]?.paire}</b> ({pc(emp.pairesCases[0]?.pct)})
+            <br />un % = si je joue ces <b>deux cases</b>, le couplé paie dans X % des courses
+          </>
+        ))}
+      </div>
+
+      <div style={{ marginTop: 12, fontSize: 11, color: '#8fa3bf', fontFamily: TE.mono }}>
+        par bloc · {paires.map((p) => `${p.blocs} ${pc(p.pct)}`).join(' · ')}
+      </div>
+
+      <div style={{ marginTop: 8, fontSize: 11, color: '#8fa3bf', fontFamily: TE.mono }}>
+        P1..Pk — <b>couplé ≥ 2</b> / trio : {(emp.courbe || []).slice(0, 10).map((c) => `P${c.k} ${pc(c.couple)} / ${pc(c.trio)}`).join(' · ')}
+      </div>
+    </div>
   )
 }

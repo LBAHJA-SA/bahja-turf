@@ -870,6 +870,53 @@ function publier() {
   })
 }
 
+/* ⭐ 19/10/2026 — LE TRIO · COUPLÉ SE RECALCULE AVEC L'ARCHIVE (§15).
+ * Le nouvel onglet lit `public/data/trio.json` : sans ce pas, ses taux
+ * resteraient ceux d'hier. ⚠ `tools/trio.mjs` mesure le corpus
+ * `data/corpus/fusion.json` : ses chiffres ne bougent donc que quand ce
+ * corpus grandit (tools/fusion.mjs). Le pas est volontairement AVANT
+ * `publierDonnees()` pour que le fichier écrit soit commité.
+ * Un échec ne casse jamais le cycle (le fichier d'hier reste en place). */
+function mesurerTrio() {
+  return new Promise((res) => {
+    log(' trio · couplé (tools/trio.mjs)')
+    const p = spawn(process.execPath, [path.join(ICI, 'trio.mjs')], {
+      cwd: RACINE, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true,
+    })
+    let sortie = ''
+    p.stdout.on('data', (d) => { sortie += String(d) })
+    p.stderr.on('data', (d) => { sortie += String(d) })
+    p.on('close', (code) => {
+      const dernier = (sortie.trim().split('\n').filter(Boolean).slice(-1)[0] || '').replace(/^\s+/, '')
+      log(code === 0 ? `     ${dernier || 'trio : a jour'}` : `     trio : ECHEC (code ${code}) ${dernier}`)
+      res()
+    })
+    p.on('error', (e) => { log('     trio : impossible : ' + e.message); res() })
+  })
+}
+
+/* ⭐ 19/10/2026 — LES DEUX EMPREINTES (§15.8) se recalculent avec l'archive.
+ * `tools/empreinte.mjs` relit `data/quintes.json` et réécrit
+ * `data/empreinte.json` + `public/data/empreinte.json` (podium + quinté).
+ * Comme mesurerTrio() : un échec ne casse jamais le cycle. */
+function mesurerEmpreinte() {
+  return new Promise((res) => {
+    log(' empreintes podium · quinté (tools/empreinte.mjs)')
+    const p = spawn(process.execPath, [path.join(ICI, 'empreinte.mjs')], {
+      cwd: RACINE, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true,
+    })
+    let sortie = ''
+    p.stdout.on('data', (d) => { sortie += String(d) })
+    p.stderr.on('data', (d) => { sortie += String(d) })
+    p.on('close', (code) => {
+      const dernier = (sortie.trim().split('\n').filter(Boolean).slice(-1)[0] || '').replace(/^\s+/, '')
+      log(code === 0 ? `     ${dernier || 'empreintes : a jour'}` : `     empreintes : ECHEC (code ${code}) ${dernier}`)
+      res()
+    })
+    p.on('error', (e) => { log('     empreintes : impossible : ' + e.message); res() })
+  })
+}
+
 async function cycle() {
   log('===== cycle =====')
   /* 10/10/2026 — on réunit les deux archives AVANT tout : si l'utilisateur
@@ -888,6 +935,8 @@ async function cycle() {
   log(` jour ${aujourdhui()}`)
   await collecterJour(aujourdhui())
   await archiverLesCourses(aujourdhui())
+  await mesurerTrio()
+  await mesurerEmpreinte()
   await publierDonnees()
   await publier()
   const db = lire(F_SYN, {})

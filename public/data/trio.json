@@ -1,0 +1,1196 @@
+{
+ "mesure": {
+  "outil": "tools/trio.mjs",
+  "le": "2026-10-21",
+  "sources": [
+   "data/corpus/fusion.json — 347 Quintés (ordre de marché + arrivée)",
+   "data/quintes.json — l'ordre de PRESSE réel (96 courses) + les rapports",
+   "data/corpus/presse-carriere.json — le test « quel cheval d'en bas »"
+  ],
+  "courses": 347,
+  "coursesPresse": 96,
+  "du": "2024-09-12",
+  "au": "2026-10-04",
+  "zone": "Z1 = rangs de marché 1-3 · Z2 = 4-8 · Z3 = 9+ (« d'en bas »)",
+  "legende": {
+   "marche": "l'ordre des cotes (1 = la plus petite)",
+   "carnet": "les cases P1, P2, … du carnet — l'ordre que la page affiche (§11.13)",
+   "presse": "le rang de presse (la Synthèse) — la référence",
+   "fusion": "la moyenne des deux rangs (mesurée : elle PERD contre le carnet)"
+  },
+  "note": "Mesure seule. N'entre PAS dans le ticket du Quinté (quotas 3-2-1-1-1 fermés)."
+ },
+ "derniers": {
+  "n": 347,
+  "secondHors8": 21.9,
+  "troisiemeHors8": 28.8,
+  "unDesDeux": 45.8,
+  "unDesTrois": 55.9,
+  "troisDans8": 44.1
+ },
+ "positions": [
+  {
+   "place": 1,
+   "n": 347,
+   "zones": {
+    "r1-3": {
+     "n": 174,
+     "pct": 50.1
+    },
+    "r4-8": {
+     "n": 116,
+     "pct": 33.4
+    },
+    "r9-12": {
+     "n": 45,
+     "pct": 13
+    },
+    "r13+": {
+     "n": 12,
+     "pct": 3.5
+    }
+   },
+   "r1-3": 174,
+   "r4-8": 116,
+   "r9-12": 45,
+   "r13+": 12
+  },
+  {
+   "place": 2,
+   "n": 347,
+   "zones": {
+    "r1-3": {
+     "n": 133,
+     "pct": 38.3
+    },
+    "r4-8": {
+     "n": 138,
+     "pct": 39.8
+    },
+    "r9-12": {
+     "n": 57,
+     "pct": 16.4
+    },
+    "r13+": {
+     "n": 19,
+     "pct": 5.5
+    }
+   },
+   "r1-3": 133,
+   "r4-8": 138,
+   "r9-12": 57,
+   "r13+": 19
+  },
+  {
+   "place": 3,
+   "n": 347,
+   "zones": {
+    "r1-3": {
+     "n": 106,
+     "pct": 30.5
+    },
+    "r4-8": {
+     "n": 141,
+     "pct": 40.6
+    },
+    "r9-12": {
+     "n": 71,
+     "pct": 20.5
+    },
+    "r13+": {
+     "n": 29,
+     "pct": 8.4
+    }
+   },
+   "r1-3": 106,
+   "r4-8": 141,
+   "r9-12": 71,
+   "r13+": 29
+  }
+ ],
+ "bassmatTrio": [
+  {
+   "compo": "1·1·1",
+   "n": 85,
+   "pct": 24.5,
+   "chevaux": 3,
+   "combinaisons": 120
+  },
+  {
+   "compo": "1·2·0",
+   "n": 69,
+   "pct": 19.9,
+   "chevaux": 3,
+   "combinaisons": 30
+  },
+  {
+   "compo": "2·1·0",
+   "n": 64,
+   "pct": 18.4,
+   "chevaux": 3,
+   "combinaisons": 15
+  },
+  {
+   "compo": "2·0·1",
+   "n": 40,
+   "pct": 11.5,
+   "chevaux": 3,
+   "combinaisons": 24
+  },
+  {
+   "compo": "0·2·1",
+   "n": 34,
+   "pct": 9.8,
+   "chevaux": 3,
+   "combinaisons": 80
+  },
+  {
+   "compo": "1·0·2",
+   "n": 18,
+   "pct": 5.2,
+   "chevaux": 3,
+   "combinaisons": 84
+  },
+  {
+   "compo": "0·1·2",
+   "n": 13,
+   "pct": 3.7,
+   "chevaux": 3,
+   "combinaisons": 140
+  },
+  {
+   "compo": "3·0·0",
+   "n": 11,
+   "pct": 3.2,
+   "chevaux": 3,
+   "combinaisons": 1
+  },
+  {
+   "compo": "0·3·0",
+   "n": 9,
+   "pct": 2.6,
+   "chevaux": 3,
+   "combinaisons": 10
+  },
+  {
+   "compo": "0·0·3",
+   "n": 4,
+   "pct": 1.2,
+   "chevaux": 3,
+   "combinaisons": 56
+  }
+ ],
+ "bassmatQuinte": [
+  {
+   "compo": "2·2·1",
+   "n": 67,
+   "pct": 19.3,
+   "chevaux": 5,
+   "combinaisons": 240
+  },
+  {
+   "compo": "1·2·2",
+   "n": 50,
+   "pct": 14.4,
+   "chevaux": 5,
+   "combinaisons": 840
+  },
+  {
+   "compo": "1·3·1",
+   "n": 47,
+   "pct": 13.5,
+   "chevaux": 5,
+   "combinaisons": 240
+  },
+  {
+   "compo": "2·1·2",
+   "n": 44,
+   "pct": 12.7,
+   "chevaux": 5,
+   "combinaisons": 420
+  },
+  {
+   "compo": "3·1·1",
+   "n": 26,
+   "pct": 7.5,
+   "chevaux": 5,
+   "combinaisons": 40
+  },
+  {
+   "compo": "1·1·3",
+   "n": 23,
+   "pct": 6.6,
+   "chevaux": 5,
+   "combinaisons": 840
+  },
+  {
+   "compo": "3·2·0",
+   "n": 22,
+   "pct": 6.3,
+   "chevaux": 5,
+   "combinaisons": 10
+  },
+  {
+   "compo": "2·3·0",
+   "n": 18,
+   "pct": 5.2,
+   "chevaux": 5,
+   "combinaisons": 30
+  },
+  {
+   "compo": "0·3·2",
+   "n": 15,
+   "pct": 4.3,
+   "chevaux": 5,
+   "combinaisons": 280
+  },
+  {
+   "compo": "1·4·0",
+   "n": 11,
+   "pct": 3.2,
+   "chevaux": 5,
+   "combinaisons": 15
+  },
+  {
+   "compo": "2·0·3",
+   "n": 7,
+   "pct": 2,
+   "chevaux": 5,
+   "combinaisons": 168
+  },
+  {
+   "compo": "3·0·2",
+   "n": 7,
+   "pct": 2,
+   "chevaux": 5,
+   "combinaisons": 28
+  },
+  {
+   "compo": "0·2·3",
+   "n": 6,
+   "pct": 1.7,
+   "chevaux": 5,
+   "combinaisons": 560
+  },
+  {
+   "compo": "0·1·4",
+   "n": 1,
+   "pct": 0.3,
+   "chevaux": 5,
+   "combinaisons": 350
+  },
+  {
+   "compo": "0·4·1",
+   "n": 1,
+   "pct": 0.3,
+   "chevaux": 5,
+   "combinaisons": 40
+  },
+  {
+   "compo": "1·0·4",
+   "n": 1,
+   "pct": 0.3,
+   "chevaux": 5,
+   "combinaisons": 210
+  },
+  {
+   "compo": "0·0·5",
+   "n": 1,
+   "pct": 0.3,
+   "chevaux": 5,
+   "combinaisons": 56
+  }
+ ],
+ "basParQuinte": [
+  {
+   "nb": 0,
+   "n": 51,
+   "pct": 14.7
+  },
+  {
+   "nb": 1,
+   "n": 141,
+   "pct": 40.6
+  },
+  {
+   "nb": 2,
+   "n": 116,
+   "pct": 33.4
+  },
+  {
+   "nb": 3,
+   "n": 36,
+   "pct": 10.4
+  }
+ ],
+ "ancre": {
+  "n": 347,
+  "g3Top5": 53.3,
+  "g3Top3": 28.2,
+  "blocs": [
+   {
+    "id": "G1",
+    "label": "1-4",
+    "top5": 98.3,
+    "parCourse": 2.1
+   },
+   {
+    "id": "G2",
+    "label": "5-8",
+    "top5": 90.5,
+    "parCourse": 1.48
+   },
+   {
+    "id": "G3",
+    "label": "9-10",
+    "top5": 53.3,
+    "parCourse": 0.6
+   },
+   {
+    "id": "G4",
+    "label": "11-12",
+    "top5": 38.6,
+    "parCourse": 0.42
+   },
+   {
+    "id": "G5",
+    "label": "13-+",
+    "top5": 34.6,
+    "parCourse": 0.4
+   }
+  ]
+ },
+ "courbes": {
+  "trio": [
+   {
+    "n": 4,
+    "combinaisons": 4,
+    "marche": 7.8,
+    "carnet": 7.3,
+    "presse": 9.4,
+    "fusion": 9.4,
+    "marchePresse": 6.3
+   },
+   {
+    "n": 5,
+    "combinaisons": 10,
+    "marche": 16.1,
+    "carnet": 16.7,
+    "presse": 14.6,
+    "fusion": 16.7,
+    "marchePresse": 12.5
+   },
+   {
+    "n": 6,
+    "combinaisons": 20,
+    "marche": 27.1,
+    "carnet": 25,
+    "presse": 25,
+    "fusion": 24,
+    "marchePresse": 28.1
+   },
+   {
+    "n": 7,
+    "combinaisons": 35,
+    "marche": 34.9,
+    "carnet": 34.4,
+    "presse": 34.4,
+    "fusion": 32.3,
+    "marchePresse": 35.4
+   },
+   {
+    "n": 8,
+    "combinaisons": 56,
+    "marche": 44.1,
+    "carnet": 39.6,
+    "presse": 43.8,
+    "fusion": 43.8,
+    "marchePresse": 38.5
+   },
+   {
+    "n": 9,
+    "combinaisons": 84,
+    "marche": 55.9,
+    "carnet": 51,
+    "presse": 52.1,
+    "fusion": 56.3,
+    "marchePresse": 50
+   },
+   {
+    "n": 10,
+    "combinaisons": 120,
+    "marche": 66.9,
+    "carnet": 57.3,
+    "presse": 60.4,
+    "fusion": 64.6,
+    "marchePresse": 58.3
+   },
+   {
+    "n": 11,
+    "combinaisons": 165,
+    "marche": 75.5,
+    "carnet": 70.8,
+    "presse": 75,
+    "fusion": 72.9,
+    "marchePresse": 68.8
+   },
+   {
+    "n": 12,
+    "combinaisons": 220,
+    "marche": 84.4,
+    "carnet": 81.3,
+    "presse": 81.3,
+    "fusion": 81.3,
+    "marchePresse": 83.3
+   },
+   {
+    "n": 13,
+    "combinaisons": 286,
+    "marche": 89.3,
+    "carnet": 88.5,
+    "presse": 87.5,
+    "fusion": 87.5,
+    "marchePresse": 87.5
+   },
+   {
+    "n": 14,
+    "combinaisons": 364,
+    "marche": 95.7,
+    "carnet": 93.8,
+    "presse": 92.7,
+    "fusion": 92.7,
+    "marchePresse": 94.8
+   }
+  ],
+  "quinte": [
+   {
+    "n": 8,
+    "combinaisons": 56,
+    "marche": 14.7,
+    "carnet": 7.3,
+    "presse": 10.4,
+    "fusion": 11.5,
+    "marchePresse": 9.4
+   },
+   {
+    "n": 9,
+    "combinaisons": 126,
+    "marche": 25.1,
+    "carnet": 16.7,
+    "presse": 18.8,
+    "fusion": 21.9,
+    "marchePresse": 17.7
+   },
+   {
+    "n": 10,
+    "combinaisons": 252,
+    "marche": 40.1,
+    "carnet": 27.1,
+    "presse": 31.3,
+    "fusion": 33.3,
+    "marchePresse": 30.2
+   },
+   {
+    "n": 11,
+    "combinaisons": 462,
+    "marche": 53.3,
+    "carnet": 47.9,
+    "presse": 50,
+    "fusion": 46.9,
+    "marchePresse": 46.9
+   },
+   {
+    "n": 12,
+    "combinaisons": 792,
+    "marche": 65.4,
+    "carnet": 60.4,
+    "presse": 65.6,
+    "fusion": 59.4,
+    "marchePresse": 63.5
+   },
+   {
+    "n": 13,
+    "combinaisons": 1287,
+    "marche": 74.4,
+    "carnet": 74,
+    "presse": 74,
+    "fusion": 76,
+    "marchePresse": 66.7
+   },
+   {
+    "n": 14,
+    "combinaisons": 2002,
+    "marche": 88.2,
+    "carnet": 82.3,
+    "presse": 83.3,
+    "fusion": 85.4,
+    "marchePresse": 84.4
+   },
+   {
+    "n": 15,
+    "combinaisons": 3003,
+    "marche": 96.5,
+    "carnet": 90.6,
+    "presse": 90.6,
+    "fusion": 94.8,
+    "marchePresse": 93.8
+   },
+   {
+    "n": 16,
+    "combinaisons": 4368,
+    "marche": 98.8,
+    "carnet": 97.9,
+    "presse": 97.9,
+    "fusion": 97.9,
+    "marchePresse": 97.9
+   }
+  ],
+  "couple": [
+   {
+    "n": 2,
+    "combinaisons": 1,
+    "marche": 6.1,
+    "carnet": 7.3,
+    "presse": 5.2,
+    "fusion": 5.2,
+    "marchePresse": 5.2
+   },
+   {
+    "n": 3,
+    "combinaisons": 3,
+    "marche": 17.6,
+    "carnet": 12.5,
+    "presse": 15.6,
+    "fusion": 17.7,
+    "marchePresse": 16.7
+   },
+   {
+    "n": 4,
+    "combinaisons": 6,
+    "marche": 28.2,
+    "carnet": 22.9,
+    "presse": 30.2,
+    "fusion": 31.3,
+    "marchePresse": 29.2
+   },
+   {
+    "n": 5,
+    "combinaisons": 10,
+    "marche": 39.2,
+    "carnet": 35.4,
+    "presse": 40.6,
+    "fusion": 40.6,
+    "marchePresse": 37.5
+   },
+   {
+    "n": 6,
+    "combinaisons": 15,
+    "marche": 48.7,
+    "carnet": 44.8,
+    "presse": 49,
+    "fusion": 50,
+    "marchePresse": 51
+   },
+   {
+    "n": 7,
+    "combinaisons": 21,
+    "marche": 57.1,
+    "carnet": 52.1,
+    "presse": 59.4,
+    "fusion": 57.3,
+    "marchePresse": 56.3
+   },
+   {
+    "n": 8,
+    "combinaisons": 28,
+    "marche": 65.7,
+    "carnet": 58.3,
+    "presse": 66.7,
+    "fusion": 68.8,
+    "marchePresse": 67.7
+   },
+   {
+    "n": 9,
+    "combinaisons": 36,
+    "marche": 74.1,
+    "carnet": 69.8,
+    "presse": 69.8,
+    "fusion": 78.1,
+    "marchePresse": 75
+   },
+   {
+    "n": 10,
+    "combinaisons": 45,
+    "marche": 80.1,
+    "carnet": 76,
+    "presse": 74,
+    "fusion": 80.2,
+    "marchePresse": 81.3
+   },
+   {
+    "n": 11,
+    "combinaisons": 55,
+    "marche": 86.5,
+    "carnet": 83.3,
+    "presse": 84.4,
+    "fusion": 86.5,
+    "marchePresse": 87.5
+   },
+   {
+    "n": 12,
+    "combinaisons": 66,
+    "marche": 91.4,
+    "carnet": 89.6,
+    "presse": 88.5,
+    "fusion": 90.6,
+    "marchePresse": 93.8
+   }
+  ],
+  "coupleOrdre": [
+   {
+    "n": 2,
+    "combinaisons": 1,
+    "marche": 0.9,
+    "carnet": 5.2,
+    "presse": 3.1,
+    "fusion": 3.1,
+    "marchePresse": 0
+   },
+   {
+    "n": 3,
+    "combinaisons": 3,
+    "marche": 9.2,
+    "carnet": 8.3,
+    "presse": 7.3,
+    "fusion": 9.4,
+    "marchePresse": 8.3
+   },
+   {
+    "n": 4,
+    "combinaisons": 6,
+    "marche": 16.1,
+    "carnet": 13.5,
+    "presse": 16.7,
+    "fusion": 15.6,
+    "marchePresse": 14.6
+   },
+   {
+    "n": 5,
+    "combinaisons": 10,
+    "marche": 21.3,
+    "carnet": 17.7,
+    "presse": 22.9,
+    "fusion": 20.8,
+    "marchePresse": 19.8
+   },
+   {
+    "n": 6,
+    "combinaisons": 15,
+    "marche": 27.7,
+    "carnet": 21.9,
+    "presse": 27.1,
+    "fusion": 27.1,
+    "marchePresse": 29.2
+   },
+   {
+    "n": 7,
+    "combinaisons": 21,
+    "marche": 32.3,
+    "carnet": 26,
+    "presse": 34.4,
+    "fusion": 32.3,
+    "marchePresse": 32.3
+   },
+   {
+    "n": 8,
+    "combinaisons": 28,
+    "marche": 37.8,
+    "carnet": 30.2,
+    "presse": 39.6,
+    "fusion": 40.6,
+    "marchePresse": 40.6
+   },
+   {
+    "n": 9,
+    "combinaisons": 36,
+    "marche": 43.5,
+    "carnet": 37.5,
+    "presse": 41.7,
+    "fusion": 44.8,
+    "marchePresse": 45.8
+   },
+   {
+    "n": 10,
+    "combinaisons": 45,
+    "marche": 46.7,
+    "carnet": 40.6,
+    "presse": 44.8,
+    "fusion": 46.9,
+    "marchePresse": 50
+   },
+   {
+    "n": 11,
+    "combinaisons": 55,
+    "marche": 50.4,
+    "carnet": 43.8,
+    "presse": 49,
+    "fusion": 50,
+    "marchePresse": 56.3
+   },
+   {
+    "n": 12,
+    "combinaisons": 66,
+    "marche": 53.3,
+    "carnet": 47.9,
+    "presse": 51,
+    "fusion": 52.1,
+    "marchePresse": 59.4
+   }
+  ]
+ },
+ "blocsTrio": {
+  "n": 96,
+  "du": "2026-02-09",
+  "au": "2026-07-07",
+  "parBloc": [
+   {
+    "id": "G1",
+    "n": 96,
+    "taille": 4,
+    "pct": 90.6,
+    "hasard": 63.3,
+    "ecart": 27.3
+   },
+   {
+    "id": "G2",
+    "n": 96,
+    "taille": 4,
+    "pct": 66.7,
+    "hasard": 63.3,
+    "ecart": 3.4
+   },
+   {
+    "id": "G3",
+    "n": 96,
+    "taille": 2,
+    "pct": 24,
+    "hasard": 36.9,
+    "ecart": -12.9
+   },
+   {
+    "id": "G4",
+    "n": 96,
+    "taille": 2,
+    "pct": 25,
+    "hasard": 36.7,
+    "ecart": -11.7
+   },
+   {
+    "id": "G5",
+    "n": 96,
+    "taille": 3.2,
+    "pct": 18.8,
+    "hasard": 51.7,
+    "ecart": -32.9
+   }
+  ],
+  "unions": [
+   {
+    "nom": "G1",
+    "pct": 90.6,
+    "n": 87,
+    "total": 96
+   },
+   {
+    "nom": "G1∪G2",
+    "pct": 97.9,
+    "n": 94,
+    "total": 96
+   },
+   {
+    "nom": "G3∪G4",
+    "pct": 44.8,
+    "n": 43,
+    "total": 96
+   },
+   {
+    "nom": "G4∪G5",
+    "pct": 42.7,
+    "n": 41,
+    "total": 96
+   },
+   {
+    "nom": "G3∪G4∪G5",
+    "pct": 61.5,
+    "n": 59,
+    "total": 96
+   }
+  ],
+  "combien": [
+   {
+    "k": 0,
+    "n": 37,
+    "pct": 38.5
+   },
+   {
+    "k": 1,
+    "n": 50,
+    "pct": 52.1
+   },
+   {
+    "k": 2,
+    "n": 7,
+    "pct": 7.3
+   },
+   {
+    "k": 3,
+    "n": 2,
+    "pct": 2.1
+   }
+  ]
+ },
+ "euros": {
+  "n": 93,
+  "rapport": {
+   "moyenne": 235,
+   "mediane": 80,
+   "min": 4,
+   "max": 8614.9
+  },
+  "presse": [
+   {
+    "n": 3,
+    "combinaisons": 1,
+    "miseParCourse": 1,
+    "pct": 4.3,
+    "hits": 4,
+    "gainMoyen": 10,
+    "gain": 42,
+    "bilan": -51,
+    "roi": -55.4
+   },
+   {
+    "n": 4,
+    "combinaisons": 4,
+    "miseParCourse": 4,
+    "pct": 8.6,
+    "hits": 8,
+    "gainMoyen": 14,
+    "gain": 116,
+    "bilan": -256,
+    "roi": -68.9
+   },
+   {
+    "n": 5,
+    "combinaisons": 10,
+    "miseParCourse": 10,
+    "pct": 14,
+    "hits": 13,
+    "gainMoyen": 20,
+    "gain": 262,
+    "bilan": -668,
+    "roi": -71.9
+   },
+   {
+    "n": 6,
+    "combinaisons": 20,
+    "miseParCourse": 20,
+    "pct": 23.7,
+    "hits": 22,
+    "gainMoyen": 35,
+    "gain": 768,
+    "bilan": -1092,
+    "roi": -58.7
+   },
+   {
+    "n": 7,
+    "combinaisons": 35,
+    "miseParCourse": 35,
+    "pct": 33.3,
+    "hits": 31,
+    "gainMoyen": 43,
+    "gain": 1346,
+    "bilan": -1909,
+    "roi": -58.7
+   },
+   {
+    "n": 8,
+    "combinaisons": 56,
+    "miseParCourse": 56,
+    "pct": 43,
+    "hits": 40,
+    "gainMoyen": 49,
+    "gain": 1967,
+    "bilan": -3241,
+    "roi": -62.2
+   },
+   {
+    "n": 9,
+    "combinaisons": 84,
+    "miseParCourse": 84,
+    "pct": 50.5,
+    "hits": 47,
+    "gainMoyen": 53,
+    "gain": 2494,
+    "bilan": -5318,
+    "roi": -68.1
+   },
+   {
+    "n": 10,
+    "combinaisons": 120,
+    "miseParCourse": 120,
+    "pct": 59.1,
+    "hits": 55,
+    "gainMoyen": 64,
+    "gain": 3547,
+    "bilan": -7613,
+    "roi": -68.2
+   },
+   {
+    "n": 11,
+    "combinaisons": 165,
+    "miseParCourse": 165,
+    "pct": 74.2,
+    "hits": 69,
+    "gainMoyen": 82,
+    "gain": 5680,
+    "bilan": -9665,
+    "roi": -63
+   },
+   {
+    "n": 12,
+    "combinaisons": 220,
+    "miseParCourse": 220,
+    "pct": 80.6,
+    "hits": 75,
+    "gainMoyen": 93,
+    "gain": 6993,
+    "bilan": -13467,
+    "roi": -65.8
+   }
+  ],
+  "marche": [
+   {
+    "n": 3,
+    "combinaisons": 1,
+    "miseParCourse": 1,
+    "pct": 3.2,
+    "hits": 3,
+    "gainMoyen": 8,
+    "gain": 25,
+    "bilan": -68,
+    "roi": -73.4
+   },
+   {
+    "n": 4,
+    "combinaisons": 4,
+    "miseParCourse": 4,
+    "pct": 5.4,
+    "hits": 5,
+    "gainMoyen": 9,
+    "gain": 44,
+    "bilan": -328,
+    "roi": -88.3
+   },
+   {
+    "n": 5,
+    "combinaisons": 10,
+    "miseParCourse": 10,
+    "pct": 11.8,
+    "hits": 11,
+    "gainMoyen": 20,
+    "gain": 225,
+    "bilan": -705,
+    "roi": -75.8
+   },
+   {
+    "n": 6,
+    "combinaisons": 20,
+    "miseParCourse": 20,
+    "pct": 28,
+    "hits": 26,
+    "gainMoyen": 37,
+    "gain": 964,
+    "bilan": -896,
+    "roi": -48.1
+   },
+   {
+    "n": 7,
+    "combinaisons": 35,
+    "miseParCourse": 35,
+    "pct": 35.5,
+    "hits": 33,
+    "gainMoyen": 48,
+    "gain": 1580,
+    "bilan": -1675,
+    "roi": -51.4
+   },
+   {
+    "n": 8,
+    "combinaisons": 56,
+    "miseParCourse": 56,
+    "pct": 38.7,
+    "hits": 36,
+    "gainMoyen": 50,
+    "gain": 1792,
+    "bilan": -3416,
+    "roi": -65.6
+   },
+   {
+    "n": 9,
+    "combinaisons": 84,
+    "miseParCourse": 84,
+    "pct": 48.4,
+    "hits": 45,
+    "gainMoyen": 59,
+    "gain": 2670,
+    "bilan": -5142,
+    "roi": -65.8
+   },
+   {
+    "n": 10,
+    "combinaisons": 120,
+    "miseParCourse": 120,
+    "pct": 57,
+    "hits": 53,
+    "gainMoyen": 71,
+    "gain": 3746,
+    "bilan": -7414,
+    "roi": -66.4
+   },
+   {
+    "n": 11,
+    "combinaisons": 165,
+    "miseParCourse": 165,
+    "pct": 67.7,
+    "hits": 63,
+    "gainMoyen": 90,
+    "gain": 5662,
+    "bilan": -9683,
+    "roi": -63.1
+   },
+   {
+    "n": 12,
+    "combinaisons": 220,
+    "miseParCourse": 220,
+    "pct": 82.8,
+    "hits": 77,
+    "gainMoyen": 104,
+    "gain": 7984,
+    "bilan": -12476,
+    "roi": -61
+   }
+  ],
+  "detail4": [
+   {
+    "date": "2026-02-17",
+    "trio": [
+     10,
+     15,
+     14
+    ],
+    "paie": 13.4
+   },
+   {
+    "date": "2026-02-25",
+    "trio": [
+     1,
+     10,
+     6
+    ],
+    "paie": 4
+   },
+   {
+    "date": "2026-04-01",
+    "trio": [
+     1,
+     5,
+     9
+    ],
+    "paie": 5.8
+   },
+   {
+    "date": "2026-04-26",
+    "trio": [
+     6,
+     14,
+     3
+    ],
+    "paie": 10.9
+   },
+   {
+    "date": "2026-04-27",
+    "trio": [
+     3,
+     5,
+     11
+    ],
+    "paie": 24
+   },
+   {
+    "date": "2026-04-29",
+    "trio": [
+     14,
+     9,
+     3
+    ],
+    "paie": 10.6
+   },
+   {
+    "date": "2026-05-14",
+    "trio": [
+     10,
+     6,
+     3
+    ],
+    "paie": 39.3
+   },
+   {
+    "date": "2026-06-06",
+    "trio": [
+     11,
+     8,
+     14
+    ],
+    "paie": 7.7
+   }
+  ]
+ },
+ "chevauxBas": {
+  "courses": 100,
+  "hasard": 10,
+  "z3ParCourse": 7.23,
+  "regles": [
+   {
+    "nom": "cote la plus basse",
+    "pct": 17,
+    "n": 100
+   },
+   {
+    "nom": "forme (musique)",
+    "pct": 13,
+    "n": 100
+   },
+   {
+    "nom": "poids le plus léger",
+    "pct": 8,
+    "n": 100
+   },
+   {
+    "nom": "corde la plus petite",
+    "pct": 12,
+    "n": 100
+   },
+   {
+    "nom": "gains les plus hauts",
+    "pct": 8,
+    "n": 100
+   },
+   {
+    "nom": "âge le plus jeune",
+    "pct": 11,
+    "n": 100
+   }
+  ]
+ }
+}

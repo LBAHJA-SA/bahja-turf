@@ -33,6 +33,144 @@ const TF = 'https://www.turf-france.com'
 const EQ = 'https://www.equidia.fr'
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
 
+/* ──────────────────────────────────────────────────────────── Equidia ───── */
+
+const CURL_BIN = process.platform === 'win32' ? 'curl.exe' : 'curl'
+function curlTexte(url, delai = 55000) {
+  return new Promise((resolve) => {
+    execFile(CURL_BIN, ['-sS', '-m', String(Math.ceil(delai / 1000)), '-A', UA, '--compressed', url],
+      { timeout: delai, maxBuffer: 12 * 1024 * 1024 }, (err, stdout) => {
+        if (err) resolve(null)
+        else resolve(String(stdout || ''))
+      })
+  })
+}
+async function fetchEquidia(url) {
+  try {
+    const r = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' }, signal: AbortSignal.timeout(20000) })
+    if (!r.ok) return null
+    return await r.text()
+  } catch { return curlTexte(url) }
+}
+
+function extraireProgrammeEquidia(html, date) {
+  const m = html.match(/<script id="serverApp-state" type="application\/json">([\s\S]*?)<\/script>/)
+  if (!m) return null
+  let txt = m[1].replace(/"/g, '"').replace(/</g, '<').replace(/>/g, '>').replace(/&nbsp;/g, ' ').replace(/'/g, "'").replace(/&/g, '&')
+  try {
+    const st = JSON.parse(txt)
+    for (const key of Object.keys(st)) {
+      if (key.startsWith('courses/') && key.includes(date)) {
+        const data = st[key]
+        if (data && data.meetings) return data.meetings
+      }
+    }
+    return null
+  } catch { return null }
+}
+
+/* Equidia renvoie parfois des OBJETS ({nom_entraineur}, {nom_monte}…)
+ * là où on attend une chaîne : le crash React « Objects are not valid as
+ * a React child » du 13/10 vient de là. On extrait toujours une chaîne. */
+function txtNom(x) {
+  if (x == null) return ''
+  if (typeof x === 'string') return x
+  if (typeof x === 'object') {
+    for (const k of ['name', 'nom', 'nom_entraineur', 'nom_monte', 'nom_cheval', 'nom_jockey', 'valeur']) {
+      if (typeof x[k] === 'string' && x[k]) return x[k]
+    }
+    for (const v of Object.values(x)) if (typeof v === 'string' && v) return v
+    return ''
+  }
+  return String(x)
+}
+
+function extraireDetailEquidia(html, date, rNum, cNum) {
+  const m = html.match(/<script id="serverApp-state" type="application\/json">([\s\S]*?)<\/script>/)
+  if (!m) return null
+  let txt = m[1].replace(/"/g, '"').replace(/</g, '<').replace(/>/g, '>').replace(/&nbsp;/g, ' ').replace(/'/g, "'").replace(/&/g, '&')
+  try {
+    const st = JSON.parse(txt)
+    // La clé principale avec les partants détaillés : v2/courses/{date}/R{n}/C{m}
+    const courseKey = `v2/courses/${date}/R${rNum}/C${cNum}`
+    if (st[courseKey] && st[courseKey].partants) {
+      return st[courseKey]
+    }
+    // Fallback : toute clé v2/courses d'abord, pari_simple en dernier
+    // (marché seul : pas de noms/musiques).
+    const tag = `/R${rNum}/C${cNum}`
+    for (const key of Object.keys(st)) {
+      if (key.includes(tag) && key.includes('v2/courses')) return st[key]
+    }
+    return null
+  } catch { return null }
+}
+
+function parserDetailEquidia(data, date, rNum, cNum, pays) {
+  if (!data) return null
+  
+  // Equidia structure: data = { partants: [...], ... } from v2/courses/{date}/R{n}/C{m}
+  const partantsData = data.partants || (Array.isArray(data) ? data : (data.runners || data.participants || []))
+  if (!Array.isArray(partantsData) || !partantsData.length) return null
+
+  const partants = partantsData
+    .filter((r) => r.num_partant || r.numero || r.num)
+    .map((r) => {
+      const num = Number(r.num_partant || r.numero || r.num)
+      const cheval = txtNom(r.cheval?.nom_cheval || r.cheval?.nom || r.name || r.horse?.name || '')
+      // Musique is directly on the partant object in Equidia
+      const musique = txtNom(r.musique || r.short_musique || r.cheval?.musique || '')
+      const driv = txtNom(r.monte || r.cheval?.driver || r.driver || r.jockey || r.rider || '')
+      const entr = txtNom(r.entraineur || r.cheval?.trainer || r.trainer || r.horse?.trainer || '')
+      const prop = txtNom(r.proprietaire || r.cheval?.owner || r.horse?.owner || '')
+      return {
+        num, cheval, nom: cheval,
+        poids: r.pds_calc_hand_partant ?? r.pds_cond_monte_partant ?? r.poids ?? r.weight ?? null,
+        driver: driv,
+        jockey: driv,
+        entraineur: entr,
+        valeur: r.valeur ?? r.cheval?.valeur ?? null,
+        sexe: txtNom(r.sexe_cheval ?? r.cheval?.sexe ?? ''),
+        age: r.age_cheval ?? r.cheval?.age ?? null,
+        couleur: txtNom(r.couleur ?? r.cheval?.couleur ?? ''),
+        proprietaire: prop,
+        cote: r.cote ?? r.rapp_evol ?? r.rapp_ref ?? r.odd ?? r.cote_pmu ?? null,
+        coteRef: r.coteRef ?? r.rapp_ref ?? r.rapp_evol ?? r.startodd ?? null,
+        depart: r.place_corde_partant ?? r.cheval?.corde ?? r.startbox ?? null,
+        def: txtNom(r.deferrer_partant ?? r.cheval?.ferrure ?? r.horseshoe ?? r.blinkers ?? ''),
+        silk: r.silks_path || r.cheval?.silk?.url || r.jockeycolorfile || r.jockeycolour || null,
+        dernierPassage: txtNom(r.previousDistPartant ?? r.cheval?.lastPerformance ?? r.shortperformance ?? ''),
+        gains: r.gains_carriere ?? r.cheval?.gains ?? r.horse?.gains ?? null,
+        musique: txtNom(r.musique || r.short_musique || r.cheval?.musique || ''),
+        place: r.place_corde_partant ?? r.finishorder ?? r.finish ?? r.place ?? null,
+      }
+    }).filter((p) => p.num)
+
+  if (!partants.length) return null
+
+  const arrivee = []
+
+  const hippodrome = data.meeting?.hippodrome || data.track || data.hippodrome || ''
+  const nom = data.race?.nom || data.name || ''
+
+  return {
+    v: 2, pv: 4,
+    source: 'Equidia',
+    race: {
+      numOrdre: cNum, nom,
+      distance: data.distance ?? data.race?.distance ?? null,
+      type: data.type ?? data.discipline ?? data.type_course ?? '',
+      date: date,
+      nbPartants: partants.length,
+      meteo: null,
+    },
+    meeting: { num: rNum, hippodrome, pays: String(pays).trim().toUpperCase() },
+    participants: partants,
+    arrivee,
+    collecteLe: new Date().toISOString(),
+  }
+}
+
 /* ──────────────────────────────────────────────────────────── texte ───── */
 
 function texte(x) {
@@ -62,21 +200,8 @@ function nombre(x) {
   return m ? Number(m[0]) : null
 }
 
-/* ────────────────────────────────────────────── repli curl ──────────── */
-/* 12/10/2026 — turf-france black-hole la pile TLS de Node DEPUIS CE PC
- * (curl passe en 11-15 s, Node stall puis ETIMEDOUT ; Vercel OK car autre
- * IP : blocage IP×empreinte, pas panne). Repli : curl système (60 s), puis
- * échec honnête. Ne change rien quand fetch réussit (cas Vercel). */
-const CURL_BIN = process.platform === 'win32' ? 'curl.exe' : 'curl'
-function curlTexte(url, delai = 55000) {
-  return new Promise((resolve) => {
-    execFile(CURL_BIN, ['-sS', '-m', String(Math.ceil(delai / 1000)), '-A', UA, '--compressed', url],
-      { timeout: delai, maxBuffer: 12 * 1024 * 1024 }, (err, stdout) => {
-        if (err) resolve(null)
-        else resolve(String(stdout || ''))
-      })
-  })
-}
+/* ─────────────────────────────────────────────────────── programme ────── */
+
 async function fetchTF(url) {
   try {
     const r = await fetch(url, {
@@ -87,6 +212,8 @@ async function fetchTF(url) {
   } catch { /* repli curl ci-dessous */ }
   return curlTexte(url)
 }
+
+/* ─────────────────────────────────────────────────────── programme ────── */
 
 /* ─────────────────────────────────────────────────────── programme ────── */
 
@@ -173,21 +300,22 @@ function normaliserPartant(p) {
    *   c'est elle qui remplit `cote` (le moteur lit `coteRef` d'abord). */
   const ref = p.coteRef ?? p.cote_pmu ?? null
   const cote = ref != null && ref > 1 ? ref : null
+  const num = Number(p.num)
   return {
-    num: p.num,
-    cheval: p.cheval || p.nom || p.horse || '',
-    driver: p.driver || p.jockey || '',
-    entraineur: p.entraineur || p.trainer || '',
+    num: Number.isFinite(num) && num > 0 ? num : p.num,
+    cheval: txtNom(p.cheval || p.nom || p.horse || ''),
+    driver: txtNom(p.driver || p.jockey || ''),
+    entraineur: txtNom(p.entraineur || p.trainer || ''),
     poids: p.poids ?? null,
     cote, coteRef: ref,
     gains: p.gains ?? p.gain ?? null,
-    musique: p.musique || '',
+    musique: txtNom(p.musique || ''),
     corde: p.corde ?? null,
     valeur: p.valeur ?? null,
-    proprietaire: p.proprietaire || p.owner || '',
-    sexe: p.sexe || '',
+    proprietaire: txtNom(p.proprietaire || p.owner || ''),
+    sexe: txtNom(p.sexe || ''),
     age: p.age ?? null,
-    def: p.def || null,
+    def: txtNom(p.def || ''),
   }
 }
 
@@ -339,6 +467,86 @@ async function lireMarcheEquidia(date, rNum, cNum) {
   } catch { return null }
 }
 
+/* ────────────────────────────────────────── turfomania (musique) ──────── */
+/* 13/10/2026 — turfomania.fr accessible (pas de blocage) et son tableau
+ * partants donne la MUSIQUE inline (« HOTTOT (215j) 4p (25) 4p 1p 3p »),
+ * le poids, la corde, le driver/entraîneur et les gains. Cas LA BARAKA :
+ * la musique d'archive était pourrie (« 8p 8p 1p 6p 0p ») alors que la
+ * vraie forme était 1-4-2-3-7-4-5. On ne prend QUE la musique (+ champs
+ * d'identité), JAMAIS les cotes (échelle PMU live ≠ ref turf-france).
+ * Limite : page d'accueil = programme du jour uniquement → repli valable
+ * seulement pour date === aujourd'hui (serveur). Les courses passées dont
+ * la musique est perdue restent perdues. */
+const TM = 'https://www.turfomania.fr'
+
+function tmCelluleCheval(txt) {
+  // « HOTTOT (215j) 4p (25) 4p 1p 3p » → { cheval, musique }
+  const t = texte(txt)
+  const m = t.match(/^(.+?\(\d+j\))\s*(.*)$/)
+  if (!m) return { cheval: t, musique: '' }
+  return { cheval: m[1].trim(), musique: (m[2] || '').replace(/\s+/g, ' ').trim() }
+}
+
+export async function completerMusiqueTurfomania(partants, date, nomCourse) {
+  if (!Array.isArray(partants) || !partants.some((p) => !p.musique)) return 0
+  const auj = new Date().toISOString().slice(0, 10)
+  if (date !== auj) return 0 // l'accueil turfomania ne liste que le jour même
+  // fetch Node renvoie parfois une page défi de 5 ko : on exige des liens,
+  // sinon repli curl explicite (même cause que turf-france : TLS black-hole).
+  const lireTM = async (url) => {
+    let h = await fetchTF(url)
+    if (h && /partants-[^"]+\.html\?idcourse=/i.test(h)) return h
+    try {
+      const { execFile: ef } = await import('node:child_process')
+      const bin = process.platform === 'win32' ? 'curl.exe' : 'curl'
+      h = await new Promise((resolve) => {
+        ef(bin, ['-sS', '-m', '55', '-A', UA, '--compressed', url],
+          { timeout: 55000, maxBuffer: 12 * 1024 * 1024 }, (err, out) => resolve(err ? null : String(out || '')))
+      })
+    } catch { h = null }
+    return h
+  }
+  try {
+    const acc = await lireTM(`${TM}/`)
+    if (!acc) return 0
+    // liens partants du jour : /pronostics/partants-<slug>.html?idcourse=NNN
+    const liens = [...acc.matchAll(/href="(\/pronostics\/partants-[^"]+\.html\?idcourse=(\d+))"/gi)]
+    if (!liens.length) return 0
+    const mots = normNom(nomCourse).split(' ').filter((w) => w.length > 3)
+    let hrefComplet = null
+    for (const m of liens) {
+      const slug = normNom(decodeURIComponent(m[1]).replace(/-/g, ' '))
+      if (mots.length && mots.every((w) => slug.includes(w))) { hrefComplet = m[1]; break }
+    }
+    if (!hrefComplet && mots.length) {
+      for (const m of liens) { // repli : 2 mots sur 3
+        const slug = normNom(decodeURIComponent(m[1]).replace(/-/g, ' '))
+        if (mots.filter((w) => slug.includes(w)).length >= Math.min(2, mots.length)) { hrefComplet = m[1]; break }
+      }
+    }
+    if (!hrefComplet) return 0
+    const page = await lireTM(`${TM}${hrefComplet}`)
+    if (!page) return 0
+    const table = (page.match(/<table class="tableauLine tablesorter">([\s\S]*?)<\/table>/i) || [])[1]
+    if (!table) return 0
+    const ths = [...table.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/gi)].map((x) => texte(x[1]).toLowerCase())
+    const iNum = ths.findIndex((t) => /^n/.test(t))
+    const iChev = ths.findIndex((t) => /cheval/.test(t))
+    if (iNum < 0 || iChev < 0) return 0
+    let n = 0
+    for (const rm of table.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)) {
+      const tds = [...rm[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((x) => x[1])
+      if (tds.length <= Math.max(iNum, iChev)) continue
+      const num = Number(texte(tds[iNum]))
+      if (!Number.isFinite(num) || num < 1) continue
+      const { cheval, musique } = tmCelluleCheval(tds[iChev])
+      const p = partants.find((q) => q.num === num)
+      if (p && musique && !p.musique) { p.musique = musique; if (!p.cheval) p.cheval = cheval; n++ }
+    }
+    return n
+  } catch { return 0 }
+}
+
 /* ─────────────────────────────────────────────────────── handler ──────── */
 
 export default async function handler(req, res) {
@@ -364,10 +572,14 @@ export default async function handler(req, res) {
       let source = ''
       let erreur = null
 
-      // ① le fichier d'archive : le plus rapide et le plus complet
+      // ① le fichier d'archive — SAUF squelette (que num+poids, sans noms
+      //    ni musiques ni cotes : le fallback casacourses à vide). Un squelette
+      //    ne bloque jamais le direct : sinon la page reste vide toute la journée.
+      const estSquelette = (ps) => (ps || []).length > 0
+        && (ps || []).every((p) => !p.cheval && !p.nom && !p.musique)
       try {
         const arch = lireDetailArchive(cDate, rNum, cNum, pays)
-        if (arch && arch.partants.length) {
+        if (arch && arch.partants.length && !estSquelette(arch.partants)) {
           meta = { hippodrome: arch.hippodrome, nom: arch.nom, heure: '', distance: arch.distance, discipline: arch.discipline }
           partants = arch.partants
           if (arch.arrivee?.length) arrivee = arch.arrivee
@@ -375,30 +587,119 @@ export default async function handler(req, res) {
         }
       } catch (e) { /* on tente le direct */ }
 
-      // ② reu.php en direct : les partants du jour (+ l'arrivée si finie)
-      if (!partants.length) {
+      // ② Direct : UNIQUEMENT si pas d'archive. Pour les dates passées on ne
+      //    relit JAMAIS le direct pour les partants (données post-course
+      //    contaminées : ordre d'arrivée + musiques incluant la course).
+      //    Seule l'arrivée peut encore être lue en direct (résultat public).
+      //    Exception sûre : les NOMS (cheval/driver/entraîneur) n'ont aucun
+      //    pouvoir prédictif → on les complète même pour les dates passées.
+      const estPassee = cDate < new Date().toISOString().slice(0, 10)
+      if (!partants.length && !estPassee) {
+        try {
+          const urlDetail = `${EQ}/courses/${cDate}/R${rNum}/C${cNum}`
+          const htmlDetail = await fetchEquidia(urlDetail)
+          if (htmlDetail) {
+            const data = extraireDetailEquidia(htmlDetail, cDate, rNum, cNum)
+            if (data) {
+              const parsed = parserDetailEquidia(data, cDate, rNum, cNum, pays)
+              if (parsed && parsed.participants?.length) {
+                // On garde les données Equidia, on complète seulement ce qui manque
+                if (!partants.length) {
+                  partants = parsed.participants
+                  meta = { hippodrome: parsed.hippodrome, nom: parsed.race?.nom || '', heure: '', distance: parsed.race?.distance ?? null, discipline: parsed.race?.type || '' }
+                }
+                if (parsed.arrivee?.length && !arrivee.length) arrivee = parsed.arrivee
+                if (!meta.hippodrome) meta.hippodrome = parsed.hippodrome
+                if (!meta.nom) meta.nom = parsed.race?.nom || ''
+                if (!meta.distance) meta.distance = parsed.race?.distance ?? null
+                if (!meta.discipline) meta.discipline = parsed.race?.type || ''
+                source = 'equidia'
+              }
+            }
+          }
+          } catch (e) { /* on continue */ }
+      }
+
+      // ② reu.php en direct : fallback pour les cotes si Equidia n'en a pas
+      //    + remplissage des scalaires manquants (valeur/poids/corde/gains/âge).
+      //    On ne remplace JAMAIS : ni la musique Equidia (corrompue côté reu),
+      //    ni une cote déjà lue, ni driver/cheval.
+      const nbCotes = (ps) => (ps || []).filter((p) => { const n = Number(p.coteRef); return Number.isFinite(n) && n > 0 }).length
+      const manqueScalaire = (ps) => (ps || []).some((p) => p.valeur == null || p.poids == null || p.corde == null || p.gains == null || p.age == null)
+      if (partants.length && (nbCotes(partants) < 3 || manqueScalaire(partants))) {
         try {
           const det = await lireDetailDirect(cDate, rNum, cNum, pays)
-          partants = det.partants
-          if (det.arrivee?.length) arrivee = det.arrivee
-          source = 'reu.php'
-        } catch (e) { erreur = e.message }
-      } else if (!arrivee.length) {
-        // l'archive d'avant-course n'a pas l'arrivée : on la lit en direct
+          if (det.arrivee?.length && !arrivee.length) arrivee = det.arrivee
+          if (nbCotes(det.partants) > nbCotes(partants)) {
+            // On ne prend QUE les cotes, on ne remplace pas les autres données Equidia
+            const eqCotes = new Map(det.partants.map(p => [p.num, { coteRef: p.coteRef, cote: p.cote, coteEq: true }]))
+            for (const p of partants) {
+              const eq = eqCotes.get(p.num)
+              if (eq && (p.coteRef == null || p.coteRef <= 1)) {
+                p.coteRef = eq.coteRef
+                p.cote = eq.cote
+                p.coteEq = true
+              }
+            }
+          }
+          // Scalaires manquants seulement (jamais musique/cheval/driver)
+          const parDet = new Map(det.partants.map((p) => [p.num, p]))
+          for (const p of partants) {
+            const d = parDet.get(p.num)
+            if (!d) continue
+            for (const k of ['valeur', 'poids', 'corde', 'gains', 'age']) {
+              if ((p[k] == null) && d[k] != null) p[k] = d[k]
+            }
+          }
+        } catch (e) { /* on continue */ }
+      }
+
+      // ②b reu.php pour l'arrivée si pas encore
+      if (!arrivee.length) {
         try {
           const det = await lireDetailDirect(cDate, rNum, cNum, pays)
           if (det.arrivee?.length) arrivee = det.arrivee
         } catch (e) { /* pas encore courue */ }
       }
 
-      // ③ bouche-trous Equidia : DÉSACTIVÉ le 11/10 (mesure tête-à-tête :
-      //    ref-archive 3.7-19.2 vs PMU figé 2.5-96, avec RÉORDREMENT 8.7→96
-      //    contre 7.4→2.5 — deux ÉCHELLES différentes, pas deux moments.
-      //    Injecter du PMU dans des familles calibrées turf-france CORROMPT
-      //    l'empreinte : pire que l'aveugle. En attente d'une source de la
-      //    même échelle. La vraie réparation = le collecteur archive-reu
-      //    doit capturer les cotesRef COMPLÈTES à l'heure de publication.)
-      let cotesEq = 0 /* fill désactivé, voir ci-dessus — champ gardé pour la page */
+      // ②c turfomania : répare les MUSIQUES manquantes/fausses (cas LA BARAKA).
+      //    Jour même uniquement. Ne touche JAMAIS aux cotes (échelle PMU ≠ ref).
+      if (partants.length && partants.some((p) => !p.musique)) {
+        try { await completerMusiqueTurfomania(partants, cDate, meta.nom || '') } catch { /* musique inchangée */ }
+      }
+
+      // ②d identité seule (passé comme présent) : cheval/driver/entraîneur
+      //    depuis Equidia direct quand l'archive ne les a pas. Les noms ne
+      //    prédisent rien → aucun risque hindsight. Jamais cotes/musique.
+      if (partants.length && partants.some((p) => !p.cheval)) {
+        try {
+          const htmlN = await fetchEquidia(`${EQ}/courses/${cDate}/R${rNum}/C${cNum}`)
+          if (htmlN) {
+            const dataN = extraireDetailEquidia(htmlN, cDate, rNum, cNum)
+            if (dataN) {
+              const parsedN = parserDetailEquidia(dataN, cDate, rNum, cNum, pays)
+              if (parsedN?.participants?.length) {
+                const parN = new Map(parsedN.participants.map((p) => [p.num, p]))
+                for (const p of partants) {
+                  const d = parN.get(p.num)
+                  if (!d) continue
+                  if (!p.cheval && d.cheval) p.cheval = d.cheval
+                  if (!p.driver && d.driver) p.driver = d.driver
+                  if (!p.entraineur && d.entraineur) p.entraineur = d.entraineur
+                }
+              }
+            }
+          }
+        } catch { /* noms inchangés */ }
+      }
+
+      // ③ bouche-trous Equidia marché (cotes PMU) : DÉSACTIVÉ (échelles différentes)
+      //    La vraie réparation = le collecteur archive-reu doit capturer les cotesRef COMPLÈTES
+      let cotesEq = 0
+
+      if (!partants.length) {
+        throw new Error('Aucune source de partants disponible (Equidia + fallbacks)')
+      }
 
       res.statusCode = 200
       res.end(JSON.stringify({
@@ -409,17 +710,39 @@ export default async function handler(req, res) {
           distance: meta.distance, discipline: meta.discipline,
           arrivee,
           partants,
-          erreur,
-          cotesEq,
+          erreur: null,
+          cotesEq: 0,
         },
-        source,
+        source: source || 'equidia',
       }))
       return
     }
 
     /* ── LA LISTE des courses du jour ── */
+    // 1. Programme depuis Equidia (archive)
     let reunions = lireProgrammeArchive(date)
     let source = 'archive'
+    if (!reunions) {
+      // Fallback : programme Equidia direct
+      try {
+        const html = await fetchEquidia(`${EQ}/courses/${date}`)
+        if (html) {
+          const meetings = extraireProgrammeEquidia(html, date)
+          if (meetings && meetings.length) {
+            reunions = meetings.map((m) => ({
+              hippodrome: m.hippodrome || m.track || '',
+              pays: m.pays || m.country || 'FRANCE',
+              courses: (m.races || m.courses || []).map((c) => ({
+                date, reunion: 'R' + Number(m.numero || m.num || 0), code: 'C' + Number(c.numero || c.code || c.num || 0),
+                pays: m.pays || m.country || 'FRANCE', nom: c.nom || c.name || '', heure: c.heure || c.time_hm || '',
+                distance: null, partants: null, type: '',
+              })),
+            }))
+            source = 'equidia'
+          }
+        }
+      } catch (e) { /* fallback */ }
+    }
     if (!reunions) {
       reunions = await lireProgrammeDirect(date)
       source = 'reu.php'

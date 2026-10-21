@@ -20,6 +20,16 @@ import { verdict, trioCandidat } from '../backend/COUPLE/moteur.js'
 
 const N = Math.max(1, Number(process.argv[2]) || 100)
 
+const tout = charger().filter((c) => (c.arrivee || []).length >= 3 && (c.partants || []).length >= 8)
+const tests = tout.slice(-Math.min(N, tout.length))
+console.log('corpus : ' + tout.length + ' · test : ' + tests.length + ' (' + tests[0].date + ' → ' + tests[tests.length - 1].date + ')')
+/* Sur l'archive entière, on saute le verdict causal course par course
+ * (reconstruire son index 3900× = des heures, pour une référence déjà
+ * mesurée sur 150) : restent les 4 configs + top3cote, 100 % causaux. */
+
+const SANS_VERDICT = tests.length > 200
+if (SANS_VERDICT) console.log('archive entière : verdict causal sauté (référence 150 courses déjà mesurée)')
+
 const rangsDe = (partants, champ) => {
   const ordre = partants
     .map((p) => ({ num: p.num, c: Number(p[champ] ?? Infinity) }))
@@ -43,10 +53,6 @@ function* permutations(nums, k, pref = []) {
     yield* permutations(nums, k, [...pref, n])
   }
 }
-
-const tout = charger().filter((c) => (c.arrivee || []).length >= 3 && (c.partants || []).length >= 8)
-const tests = tout.slice(-N)
-console.log('corpus : ' + tout.length + ' · test : ' + tests.length + ' (' + tests[0].date + ' → ' + tests[tests.length - 1].date + ')')
 
 // tables incrémentales : clé -> {s, w} pour trio + 3 paires
 const T = { trio: new Map(), p12: new Map(), p13: new Map(), p23: new Map() }
@@ -122,13 +128,15 @@ tests.forEach((course, i) => {
   if (m13) { R.p13.j++; if (a[0] === m13.trio[0] && a[2] === m13.trio[1]) R.p13.hit++ }
   const m23 = meilleur(T.p23, T.p23, 2)
   if (m23) { R.p23.j++; if (a[1] === m23.trio[0] && a[2] === m23.trio[1]) R.p23.hit++ }
-  const v = verdict(course.partants, construireIndex(passe))
-  if (v && v.trio) {
-    R.verdict.j++
-    if (v.trio[0] === a[0] && v.trio[1] === a[1] && v.trio[2] === a[2]) R.verdict.exact++
-    const s = new Set(v.trio)
-    if (a.filter((x) => s.has(x)).length >= 2) R.verdict.deux++
-    if (v.trio[0] === a[0]) R.verdict.c1++
+  if (!SANS_VERDICT) {
+    const v = verdict(course.partants, construireIndex(passe))
+    if (v && v.trio) {
+      R.verdict.j++
+      if (v.trio[0] === a[0] && v.trio[1] === a[1] && v.trio[2] === a[2]) R.verdict.exact++
+      const s = new Set(v.trio)
+      if (a.filter((x) => s.has(x)).length >= 2) R.verdict.deux++
+      if (v.trio[0] === a[0]) R.verdict.c1++
+    }
   }
   const tri = trioCandidat(course.partants)
   if (tri) {
@@ -148,8 +156,10 @@ console.log('  1) trio 1-2-3 : ' + R.trio.hit + '/' + R.trio.j + ' = ' + pct(R.t
 console.log('  2) paire 1-2  : ' + R.p12.hit + '/' + R.p12.j + ' = ' + pct(R.p12.hit, R.p12.j))
 console.log('  3) paire 1-3  : ' + R.p13.hit + '/' + R.p13.j + ' = ' + pct(R.p13.hit, R.p13.j))
 console.log('  4) paire 2-3  : ' + R.p23.hit + '/' + R.p23.j + ' = ' + pct(R.p23.hit, R.p23.j))
-console.log('  verdict causal : exact=' + R.verdict.exact + ' ' + pct(R.verdict.exact, R.verdict.j)
-  + ' · ≥2=' + R.verdict.deux + ' ' + pct(R.verdict.deux, R.verdict.j) + ' · 1er=' + R.verdict.c1 + ' ' + pct(R.verdict.c1, R.verdict.j))
+if (!SANS_VERDICT) {
+  console.log('  verdict causal : exact=' + R.verdict.exact + ' ' + pct(R.verdict.exact, R.verdict.j)
+    + ' · ≥2=' + R.verdict.deux + ' ' + pct(R.verdict.deux, R.verdict.j) + ' · 1er=' + R.verdict.c1 + ' ' + pct(R.verdict.c1, R.verdict.j))
+}
 console.log('  top3cote       : exact=' + R.top3.exact + ' ' + pct(R.top3.exact, tests.length)
   + ' · ≥2=' + R.top3.deux + ' ' + pct(R.top3.deux, tests.length) + ' · 1er=' + R.top3.c1 + ' ' + pct(R.top3.c1, tests.length))
 for (const [nom, map] of Object.entries(topMotifs)) {

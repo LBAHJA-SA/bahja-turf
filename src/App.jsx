@@ -5,6 +5,7 @@ import QuinteGrille from '../frontend/QUINTE/QuinteGrille.jsx'
 import Couple from '../frontend/COUPLE/Couple.jsx'
 import Analyse from '../frontend/ANALYSE/Analyse.jsx'
 import Presse from '../frontend/PRESSE/Presse.jsx'
+import Lives from '../frontend/LIVES/Lives.jsx'
 import Admin from '../frontend/ADMIN/Admin.jsx'
 import { pointerVisite } from '../backend/ADMIN/visites.js'
 
@@ -46,6 +47,14 @@ export default function App(){
 
         {/* la presse du jour : déclarations, analyse, revue de presse, articles */}
         <Route path="/presse" element={<Presse />} />
+
+        {/* ══════════════════════════════════════════════════════════════════════
+         *  LES LIVES — les hippodromes régionaux d'Equidia en direct (20/10/2026)
+         *  Source : regions-api.equidia.fr (CORS ouvert, flux HLS dans la page).
+         *  L'alias /live reste valable.
+         * ══════════════════════════════════════════════════════════════════════ */}
+        <Route path="/lives" element={<Lives />} />
+        <Route path="/live" element={<Lives />} />
 
         {/* ══════════════════════════════════════════════════════════════════════
          *  ⚠ LA CONSOLE D'ADMINISTRATION — INVISIBLE POUR LES VISITEURS.

@@ -344,10 +344,22 @@ export async function fetchFiabilite() {
   } catch (e) { return null }
 }
 
-/** Les écarts des places P1..P20 - tools/ecarts.mjs. */
+/** LES ÉCARTS des places P1..P20 — tools/ecarts.mjs. */
 export async function fetchEcarts() {
   try {
     const r = await fetch('/data/ecarts.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}
+
+/** ⭐ LES DEUX EMPREINTES — tools/empreinte.mjs (19/10/2026).
+ *  La bassmat du PODIUM et celle du QUINTÉ, par case du carnet (P1..P20) :
+ *  les motifs par groupe, les empreintes exactes, et la courbe « k cases
+ *  pour tout tenir ». La page l'affiche telle quelle. */
+export async function fetchEmpreinte() {
+  try {
+    const r = await fetch('/data/empreinte.json', { headers: { Accept: 'application/json' } })
     if (!r.ok) return null
     return r.json()
   } catch (e) { return null }
@@ -629,15 +641,36 @@ export function groupeDeSlot(slot) {
   return 'G5'
 }
 
-/* ⚠ QUOTAS = RÈGLE FERMÉE. §11.2 : 2 ou 3 / 2 ou 3 / 1 / 1 / 0 ou 1.
- * Ils viennent de dix ans de méthode et d'expertise — ils ne se modifient JAMAIS.
- * Le seul travail permis est le CHOIS du cheval À L'INTÉRIEUR d'un bloc. */
+/* ⚠ QUOTAS — la méthode écrite (§11.2 / §11.9) : G1 2 ou 3 · G2 2 ou 3 · G3 1 ·
+ * G4 1 · G5 0 ou 1. Le seul travail permis est le CHOIX du cheval À L'INTÉRIEUR
+ * d'un bloc. Toute modification des quotas est une décision de l'utilisateur.
+ *
+ * ⭐ 20/10/2026 — 4-2-1-1-0 (§11.27, décidé par l'utilisateur) : le CHOIX le plus
+ * cher est celui de G1 — le cheval écarté y arrive dans les 5 une fois sur trois
+ * (36,5 %), alors que dans G2 il n'arrive qu'une fois sur quatre (26,0 %).
+ * Donc on SUPPRIME le choix de G1 : on prend les 4. Le siège est repris en G2
+ * (3 → 2). Toujours 8 chevaux — ce n'est pas un 9ᵉ siège.
+ *
+ *   presse (96)    podium 40,6 → 46,9 % · quinté 12,5 → 16,7 % · ≥4 47,9 → 50,0 %
+ *   archives (123) podium 32,5 → 44,7 % · quinté 11,4 → 12,2 %
+ *
+ * Les deux moitiés du corpus progressent (47,9/18,8 · 45,8/14,6 contre
+ * 37,5/12,5 · 43,8/12,5). Bootstrap apparié 10 000 tirages : podium 11 gagnées
+ * / 5 perdues, quinté 7 / 3. Mesure : tools/sans-choix.mjs. */
+/* ⭐ 20/10/2026 (soir) — RETOUR À 3-2-1-1-1 SUR INSTRUCTION DE L'UTILISATEUR.
+ * C'est SA méthode : elle ne se discute pas. 4-2-1-1-0 est abandonné.
+ * Mesure au moment du retour (114 Quintés, tools/verif-production.mjs) :
+ *   4-2-1-1-0 → podium 48,2 % · quinté 11,4 % · ≥4 55,3 %
+ *   3-2-1-1-1 → podium 37,7 % · quinté  7,9 % · ≥4 41,2 %
+ * Le choix dans les blocs reste celui de §11.23/§11.32 : G1-G4 carnet,
+ * G5 marché. Seuls les QUOTAS reviennent à 3-2-1-1-1 — toujours 8 chevaux
+ * (3+2+1+1+1), pas 9. */
 export const GROUPES = [
-  { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 3, alt: 2 },
+  { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 3, alt: 4 },
   { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 2, alt: 3 },
   { id: 'G3', label: 'G3 · P9-P10', min: 9, max: 10, quota: 1, alt: 2, obligatoire: true },
   { id: 'G4', label: 'G4 · P11-P12', min: 11, max: 12, quota: 1, alt: 2 },
-  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 1, alt: 1 },
+  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 1, alt: 0 },
 ]
 
 /** Le « ticket fixé » : le moteur remplit les quotas, on ne modifie pas à la main. */
@@ -822,16 +855,39 @@ function coteDe(cotes, num) {
  * G3 est obligatoire : si son score est faible, on le prend quand même.
  * Renvoie la liste des numéros retenus + le détail.
  *
- * ── QUI ENTRE ? — §11.22 (16/10/2026) ────────────────────────────────────
+ * ── QUI ENTRE ? — §11.23 (19/10/2026) ────────────────────────────────────
  * Le CHOIX dans chaque bloc vient de `CHOIX_DU_BLOC` :
  *
- *     G1 carnet · G2 marché · G3-G5 carnet
+ *     G1 carnet · G2 carnet · G3 carnet · G4-G5 marché
  *
  * « carnet » = la PLACE DE PRESSE P1..P20 de la case ; « marché » = la cote.
- * Mesuré sur 96 Quintés à presse réelle (tools/choix-grille.mjs) : 38,5 % de
- * 1-2-3 contre 28,1 % pour « la cote partout » (§11.17). Sans cotes — ou
- * cotes incomplètes dans le bloc visé — c'est `tries` qui décide : carrière
- * (physique), puis forme.
+ *
+ * ⭐ POURQUOI LA QUEUE PASSE AU MARCHÉ. Mesure du 19/10/2026 sur les 96
+ * Quintés à presse RÉELLE et cotes finales de data/quintes.json — le VRAI
+ * buildGrid, le VRAI remplirGrille (tools/experience-g5.mjs ≡ ecrire ci-dessous
+ * reproduit le ticket du moteur sur 96/96 courses) :
+ *
+ *     règle                        PAYANTE  couvre+4    5/5     x/5
+ *     G1-G3 carnet · G4-G5 marché   37,5 %    17,7 %   11,5 %   2,06   ← RETENU
+ *     le carnet partout             38,5 %    19,8 %    8,3 %   2,05
+ *     G1 car · G2 mar · G3-G5 car   38,5 %    17,7 %    7,3 %   1,97   (d'avant)
+ *     la cote partout               28,1 %    14,6 %    6,3 %   1,82
+ *
+ * Le 5/5 — ce que paie le Quinté — passe de 7,3 % à 11,5 % (+4,2 points), le
+ * x/5 de 1,97 à 2,06 ; en échange la métrique §11.18 PAYANTE (le 1-2-3
+ * complet) perd 1 point (38,5 → 37,5), ce qui est dans le bruit. Bootstrap
+ * 4 000 tirages appariés contre la règle d'avant : le 5/5 est meilleur dans
+ * 89,8 % des tirages.
+ *
+ * ⚠ La cote n'entre QUE dans la queue. « La cote partout » est mauvaise
+ * (28,1 % de PAYANTE) : le haut du carnet reste le seul ordre qui suit
+ * l'arrivée (§11.16). G4 et G5 sont les deux blocs que la presse cite le
+ * moins — c'est là que le marché la bat.
+ *
+ * ⚠ La « surprise » de §11.17 (prendre le moins cité des écartés du bloc) a
+ * été re-mesurée : elle PERD. Elle reste hors du moteur.
+ * Sans cotes — ou cotes incomplètes dans le bloc visé — c'est `carnet` qui
+ * décide (la place de presse), jamais la carrière : §11.16.
  *
  * ⭐ R8 (0,9 force P + 0,1 marché) est RETIRÉ DE LA SÉLECTION : 31 % contre
  * 38,5 % sur la même mesure, et §11.19 dit que `stats` n'ordonne QUE le
@@ -843,12 +899,13 @@ function coteDe(cotes, num) {
  * sur la page au moment du départ.
  *
  * ── LE 5e ARGUMENT : `stats` = computeStats(archive) ──────────────────────
- * Il ne change pas QUELS chevaux entrent — seulement l'ORDRE dans lequel le
- * ticket les affiche. Un Quinté se joue dans l'ordre : la 1re case est celle
- * qui doit gagner. `ordonnerParStats` la donne au cheval que l'archive montre
- * le plus souvent 1er, la 2e à celui qu'elle montre le plus souvent 2e, etc.
+ * Depuis le 20/10/2026 il n'ordonne PLUS le ticket : l'ordre suit LA PRESSE
+ * (`ordonnerParPresse`, §11.32). Mesure, 96 Quintés : ordonner par les
+ * statistiques de podium plaçait les 3 premiers DANS LES TROIS PREMIÈRES CASES
+ * 0 fois sur 96 ; l'ordre de la presse le fait 5 fois. `stats` reste accepté
+ * (affichage, compatibilité) et `ordonnerParStats` reste exporté.
  */
-export function remplirGrille(grille, classement, discipline, cotes = null, stats = null) {
+export function remplirGrille(grille, classement, discipline, cotes = null, stats = null, choixDuBloc = null) {
   const parNum = new Map(classement.map((x) => [x.p.num, x]))
   // le classement arrive DÉJÀ trié : physique (filtres éliminatoires, §5) si
   // une carrière est disponible, sinon ordre du carnet. On respecte cet ordre.
@@ -870,23 +927,33 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
    * l'information et n'entre plus dans le choix. */
   const aStats = (stats?.parPlace || []).some((st) => st && st.n >= 2)
 
-  /* ⭐ 16/10/2026 — LE CHOIX DANS LE BLOC (tools/choix-grille.mjs).
-   * Les quotas 3-2-1-1-1 ne bougent JAMAIS (§11.16) : c'est QUI on prend
-   * à l'intérieur du bloc qui change. Mesuré sur les 96 Quintés à presse
-   * RÉELLE, en ne répartissant QUE le choix (mêmes blocs `buildGrid`, mêmes
-   * 8 places), métrique §11.18 = « le 1-2-3 est complet dans la grille » :
+  /* ⭐ 19/10/2026 — LE CHOIX DANS LE BLOC. Les quotas ne bougent pas (§11.16) :
+   * c'est QUI on prend à l'intérieur du bloc qui change.
+   * Mesure complète dans le commentaire de `remplirGrille` (§11.23).
    *
-   *     G1 carnet · G2 marché · G3-G5 carnet   1-2-3 = 38,5 %   (38,5 % ouverture)
-   *     le carnet partout                      1-2-3 = 38,5 %   (38,5 %)
-   *     la cote partout (§11.17)               1-2-3 = 28,1 %   (31,3 %)
-   *     l'ordre des cases du carnet (`slot`)   1-2-3 = 25,0 %   (25,0 %)
+   *     G1-G3 carnet · G4-G5 marché   →   5/5 11,5 % · x/5 2,06   ← règle du bloc
+   *     le carnet partout             →   5/5  8,3 % · x/5 2,05
+   *     (règle d'avant)               →   5/5  7,3 % · x/5 1,97
+   *     la cote partout               →   5/5  6,3 % · x/5 1,82
    *
-   * → le RANG DE PRESSE est ce qui suit l'arrivée, pas la cote (§11.16).
-   *   Le marché garde deux rôles : choisir dans G2, et ordonner le ticket
-   *   (§11.19) ; il n'entre nulle part ailleurs dans la sélection.
-   *   `carnet` = la place de presse P1..P20 de la case (et non son `slot`,
-   *   qui est le numéro de colonne du carnet papier — mesuré moins bon). */
-  const CHOIX_DU_BLOC = { G1: 'carnet', G2: 'marche', G3: 'carnet', G4: 'carnet', G5: 'carnet' }
+   * Le haut du carnet est le seul ordre qui suit l'arrivée ; la queue (G4,
+   * G5) est la zone que la presse cite le moins — le marché y est meilleur.
+   * `carnet` = la place de presse P1..P20 de la case (et non son `slot`,
+   * qui est le numéro de colonne du carnet papier — mesuré moins bon).
+   *
+   * ⭐ 20/10/2026 (§11.27) — G5 a quota 0 : plus de siège à remplir, le marché
+   * n'y décide plus rien. G1 prend ses 4 (aucun choix là où il coûte le plus)
+   * et G2 redescend à 2 : 4-2-1-1-0, toujours 8 chevaux.
+   *
+   * ⭐ 20/10/2026 (soir) — G4 PASSE AU CARNET (§11.32). Mesure sur le TRIO,
+   * c'est-à-dire les 3 premiers ENSEMBLE dans le ticket (pas place par place) :
+   * 372 combinaisons énumérées (62 répartitions de 8 × 6 règles de choix),
+   *   G1-G4 carnet → trio 47,9 % (P96, moitiés 47,9 / 47,9) · 50,0 % (R18)    ← retenu
+   *   G4 au marché → trio 46,9 % (moitiés 47,9 / 45,8) · 44,4 % (R18)         (avant)
+   * Prix payé : le quinté complet passe de 16,7 % à 12,5 % sur P96.
+   * C'est le seul point de la grille où les deux métriques divergent : le
+   * carnet couvre mieux le trio, le marché signe mieux les quintés. */
+  const CHOIX_DU_BLOC = { G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'carnet', G5: 'marche' }
 
   for (const g of grille.groupes) {
     const cases = g.cases.map((c) => ({ ...c, s: parNum.get(c.num)?.s || null, ok: parNum.get(c.num)?.ok ?? null }))
@@ -910,23 +977,26 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
     const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
 
     /* le choix du bloc : le carnet (rang de presse) ou la cote du marché.
-     * Sans cote complète sur le bloc, `marche` retombe sur `tries` — le
-     * comportement carrière/forme d'avant, jamais modifié. */
+     * ⚠ Sans cote complète sur le bloc, `marche` retombe sur `carnet` (la
+     * place de presse) — jamais sur la carrière : §11.16. */
     const surLeMarche = cases.every((c) => coteDe(cotes, c.num) != null)
-    const choix = CHOIX_DU_BLOC[g.id] || 'carnet'
-    const effectif = choix === 'marche' && !surLeMarche ? 'classement' : choix
+    /* ⭐ 20/10/2026 — `choixDuBloc` (6ᵉ argument) permet de MESURER une autre
+     * règle de choix sans toucher à la production : tools/sept.mjs énumère les
+     * 16 combinaisons carnet/marché et les note. Sans argument, la règle
+     * ci-dessus s'applique — le comportement de la page ne change pas. */
+    const choix = ((choixDuBloc || CHOIX_DU_BLOC)[g.id]) || 'carnet'
+    const effectif = choix === 'marche' && !surLeMarche ? 'carnet' : choix
     const retenus = new Set()
-    if (choix === 'marche' && surLeMarche) {
-      cases.slice()
+    let ordre
+    if (effectif === 'marche') {
+      ordre = cases.slice()
         .sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num) || a.place - b.place)
-        .slice(0, quota).forEach((c) => retenus.add(c.place))
-    } else if (choix === 'carnet') {
-      cases.slice()
-        .sort((a, b) => a.place - b.place)
-        .slice(0, quota).forEach((c) => retenus.add(c.place))
+    } else if (effectif === 'carnet') {
+      ordre = cases.slice().sort((a, b) => a.place - b.place)
     } else {
-      tries.slice(0, quota).forEach((c) => retenus.add(c.place))
+      ordre = tries
     }
+    ordre.slice(0, quota).forEach((c) => retenus.add(c.place))
 
     detail.push({
       ...g,
@@ -944,89 +1014,109 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
     cases.forEach((c) => { if (retenus.has(c.place)) ticket.push(c.num) })
   }
 
-  // ── L'ORDRE DE LA TICKET — celui des STATISTIQUES, rien d'autre ──────────
-  // Ni l'ordre des cases du carnet, ni celui des cotes, ni celui de la presse.
-  // Un Quinté se joue DANS L'ORDRE : la 1re case est celle qui doit gagner.
-  // On la donne donc au cheval que l'archive montre le plus souvent 1er, la
-  // 2e à celui qu'elle montre le plus souvent 2e, etc. → `ordonnerParStats`.
+  // ── L'ORDRE DU TICKET — UNE SEULE CASE PRÉDIT, LES 7 AUTRES NON (§11.33) ──
+  // 20/10/2026 : l'utilisateur a refusé l'ordre total (« cet ordre est
+  // trompeur »). Il a raison : seul le 1er du ticket a un pouvoir mesuré
+  // (27,1 % de victoires, contre 4,2 % pour le 8e). Entre le 2e et le 5e, les
+  // taux sont plats (10,4 / 11,5 / 10,4 / 8,3) — aucun ordre n'y est mesurable.
+  // Donc : la 1re case = le cheval le mieux cité par la presse, le reste = un
+  // BLOC trié par numéro. On n'invente pas de 2e, 3e, 4e, 5e.
   const uniques = [...new Set(ticket)]
-  return { ticket: ordonnerParStats(uniques, grille, stats, cotes), detail }
+  return { ticket: ordonnerTicket(uniques, grille), detail }
 }
 
 /**
- * ⭐ L'ORDRE DE LA TICKET — par probabilités de place.
+ * ⭐ L'ORDRE DU TICKET — 20/10/2026 (§11.33).
  *
- *   stats    = computeStats(archive) → parPlace[r].p = [P(1er), P(2e), P(3e), P(4e), P(5e)]
- *              où `r` est le RANG DE PRESSE du cheval (P1, P2, P3…).
- *   cotes    = { n° : {cote} } — le départage quand l'archive ne dit rien.
+ * **Une case prédit, les sept autres sont un bloc.**
  *
- * Attribution gloutonne : le meilleur pour la 1re place, puis le meilleur pour
- * la 2e parmi ceux qui restent, puis la 3e, la 4e, la 5e. Les chevaux en
- * trop suivent, sans place.
+ * Mesure (`tools/discrimination.mjs`, 96 Quintés, 8 chevaux du ticket) :
  *
- * ⚠ Avec moins de 10 Quintés dans l'archive (`stats.nb`), ces pourcentages sont
- * du bruit : le ordre est presque arbitraire. C'est demandé quand même — l'ordre
- * s'affine tout seul à mesure que l'archive grossit.
+ *   rang   gagne    dans les 3   dans les 5
+ *   1er    27,1 %      53,1 %       65,6 %      ← le seul écart net
+ *   2e     10,4 %      40,6 %       53,1 %
+ *   3e     11,5 %      37,5 %       50,0 %      ← plat
+ *   4e     10,4 %      26,0 %       38,5 %      ← plat
+ *   5e      8,3 %      20,8 %       40,6 %
+ *   8e      4,2 %      19,8 %       32,3 %
+ *
+ * Entre le 2e et le 4e, l'écart est dans le bruit : afficher 2·3·4 comme s'ils
+ * étaient prédits, c'est mentir. On ne garde donc QUE la 1re case (le P1 de la
+ * presse, dans le ticket par construction) et on rend les 7 autres par numéro.
+ *
+ * AUC de l'ordre complet : 0,61 (hasard 0,50) — un pouvoir de tri réel mais
+ * faible, insuffisant pour annoncer une place 2, 3, 4 ou 5.
+ */
+export function ordonnerTicket(ticket, grille) {
+  const nums = [...new Set(ticket || [])]
+  if (nums.length < 2) return nums
+  const p = grille?.parNum || {}
+  const rang = (n) => (p[n] != null ? p[n] : 999)
+  const tete = nums.slice().sort((a, b) => (rang(a) - rang(b)) || a - b)[0]
+  return [tete, ...nums.filter((n) => n !== tete).sort((a, b) => a - b)]
+}
+
+/**
+ * ⭐ L'ORDRE DE LA TICKET — ⚠ 20/10/2026 : PAR LES STATISTIQUES DU PODIUM.
+ *
+ *   stats    = computeStats(archive) → parPlace[r] : `r` = la CASE P du carnet,
+ *              `podiums` = combien de fois la case a fini 1er, 2e ou 3e,
+ *              `n` = combien de fois elle a fini dans les cinq.
+ *   grille   = buildGrid → slotParNum (le P de chaque numéro).
+ *
+ * La règle est celle de l'utilisateur (20/10/2026) :
+ *
+ *     « le ticket de 8 doit être ordonné selon les statistiques du podium »
+ *
+ * Donc l'ordre est la PROBABILITÉ DE PODIUM de chaque case, décroissante :
+ * la 1re case du ticket va au cheval dont la case P fait le plus souvent
+ * 1er-2e-3e, la 2e au suivant, etc. On ne cherche plus à deviner « 4e » ou
+ * « 5e » : le Quinté se joue sur le podium, l'ordre suit le podium.
+ *
+ * Le taux est CONDITIONNEL (podiums / n_top5) : c'est la seule base où les
+ * cases sont comparables entre elles (§2.2 — dénominateur nommé).
+ *
+ * ⚠ Une case avec n < 2 n'a pas de statistique : elle passe derrière, dans
+ * l'ordre du carnet. Même principe que « physique > forme » : le fait bat la
+ * supposition.
+ *
+ * L'ancienne règle (07/10 → 19/10) donnait à chaque cheval SA place de
+ * prédilection (argmax de [1er, 2e, 3e, 4e, 5e]) puis remplissait les cases
+ * 1, 2, 3, 4, 5. Elle est mesurée contre celle-ci dans tools/ordre.mjs.
  */
 export function ordonnerParStats(ticket, grille, stats, cotes = null) {
   const nums = [...new Set(ticket || [])]
   if (nums.length < 2) return nums
 
   const parPlace = stats?.parPlace || []
-  /* ⚠ 15/10/2026 — LE P EST LA CASE DU CARNET (slotParNum de la grille,
-   * §11.13), PARTOUT : sélection, stats, ordre, affichage. */
   const ps = grille?.slotParNum || {}
   const pDeNum = (num) => ps[num] ?? 999
 
-  /* ── L'ORDRE : LA PLACE EST CELLE OÙ LE P EST LE PLUS FORT ──
-   * Règle de l'utilisateur (07/10/2026) : chaque cheval du ticket se
-   * place à la position où son P(n) est le plus fort d'après le tableau
-   * Statistiques. P1 à 100 % au 1er → première case. P4 à 50 % au 5e →
-   * cinquième case. Puis les autres, sans place.
-   *
-   * ⚠ CORRIGÉ le 10/10 : l'ancien code prenait pour CHAQUE case le
-   * cheval restant le plus FORT (max global, départage par le carnet).
-   * Un cheval fort en 3e (P2 à 60 %) pouvait s'asseoir en 2e case et
-   * faire descendre le vrai 2e (P10 à 60 % au 2e) — vu par
-   * l'utilisateur le 10/10 : « le 2e doit être P10 ». Désormais chaque
-   * cheval déclare SA place (son argmax) et une place n'accueille QUE
-   * le plus fort de ceux qui la revendiquent. Les perdants et les
-   * chevaux sans force suivent « sans place », au rang du carnet.
-   *
-   * ⚠ Un P avec n=1 (une seule course) affiche des pourcentages de
-   *   100 % qui ne veulent rien dire. On les traite comme nuls : sans
-   *   historique, pas de force — c'est le même principe que « physique
-   *   > forme » : le fait bat la supposition. */
-  const signature = (num) => {
+  /* ── LA FORCE D'UNE CASE : SA PROBABILITÉ DE PODIUM ────────────────────
+   * podium_conditionnel = podiums / n_top5. `top3` (déjà calculé) est le même
+   * nombre arrondi ; on prend le rapport exact pour départager les ex æquo. */
+  const forcePodium = (num) => {
     const st = parPlace[pDeNum(num) - 1]
-    if (!st || !st.n || st.n < 2 || !Array.isArray(st.p)) return null
-    let best = 0
-    for (let k = 1; k < 5; k++) if ((st.p[k] ?? 0) > (st.p[best] ?? 0)) best = k
-    return (st.p[best] ?? 0) > 0 ? { place: best, force: st.p[best] } : null
+    if (!st || !st.n || st.n < 2) return null
+    const pod = st.podiums != null
+      ? st.podiums
+      : (st.p?.[0] ?? 0) + (st.p?.[1] ?? 0) + (st.p?.[2] ?? 0)
+    return pod / st.n
   }
 
-  /* ⚠ LE DÉPARTAGE EST LE RANG DU CARNET (le P de la grille), PAS LA COTE.
-   * Avec la cote, le même ticket donnait un ordre différent en local
-   * (pas de marché) et en production (marché lu) : la page et
-   * l'archive ne se ressemblaient plus. Or l'ordre doit être le même
-   * partout — c'est l'archive qui fait foi. On départage donc par le
-   * P le plus proche du début du carnet, ce qui est stable. */
-  const rangDe = (num) => pDeNum(num)
-
-  const s = nums.map((n) => ({ n, sig: signature(n), rang: rangDe(n) }))
-  /* chaque place : le plus fort de ses candidats (force, puis carnet) */
-  const places = new Array(5).fill(null)
-  const pris = new Set()
-  const candidats = s.filter((x) => x.sig)
-    .sort((a, b) => (b.sig.force - a.sig.force) || (a.rang - b.rang))
-  for (const x of candidats) {
-    if (places[x.sig.place] == null) { places[x.sig.place] = x.n; pris.add(x.n) }
-  }
-  /* les autres, sans place, dans l'ordre du carnet */
-  const sansPlace = s.filter((x) => !pris.has(x.n))
-    .sort((a, b) => a.rang - b.rang)
+  /* ── LE DÉPARTAGE : LE CARNET (le P le plus petit) ──────────────────────
+   * Pas la cote : l'ordre doit être le même avec et sans marché (§11.19). */
+  return nums
+    .map((n) => ({ n, f: forcePodium(n), rang: pDeNum(n) }))
+    .sort((a, b) => {
+      const fa = a.f, fb = b.f
+      if (fa == null && fb == null) return a.rang - b.rang
+      if (fa == null) return 1
+      if (fb == null) return -1
+      if (fb !== fa) return fb - fa
+      return a.rang - b.rang
+    })
     .map((x) => x.n)
-  return [...places.filter((n) => n != null), ...sansPlace]
 }
 
 /* ------------------------------------------------ LE TICKET & LES PARTANTS --- */

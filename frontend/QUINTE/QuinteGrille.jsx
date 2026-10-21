@@ -2,17 +2,17 @@ import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
 import Drapeau from '../../src/Drapeau.jsx'
-import { hhmmGMT, heureGMT, heureMarocGMT } from '../../src/temps.js'
+import { hhmmGMT, heureGMT, heureParisGMT } from '../../src/temps.js'
 import {
   fetchRecapSite, fetchArchiveDisque,
   buildGrid, classerPartants, classerPhysique, remplirGrille, GROUPES, quotasEffectifs,
-  scorePhysique, filtres, ordonnerParStats, ticketValide, ticketAffiche,
+  scorePhysique, filtres, ordonnerParStats, ordonnerTicket, ticketValide, ticketAffiche,
   saveArchive, listArchive, deleteArchive, attachResult, attachTicket,
   loadCarriere, syncDepuisDisque, getArchive,
   clearArchive,
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
-  rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix,
+  rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix, fetchEmpreinte,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
@@ -140,6 +140,8 @@ const THEME = {
     th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#fecdd3', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '6px 9px', fontSize: 13 },
   },
+  /* 🎯 (retiré le 19/10/2026) — le Trio · Couplé a été sorti de cette page :
+     il vit sur la page Coply, avec SA sélection. Voir /coply. */
 }
 
 const TABS = [['grille', 'La grille'], ['ticket', 'Le ticket'], ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts'], ['choix', 'Choix']]
@@ -258,7 +260,7 @@ function ConditionsCourse({ course, date, sk }) {
       <div style={{ marginTop: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,.07)' }}>
         <div style={{ fontSize: 12, color: '#475569' }}>
           <b style={{ color: '#e7f1ff' }}>{c.date_formatted || date}</b>
-          {c.time ? ' · ' + (heureMarocGMT(c.time) || c.time + ' h') : ''}
+          {c.time ? ' · ' + (heureParisGMT(date, c.time) || c.time + ' h') : ''}
           {'   ·   '}
           {c.reunion_code ? <b style={{ color: '#e7f1ff' }}>{c.reunion_code}</b> : null}
           {/* le drapeau du pays de la réunion — une VRAIE image (Windows ne
@@ -333,16 +335,18 @@ export default function QuinteGrille() {
   //    La page les AFFICHE telles quelles : aucun chiffre saisi à la main (§7).
   const [fiabilite, setFiabilite] = useState(null)
   const [ecarts, setEcarts] = useState(null)
+  // ⭐ LES DEUX EMPREINTES (tools/empreinte.mjs, 19/10/2026) — la bassmat du
+  //    podiums et du quinté, par case du carnet. Lu tel quel.
+  const [empreinte, setEmpreinte] = useState(null)
   // 🩸 LA MESURE DU CHOIX dans G1/G2 (tools/choix-g1g2.mjs, 16/10/2026).
   const [choix, setChoix] = useState(null)
   // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
   //   (AGENTS.md §13.3) : la page doit le montrer tel quel, pas le recalculer.
-  const [ticketManuel, setTicketManuel] = useState(null)
-  // ⚑ la lecture du RÉSULTAT est déclenchée par l'utilisateur (bouton) :
+  const [ticketManuel, setTicketManuel] = useState(null)  // ⚑ la lecture du RÉSULTAT est déclenchée par l'utilisateur (bouton) :
   //   on ne va pas sonder casacourses en boucle toute la journée.
   const [busyResultat, setBusyResultat] = useState(false)
   // 🔒 AUCUNE modification à la main : le numéro de chaque case est celui du moteur.
-  //    Le clic ne change plus rien (demandé le 05/10/2026).
+  //    Le clic ne change plus rien (demandé le 05/10/2026, reconfirmé le 20/10).
 
   /* ------------------------------------------------------ chargement --- */
 
@@ -353,6 +357,7 @@ export default function QuinteGrille() {
     fetchFiabilite().then((x) => x && setFiabilite(x)).catch(() => {})
     fetchEcarts().then((x) => x && setEcarts(x)).catch(() => {})
     fetchChoix().then((x) => x && setChoix(x)).catch(() => {})
+    fetchEmpreinte().then((x) => x && setEmpreinte(x)).catch(() => {})
   }, [])
 
   const charger = useCallback(async (d) => {
@@ -610,7 +615,7 @@ export default function QuinteGrille() {
   const stats = useMemo(() => computeStats(archive), [archive])
 
   // 📍 le RANG DE MARCHÉ de chaque partant (1 = la cote la plus basse) — c'est
-  //   le badge des boules. Il n'entre PAS dans la sélection (§11.22).
+  //   le badge des boules. Il ne règle QUE la queue : G4 et G5 (§11.23).
   const rangs = useMemo(() => rangsMarche(cotes), [cotes])
   const bandes = useMemo(() => Object.fromEntries(Object.entries(rangs).map(([n, r]) => [n, bandeMarche(r)])), [rangs])
 
@@ -735,6 +740,11 @@ function PanneauMesure({ sk, fiabilite, detail }) {
               </tbody>
             </table>
           </div>
+          <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6, lineHeight: 1.6 }}>
+            Depuis le 19/10/2026 (§11.23), la <b>queue</b> du ticket se remplit à la cote — aujourd'hui
+            <b> G4</b> seulement. Depuis le 20/10/2026 (§11.27) G1 prend ses <b>4</b> et G2 redescend à <b>2</b> :
+            quotas <b>4-2-1-1-0</b>, toujours 8 chevaux. G1-G3 restent au rang de presse.
+          </div>
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
             <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>Le badge des boules</b>{' '}
@@ -769,14 +779,16 @@ function PanneauMesure({ sk, fiabilite, detail }) {
             </div>
             <span style={{ color: sk.muted }}>
               Le badge de la boule porte ce rang, sur le fond de sa bande (M≤3 · M≤5 · M6-12 · M13+).
-              Rien de tout cela ne choisit à votre place : §11.22, c’est le rang de presse qui remplit les blocs.
+              Il <b>choisit</b> dans G4 ; dans G1-G3 c’est le rang de presse qui décide, et G5 n’a
+              plus de siège depuis le 20/10/2026 (§11.23 · §11.26).
             </span>
           </div>
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
             <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>L’expérience du siège de G5</b>{' '}
-            — la méthode dit « B5 : 1 ou 0 » (§11.6). Le moteur prend ce siège <b>sans condition</b>. Voici ce que
-            les autres lectures donnent, sur les <b>mêmes 8 chevaux</b> (tools/experience-g5.mjs).
+            — la méthode dit « B5 : 1 ou 0 » (§11.6). Le 20/10/2026, le siège a été <b>déplacé vers G2</b>
+            (§11.26) : la ligne marquée « appliquée » est celle du moteur. Les autres lectures sont
+            mesurées sur les <b>mêmes 8 chevaux</b> (tools/experience-g5.mjs).
             <div style={{ overflowX: 'auto', marginTop: 6 }}>
               <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
                 <thead>
@@ -804,8 +816,8 @@ function PanneauMesure({ sk, fiabilite, detail }) {
               </table>
             </div>
             <span style={{ color: sk.muted }}>
-              Aucune de ces variantes n’est en production tant que le choix n’est pas fait (§11.16 — les quotas
-              n’appartiennent pas au moteur). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
+              Une seule de ces variantes est en production — celle qui porte « appliquée » (4-2-1-1-0,
+              §11.27). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
             </span>
           </div>
         </>
@@ -929,8 +941,9 @@ function TabChoix({ sk, choix }) {
         ) : null}
         <br />
         <span style={{ color: sk.muted }}>
-          ⛔ Les quotas ne bougent pas (§11.16) : <b>3-2-1-1-1</b>. On ne mesure QUE qui entre
-          dans G1 (3 gardés sur 4) et dans G2 (2 gardés sur 4). Métrique = <b>PAYANTE</b>,
+          ⛔ Les quotas sont fixés (§11.16) : <b>4-2-1-1-0</b> depuis le 20/10/2026
+          (§11.27 — G1 prend ses 4, G2 redescend à 2). On ne mesure QUE qui entre
+          dans G2 (2 gardés sur 4) et dans G4 (1 gardé sur 2). Métrique = <b>PAYANTE</b>,
           le 1-2-3 complet dans la grille.
         </span>
       </div>
@@ -975,7 +988,7 @@ function TabChoix({ sk, choix }) {
           ['le choix parfait dans G1 seul', L.oracleG1, sk.accent],
           ['le choix parfait dans G2 seul', L.oracleG2, sk.accent],
           ['le hasard pur', L.hasard, sk.muted],
-          ['déplacer le siège de G5 vers G2 (§11.23)', L.quotaG5versG2, sk.muted],
+          ['3-3-1-1-0 (§11.26 — remplacé le 20/10 par 4-2-1-1-0, §11.27)', L.quotaG5versG2, sk.accent],
         ].map(([lib, v, col]) => (
           <div key={lib} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '3px 0' }}>
             <span style={{ width: 300, color: sk.texte }}>{lib}</span>
@@ -988,8 +1001,9 @@ function TabChoix({ sk, choix }) {
         ))}
         <div style={{ marginTop: 8, fontSize: 12, color: sk.texte, borderTop: '1px dashed ' + sk.bord, paddingTop: 8, lineHeight: 1.6 }}>
           Le <b>choix</b> vaut <b style={{ color: sk.accent }}>+{nb(Math.round(10 * (L.oracle - L.code)) / 10)} pts</b>,
-          la <b>quota</b> <b>+{nb(Math.round(10 * (L.quotaG5versG2 - L.code)) / 10)} pts</b> :
-          le levier est bien dans le choix, comme l’utilisateur le dit.
+          la <b>quota</b> <b>+{nb(Math.round(10 * (L.quotaG5versG2 - L.code)) / 10)} pts</b>.
+          Le choix parfait reste hors d'atteinte ; le déplacement du siège, lui, a été
+          <b> appliqué</b> le 20/10/2026 : c'est le premier levier qui gagne sur les deux corpus (§11.26).
         </div>
       </div>
 
@@ -1093,12 +1107,15 @@ function TabChoix({ sk, choix }) {
           La carrière vient de <b>tools/collect-forms.mjs</b> (<code>data/forms.json</code>),
           enrichie par <b>tools/collect-terrain.mjs</b> (<code>data/terrain.json</code>) et
           <b>tools/collect-vh.mjs</b> (<code>data/vh.json</code>) — terrain, sens et VH collectés de PMU (§14.6).
-          La règle en production reste <b>G1 presse · G2 marché · G3-G5 carnet</b> (§11.22) : rien n’est appliqué.
+          La règle en production est <b>G1-G3 carnet · G4 marché</b>, sur les quotas
+          <b> 4-2-1-1-0</b> (§11.23 + §11.27).
         </span>
       </div>
     </div>
   )
 }
+
+
 const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   <Boite key={cellule.slot} n={cellule.num} pris={cellule.pris}
     presse={cellule.presse} score={cellule.s} cote={cellule.cote} slot={cellule.slot}
@@ -1108,15 +1125,16 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   <div style={{ width: 54, height: 54 }} />
 ))
 
-  // ⚠ L'ORDRE DE LA TICKET = les PROBABILITÉS DE PLACE de l'onglet Statistiques.
-  //   La 1re case est le cheval qui, d'après l'archive, sort le plus souvent 1er ;
-  //   la 2e, celui qui sort le plus souvent 2e… Ni la presse, ni les cotes, ni
-  //   l'ordre des cases du carnet. → `ordonnerParStats` (appelé par remplirGrille).
+  // ⚠ L'ORDRE DU TICKET — UNE CASE PRÉDIT, LES SEPT AUTRES NON (§11.33).
+  //   Mesuré sur 96 Quintés : le 1er du ticket gagne 27,1 %, le 8e 4,2 %.
+  //   Entre le 2e et le 4e : 10,4 / 11,5 / 10,4 → plat, aucun ordre mesurable.
+  //   Donc la 1re case va au P1 de la presse, et les 7 autres sont un BLOC
+  //   trié par numéro : la page n'invente pas de 2e, 3e, 4e, 5e.
   //   ⚠ Un ticket ARCHIVÉ garde son ordre d'origine : il est intouchable (§13.3).
   /* ⚠ LE TICKET ARCHIVÉ EST INTOCABLE (§13.3) — mais SEULEMENT l'ORDRE
-   *  change avec l'archive. Les MÊMS chevaux, remis dans l'ordre que les
-   *  statistiques donnent aujourd'hui (§17.2). Sans cela la page resterait
-   *  bloquée sur un ordre de juin alors que la méthode a changé.
+   *  change avec l'archive. Les MÊMS chevaux, remis dans l'ordre de la presse
+   *  du jour. Sans cela la page resterait bloquée sur un ordre de juin alors
+   *  que la méthode a changé.
    *  Le premier ticket figé reste : ce qu'on fige, c'est la SÉLECTION. */
   const ticket = useMemo(() => {
     if (!rempli) return ticketManuel && ticketManuel.length ? ticketManuel : []
@@ -1125,8 +1143,8 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
      *   `ticketAffiche` retire les numéros absents de la grille du jour et,
      *   la course encore ouverte, remplit la place dans le même groupe
      *   (quota §11.19). Course courue : constat, sans invention (§7). */
-    return ordonnerParStats(ticketAffiche(base, rempli, !courseFinie), grille, stats, cotes)
-  }, [rempli, ticketManuel, grille, stats, cotes, courseFinie])
+    return ordonnerTicket(ticketAffiche(base, rempli, !courseFinie), grille)
+  }, [rempli, ticketManuel, grille, courseFinie])
 
   // ⚠ L'AUTO-FIGEAGE : dès que le moteur produit un ticket, on l'écrit dans
   //   l'archive. L'archive doit montrer le ticket DÈS LE PREMIER ANALYSE —
@@ -1377,12 +1395,14 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           <div style={{ fontSize: 12, color: SK.texte, margin: '12px 0 8px', lineHeight: 1.6, background: SK.alt, border: '1px solid ' + SK.bord, borderLeft: '4px solid ' + SK.accent, borderRadius: SK.box.borderRadius, padding: '10px 12px' }}>
             MA MÉTHODE — cinq groupes, un quota chacun. Le moteur remplit les quotas :
             le ticket est fixé, il ne se modifie pas à la main.
+            Depuis le 20/10/2026 les quotas sont <b>4-2-1-1-0</b> (§11.27) : G1 prend ses 4
+            et G2 redescend à 2 — <b>toujours 8 chevaux</b>.
             Les boîtes se lisent <b>en travers</b> : ligne du haut puis ligne du bas.{carnet(detail) && <> Les cases sont numérotées <b>P1, P2… en colonnes</b> : la ligne du haut porte la parité du P1.</>}
             <br />
             {Object.keys(cotes).length >= 4 ? (
               <>📈 <b>Marché lu sur equidia.fr</b>, relevé à {heureCote ? (hhmmGMT(heureCote) || '?') + ' GMT' : '?'} — rafraîchi toutes les minutes.
                 Le badge de chaque boule (en haut à droite) est son <b>rang de cote</b> :
-                il <b>informe</b>, il ne choisit pas (§11.22 — c'est le rang de presse qui remplit les blocs).
+                il <b>choisit</b> dans G4 (§11.23 — le carnet remplit G1-G3, la cote le dernier bloc), ailleurs il <b>informe</b>.
                 Ce que ce rang vaut, et ce que vaut le moteur, sont mesurés dans le
                 <b> panneau de mesure</b> sous le ticket.</>
             ) : (
@@ -1466,6 +1486,12 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 3, marginTop: 8, color: '#fff', fontFamily: SK.nb.td }}>
               {ticket.length ? ticket.join('  ·  ') : '—'}
             </div>
+            {ticket.length > 1 && (
+              <div style={{ fontSize: 11, color: 'rgba(255,255,255,.75)', marginTop: 6, fontFamily: SK.nb.td }}>
+                <b>{ticket[0]}</b> = la seule case qui prédit (27,1 % de victoires) ·
+                les {ticket.length - 1} autres sont un <b>bloc sans ordre</b> — le Quinté se joue en désordre.
+              </div>
+            )}
             {infoTicket && (
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,.85)', marginTop: 8, fontFamily: SK.nb.td }}>
                 {infoTicket.n} chevaux · score forme moyen {infoTicket.forme}/10 · score global moyen {infoTicket.global}
@@ -1606,11 +1632,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         </td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>{(a.arrivee || []).join('-') || '—'}</td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>
-  {/* ⭐ ORDRE VIVANT (10/10) : l'archive affiche les MÊMES chevaux, remis
-      dans l'ordre que donnent les Statistiques AUJOURD'HUI — le gel fige
-      la SÉLECTION, jamais l'ordre (§17.2). Sans ça, la ligne montrait
-      l'ordre brut du gel, qui ne suit pas la logique des résultats. */}
-  {ordonnerParStats(ticketValide(a), buildGrid(a.synthese || [], a.runners || []), stats).join(' ') || '—'}
+  {/* ⭐ ORDRE VIVANT (20/10/2026, §11.32) : l'archive affiche les MÊMES
+      chevaux, remis dans l'ordre de LA PRESSE du jour — le gel fige la
+      SÉLECTION, jamais l'ordre (§17.2). */}
+  {ordonnerTicket(ticketValide(a), buildGrid(a.synthese || [], a.runners || [])).join(' ') || '—'}
 </td>
                         {/* ⭐ UN SEUL TEMPS : l'heure où le ticket a été POSÉ (le gel).
                             Pas l'heure d'enregistrement de la Synthèse — ce
@@ -1855,6 +1880,73 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     </table>
                   </div>
                 )}
+
+                {/* ⭐ LES DEUX EMPREINTES (19/10/2026) — tools/empreinte.mjs.
+                    Le PODIUM et le QUINTÉ lus par CASE du carnet (P1..P20),
+                    comme la grille. Source : les 96 Quintés à presse réelle. */}
+                {empreinte && (() => {
+                  const E = empreinte
+                  const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
+                  const bloc = (titre, d, max) => (
+                    <div style={{ flex: '1 1 300px', minWidth: 290 }}>
+                      <div style={{ fontSize: 12, fontWeight: 800, color: SK.accent, letterSpacing: .6, textTransform: 'uppercase', marginBottom: 6 }}>{titre}</div>
+                      <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12.5 }}>
+                        <tbody>
+                          {d.motifs.slice(0, max).map((m) => (
+                            <tr key={m.motif} style={{ borderBottom: '1px solid rgba(255,255,255,.06)' }}>
+                              <td style={{ padding: '3px 6px', fontFamily: SK.nb.td, fontWeight: 800, color: SK.texte, whiteSpace: 'nowrap' }}>{m.motif}</td>
+                              <td style={{ padding: '3px 6px', width: 46, textAlign: 'right', fontFamily: SK.nb.td, color: '#c7d6ea' }}>{m.n}</td>
+                              <td style={{ padding: '3px 6px', width: 62, textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800, color: SK.accent, whiteSpace: 'nowrap' }}>{nb(m.pct)} %</td>
+                              <td style={{ padding: '3px 6px', width: 90 }}>
+                                <div style={{ height: 7, borderRadius: 4, background: SK.accent, opacity: .75, width: Math.max(2, m.pct * 3.2) }} />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <div style={{ fontSize: 11, color: SK.muted, marginTop: 6, lineHeight: 1.5 }}>
+                        moyenne par course : <b>G1 {nb(d.moyenne.G1)}</b> · G2 {nb(d.moyenne.G2)} · G3 {nb(d.moyenne.G3)} · G4 {nb(d.moyenne.G4)} · G5 {nb(d.moyenne.G5)}
+                        <br />{d.distinctes} empreintes distinctes · la plus fréquente : <b style={{ fontFamily: SK.nb.td }}>{d.empreintes[0]?.empreinte}</b> ({nb(d.empreintes[0]?.pct)} %)
+                      </div>
+                    </div>
+                  )
+                  return (
+                    <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
+                      <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Les deux empreintes — le podium et le quinté</b>
+                      <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 10 }}>
+                        <b>{E.n}</b> Quintés à <b>presse réelle</b> ({E.periode.debut} → {E.periode.fin}) · lus par <b>case du carnet</b> (P1..P20), le même P que la grille.
+                        Un motif = combien de chevaux de chaque groupe : <b>G1·G2·G3·G4·G5</b>.
+                      </div>
+                      <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap' }}>
+                        {bloc('Le podium (3 places)', E.podium, 8)}
+                        {bloc('Le quinté (5 places)', E.quinte, 10)}
+                      </div>
+                      <div style={{ marginTop: 14, borderTop: '1px solid ' + SK.bord, paddingTop: 10 }}>
+                        <div style={{ fontSize: 12, fontWeight: 800, color: SK.accent, letterSpacing: .6, textTransform: 'uppercase', marginBottom: 6 }}>Combien de cases pour tout tenir</div>
+                        <table style={{ borderCollapse: 'collapse', fontSize: 12 }}>
+                          <thead>
+                            <tr>
+                              {['P1..Pk', 'podium', 'quinté'].map((h) => <th key={h} style={{ padding: '3px 10px', textAlign: 'right', color: SK.muted, fontWeight: 800, fontSize: 11 }}>{h}</th>)}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {E.courbe.map((c) => (
+                              <tr key={c.k} style={{ borderTop: '1px solid rgba(255,255,255,.06)', background: c.k === 8 ? SK.accentClair : 'transparent' }}>
+                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800 }}>{c.k}</td>
+                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td }}>{nb(c.podium)} %</td>
+                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: c.k === 8 ? 800 : 400, color: c.k === 8 ? SK.accent : '#c7d6ea' }}>{nb(c.quinte)} %</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                        <div style={{ fontSize: 11, color: SK.muted, marginTop: 6 }}>
+                          La ligne surlignée = le ticket du Quinté (8 chevaux, quotas 4-2-1-1-0).
+                          Écrire les chiffres : <code>node tools\empreinte.mjs</code>.
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })()}
 
                 <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
                 <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Le vainqueur vient de…</b>

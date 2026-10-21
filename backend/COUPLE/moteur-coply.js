@@ -68,13 +68,18 @@ async function chargerModele() {
 const sigmoid = (z) => 1 / (1 + Math.exp(-Math.max(-30, Math.min(30, z))))
 
 /**
- * selectionCoply(partants, course) → { trio, paires, probas, modele }
- *   trio    : les 3 numéros (top-3 prédit)
- *   paires  : les 3 paires du trio [[a,b],[a,c],[b,c]] — la définition
+ * selectionCoply(partants, course, n = 3) → { chevaux, trios, paires, probas, modele }
+ *   chevaux : les n numéros (top-n prédit) — 3 par défaut
+ *   trios   : les C(n,3) trios des n chevaux
+ *   paires  : les C(n,2) couplés des n chevaux
  *   probas  : P(top3) de chaque cheval, pour l'affichage
  *   modele  : { fenetre, validation } — la traçabilité
+ *
+ * ⚠ 19/10/2026 — la page n'affiche QUE les 3 numéros (choix de
+ *   l'utilisateur) : « عطي غير تلاتة الارقام فقط ». `n` reste un paramètre
+ *   pour les tests, il n'est pas exposé dans l'interface.
  */
-export async function selectionCoply(partants, course) {
+export async function selectionCoply(partants, course, n = 3) {
   const m = await chargerModele()
   const chevaux = (partants || []).filter((p) => p.num && !p.nonPartant)
   if (chevaux.length < 3) return null
@@ -86,22 +91,35 @@ export async function selectionCoply(partants, course) {
   })
   preds.sort((a, b) => b.p - a.p || a.num - b.num)
 
-  const trio = preds.slice(0, 3).map((x) => x.num)
-  const [a, b, c] = trio
+  const taille = Math.max(3, Math.min(Number(n) || 4, preds.length))
+  const chevauxSel = preds.slice(0, taille).map((x) => x.num)
   return {
-    trio,
-    paires: [[a, b], [a, c], [b, c]],
-    probas: preds.slice(0, 6).map((x) => ({ num: x.num, p: x.p, cote: x.cote })),
+    chevaux: chevauxSel,
+    trios: combinaisons(chevauxSel, 3),
+    paires: combinaisons(chevauxSel, 2),
+    probas: preds.slice(0, 8).map((x) => ({ num: x.num, p: x.p, cote: x.cote })),
     modele: { fenetre: m.fenetre, fin: m.fin, validation: m.validation },
   }
 }
 
-/** Le repli si le modèle est indisponible : les 3 plus petites cotes. */
-export function repliMarche(partants) {
+/** Les combinaisons de k numéros pris parmi n (l'ordre ne compte pas). */
+export function combinaisons(liste, k) {
+  const out = []
+  const rec = (debut, acc) => {
+    if (acc.length === k) { out.push([...acc]); return }
+    for (let i = debut; i < liste.length; i++) { acc.push(liste[i]); rec(i + 1, acc); acc.pop() }
+  }
+  rec(0, [])
+  return out
+}
+
+/** Le repli si le modèle est indisponible : les n plus petites cotes. */
+export function repliMarche(partants, n = 3) {
   const chevaux = (partants || []).filter((p) => p.num && !p.nonPartant)
   const cs = chevaux
     .map((p) => ({ num: p.num, c: Number(p.coteRef ?? p.cote_pmu ?? p.cote) }))
     .filter((x) => Number.isFinite(x.c) && x.c > 0)
     .sort((a, b) => a.c - b.c || a.num - b.num)
-  return cs.slice(0, 3).map((x) => x.num)
+  const taille = Math.max(3, Math.min(Number(n) || 4, cs.length))
+  return cs.slice(0, taille).map((x) => x.num)
 }

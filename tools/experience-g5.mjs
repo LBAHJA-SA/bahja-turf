@@ -1,20 +1,18 @@
 /* =============================================================================
  * tools/experience-g5.mjs — L'EXPÉRIENCE DU SIÈGE DE G5 (16/10/2026)
  *
- * §11.16 : les quotas 3-2-1-1-1 ne se modifient pas. Mais la méthode elle-même
- * déclare une LATITUDE, §11.2 / §11.6 / §11.9 :
+ * §11.16 : les quotas appartiennent à la méthode, pas au moteur. Mais la méthode
+ * elle-même déclare une LATITUDE, §11.2 / §11.6 / §11.9 :
  *
  *     B1 ······ 2 ou 3      B3 ······ 1 OBLIGATOIRE     B5 ······ 1 ou 0
  *     B2 ······ 2 ou 3      B4 ······ 1
  *
  * Et §11.6 dit du dernier bloc : « B5 : 1 ou 0 — le 1 seulement si un cheval de
- * B5 a une configuration physique irréprochable ». Le code, lui, prend ce siège
- * SANS CONDITION (quota = 1).
+ * B5 a une configuration physique irréprochable ».
  *
- * Cette expérience ne touche QUE ce siège : on le laisse à G5 sous condition,
- * ou on le déplace vers le bloc qui a les arrivants. Rien d'autre ne bouge —
- * mêmes blocs (buildGrid), même choix (§11.22 — G1 carnet · G2 marché · G3-G5
- * carnet), même métrique §11.18 (PAYANTE = le 1-2-3 complet dans la grille).
+ * ⭐ 20/10/2026 — §11.26 : la mesure a tranché, le siège de G5 est passé à G2.
+ * La production est donc 3-3-1-1-0, et cette expérience mesure désormais
+ * l'inverse : que vaut le siège quand on le remet, et où ?
  *
  *   96 Quintés à presse RÉELLE (data/quintes.json), cotes finales ET ouverture.
  *
@@ -61,10 +59,18 @@ export function rangMarche(c) {
   return Object.fromEntries(ordre.map((n, i) => [n, i + 1]))
 }
 
-/** les quotas de référence (le code en production) */
-export const Q_BASE = { G1: 3, G2: 2, G3: 1, G4: 1, G5: 1 }
-/** le siège de G5 part vers `secours` (G2 par défaut) */
-export const Q_SANS_G5 = (secours = 'G2') => ({ G1: 3, G2: 2, G3: 1, G4: 1, G5: 0, [secours]: 3 })
+/* ⭐ 20/10/2026 (§11.27) — la production est 4-2-1-1-0 : G1 prend ses 4 (plus
+ * de choix là où il coûte le plus), G2 redescend à 2. L'expérience compare les
+ * répartitions à 8 chevaux, et la seule qui AJOUTE un siège (9) à part. */
+export const Q_BASE = { G1: 4, G2: 2, G3: 1, G4: 1, G5: 0 }
+/** la règle d'avant : le siège de G5, inconditionnel */
+export const Q_AVANT = { G1: 3, G2: 2, G3: 1, G4: 1, G5: 1 }
+/** 3-3-1-1-0 — la production du 20/10 au matin (§11.26) */
+export const Q_3_3_1_1_0 = { G1: 3, G2: 3, G3: 1, G4: 1, G5: 0 }
+/** le siège de G2 part vers `secours` (8 chevaux, base 4-2-1-1-0) */
+export const Q_SANS_G5 = (secours = 'G3') => ({ G1: 4, G2: 1, G3: 1, G4: 1, G5: 0, [secours]: 2 })
+/** le siège est AJOUTÉ (9 chevaux) */
+export const Q_PLUS_G5 = { G1: 4, G2: 2, G3: 1, G4: 1, G5: 1 }
 
 const classementDe = (grille) => grille.groupes
   .flatMap((g) => g.cases).slice().sort((a, b) => a.slot - b.slot)
@@ -79,17 +85,14 @@ export function jouer(c, quotas) {
   return { ticket, g5: g5?.cases?.find((x) => x.pris)?.num ?? null }
 }
 
-/** ⭐ les variantes — chacune reste dans la latitude déclarée par la méthode */
+/** ⭐ les variantes — toutes restent dans la latitude déclarée par la méthode */
 export const VARIANTES = [
-  { cle: 'courante', nom: '3-2-1-1-1 — G5 inconditionnel (le code actuel)' },
-  { cle: 'A3',  nom: 'G5 garde son siège si top-3 marché, sinon G2', cond: 3 },
-  { cle: 'A5',  nom: 'G5 garde son siège si top-5 marché, sinon G2', cond: 5 },
-  { cle: 'A8',  nom: 'G5 garde son siège si top-8 marché, sinon G2', cond: 8 },
-  { cle: 'A10', nom: 'G5 garde son siège si top-10 marché, sinon G2', cond: 10 },
-  { cle: 'A16', nom: 'G5 garde son siège si top-16 marché, sinon G2', cond: 16 },
-  { cle: 'B2',  nom: '3-3-1-1-0 — le siège va à G2, toujours' },
-  { cle: 'B3',  nom: '3-2-2-1-0 — le siège va à G3, toujours' },
-  { cle: 'B4',  nom: '3-2-1-2-0 — le siège va à G4, toujours' },
+  { cle: 'courante', nom: '4-2-1-1-0 — en production depuis le 20/10 (§11.27)' },
+  { cle: 'g5g2', nom: '3-3-1-1-0 — la production du matin (§11.26)' },
+  { cle: 'avant', nom: '3-2-1-1-1 — la règle d’avant (G5 inconditionnel)' },
+  { cle: 'B3', nom: '4-1-2-1-0 — le siège de G2 va à G3' },
+  { cle: 'B4', nom: '4-1-1-2-0 — le siège de G2 va à G4' },
+  { cle: 'C1', nom: '3-3-1-1-1 — 9 chevaux (le siège AJOUTÉ à G5)' },
 ]
 
 export const kpi = (t, arr) => { let k = 0; for (const x of arr) { if (!t.includes(x)) break; k++ } return k }
@@ -98,13 +101,13 @@ const pad = (s, n) => String(s).padEnd(n)
 
 /** joue une variante sur une course ; renvoie { ticket, garde } */
 function tirer(c, v, base) {
-  if (!v.cond) {
-    const q = v.cle === 'B2' ? Q_SANS_G5('G2') : v.cle === 'B3' ? Q_SANS_G5('G3') : Q_SANS_G5('G4')
-    return { ticket: jouer(c, q).ticket, garde: false }
-  }
-  const rang = rangMarche(c)
-  const garde = base.g5 != null && rang[base.g5] <= v.cond
-  return { ticket: (garde ? base : jouer(c, Q_SANS_G5('G2'))).ticket, garde }
+  if (v.cle === 'courante') return { ticket: base.ticket, garde: false }
+  if (v.cle === 'g5g2') return { ticket: jouer(c, Q_3_3_1_1_0).ticket, garde: false }
+  if (v.cle === 'avant') return { ticket: jouer(c, Q_AVANT).ticket, garde: false }
+  if (v.cle === 'B3') return { ticket: jouer(c, Q_SANS_G5('G3')).ticket, garde: false }
+  if (v.cle === 'B4') return { ticket: jouer(c, Q_SANS_G5('G4')).ticket, garde: false }
+  if (v.cle === 'C1') return { ticket: jouer(c, Q_PLUS_G5).ticket, garde: false }
+  return { ticket: base.ticket, garde: false }
 }
 
 /** mesure toutes les variantes sur une liste de courses → { cle: {n,p3,p4,p5,ch,garde} } */
@@ -139,7 +142,7 @@ function rapport(champ) {
 
   console.log('\n  LE SIÈGE DE G5 — cotes ' + (champ === 'cotes' ? 'finales' : "d'ouverture"))
   console.log('  ' + N + ' Quintés à presse réelle · blocs buildGrid · choix §11.22 · métrique §11.18 (PAYANTE)')
-  console.log('  quotas de la méthode 3-2-1-1-1 — on ne déplace QUE le siège du dernier bloc (§11.2 : B5 = 1 ou 0)\n')
+  console.log('  quotas 3-3-1-1-0 (en production, §11.26) — on ne touche QUE le siège de G5 (§11.2 : B5 = 1 ou 0)\n')
   console.log('  ' + pad('variante', 50) + pad('PAYANTE', 10) + pad('couvre +4', 12) + pad('5/5', 10) + pad('ch.', 6) + 'siège gardé')
   console.log('  ' + '-'.repeat(96))
   const ordre = Object.entries(R).sort((a, b) => (b[1].p3 / b[1].n) - (a[1].p3 / a[1].n))
@@ -155,8 +158,8 @@ function rapport(champ) {
     console.log('  ' + pad(VARIANTES.find((v) => v.cle === cle)?.nom || cle, 50) +
       pad(pct(H1[cle].p3, H1[cle].n), 12) + pct(H2[cle].p3, H2[cle].n))
   }
-  console.log('\n  La variante « courante » est le code en production. Toute autre ligne est une')
-  console.log('  expérience : rien n\'est appliqué tant que le choix n\'est pas fait.\n')
+  console.log('\n  La variante « courante » est le code en production (§11.26) : 3-3-1-1-0.')
+  console.log('  Les autres lignes sont mesurées sur les mêmes courses, jamais appliquées.\n')
   return { N, R, H1, H2, ordre }
 }
 

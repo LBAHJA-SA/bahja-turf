@@ -15,8 +15,8 @@
  *                     PRESSE, ceux que le marché place dans ses T premières
  *                     cotes arrivent-ils plus souvent ? (par tranche de rang)
  *   4. `experience` — les variantes du siège de G5 (tools/experience-g5.mjs).
- *                     AUCUNE n'est appliquée : `experienceAppliquee` dit
- *                     laquelle est en production.
+ *                     `experienceAppliquee` dit laquelle est en production
+ *                     (4-2-1-1-0 depuis le §11.27 du 20/10/2026).
  *
  *   node tools\fiabilite.mjs
  * ============================================================================= */
@@ -149,7 +149,7 @@ console.log('  ' + '-'.repeat(66))
 for (const b of out.badge) {
   console.log('  ' + b.lib.padEnd(30) + f(b.n) + f(b.top5 + ' %') + f(b.top3 + ' %'))
 }
-console.log('\n  L\'EXPÉRIENCE DU SIÈGE DE G5 — ' + (out.experienceAppliquee === 'courante' ? 'la ligne 3-2-1-1-1 est en production ; les autres ne sont PAS appliquées' : ''))
+console.log('\n  L\'EXPÉRIENCE DU SIÈGE — ' + (out.experienceAppliquee === 'courante' ? 'la ligne 4-2-1-1-0 est en production (§11.27) ; les autres ne sont PAS appliquées' : ''))
 console.log('  ' + '-'.repeat(66))
 for (const v of out.experience) {
   console.log('  ' + (v.appliquee ? '▶ ' : '  ') + v.nom.padEnd(48) + f(v.payante + ' %') + f(v.payanteOuverture + ' %'))

@@ -146,15 +146,31 @@ export function heureMarocGMT(hhmm) {
 }
 
 /**
- * ⭐ L'HEURE D'UNE COURSE, quelle que soit sa forme, toujours en GMT.
+ * ⭐ Heure GMT d'une course, selon son PAYS (20/10/2026).
  *
- *   « 15:15 »                     (heure de Paris)  → « 13:15 GMT »
- *   « 2026-10-16T13:58:00+02:00 » (un instant)      → « 11:58 GMT »
- *   « 2026-10-03T03:02:51.835Z »  (un instant)      → « 03:02 GMT »
- *   « 1729154280 »                (un timestamp)    → l'instant, en GMT
+ *  Les sites ne parlent pas la même langue :
+ *    · Equidia / turf-france : heure MURALE de PARIS (UTC+1 en hiver, +2 l'été)
+ *    · casacourses (Maroc)   : heure MURALE du MAROC (UTC+1 fixe)
+ *    · le champ `heure` peut aussi être un INSTANT ISO (avec décalage)
  *
- * `date` sert à l'heure d'été quand l'heure est murale. Vide → ''.
+ *  Avant : chaque page choisissait sa propre conversion — et la plupart
+ *  se trompaient d'une heure (QuinteGrille utilisait heureMarocGMT pour une
+ *  heure de Paris, Article n'utilisait même pas c.heure). Cette fonction
+ *  centralise le choix selon le pays.
  */
+export function heureGMTParPays(pays, date, heure) {
+  const brut = String(heure == null ? '' : heure).trim()
+  if (!brut) return ''
+  const p = String(pays || '').toUpperCase()
+  const maroc = (p === 'MA' || p === 'MAROC' || p === 'MOROCCO')
+  if (maroc) {
+    if (/^\d{1,2}\s*[:hH]\s*\d{2}/.test(brut) && !/[TZ]|[+-]\d{2}:?\d{2}$/.test(brut)) return heureMarocGMT(brut)
+    const h = hhmmGMT(brut)
+    return h ? h + ' GMT' : ''
+  }
+  return heureCourseGMT(date, brut)
+}
+
 export function heureCourseGMT(date, heure) {
   const brut = String(heure == null ? '' : heure).trim()
   if (!brut) return ''

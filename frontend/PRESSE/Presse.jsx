@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Entete from '../../src/Entete.jsx'
-import { jourHeureGMT, heureParisGMT } from '../../src/temps.js'
+import { jourHeureGMT, heureGMTParPays } from '../../src/temps.js'
 import {
   aujourdhui, quinteDuJour, declarations, analyse, revueDePresse, articles, htmlSur,
   videosJournaux, partagerVideos, papierDuJour,
@@ -468,7 +468,7 @@ export default function Presse() {
               <span style={{ fontWeight: 800, fontSize: 14.5 }}>{quinte.hippodrome}</span>
               <span style={{ fontSize: 13, color: SK.texte }}>{quinte.nom}</span>
               <span style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: 12, color: SK.doux }}>
-                {quinte.heure && <span><i className="bi bi-clock" /> {heureParisGMT(quinte.date, quinte.heure)}</span>}
+                {quinte.heure && <span><i className="bi bi-clock" /> {heureGMTParPays(quinte.pays, quinte.date, quinte.heure)}</span>}
                 {quinte.distance ? <span><i className="bi bi-rulers" /> {quinte.distance} m</span> : null}
                 {quinte.partants ? <span><i className="bi bi-people" /> {quinte.partants} partants</span> : null}
                 {quinte.discipline ? <span><i className="bi bi-flag" /> {quinte.discipline}</span> : null}
