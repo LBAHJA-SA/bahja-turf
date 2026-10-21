@@ -14,10 +14,26 @@
 //     |picks ∩ {1er,2e,3e}| ≥ 2   (les 3 paires du trio).
 //
 //  Le modèle : régression logistique sur P(dans le top3), entraînée sur
-//  l'archive (fenêtre glissante). Il combine le marché (cote_pmu) + la forme,
-//  la valeur, l'âge, la corde, le palmarès, les gains, le déferré, les
-//  oeillères, le sexe, la distance. Mesuré : 51,50 % (≥2/3) sur les 200
-//  dernières courses — le marché seul donne 49,75 %.
+//  l'archive (fenêtre glissante). Il combine le marché (cote) + la forme,
+//  la valeur, l'âge, la corde, les gains, le sexe, la distance.
+//
+//  ⚠ MESURÉ LE 21/10/2026 — `tools/coply-verif.mjs` + `tools/coply-regles.mjs`.
+//    600 courses JAMAIS VUES (train = tout le reste) :
+//        le moteur   51,3 % (≥2/3)  ·  8,2 % (les 3 exacts)
+//        le marché   51,2 % (≥2/3)  ·  8,4 % (les 3 exacts)
+//        → il choisit EXACTEMENT le top-3 du marché 89,2 % du temps.
+//    Les « 51,50 % » annoncés jusqu'ici étaient IN-SAMPLE : les 200 courses
+//    de validation étaient DANS la fenêtre d'entraînement (bug corrigé dans
+//    tools/train-coply.mjs le même jour).
+//    Huit autres règles testées hors échantillon, toutes ≤ au marché :
+//        la forme seule 35,1 % · le marché sans le favori 35,9 % ·
+//        1er du marché + 2 formes 49,0 % · deux réentraînements 51,0-51,2 %.
+//        La grille « a × rang de cote + b × rang de forme » a choisi b = 0
+//        SUR LE TRAIN : la forme n'ajoute rien à la cote.
+//    → À 3 NUMÉROS, LA COTE EST LE PLAFOND. Le seul signal mesuré au-dessus
+//      est la PRESSE sur le Quinté : favori + presse rangs 2-3 = 39,6 %
+//      contre 32,3 % au marché (96 Quintés, moitiés 39,6 / 39,6, bootstrap
+//      91,8 %). Ce n'est PAS branché ici — décision de l'utilisateur.
 // ─────────────────────────────────────────────────────────────────────────
 
 const FORMULE = '/data/coply-modele.json'
@@ -69,21 +85,53 @@ const sigmoid = (z) => 1 / (1 + Math.exp(-Math.max(-30, Math.min(30, z))))
 
 /**
  * selectionCoply(partants, course, n = 3) → { chevaux, trios, paires, probas, modele }
- *   chevaux : les n numéros (top-n prédit) — 3 par défaut
+ *   chevaux : les n numéros (top-n) — 3 par défaut
  *   trios   : les C(n,3) trios des n chevaux
  *   paires  : les C(n,2) couplés des n chevaux
- *   probas  : P(top3) de chaque cheval, pour l'affichage
- *   modele  : { fenetre, validation } — la traçabilité
+ *   probas  : P(top3) de chaque cheval (vide quand le carnet décide)
+ *   modele  : { regle: 'carnet' | 'modele', … } — la traçabilité
  *
  * ⚠ 19/10/2026 — la page n'affiche QUE les 3 numéros (choix de
  *   l'utilisateur) : « عطي غير تلاتة الارقام فقط ». `n` reste un paramètre
  *   pour les tests, il n'est pas exposé dans l'interface.
+ *
+ * ⚠ 21/10/2026 — L'ORDRE DU CARNET PASSE DEVANT LE MARCHÉ.
+ *   Mesuré en EUROS (`tools/coply-trio-euros.mjs` + `tools/couple-euros.mjs`,
+ *   94 Quintés, 1 € par course) :
+ *       trio du marché 1-3   : −74 %   (quand il gagne, il paie 8 €)
+ *       trio du carnet 1-3   : −56 %
+ *       couplé placé marché  : −22,4 %
+ *       couplé placé carnet  : −3,4 %
+ *   Le balayage de TOUTES les fenêtres de 3 rangs (marché et carnet, 1-3 à
+ *   10-12) ne donne aucune ligne positive : sous le rang 4, on ne touche
+ *   JAMAIS (0/92). Le trio à 3 numéros est une loterie — le carnet est
+ *   simplement l'ordre qui perd le moins.
+ *   `course.presse` = l'ordre de la presse (P1, P2, …). Il n'existe QUE pour
+ *   le Quinté ; ailleurs le marché reste la seule donnée disponible.
  */
 export async function selectionCoply(partants, course, n = 3) {
-  const m = await chargerModele()
   const chevaux = (partants || []).filter((p) => p.num && !p.nonPartant)
   if (chevaux.length < 3) return null
+  const taille = Math.max(3, Math.min(Number(n) || 3, chevaux.length))
 
+  /* ① LE CARNET, quand il est publié */
+  const nums = new Set(chevaux.map((p) => p.num))
+  const carnet = (Array.isArray(course && course.presse) ? course.presse : [])
+    .map(Number)
+    .filter((x) => nums.has(x))
+  if (carnet.length >= 3) {
+    const sel = carnet.slice(0, taille)
+    return {
+      chevaux: sel,
+      trios: combinaisons(sel, 3),
+      paires: combinaisons(sel, 2),
+      probas: [],
+      modele: { regle: 'carnet', presse: carnet.slice(0, taille) },
+    }
+  }
+
+  /* ② sinon le modèle — mesuré égal au marché (§ en-tête) */
+  const m = await chargerModele()
   const preds = chevaux.map((p) => {
     const x = caract(p, course).map((v, i) => (v - m.mean[i]) / m.std[i])
     const z = x.reduce((s, v, i) => s + v * m.poids[i], 0)
@@ -91,14 +139,13 @@ export async function selectionCoply(partants, course, n = 3) {
   })
   preds.sort((a, b) => b.p - a.p || a.num - b.num)
 
-  const taille = Math.max(3, Math.min(Number(n) || 4, preds.length))
   const chevauxSel = preds.slice(0, taille).map((x) => x.num)
   return {
     chevaux: chevauxSel,
     trios: combinaisons(chevauxSel, 3),
     paires: combinaisons(chevauxSel, 2),
     probas: preds.slice(0, 8).map((x) => ({ num: x.num, p: x.p, cote: x.cote })),
-    modele: { fenetre: m.fenetre, fin: m.fin, validation: m.validation },
+    modele: { regle: 'modele', fenetre: m.fenetre, fin: m.fin, validation: m.validation },
   }
 }
 

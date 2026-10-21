@@ -4601,3 +4601,101 @@ G1 quota 3 → 4   ·   G2 2 → 3   ·   G3 1   ·   G4 1   ·   G5 1 → 0
 **Ce qui ne bouge pas :** les cinq BOÎTES (P1-P4 · P5-P8 · P9-P10 · P11-P12 ·
 P13+) et la règle de choix dans le bloc. Seul le REMPLISSAGE des quotas change,
 et seulement parce que G5 n'a plus de siège.
+
+---
+
+### 11.38 ⭐ LE COUPLÉ EN EUROS — LE MARCHÉ NE PAIE PAS (21/10/2026)
+
+> L'utilisateur : « السوق بوحدو ماخدانش بمرة … لو كان الطوب 3 ديال السوق
+> كايربح لو تم اعلاق شركات الرهان » et « البصمة ديال الكوبلي مجتمع عمرها
+> ماكاتعطي نتيجة ايجابية ».
+
+#### ① Le moteur du /coply n'est pas un moteur : c'est la cote
+
+	ools/coply-verif.mjs applique LE VRAI selectionCoply (module importé tel
+quel, etch remplacé par la lecture du modèle local) sur les 400 dernières
+courses de l'archive :
+
+`
+le moteur            50,3 % (≥2/3)   8,3 % (3/3)
+le marché            49,5 %          8,0 %
+→ mêmes 3 numéros     89,2 % des courses
+`
+
+Et sur 600 courses **jamais vues** (train = tout le reste, 	ools/coply-regles.mjs) :
+**moteur 51,3 % / 8,2 % · marché 51,2 % / 8,4 %**. Les « 51,50 % » annoncés
+jusqu'ici étaient **in-sample** (les 200 courses de validation étaient DANS la
+fenêtre d'entraînement) — bug corrigé dans 	ools/train-coply.mjs, qui exporte
+maintenant les briques et valide en causal.
+
+Huit autres règles, hors échantillon, toutes ≤ au marché : forme seule 35,1 % ·
+marché sans le favori 35,9 % · 1er + 2 formes 49,0 % · deux réentraînements
+51,0-51,2 %. La grille  × rang de cote + b × rang de forme choisit **b = 0**
+sur le train : la forme n'ajoute rien à la cote. Deux champs étaient morts
+(gains alors que l'archive donne gain ; corde alors que la page donne
+depart) — corrigés, effet nul.
+
+#### ② En euros, l'utilisateur a raison
+
+	ools/coply-trio-euros.mjs — 94 Quintés, **1 € par course**, 1 seul trio,
+encaissé au vrai rapport TIERCE_ORDRE / Désordre :
+
+| règle (3 numéros) | touchés | retour | ROI | sans le plus gros gain |
+|---|---|---|---|---|
+| marché top-3 (les 3 favoris) | 3,2 % | 25 € | **−73,7 %** | −87,6 % |
+| carnet P1·P2·P3 | 4,3 % | 42 € | −55,9 % | −81,4 % |
+| marché rangs 4-5-6 | 2,1 % | 67 € | −28,7 % | −70,5 % |
+| carnet P1·P2 + 1er du marché hors carnet | 5,3 % | 78 € | **−16,7 %** | −48,2 % |
+
+**Ce que paie le trio, par place dans le marché :**
+
+`
+les 3 favoris (rangs 1-3)   →  rapport moyen    8 €   (médian 8 €)
+rangs 4-8                   →  rapport moyen   80 €
+rangs 9-14                  →  rapport moyen  497 €
+`
+
+→ Gagner avec les 3 favoris rapporte **8 €**. C'est exactement ce que
+l'utilisateur a dit : les bookmakers ne risquent rien.
+
+**Le balayage de toutes les fenêtres de 3 rangs** (marché et carnet, rangs
+1-3 à 10-12) ne donne **aucune ligne positive** :
+
+`
+marché  1-3 −73 %   4-6 −27 %   tout le reste : 0 touche / 92
+carnet  1-3 −55 %   2-4 −88 %   tout le reste : 0 touche / 92
+`
+
+Le trio ne vit que dans le haut du marché. Descendre chercher le gros rapport,
+c'est ne jamais toucher. **À 3 numéros, le trio est une loterie fermée.**
+
+#### ③ Le seul pari proche de l'équilibre : le couplé placé du carnet
+
+	ools/couple-euros.mjs (3 paires par course, 1 € la paire) :
+
+| | placé | ROI placé | gagnant | ROI gagnant |
+|---|---|---|---|---|
+| carnet top-3 | 37,6 % | **+2,4 %** | 15,1 % | −27,0 % |
+| marché top-3 | 34,6 % | −21,0 % | 18,0 % | −8,6 % |
+
+Contrôle indépendant (97 Quintés, filtre différent) : carnet **−3,4 %** ·
+marché **−22,4 %**. Le signe exact bouge, l'écart de 19 points ne bouge pas.
+
+#### ④ ✅ APPLIQUÉ — le carnet passe devant le marché dans /coply
+
+selectionCoply(partants, course, n) : si course.presse est fourni (≥ 3
+numéros qui partent), la sélection = **les 3 premiers du carnet** ; sinon le
+modèle (≡ marché). La page lit l'ordre dans /data/synthese.json (écrit par
+	ools/daily.mjs) et l'attache à la course quand les clés concordent
+({date}_R{n}_C{m}). Une ligne sous les 3 numéros dit laquelle des deux règles
+a parlé.
+
+**Ce que ça change :** trio −74 % → **−56 %**, couplé placé −22,4 % → **−3,4 %**.
+Ce n'est pas un gain : c'est **moins de perte**. Aucune règle à 3 numéros n'est
+positive sur l'archive — le Trio n'est pas un placement, c'est un pari choisi
+(§15.6). C'est l'utilisateur qui décide s'il le joue.
+
+**Outils :** 	ools/coply-verif.mjs (le vrai moteur, mesuré) ·
+	ools/coply-regles.mjs (8 règles, hors échantillon) ·
+	ools/coply-trio-euros.mjs (le trio en euros, balayage des fenêtres) ·
+	ools/couple-euros.mjs (le couplé en euros).

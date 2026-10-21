@@ -235,17 +235,38 @@ function Lecture({ course, date }) {
   const partants = course.partants || []
   const arrivee = (course.arrivee || []).slice(0, 5)
   const [sel, setSel] = useState(null)
+  const [presses, setPresses] = useState(null)
   const nbCotes = partants.filter((p) => Number(p.coteRef) > 0).length
+
+  /* ①bis L'ORDRE DU CARNET — publié pour le Quinté dans /data/synthese.json
+     (écrit par `tools/daily.mjs`). Mesuré le 21/10/2026 sur 94 Quintés, en
+     euros : le carnet perd −56 % au trio (les 3 favoris : −74 %) et −3,4 % au
+     couplé placé (les 3 favoris : −22,4 %). Ailleurs, pas de presse → cotes. */
+  useEffect(() => {
+    let mort = false
+    fetch('/data/synthese.json', { headers: { Accept: 'application/json' } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => { if (!mort && j) setPresses(j) })
+      .catch(() => {})
+    return () => { mort = true }
+  }, [])
+
+  const jour = String(course.date || date || '').slice(0, 10)
+  const cleQuinte = String(course.cle || '').split('_').slice(0, 3).join('_')
 
   useEffect(() => {
     if (partants.length >= 3) {
       let mort = false
-      selectionCoply(partants, course, 3)
+      const fiche = presses && presses[jour]
+      const p = fiche && fiche.cle === cleQuinte && Array.isArray(fiche.synthese)
+        ? fiche.synthese.map(Number).filter((x) => x > 0)
+        : null
+      selectionCoply(partants, p && p.length >= 3 ? { ...course, presse: p } : course, 3)
         .then((s) => { if (!mort) setSel(s) })
         .catch(() => { if (!mort) setSel({ chevaux: repliMarche(partants, 3), repli: true }) })
       return () => { mort = true }
     }
-  }, [partants, course])
+  }, [partants, course, presses, jour, cleQuinte])
 
   return (
     <>
@@ -291,6 +312,13 @@ function Lecture({ course, date }) {
           </div>
           <div style={{ fontSize: 34, fontWeight: 800, fontFamily: TE.mono, letterSpacing: 6, color: '#fff', marginTop: 6 }}>
             {sel.chevaux.join(' · ')}
+          </div>
+          <div style={{ fontSize: 11, color: '#a8b6cc', marginTop: 6 }}>
+            {sel.repli
+              ? 'cotes — moteur indisponible'
+              : sel.modele?.regle === 'carnet'
+                ? 'ordre du carnet (presse)'
+                : 'cotes — pas de presse publiée pour cette course'}
           </div>
         </div>
       )}
