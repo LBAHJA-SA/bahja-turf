@@ -4447,5 +4447,65 @@ You must re-authenticate to this scope or use a token with access to this scope.
 - **Ce qui reste** : la carte « **Autres directs** » avec le lien
   `https://www.letrot.com/videos ↗` (ouvre un nouvel onglet) — c'est le seul
   moyen fiable de voir le live du trot.
-- La marque (voile 7 s + badge top-droite) reste pour les lives d'Equidia Régions.
+- Le badge top-droite reste pour les lives d'Equidia Régions (le voile plein écran a été retiré, voir §18.3).
 
+
+---
+
+## 21. ⚠️ LE SITE SE PUBLIE PAR GIT — un push de DONNÉES redéploie le CODE (21/10/2026)
+
+> Incident du 21/10/2026 : l'utilisateur signale **« صفحة البت المباشر لم تعد
+> موجودة »** — `/lives` avait disparu de https://bahja-turf.vercel.app.
+
+### 21.1 Ce qui s'est passé
+
+Le projet Vercel `prj_FZFNbBzmLKfzQeAfNa6SNjXt3q2q` est **relié au dépôt
+GitHub `LBAHJA-SA/bahja-turf`, branche `main`** (`source: "git"` dans l'API
+Vercel). Chaque `git push` sur `main` déclenche un **build complet** du dépôt,
+qui prend la place de la production.
+
+Or :
+
+| | |
+|---|---|
+| dernier commit de **code** | **18/10/2026** (« toutes les heures du site passent en GMT ») |
+| travail local | 3 jours de code **non commité** (Lives, Coply/Trio, parseur, moteur) |
+| `tools/publier-archive.mjs` | commit **les données seules** puis `git push main` |
+| résultat | chaque push de données reconstruit le site **avec le code du 18/10** → `/lives` n'existe plus |
+
+`vercel deploy --prod` (CLI) publiait bien le bon build, mais le **push de
+données suivant (09:54) l'a écrasé** — d'où l'impression d'un site qui « perd »
+des pages.
+
+### 21.2 La règle
+
+> **Le dépôt est la source de vérité du site.** Après tout changement de code
+> (`src/`, `frontend/`, `backend/`, `api/`, `tools/`), il faut **commiter et
+> pousser**, sinon le prochain push de données republiera l'ancien site.
+
+```
+git add -A -- src frontend backend api tools AGENTS.md index.html package.json vite.config.js vercel.json
+git commit -m "app : …"
+git push origin main          # Vercel reconstruit et remplace la production
+```
+
+`node tools/deploy.mjs --check` **ne suffit pas** : il compare l'empreinte des
+sources locales au dernier déploiement enregistré dans `data/deploy.json`, pas
+au dépôt. Il peut dire « a jour : OUI » alors que la production vient d'être
+remplacée par un build git plus ancien.
+
+### 21.3 Comment vérifier que le bon build est en ligne
+
+```
+fetch('https://bahja-turf.vercel.app/')     → hash du bundle dans index.html
+fetch('…/assets/index-<hash>.js')           → doit contenir '/lives'
+```
+
+Le 21/10 : `C44CWptn` (ancien, sans `/lives`) → après le push, `i8fqLx4Y`
+(identique au build local) avec `/lives` présent.
+
+### 21.4 ⚠️ Les URLs de déploiement sont protégées
+
+`https://bahja-turf-xxxxxxxx-woorckflow-4697.vercel.app` renvoie la **page de
+protection Vercel** (≈ 332 Ko de HTML sans `assets/index-…`). Seul l'alias
+`bahja-turf.vercel.app` est public : c'est **lui** qu'on sonde.
