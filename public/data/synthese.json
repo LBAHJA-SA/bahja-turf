@@ -23,7 +23,13 @@
       10
     ],
     "savedAt": "2026-10-22T09:58:20.800Z",
-    "arrivee": null,
+    "arrivee": [
+      12,
+      5,
+      9,
+      7,
+      3
+    ],
     "ticket": [
       9,
       4,
@@ -110,7 +116,7 @@
       15,
       16
     ],
-    "cloture": null,
+    "cloture": "2026-10-22T13:16:49.689Z",
     "scores": null,
     "collecte": "2026-10-22T10:01:11.154Z",
     "ticketMatin": [
