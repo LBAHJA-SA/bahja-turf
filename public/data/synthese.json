@@ -1,4 +1,130 @@
 {
+  "2026-10-22": {
+    "date": "2026-10-22",
+    "found": true,
+    "race": null,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      9,
+      15,
+      5,
+      4,
+      7,
+      16,
+      6,
+      11,
+      14,
+      13,
+      2,
+      1,
+      12,
+      8,
+      3,
+      10
+    ],
+    "savedAt": "2026-10-22T09:58:20.800Z",
+    "arrivee": null,
+    "ticket": [
+      9,
+      4,
+      5,
+      6,
+      7,
+      11,
+      13,
+      15,
+      16
+    ],
+    "ticketSource": "final",
+    "ticketPoseLe": "2026-10-22T10:01:11.152Z",
+    "sourceImport": "page",
+    "placeholder": false,
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "STEEPLECHASE",
+    "hippodrome": "AUTEUIL",
+    "distance": 3600,
+    "courseId": "2026-10-22_R1_C1",
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          9,
+          4,
+          15,
+          16
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          11
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          13
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": []
+      }
+    ],
+    "surprises": [],
+    "ticketMoteur": [
+      9,
+      4,
+      5,
+      6,
+      7,
+      11,
+      13,
+      15,
+      16
+    ],
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-10-22T10:01:11.154Z",
+    "ticketMatin": [
+      9,
+      4,
+      5,
+      6,
+      7,
+      11,
+      13,
+      15,
+      16
+    ]
+  },
   "2026-10-21": {
     "date": "2026-10-21",
     "found": true,
@@ -111,7 +237,7 @@
       11,
       13
     ],
-    "cloture": "2026-10-21T16:22:29.916Z",
+    "cloture": "2026-10-22T10:00:39.870Z",
     "scores": null,
     "collecte": "2026-10-21T10:54:21.677Z",
     "ticketMatin": [

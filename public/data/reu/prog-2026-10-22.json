@@ -1,0 +1,654 @@
+{
+ "date": "2026-10-22",
+ "reunions": [
+  {
+   "hippodrome": "LES SABLES D OLONNE",
+   "pays": "FR",
+   "courses": [
+    {
+     "date": "2026-10-22",
+     "reunion": "R2",
+     "code": "C1",
+     "pays": "FR",
+     "nom": "PRIX VISION D'ETAT",
+     "heure": "10:05",
+     "distance": 1200,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R2",
+     "code": "C2",
+     "pays": "FR",
+     "nom": "PRIX DE LA BAIE DES SABLES",
+     "heure": "10:36",
+     "distance": 2700,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R2",
+     "code": "C3",
+     "pays": "FR",
+     "nom": "PRIX DE BOURGENAY",
+     "heure": "11:07",
+     "distance": 2700,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R2",
+     "code": "C4",
+     "pays": "FR",
+     "nom": "PRIX ROGER CROSSOUARD",
+     "heure": "11:39",
+     "distance": 2700,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R2",
+     "code": "C5",
+     "pays": "FR",
+     "nom": "PRIX CLAUDE ROUGET",
+     "heure": "12:11",
+     "distance": 2700,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R2",
+     "code": "C6",
+     "pays": "FR",
+     "nom": "PRIX DU CREDIT MUTUEL",
+     "heure": "12:43",
+     "distance": 1200,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R2",
+     "code": "C7",
+     "pays": "FR",
+     "nom": "PRIX MARCEL CARDIN",
+     "heure": "13:15",
+     "distance": 1950,
+     "type": "PLAT"
+    }
+   ]
+  },
+  {
+   "hippodrome": "CABOURG",
+   "pays": "FR",
+   "courses": [
+    {
+     "date": "2026-10-22",
+     "reunion": "R3",
+     "code": "C1",
+     "pays": "FR",
+     "nom": "PRIX DU PAYS D'AUGE",
+     "heure": "10:20",
+     "distance": 2725,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R3",
+     "code": "C2",
+     "pays": "FR",
+     "nom": "PRIX DES HIRONDELLES",
+     "heure": "10:51",
+     "distance": 2050,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R3",
+     "code": "C3",
+     "pays": "FR",
+     "nom": "PRIX DES GRIVES",
+     "heure": "11:23",
+     "distance": 2050,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R3",
+     "code": "C4",
+     "pays": "FR",
+     "nom": "PRIX DE TOURLAVILLE",
+     "heure": "11:55",
+     "distance": 2750,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R3",
+     "code": "C5",
+     "pays": "FR",
+     "nom": "PRIX DES GOELANDS",
+     "heure": "12:27",
+     "distance": 2750,
+     "type": "MONTE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R3",
+     "code": "C6",
+     "pays": "FR",
+     "nom": "PRIX DE RUCQUEVILLE",
+     "heure": "13:12",
+     "distance": 2750,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R3",
+     "code": "C7",
+     "pays": "FR",
+     "nom": "PRIX DE PERCY",
+     "heure": "13:47",
+     "distance": 2750,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R3",
+     "code": "C8",
+     "pays": "FR",
+     "nom": "PRIX D'HARCOURT",
+     "heure": "14:22",
+     "distance": 2750,
+     "type": "MONTE"
+    }
+   ]
+  },
+  {
+   "hippodrome": "AUTEUIL",
+   "pays": "FR",
+   "courses": [
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C1",
+     "pays": "FR",
+     "nom": "PRIX ANDRE ADELE",
+     "heure": "12:55",
+     "distance": 3600,
+     "type": "STEEPLECHASE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C2",
+     "pays": "FR",
+     "nom": "PRIX PETIT FONTAINE",
+     "heure": "13:30",
+     "distance": 3600,
+     "type": "HAIE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C3",
+     "pays": "FR",
+     "nom": "PRIX AL CAPONE II",
+     "heure": "14:05",
+     "distance": 4400,
+     "type": "STEEPLECHASE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C4",
+     "pays": "FR",
+     "nom": "PRIX EMILIUS",
+     "heure": "14:40",
+     "distance": 3600,
+     "type": "HAIE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C5",
+     "pays": "FR",
+     "nom": "PRIX GENERAL DONNIO",
+     "heure": "15:15",
+     "distance": 4400,
+     "type": "STEEPLECHASE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C6",
+     "pays": "FR",
+     "nom": "PRIX PAUL'S CRAY",
+     "heure": "15:50",
+     "distance": 3600,
+     "type": "HAIE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C7",
+     "pays": "FR",
+     "nom": "PRIX PELAT",
+     "heure": "16:25",
+     "distance": 3600,
+     "type": "HAIE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C8",
+     "pays": "FR",
+     "nom": "PRIX MARLY RIVER",
+     "heure": "17:00",
+     "distance": 3600,
+     "type": "HAIE"
+    }
+   ]
+  },
+  {
+   "hippodrome": "DEAUVILLE",
+   "pays": "FR",
+   "courses": [
+    {
+     "date": "2026-10-22",
+     "reunion": "R4",
+     "code": "C1",
+     "pays": "FR",
+     "nom": "PRIX DE FIERVILLE",
+     "heure": "14:57",
+     "distance": 1500,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R4",
+     "code": "C2",
+     "pays": "FR",
+     "nom": "PRIX D'ARGENTAN",
+     "heure": "15:32",
+     "distance": 1500,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R4",
+     "code": "C3",
+     "pays": "FR",
+     "nom": "PRIX DE VILLEPELEE",
+     "heure": "16:07",
+     "distance": 1500,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R4",
+     "code": "C4",
+     "pays": "FR",
+     "nom": "PRIX DU CANAL DU HAVRE",
+     "heure": "16:42",
+     "distance": 1300,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R4",
+     "code": "C5",
+     "pays": "FR",
+     "nom": "PRIX DE L'ECLUSE FRANCOIS I ER",
+     "heure": "17:20",
+     "distance": 1300,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R4",
+     "code": "C6",
+     "pays": "FR",
+     "nom": "PRIX DE CASTILLON",
+     "heure": "17:55",
+     "distance": 1900,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R4",
+     "code": "C7",
+     "pays": "FR",
+     "nom": "PRIX DU CHATEAU D'AUVERS-SUR-OISE",
+     "heure": "18:27",
+     "distance": 1900,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R4",
+     "code": "C8",
+     "pays": "FR",
+     "nom": "PRIX DE PUTANGES",
+     "heure": "18:59",
+     "distance": 1900,
+     "type": "PLAT"
+    }
+   ]
+  },
+  {
+   "hippodrome": "MUNICH-DAGLFING",
+   "pays": "DE",
+   "courses": [
+    {
+     "date": "2026-10-22",
+     "reunion": "R5",
+     "code": "C1",
+     "pays": "DE",
+     "nom": "PRIX TROTTO.DE                          ALLEMAGNE",
+     "heure": "17:00",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R5",
+     "code": "C2",
+     "pays": "DE",
+     "nom": "PRIX DU PORTUGAL                        ALLEMAGNE",
+     "heure": "17:37",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R5",
+     "code": "C3",
+     "pays": "DE",
+     "nom": "PRIX DER ELISABETH-MANN-STIFTUNG        ALLEMAGNE",
+     "heure": "18:11",
+     "distance": 2600,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R5",
+     "code": "C4",
+     "pays": "DE",
+     "nom": "PRIX D'ITALIE                           ALLEMAGNE",
+     "heure": "18:43",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R5",
+     "code": "C5",
+     "pays": "DE",
+     "nom": "PRIX DE SUÈDE                           ALLEMAGNE",
+     "heure": "19:15",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R5",
+     "code": "C6",
+     "pays": "DE",
+     "nom": "PRIX DE FINLANDE                        ALLEMAGNE",
+     "heure": "19:43",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R5",
+     "code": "C7",
+     "pays": "DE",
+     "nom": "PRIX WETTSTAR.DE                        ALLEMAGNE",
+     "heure": "20:08",
+     "distance": 2600,
+     "type": "ATTELE"
+    }
+   ]
+  },
+  {
+   "hippodrome": "BELMONT PARK",
+   "pays": "US",
+   "courses": [
+    {
+     "date": "2026-10-22",
+     "reunion": "R6",
+     "code": "C1",
+     "pays": "US",
+     "nom": "ALLOWANCE 1700",
+     "heure": "18:10",
+     "distance": 1700,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R6",
+     "code": "C2",
+     "pays": "US",
+     "nom": "CLAIMING 1200",
+     "heure": "18:42",
+     "distance": 1200,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R6",
+     "code": "C3",
+     "pays": "US",
+     "nom": "MAIDEN SPECIAL WEIGHT 1400",
+     "heure": "19:16",
+     "distance": 1400,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R6",
+     "code": "C4",
+     "pays": "US",
+     "nom": "CLAIMING 1200",
+     "heure": "19:49",
+     "distance": 1200,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R6",
+     "code": "C5",
+     "pays": "US",
+     "nom": "MAIDEN SPECIAL WEIGHT 1200",
+     "heure": "20:23",
+     "distance": 1200,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R6",
+     "code": "C6",
+     "pays": "US",
+     "nom": "MAIDEN CLAIMING 1600",
+     "heure": "20:57",
+     "distance": 1600,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R6",
+     "code": "C7",
+     "pays": "US",
+     "nom": "CLAIMING 1700",
+     "heure": "21:31",
+     "distance": 1700,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R6",
+     "code": "C8",
+     "pays": "US",
+     "nom": "CLAIMING 1700",
+     "heure": "22:05",
+     "distance": 1800,
+     "type": "PLAT"
+    }
+   ]
+  },
+  {
+   "hippodrome": "CHILE",
+   "pays": "CL",
+   "courses": [
+    {
+     "date": "2026-10-22",
+     "reunion": "R7",
+     "code": "C1",
+     "pays": "CL",
+     "nom": "ECTON KING H.",
+     "heure": "20:00",
+     "distance": 1000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R7",
+     "code": "C2",
+     "pays": "CL",
+     "nom": "ESTE SI H.",
+     "heure": "20:30",
+     "distance": 1000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R7",
+     "code": "C3",
+     "pays": "CL",
+     "nom": "LA RED S.",
+     "heure": "21:00",
+     "distance": 1000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R7",
+     "code": "C4",
+     "pays": "CL",
+     "nom": "EXPO H.",
+     "heure": "21:30",
+     "distance": 1000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R7",
+     "code": "C5",
+     "pays": "CL",
+     "nom": "ERNESTO II H.",
+     "heure": "22:00",
+     "distance": 1000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R7",
+     "code": "C6",
+     "pays": "CL",
+     "nom": "EL CAMPEON H.",
+     "heure": "22:30",
+     "distance": 1400,
+     "type": "PLAT"
+    }
+   ]
+  },
+  {
+   "hippodrome": "Casablanca",
+   "pays": "MA",
+   "courses": [
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C1",
+     "pays": "MA",
+     "nom": "- 10654 BINT GHAZAH (D) PA - 4 Ans et plus Distance : 1900m",
+     "heure": "00:00",
+     "distance": 1900,
+     "type": ""
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C2",
+     "pays": "MA",
+     "nom": "- 1379 MOULAY DRISS PS - 3 Ans et plus Distance : 1900m",
+     "heure": "00:00",
+     "distance": 1900,
+     "type": ""
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C3",
+     "pays": "MA",
+     "nom": "- 10652 OUALILI (C) PA - 4 Ans Distance : 1700m",
+     "heure": "00:00",
+     "distance": 1700,
+     "type": ""
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C4",
+     "pays": "MA",
+     "nom": "- 6137 ZERHOUN AB - 3 Ans et plus Distance : 1400m",
+     "heure": "00:00",
+     "distance": 1400,
+     "type": ""
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C5",
+     "pays": "MA",
+     "nom": "- 10651 DE LA VILLE DE MEKNES (B) PA - 3 Ans Distance : 1700m",
+     "heure": "00:00",
+     "distance": 1700,
+     "type": ""
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C6",
+     "pays": "MA",
+     "nom": "- 10653 MOULAY ISMAIL PA - 4 Ans et plus Distance : 1800m",
+     "heure": "00:00",
+     "distance": 1800,
+     "type": ""
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C7",
+     "pays": "MA",
+     "nom": "- 6136 DE L'HIPPODROME AB - 3 Ans Distance : 1700m",
+     "heure": "00:00",
+     "distance": 1700,
+     "type": ""
+    },
+    {
+     "date": "2026-10-22",
+     "reunion": "R1",
+     "code": "C8",
+     "pays": "MA",
+     "nom": "- 6138 DE LA S.C.H DE FES AB - 4 Ans et plus Distance : 1900m",
+     "heure": "00:00",
+     "distance": 1900,
+     "type": ""
+    }
+   ]
+  }
+ ],
+ "collecteLe": "2026-10-22T10:01:11.244Z"
+}
