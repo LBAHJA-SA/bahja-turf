@@ -1141,6 +1141,20 @@ function GrilleVideos({ videos, onVoir }) {
   )
 }
 
+/** L'URL du lecteur intégré — UNE seule définition.
+ *  `playsinline=1` = la lecture reste dans le cadre (téléphone compris),
+ *  `rel=0` = pas de vidéos d'autres chaînes à la fin, `modestbranding=1` et
+ *  `iv_load_policy=3` = le moins de marque et d'habillage possibles.
+ *  Le jour où YouTube change un paramètre, il n'y a qu'un endroit à corriger. */
+function lienVideo(id) {
+  const p = new URLSearchParams({
+    playsinline: '1', rel: '0', hl: 'fr', modestbranding: '1',
+    iv_load_policy: '3', color: 'white',
+  })
+  if (typeof window !== 'undefined' && window.location.origin) p.set('origin', window.location.origin)
+  return 'https://www.youtube.com/embed/' + encodeURIComponent(id) + '?' + p.toString()
+}
+
 /** Le lecteur : la vidéo se joue DANS la page, jamais dans un onglet.
  *  ⚠ La vidéo est la revue de presse d'un tiers : elle garde sa marque, comme
  *    l'article relayé — c'est le contenu, pas notre habillage. */
@@ -1184,11 +1198,28 @@ function LecteurVideo({ video, onFermer }) {
           </button>
         </div>
         <div style={{ background: '#000', aspectRatio: '16/9', width: '100%' }}>
+          {/* ⚠ 23/10/2026 — LA VIDÉO DOIT SE JOUER ICI, Y COMPRIS SUR TÉLÉPHONE.
+           *
+           *   `playsinline=1` est OBLIGATOIRE : sans lui, iOS et Android
+           *   confient la lecture au lecteur natif et ouvrent l'application
+           *   YouTube — on quitte la page, exactement ce que la règle de la
+           *   maison interdit.
+           *
+           *   `autoplay=1` est RETIRÉ : refusé sans geste utilisateur sur la
+           *   plupart des navigateurs, et c'est lui qui pousse au passage à
+           *   l'application. Le lecteur garde son cadre, on ne l'auto-lance
+           *   plus — c'est le clic dans le cadre qui démarre.
+           *
+           *   `origin` déclare notre origine (YouTube l'exige pour la lecture
+           *   dans un cadre tiers) ; `www.youtube.com` est plus largement
+           *   accepté que `youtube-nocookie.com`, que plusieurs bloqueurs
+           *   coupent par motif. */}
           <iframe
-            src={'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.id) + '?autoplay=1&rel=0&hl=fr&modestbranding=1'}
+            src={lienVideo(video.id)}
             title={video.titre}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
             style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
           />
         </div>
