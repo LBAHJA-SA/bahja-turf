@@ -528,13 +528,25 @@ export async function articles(nbPT = 24) {
  *   sert : les vidéos DU JOUR d'abord (le nom de la course ou la date du jour),
  *   les précédentes ensuite.
  *
- * ⚠ COMMENT ON LIT LA CHAÎNE : `/api/yt/channel/{id}/videos` rend 1,3 Mo de
- *   HTML dont tout l'état est dans `ytInitialData`. On l'extrait par comptage
- *   d'accolades (pas de regex sur 1,3 Mo de JSON) et on lit DEUX formes, parce
- *   que YouTube sert les unes ou les autres selon les vidéos :
- *     · `videoRenderer`       (la forme historique)
- *     · `lockupViewModel`     (la forme récente)
- *   ⚠ Le flux RSS (`/feeds/videos.xml?channel_id=…`) est MORT : 404 (mesuré).
+ * ⚠ COMMENT ON LIT LA CHAÎNE — DEUX sources, et elles ne servent pas à la même
+ *   chose (mesuré le 23/10/2026) :
+ *
+ *   ① LE FLUX RSS `/feeds/videos.xml?channel_id=…` — **32 Ko**, 15 entrées,
+ *      avec `published` à la SECONDE. C'est la source de la FRAÎCHEUR : on le
+ *      relit toutes les 60 s. (Il avait été noté « mort, 404 » le 18/10 ; il
+ *      répond 200 aujourd'hui — la note était fausse ou la panne passagère.)
+ *      ⚠ YouTube le cache 15 min (`cache-control: max-age=900`) : une vidéo
+ *      publiée peut donc mettre jusqu'à un quart d'heure à y entrer.
+ *
+ *   ② LA PAGE `/channel/{id}/videos` — **1,3 Mo** de HTML dont tout l'état est
+ *      dans `ytInitialData`. Elle donne 30 vidéos, la DURÉE et les vues, mais
+ *      pas d'horodatage absolu (« il y a 7 h »). On l'extrait par comptage
+ *      d'accolades (pas de regex sur 1,3 Mo de JSON) et on lit DEUX formes,
+ *      parce que YouTube sert les unes ou les autres selon les vidéos :
+ *        · `videoRenderer`       (la forme historique)
+ *        · `lockupViewModel`     (la forme récente)
+ *      On ne la relit que toutes les 10 min : elle enrichit (durée) et
+ *      complète (les vidéos plus anciennes que les 15 du flux).
  */
 
 const CHAINE_VIDEO = {
@@ -618,20 +630,125 @@ function videosDeLaChaine(etat) {
   }))
 }
 
-/**
- * Les vidéos de la chaîne : { chaine, lien, liste: [{ id, titre, publie, vu,
- * duree, vignette }] }. Même cache de 10 minutes que les articles.
+/* ── ⑥ bis LA VEILLE : le flux RSS, la source FRAÎCHE ───────────────────────
+ * Le canal publie la revue de presse de la course du LENDEMAIN le soir même :
+ * le 23/10 à 22 h 03, la vidéo du Quinté du 24 (PRIX DE BEAUNE) était déjà en
+ * ligne. Une page ouverte ne la voyait jamais arriver — elle ne se rechargeait
+ * qu'à la main. D'où le flux, relu toutes les minutes.
  */
-export async function videosJournaux() {
-  const cle = 'presse.videos.v1'
+const TTL_FLUX = 60 * 1000            // le flux RSS : une minute
+const TTL_PAGE = 10 * 60 * 1000       // la page de la chaîne : dix minutes (1,3 Mo)
+
+/** « &amp; » → « & » — les titres du flux sont échappés. */
+function decoderEntites(s) {
+  return String(s || '')
+    .replace(/&#(\d+);/g, (m, n) => String.fromCharCode(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (m, n) => String.fromCharCode(parseInt(n, 16)))
+    .replace(/&quot;/g, '"').replace(/&apos;/g, "'")
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+}
+
+/** « 502 » → « 502 » · « 4500 » → « 4,5 k » · « 1250000 » → « 1,3 M ». */
+function nbVues(n) {
+  const x = Number(n)
+  if (!Number.isFinite(x) || x <= 0) return ''
+  if (x < 1000) return String(x)
+  if (x < 1e6) return (x / 1000).toFixed(1).replace('.', ',') + ' k'
+  return (x / 1e6).toFixed(1).replace('.', ',') + ' M'
+}
+
+/** Un instant ISO → « il y a 7 min », « il y a 3 h », « il y a 2 j ». */
+function depuis(iso) {
+  const t = Date.parse(iso)
+  if (!Number.isFinite(t)) return ''
+  const min = Math.max(0, Math.round((Date.now() - t) / 60000))
+  if (min < 1) return "à l'instant"
+  if (min < 60) return `il y a ${min} min`
+  const h = Math.round(min / 60)
+  if (h < 24) return `il y a ${h} h`
+  return `il y a ${Math.round(h / 24)} j`
+}
+
+/** Le flux RSS de la chaîne → la même forme que `videosDeLaChaine`, AVEC
+ *  `publieLe` (l'instant exact) et `vu`. Pas de durée : le flux n'en donne pas. */
+function videosParFlux(xml) {
+  const liste = []
+  for (const bloc of String(xml).split('<entry>').slice(1)) {
+    const id = (/<yt:videoId>([^<]+)<\/yt:videoId>/.exec(bloc) || [])[1]
+    const titre = decoderEntites((/<title>([\s\S]*?)<\/title>/.exec(bloc) || [])[1] || '')
+    const publieLe = (/<published>([^<]+)<\/published>/.exec(bloc) || [])[1] || ''
+    const vues = (/<media:statistics views="(\d+)"/.exec(bloc) || [])[1]
+    if (!id) continue
+    liste.push({
+      id,
+      titre: titre.trim(),
+      vu: nbVues(vues),
+      publie: depuis(publieLe),
+      publieLe,
+      duree: '',
+    })
+  }
+  return liste
+}
+
+/** Le flux, gardé une minute. */
+async function videosDuFlux() {
+  const cle = 'presse.videos.flux.v1'
   const cache = cacheLire(cle)
-  if (cache && Date.now() - cache.t < TTL_ARTICLES) return cache.v
+  if (cache && Date.now() - cache.t < TTL_FLUX) return cache.v
+  const xml = await htmlTexte(`/api/yt/feeds/videos.xml?channel_id=${CHAINE_VIDEO.id}`)
+  const liste = videosParFlux(xml)
+  if (!liste.length) throw new Error("le flux de la chaîne n'a livré aucune vidéo")
+  cacheEcrire(cle, liste)
+  return liste
+}
+
+/** La page de la chaîne, gardée dix minutes — durée et vues. */
+async function videosDeLaPage() {
+  const cle = 'presse.videos.page.v1'
+  const cache = cacheLire(cle)
+  if (cache && Date.now() - cache.t < TTL_PAGE) return cache.v
   const html = await htmlTexte(`/api/yt/channel/${CHAINE_VIDEO.id}/videos`)
   const liste = videosDeLaChaine(etatYoutube(html))
   if (!liste.length) throw new Error("la chaîne n'a livré aucune vidéo")
-  const valeur = { chaine: CHAINE_VIDEO.nom, lien: CHAINE_VIDEO.lien, liste }
-  cacheEcrire(cle, valeur)
-  return valeur
+  cacheEcrire(cle, liste)
+  return liste
+}
+
+/**
+ * Les vidéos de la chaîne : { chaine, lien, liste: [{ id, titre, publie,
+ * publieLe, vu, duree, vignette, grandVignette }] }.
+ *
+ * ⚠ LES DEUX SOURCES SONT FUSIONNÉES, jamais l'une à la place de l'autre :
+ *   · le FLUX donne l'ordre et l'instant exact (`publieLe`) — c'est lui qui
+ *     fait apparaître une vidéo dans la minute ;
+ *   · la PAGE donne la durée et les 15 vidéos plus anciennes que le flux.
+ *   Si l'une tombe, l'autre suffit : une panne de YouTube ne vide pas l'écran.
+ */
+export async function videosJournaux() {
+  const [flux, page] = await Promise.allSettled([videosDuFlux(), videosDeLaPage()])
+  const dePage = page.status === 'fulfilled' ? page.value : []
+  const duFlux = flux.status === 'fulfilled' ? flux.value : []
+  if (!dePage.length && !duFlux.length) {
+    throw (flux.status === 'rejected' && flux.reason) || new Error("la chaîne n'a livré aucune vidéo")
+  }
+
+  const parId = new Map()
+  for (const v of dePage) parId.set(v.id, v)
+  for (const v of duFlux) parId.set(v.id, { ...(parId.get(v.id) || {}), ...v })
+
+  /* l'ordre : d'abord ceux dont on connaît l'instant exact, du plus récent au
+   * plus ancien ; puis les plus anciens de la page, dans l'ordre de YouTube. */
+  const dates = [...parId.values()].filter((v) => v.publieLe)
+    .sort((a, b) => String(b.publieLe).localeCompare(String(a.publieLe)))
+  const sansDate = dePage.filter((v) => !parId.get(v.id).publieLe)
+
+  const liste = [...dates, ...sansDate].map((v) => ({
+    ...v,
+    vignette: `https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`,
+    grandVignette: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`,
+  }))
+  return { chaine: CHAINE_VIDEO.nom, lien: CHAINE_VIDEO.lien, liste }
 }
 
 /* ── lesquelles sont celles DU JOUR ? ───────────────────────────────────────
@@ -673,19 +790,49 @@ export function jetonsDate(date) {
   ].filter(Boolean)
 }
 
-/** Sépare les vidéos du jour des précédentes. */
+/** La date de la RÉUNION écrite dans le titre, en ISO — `''` si absente.
+ *  ⚠ Le titre porte la date de la COURSE, pas celle de la publication : la
+ *    vidéo du Quinté du 24 est mise en ligne le 23 au soir avec « SAMEDI
+ *    24 OCTOBRE 26 » dans le titre. C'est ce qui permet de la ranger comme
+ *    « à venir » et non comme « jour précédent ».
+ *  « … SAMEDI 24 OCTOBRE 26 » → 2026-10-24 · « 18/10/26 » → 2026-10-18 */
+export function jourVideo(titre) {
+  const t = sansAccent(titre)
+  const jour = (j, m, a) => {
+    const an = a < 100 ? 2000 + a : a
+    if (!j || !m || !an) return ''
+    return `${an}-${String(m).padStart(2, '0')}-${String(j).padStart(2, '0')}`
+  }
+  const lettres = /\b(\d{1,2})\s+(JANVIER|FEVRIER|MARS|AVRIL|MAI|JUIN|JUILLET|AOUT|SEPTEMBRE|OCTOBRE|NOVEMBRE|DECEMBRE)\s+(\d{2,4})\b/.exec(t)
+  if (lettres) return jour(Number(lettres[1]), MOIS_VIDEO.indexOf(lettres[2]) + 1, Number(lettres[3]))
+  const chiffres = /\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})\b/.exec(t)
+  if (chiffres) return jour(Number(chiffres[1]), Number(chiffres[2]), Number(chiffres[3]))
+  return ''
+}
+
+/** Sépare les vidéos en trois — la course du jour, celles DÉJÀ EN LIGNE pour
+ *  une course à venir, et les jours précédents.
+ *
+ *  ⚠ CE QUI A CHANGÉ LE 23/10/2026 : une vidéo publiée le soir pour la course
+ *    du lendemain tombait dans « les jours précédents » — c'est-à-dire nulle
+ *    part, sous 27 autres vignettes. Elle a maintenant sa place, en haut.
+ */
 export function partagerVideos(liste, { nom, date } = {}) {
   const complet = sansAccent(nom).trim()
   const mot = motCleCourse(nom)
   const dates = jetonsDate(date)
   const duJour = []
+  const aVenir = []
   const autres = []
   for (const v of liste || []) {
     const t = sansAccent(v.titre)
-    const dujour = (complet && t.includes(complet)) || (mot && t.includes(mot)) || dates.some((x) => t.includes(x))
-    ;(dujour ? duJour : autres).push(v)
+    const parNom = (complet && t.includes(complet)) || (mot && t.includes(mot)) || dates.some((x) => t.includes(x))
+    const j = jourVideo(v.titre) || String(v.publieLe || '').slice(0, 10)
+    if (j && date && j > date && !parNom) aVenir.push(v)
+    else if (parNom || (j && date && j === date)) duJour.push(v)
+    else autres.push(v)
   }
-  return { duJour, autres }
+  return { duJour, aVenir, autres }
 }
 
 /* ═══════ ⑦ LE PAPIER DU JOUR — ce que dit le journal, en TEXTE, cheval par cheval ═══════

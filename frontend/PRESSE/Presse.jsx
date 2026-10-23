@@ -244,6 +244,7 @@ export default function Presse() {
   const [papier, setPapier] = useState('')
   const [vue, setVue] = useState(null)
   const [videoVue, setVideoVue] = useState(null)
+  const [veille, setVeille] = useState(0)     // dernier passage de la veille (ms)
   const [relance, setRelance] = useState(0)   // « Réessayer » : on refait les appels
 
   useEffect(() => { document.title = 'Presse — Bahja TURF' }, [])
@@ -353,6 +354,7 @@ export default function Presse() {
         const v = await videosJournaux()
         if (mort) return
         setVideos(v.liste)
+        setVeille(Date.now())
         setChaine({ nom: v.chaine, lien: v.lien })
         poser('videos', v.liste.length ? 'ok' : 'vide', v.liste.length ? '' : 'Aucune vidéo publiée pour l\'instant.')
       } catch (e) {
@@ -364,10 +366,55 @@ export default function Presse() {
 
   /* ⚠ Le partage « du jour / avant » se fait ICI, avec le nom de la course :
    *   c'est le seul endroit qui connaît les deux. */
-  const { duJour: videosDuJour, autres: videosAutres } = useMemo(
+  const { duJour: videosDuJour, aVenir: videosAVenir, autres: videosAutres } = useMemo(
     () => partagerVideos(videos, { nom: quinte && quinte.nom, date }),
     [videos, quinte, date],
   )
+
+  /* le sous-titre du bloc, dit en clair ce qu'il y a dans chaque pile */
+  const sousVideos = useMemo(() => {
+    if (!videos.length) return 'Les journaux feuilletés chaque matin, un par un'
+    const m = [`${videosDuJour.length} vidéo${videosDuJour.length > 1 ? 's' : ''} du jour`]
+    if (videosAVenir.length) m.push(`${videosAVenir.length} déjà en ligne pour la course à venir`)
+    m.push(`${videosAutres.length} des jours précédents`)
+    return 'Les journaux feuilletés chaque matin — ' + m.join(' · ')
+  }, [videos, videosDuJour, videosAVenir, videosAutres])
+
+  /* ── ⑤ bis LA VEILLE AUTOMATIQUE ─────────────────────────────────────────
+   * Le canal met en ligne la revue de presse de la course du LENDEMAIN le
+   * soir même : mesuré le 23/10/2026, la vidéo du Quinté du 24 (PRIX DE
+   * BEAUNE) était en ligne à 22 h 03 — et la page, ouverte depuis le matin,
+   * ne la voyait jamais arriver. Elle ne se rechargeait qu'à la main.
+   *
+   * → on relit maintenant toutes les 60 s tant que l'onglet est visible, et
+   *   tout de suite quand on y revient. Côté données le flux RSS est gardé
+   *   60 s : un passage par minute = un appel de 32 Ko (la page de la chaîne,
+   *   1,3 Mo, n'est relue que toutes les 10 min).
+   * ⚠ Une veille qui tombe ne casse jamais l'écran : la liste reste telle
+   *   quelle, on ne pose pas d'erreur. */
+  useEffect(() => {
+    let mort = false
+    const lire = async () => {
+      if (document.visibilityState !== 'visible') return
+      try {
+        const v = await videosJournaux()
+        if (mort || !v.liste.length) return
+        setVideos((avant) => (avant.map((x) => x.id).join() === v.liste.map((x) => x.id).join() ? avant : v.liste))
+        setVeille(Date.now())
+        poser('videos', 'ok')
+      } catch (e) { /* silencieux : la veille n'est pas la lecture */ }
+    }
+    const tic = setInterval(lire, 60000)
+    const auReveil = () => { if (document.visibilityState === 'visible') lire() }
+    document.addEventListener('visibilitychange', auReveil)
+    window.addEventListener('focus', auReveil)
+    return () => {
+      mort = true
+      clearInterval(tic)
+      document.removeEventListener('visibilitychange', auReveil)
+      window.removeEventListener('focus', auReveil)
+    }
+  }, [])
 
   /* ── ⑦ le papier du jour, EN TEXTE, rattaché au Quinté ────────────────────
    * ⚠ Il faut le numéro de la course : le rattachement d'un papier à un cheval
@@ -901,10 +948,9 @@ export default function Presse() {
           <section>
             <TitreBloc
               titre="La revue de presse en vidéo"
-              sous={videos.length
-                ? `Les journaux feuilletés chaque matin — ${videosDuJour.length} vidéo${videosDuJour.length > 1 ? 's' : ''} du jour, ${videosAutres.length} des jours précédents`
-                : 'Les journaux feuilletés chaque matin, un par un'}
+              sous={sousVideos}
             />
+            <Veille t={veille} />
             <Etat etat={etats.videos} msg={pannes.videos} vide="Aucune vidéo publiée pour l'instant." onRetry={relancer} />
 
             {videosDuJour.length > 0 && (
@@ -915,6 +961,20 @@ export default function Presse() {
                   n={videosDuJour.length}
                 />
                 <GrilleVideos videos={videosDuJour} onVoir={setVideoVue} />
+              </>
+            )}
+
+            {/* ⚠ Les vidéos de la course du LENDEMAIN sont mises en ligne la
+                veille au soir : elles ont leur bloc, en haut, et non plus
+                noyées dans « les jours précédents ». */}
+            {videosAVenir.length > 0 && (
+              <>
+                <SousTitre
+                  icone="bi-alarm"
+                  texte="Déjà en ligne — la course à venir"
+                  n={videosAVenir.length}
+                />
+                <GrilleVideos videos={videosAVenir} onVoir={setVideoVue} />
               </>
             )}
 
@@ -957,6 +1017,20 @@ function TitreBloc({ titre, sous }) {
       </h2>
       {sous && <p style={{ margin: '4px 0 0 20px', fontSize: 11.5, color: SK.muet }}>{sous}</p>}
     </div>
+  )
+}
+
+/** La ligne de veille : l'heure (GMT, comme tout le site) de la dernière
+ *  relecture du flux. Elle ne sert pas à décorer — elle dit à l'utilisateur
+ *  que la page se met à jour TOUTE SEULE, et depuis quand. */
+function Veille({ t }) {
+  if (!t) return null
+  const hh = new Date(t).toISOString().slice(11, 16)
+  return (
+    <p style={{ margin: '-4px 0 11px 20px', fontSize: 11, color: SK.muet }}>
+      <i className="bi bi-arrow-repeat" style={{ marginRight: 6, color: SK.accent }} />
+      veille automatique — flux relu à {hh} GMT, puis toutes les minutes
+    </p>
   )
 }
 

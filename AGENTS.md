@@ -3475,26 +3475,39 @@ qu'il avait donnée :
 introuvables (§24.6) — mais leur **revue existe en clair, en vidéo, tous les
 jours**. On ne remplace pas la presse : on prend celle qu'il regarde déjà.
 
-#### Comment on lit la chaîne
+#### Comment on lit la chaîne — DEUX sources, corrigé le 23/10/2026
 
 ```
-GET /api/yt/channel/UCinyN5Q6efFgWevTqklFi3w/videos   (relais → www.youtube.com)
-  → 1,3 Mo de HTML ; TOUT l'état est dans `ytInitialData`
-  → on l'extrait par COMPTAGE D'ACCOLADES, jamais par regex sur 1,3 Mo
-  → on lit DEUX formes, YouTube sert l'une ou l'autre :
-       · videoRenderer     (la forme historique)
-       · lockupViewModel   (la forme récente — titre dans metadata, durée en badge)
+① GET /api/yt/feeds/videos.xml?channel_id=UCinyN5Q6efFgWevTqklFi3w
+   → 32 Ko, 15 entrées, `published` À LA SECONDE, les vues
+   → C'EST LA SOURCE DE LA FRAÎCHEUR : relue toutes les 60 s
+   ⚠ YouTube la cache 15 min (`cache-control: max-age=900`) : une vidéo
+     publiée peut mettre jusqu'à un quart d'heure à y entrer.
+
+② GET /api/yt/channel/UCinyN5Q6efFgWevTqklFi3w/videos
+   → 1,3 Mo de HTML ; TOUT l'état est dans `ytInitialData`
+   → on l'extrait par COMPTAGE D'ACCOLADES, jamais par regex sur 1,3 Mo
+   → on lit DEUX formes, YouTube sert l'une ou l'autre :
+        · videoRenderer     (la forme historique)
+        · lockupViewModel   (la forme récente — titre dans metadata, durée en badge)
+   → elle donne 30 vidéos, la DURÉE et les vues, mais pas d'horodatage
+     absolu (« il y a 6 h »). Relue toutes les 10 min seulement.
 ```
 
+Les deux sont **fusionnées par `id`**, jamais l'une à la place de l'autre : le
+flux donne l'ordre et l'instant exact, la page donne la durée et les vidéos plus
+anciennes que les 15 du flux. Si l'une tombe, l'autre suffit.
+
 ```
-❌ /feeds/videos.xml?channel_id=…   → 404 (le flux RSS est MORT, mesuré le 18/10)
 ❌ /api/… public de la chaîne       → il n'y en a pas sans clé d'API
-✅ la page /videos + ytInitialData  → 30 vidéos, avec titre, « il y a 6 h », vues, durée
+✅ le flux RSS                      → 200, 32 Ko (il avait été noté « mort, 404 »
+                                      le 18/10 : la note était fausse)
+✅ la page /videos + ytInitialData  → 30 vidéos, avec titre, vues, durée
 ```
 
-#### Quelles vidéos sont « du jour »
+#### Quelles vidéos sont « du jour » — et celles de DEMAIN
 
-Deux signaux, **et rien d'autre** — on ne devine jamais :
+Trois signaux, **et rien d'autre** — on ne devine jamais :
 
 ```
 ① LE NOM DE LA COURSE  « PRIX RIEUSSEC » → le mot distinctif (RIEUSSEC ;
@@ -3502,23 +3515,79 @@ Deux signaux, **et rien d'autre** — on ne devine jamais :
    le plus sûr : le canal met le nom du Quinté dans ses titres.
 ② LA DATE DU JOUR, toutes ses écritures : 18/10/2026 · 18/10/26 · 18-10-26 ·
    18.10.26 · 18 OCTOBRE 26 · 18 OCTOBRE 2026
+③ LA DATE DE LA RÉUNION ÉCRITE DANS LE TITRE (`jourVideo`) — c'est elle qui
+   range une vidéo dans « DÉJÀ EN LIGNE — LA COURSE À VENIR ».
 ```
+
+> ⚠ **Le canal publie la revue de presse de la course du LENDEMAIN le soir
+> même.** Mesuré le 23/10/2026 : la vidéo du Quinté du 24 (PRIX DE BEAUNE,
+> Compiègne) était en ligne à **22 h 03**, avec « SAMEDI 24 OCTOBRE 26 » dans
+> le titre. Avant le 23/10, elle tombait dans « Les jours précédents » — donc
+> nulle part, sous 25 vignettes. Elle a maintenant son bloc, juste sous celui
+> du jour.
 
 Le partage se fait **dans la page** (`partagerVideos`), parce que c'est le seul
 endroit qui connaît **la course** *et* **les vidéos**. Sans nom ni date, tout
 part dans « Les jours précédents » : mieux vaut ne rien mettre en avant que de
 mettre en avant la course d'hier.
 
+#### ⏱️ La veille automatique — « لتضهر عندنا فور نزولها »
+
+Demande de l'utilisateur, 23/10/2026 :
+
+> « الفيديوهات الخاصة بيوم الغد توجد على اليوتوب لكن لا تظهر عندنا في الصفحة
+>   هل من طريقة للتحديث التلقائي لهذه الفيديوهات لتظهر عندنا فور نزولها »
+
+Une page ouverte ne voyait **jamais** une vidéo arriver : elle n'était lue
+qu'une fois, au montage. Maintenant :
+
+| quand | ce qui se passe |
+|---|---|
+| toutes les **60 s** | `videosJournaux()` est relu — **si l'onglet est visible** |
+| retour sur l'onglet (`visibilitychange`) | relecture immédiate |
+| retour sur la fenêtre (`focus`) | relecture immédiate |
+| onglet en arrière-plan | **rien** : pas de réseau pour rien |
+
+- la liste n'est remplacée que si les `id` ont changé (pas de clignotement) ;
+- une veille qui tombe **ne casse jamais l'écran** : la liste reste, aucune
+  erreur n'est posée ;
+- la ligne « veille automatique — flux relu à 23:34 GMT, puis toutes les
+  minutes » dit à l'utilisateur que ça se fait tout seul, et depuis quand.
+- coût : **32 Ko par minute** (le flux). La page de 1,3 Mo n'est relue que
+  toutes les 10 min.
+
 #### Le lecteur
 
-La vidéo se joue **dans la page** (`youtube-nocookie.com/embed/{id}`, 16/9,
-Échap pour fermer), comme l'article — **jamais dans un onglet**, jamais un lien
-qui sort. Vérifié au réseau : `videoplayback` part bien, la vidéo joue vraiment.
+La vidéo se joue **dans la page**, comme l'article — **jamais dans un onglet**,
+jamais un lien qui sort.
+
+```
+https://www.youtube.com/embed/{id}
+  ?playsinline=1        ← OBLIGATOIRE : sans lui, iOS et Android confient la
+                          lecture au lecteur natif et ouvrent l'application
+                          YouTube — on quitte la page
+  &rel=0&modestbranding=1&iv_load_policy=3&color=white
+  &origin=<notre origine>   (YouTube l'exige pour la lecture en cadre tiers)
+```
+
+> ⚠ `autoplay=1` a été **retiré** le 23/10/2026 : il est refusé sans geste
+> utilisateur, et c'est lui qui pousse vers l'application. C'est le clic dans
+> le cadre qui démarre la lecture.
+> ⚠ `youtube-nocookie.com` a été abandonné : plusieurs bloqueurs le coupent par
+> motif (écran noir). `www.youtube.com` est plus largement accepté.
+> Une seule définition : `lienVideo(id)` dans `Presse.jsx`.
+
+Vérifié au réseau : `videoplayback` part bien, la vidéo joue vraiment.
 
 > ⚠ Exception assumée, la même que pour l'article relayé : **la vidéo garde sa
 >   marque** (celle du journal et celle de la chaîne). C'est le contenu, pas
 >   notre habillage. Nos sources à nous ne s'écrivent toujours nulle part à
 >   l'écran.
+
+> ⚠ **2 vidéos sur 30 ne peuvent pas jouer** : `Ga6hptSkwp8` et `OdXSzlo3qGs`
+>   sont réservées aux membres de la chaîne (`UNPLAYABLE`, « Rejoignez cette
+>   chaîne »). Ce n'est pas notre lecteur : elles ne jouent nulle part sans
+>   abonnement.
 
 #### Pour ajouter une autre chaîne
 
