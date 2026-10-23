@@ -24,7 +24,13 @@
       18
     ],
     "savedAt": "2026-10-23T04:01:29.983Z",
-    "arrivee": null,
+    "arrivee": [
+      15,
+      12,
+      6,
+      14,
+      16
+    ],
     "ticket": [
       11,
       3,
@@ -41,7 +47,7 @@
     "nbPartants": 18,
     "hippodrome": "VINCENNES",
     "prix": "PRIX ORIONIS",
-    "courseId": "pmu-R1C4",
+    "courseId": "2026-10-23_R1_C4",
     "cle": "2026-10-23_R1_C4",
     "runners": [
       1,
@@ -65,7 +71,15 @@
     ],
     "ticketSource": "page",
     "ticketPoseLe": "2026-10-23T04:32:35.484Z",
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "placeholder": false,
+    "ticketMode": null,
+    "groupes": null,
+    "surprises": [],
+    "ticketMoteur": null,
+    "cloture": "2026-10-23T20:12:02.130Z",
+    "scores": null,
+    "collecte": "2026-10-23T20:12:02.130Z"
   },
   "2026-10-22": {
     "date": "2026-10-22",
@@ -184,7 +198,7 @@
       15,
       16
     ],
-    "cloture": "2026-10-22T13:16:49.689Z",
+    "cloture": "2026-10-23T20:11:39.384Z",
     "scores": null,
     "collecte": "2026-10-22T23:49:10.323Z",
     "ticketMatin": [
