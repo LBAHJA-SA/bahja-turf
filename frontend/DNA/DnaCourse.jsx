@@ -212,7 +212,15 @@ function SurfaceList({ title, rows, accent, measured, baseline }) {
 }
 
 export default function DnaCoursePage() {
-  const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10))
+  /* ⚠ 23/10/2026 — la date par défaut est celle du CALENDRIER LOCAL, pas
+   * `toISOString()` (UTC). Au Maroc (UTC+1), à 23 h 30 UTC il est déjà demain :
+   * la page demandait alors la journée d'hier, et la réunion marocaine — qui
+   * suit la date de Casablanca — n'y figurait pas. */
+  const [date, setDate] = useState(() => {
+    const d = new Date()
+    const p = (n) => String(n).padStart(2, '0')
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`
+  })
   const [meetings, setMeetings] = useState([])
   const [selReu, setSelReu] = useState(null)
   const [sel, setSel] = useState(null)
@@ -359,7 +367,9 @@ export default function DnaCoursePage() {
       {sel && (
         <Card accent="#4ade80">
           <h3 style={{ fontSize: '0.95rem', color: '#4ade80', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-            <Crown size={15} /> R{sel.rnum}C{sel.cnum} — {sel.course.libelle || sel.course.discipline || sel.course.specialty}{' '}
+            <Crown size={15} /> {sel.rnum >= 100
+              ? `MA · ${sel.meeting?.sorec || 'SOREC'} C${sel.cnum}`
+              : `R${sel.rnum}C${sel.cnum}`} — {sel.course.libelle || sel.course.discipline || sel.course.specialty}{' '}
             {statusChip(raceStatus(sel.course, now))}
           </h3>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 8 }}>
@@ -373,6 +383,20 @@ export default function DnaCoursePage() {
                   <b style={{ color: '#4ade80' }}>{p.num}</b> {p.horse}
                 </span>
               ))}
+            </div>
+          )}
+          {/* ⚠ 23/10/2026 — le moteur est ANCRÉ SUR LE MARCHÉ : sans cote, il
+              n'a aucune bande où ranger les chevaux et les quatre zones
+              sortent vides. C'est le cas des courses marocaines dont les paris
+              ne sont pas encore ouverts (et de toute course sans cote). On le
+              dit AVANT le bouton, plutôt que de laisser un écran vide. */}
+          {raceData?.participants?.length > 0 && !raceData.participants.some((p) => p.cote != null) && (
+            <div style={{ marginBottom: 9 }}>
+              <Notice tone="warn" icon={<AlertTriangle size={13} />}>
+                Aucune cote publiée pour cette course : le classement du moteur est ancré sur le
+                marché, donc les zones resteront vides tant que les paris ne sont pas ouverts.
+                Le programme et les partants, eux, sont complets.
+              </Notice>
             </div>
           )}
           <button onClick={run} disabled={analyzing || !raceData?.participants?.length} className="neon-btn neon-btn-lg"

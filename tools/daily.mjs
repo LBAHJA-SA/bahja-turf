@@ -895,6 +895,34 @@ function mesurerTrio() {
   })
 }
 
+/* ⭐ 23/10/2026 — LA RÉUNION DU MAROC (§13). `tools/maroc.mjs` lit la SOREC
+ * (`e-sorec.ma`) et écrit `data/maroc.json` + `public/data/maroc.json`.
+ *
+ * ⚠ POURQUOI CE PAS EST DANS LE JOB : e-sorec est INJOIGNABLE depuis Vercel
+ *   (504 en edge, 502 en Node, mesuré le 23/10/2026). Le poste, lui, le lit
+ *   très bien. Sans ce fichier, Casablanca / Settat n'existent pas en ligne.
+ *   Comme mesurerTrio() : un échec ne casse jamais le cycle, et le fichier de
+ *   la veille reste en place. */
+function publierMaroc() {
+  return new Promise((res) => {
+    log(' réunion du Maroc (tools/maroc.mjs)')
+    const p = spawn(process.execPath, [path.join(ICI, 'maroc.mjs')], {
+      cwd: RACINE, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true,
+    })
+    let sortie = ''
+    p.stdout.on('data', (d) => { sortie += String(d) })
+    p.stderr.on('data', (d) => { sortie += String(d) })
+    p.on('close', (code) => {
+      const dernier = (sortie.trim().split('\n').filter(Boolean).slice(-1)[0] || '').replace(/^\s*\[maroc\]\s*/, '')
+      log(code === 0
+        ? `     ${dernier || 'maroc : a jour'}`
+        : `     maroc : ECHEC (code ${code}) ${dernier}`)
+      res()
+    })
+    p.on('error', (e) => { log('     maroc : impossible : ' + e.message); res() })
+  })
+}
+
 /* ⭐ 19/10/2026 — LES DEUX EMPREINTES (§15.8) se recalculent avec l'archive.
  * `tools/empreinte.mjs` relit `data/quintes.json` et réécrit
  * `data/empreinte.json` + `public/data/empreinte.json` (podium + quinté).
@@ -937,6 +965,7 @@ async function cycle() {
   await archiverLesCourses(aujourdhui())
   await mesurerTrio()
   await mesurerEmpreinte()
+  await publierMaroc()
   await publierDonnees()
   await publier()
   const db = lire(F_SYN, {})

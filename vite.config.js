@@ -13,6 +13,7 @@ import { fileURLToPath } from "node:url";
  *   /api/tf  →  turf-france.com         reu.php, tqqjour.php
  *   /api/eq  →  equidia.fr              le marché (rapp_evol = la cote)
  *   /api/ptf →  horse-racing-api.paris-turf.com   la carrière des chevaux
+ *   /api/ma  →  e-sorec.ma              la réunion du MAROC (la SOREC)
  *
  * ⚠ POURQUOI /api ET PAS /pt, /tf, /eq
  *   Ces trois-là ne sont pas de vrais fichiers du projet : en production,
@@ -47,6 +48,10 @@ const ORIGINES = {
    * coup de cœur, l'outsider, la dernière heure… et le commentaire du cheval).
    * ⚠ Le site n'envoie AUCUN en-tête CORS (mesuré le 18/10/2026) : on relaie. */
   gz: "https://www.lagazettedescourses.fr",
+  /* LA SOREC — la réunion du Maroc (e-sorec.ma). Le programme PMU n'en contient
+   * aucune ; et e-sorec n'envoie AUCUN en-tête CORS (mesuré le 23/10/2026).
+   * La page `/dna` la lit donc par ce relais, comme equidia. */
+  ma: "https://e-sorec.ma",
 };
 /** La clé de l'API ParisTurf (publique : livrée dans son bundle). Elle vit ici,
  *  côté serveur, pour la même raison qu'en production : l'API tient une liste
@@ -449,7 +454,7 @@ function proxiesApi() {
       server.middlewares.use((req, res, next) => {
         const base = "http://" + (req.headers.host || "localhost:3003");
         const u = new URL(req.url || "/", base);
-        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq)$/.exec(u.pathname);
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma)$/.exec(u.pathname);
         if (!m) return next();
         /* La requête ENTIÈRE : `relayer` reconnaît les trois formes —
          *   /api/tf?p=…            (Vercel) · /api/ptf?v=… ou ?hls=… (la vidéo).
@@ -458,7 +463,7 @@ function proxiesApi() {
         relayer(m[1], req.url, res, base);
       });
       server.middlewares.use((req, res, next) => {
-        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq)(\/.*)?$/.exec(req.url || "");
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma)(\/.*)?$/.exec(req.url || "");
         if (!m) return next();
         relayer(m[1], req.url, res, "http://" + (req.headers.host || "localhost:3003"));
       });

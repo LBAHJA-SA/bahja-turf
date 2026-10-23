@@ -13,15 +13,22 @@
  *
  * LES TROIS LECTURES
  *
- *   fetchMeetings(date)               → le programme PMU du jour
+ *   fetchMeetings(date)               → le programme du jour
  *       `backend/ANALYSE/programme.js` (le programme PMU, le même que la page
  *       « Analyse course ») + `backend/ANALYSE/paris.js` (les pastilles des
  *       paris). On ne réinvente ni la liste, ni les numéros de réunion : R1,
- *       R2… sont ceux du PMU, et le Maroc garde son badge « MA ».
+ *       R2… sont ceux du PMU.
+ *       ⚠ 23/10/2026 — ET LA RÉUNION DU MAROC, EN DERNIER : le programme PMU
+ *       ne contient AUCUNE course marocaine, si bien que Casablanca avait
+ *       disparu de la page. `backend/DNA/morocco.js` lit la SOREC
+ *       (`e-sorec.ma`) et rend la réunion dans la même forme, avec
+ *       `num = 100 + index` et `country: 'MA'` — l'écran affiche « MA ».
  *
  *   fetchRace(date, rnum, cnum)       → les partants + la cote
- *       `backend/ANALYSE/parisTurf.js` (`partantsDeCourse`), la même source
- *       que la fiche d'un cheval dans « Analyse course ».
+ *       PMU : `backend/ANALYSE/parisTurf.js` (`partantsDeCourse`), la même
+ *       source que la fiche d'un cheval dans « Analyse course ».
+ *       Maroc (rnum ≥ 100) : `courseSorec` de `morocco.js` — la SOREC donne
+ *       cote, ouverture, corde, musique et arrivée.
  *
  *   extractDnaCourse(participants, …) → LE MOTEUR
  *       `POST /api/dna` : la route du site (middleware Vite en local, fonction
@@ -35,6 +42,7 @@
 import { programmePmu } from '../ANALYSE/programme.js'
 import { partantsDeCourse } from '../ANALYSE/parisTurf.js'
 import { parisDuJour, parisDe } from '../ANALYSE/paris.js'
+import { programmeSorec, courseSorec, MAROC_OFFSET } from './morocco.js'
 
 /* La course telle qu'on l'a lue, pour que `fetchRace` retrouve son identifiant
  * chez la source de chevaux. Clé : « 2026-10-23|R1|C3 ». */
@@ -103,9 +111,10 @@ function instant(date, heure, pays) {
 export async function fetchMeetings(date) {
   if (!date) return { meetings: [] }
 
-  const [prog, paris] = await Promise.all([
+  const [prog, paris, maroc] = await Promise.all([
     programmePmu(date),
     parisDuJour(date).catch(() => ({})),
+    programmeSorec(date).catch(() => []),
   ])
 
   const meetings = (prog?.reunions || []).map((m) => {
@@ -142,7 +151,20 @@ export async function fetchMeetings(date) {
     }
   })
 
-  return { meetings: meetings.filter((m) => m.num > 0 && m.courses.length) }
+  /* LE MAROC — en dernier, comme dans la copie autonome. `num` vaut déjà
+   * 100 + index (aucune collision avec R1..Rn du PMU) et `country` vaut 'MA'.
+   * On enregistre ses courses pour que `fetchRace` retrouve le `sorecId`. */
+  for (const m of maroc) {
+    for (const c of m.courses || []) {
+      COURSES.set(`${date}|${m.num}|${c.num}`, {
+        ...c, reunion: m.num, pays: 'MA', hippodrome: m.hippodrome || '',
+      })
+    }
+  }
+
+  return {
+    meetings: [...meetings.filter((m) => m.num > 0 && m.courses.length), ...maroc],
+  }
 }
 
 /* ---------------------------------------------------------------- partants -- */
@@ -159,6 +181,19 @@ export async function fetchRace(date, rnum, cnum) {
   const cle = `${date}|${Number(rnum)}|${Number(cnum)}`
   const course = COURSES.get(cle)
   if (!course) throw new Error("Course inconnue — rechargez le programme de cette date.")
+
+  /* LE MAROC (rnum ≥ 100) : la SOREC donne tout elle-même — cote, ouverture,
+   * corde, musique, arrivée. Aucun croisement avec la source française. */
+  if (Number(rnum) >= MAROC_OFFSET) {
+    const data = await courseSorec(date, Number(rnum), Number(cnum))
+    if (!data || !(data.participants || []).length) {
+      throw new Error(
+        "La SOREC ne publie pas encore les partants de cette course marocaine. " +
+        'Le programme, lui, est complet.'
+      )
+    }
+    return { course: { ...course, ...data.course }, participants: data.participants }
+  }
 
   if (!course.id) {
     throw new Error(

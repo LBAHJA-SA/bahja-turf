@@ -60,7 +60,7 @@ function lireEnv() {
 }
 
 /** l'empreinte des SOURCES — c'est elle qui dit si le site est périmé */
-const SOURCES = ['src', 'frontend', 'backend', 'public', 'index.html', 'package.json', 'vite.config.js', 'vercel.json']
+const SOURCES = ['src', 'frontend', 'backend', 'api', 'public', 'index.html', 'package.json', 'vite.config.js', 'vercel.json']
 const SUFFIXES = new Set(['.js', '.jsx', '.mjs', '.css', '.json', '.html'])
 
 /** Champs d'horodatage : ils changent a chaque job SANS rien changer de utile.
