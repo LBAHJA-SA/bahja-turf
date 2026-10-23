@@ -18,6 +18,11 @@
  *   Tant qu'elle est vide, cette route répond 503 avec un message clair : la
  *   page affiche alors le programme et les partants, et dit que le moteur n'est
  *   pas hébergé en ligne. On ne pointe PAS vers un service tiers par défaut.
+ *
+ *   EN LIGNE, l'adresse posée est celle de l'app Modal `dna-course-engine`
+ *   (recette : `dna-course/modal_app.py`, `python -m modal deploy modal_app.py`).
+ *   En local on ne passe même pas par ici : `vite.config.js` parle d'abord au
+ *   moteur du poste (127.0.0.1:5057).
  */
 const MOTEUR = String(process.env.DNA_ENGINE_URL || '').replace(/\/+$/, '')
 
