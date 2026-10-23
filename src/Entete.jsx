@@ -21,9 +21,14 @@ import { Link } from 'react-router-dom'
 const LIENS = [
   { cle: 'analyse', to: '/', libelle: 'Analyse course', icone: 'bi-clipboard2-pulse' },
   { cle: 'quinte', to: '/quinte', libelle: 'Quinté', icone: 'bi-trophy' },
-  { cle: 'couple', to: '/coply', libelle: 'Coply', icone: 'bi-people' },
   { cle: 'presse', to: '/presse', libelle: 'Presse', icone: 'bi-newspaper' },
   { cle: 'lives', to: '/lives', libelle: 'Lives', icone: 'bi-broadcast' },
+  /* 23/10/2026 — le moteur DNA COURSE, tel quel : il vit dans `dna-course\`
+   * (Flask sur le port 5057) et la page l'affiche dans un cadre.
+   * `dev: true` — le moteur tourne sur le poste : le lien n'apparaît donc que
+   * en développement. En ligne (Vercel) il n'y a rien à afficher, et un onglet
+   * mort dans le bandeau serait pire que pas d'onglet du tout. */
+  { cle: 'dna', to: '/dna', libelle: 'DNA COURSE', icone: 'bi-cpu', dev: true },
 ]
 
 export default function Entete({ page }) {
@@ -37,7 +42,7 @@ export default function Entete({ page }) {
         </Link>
 
         <nav className="entete-nav">
-          {LIENS.map((l) => (
+          {LIENS.filter((l) => !l.dev || import.meta.env.DEV).map((l) => (
             <Link
               key={l.cle}
               to={l.to}

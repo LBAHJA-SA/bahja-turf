@@ -28,8 +28,6 @@
  *     public/data/ecarts.json       les écarts (page Quinté)
  *     public/data/choix.json        les choix (page Quinté)
  *     public/data/reu/              les fiches de courses + prog-{date}.json
- *     public/data/coply-modele.json · contextual-selection.json
- *     public/data/empreinte*.json · ticket-groupe.json     (le Coply)
  *
  *  UTILISATION
  *     node tools\publier-archive.mjs              publie
@@ -60,10 +58,8 @@ const VERIFIER = args.includes('--verifier')
 const AUTO = args.includes('--auto')
 
 /** [chemin, ce que c'est] — l'ordre est celui de l'affichage.
- *  ⚠ 18/10/2026 : le COPLY est entré dans le lot, sur accord de l'utilisateur.
- *    Ce sont ses fichiers de données (modèle, sélection contextuelle,
- *    empreintes, tickets de groupe) : les pages du site les lisent en direct,
- *    donc ils voyagent comme les autres. */
+ *  ⚠ 23/10/2026 : la page COPLY est supprimée — ses artefacts (modèle,
+ *    sélection contextuelle, tickets de groupe) ne voyagent plus. */
 const A_PUBLIER = [
   ['public/data/synthese.json', "l'archive"],
   ['public/data/cotes.json', 'le marché'],
@@ -71,12 +67,9 @@ const A_PUBLIER = [
   ['public/data/ecarts.json', 'les écarts'],
   ['public/data/choix.json', 'les choix'],
   ['public/data/reu', 'les fiches de courses'],
-  ['public/data/coply-modele.json', 'le modèle du Coply'],
-  ['public/data/contextual-selection.json', 'la sélection contextuelle'],
   ['public/data/empreinte.json', 'les empreintes'],
   ['public/data/empreinte-v3.json', 'les empreintes v3'],
   ['public/data/empreinte-v4.json', 'les empreintes v4'],
-  ['public/data/ticket-groupe.json', 'les tickets de groupe'],
 ]
 
 /* un chemin qui n'existe pas ferait échouer `git add` : on l'écarte d'abord */

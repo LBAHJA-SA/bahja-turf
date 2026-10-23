@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Article from '../frontend/ARTICLE/Article.jsx'
 import QuinteGrille from '../frontend/QUINTE/QuinteGrille.jsx'
-import Couple from '../frontend/COUPLE/Couple.jsx'
 import Analyse from '../frontend/ANALYSE/Analyse.jsx'
 import Presse from '../frontend/PRESSE/Presse.jsx'
 import Lives from '../frontend/LIVES/Lives.jsx'
+import DnaCourse from '../frontend/DNA/DnaCourse.jsx'
 import Admin from '../frontend/ADMIN/Admin.jsx'
 import { pointerVisite } from '../backend/ADMIN/visites.js'
 
@@ -42,8 +42,9 @@ export default function App(){
 
         <Route path="/quinte" element={<QuinteGrille />} />
 
-        <Route path="/couple" element={<Couple />} />
-        <Route path="/coply" element={<Couple />} />
+        {/* ⚠ 23/10/2026 — LA PAGE « COPLY » EST SUPPRIMÉE.
+         *  /coply et /couple tombent dans l'adresse inconnue → retour à
+         *  l'accueil, comme n'importe quelle vieille adresse. */}
 
         {/* la presse du jour : déclarations, analyse, revue de presse, articles */}
         <Route path="/presse" element={<Presse />} />
@@ -55,6 +56,15 @@ export default function App(){
          * ══════════════════════════════════════════════════════════════════════ */}
         <Route path="/lives" element={<Lives />} />
         <Route path="/live" element={<Lives />} />
+
+        {/* ══════════════════════════════════════════════════════════════════════
+         *  DNA COURSE — le moteur marché-ancré (23/10/2026)
+         *  C'est une application AUTONOME (dossier `dna-course\`, Flask sur le
+         *  port 5057) : la page l'affiche dans un cadre, elle ne la recopie pas.
+         *  L'alias /dna-course reste valable.
+         * ══════════════════════════════════════════════════════════════════════ */}
+        <Route path="/dna" element={<DnaCourse />} />
+        <Route path="/dna-course" element={<DnaCourse />} />
 
         {/* ══════════════════════════════════════════════════════════════════════
          *  ⚠ LA CONSOLE D'ADMINISTRATION — INVISIBLE POUR LES VISITEURS.

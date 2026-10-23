@@ -11,7 +11,6 @@
 |---|---|---|---|---|
 | **Analyse course** | `/` (`/analyse` = alias) | `frontend/ANALYSE/` | `backend/ANALYSE/` | reu.php (programme des réunions) → turf-france / tqqjour → api bahja → casacourses. Programme, partants, études ; `/chevaux` = les fiches cheval. |
 | **Quinté** | `/quinte` | `frontend/QUINTE/` | `backend/QUINTE/` | la presse (`pronostics-turf.info`) + le marché (Equidia) + l'archive locale (`data/`) |
-| **Coply** | `/coply` | `frontend/COUPLE/` | `backend/COUPLE/` | l'archive des couples (`archivecouple/`) + le programme |
 | **Presse** | `/presse` | `frontend/PRESSE/` | `backend/PRESSE/` | ① déclarations et ② analyse du jour (`api.equidia.fr`) · ③ revue de presse (`pronostics-turf.info`, 18 journaux × 8 chevaux) · ④ **le papier du jour, en texte** (le journal qui le publie) puis **les articles des journaux** (Paris-Turf, Le Veinard) · ⑤ **les journaux en vidéo** : la chaîne qui les feuillette chaque matin |
 | **Article** (une course) | `/r/:slug` (`/race/:id` = alias) | `frontend/ARTICLE/` | `backend/ARTICLE/` | reu.php detail (course EXACTE + 19 colonnes + aptitude + tops + arrivée) → tqqjour → API bahja. **Pas dans le menu** : on y arrive en cliquant une course. |
 

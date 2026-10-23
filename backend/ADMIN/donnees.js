@@ -33,7 +33,6 @@
 export const PAGES = [
   { cle: 'analyse', nom: 'Analyse course', route: '/', icone: 'bi-clipboard2-pulse', bandeau: true, teinte: '#22d3ee' },
   { cle: 'quinte', nom: 'Quinté', route: '/quinte', icone: 'bi-trophy', bandeau: true, teinte: '#e879f9' },
-  { cle: 'couple', nom: 'Coply', route: '/coply', icone: 'bi-people', bandeau: true, teinte: '#fb923c' },
   { cle: 'presse', nom: 'Presse', route: '/presse', icone: 'bi-newspaper', bandeau: true, teinte: '#fbbf24' },
   { cle: 'article', nom: 'Fiche de course', route: '/r/:slug', icone: 'bi-file-earmark-text', bandeau: false, teinte: '#a78bfa' },
   { cle: 'admin', nom: 'Administration', route: '/admin', icone: 'bi-shield-lock', bandeau: false, teinte: '#94a3b8', prive: true },

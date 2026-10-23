@@ -1,7 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { execFile } from "node:child_process";
+import { execFile, spawn } from "node:child_process";
 import http2 from "node:http2";
+import net from "node:net";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 /* ──────────────────────────────────────────────────────────────────────────
  * LES 3 PROXIES — local ET production, le MEME code.
@@ -459,23 +462,6 @@ function proxiesApi() {
         if (!m) return next();
         relayer(m[1], req.url, res, "http://" + (req.headers.host || "localhost:3003"));
       });
-      /* /api/couple : les courses du jour pour la page Couplé. C'est une
-       * FONCTION (elle lit reu.php + prog-{date}.json sur le disque), pas
-       * un proxy. En production Vercel la trouve dans `api/couple.js` ;
-       * ici on l'appelle directement, sinon la page aurait des données
-       * différentes en local et en ligne — exactement le piège du §18.2. */
-      server.middlewares.use(async (req, res, next) => {
-        const u = new URL(req.url || "/", "http://localhost");
-        if (u.pathname !== "/api/couple") return next();
-        try {
-          const mod = await server.ssrLoadModule("/api/couple.js");
-          await mod.default(req, res);
-        } catch (e) {
-          res.statusCode = 500;
-          res.setHeader("Content-Type", "application/json; charset=utf-8");
-          res.end(JSON.stringify({ erreur: String(e && e.message ? e.message : e) }));
-        }
-      });
       /* /api/visite et /api/visiteurs — LE JOURNAL DES VISITEURS (18/10/2026).
        * En DEV, il n'y a pas de base : on répond exactement comme le ferait
        * Vercel sans les variables KV_* — `{configure:false}` — pour que la
@@ -536,8 +522,63 @@ function proxiesApi() {
   };
 }
 
+/* ─────────────────────────────────────────────── DNA COURSE (23/10/2026) ────
+ *  La page `/dna` affiche l'application autonome `dna-course\` (Flask, port
+ *  5057) dans un cadre. Elle ne doit donc pas être éteinte quand on ouvre le
+ *  site : ce plugin la démarre avec lui.
+ *
+ *    · port déjà ouvert  → on ne touche à rien (une copie tourne peut-être
+ *      déjà, avec un moteur plus récent) ;
+ *    · port fermé        → `python backend/server.py`, dans `dna-course\`.
+ *
+ *  ⚠ Ne JAMAIS faire échouer le serveur de dev si Python manque : la page
+ *  affiche alors son message « moteur injoignable », le reste du site vit.
+ * ────────────────────────────────────────────────────────────────────────── */
+const ICI = path.dirname(fileURLToPath(import.meta.url));
+const DNA_PORT = 5057;
+
+function portOuvert(port, hote = "127.0.0.1", delai = 900) {
+  return new Promise((resolve) => {
+    const s = net.connect({ port, host: hote });
+    let fini = false;
+    const finir = (v) => { if (fini) return; fini = true; try { s.destroy() } catch (e) { /* déjà fermé */ } resolve(v); };
+    s.once("connect", () => finir(true));
+    s.once("error", () => finir(false));
+    setTimeout(() => finir(false), delai);
+  });
+}
+
+function dnaCourse() {
+  return {
+    name: "dna-course",
+    apply: "serve",
+    async configureServer() {
+      if (await portOuvert(DNA_PORT)) {
+        console.log(`  \x1b[32m➜\x1b[0m  DNA COURSE : déjà en ligne sur http://127.0.0.1:${DNA_PORT}`);
+        return;
+      }
+      const dossier = path.join(ICI, "dna-course");
+      const python = process.env.PYTHON || (process.platform === "win32" ? "python" : "python3");
+      try {
+        const enfant = spawn(python, ["backend/server.py"], {
+          cwd: dossier, stdio: "ignore", windowsHide: true, detached: false,
+        });
+        enfant.on("error", (e) => {
+          console.log(`  \x1b[33m!\x1b[0m  DNA COURSE : impossible de lancer « ${python} » (${e.message}) — ouvrez /dna après l'avoir démarré à la main.`);
+        });
+        enfant.on("exit", (code) => {
+          if (code) console.log(`  \x1b[33m!\x1b[0m  DNA COURSE : le moteur s'est arrêté (code ${code}).`);
+        });
+        console.log(`  \x1b[32m➜\x1b[0m  DNA COURSE : démarrage du moteur sur http://127.0.0.1:${DNA_PORT}`);
+      } catch (e) {
+        console.log(`  \x1b[33m!\x1b[0m  DNA COURSE : ${e && e.message ? e.message : e}`);
+      }
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), proxiesApi()],
+  plugins: [react(), proxiesApi(), dnaCourse()],
   server: {
     port: 3003,
     host: true,

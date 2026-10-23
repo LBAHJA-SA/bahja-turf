@@ -141,8 +141,8 @@ const THEME = {
     th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#fecdd3', fontFamily: 'system-ui, sans-serif' },
     td: { padding: '6px 9px', fontSize: 13 },
   },
-  /* 🎯 (retiré le 19/10/2026) — le Trio · Couplé a été sorti de cette page :
-     il vit sur la page Coply, avec SA sélection. Voir /coply. */
+  /* 🎯 (retiré le 19/10/2026) — le Trio · Couplé a été sorti de cette page.
+     ⚠ 23/10/2026 : la page Coply qui le portait est supprimée à son tour. */
 }
 
 const TABS = [['grille', 'La grille'], ['ticket', 'Le ticket'], ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts'], ['choix', 'Choix']]

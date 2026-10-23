@@ -150,6 +150,7 @@ body::before{
 .p-article{ --t: var(--n-violet) }
 .p-presse{ --t: var(--n-ambre) }
 .p-lives { --t: var(--n-vert) }
+.p-dna   { --t: var(--n-violet) }
 
 /* ── LE TEXTE D'UN ARTICLE DE JOURNAL, dans la visionneuse de la page Presse ─
  * On lit l'article sur son papier : fond crème, encre sombre, sérif pour le
