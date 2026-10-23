@@ -380,6 +380,24 @@ export default function Presse() {
     return 'Les journaux feuilletés chaque matin — ' + m.join(' · ')
   }, [videos, videosDuJour, videosAVenir, videosAutres])
 
+  /* ⭐ L'ORDRE DES BLOCS SUIT LA FRAÎCHEUR (23/10/2026).
+   * Le soir, la revue de presse de la course du LENDEMAIN tombe (mesuré :
+   * 22 h 03 pour le Quinté du 24) : c'est elle qu'on vient voir, elle passe
+   * donc EN TÊTE. Le matin, c'est celle du jour la plus récente, et elle
+   * reprend sa place. L'ordre se calcule, il ne se décide pas à la main. */
+  const blocsVideos = useMemo(() => {
+    const neuf = (l) => (l[0] && l[0].publieLe) || ''
+    const jour = {
+      cle: 'jour', icone: 'bi-star-fill',
+      texte: 'Le Jour du Quinté' + (quinte && quinte.nom ? ' — ' + quinte.nom : ''),
+      videos: videosDuJour,
+    }
+    const venir = { cle: 'venir', icone: 'bi-alarm', texte: 'Déjà en ligne — la course à venir', videos: videosAVenir }
+    const b = neuf(videosAVenir) > neuf(videosDuJour) ? [venir, jour] : [jour, venir]
+    b.push({ cle: 'avant', icone: 'bi-clock-history', texte: 'Les jours précédents', videos: videosAutres })
+    return b.filter((x) => x.videos.length > 0)
+  }, [videosDuJour, videosAVenir, videosAutres, quinte])
+
   /* ── ⑤ bis LA VEILLE AUTOMATIQUE ─────────────────────────────────────────
    * Le canal met en ligne la revue de presse de la course du LENDEMAIN le
    * soir même : mesuré le 23/10/2026, la vidéo du Quinté du 24 (PRIX DE
@@ -953,37 +971,12 @@ export default function Presse() {
             <Veille t={veille} />
             <Etat etat={etats.videos} msg={pannes.videos} vide="Aucune vidéo publiée pour l'instant." onRetry={relancer} />
 
-            {videosDuJour.length > 0 && (
-              <>
-                <SousTitre
-                  icone="bi-star-fill"
-                  texte={'Le Jour du Quinté' + (quinte && quinte.nom ? ' — ' + quinte.nom : '')}
-                  n={videosDuJour.length}
-                />
-                <GrilleVideos videos={videosDuJour} onVoir={setVideoVue} />
-              </>
-            )}
-
-            {/* ⚠ Les vidéos de la course du LENDEMAIN sont mises en ligne la
-                veille au soir : elles ont leur bloc, en haut, et non plus
-                noyées dans « les jours précédents ». */}
-            {videosAVenir.length > 0 && (
-              <>
-                <SousTitre
-                  icone="bi-alarm"
-                  texte="Déjà en ligne — la course à venir"
-                  n={videosAVenir.length}
-                />
-                <GrilleVideos videos={videosAVenir} onVoir={setVideoVue} />
-              </>
-            )}
-
-            {videosAutres.length > 0 && (
-              <>
-                <SousTitre icone="bi-clock-history" texte="Les jours précédents" n={videosAutres.length} />
-                <GrilleVideos videos={videosAutres} onVoir={setVideoVue} />
-              </>
-            )}
+            {blocsVideos.map((b) => (
+              <div key={b.cle}>
+                <SousTitre icone={b.icone} texte={b.texte} n={b.videos.length} />
+                <GrilleVideos videos={b.videos} onVoir={setVideoVue} />
+              </div>
+            ))}
           </section>
         )}
       </div>
