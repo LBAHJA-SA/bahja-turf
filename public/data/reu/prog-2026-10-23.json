@@ -123,7 +123,7 @@
      "partants": 11,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-5-11-10-2-9-7"
     }
    ]
   },
@@ -738,10 +738,10 @@
      "partants": 11,
      "hippodrome": "VINCENNES",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-5-11-10-2-9-7"
     }
    ]
   }
  ],
- "collecteLe": "2026-10-23T20:30:05.665Z"
+ "collecteLe": "2026-10-23T20:31:50.833Z"
 }
