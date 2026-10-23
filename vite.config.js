@@ -480,6 +480,72 @@ function proxiesApi() {
         }
         next();
       });
+      /* /api/dna — LE MOTEUR DNA COURSE (23/10/2026).
+       *
+       * La page `/dna` envoie ses partants ici ; on les porte au moteur
+       * RACE_DNA_ENGINE, qui les confronte à son archive (86 886 courses).
+       *
+       *   ① le moteur DU POSTE   http://127.0.0.1:5057  (le plugin `dnaCourse`
+       *      le démarre avec le site) — c'est le chemin normal en local ;
+       *   ② à défaut, le moteur distant (la même adresse qu'`api/dna.js` en
+       *      production, réglable par `DNA_ENGINE_URL`).
+       *
+       * ⚠ Le moteur n'est pas dans ce dépôt : c'est un service Python qui ouvre
+       *   une base SQLite de 84 Mo. On relaie, comme pour turf-france ou equidia.
+       */
+      server.middlewares.use((req, res, next) => {
+        const u = new URL(req.url || "/", "http://localhost");
+        if (u.pathname !== "/api/dna") return next();
+        const repondre = (statut, corps, entete) => {
+          res.statusCode = statut;
+          res.setHeader("Content-Type", "application/json; charset=utf-8");
+          res.setHeader("Cache-Control", "no-store");
+          if (entete) res.setHeader("X-Bahja-Proxy", entete);
+          res.end(typeof corps === "string" ? corps : JSON.stringify(corps));
+        };
+        if (req.method !== "POST") {
+          res.setHeader("Allow", "POST");
+          repondre(405, { error: "POST attendu" });
+          return;
+        }
+        const morceaux = [];
+        let taille = 0;
+        req.on("data", (c) => {
+          taille += c.length;
+          if (taille > 1024 * 1024) { repondre(413, { error: "trop gros" }); req.destroy(); return; }
+          morceaux.push(c);
+        });
+        req.on("end", async () => {
+          const brut = Buffer.concat(morceaux).toString("utf8");
+          let corps = null;
+          try { corps = JSON.parse(brut); } catch (e) { corps = null; }
+          if (!corps || !Array.isArray(corps.participants) || !corps.participants.length) {
+            repondre(400, { error: "participants manquants" });
+            return;
+          }
+          const cibles = [
+            `http://127.0.0.1:${DNA_PORT}/api/dna/extract`,
+            ...(MOTEUR_DNA ? [MOTEUR_DNA + "/api/dna/extract"] : []),
+          ];
+          let dernier = "aucune cible";
+          for (const cible of cibles) {
+            try {
+              const r = await fetch(cible, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", accept: "application/json" },
+                body: JSON.stringify(corps),
+                signal: AbortSignal.timeout(120000),
+              });
+              const texte = await r.text();
+              repondre(r.status, texte, "dna");
+              return;
+            } catch (e) {
+              dernier = (e && e.message) || String(e);
+            }
+          }
+          repondre(502, { error: "moteur DNA injoignable", detail: dernier }, "dna-ERREUR");
+        });
+      });
       /* /api/archive-push : le navigateur RENVOIE son archive au disque,
        * SANS CLIC (10/10/2026 — fin des « deux archives » qui divergent).
        * POST JSON {date: record} → fusionné dans data/synthese.json avec
@@ -536,6 +602,10 @@ function proxiesApi() {
  * ────────────────────────────────────────────────────────────────────────── */
 const ICI = path.dirname(fileURLToPath(import.meta.url));
 const DNA_PORT = 5057;
+/** Le moteur DNA distant — même variable d'environnement que `api/dna.js`
+ *  (`DNA_ENGINE_URL`). Vide = pas de moteur distant : en local c'est le poste
+ *  qui répond (port 5057), en ligne la page le dit. */
+const MOTEUR_DNA = String(process.env.DNA_ENGINE_URL || '').replace(/\/+$/, "");
 
 function portOuvert(port, hote = "127.0.0.1", delai = 900) {
   return new Promise((resolve) => {

@@ -59,9 +59,10 @@ export default function App(){
 
         {/* ══════════════════════════════════════════════════════════════════════
          *  DNA COURSE — le moteur marché-ancré (23/10/2026)
-         *  C'est une application AUTONOME (dossier `dna-course\`, Flask sur le
-         *  port 5057) : la page l'affiche dans un cadre, elle ne la recopie pas.
-         *  L'alias /dna-course reste valable.
+         *  Une page du site comme les autres : `frontend/DNA/` prend le
+         *  programme et les partants ici (backend/DNA/donnees.js) et envoie les
+         *  chevaux au moteur par `/api/dna`. Plus de cadre, plus d'application
+         *  à part. L'alias /dna-course reste valable.
          * ══════════════════════════════════════════════════════════════════════ */}
         <Route path="/dna" element={<DnaCourse />} />
         <Route path="/dna-course" element={<DnaCourse />} />

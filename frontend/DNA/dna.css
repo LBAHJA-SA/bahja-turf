@@ -1,0 +1,131 @@
+/* =============================================================================
+ * frontend/DNA/dna.css — L'HABIT DE LA PAGE « DNA COURSE » (23/10/2026)
+ *
+ * La feuille de l'application autonome (`dna-course/src/index.css`) commence
+ * par une remise à zéro GLOBALE (`* { margin: 0 }`, `body { … }`, `table {
+ * display: block }`). Importée telle quelle dans ce site, elle casserait
+ * toutes les autres pages : ici on ne garde que l'habit de l'écran, et chaque
+ * règle est portée par sa classe (`.neon-theme`, `.dna-page`).
+ *
+ * Rien d'autre n'est changé : mêmes couleurs, mêmes rayons, mêmes ombres.
+ * ========================================================================== */
+
+.dna-page {
+  min-height: 100vh;
+  background: #070b14;
+  padding: 14px 16px 44px;
+}
+
+@keyframes dna-spin { to { transform: rotate(360deg); } }
+
+/* ===== le thème néon de l'écran ===== */
+.neon-theme {
+  --neon-green: #39ff14;
+  --neon-cyan: #00e5ff;
+  --neon-purple: #b026ff;
+  --neon-amber: #ffab00;
+  --neon-red: #ff3333;
+  --gold: #ffd700;
+  --text-primary: #eef3fb;
+  --text-secondary: #bcc8dc;
+  --text-muted: #8b97ad;
+  --bg-card: #111a2e;
+  --bg-card-hover: #182442;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.18);
+  --text: #e6edf7;
+  --text-dim: #8b97ad;
+  background: #0a0f1e;
+  color: var(--text);
+  border-radius: 14px;
+  padding: 24px;
+  font-size: 14px;
+}
+.neon-theme .neon-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+.neon-theme .neon-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.neon-theme .neon-card-flat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.neon-theme .neon-input {
+  background: #0d1424;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  color-scheme: dark;
+}
+.neon-theme .neon-input:focus { border-color: var(--neon-cyan); }
+.neon-theme select.neon-input option { background: #0d1424; color: var(--text); }
+.neon-theme .neon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 16px; border-radius: 8px;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--neon-cyan);
+  font-weight: 700; font-size: 13px; cursor: pointer;
+  transition: all 0.15s;
+}
+.neon-theme .neon-btn:hover:not(:disabled) { background: rgba(0, 229, 255, 0.22); }
+.neon-theme .neon-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.neon-theme .neon-btn-lg { padding: 12px 20px; font-size: 14px; }
+.neon-theme .neon-btn.outline {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-dim);
+}
+.neon-theme .neon-btn.outline:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+.neon-theme .neon-badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 10px; font-weight: 700;
+}
+.neon-theme .badge-cyan {
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+}
+.neon-theme .spinner-neon {
+  width: 32px; height: 32px;
+  border: 3px solid rgba(0, 229, 255, 0.15);
+  border-top-color: var(--neon-cyan);
+  border-radius: 50%;
+  animation: dna-spin 0.7s linear infinite;
+}
+.neon-theme .empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
+.neon-theme .animate-spin { animation: dna-spin 0.7s linear infinite; }
+
+/* ===== la pastille de titre de la page ===== */
+.dna-page .page-tag {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 16px; padding: 12px 18px; border-radius: 12px;
+  font-weight: 900; font-size: 1.1rem; letter-spacing: 0.3px;
+  border: 1.5px solid;
+}
+.dna-page .page-tag small { font-size: 0.72rem; font-weight: 600; opacity: 0.9; }
+.dna-page .page-tag.dna {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.18), rgba(0, 229, 255, 0.10));
+  border-color: #4ade80;
+  color: #4ade80;
+}
+
+/* ===== les tableaux de l'écran (l'écran n'en stylait aucun) ===== */
+.neon-theme table { border-collapse: collapse; }
+.neon-theme th { font-weight: 800; }

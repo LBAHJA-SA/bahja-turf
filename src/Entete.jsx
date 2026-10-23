@@ -23,12 +23,12 @@ const LIENS = [
   { cle: 'quinte', to: '/quinte', libelle: 'Quinté', icone: 'bi-trophy' },
   { cle: 'presse', to: '/presse', libelle: 'Presse', icone: 'bi-newspaper' },
   { cle: 'lives', to: '/lives', libelle: 'Lives', icone: 'bi-broadcast' },
-  /* 23/10/2026 — le moteur DNA COURSE, tel quel : il vit dans `dna-course\`
-   * (Flask sur le port 5057) et la page l'affiche dans un cadre.
-   * `dev: true` — le moteur tourne sur le poste : le lien n'apparaît donc que
-   * en développement. En ligne (Vercel) il n'y a rien à afficher, et un onglet
-   * mort dans le bandeau serait pire que pas d'onglet du tout. */
-  { cle: 'dna', to: '/dna', libelle: 'DNA COURSE', icone: 'bi-cpu', dev: true },
+  /* 23/10/2026 — le moteur DNA COURSE, comme les autres pages.
+   * La page ne cadre plus une application à part : c'est `frontend/DNA/`, elle
+   * prend le programme et les partants du site (backend/DNA/donnees.js) et
+   * envoie les chevaux au moteur par `/api/dna` — le même relais en local et en
+   * ligne, comme `/api/tf` pour turf-france. Elle s'affiche donc partout. */
+  { cle: 'dna', to: '/dna', libelle: 'DNA COURSE', icone: 'bi-cpu' },
 ]
 
 export default function Entete({ page }) {
