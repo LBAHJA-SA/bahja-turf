@@ -144,7 +144,7 @@
    "sexe": "F",
    "age": 5,
    "couleur": "",
-   "proprietaire": "M.CHAOUAT",
+   "proprietaire": "M.CHAOUAT/R.OLIVIER",
    "cote": 39,
    "coteRef": 39,
    "depart": null,
@@ -294,29 +294,6 @@
    "place": null
   },
   {
-   "num": 3,
-   "cheval": "BELLE GOSSE",
-   "nom": "BELLE GOSSE",
-   "poids": 72,
-   "driver": "A.ZULIANI",
-   "jockey": "A.ZULIANI",
-   "entraineur": "F.NICOLLE",
-   "valeur": 58,
-   "sexe": "F",
-   "age": 5,
-   "couleur": "",
-   "proprietaire": "EC.DES BOIS/EC.ARTSAM/L.CLAUDE",
-   "cote": 21,
-   "coteRef": 21,
-   "depart": null,
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261024-r1c3p3-png-1",
-   "dernierPassage": "1h7h5s7s1s(25)Th4h1h",
-   "gains": 51460,
-   "musique": "1h7h5s7s1s(25)Th4h1h",
-   "place": null
-  },
-  {
    "num": 6,
    "cheval": "LE COLOMBAR",
    "nom": "LE COLOMBAR",
@@ -361,6 +338,29 @@
    "gains": 109430,
    "musique": "1s7h4s3h1h4h2s1h6h4h",
    "place": null
+  },
+  {
+   "num": 3,
+   "cheval": "BELLE GOSSE",
+   "nom": "BELLE GOSSE",
+   "poids": 72,
+   "driver": "A.ZULIANI",
+   "jockey": "A.ZULIANI",
+   "entraineur": "F.NICOLLE",
+   "valeur": 58,
+   "sexe": "F",
+   "age": 5,
+   "couleur": "",
+   "proprietaire": "EC.DES BOIS/EC.ARTSAM/L.CLAUDE",
+   "cote": 21,
+   "coteRef": 21,
+   "depart": null,
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261024-r1c3p3-png-1",
+   "dernierPassage": "1h7h5s7s1s(25)Th4h1h",
+   "gains": 51460,
+   "musique": "1h7h5s7s1s(25)Th4h1h",
+   "place": null
   }
  ],
  "arrivee": [
@@ -376,6 +376,6 @@
   1,
   14
  ],
- "collecteLe": "2026-10-24T13:46:06.363Z",
+ "collecteLe": "2026-10-24T15:32:19.494Z",
  "collecteApresCourse": true
 }

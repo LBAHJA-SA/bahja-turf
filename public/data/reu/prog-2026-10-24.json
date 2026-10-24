@@ -63,7 +63,7 @@
      "partants": 8,
      "hippodrome": "COMPIEGNE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-2-4-5-7-3-8"
     },
     {
      "date": "2026-10-24",
@@ -78,7 +78,7 @@
      "partants": 7,
      "hippodrome": "COMPIEGNE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-6-3-5-2-7-4"
     },
     {
      "date": "2026-10-24",
@@ -93,7 +93,7 @@
      "partants": 10,
      "hippodrome": "COMPIEGNE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "9-8-4-2-10-7-6-3"
     },
     {
      "date": "2026-10-24",
@@ -234,7 +234,7 @@
      "partants": 14,
      "hippodrome": "CHATEAUBRIANT",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "4-12-9-7-10-5-11-8-6-1"
     },
     {
      "date": "2026-10-24",
@@ -249,7 +249,7 @@
      "partants": 14,
      "hippodrome": "CHATEAUBRIANT",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-11-10-2-7-4-5-1-9-8-3"
     },
     {
      "date": "2026-10-24",
@@ -264,7 +264,7 @@
      "partants": 16,
      "hippodrome": "CHATEAUBRIANT",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "12-14-15-6-11-2-4-13-9-10-5-16-3-1"
     }
    ]
   },
@@ -285,7 +285,7 @@
      "partants": 14,
      "hippodrome": "CABOURG",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-7-11-5-3-10-8-9-14-13-12-4"
     },
     {
      "date": "2026-10-24",
@@ -300,7 +300,7 @@
      "partants": 16,
      "hippodrome": "CABOURG",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "13-16-10-12-14-2-3-8-7-15-11-1-5-6"
     },
     {
      "date": "2026-10-24",
@@ -315,7 +315,7 @@
      "partants": 16,
      "hippodrome": "CABOURG",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-16-11-13-7-6-14-10-9-3-2-5-4"
     },
     {
      "date": "2026-10-24",
@@ -471,7 +471,7 @@
      "partants": 11,
      "hippodrome": "DONCASTER",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "2-4-5-6-9-11-7-10-3-8-1"
     },
     {
      "date": "2026-10-24",
@@ -486,7 +486,7 @@
      "partants": 16,
      "hippodrome": "DONCASTER",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "2-8-3-6-16-12-15-5-13-7-4-9-1-11"
     },
     {
      "date": "2026-10-24",
@@ -849,7 +849,7 @@
      "partants": 8,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-2-4-5-7-3-8"
     },
     {
      "date": "2026-10-24",
@@ -864,7 +864,7 @@
      "partants": 7,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-6-3-5-2-7-4"
     },
     {
      "date": "2026-10-24",
@@ -879,7 +879,7 @@
      "partants": 10,
      "hippodrome": "Casablanca",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "9-8-4-2-10-7-6-3"
     },
     {
      "date": "2026-10-24",
@@ -1128,7 +1128,7 @@
      "partants": 14,
      "hippodrome": "SALON DE PROVENCE",
      "source": "Equidia",
-     "arrivee": "4-5-9-13-6-14-2-7-11-8-10"
+     "arrivee": "4-5-9-13-6-14-2-7-11-8-10-1"
     },
     {
      "date": "2026-10-24",
@@ -1178,5 +1178,5 @@
    ]
   }
  ],
- "collecteLe": "2026-10-24T13:49:15.821Z"
+ "collecteLe": "2026-10-24T15:34:43.713Z"
 }

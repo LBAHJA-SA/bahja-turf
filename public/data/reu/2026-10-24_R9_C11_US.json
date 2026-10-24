@@ -275,8 +275,8 @@
    "cheval": "CONSIDERATE CITY",
    "nom": "CONSIDERATE CITY",
    "poids": 54.5,
-   "driver": "RESERVISTE 2 AE",
-   "jockey": "RESERVISTE 2 AE",
+   "driver": "C ELLIOTT",
+   "jockey": "C ELLIOTT",
    "entraineur": "J W FERRARO",
    "valeur": 36,
    "sexe": "F",
@@ -295,5 +295,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-10-24T13:48:04.101Z"
+ "collecteLe": "2026-10-24T15:33:43.153Z"
 }

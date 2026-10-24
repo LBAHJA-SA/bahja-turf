@@ -74,7 +74,7 @@
     "ticketMoteur": null,
     "cloture": "2026-10-24T13:46:00.101Z",
     "scores": null,
-    "collecte": "2026-10-24T13:46:00.102Z"
+    "collecte": "2026-10-24T23:58:56.406Z"
   },
   "2026-10-23": {
     "date": "2026-10-23",
@@ -154,7 +154,7 @@
     "groupes": null,
     "surprises": [],
     "ticketMoteur": null,
-    "cloture": "2026-10-24T13:45:58.125Z",
+    "cloture": "2026-10-24T23:58:53.876Z",
     "scores": null,
     "collecte": "2026-10-23T20:30:05.416Z"
   },

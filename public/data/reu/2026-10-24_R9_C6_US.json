@@ -137,8 +137,8 @@
    "cheval": "LATEST EDITION",
    "nom": "LATEST EDITION",
    "poids": 56,
-   "driver": "M FERNANDEZ",
-   "jockey": "M FERNANDEZ",
+   "driver": "H K HARKIE",
+   "jockey": "H K HARKIE",
    "entraineur": "E HERNANDEZ",
    "valeur": 27.5,
    "sexe": "F",
@@ -226,5 +226,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-10-24T13:47:48.816Z"
+ "collecteLe": "2026-10-24T15:33:32.082Z"
 }

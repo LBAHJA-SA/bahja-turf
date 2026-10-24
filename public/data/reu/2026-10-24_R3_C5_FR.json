@@ -337,7 +337,7 @@
    "dernierPassage": "Da6a5a7a0a0aDa9a8a0a",
    "gains": 83785,
    "musique": "Da6a5a7a0a0aDa9a8a0a",
-   "place": null
+   "place": "Non partant"
   }
  ],
  "arrivee": [
@@ -351,8 +351,9 @@
   7,
   11,
   8,
-  10
+  10,
+  1
  ],
- "collecteLe": "2026-10-24T13:49:07.465Z",
+ "collecteLe": "2026-10-24T15:34:35.137Z",
  "collecteApresCourse": true
 }
