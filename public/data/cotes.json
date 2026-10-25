@@ -4668,5 +4668,171 @@
     "heure": "2026-10-22T12:00:00+02:00"
    }
   ]
+ },
+ "2026-10-25_R1_C5": {
+  "source": "equidia.fr",
+  "favori": 2,
+  "cotes": [
+   {
+    "num": 2,
+    "nom": "SHRIHARA",
+    "cote": 5.2,
+    "ouverture": 6.5,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:16:00+01:00"
+   },
+   {
+    "num": 7,
+    "nom": "AME D'OR",
+    "cote": 8.8,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 13,
+    "nom": "NANCY DES PLACES",
+    "cote": 8.9,
+    "ouverture": 9.3,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 3,
+    "nom": "MAIA STAR",
+    "cote": 9,
+    "ouverture": 8.9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 9,
+    "nom": "MARINALEDA",
+    "cote": 9.4,
+    "ouverture": 14,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 15,
+    "nom": "JANAH",
+    "cote": 11,
+    "ouverture": 9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 8,
+    "nom": "CRISTABEL",
+    "cote": 12,
+    "ouverture": 9.8,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 11,
+    "nom": "GOLDEN BELLE",
+    "cote": 14,
+    "ouverture": 12,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 4,
+    "nom": "AMERICAN GLORY",
+    "cote": 18,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 16,
+    "nom": "GAREYA",
+    "cote": 18,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 10,
+    "nom": "BRITANIA",
+    "cote": 19,
+    "ouverture": 18,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 6,
+    "nom": "WEEMAGATEE",
+    "cote": 23,
+    "ouverture": 22,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 5,
+    "nom": "HASAPIKO",
+    "cote": 33,
+    "ouverture": 29,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 1,
+    "nom": "AGILE",
+    "cote": 37,
+    "ouverture": 25,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 526501,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 12,
+    "nom": "FOXEY LADY",
+    "cote": 47,
+    "ouverture": 34,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   },
+   {
+    "num": 14,
+    "nom": "TEARDROP EXPLODES",
+    "cote": 63,
+    "ouverture": 46,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-25T15:18:00+01:00"
+   }
+  ]
  }
 }

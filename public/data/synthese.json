@@ -1,4 +1,122 @@
 {
+  "2026-10-25": {
+    "date": "2026-10-25",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      2,
+      3,
+      13,
+      8,
+      9,
+      15,
+      7,
+      4,
+      16,
+      6,
+      11,
+      1,
+      10,
+      12,
+      5,
+      14
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "PLAT",
+    "hippodrome": "SAINT-CLOUD",
+    "distance": 2500,
+    "courseId": "2026-10-25_R1_C5",
+    "arrivee": [
+      9,
+      13,
+      10,
+      3,
+      4
+    ],
+    "ticket": [
+      2,
+      3,
+      4,
+      7,
+      8,
+      9,
+      11,
+      13,
+      15
+    ],
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          2,
+          3,
+          8,
+          13
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          4,
+          9,
+          15
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          7
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          11
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": []
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-25T15:12:32.530Z",
+    "ticketMoteur": [
+      2,
+      3,
+      4,
+      7,
+      8,
+      9,
+      11,
+      13,
+      15
+    ],
+    "cloture": "2026-10-25T15:12:32.533Z",
+    "scores": null,
+    "collecte": "2026-10-25T15:12:32.533Z"
+  },
   "2026-10-24": {
     "date": "2026-10-24",
     "found": true,
@@ -72,7 +190,7 @@
     "groupes": null,
     "surprises": [],
     "ticketMoteur": null,
-    "cloture": "2026-10-24T13:46:00.101Z",
+    "cloture": "2026-10-25T15:12:27.164Z",
     "scores": null,
     "collecte": "2026-10-24T23:58:56.406Z"
   },
