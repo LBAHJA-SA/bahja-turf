@@ -18,27 +18,27 @@
  },
  "participants": [
   {
-   "num": 1,
-   "cheval": "PERSEVERANTE",
-   "nom": "PERSEVERANTE",
-   "poids": 57,
-   "driver": "SANTIAGO BAZ",
-   "jockey": "SANTIAGO BAZ",
-   "entraineur": "PABLO RICARDO DUARTE",
+   "num": 10,
+   "cheval": "GOL CELESTE",
+   "nom": "GOL CELESTE",
+   "poids": 58,
+   "driver": "HECTOR FABIAN LAZO",
+   "jockey": "HECTOR FABIAN LAZO",
+   "entraineur": "ROBERTO SOLANES (CS)",
    "valeur": null,
    "sexe": "M",
    "age": 4,
    "couleur": "",
-   "proprietaire": "PRINA",
+   "proprietaire": "UN PLACER VERME",
    "cote": null,
    "coteRef": null,
-   "depart": "1",
+   "depart": "10",
    "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261025-r7c12p1-png-3",
-   "dernierPassage": "4p0p9p5p0p",
-   "gains": 6025,
-   "musique": "4p0p9p5p0p",
-   "place": null
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261025-r7c12p10-png-3",
+   "dernierPassage": "6p2p5p3p3p",
+   "gains": 9562,
+   "musique": "6p2p5p3p3p",
+   "place": "01"
   },
   {
    "num": 2,
@@ -61,7 +61,7 @@
    "dernierPassage": "1p8p8p7p7p",
    "gains": 3484,
    "musique": "1p8p8p7p7p",
-   "place": null
+   "place": "02"
   },
   {
    "num": 3,
@@ -84,7 +84,30 @@
    "dernierPassage": "5p2p1p5p1p",
    "gains": 1687,
    "musique": "5p2p1p5p1p",
-   "place": null
+   "place": "03"
+  },
+  {
+   "num": 11,
+   "cheval": "BOTAFUMEIRO FEVER",
+   "nom": "BOTAFUMEIRO FEVER",
+   "poids": 53,
+   "driver": "FLORENCIA MOREIRA",
+   "jockey": "FLORENCIA MOREIRA",
+   "entraineur": "JAVIER TUCCELLI",
+   "valeur": null,
+   "sexe": "M",
+   "age": 4,
+   "couleur": "",
+   "proprietaire": "VIRGEN DE GUADALUPE",
+   "cote": null,
+   "coteRef": null,
+   "depart": "11",
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261025-r7c12p11-png-3",
+   "dernierPassage": "5p3p5p8p1p",
+   "gains": 564,
+   "musique": "5p3p5p8p1p",
+   "place": "04"
   },
   {
    "num": 4,
@@ -107,6 +130,29 @@
    "dernierPassage": "2p4p4p5p0p",
    "gains": 18143,
    "musique": "2p4p4p5p0p",
+   "place": "05"
+  },
+  {
+   "num": 1,
+   "cheval": "PERSEVERANTE",
+   "nom": "PERSEVERANTE",
+   "poids": 57,
+   "driver": "SANTIAGO BAZ",
+   "jockey": "SANTIAGO BAZ",
+   "entraineur": "PABLO RICARDO DUARTE",
+   "valeur": null,
+   "sexe": "M",
+   "age": 4,
+   "couleur": "",
+   "proprietaire": "PRINA",
+   "cote": null,
+   "coteRef": null,
+   "depart": "1",
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261025-r7c12p1-png-3",
+   "dernierPassage": "4p0p9p5p0p",
+   "gains": 6025,
+   "musique": "4p0p9p5p0p",
    "place": null
   },
   {
@@ -225,52 +271,6 @@
    "place": null
   },
   {
-   "num": 10,
-   "cheval": "GOL CELESTE",
-   "nom": "GOL CELESTE",
-   "poids": 58,
-   "driver": "HECTOR FABIAN LAZO",
-   "jockey": "HECTOR FABIAN LAZO",
-   "entraineur": "ROBERTO SOLANES (CS)",
-   "valeur": null,
-   "sexe": "M",
-   "age": 4,
-   "couleur": "",
-   "proprietaire": "UN PLACER VERME",
-   "cote": null,
-   "coteRef": null,
-   "depart": "10",
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261025-r7c12p10-png-3",
-   "dernierPassage": "6p2p5p3p3p",
-   "gains": 9562,
-   "musique": "6p2p5p3p3p",
-   "place": null
-  },
-  {
-   "num": 11,
-   "cheval": "BOTAFUMEIRO FEVER",
-   "nom": "BOTAFUMEIRO FEVER",
-   "poids": 53,
-   "driver": "FLORENCIA MOREIRA",
-   "jockey": "FLORENCIA MOREIRA",
-   "entraineur": "JAVIER TUCCELLI",
-   "valeur": null,
-   "sexe": "M",
-   "age": 4,
-   "couleur": "",
-   "proprietaire": "VIRGEN DE GUADALUPE",
-   "cote": null,
-   "coteRef": null,
-   "depart": "11",
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261025-r7c12p11-png-3",
-   "dernierPassage": "5p3p5p8p1p",
-   "gains": 564,
-   "musique": "5p3p5p8p1p",
-   "place": null
-  },
-  {
    "num": 12,
    "cheval": "FUEGO NEGRO",
    "nom": "FUEGO NEGRO",
@@ -317,6 +317,13 @@
    "place": null
   }
  ],
- "arrivee": [],
- "collecteLe": "2026-10-25T15:20:04.335Z"
+ "arrivee": [
+  10,
+  2,
+  3,
+  11,
+  4
+ ],
+ "collecteLe": "2026-10-25T22:18:52.540Z",
+ "collecteApresCourse": true
 }

@@ -121,7 +121,7 @@
    "sexe": "M",
    "age": 2,
    "couleur": "",
-   "proprietaire": "P.DAUGUET/A.CHAUVIN/C.BLONDIN",
+   "proprietaire": "P.DAUGUET/G.BOURSIER/C.BLONDIN",
    "cote": 6.5,
    "coteRef": 6.5,
    "depart": "6",
@@ -212,6 +212,6 @@
   7,
   1
  ],
- "collecteLe": "2026-10-25T15:18:08.434Z",
+ "collecteLe": "2026-10-25T22:15:07.131Z",
  "collecteApresCourse": true
 }

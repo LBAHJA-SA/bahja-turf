@@ -98,7 +98,7 @@
    "sexe": "H",
    "age": 3,
    "couleur": "",
-   "proprietaire": "MME A.CHOPARD/MME V.TRIGODET",
+   "proprietaire": "MME A.CHOPARD",
    "cote": 5.9,
    "coteRef": 5.9,
    "depart": "2",
@@ -260,6 +260,6 @@
   1,
   6
  ],
- "collecteLe": "2026-10-25T15:18:14.752Z",
+ "collecteLe": "2026-10-25T22:15:15.427Z",
  "collecteApresCourse": true
 }

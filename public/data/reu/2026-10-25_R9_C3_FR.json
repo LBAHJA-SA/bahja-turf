@@ -167,7 +167,7 @@
    "sexe": "H",
    "age": 6,
    "couleur": "",
-   "proprietaire": "LE HARAS DES SENS",
+   "proprietaire": "HARAS DES SENS/R.CHARIGNON",
    "cote": 133,
    "coteRef": 133,
    "depart": "10",
@@ -259,6 +259,6 @@
   7,
   9
  ],
- "collecteLe": "2026-10-25T15:18:19.326Z",
+ "collecteLe": "2026-10-25T22:15:24.679Z",
  "collecteApresCourse": true
 }

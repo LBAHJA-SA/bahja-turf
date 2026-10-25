@@ -144,7 +144,7 @@
    "sexe": "F",
    "age": 5,
    "couleur": "",
-   "proprietaire": "G.DUFIT/P.JOURNIAC",
+   "proprietaire": "G.DUFIT",
    "cote": 5.1,
    "coteRef": 5.1,
    "depart": null,
@@ -176,7 +176,7 @@
    "dernierPassage": "1h(24)2h2h3p3p6h",
    "gains": 19720,
    "musique": "1h(24)2h2h3p3p6h",
-   "place": null
+   "place": "Non partant"
   },
   {
    "num": 8,
@@ -199,7 +199,7 @@
    "dernierPassage": "4s1h7h7h7s2h(25)6h3h1h",
    "gains": 40880,
    "musique": "4s1h7h7h7s2h(25)6h3h1h",
-   "place": null
+   "place": "Non partant"
   }
  ],
  "arrivee": [
@@ -207,8 +207,10 @@
   2,
   4,
   5,
-  7
+  7,
+  6,
+  8
  ],
- "collecteLe": "2026-10-25T15:12:50.107Z",
+ "collecteLe": "2026-10-25T22:10:15.429Z",
  "collecteApresCourse": true
 }
