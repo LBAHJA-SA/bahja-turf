@@ -4834,5 +4834,171 @@
     "heure": "2026-10-25T15:18:00+01:00"
    }
   ]
+ },
+ "2026-10-26_R1_C4": {
+  "source": "equidia.fr",
+  "favori": 3,
+  "cotes": [
+   {
+    "num": 3,
+    "nom": "OLYMPIC MESSAGE",
+    "cote": 5,
+    "ouverture": 5.4,
+    "tendance": "-",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 12,
+    "nom": "DUBALAA",
+    "cote": 8.6,
+    "ouverture": 8.9,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 13,
+    "nom": "PUMALIN PARK",
+    "cote": 9.5,
+    "ouverture": 9.8,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 9,
+    "nom": "KRASKHOV",
+    "cote": 9.8,
+    "ouverture": 9.1,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 10,
+    "nom": "NOVA LUXOR",
+    "cote": 10,
+    "ouverture": 10,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 5,
+    "nom": "MISTER CHARMES",
+    "cote": 11,
+    "ouverture": 12,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 14,
+    "nom": "PERSIAN GRACE",
+    "cote": 14,
+    "ouverture": 13,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 8,
+    "nom": "FRANCISCANO",
+    "cote": 15,
+    "ouverture": 15,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 4,
+    "nom": "DIVINE CHRISNAT",
+    "cote": 17,
+    "ouverture": 17,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 7,
+    "nom": "MELUSINE DU HOULEY",
+    "cote": 17,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 11,
+    "nom": "REVE DE VALLARSA",
+    "cote": 22,
+    "ouverture": 20,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 1,
+    "nom": "WAPI",
+    "cote": 25,
+    "ouverture": 24,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 16,
+    "nom": "APOGEO",
+    "cote": 26,
+    "ouverture": 26,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 2,
+    "nom": "TORTISAMBERT",
+    "cote": 28,
+    "ouverture": 26,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 6,
+    "nom": "FAST RAAJ",
+    "cote": 28,
+    "ouverture": 27,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   },
+   {
+    "num": 15,
+    "nom": "MICOCOULIER",
+    "cote": 41,
+    "ouverture": 40,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-26T13:16:00+01:00"
+   }
+  ]
  }
 }

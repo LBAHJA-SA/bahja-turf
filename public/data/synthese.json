@@ -1,4 +1,115 @@
 {
+  "2026-10-26": {
+    "date": "2026-10-26",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      3,
+      14,
+      5,
+      7,
+      10,
+      12,
+      9,
+      2,
+      8,
+      6,
+      13,
+      1,
+      4,
+      11,
+      16
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "PLAT",
+    "hippodrome": "CHANTILLY",
+    "distance": 1600,
+    "courseId": "2026-10-26_R1_C4",
+    "arrivee": null,
+    "ticket": [
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      14
+    ],
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          3,
+          14,
+          5,
+          10
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          7,
+          12,
+          9
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          8
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          6
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": []
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-26T12:23:48.078Z",
+    "ticketMoteur": [
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      14
+    ],
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-10-26T12:23:48.079Z"
+  },
   "2026-10-25": {
     "date": "2026-10-25",
     "found": true,
@@ -113,7 +224,7 @@
       13,
       15
     ],
-    "cloture": "2026-10-25T15:12:32.533Z",
+    "cloture": "2026-10-26T12:23:45.822Z",
     "scores": null,
     "collecte": "2026-10-25T22:09:52.984Z"
   },
