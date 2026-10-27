@@ -44,7 +44,13 @@
     "hippodrome": "CHANTILLY",
     "distance": 1600,
     "courseId": "2026-10-26_R1_C4",
-    "arrivee": null,
+    "arrivee": [
+      12,
+      3,
+      10,
+      13,
+      9
+    ],
     "ticket": [
       3,
       5,
@@ -106,7 +112,7 @@
       12,
       14
     ],
-    "cloture": null,
+    "cloture": "2026-10-27T20:50:24.645Z",
     "scores": null,
     "collecte": "2026-10-26T12:23:48.079Z"
   },
