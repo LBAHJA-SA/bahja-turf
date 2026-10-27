@@ -10,6 +10,19 @@ import './dna.css'
 
 const DEFAULT_LIMITS = { F: 5, S: 10, O: 20, O2: 30 }
 const BAND_COLORS = { F: '#ef4444', S: '#f59e0b', O: '#22c55e', O2: '#a855f7', T: '#38bdf8', UNK: '#94a3b8' }
+
+/* ⭐ 25/10/2026 — la date du CALENDRIER LOCAL, jamais `toISOString()` (UTC).
+ *   Au Maroc (UTC+1), à 23 h 30 UTC il est déjà demain. `lendemainDe` sert au
+ *   repli de la bande : quand plus rien ne part aujourd'hui, elle montre la
+ *   première course de demain (voir `Programme.jsx`). */
+function jourLocal(d = new Date()) {
+  const p = (n) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`
+}
+function lendemainDe(iso) {
+  const [a, m, j] = String(iso).split('-').map(Number)
+  return jourLocal(new Date(a, (m || 1) - 1, (j || 1) + 1))
+}
 const ZONE_META = {
   A: { label: 'CORE', color: '#22c55e', description: 'قوية / أساسية' },
   B: { label: 'VALUE', color: '#eab308', description: 'Favori + Outsider' },
@@ -216,12 +229,13 @@ export default function DnaCoursePage() {
    * `toISOString()` (UTC). Au Maroc (UTC+1), à 23 h 30 UTC il est déjà demain :
    * la page demandait alors la journée d'hier, et la réunion marocaine — qui
    * suit la date de Casablanca — n'y figurait pas. */
-  const [date, setDate] = useState(() => {
-    const d = new Date()
-    const p = (n) => String(n).padStart(2, '0')
-    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`
-  })
+  const [date, setDate] = useState(() => jourLocal())
   const [meetings, setMeetings] = useState([])
+  /* ⭐ 25/10/2026 — le programme du LENDEMAIN, chargé seulement quand la
+   *   journée affichée est celle du jour ET qu'il n'y reste plus rien à
+   *   partir. Sert au repli de la bande (`Programme.jsx`) : sans lui, à
+   *   23 h 40 la page paraît vide et l'on croit que rien n'a été déployé. */
+  const [demain, setDemain] = useState(null)
   const [selReu, setSelReu] = useState(null)
   const [sel, setSel] = useState(null)
   const [raceData, setRaceData] = useState(null)
@@ -247,6 +261,38 @@ export default function DnaCoursePage() {
   }
 
   useEffect(() => { loadMeetings(date) }, [])
+
+  /* ⭐ 25/10/2026 — LE REPLI « DEMAIN ».
+   *
+   *   La bande du programme affiche toujours la course suivante ; quand la
+   *   journée est finie, il n'y en a plus. On charge alors le programme du
+   *   lendemain pour que la bande montre la PREMIÈRE COURSE DE DEMAIN au lieu
+   *   de disparaître. On ne le charge que si c'est utile (une seule lecture
+   *   par jour, et seulement si la date affichée est celle d'aujourd'hui). */
+  useEffect(() => {
+    if (!meetings.length) return undefined
+    if (date !== jourLocal()) { setDemain(null); return undefined }
+    const reste = meetings.some((m) =>
+      (m.courses || []).some((c) => c.time != null && c.time > Date.now()))
+    if (reste) { setDemain(null); return undefined }
+    const cible = lendemainDe(date)
+    let vivant = true
+    fetchMeetings(cible)
+      .then((d) => { if (vivant) setDemain({ date: cible, meetings: d.meetings || [] }) })
+      .catch(() => { /* pas de lendemain : la bande reste simplement vide */ })
+    return () => { vivant = false }
+  }, [date, meetings])
+
+  /* le clic sur la bande « DEMAIN » : on bascule la journée entière. */
+  const allerDate = async (d) => {
+    setDate(d)
+    setSel(null)
+    setSelReu(null)
+    setRaceData(null)
+    setResult(null)
+    setErr(null)
+    await loadMeetings(d)
+  }
 
   const pick = async (meeting, course) => {
     setSel({ date, rnum: meeting.num, cnum: course.num, meeting, course })
@@ -362,6 +408,8 @@ export default function DnaCoursePage() {
         onCharger={() => loadMeetings(date)}
         sel={sel}
         onPick={pick}
+        demain={demain}
+        onAllerDate={allerDate}
       />
 
       {sel && (
@@ -381,21 +429,54 @@ export default function DnaCoursePage() {
               {raceData.participants.slice(0, 20).map((p) => (
                 <span key={p.num} style={{ fontSize: '0.86rem', padding: '3px 6px', borderRadius: 6, background: 'rgba(255,255,255,0.04)', border: '1px solid var(--border)' }}>
                   <b style={{ color: '#4ade80' }}>{p.num}</b> {p.horse}
+                  {p.cote != null && (
+                    <b style={{ marginLeft: 5, fontFamily: 'ui-monospace, monospace', fontSize: '0.76rem', color: '#38bdf8' }}>{p.cote}</b>
+                  )}
                 </span>
               ))}
             </div>
           )}
+          {/* ⭐ 25/10/2026 — la source de chevaux habituelle ne publie pas
+              toutes les courses (des réunions françaises entières : Agen,
+              Saint Galmier, Chatelaillon, Vire). Les partants viennent alors
+              de casacourses, avec sa cote. On le dit : la provenance n'est
+              pas la même, donc les cotes ne sont pas forcément identiques. */}
+          {raceData?.course?.sourcePartants === 'casacourses' && (
+            <div style={{ marginBottom: 9 }}>
+              <Notice tone="info" icon={<Info size={13} />}>
+                <b>Partants et cotes : casacourses.</b> La source de chevaux habituelle ne publie
+                pas cette course ; casacourses la donne en entier (partants, cote, musique,
+                jockey, entraîneur). Le poids et la corde, qu&apos;elle ne fournit pas, restent
+                vides — ils ne sont jamais inventés.
+              </Notice>
+            </div>
+          )}
           {/* ⚠ 23/10/2026 — le moteur est ANCRÉ SUR LE MARCHÉ : sans cote, il
               n'a aucune bande où ranger les chevaux et les quatre zones
-              sortent vides. C'est le cas des courses marocaines dont les paris
-              ne sont pas encore ouverts (et de toute course sans cote). On le
-              dit AVANT le bouton, plutôt que de laisser un écran vide. */}
+              sortent vides. On le dit AVANT le bouton, plutôt que de laisser
+              un écran vide.
+              ⭐ 25/10/2026 — deux messages, parce que les causes sont
+              différentes : en France les paris ne sont pas encore ouverts ;
+              au Maroc la SOREC ne publie la cote qu'avec le rapport (mesuré :
+              Marrakech C7, `oddtime` = départ + 59 min). */}
           {raceData?.participants?.length > 0 && !raceData.participants.some((p) => p.cote != null) && (
             <div style={{ marginBottom: 9 }}>
               <Notice tone="warn" icon={<AlertTriangle size={13} />}>
-                Aucune cote publiée pour cette course : le classement du moteur est ancré sur le
-                marché, donc les zones resteront vides tant que les paris ne sont pas ouverts.
-                Le programme et les partants, eux, sont complets.
+                {sel.rnum >= 100 ? (
+                  <>
+                    <b>La SOREC ne publie pas de cote avant le départ.</b> Mesuré le 25/10/2026 sur
+                    Marrakech : la cote arrive avec le rapport, environ une heure après la course
+                    (Marrakech C7, <code>oddtime</code> = départ + 59 min). Le moteur est ancré sur le
+                    marché : sans cote, les quatre zones restent vides. Le programme, les partants,
+                    la musique et la corde, eux, sont complets.
+                  </>
+                ) : (
+                  <>
+                    Aucune cote publiée pour cette course : le classement du moteur est ancré sur le
+                    marché, donc les zones resteront vides tant que les paris ne sont pas ouverts.
+                    Le programme et les partants, eux, sont complets.
+                  </>
+                )}
               </Notice>
             </div>
           )}

@@ -44,6 +44,8 @@
  *   Bonus : la clé ne part jamais dans le bundle de la page.
  * ========================================================================== */
 
+import { sessionValide } from './_acces.js'
+
 export const config = { runtime: 'edge' }
 
 const BASE = 'https://horse-racing-api.paris-turf.com'
@@ -203,6 +205,12 @@ async function servirVideo(u, req) {
 }
 
 export default async function handler(req) {
+  if (!await sessionValide(req)) {
+    return new Response(JSON.stringify({ erreur: 'session requise' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
+    })
+  }
   /* Repli : si Vercel nous appelle en Node (req, res), on le dit clairement
      plutôt que de renvoyer une page vide. Le `config` ci-dessus doit être
      respecté — c'est ce que vérifie l'en-tête X-Bahja-Runtime. */

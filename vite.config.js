@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import { execFile, spawn } from "node:child_process";
 import http2 from "node:http2";
@@ -52,6 +52,12 @@ const ORIGINES = {
    * aucune ; et e-sorec n'envoie AUCUN en-tête CORS (mesuré le 23/10/2026).
    * La page `/dna` la lit donc par ce relais, comme equidia. */
   ma: "https://e-sorec.ma",
+  /* LE PMU — les RAPPORTS OFFICIELS (24/10/2026). `rapports-definitifs` donne,
+   * course par course, le dividende de chaque pari (Simple, Couplé, 2sur4,
+   * Trio, Tiercé, Quarté+, Quinté+…) en centimes pour 1 €. L'API ne renvoie
+   * AUCUN en-tête CORS (mesuré le 24/10 : « Failed to fetch » depuis la page),
+   * d'où ce relais. La page `/resultats` la lit. */
+  pmu: "https://online.turfinfo.api.pmu.fr",
 };
 /** La clé de l'API ParisTurf (publique : livrée dans son bundle). Elle vit ici,
  *  côté serveur, pour la même raison qu'en production : l'API tient une liste
@@ -421,6 +427,81 @@ function decoderTexte(octets, type = "") {
   }
 }
 
+/* ────────────────────────────────────────── LE DIRECT DE LA SOREC (Maroc) ────
+ * Mêmes règles qu'`api/sorec.js` : le certificat https de la SOREC a expiré le
+ * 22/09/2025, son direct n'existe qu'en **http** — et une page servie en https
+ * ne peut pas le lire (contenu mixte bloqué). On relaie donc, en réécrivant
+ * les playlists pour que le lecteur ne parle qu'à nous.
+ * ────────────────────────────────────────────────────────────────────────── */
+const SOREC_HOTE = "sorec-streaming.archostechnology.net";
+const SOREC_BASE = "http://" + SOREC_HOTE;
+const SOREC_FLUX = {
+  auto: "/live/OutStream1/playlist.m3u8",
+  dvr: "/live/OutStream1/playlist.m3u8?DVR",
+  cotes: "/live/myStream_2/playlist.m3u8",
+};
+const sorecPlayliste = (type, url) => /mpegurl|m3u8/i.test(type || "") || /\.m3u8(\?|$)/i.test(url || "");
+
+function sorecAutorise(url) {
+  try {
+    const u = new URL(url);
+    return u.host === SOREC_HOTE && /^https?:$/.test(u.protocol);
+  } catch { return false; }
+}
+
+function reecrireSorec(texte, base, origine) {
+  const absolue = (x) => origine + "/api/sorec?hls=" + encodeURIComponent(new URL(x, base).href);
+  return String(texte).split("\n").map((ligne) => {
+    const t = ligne.trim();
+    if (!t) return ligne;
+    if (t.startsWith("#")) {
+      return /URI="/.test(t) ? t.replace(/URI="([^"]+)"/g, (_, x) => 'URI="' + absolue(x) + '"') : ligne;
+    }
+    return absolue(t);
+  }).join("\n");
+}
+
+async function relayerSorec(u, res, origine) {
+  const entetes = { "user-agent": UA, accept: "*/*", referer: SOREC_BASE + "/" };
+  const sortie = { "Access-Control-Allow-Origin": "*", "X-Bahja-Proxy": "sorec" };
+  const texte = (code, corps) => {
+    res.statusCode = code;
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.end(corps);
+  };
+  try {
+    const flux = u.searchParams.get("flux");
+    if (flux) {
+      const chemin = SOREC_FLUX[flux];
+      if (!chemin) return texte(400, "flux inconnu");
+      const r = await fetch(SOREC_BASE + chemin, { headers: entetes });
+      if (!r.ok) return texte(502, "direct indisponible (" + r.status + ")");
+      const corps = await r.text();
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/vnd.apple.mpegurl");
+      res.setHeader("Cache-Control", "no-store");
+      for (const [k, v] of Object.entries(sortie)) res.setHeader(k, v);
+      res.end(reecrireSorec(corps, SOREC_BASE + chemin, origine));
+      return;
+    }
+    const cible = u.searchParams.get("hls");
+    if (!cible) return texte(400, "rien à relayer");
+    if (!sorecAutorise(cible)) return texte(400, "hôte refusé");
+    const m = await fetch(cible, { headers: entetes });
+    const type = m.headers.get("content-type") || "application/octet-stream";
+    if (!m.ok) return texte(m.status, "média indisponible (" + m.status + ")");
+    const playlist = sorecPlayliste(type, cible);
+    const buf = Buffer.from(await m.arrayBuffer());
+    res.statusCode = m.status;
+    res.setHeader("Content-Type", playlist ? "application/vnd.apple.mpegurl" : type);
+    res.setHeader("Cache-Control", "public, max-age=600");
+    for (const [k, v] of Object.entries(sortie)) res.setHeader(k, v);
+    res.end(playlist ? reecrireSorec(buf.toString("utf8"), cible, origine) : buf);
+  } catch (e) {
+    texte(502, "sorec : " + (e && e.message ? e.message : e));
+  }
+}
+
 function proxiesApi() {
   return {
     name: "proxies-api",
@@ -454,7 +535,7 @@ function proxiesApi() {
       server.middlewares.use((req, res, next) => {
         const base = "http://" + (req.headers.host || "localhost:3003");
         const u = new URL(req.url || "/", base);
-        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma)$/.exec(u.pathname);
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma|pmu)$/.exec(u.pathname);
         if (!m) return next();
         /* La requête ENTIÈRE : `relayer` reconnaît les trois formes —
          *   /api/tf?p=…            (Vercel) · /api/ptf?v=… ou ?hls=… (la vidéo).
@@ -463,9 +544,66 @@ function proxiesApi() {
         relayer(m[1], req.url, res, base);
       });
       server.middlewares.use((req, res, next) => {
-        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma)(\/.*)?$/.exec(req.url || "");
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma|pmu)(\/.*)?$/.exec(req.url || "");
         if (!m) return next();
         relayer(m[1], req.url, res, "http://" + (req.headers.host || "localhost:3003"));
+      });
+      /* /api/sorec — LE DIRECT DU MAROC (23/10/2026). Même contrat que
+       * `api/sorec.js` : ?flux=auto|dvr|cotes et ?hls=<url>. */
+      server.middlewares.use((req, res, next) => {
+        const base = "http://" + (req.headers.host || "localhost:3003");
+        const u = new URL(req.url || "/", base);
+        if (u.pathname !== "/api/sorec") return next();
+        relayerSorec(u, res, base);
+      });
+      /* /api/admin — LE LOGIN DE LA CONSOLE (25/10/2026).
+       *
+       * En production c'est `api/admin.js` que Vercel appelle. En développement
+       * il n'existe pas : on importe DONC le même fichier et on l'appelle
+       * derrière un petit adaptateur (Vercel, lui, parse le corps et expose
+       * `req.query` tout seul). Une seule règle, deux environnements.
+       *
+       * Les comptes viennent de `ADMIN_COMPTES` / `ADMIN_SECRET` : en local on
+       * lit `.env.local` (créé par `vercel env pull`). Sans ces variables, la
+       * page affiche le mode d'emploi — rien ne casse. */
+      {
+        const env = loadEnv(server.config.mode, process.cwd(), "");
+        for (const [k, v] of Object.entries(env)) {
+          if (process.env[k] == null) process.env[k] = v;
+        }
+      }
+      server.middlewares.use(async (req, res, next) => {
+        const u = new URL(req.url || "/", "http://localhost");
+        if (u.pathname !== "/api/admin") return next();
+
+        req.query = Object.fromEntries(u.searchParams);
+        if (req.method === "POST" || req.method === "PUT") {
+          const morceaux = [];
+          for await (const m of req) morceaux.push(m);
+          const brut = Buffer.concat(morceaux).toString("utf8");
+          try { req.body = brut ? JSON.parse(brut) : {}; } catch { req.body = {}; }
+        }
+
+        const faux = {
+          statusCode: 200,
+          setHeader: (k, v) => res.setHeader(k, v),
+          status(code) { res.statusCode = code; return this; },
+          json(obj) {
+            res.setHeader("Content-Type", "application/json; charset=utf-8");
+            res.end(JSON.stringify(obj));
+            return this;
+          },
+          end(v) { res.end(v); },
+        };
+
+        try {
+          const { default: adminHandler } = await import("./api/admin.js");
+          await adminHandler(req, faux);
+        } catch (e) {
+          res.statusCode = 500;
+          res.setHeader("Content-Type", "application/json; charset=utf-8");
+          res.end(JSON.stringify({ erreur: "dev : " + String(e.message || e) }));
+        }
       });
       /* /api/visite et /api/visiteurs — LE JOURNAL DES VISITEURS (18/10/2026).
        * En DEV, il n'y a pas de base : on répond exactement comme le ferait

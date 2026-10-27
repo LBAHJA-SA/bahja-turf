@@ -14,11 +14,13 @@
  *    ③ en développement, Vercel n'est pas là : l'appel tombe en 404 sans bruit.
  * ══════════════════════════════════════════════════════════════════════════ */
 
-import { CLE_ACCES } from './donnees.js'
+import { CLE_ACCES, CLE_SESSION } from './donnees.js'
 
 /** Vrai si ce navigateur est celui du propriétaire (console ouverte). */
 function estProprietaire() {
-  try { return !!localStorage.getItem(CLE_ACCES) } catch { return false }
+  try {
+    return !!localStorage.getItem(CLE_SESSION) || !!localStorage.getItem(CLE_ACCES)
+  } catch { return false }
 }
 
 /**

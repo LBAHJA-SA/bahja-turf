@@ -3388,7 +3388,7 @@ Il n'y a **pas** de bouton par bloc : un seul suffit, et il relance tout.
 
 Le relais relayait les octets tels quels : `pronostics-turf.info` est en
 **windows-1252**, et « Assiduité », « L'Indépendant », « La Dépêche »
-arrivaient en « Assiduit� », « L'Ind�pendant », « La D�p�che ».
+arrivaient en « Assiduité », « L'Indépendant », « La Dépêche ».
 
 Corrigé **dans les deux relais** :
 
@@ -3688,7 +3688,7 @@ publié sur ce Quinté pour l'instant ».
 
 ---
 
-## 25. 🛡️ LA CONSOLE D'ADMINISTRATION `/admin` (18/10/2026) — invisible, et ce qu'elle prépare
+## 25. 🛡️ LA CONSOLE D'ADMINISTRATION `/admin` (18/10/2026) — invisible, et son login (25/10/2026)
 
 > **Demande de l'utilisateur** : « أريد أن أضيف صفحة الإدارة لكن لا تظهر عند
 > الزوار » (une page d'administration, mais qui ne se montre pas aux visiteurs),
@@ -3696,6 +3696,11 @@ publié sur ce Quinté pour l'instant ».
 > utilisateurs et les mots de passe), et **savoir qui vient sur le site**.
 
 ### 25.1 Les trois règles d'invisibilité
+
+> ⚠ **Mise à jour du 25/10/2026** : la « clé » a été **remplacée par un vrai
+> login** (§25.7). Les règles ci-dessous décrivent l'état du 18/10 ; seule la
+> première reste vraie telle quelle (aucun lien). Le point ② est devenu : *sans
+> session, `/admin` montre le formulaire* — et non plus l'accueil.
 
 | | |
 |---|---|
@@ -3716,16 +3721,25 @@ Pages         →  le catalogue du site + qui a le droit d'y aller
 Visiteurs     →  le journal (IP, pays, page, appareil) + la mesure Vercel
 ```
 
-**Utilisateurs** — chaque compte : nom, mot de passe (généré **lisible** : sans
-`0/O` ni `1/l/I`, on le relit au téléphone), une pastille par page (clic =
+**Utilisateurs** — chaque compte : nom, mot de passe (**champ de saisie : tu
+écris le tien** ; le bouton 🎲 n'est qu'une option, et le générateur évite
+`0/O`/`1/l/I` pour qu'on le relise au téléphone), une pastille par page (clic =
 autoriser/refuser), `rien` / `tout`, actif-suspendu, suppression.
 `comptes.json` s'exporte — **c'est ce fichier qu'on donnera au serveur le jour du
 login** — et s'importe.
 
+> ⚠ **25/10/2026** : cet onglet est le **BROUILLON** du navigateur. Ce que le
+> login lit vraiment, c'est `ADMIN_COMPTES` (§25.7). La carte « Les comptes du
+> serveur » montre ce que le serveur a lu, et le bouton **Préparer
+> ADMIN_COMPTES** transforme le brouillon en hash PBKDF2, le télécharge et le
+> copie — aucun mot de passe en clair ne part sur le serveur.
+
 **Pages** — le catalogue est une **constante** (`PAGES`, `backend/ADMIN/donnees.js`)
-alignée sur `src/App.jsx` : analyse `/` · quinte `/quinte` · couple `/coply` ·
-presse `/presse` · article `/r/:slug` · admin `/admin`. La colonne « qui y a
-accès » se remplit depuis les comptes : c'est la matrice des droits.
+alignée sur `src/App.jsx` : analyse `/` · quinte `/quinte` · presse `/presse` ·
+lives `/lives` · DNA `/dna` · résultats `/resultats` · article `/r/:slug` ·
+admin `/admin` (8 entrées, `/coply` supprimée). La colonne « qui y a
+accès » se remplit depuis **les comptes du serveur** quand ils existent, sinon
+depuis le brouillon : c'est la matrice des droits.
 
 > ⚠ La `cle` d'une page est une **clé de permission** : la renommer effacerait
 > les droits déjà saisis. Les pages inconnues d'un compte importé sont
@@ -3786,48 +3800,457 @@ site le jour où le journal devient permanent.
 
 | Fichier | Rôle |
 |---|---|
-| `frontend/ADMIN/Admin.jsx` | la console : porte, 3 onglets, peau « ardoise » (hors des 4 peaux des onglets publics) |
-| `backend/ADMIN/donnees.js` | catalogue des pages, comptes (localStorage), mots de passe, import/export, lecture d'un visiteur |
-| `backend/ADMIN/visites.js` | `pointerVisite()` — le ping d'une page vue |
+| `frontend/ADMIN/Admin.jsx` | la console : la **porte** (login) + 3 onglets, peau « ardoise » (hors des 4 peaux des onglets publics) |
+| `api/admin.js` | **le serveur du login** : `etat` · `session` · `login` · `logout` · `comptes` — PBKDF2 + cookie HMAC |
+| `src/lib/adminAuth.js` | les 5 appels de la page vers `/api/admin` (`credentials: 'same-origin'`) |
+| `backend/ADMIN/donnees.js` | catalogue des pages, brouillon de comptes (localStorage), `hacher()` / `envComptes()` (Web Crypto), mots de passe, import/export, lecture d'un visiteur |
+| `backend/ADMIN/visites.js` | `pointerVisite()` — le ping d'une page vue (le propriétaire connecté n'est pas compté) |
+| `vite.config.js` | le middleware **dev** `/api/admin` (il importe `api/admin.js` derrière un adaptateur) + `loadEnv` |
 | `src/App.jsx` | la route `/admin` + `<NoterPage />` (le ping à chaque changement d'adresse) |
 
-### 25.6 ⏸️ EN ATTENTE — NE PAS ACTIVER SANS DEMANDE (18/10/2026)
+### 25.6 ⏸️ HISTORIQUE — la consigne du 18/10 et son état
 
 > **Consigne de l'utilisateur, le 18/10/2026** : « سجل عندك إلى أن أطلب منك تفعيل
 > صفحة الأدمن لتقوم بالمهمة » — *note-le : tu n'actives la page d'administration
 > que quand je te le demanderai.*
 
-**La console est PRÉPARÉE, elle n'est PAS active.** Rien ne filtre l'entrée du
-site, et il ne faut **pas** l'anticiper : l'activation est une décision de
-l'utilisateur, pas une amélioration technique à prendre seule.
+**Cette consigne a été honorée puis levée.** Le 25/10/2026 l'utilisateur a
+demandé « الان بغيت نزيد صفحة الاذمين » et a choisi **« فعّل الكونسول الحالي
+(login حقيقي) »** : le login est donc actif — voir §25.7.
 
-**État au 18/10/2026 :**
+**Ce qui reste vrai :**
 
 | | |
 |---|---|
-| ✅ la console `/admin` | en ligne, invisible, 3 onglets — testée (403 du journal, 204 de la visite) |
-| ✅ les comptes et les pages | saisissables dans le navigateur, exportables en `comptes.json` |
-| ✅ les 2 routes du journal | déployées, **fermées par défaut** (403 sans `ADMIN_JETON`) |
-| ⏸️ **la clé de la console** | pas encore choisie par l'utilisateur |
-| ⏸️ **le login** | pas commencé — aucune page n'est filtrée |
+| ✅ **aucune page publique n'est filtrée** | le login ouvre la **console**, pas le site. Les droits `pages[]` sont portés et affichés, mais le routeur n'est pas gardé |
 | ⏸️ **la base Redis** | pas créée → aucune adresse IP n'est enregistrée (le site n'en souffre pas) |
-| ⏸️ **`ADMIN_JETON`** | pas posé |
+| ⏸️ **`ADMIN_JETON`** | pas posé → `/api/visiteurs` répond 403 « journal fermé » |
 | ⏸️ **Vercel Analytics** | pas encore activé (projet → Analytics → Enable) |
 
-**Ce que « activer » voudra dire, le jour venu — dans cet ordre :**
+⚠ **Ne rien brancher « en passant »** : pas de page bloquée sans que
+l'utilisateur l'ait demandé, pas de base créée sans le dire.
 
-1. **Le login** : une vérification **côté serveur** (les comptes ne peuvent plus
-   vivre dans le navigateur). Le `comptes.json` exporté par la console est
-   exactement l'entrée attendue — sa forme ne changera pas.
-2. **Les droits par page** : chaque compte ne voit que son `pages[]`. Le
-   catalogue `PAGES` (`backend/ADMIN/donnees.js`) et les routes de `src/App.jsx`
-   sont déjà alignés : la garde se posera sur le routeur.
-3. **Le journal des visites** : base Redis + `ADMIN_JETON` (§25.3), puis
-   l'onglet Visiteurs se remplit (IP, pays, page, appareil).
-4. **La mention RGPD** sur le site, si le journal devient permanent.
+### 25.7 ✅ LE LOGIN EST ACTIF (25/10/2026)
 
-⚠ **Ne rien brancher « en passant »** : pas de login partiel, pas de base créée
-sans le dire, pas de page bloquée sans que l'utilisateur l'ait demandé.
+> **Demande** : « الان بغيت نزيد صفحة الاذمين » → réponse choisie :
+> **« فعّل الكونسول الحالي (login حقيقي) »**.
+
+#### Ce qui a remplacé la clé
+
+| | avant (18/10) | **maintenant (25/10)** |
+|---|---|---|
+| l'entrée | `/admin?cle=…`, clé en `localStorage` | **mot de passe** vérifié par le serveur |
+| la vérification | aucune (discrétion) | **PBKDF2-SHA256, 210 000 itérations, 32 octets** |
+| la session | un drapeau dans le navigateur | cookie **`bahja_admin`** signé HMAC-SHA256, `HttpOnly; SameSite=Lax; Max-Age=43200`, `Secure` en https |
+| les comptes | `localStorage` (brouillon) | variable **`ADMIN_COMPTES`** sur Vercel |
+| sans entrée | renvoi à `/` | **le formulaire** de la porte |
+
+#### Les deux variables
+
+| Variable | Contenu |
+|---|---|
+| `ADMIN_COMPTES` | JSON : `[{ "nom", "sel", "iter", "hash", "pages": [...], "actif" }]` — `hash` = PBKDF2 hex, **jamais** le mot de passe |
+| `ADMIN_SECRET` | une longue chaîne aléatoire (base64url) : elle **signe** les cookies |
+
+Sans l'une des deux → `/api/admin?action=etat` répond `{configure:false}` et la
+porte affiche le **mode d'emploi** au lieu de s'ouvrir. Rien n'est cassé.
+
+#### ⭐ LE MOT DE PASSE EST MODIFIABLE — il n'est jamais imposé (25/10/2026)
+
+> **Consigne de l'utilisateur, le 25/10/2026** : « الباسوورد يجب ان اتمكن من
+> تعديله وليس باسوورد تلقائي » — *le mot de passe doit être modifiable, pas un
+> mot de passe automatique.*
+
+Deux endroits, tous les deux dans **l'onglet Utilisateurs** :
+
+| Où | Ce qu'on fait |
+|---|---|
+| carte **« Changer mon mot de passe »** | deux champs (nouveau + confirmation) → **Calculer la nouvelle valeur** → la valeur de `ADMIN_COMPTES` est calculée, copiée et affichée avec les 3 étapes restantes |
+| carte **« Les utilisateurs (brouillon) »** | le mot de passe de **chaque** ligne est un **champ de saisie** (`écris son mot de passe`), plus un texte figé. Le bouton 🎲 reste là *si* on préfère en tirer un au hasard |
+
+- **`Ajouter` crée une ligne avec un mot de passe VIDE** — c'est toi qui l'écris.
+- **`MIN_MDP = 6`** (et non 8) : l'utilisateur a choisi un mot de passe de
+  7 caractères (`SADKI75`). La console ne bloque que le ridicule ; sous 8
+  caractères le champ passe en **ambre** — c'est un avertissement, pas un refus.
+- Un brouillon vide alors que le serveur a des comptes → bouton
+  **« Reprendre les comptes du serveur »** : il recrée les lignes (nom + pages +
+  actif) avec le mot de passe **vide** (le serveur n'en rend jamais) ; tu retapes
+  celui que tu veux.
+- Si un compte du brouillon n'a pas de mot de passe, le calcul **refuse** et
+  nomme les comptes manquants : un hash ne se devine pas.
+
+#### ⭐ LE MOT DE PASSE EFFECTIF EST `SADKI75` (25/10/2026)
+
+> Consigne : « دير ليا SADKI75 ».
+
+| | |
+|---|---|
+| compte | **`sam`** (nom facultatif : le serveur l'accepte vide quand il n'y a qu'un compte) |
+| mot de passe | **`SADKI75`** — 7 caractères, d'où `MIN_MDP = 6` |
+| `sel` | `1c5048c31b15d70ddc902b552484fe5b` |
+| `hash` | `95664dd6bf6ea37d6cb9c24cfa1b7296dc28eb916d6d75840087df24e05106b1` |
+| pages | les 8 (`analyse`, `quinte`, `presse`, `lives`, `dna`, `resultats`, `article`, `admin`) |
+
+- `ADMIN_COMPTES` a été **écrit par `npx vercel env add ADMIN_COMPTES <env> --force`**
+  sur les trois environnements, puis **redéployé** : le mot de passe est actif.
+- L'ancien mot de passe (`prxa7qukpgj6cj`) **répond 401** — vérifié en ligne.
+
+```
+① /admin → se connecter
+② carte « Changer mon mot de passe » → taper le nouveau (2 fois)
+③ « Calculer la nouvelle valeur » → hash PBKDF2 calculé DANS LE NAVIGATEUR
+   (Web Crypto), valeur copiée + ADMIN_COMPTES.json téléchargé
+④ Vercel → Environment Variables → ADMIN_COMPTES → Edit → coller → Save
+   (les 3 environnements : Production · Preview · Development)
+⑤ Redéployer — Vercel ne relit pas les variables à chaud
+```
+
+⚠ **Tant que ⑤ n'est pas fait, l'ANCIEN mot de passe reste le bon.** C'est dit
+dans la carte. La session en cours, elle, ne casse pas : le cookie ne contient
+pas le mot de passe.
+
+⚠ **Web Crypto n'existe qu'en https ou sur localhost.** En clair sur une IP
+distante, `cryptoDisponible()` est faux : la console le dit et refuse de
+fabriquer un faux hash.
+
+✅ **Vérifié** : un mot de passe tapé dans la carte a produit
+`hash = 449d6f7c…` ; recalculé en Node
+(`crypto.pbkdf2Sync(mdp, sel, 210000, 32, 'sha256')`) → **identique à l'octet**.
+Le hash du navigateur et celui que `api/admin.js` vérifie sont **le même calcul**.
+
+#### Les garde-fous du serveur
+
+- `nom` vide accepté **s'il n'y a qu'un compte** (le cas normal) ;
+- **8 échecs en 10 min par IP → 429**, plus 400 ms de délai sur chaque échec ;
+- comparaison **à temps constant** (pas de mesure du secret par le temps) ;
+- `logout` efface le cookie (`Max-Age=0`) ;
+- `/api/admin?action=comptes` **sans session → 401** ; avec session → noms +
+  pages + actif, **jamais** `sel` ni `hash`.
+
+#### Vérifié en ligne (25/10/2026)
+
+```
+GET  /api/admin?action=etat                    200 {configure:true, secret:true, comptes:1, login:true}
+POST /api/admin?action=login   (faux)          401 {"erreur":"nom ou mot de passe incorrect"}
+POST /api/admin?action=login   (ancien mdp)    401  ← prxa7qukpgj6cj ne passe plus
+POST /api/admin?action=login   (SADKI75)       200 {ok:true, nom:"sam", pages:[…]}
+     Set-Cookie  bahja_admin=…; Path=/; HttpOnly; SameSite=Lax; Max-Age=43200; Secure
+GET  /api/admin?action=session  (cookie)       200 {connecte:true, nom:"sam", …}
+GET  /api/admin?action=comptes  (sans cookie)  401 {"erreur":"session requise"}
+POST /api/admin?action=logout                  200  Set-Cookie Max-Age=0
+page /admin sans session  → le formulaire
+page /admin avec session  → la console (« La session ouverte » + « Changer mon mot de passe »
+                             + « Les comptes du serveur » + « Les utilisateurs (brouillon) »)
+document.cookie            → "" (le cookie est HttpOnly, la page ne le voit pas)
+```
+
+**Compte propriétaire** : `sam`, mot de passe **`SADKI75`** (7 caractères → `MIN_MDP = 6`).
+Pour le changer : la carte « Changer mon mot de passe », puis Vercel + redéploiement
+(le serveur ne peut pas écrire ses propres variables).
+
+---
+
+### 25.8 📅 L'ABONNEMENT — DÉBUT ET FIN PAR COMPTE (25/10/2026)
+
+> **Demande** : « انا الي غادي نزيدهم بيدي و بغيتك تدير ليا بداية ونهاية اي يوزر
+> اشتراك » — *je m'occupe moi-même des ajouts Vercel ; toi, donne-moi le début et
+> la fin de l'abonnement de chaque utilisateur.*
+
+#### La donnée : deux champs dans `ADMIN_COMPTES`
+
+```json
+[{ "nom": "sam", "sel": "…", "iter": 210000, "hash": "…",
+   "pages": ["analyse","quinte"],
+   "actif": true,
+   "debut": "2026-10-25",
+   "fin":   "2026-11-25" }]
+```
+
+| Règle | Pourquoi |
+|---|---|
+| **`AAAA-MM-JJ`** (le format de `<input type="date">`) | rien d'autre n'est stocké, rien à interpréter |
+| **vide = pas de limite** | les comptes créés avant aujourd'hui, et le compte unique, continuent d'entrer — ajouter le champ ne casse rien |
+| **la FIN est INCLUSE** | `fin = 30/11` → valable jusqu'au 30 à 23:59:59.999 GMT. On ne coupe pas la veille au soir |
+| **comparaison en jours GMT** | même règle que tout le site (§26) : l'heure de l'appareil ne décide de rien |
+| **jours restants arrondis au supérieur** | « 1 j » = « aujourd'hui est le dernier jour » |
+
+#### Le serveur (`api/admin.js`) — le même calcul que `backend/ADMIN/donnees.js`
+
+| Où | Ce qu'il fait |
+|---|---|
+| `login` | après un mot de passe **correct**, refuse **403** si `fin` est passée (`abonnement expiré le JJ/MM/AAAA — contacte l’administrateur`) ou si `debut` est future. **Le cookie n'est pas posé** |
+| `session` | revérifie l'abonnement **à chaque appel** : un cookie de 12 h ne survit pas à une fin d'abonnement |
+| `comptes` | renvoie `debut`, `fin` et `abonnement: { etat, debut, fin, jours }` (jamais `sel`/`hash`) |
+
+⚠ Un refus pour abonnement **ne compte pas comme un échec de mot de passe** : pas de
+429 injuste (le mot de passe était bon).
+
+#### La console (`frontend/ADMIN/Admin.jsx`)
+
+- **une 3ᵉ ligne par utilisateur** : `Abonnement  du [date]  au [date]` + une pastille
+  + trois boutons rapides **`+30 j`** · **`+1 an`** · **`sans limite`**.
+- **quatre couleurs**, une par état — `illimité` (gris) · `en cours` (vert) ·
+  `pas encore commencé` (ambre) · `expiré` (rouge).
+- la carte **« La session ouverte »** affiche l'abonnement du compte connecté ;
+  la carte **« Les comptes du serveur »** affiche `du → au` et la pastille de chacun.
+- `envComptes()` (le bouton **« Enregistrer »** de la carte Utilisateurs, et
+  « Recalculer la valeur » de la carte serveur)
+  écrit `debut` et `fin` dans la valeur produite ; `nouveauCompte()` les crée vides.
+
+#### Vérifié — le vrai handler, sans réseau (25/10/2026)
+
+```
+sam      (sans dates)              200  illimité
+expire   (fin hier)                403  abonnement expiré le 24/10/2026
+futur    (début dans 5 j)          403  abonnement pas encore commencé (début le 30/10/2026)
+encours  (fin dans 10 j)           200  en-cours, 11 j
+dernier  (fin aujourd’hui)         200  en-cours, 1 j   ← la fin est bien incluse
+suspendu (actif:false)             401  nom ou mot de passe incorrect
+mauvais mot de passe               401
+session (cookie valide)            200  connecte=true
+comptes (sans cookie)              401  session requise
+```
+
+Et dans la console en ligne : la pastille est passée à **« expiré le 24/10/2026 »**
+dès qu'une fin a été posée, et le JSON produit contenait bien
+`"debut":"","fin":"2026-10-24"`.
+
+#### ⚠ Changer une date = la même procédure que le mot de passe
+
+Les dates vivent dans `ADMIN_COMPTES`, donc : **console → « Enregistrer » →
+coller sur Vercel → redéployer**. Vercel injecte les variables **au déploiement**
+et `process.env` est **en lecture seule** : le serveur ne peut pas réécrire ses
+propres variables (c'est aussi pourquoi il n'y a pas d'auto-service). Le jour où
+les comptes passeront dans un **KV**, cette étape disparaîtra.
+
+#### ⭐ LE BOUTON « ENREGISTRER » (25/10/2026)
+
+> **Retour de l'utilisateur** : « عند اضافة يوزر جديد لايوجد زر الحفض » —
+> *quand j'ajoute un utilisateur, il n'y a pas de bouton Enregistrer.*
+
+Il avait raison : le brouillon s'écrivait **tout seul** dans le navigateur (aucun
+retour visible), et le seul bouton qui produisait la valeur du serveur s'appelait
+« Vers le serveur » et affichait son résultat **plus bas dans la page**.
+
+| Ce qui a changé | Détail |
+|---|---|
+| le bouton s'appelle **« Enregistrer »** (vert, plein, icône 💾) | c'est `preparerEnv()` : hash des mots de passe → valeur de `ADMIN_COMPTES` → **copiée** (plus de fichier) |
+| **un état visible** en haut de la carte | « ✓ Brouillon enregistré ici · 23:21 GMT » — l'heure est celle de la dernière écriture locale, en GMT (§26) |
+| **un bloc de confirmation** en haut de la carte | « ✅ Valeur enregistrée et copiée — il reste 2 gestes » + lien Vercel + **Copier la valeur** + **J'ai redéployé — vérifier** |
+| **défilement automatique** vers ce bloc | sans lui, le retour apparaissait hors de l'écran et on croyait que rien ne s'était passé |
+| message d'erreur nominatif | « Rien n'est enregistré : ce compte n'a pas de mot de passe. testeur » |
+
+⚠ « Enregistrer » **n'écrit pas** sur Vercel : aucun code ne peut le faire
+(variable en lecture seule, pas de token). Il fait tout ce qui est possible
+côté navigateur et affiche les 2 gestes qui restent.
+
+#### ⭐ 25.9 LA FUSION — AUCUN COMPTE NE SE PERD, AUCUN NE RÉSUSCITE (25/10/2026)
+
+> **Retour de l'utilisateur** : « كايخرج ليا واحد الملف للتحميل ADMIN_COMPTES.json
+> انا هادشي ماعندي لاش يخرج ليا هادشي خاصو يكون اوطو » + il avait collé une
+> valeur qui ne contenait **que** son nouveau compte.
+
+Deux défauts réels :
+
+| Défaut | Conséquence |
+|---|---|
+| « Enregistrer » **téléchargeait** `ADMIN_COMPTES.json` | une fenêtre de téléchargement à chaque clic — il n'en veut pas |
+| la valeur produite = **le brouillon seul** | un compte du serveur absent du brouillon **disparaissait** (coller `[0677889900]` effaçait `sam` → plus de login) |
+
+**Ce qui est fait maintenant — `produireValeur()` :**
+
+```
+brouillon AVEC mot de passe   → haché, il remplace l'ancien
+brouillon SANS mot de passe   → on réutilise sel/iter/hash DU SERVEUR (rien à retaper)
+compte du serveur ABSENT      → conservé tel quel
+compte SUPPRIMÉ à la main     → ne revient pas (liste `bahja.admin.retires`)
+```
+
+- **aucun téléchargement** : la valeur est copiée dans le presse-papier, c'est tout
+  (les boutons « Télécharger » ont été retirés des blocs de confirmation).
+- **un brouillon vide est accepté** tant que la valeur produite n'est pas vide :
+  c'est le cas « je supprime un utilisateur » (les comptes du serveur sont repris).
+  Une valeur `[]` est refusée — elle fermerait le login.
+- ⚠ `api/admin.js?action=comptes` renvoie désormais **`sel` / `iter` / `hash`** :
+  sans eux la fusion fabriquait une ligne **sans hash**, donc un compte mort.
+  Ce n'est pas une fuite nouvelle (la console affiche déjà la valeur complète à
+  coller) ; la session est `HttpOnly`, signée, revérifiée à chaque appel.
+
+#### ⭐ 25.10 SUPPRIMER DEMANDE CONFIRMATION (25/10/2026)
+
+> « تانيا خدف اي يوزر خاص تكون رسالة تاكيج الحدف »
+
+`supprimer(c)` ouvre un `window.confirm` qui **nomme le compte** :
+
+```
+Supprimer le compte « testeur » ?
+
+• il disparaît de la liste ci-dessous ;
+• le SERVEUR le garde encore : il faut « Enregistrer », coller la valeur
+  sur Vercel, puis redéployer pour qu'il ne puisse plus se connecter.
+
+Confirmer la suppression ?
+```
+
+Le nom entre dans `bahja.admin.retires` (localStorage) : la fusion ne le
+ressuscite pas depuis `ADMIN_COMPTES`. Re-créer le compte avec un mot de passe
+le réintroduit normalement.
+
+#### Vérifié en ligne (25/10/2026)
+
+```
+brouillon vide + retires ["testeur"]  → Enregistrer → ["sam"]            ✅
+ajout « testeur » (mdp + fin)         → Enregistrer → ["testeur","sam"]  ✅
+  · sam garde SON hash   sel 1c5048c3… · hash 95664dd6…   (pas de ligne morte)
+  · aucun champ « abonnement » dans la valeur produite
+corbeille sur « testeur »             → dialogue confirm nommé           ✅
+  · accepter → ligne retirée · retires ["testeur"]
+aucune fenêtre de téléchargement      ✅
+```
+
+#### ⭐ 25.11 LE SITE EST DERRIÈRE UNE PORTE (26/10/2026)
+
+> **Constat de l'utilisateur** : « sam كايدخل لكن راه مايمكنش نذخل 0677889900
+> لانه الصفحة مازال مفتوحة للجميع » — le login existait, mais il n'ouvrait que
+> `/admin`. Les pages restaient lisibles par n'importe qui : un abonnement qui
+> n'ouvre rien ne sert à rien.
+
+Décision (question posée, réponse de l'utilisateur) : **tout est fermé, y compris
+la page d'accueil**, et celui qui n'est pas connecté voit **le formulaire de
+connexion à la même adresse** (pas de redirection).
+
+| Fichier | Rôle |
+|---|---|
+| `src/lib/acces.js` | l'état partagé : qui est connecté (`/api/admin?action=session`), `connecter`, `deconnecter`, `aDroit(pages, cle)`, `premierePage` |
+| `src/Portail.jsx` | la porte : `①` formulaire · `②` « pas dans ton abonnement » · `③` la page |
+| `src/App.jsx` | **chaque** route est enveloppée : `<Portail cle="quinte"><QuinteGrille /></Portail>` — sauf `/admin`, qui a déjà sa porte |
+| `src/Entete.jsx` | n'affiche **que** les liens autorisés + le nom connecté + **Déconnexion** |
+
+Règles :
+
+- **`admin` dans `pages[]` = tous les droits** (le propriétaire). Sinon il faut la
+  clé exacte de la page (`analyse`, `quinte`, `presse`, `lives`, `dna`,
+  `resultats`, `article` — voir `PAGES`, `donnees.js`).
+- **une page non autorisée n'est pas une erreur** : elle affiche « cette page
+  n'est pas dans ton abonnement », le nom du compte, un bouton vers sa première
+  page autorisée, et **Se déconnecter**.
+- **le menu suit les droits** : un compte `["presse"]` ne voit que « Presse ».
+- ⚠ **si le serveur n'a pas `ADMIN_COMPTES` (`configure:false`), on laisse
+  passer** avec un bandeau ambre « login non configuré ». Une variable oubliée
+  ne doit pas fermer le site — pas même au propriétaire.
+
+#### Vérifié en ligne (26/10/2026), avec un compte d'essai retiré ensuite
+
+```
+déconnexion → /            → « LBAHJA-TURF · ACCÈS ABONNÉ · Entrer »   ✅ (même URL)
+login sam / SADKI75        → la page s'ouvre · 6 liens dans le menu     ✅
+compte essai pages=["presse"] :
+   /                       → « Cette page n'est pas dans ton abonnement » ✅
+   « Aller à la page autorisée » → /presse s'ouvre · menu = [Presse]    ✅
+compte retiré de ADMIN_COMPTES → son cookie ne vaut plus rien :
+   /presse                 → le formulaire de connexion                 ✅
+```
+
+⚠ **Ce que cette porte ne fait pas** : les relais `/api/*` (pmu, pt, eq, dna…)
+restent joignables directement. Un visiteur techniquement curieux peut donc lire
+les données sans passer par la page. Pour fermer ça aussi il faut un
+**middleware Vercel** qui vérifie le cookie avant la réécriture SPA — c'est une
+autre étape, non faite ici (le propriétaire ne l'a pas demandée).
+
+#### ⭐ 25.12 QUI VIENT, ET AVEC QUEL APPAREIL (26/10/2026)
+
+> **Demande de l'utilisateur** : « واش كاين شي طريقة باش ايبان ليا نوع الجهاز
+> ةالايب ديال المشتركين » — voir le type d'appareil et l'IP des abonnés.
+
+Deux journaux, une seule base. Le premier existait déjà (il n'était **pas
+branché**) ; le second est nouveau.
+
+| Journal | Ce qu'il dit | Écrit par |
+|---|---|---|
+| `visites` | qui vient sur le site, d'où, sur quelle page — **une ligne par page vue** | `api/visite.js` |
+| `connexions` | qui **entre**, quand, avec quel appareil, et **si ça a marché** — une ligne par tentative | `api/admin.js` |
+
+Champs : `t` (ISO GMT) · `ip` · `pays` · `ville` · `ua` · `qui`/`nom` ·
+`p` (page) · `ref` · `ok` + `motif` (connexions).
+
+##### Ce qui a changé dans le code
+
+| Fichier | Rôle |
+|---|---|
+| `api/_session.js` | **nouveau** — la session sortie de `api/admin.js` : `COOKIE`, `secret`, `comptes`, `fabriquer`, `lireJeton`, `cookies`, `verifier`, `sessionAdmin`, `aDroitAdmin`, `journalOuvert` |
+| `api/_journal.js` | **nouveau** — le Redis REST partagé : `ecrire`, `lire`, `contexte(req)` (IP + pays + ville + ua), délai 2 s |
+| `api/visite.js` | ajoute **`qui`** = le nom du compte, lu dans le **cookie signé** (jamais envoyé par la page → infalsifiable) |
+| `api/admin.js` | écrit une ligne dans `connexions` à **chaque** tentative : `ok:true`, ou `motif: 'mot de passe'` / `'inconnu'` / `'abonnement …'` |
+| `api/visiteurs.js` | lit **les deux** journaux : `?journal=connexions` (défaut = `visites`) + `comptesDistincts` |
+| `frontend/ADMIN/Admin.jsx` | colonne **Compte** dans les visites + carte **« Les connexions »** (Quand · Compte · Résultat · IP · Appareil · Pays) |
+| `backend/ADMIN/donnees.js` | `lireConnexions`, `verdictConnexion` |
+
+##### ⚠ Le plafond de 12 fonctions (le piège du déploiement)
+
+Le plan **Hobby** refuse plus de **12 fonctions serverless** par déploiement :
+
+```
+Error: No more than 12 Serverless Functions can be added to a Deployment
+       on the Hobby plan.
+```
+
+Le projet en a exactement **12** (`admin dna eq gz lv pmu pt sorec tf visite
+visiteurs yt`) ; `ma` et `ptf` sont en **Edge** et ne comptent pas. Un
+`api/connexions.js` séparé faisait donc échouer le build.
+
+→ **Les deux journaux se lisent par la MÊME route** : `api/visiteurs.js` avec
+`?journal=connexions`. Une fonction de moins, aucune variable de plus.
+Toute nouvelle route `/api/*` doit d'abord se demander si elle peut être un
+paramètre d'une route existante.
+
+
+##### ⭐ La session suffit — `ADMIN_JETON` n'est plus obligatoire
+
+Avant, lire le journal exigeait `ADMIN_JETON` : une variable de plus à poser sur
+Vercel pour une information que le propriétaire a déjà le droit de voir.
+Désormais `journalOuvert(req)` accepte **deux clés** :
+
+1. la **session** de la console dont le compte porte `admin` dans `pages[]` — le
+   chemin normal, rien à poser ;
+2. ou `ADMIN_JETON` en query — pour un `curl` sans navigateur.
+
+Un abonné simple (`pages: ["presse","quinte"]`) reçoit **403** : il ne voit ni
+les IP des autres, ni leurs appareils.
+
+##### ⚠ Ce qu'il reste à faire — côté Vercel, une seule fois
+
+**La base n'est pas branchée** : `KV_REST_API_URL` / `KV_REST_API_TOKEN` sont
+absents de la production, donc `api/visite` répond 204 sans écrire et
+`api/visiteurs` répond `{configure:false}`. La console l'affiche et explique :
+
+```
+vercel.com → projet bahja-turf → Storage → créer un Redis (offre gratuite)
+           → le relier au projet (Vercel pose KV_REST_API_URL/TOKEN tout seul)
+           → redéployer
+```
+
+Aucune autre variable n'est nécessaire. Tant que ce n'est pas fait, **rien ne
+s'écrit** — et c'est voulu : une variable oubliée ne doit pas casser le site.
+
+##### Vérifié hors ligne (26/10/2026) — 44 tests, aucune ligne réseau
+
+```
+test-session.mjs  17/17  cookie signé relu · falsifié refusé · compte retiré/désactivé
+                          → session nulle · aDroitAdmin · journalOuvert (session/jeton)
+test-admin.mjs     9/9   login sam 200 + cookie HttpOnly · mauvais mdp 401 ·
+                          nom inconnu 401 · abonnement expiré 403 · comptes · logout
+test-journal.mjs  18/18  (fausse base Redis en local)
+                          visite abonné → qui = 0677889900 · visite anonyme → qui vide
+                          3 tentatives écrites (ok / « mot de passe » / « inconnu »)
+                          aucun mot de passe stocké · les DEUX journaux lus par la session ·
+                          abonné simple → 403 (les deux) · jeton accepté aussi
+```
+
+⚠ **RGPD** : une IP est une donnée personnelle. Plafond `LTRIM` (2000 visites,
+1000 connexions), rien ne part ailleurs, seul le propriétaire lit. Prévoir une
+durée de conservation et une mention sur le site.
+
+
 
 ---
 
@@ -4925,3 +5348,623 @@ reste la meilleure règle mesurée — 0,84 € par euro.
 > du quinté, du trio). Elle ne peut pas choisir, parce qu'un motif est un
 > panier de 4 à 64 trios. Le choix se joue **à l'intérieur** du panier, et
 > c'est là que les 15 règles testées perdent toutes.
+
+## 22. 🐎 LE DIRECT DE LA SOREC — la chaîne du Maroc dans `/lives` (23/10/2026)
+
+> Demande de l'utilisateur : « ajoute-moi cette chaîne
+> `https://sorec-streaming.archostechnology.net/index_2_jwplayer.html`
+> ici `http://localhost:3003/lives` »
+
+### 22.1 Ce que la page de la SOREC contient vraiment
+
+Elle ne fait qu'une chose : poser un lecteur **JW Player** sur un flux **HLS**.
+On ne l'intègre donc pas (iframe, http, certificat mort) : on prend **le flux**.
+
+| Page | Flux |
+|---|---|
+| `index_1_jwplayer.html` | `/live/OutStream1/playlist.m3u8` — le direct |
+| `index_2_jwplayer.html` | idem (celle que l'utilisateur a donnée) |
+| `index_3_jwplayer.html` | `/live/OutStream1/playlist.m3u8?DVR` — retour sur image |
+| `index_4_jwplayer.html` | `/live/myStream_2/playlist.m3u8` — côtes et rapports |
+
+La playlist maîtresse donne une variante (`chunklist_w….m3u8`) puis des
+segments `media_w…_1952.ts` de ~650 Ko, en 640×360.
+
+### 22.2 Le relais `/api/sorec` — et pourquoi il est en NODE
+
+```
+GET /api/sorec?flux=auto|dvr|cotes     la playlist, URLs réécrites
+GET /api/sorec?hls=<url absolue>       un média traversé (variante, .ts)
+GET /api/sorec?diag=1                  DNS + TCP + fetch — le diagnostic
+```
+
+Deux verrous mesurés le 23/10 :
+
+1. **le certificat https a expiré le 22/09/2025** → tout navigateur refuse la
+   connexion. Le flux n'existe qu'en **http**, et une page servie en https ne
+   peut pas le lire (contenu mixte). D'où le relais.
+2. **runtime NODE, pas EDGE** : en edge, `fetch` vers une URL `http://` rend
+   `internal error` (502 sur les trois flux). En Node la même requête passe.
+   ⚠ C'est l'inverse d'`api/ptf.js`, où Cloudflare impose l'edge.
+
+En développement, le middleware `/api/sorec` de `vite.config.js` fait le même
+travail — même contrat, deux environnements.
+
+### 22.3 ⚠ En ligne, le direct est FERMÉ — mesuré, pas supposé
+
+`/api/sorec?diag=1` en production :
+
+```
+dns    : 54.36.17.186      (la résolution marche)
+tcp80  : timeout           (le port ne répond pas)
+fetch  : UND_ERR_CONNECT_TIMEOUT
+```
+
+Deux relais publics interrogés depuis l'étranger donnent la même chose
+(`allorigins` 502, `codetabs` 522). **Le serveur de la SOREC refuse les
+connexions venant de l'étranger.** Depuis le poste (Maroc), tout passe.
+
+Conséquence : le lecteur **marche en local** et **reste noir en ligne**. La page
+l'écrit noir sur blanc au lieu de laisser un carré noir — l'avertissement
+n'apparaît que si `location.protocol === 'https:'`, avec un lien de repli vers
+leur site. Ce qu'il faudrait pour que ça marche en ligne ne dépend pas de nous :
+que la SOREC **renouvelle son certificat** et **ouvre son pare-feu**.
+
+### 22.4 L'affichage
+
+`frontend/LIVES/Lives.jsx` → `BlocSorec`, en tête de `/lives` :
+
+- trois pastilles **Direct · Retour sur image · Côtes / Rapports** ;
+- le même `Lecteur` que les réunions Equidia, avec
+  `urlDirecte={'/api/sorec?flux=' + flux}` ;
+- `lien={null}` : **aucun lien qui sorte** — le direct se regarde dans la page ;
+- `key={flux}` : changer de flux repart d'un lecteur neuf (pas de reste de
+  tampon de l'ancien direct).
+
+### 22.5 ⏱️ LE RELAIS DÉCALÉ — 60 s de retard, depuis ce poste (24/10/2026)
+
+> Demande de l'utilisateur : « مايمكنش نديرو شي طريقة متلا تسجيل وعرض على الانترنت
+> بشي فرق ديل 60 تانية »
+
+**La mesure qui commande tout : le DVR de la SOREC ne garde que 30 s** (3 segments
+de ~10 s). Un retour en arrière de 60 s n'existe pas chez eux → il faut notre
+propre tampon. Et comme seul un poste au Maroc peut lire le flux (§22.3), ce
+tampon ne peut tourner que sur la machine de l'utilisateur.
+
+| Fichier | Rôle |
+|---|---|
+| `tools/sorec-relais.mjs` | tire le direct, garde les segments **en mémoire**, les ressert **60 s en retard** |
+| `tools/sorec-relais.bat` | double-clic : lance le relais sur le port 5058 |
+| `frontend/LIVES/Lives.jsx` | champ **« Relais décalé »** dans le bloc SOREC (gardé en `localStorage`) |
+
+```
+node tools/sorec-relais.mjs --decalage 60 --port 5058
+   http://localhost:5058/live.m3u8     la playlist décalée
+   http://localhost:5058/etat          segments en mémoire, retard réel, erreur
+```
+
+Ce n'est **pas un enregistrement** : rien n'est écrit sur le disque, les segments
+sont jetés dès qu'ils sortent de `décalage + 120 s`.
+
+#### Les deux pièges, mesurés le 24/10
+
+1. **Le nom de la variante change à CHAQUE requête** (`chunklist_w335608973`,
+   `w1781855422`, `w2135545017` sur trois appels consécutifs). Comparer les noms
+   pour détecter un redémarrage vidait le tampon toutes les 15 s → le décalage
+   n'était jamais atteint. **L'identité d'un segment est son NUMÉRO**
+   (`media_w…_2132.ts` → 2132), pas son URL.
+2. **Le serveur coupe par moments** (une requête sur dix expire). Une erreur de
+   passage ne jette rien : on réessaie 2 s plus tard, le tampon reste.
+
+Mesure après correction : `segments 12 · secondesEnMemoire 120 · prets 6 ·
+retardReel 62 s` — le retard demandé (60 s) est tenu.
+
+#### Pour un autre appareil
+
+Le port 5058 n'écoute que sur le poste. Pour le téléphone :
+
+```
+cloudflared tunnel --url http://localhost:5058      (sans compte, URL éphémère)
+ngrok http 5058                                     (ngrok 3.3.1 est installé, authtoken à créer)
+```
+
+L'adresse obtenue (`https://….trycloudflare.com`) se colle dans le champ
+« Relais décalé » de `/lives` ; elle est gardée dans le navigateur. Elle change à
+chaque lancement du tunnel.
+
+### 22.6 🃏 TOUT EN CARTES, L'ÉCRAN SUR CLIC (24/10/2026)
+
+> Demande de l'utilisateur : « fais apparaître toutes les chaînes en cartes, sans
+> grand écran ; au clic sur la carte l'écran s'ouvre. Pour la chaîne SOREC sur
+> internet, mets-lui un bouton pour regarder dehors. »
+
+**Avant** : le lecteur SOREC était posé en haut de `/lives`, ouvert d'office, et
+la réunion Equidia du jour aussi → deux grands écrans empilés avant même la
+liste.
+
+**Maintenant** : une seule grille de cartes, **aucun lecteur au chargement**
+(`choix` démarre à `null`, et `lire()` ne sélectionne plus la première réunion).
+Un clic ouvre l'écran, un `✕ Fermer` le referme.
+
+| carte | contenu | clic |
+|---|---|---|
+| **SOREC · Maroc** | badge `EN DIRECT`, `MA`, « Direct · retour sur image · cotes » | ouvre `PanneauSorec` |
+| **R1 · Compiègne** (… les réunions Equidia) | heure GMT, disciplines, Quinté+/Quarté+/Premium/PMH/CSI | ouvre le `Lecteur` |
+| **Le Trot** | « lien externe » | `letrot.com/videos` (l'éditeur refuse l'intégration) |
+
+- Le composant `Carte` est **unique** : même hauteur d'image (96 px), même
+  dégradé, même pied. Il rend un `div role="button"` et non un `<button>` — la
+  carte SOREC porte un lien dedans, et un `<a>` dans un `<button>` n'est pas du
+  HTML valide.
+- `PanneauSorec` porte : le lecteur, les trois pastilles de flux, le champ
+  **Relais décalé** (§22.5), le bouton **▶ Regarder sur le site SOREC ↗**
+  (`SOREC_EXTERNE`, en http — il marche depuis n'importe quel appareil au
+  Maroc, c'est notre relais qui est bloqué, pas le navigateur), et le `✕`.
+- Vérifié : 8 cartes, `video` = 0 au chargement, clic SOREC → panneau + 1
+  lecteur, clic R1 → « Écran — R1 · Putois » + `✕ Fermer`, Fermer → 0 lecteur.
+
+### 12.6 🧾 LES CONDITIONS DE LA COURSE — d'où vient chaque ligne (24/10/2026)
+
+> Signalement de l'utilisateur : « ici les données ne viennent pas en entier »
+> — la grille affichait `— non publié` sur Piste, Corde, Terrain, Allocations,
+> Tirelire et Météo.
+
+**Ce n'était pas un bug de lecture.** Mesuré sur le Quinté du 24/10
+(PRIX DE BEAUNE, R1C3 Compiègne) : `pro.casacourses.com/api/race/{id}` ne
+contient **ni** `track_type`, **ni** `track_condition`, **ni** `prize`, **ni**
+`weather_temp` — les clés sont **absentes**, pas vides.
+
+`fetchConditions(courseId)` (`src/lib/quinte.js`, copie backend à l'octet près)
+complète donc la course en **deux appels parallèles**, et ne jette jamais :
+
+| ligne | source | clé |
+|---|---|---|
+| **Piste** | Equidia | `v2/courses/{date}/R{n}/C{m}` → `lib_piste_course` (« Herbe ») |
+| **Allocations** | Equidia | `montant_total_allocation` (« 98.000,00 euros » → **98 000 €**) |
+| **Tirelire** | Equidia | `is_tirelire` → Oui / Non |
+| **Météo** | Equidia | `reunion.meteo_temperature` + `meteo_nebulosite_libelle_court` |
+| **Catégorie** | Equidia | `categ_course` (« HANDICAP ») — remplace `class`, absent |
+| **Conditions détaillées** | Equidia | `conditions_txt_course` (142 car.) — remplace `comment` |
+| **Terrain** | turf-france | `reu.php?view=program` → « Terrain : … » de la ligne de la course |
+| **Corde** | — | **non publiée** : une course d'obstacle n'a pas de corde |
+
+⚠ **Deux pièges corrigés au passage :**
+
+1. l'ancien code affichait `Corde: c.track_type` — c'est-à-dire **la piste
+   deux fois**. La corde n'existe pas en obstacle : on écrit « non publié ».
+2. `Terrain` affichait `—` (le `FR()` d'un `null`) au lieu de « — non publié ».
+
+⚠ **Le terrain n'est PAS chez Equidia** : cherché dans tout l'état
+(`terrain`, `etat_piste`, `penetro`, `going`), seules les `apt_terrain` **par
+cheval** existent — ce n'est pas le terrain du jour. Le 24/10, turf-france ne
+le publie pas non plus pour Compiègne (`<td><strong>Terrain :</strong></td><td></td>`),
+et la 9ᵉ cellule de la ligne vaut « HANDICAP ». **On l'écrit « non publié »**
+(AGENTS.md §7) plutôt que de le deviner.
+
+Le branchement est fait **dans `chargerCourseCC()`**, donc les deux chemins de
+la page (course du jour et archive) en profitent sans code en plus.
+
+---
+
+## 23. 🏁 RÉSULTATS & RAPPORTS — la page `/resultats` (24/10/2026)
+
+> Demande de l'utilisateur : « la page des résultats de casacourses, mais
+> seulement les résultats avec le rapport — combien ça paie — un autre style,
+> et un bouton de rafraîchissement ».
+
+**La page ne montre QUE du terminé** : pas de programme, pas de course à venir.
+Pour chaque course : l'**arrivée des 5 premiers** et **ce que paie chaque pari**.
+
+### 23.1 Les deux sources, et pourquoi deux
+
+| ce qu'on veut | source | appel |
+|---|---|---|
+| réunions + courses + **arrivée** | casacourses | `pro.casacourses.com/api/programme?date=` puis `/api/race/{id}?date=` |
+| **les rapports** (combien ça paie) | **PMU** | `/api/pmu/rest/client/61/programme/{JJMMAAAA}/R{n}/C{m}/rapports-definitifs` |
+
+⚠ **casacourses a bien un champ `dividends`… il est TOUJOURS VIDE.**
+Vérifié sur **30 courses terminées du 23/10** (France et Belgique) : `dividends: []`
+partout, y compris sur le Quinté de Vincennes. Le rapport n'est pas là.
+
+⚠ **L'API du PMU n'envoie AUCUN en-tête CORS** (`Failed to fetch` depuis la
+page, mesuré le 24/10). D'où le **relais `/api/pmu`**, ajouté le même jour :
+
+```
+api/pmu.js                 export default proxy('pmu')
+api/_proxy.js              ORIGINES.pmu = 'https://online.turfinfo.api.pmu.fr'
+vite.config.js             ORIGINES + les 2 regex /api/(…|pmu)
+vercel.json                /api/pmu/:surcharge(.*) -> /api/pmu?p=:surcharge
+```
+
+⚠ Le PMU ne connaît que **ses** courses : le Maroc (SOREC), la Belgique, la
+Grande-Bretagne n'ont pas de rapports. On ne les demande donc que pour les pays
+PMU (`FR, GP, MQ, RE, GF, YT, PM, BL, MF`) et un 404 est avalé sans bruit —
+la course garde son arrivée et affiche « Rapports non publiés ».
+
+### 23.2 ⚠ LE PIÈGE DES CENTIMES
+
+Le PMU compte en **centimes pour 1 €** :
+
+```
+"dividendePourUnEuro": 280      →  2,80 €
+"dividendePourUnEuro": 21061450 →  210 614,50 €   (Quinté+ ordre, Vincennes 23/10)
+```
+
+Ne jamais afficher le brut : `euros()` divise par 100 et formate en `fr-FR`.
+
+### 23.3 ⭐ LE TABLEAU — « هاد الطريقة أسهل وأجمل » (24/10/2026)
+
+> L'utilisateur a montré le tableau de casacourses : **une ligne par course**,
+> l'arrivée en cases vertes, les non-partants en cases rouges, et le rapport
+> derrière un clic. Verdict : « c'est plus simple et plus beau ».
+> La page a donc été **refaite en tableau** (les cartes de la veille sont
+> supprimées).
+
+```
+DATE       │ TERRAIN (hippodrome + type de pari) │ ARRIVÉE          │ NON-PART. │ DÉTAILS
+23/10/26   │ 🇲🇦 R9 Anfa · Quinté+ · C7 · 16:35   │ 9 5 13 2 6       │ 16        │ Rapport ▼
+23/10/26   │ 🇫🇷 R1 Vincennes · Trio · C1 · 17:23 │ 9 8 5 13 12      │ 4         │ Rapport ▼
+```
+
+- **« Rapport ▼ » déplie**, sous la ligne, une tuile par pari (une par couleur)
+  avec ses lignes : `Ordre · Désordre · Bonus 4 · Bonus 3` et le montant.
+  Plusieurs courses peuvent être ouvertes en même temps.
+- **Le type de la course** est déduit des rapports : `QUINTE_PLUS` → Quinté+,
+  `QUARTE_PLUS` → Quarté+, `QUARTE` → Quarté, `TIERCE` → Tiercé, `TRIO` → Trio.
+- **Les non-partants** viennent de `nonStarters` (casacourses) et de
+  `status !== true` (SOREC) — mesuré sur Anfa du 23/10 : C2 → 3, C3 → 8,
+  C5 → 6, C6 → 5, C7 → 16, exactement les cases rouges de casacourses.
+- Un liseré or plus épais sépare les réunions ; l'ordre est **Maroc d'abord**,
+  puis R1, R2, R3…
+
+Nuit profonde + **or** (la couleur du podium), chiffres en monospace.
+Les couleurs ne décorent pas : **elles disent qui a gagné**.
+
+| élément | couleur |
+|---|---|
+| arrivée | cases **vertes** `#15803d` |
+| non-partant | cases **rouges** `#b91c1c` |
+| Quinté+ | or · Quarté+ orange · Tiercé cyan · Trio vert · 2sur4 rose |
+
+⚠ **Les libellés de la SOREC sont traduits** : elle envoie `ORDRE`, `DESORDRE`,
+`BONUS 3`, `NP1`, `B3NP1`, `B4NP1` → `Ordre`, `Désordre`, `Bonus 3`,
+`Bonus (NP1)`, `Bonus 3 (NP1)`, `Bonus 4 (NP1)`. Sans ça la tuile affichait
+« b3np1 ». Et le nom du pari déjà écrit dans le titre est retiré de la ligne
+(`Quinté+ Ordre` → `Ordre`) : sans ça le Quinté+ débordait en « Quinté+… ».
+L'ordre de lecture est forcé : **ordre, désordre, bonus 4, bonus 3, puis NP1**
+(la SOREC envoie le bonus en premier).
+
+### 23.4 Les deux compactions (sinon la tuile est illisible)
+
+1. **Les lignes qui paient pareil sont regroupées** par *(libellé, montant)* :
+   `2sur4` = 6 combinaisons à 21,80 € → **une** ligne « 6 combinaisons » ;
+   `Bonus 4sur5` = 5 combinaisons à 14,80 € → **une** ligne. La liste exacte
+   des combinaisons reste dans l'`title` (infobulle).
+   ⚠ On regroupe par *(libellé, montant)* et non par pari entier, sinon
+   « Bonus 3 » disparaîtrait dans les « Bonus 4sur5 ».
+2. **Les réunions sont triées R1, R2, R3…** — casacourses les rend dans l'ordre
+   de son fournisseur (R2, R3, R5, R1…).
+
+### 23.5 Ce qui a été mesuré en ligne
+
+```
+23/10/2026 : 37 courses · 5 réunions
+             🇲🇦 R9 Anfa (SOREC, en DH) : 7 courses, Quinté+ C7 = 9-5-13-2-6, NP 16
+                Ordre 375,00 DH · Désordre 7,50 DH · Bonus 4 1,50 DH · Bonus 3 1,10 DH
+             🇫🇷 R1 Vincennes : Quinté+ C4 = 15-12-6-14-16
+                Simple gagnant 4,50 € · Quinté+ désordre 2 982,60 €
+                Quinté+ ordre 210 614,50 € · Bonus 4sur5 14,80 €
+             R2 Mons (BE) : aucun rapport (le PMU ne connaît pas la Belgique)
+24/10/2026 (matin) : « Aucune course terminée à cette date. »  ← normal
+```
+
+- Le bouton **↻ Actualiser** vide le cache de la date (`oublier(date)`) et
+  relit tout ; l'avancement s'affiche (« rapports 12/40 »).
+- Le cache est en mémoire (`Map` par date) : changer de date ne relit pas.
+- `chargerResultats` fait au plus **8 requêtes en vol**.
+
+### 23.6 Les fichiers
+
+| fichier | rôle |
+|---|---|
+| `frontend/RESULTATS/Resultats.jsx` | la page : **tableau**, arrivée, non-partants, rapport déplié, date, bouton |
+| `backend/RESULTATS/donnees.js` | casacourses + PMU, normalisation, cache, `enParallele`, `chargerTout` |
+| `backend/RESULTATS/maroc.js` | **SOREC** : `chargerSorec`, `lireArriveeSorec`, `lireNonPartantsSorec`, `lireDividendesSorec`, `lireArchive`, `chargerResultatsMaroc` |
+| `tools/maroc-resultats.mjs` | écrit `data/maroc-resultats.json` + `public/data/maroc-resultats.json` |
+| `api/pmu.js` · `api/_proxy.js` · `api/ma.js` | les relais des rapports et de la SOREC |
+| `src/App.jsx` | `/resultats` (et l'alias `/rapports`) |
+| `src/Entete.jsx` | le lien « Résultats » (`bi-list-ol`) |
+| `src/index.css` | `.p-resultats{ --t: var(--n-ambre) }` |
+
+### 23.7 ⭐ LE MAROC PAIE EN DIRHAMS — PAS DE PMU (24/10/2026)
+
+> « هادو الأثمنة ديال فرنسا وأنا قلت ليك الأثمنة ديال SOREC »
+
+| | Maroc | France et autres |
+|---|---|---|
+| arrivée | e-sorec `result` (« 2 - 3 - 5 - 7 - 4 ») | casacourses `/api/race/{id}` |
+| rapports | e-sorec `dividends[]` | PMU `rapports-definitifs` |
+| devise | **DH** (centimes de dirham) | **€** (centimes d'euro) |
+| non-partants | `runners[].status !== true` | `nonStarters` |
+
+- **casacourses ne sait pas faire le Maroc** : sa réunion « Casablanca » reste
+  `OPEN` / `has_results: false` à jamais, `dividends: []`. Elle est **jetée** de
+  la liste (`chargerTout` filtre `pays === 'MA'`).
+- ⚠ **e-sorec n'est joignable QUE depuis le Maroc** (Vercel : 504 edge, 502 Node).
+  La page lit donc `public/data/maroc-resultats.json` (écrit par
+  `tools/maroc-resultats.mjs`, publié par `tools/daily.mjs`), et ne tente le
+  direct qu'en local (`localhost`) ou sur **↻ Actualiser**.
+- **Conséquence à dire à l'utilisateur** : en ligne, le Maroc du jour n'apparaît
+  qu'après le passage du job (08 h 45 / 20 h 30) **et** un déploiement.
+- L'archive est **fusionnante** : `--jours=N` relit N jours mais garde les 60
+  derniers déjà connus.
+
+---
+
+## 27. ⭐ DEUX DISPARITIONS RÉPARÉES — le Maroc suit la date, le 500 n'est pas une panne (25/10/2026)
+
+> « لماذا تختفي قنوات البت الحي ⚠ régions : HTTP 500 — la source Equidia Régions
+> ne répond pas. ولماذا يختفي اجتماع المغرب »
+
+Deux symptômes, **deux causes différentes** — et aucune des deux n'était une panne.
+
+### 24.1 ⭐ « régions : HTTP 500 » = une journée SANS RÉUNION
+
+Equidia Régions ne rend pas une liste vide quand il n'y a rien à publier : il
+rend `{"error":{"code":"error-500","msg":"Internal server error !"}}`.
+
+```
+2026-10-23 → 200 (5 réunions)     2026-10-25 → 500
+2026-10-24 → 200 (8 réunions)     2026-10-26 → 500
+2026-10-27 → 200                  2027-01-01 → 200 avec 0 réunion
+```
+
+`chargerLives()` transformait ça en **erreur** → la page affichait
+`⚠ régions : HTTP 500 — la source ne répond pas` et **plus aucune chaîne**.
+
+| avant | maintenant |
+|---|---|
+| `!r.ok` → `throw` | **3 essais** (400 ms puis 1 s) → `vide: true` |
+| — | `derniereJournee(date, 7)` : la dernière journée qui a couru |
+
+> ⚠ Le 500 est **instable** : le même 26/10 rend 500 depuis Node et 5 réunions
+> depuis le navigateur, à deux minutes d'écart. D'où les 3 essais — sans eux un
+> incident passager ferait disparaître les chaînes.
+
+`frontend/LIVES/Lives.jsx` : bloc « **Aucune réunion régionale** le … » + deux
+boutons — **↻ Réessayer** (`relancer()`, sans attendre les 60 s) et
+**↩ Voir la dernière journée qui a couru** (`voirDerniere()`).
+
+Vérifié en ligne le 25/10 : `2027-01-01` → bloc vide + les deux boutons ; le
+bouton « dernière journée » bascule sur `2026-12-31` (2 réunions).
+
+### 24.2 ⭐ LE MAROC NE SUIVAIT PAS LA DATE — `/api/meetings` ignore `?date=`
+
+```
+GET /api/meetings?date=2026-10-23   → 10 événements datés du 25/10   ✗
+GET /api/meetings-v2/2026-10-23     → 10 événements datés du 23/10   ✓
+```
+
+`morocco.js` filtre ensuite sur `event.date` : pour toute date **autre que celle
+du jour**, la liste était vide et **la réunion marocaine disparaissait de
+`/dna`** — sans erreur, sans message.
+
+**Corrigé** : `direct()` et `collecter()` appellent **`/api/meetings-v2/{date}`**.
+
+### 24.3 L'archive par date — `maroc-jours.json`
+
+`data/maroc.json` ne porte **que la journée du run** : même avec la bonne URL,
+une date passée n'avait aucun fichier de repli (et en ligne e-sorec est
+injoignable depuis Vercel).
+
+- `tools/maroc.mjs` → `archiver()` écrit **`data/maroc-jours.json`** +
+  `public/data/maroc-jours.json` : `{ maj, jours: { "2026-10-23": [meetings] } }`,
+  **40 jours** gardés.
+- `morocco.js` → `jours()` lit ce fichier ; `programmeSorec` s'en sert quand
+  `maroc.json` ne correspond pas à la date demandée (`collecteLe: null` → jamais
+  « frais », donc le direct est retenté dès qu'il est joignable).
+- Amorçage fait le 25/10 : **8 jours** (18 → 25/10), 1 réunion par jour
+  (Marrakech, Casablanca, Khemisset ×2, Meknes, Casablanca, Settat, Marrakech).
+
+> ⚠ `/dna` ne recharge **que sur « Charger »** : changer la date ne suffit pas
+> (le `useEffect` ne dépend que du montage). C'est voulu — une date ne doit pas
+> lancer 17 requêtes à chaque frappe.
+
+Vérifié en ligne le 25/10 : `/dna` → 23/10 → Charger → **6 réunions** dont
+`MA · Casablanca · Q+ · 7 courses`, et `MA · R9 C1 — KERMESSE` ouvre ses partants.
+
+---
+
+## 28. ⏱ LA COURSE QUI PART DANS 5 MINUTES — visible dans la carte (25/10/2026)
+
+> « بغيت الكورسة الى باقي ليها خمس دقايق على الانطلاقة تبان فالبطاقة واضحة »
+
+`frontend/DNA/Programme.jsx` + `frontend/DNA/dna.css`.
+
+### 28.1 Pourquoi trois endroits, et pas un
+
+Une réunion peut être **repliée**. Une course imminente dans une carte fermée
+ne se verrait pas — c’est le piège de la demande « dans la carte ».
+
+| # | où | quoi |
+|---|---|---|
+| ① | **bande** sous la date | `⏱ DÉPART DANS 3:12 · R6 Krieau · C5 · 2600 m` + l’heure locale ; un clic ouvre la réunion |
+| ② | **carte de la réunion** | bordure rose 2 px qui bat + pastille `⏱ 3:12` dans l’en-tête, **même repliée** ; la carte s’ouvre toute seule |
+| ③ | **ligne de la course** | fond rouge, bordure 2 px, `⏱ 3:12` en pastille blanche, et `DÉPART DANS 3:12 — 17:55` |
+
+### 28.2 La fenêtre et le rythme
+
+```
+SEUIL = 5 min      la fenêtre demandée
+APRES = 12 min     une course reste marquée « partie » 12 min après le départ
+```
+
+Le décompte bat à la **seconde** (`useNow(1000)`), pas aux 30 s du reste de la
+page : à « D-4 min » près on ne sait pas s’il reste le temps de jouer.
+
+### 28.3 L’ouverture automatique — et comment la refermer
+
+`fermePar` (un `useRef`) : la carte de la course imminente reste ouverte tant
+que l’utilisateur ne clique pas sur son en-tête. Cliquer la ferme **pour de
+bon** — sinon on se battrait avec lui à chaque seconde du décompte. La bande ①
+rouvre la carte sans condition.
+
+### 28.4 Ce qui a été vérifié
+
+Essai avec `SEUIL` porté à 90 min (plusieurs courses dans la fenêtre), puis
+remis à 5 min :
+
+- bande : `DÉPART DANS 0:28 · R6 Krieau (vienne) · C5 · 2600 m · 17:35` ;
+- cartes R5/R6/R7/R11 en rose avec `⏱ 17:19` … et la ligne C8 de R5 en rouge
+  avec `⏱ 14:31 · DÉPART DANS 14:31 — 17:55` ;
+- la carte de la course imminente s’ouvre seule (R5, 8 lignes rendues) ;
+- en ligne (bundle `index-BDTt3AZh.js`) : `DÉPART DANS`, `dna-imminent`,
+  `part dans` et `dna-dot` présents dans le JS **et** le CSS.
+
+### 28.5 ⭐ LA BANDE MONTRE LA PROCHAINE COURSE, EN PERMANENCE (25/10/2026)
+
+> Demande de l’utilisateur : **« هادي بدلها عوض خمس دقايق تبان الكورسة
+> القادمة »** — le bandeau restait vide entre deux courses, et ce n’est pas
+> une information : à 17 h 30 il n’y avait plus rien en haut du programme.
+
+`plusProche()` (fenêtre de 5 min) est remplacé par **`prochaineCourse()`** :
+la course la plus proche du départ, **sans plafond**.
+
+| état | quand | ce qu’on voit |
+|---|---|---|
+| **calme** (cyan, pas d’animation) | la prochaine est à plus de 5 min | `PROCHAINE COURSE · DANS 12:29:00 · R2 Marseille-Borély · C1 · 1200 m · 11:42 ↗` |
+| **pressée** (rose, bordure 2 px, `dna-imminent`) | à moins de 5 min | `DÉPART DANS 2:40 · R2 Marseille-Borély · C1 · 1200 m · 11:42 ↗` |
+| **rien** | plus aucune course à partir (journée finie, archive) | — |
+
+- Nouveau formateur **`duree()`** : `m:ss` sous l’heure, `h:mm:ss` au-delà
+  (`mmss` aurait écrit « 125:00 »).
+- **Ce qui ne change pas** : ② la carte rose et ③ la ligne rouge restent
+  réservées aux **5 minutes**, et l’ouverture automatique aussi — sinon la
+  carte sauterait à chaque changement de « prochaine course ».
+
+Vérifié au navigateur (horloge avancée à `10:39:20Z` le 26/10) :
+
+```
+bande   DÉPART DANS 2:40 · bordure rgb(251,113,133) 2px · animation dna-imminent
+carte   R2 · ⏱ 2:40 · « C1 part dans 2:40 »
+ligne   C1 · 10:42 GMT · ⏱ 2:40 · DÉPART DANS 2:40 — 11:42
+```
+
+#### ⭐ 28.5.1 Le repli « DEMAIN » — quand la journée est finie
+
+> L’utilisateur a écrit **« التغييرات لم تظهر على VERCEL »** à 23 h 40 : le
+> bundle déployé **était** le bon (`index-DsPW6KuI.js`, `PROCHAINE COURSE`
+> présent, `plusProche` absent), mais **toutes les courses du 25/10 étaient
+> parties** → `prochaineCourse` rendait `null` → bande vide → « rien n’a
+> changé ». Le déploiement n’était pas en cause, l’écran n’avait rien à dire.
+
+`DnaCourse.jsx` charge désormais **le programme du lendemain** quand — et
+seulement quand — la date affichée est celle du jour **et** qu’il n’y reste
+plus une seule course à partir. `Programme.jsx` prend alors le relais :
+
+| état | quand | ce qu’on voit |
+|---|---|---|
+| **demain** (ambre, pas d’animation) | la journée affichée est finie | `DEMAIN · DANS 12:21:49 · R2 Marseille-Borély · C1 · 1200 m · 11:42 ↗` |
+
+- un **clic** sur cette bande charge la journée du lendemain (`allerDate` :
+  `setDate` + `loadMeetings` dans le même appel, sélection remise à zéro) ;
+- **aucun repli** sur une date passée (archive) : la bande reste vide, c’est
+  la bonne réponse ;
+- une seule lecture de plus par jour, et seulement si elle sert.
+
+Vérifié au navigateur le 25/10 à 22 h 10 UTC :
+
+```
+25/10 (journée finie)  DEMAIN · DANS 12:21:49 R2 Marseille-Borély · C1 · 1200 m 11:42 ↗  (ambre)
+clic                   → date = 2026-10-26 · 8 réunions · PROCHAINE COURSE · DANS 12:21:46 (cyan)
+26/10 + horloge 10:39Z DÉPART DANS 2:40 · bordure rgb(251,113,133) · dna-imminent
+20/10 (archive)        aucune bande  ✅
+```
+
+### 28.6 ⚠ L’HEURE DU MAROC — celle de la SOREC, pas celle du navigateur
+
+Le bandeau peut désormais pointer une course marocaine : son heure devait donc
+être juste. Mesuré le 25/10/2026 :
+
+```
+SOREC  time = "2026-10-26 12:03:00"   (heure locale du Maroc, UTC+1)
+       timestamp = 1793012580000      (= 11:03Z — correct)
+Chrome : Africa/Casablanca → 11:03    ✗   (sa base de fuseaux ignore UTC+1)
+Node   : Africa/Casablanca → 12:03    ✓
+```
+
+→ `versCourse()` garde **`heure`** (« 12:03 », la chaîne de la SOREC) et
+`heureLocale(ms, pays, heureMa)` la préfère à tout calcul. Sans ce champ (vieux
+fichier), repli sur **UTC+1**, jamais sur `Africa/Casablanca`.
+
+Vérifié : la carte `MA · Casablanca` affiche **« 1er à 12:03 »** (elle disait
+11:03).
+
+---
+
+## 29. ⭐ LA COURSE SANS FICHE — casacourses prend le relais (25/10/2026)
+
+> Message vu sur `/dna` : **« Les partants de cette course ne sont pas publiés
+> par la source de chevaux (réunion étrangère ou course sans fiche). Le
+> programme, lui, est complet. »**
+
+### 29.1 Le constat — ce ne sont pas des réunions étrangères
+
+`fetchRace` n’ouvrait une course que si paris-turf lui donnait son `id`. Sinon,
+message et **rien d’autre**. Or, mesuré le 25/10/2026 :
+
+| date | réunion | courses sans fiche |
+|---|---|---|
+| 25/10 | **R9 Agen la Garenne** (FR) | **7 / 7** |
+| 25/10 | **R11 Saint Galmier** (FR) | **9 / 9** |
+| 25/10 | **R14 Chatelaillon** (FR) | **7 / 7** |
+| 26/10 | **R7 Vire** (FR) | **8 / 8** |
+
+Des réunions **françaises entières**. Le message parlait de « réunion
+étrangère » : il se trompait de cause.
+
+### 29.2 La source de secours — casacourses, déjà lue par la page
+
+`backend/ANALYSE/paris.js` lit déjà `pro.casacourses.com/api/programme` pour les
+pastilles. Il porte **aussi** les partants de ces courses :
+
+```
+GET /api/race/pmu-R9C1?date=2026-10-25
+  → 8 partants nommés · odd_numeric 11 / 4.2 / 3.9 …  · odd_opening_numeric
+    performance (la musique) · jockey_name · horse_trainer · horse_age
+```
+
+- l’identifiant est celui que **casacourses fabrique lui-même** à partir du
+  numéro PMU (`pmu_reunion` + `pmu_course`) : on retrouve la course par sa
+  **clé**, jamais par son nom ;
+- le programme est mis en cache **une fois par date** (`programmeCc`) et
+  partagé avec les pastilles — aucun appel en plus ;
+- **ce qui manque reste vide** : casacourses ne donne ni `poids` ni `corde`
+  (`poids: null`, `corde: null`) — jamais inventés.
+
+### 29.3 ⚠ LE PIÈGE — casacourses numérote le Maroc « R1 »
+
+Mesuré le 25/10 : casacourses appelle **R1 Casablanca**, là où le PMU appelle
+**R1 Saint-Cloud**. Sans filtre, `R1C1` rendait **17 partants de Casablanca**
+(`ALMOUAFAQ ROCH`, `ZHER`…) au lieu de Saint-Cloud.
+
+→ `partantsCasacourses` **saute toute réunion `country === 'MA'`**. Le Maroc a
+sa propre lecture (`rnum >= 100`, SOREC) et n’a rien à faire ici. Vérifié après
+le filtre : `R1C1` rend 9 partants de Saint-Cloud (`INDALIMOS`, `QUALIXIA`,
+`AZANIYA`).
+
+### 29.4 Ce que ça donne
+
+| course | avant | après |
+|---|---|---|
+| 25/10 R9C1 Agen la Garenne | message, 0 partant | **8 partants · 8 cotes · zones A/B/C remplies** |
+| 25/10 R11C4 Saint Galmier | message | **14 partants · 14 cotes** |
+| 25/10 R14C3 Chatelaillon | message | **16 partants · 15 cotes** |
+| 26/10 R7C1 Vire | message | message (casacourses n’a **pas encore** les partants — honnête) |
+| 25/10 R1C3 Saint-Cloud | source de chevaux | **inchangé** (10 partants, `sourcePartants` absent) |
+
+Le moteur sur Agen R9C1 : `ZONE A 3·2·6 (90.9) · 3·2·4 (88.6) · 3·2·5 (86.6)`.
+
+⚠ La page **dit** d’où viennent les partants (`raceData.course.sourcePartants
+=== 'casacourses'` → encart bleu) : ce ne sont pas les mêmes cotes que la
+source habituelle, et l’écran ne doit pas le laisser croire.

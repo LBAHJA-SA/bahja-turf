@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useAcces, aDroit, deconnecter } from './lib/acces.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  src/Entete.jsx — LE BANDEAU COMMUN (18/10/2026)
@@ -29,9 +30,23 @@ const LIENS = [
    * envoie les chevaux au moteur par `/api/dna` — le même relais en local et en
    * ligne, comme `/api/tf` pour turf-france. Elle s'affiche donc partout. */
   { cle: 'dna', to: '/dna', libelle: 'DNA COURSE', icone: 'bi-cpu' },
+  /* 24/10/2026 — LES RÉSULTATS ET LES RAPPORTS. La page ne montre que les
+   * courses terminées : l'arrivée des 5 premiers et ce que paie chaque pari. */
+  { cle: 'resultats', to: '/resultats', libelle: 'Résultats', icone: 'bi-list-ol' },
 ]
 
 export default function Entete({ page }) {
+  const acces = useAcces()
+  /* ⭐ 25/10/2026 — ON NE MONTRE QUE CE QUI S'OUVRE.
+   * Un compte limité à `presse` + `quinte` ne voit pas de lien vers DNA :
+   * cliquer dessus le mènerait à un refus. Le propriétaire (`admin` dans ses
+   * pages) voit tout. Tant que la session n'est pas connue, on montre tout :
+   * la porte s'occupe du reste. */
+  const connecte = acces.pret && acces.connecte
+  const liens = LIENS
+    .filter((l) => !l.dev || import.meta.env.DEV)
+    .filter((l) => !connecte || aDroit(acces.pages, l.cle))
+
   return (
     <header className="entete">
       <div className="entete-in">
@@ -42,7 +57,7 @@ export default function Entete({ page }) {
         </Link>
 
         <nav className="entete-nav">
-          {LIENS.filter((l) => !l.dev || import.meta.env.DEV).map((l) => (
+          {liens.map((l) => (
             <Link
               key={l.cle}
               to={l.to}
@@ -54,6 +69,28 @@ export default function Entete({ page }) {
             </Link>
           ))}
         </nav>
+
+        {/* ⭐ qui est connecté — et de quoi sortir */}
+        {connecte && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginLeft: 6 }}>
+            <span title={acces.abonnement && acces.abonnement.fin
+              ? 'abonnement jusqu’au ' + acces.abonnement.fin.split('-').reverse().join('/')
+              : 'abonnement sans limite'}
+              style={{ fontSize: 12, color: '#a9b6c9', whiteSpace: 'nowrap' }}>
+              <i className="bi bi-person-circle" /> {acces.nom}
+            </span>
+            <button
+              onClick={async () => { await deconnecter(); window.location.href = '/' }}
+              title="Fermer la session"
+              style={{
+                padding: '5px 10px', borderRadius: 8, cursor: 'pointer', fontSize: 11.5, fontWeight: 700,
+                color: '#e2e8f0', background: 'rgba(148,163,184,.14)',
+                border: '1px solid rgba(148,163,184,.3)',
+              }}>
+              <i className="bi bi-box-arrow-right" /> Déconnexion
+            </button>
+          </div>
+        )}
 
       </div>
     </header>

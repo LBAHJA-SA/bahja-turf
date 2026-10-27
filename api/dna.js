@@ -24,6 +24,8 @@
  *   En local on ne passe même pas par ici : `vite.config.js` parle d'abord au
  *   moteur du poste (127.0.0.1:5057).
  */
+import { sessionValide } from './_acces.js'
+
 const MOTEUR = String(process.env.DNA_ENGINE_URL || '').replace(/\/+$/, '')
 
 /* le moteur ouvre l'archive au premier appel : on lui laisse le temps */
@@ -31,6 +33,13 @@ export const config = { maxDuration: 60 }
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store')
+
+  if (!await sessionValide(req)) {
+    res.statusCode = 401
+    res.setHeader('Content-Type', 'application/json; charset=utf-8')
+    res.end(JSON.stringify({ erreur: 'session requise' }))
+    return
+  }
 
   if (req.method !== 'POST') {
     res.statusCode = 405

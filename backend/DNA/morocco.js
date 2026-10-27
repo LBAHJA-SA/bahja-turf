@@ -66,6 +66,7 @@ const OFFSET = 100
 const TTL = 120000      /* 2 min : le programme d'une réunion ne bouge pas vite */
 const FRAIS = 3 * 3600e3 /* 3 h : au-delà, le fichier n'est plus « le jour même » */
 const DELAI_DIRECT = 5000 /* e-sorec injoignable = 5 s perdues, pas 30 */
+const DELAI_RETENTE = 4000 /* la 2ᵉ tentative, plus courte : on a déjà attendu */
 
 /* Les hippodromes marocains. `country` de e-sorec vaut « MAR » pour Anfa, mais
  * certaines réunions arrivent avec un pays vide : on reconnaît alors la piste. */
@@ -141,6 +142,9 @@ async function lire(chemin, delai = DELAI_DIRECT) {
   return r.json()
 }
 
+/** Une pause courte — e-sorec limite le débit quand on enchaîne les appels. */
+const pause = (ms) => new Promise((r) => setTimeout(r, ms))
+
 /** « C7 » → 7 · « R9 » → 9 */
 function numero(code) {
   const m = /\d+/.exec(String(code || ''))
@@ -204,9 +208,15 @@ function statut(race) {
   const s = String(race?.status || '').toUpperCase()
   if (/OFFICIAL|DEFINITIF/.test(s)) return { statut: 'DEFINITIF', definitif: true }
   if (/FINISH|ARRIV/.test(s)) return { statut: 'ARRIVEE' }
-  /* « CLOSED » = les paris sont fermés, la course part ou court : l'écran
-   * l'affiche « En cours » plutôt qu'un compte à rebours négatif. */
-  if (/RUNNING|LIVE|EN_COURS|CLOSED|CLOSING/.test(s)) return { statut: 'EN_COURS' }
+  if (/RUNNING|LIVE|EN_COURS/.test(s)) return { statut: 'EN_COURS' }
+  /* ⭐ 25/10/2026 — « CLOSED » veut dire « les ENGAGEMENTS sont clos », pas
+   * « la course court ». La carte de DEMAIN (Anfa, 8 courses) arrive en
+   * `CLOSED` : l'écran affichait « En cours » sur une course du lendemain.
+   * Ce n'est « en cours » que si l'heure de départ est passée. */
+  if (/CLOSED|CLOSING/.test(s)) {
+    const t = millis(race?.timestamp)
+    return { statut: t != null && Date.now() >= t ? 'EN_COURS' : 'PROGRAMMEE' }
+  }
   return { statut: s || 'PROGRAMMEE' }
 }
 
@@ -229,7 +239,15 @@ function versCourse(race, reunion, date) {
     surface: '',
     terrain: race?.trackcondition || '',
     runners: race?.starters ?? null,
-    heure: '',
+    /* ⭐ 25/10/2026 — L'HEURE ÉCRITE PAR LA SOREC, telle quelle.
+     *
+     *  `race.time` = « 2026-10-26 12:03:00 », l'heure LOCALE du Maroc. On la
+     *  garde : c'est la seule qui ne dépende pas de la base de fuseaux du
+     *  navigateur. Mesuré le 25/10/2026 : `Africa/Casablanca` dans Chrome
+     *  rendait 11:03 pour une course que la SOREC annonce à 12:03 (le Maroc
+     *  est à UTC+1 depuis 2018). L'écran affichait donc une heure fausse.
+     *  → `Programme.jsx` préfère ce champ à tout calcul (`heureLocale`). */
+    heure: String(race?.time || '').slice(11, 16),
     time: millis(race?.timestamp),
     date,
     reunion,
@@ -293,6 +311,26 @@ async function fichier() {
   return fichierMemo
 }
 
+/** ⭐ `/data/maroc-jours.json` — L'ARCHIVE PAR DATE (25/10/2026).
+ *
+ *  `maroc.json` ne porte que la journée du run. Sur `/dna`, dès qu'on changeait
+ *  de date, la réunion marocaine DISPARAISSAIT — c'était le seul symptôme, et
+ *  il était invisible : la page n'affichait simplement plus le Maroc.
+ *  `tools/maroc.mjs` garde maintenant les 40 derniers jours ici. */
+let joursMemo
+async function jours() {
+  if (joursMemo !== undefined) return joursMemo
+  joursMemo = null
+  try {
+    const r = await fetch('/data/maroc-jours.json', { headers: { Accept: 'application/json' }, cache: 'no-store' })
+    if (r.ok) {
+      const j = await r.json()
+      if (j && j.jours && typeof j.jours === 'object') joursMemo = j.jours
+    }
+  } catch (e) { /* pas d'archive : le fichier du jour reste la seule source */ }
+  return joursMemo
+}
+
 /** Le direct est-il tombé ? (une fois par chargement de page)
  *
  *  ⚠ Mesuré le 23/10/2026 : e-sorec répond au poste et refuse Vercel. Sans ce
@@ -300,15 +338,35 @@ async function fichier() {
  *  Le premier échec le lève pour de bon ; le fichier prend le relais. */
 let directKO = false
 
-/** Le direct, une seule fois, avec un délai court. */
+/** Combien de fois on a retenté le direct pour une course SANS cote (plafond :
+ *  2 par session — voir `courseSorec`). */
+let essaisSansCote = 0
+const MAX_ESSAIS_SANS_COTE = 2
+
+/** Le direct, une seule fois, avec un délai court.
+ *
+ *  ⚠ `-v2` EST OBLIGATOIRE (mesuré le 25/10/2026) : `/api/meetings?date=…`
+ *  IGNORE le paramètre et rend toujours la journée qu'il croit courante —
+ *  d'où une réunion marocaine qui n'existait que pour AUJOURD'HUI et
+ *  disparaissait dès qu'on changeait de date sur `/dna`.
+ *
+ *      2026-10-23 → meetings       : 10 événements datés du 25/10   ✗
+ *      2026-10-23 → meetings-v2/…  : 10 événements datés du 23/10   ✓
+ */
 async function direct(date) {
-  try {
-    const data = await lire('/api/meetings?date=' + encodeURIComponent(date))
-    return versMeetings(data?.content?.events, date)
-  } catch (e) {
-    directKO = true
-    return []
+  /* ⚠ DEUX TENTATIVES. Mesuré le 25/10/2026 : e-sorec rend parfois
+   * ECONNRESET sur une connexion sur deux. Avec une seule tentative, ce
+   * hasard faisait DISPARAÎTRE la réunion marocaine de la page pour toute la
+   * session (`directKO`) — exactement le symptôme « le Maroc a disparu ».
+   * La 2ᵉ tentative est plus courte : on a déjà attendu 5 s. */
+  for (let i = 0; i < 2; i++) {
+    try {
+      const data = await lire('/api/meetings-v2/' + encodeURIComponent(date), i === 0 ? DELAI_DIRECT : DELAI_RETENTE)
+      return versMeetings(data?.content?.events, date)
+    } catch (e) { /* on retente une fois, puis on renonce */ }
   }
+  directKO = true
+  return []
 }
 
 /**
@@ -322,8 +380,16 @@ export async function programmeSorec(date) {
   if (deja) return deja
 
   const f = await fichier()
-  const meme = f && String(f.date) === String(date) && (f.meetings || []).length ? f : null
-  const frais = meme && f.collecteLe && Date.now() - Date.parse(f.collecteLe) < FRAIS
+  const arch = await jours()
+
+  /* ② le fichier du jour — ② bis l'archive par date (nouveau, 25/10/2026) */
+  let meme = null
+  if (f && String(f.date) === String(date) && (f.meetings || []).length) {
+    meme = f
+  } else if (arch && Array.isArray(arch[date]) && arch[date].length) {
+    meme = { date, meetings: arch[date], collecteLe: null }
+  }
+  const frais = meme && meme.collecteLe && Date.now() - Date.parse(meme.collecteLe) < FRAIS
   /* fichier du jour encore frais → on s'en sert (instantané, et c'est le SEUL
    * chemin qui marche depuis Vercel) ; sinon on retente le direct. */
   if (frais) return pose(cle, meme.meetings)
@@ -342,6 +408,10 @@ function partants(contenu) {
     .filter((x) => x && x.status !== false && x.startnr != null)
     .map((x) => {
       const horse = x.horse || {}
+      /* `odd` = la cote du moment (pari-mutuel réel, relevé à l'instant) ;
+       * `startodd` = le rapport du tout début du pool — mesuré le 25/10 sur
+       * Marrakech C7 : somme des 1/cote = 6,9, donc PAS un marché (des mises
+       * de quelques dirhams). On ne s'en sert jamais comme cote. */
       const cot = cote(x.odd)
       return {
         num: Number(x.startnr),
@@ -395,8 +465,17 @@ export async function courseSorec(date, rnum, cnum) {
    *
    *    En ligne (Vercel), e-sorec ne répond pas : `directKO` se lève au premier
    *    échec et le fichier prend le relais — sans repayer le délai à chaque
-   *    course. */
-  if (!directKO && c.sorecId) {
+   *    course.
+   *
+   *    ⭐ 25/10/2026 — SAUF SI LE FICHIER N'A AUCUNE COTE. Une course sans cote,
+   *    ce sont quatre zones vides : 5 s perdues valent mieux que ça. On retente
+   *    alors le direct, mais deux fois par session au maximum (`essaisSansCote`),
+   *    sinon une page en ligne paierait 5 s à chaque course cliquée. */
+  const duFichier = Array.isArray(c.runners) && c.runners.length ? c.runners : null
+  const sansCote = !duFichier || !duFichier.some((p) => p.cote != null)
+  const retenter = !directKO || (sansCote && essaisSansCote < MAX_ESSAIS_SANS_COTE)
+  if (c.sorecId && retenter) {
+    if (directKO) essaisSansCote += 1
     const live = await partantsDirects(c.sorecId)
     if (live && live.length) {
       return { course: { ...entete, runners: live.length }, participants: live }
@@ -412,18 +491,23 @@ export async function courseSorec(date, rnum, cnum) {
 }
 
 /** Les partants d'une course SOREC, en direct. `null` si la SOREC ne répond pas
- *  (et alors `directKO` est levé pour tout le reste de la session). */
+ *  (et alors `directKO` est levé pour tout le reste de la session).
+ *
+ *  ⚠ Deux tentatives : e-sorec coupe parfois la connexion (ECONNRESET mesuré
+ *  le 25/10/2026). Un échec isolé ne doit pas vider la course. */
 async function partantsDirects(sorecId) {
   const cle = 'sorec:race:' + sorecId
   let data = garde(cle)
   if (!data) {
-    try {
-      data = await lire('/api/races/' + encodeURIComponent(sorecId))
-    } catch (e) {
-      directKO = true
-      return null
+    for (let i = 0; i < 2; i++) {
+      try {
+        data = await lire('/api/races/' + encodeURIComponent(sorecId), i === 0 ? DELAI_DIRECT : DELAI_RETENTE)
+        break
+      } catch (e) {
+        if (i === 1) { directKO = true; return null }
+      }
     }
-    pose(cle, data)
+    if (data) pose(cle, data)
   }
   const p = partants(data?.content)
   return p.length ? p : null
@@ -443,21 +527,34 @@ async function partantsDirects(sorecId) {
 export async function collecter(date) {
   let data
   try {
-    data = await lire('/api/meetings?date=' + encodeURIComponent(date), 20000)
+    data = await lire('/api/meetings-v2/' + encodeURIComponent(date), 20000)
   } catch (e) {
     throw new Error('SOREC injoignable — ' + (e && e.message ? e.message : e))
   }
   const meetings = versMeetings(data?.content?.events, date)
   if (!meetings.length) throw new Error('aucune réunion marocaine dans la réponse SOREC')
+
+  /* ⚠ TROIS TENTATIVES PAR COURSE (25/10/2026). Mesuré en collectant la carte
+   *   du 26/10 : sur 8 courses, la C1 est revenue VIDE et la C2 avec 4 partants
+   *   sur 6 — e-sorec limite le débit quand on enchaîne les appels. Un relevé
+   *   partiel est pire qu'un relevé absent : la page croit la course connue et
+   *   n'affiche que la moitié du peloton. On retente donc, avec une pause, et
+   *   on garde le meilleur résultat obtenu. */
   for (const m of meetings) {
     for (const c of m.courses) {
       if (!c.sorecId) continue
-      try {
-        const data = await lire('/api/races/' + encodeURIComponent(c.sorecId), 15000)
-        c.runners = partants(data?.content)
-      } catch (e) {
-        c.runners = []
+      const attendu = Number(c.runners) || 0   /* `starters` avant écrasement */
+      let meilleur = []
+      for (let essai = 0; essai < 3; essai++) {
+        if (essai) await pause(1200)
+        try {
+          const d = await lire('/api/races/' + encodeURIComponent(c.sorecId), 15000)
+          const p = partants(d?.content)
+          if (p.length > meilleur.length) meilleur = p
+          if (meilleur.length && (!attendu || meilleur.length >= attendu)) break
+        } catch (e) { /* on retente */ }
       }
+      c.runners = meilleur
     }
   }
   return {

@@ -103,11 +103,40 @@ export function normaliser(m, maintenant = Date.now()) {
 /**
  * Les réunions d'une journée, triées : en direct d'abord, puis à venir (par
  * heure), puis terminées.
+ *
+ * ⚠ LE 500 N'EST PAS UNE PANNE (mesuré le 25/10/2026) — Equidia Régions répond
+ *   `{"error":{"code":"error-500","msg":"Internal server error !"}}` quand la
+ *   journée ne porte AUCUNE réunion, au lieu de rendre une liste vide :
+ *
+ *     2026-10-23 → 200 (5 réunions)      2026-10-25 → 500
+ *     2026-10-24 → 200 (8 réunions)      2026-10-26 → 500   (lundi, relâche)
+ *     2026-10-27 → 200                   2026-10-31 → 200
+ *
+ *   La page affichait donc « ⚠ régions : HTTP 500 — la source ne répond pas »
+ *   un dimanche sans réunion régionale. Un 500 ou un 404 devient ici une
+ *   JOURNÉE VIDE (`vide: true`) : ce n'est pas une erreur, c'est une réponse.
  */
 export async function chargerLives(date = jourISO(), { limite = 50 } = {}) {
   const url = `${BASE}/meetings?fromDate=${date}&toDate=${date}&offset=0&limit=${limite}`
-  const r = await fetch(url)
-  if (!r.ok) throw new Error('régions : HTTP ' + r.status)
+
+  /* ⚠ Le 500 est INSTABLE (mesuré le 25/10 : le même 26/10 rend 500 depuis
+   *   Node et 5 réunions depuis le navigateur, à 2 minutes d'écart). Avant de
+   *   conclure « journée vide », on redonne sa chance à la source — sinon un
+   *   incident passager de la plateforme ferait disparaître les chaînes. */
+  let r = null
+  for (let essai = 0; essai < 3; essai++) {
+    try {
+      const essaiReponse = await fetch(url, { cache: 'no-store' })
+      if (essaiReponse.ok) { r = essaiReponse; break }
+    } catch (e) { /* on réessaie */ }
+    if (essai < 2) await new Promise((ok) => setTimeout(ok, 400 + essai * 600))
+  }
+
+  /* 3 essais sans réponse : c'est une journée SANS RÉUNION (le 500 est la façon
+   * dont Equidia dit « rien à publier »), pas une panne de la page. */
+  if (!r) {
+    return { date, total: 0, meetings: [], enDirect: 0, vide: true, incertain: true, lu: new Date().toISOString() }
+  }
   const j = await r.json()
   const maintenant = Date.now()
   const liste = (j.meetings || []).map((m) => normaliser(m, maintenant))
@@ -118,8 +147,26 @@ export async function chargerLives(date = jourISO(), { limite = 50 } = {}) {
     total: j.total ?? liste.length,
     meetings: liste,
     enDirect: liste.filter((m) => m.etat === 'direct').length,
+    vide: liste.length === 0,
     lu: new Date().toISOString(),
   }
+}
+
+/**
+ * La dernière journée qui a des réunions — au plus `jours` jours en arrière.
+ * Sert quand la date choisie est vide : plutôt qu'un écran noir, on propose
+ * « la dernière journée » en un clic.
+ * → { date, meetings, … } ou null
+ */
+export async function derniereJournee(date = jourISO(), jours = 7) {
+  const d = new Date(date + 'T12:00:00Z')
+  for (let i = 1; i <= jours; i++) {
+    d.setUTCDate(d.getUTCDate() - 1)
+    const jour = d.toISOString().slice(0, 10)
+    const j = await chargerLives(jour)
+    if (j.meetings.length) return j
+  }
+  return null
 }
 
 /**

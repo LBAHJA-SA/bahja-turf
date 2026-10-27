@@ -27,6 +27,8 @@
  *   Même contrat, deux transports.
  * ========================================================================== */
 
+import { sessionValide } from './_acces.js'
+
 export const config = { runtime: 'edge' }
 
 const BASE = 'https://e-sorec.ma'
@@ -71,6 +73,12 @@ async function chercher(cible) {
 }
 
 export default async function handler(req) {
+  if (!await sessionValide(req)) {
+    return new Response(JSON.stringify({ erreur: 'session requise' }), {
+      status: 401,
+      headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
+    })
+  }
   /* Repli : si Vercel nous appelle en Node, on le dit clairement. */
   if (req && typeof req.setHeader === 'function') {
     return new Response(JSON.stringify({ erreur: 'runtime edge non obtenu' }), {

@@ -297,6 +297,111 @@ export async function fetchCotes(courseId) {
   } catch (e) { return {} }
 }
 
+/* ═════════════════════════════════════════════ LES CONDITIONS DE LA COURSE ═══
+ * 24/10/2026 — la page affichait « — non publié » sur 6 lignes sur 10.
+ *
+ * ⭐ POURQUOI : pro.casacourses.com ne publie PAS `track_type`,
+ *    `track_condition`, `prize`, `weather_temp` (mesuré sur le Quinté du
+ *    24/10, PRIX DE BEAUNE R1C3 Compiègne : ces clés sont absentes, pas
+ *    vides). Ce n'était donc pas un bug de lecture : la source n'a pas la
+ *    donnée. Il fallait aller la chercher ailleurs — et surtout ne pas
+ *    l'inventer (AGENTS.md §7).
+ *
+ * ⭐ OÙ ELLE EST (vérifié course par course le 24/10/2026) :
+ *
+ *    | champ        | source        | clé                              |
+ *    |--------------|---------------|----------------------------------|
+ *    | piste        | Equidia       | `lib_piste_course`  (« Herbe »)  |
+ *    | allocations  | Equidia       | `montant_total_allocation`       |
+ *    | tirelire     | Equidia       | `is_tirelire`                    |
+ *    | météo        | Equidia       | `reunion.meteo_temperature` …    |
+ *    | catégorie    | Equidia       | `categ_course` (« HANDICAP »)    |
+ *    | conditions   | Equidia       | `conditions_txt_course`          |
+ *    | terrain      | turf-france   | `reu.php?view=program` → « Terrain : … » |
+ *
+ *    ⚠ Le TERRAIN n'est PAS chez Equidia (cherché dans tout l'état : seules
+ *      les `apt_terrain` par cheval existent, ce n'est pas le terrain du
+ *      jour). turf-france le publie par course, dans la 9ᵉ cellule de la
+ *      ligne du programme — c'est déjà ce que lit `backend/ANALYSE/turfFrance.js`.
+ *
+ *    ⚠ La CORDE d'une course d'obstacle n'existe pas (pas de départ en
+ *      ligne) : on la laisse « non publié » plutôt que d'y mettre la piste,
+ *      comme le faisait l'ancien code (`Corde: c.track_type`).
+ *
+ * Les deux appels partent EN MÊME TEMPS et ne jettent jamais : si une source
+ * tombe, on garde ce que l'autre a donné.
+ * ========================================================================= */
+
+const TF_BASE = '/api/tf'
+
+/** Le terrain du jour pour R{r}C{c}, lu dans la page programme de turf-france. */
+export function terrainTf(html, r, c) {
+  const h = String(html).replace(/&amp;/g, '&')
+  for (const m of h.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)) {
+    const lien = m[1].match(/view=detail&date=\d{4}-\d{2}-\d{2}&reunion=R(\d+)&course=C(\d+)/)
+    if (!lien || Number(lien[1]) !== Number(r) || Number(lien[2]) !== Number(c)) continue
+    const cells = [...m[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)]
+      .map((x) => x[1].replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim())
+    const t = ((cells[8] || '').match(/Terrain\s*:\s*([^0-9]+)/i) || [])[1]
+    return t ? t.trim() : ''
+  }
+  return ''
+}
+
+/** Les conditions publiées par Equidia (piste, allocation, tirelire, météo…). */
+export function parseConditionsEquidia(html, date, r, c) {
+  const m = String(html).match(/<script id="serverApp-state" type="application\/json">([\s\S]*?)<\/script>/)
+  if (!m) return {}
+  const txt = m[1]
+    .replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, ' ').replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+  let etat
+  try { etat = JSON.parse(txt) } catch (e) { return {} }
+  const co = etat[`v2/courses/${date}/R${r}/C${c}`]
+  if (!co) return {}
+  const re = co.reunion || {}
+  const out = {}
+  if (co.lib_piste_course) out.lib_piste = co.lib_piste_course
+  if (co.categ_course) out.categorie = co.categ_course
+  if (co.conditions_txt_course) out.comment = co.conditions_txt_course
+  if (co.lib_parcours_course) out.parcours = co.lib_parcours_course
+  if (typeof co.is_tirelire === 'boolean') out.tirelire = co.is_tirelire
+
+  /* « 98.000,00 euros » → « 98 000 € » (le format de la source est illisible) */
+  const brut = String(co.montant_total_allocation || '')
+  if (brut) {
+    const n = Number(brut.replace(/\./g, '').replace(',', '.').replace(/[^\d.]/g, ''))
+    const euro = /euro|€/i.test(brut)
+    out.allocation = n ? n.toLocaleString('fr-FR') + (euro ? ' €' : '') : brut
+  }
+
+  const t = re.meteo_temperature
+  if (t != null && t !== '') {
+    const neb = re.meteo_nebulosite_libelle_court || ''
+    out.meteo = String(t).replace('.', ',') + '°C' + (neb ? ' · ' + neb : '')
+  }
+  return out
+}
+
+/** Toutes les conditions d'une course (`2026-10-24_R1_C3`). {} si rien. */
+export async function fetchConditions(courseId) {
+  const m = String(courseId || '').match(/^(\d{4}-\d{2}-\d{2})_R(\d+)_C(\d+)$/)
+  if (!m) return {}
+  const [, d, r, c] = m
+  const [eq, tf] = await Promise.all([
+    fetch(`${EQ_BASE}/courses/${d}/R${r}/C${c}`, { headers: { Accept: 'text/html' } })
+      .then((x) => (x.ok ? x.text() : '')).then((h) => (h ? parseConditionsEquidia(h, d, r, c) : {}))
+      .catch(() => ({})),
+    fetch(`${TF_BASE}/php/reu.php?view=program&date=${d}`, { headers: { Accept: 'text/html' } })
+      .then((x) => (x.ok ? x.text() : '')).then((h) => (h ? terrainTf(h, r, c) : ''))
+      .catch(() => ''),
+  ])
+  const out = { ...eq }
+  if (tf) out.terrain = tf
+  return out
+}
+
 /* ⭐ LE BADGE MARCHÉ — le rang de cote de chaque partant (16/10/2026).
  *
  * §11.22 : le marché n'entre PAS dans la sélection (c'est le rang de presse qui
@@ -602,7 +707,13 @@ export async function chargerCourseCC(date, synthese = []) {
     const q = await chercherQuinteCC(date)
     if (!q) return null
     const det = await fetchRaceCC(q.r.id, date)
-    return { ...det, cover: q.ratio, cle: cleEquidia(date, q.m, q.r) }
+    const cle = cleEquidia(date, q.m, q.r)
+    /* ⭐ 24/10/2026 — les conditions que casacourses ne publie pas (piste,
+     *   terrain, allocations, tirelire, météo) sont complétées ici, une fois,
+     *   pour les DEUX chemins de la page (chargement du jour et archive).
+     *   `fetchConditions` ne jette jamais : au pire `raw` reste comme avant. */
+    const cond = await fetchConditions(cle).catch(() => ({}))
+    return { ...det, cle, cover: q.ratio, raw: { ...det.raw, ...cond } }
   } catch (e) {
     return null
   }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import Entete from '../../src/Entete.jsx'
 import { heureGMT, maintenantGMT, parisVersGMT } from '../../src/temps.js'
-import { chargerLives, fluxHLS, jourISO, lienEquidia } from '../../backend/LIVES/lives.js'
+import { chargerLives, derniereJournee, fluxHLS, jourISO, lienEquidia } from '../../backend/LIVES/lives.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  frontend/LIVES/Lives.jsx — « LIVES EN COURS » (20/10/2026)
@@ -71,7 +71,7 @@ function Badge({ m }) {
 
 /* ─────────────────────────────────────────────── le lecteur HLS ─────────── */
 
-function Lecteur({ reunion, urlDirecte }) {
+function Lecteur({ reunion, urlDirecte, lien, libelleLien }) {
   const video = useRef(null)
   const [src, setSrc] = useState(null)
   const [etat, setEtat] = useState('ouverture')   // ouverture | pret | erreur
@@ -155,6 +155,10 @@ function Lecteur({ reunion, urlDirecte }) {
       v.removeEventListener('ended', arrete)
     }
   }, [src])
+
+  /* le lien du pied de lecteur — `lien` explicite d'abord (null = AUCUN lien
+   * qui sort, c'est le cas du direct du Maroc), sinon la réunion Equidia. */
+  const adresse = lien !== undefined ? lien : (reunion.lienExtern || lienEquidia(reunion))
 
   return (
     <div style={{ position: 'relative', background: '#000', borderRadius: 12, overflow: 'hidden', border: '1px solid ' + TE.bord }}>
@@ -251,10 +255,241 @@ function Lecteur({ reunion, urlDirecte }) {
           <span style={{ fontSize: 11.5, color: TE.muet }}>· {reunion.disciplines.join(' · ')}</span>
         )}
         {reunion.quinte && <span style={{ ...S.chip, background: 'rgba(232,121,249,.18)', color: '#f0abfc' }}>Quinté+</span>}
-        <a href={reunion.lienExtern || lienEquidia(reunion)} target="_blank" rel="noreferrer" style={{
-          marginLeft: 'auto', fontSize: 11.5, color: TE.accent, textDecoration: 'none', fontWeight: 700,
-        }}>{reunion.libelleLien || 'Equidia Régions'} ↗</a>
+        {/* `lien={null}` = aucun lien qui sort (le direct du Maroc). Sinon la
+            réunion Equidia s'ouvre dans un onglet, comme avant. */}
+        {adresse && (
+          <a href={adresse} target="_blank" rel="noreferrer" style={{
+            marginLeft: 'auto', fontSize: 11.5, color: TE.accent, textDecoration: 'none', fontWeight: 700,
+          }}>{libelleLien || reunion.libelleLien || 'Equidia Régions'} ↗</a>
+        )}
       </div>
+    </div>
+  )
+}
+
+/* ─────────────────────────── LE DIRECT DU MAROC — LA SOREC ────────────────
+ * Demande de l'utilisateur (23/10/2026) :
+ *   « ajoute-moi cette chaîne https://sorec-streaming.archostechnology.net/
+ *     index_2_jwplayer.html ici /lives »
+ *
+ * La page de la SOREC ne fait qu'une chose : poser un lecteur JW Player sur un
+ * flux HLS. On ne l'intègre pas (iframe, http, certificat expiré) — on prend
+ * LE FLUX et on le lit avec notre lecteur, comme les réunions Equidia :
+ *
+ *   auto    /live/OutStream1/playlist.m3u8        le direct
+ *   dvr     /live/OutStream1/playlist.m3u8?DVR    le retour sur image
+ *   cotes   /live/myStream_2/playlist.m3u8        les côtes et les rapports
+ *
+ * ⚠ Le site ne sert que du **http** (son certificat https a expiré le
+ *   22/09/2025) : une page https ne peut pas le lire. Tout passe donc par
+ *   `/api/sorec`, qui relaie et réécrit les playlists (même principe que le
+ *   replay de Paris-Turf). */
+const SOREC_REUNION = {
+  cle: 'sorec', reunion: 'SOREC', hippodrome: 'Maroc',
+  etat: 'direct', debut: null, fin: null, disciplines: [], quinte: false, image: null,
+}
+
+const SOREC_FLUX = [
+  { cle: 'auto', libelle: 'Direct' },
+  { cle: 'dvr', libelle: 'Retour sur image' },
+  { cle: 'cotes', libelle: 'Côtes / Rapports' },
+]
+
+/** La page publique de la SOREC — le bouton « regarder dehors », qui marche
+ *  depuis n'importe quel appareil au Maroc (c'est notre relais qui ne peut
+ *  pas, pas le navigateur de l'utilisateur). */
+const SOREC_EXTERNE = 'http://sorec-streaming.archostechnology.net/index_2_jwplayer.html'
+
+const CLE_RELAIS = 'sorec-relais'
+
+/* ⭐ LA CARTE — une chaîne = une carte (24/10/2026).
+ *
+ *   Demande de l'utilisateur : « fais apparaître toutes les chaînes en cartes,
+ *   sans grand écran ; le clic ouvre l'écran ». Toutes les cartes ont donc
+ *   exactement la même forme — SOREC, chaque réunion Equidia, et Le Trot (qui
+ *   n'a que le lien). Aucune ne s'ouvre toute seule : l'écran reste fermé
+ *   jusqu'au clic.
+ *
+ *   ⚠ `div` et non `button` : la carte SOREC porte un lien dedans (regarder
+ *   sur leur site), et un `<a>` dans un `<button>` n'est pas du HTML valide. */
+function Carte({ numero, lieu, badge, image, lignes = [], chips = null, actif, onClick, href, action }) {
+  const corps = (
+    <>
+      <div style={{
+        height: 96,
+        background: image ? `center/cover no-repeat url(${image})` : 'linear-gradient(120deg,#052e21,#065f46)',
+        position: 'relative',
+      }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.65))' }} />
+        {badge && <div style={{ position: 'absolute', top: 8, left: 8 }}>{badge}</div>}
+        <div style={{
+          position: 'absolute', bottom: 7, left: 9, right: 9,
+          display: 'flex', alignItems: 'flex-end', gap: 7,
+        }}>
+          <b style={{ fontSize: 19, fontFamily: TE.mono, lineHeight: 1 }}>{numero}</b>
+          <span style={{ fontSize: 13, fontWeight: 800, textShadow: '0 1px 6px #000' }}>{lieu}</span>
+        </div>
+      </div>
+
+      <div style={{ padding: '9px 11px 11px' }}>
+        {lignes.map((l, i) => (
+          <div key={i} style={{
+            fontSize: 11.5, marginTop: i ? 3 : 0,
+            color: i === 0 ? TE.muet : '#cbd5e1',
+            fontFamily: i === 0 ? TE.mono : TE.police,
+          }}>{l}</div>
+        ))}
+        {chips && <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginTop: 7 }}>{chips}</div>}
+        {action}
+      </div>
+    </>
+  )
+
+  const style = {
+    display: 'block', width: '100%', textAlign: 'left', padding: 0, overflow: 'hidden',
+    borderRadius: 12, fontFamily: TE.police, color: '#e7f1ff', cursor: 'pointer',
+    background: actif ? TE.accentClair : TE.carte,
+    border: '1px solid ' + (actif ? TE.accent : TE.bord),
+    boxSizing: 'border-box', textDecoration: 'none',
+  }
+
+  if (href) {
+    return <a className="lives-carte" href={href} target="_blank" rel="noreferrer" style={style}>{corps}</a>
+  }
+  return (
+    <div
+      className="lives-carte"
+      role="button"
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick && onClick() } }}
+      style={style}
+    >{corps}</div>
+  )
+}
+
+/* ⭐ LE PANNEAU DU DIRECT MAROC — il ne s'affiche QUE si sa carte est ouverte. */
+function PanneauSorec({ onFermer }) {
+  const [flux, setFlux] = useState('auto')
+  /* ⭐ LE RELAIS DÉCALÉ (24/10/2026) — `tools/sorec-relais.mjs` sur ce poste,
+     exposé par un tunnel. Quand son adresse est renseignée, elle REMPLACE la
+     source : c'est elle qui rend le direct visible depuis un autre appareil,
+     avec le retard qu'on a choisi (60 s par défaut). Gardée dans le navigateur. */
+  const [relais, setRelais] = useState(() => {
+    try { return localStorage.getItem(CLE_RELAIS) || '' } catch (e) { return '' }
+  })
+  const [saisie, setSaisie] = useState(relais)
+  /* La page est-elle servie en https (donc en ligne) ? Le direct de la SOREC
+     n'est joignable que depuis le Maroc — voir l'avertissement plus bas. */
+  const enLigne = typeof location !== 'undefined' && location.protocol === 'https:'
+
+  const appliquer = () => {
+    const propre = saisie.trim().replace(/\/+$/, '')
+    setRelais(propre)
+    try {
+      if (propre) localStorage.setItem(CLE_RELAIS, propre)
+      else localStorage.removeItem(CLE_RELAIS)
+    } catch (e) { /* navigation privée : on garde juste en mémoire */ }
+  }
+
+  const source = relais ? relais + '/live.m3u8' : '/api/sorec?flux=' + flux
+
+  return (
+    <div style={{ ...S.box, padding: 12, marginBottom: 16 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
+        <b style={{ fontSize: 12.5, color: TE.accent, whiteSpace: 'nowrap' }}>SOREC — les courses du Maroc</b>
+        <Badge m={SOREC_REUNION} />
+        <a
+          href={SOREC_EXTERNE}
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            padding: '6px 11px', borderRadius: 8, fontSize: 11.5, fontWeight: 800,
+            fontFamily: TE.police, textDecoration: 'none', whiteSpace: 'nowrap',
+            background: 'rgba(255,255,255,.04)', border: '1px solid ' + TE.bord, color: TE.ambre,
+          }}
+        >▶ Regarder sur le site SOREC ↗</a>
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {relais ? (
+            <span style={{
+              padding: '6px 12px', borderRadius: 8, fontSize: 11.5, fontWeight: 800,
+              background: TE.accentClair, border: '1px solid ' + TE.accent, color: TE.accent,
+            }}>relais décalé</span>
+          ) : SOREC_FLUX.map((f) => {
+            const actif = f.cle === flux
+            return (
+              <button
+                key={f.cle}
+                onClick={() => setFlux(f.cle)}
+                style={{
+                  padding: '6px 12px', borderRadius: 8, cursor: 'pointer', fontSize: 11.5, fontWeight: 800,
+                  fontFamily: TE.police,
+                  background: actif ? TE.accentClair : 'rgba(255,255,255,.04)',
+                  border: '1px solid ' + (actif ? TE.accent : TE.bord),
+                  color: actif ? TE.accent : TE.muet,
+                }}
+              >{f.libelle}</button>
+            )
+          })}
+        </div>
+        <button onClick={onFermer} title="Fermer l’écran" style={{
+          padding: '6px 10px', borderRadius: 8, cursor: 'pointer', fontSize: 12, fontWeight: 800,
+          fontFamily: TE.police, background: 'rgba(255,255,255,.04)', border: '1px solid ' + TE.bord, color: TE.muet,
+        }}>✕</button>
+      </div>
+      {/* `key={source}` : changer de source repart d'un lecteur neuf (pas de
+          reste de tampon de l'ancien direct). */}
+      <Lecteur key={source} reunion={SOREC_REUNION} urlDirecte={source} lien={null} />
+
+      {/* ── le relais décalé : l'adresse du poste, exposée par un tunnel ── */}
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center', marginTop: 10 }}>
+        <span style={{ fontSize: 11, color: TE.muet, whiteSpace: 'nowrap' }}>Relais décalé</span>
+        <input
+          value={saisie}
+          onChange={(e) => setSaisie(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') appliquer() }}
+          placeholder="https://….trycloudflare.com  ou  http://localhost:5058"
+          style={{
+            flex: '1 1 260px', minWidth: 180, padding: '6px 9px', borderRadius: 8,
+            background: 'rgba(255,255,255,.04)', border: '1px solid ' + TE.bord,
+            color: '#e5e7eb', fontSize: 11.5, fontFamily: TE.police, outline: 'none',
+          }}
+        />
+        <button onClick={appliquer} style={{
+          padding: '6px 12px', borderRadius: 8, cursor: 'pointer', fontSize: 11.5, fontWeight: 800,
+          fontFamily: TE.police, background: TE.accentClair, border: '1px solid ' + TE.accent, color: TE.accent,
+        }}>Utiliser</button>
+        {relais && (
+          <button onClick={() => { setSaisie(''); setRelais(''); try { localStorage.removeItem(CLE_RELAIS) } catch (e) { /* rien */ } }} style={{
+            padding: '6px 10px', borderRadius: 8, cursor: 'pointer', fontSize: 11.5, fontWeight: 800,
+            fontFamily: TE.police, background: 'rgba(255,255,255,.04)', border: '1px solid ' + TE.bord, color: TE.muet,
+          }}>✕</button>
+        )}
+      </div>
+
+      <p style={{ margin: '9px 2px 0', fontSize: 11, color: TE.muet, lineHeight: 1.6 }}>
+        Le direct de la SOREC, lu dans la page — aucun onglet. « Retour sur image » permet de revenir
+        en arrière dans la réunion ; « Côtes / Rapports » montre les rapports de la journée.
+        Si le flux ne s’ouvre pas : la réunion n’a pas commencé.
+      </p>
+      {/* ⚠ L'AVERTISSEMENT DE LIGNE (mesuré le 23/10/2026) : le serveur de la
+          SOREC ferme les connexions étrangères — DNS ok, TCP 80 en délai
+          d'attente depuis Vercel, comme depuis deux relais publics. En local
+          (Maroc) il passe. Autant le dire plutôt que laisser un carré noir. */}
+      {enLigne && !relais && (
+        <p style={{
+          margin: '7px 2px 0', fontSize: 11, lineHeight: 1.6, color: '#fbbf24',
+          background: 'rgba(251,191,36,.08)', border: '1px solid rgba(251,191,36,.25)',
+          borderRadius: 8, padding: '7px 9px',
+        }}>
+          <b>En ligne, ce direct est fermé :</b> le serveur de la SOREC refuse les connexions
+          venant de l’étranger (mesuré le 23/10 : le port 80 ne répond pas depuis Vercel) et son
+          certificat https a expiré le 22/09/2025. En local, il passe — et le <b>relais décalé</b>
+          ci-dessus est justement là pour ça : lance{' '}
+          <code style={{ fontSize: 10.5 }}>node tools/sorec-relais.mjs</code>, expose-le, et colle
+          son adresse. Sinon, le bouton <b>▶ Regarder sur le site SOREC</b> ouvre leur page.
+        </p>
+      )}
     </div>
   )
 }
@@ -299,20 +534,35 @@ export default function Lives() {
   const [err, setErr] = useState(null)
   const [choix, setChoix] = useState(null)
   const [maj, setMaj] = useState(null)
+  const [occupe, setOccupe] = useState(false)
 
   useEffect(() => { document.title = 'Lives en cours — Bahja TURF' }, [])
+
+  const appliquer = useCallback((d) => {
+    setData(d); setErr(null); setMaj(new Date())
+    setChoix((c) => {
+      if (!c) return null                                  // rien d'ouvert au départ
+      if (c === 'sorec') return 'sorec'
+      return d.meetings.some((m) => m.cle === c) ? c : null
+    })
+  }, [])
 
   const lire = useCallback(() => {
     let mort = false
     chargerLives(date)
-      .then((d) => {
-        if (mort) return
-        setData(d); setErr(null); setMaj(new Date())
-        setChoix((c) => (c && d.meetings.some((m) => m.cle === c)) ? c : (d.meetings[0]?.cle || null))
-      })
+      .then((d) => { if (!mort) appliquer(d) })
       .catch((e) => { if (!mort) setErr(e.message || 'source indisponible') })
     return () => { mort = true }
-  }, [date])
+  }, [date, appliquer])
+
+  /* ⭐ « Réessayer » — une journée vide se relit tout de suite, sans attendre
+     les 60 s du rafraîchissement automatique. */
+  const relancer = async () => {
+    setOccupe(true)
+    try { appliquer(await chargerLives(date)) }
+    catch (e) { setErr(e.message || 'source indisponible') }
+    finally { setOccupe(false) }
+  }
 
   /* ① la lecture — puis toutes les 60 s : une réunion passe « en direct »
         pendant qu'on regarde la page, et les flux expirent. */
@@ -325,6 +575,21 @@ export default function Lives() {
   const reunions = data?.meetings || []
   const choisie = reunions.find((m) => m.cle === choix) || null
   const directs = reunions.filter((m) => m.etat === 'direct')
+
+  /* ⭐ « Voir la dernière journée » — la date choisie est vide (dimanche,
+     lundi, jour férié). On remonte au plus 7 jours et on bascule la date. */
+  const voirDerniere = async () => {
+    setOccupe(true)
+    try {
+      const j = await derniereJournee(date, 7)
+      if (j) setDate(j.date)
+      else setErr('aucune réunion régionale dans les 7 derniers jours')
+    } catch (e) {
+      setErr(e.message || 'source indisponible')
+    } finally {
+      setOccupe(false)
+    }
+  }
 
 
   return (
@@ -361,18 +626,6 @@ export default function Lives() {
           </span>
         </div>
 
-        <div style={{ ...S.box, padding: 12, marginBottom: 14, display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-          <b style={{ fontSize: 12.5, color: TE.accent, whiteSpace: 'nowrap' }}>Autres directs</b>
-          <a href="https://www.letrot.com/videos" target="_blank" rel="noreferrer" style={{
-            padding: '6px 12px', borderRadius: 8, border: '1px solid ' + TE.bord,
-            background: TE.accentClair, color: TE.accent, fontWeight: 800, fontSize: 12,
-            textDecoration: 'none', whiteSpace: 'nowrap',
-          }}>Le Trot — vidéos & lives ↗</a>
-          <span style={{ fontSize: 11, color: TE.muet }}>
-            Les courses de trot en direct et en replay (letrot.com). Le site refuse l'intégration dans une page externe — le lien ouvre un nouvel onglet.
-          </span>
-        </div>
-
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 14 }}>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
             style={{
@@ -404,22 +657,80 @@ export default function Lives() {
         )}
 
         {data && reunions.length === 0 && (
-          <div style={{ ...S.box, padding: 26, textAlign: 'center', color: TE.muet, fontSize: 13 }}>
-            Aucune réunion ce jour-là.
+          <div style={{ ...S.box, padding: 22, textAlign: 'center', color: TE.muet, fontSize: 13, marginBottom: 12 }}>
+            <div style={{ marginBottom: 6 }}>
+              <b style={{ color: TE.accent }}>Aucune réunion régionale</b> le {data.date}.
+            </div>
+            <div style={{ fontSize: 12, marginBottom: 10 }}>
+              Equidia Régions ne publie rien ce jour-là (jour sans course sur les
+              hippodromes régionaux). La source a été interrogée 3 fois avant de
+              conclure — ce n’est pas une panne de la page.
+            </div>
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button onClick={relancer} disabled={occupe} style={{
+                padding: '7px 13px', borderRadius: 8, cursor: occupe ? 'default' : 'pointer',
+                border: '1px solid ' + TE.bord, background: 'rgba(255,255,255,.04)', color: TE.muet,
+                fontWeight: 800, fontSize: 12, fontFamily: TE.police, opacity: occupe ? .55 : 1,
+              }}>↻ Réessayer</button>
+              <button onClick={voirDerniere} disabled={occupe} style={{
+                padding: '7px 13px', borderRadius: 8, cursor: occupe ? 'default' : 'pointer',
+                border: '1px solid ' + TE.bord, background: TE.accentClair, color: TE.accent,
+                fontWeight: 800, fontSize: 12, fontFamily: TE.police, opacity: occupe ? .55 : 1,
+              }}>{occupe ? '⟳ recherche…' : '↩ Voir la dernière journée qui a couru'}</button>
+            </div>
           </div>
         )}
 
-        {/* ── le lecteur ── */}
+        {/* ── L'ÉCRAN — il ne s'ouvre QUE par un clic sur une carte ── */}
         {choisie && (
           <div style={{ marginBottom: 16 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
+              <b style={{ fontSize: 12.5, color: TE.accent }}>
+                Écran — {choisie.reunion} · {choisie.hippodrome}
+              </b>
+              <button onClick={() => setChoix(null)} style={{
+                marginLeft: 'auto', padding: '5px 10px', borderRadius: 8, cursor: 'pointer',
+                fontSize: 11.5, fontWeight: 800, fontFamily: TE.police,
+                background: 'rgba(255,255,255,.04)', border: '1px solid ' + TE.bord, color: TE.muet,
+              }}>✕ Fermer</button>
+            </div>
             <Lecteur key={choisie.cle} reunion={choisie} />
           </div>
         )}
 
-        {/* ── la liste ── */}
-        {reunions.length > 0 && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(268px,1fr))', gap: 12 }}>
-            {reunions.map((m) => {
+        {choix === 'sorec' && <PanneauSorec onFermer={() => setChoix(null)} />}
+
+        {/* ── LES CHAÎNES — une carte par chaîne, écran fermé au départ ── */}
+        <div style={{ fontSize: 12, fontWeight: 800, color: TE.accent, margin: '6px 0 8px' }}>
+          Les chaînes — clique une carte pour ouvrir l’écran
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(268px,1fr))', gap: 12 }}>
+          {/* ① le Maroc — la seule qui ne vient pas d'Equidia */}
+          <Carte
+            numero="SOREC"
+            lieu="Maroc"
+            badge={<Badge m={SOREC_REUNION} />}
+            lignes={['Maroc · courses du jour', 'Direct · retour sur image · cotes']}
+            chips={<span style={{ ...S.chip, background: 'rgba(52,211,153,.14)', color: TE.accent }}>MA</span>}
+            actif={choix === 'sorec'}
+            onClick={() => setChoix('sorec')}
+            action={
+              <a
+                href={SOREC_EXTERNE}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  display: 'inline-block', marginTop: 8, fontSize: 11, fontWeight: 800,
+                  color: TE.ambre, textDecoration: 'none', padding: '4px 9px', borderRadius: 7,
+                  border: '1px solid rgba(251,191,36,.4)', background: 'rgba(251,191,36,.08)',
+                }}
+              >▶ Regarder dehors ↗</a>
+            }
+          />
+
+          {/* ② les réunions Equidia */}
+          {reunions.map((m) => {
               const actif = m.cle === choix
               return (
                 <button
@@ -469,14 +780,23 @@ export default function Lives() {
                 </button>
               )
             })}
-          </div>
-          )}
+
+          {/* ③ Le Trot — le lien seul : l'éditeur refuse l'intégration */}
+          <Carte
+            numero="Le Trot"
+            lieu="letrot.com"
+            href="https://www.letrot.com/videos"
+            lignes={['Trot · France', 'Directs et replays — hors de la page']}
+            chips={<span style={{ ...S.chip, background: 'rgba(148,163,184,.16)', color: '#cbd5e1' }}>lien externe</span>}
+          />
+        </div>
 
         <div style={{ marginTop: 18, fontSize: 11, color: '#94a3b8', textAlign: 'center', lineHeight: 1.7 }}>
-          Source : Equidia Régions (<span style={{ fontFamily: TE.mono }}>regions-api.equidia.fr</span>) · flux HLS lu dans la page ·
-          la liste se relit toutes les 60 s · heures en GMT.
+          Sources : Equidia Régions (<span style={{ fontFamily: TE.mono }}>regions-api.equidia.fr</span>) et la SOREC
+          (Maroc) · flux HLS lus dans la page, jamais dans un onglet · la liste se relit toutes les 60 s · heures en GMT.
           <br />
-          ⚠ Si un flux ne s’ouvre pas : la réunion n’a pas commencé, ou l’éditeur bloque le pays.
+          ⚠ Si un flux ne s’ouvre pas : la réunion n’a pas commencé, ou l’éditeur bloque le pays
+          (la SOREC, elle, ne répond qu’au Maroc — d’où le bouton « Regarder dehors »).
         </div>
       </div>
     </>

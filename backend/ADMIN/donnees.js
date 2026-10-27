@@ -34,6 +34,9 @@ export const PAGES = [
   { cle: 'analyse', nom: 'Analyse course', route: '/', icone: 'bi-clipboard2-pulse', bandeau: true, teinte: '#22d3ee' },
   { cle: 'quinte', nom: 'Quinté', route: '/quinte', icone: 'bi-trophy', bandeau: true, teinte: '#e879f9' },
   { cle: 'presse', nom: 'Presse', route: '/presse', icone: 'bi-newspaper', bandeau: true, teinte: '#fbbf24' },
+  { cle: 'lives', nom: 'Lives', route: '/lives', icone: 'bi-broadcast', bandeau: true, teinte: '#f472b6' },
+  { cle: 'dna', nom: 'DNA COURSE', route: '/dna', icone: 'bi-cpu', bandeau: true, teinte: '#38bdf8' },
+  { cle: 'resultats', nom: 'Résultats', route: '/resultats', icone: 'bi-list-ol', bandeau: true, teinte: '#34d399' },
   { cle: 'article', nom: 'Fiche de course', route: '/r/:slug', icone: 'bi-file-earmark-text', bandeau: false, teinte: '#a78bfa' },
   { cle: 'admin', nom: 'Administration', route: '/admin', icone: 'bi-shield-lock', bandeau: false, teinte: '#94a3b8', prive: true },
 ]
@@ -72,6 +75,83 @@ export function motDePasse(n = 10) {
   return s
 }
 
+/* ─────────────────────── LE HACHAGE — PBKDF2, LE MÊME CALCUL QUE LE SERVEUR
+ *
+ *  `api/admin.js` vérifie le mot de passe avec
+ *      crypto.pbkdf2Sync(mdp, sel, iter, 32, 'sha256')
+ *  Le navigateur calcule exactement la même chose (Web Crypto). C'est ce qui
+ *  permet à la console de fabriquer `ADMIN_COMPTES` SANS qu'un mot de passe en
+ *  clair ne quitte jamais la machine du propriétaire.
+ *
+ *  ⚠ Web Crypto n'existe qu'en contexte sûr (https, ou localhost). En clair
+ *    sur une IP distante il n'y a pas de `crypto.subtle` : on le DIT, on ne
+ *    fabrique pas un faux hash.                                                */
+export const ITER_HACHAGE = 210000
+
+const enHex = (octets) => Array.from(octets, (o) => o.toString(16).padStart(2, '0')).join('')
+const deHex = (hex) => {
+  const propre = String(hex || '').replace(/[^0-9a-f]/gi, '')
+  const out = new Uint8Array(propre.length / 2)
+  for (let i = 0; i < out.length; i++) out[i] = parseInt(propre.slice(i * 2, i * 2 + 2), 16)
+  return out
+}
+
+export function cryptoDisponible() {
+  return !!(globalThis.crypto && globalThis.crypto.subtle && globalThis.crypto.getRandomValues)
+}
+
+/** Un sel de 16 octets, en hexadécimal. */
+export function sel() {
+  if (!cryptoDisponible()) throw new Error('crypto indisponible : ouvre la console en https (ou sur localhost)')
+  const o = new Uint8Array(16)
+  globalThis.crypto.getRandomValues(o)
+  return enHex(o)
+}
+
+/** → { sel, iter, hash } — exactement les trois champs que lit le serveur. */
+export async function hacher(motDePasse, selHex, iter = ITER_HACHAGE) {
+  if (!cryptoDisponible()) throw new Error('crypto indisponible : ouvre la console en https (ou sur localhost)')
+  const s = selHex || sel()
+  const cle = await globalThis.crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(String(motDePasse)), 'PBKDF2', false, ['deriveBits'],
+  )
+  const bits = await globalThis.crypto.subtle.deriveBits(
+    { name: 'PBKDF2', salt: deHex(s), iterations: iter, hash: 'SHA-256' }, cle, 256,
+  )
+  return { sel: s, iter, hash: enHex(new Uint8Array(bits)) }
+}
+
+/**
+ * LES COMPTES DU BROUILLON → LA LISTE que lit le serveur.
+ *
+ * Ne partent au serveur que : le nom, les pages, l'état actif, les dates
+ * d'abonnement, et le HASH. Le mot de passe en clair reste dans ce navigateur.
+ */
+export async function envComptesListe(liste) {
+  const out = []
+  for (const c of liste || []) {
+    if (!c || !c.nom) continue
+    if (!c.motDePasse) continue
+    const h = await hacher(c.motDePasse, c.sel, Number(c.iter) || ITER_HACHAGE)
+    out.push({
+      nom: String(c.nom).trim(),
+      sel: h.sel,
+      iter: h.iter,
+      hash: h.hash,
+      pages: Array.isArray(c.pages) ? c.pages : [],
+      actif: c.actif !== false,
+      /* ⭐ L'ABONNEMENT : deux dates, jamais devinées — vides = pas de limite. */
+      debut: dateISO(c.debut),
+      fin: dateISO(c.fin),
+    })
+  }
+  return out
+}
+
+export async function envComptes(liste) {
+  return JSON.stringify(await envComptesListe(liste))
+}
+
 /* ────────────────────────────────────────────────────────────── LES COMPTES */
 
 /** Un compte vide, prêt à être rempli. `pages` = les clés autorisées. */
@@ -82,6 +162,8 @@ export function nouveauCompte(nom = '') {
     motDePasse: motDePasse(),
     pages: ['analyse', 'quinte'],
     actif: true,
+    debut: '',      /* ⭐ abonnement : vide = pas de limite */
+    fin: '',
     creeLe: new Date().toISOString(),
   }
 }
@@ -94,10 +176,112 @@ export function ecrireComptes(liste) {
   return ecrire(CLE_COMPTES, Array.isArray(liste) ? liste : [])
 }
 
+/* ⭐ LES COMPTES SUPPRIMÉS À LA MAIN (25/10/2026)
+ *
+ *  Le brouillon est FUSIONNÉ avec le serveur pour ne jamais perdre un compte
+ *  (sinon `sam` s'effaçait tout seul). Mais une suppression VOLONTAIRE doit
+ *  gagner : on garde donc ici les noms retirés, pour que la fusion ne les
+ *  ressuscite pas. Un nom qui revient avec un mot de passe sort de cette liste.
+ */
+const CLE_RETIRES = 'bahja.admin.retires'
+export function lireRetires() {
+  const c = lire(CLE_RETIRES, [])
+  return Array.isArray(c) ? c.map(String) : []
+}
+export function ecrireRetires(liste) {
+  return ecrire(CLE_RETIRES, Array.isArray(liste) ? liste.map(String) : [])
+}
+
 /* Un compte déjà saisi AVANT l'arrivée d'une page n'a pas sa clé : on ne la
  * lui donne pas d'office (un droit ne s'invente pas), on signale juste. */
 export function droitsInconnus(compte) {
   return (compte.pages || []).filter((p) => !PAGE_PAR_CLE[p])
+}
+
+/* ═══════════════════════════════════════════════ L'ABONNEMENT (25/10/2026) ══
+ *
+ *  ⭐ Demande de l'utilisateur : « بداية ونهاية اي يوزر اشتراك » — chaque
+ *  compte porte une DATE DE DÉBUT et une DATE DE FIN d'abonnement.
+ *
+ *  RÈGLES (et pourquoi)
+ *   ① DEUX DATES seulement, au format `AAAA-MM-JJ` — le même que l'attribut
+ *     `type="date"` du navigateur. Rien d'autre n'est stocké.
+ *   ② VIDE = PAS DE LIMITE. Un compte sans dates ne casse jamais : c'est le
+ *     cas de tous les comptes créés avant aujourd'hui, et du compte unique.
+ *   ③ LA FIN EST INCLUSE : `fin = 2026-11-30` → valable jusqu'au 30 à
+ *      minuit (23:59:59.999). Le dernier jour compte, on ne coupe pas la
+ *      veille au soir.
+ *   ④ TOUT EST EN GMT (règle §26 du projet) : `aujourdhuiGMT()` compare des
+ *      jours GMT, jamais l'heure locale de l'appareil.
+ *   ⑤ Le calcul du « combien de jours il reste » est ARRONDI AU SUPÉRIEUR :
+ *      « il reste 1 jour » veut dire « aujourd'hui est le dernier jour ».
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+export const DATE_ISO = /^\d{4}-\d{2}-\d{2}$/
+
+/** Une date valide, ou '' — jamais une date inventée. */
+export function dateISO(valeur) {
+  const s = String(valeur || '').trim()
+  if (!DATE_ISO.test(s)) return ''
+  const d = new Date(s + 'T00:00:00Z')
+  if (Number.isNaN(d.getTime())) return ''
+  return d.toISOString().slice(0, 10) === s ? s : ''
+}
+
+/** Le jour courant en GMT : 'AAAA-MM-JJ'. */
+export function aujourdhuiGMT(maintenant = Date.now()) {
+  return new Date(maintenant).toISOString().slice(0, 10)
+}
+
+/** Les jours qui restent (fin incluse) — `null` s'il n'y a pas de fin. */
+export function joursRestants(fin, maintenant = Date.now()) {
+  const f = dateISO(fin)
+  if (!f) return null
+  const finMs = Date.parse(f + 'T23:59:59.999Z')
+  const reste = Math.ceil((finMs - maintenant) / 86400000)
+  return reste > 0 ? reste : 0
+}
+
+/**
+ * L'état d'un abonnement, en un objet — le même calcul que le serveur.
+ *   illimite  aucune date
+ *   a-venir   la date de début est dans le futur
+ *   en-cours  on est entre les deux
+ *   expire    la date de fin est passée
+ */
+export function etatAbonnement(compte, maintenant = Date.now()) {
+  const debut = dateISO(compte && compte.debut)
+  const fin = dateISO(compte && compte.fin)
+  const jours = joursRestants(fin, maintenant)
+  if (!debut && !fin) return { etat: 'illimite', debut: '', fin: '', jours: null }
+  const jour = aujourdhuiGMT(maintenant)
+  if (debut && jour < debut) return { etat: 'a-venir', debut, fin, jours }
+  if (fin && jour > fin) return { etat: 'expire', debut, fin, jours: 0 }
+  return { etat: 'en-cours', debut, fin, jours }
+}
+
+/** '2026-11-30' → '30/11/2026' (et '—' si vide). */
+export function dateLisible(iso) {
+  const d = dateISO(iso)
+  if (!d) return '—'
+  const [a, m, j] = d.split('-')
+  return `${j}/${m}/${a}`
+}
+
+/** Une phrase courte, pour une pastille : « illimité », « 12 j restants »… */
+export function abonnementCourt(compte, maintenant = Date.now()) {
+  const a = etatAbonnement(compte, maintenant)
+  if (a.etat === 'illimite') return 'illimité'
+  if (a.etat === 'a-venir') return 'débute le ' + dateLisible(a.debut)
+  if (a.etat === 'expire') return 'expiré le ' + dateLisible(a.fin)
+  if (a.jours === null) return 'depuis le ' + dateLisible(a.debut)
+  if (a.jours <= 1) return 'dernier jour'
+  return a.jours + ' j restants'
+}
+
+/** La date d'aujourd'hui + n jours, en 'AAAA-MM-JJ' (pour les boutons rapides). */
+export function dansNJours(n, depuis = Date.now()) {
+  return new Date(depuis + Number(n) * 86400000).toISOString().slice(0, 10)
 }
 
 /* ────────────────────────────────────────────────────────────── LES RÉGLAGES */
@@ -114,7 +298,13 @@ export function ecrireReglages(r) {
   return ecrire(CLE_REGLAGES, { ...REGLAGES_DEFAUT, ...(r || {}) })
 }
 
-/* ────────────────────────────────────────── LA CLÉ DE LA CONSOLE (discrétion) */
+/* ────────────────────────── LA CLÉ DE LA CONSOLE — RETIRÉE (25/10/2026)
+ *
+ *  ⚠ Elle ne garde plus rien : le login de `api/admin.js` a pris sa place
+ *    (§25.7 d'AGENTS.md). Ces trois fonctions restent exportées parce que
+ *    `CLE_ACCES` sert encore à `backend/ADMIN/visites.js` pour reconnaître un
+ *    navigateur qui a déjà ouvert la console — mais la page ne les appelle
+ *    plus, et `/admin?cle=…` n'existe plus.                        */
 
 export function lireCle() {
   try { return localStorage.getItem(CLE_ACCES) || '' } catch { return '' }
@@ -124,6 +314,24 @@ export function ecrireCle(v) {
 }
 export function oublierCle() {
   try { localStorage.removeItem(CLE_ACCES); return true } catch { return false }
+}
+
+/* ────────────────────────────── LA SESSION (ce que le navigateur peut dire)
+ *
+ *  ⚠ Ce n'est PAS la sécurité : le cookie de session est `HttpOnly`, la page
+ *    ne peut donc pas le lire — et c'est voulu. Ce drapeau local ne sert qu'à
+ *    UNE chose : que le propriétaire connecté ne soit pas compté comme un
+ *    visiteur dans son propre journal (voir `backend/ADMIN/visites.js`).      */
+export const CLE_SESSION = 'bahja.admin.session'
+
+export function marquerSession(nom) {
+  try { localStorage.setItem(CLE_SESSION, String(nom || 'oui')); return true } catch { return false }
+}
+export function oublierSession() {
+  try { localStorage.removeItem(CLE_SESSION); return true } catch { return false }
+}
+export function sessionMemorisee() {
+  try { return localStorage.getItem(CLE_SESSION) || '' } catch { return '' }
 }
 
 /* ───────────────────────────────────── LE JETON DU JOURNAL (côté serveur) */
@@ -152,6 +360,42 @@ export async function lireVisites(jeton) {
   if (r.status === 403) throw new Error((j && j.erreur) || 'journal fermé — jeton manquant ou invalide')
   if (!r.ok || !j) throw new Error('journal illisible (HTTP ' + r.status + ')')
   return j
+}
+
+/* ────────────────────────────────────────── LES CONNEXIONS (26/10/2026)
+ *
+ *  Le deuxième journal : une ligne par tentative de connexion, écrite par
+ *  `api/admin.js`. Il répond à « pourquoi 0677889900 n'arrive pas à entrer ? »
+ *  — nom, heure, IP, appareil, et le verdict.
+ *
+ *  ⚠ Le jeton est FACULTATIF : la session de la console suffit (le serveur
+ *    accepte les deux). On ne l'envoie donc que s'il est là.                */
+export async function lireConnexions(jeton) {
+  const q = '?journal=connexions' + (jeton ? '&jeton=' + encodeURIComponent(jeton) : '')
+  const r = await fetch('/api/visiteurs' + q, { headers: { Accept: 'application/json' } })
+  let j = null
+  try { j = await r.json() } catch { /* idem : on le dit plus bas */ }
+  if (r.status === 403) throw new Error((j && j.erreur) || 'journal fermé — connecte-toi à la console')
+  if (!r.ok || !j) throw new Error('journal des connexions illisible (HTTP ' + r.status + ')')
+  return j
+}
+
+/** Les battements reçus des sessions actives (IP, appareil et heure). */
+export async function lireSessionsActives(jeton) {
+  const q = '?journal=actifs' + (jeton ? '&jeton=' + encodeURIComponent(jeton) : '')
+  const r = await fetch('/api/visiteurs' + q, { headers: { Accept: 'application/json' } })
+  let j = null
+  try { j = await r.json() } catch { /* réponse illisible */ }
+  if (r.status === 403) throw new Error((j && j.erreur) || 'journal fermé — connecte-toi à la console')
+  if (!r.ok || !j) throw new Error('journal des sessions illisible (HTTP ' + r.status + ')')
+  return j
+}
+
+/** Le verdict d'une tentative, en clair : « entré », « mot de passe », … */
+export function verdictConnexion(c) {
+  if (!c) return '—'
+  if (c.ok) return 'entré'
+  return c.motif || 'refusé'
 }
 
 /** Envoie une visite de TEST (pour vérifier que la chaîne écrit bien). */

@@ -151,6 +151,8 @@ body::before{
 .p-presse{ --t: var(--n-ambre) }
 .p-lives { --t: var(--n-vert) }
 .p-dna   { --t: var(--n-violet) }
+/* 24/10/2026 — la page « Résultats » : l'or du podium, comme ses médailles. */
+.p-resultats{ --t: var(--n-ambre) }
 
 /* ── LE TEXTE D'UN ARTICLE DE JOURNAL, dans la visionneuse de la page Presse ─
  * On lit l'article sur son papier : fond crème, encre sombre, sérif pour le

@@ -18,6 +18,23 @@
 
 @keyframes dna-spin { to { transform: rotate(360deg); } }
 
+/* ⭐ LA COURSE QUI PART DANS 5 MINUTES (25/10/2026) — la carte, la réunion et
+ *  la ligne battent au même rythme. Assez lent pour ne pas agiter la page,
+ *  assez marqué pour se voir du coin de l'œil. */
+@keyframes dna-imminent {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(251,113,133,.35), 0 0 16px rgba(244,63,94,.22); }
+  50%      { box-shadow: 0 0 0 2px rgba(251,113,133,.85), 0 0 30px rgba(244,63,94,.55); }
+}
+@keyframes dna-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .45; transform: scale(.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes dna-imminent { 0%, 100% { box-shadow: 0 0 0 2px rgba(251,113,133,.85); } }
+  @keyframes dna-dot { 0%, 100% { opacity: 1; } }
+}
+
+
 /* ===== le thème néon de l'écran ===== */
 .neon-theme {
   --neon-green: #39ff14;

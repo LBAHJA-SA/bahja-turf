@@ -53,6 +53,29 @@ const ecrire = (f, o) => {
   fs.writeFileSync(f, JSON.stringify(o, null, 2), 'utf8')
 }
 
+/* ⭐ L'ARCHIVE PAR DATE (25/10/2026) — `maroc.json` ne porte QUE la journée du
+ *   run. Sur `/dna`, dès qu'on choisit une autre date, la réunion marocaine
+ *   disparaissait : le fichier ne correspondait plus. On garde donc les 40
+ *   derniers jours dans `maroc-jours.json`, que `morocco.js` consulte quand le
+ *   fichier du jour ne correspond pas à la date demandée. */
+const GARDER = 40
+const FICHIER_JOURS = 'maroc-jours.json'
+
+function archiver(date, meetings) {
+  const f = path.join(DATA, FICHIER_JOURS)
+  let ancien = { jours: {} }
+  try { ancien = JSON.parse(fs.readFileSync(f, 'utf8')) || { jours: {} } } catch (e) { /* premier run */ }
+  const jours = { ...(ancien.jours || {}) }
+  jours[date] = meetings
+  const gardees = Object.keys(jours).sort().slice(-GARDER)
+  const propre = {}
+  for (const d of gardees) propre[d] = jours[d]
+  const sortie = { maj: new Date().toISOString(), jours: propre }
+  ecrire(f, sortie)
+  ecrire(path.join(PUB, FICHIER_JOURS), sortie)
+  return gardees.length
+}
+
 async function main() {
   reglerSource('https://e-sorec.ma')
   console.log(`[maroc] ${date} — lecture de la SOREC`)
@@ -69,6 +92,7 @@ async function main() {
 
   ecrire(path.join(DATA, 'maroc.json'), jour)
   ecrire(path.join(PUB, 'maroc.json'), jour)
+  const nbJours = archiver(date, jour.meetings)
 
   console.log(
     `[maroc] ${jour.reunions} réunion(s) · ${jour.courses} course(s) · ` +
@@ -77,6 +101,7 @@ async function main() {
   for (const m of jour.meetings) {
     console.log(`[maroc]   MA${m.num} · ${m.hippodrome} (${m.sorec}) · ${m.courses.length} courses`)
   }
+  console.log(`[maroc] archive : ${nbJours} jour(s) dans ${FICHIER_JOURS}`)
 }
 
 main()

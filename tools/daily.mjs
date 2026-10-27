@@ -923,6 +923,32 @@ function publierMaroc() {
   })
 }
 
+/* 24/10/2026 - LES RESULTATS DU MAROC (`tools/maroc-resultats.mjs`).
+ * La page `/resultats` montre l'arrivee ET les prix de la SOREC. e-sorec
+ * n'etant joignable que depuis le Maroc, la page en ligne lit l'archive
+ * `public/data/maroc-resultats.json` : c'est ce pas qui la remplit (les 7
+ * derniers jours a chaque passage). Comme publierMaroc() : un echec ne casse
+ * jamais le cycle, et le fichier de la veille reste en place. */
+function publierResultatsSorec() {
+  return new Promise((res) => {
+    log(' resultats du Maroc (tools/maroc-resultats.mjs)')
+    const p = spawn(process.execPath, [path.join(ICI, 'maroc-resultats.mjs')], {
+      cwd: RACINE, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true,
+    })
+    let sortie = ''
+    p.stdout.on('data', (d) => { sortie += String(d) })
+    p.stderr.on('data', (d) => { sortie += String(d) })
+    p.on('close', (code) => {
+      const dernier = (sortie.trim().split('\n').filter(Boolean).slice(-1)[0] || '').replace(/^\s*\[sorec\]\s*/, '')
+      log(code === 0
+        ? `     ${dernier || 'resultats SOREC : a jour'}`
+        : `     resultats SOREC : ECHEC (code ${code}) ${dernier}`)
+      res()
+    })
+    p.on('error', (e) => { log('     resultats SOREC : impossible : ' + e.message); res() })
+  })
+}
+
 /* ⭐ 19/10/2026 — LES DEUX EMPREINTES (§15.8) se recalculent avec l'archive.
  * `tools/empreinte.mjs` relit `data/quintes.json` et réécrit
  * `data/empreinte.json` + `public/data/empreinte.json` (podium + quinté).
@@ -966,6 +992,7 @@ async function cycle() {
   await mesurerTrio()
   await mesurerEmpreinte()
   await publierMaroc()
+  await publierResultatsSorec()
   await publierDonnees()
   await publier()
   const db = lire(F_SYN, {})

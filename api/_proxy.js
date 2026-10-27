@@ -20,6 +20,8 @@
  *   edge. Mesuré le 17/10/2026 ; le détail est en tête de `api/ptf.js`.
  * ========================================================================== */
 
+import { sessionValide } from './_acces.js'
+
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
 
 /** Les cibles — declaration UNIQUE (vite.config.js en reprend les memes). */
@@ -30,6 +32,11 @@ export const ORIGINES = {
   lv: 'https://www.leveinard.com',           // LE VEINARD — les actualites des courses
   yt: 'https://www.youtube.com',             // la revue de presse EN VIDEO
   gz: 'https://www.lagazettedescourses.fr',  // le papier du jour, en texte (WordPress REST)
+  /* ⭐ LE PMU — les rapports officiels de chaque course (24/10/2026).
+   *   `rapports-definitifs` rend le dividende de tous les paris en centimes
+   *   pour 1 €. L'API n'envoie AUCUN en-tête CORS : la page `/resultats` la
+   *   lit donc par ce relais, comme equidia. */
+  pmu: 'https://online.turfinfo.api.pmu.fr',
   /* ⚠ La SOREC (e-sorec.ma, la réunion du Maroc) n'est PAS ici : son relais
    *   est `api/ma.js`, en runtime EDGE. En Node, e-sorec répondait 502 depuis
    *   Vercel (empreinte TLS refusée) alors que `/api/gz` marchait dans le même
@@ -105,6 +112,10 @@ export function proxy(label) {
   const origine = ORIGINES[label]
   if (!origine) throw new Error(`proxy inconnu : ${label}`)
   return async function handler(req, res) {
+    if (!await sessionValide(req)) {
+      res.status(401).json({ erreur: 'session requise' })
+      return
+    }
     try {
       // Deux formes d'appel, meme resultat :
       //   /api/tf/tqqjour.php     -> le sous-chemin est dans le chemin

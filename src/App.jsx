@@ -6,7 +6,9 @@ import Analyse from '../frontend/ANALYSE/Analyse.jsx'
 import Presse from '../frontend/PRESSE/Presse.jsx'
 import Lives from '../frontend/LIVES/Lives.jsx'
 import DnaCourse from '../frontend/DNA/DnaCourse.jsx'
+import Resultats from '../frontend/RESULTATS/Resultats.jsx'
 import Admin from '../frontend/ADMIN/Admin.jsx'
+import Portail from './Portail.jsx'
 import { pointerVisite } from '../backend/ADMIN/visites.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -24,6 +26,13 @@ import { pointerVisite } from '../backend/ADMIN/visites.js'
  *  ⚠ 18/10/2026 — LA PAGE « PRESSE » ARRIVE.
  *  /presse rassemble les déclarations des entraîneurs et des drivers, l'analyse
  *  de la course, les pronostics des journaux et les nouvelles des chevaux.
+ *
+ *  ⚠ 25/10/2026 — LE SITE EST DERRIÈRE UNE PORTE (`src/Portail.jsx`).
+ *  « الصفحة مازال مفتوحة للجميع » : le login ne protégeait que `/admin`.
+ *  Désormais CHAQUE page est enveloppée dans <Portail cle="…"> : sans session
+ *  valide, c'est le formulaire de connexion qui s'affiche à la même adresse ;
+ *  et un compte ne voit que les clés de `pages[]` (voir PAGES, donnees.js).
+ *  Seule `/admin` garde sa propre porte — elle est déjà derrière un login.
  * ══════════════════════════════════════════════════════════════════════════ */
 export default function App(){
   return (
@@ -31,31 +40,31 @@ export default function App(){
       <NoterPage />
       <Routes>
         {/* ── l'accueil : l'analyse de toutes les courses du jour ── */}
-        <Route path="/" element={<Analyse />} />
+        <Route path="/" element={<Portail cle="analyse"><Analyse /></Portail>} />
         {/* alias : l'ancien nom reste valable (les favoris ne cassent pas) */}
-        <Route path="/analyse" element={<Analyse />} />
-        <Route path="/chevaux" element={<Analyse />} />
+        <Route path="/analyse" element={<Portail cle="analyse"><Analyse /></Portail>} />
+        <Route path="/chevaux" element={<Portail cle="analyse"><Analyse /></Portail>} />
         <Route path="/articles" element={<Navigate to="/" replace />} />
 
-        <Route path="/r/:slug" element={<Article />} />
-        <Route path="/race/:id" element={<Article />} />
+        <Route path="/r/:slug" element={<Portail cle="article"><Article /></Portail>} />
+        <Route path="/race/:id" element={<Portail cle="article"><Article /></Portail>} />
 
-        <Route path="/quinte" element={<QuinteGrille />} />
+        <Route path="/quinte" element={<Portail cle="quinte"><QuinteGrille /></Portail>} />
 
         {/* ⚠ 23/10/2026 — LA PAGE « COPLY » EST SUPPRIMÉE.
          *  /coply et /couple tombent dans l'adresse inconnue → retour à
          *  l'accueil, comme n'importe quelle vieille adresse. */}
 
         {/* la presse du jour : déclarations, analyse, revue de presse, articles */}
-        <Route path="/presse" element={<Presse />} />
+        <Route path="/presse" element={<Portail cle="presse"><Presse /></Portail>} />
 
         {/* ══════════════════════════════════════════════════════════════════════
          *  LES LIVES — les hippodromes régionaux d'Equidia en direct (20/10/2026)
          *  Source : regions-api.equidia.fr (CORS ouvert, flux HLS dans la page).
          *  L'alias /live reste valable.
          * ══════════════════════════════════════════════════════════════════════ */}
-        <Route path="/lives" element={<Lives />} />
-        <Route path="/live" element={<Lives />} />
+        <Route path="/lives" element={<Portail cle="lives"><Lives /></Portail>} />
+        <Route path="/live" element={<Portail cle="lives"><Lives /></Portail>} />
 
         {/* ══════════════════════════════════════════════════════════════════════
          *  DNA COURSE — le moteur marché-ancré (23/10/2026)
@@ -64,8 +73,17 @@ export default function App(){
          *  chevaux au moteur par `/api/dna`. Plus de cadre, plus d'application
          *  à part. L'alias /dna-course reste valable.
          * ══════════════════════════════════════════════════════════════════════ */}
-        <Route path="/dna" element={<DnaCourse />} />
-        <Route path="/dna-course" element={<DnaCourse />} />
+        <Route path="/dna" element={<Portail cle="dna"><DnaCourse /></Portail>} />
+        <Route path="/dna-course" element={<Portail cle="dna"><DnaCourse /></Portail>} />
+
+        {/* ══════════════════════════════════════════════════════════════════════
+         *  RÉSULTATS & RAPPORTS (24/10/2026)
+         *  Les arrivées officielles (casacourses) et ce que paie chaque pari
+         *  (rapports définitifs du PMU). Pas de programme : que du terminé.
+         *  Données : backend/RESULTATS/donnees.js.
+         * ══════════════════════════════════════════════════════════════════════ */}
+        <Route path="/resultats" element={<Portail cle="resultats"><Resultats /></Portail>} />
+        <Route path="/rapports" element={<Portail cle="resultats"><Resultats /></Portail>} />
 
         {/* ══════════════════════════════════════════════════════════════════════
          *  ⚠ LA CONSOLE D'ADMINISTRATION — INVISIBLE POUR LES VISITEURS.

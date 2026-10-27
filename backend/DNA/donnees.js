@@ -41,7 +41,7 @@
 
 import { programmePmu } from '../ANALYSE/programme.js'
 import { partantsDeCourse } from '../ANALYSE/parisTurf.js'
-import { parisDuJour, parisDe } from '../ANALYSE/paris.js'
+import { parisDuJour, parisDe, partantsCasacourses } from '../ANALYSE/paris.js'
 import { programmeSorec, courseSorec, MAROC_OFFSET } from './morocco.js'
 
 /* La course telle qu'on l'a lue, pour que `fetchRace` retrouve son identifiant
@@ -195,10 +195,28 @@ export async function fetchRace(date, rnum, cnum) {
     return { course: { ...course, ...data.course }, participants: data.participants }
   }
 
+  /* ⭐ 25/10/2026 — LA SOURCE DE CHEVAUX NE PUBLIE PAS TOUTES LES COURSES.
+   *
+   *  Elle donne son `id` pour celles qu'elle connaît ; les autres n'avaient
+   *  aucun partant et la page s'arrêtait sur un message. Or ce ne sont pas
+   *  des « réunions étrangères » : le 25/10, Agen la Garenne R9 (7 courses),
+   *  Saint Galmier R11 (9), Chatelaillon R14 (7) et Vire R7 le 26/10 (8) —
+   *  des réunions FRANÇAISES entières — tombaient dans ce trou.
+   *
+   *  casacourses, déjà lu pour les pastilles, les a avec leur cote. On le
+   *  tente AVANT de renoncer, et on le DIT (`sourcePartants`) pour que
+   *  l'écran ne fasse pas passer cette source pour la source habituelle. */
   if (!course.id) {
+    const secours = await partantsCasacourses(date, Number(rnum), Number(cnum))
+    if (secours.length) {
+      return {
+        course: { ...course, runners: secours.length, sourcePartants: 'casacourses' },
+        participants: secours,
+      }
+    }
     throw new Error(
-      "Les partants de cette course ne sont pas publiés par la source de chevaux " +
-      '(réunion étrangère ou course sans fiche). Le programme, lui, est complet.'
+      'Les partants de cette course ne sont publiés par aucune des deux sources ' +
+      '(source de chevaux et casacourses). Le programme, lui, est complet.'
     )
   }
 

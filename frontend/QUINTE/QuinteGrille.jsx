@@ -229,8 +229,13 @@ function dotations(prize, devisee) {
 function ConditionsCourse({ course, date, sk }) {
   if (!course) return null
   const c = course.raw || {}
-  const piste = /psf/i.test(c.track_type || '') ? 'PSF'
-    : c.track_type ? 'Herbe' : NON_PUBLIE
+  /* ⭐ 24/10/2026 — la piste vient d'Equidia (`lib_piste_course`), le terrain
+   *   de turf-france : casacourses ne publie ni l'un ni l'autre. Voir
+   *   `fetchConditions()` dans src/lib/quinte.js. */
+  const piste = c.lib_piste
+    || (/psf/i.test(c.track_type || '') ? 'PSF' : c.track_type ? 'Herbe' : NON_PUBLIE)
+  const categorie = c.class || c.categorie || ''
+  const details = c.comment || c.conditions || ''
 
   const Ligne = ({ k, v, fort }) => (
     <div style={{ display: 'flex', gap: 8, padding: '3px 0', alignItems: 'baseline' }}>
@@ -272,9 +277,9 @@ function ConditionsCourse({ course, date, sk }) {
           {c.code ? '  ·  ' + c.code : ''}
         </div>
         <div style={{ fontSize: 14, fontWeight: 800, marginTop: 2 }}>{c.name || course.hippodrome}</div>
-        {c.class ? (
+        {categorie ? (
           <div style={{ fontSize: 11, color: '#fb7185', fontWeight: 700 }}>
-            {c.class}{c.class.toUpperCase().includes('GROUPE') ? ' — COURSE DE GROUPE' : ''}
+            {categorie}{String(categorie).toUpperCase().includes('GROUPE') ? ' — COURSE DE GROUPE' : ''}
           </div>
         ) : null}
         {c.allowance ? (
@@ -286,25 +291,27 @@ function ConditionsCourse({ course, date, sk }) {
         <div style={{ flex: '1 1 240px' }}>
           <Ligne k="Distance" v={course.distance ? `${course.distance} M` : NON_PUBLIE} fort />
           <Ligne k="Piste" v={piste} />
-          <Ligne k="Corde" v={FR(c.track_type)} />
-          <Ligne k="Terrain" v={FR(c.track_condition)} />
+          <Ligne k="Corde" v={c.corde ? String(c.corde) : NON_PUBLIE} />
+          <Ligne k="Terrain" v={c.terrain || c.track_condition || NON_PUBLIE} />
           <Ligne k="Discipline" v={FR(c.type)} fort />
         </div>
         <div style={{ flex: '1 1 240px' }}>
           <Ligne k="Partants" v={course.nbPartants ? String(course.nbPartants) : NON_PUBLIE} fort />
-          <Ligne k="Allocations" v={dotations(c.prize, course.devisee)} />
-          <Ligne k="Tirelire" v={NON_PUBLIE} />
-          <Ligne k="Météo" v={c.weather_temp != null ? `${c.weather_temp}°C` : NON_PUBLIE} />
+          <Ligne k="Allocations" v={c.allocation || dotations(c.prize, course.devisee)} />
+          <Ligne k="Tirelire"
+            v={c.tirelire === true ? 'Oui' : c.tirelire === false ? 'Non' : NON_PUBLIE} />
+          <Ligne k="Météo"
+            v={c.meteo || (c.weather_temp != null ? `${c.weather_temp}°C` : NON_PUBLIE)} />
         </div>
       </div>
 
-      {c.comment ? (
+      {details ? (
         <details style={{ marginTop: 8 }}>
           <summary style={{ fontSize: 11, color: '#1d4ed8', cursor: 'pointer' }}>
-            Les conditions détaillées ({c.comment.length} caractères)
+            Les conditions détaillées ({details.length} caractères)
           </summary>
           <div style={{ fontSize: 11, color: '#a4b8d6', lineHeight: 1.6, marginTop: 6, whiteSpace: 'pre-wrap' }}>
-            {c.comment}
+            {details}
           </div>
         </details>
       ) : null}
