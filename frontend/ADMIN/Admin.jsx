@@ -402,6 +402,7 @@ export default function Admin() {
       if (distant) setComptes((l) => l.map((x) => x.id === c.id ? {
         ...x, nom: distant.nom, motDePasse: '', pages: distant.pages || [],
         actif: distant.actif !== false, debut: distant.debut || '', fin: distant.fin || '',
+        etudesFrance: distant.etudesFrance !== false,
       } : x))
     }
     setEditionId(null)
@@ -437,6 +438,7 @@ export default function Admin() {
       const propre = (s) => ({
         nom: s.nom, sel: s.sel, iter: Number(s.iter) || 210000, hash: s.hash,
         pages: Array.isArray(s.pages) ? s.pages : [], actif: s.actif !== false,
+        etudesFrance: s.etudesFrance !== false,
         debut: s.debut || '', fin: s.fin || '',
       })
       const suite = serveur.map(propre)
@@ -444,7 +446,7 @@ export default function Admin() {
         ...(index >= 0 ? suite[index] : hache),
         ...(hache || {}), nom,
         pages: Array.isArray(c.pages) ? c.pages : [],
-        actif: c.actif !== false, debut: c.debut || '', fin: c.fin || '',
+        actif: c.actif !== false, etudesFrance: c.etudesFrance !== false, debut: c.debut || '', fin: c.fin || '',
       }
       if (index >= 0) suite[index] = nouveau
       else suite.push(nouveau)
@@ -485,6 +487,7 @@ export default function Admin() {
           .map((s) => ({
             nom: s.nom, sel: s.sel, iter: Number(s.iter) || 210000, hash: s.hash,
             pages: Array.isArray(s.pages) ? s.pages : [], actif: s.actif !== false,
+            etudesFrance: s.etudesFrance !== false,
             debut: s.debut || '', fin: s.fin || '',
           }))
         await sauverValeurServeur(JSON.stringify(suite))
@@ -647,6 +650,7 @@ export default function Admin() {
       hash: s.hash,
       pages: Array.isArray(s.pages) ? s.pages : [],
       actif: s.actif !== false,
+      etudesFrance: s.etudesFrance !== false,
       debut: s.debut || '',
       fin: s.fin || '',
     })
@@ -722,19 +726,21 @@ export default function Admin() {
         if (String(s.nom || '').toLowerCase() !== ancienNom.toLowerCase()) return {
           nom: s.nom, sel: s.sel, iter: Number(s.iter) || 210000, hash: s.hash,
           pages: Array.isArray(s.pages) ? s.pages : [], actif: s.actif !== false,
+          etudesFrance: s.etudesFrance !== false,
           debut: s.debut || '', fin: s.fin || '',
         }
         return {
           nom, sel: hash ? hash.sel : s.sel, iter: hash ? hash.iter : Number(s.iter) || 210000,
           hash: hash ? hash.hash : s.hash,
           pages: Array.isArray(editionServeur.pages) ? editionServeur.pages : [],
-          actif: editionServeur.actif !== false, debut: editionServeur.debut || '', fin: editionServeur.fin || '',
+          actif: editionServeur.actif !== false, etudesFrance: editionServeur.etudesFrance !== false,
+          debut: editionServeur.debut || '', fin: editionServeur.fin || '',
         }
       })
       await sauverValeurServeur(JSON.stringify(suite))
       setDuServeur(suite)
       setComptes((l) => l.map((x) => String(x.serveurNom || x.nom || '').toLowerCase() === ancienNom.toLowerCase()
-        ? { ...x, nom, serveurNom: nom, motDePasse: '', pages: editionServeur.pages, actif: editionServeur.actif, debut: editionServeur.debut, fin: editionServeur.fin }
+        ? { ...x, nom, serveurNom: nom, motDePasse: '', pages: editionServeur.pages, actif: editionServeur.actif, etudesFrance: editionServeur.etudesFrance, debut: editionServeur.debut, fin: editionServeur.fin }
         : x))
       setEditionServeur(null)
     } catch (e) {
@@ -752,6 +758,7 @@ export default function Admin() {
       const suite = serveur.filter((s) => String(s.nom || '').trim().toLowerCase() !== nom).map((s) => ({
         nom: s.nom, sel: s.sel, iter: Number(s.iter) || 210000, hash: s.hash,
         pages: Array.isArray(s.pages) ? s.pages : [], actif: s.actif !== false,
+        etudesFrance: s.etudesFrance !== false,
         debut: s.debut || '', fin: s.fin || '',
       }))
       if (!suite.length) throw new Error('لا يمكن حذف آخر حساب؛ يجب إبقاء حساب واحد على الأقل.')
@@ -816,6 +823,7 @@ export default function Admin() {
       motDePasse: '',
       pages: c.pages || [],
       actif: c.actif !== false,
+      etudesFrance: c.etudesFrance !== false,
       debut: c.debut || '',
       fin: c.fin || '',
     }))
@@ -1003,7 +1011,7 @@ export default function Admin() {
                           <Bouton petit icone="bi-x-lg" onClick={() => { setEditionServeur(null); setErreurServeur('') }} desactive={envEnCours}>إلغاء</Bouton>
                         </> : <Bouton petit icone="bi-pencil" onClick={() => {
                           setErreurServeur('')
-                          setEditionServeur({ ancienNom: c.nom, nom: c.nom, motDePasse: '', pages: c.pages || [], actif: c.actif !== false, debut: c.debut || '', fin: c.fin || '' })
+                          setEditionServeur({ ancienNom: c.nom, nom: c.nom, motDePasse: '', pages: c.pages || [], actif: c.actif !== false, etudesFrance: c.etudesFrance !== false, debut: c.debut || '', fin: c.fin || '' })
                         }} desactive={envEnCours}>تعديل</Bouton>}
                         <Bouton petit icone="bi-trash" teinte={T.mal} onClick={() => supprimerCompteServeur(c)} desactive={envEnCours}>حذف</Bouton>
                       </span>
@@ -1025,6 +1033,11 @@ export default function Admin() {
                         إلى <input type="date" value={editionServeur.fin} onChange={(e) => modifierCompteServeur('fin', e.target.value)} style={{ padding: 5, borderRadius: 7 }} />
                         <Bouton petit onClick={() => { modifierCompteServeur('debut', ''); modifierCompteServeur('fin', '') }}>بلا حد</Bouton>
                       </div>
+                      <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 9, fontSize: 12.5, color: T.doux, cursor: 'pointer' }}>
+                        <input type="checkbox" checked={editionServeur.etudesFrance !== false}
+                          onChange={(e) => modifierCompteServeur('etudesFrance', e.target.checked)} />
+                        Afficher « Études, Analyses, Synthèse et Pronostics » (France)
+                      </label>
                     </div>}
                     <div style={{ marginTop: 6, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                       {(valeurEdition.pages || []).length === 0
@@ -1260,6 +1273,10 @@ export default function Admin() {
                           (aujourd’hui {dateLisible(aujourdhuiGMT())} GMT · la fin est <b>incluse</b>)
                         </span>
                       </div>
+                      <label style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginTop: 9, fontSize: 12, color: T.doux, cursor: enEdition ? 'pointer' : 'default' }}>
+                        <input type="checkbox" checked={c.etudesFrance !== false} onChange={(e) => majCompte(c.id, 'etudesFrance', e.target.checked)} />
+                        Afficher « Études, Analyses, Synthèse et Pronostics » (France)
+                      </label>
                       </fieldset>
                     </div>
                   )

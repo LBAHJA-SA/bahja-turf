@@ -25,6 +25,7 @@ let etat = {
   configure: null,      // false = le serveur n'a pas ADMIN_COMPTES
   nom: '',
   pages: [],
+  etudesFrance: true,
   abonnement: null,     // { etat: 'illimite' | 'en-cours' | 'a-venir' | 'expire', debut, fin, jours }
   erreur: '',
 }
@@ -58,11 +59,11 @@ export async function rafraichirAcces(force = false) {
     if (r && r.connecte) {
       poser({
         pret: true, connecte: true, configure: r.configure !== false,
-        nom: r.nom || '', pages: r.pages || [], abonnement: r.abonnement || null, erreur: '',
+        nom: r.nom || '', pages: r.pages || [], etudesFrance: r.etudesFrance !== false, abonnement: r.abonnement || null, erreur: '',
       })
     } else {
       poser({
-        pret: true, connecte: false, nom: '', pages: [],
+        pret: true, connecte: false, nom: '', pages: [], etudesFrance: true,
         configure: r ? r.configure !== false : null,
         abonnement: (r && r.abonnement) || null,
         erreur: (r && r.erreur) || '',
@@ -79,7 +80,7 @@ export async function connecter(nom, motDePasse) {
   if (r && r.ok) {
     poser({
       pret: true, connecte: true, configure: true,
-      nom: r.nom || '', pages: r.pages || [], abonnement: r.abonnement || null, erreur: '',
+      nom: r.nom || '', pages: r.pages || [], etudesFrance: r.etudesFrance !== false, abonnement: r.abonnement || null, erreur: '',
     })
     return { ok: true }
   }
@@ -94,7 +95,7 @@ export async function connecter(nom, motDePasse) {
 /** Se déconnecter — le serveur efface le cookie, puis on vide la mémoire. */
 export async function deconnecter() {
   await deconnexionAdmin()
-  poser({ pret: true, connecte: false, nom: '', pages: [], abonnement: null, erreur: '' })
+  poser({ pret: true, connecte: false, nom: '', pages: [], etudesFrance: true, abonnement: null, erreur: '' })
 }
 
 /**

@@ -114,6 +114,7 @@ export function sessionAdmin(req) {
   return {
     nom: c.nom,
     pages: Array.isArray(c.pages) ? c.pages : (Array.isArray(j.p) ? j.p : []),
+    etudesFrance: c.etudesFrance !== false,
   }
 }
 

@@ -105,6 +105,7 @@ function comptesValides(valeur) {
       nom, sel: c.sel, iter, hash: c.hash,
       pages: [...new Set(pages)],
       actif: c.actif !== false,
+      etudesFrance: c.etudesFrance !== false,
       debut, fin,
     }
   })
@@ -311,7 +312,7 @@ export default async function handler(req, res) {
     }
     await noterSessionActive(req, compte.nom)
     res.status(200).json({
-      connecte: true, nom: j.n, pages: j.p || [], configure: arme, abonnement: ab,
+      connecte: true, nom: j.n, pages: j.p || [], etudesFrance: compte.etudesFrance !== false, configure: arme, abonnement: ab,
       connexion: contexte(req),
     })
     return
@@ -403,7 +404,7 @@ export default async function handler(req, res) {
     await noterSessionActive(req, bon.nom)
     await noterConnexion(req, { nom: bon.nom, ok: true, motif: '' })
     res.status(200).json({
-      ok: true, nom: bon.nom, pages: bon.pages || [], abonnement: ab,
+      ok: true, nom: bon.nom, pages: bon.pages || [], etudesFrance: bon.etudesFrance !== false, abonnement: ab,
       connexion: contexte(req),
     })
     return
@@ -456,6 +457,7 @@ export default async function handler(req, res) {
         hash: c.hash,
         pages: Array.isArray(c.pages) ? c.pages : [],
         actif: c.actif !== false,
+        etudesFrance: c.etudesFrance !== false,
         /* ⭐ l'abonnement : les dates + l'état calculé par le serveur */
         debut: dateISO(c.debut),
         fin: dateISO(c.fin),

@@ -56,7 +56,11 @@ export async function sessionValide(req) {
         if (state.bloque || !device || state.appareil !== device) return null
       }
     }
-    return { nom: String(compte.nom), pages: Array.isArray(compte.pages) ? compte.pages : [] }
+    return {
+      nom: String(compte.nom),
+      pages: Array.isArray(compte.pages) ? compte.pages : [],
+      etudesFrance: compte.etudesFrance !== false,
+    }
   } catch { return null }
 }
 

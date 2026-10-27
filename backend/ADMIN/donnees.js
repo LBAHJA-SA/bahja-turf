@@ -140,6 +140,7 @@ export async function envComptesListe(liste) {
       hash: h.hash,
       pages: Array.isArray(c.pages) ? c.pages : [],
       actif: c.actif !== false,
+      etudesFrance: c.etudesFrance !== false,
       /* ⭐ L'ABONNEMENT : deux dates, jamais devinées — vides = pas de limite. */
       debut: dateISO(c.debut),
       fin: dateISO(c.fin),
@@ -162,6 +163,7 @@ export function nouveauCompte(nom = '') {
     motDePasse: motDePasse(),
     pages: ['analyse', 'quinte'],
     actif: true,
+    etudesFrance: true,
     debut: '',      /* ⭐ abonnement : vide = pas de limite */
     fin: '',
     creeLe: new Date().toISOString(),

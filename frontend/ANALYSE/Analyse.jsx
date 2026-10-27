@@ -10,6 +10,7 @@ import {
 import { chargerEtudesTf } from '../../backend/ANALYSE/turfFrance.js'
 import { programmePmu, paysLisible } from '../../backend/ANALYSE/programme.js'
 import { parisDuJour, parisDe } from '../../backend/ANALYSE/paris.js'
+import { useAcces } from '../../src/lib/acces.js'
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * frontend/ANALYSE/Analyse.jsx — TOUTES LES COURSES, TOUS LES CHEVAUX.
@@ -116,6 +117,7 @@ function joursDepuis(carriere, quand) {
 /* ═══════════════════════════════════ LA PAGE ═══════════════════════════════ */
 
 export default function Analyse() {
+  const acces = useAcces()
   const [date, setDate] = useState(jourParis())
   /* ⭐ L'HEURE D'UNE COURSE, EN GMT (18/10/2026) : le programme publie l'heure
      de PARIS (« 15:15 ») → on affiche « 13:15 GMT ». Un instant (date ISO) est
@@ -462,7 +464,7 @@ export default function Analyse() {
                 )}
 
                 {/* ④ SOUS LA COURSE : Etudes · Analyses · Synthèse · Pronostics */}
-                <BlocEtudes date={date} course={course} onOuvrir={setOutil} />
+                {acces.etudesFrance !== false && <BlocEtudes date={date} course={course} onOuvrir={setOutil} />}
               </div>
             )}
           </div>
