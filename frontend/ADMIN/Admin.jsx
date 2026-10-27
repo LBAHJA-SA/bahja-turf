@@ -1028,16 +1028,16 @@ export default function Admin() {
                           return <button key={p.cle} onClick={() => modifierCompteServeur('pages', oui ? editionServeur.pages.filter((x) => x !== p.cle) : [...editionServeur.pages, p.cle])} style={{ cursor: 'pointer', padding: '3px 8px', borderRadius: 999, color: oui ? '#0b1220' : T.doux, background: oui ? p.teinte : 'rgba(148,163,184,.07)', border: '1px solid ' + T.ligne, fontSize: 11.5 }}>{p.nom}</button>
                         })}
                       </div>
-                      <div style={{ display: 'flex', gap: 7, alignItems: 'center', flexWrap: 'wrap', fontSize: 12, color: T.muet }}>
-                        الاشتراك <input type="date" value={editionServeur.debut} onChange={(e) => modifierCompteServeur('debut', e.target.value)} style={{ padding: 5, borderRadius: 7 }} />
-                        إلى <input type="date" value={editionServeur.fin} onChange={(e) => modifierCompteServeur('fin', e.target.value)} style={{ padding: 5, borderRadius: 7 }} />
-                        <Bouton petit onClick={() => { modifierCompteServeur('debut', ''); modifierCompteServeur('fin', '') }}>بلا حد</Bouton>
-                      </div>
                       <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 9, fontSize: 12.5, color: T.doux, cursor: 'pointer' }}>
                         <input type="checkbox" checked={editionServeur.etudesFrance !== false}
                           onChange={(e) => modifierCompteServeur('etudesFrance', e.target.checked)} />
                         Afficher « Études, Analyses, Synthèse et Pronostics » (France)
                       </label>
+                      <div style={{ display: 'flex', gap: 7, alignItems: 'center', flexWrap: 'wrap', fontSize: 12, color: T.muet }}>
+                        الاشتراك <input type="date" value={editionServeur.debut} onChange={(e) => modifierCompteServeur('debut', e.target.value)} style={{ padding: 5, borderRadius: 7 }} />
+                        إلى <input type="date" value={editionServeur.fin} onChange={(e) => modifierCompteServeur('fin', e.target.value)} style={{ padding: 5, borderRadius: 7 }} />
+                        <Bouton petit onClick={() => { modifierCompteServeur('debut', ''); modifierCompteServeur('fin', '') }}>بلا حد</Bouton>
+                      </div>
                     </div>}
                     <div style={{ marginTop: 6, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                       {(valeurEdition.pages || []).length === 0
@@ -1251,6 +1251,11 @@ export default function Admin() {
                         )}
                       </div>
 
+                      <label style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginTop: 9, fontSize: 12, color: T.doux, cursor: enEdition ? 'pointer' : 'default' }}>
+                        <input type="checkbox" checked={c.etudesFrance !== false} onChange={(e) => majCompte(c.id, 'etudesFrance', e.target.checked)} />
+                        Afficher « Études, Analyses, Synthèse et Pronostics » (France)
+                      </label>
+
                       {/* ligne 3 : ⭐ L'ABONNEMENT — début · fin (vide = sans limite) */}
                       <div style={{ display: 'flex', gap: 7, alignItems: 'center', flexWrap: 'wrap', marginTop: 9 }}>
                         <span style={{ fontSize: 11.5, color: T.muet, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.05em' }}>
@@ -1273,10 +1278,6 @@ export default function Admin() {
                           (aujourd’hui {dateLisible(aujourdhuiGMT())} GMT · la fin est <b>incluse</b>)
                         </span>
                       </div>
-                      <label style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginTop: 9, fontSize: 12, color: T.doux, cursor: enEdition ? 'pointer' : 'default' }}>
-                        <input type="checkbox" checked={c.etudesFrance !== false} onChange={(e) => majCompte(c.id, 'etudesFrance', e.target.checked)} />
-                        Afficher « Études, Analyses, Synthèse et Pronostics » (France)
-                      </label>
                       </fieldset>
                     </div>
                   )
