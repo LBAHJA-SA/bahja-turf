@@ -1,38 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208 60" width="208" height="60" role="img" aria-label="Bahja TURF">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e3a8a"/>
+    <linearGradient id="bt-plaque" x1="0" y1="0" x2="0.65" y2="1">
+      <stop offset="0%" stop-color="#0c1626"/>
+      <stop offset="42%" stop-color="#15263f"/>
+      <stop offset="100%" stop-color="#060d18"/>
     </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f59e0b"/>
-      <stop offset="100%" stop-color="#c5a146"/>
+    <linearGradient id="bt-lueur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="bt-or" x1="0" y1="0" x2="0.55" y2="1">
+      <stop offset="0%" stop-color="#fff3c4"/>
+      <stop offset="42%" stop-color="#f0b429"/>
+      <stop offset="100%" stop-color="#a9740d"/>
+    </linearGradient>
+    <linearGradient id="bt-vert" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#0f9d70"/>
+    </linearGradient>
+    <linearGradient id="bt-tete" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#bfcfdf"/>
+    </linearGradient>
+    <radialGradient id="bt-halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#f0b429" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#f0b429" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <!-- Background -->
-  <rect width="200" height="60" rx="12" fill="url(#g)"/>
-  <!-- Koutoubia silhouette -->
-  <g fill="white" opacity="0.12">
-    <rect x="22" y="18" width="10" height="22" rx="1"/>
-    <rect x="24" y="12" width="6" height="8" rx="1"/>
-    <rect x="26" y="8" width="2" height="6"/>
-    <circle cx="27" cy="7" r="1.5"/>
-    <!-- arches -->
-    <rect x="23" y="32" width="2" height="4" rx="1"/><rect x="27" y="32" width="2" height="4" rx="1"/>
+
+  <rect width="208" height="60" rx="14" fill="url(#bt-plaque)"/>
+  <rect width="208" height="30" rx="14" fill="url(#bt-lueur)"/>
+  <rect x="0.6" y="0.6" width="206.8" height="58.8" rx="13.4" fill="none"
+        stroke="url(#bt-or)" stroke-opacity="0.34"/>
+  <circle cx="26" cy="30" r="21" fill="url(#bt-halo)"/>
+
+  <!-- LE CHEVAL — tête de profil, crinière d'or le long de l'encolure -->
+  <g transform="translate(4.2,9) scale(0.86)">
+    <path d="M41.5 25 C41 22.4 39.5 20.6 37.2 19.4 C34 17.8 31.4 15.6 29.4 13 C28.2 11.4 27.6 9.9 27.2 8.4
+             L24.4 2.2 C24 1.2 22.7 1.2 22.4 2.3 L21.4 6.5 C19.9 6.9 18.7 7.6 17.7 8.7
+             C13.9 11.6 11.2 15.6 9.9 20.2 C8.7 24.4 8.3 29.6 8.7 34.6 L9.3 45.9 L18.8 45.9
+             L20.8 38.2 C21.9 34.4 23.9 31.4 27 29.6 C29.9 27.9 33.2 26.9 36.4 26.6
+             C38.5 26.4 40.4 26.1 41.5 25 Z"
+          fill="url(#bt-tete)"/>
+    <path d="M21.4 6.5 C17.7 8.7 14.4 11.6 12.2 15.6 C9.9 19.8 8.6 24.6 8.4 29.8
+             C8.2 35.2 8.5 40.6 9.3 45.9 L14.6 45.9 C13.9 40 13.7 34.2 14.2 28.6
+             C14.7 23 16.4 17.4 19.2 12.4 L21.6 8.6 Z"
+          fill="url(#bt-or)"/>
+    <circle cx="31" cy="21" r="1.5" fill="#08101d"/>
   </g>
-  <!-- Horse racing silhouette -->
-  <g transform="translate(38,10)">
-    <path d="M12 18 Q16 12 22 14 L28 10 Q32 8 34 12 L30 16 Q26 18 22 18 L18 22 L14 22 Z" fill="white" opacity="0.95"/>
-    <circle cx="32" cy="9" r="2.5" fill="white"/>
-    <path d="M22 14 L26 6 L28 6 L24 14 Z" fill="white" opacity="0.9"/>
-    <!-- jockey -->
-    <circle cx="26" cy="7" r="2" fill="#22c55e"/>
-    <path d="M26 9 L22 14 L26 12 Z" fill="#22c55e"/>
-  </g>
-  <!-- Text -->
-  <text x="78" y="24" font-family="Inter, Arial, sans-serif" font-weight="900" font-size="16" fill="white" letter-spacing="-0.5">Bahja</text>
-  <text x="78" y="38" font-family="Inter, Arial, sans-serif" font-weight="900" font-size="14" fill="#22c55e" letter-spacing="1">TURF</text>
-  <text x="78" y="48" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="6.5" fill="rgba(255,255,255,0.6)" letter-spacing="0.8">FRANCE • MAROC • MARRAKECH</text>
-  <!-- Gold underline -->
-  <rect x="78" y="41" width="42" height="1.5" rx="1" fill="url(#gold)" opacity="0.8"/>
+
+  <!-- LE NOM -->
+  <rect x="47" y="15" width="1" height="30" rx="0.5" fill="url(#bt-or)" opacity="0.42"/>
+
+  <text x="55" y="27" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="17.5"
+        fill="#ffffff" letter-spacing="1.1">BAHJA</text>
+  <text x="55" y="43" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="13"
+        fill="url(#bt-vert)" letter-spacing="4.6">TURF</text>
+
+  <rect x="55" y="47.4" width="139" height="1" rx="0.5" fill="url(#bt-or)" opacity="0.5"/>
+  <text x="55" y="55.7" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="5.9"
+        fill="#a3b4c9" letter-spacing="1.02">FRANCE &#183; MAROC &#183; MARRAKECH</text>
 </svg>
