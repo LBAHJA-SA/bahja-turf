@@ -6339,3 +6339,121 @@ décision de l'utilisateur, pas du moteur.
 node tools\cote-courte.mjs
 ```
 
+---
+
+### 11.42 🧠 « DU LOGIQUE ET DE L'ILLOGIQUE » — la carrière seule, mesurée (28/10/2026)
+
+> Instruction de l'utilisateur, après le refus des règles de marché :
+> **« هذه القواعد فاشلة لأنها تعتمد كوط وسوق، كله تضليل، لأن الكوط ليس ثابت.
+> يجب العمل بشيء من المنطق وشيء من اللامنطق، وليس هذه القواعد المتحجرة
+> ونقول مستحيل. »**
+
+Deux refus à respecter : **la cote** (elle bouge) et **le « c'est impossible »**.
+On mesure donc un choix qui ne lit **ni la cote ni la presse** — uniquement la
+carrière du cheval — et qui garde une part d'illogisme.
+
+#### ① Le problème de la mesure précédente : on avait coupé 3 critères sur 6
+
+§11.24 avait conclu « la carrière ne choisit pas mieux que le carnet ». Mais
+`tools/carriere-archive.mjs` ne gardait que `date · track · dist · place · type`
+des 5 dernières courses → le score physique ne pouvait PAS être calculé.
+
+L'API casacourses donne beaucoup plus **dans le même appel** :
+
+| niveau | champs |
+|---|---|
+| course | `track_condition` (**terrain du jour**) · `class` · `prize` · `distance` · `type` |
+| partant | `number` · `weight` (**poids porté**) · `horse_age` · `forms[]` |
+| forme | `date` · `track` · `distance` · `place` · `racetype` · `weight` · **`raceprizemoney` (allocation = le niveau couru)** · `winners` |
+
+`tools/carriere-v2.mjs` recollecte les 96 Quintés avec ces champs →
+`data/corpus/carriere-v2.json` (96/96 collectés, 0 erreur ; allocation sur
+96,1 % des cases, piste sur 57 %).
+
+**Ce qu'on peut calculer pour de vrai :**
+
+| critère | poids | état |
+|---|---|---|
+| FORME UTILE (±400 m, 1/(1+0,55·i)) | 22 % | ✅ |
+| DISTANCE pratiquée | 22 % | ✅ |
+| PISTE (hippodrome déjà couru 60 % + résultat 40 %) | 18 % | ✅ |
+| NIVEAU (allocation du jour / ses 2 dernières ; > 1,5 = montée) | 13 % | ✅ |
+| TERRAIN | 13 % | ❌ pas dans les courses passées |
+| CORDE | 12 % | ❌ `number` = numéro de selle |
+
+→ le score est normalisé sur les **75 % réellement disponibles**.
+
+#### ② Trois définitions différentes de la « logique » — et le MÊME résultat
+
+`tools/choix-logique.mjs` (forme+distance, puis +piste) et
+`tools/choix-physique-complet.mjs` (les 4 critères) : **95 Quintés**, blocs
+pleins, une seule chose change à la fois.
+
+| règle | G1 | G2 | G3 | G4 | G5 | **partout** |
+|---|---|---|---|---|---|---|
+| LOGIQUE forme+distance | **13,7 %** | 7,4 % | 10,5 % | 10,5 % | 11,6 % | 7,4 % |
+| LOGIQUE forme+distance+piste | **13,7 %** | 7,4 % | 8,4 % | 9,5 % | 10,5 % | 4,2 % |
+| PHYSIQUE 4 critères (75 %) | **13,7 %** | 7,4 % | 8,4 % | 9,5 % | 10,5 % | 3,2 % |
+| ILLOGIQUE (les pires) | 4,2 % | 7,4 % | 10,5 % | 7,4 % | 10,5 % | 5,3 % |
+| MIXTE ((k−1) logiques + le pire) | 6,3 % | 10,5 % | 8,4 % | 9,5 % | 10,5 % | 3,2 % |
+| **carnet / marché (production)** | **11,6** | **11,6** | **11,6** | **11,6** | **11,6** | **11,6** |
+
+Référence : podium 37,9 % · quinté 11,6 % · ≥4 41,1 % · moitiés 12,8 / 10,4.
+
+**Trois scores indépendants donnent exactement la même chose : `13,7 %` en G1,
+et seulement là.** Ce n'est pas de la chance d'échantillon — trois formules
+différentes convergent — mais ce n'est pas non plus une règle, parce que :
+
+- le gain en G1 est **+2,1 points de quinté** … contre **−7,4 points de podium**
+  (30,5 % au lieu de 37,9 %) ;
+- le bootstrap apparié préfère G1=physique dans **69,5 %** (4 critères) et
+  **77,8 %** (forme+distance) des 10 000 tirages — **sous le seuil de 80 %** ;
+- les quarts : **2/4 gagnés, 0 perdu** (jamais pire, mais pas 3/4).
+
+**Et surtout : le physique est PIRE que le carnet dans les quatre autres blocs.**
+Le scénario « physique partout » tombe à **3,2 %** de quinté — c'est-à-dire que
+le haut du carnet n'est pas un ordre arbitraire : c'est le seul ordre qui suit
+l'arrivée dans G2, G3, G4 et G5.
+
+#### ③ L'illogisme, mesuré pour ce qu'il vaut
+
+« Prendre le cheval que la logique rejette le plus fort » est le prix exact de
+l'illogisme :
+
+| règle | quinté | podium | bootstrap |
+|---|---|---|---|
+| les k pires notes, **partout** | 5,3 % | 16,8 % | 6 % |
+| (k−1) meilleures + la pire, partout | 3,2 % | 22,1 % | 0,7 % |
+| la production | 11,6 % | 37,9 % | — |
+
+Un cheval sur 8 qui serait choisi **contre** la logique coûte 8,4 points de
+quinté. L'illogisme ne s'ajoute donc pas : il se paie. Ce que la mesure ne dit
+pas — et c'est le vrai manque — c'est qu'**aucun des deux n'a l'information
+décisive** : le terrain et la corde, 25 % de la méthode, absents de l'API.
+
+#### ④ Le verdict, sans « impossible »
+
+- **Rien ne passe le filtre complet** (2/2 moitiés + bootstrap ≥ 80 % + 3/4
+  quarts). La règle de production reste `G1-G3 carnet · G4-G5 marché`.
+- Le seul signal qui revient dans les trois mesures est **G1 = les 3 meilleurs
+  physiques** : +2,1 points de quinté, −7,4 de podium, jamais pire dans un quart.
+  **C'est une décision de l'utilisateur, pas du moteur** : la métrique dense
+  (podium, §11.25) dit que l'échange est perdant.
+- La borne haute reste **76,8 %** de quinté (choix parfait, arrivée connue). Le
+  moteur en trouve 11,6 %. L'écart **n'est pas dans les quotas** — il est dans une
+  information que ni la cote, ni la presse, ni la carrière automatique ne portent :
+  le terrain du jour et la corde de départ.
+
+| Fichier | Rôle |
+|---|---|
+| `tools/carriere-v2.mjs` | recollecte la carrière complète (terrain du jour, allocation, poids) → `data/corpus/carriere-v2.json` (hors git) |
+| `tools/choix-logique.mjs` | LOGIQUE / ILLOGIQUE / MIXTE en forme+distance, puis +piste → `data/choix-logique.json` |
+| `tools/choix-physique-complet.mjs` | les 4 critères sur 6 → `data/choix-physique-complet.json` |
+
+```
+node tools\carriere-v2.mjs
+node tools\choix-logique.mjs
+node tools\choix-physique-complet.mjs
+```
+
+

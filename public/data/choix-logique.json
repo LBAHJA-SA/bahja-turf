@@ -1,0 +1,2514 @@
+{
+ "outil": "tools/choix-logique.mjs",
+ "le": "2026-10-28",
+ "source": "data/quintes.json + data/corpus/carriere96.json — presse réelle, blocs pleins",
+ "n": 95,
+ "ecartees": 1,
+ "sansCarriere": 0,
+ "quotas": {
+  "G1": 3,
+  "G2": 2,
+  "G3": 1,
+  "G4": 1,
+  "G5": 1
+ },
+ "prod": {
+  "G1": "carnet",
+  "G2": "carnet",
+  "G3": "carnet",
+  "G4": "marche",
+  "G5": "marche"
+ },
+ "definition": "LOGIQUE 1 = forme utile (±400 m, poids 1/(1+0,55·i)) + distance pratiquée, 50/50. LOGIQUE 2 = forme + distance + piste (a-t-il déjà couru cet hippodrome, et comment), repondérés aux poids de la méthode (22/22/18 → 100 %). ILLOGIQUE = le cheval que la note rejette le plus fort dans le bloc. MIXTE = (k−1) meilleures notes + ce cheval-là. Aucune règle ne lit la cote ni la presse, sauf les deux lignes de comparaison carnet/marché.",
+ "reference": {
+  "pod": 37.9,
+  "qui": 11.6,
+  "q4": 41.1,
+  "ch": 8,
+  "h1": {
+   "pod": 38.3,
+   "qui": 12.8,
+   "q4": 42.6,
+   "ch": 8
+  },
+  "h2": {
+   "pod": 37.5,
+   "qui": 10.4,
+   "q4": 39.6,
+   "ch": 8
+  }
+ },
+ "blocs": {
+  "G1": [
+   {
+    "cle": "logique",
+    "lib": "LOGIQUE — forme utile + distance",
+    "pod": 34.7,
+    "qui": 13.7,
+    "q4": 34.7,
+    "ch": 8,
+    "dPod": -3.2,
+    "dQui": 2.1,
+    "h1": {
+     "pod": 31.9,
+     "qui": 12.8,
+     "q4": 34,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 14.6,
+     "q4": 35.4,
+     "ch": 8
+    },
+    "gagne2": true,
+    "boot": {
+     "mieux": 77.8,
+     "pire": 11.1,
+     "egal": 11.1,
+     "mieuxPod": 19.8
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 16.7
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 12.5
+     }
+    ],
+    "gagneQuarts": 2,
+    "perdQuarts": 0
+   },
+   {
+    "cle": "logique2",
+    "lib": "LOGIQUE — forme + distance + PISTE",
+    "pod": 30.5,
+    "qui": 13.7,
+    "q4": 38.9,
+    "ch": 8,
+    "dPod": -7.4,
+    "dQui": 2.1,
+    "h1": {
+     "pod": 31.9,
+     "qui": 14.9,
+     "q4": 34,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 29.2,
+     "qui": 12.5,
+     "q4": 43.8,
+     "ch": 8
+    },
+    "gagne2": true,
+    "boot": {
+     "mieux": 69.6,
+     "pire": 19.2,
+     "egal": 11.2,
+     "mieuxPod": 3.1
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 12.5
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 16.7
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 2,
+    "perdQuarts": 0
+   },
+   {
+    "cle": "carnet",
+    "lib": "rang de presse (production G1-G3)",
+    "pod": 37.9,
+    "qui": 11.6,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": 0,
+    "h1": {
+     "pod": 38.3,
+     "qui": 12.8,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 10.4,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": null,
+    "quarts": null,
+    "gagneQuarts": null,
+    "perdQuarts": null
+   },
+   {
+    "cle": "marche",
+    "lib": "cote la plus courte (production G4-G5)",
+    "pod": 30.5,
+    "qui": 8.4,
+    "q4": 36.8,
+    "ch": 8,
+    "dPod": -7.4,
+    "dQui": -3.2,
+    "h1": {
+     "pod": 31.9,
+     "qui": 8.5,
+     "q4": 38.3,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 29.2,
+     "qui": 8.3,
+     "q4": 35.4,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 8.6,
+     "pire": 83.8,
+     "egal": 7.6,
+     "mieuxPod": 1.3
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 4.3
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 12.5
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 2
+   },
+   {
+    "cle": "mixte",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist)",
+    "pod": 28.4,
+    "qui": 7.4,
+    "q4": 36.8,
+    "ch": 8,
+    "dPod": -9.5,
+    "dQui": -4.2,
+    "h1": {
+     "pod": 29.8,
+     "qui": 8.5,
+     "q4": 36.2,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 27.1,
+     "qui": 6.3,
+     "q4": 37.5,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 6,
+     "pire": 89.4,
+     "egal": 4.6,
+     "mieuxPod": 0.7
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 3
+   },
+   {
+    "cle": "mixte2",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist+piste)",
+    "pod": 30.5,
+    "qui": 6.3,
+    "q4": 35.8,
+    "ch": 8,
+    "dPod": -7.4,
+    "dQui": -5.3,
+    "h1": {
+     "pod": 34,
+     "qui": 8.5,
+     "q4": 36.2,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 27.1,
+     "qui": 4.2,
+     "q4": 35.4,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 4.5,
+     "pire": 90.2,
+     "egal": 5.3,
+     "mieuxPod": 4
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 4.2
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 4
+   },
+   {
+    "cle": "illogique",
+    "lib": "ILLOGIQUE — pires notes forme+distance",
+    "pod": 26.3,
+    "qui": 5.3,
+    "q4": 34.7,
+    "ch": 8,
+    "dPod": -11.6,
+    "dQui": -6.3,
+    "h1": {
+     "pod": 25.5,
+     "qui": 4.3,
+     "q4": 34,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 27.1,
+     "qui": 6.3,
+     "q4": 35.4,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0.5,
+     "pire": 98.3,
+     "egal": 1.1,
+     "mieuxPod": 0.1
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 4.3
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 0
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 12.5
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 3
+   },
+   {
+    "cle": "illogique2",
+    "lib": "ILLOGIQUE — pires notes forme+distance+piste",
+    "pod": 26.3,
+    "qui": 4.2,
+    "q4": 36.8,
+    "ch": 8,
+    "dPod": -11.6,
+    "dQui": -7.4,
+    "h1": {
+     "pod": 25.5,
+     "qui": 2.1,
+     "q4": 38.3,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 27.1,
+     "qui": 6.3,
+     "q4": 35.4,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0.2,
+     "pire": 99.5,
+     "egal": 0.3,
+     "mieuxPod": 0
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 0
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 0
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 12.5
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 3
+   }
+  ],
+  "G2": [
+   {
+    "cle": "carnet",
+    "lib": "rang de presse (production G1-G3)",
+    "pod": 37.9,
+    "qui": 11.6,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": 0,
+    "h1": {
+     "pod": 38.3,
+     "qui": 12.8,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 10.4,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": null,
+    "quarts": null,
+    "gagneQuarts": null,
+    "perdQuarts": null
+   },
+   {
+    "cle": "illogique",
+    "lib": "ILLOGIQUE — pires notes forme+distance",
+    "pod": 30.5,
+    "qui": 9.5,
+    "q4": 33.7,
+    "ch": 8,
+    "dPod": -7.4,
+    "dQui": -2.1,
+    "h1": {
+     "pod": 23.4,
+     "qui": 6.4,
+     "q4": 34,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 12.5,
+     "q4": 33.3,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 18.7,
+     "pire": 70.1,
+     "egal": 11.2,
+     "mieuxPod": 4.3
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 20.8
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 3
+   },
+   {
+    "cle": "mixte2",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist+piste)",
+    "pod": 32.6,
+    "qui": 8.4,
+    "q4": 33.7,
+    "ch": 8,
+    "dPod": -5.3,
+    "dQui": -3.2,
+    "h1": {
+     "pod": 34,
+     "qui": 8.5,
+     "q4": 25.5,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 31.3,
+     "qui": 8.3,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 8.7,
+     "pire": 81.9,
+     "egal": 9.4,
+     "mieuxPod": 8.1
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 3
+   },
+   {
+    "cle": "illogique2",
+    "lib": "ILLOGIQUE — pires notes forme+distance+piste",
+    "pod": 27.4,
+    "qui": 8.4,
+    "q4": 32.6,
+    "ch": 8,
+    "dPod": -10.5,
+    "dQui": -3.2,
+    "h1": {
+     "pod": 21.3,
+     "qui": 6.4,
+     "q4": 29.8,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 33.3,
+     "qui": 10.4,
+     "q4": 35.4,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 12.3,
+     "pire": 79.3,
+     "egal": 8.4,
+     "mieuxPod": 0.9
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 16.7
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 3
+   },
+   {
+    "cle": "marche",
+    "lib": "cote la plus courte (production G4-G5)",
+    "pod": 36.8,
+    "qui": 7.4,
+    "q4": 37.9,
+    "ch": 8,
+    "dPod": -1.1,
+    "dQui": -4.2,
+    "h1": {
+     "pod": 40.4,
+     "qui": 6.4,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 33.3,
+     "qui": 8.3,
+     "q4": 33.3,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 98.6,
+     "egal": 1.4,
+     "mieuxPod": 31.5
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 3
+   },
+   {
+    "cle": "logique2",
+    "lib": "LOGIQUE — forme + distance + PISTE",
+    "pod": 31.6,
+    "qui": 7.4,
+    "q4": 34.7,
+    "ch": 8,
+    "dPod": -6.3,
+    "dQui": -4.2,
+    "h1": {
+     "pod": 36.2,
+     "qui": 10.6,
+     "q4": 38.3,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 27.1,
+     "qui": 4.2,
+     "q4": 31.3,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 2.4,
+     "pire": 93.1,
+     "egal": 4.5,
+     "mieuxPod": 3.9
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 4.2
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 3
+   },
+   {
+    "cle": "logique",
+    "lib": "LOGIQUE — forme utile + distance",
+    "pod": 28.4,
+    "qui": 7.4,
+    "q4": 31.6,
+    "ch": 8,
+    "dPod": -9.5,
+    "dQui": -4.2,
+    "h1": {
+     "pod": 34,
+     "qui": 12.8,
+     "q4": 29.8,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 22.9,
+     "qui": 2.1,
+     "q4": 33.3,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 2.8,
+     "pire": 91.9,
+     "egal": 5.3,
+     "mieuxPod": 0
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 0
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 2
+   },
+   {
+    "cle": "mixte",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist)",
+    "pod": 26.3,
+    "qui": 4.2,
+    "q4": 31.6,
+    "ch": 8,
+    "dPod": -11.6,
+    "dQui": -7.4,
+    "h1": {
+     "pod": 25.5,
+     "qui": 4.3,
+     "q4": 29.8,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 27.1,
+     "qui": 4.2,
+     "q4": 33.3,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 100,
+     "egal": 0,
+     "mieuxPod": 0.2
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 4.3
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 4.2
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 4
+   }
+  ],
+  "G3": [
+   {
+    "cle": "carnet",
+    "lib": "rang de presse (production G1-G3)",
+    "pod": 37.9,
+    "qui": 11.6,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": 0,
+    "h1": {
+     "pod": 38.3,
+     "qui": 12.8,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 10.4,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": null,
+    "quarts": null,
+    "gagneQuarts": null,
+    "perdQuarts": null
+   },
+   {
+    "cle": "logique",
+    "lib": "LOGIQUE — forme utile + distance",
+    "pod": 35.8,
+    "qui": 10.5,
+    "q4": 40,
+    "ch": 8,
+    "dPod": -2.1,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 36.2,
+     "qui": 10.6,
+     "q4": 40.4,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 35.4,
+     "qui": 10.4,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 67.4,
+     "egal": 32.6,
+     "mieuxPod": 18.1
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "mixte",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist)",
+    "pod": 35.8,
+    "qui": 10.5,
+    "q4": 40,
+    "ch": 8,
+    "dPod": -2.1,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 36.2,
+     "qui": 10.6,
+     "q4": 40.4,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 35.4,
+     "qui": 10.4,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 67.4,
+     "egal": 32.6,
+     "mieuxPod": 18.1
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "marche",
+    "lib": "cote la plus courte (production G4-G5)",
+    "pod": 34.7,
+    "qui": 10.5,
+    "q4": 36.8,
+    "ch": 8,
+    "dPod": -3.2,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 34,
+     "qui": 10.6,
+     "q4": 38.3,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 35.4,
+     "qui": 10.4,
+     "q4": 35.4,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 68.6,
+     "egal": 31.4,
+     "mieuxPod": 0
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "illogique2",
+    "lib": "ILLOGIQUE — pires notes forme+distance+piste",
+    "pod": 32.6,
+    "qui": 10.5,
+    "q4": 42.1,
+    "ch": 8,
+    "dPod": -5.3,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 31.9,
+     "qui": 14.9,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 33.3,
+     "qui": 6.3,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 28.3,
+     "pire": 54.7,
+     "egal": 17,
+     "mieuxPod": 5.5
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 21.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 2
+   },
+   {
+    "cle": "logique2",
+    "lib": "LOGIQUE — forme + distance + PISTE",
+    "pod": 34.7,
+    "qui": 8.4,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": -3.2,
+    "dQui": -3.2,
+    "h1": {
+     "pod": 34,
+     "qui": 8.5,
+     "q4": 44.7,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 35.4,
+     "qui": 8.3,
+     "q4": 37.5,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 96.1,
+     "egal": 3.9,
+     "mieuxPod": 4.5
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 2
+   },
+   {
+    "cle": "mixte2",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist+piste)",
+    "pod": 34.7,
+    "qui": 8.4,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": -3.2,
+    "dQui": -3.2,
+    "h1": {
+     "pod": 34,
+     "qui": 8.5,
+     "q4": 44.7,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 35.4,
+     "qui": 8.3,
+     "q4": 37.5,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 96.1,
+     "egal": 3.9,
+     "mieuxPod": 4.5
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 2
+   },
+   {
+    "cle": "illogique",
+    "lib": "ILLOGIQUE — pires notes forme+distance",
+    "pod": 31.6,
+    "qui": 8.4,
+    "q4": 44.2,
+    "ch": 8,
+    "dPod": -6.3,
+    "dQui": -3.2,
+    "h1": {
+     "pod": 29.8,
+     "qui": 12.8,
+     "q4": 46.8,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 33.3,
+     "qui": 4.2,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 8.6,
+     "pire": 82.5,
+     "egal": 8.9,
+     "mieuxPod": 0.5
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 4.2
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 2
+   }
+  ],
+  "G4": [
+   {
+    "cle": "marche",
+    "lib": "cote la plus courte (production G4-G5)",
+    "pod": 37.9,
+    "qui": 11.6,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": 0,
+    "h1": {
+     "pod": 38.3,
+     "qui": 12.8,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 10.4,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": null,
+    "quarts": null,
+    "gagneQuarts": null,
+    "perdQuarts": null
+   },
+   {
+    "cle": "logique",
+    "lib": "LOGIQUE — forme utile + distance",
+    "pod": 37.9,
+    "qui": 10.5,
+    "q4": 44.2,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 38.3,
+     "qui": 12.8,
+     "q4": 46.8,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 8.3,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 62.1,
+     "egal": 37.9,
+     "mieuxPod": 42.1
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "mixte",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist)",
+    "pod": 37.9,
+    "qui": 10.5,
+    "q4": 44.2,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 38.3,
+     "qui": 12.8,
+     "q4": 46.8,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 8.3,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 62.1,
+     "egal": 37.9,
+     "mieuxPod": 42.1
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "logique2",
+    "lib": "LOGIQUE — forme + distance + PISTE",
+    "pod": 36.8,
+    "qui": 9.5,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": -1.1,
+    "dQui": -2.1,
+    "h1": {
+     "pod": 36.2,
+     "qui": 12.8,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 6.3,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 84.1,
+     "egal": 15.9,
+     "mieuxPod": 25.2
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 2
+   },
+   {
+    "cle": "mixte2",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist+piste)",
+    "pod": 36.8,
+    "qui": 9.5,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": -1.1,
+    "dQui": -2.1,
+    "h1": {
+     "pod": 36.2,
+     "qui": 12.8,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 6.3,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 84.1,
+     "egal": 15.9,
+     "mieuxPod": 25.2
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 17.4
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 2
+   },
+   {
+    "cle": "carnet",
+    "lib": "rang de presse (production G1-G3)",
+    "pod": 38.9,
+    "qui": 8.4,
+    "q4": 44.2,
+    "ch": 8,
+    "dPod": 1,
+    "dQui": -3.2,
+    "h1": {
+     "pod": 38.3,
+     "qui": 8.5,
+     "q4": 46.8,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 39.6,
+     "qui": 8.3,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 95.5,
+     "egal": 4.5,
+     "mieuxPod": 65.4
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 2
+   },
+   {
+    "cle": "illogique2",
+    "lib": "ILLOGIQUE — pires notes forme+distance+piste",
+    "pod": 33.7,
+    "qui": 7.4,
+    "q4": 42.1,
+    "ch": 8,
+    "dPod": -4.2,
+    "dQui": -4.2,
+    "h1": {
+     "pod": 34,
+     "qui": 6.4,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 33.3,
+     "qui": 8.3,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 3.1,
+     "pire": 91.8,
+     "egal": 5.1,
+     "mieuxPod": 2.9
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 3
+   },
+   {
+    "cle": "illogique",
+    "lib": "ILLOGIQUE — pires notes forme+distance",
+    "pod": 32.6,
+    "qui": 6.3,
+    "q4": 40,
+    "ch": 8,
+    "dPod": -5.3,
+    "dQui": -5.3,
+    "h1": {
+     "pod": 31.9,
+     "qui": 6.4,
+     "q4": 40.4,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 33.3,
+     "qui": 6.3,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 2.1,
+     "pire": 95.7,
+     "egal": 2.2,
+     "mieuxPod": 1.4
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 8.7
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 4.2
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 4.2
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 3
+   }
+  ],
+  "G5": [
+   {
+    "cle": "carnet",
+    "lib": "rang de presse (production G1-G3)",
+    "pod": 37.9,
+    "qui": 11.6,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": 0,
+    "h1": {
+     "pod": 36.2,
+     "qui": 10.6,
+     "q4": 40.4,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 39.6,
+     "qui": 12.5,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 33.3,
+     "pire": 36.2,
+     "egal": 30.5,
+     "mieuxPod": 30
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 12.5
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "marche",
+    "lib": "cote la plus courte (production G4-G5)",
+    "pod": 37.9,
+    "qui": 11.6,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": 0,
+    "h1": {
+     "pod": 38.3,
+     "qui": 12.8,
+     "q4": 42.6,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 10.4,
+     "q4": 39.6,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": null,
+    "quarts": null,
+    "gagneQuarts": null,
+    "perdQuarts": null
+   },
+   {
+    "cle": "logique",
+    "lib": "LOGIQUE — forme utile + distance",
+    "pod": 35.8,
+    "qui": 11.6,
+    "q4": 38.9,
+    "ch": 8,
+    "dPod": -2.1,
+    "dQui": 0,
+    "h1": {
+     "pod": 34,
+     "qui": 10.6,
+     "q4": 36.2,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 12.5,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 33.3,
+     "pire": 36.2,
+     "egal": 30.5,
+     "mieuxPod": 0
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 12.5
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "mixte",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist)",
+    "pod": 35.8,
+    "qui": 11.6,
+    "q4": 38.9,
+    "ch": 8,
+    "dPod": -2.1,
+    "dQui": 0,
+    "h1": {
+     "pod": 34,
+     "qui": 10.6,
+     "q4": 36.2,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 12.5,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 33.3,
+     "pire": 36.2,
+     "egal": 30.5,
+     "mieuxPod": 0
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 12.5
+     }
+    ],
+    "gagneQuarts": 1,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "illogique2",
+    "lib": "ILLOGIQUE — pires notes forme+distance+piste",
+    "pod": 40,
+    "qui": 10.5,
+    "q4": 41.1,
+    "ch": 8,
+    "dPod": 2.1,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 38.3,
+     "qui": 10.6,
+     "q4": 40.4,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 41.7,
+     "qui": 10.4,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 12.1,
+     "pire": 66,
+     "egal": 21.9,
+     "mieuxPod": 77.9
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "logique2",
+    "lib": "LOGIQUE — forme + distance + PISTE",
+    "pod": 35.8,
+    "qui": 10.5,
+    "q4": 38.9,
+    "ch": 8,
+    "dPod": -2.1,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 34,
+     "qui": 10.6,
+     "q4": 36.2,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 10.4,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 67.4,
+     "egal": 32.6,
+     "mieuxPod": 0
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "mixte2",
+    "lib": "MIXTE — (k−1) meilleures + la pire (forme+dist+piste)",
+    "pod": 35.8,
+    "qui": 10.5,
+    "q4": 38.9,
+    "ch": 8,
+    "dPod": -2.1,
+    "dQui": -1.1,
+    "h1": {
+     "pod": 34,
+     "qui": 10.6,
+     "q4": 36.2,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 37.5,
+     "qui": 10.4,
+     "q4": 41.7,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 67.4,
+     "egal": 32.6,
+     "mieuxPod": 0
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 12.5
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 1
+   },
+   {
+    "cle": "illogique",
+    "lib": "ILLOGIQUE — pires notes forme+distance",
+    "pod": 37.9,
+    "qui": 9.5,
+    "q4": 36.8,
+    "ch": 8,
+    "dPod": 0,
+    "dQui": -2.1,
+    "h1": {
+     "pod": 36.2,
+     "qui": 10.6,
+     "q4": 36.2,
+     "ch": 8
+    },
+    "h2": {
+     "pod": 39.6,
+     "qui": 8.3,
+     "q4": 37.5,
+     "ch": 8
+    },
+    "gagne2": false,
+    "boot": {
+     "mieux": 0,
+     "pire": 88.1,
+     "egal": 11.9,
+     "mieuxPod": 44.5
+    },
+    "quarts": [
+     {
+      "quart": 1,
+      "n": 23,
+      "prod": 17.4,
+      "regle": 13
+     },
+     {
+      "quart": 2,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     },
+     {
+      "quart": 3,
+      "n": 24,
+      "prod": 12.5,
+      "regle": 8.3
+     },
+     {
+      "quart": 4,
+      "n": 24,
+      "prod": 8.3,
+      "regle": 8.3
+     }
+    ],
+    "gagneQuarts": 0,
+    "perdQuarts": 2
+   }
+  ]
+ },
+ "globaux": {
+  "logique": {
+   "pod": 22.1,
+   "qui": 7.4,
+   "q4": 28.4,
+   "ch": 8,
+   "h1": {
+    "pod": 25.5,
+    "qui": 12.8,
+    "q4": 27.7,
+    "ch": 8
+   },
+   "h2": {
+    "pod": 18.8,
+    "qui": 2.1,
+    "q4": 29.2,
+    "ch": 8
+   },
+   "boot": {
+    "mieux": 7.4,
+    "pire": 86,
+    "egal": 6.6,
+    "mieuxPod": 0
+   },
+   "dPod": -15.8,
+   "dQui": -4.2,
+   "quarts": [
+    {
+     "quart": 1,
+     "n": 23,
+     "prod": 17.4,
+     "regle": 13
+    },
+    {
+     "quart": 2,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 12.5
+    },
+    {
+     "quart": 3,
+     "n": 24,
+     "prod": 12.5,
+     "regle": 0
+    },
+    {
+     "quart": 4,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 4.2
+    }
+   ],
+   "gagneQuarts": 1,
+   "perdQuarts": 3
+  },
+  "logique2": {
+   "pod": 18.9,
+   "qui": 4.2,
+   "q4": 26.3,
+   "ch": 8,
+   "h1": {
+    "pod": 27.7,
+    "qui": 8.5,
+    "q4": 31.9,
+    "ch": 8
+   },
+   "h2": {
+    "pod": 10.4,
+    "qui": 0,
+    "q4": 20.8,
+    "ch": 8
+   },
+   "boot": {
+    "mieux": 0.5,
+    "pire": 98.8,
+    "egal": 0.8,
+    "mieuxPod": 0
+   },
+   "dPod": -19,
+   "dQui": -7.4,
+   "quarts": [
+    {
+     "quart": 1,
+     "n": 23,
+     "prod": 17.4,
+     "regle": 4.3
+    },
+    {
+     "quart": 2,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 12.5
+    },
+    {
+     "quart": 3,
+     "n": 24,
+     "prod": 12.5,
+     "regle": 0
+    },
+    {
+     "quart": 4,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 0
+    }
+   ],
+   "gagneQuarts": 1,
+   "perdQuarts": 3
+  },
+  "mixte": {
+   "pod": 17.9,
+   "qui": 3.2,
+   "q4": 24.2,
+   "ch": 8,
+   "h1": {
+    "pod": 19.1,
+    "qui": 4.3,
+    "q4": 19.1,
+    "ch": 8
+   },
+   "h2": {
+    "pod": 16.7,
+    "qui": 2.1,
+    "q4": 29.2,
+    "ch": 8
+   },
+   "boot": {
+    "mieux": 0.6,
+    "pire": 98.9,
+    "egal": 0.5,
+    "mieuxPod": 0
+   },
+   "dPod": -20,
+   "dQui": -8.4,
+   "quarts": [
+    {
+     "quart": 1,
+     "n": 23,
+     "prod": 17.4,
+     "regle": 0
+    },
+    {
+     "quart": 2,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 8.3
+    },
+    {
+     "quart": 3,
+     "n": 24,
+     "prod": 12.5,
+     "regle": 4.2
+    },
+    {
+     "quart": 4,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 0
+    }
+   ],
+   "gagneQuarts": 0,
+   "perdQuarts": 3
+  },
+  "mixte2": {
+   "pod": 22.1,
+   "qui": 2.1,
+   "q4": 24.2,
+   "ch": 8,
+   "h1": {
+    "pod": 23.4,
+    "qui": 0,
+    "q4": 23.4,
+    "ch": 8
+   },
+   "h2": {
+    "pod": 20.8,
+    "qui": 4.2,
+    "q4": 25,
+    "ch": 8
+   },
+   "boot": {
+    "mieux": 0.1,
+    "pire": 99.5,
+    "egal": 0.4,
+    "mieuxPod": 0.4
+   },
+   "dPod": -15.8,
+   "dQui": -9.5,
+   "quarts": [
+    {
+     "quart": 1,
+     "n": 23,
+     "prod": 17.4,
+     "regle": 0
+    },
+    {
+     "quart": 2,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 0
+    },
+    {
+     "quart": 3,
+     "n": 24,
+     "prod": 12.5,
+     "regle": 8.3
+    },
+    {
+     "quart": 4,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 0
+    }
+   ],
+   "gagneQuarts": 0,
+   "perdQuarts": 4
+  },
+  "illogique": {
+   "pod": 18.9,
+   "qui": 7.4,
+   "q4": 22.1,
+   "ch": 8,
+   "h1": {
+    "pod": 10.6,
+    "qui": 4.3,
+    "q4": 21.3,
+    "ch": 8
+   },
+   "h2": {
+    "pod": 27.1,
+    "qui": 10.4,
+    "q4": 22.9,
+    "ch": 8
+   },
+   "boot": {
+    "mieux": 15.2,
+    "pire": 78.3,
+    "egal": 6.5,
+    "mieuxPod": 0.3
+   },
+   "dPod": -19,
+   "dQui": -4.2,
+   "quarts": [
+    {
+     "quart": 1,
+     "n": 23,
+     "prod": 17.4,
+     "regle": 4.3
+    },
+    {
+     "quart": 2,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 4.2
+    },
+    {
+     "quart": 3,
+     "n": 24,
+     "prod": 12.5,
+     "regle": 12.5
+    },
+    {
+     "quart": 4,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 8.3
+    }
+   ],
+   "gagneQuarts": 0,
+   "perdQuarts": 2
+  },
+  "illogique2": {
+   "pod": 18.9,
+   "qui": 7.4,
+   "q4": 21.1,
+   "ch": 8,
+   "h1": {
+    "pod": 17,
+    "qui": 6.4,
+    "q4": 19.1,
+    "ch": 8
+   },
+   "h2": {
+    "pod": 20.8,
+    "qui": 8.3,
+    "q4": 22.9,
+    "ch": 8
+   },
+   "boot": {
+    "mieux": 15.5,
+    "pire": 78.3,
+    "egal": 6.2,
+    "mieuxPod": 0.1
+   },
+   "dPod": -19,
+   "dQui": -4.2,
+   "quarts": [
+    {
+     "quart": 1,
+     "n": 23,
+     "prod": 17.4,
+     "regle": 8.7
+    },
+    {
+     "quart": 2,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 4.2
+    },
+    {
+     "quart": 3,
+     "n": 24,
+     "prod": 12.5,
+     "regle": 8.3
+    },
+    {
+     "quart": 4,
+     "n": 24,
+     "prod": 8.3,
+     "regle": 8.3
+    }
+   ],
+   "gagneQuarts": 0,
+   "perdQuarts": 3
+  }
+ },
+ "oracle": {
+  "pod": 94.7,
+  "qui": 76.8
+ },
+ "verdict": "Aucune règle de carrière ne bat la production. Le meilleur scénario global est « LOGIQUE — forme utile + distance » : quinté 7.4 % contre 11.6 %, moitiés 12.8/2.1, bootstrap 7.4 %, quarts 1/4 −3. La carrière automatique ne voit que distance, hippodrome et place : sans terrain, sans niveau, sans corde, elle ne peut pas trier mieux que le carnet."
+}
