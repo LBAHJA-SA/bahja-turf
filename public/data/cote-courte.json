@@ -1,0 +1,194 @@
+{
+ "outil": "tools/cote-courte.mjs",
+ "le": "2026-10-28",
+ "source": "data/quintes.json — Quintés à presse réelle, blocs pleins (4·4·2·2·≥1)",
+ "n": 95,
+ "ecartees": 1,
+ "quotas": {
+  "G1": 3,
+  "G2": 2,
+  "G3": 1,
+  "G4": 1,
+  "G5": 1
+ },
+ "prod": {
+  "G1": "carnet",
+  "G2": "carnet",
+  "G3": "carnet",
+  "G4": "marche",
+  "G5": "marche"
+ },
+ "definition": "La règle « cote protégée » part du ticket de production et échange, DANS le bloc, la case retenue la moins bien classée à la presse contre la cote ≤ seuil restée dehors. Le quota ne bouge jamais. Retenue seulement si elle gagne le quinté dans les deux moitiés ET si le bootstrap apparié (10 000 tirages) la préfère dans ≥ 80 % des tirages.",
+ "reference": {
+  "pod": 37.9,
+  "qui": 11.6,
+  "q4": 41.1,
+  "h1": {
+   "pod": 38.3,
+   "qui": 12.8
+  },
+  "h2": {
+   "pod": 37.5,
+   "qui": 10.4
+  }
+ },
+ "cout": {
+  "3": {
+   "coupees": 1,
+   "courses": 1,
+   "gagne": 0,
+   "top3": 0,
+   "top5": 0
+  },
+  "4": {
+   "coupees": 5,
+   "courses": 5,
+   "gagne": 0,
+   "top3": 0,
+   "top5": 20
+  },
+  "5": {
+   "coupees": 9,
+   "courses": 8,
+   "gagne": 11.1,
+   "top3": 22.2,
+   "top5": 55.6
+  },
+  "6": {
+   "coupees": 15,
+   "courses": 14,
+   "gagne": 6.7,
+   "top3": 26.7,
+   "top5": 46.7
+  },
+  "8": {
+   "coupees": 43,
+   "courses": 36,
+   "gagne": 14,
+   "top3": 30.2,
+   "top5": 48.8
+  },
+  "10": {
+   "coupees": 80,
+   "courses": 58,
+   "gagne": 10,
+   "top3": 25,
+   "top5": 37.5
+  }
+ },
+ "lignes": [
+  {
+   "seuil": 3,
+   "lib": "cote ≤ 3",
+   "pod": 37.9,
+   "qui": 11.6,
+   "q4": 40,
+   "dPod": 0,
+   "dQui": 0,
+   "h1": 12.8,
+   "h2": 10.4,
+   "gagne2": false,
+   "boot": {
+    "mieux": 0,
+    "pire": 0,
+    "egal": 100,
+    "mieuxPod": 0
+   }
+  },
+  {
+   "seuil": 4,
+   "lib": "cote ≤ 4",
+   "pod": 36.8,
+   "qui": 11.6,
+   "q4": 38.9,
+   "dPod": -1.1,
+   "dQui": 0,
+   "h1": 12.8,
+   "h2": 10.4,
+   "gagne2": false,
+   "boot": {
+    "mieux": 0,
+    "pire": 0,
+    "egal": 100,
+    "mieuxPod": 0
+   }
+  },
+  {
+   "seuil": 5,
+   "lib": "cote ≤ 5",
+   "pod": 37.9,
+   "qui": 12.6,
+   "q4": 41.1,
+   "dPod": 0,
+   "dQui": 1,
+   "h1": 12.8,
+   "h2": 12.5,
+   "gagne2": true,
+   "boot": {
+    "mieux": 64.3,
+    "pire": 0,
+    "egal": 35.7,
+    "mieuxPod": 39.8
+   }
+  },
+  {
+   "seuil": 6,
+   "lib": "cote ≤ 6",
+   "pod": 37.9,
+   "qui": 12.6,
+   "q4": 42.1,
+   "dPod": 0,
+   "dQui": 1,
+   "h1": 12.8,
+   "h2": 12.5,
+   "gagne2": true,
+   "boot": {
+    "mieux": 64.3,
+    "pire": 0,
+    "egal": 35.7,
+    "mieuxPod": 39.8
+   }
+  },
+  {
+   "seuil": 8,
+   "lib": "cote ≤ 8",
+   "pod": 35.8,
+   "qui": 12.6,
+   "q4": 42.1,
+   "dPod": -2.1,
+   "dQui": 1,
+   "h1": 10.6,
+   "h2": 14.6,
+   "gagne2": false,
+   "boot": {
+    "mieux": 61,
+    "pire": 23.5,
+    "egal": 15.5,
+    "mieuxPod": 30.7
+   }
+  },
+  {
+   "seuil": 10,
+   "lib": "cote ≤ 10",
+   "pod": 34.7,
+   "qui": 7.4,
+   "q4": 41.1,
+   "dPod": -3.2,
+   "dQui": -4.2,
+   "h1": 6.4,
+   "h2": 8.3,
+   "gagne2": false,
+   "boot": {
+    "mieux": 5.5,
+    "pire": 87.4,
+    "egal": 7.1,
+    "mieuxPod": 25.8
+   }
+  }
+ ],
+ "oracle": {
+  "pod": 94.7,
+  "qui": 76.8
+ },
+ "verdict": "Aucun seuil ne bat la production dans les deux moitiés ET au bootstrap. Le meilleur (≤ 5 : quinté 12.6 % contre 11.6 %, bootstrap mieux 64.3 %) retombe dans le bruit : la production reste."
+}

@@ -6253,3 +6253,89 @@ node tools\huit.mjs
 sont dérivés de `GROUPES` dans `QuinteGrille.jsx`. Le passage 4-3-1-1-0 → 9
 chevaux avait laissé sept phrases périmées dans la page ; ce n'est plus
 possible.
+
+---
+
+### 11.41 🎯 LA COTE COURTE COUPÉE — le seul choix qui ressemble à un caprice, mesuré (28/10/2026)
+
+> Réaction de l'utilisateur devant la grille du 28/10 :
+> **« نفس الاختيارات … اختيارات عشوائية »** — le ticket n'a pas bougé et les
+> résultats restent 3/5 ou 2/5.
+
+#### ① D'abord : le moteur n'est pas aléatoire, et voici son arithmétique
+
+La grille du 28/10 (15 partants, presse lue à la source) :
+`3(P1) 8(P2) 10(P3) 6(P4) 9(P5) 2(P6) 14(P7) 11(P8) 12(P9) 1(P10) 5(P11) 4(P12) 7(P13) 13(P14) 15(P15)`.
+
+⚠ Les **cases** de la grille ne sont pas les rangs de presse (§11.14) : P1 = 3
+(impair) → la ligne du haut porte les impairs, le bas les pairs. Les blocs
+contiennent donc :
+
+| bloc | cases (par slot) | triées par rang de presse |
+|---|---|---|
+| G1 | 3 · 8 · 9 · 10 | 3 (P1) > 8 (P2) > **10 (P3)** > 9 (P5) |
+| G2 | 11 · 6 · 1 · 2 | 6 (P4) > **2 (P6)** > 11 (P8) > 1 (P10) |
+| G3 | 5 · 14 | **14 (P7)** > 5 (P11) |
+| G4 | 7 · 12 | **12** (marché : 18,7 contre 33,7) |
+| G5 | 13 · 4 · 15 | **4** (marché) |
+
+→ ticket **3 · 8 · 10 · 6 · 2 · 14 · 12 · 4**. Le n°9 (cote **1,81**, favori du
+marché) sort parce qu'il n'est que **P5** dans la presse et que G1 n'a que
+**3 sièges sur 4**. C'est le quota qui le coupe, pas le hasard.
+
+#### ② Le coût de cette coupure — `tools/cote-courte.mjs`, 95 Quintés
+
+| cases coupées par la production | combien de fois | arrive top-5 | arrive top-3 | gagne |
+|---|---|---|---|---|
+| cote ≤ 3 | **1** / 95 | 0 % | 0 % | 0 % |
+| cote ≤ 4 | 5 / 95 | 20 % | 0 % | 0 % |
+| cote ≤ 5 | 9 / 95 | 55,6 % | 22,2 % | 11,1 % |
+| cote ≤ 8 | 43 / 95 | 48,8 % | 30,2 % | 14 % |
+| cote ≤ 10 | 80 / 95 | 37,5 % | 25 % | 10 % |
+
+**Couper une cote très courte est rare (1 fois sur 95) et ne coûte presque
+rien** : les 5 cotes ≤ 4 coupées ne sont jamais entrées dans les 3 et une seule
+fois dans les 5. Le « caprice » du 28/10 est donc l'exception, pas la règle.
+
+#### ③ La règle testée — et refusée
+
+« Cote protégée » : si une case non retenue du bloc a une cote ≤ seuil, elle
+prend la place de la case retenue la moins bien classée à la presse **du même
+bloc** (le quota ne bouge jamais).
+
+| règle | podium | quinté | ≥4 | moitiés (quinté) | bootstrap |
+|---|---|---|---|---|---|
+| production 3-2-1-1-1 | **37,9 %** | 11,6 % | 41,1 % | 12,8 / 10,4 | — |
+| cote ≤ 4 protégée | 36,8 % | 11,6 % | 38,9 % | 12,8 / 10,4 | 0 % |
+| cote ≤ 5 protégée | 37,9 % | **12,6 %** | 41,1 % | 12,8 / 12,5 | **64,3 %** |
+| cote ≤ 6 protégée | 37,9 % | 12,6 % | 42,1 % | 12,8 / 12,5 | 64,3 % |
+| cote ≤ 8 protégée | 35,8 % | 12,6 % | 42,1 % | 10,6 / 14,6 | 61 % |
+| cote ≤ 10 protégée | 34,7 % | 7,4 % | 41,1 % | 6,4 / 8,3 | 5,5 % |
+
+La meilleure (`≤ 5`) gagne **un seul quinté** (12,6 contre 11,6) et le bootstrap
+la préfère dans **64,3 %** des tirages — sous le seuil de 80 %. **La production
+reste.**
+
+#### ④ Ce que ça dit vraiment : le plafond de la structure
+
+La **borne haute** — le meilleur choix possible dans chaque bloc, calculé avec
+l'arrivée connue d'avance — donne **podium 94,7 % · quinté 76,8 %**. Autrement
+dit : la structure 3-2-1-1-1 *contient* le quinté 3 fois sur 4 ; le moteur n'en
+trouve que **11,6 %**. Tout l'écart est dans **QUI** entre — et c'est
+précisément ce qu'aucune des règles mesurées (§11.24 : 243 puis 3 125
+combinaisons ; §11.40 : 16 combinaisons carnet/marché) ne sait faire.
+
+**Conséquence à dire clairement :** à 8 chevaux, la moyenne est **3,29/5** et le
+5/5 tombe **11,6 %** du temps. Un résultat de **3/5 ou 2/5 est le résultat
+NORMAL**, pas une panne du moteur. Le seul levier mesuré qui augmente le 5/5
+reste le **nombre de cases** (12 chevaux → 69 % du quinté, §11.25) — c'est une
+décision de l'utilisateur, pas du moteur.
+
+| Fichier | Rôle |
+|---|---|
+| `tools/cote-courte.mjs` | le coût de la coupure + la règle « cote protégée » → `data/cote-courte.json` |
+
+```
+node tools\cote-courte.mjs
+```
+
