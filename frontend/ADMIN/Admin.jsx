@@ -17,6 +17,7 @@ import {
   etatAdmin, sessionAdmin, connexionAdmin, deconnexionAdmin, comptesServeur, sauvegarderComptesServeur, reinitialiserAppareilServeur,
 } from '../../src/lib/adminAuth.js'
 import { heureGMT } from '../../src/temps.js'
+import AdminPronostiques from '../PRONOSTIQUE/AdminPronostiques.jsx'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  frontend/ADMIN/Admin.jsx — LA CONSOLE D'ADMINISTRATION
@@ -39,6 +40,7 @@ import { heureGMT } from '../../src/temps.js'
  *  TROIS ONGLETS
  *    Utilisateurs : qui entre, avec quel mot de passe, et QUELLES PAGES.
  *    Pages        : le catalogue du site, et qui a le droit d'y aller.
+ *    Pronostique  : l'espace d'administration de PRONOSTIQUE BAHJA TURF.
  *    Visiteurs    : le journal (IP, pays, page, appareil, compte) + les connexions + la mesure Vercel.
  * ══════════════════════════════════════════════════════════════════════════ */
 
@@ -147,6 +149,79 @@ function Pastille({ ok, children }) {
       color: ok ? T.bon : T.muet, background: ok ? 'rgba(52,211,153,.13)' : 'rgba(148,163,184,.10)',
       border: '1px solid ' + (ok ? 'rgba(52,211,153,.4)' : T.ligne),
     }}>{children}</span>
+  )
+}
+
+/* ══════════════════════ ADMINISTRATEUR ou UTILISATEUR (27/10/2026) ═════════
+ *
+ *  Demande de l'utilisateur : « il faut distinguer l'ajout d'un UTILISATEUR de
+ *  l'ajout d'un ADMINISTRATEUR, et ranger l'affichage de cette page ».
+ *
+ *  Un compte est ADMINISTRATEUR quand ses `pages` contiennent « admin » —
+ *  exactement ce que le serveur vérifie (`compteAdmin` dans api/_acces.js et
+ *  `adminValide` pour les actions de la console). Il n'y a donc PAS de champ
+ *  « rôle » séparé : impossible que la page et le serveur se contredisent.
+ *
+ *  Les administrateurs sont rangés EN PREMIER, puis les utilisateurs, chacun
+ *  par ordre alphabétique. C'est la seule règle d'affichage.
+ */
+const estAdminCompte = (c) => Array.isArray(c && c.pages) && c.pages.includes('admin')
+
+/** Toutes les clés de pages : c'est ce qu'un administrateur reçoit. */
+const TOUTES_LES_PAGES = PAGES.map((p) => p.cle)
+
+/** Les pages d'un compte selon le rôle voulu (promotion / rétrogradation).
+ *  Promotion = toutes les pages ; rétrogradation = on retire « admin » et on
+ *  garde les autres droits (on ne casse pas l'accès aux courses). */
+const pagesAvecRole = (pages, admin) => admin
+  ? [...new Set([...(pages || []), ...TOUTES_LES_PAGES])]
+  : (pages || []).filter((p) => p !== 'admin')
+
+/** L'ordre d'affichage : administrateurs d'abord, puis utilisateurs ;
+ *  à l'intérieur d'un groupe, alphabétique, insensible à la casse. */
+const ordreDesComptes = (liste) => [...(liste || [])].sort((a, b) => {
+  const ra = estAdminCompte(a) ? 0 : 1
+  const rb = estAdminCompte(b) ? 0 : 1
+  if (ra !== rb) return ra - rb
+  const na = String(a.nom || '').trim()
+  const nb = String(b.nom || '').trim()
+  const c = na.localeCompare(nb, 'fr', { sensitivity: 'base', numeric: true })
+  return c !== 0 ? c : (na < nb ? -1 : na > nb ? 1 : 0)
+})
+
+const roleDe = (c) => (estAdminCompte(c) ? 'admin' : 'user')
+
+/** Le badge du rôle — même forme que les autres pastilles de la console. */
+function PastilleRole({ compte }) {
+  const a = estAdminCompte(compte)
+  const c = a ? T.alerte : T.doux
+  return (
+    <span title={a
+      ? 'Administrateur : la console, toutes les pages, et le verrou d’appareil levé'
+      : 'Utilisateur : les pages cochées, sans la console'} style={{
+      display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: mono,
+      fontSize: 11, fontWeight: 800, padding: '2px 8px', borderRadius: 6,
+      color: c, background: c + '1f', border: '1px solid ' + c + '66', whiteSpace: 'nowrap',
+    }}>
+      <i className={'bi ' + (a ? 'bi-shield-lock' : 'bi-person')} />
+      {a ? 'Administrateur' : 'Utilisateur'}
+    </span>
+  )
+}
+
+/** Le titre d'un groupe dans une liste de comptes. */
+function TitreGroupe({ role, n }) {
+  const a = role === 'admin'
+  const c = a ? T.alerte : T.doux
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '7px 1px 1px' }}>
+      <i className={'bi ' + (a ? 'bi-shield-lock' : 'bi-people')} style={{ color: c, fontSize: 12.5 }} />
+      <b style={{ fontSize: 11, letterSpacing: '.10em', textTransform: 'uppercase', color: c }}>
+        {a ? 'Administrateurs' : 'Utilisateurs'}
+      </b>
+      <span style={{ fontFamily: mono, fontSize: 11, color: T.muet }}>{n}</span>
+      <span style={{ flex: 1, minWidth: 30, height: 1, background: T.ligne }} />
+    </div>
   )
 }
 
@@ -342,7 +417,9 @@ export default function Admin() {
     setOnglet('utilisateurs')
   }
 
-  const [onglet, setOnglet] = useState('utilisateurs')
+  const [onglet, setOnglet] = useState(() =>
+    new URLSearchParams(window.location.search).get('onglet') === 'pronostique' ? 'pronostique' : 'utilisateurs'
+  )
 
   /* ── ② LES COMPTES (dans ce navigateur) ─────────────────────────────────── */
   const [comptes, setComptes] = useState(() => lireComptes())
@@ -371,7 +448,14 @@ export default function Admin() {
       return { ...c, pages: pages.includes(cle) ? pages.filter((p) => p !== cle) : [...pages, cle] }
     }))
 
-  const ajouter = () => {
+  /* ⭐ 27/10/2026 — DEUX BOUTONS, DEUX MÉTIERS.
+   *  « + Utilisateur »  → compte ordinaire : Analyse course + Quinté, rien de plus.
+   *  « + Administrateur » → toutes les pages + la console (page « admin »), donc
+   *    le verrou d'appareil levé (api/_acces.js → compteAdmin).
+   *  Le nom proposé suit le rôle : utilisateur1 / admin1. */
+  const ajouter = (role = 'utilisateur') => {
+    const admin = role === 'admin'
+    const prefixe = admin ? 'admin' : 'utilisateur'
     /* ⭐ 25/10/2026 — le mot de passe n'est plus généré tout seul : on l'écrit.
      * (le bouton 🎲 de la ligne reste là si tu préfères en tirer un au hasard) */
     const existants = new Set([
@@ -379,8 +463,13 @@ export default function Admin() {
       ...comptes.map((x) => String(x.nom || '').trim().toLowerCase()),
     ])
     let n = 1
-    while (existants.has(('utilisateur' + n).toLowerCase())) n++
-    const c = { ...nouveauCompte('utilisateur' + n), motDePasse: '', nouveau: true }
+    while (existants.has((prefixe + n).toLowerCase())) n++
+    const c = {
+      ...nouveauCompte(prefixe + n),
+      motDePasse: '',
+      nouveau: true,
+      pages: pagesAvecRole(admin ? [] : ['analyse', 'quinte'], admin),
+    }
     setComptes((l) => [...l, c])
     setVus((s) => new Set([...s, c.id]))   // champ visible pendant la saisie
     setEditionId(c.id)
@@ -688,6 +777,16 @@ export default function Admin() {
   }
 
   const sauverValeurServeur = async (valeur) => {
+    /* ⭐ 27/10/2026 — GARDE-FOU : plus aucun administrateur actif = console
+     * fermée pour tout le monde. Le serveur le refuse déjà (api/admin.js :
+     * « garde au moins un compte actif avec le droit Administration ») ; on le
+     * dit ici, avant l'appel, avec le mot juste — c'est un rôle, pas une page. */
+    let liste = null
+    try { liste = JSON.parse(valeur) } catch { liste = null }
+    if (Array.isArray(liste) && liste.length
+      && !liste.some((c) => c.actif !== false && Array.isArray(c.pages) && c.pages.includes('admin'))) {
+      throw new Error('Garde au moins un administrateur actif : sans lui, plus personne ne peut ouvrir cette console.')
+    }
     setEnvEnCours(true)
     setEnvPret('')
     setDeploiementComptes(null)
@@ -900,6 +999,8 @@ export default function Admin() {
             icone="bi-people" libelle="Utilisateurs" compte={comptesBrouillon.length} />
           <Onglet actif={onglet === 'pages'} onClick={() => setOnglet('pages')}
             icone="bi-grid-3x3-gap" libelle="Pages" compte={PAGES.length} />
+          <Onglet actif={onglet === 'pronostique'} onClick={() => setOnglet('pronostique')}
+            icone="bi-star" libelle="PRONOSTIQUE BAHJA TURF" />
           <Onglet actif={onglet === 'visiteurs'} onClick={() => setOnglet('visiteurs')}
             icone="bi-graph-up" libelle="Visiteurs" />
         </div>
@@ -957,7 +1058,7 @@ export default function Admin() {
 
             <Carte
               titre="Les comptes du serveur"
-              sous={duServeur === null ? 'lecture…' : `${duServeur.length} compte(s) dans ADMIN_COMPTES`}
+              sous={duServeur === null ? 'lecture…' : `${duServeur.length} compte(s) · ${(duServeur || []).filter(estAdminCompte).length} administrateur(s)`}
               teinte={T.accentClair}
               droite={<>
                 <Bouton icone="bi-arrow-clockwise" onClick={lireServeur}>Relire</Bouton>
@@ -969,6 +1070,11 @@ export default function Admin() {
                 Les comptes ci-dessous viennent de la variable <code style={{ fontFamily: mono }}>ADMIN_COMPTES</code>
                 {' '}— c'est elle que le login lit. Le bouton enregistre les comptes ici, met à jour Vercel
                 et lance automatiquement un redéploiement. Le mot de passe en clair n’est jamais envoyé.
+                <div style={{ marginTop: 6 }}>
+                  Les <b>administrateurs</b> sont en premier : ce sont les comptes qui portent la page
+                  {' '}<b>Administration</b> (console + verrou d’appareil levé). Les autres sont des
+                  {' '}<b>utilisateurs</b> — on les crée avec <b>+ Utilisateur</b>, plus bas.
+                </div>
                 {!etat?.automatisation && <span style={{ display: 'block', marginTop: 7, color: T.alerte }}>Configuration initiale requise : ajoutez une fois la variable secrète VERCEL_TOKEN dans les réglages Vercel, puis redéployez. Les enregistrements suivants seront automatiques.</span>}
               </div>
 
@@ -981,7 +1087,9 @@ export default function Admin() {
                     soit <code style={{ fontFamily: mono }}>ADMIN_COMPTES</code> est vide, soit la session a expiré.
                   </div>
                 )}
-                {(duServeur || []).map((c) => {
+                {ordreDesComptes(duServeur).map((c, i, liste) => {
+                  const role = roleDe(c)
+                  const debutDeGroupe = i === 0 || roleDe(liste[i - 1]) !== role
                   const enEditionServeur = editionServeur && String(editionServeur.ancienNom).toLowerCase() === String(c.nom).toLowerCase()
                   const valeurEdition = enEditionServeur ? editionServeur : c
                   const derniereConnexion = derniereConnexionDuCompte(c.nom)
@@ -992,12 +1100,17 @@ export default function Admin() {
                     (compteSessionActuelle ? moi.connexion : null) ||
                     derniereConnexion
                   const expire = c.abonnement?.etat === 'expire'
-                  return <div key={c.nom || c.id} style={{
+                  return <div key={c.nom || c.id} style={{ display: 'contents' }}>
+                    {debutDeGroupe && (
+                      <TitreGroupe role={role} n={liste.filter((x) => roleDe(x) === role).length} />
+                    )}
+                  <div style={{
                     padding: '9px 11px', borderRadius: 11, background: 'rgba(2,6,15,.35)',
-                    border: '1px solid ' + T.ligne,
+                    border: '1px solid ' + (role === 'admin' ? 'rgba(251,191,36,.30)' : T.ligne),
                   }}>
                     <div style={{ display: 'flex', gap: 9, alignItems: 'center', flexWrap: 'wrap' }}>
                       <b style={{ fontSize: 13, color: expire ? T.mal : estEnLigne ? T.bon : '#e2e8f0' }}>{enEditionServeur ? (editionServeur.nom || '(sans nom)') : (c.nom || '(sans nom)')}</b>
+                      <PastilleRole compte={valeurEdition} />
                       <Pastille ok={c.actif !== false}>{c.actif !== false ? 'actif' : 'suspendu'}</Pastille>
                       <PastilleAbonnement compte={c} />
                       <span style={{ fontSize: 11.5, color: T.muet, fontFamily: mono }}>
@@ -1021,6 +1134,15 @@ export default function Admin() {
                         <input value={editionServeur.nom} onChange={(e) => modifierCompteServeur('nom', e.target.value)} aria-label="اسم المستخدم" placeholder="اسم المستخدم" style={{ padding: '6px 9px', borderRadius: 8, border: '1px solid ' + T.ligne, background: 'rgba(2,6,15,.65)', color: T.accentClair }} />
                         <input value={editionServeur.motDePasse} onChange={(e) => modifierCompteServeur('motDePasse', e.target.value)} type="password" autoComplete="new-password" placeholder="كلمة مرور جديدة (اختياري)" style={{ minWidth: 230, padding: '6px 9px', borderRadius: 8, border: '1px solid ' + T.ligne, background: 'rgba(2,6,15,.65)', color: T.accentClair }} />
                         <Bouton petit plein={editionServeur.actif} teinte={editionServeur.actif ? T.bon : T.mal} onClick={() => modifierCompteServeur('actif', !editionServeur.actif)}>{editionServeur.actif ? 'نشط' : 'موقوف'}</Bouton>
+                        {/* ⭐ le rôle, d'un seul clic : promotion = toutes les
+                            pages + la console ; rétrogradation = on retire
+                            seulement « admin » (les autres droits restent). */}
+                        <Bouton petit icone={estAdminCompte(editionServeur) ? 'bi-shield-lock' : 'bi-person'}
+                          plein={estAdminCompte(editionServeur)} teinte={estAdminCompte(editionServeur) ? T.alerte : T.accent}
+                          titre={estAdminCompte(editionServeur) ? 'Retirer les droits d’administration' : 'Donner toutes les pages et la console'}
+                          onClick={() => modifierCompteServeur('pages', pagesAvecRole(editionServeur.pages, !estAdminCompte(editionServeur)))}>
+                          {estAdminCompte(editionServeur) ? 'Administrateur' : 'Utilisateur'}
+                        </Bouton>
                       </div>
                       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                         {PAGES.map((p) => {
@@ -1061,6 +1183,7 @@ export default function Admin() {
                       </span>}
                     </div>
                   </div>
+                  </div>
                 })}
               </div>
 
@@ -1074,10 +1197,15 @@ export default function Admin() {
 
             <Carte
               titre="Les utilisateurs"
-              sous={comptesBrouillon.length ? `${comptesBrouillon.length} · ${comptesBrouillon.filter((c) => c.actif).length} actif(s)` : 'aucun pour l\'instant'}
+              sous={comptesBrouillon.length
+                ? `${comptesBrouillon.length} · ${comptesBrouillon.filter(estAdminCompte).length} administrateur(s) · ${comptesBrouillon.filter((c) => c.actif).length} actif(s)`
+                : 'aucun pour l\'instant'}
               teinte={T.accent}
               droite={<>
-                <Bouton icone="bi-person-plus" onClick={ajouter} plein teinte={T.accent}>Ajouter</Bouton>
+                <Bouton icone="bi-person-plus" onClick={() => ajouter('utilisateur')} plein teinte={T.accent}
+                  titre="Compte ordinaire : seulement les pages que tu coches, pas de console">+ Utilisateur</Bouton>
+                <Bouton icone="bi-shield-lock" onClick={() => ajouter('admin')} plein teinte={T.alerte}
+                  titre="Compte d’administration : toutes les pages, la console, et le verrou d’appareil levé">+ Administrateur</Bouton>
                 {/* Enregistre la liste sécurisée sur Vercel et relance le site. */}
                 <Bouton icone="bi-save" onClick={preparerEnv} plein teinte={T.bon} desactive={envEnCours}
                   titre="Enregistrer les comptes sur Vercel et lancer un redéploiement">
@@ -1144,25 +1272,34 @@ export default function Admin() {
                     </>
                   ) : (
                     <>
-                      <b>Ajouter</b> crée une ligne vide : tu écris le nom, <b>ton</b> mot de passe,
-                      tu choisis les pages et l’abonnement, puis tu cliques <b>Enregistrer</b>.
+                      <b>+ Utilisateur</b> crée une ligne vide de compte ordinaire ;
+                      {' '}<b>+ Administrateur</b> crée un compte qui a toutes les pages et la console.
+                      Dans les deux cas : tu écris le nom, <b>ton</b> mot de passe, tu règles les pages et
+                      l’abonnement, puis tu cliques <b>Enregistrer et déployer</b>.
                     </>
                   )}
                 </div>
               )}
 
               <div style={{ display: 'grid', gap: 10 }}>
-                {comptesVus.map((c) => {
+                {ordreDesComptes(comptesVus).map((c, i, liste) => {
                   const inconnues = droitsInconnus(c)
                   const enEdition = editionId === c.id
+                  const role = roleDe(c)
+                  const debutDeGroupe = i === 0 || roleDe(liste[i - 1]) !== role
                   return (
-                    <div key={c.id} style={{
+                    <div key={c.id} style={{ display: 'contents' }}>
+                      {debutDeGroupe && (
+                        <TitreGroupe role={role} n={liste.filter((x) => roleDe(x) === role).length} />
+                      )}
+                    <div style={{
                       padding: '11px 13px', borderRadius: 12, background: 'rgba(2,6,15,.35)',
-                      border: '1px solid ' + (c.actif ? T.ligne : 'rgba(248,113,113,.28)'),
+                      border: '1px solid ' + (!c.actif ? 'rgba(248,113,113,.28)' : role === 'admin' ? 'rgba(251,191,36,.30)' : T.ligne),
                       opacity: c.actif ? 1 : .68,
                     }}>
                       <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 9 }}>
                         <b style={{ fontSize: 13.5 }}>{c.nom || '(sans nom)'}</b>
+                        <PastilleRole compte={c} />
                         <span style={{ marginLeft: 'auto', display: 'flex', gap: 7, alignItems: 'center', flexWrap: 'wrap' }}>
                           <Bouton petit icone="bi-pencil" onClick={() => commencerEdition(c)} desactive={envEnCours || duServeur === null || enEdition}>
                             تعديل
@@ -1240,8 +1377,15 @@ export default function Admin() {
                             </button>
                           )
                         })}
+                        <Bouton petit icone={estAdminCompte(c) ? 'bi-shield-lock' : 'bi-person'}
+                          plein={estAdminCompte(c)} teinte={estAdminCompte(c) ? T.alerte : T.accent}
+                          titre={estAdminCompte(c) ? 'Retirer les droits d’administration' : 'Donner toutes les pages et la console'}
+                          onClick={() => majCompte(c.id, 'pages', pagesAvecRole(c.pages, !estAdminCompte(c)))}>
+                          {estAdminCompte(c) ? 'Administrateur' : 'Utilisateur'}
+                        </Bouton>
                         <Bouton petit onClick={() => majCompte(c.id, 'pages', [])} titre="Retirer tous les droits">rien</Bouton>
-                        <Bouton petit onClick={() => majCompte(c.id, 'pages', PAGES.filter((p) => !p.prive).map((p) => p.cle))}>
+                        <Bouton petit onClick={() => majCompte(c.id, 'pages', PAGES.filter((p) => !p.prive).map((p) => p.cle))}
+                          titre="Toutes les pages publiques — sans la console (c’est le bouton Administrateur qui la donne)">
                           tout
                         </Bouton>
                         {inconnues.length > 0 && (
@@ -1279,6 +1423,7 @@ export default function Admin() {
                         </span>
                       </div>
                       </fieldset>
+                    </div>
                     </div>
                   )
                 })}
@@ -1348,7 +1493,18 @@ export default function Admin() {
           </Carte>
         )}
 
-        {/* ═══════════════════════════ ③ VISITEURS ═══════════════════════════ */}
+        {/* ═════════════ ③ PRONOSTIQUE BAHJA TURF ════════════════════════ */}
+        {onglet === 'pronostique' && (
+          <Carte
+            titre="PRONOSTIQUE BAHJA TURF"
+            sous="édition et publication pour les visiteurs"
+            teinte="#e879f9"
+          >
+            <AdminPronostiques />
+          </Carte>
+        )}
+
+        {/* ═══════════════════════════ ④ VISITEURS ═══════════════════════════ */}
         {onglet === 'visiteurs' && (
           <>
             <Carte

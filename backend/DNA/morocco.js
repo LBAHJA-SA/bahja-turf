@@ -338,6 +338,22 @@ async function jours() {
  *  Le premier échec le lève pour de bon ; le fichier prend le relais. */
 let directKO = false
 
+/** ⭐ 27/10/2026 — OUBLIER CE QUI A ÉTÉ LU.
+ *
+ *  `/dna` se rafraîchit maintenant à l'heure pile tant que la réunion
+ *  marocaine n'est pas là. Or les deux fichiers (`maroc.json`,
+ *  `maroc-jours.json`) et le programme sont gardés EN MÉMOIRE pour la durée de
+ *  la page : sans cet oubli, le rafraîchissement redemandait les mêmes données
+ *  et le Maroc ne pouvait apparaître qu'en rechargeant l'onglet.
+ *
+ *  `directKO` n'est PAS remis à zéro : le direct est mort depuis Vercel, on ne
+ *  repaye pas 10 s d'attente à chaque heure. */
+export function oublier() {
+  fichierMemo = undefined
+  joursMemo = undefined
+  cache.clear()
+}
+
 /** Combien de fois on a retenté le direct pour une course SANS cote (plafond :
  *  2 par session — voir `courseSorec`). */
 let essaisSansCote = 0
@@ -409,16 +425,39 @@ function partants(contenu) {
     .map((x) => {
       const horse = x.horse || {}
       /* `odd` = la cote du moment (pari-mutuel réel, relevé à l'instant) ;
-       * `startodd` = le rapport du tout début du pool — mesuré le 25/10 sur
-       * Marrakech C7 : somme des 1/cote = 6,9, donc PAS un marché (des mises
-       * de quelques dirhams). On ne s'en sert jamais comme cote. */
+       * `startodd` = la grille d'ouverture.
+       *
+       * ⭐ 27/10/2026 — `startodd` SERT DE COTE QUAND `odd` MANQUE.
+       *
+       *  Ce qui était écrit ici (« on ne s'en sert jamais comme cote ») a été
+       *  démenti par l'utilisateur : sur e-sorec.ma, la colonne « Cotes » de la
+       *  course R9C9 de Khemisset affichait déjà 24 · 6,7 · 12 · 11 … à 06 h,
+       *  alors que notre page annonçait « la SOREC ne publie pas de cote avant
+       *  le départ ». C'était faux : `odd` (le pari-mutuel) n'est rempli qu'à
+       *  l'ouverture des paris, mais `startodd` est publié dès le matin.
+       *
+       *  On s'en sert donc en repli, et on le DIT (`coteOuverture`) pour que
+       *  l'écran ne fasse pas passer une grille d'ouverture pour un marché.
+       *  Sans ce repli, le moteur — ancré sur le marché — rendait quatre zones
+       *  vides sur une course qui a bel et bien des cotes. Dès que `odd` arrive,
+       *  c'est lui qui reprend la main : le direct, puis le fichier du job. */
+      /* ⚠ LE PLANCHER 1,1 N'EST PAS UNE COTE. Mesuré sur les 9 journées de
+       * `maroc-jours.json` : 74 partants sur 808 ont `startodd` = 110 (soit
+       * 1,10) et leur cote finale vaut 14,3 en moyenne — ce sont des Outsiders,
+       * pas des favoris. 110 est la valeur par défaut de la grille SOREC, pas
+       * un rapport. On la traite comme absente, sinon elle fabriquerait un
+       * faux favori dans chaque course marocaine. */
       const cot = cote(x.odd)
+      const brutOuv = Number(x.startodd)
+      const ouv = Number.isFinite(brutOuv) && brutOuv > 110 ? cote(brutOuv) : null
+      const cotRetenue = cot != null ? cot : ouv
       return {
         num: Number(x.startnr),
         horse: horse.name || '',
-        cote: cot,
-        cote_pmu: cot,
-        ouverture: cote(x.startodd),
+        cote: cotRetenue,
+        cote_pmu: cotRetenue,
+        ouverture: ouv,
+        coteOuverture: cot == null && ouv != null,
         age: horse.age ?? null,
         sexe: horse.gender || '',
         poids: nombre(x.weight),
@@ -441,6 +480,24 @@ function partants(contenu) {
  *   `odd` donne la cote du marché, `startodd` l'ouverture, `startbox` la corde
  *   et `shortperformance` la musique — les quatre champs que le moteur lit.
  */
+/** ⭐ 27/10/2026 — LE REPLI « GRILLE D'OUVERTURE », APPLIQUÉ AUSSI À LA LECTURE.
+ *
+ *  `partants()` le fait déjà pour la SOREC en direct. Mais les fichiers écrits
+ *  avant ce changement (`maroc.json`, et surtout l'archive `maroc-jours.json`
+ *  qui garde 10 jours de courses) n'ont pas le drapeau — et leurs `cote` valent
+ *  `null` alors que leur `ouverture` est remplie. Sans ce passage, une course
+ *  d'hier resterait à quatre zones vides.
+ *
+ *  Le pari-mutuel réel (`cote` venue de `odd`) n'est JAMAIS écrasé. */
+function avecOuverture(runners) {
+  if (!Array.isArray(runners)) return runners
+  return runners.map((p) => (
+    p && p.cote == null && p.ouverture != null && p.ouverture > 1.1
+      ? { ...p, cote: p.ouverture, cote_pmu: p.ouverture, coteOuverture: true }
+      : p
+  ))
+}
+
 export async function courseSorec(date, rnum, cnum) {
   const meetings = await programmeSorec(date)
   const meeting = meetings.find((m) => m.num === Number(rnum))
@@ -484,7 +541,7 @@ export async function courseSorec(date, rnum, cnum) {
 
   /* ② LES PARTANTS DU FICHIER (repli hors-ligne, ou SOREC muette) */
   if (Array.isArray(c.runners) && c.runners.length) {
-    return { course: { ...entete, runners: c.runners.length }, participants: c.runners }
+    return { course: { ...entete, runners: c.runners.length }, participants: avecOuverture(c.runners) }
   }
 
   return null

@@ -440,6 +440,40 @@ export const BANDE_MARCHE = {
   faible: { lib: '13e et au-delà', court: 'M13+', couleur: '#fb7185', fond: 'rgba(244,63,94,.18)' },
 }
 
+/* ⭐ LA FORME DU MARCHÉ — 28/10/2026 (tools/bassmat.mjs).
+ *
+ * Le seul découpage qui change la LECTURE des cases, et il est mesuré : dans
+ * un marché fermé le 4e de G2 (P8) donne 22,7 % de top-5 ; dans un marché
+ * normal 29,7 % ; ouvert 26,7 %. Les autres cases ne bougent pas de plus de
+ * 4 points. Les seuils ci-dessous sont ceux qui ont servi à découper
+ * l'archive : les changer oblige à relancer `node tools\bassmat.mjs`.
+ *
+ *   fermé  : favori ≤ 3,2  ET ≤ 5 chevaux sous 10/1
+ *   ouvert : favori ≥ 4,4  OU ≥ 9 chevaux sous 10/1
+ *   normal : entre les deux
+ *
+ * `cle` = null s'il n'y a pas assez de cotes pour décider (6 minimum).
+ */
+export const SEUILS_FORME = { favFerme: 3.2, sous10Ferme: 5, favOuvert: 4.4, sous10Ouvert: 9 }
+
+export const FORME_MARCHE = {
+  ferme: { lib: 'marché fermé', court: 'fermé', detail: 'un favori net, peu de chevaux sous 10/1', couleur: '#38bdf8' },
+  normal: { lib: 'marché normal', court: 'normal', detail: 'ni écrasé, ni ouvert', couleur: '#fbbf24' },
+  ouvert: { lib: 'marché ouvert', detail: 'pas de favori net, beaucoup de chevaux sous 10/1', court: 'ouvert', couleur: '#fb7185' },
+}
+
+export function formeMarche(cotes) {
+  const nums = Object.keys(cotes || {}).map(Number).filter((n) => coteDe(cotes, n) != null)
+  if (nums.length < 6) return null
+  const tri = nums.slice().sort((a, b) => coteDe(cotes, a) - coteDe(cotes, b) || a - b)
+  const fav = coteDe(cotes, tri[0])
+  const nSous10 = nums.filter((n) => coteDe(cotes, n) < 10).length
+  const cle = (fav <= SEUILS_FORME.favFerme && nSous10 <= SEUILS_FORME.sous10Ferme) ? 'ferme'
+    : (fav >= SEUILS_FORME.favOuvert || nSous10 >= SEUILS_FORME.sous10Ouvert) ? 'ouvert'
+      : 'normal'
+  return { cle, ...FORME_MARCHE[cle], fav, nSous10, nb: nums.length, favori: tri[0] }
+}
+
 /** La fiabilité mesurée du moteur — tools/fiabilite.mjs. La page la lit telle quelle. */
 export async function fetchFiabilite() {
   try {
@@ -485,7 +519,36 @@ export async function fetchBlocPm() {
   } catch (e) { return null }
 }
 
-/** LE CHOIX DANS G1 ET G2 — tools/choix-g1g2.mjs (16/10/2026).
+/** ⭐ G5 ET LES 8 CHEVAUX — tools/huit.mjs (28/10/2026).
+ *
+ *  « G5 est-il nécessaire ? » et « à 8 chevaux, quelle répartition ? ».
+ *  Le fichier porte la nécessité au sens du plafond (38,5 % des quintés
+ *  contiennent un cheval de P13+), le taux du siège, et le classement des 121
+ *  répartitions de 8 chevaux, avec le ticket robuste sur les deux corpus. */
+export async function fetchHuit() {
+  try {
+    const r = await fetch('/data/huit.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}
+
+/** ⭐ LA BASSMAT DE LA COURSE — tools/bassmat.mjs (28/10/2026).
+ *
+ *  La seule table qui se lit pour UNE course : la forme de son marché, ce que
+ *  donne chaque case (P1..P20) globalement ET par forme, la composition
+ *  attendue du podium et du quinté, l'audit des décisions (case gardée contre
+ *  case jetée), la calibration et la courbe « combien de cases ».
+ *  Aucun chiffre n'est saisi à la main : la page l'affiche tel quel. */
+export async function fetchBassmat() {
+  try {
+    const r = await fetch('/data/bassmat.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}
+
+/** LE CHOIX DANS G1 ET G2 - tools/choix-g1g2.mjs (16/10/2026).
  *  Où sont les 1-2-3 écartés, ce que vaut le choix contre la quota (§11.16 :
  *  les quotas ne bougent pas), et les 29 règles de choix mesurées une à une. */
 export async function fetchChoix() {
@@ -771,45 +834,43 @@ export function groupeDeSlot(slot) {
  * G4 1 · G5 0 ou 1. Le seul travail permis est le CHOIX du cheval À L'INTÉRIEUR
  * d'un bloc. Toute modification des quotas est une décision de l'utilisateur.
  *
- * ⭐ 21/10/2026 — 4-3-1-1-0 (§11.34, DÉCISION DE L'UTILISATEUR après mesure).
+ * ⭐ 28/10/2026 — 3-2-1-1-1 = 8 CHEVAUX (§11.40, DÉCISION DE L'UTILISATEUR).
+ *   « 3-2-1-1-1 هذه هي الاقوى، المشكل في الاختيارات فقط »
+ *   « اريد تمانية خيول فقط »
  *
- * Le 4ᵉ de G1 est le cheval le plus rentable de toute la grille — mesuré sur
- * 96 Quintés à presse réelle, sa fréquence d'arrivée dans les 5 premières :
+ * Retour au ticket de 8 de la méthode, G5 compris. Le moteur applique donc
+ * G1 3 · G2 2 · G3 1 · G4 1 · G5 1.
  *
- *   4ᵉ de G1 (P4)   36,5 %      ← on le JETAIT
- *   4ᵉ de G2 (P8)   26,0 %
- *   2ᵉ de G3 (P10)  26,0 %
- *   2ᵉ de G4 (P12)  18,9 %
- *   1ᵉʳ de G5 (P13) 12,5 %      ← on lui donnait un siège
+ * Ce que la mesure dit, et qu'il faut lire avec la décision (96 Quintés à
+ * presse réelle, tools/huit.mjs — métriques denses du §11.25) :
  *
- * La grille donnait donc 3 sièges (G3 · G4 · G5) à des chevaux qui arrivent
- * moins souvent que le seul qu'elle écartait. Correction : on ne CHOISIT plus
- * dans G1 (les 4 entrent), G2 prend son 4ᵉ aussi, et le siège sort de G5.
- * Le ticket passe à 9 chevaux — décision assumée, mesurée, pas un ajout sec.
+ *   répartition        podium entier   quinté entier   ≥4 du quinté
+ *   4-3-1-1-0 (9)         57,3 %          22,9 %          72,9 %
+ *   3-2-1-1-1 (8)         38,5 %           8,3 %          43,8 %
+ *   4-2-1-1-0 (8)         47,9 %          12,5 %          56,3 %
  *
- *   presse (96)   podium entier 38,5 → 57,3 % · quinté entier 8,3 → 22,9 %
- *                 ≥4 du quinté  43,8 → 72,9 %
+ * → le 9ᵉ cheval valait +14,6 points de quinté. À 8 chevaux, la meilleure
+ *   répartition mesurée est 4-2-1-1-0 (12,5 %) ; 3-2-1-1-1 est retenue par
+ *   décision de l'utilisateur, pas par le chiffre. Les deux restent dans la
+ *   latitude écrite par la méthode (§11.9 : G1 2 ou 3 · G2 2 ou 3 · G5 0 ou 1).
  *
- * Bootstrap apparié 10 000 tirages (tools/test-apparie.mjs) : 4-3-1-1-0 fait
- * mieux dans 100,0 % des tirages, pire dans 0,0 %.
- *   podiums gagnés par course : +0,188  IC 90 % [0,115 ; 0,271]
- *   quintés gagnés par course : +0,146  IC 90 % [0,083 ; 0,219]
- *   arrivants du top 5 trouvés: +0,584  IC 90 % [0,448 ; 0,719]
- * Les trois intervalles excluent 0.
+ * Le CHOIX dans les blocs ne bouge pas : G1-G4 au carnet (place de presse),
+ * G5 au marché (§11.23). Mesure bloc par bloc : tools/choix32111.mjs (§11.40).
  *
  * ⚠ Historique, pour ne pas refaire l'erreur :
  *   · §11.26 avait retenu 3-3-1-1-0 sur les chiffres de tools/test-quotas.mjs,
  *     qui RÉIMPLÉMENTE le remplissage (sans computeStats) : il annonçait 11,5 %
  *     de quinté pour 3-2-1-1-1 là où le VRAI remplirGrille en donne 8,3 %.
- *   · La règle de choix dans les blocs, elle, ne bouge pas (§11.23/§11.32) :
- *     G1-G3 carnet, G4 carnet, G5 marché (G5 n'ayant plus de siège, la question
- *     y est sans objet). */
+ *   · 21/10/2026 avait retenu 4-3-1-1-0 (9 chevaux) sur la mesure : +14,6 points
+ *     de quinté pour un cheval de plus. Le retour à 8 n'est pas une conclusion
+ *     de la mesure, c'est la décision de l'utilisateur — elle est appliquée
+ *     telle quelle. */
 export const GROUPES = [
-  { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 4, alt: 3 },
-  { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 3, alt: 2 },
+  { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 3, alt: 4 },
+  { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 2, alt: 3 },
   { id: 'G3', label: 'G3 · P9-P10', min: 9, max: 10, quota: 1, alt: 2, obligatoire: true },
   { id: 'G4', label: 'G4 · P11-P12', min: 11, max: 12, quota: 1, alt: 2 },
-  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 0, alt: 1 },
+  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 1, alt: 0 },
 ]
 
 /** Le « ticket fixé » : le moteur remplit les quotas, on ne modifie pas à la main. */
@@ -1092,7 +1153,17 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
    * Prix payé : le quinté complet passe de 16,7 % à 12,5 % sur P96.
    * C'est le seul point de la grille où les deux métriques divergent : le
    * carnet couvre mieux le trio, le marché signe mieux les quintés. */
-  const CHOIX_DU_BLOC = { G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'carnet', G5: 'marche' }
+  const CHOIX_DU_BLOC = { G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'marche', G5: 'marche' }
+  /* ⭐ 28/10/2026 — G4 repasse au MARCHÉ, et le commentaire ci-dessus redevient
+   * vrai (il disait « G4-G5 marché » alors que la table portait G4 carnet).
+   * Mesure à 3-2-1-1-1, 95 Quintés à presse réelle (tools/choix32111.mjs) :
+   *
+   *   G4 au carnet   quinté 8,4 %   moitiés 8,5 / 8,3
+   *   G4 au marché   quinté 11,6 %  moitiés 12,8 / 10,4   ← bootstrap 95,5 %
+   *
+   * C'est le seul bloc dont l'échange tient dans les deux moitiés ET au
+   * bootstrap. G1-G3 restent au carnet (aucune alternative ne gagne), G5
+   * reste au marché. */
 
   for (const g of grille.groupes) {
     const cases = g.cases.map((c) => ({ ...c, s: parNum.get(c.num)?.s || null, ok: parNum.get(c.num)?.ok ?? null }))

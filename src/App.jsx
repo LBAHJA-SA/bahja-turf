@@ -7,6 +7,7 @@ import Presse from '../frontend/PRESSE/Presse.jsx'
 import Lives from '../frontend/LIVES/Lives.jsx'
 import DnaCourse from '../frontend/DNA/DnaCourse.jsx'
 import Resultats from '../frontend/RESULTATS/Resultats.jsx'
+import PronostiqueBahjaTurf from '../frontend/PRONOSTIQUE/PronostiqueBahjaTurf.jsx'
 import Admin from '../frontend/ADMIN/Admin.jsx'
 import Portail from './Portail.jsx'
 import { pointerVisite } from '../backend/ADMIN/visites.js'
@@ -50,6 +51,10 @@ export default function App(){
         <Route path="/race/:id" element={<Portail cle="article"><Article /></Portail>} />
 
         <Route path="/quinte" element={<Portail cle="quinte"><QuinteGrille /></Portail>} />
+
+        {/* Espace des pronostics favoris de Bahja Turf. L'accès suit le droit
+         * Analyse course afin qu'il soit disponible aux abonnés concernés. */}
+        <Route path="/pronostique-bahja-turf" element={<Portail cle="analyse"><PronostiqueBahjaTurf /></Portail>} />
 
         {/* ⚠ 23/10/2026 — LA PAGE « COPLY » EST SUPPRIMÉE.
          *  /coply et /couple tombent dans l'adresse inconnue → retour à

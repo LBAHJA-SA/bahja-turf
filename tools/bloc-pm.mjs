@@ -44,7 +44,7 @@
  * ============================================================================= */
 import fs from 'node:fs'
 import path from 'node:path'
-import { buildGrid, remplirGrille, bandeMarche } from '../src/lib/quinte.js'
+import { buildGrid, remplirGrille, bandeMarche, GROUPES } from '../src/lib/quinte.js'
 
 const RACINE = path.resolve(
   path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')), '..')
@@ -163,8 +163,8 @@ const parBassmat = (c, i, cles, champ, aPrioriCellule) => {
 }
 
 const REGLES = [
-  { code: 'production', nom: 'le moteur — carnet G1-G4, G5 sans siège (4-3-1-1-0)', f: () => null },
-  { code: 'carnet', nom: 'le carnet partout — identique : G5 n’a plus de siège', f: () => ({ G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'carnet', G5: 'carnet' }) },
+  { code: 'production', nom: `le moteur — ${GROUPES.map((g) => g.quota).join('-')} (G1-G3 carnet · G4-G5 marché)`, f: () => null },
+  { code: 'carnet', nom: 'le carnet partout, G5 compris', f: () => ({ G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'carnet', G5: 'carnet' }) },
   { code: 'marche', nom: 'le marché partout (la cote)', f: () => ({ G1: 'marche', G2: 'marche', G3: 'marche', G4: 'marche', G5: 'marche' }) },
   { code: 'blocM', nom: 'BASSMAT bloc × bande (top-5, LOO)', f: (c, i) => ({ G1: 'ordre', G2: 'ordre', G3: 'ordre', G4: 'ordre', G5: 'ordre' }), ordre: (c, i) => parBassmat(c, i, cleBloc, 't5', false) },
   { code: 'caseM', nom: 'BASSMAT case × bande (top-5, LOO)', f: () => ({ G1: 'ordre', G2: 'ordre', G3: 'ordre', G4: 'ordre', G5: 'ordre' }), ordre: (c, i) => parBassmat(c, i, cleCase, 't5', true) },
@@ -386,7 +386,7 @@ for (let p = 1; p <= 20; p++) {
   console.log(ligne)
 }
 
-console.log('\n  LA MESURE — les mêmes quotas (4-3-1-1-0), seule la règle de choix change')
+console.log('\n  LA MESURE — les mêmes quotas (' + GROUPES.map((g) => g.quota).join('-') + '), seule la règle de choix change')
 console.log('  ' + L('règle', 44) + R('chev.', 7) + R('podium entier', 15) + R('quinté entier', 15) + R('≥4', 8) + R('1re moitié', 14) + R('2ᵉ moitié', 14))
 for (const m of mesure) {
   console.log('  ' + L(m.nom, 44) + R(nb(m.chevaux), 7) + R(nb(m.podium) + ' %', 15) + R(nb(m.quinte) + ' %', 15)

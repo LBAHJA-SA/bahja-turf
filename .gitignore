@@ -36,6 +36,16 @@ public/data/reu/
 # -- corpus d'analyse (laboratoire, hors deploy) --------
 data/corpus/
 
+# -- dumps de travail (jamais du code, jamais deployes) --
+#   dna-course/ et archivecouple/ sont des copies locales de pages
+#   (6901 et 4526 fichiers). Aucun import : src/ ne les lit pas.
+dna-course/
+archivecouple/
+
+# -- outillage d'agent (ne fait pas partie du site) -----
+.agents/
+skills-lock.json
+
 # -- Windows / OS ---------------------------------------
 Thumbs.db
 Desktop.ini
@@ -49,3 +59,4 @@ Desktop.ini
 .deploy-env
 .vercel/
 .vercelignore
+.env*

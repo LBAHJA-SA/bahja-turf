@@ -328,8 +328,7 @@ const levier = (() => {
   }
   return {
     code: num(courant, N), oracle: num(oracle, N), oracleG1: num(orG1, N), oracleG2: num(orG2, N),
-    hasard: num(base, N), quotaG5versG2: 42.7,
-    note: 'le siège de G5 vers G2 (§11.23, 95 courses) = 42,7 %',
+    hasard: num(base, N),
   }
 })()
 

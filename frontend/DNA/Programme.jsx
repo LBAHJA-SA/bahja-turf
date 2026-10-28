@@ -188,6 +188,26 @@ export default function Programme({ date, setDate, meetings, loading, onCharger,
     return { reunions: meetings.length, courses }
   }, [meetings])
 
+  /* ⭐ 27/10/2026 — LE MAROC MANQUE-T-IL ? (voir le bandeau plus bas)
+   *   La question ne se pose que pour la journée du jour : une date passée est
+   *   servie par l'archive `maroc-jours.json`, qui ne bougera plus. */
+  const marocAbsent = useMemo(() => {
+    if (!meetings.length) return false
+    const d = new Date()
+    const p = (n) => String(n).padStart(2, '0')
+    const aujourdhui = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`
+    if (String(date) !== aujourdhui) return false
+    return !meetings.some((m) => String(m.country || '').toUpperCase() === 'MA' || Number(m.num) >= 100)
+  }, [date, meetings])
+
+  /** « 14:00 » — la prochaine heure pile (celle du rafraîchissement). */
+  const heureRelance = useMemo(() => {
+    const d = new Date(now)
+    d.setMinutes(0, 0, 0)
+    d.setHours(d.getHours() + 1)
+    return `${String(d.getHours()).padStart(2, '0')}:00`
+  }, [now])
+
   /* on ouvre d'office la réunion qui porte le Quinté — sinon la première.
      ⭐ mais si une course part dans moins de 5 min, c'est ELLE qu'on ouvre.
      (Seulement dans les 5 min : ouvrir d'office à chaque changement de
@@ -240,6 +260,20 @@ export default function Programme({ date, setDate, meetings, loading, onCharger,
           {loading ? '…' : 'Charger'}
         </button>
       </div>
+
+      {/* ⭐ 27/10/2026 — « LA RÉUNION DU MAROC N'EST PAS ENCORE LÀ ».
+          Le bandeau dit POURQUOI elle manque et QUAND la page redemandera :
+          le job du poste tourne à l'heure pile, et la page se rafraîchit
+          elle-même à la même heure tant que la réunion n'apparaît pas. */}
+      {marocAbsent && (
+        <div style={{
+          margin: '8px 10px 0', padding: '6px 9px', borderRadius: 8, lineHeight: 1.45,
+          border: '1px solid rgba(251,191,36,.38)', background: 'rgba(251,191,36,.10)', color: '#fde68a', fontSize: 11,
+        }}>
+          Réunion du Maroc pas encore publiée par la SOREC — nouvel essai à <b>{heureRelance}</b>,
+          puis à chaque heure pile jusqu'à ce qu'elle apparaisse.
+        </div>
+      )}
 
       {/* ⭐ ① LA BANDE — TOUJOURS la prochaine course, même si sa réunion est
           repliée plus bas. Un clic l'ouvre.

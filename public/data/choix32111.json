@@ -1,0 +1,614 @@
+{
+ "outil": "tools/choix32111.mjs",
+ "le": "2026-10-28",
+ "source": "data/quintes.json — Quintés à presse réelle, blocs pleins (4·4·2·2·≥1)",
+ "n": 95,
+ "ecartees": 1,
+ "quotas": {
+  "G1": 3,
+  "G2": 2,
+  "G3": 1,
+  "G4": 1,
+  "G5": 1
+ },
+ "definition": "Le choix est mesuré bloc par bloc : une seule règle change, les quatre autres restent à la production (G1-G3 carnet · G4-G5 marché). Un choix n’est retenu que s’il bat la production sur le quinté dans les deux moitiés ET si le bootstrap apparié (10 000 tirages) le préfère dans au moins 80 % des tirages.",
+ "reference": {
+  "pod": 37.9,
+  "qui": 11.6,
+  "q4": 41.1,
+  "ch": 8,
+  "h1": {
+   "pod": 38.3,
+   "qui": 12.8
+  },
+  "h2": {
+   "pod": 37.5,
+   "qui": 10.4
+  }
+ },
+ "blocs": {
+  "G1": {
+   "quota": 3,
+   "sur": 4,
+   "lignes": [
+    {
+     "cle": "carnet",
+     "lib": "carnet (place de presse)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 12.8,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": null
+    },
+    {
+     "cle": "fusion",
+     "lib": "fusion (presse + cote)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 40,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 12.8,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0,
+      "pire": 0,
+      "egal": 100,
+      "mieuxPod": 0
+     }
+    },
+    {
+     "cle": "fixe:1·2·3",
+     "lib": "cases #1·#2·#3 du bloc",
+     "pod": 32.6,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": -5.3,
+     "dQui": 0,
+     "h1": 12.8,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": {
+      "mieux": 27.8,
+      "pire": 37.1,
+      "egal": 35.1,
+      "mieuxPod": 0.8
+     }
+    },
+    {
+     "cle": "marche",
+     "lib": "marché (cote la plus courte)",
+     "pod": 30.5,
+     "qui": 8.4,
+     "q4": 36.8,
+     "dPod": -7.4,
+     "dQui": -3.2,
+     "h1": 8.5,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 8.6,
+      "pire": 83.8,
+      "egal": 7.6,
+      "mieuxPod": 1.3
+     }
+    },
+    {
+     "cle": "fixe:1·2·4",
+     "lib": "cases #1·#2·#4 du bloc",
+     "pod": 27.4,
+     "qui": 8.4,
+     "q4": 33.7,
+     "dPod": -10.5,
+     "dQui": -3.2,
+     "h1": 8.5,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 21.8,
+      "pire": 69.2,
+      "egal": 9,
+      "mieuxPod": 1.7
+     }
+    },
+    {
+     "cle": "fixe:1·3·4",
+     "lib": "cases #1·#3·#4 du bloc",
+     "pod": 28.4,
+     "qui": 7.4,
+     "q4": 37.9,
+     "dPod": -9.5,
+     "dQui": -4.2,
+     "h1": 6.4,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 4.5,
+      "pire": 91.2,
+      "egal": 4.3,
+      "mieuxPod": 0.5
+     }
+    },
+    {
+     "cle": "fixe:2·3·4",
+     "lib": "cases #2·#3·#4 du bloc",
+     "pod": 21.1,
+     "qui": 4.2,
+     "q4": 29.5,
+     "dPod": -16.8,
+     "dQui": -7.4,
+     "h1": 6.4,
+     "h2": 2.1,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0.7,
+      "pire": 97.9,
+      "egal": 1.3,
+      "mieuxPod": 0
+     }
+    }
+   ],
+   "boot": null
+  },
+  "G2": {
+   "quota": 2,
+   "sur": 4,
+   "lignes": [
+    {
+     "cle": "carnet",
+     "lib": "carnet (place de presse)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 12.8,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": null
+    },
+    {
+     "cle": "fusion",
+     "lib": "fusion (presse + cote)",
+     "pod": 36.8,
+     "qui": 10.5,
+     "q4": 40,
+     "dPod": -1.1,
+     "dQui": -1.1,
+     "h1": 10.6,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0,
+      "pire": 69.4,
+      "egal": 30.6,
+      "mieuxPod": 13.8
+     }
+    },
+    {
+     "cle": "fixe:1·3",
+     "lib": "cases #1·#3 du bloc",
+     "pod": 35.8,
+     "qui": 9.5,
+     "q4": 35.8,
+     "dPod": -2.1,
+     "dQui": -2.1,
+     "h1": 10.6,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 13.3,
+      "pire": 74.2,
+      "egal": 12.5,
+      "mieuxPod": 23.1
+     }
+    },
+    {
+     "cle": "fixe:2·3",
+     "lib": "cases #2·#3 du bloc",
+     "pod": 25.3,
+     "qui": 9.5,
+     "q4": 33.7,
+     "dPod": -12.6,
+     "dQui": -2.1,
+     "h1": 8.5,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": {
+      "mieux": 13.9,
+      "pire": 75.8,
+      "egal": 10.3,
+      "mieuxPod": 0.3
+     }
+    },
+    {
+     "cle": "marche",
+     "lib": "marché (cote la plus courte)",
+     "pod": 36.8,
+     "qui": 7.4,
+     "q4": 37.9,
+     "dPod": -1.1,
+     "dQui": -4.2,
+     "h1": 6.4,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0,
+      "pire": 98.6,
+      "egal": 1.4,
+      "mieuxPod": 31.5
+     }
+    },
+    {
+     "cle": "fixe:1·2",
+     "lib": "cases #1·#2 du bloc",
+     "pod": 33.7,
+     "qui": 7.4,
+     "q4": 42.1,
+     "dPod": -4.2,
+     "dQui": -4.2,
+     "h1": 10.6,
+     "h2": 4.2,
+     "gagne2": false,
+     "boot": {
+      "mieux": 4.6,
+      "pire": 89.2,
+      "egal": 6.2,
+      "mieuxPod": 4.6
+     }
+    },
+    {
+     "cle": "fixe:3·4",
+     "lib": "cases #3·#4 du bloc",
+     "pod": 23.2,
+     "qui": 7.4,
+     "q4": 28.4,
+     "dPod": -14.7,
+     "dQui": -4.2,
+     "h1": 6.4,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 3.6,
+      "pire": 92.2,
+      "egal": 4.2,
+      "mieuxPod": 0.1
+     }
+    },
+    {
+     "cle": "fixe:1·4",
+     "lib": "cases #1·#4 du bloc",
+     "pod": 32.6,
+     "qui": 5.3,
+     "q4": 30.5,
+     "dPod": -5.3,
+     "dQui": -6.3,
+     "h1": 6.4,
+     "h2": 4.2,
+     "gagne2": false,
+     "boot": {
+      "mieux": 2,
+      "pire": 95.3,
+      "egal": 2.7,
+      "mieuxPod": 9.9
+     }
+    }
+   ],
+   "boot": null
+  },
+  "G3": {
+   "quota": 1,
+   "sur": 2,
+   "lignes": [
+    {
+     "cle": "carnet",
+     "lib": "carnet (place de presse)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 12.8,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": null
+    },
+    {
+     "cle": "fusion",
+     "lib": "fusion (presse + cote)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 12.8,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0,
+      "pire": 0,
+      "egal": 100,
+      "mieuxPod": 0
+     }
+    },
+    {
+     "cle": "fixe:1",
+     "lib": "cases #1 du bloc",
+     "pod": 35.8,
+     "qui": 11.6,
+     "q4": 42.1,
+     "dPod": -2.1,
+     "dQui": 0,
+     "h1": 14.9,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 42.8,
+      "pire": 34.4,
+      "egal": 22.8,
+      "mieuxPod": 0
+     }
+    },
+    {
+     "cle": "marche",
+     "lib": "marché (cote la plus courte)",
+     "pod": 34.7,
+     "qui": 10.5,
+     "q4": 36.8,
+     "dPod": -3.2,
+     "dQui": -1.1,
+     "h1": 10.6,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0,
+      "pire": 68.6,
+      "egal": 31.4,
+      "mieuxPod": 0
+     }
+    },
+    {
+     "cle": "fixe:2",
+     "lib": "cases #2 du bloc",
+     "pod": 31.6,
+     "qui": 7.4,
+     "q4": 42.1,
+     "dPod": -6.3,
+     "dQui": -4.2,
+     "h1": 8.5,
+     "h2": 6.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 1.4,
+      "pire": 95.2,
+      "egal": 3.4,
+      "mieuxPod": 4.1
+     }
+    }
+   ],
+   "boot": null
+  },
+  "G4": {
+   "quota": 1,
+   "sur": 2,
+   "lignes": [
+    {
+     "cle": "marche",
+     "lib": "marché (cote la plus courte)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 12.8,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": null
+    },
+    {
+     "cle": "fixe:1",
+     "lib": "cases #1 du bloc",
+     "pod": 38.9,
+     "qui": 10.5,
+     "q4": 44.2,
+     "dPod": 1,
+     "dQui": -1.1,
+     "h1": 10.6,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": {
+      "mieux": 18.6,
+      "pire": 59.9,
+      "egal": 21.5,
+      "mieuxPod": 58.7
+     }
+    },
+    {
+     "cle": "carnet",
+     "lib": "carnet (place de presse)",
+     "pod": 38.9,
+     "qui": 8.4,
+     "q4": 44.2,
+     "dPod": 1,
+     "dQui": -3.2,
+     "h1": 8.5,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0,
+      "pire": 95.5,
+      "egal": 4.5,
+      "mieuxPod": 65.4
+     }
+    },
+    {
+     "cle": "fusion",
+     "lib": "fusion (presse + cote)",
+     "pod": 38.9,
+     "qui": 8.4,
+     "q4": 44.2,
+     "dPod": 1,
+     "dQui": -3.2,
+     "h1": 8.5,
+     "h2": 8.3,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0,
+      "pire": 95.5,
+      "egal": 4.5,
+      "mieuxPod": 65.4
+     }
+    },
+    {
+     "cle": "fixe:2",
+     "lib": "cases #2 du bloc",
+     "pod": 31.6,
+     "qui": 6.3,
+     "q4": 37.9,
+     "dPod": -6.3,
+     "dQui": -5.3,
+     "h1": 8.5,
+     "h2": 4.2,
+     "gagne2": false,
+     "boot": {
+      "mieux": 0,
+      "pire": 99.4,
+      "egal": 0.6,
+      "mieuxPod": 0
+     }
+    }
+   ],
+   "boot": null
+  },
+  "G5": {
+   "quota": 1,
+   "sur": null,
+   "lignes": [
+    {
+     "cle": "2e-marche",
+     "lib": "2e cote du bloc",
+     "pod": 38.9,
+     "qui": 12.6,
+     "q4": 38.9,
+     "dPod": 1,
+     "dQui": 1,
+     "h1": 14.9,
+     "h2": 10.4,
+     "gagne2": true,
+     "boot": {
+      "mieux": 56.7,
+      "pire": 26.1,
+      "egal": 17.1,
+      "mieuxPod": 55.3
+     }
+    },
+    {
+     "cle": "carnet",
+     "lib": "carnet (place de presse)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 10.6,
+     "h2": 12.5,
+     "gagne2": false,
+     "boot": {
+      "mieux": 33.3,
+      "pire": 36.2,
+      "egal": 30.5,
+      "mieuxPod": 30
+     }
+    },
+    {
+     "cle": "marche",
+     "lib": "marché (cote la plus courte)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 12.8,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": null
+    },
+    {
+     "cle": "fusion",
+     "lib": "fusion (presse + cote)",
+     "pod": 37.9,
+     "qui": 11.6,
+     "q4": 41.1,
+     "dPod": 0,
+     "dQui": 0,
+     "h1": 10.6,
+     "h2": 12.5,
+     "gagne2": false,
+     "boot": {
+      "mieux": 33.3,
+      "pire": 36.2,
+      "egal": 30.5,
+      "mieuxPod": 30
+     }
+    },
+    {
+     "cle": "cher",
+     "lib": "la cote la plus longue",
+     "pod": 37.9,
+     "qui": 10.5,
+     "q4": 37.9,
+     "dPod": 0,
+     "dQui": -1.1,
+     "h1": 10.6,
+     "h2": 10.4,
+     "gagne2": false,
+     "boot": {
+      "mieux": 18.1,
+      "pire": 57.8,
+      "egal": 24.1,
+      "mieuxPod": 39.9
+     }
+    }
+   ],
+   "boot": {
+    "mieux": 56.7,
+    "pire": 26.1,
+    "egal": 17.1,
+    "mieuxPod": 55.3
+   }
+  }
+ },
+ "assemble": {
+  "choix": {
+   "G1": "carnet",
+   "G2": "carnet",
+   "G3": "carnet",
+   "G4": "marche",
+   "G5": "marche"
+  },
+  "pod": 37.9,
+  "qui": 11.6,
+  "q4": 41.1,
+  "ch": 8,
+  "h1": {
+   "pod": 38.3,
+   "qui": 12.8
+  },
+  "h2": {
+   "pod": 37.5,
+   "qui": 10.4
+  },
+  "boot": {
+   "mieux": 0,
+   "pire": 0,
+   "egal": 100,
+   "mieuxPod": 0
+  }
+ },
+ "verdict": "Aucun choix de bloc ne bat la production de façon significative : la règle actuelle (G1-G3 carnet · G4-G5 marché) reste. Les +1 point du meilleur candidat (G5 2ᵉ cote) tombent à 56.7 % au bootstrap — du bruit (§11.24)."
+}

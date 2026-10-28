@@ -37,6 +37,18 @@ export async function sessionValide(req) {
     }
     const debut = date(compte.debut), fin = date(compte.fin)
     if (debut === null || fin === null || (debut && jour < debut) || (fin && jour > fin)) return null
+    /* ⭐ 27/10/2026 — le verrou d'appareil ne s'applique PAS à l'administration
+     * (voir `compteAdmin`). On saute donc la lecture Redis : plus de
+     * comparaison, plus de blocage — et, au passage, un compte admin n'est plus
+     * refusé quand Redis est injoignable. */
+    if (compteAdmin(compte)) {
+      return {
+        nom: String(compte.nom),
+        pages: Array.isArray(compte.pages) ? compte.pages : [],
+        etudesFrance: compte.etudesFrance !== false,
+        sansVerrou: true,
+      }
+    }
     const deviceItem = cookie.split(';').map((x) => x.trim()).find((x) => x.startsWith('bahja_device='))
     let device = ''
     try { device = deviceItem ? decodeURIComponent(deviceItem.slice('bahja_device='.length)) : '' } catch { return null }
@@ -66,4 +78,23 @@ export async function sessionValide(req) {
 
 export function adminValide(session) {
   return !!session && Array.isArray(session.pages) && session.pages.includes('admin')
+}
+
+/** ⭐ 27/10/2026 — LE COMPTE D'ADMINISTRATION EST EXEMPTÉ DU VERROU D'APPAREIL.
+ *
+ *  Demande de l'utilisateur : « exclus les comptes qui portent la permission
+ *  Administration du verrou d'appareil, au login comme à la vérification de
+ *  session — ainsi le compte d'administration peut entrer depuis plusieurs
+ *  appareils, le verrou restant pour les autres ».
+ *
+ *  Un compte « administration » est un compte dont `pages` contient « admin »
+ *  (c'est déjà ce que vérifie `adminValide`). Il en faut toujours un actif
+ *  (voir la validation de `ADMIN_COMPTES` dans `api/admin.js`).
+ *
+ *  ⚠ Ce n'est pas l'appareil qui est oublié, c'est la LIAISON : le cookie
+ *    `bahja_device` continue d'exister, mais on ne compare plus et on ne
+ *    bloque plus. Les autres comptes gardent le verrou intact.
+ */
+export function compteAdmin(compte) {
+  return !!compte && compte.actif !== false && Array.isArray(compte.pages) && compte.pages.includes('admin')
 }

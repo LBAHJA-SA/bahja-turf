@@ -16,7 +16,7 @@
  *                     cotes arrivent-ils plus souvent ? (par tranche de rang)
  *   4. `experience` — les variantes du siège de G5 (tools/experience-g5.mjs).
  *                     `experienceAppliquee` dit laquelle est en production
- *                     (4-3-1-1-0 depuis le §11.34 du 21/10/2026).
+ *                     (3-2-1-1-1 depuis le §11.40 du 28/10/2026).
  *
  *   node tools\fiabilite.mjs
  * ============================================================================= */
@@ -149,7 +149,7 @@ console.log('  ' + '-'.repeat(66))
 for (const b of out.badge) {
   console.log('  ' + b.lib.padEnd(30) + f(b.n) + f(b.top5 + ' %') + f(b.top3 + ' %'))
 }
-console.log('\n  L\'EXPÉRIENCE DU SIÈGE — ' + (out.experienceAppliquee === 'courante' ? 'la ligne 4-3-1-1-0 est en production (§11.34) ; les autres ne sont PAS appliquées' : ''))
+console.log('\n  L\'EXPÉRIENCE DU SIÈGE — ' + (out.experienceAppliquee === 'courante' ? 'la ligne 3-2-1-1-1 est en production (§11.40) ; les autres ne sont PAS appliquées' : ''))
 console.log('  ' + '-'.repeat(66))
 for (const v of out.experience) {
   console.log('  ' + (v.appliquee ? '▶ ' : '  ') + v.nom.padEnd(48) + f(v.payante + ' %') + f(v.payanteOuverture + ' %'))

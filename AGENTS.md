@@ -5968,3 +5968,245 @@ Le moteur sur Agen R9C1 : `ZONE A 3·2·6 (90.9) · 3·2·4 (88.6) · 3·2·5 (8
 ⚠ La page **dit** d’où viennent les partants (`raceData.course.sourcePartants
 === 'casacourses'` → encart bleu) : ce ne sont pas les mêmes cotes que la
 source habituelle, et l’écran ne doit pas le laisser croire.
+
+---
+
+### 11.35 ⭐ LA BASSMAT DE LA COURSE — « بصمة السباق » (28/10/2026)
+
+> Demande de l'utilisateur : **« Quinté → Archive · Statistiques · Écarts ·
+> Choix : بغيت نخرج منهم بصمة للسباق لان الاختيارات الحالية ضعيفة جدا »**
+
+Les quatre onglets existaient déjà, mais chacun mesurait **un morceau** : les
+écarts donnaient la fiabilité d'une case, l'empreinte donnait la forme du
+podium, le choix donnait le prix d'une règle. Aucun ne répondait à la question
+posée devant une course : **cette course, quelle forme a-t-elle, et le ticket
+est-il du bon côté de la statistique ?**
+
+#### L'onglet
+
+`bassmat` — 3ᵉ onglet de `/quinte`, magenta `#f0abfc`, 5 sections :
+① la forme du marché · ② l'empreinte attendue · ③ le ticket case par case ·
+④ les décisions (gardée contre jetée) · ⑤ la couverture. Plus le verdict, écrit
+par l'outil.
+
+**Aucune règle nouvelle n'est appliquée.** Le ticket reste `4-3-1-1-0`. La
+bassmat **décrit**, elle ne choisit pas — parce que le choix est fermé (§11.24,
+§11.29, §11.30).
+
+#### ① La forme du marché — le seul découpage qui déplace les cases
+
+```
+fermé  : favori ≤ 3,2  ET ≤ 5 chevaux sous 10/1
+ouvert : favori ≥ 4,4  OU ≥ 9 chevaux sous 10/1
+normal : entre les deux
+```
+
+| forme | courses (96) | le 4ᵉ de G2 (P8) arrive top-5 |
+|---|---|---|
+| fermé | 44 (45,8 %) | 22,7 % |
+| normal | 37 (38,5 %) | 29,7 % |
+| ouvert | 15 (15,6 %) | 26,7 % |
+
+Aucune autre case ne bouge de plus de 4 points d'une forme à l'autre : c'est le
+seul découpage retenu. **Pas de découpage par discipline** — mesuré puis écarté :
+le quinté moyen prend G1 2,04 · G2 1,47 · G3 0,58 · G4 0,49 · G5 0,42 en plat,
+2,17 · 1,39 · 0,61 · 0,51 · 0,32 en trot, 1,90 · 1,60 · 0,60 · 0,40 · 0,50 en
+obstacle : la composition est la même.
+
+#### ② Ce que donne chaque case (96 Quintés, presse réelle)
+
+| case | top-5 | top-3 | | case | top-5 | top-3 |
+|---|---|---|---|---|---|---|
+| P1 | **65,6 %** | 53,1 % | | P7 | 38,5 % | 18,8 % |
+| P2 | 49,0 % | 32,3 % | | P8 | **26,0 %** | 12,5 % |
+| P3 | 49,0 % | 33,3 % | | P9 | 35,4 % | 14,6 % |
+| P4 | 40,6 % | 31,3 % | | P10 | 22,9 % | 10,4 % |
+| P5 | 42,7 % | 26,0 % | | P11 | 29,5 % | 16,8 % |
+| P6 | 39,6 % | 20,8 % | | P12 | 19,8 % | 10,4 % |
+
+**Le ticket 4-3-1-1-0 = P1·P2·P3·P4 · P5·P6·P7 · P9 · P11.** Ce sont
+exactement **les 9 meilleures cases** de la table : le découpage est au plafond.
+P8 (26 %) est la seule case « forte du carnet » que le moteur jette, et elle est
+la meilleure des cases laissées dehors.
+
+#### ③ L'audit des décisions — gardée contre jetée
+
+| bloc | garde | taux | jette | taux | écart |
+|---|---|---|---|---|---|
+| **G2** 3/4 | P5·P6·P7 | 40,3 % | P8 | 26,0 % | **+14,3** |
+| **G3** 1/2 | P9 | 35,4 % | P10 | 22,9 % | **+12,5** |
+| **G4** 1/2 | P11 | 29,5 % | P12 | 19,8 % | **+9,7** |
+
+Le carnet garde les cases fortes **dans les trois blocs où il y a un choix**, et
+l'écart est large (10 à 14 points). C'est la réponse chiffrée à « les choix
+actuels sont faibles » : ils ne le sont pas **dans le bloc**.
+
+#### ④ La calibration — le modèle des cases ne ment pas
+
+```
+9 chevaux · promis 3,8 arrivants · vus 3,9   (écart 0,1)
+le ticket tient : podium entier 57,3 % · quinté entier 22,9 % · x/5 3,9
+```
+
+Les taux de cases sont donc **additifs** : on peut les lire tels quels.
+
+#### ⑤ La couverture — où est la marge
+
+| k (P1..Pk) | podium | quinté |
+|---|---|---|
+| 8 | 39,6 % | 7,3 % |
+| **9 (le préfixe du ticket)** | **51,0 %** | 16,7 % |
+| 10 | 57,3 % | 28,1 % |
+| **12** | **81,3 %** | **61,5 %** |
+
+⚠ La courbe est comptée **par préfixe de cases** (P1..Pk), pas par le ticket :
+à k = 9 elle donne 16,7 %, alors que le ticket 4-3-1-1-0 tient 22,9 % — il
+remplace P8 par P9·P11. Les deux chiffres sont justes, ils ne mesurent pas la
+même chose.
+
+#### Conclusion
+
+> **Le choix dans le bloc est au plafond ; la marge est dans la LARGEUR.**
+> 9 cases → 22,9 % de quinté · 12 cases → 61,5 %. Passer de 9 à 12 chevaux
+> fait plus que doubler le quinté, alors qu'aucune règle de choix ne bat le
+> carnet.
+
+#### Fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `tools/bassmat.mjs` | la mesure → `data/bassmat.json` + `public/data/bassmat.json` |
+| `src/lib/quinte.js` | `SEUILS_FORME`, `FORME_MARCHE`, `formeMarche(cotes)`, `fetchBassmat()` |
+| `frontend/QUINTE/QuinteGrille.jsx` | `THEME.bassmat` + `TabBassmat` — **aucun chiffre saisi à la main** |
+
+Le fichier reproduit `data/fiabilite.json` **exactement** (podium 57,3 % ·
+quinté 22,9 % · 9 chevaux) : c'est la contre-vérification de l'outil.
+
+```
+node tools\bassmat.mjs
+```
+
+---
+
+### 11.40 ⭐ RETOUR À 3-2-1-1-1 — LE TICKET DE 8, G5 COMPRIS (28/10/2026, appliqué)
+
+> Instruction de l'utilisateur :
+> **« 3-2-1-1-1 هذه هي الاقوى ، المشكل في الاختيارات فقط انظر الى الاحصائيات
+> و الارشيف وسترى »**
+
+Les quotas **ne sont plus 4-3-1-1-0** (9 chevaux, §11.37). Le moteur applique :
+
+```
+G1 3  ·  G2 2  ·  G3 1 (obligatoire)  ·  G4 1  ·  G5 1   =  8 chevaux
+```
+
+`GROUPES` dans `src/lib/quinte.js` + copie `backend/QUINTE/quinte.js` (à l'octet
+près). `GROUPES[].alt` porte désormais la variante haute (G1 4 · G2 3 · G5 0) —
+c'est de la documentation, `remplirGrille` ne lit que `quota`.
+
+#### Ce que ça coûte, mesuré — et pourquoi la décision reste la bonne
+
+`tools/fiabilite.mjs`, 96 Quintés à presse réelle, cotes finales :
+
+| répartition | chev. | PAYANTE (1-2-3) | couvre +4 | **5/5** |
+|---|---|---|---|---|
+| 4-3-1-1-0 (§11.37, jusqu'au 28/10) | 9 | 55,2 % | 37,5 % | **25,0 %** |
+| 4-2-1-1-0 | 8 | 46,9 % | 28,1 % | 16,7 % |
+| 3-3-1-1-0 | 8 | 40,6 % | 20,8 % | 12,5 % |
+| **3-2-1-1-1 (en production)** | **8** | **37,5 %** | **17,7 %** | **11,5 %** |
+| 3-2-1-1-0 (7 chevaux) | 7 | 35,4 % | — | 9,4 % |
+
+Le 9ᵉ cheval valait **+13,5 points de 5/5**. À 8 chevaux, la meilleure
+répartition mesurée est `4-2-1-1-0` (16,7 % presse · 12,3 % archives,
+`tools/huit.mjs`) — `3-2-1-1-1` est donc retenue **par décision de
+l'utilisateur, pas par le chiffre**. Le bootstrap apparié le dit sans détour :
+`3-2-1-1-1` n'est meilleure que dans **3,5 %** des tirages. Les deux sont dans la
+latitude écrite par la méthode (§11.9 : G1 2 ou 3 · G2 2 ou 3 · G5 0 ou 1).
+
+#### Le ticket fait vraiment 8 — vérifié, pas supposé
+
+`tools/verif-8.mjs` rejoue le **vrai** `buildGrid` + le **vrai** `remplirGrille`
+sur les 96 courses :
+
+```
+ticket exactement 8 : 96  (100 %)   ·  plus court 0  ·  plus long 0
+cheval en double    : 0             ·  bloc hors quota 0
+```
+
+C'est la contre-vérification qui manquait au §11.29 (le bug `obligatoire: true`
+de G3 y avait mesuré un ticket de 9 en croyant en mesurer un de 8).
+
+#### G4 repasse au MARCHÉ — le seul vrai gain du jour
+
+Le commentaire de `remplirGrille` disait « G4-G5 marché » depuis le 19/10 mais
+la table `CHOIX_DU_BLOC` portait `G4: 'carnet'`. Ce désaccord est corrigé **dans
+le sens de la mesure** :
+
+| G4 rempli par | quinté | 1ʳᵉ moitié | 2ᵈᵉ moitié | bootstrap |
+|---|---|---|---|---|
+| **le marché (la cote)** | **11,6 %** | **12,8 %** | **10,4 %** | **95,5 % mieux** |
+| le carnet (place de presse) | 8,4 % | 8,5 % | 8,3 % | — |
+
+C'est le **seul** bloc dont l'échange tient dans les deux moitiés **et** au
+bootstrap. À 8 chevaux, c'est ce qui rend les 11,5 % de 5/5 du §11.23.
+
+#### Le choix dans les blocs — 243 combinaisons, et c'est fermé
+
+`tools/choix32111.mjs` (95 courses à blocs pleins, mesure bloc par bloc, une
+seule règle change à la fois) :
+
+| bloc | production | meilleure alternative | verdict |
+|---|---|---|---|
+| G1 | carnet · 11,6 % | marché 8,4 % · fusion 11,6 % | rien ne gagne |
+| G2 | carnet · 11,6 % | marché 7,4 % · cases #1·#3 9,5 % | rien ne gagne |
+| G3 | carnet · 11,6 % | marché 10,5 % · case #2 7,4 % | rien ne gagne |
+| G4 | marché · 11,6 % | carnet 8,4 % · case #1 10,5 % | **le marché** |
+| G5 | marché · 11,6 % | 2ᵉ cote 12,6 % | +1 pt, bootstrap **56,7 %** = bruit |
+
+> **Verdict de l'outil :** *« Aucun choix de bloc ne bat la production de façon
+> significative. Les +1 point du meilleur candidat (G5 2ᵉ cote) tombent à
+> 56,7 % au bootstrap — du bruit (§11.24). »*
+
+⚠ Un candidat n'entre **que** s'il gagne dans les deux moitiés **et** si le
+bootstrap le préfère dans **≥ 80 %** des 10 000 tirages. Sans ce second filtre,
+`G2 #1·#3` et `G5 2ᵉ cote` entraient sur un point de hasard — c'était le défaut
+de la première version de l'outil.
+
+#### Et G5 ? — nécessité de PLAFOND, siège qui ne tient pas
+
+`tools/huit.mjs` (§11.35) mesure la question posée par l'utilisateur :
+
+```
+un cheval de G5 (P13+) finit dans les cinq : 38,5 % des courses
+→ sans siège G5, un ticket de 8 plafonne à 61,5 % de quinté, quoi qu'il contienne
+
+le meilleur cheval du marché dans G5 arrive top-5 : 13,5 %
+quand un G5 arrive, le siège le trouve          : 35,1 %
+```
+
+**La nécessité est réelle** (le plafond), **mais le siège n'est pas la porte**
+(il ne tient le cheval qu'une fois sur trois). G5 reste dans le ticket parce que
+la méthode le veut — et parce que sans lui 38,5 % des courses deviennent
+mathématiquement impossibles.
+
+#### Fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `tools/verif-8.mjs` | **le ticket fait-il 8 ?** — vrai `buildGrid` + vrai `remplirGrille`, 96 courses |
+| `tools/choix32111.mjs` | le choix bloc par bloc à 3-2-1-1-1 → `data/choix32111.json` |
+| `tools/huit.mjs` | la nécessité de G5 + les 121 répartitions de 8 → `data/huit.json` |
+| `tools/experience-g5.mjs` | `Q_BASE` = 3-2-1-1-1 · variantes 43110 / 42110 / g5g2 / sans / B3 / B4 |
+| `tools/fiabilite.mjs` | la fiabilité de production → `data/fiabilite.json` |
+
+```
+node tools\verif-8.mjs
+node tools\choix32111.mjs
+node tools\fiabilite.mjs
+node tools\huit.mjs
+```
+
+⚠ **Le front ne tape plus aucun quota à la main** : `QUOTAS_TXT` et `NB_TICKET`
+sont dérivés de `GROUPES` dans `QuinteGrille.jsx`. Le passage 4-3-1-1-0 → 9
+chevaux avait laissé sept phrases périmées dans la page ; ce n'est plus
+possible.

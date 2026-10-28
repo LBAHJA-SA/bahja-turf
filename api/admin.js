@@ -48,14 +48,52 @@
 import {
   COOKIE, DEVICE_COOKIE, DUREE, secret, comptes, fabriquer, lireJeton, cookies, verifier,
 } from './_session.js'
-import { ecrire, contexte } from './_journal.js'
-import { sessionValide, adminValide } from './_acces.js'
+import { ecrire, contexte, journalConfigure, lireCleRedis, ecrireCleRedis } from './_journal.js'
+import { sessionValide, adminValide, compteAdmin } from './_acces.js'
 import { lireEtatAppareil, enregistrerAppareil, reinitialiserAppareil } from './_device.js'
 import crypto from 'node:crypto'
 
 const VERCEL_TEAM_ID = 'team_hNLmwUkmGtwVFYfSED5UMvpr'
 const VERCEL_PROJECT_ID = 'prj_FZFNbBzmLKfzQeAfNa6SNjXt3q2q'
 const PAGES_AUTORISEES = new Set(['analyse', 'quinte', 'presse', 'lives', 'dna', 'resultats', 'article', 'admin'])
+const CLE_PRONOSTIQUES = 'bahja:pronostiques:v1'
+const GROUPES_PRONOSTIQUES = ['quinteAssurance', 'synthese']
+
+function listePronostiques(brut) {
+  if (!brut) return []
+  try { const valeur = typeof brut === 'string' ? JSON.parse(brut) : brut; return Array.isArray(valeur) ? valeur : [] }
+  catch { return [] }
+}
+
+function textePronostic(value, limite = 500) { return String(value ?? '').trim().slice(0, limite) }
+
+function validerPronostic(value) {
+  const p = value && typeof value === 'object' ? value : {}
+  if (!/^[a-zA-Z0-9_-]{1,80}$/.test(String(p.id || ''))) throw new Error('Identifiant de pronostic invalide.')
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(p.date || ''))) throw new Error('Choisis une date valide.')
+  const date = new Date(p.date + 'T00:00:00Z')
+  if (Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== p.date) throw new Error('Choisis une date valide.')
+  const reunion = Number(p.reunion), course = Number(p.course)
+  if (!Number.isInteger(reunion) || reunion < 1 || reunion > 999 || !Number.isInteger(course) || course < 1 || course > 99) {
+    throw new Error('Choisis une réunion et une course.')
+  }
+  const fields = {}
+  for (const group of GROUPES_PRONOSTIQUES) {
+    const raw = p.fields?.[group]
+    fields[group] = group === 'synthese'
+      ? textePronostic(Array.isArray(raw) ? raw[0] : raw)
+      : [textePronostic(Array.isArray(raw) ? raw[0] : ''), textePronostic(Array.isArray(raw) ? raw[1] : '')]
+  }
+  return {
+    id: String(p.id), date: p.date, reunion, course,
+    pays: textePronostic(p.pays, 8).toUpperCase(),
+    hippodrome: textePronostic(p.hippodrome, 120),
+    reunionLabel: textePronostic(p.reunionLabel, 40),
+    courseNom: textePronostic(p.courseNom, 160),
+    distance: Number(p.distance) > 0 ? Number(p.distance) : null,
+    fields,
+  }
+}
 
 async function appelVercel(path, options = {}) {
   const token = String(process.env.VERCEL_TOKEN || '').trim()
@@ -273,6 +311,10 @@ export default async function handler(req, res) {
       comptes: comptes().length,
       login: arme,
       automatisation: !!String(process.env.VERCEL_TOKEN || '').trim(),
+      /* ⭐ 27/10/2026 — REPÈRE DE VERSION de la FONCTION (public, sans secret).
+       * Le bundle HTML ne prouve rien sur `api/` : c'est ce champ qui dit si la
+       * fonction en ligne est bien la dernière. `tools/verif-api.mjs` le lit. */
+      version: 'verrou-admin-2',
     })
     return
   }
@@ -293,28 +335,79 @@ export default async function handler(req, res) {
       res.status(200).json({ connecte: false, configure: arme, abonnement: ab })
       return
     }
-    const deviceCookie = cookies(req)[DEVICE_COOKIE]
-    if (!deviceCookie && await lireEtatAppareil(compte.nom)) {
-      res.status(200).json({ connecte: false, configure: arme, appareilConnexionRequise: true })
-      return
-    }
-    const deviceId = deviceCookie || crypto.randomBytes(32).toString('base64url')
-    try {
-      const lie = await enregistrerAppareil(compte.nom, deviceId)
-      if (!lie.ok) {
-        res.status(200).json({ connecte: false, configure: arme, appareilBloque: true })
+    /* ⭐ 27/10/2026 — L'ADMINISTRATION N'EST PAS LIÉE À UN APPAREIL.
+     * Le compte qui porte la page « admin » entre depuis n'importe quel
+     * appareil, autant de fois qu'il veut ; les autres gardent le verrou
+     * (première connexion = l'appareil, tout autre appareil = compte bloqué). */
+    if (!compteAdmin(compte)) {
+      const deviceCookie = cookies(req)[DEVICE_COOKIE]
+      if (!deviceCookie && await lireEtatAppareil(compte.nom)) {
+        res.status(200).json({ connecte: false, configure: arme, appareilConnexionRequise: true })
         return
       }
-      if (!cookies(req)[DEVICE_COOKIE]) poserCookieAppareil(req, res, deviceId)
-    } catch {
-      res.status(503).json({ connecte: false, configure: arme, erreur: 'Vérification de l’appareil indisponible' })
-      return
+      const deviceId = deviceCookie || crypto.randomBytes(32).toString('base64url')
+      try {
+        const lie = await enregistrerAppareil(compte.nom, deviceId)
+        if (!lie.ok) {
+          res.status(200).json({ connecte: false, configure: arme, appareilBloque: true })
+          return
+        }
+        if (!cookies(req)[DEVICE_COOKIE]) poserCookieAppareil(req, res, deviceId)
+      } catch {
+        res.status(503).json({ connecte: false, configure: arme, erreur: 'Vérification de l’appareil indisponible' })
+        return
+      }
     }
     await noterSessionActive(req, compte.nom)
     res.status(200).json({
       connecte: true, nom: j.n, pages: j.p || [], etudesFrance: compte.etudesFrance !== false, configure: arme, abonnement: ab,
       connexion: contexte(req),
     })
+    return
+  }
+
+  /* ── les pronostics publiés par l'administration, stockés dans Redis ───── */
+  if (action === 'pronostics') {
+    const session = await sessionValide(req)
+    if (!session) { res.status(401).json({ erreur: 'session requise' }); return }
+    if (req.method === 'GET') {
+      if (!adminValide(session) && !(session.pages || []).includes('analyse')) {
+        res.status(403).json({ erreur: 'accès à la page requis' }); return
+      }
+      if (!journalConfigure()) { res.status(503).json({ erreur: 'stockage des pronostics non configuré' }); return }
+      try {
+        res.status(200).json({ pronostics: listePronostiques(await lireCleRedis(CLE_PRONOSTIQUES)) })
+      } catch { res.status(503).json({ erreur: 'lecture des pronostics impossible' }) }
+      return
+    }
+    if (req.method !== 'POST') { res.setHeader('Allow', 'GET, POST'); res.status(405).json({ erreur: 'GET ou POST attendu' }); return }
+    if (!adminValide(session)) { res.status(403).json({ erreur: 'accès administrateur requis' }); return }
+    if (!journalConfigure()) { res.status(503).json({ erreur: 'stockage des pronostics non configuré' }); return }
+    let corps = req.body
+    if (typeof corps === 'string') { try { corps = JSON.parse(corps) } catch { corps = {} } }
+    corps = corps || {}
+    try {
+      const liste = listePronostiques(await lireCleRedis(CLE_PRONOSTIQUES))
+      let suivante
+      if (corps.action === 'delete') {
+        suivante = liste.filter((p) => p.id !== String(corps.id || ''))
+      } else {
+        const propre = validerPronostic(corps.pronostic)
+        const existant = liste.find((p) => p.id === propre.id)
+        const enregistre = {
+          ...propre, creeLe: existant?.creeLe || new Date().toISOString(),
+          modifieLe: new Date().toISOString(), modifiePar: session.nom,
+        }
+        suivante = existant ? liste.map((p) => p.id === propre.id ? enregistre : p) : [...liste, enregistre]
+      }
+      if (suivante.length > 100) throw new Error('La limite de 100 pronostics est atteinte.')
+      await ecrireCleRedis(CLE_PRONOSTIQUES, JSON.stringify(suivante))
+      res.status(200).json({ ok: true, pronostics: suivante })
+    } catch (e) {
+      const erreur = String(e?.message || '')
+      const statut = /Choisis|invalide|limite/.test(erreur) ? 400 : 503
+      res.status(statut).json({ erreur: erreur || 'enregistrement des pronostics impossible' })
+    }
     return
   }
 
@@ -384,17 +477,31 @@ export default async function handler(req, res) {
       return
     }
 
+    /* ⭐ 27/10/2026 — l'administration n'est pas liée à un appareil : on ne
+     * lie pas, on ne bloque pas. On note simplement le cookie d'appareil (il
+     * resservira si le compte perd un jour la page « admin »). */
     const deviceId = cookies(req)[DEVICE_COOKIE] || crypto.randomBytes(32).toString('base64url')
-    try {
-      const lie = await enregistrerAppareil(bon.nom, deviceId)
-      if (!lie.ok) {
-        await noterConnexion(req, { nom: bon.nom, ok: false, motif: 'appareil différent — compte bloqué' })
-        res.status(403).json({ erreur: 'Compte bloqué : connexion depuis un autre appareil. Contactez l’administrateur.', appareilBloque: true })
+    if (compteAdmin(bon)) {
+      /* ⭐ 27/10/2026 — le verrou ne s'applique pas à l'administration. S'il
+       * restait un état « bloqué » d'avant (le compte a pu être bloqué quand la
+       * règle valait encore pour lui), on l'EFFACE : la console ne doit pas
+       * montrer un compte rouge qui n'est plus bloqué par rien. Une base en
+       * panne ne doit pas empêcher d'entrer : tout est avalé. */
+      try {
+        if ((await lireEtatAppareil(bon.nom))?.bloque) await reinitialiserAppareil(bon.nom)
+      } catch { /* on entre quand même */ }
+    } else {
+      try {
+        const lie = await enregistrerAppareil(bon.nom, deviceId)
+        if (!lie.ok) {
+          await noterConnexion(req, { nom: bon.nom, ok: false, motif: 'appareil différent — compte bloqué' })
+          res.status(403).json({ erreur: 'Compte bloqué : connexion depuis un autre appareil. Contactez l’administrateur.', appareilBloque: true })
+          return
+        }
+      } catch {
+        res.status(503).json({ erreur: 'Vérification de l’appareil indisponible, réessayez plus tard' })
         return
       }
-    } catch {
-      res.status(503).json({ erreur: 'Vérification de l’appareil indisponible, réessayez plus tard' })
-      return
     }
 
     const https = String(req.headers['x-forwarded-proto'] || '').includes('https') || !!process.env.VERCEL
@@ -462,7 +569,10 @@ export default async function handler(req, res) {
         debut: dateISO(c.debut),
         fin: dateISO(c.fin),
         abonnement: abonnement(c),
-        appareilBloque: !!(await lireEtatAppareil(c.nom))?.bloque,
+        /* ⭐ 27/10/2026 — un compte d'administration n'est jamais « bloqué par
+         * l'appareil » : on n'affiche pas un voyant rouge pour une règle qui ne
+         * s'applique plus à lui (l'état Redis peut en garder la trace). */
+        appareilBloque: compteAdmin(c) ? false : !!(await lireEtatAppareil(c.nom))?.bloque,
       }))),
     })
     return

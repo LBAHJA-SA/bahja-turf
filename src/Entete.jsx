@@ -22,6 +22,7 @@ import { useAcces, aDroit, deconnecter } from './lib/acces.js'
 const LIENS = [
   { cle: 'analyse', to: '/', libelle: 'Analyse course', icone: 'bi-clipboard2-pulse' },
   { cle: 'quinte', to: '/quinte', libelle: 'Quinté', icone: 'bi-trophy' },
+  { cle: 'pronostic', droit: 'analyse', to: '/pronostique-bahja-turf', libelle: 'PRONOSTIQUE BAHJA TURF', icone: 'bi-star' },
   { cle: 'presse', to: '/presse', libelle: 'Presse', icone: 'bi-newspaper' },
   { cle: 'lives', to: '/lives', libelle: 'Lives', icone: 'bi-broadcast' },
   /* 23/10/2026 — le moteur DNA COURSE, comme les autres pages.
@@ -45,15 +46,21 @@ export default function Entete({ page }) {
   const connecte = acces.pret && acces.connecte
   const liens = LIENS
     .filter((l) => !l.dev || import.meta.env.DEV)
-    .filter((l) => !connecte || aDroit(acces.pages, l.cle))
+    .filter((l) => !connecte || aDroit(acces.pages, l.droit || l.cle))
 
   return (
     <header className="entete">
       <div className="entete-in">
 
+        {/* ⭐ 27/10/2026 — UN SEUL LOGO.
+            L'ancien en-tête posait DEUX images : l'illustration
+            `logo-horse.png` (une course de chevaux, sur fond blanc, avec un
+            halo cyan) PUIS la plaque `logo.svg`. La nouvelle plaque porte
+            elle-même la tête de cheval : garder les deux faisait deux logos
+            côte à côte. `logo-horse.png` reste dans `public/` (rien n'est
+            supprimé) — il suffit de remettre la ligne pour la revoir. */}
         <Link to="/" className="entete-logo" title="Analyse course">
-          <img src="/logo-horse.png" alt="LBAHJA-TURF" onError={(e) => { e.currentTarget.style.display = 'none' }} />
-          <img src="/logo.svg" alt="LBAHJA-TURF" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+          <img src="/logo.svg" alt="Bahja TURF" onError={(e) => { e.currentTarget.style.display = 'none' }} />
         </Link>
 
         <nav className="entete-nav">

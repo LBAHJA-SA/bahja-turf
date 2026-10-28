@@ -108,7 +108,11 @@ body::before{
 }
 .entete-logo{ display: flex; align-items: center; gap: 10px; text-decoration: none }
 .entete-logo img{ height: 42px; border-radius: 10px; display: block }
-.entete-logo img:first-child{
+/* ⭐ 27/10/2026 — l'ancienne pastille blanche était réservée à l'illustration
+   `logo-horse.png` (première image de l'en-tête). La plaque `logo.svg` porte
+   maintenant son propre cadre : elle ne doit pas recevoir de fond blanc. La
+   règle ne vise donc plus que l'illustration, au cas où on la remettrait. */
+.entete-logo img[src*="logo-horse"]{
   background: #fff; padding: 2px; height: 44px;
   box-shadow: 0 0 0 1px rgba(34,211,238,.45), 0 0 18px rgba(34,211,238,.35);
 }
@@ -146,6 +150,7 @@ body::before{
 /* la teinte de chaque page */
 .p-analyse{ --t: var(--n-cyan) }
 .p-quinte { --t: var(--n-magenta) }
+.p-pronostic { --t: var(--n-magenta) }
 .p-couple { --t: var(--n-orange) }
 .p-article{ --t: var(--n-violet) }
 .p-presse{ --t: var(--n-ambre) }

@@ -1,0 +1,572 @@
+{
+ "outil": "tools/huit.mjs",
+ "le": "2026-10-28",
+ "source": "data/quintes.json — 96 Quintés à presse réelle + data/corpus/archives-quinte.json",
+ "n": 96,
+ "periode": {
+  "debut": "2026-02-09",
+  "fin": "2026-07-07"
+ },
+ "definition": "At 8 chevaux : le ticket contient 8 chevaux (vérifié course par course). « avec G5 » = au moins un cheval de P13+. Podium entier = les 3 premiers dans le ticket ; quinté entier = les 5.",
+ "g5": {
+  "n": 96,
+  "unArrive": 38.5,
+  "podium": 18.8,
+  "plafondSansG5": 61.5,
+  "siegeTop5": 13.5,
+  "siegeTop3": 5.2,
+  "trouveQuandArrive": 35.1,
+  "parForme": [
+   {
+    "cle": "ferme",
+    "n": 44,
+    "unArrive": 36.4,
+    "siegeTop5": 13.6
+   },
+   {
+    "cle": "normal",
+    "n": 37,
+    "unArrive": 40.5,
+    "siegeTop5": 13.5
+   },
+   {
+    "cle": "ouvert",
+    "n": 15,
+    "unArrive": 40,
+    "siegeTop5": 13.3
+   }
+  ],
+  "parCote": [
+   {
+    "lib": "0–10",
+    "n": 10,
+    "top5": 20,
+    "top3": 10
+   },
+   {
+    "lib": "10–15",
+    "n": 18,
+    "top5": 5.6,
+    "top3": 0
+   },
+   {
+    "lib": "15–25",
+    "n": 31,
+    "top5": 22.6,
+    "top3": 3.2
+   },
+   {
+    "lib": "25–∞",
+    "n": 37,
+    "top5": 8.1,
+    "top3": 8.1
+   }
+  ]
+ },
+ "huit": {
+  "combos": 121,
+  "nbAvec": 100,
+  "nbSans": 21,
+  "prod": {
+   "k": "3-2-1-1-1",
+   "pod": 37.5,
+   "qui": 11.5,
+   "q4": 40.6,
+   "ch": 8,
+   "ecart": 0,
+   "lib": "la production actuelle — 8 chevaux, G5 compris",
+   "chevaux": 8
+  },
+  "meilleureAvec": "3-2-1-1-1",
+  "meilleureSans": "4-2-1-1-0",
+  "robusteSans": [
+   {
+    "k": "4-2-1-1-0",
+    "press": 16.7,
+    "archives": 12.3,
+    "min": 12.3,
+    "pod": 46.9,
+    "q4": 50
+   },
+   {
+    "k": "3-3-1-1-0",
+    "press": 12.5,
+    "archives": 11.5,
+    "min": 11.5,
+    "pod": 40.6,
+    "q4": 47.9
+   },
+   {
+    "k": "4-3-1-0-0",
+    "press": 10.4,
+    "archives": 18,
+    "min": 10.4,
+    "pod": 46.9,
+    "q4": 60.4
+   },
+   {
+    "k": "4-2-2-0-0",
+    "press": 13.5,
+    "archives": 9.8,
+    "min": 9.8,
+    "pod": 41.7,
+    "q4": 51
+   },
+   {
+    "k": "3-3-2-0-0",
+    "press": 10.4,
+    "archives": 9,
+    "min": 9,
+    "pod": 36.5,
+    "q4": 52.1
+   },
+   {
+    "k": "3-4-1-0-0",
+    "press": 7.3,
+    "archives": 12.3,
+    "min": 7.3,
+    "pod": 37.5,
+    "q4": 46.9
+   }
+  ],
+  "robusteAvec": [
+   {
+    "k": "4-2-1-0-1",
+    "press": 10.4,
+    "archives": 9.8,
+    "min": 9.8,
+    "pod": 41.7,
+    "q4": 45.8
+   },
+   {
+    "k": "3-3-1-0-1",
+    "press": 8.3,
+    "archives": 10.7,
+    "min": 8.3,
+    "pod": 34.4,
+    "q4": 42.7
+   },
+   {
+    "k": "3-2-1-1-1",
+    "press": 11.5,
+    "archives": 6.6,
+    "min": 6.6,
+    "pod": 37.5,
+    "q4": 40.6
+   },
+   {
+    "k": "3-2-1-0-2",
+    "press": 7.3,
+    "archives": 4.9,
+    "min": 4.9,
+    "pod": 32.3,
+    "q4": 36.5
+   },
+   {
+    "k": "4-1-1-1-1",
+    "press": 4.2,
+    "archives": 10.7,
+    "min": 4.2,
+    "pod": 33.3,
+    "q4": 37.5
+   },
+   {
+    "k": "3-2-2-0-1",
+    "press": 9.4,
+    "archives": 4.1,
+    "min": 4.1,
+    "pod": 33.3,
+    "q4": 44.8
+   }
+  ],
+  "avec": [
+   {
+    "k": "3-2-1-1-1",
+    "pod": 37.5,
+    "qui": 11.5,
+    "q4": 40.6,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-2-1-0-1",
+    "pod": 41.7,
+    "qui": 10.4,
+    "q4": 45.8,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-2-2-0-1",
+    "pod": 33.3,
+    "qui": 9.4,
+    "q4": 44.8,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-3-1-0-1",
+    "pod": 34.4,
+    "qui": 8.3,
+    "q4": 42.7,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-2-1-0-2",
+    "pod": 32.3,
+    "qui": 7.3,
+    "q4": 36.5,
+    "ch": 7.9,
+    "ecart": 10
+   },
+   {
+    "k": "4-1-1-1-1",
+    "pod": 33.3,
+    "qui": 4.2,
+    "q4": 37.5,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "2-2-2-1-1",
+    "pod": 22.9,
+    "qui": 4.2,
+    "q4": 32.3,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-1-1-2-1",
+    "pod": 30.2,
+    "qui": 3.1,
+    "q4": 26,
+    "ch": 7.99,
+    "ecart": 1
+   },
+   {
+    "k": "3-1-2-1-1",
+    "pod": 30.2,
+    "qui": 3.1,
+    "q4": 33.3,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-1-2-0-1",
+    "pod": 29.2,
+    "qui": 3.1,
+    "q4": 35.4,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-0-1-2-1",
+    "pod": 24,
+    "qui": 3.1,
+    "q4": 29.2,
+    "ch": 7.99,
+    "ecart": 1
+   },
+   {
+    "k": "2-3-1-1-1",
+    "pod": 19.8,
+    "qui": 3.1,
+    "q4": 37.5,
+    "ch": 8,
+    "ecart": 0
+   }
+  ],
+  "sans": [
+   {
+    "k": "4-2-1-1-0",
+    "pod": 46.9,
+    "qui": 16.7,
+    "q4": 50,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-2-2-0-0",
+    "pod": 41.7,
+    "qui": 13.5,
+    "q4": 51,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-2-2-1-0",
+    "pod": 40.6,
+    "qui": 13.5,
+    "q4": 50,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-3-1-1-0",
+    "pod": 40.6,
+    "qui": 12.5,
+    "q4": 47.9,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-3-1-0-0",
+    "pod": 46.9,
+    "qui": 10.4,
+    "q4": 60.4,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-2-1-2-0",
+    "pod": 39.6,
+    "qui": 10.4,
+    "q4": 40.6,
+    "ch": 7.99,
+    "ecart": 1
+   },
+   {
+    "k": "3-3-2-0-0",
+    "pod": 36.5,
+    "qui": 10.4,
+    "q4": 52.1,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-4-1-0-0",
+    "pod": 37.5,
+    "qui": 7.3,
+    "q4": 46.9,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "2-3-2-1-0",
+    "pod": 24,
+    "qui": 6.3,
+    "q4": 39.6,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-1-1-2-0",
+    "pod": 35.4,
+    "qui": 5.2,
+    "q4": 35.4,
+    "ch": 7.99,
+    "ecart": 1
+   },
+   {
+    "k": "4-1-2-1-0",
+    "pod": 35.4,
+    "qui": 5.2,
+    "q4": 46.9,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "2-4-1-1-0",
+    "pod": 26,
+    "qui": 4.2,
+    "q4": 41.7,
+    "ch": 8,
+    "ecart": 0
+   }
+  ],
+  "avecArchives": [
+   {
+    "k": "4-1-1-1-1",
+    "pod": 35.2,
+    "qui": 10.7,
+    "q4": 40.2,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-3-1-0-1",
+    "pod": 32,
+    "qui": 10.7,
+    "q4": 42.6,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-2-1-0-1",
+    "pod": 41,
+    "qui": 9.8,
+    "q4": 46.7,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-0-2-1-1",
+    "pod": 27.9,
+    "qui": 6.6,
+    "q4": 28.7,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-2-1-1-1",
+    "pod": 24.6,
+    "qui": 6.6,
+    "q4": 36.9,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-1-2-0-1",
+    "pod": 38.5,
+    "qui": 5.7,
+    "q4": 41.8,
+    "ch": 8,
+    "ecart": 0
+   }
+  ],
+  "sansArchives": [
+   {
+    "k": "4-3-1-0-0",
+    "pod": 53.3,
+    "qui": 18,
+    "q4": 60.7,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-2-1-1-0",
+    "pod": 44.3,
+    "qui": 12.3,
+    "q4": 53.3,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-1-2-1-0",
+    "pod": 41.8,
+    "qui": 12.3,
+    "q4": 45.9,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-4-1-0-0",
+    "pod": 35.2,
+    "qui": 12.3,
+    "q4": 48.4,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "3-3-1-1-0",
+    "pod": 32.8,
+    "qui": 11.5,
+    "q4": 50,
+    "ch": 8,
+    "ecart": 0
+   },
+   {
+    "k": "4-1-1-2-0",
+    "pod": 37.7,
+    "qui": 10.7,
+    "q4": 44.3,
+    "ch": 8,
+    "ecart": 0
+   }
+  ],
+  "conditionnel": [
+   {
+    "lib": "cote du siège ≤ 10",
+    "n": 11,
+    "pod": 45.8,
+    "qui": 15.6,
+    "q4": 49,
+    "dPod": -1.1,
+    "dQui": -1.1,
+    "dQ4": -1
+   },
+   {
+    "lib": "cote du siège ≤ 12",
+    "n": 15,
+    "pod": 44.8,
+    "qui": 14.6,
+    "q4": 49,
+    "dPod": -2.1,
+    "dQui": -2.1,
+    "dQ4": -1
+   },
+   {
+    "lib": "cote du siège ≤ 15",
+    "n": 28,
+    "pod": 42.7,
+    "qui": 13.5,
+    "q4": 47.9,
+    "dPod": -4.2,
+    "dQui": -3.2,
+    "dQ4": -2.1
+   },
+   {
+    "lib": "cote du siège ≤ 20",
+    "n": 46,
+    "pod": 42.7,
+    "qui": 13.5,
+    "q4": 47.9,
+    "dPod": -4.2,
+    "dQui": -3.2,
+    "dQ4": -2.1
+   },
+   {
+    "lib": "marché ouvert",
+    "n": 15,
+    "pod": 45.8,
+    "qui": 15.6,
+    "q4": 47.9,
+    "dPod": -1.1,
+    "dQui": -1.1,
+    "dQ4": -2.1
+   },
+   {
+    "lib": "marché fermé",
+    "n": 45,
+    "pod": 42.7,
+    "qui": 15.6,
+    "q4": 41.7,
+    "dPod": -4.2,
+    "dQui": -1.1,
+    "dQ4": -8.3
+   }
+  ],
+  "bootstrap": {
+   "a": "3-2-1-1-1",
+   "b": "4-2-1-1-0",
+   "mieux": 3.5,
+   "pire": 93.6,
+   "egal": 2.9,
+   "mieuxPod": 0
+  },
+  "halves": {
+   "avec": {
+    "h1": {
+     "qui": 12.5,
+     "pod": 37.5
+    },
+    "h2": {
+     "qui": 10.4,
+     "pod": 37.5
+    }
+   },
+   "sans": {
+    "h1": {
+     "qui": 18.8,
+     "pod": 47.9
+    },
+    "h2": {
+     "qui": 14.6,
+     "pod": 45.8
+    }
+   }
+  }
+ },
+ "verdict": "Un cheval de G5 finit dans les cinq 38.5 % du temps : sans siège G5, un ticket de 8 ne peut donc pas dépasser 61.5 % de quinté, quelle que soit sa composition. C'est la nécessité de G5 — elle est réelle. Mais le siège n'est pas la porte : le meilleur cheval du marché dans G5 n'arrive que 13.5 % du temps, et quand un G5 arrive il n'est trouvé que 35.1 % du temps. À 8 chevaux, le meilleur avec G5 est 3-2-1-1-1 (11.5 % de quinté, 37.5 % de podium) ; le meilleur sans G5 par le quinté est 4-2-1-1-0 (16.7 %), mais le seul qui tienne sur les deux corpus est 4-2-1-1-0 (16.7 % presse · 12.3 % archives). Le bootstrap donne 3-2-1-1-1 meilleur que 4-2-1-1-0 dans 3.5 % des tirages seulement. La production (3-2-1-1-1, 8 chevaux) tient 11.5 % du quinté contre 12.3 % pour la meilleure répartition de 8 : l'écart est le prix de la RÉPARTITION, pas du nombre de cases — le ticket fait 8 chevaux dans les deux cas."
+}

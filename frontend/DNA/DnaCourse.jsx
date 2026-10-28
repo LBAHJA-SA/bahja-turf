@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Dna, Calendar, RefreshCw, Crown, Users, Layers, Target, FlaskConical, Settings2, TrendingUp, AlertTriangle, Info } from 'lucide-react'
 import { fmtClockZ } from '../../src/lib/gmtTime.js'
 import { fetchMeetings, fetchRace, extractDnaCourse } from '../../backend/DNA/donnees.js'
+import { oublier as oublierMaroc } from '../../backend/DNA/morocco.js'
 import Programme from './Programme.jsx'
 import { RaceBetBadges } from './BetBadges.jsx'
 import { useNow, raceStatus, statusChip, meteoText, countryFlag } from '../../src/lib/raceStatus.jsx'
@@ -262,6 +263,43 @@ export default function DnaCoursePage() {
 
   useEffect(() => { loadMeetings(date) }, [])
 
+  /* ⭐ 27/10/2026 — LA RÉUNION DU MAROC N'ARRIVE PAS TOUJOURS À L'HEURE.
+   *
+   *  Demande de l'utilisateur : « la réunion du Maroc n'apparaît pas sur
+   *  DNA COURSE, tous les jours ; je préfère un rafraîchissement à l'heure
+   *  pile jusqu'à ce qu'elle apparaisse ».
+   *
+   *  La SOREC publie sa carte en cours de matinée, et le fichier
+   *  `/data/maroc.json` n'est réécrit (puis redéployé) que par le job horaire
+   *  du poste (`tools/maroc-auto.mjs`). Tant que la réunion n'est pas là, la
+   *  page se redemande À L'HEURE PILE — `oublierMaroc()` vide la mémoire des
+   *  fichiers, sinon on relisait le même contenu. Dès qu'elle apparaît, le
+   *  rafraîchissement s'arrête de lui-même.
+   *
+   *  On ne le fait que pour la journée du JOUR : une date passée est servie
+   *  par l'archive (`maroc-jours.json`), elle ne changera plus. */
+  const marocPresent = meetings.some((m) => String(m.country || '').toUpperCase() === 'MA' || Number(m.num) >= 100)
+  useEffect(() => {
+    if (marocPresent || date !== jourLocal()) return undefined
+    let vivant = true
+    let timer = null
+    const programmer = () => {
+      const d = new Date()
+      const prochain = new Date(d)
+      prochain.setMinutes(0, 0, 0)
+      prochain.setHours(d.getHours() + 1)
+      const delai = Math.max(15000, prochain.getTime() - d.getTime())
+      timer = setTimeout(async () => {
+        if (!vivant) return
+        oublierMaroc()
+        await loadMeetings(date)
+        if (vivant) programmer()
+      }, delai)
+    }
+    programmer()
+    return () => { vivant = false; if (timer) clearTimeout(timer) }
+  }, [marocPresent, date])
+
   /* ⭐ 25/10/2026 — LE REPLI « DEMAIN ».
    *
    *   La bande du programme affiche toujours la course suivante ; quand la
@@ -432,6 +470,10 @@ export default function DnaCoursePage() {
                   {p.cote != null && (
                     <b style={{ marginLeft: 5, fontFamily: 'ui-monospace, monospace', fontSize: '0.76rem', color: '#38bdf8' }}>{p.cote}</b>
                   )}
+                  {p.coteOuverture && (
+                    <i title="grille d'ouverture SOREC — le pari-mutuel réel arrive à l'ouverture des paris"
+                      style={{ marginLeft: 3, color: 'var(--text-muted)', fontSize: '0.62rem', fontStyle: 'normal' }}>ouv.</i>
+                  )}
                 </span>
               ))}
             </div>
@@ -451,6 +493,27 @@ export default function DnaCoursePage() {
               </Notice>
             </div>
           )}
+          {/* ⭐ 27/10/2026 — LES COTES D'OUVERTURE SOREC.
+              L'utilisateur a montré le contraire de ce que la page affirmait :
+              e-sorec.ma publie bel et bien une colonne « Cotes » avant le
+              départ (R9C9 Khemisset : 24 · 6,7 · 12 · 11 …). C'est `startodd`,
+              la grille d'ouverture. `morocco.js` s'en sert maintenant comme
+              cote quand le pari-mutuel (`odd`) n'est pas encore ouvert — les
+              quatre zones se calculent donc au lieu de rester vides. On le dit
+              ici, sans le confondre avec le marché. */}
+          {raceData?.participants?.some((p) => p.coteOuverture) && (
+            <div style={{ marginBottom: 9 }}>
+              <Notice tone="info" icon={<Info size={13} />}>
+                <b>Cotes : la grille d&apos;ouverture de la SOREC.</b> Le pari-mutuel réel
+                (<code>odd</code>) n&apos;est publié qu&apos;à l&apos;ouverture des paris ; avant, la SOREC
+                donne sa grille d&apos;ouverture (la colonne « Cotes » de e-sorec.ma). C&apos;est elle qui
+                alimente les quatre zones, et le classement sera recalculé dès que le marché réel
+                arrivera — au chargement suivant, la page relit la SOREC. Les partants à
+                <b> 1,10 </b> de cette grille sont une valeur par défaut de la SOREC, pas une cote :
+                ils restent sans cote plutôt que de fabriquer un faux favori.
+              </Notice>
+            </div>
+          )}
           {/* ⚠ 23/10/2026 — le moteur est ANCRÉ SUR LE MARCHÉ : sans cote, il
               n'a aucune bande où ranger les chevaux et les quatre zones
               sortent vides. On le dit AVANT le bouton, plutôt que de laisser
@@ -458,17 +521,19 @@ export default function DnaCoursePage() {
               ⭐ 25/10/2026 — deux messages, parce que les causes sont
               différentes : en France les paris ne sont pas encore ouverts ;
               au Maroc la SOREC ne publie la cote qu'avec le rapport (mesuré :
-              Marrakech C7, `oddtime` = départ + 59 min). */}
+              Marrakech C7, `oddtime` = départ + 59 min).
+              ⭐ 27/10/2026 — au Maroc ce message ne sort plus que si la SOREC
+              n'a même pas donné sa grille d'ouverture (voir le bloc ci-dessus,
+              qui traite le cas courant). */}
           {raceData?.participants?.length > 0 && !raceData.participants.some((p) => p.cote != null) && (
             <div style={{ marginBottom: 9 }}>
               <Notice tone="warn" icon={<AlertTriangle size={13} />}>
                 {sel.rnum >= 100 ? (
                   <>
-                    <b>La SOREC ne publie pas de cote avant le départ.</b> Mesuré le 25/10/2026 sur
-                    Marrakech : la cote arrive avec le rapport, environ une heure après la course
-                    (Marrakech C7, <code>oddtime</code> = départ + 59 min). Le moteur est ancré sur le
-                    marché : sans cote, les quatre zones restent vides. Le programme, les partants,
-                    la musique et la corde, eux, sont complets.
+                    <b>Aucune cote, même d&apos;ouverture, pour cette course.</b> La SOREC n&apos;a
+                    publié ni sa grille d&apos;ouverture ni le pari-mutuel : le moteur, ancré sur le
+                    marché, laisse donc les quatre zones vides. Le programme, les partants, la
+                    musique et la corde, eux, sont complets.
                   </>
                 ) : (
                   <>

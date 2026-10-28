@@ -13,9 +13,15 @@ import {
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
   rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix, fetchEmpreinte,
-  fetchBlocPm,
+  fetchBlocPm, fetchBassmat, formeMarche, fetchHuit,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
+
+/* ⭐ 28/10/2026 — les quotas affichés viennent de `GROUPES`, JAMAIS d'un
+ * littéral : le texte suit le moteur au lieu de dériver (4-3-1-1-0 → 9 chevaux
+ * avait laissé sept phrases périmées dans la page). */
+const QUOTAS_TXT = GROUPES.map((g) => g.quota).join('-')
+const NB_TICKET = GROUPES.reduce((s2, g) => s2 + g.quota, 0)
 
 const s = {
   box: { border: '1px solid rgba(125,205,255,.28)', borderRadius: 10, background: 'rgba(12,20,37,.72)' },
@@ -143,9 +149,31 @@ const THEME = {
   },
   /* 🎯 (retiré le 19/10/2026) — le Trio · Couplé a été sorti de cette page.
      ⚠ 23/10/2026 : la page Coply qui le portait est supprimée à son tour. */
+  /* ⭐ LA BASSMAT DE LA COURSE — 28/10/2026. « بصمة السباق ».
+     Magenta profond : c'est un SCEAU, pas un tableau de bord. Il se lit avant
+     de parier, il ne se confond avec aucun des six autres onglets. */
+  bassmat: {
+    titre: 'Bassmat',
+    sousTitre: 'بصمة السباق — l’empreinte de cette course',
+    fond: 'transparent',
+    entete: 'linear-gradient(120deg,#180418 0%,#86198f 55%,#f0abfc 100%)',
+    accent: '#f0abfc', accentSombre: '#701a75', accentClair: 'rgba(240,171,252,.16)',
+    bord: 'rgba(240,171,252,.45)', carte: 'rgba(28,8,28,.78)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(240,171,252,.07)',
+    on: 'rgba(240,171,252,.22)', danger: 'rgba(244,63,94,.18)', texte: '#fbe8fd', muted: '#ab86ae',
+    ombre: 'rgba(192,38,211,.35)', ombreD: '0 0 24px rgba(240,171,252,.16)',
+    police: 'system-ui, -apple-system, sans-serif',
+    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
+    box: { border: '1px solid rgba(240,171,252,.45)', borderRadius: 10, background: 'rgba(28,8,28,.78)' },
+    hdrStyle: { background: 'linear-gradient(180deg,#86198f,#180418)', color: '#fbe8fd' },
+    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#f5d0fe', fontFamily: 'system-ui, sans-serif' },
+    td: { padding: '6px 9px', fontSize: 13 },
+  },
 }
 
-const TABS = [['grille', 'La grille'], ['ticket', 'Le ticket'], ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts'], ['choix', 'Choix']]
+const TABS = [
+  ['grille', 'La grille'], ['ticket', 'Le ticket'], ['bassmat', 'Bassmat'],
+  ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts'], ['choix', 'Choix'],
+]
 
 function Boite({ n, pris, presse, couleur, score, cote, slot, marche, onClick }) {
   // boule 3D : dégradé radial + ombres portées/incrustées.
@@ -351,6 +379,13 @@ export default function QuinteGrille() {
   const [blocPm, setBlocPm] = useState(null)
   // 🩸 LA MESURE DU CHOIX dans G1/G2 (tools/choix-g1g2.mjs, 16/10/2026).
   const [choix, setChoix] = useState(null)
+  // ⭐ LA BASSMAT DE LA COURSE (tools/bassmat.mjs, 28/10/2026) — « بصمة السباق ».
+  //    La forme du marché, les taux par case, l'empreinte attendue, l'audit des
+  //    décisions. Le fichier est lu tel quel : aucun chiffre saisi à la main.
+  const [bassmat, setBassmat] = useState(null)
+  // ⭐ G5 ET LES 8 CHEVAUX (tools/huit.mjs, 28/10/2026) — la preuve du plafond
+  //    de G5, et le classement des 121 répartitions de 8 chevaux.
+  const [huit, setHuit] = useState(null)
   // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
   //   (AGENTS.md §13.3) : la page doit le montrer tel quel, pas le recalculer.
   const [ticketManuel, setTicketManuel] = useState(null)  // ⚑ la lecture du RÉSULTAT est déclenchée par l'utilisateur (bouton) :
@@ -370,6 +405,8 @@ export default function QuinteGrille() {
     fetchChoix().then((x) => x && setChoix(x)).catch(() => {})
     fetchEmpreinte().then((x) => x && setEmpreinte(x)).catch(() => {})
     fetchBlocPm().then((x) => x && setBlocPm(x)).catch(() => {})
+    fetchBassmat().then((x) => x && setBassmat(x)).catch(() => {})
+    fetchHuit().then((x) => x && setHuit(x)).catch(() => {})
   }, [])
 
   const charger = useCallback(async (d) => {
@@ -631,6 +668,13 @@ export default function QuinteGrille() {
   const rangs = useMemo(() => rangsMarche(cotes), [cotes])
   const bandes = useMemo(() => Object.fromEntries(Object.entries(rangs).map(([n, r]) => [n, bandeMarche(r)])), [rangs])
 
+  /* ⭐ LA FORME DU MARCHÉ DU JOUR (28/10/2026) — fermé / normal / ouvert.
+   *  C'est elle qui choisit la colonne de taux lue dans l'onglet Bassmat :
+   *  un marché fermé ne lit pas les cases comme un marché ouvert (P8 donne
+   *  22,7 % ici, 26,7 % là). Le seuil est celui de `formeMarche`, une seule
+   *  source pour l'outil et pour la page. */
+  const forme = useMemo(() => formeMarche(cotes), [cotes])
+
   const rempli = useMemo(() => {
     if (!grille) return null
     return remplirGrille(grille, classementFinal, 'PLAT', cotes, stats)
@@ -753,9 +797,10 @@ function PanneauMesure({ sk, fiabilite, detail }) {
             </table>
           </div>
           <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6, lineHeight: 1.6 }}>
-            Depuis le 19/10/2026 (§11.23), la <b>queue</b> du ticket se remplit à la cote — aujourd'hui
-            <b> G4</b> seulement. Depuis le 21/10/2026 (§11.34) G1 prend ses <b>4</b> et G2 ses <b>3</b> :
-            quotas <b>4-3-1-1-0</b>, <b>9 chevaux</b>. G1-G4 restent au rang de presse.
+            Depuis le 19/10/2026 (§11.23), la <b>queue</b> du ticket se remplit à la cote —
+            aujourd'hui <b> G5</b> seulement. Depuis le 28/10/2026 (§11.40) la méthode revient
+            au ticket de <b>{NB_TICKET} chevaux</b> : quotas <b>{QUOTAS_TXT}</b>. G1-G4 restent
+            au rang de presse.
           </div>
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
@@ -829,8 +874,8 @@ function PanneauMesure({ sk, fiabilite, detail }) {
               </table>
             </div>
             <span style={{ color: sk.muted }}>
-              Une seule de ces variantes est en production — celle qui porte « appliquée » (4-3-1-1-0,
-              §11.34). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
+              Une seule de ces variantes est en production — celle qui porte « appliquée »
+              ({QUOTAS_TXT}, §11.40). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
             </span>
           </div>
         </>
@@ -935,11 +980,9 @@ function TabChoix({ sk, choix }) {
   const blocs = (D.blocs || []).slice().sort((a, b) => (b.ecartes || 0) - (a.ecartes || 0))
   const meilleure = choix.grille?.meilleure || {}
   const enTete = (choix.regles || []).filter((r) => r.deux >= (choix.code || 0)).slice(0, 6)
-  /* ⚠ 21/10/2026 — depuis 4-3-1-1-0, l'écart quota est NÉGATIF (3-3-1-1-0
-   * perd 14,6 points) : le signe doit s'afficher, pas un « + » aveugle. */
+  /* ⚠ le signe doit s'afficher, pas un « + » aveugle. */
   const plus = (v) => (v > 0 ? '+' : v < 0 ? '\u2212' : '\u00b1') + nb(Math.round(10 * Math.abs(v)) / 10)
   const gainChoix = (L.oracle || 0) - (L.code || 0)
-  const gainQuota = (L.quotaG5versG2 || 0) - (L.code || 0)
   return (
     <div>
       <div style={{ fontSize: 13, color: sk.texte, lineHeight: 1.6, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', marginBottom: 12 }}>
@@ -959,9 +1002,9 @@ function TabChoix({ sk, choix }) {
         ) : null}
         <br />
         <span style={{ color: sk.muted }}>
-          ⛔ Les quotas sont fixés (§11.16) : <b>4-3-1-1-0</b> depuis le 21/10/2026
-          (§11.34 — G1 prend ses 4, G2 ses 3, le siège sort de G5). On ne mesure QUE
-          qui entre dans G2 (3 gardés sur 4) et dans G4 (1 gardé sur 2). Métrique =
+          ⛔ Les quotas sont fixés (§11.16) : <b>{QUOTAS_TXT}</b> depuis le 28/10/2026
+          (§11.40 — la méthode revient au ticket de {NB_TICKET} chevaux, G5 compris).
+          On ne mesure QUE qui entre dans chaque bloc. Métrique =
           <b>PAYANTE</b>, le 1-2-3 complet dans la grille.
         </span>
       </div>
@@ -1001,12 +1044,11 @@ function TabChoix({ sk, choix }) {
       </div>
       <div style={{ ...sk.box, padding: '10px 12px', boxShadow: sk.ombreD, fontSize: 13 }}>
         {[
-          ['le code actuel (carnet G1-G4 · G5 sans siège)', L.code, sk.muted],
+          ['le code en production (' + QUOTAS_TXT + ', ' + NB_TICKET + ' chevaux)', L.code, sk.muted],
           ['le choix PARFAIT dans G1 et G2 (oracle)', L.oracle, sk.accent],
           ['le choix parfait dans G1 seul', L.oracleG1, sk.accent],
           ['le choix parfait dans G2 seul', L.oracleG2, sk.accent],
           ['le hasard pur', L.hasard, sk.muted],
-          ['3-3-1-1-0 (§11.26 — écarté depuis le 21/10, §11.34 : 4-3-1-1-0)', L.quotaG5versG2, sk.accent],
         ].map(([lib, v, col]) => (
           <div key={lib} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '3px 0' }}>
             <span style={{ width: 300, color: sk.texte }}>{lib}</span>
@@ -1019,10 +1061,9 @@ function TabChoix({ sk, choix }) {
         ))}
         <div style={{ marginTop: 8, fontSize: 12, color: sk.texte, borderTop: '1px dashed ' + sk.bord, paddingTop: 8, lineHeight: 1.6 }}>
           Le <b>choix</b> qui reste (G2 seul) vaut <b style={{ color: sk.accent }}>{plus(gainChoix)} pts</b>,
-          et le <b>choix parfait</b> reste hors d’atteinte. Le siège repris à G1
-          (3-3-1-1-0) <b style={{ color: '#fb7185' }}>coûte {plus(gainQuota)} pts</b> — c’est
-          exactement ce que 4-3-1-1-0 corrige (§11.34) : G1 prend ses <b>4</b>, il n’y a
-          plus rien à choisir là où le choix coûtait le plus cher. Seul G2 garde un choix.
+          et le <b>choix parfait</b> reste hors d’atteinte : c’est le plafond du §11.24, pas une
+          règle à trouver. Les quotas sont figés (<b>{QUOTAS_TXT}</b>, §11.40) — le seul travail
+          permis est de choisir QUI entre dans un bloc.
         </div>
       </div>
 
@@ -1126,9 +1167,475 @@ function TabChoix({ sk, choix }) {
           La carrière vient de <b>tools/collect-forms.mjs</b> (<code>data/forms.json</code>),
           enrichie par <b>tools/collect-terrain.mjs</b> (<code>data/terrain.json</code>) et
           <b>tools/collect-vh.mjs</b> (<code>data/vh.json</code>) — terrain, sens et VH collectés de PMU (§14.6).
-          La règle en production est <b>G1-G4 carnet</b> (G5 sans siège), sur les quotas
-          <b> 4-3-1-1-0</b> (§11.23 + §11.34).
+          La règle en production est <b>G1-G3 carnet · G4-G5 marché</b>, sur les quotas
+          <b> {QUOTAS_TXT}</b> ({NB_TICKET} chevaux, §11.40).
         </span>
+      </div>
+    </div>
+  )
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+ *  ⭐ L'ONGLET BASSMAT — « بصمة السباق » (28/10/2026)
+ *
+ *  Demande de l'utilisateur, textuellement :
+ *    « Quinté → Archive · Statistiques · Écarts · Choix : بغيت نخرج منهم بصمة
+ *      للسباق لان الاختيارات الحالية ضعيفة جدا »
+ *
+ *  Cet onglet ne mesure rien : il LIT `data/bassmat.json`, écrit par
+ *  `tools/bassmat.mjs` sur les 96 Quintés à presse réelle. Il répond à une
+ *  seule question : **cette course, quelle forme a-t-elle ?**
+ *
+ *    ① la FORME DU MARCHÉ (fermé / normal / ouvert) — le seul découpage qui
+ *      déplace la lecture des cases, mesuré dans le fichier ;
+ *    ② l'EMPREINTE ATTENDUE — les cases les plus fortes POUR CETTE FORME,
+ *      donc le podium et le quinté attendus, en numéros de case ;
+ *    ③ LE TICKET, case par case — le taux de chaque case du ticket, et la
+ *      plus faible (le maillon faible, au sens de §6) ;
+ *    ④ LES DÉCISIONS — dans G2, G3, G4 : la case GARDÉE contre la JETÉE ;
+ *    ⑤ LA COUVERTURE — ce que 9 cases tiennent, et ce que les cases laissées
+ *      dehors valent. La marge est là, pas dans le choix.
+ *
+ *  ⚠ Aucun chiffre n'est saisi à la main dans ce composant. Tout vient du
+ *    fichier, y compris les verdicts.
+ * ══════════════════════════════════════════════════════════════════════════ */
+function TabBassmat({ sk, B, H, detail, forme }) {
+  if (!B) return (
+    <div style={{ fontSize: 13, color: sk.muted }}>
+      Pas encore de mesure : écrire <b>public/data/bassmat.json</b> (node tools\bassmat.mjs).
+    </div>
+  )
+  const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
+  const pc = (x) => (x == null ? '—' : nb(x) + ' %')
+  const caseDe = (p) => (B.cases || []).find((x) => x.p === p) || null
+  /* le taux d'une case : celui de la FORME DU JOUR dès qu'elle a assez de
+   * courses (n ≥ 15), sinon le taux global. Jamais un taux sur 3 courses. */
+  const taux = (p, cle) => {
+    const c = caseDe(p)
+    if (!c) return { n: 0, pc5: null, pc3: null }
+    const f = cle && c.parForme ? c.parForme[cle] : null
+    if (f && f.n >= 15) return f
+    return { n: c.n, pc5: c.pc5, pc3: c.pc3 }
+  }
+  const cle = forme ? forme.cle : null
+  const seau = (B.forme?.seaux || []).find((s) => s.cle === cle) || null
+  const couleurForme = forme ? forme.couleur : sk.muted
+
+  /* le classement des cases POUR CETTE FORME — c'est l'empreinte du jour */
+  const classement = (B.cases || [])
+    .filter((c) => c.n >= 20)
+    .map((c) => ({ p: c.p, ...taux(c.p, cle), global: c }))
+    .sort((a, b) => (b.pc5 - a.pc5) || (a.p - b.p))
+  const top5 = classement.slice(0, 5)
+  const top3 = classement.slice(0, 3)
+  const podium = B.composition?.podium?.moyenne || {}
+  const quinte = B.composition?.quinte?.moyenne || {}
+
+  /* le ticket réellement affiché, dans l'ordre des cases */
+  const tickets = []
+  for (const g of detail || []) for (const c of g.cases) if (c.pris) tickets.push({ ...c, groupe: g.id })
+  tickets.sort((a, b) => a.place - b.place)
+  const tauxTicket = (c) => taux(c.place, cle)
+  const faible = tickets.length
+    ? tickets.slice().sort((a, b) => (tauxTicket(a).pc5 ?? 0) - (tauxTicket(b).pc5 ?? 0))[0]
+    : null
+  const dedans = new Set(top5.map((x) => x.p))
+  const manquantes = classement.filter((x) => !tickets.some((c) => c.place === x.p)).slice(0, 3)
+
+  /* les décisions : ce que le moteur garde contre ce qu'il jette */
+  const decisions = (B.blocs || []).map((b) => {
+    const g = (detail || []).find((x) => x.id === b.id)
+    const pris = g ? g.cases.filter((c) => c.pris) : []
+    const pas = g ? g.cases.filter((c) => !c.pris) : []
+    const moy = (l) => (l.length ? l.reduce((s, c) => s + (taux(c.place, cle).pc5 || 0), 0) / l.length : null)
+    return { ...b, pris, pas, moyPris: moy(pris), moyPas: moy(pas) }
+  })
+
+  const boite = { ...sk.box, padding: 13, marginBottom: 12, boxShadow: sk.ombreD }
+  const titre = { fontSize: 12, fontWeight: 800, color: sk.accent, letterSpacing: 0.7, textTransform: 'uppercase', margin: '0 0 7px' }
+  const barre = (v) => (
+    <span style={{ display: 'inline-block', verticalAlign: 'middle', width: 70, height: 8, background: sk.alt, border: '1px solid ' + sk.bord, borderRadius: 999, overflow: 'hidden' }}>
+      <span style={{ display: 'block', width: Math.max(2, Math.round(v || 0)) + '%', height: '100%', background: sk.accent }} />
+    </span>
+  )
+  const teinte = (v) => (v == null ? sk.muted : v >= 45 ? '#34d399' : v >= 30 ? '#fbbf24' : '#fb7185')
+
+  return (
+    <div>
+      {/* ── l'en-tête : ce que c'est, et sur quoi c'est mesuré ─────────────── */}
+      <div style={{ ...boite, borderLeft: '4px solid ' + sk.accent, background: sk.alt }}>
+        <b style={{ fontSize: 14 }}>بصمة السباق — l’empreinte de cette course</b>
+        <div style={{ fontSize: 12, color: sk.muted, marginTop: 5, lineHeight: 1.6 }}>
+          <b>{B.n}</b> Quintés à presse réelle ({B.periode?.debut} → {B.periode?.fin}) · lus par <b>case du carnet</b> (P1..P20).
+          {' '}L’empreinte ne remplace pas votre méthode : elle dit <b>ce que cette course a l’air d’être</b>,
+          et si le ticket est du bon côté de la statistique.
+        </div>
+      </div>
+
+      {/* ── ① LA FORME DU MARCHÉ ──────────────────────────────────────────── */}
+      <div style={boite}>
+        <div style={titre}>① La forme du marché</div>
+        {!forme ? (
+          <div style={{ fontSize: 12.5, color: sk.muted }}>
+            Marché pas encore lisible ({Object.keys(forme || {}).length} cote(s)) : les taux affichés sont les taux <b>globaux</b>.
+          </div>
+        ) : (
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{
+              padding: '7px 14px', borderRadius: 10, border: '1px solid ' + couleurForme,
+              background: couleurForme + '1f', color: couleurForme, fontWeight: 800, fontSize: 14,
+            }}>
+              {forme.lib}
+            </div>
+            <div style={{ fontSize: 12.5, color: sk.texte, lineHeight: 1.7 }}>
+              favori <b>n°{forme.favori}</b> à <b>{nb(forme.fav)}</b> · <b>{forme.nSous10}</b> chevaux sous 10/1
+              {' '}sur {forme.nb} cotés · <span style={{ color: sk.muted }}>{forme.detail}</span>
+            </div>
+          </div>
+        )}
+        <div style={{ overflowX: 'auto', marginTop: 10 }}>
+          <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 12.5, border: '1px solid ' + sk.bord, borderRadius: 8, overflow: 'hidden' }}>
+            <thead><tr style={sk.hdrStyle}>
+              {['forme du marché', 'courses', 'part', 'le 4e de G2 (P8) arrive top-5'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+            </tr></thead>
+            <tbody>
+              {(B.forme?.seaux || []).map((s, i) => (
+                <tr key={s.cle} style={{
+                  borderBottom: '1px solid ' + sk.bord,
+                  background: s.cle === cle ? sk.on : (i % 2 ? sk.alt : sk.ligne),
+                  fontWeight: s.cle === cle ? 800 : 400,
+                }}>
+                  <td style={sk.td}>{s.cle === cle ? '▸ ' : ''}{s.lib}</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{s.n}</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{pc(s.part)}</td>
+                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 800, color: teinte(s.jeteG2?.pc5) }}>{pc(s.jeteG2?.pc5)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6 }}>
+          {B.forme?.regle}
+        </div>
+      </div>
+
+      {/* ── ② L'EMPREINTE ATTENDUE ────────────────────────────────────────── */}
+      <div style={boite}>
+        <div style={titre}>② L’empreinte attendue {seau ? `— ${seau.lib}` : ''}</div>
+        <div style={{ fontSize: 12.5, color: sk.texte, lineHeight: 1.7 }}>
+          Les cases les plus fortes <b>{cle ? 'pour ce marché' : 'de l’archive'}</b>, dans l’ordre :
+        </div>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', margin: '9px 0 10px' }}>
+          {top5.map((x, i) => (
+            <div key={x.p} style={{
+              minWidth: 82, padding: '7px 10px', borderRadius: 10,
+              border: '1px solid ' + (i < 3 ? sk.accent : sk.bord),
+              background: i < 3 ? sk.accentClair : sk.alt,
+            }}>
+              <div style={{ fontFamily: sk.nb.td, fontSize: 11, color: sk.muted }}>#{i + 1}</div>
+              <div style={{ fontFamily: sk.nb.td, fontWeight: 800, fontSize: 16, color: i < 3 ? sk.accent : sk.texte }}>P{x.p}</div>
+              <div style={{ fontFamily: sk.nb.td, fontSize: 12, color: teinte(x.pc5) }}>{pc(x.pc5)}</div>
+              <div style={{ fontSize: 10.5, color: sk.muted }}>top-5 · n={x.n}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ fontSize: 12.5, color: sk.texte, lineHeight: 1.8, borderTop: '1px dashed ' + sk.bord, paddingTop: 9 }}>
+          <b>Podium attendu</b> : {top3.map((x) => 'P' + x.p).join(' · ')} — les trois cases qui donnent le plus.
+          <br />
+          <b>Composition attendue</b> (moyenne par course) — podium :
+          <b> G1 {nb(podium.G1)} · G2 {nb(podium.G2)} · G3 {nb(podium.G3)} · G4 {nb(podium.G4)} · G5 {nb(podium.G5)}</b>
+          {' '}· quinté : <b>G1 {nb(quinte.G1)} · G2 {nb(quinte.G2)} · G3 {nb(quinte.G3)} · G4 {nb(quinte.G4)} · G5 {nb(quinte.G5)}</b>
+          <br />
+          <span style={{ color: sk.muted }}>
+            Autrement dit : le podium prend <b>≈ 2 chevaux de G1</b> et <b>≈ 1 de G2</b>, et il ne descend
+            presque jamais sous G3 (0,3 par course). Le quinté, lui, prend un cheval de G3 une fois sur deux.
+          </span>
+        </div>
+      </div>
+
+      {/* ── ③ LE TICKET, CASE PAR CASE ────────────────────────────────────── */}
+      <div style={boite}>
+        <div style={titre}>③ Le ticket, case par case</div>
+        {!tickets.length ? (
+          <div style={{ fontSize: 12.5, color: sk.muted }}>Aucun ticket affiché pour cette course.</div>
+        ) : (
+          <>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 12.5, border: '1px solid ' + sk.bord, borderRadius: 8, overflow: 'hidden' }}>
+                <thead><tr style={sk.hdrStyle}>
+                  {['case', 'n°', 'bloc', 'marché', cle ? `top-5 (${seau ? seau.lib : cle})` : 'top-5', 'top-5 global', 'top-3', 'dans l’empreinte'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+                </tr></thead>
+                <tbody>
+                  {tickets.map((c, i) => {
+                    const t = tauxTicket(c)
+                    const estFaible = faible && faible.place === c.place
+                    return (
+                      <tr key={c.place} style={{
+                        borderBottom: '1px solid ' + sk.bord,
+                        background: estFaible ? 'rgba(244,63,94,.13)' : (i % 2 ? sk.alt : sk.ligne),
+                      }}>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 800 }}>P{c.place}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 800, color: sk.accent }}>{c.num}</td>
+                        <td style={{ ...sk.td, color: sk.muted }}>{c.groupe}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{c.marche != null ? 'M' + c.marche : '—'}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 800, color: teinte(t.pc5) }}>{pc(t.pc5)}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{pc(caseDe(c.place)?.pc5)}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{pc(t.pc3)}</td>
+                        <td style={sk.td}>{dedans.has(c.place) ? <span style={{ color: '#34d399', fontWeight: 800 }}>oui</span> : <span style={{ color: sk.muted }}>—</span>}
+                          {estFaible && <span style={{ color: '#fb7185', fontWeight: 800 }}> · le plus faible</span>}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div style={{ fontSize: 12, color: sk.texte, marginTop: 8, lineHeight: 1.7 }}>
+              {faible ? <>
+                Le <b style={{ color: '#fb7185' }}>maillon faible</b> du ticket est
+                <b> P{faible.place} (n°{faible.num})</b> — {pc(tauxTicket(faible).pc5)} de top-5,
+                contre {pc(tauxTicket(tickets.find((c) => c.place === top5[0]?.p) || tickets[0]).pc5)} pour la meilleure case du jour.
+                {' '}Ce n’est pas une raison de l’écarter (§6 : on écarte sur le physique) — c’est la case à surveiller.
+              </> : null}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* ── ④ LES DÉCISIONS — gardée contre jetée ─────────────────────────── */}
+      <div style={boite}>
+        <div style={titre}>④ Les décisions — la case gardée contre la case jetée</div>
+        {!decisions.length ? (
+          <div style={{ fontSize: 12.5, color: sk.muted }}>Aucun bloc à choix dans cette grille.</div>
+        ) : (
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 12.5, border: '1px solid ' + sk.bord, borderRadius: 8, overflow: 'hidden' }}>
+              <thead><tr style={sk.hdrStyle}>
+                {['bloc', 'gardé', 'taux gardé', 'jeté', 'taux jeté', 'écart', 'lecture'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+              </tr></thead>
+              <tbody>
+                {decisions.map((d, i) => {
+                  const ecart = d.moyPris != null && d.moyPas != null ? Math.round(10 * (d.moyPris - d.moyPas)) / 10 : null
+                  return (
+                    <tr key={d.id} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
+                      <td style={{ ...sk.td, fontWeight: 800 }}>{d.id} <span style={{ color: sk.muted, fontWeight: 400 }}>{d.quota}/{d.taille}</span></td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td, color: '#34d399', fontWeight: 700 }}>{d.pris.map((c) => 'P' + c.place).join(' · ') || '—'}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{pc(d.moyPris == null ? null : Math.round(10 * d.moyPris) / 10)}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td, color: '#fb7185' }}>{d.pas.map((c) => 'P' + c.place).join(' · ') || '—'}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{pc(d.moyPas == null ? null : Math.round(10 * d.moyPas) / 10)}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 800, color: ecart > 0 ? '#34d399' : '#fb7185' }}>
+                        {ecart == null ? '—' : (ecart > 0 ? '+' : '') + nb(ecart)}
+                      </td>
+                      <td style={{ ...sk.td, color: sk.muted }}>
+                        {ecart == null ? 'aucun choix' : ecart > 0 ? 'garde les cases fortes' : 'garde la case faible'}
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 7, lineHeight: 1.6 }}>
+          Le ticket prend {GROUPES.map((g) => `${g.id} ${g.quota}`).join(' · ')} ({QUOTAS_TXT}, §11.40) :
+          il n’y a de choix que dans les blocs qui ont plus de cases que leur quota.
+          C’est <b>là, et seulement là</b>, que l’empreinte peut contredire le moteur — ailleurs
+          elle le confirme.
+        </div>
+      </div>
+
+      {/* ── ⑤ LA COUVERTURE ───────────────────────────────────────────────── */}
+      <div style={boite}>
+        <div style={titre}>⑤ La couverture — ce que {NB_TICKET} cases tiennent</div>
+        <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+          <div style={{ fontSize: 13, lineHeight: 1.9, minWidth: 250 }}>
+            <div>podium entier : <b style={{ color: '#34d399' }}>{pc(B.tient?.podium)}</b></div>
+            <div>quinté entier : <b style={{ color: B.tient?.quinte >= 20 ? '#34d399' : '#fbbf24' }}>{pc(B.tient?.quinte)}</b></div>
+            <div>arrivants par course : <b style={{ fontFamily: sk.nb.td }}>{nb(B.tient?.x5)}</b> / 5</div>
+            <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 4 }}>
+              cases promises <b>{nb(B.calibrage?.sommeTaux)}</b> · vues <b>{nb(B.calibrage?.moyenneVue)}</b>
+            </div>
+          </div>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ borderCollapse: 'collapse', fontSize: 12 }}>
+              <thead><tr>
+                {['P1..Pk', 'podium', 'quinté'].map((h) => <th key={h} style={{ padding: '3px 10px', textAlign: 'right', color: sk.muted, fontWeight: 800, fontSize: 11 }}>{h}</th>)}
+              </tr></thead>
+              <tbody>
+                {(B.courbe || []).map((c) => (
+                  <tr key={c.k} style={{ borderTop: '1px solid ' + sk.bord, background: c.k === 12 ? sk.on : 'transparent' }}>
+                    <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: sk.nb.td, fontWeight: 800 }}>{c.k}</td>
+                    <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: sk.nb.td }}>{pc(c.podium)}</td>
+                    <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: sk.nb.td, color: c.k === 12 ? sk.accent : sk.texte }}>{pc(c.quinte)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {manquantes.length > 0 && (
+          <div style={{ marginTop: 10, fontSize: 12.5, color: sk.texte, lineHeight: 1.7, borderTop: '1px dashed ' + sk.bord, paddingTop: 9 }}>
+            <b>Les cases laissées dehors</b>, par ordre de force aujourd’hui :
+            {manquantes.map((x) => (
+              <span key={x.p} style={{
+                marginInlineStart: 8, padding: '2px 8px', borderRadius: 6, fontFamily: sk.nb.td,
+                border: '1px solid ' + sk.bord, background: sk.alt,
+              }}>P{x.p} · {pc(x.pc5)}</span>
+            ))}
+            <br />
+            <span style={{ color: sk.muted }}>
+              Elles ne sont pas mauvaises : le ticket n’a que {NB_TICKET} sièges. À 12 cases le quinté tombe
+              <b> {pc((B.courbe || []).find((c) => c.k === 12)?.quinte)}</b> du temps — c’est la seule marge
+              que la mesure reconnaisse (§11.25).
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* ── ⑥ G5 — LA PREUVE DE NÉCESSITÉ ─────────────────────────────────── */}
+      {H && (
+        <div style={boite}>
+          <div style={titre}>⑥ G5 — la preuve de nécessité</div>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
+            {[
+              ['un cheval de G5 (P13+) finit dans les 5', H.g5.unArrive, '#34d399'],
+              ['plafond d’un ticket SANS siège G5', H.g5.plafondSansG5, '#fbbf24'],
+              ['le siège (meilleur du marché) arrive top-5', H.g5.siegeTop5, '#fb7185'],
+              ['quand un G5 arrive, le siège le trouve', H.g5.trouveQuandArrive, '#fb7185'],
+            ].map(([lib, v, col]) => (
+              <div key={lib} style={{
+                minWidth: 168, padding: '8px 11px', borderRadius: 10,
+                border: '1px solid ' + sk.bord, background: sk.alt,
+              }}>
+                <div style={{ fontFamily: sk.nb.td, fontSize: 20, fontWeight: 800, color: col }}>{pc(v)}</div>
+                <div style={{ fontSize: 10.5, color: sk.muted, lineHeight: 1.4 }}>{lib}</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, border: '1px solid ' + sk.bord, borderRadius: 8, overflow: 'hidden' }}>
+                <thead><tr style={sk.hdrStyle}>
+                  {['forme du marché', 'courses', 'un G5 dans les 5', 'siège top-5'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+                </tr></thead>
+                <tbody>
+                  {(H.g5.parForme || []).map((f, i) => (
+                    <tr key={f.cle} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
+                      <td style={sk.td}>{f.cle}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{f.n}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 800, color: teinte(f.unArrive) }}>{pc(f.unArrive)}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{pc(f.siegeTop5)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, border: '1px solid ' + sk.bord, borderRadius: 8, overflow: 'hidden' }}>
+                <thead><tr style={sk.hdrStyle}>
+                  {['cote du siège', 'n', 'top-5', 'top-3'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+                </tr></thead>
+                <tbody>
+                  {(H.g5.parCote || []).map((x, i) => (
+                    <tr key={x.lib} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
+                      <td style={sk.td}>{x.lib}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{x.n}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 800, color: teinte(x.top5) }}>{pc(x.top5)}</td>
+                      <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{pc(x.top3)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div style={{ fontSize: 12.5, color: sk.texte, marginTop: 10, lineHeight: 1.7, borderTop: '1px dashed ' + sk.bord, paddingTop: 9 }}>
+            <b style={{ color: '#34d399' }}>La nécessité est réelle</b> : dans <b>{pc(H.g5.unArrive)}</b> des courses,
+            un cheval de P13+ finit dans les cinq. Un ticket <b>sans</b> siège G5 ne peut donc pas dépasser
+            <b> {pc(H.g5.plafondSansG5)}</b> de quinté — aucune composition n’y change rien.
+            <br />
+            <b style={{ color: '#fb7185' }}>Mais le siège n’est pas la porte</b> : le meilleur cheval du marché dans G5
+            n’arrive que <b>{pc(H.g5.siegeTop5)}</b> du temps, et quand un G5 arrive il n’est trouvé que
+            <b> {pc(H.g5.trouveQuandArrive)}</b> du temps. Le plafond est vrai ; le moyen de le tenir, non.
+            <br />
+            <span style={{ color: sk.muted }}>
+              C’est exactement pourquoi la section ⑦ existe : à 8 chevaux, la question n’est pas « faut-il G5 ? »
+              (oui, pour le plafond) mais « combien coûte le siège qui essaie de le tenir ».
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* ── ⑦ 8 CHEVAUX — LE CLASSEMENT ──────────────────────────────────── */}
+      {H && (
+        <div style={boite}>
+          <div style={titre}>⑦ 8 chevaux — le classement mesuré</div>
+          <div style={{ fontSize: 12.5, color: sk.texte, lineHeight: 1.7 }}>
+            <b>{H.huit.combos}</b> répartitions de 8 chevaux énumérées ({H.huit.nbAvec} avec siège G5 ·
+            {' '}{H.huit.nbSans} sans), notées sur les deux corpus. La colonne <b>min</b> est la plus mauvaise
+            des deux : c’est elle qui décide — sur 96 courses, 1,5 point d’écart, c’est <b>un</b> quinté.
+          </div>
+
+          {[['AVEC un siège G5', H.huit.robusteAvec, 'P13+ dans le ticket'], ['SANS siège G5', H.huit.robusteSans, 'tout le ticket dans P1..P12']].map(([lib, liste, sous]) => (
+            <div key={lib} style={{ marginTop: 10 }}>
+              <div style={{ fontSize: 12, fontWeight: 800, color: sk.accent, marginBottom: 4 }}>
+                {lib} <span style={{ color: sk.muted, fontWeight: 400 }}>— {sous}</span>
+              </div>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 12.5, border: '1px solid ' + sk.bord, borderRadius: 8, overflow: 'hidden' }}>
+                  <thead><tr style={sk.hdrStyle}>
+                    {['répartition', 'quinté presse', 'quinté archives', 'min', 'podium', '≥4'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+                  </tr></thead>
+                  <tbody>
+                    {(liste || []).slice(0, 5).map((x, i) => (
+                      <tr key={x.k} style={{
+                        borderBottom: '1px solid ' + sk.bord,
+                        background: i === 0 ? sk.on : (i % 2 ? sk.alt : sk.ligne),
+                        fontWeight: i === 0 ? 800 : 400,
+                      }}>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{i === 0 ? '▸ ' : ''}{x.k}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{pc(x.press)}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{pc(x.archives)}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 800, color: teinte(x.min) }}>{pc(x.min)}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{pc(x.pod)}</td>
+                        <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{pc(x.q4)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+
+          <div style={{ fontSize: 12.5, color: sk.texte, marginTop: 10, lineHeight: 1.7, borderTop: '1px dashed ' + sk.bord, paddingTop: 9 }}>
+            <b>Le meilleur 8 est {H.huit.robusteSans?.[0]?.k}</b> — {pc(H.huit.robusteSans?.[0]?.min)} de quinté garanti
+            sur les deux corpus, {pc(H.huit.robusteSans?.[0]?.pod)} de podium. Le meilleur 8 <b>avec</b> G5 est
+            {' '}<b>{H.huit.robusteAvec?.[0]?.k}</b> : {pc(H.huit.robusteAvec?.[0]?.min)}.
+            <br />
+            La production actuelle (<b>{H.huit.prod?.k}</b>, {H.huit.prod?.chevaux} chevaux) tient
+            {' '}<b>{pc(H.huit.prod?.qui)}</b> du quinté : passer à 8 coûte
+            {' '}<b style={{ color: '#fb7185' }}>{nb(Math.round(10 * (H.huit.prod?.qui - (H.huit.robusteSans?.[0]?.min || 0))) / 10)} points</b>.
+            <br />
+            <b>Le G5 conditionnel</b> (le siège seulement quand son cheval est court) ne rattrape rien :
+            {(H.huit.conditionnel || []).map((c) => (
+              <span key={c.lib} style={{ display: 'inline-block', marginInlineStart: 6, padding: '1px 7px', borderRadius: 6, border: '1px solid ' + sk.bord, background: sk.alt, fontFamily: sk.nb.td, fontSize: 11.5 }}>
+                {c.lib} : {c.dQui >= 0 ? '+' : ''}{nb(c.dQui)}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── le verdict, écrit par l'outil ─────────────────────────────────── */}
+      <div style={{ ...boite, borderLeft: '4px solid ' + sk.accent, background: sk.alt }}>
+        <div style={titre}>Le verdict de l’empreinte</div>
+        <div style={{ fontSize: 12.5, lineHeight: 1.7 }}>{B.verdict}</div>
+        <div style={{ fontSize: 11, color: sk.muted, marginTop: 7 }}>
+          Écrit par <b>tools/bassmat.mjs</b> — rejouer : <code>node tools\bassmat.mjs</code>.
+          Aucun chiffre de cet onglet n’est saisi à la main.
+        </div>
       </div>
     </div>
   )
@@ -1414,14 +1921,14 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           <div style={{ fontSize: 12, color: SK.texte, margin: '12px 0 8px', lineHeight: 1.6, background: SK.alt, border: '1px solid ' + SK.bord, borderLeft: '4px solid ' + SK.accent, borderRadius: SK.box.borderRadius, padding: '10px 12px' }}>
             MA MÉTHODE — cinq groupes, un quota chacun. Le moteur remplit les quotas :
             le ticket est fixé, il ne se modifie pas à la main.
-            Depuis le 21/10/2026 les quotas sont <b>4-3-1-1-0</b> (§11.34) : G1 prend ses 4
-            et G2 ses 3, le siège sort de G5 — <b>9 chevaux</b>.
+            Depuis le 28/10/2026 les quotas sont <b>{QUOTAS_TXT}</b> (§11.40) : la méthode revient
+            au ticket de <b>{NB_TICKET} chevaux</b>, G5 compris.
             Les boîtes se lisent <b>en travers</b> : ligne du haut puis ligne du bas.{carnet(detail) && <> Les cases sont numérotées <b>P1, P2… en colonnes</b> : la ligne du haut porte la parité du P1.</>}
             <br />
             {Object.keys(cotes).length >= 4 ? (
               <>📈 <b>Marché lu sur equidia.fr</b>, relevé à {heureCote ? (hhmmGMT(heureCote) || '?') + ' GMT' : '?'} — rafraîchi toutes les minutes.
                 Le badge de chaque boule (en haut à droite) est son <b>rang de cote</b> :
-                il <b>choisit</b> dans G4 (§11.23 — le carnet remplit G1-G3, la cote le dernier bloc), ailleurs il <b>informe</b>.
+                il <b>choisit</b> dans G4 et G5 (§11.23 — le carnet remplit G1-G3, la cote la queue), ailleurs il <b>informe</b>.
                 Ce que ce rang vaut, et ce que vaut le moteur, sont mesurés dans le
                 <b> panneau de mesure</b> sous le ticket.</>
             ) : (
@@ -1604,6 +2111,11 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             La sélection physique (distance / piste / corde / terrain) reste à faire à la main.
           </div>
         </div>
+      )}
+
+      {/* --------------------------------------------------------- bassmat */}
+      {onglet === 'bassmat' && (
+        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} />
       )}
 
       {/* --------------------------------------------------------- archive */}
@@ -1950,16 +2462,16 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                           </thead>
                           <tbody>
                             {E.courbe.map((c) => (
-                              <tr key={c.k} style={{ borderTop: '1px solid rgba(255,255,255,.06)', background: c.k === 9 ? SK.accentClair : 'transparent' }}>
+                              <tr key={c.k} style={{ borderTop: '1px solid rgba(255,255,255,.06)', background: c.k === NB_TICKET ? SK.accentClair : 'transparent' }}>
                                 <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800 }}>{c.k}</td>
                                 <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td }}>{nb(c.podium)} %</td>
-                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: c.k === 9 ? 800 : 400, color: c.k === 9 ? SK.accent : '#c7d6ea' }}>{nb(c.quinte)} %</td>
+                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: c.k === NB_TICKET ? 800 : 400, color: c.k === NB_TICKET ? SK.accent : '#c7d6ea' }}>{nb(c.quinte)} %</td>
                               </tr>
                             ))}
                           </tbody>
                         </table>
                         <div style={{ fontSize: 11, color: SK.muted, marginTop: 6 }}>
-                          La ligne surlignée = le ticket du Quinté (9 chevaux, quotas 4-3-1-1-0).
+                          La ligne surlignée = la taille du ticket du Quinté ({NB_TICKET} chevaux, {QUOTAS_TXT}).
                           Écrire les chiffres : <code>node tools\empreinte.mjs</code>.
                         </div>
                       </div>
@@ -2022,7 +2534,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                       </div>
 
                       <div style={{ marginTop: 14, borderTop: '1px solid ' + SK.bord, paddingTop: 10 }}>
-                        <div style={{ fontSize: 12, fontWeight: 800, color: SK.accent, letterSpacing: .6, textTransform: 'uppercase', marginBottom: 4 }}>La mesure — même ticket (9 chevaux, 4-3-1-1-0), seule la règle de choix change</div>
+                        <div style={{ fontSize: 12, fontWeight: 800, color: SK.accent, letterSpacing: .6, textTransform: 'uppercase', marginBottom: 4 }}>La mesure — même ticket ({NB_TICKET} chevaux, {QUOTAS_TXT}), seule la règle de choix change</div>
                         <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6 }}>
                           Chaque règle est jugée <b>hors d'elle-même</b> (leave-one-out) : la table d'une course ne contient jamais cette course.
                         </div>
