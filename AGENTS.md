@@ -2109,6 +2109,49 @@ planificateur qu'il fallait réparer : c'était le **canal d'envoi**, mort en
 silence depuis le 07/10. Leçon : **un pas qui échoue sans le dire laisse croire
 que tout va bien** — d'où la ligne de journal à chaque publication, désormais.
 
+### 13.8 🚨 LE DÉPLOIEMENT GIT ÉCRASE LE TRAVAIL NON COMMITÉ (28/10/2026)
+
+> **Symptôme** : le site perd du travail déjà « déployé ». Le 28/10 au matin le
+> compte `sam` s'est retrouvé bloqué (« connexion depuis un autre appareil ») et
+> le ticket 3-2-1-1-1 avait disparu, alors que `tools/deploy.mjs` avait répondu
+> `a jour : OUI` quelques heures plus tôt.
+
+**La cause n'était pas le code.** Le projet Vercel `bahja-turf` a une
+**intégration Git** (`github LBAHJA-SA/bahja-turf`, branche `main`) en plus du
+déploiement CLI. Le job de données de **04 h 35** a commité l'archive et poussé
+sur `main` → Vercel a construit **le dépôt**, pas le disque. Comme `api/`,
+`src/` et `frontend/` n'étaient pas commités depuis le 27/10 01 h 16, la
+production est revenue au code de la veille. Le déploiement Git (04:35:15) est
+plus récent que le CLI (04:33:00) : il gagne l'alias.
+
+| ce qu'on croyait | ce qui se passait |
+|---|---|
+| `deploy.mjs` publie le disque | il publie le disque **une fois**, puis le prochain push du job de données republie **le dépôt** |
+| le commit de données ne touche qu'aux données | le **déploiement**, lui, emporte tout le dépôt |
+| `deploy.mjs --check` = le site est à jour | il compare le disque au déploiement **courant**, pas à ce que le prochain push va produire |
+
+**Les deux protections ajoutées :**
+
+1. **`api/admin.js?action=etat` renvoie `version: 'verrou-admin-2'`.** Le bundle
+   HTML ne prouve rien sur `api/` : c'est ce champ qui dit si la fonction en
+   ligne est la bonne. (`pronostics` → `401 session requise` au lieu de
+   `400 action inconnue` = la fonction du 27/10 est bien en place.)
+2. **`tools/publier-archive.mjs` crie AVANT de pousser** s'il reste du code non
+   commité (`codeEnAttente()`, dans les deux modes — `--auto` écrit au journal) :
+
+```
+⚠ 2 fichier(s) de CODE non commité(s) : ce push va redéployer le dépôt
+  → avant de publier :  git add -A -- . ":!data"   puis   git commit
+```
+
+**La règle qui en sort :** avant de pousser quoi que ce soit — données
+comprises — **le disque doit être propre pour le code**. Un `git push` n'est pas
+un envoi de données, c'est un envoi de dépôt.
+
+⚠ `.gitignore` ignore désormais `dna-course/`, `archivecouple/`, `.agents/` et
+`skills-lock.json` : des copies locales de pages (6 901 + 4 526 fichiers, aucun
+import), qui n'ont rien à faire dans un commit ni dans un déploiement.
+
 ---
 
 ## 14. ⚡ LA CARRIÈRE AUTOMATIQUE — fini de saisir à la main

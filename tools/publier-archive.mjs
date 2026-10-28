@@ -137,6 +137,39 @@ if (!change.length) {
   process.exit(0)
 }
 
+/* ⚠ 28/10/2026 — LE PIÈGE DU DÉPLOIEMENT GIT, DIT AVANT LE PUSH.
+ *
+ *  Vercel est branché sur GitHub (intégration du dépôt LBAHJA-SA/bahja-turf) :
+ *  le `git push` ci-dessous redéploie TOUT LE DÉPÔT, pas seulement les
+ *  données. Du code modifié sur le disque mais non commité est donc ÉCRASÉ
+ *  en production par la version du dernier commit — sans un mot.
+ *
+ *  C'est arrivé le 28/10 : le job de 04 h 35 a poussé l'archive et la
+ *  production est revenue au code de la veille (le compte « sam » s'est
+ *  retrouvé bloqué, le ticket 3-2-1-1-1 avait disparu). Le commit de données
+ *  est limité aux données, mais le DÉPLOIEMENT, lui, ne l'est pas.
+ *
+ *  On le dit donc ici, avant de pousser, et dans les deux modes : `--auto`
+ *  passe par `dire()` pour que l'avertissement finisse dans data/daily.log. */
+function codeEnAttente() {
+  const r = spawnSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: RACINE, encoding: 'utf8' })
+  return (r.stdout || '').split('\n').filter(Boolean).filter((l) => {
+    const p = l.slice(3).trim().replace(/^"|"$/g, '')
+    return !/^(data\/|public\/data\/|dist\/|node_modules\/)/.test(p)
+  })
+}
+
+const attente = codeEnAttente()
+if (attente.length) {
+  dire('')
+  dire(`⚠ ${attente.length} fichier(s) de CODE non commité(s) : ce push va redéployer le dépôt`)
+  dire('  et la production servira la version du dernier commit pour ces fichiers.')
+  for (const l of attente.slice(0, 10)) dire('   ' + l)
+  if (attente.length > 10) dire(`   … et ${attente.length - 10} autres`)
+  dire('  → avant de publier :  git add -A -- . ":!data"   puis   git commit')
+  dire('')
+}
+
 if (DRY) {
   console.log('')
   log(change.length + ' fichier(s) à publier :')
