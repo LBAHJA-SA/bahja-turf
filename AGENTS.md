@@ -6628,3 +6628,133 @@ node tools\choix-physique-complet.mjs
 ```
 
 
+
+
+---
+
+### 11.43 ⭐ LA BASSMAT PEUT-ELLE CHOISIR ? MESURÉ, ET NON (29/10/2026)
+
+> Question de l'utilisateur devant l'onglet : **« comment on répare les deux
+> limites : la bassmat ne change pas le ticket, et elle ne choisit pas un cheval
+> à la place d'un autre ? »**
+
+#### La réponse courte
+
+**Techniquement, si : elle peut.** Mesure : en remplissant les blocs par le
+**TAUX DE LA CASE POUR LA FORME DU MARCHÉ** du jour (au lieu de la place de
+presse), le ticket change dans **51 courses sur 96**. Ce n'est donc pas un onglet
+décoratif.
+
+**Mais elle choisit MAL.** Et ce n'est pas une opinion : c'est le même protocole
+que les autres mesures (LOO, formes à n ≥ 15, moitiés, quartiles, bootstrap).
+
+#### Le protocole — `tools/bassmat-choix.mjs`
+
+Corpus : **96 Quintés à presse réelle** (44 fermés / 37 normaux / 15 ouverts).
+Trois ordres possibles par bloc :
+
+```
+C = carnet   la place de presse P1..P20          (production)
+M = marché   la cote                              (production en G4-G5)
+B = bassmat  le taux top-5 de la CASE POUR LA FORME DU JOUR
+```
+
+Deux garde-fous : taux calculés en **LOO** (la course notée est retirée), et
+forme utilisée seulement si **n ≥ 15** courses dans le seau, sinon taux global.
+
+#### ① La bassmat change le ticket 51 fois sur 96
+
+| bloc | blocs où le choix diffère |
+|---|---|
+| G1 | **69 / 96** |
+| G2 | 48 / 96 |
+| G5 | 40 / 96 |
+| G3 | 7 / 96 |
+| G4 | 2 / 96 |
+
+#### ② 243 règles (3 options × 5 blocs), quotas 3-2-1-1-1 inchangés
+
+```
+production CCMM   37,5 % podium   11,5 % quinté   40,6 % ≥4   rang 2 / 243
+règles qui font MIEUX sur le 5/5 : 0
+règles à égalité               : 3   (CCCMC · CCCMM · CCCMB)
+```
+
+La production est **2ᵉ sur 243** et rien ne la bat. Les trois règles à égalité
+diffèrent sur G5 par le carnet : même 5/5, mais le ≥4 baisse (40,6 → 38,5).
+
+#### ③ Les scénarios bassmat, moitié par moitié
+
+| règle | podium | quinté | ≥4 | 1ʳᵉ moitié | 2ᵈᵉ moitié | quartiles (quinté) |
+|---|---|---|---|---|---|---|
+| BBBBM | 30,2 % | **3,1 %** | 33,3 % | 29,2 / 0,0 | 31,3 / 6,3 | 0 · 0 · 8,3 · 4,2 |
+| CBBBM | 38,5 % | 7,3 % | 40,6 % | 37,5 / 6,3 | 39,6 / 8,3 | 8,3 · 4,2 · 8,3 · 8,3 |
+| CCCBM | 38,5 % | 8,3 % | **43,8 %** | 37,5 / 8,3 | 39,6 / 8,3 | 8,3 · 8,3 · 8,3 · 8,3 |
+| CCBBM | 38,5 % | 8,3 % | 41,7 % | 37,5 / 8,3 | 39,6 / 8,3 | 8,3 · 8,3 · 8,3 · 8,3 |
+| **CCMM (production)** | 37,5 % | **11,5 %** | 40,6 % | 37,5 / 12,5 | 37,5 / 10,4 | 16,7 · 8,3 · 12,5 · 8,3 |
+
+Le seul effet réel : `CCCBM` (G4 par la bassmat) porte le ≥4 à **43,8 %**
+(bootstrap 87,9 %) — **mais il perd 3 quintés sur 96 et n'en gagne aucun**.
+
+#### ④ Bootstrap apparié, contre la production
+
+| règle | 5/5 mieux | 5/5 pire | ≥4 mieux | podium mieux | 5/5 (règle → prod) |
+|---|---|---|---|---|---|
+| BBBBM | 0,0 % | **100,0 %** | 2,0 % | 0,8 % | 0 / −8 |
+| CBBBM | 0,0 % | 98,3 % | 43,2 % | 61,1 % | 0 / −4 |
+| CCCBM | 0,0 % | 95,4 % | **87,9 %** | 61,1 % | 0 / −3 |
+| CCBBM | 0,0 % | 94,7 % | 57,4 % | 59,9 % | 0 / −3 |
+
+#### ⑤ Le test décisif — sur les blocs où les deux ordres divergent
+
+C'est le seul chiffre qui répond vraiment à « qui choisit mieux ». On isole la
+case échangée (celle que l'un garde et l'autre jette) et on regarde laquelle
+arrive dans les 5 :
+
+| bloc | désaccords | le carnet a raison | la bassmat a raison | égalité |
+|---|---|---|---|---|
+| G1 | 69 | **18** | 1 | 50 |
+| G2 | 48 | **3** | 0 | 45 |
+| G3 | 7 | **4** | 1 | 2 |
+| G4 | 2 | **2** | 0 | 0 |
+| G5 | 40 | **5** | 3 | 32 |
+| **TOTAL** | **166** | **32 (19,3 %)** | **5 (3,0 %)** | 129 (77,7 %) |
+
+**Le carnet garde la bonne case 6 fois plus souvent que la bassmat** (19,3 %
+contre 3,0 %). Et dans 77,7 % des désaccords aucune des deux cases n'arrive :
+l'échange était neutre.
+
+#### Pourquoi — et c'est structurel
+
+La bassmat est une statistique **de case**, pas **de cheval**. Deux chevaux du
+même bloc (P5 et P6, ou P11 et P12) ont des taux qui diffèrent de **4 points au
+plus** : l'ordre « par taux » ne fait donc que permuter des cases voisines, sans
+information sur les chevaux eux-mêmes. Pour choisir ENTRE deux chevaux d'un
+bloc, il faut un signal **par cheval** — c'est-à-dire la carrière, mesurée en
+§11.42 : elle gagne en G1 (+2,1 quinté) et perd partout ailleurs.
+
+#### Ce qui reste ouvert — et qui est mesurable
+
+`data/corpus/carriere-v2.json` porte maintenant, **par cheval** : `poids` du
+jour, `alloc` (le niveau des courses qu'il a courues), les `runs` (date, place,
+distance, poids) et le `terrain` du jour. Aucune de ces quatre choses n'a été
+testée **comme choix dans le bloc** (seul un score pondéré à 6 critères l'a été) :
+
+| signal par cheval | pourquoi il pourrait séparer deux voisins |
+|---|---|
+| **alloc** (niveau des courses) | le cheval qui descend de classe est « l'illogique » que la presse ne voit pas |
+| **poids** relatif au lot | en handicap, le poids est la punition du bon résultat |
+| **jours depuis la dernière** | la fraîcheur, absente du carnet |
+| **terrain du jour** | 13 % du score, mais jamais testé comme tri dans un bloc |
+
+C'est la seule famille qui n'a pas encore été mesurée. Protocole identique
+(LOO, moitiés, quartiles, bootstrap) : `tools/bassmat-choix.mjs` sert de modèle.
+
+> **Conclusion :** la limite « la bassmat ne choisit pas » n'est pas un oubli de
+> code, c'est un résultat. La faire choisir tient en une ligne — et coûte
+> **8 quintés sur 96** sans en rendre un seul. Ce qui reste à mesurer, c'est le
+> signal **par cheval**, pas la case.
+
+```
+node tools\bassmat-choix.mjs
+```
