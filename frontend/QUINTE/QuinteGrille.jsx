@@ -807,9 +807,11 @@ function PanneauMesure({ sk, fiabilite, detail }) {
           </div>
           <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6, lineHeight: 1.6 }}>
             Depuis le 19/10/2026 (§11.23), la <b>queue</b> du ticket se remplit à la cote —
-            aujourd'hui <b> G4</b> seulement. Depuis le 29/10/2026 (§11.46) le ticket de
-            <b>{NB_TICKET} chevaux</b> porte les quotas <b>{QUOTAS_TXT}</b> : le siège de G5 est
-            passé à G2, G5 n'a plus de place. G1-G3 restent au rang de presse.
+            aujourd'hui <b> G4</b> seulement. Depuis le 29/10/2026 (§11.49) les quotas
+            <b> {QUOTAS_TXT}</b> sont <b>constitutionnels</b> et ne bougent plus : le ticket de
+            <b> {NB_TICKET} chevaux</b> garde ses cinq blocs, G5 compris. G1-G3 se remplissent au
+            rang de presse, G4 et G5 à la cote. Le seul travail qui reste est <b>qui</b> entre
+            dans chaque bloc.
           </div>
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
@@ -1011,8 +1013,8 @@ function TabChoix({ sk, choix }) {
         ) : null}
         <br />
         <span style={{ color: sk.muted }}>
-          ⛔ Les quotas sont fixés (§11.16) : <b>{QUOTAS_TXT}</b> depuis le 29/10/2026
-          (§11.46 — le ticket de {NB_TICKET} chevaux, le siège de G5 passé à G2).
+          ⛔ Les quotas sont <b>constitutionnels</b> (§11.49) : <b>{QUOTAS_TXT}</b>, soit
+          {NB_TICKET} chevaux. Aucun autre quota n'existe dans le moteur.
           On ne mesure QUE qui entre dans chaque bloc. Métrique =
           <b>PAYANTE</b>, le 1-2-3 complet dans la grille.
         </span>
@@ -1294,7 +1296,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
               <br />
               <span style={{ color: sk.muted }}>
                 Bilan du mois : {(mv.bilans || []).map((n, k) => (n ? k + '/5 × ' + n : null)).filter(Boolean).join(' · ')} — moyenne <b style={{ color: sk.texte }}>{nb(mv.moyenneBilan)}/5</b>.
-                {' '}⚠ Les quotas ont changé en cours de mois (4-3-1-1-0 → 3-2-1-1-1 le 28/10 → 3-3-1-1-0 le 29/10) : on ausculte <b>ce qui a été posé</b>, pas une seule règle.
+                {' '}⚠ Les quotas ont changé en cours de mois (4-3-1-1-0 puis 3-3-1-1-0, 3-2-1-1-1 depuis le 28/10) : on ausculte <b>ce qui a été posé</b>, pas une seule règle. Depuis le 29/10/2026 le 3-2-1-1-1 est <b>constitutionnel</b> (§11.49) — il ne changera plus.
                 {mv.ticketsIncomplets?.length ? (
                   <>
                     <br />

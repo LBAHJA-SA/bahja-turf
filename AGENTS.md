@@ -7096,6 +7096,12 @@ la section ⓪ est notre archive, les sections ①–⑧ restent le corpus de r�
 
 ### 11.46 ⭐ LA REVUE MENSUELLE — LE MOTEUR CHANGE AVEC LA BASSMAT (29/10/2026, appliqué)
 
+> ⛔ **ABROGÉ le 29/10/2026 par §11.49.** La conclusion de ce chapitre
+> (3-3-1-1-0) est **retirée** : l'utilisateur a décidé que **3-2-1-1-1 est
+> constitutionnel**. Le *protocole* décrit ici reste bon — c'est la sortie de
+> ce jour-là qui ne s'applique plus. Lire §11.49 avant d'appliquer quoi que
+> ce soit de ce chapitre.
+
 > Demande de l'utilisateur : **« المحرك ما تبدلش وعلاش ماتبذلش كل شهر داز خاصنا
 > نغيرو المحرك بناءا على هاد البصمة ديال النتائج السابقة »** — « le moteur n'a
 > pas changé. Chaque mois qui passe, il faut le changer **à partir de la bassmat
@@ -7485,4 +7491,137 @@ node tools\quota-perte.mjs   → data/quota-perte.json + public/data/
 > 20/10, 3-3-1-1-0 après). C'est voulu : on mesure la répartition **en vigueur
 > au moment de la course**, pas une répartition théorique. 5 courses n'avaient
 > pas de cotes complètes → G4 y est retombé au carnet.
+
+---
+
+### 11.49 ⭐ 3-2-1-1-1 EST CONSTITUTIONNEL — et l'autopsie du choix interne (29/10/2026)
+
+> Instruction de l'utilisateur :
+> **« الكوطة التي لا يجب تغييرها بالمرة هي 3 2 1 1 1 تعتمد كدستور وحدف كل
+> الكوطات الاخرى والبحت عن مصدر فشل الاختيار داخل الكوطة واصلاحه »**
+
+#### ① La constitution
+
+| | |
+|---|---|
+| **Quota** | **3-2-1-1-1** — G1 3/4 · G2 2/4 · G3 1/2 · G4 1/2 · G5 1/… |
+| **Statut** | **CONSTITUTION.** On ne le re-mesure plus, on ne le remplace plus, on ne le propose plus. |
+| **Tous les autres quotas** | **retirés du produit.** `GROUPES[].alt` est aligné sur `quota` (plus aucune variante dans le moteur ni dans la page). |
+| Ticket | **8 chevaux**, vérifié 96/96 (`tools/verif-8.mjs` : `{"8":96}`, 0 hors quota, 0 doublon) |
+| Seul travail autorisé | **QUI entre dans le bloc** — `CHOIX_DU_BLOC`, jamais `quota` |
+
+`tools/experience-g5.mjs` garde ses variantes comme **historique de mesure** :
+`Q_BASE` (utilisé par `fiabilite.mjs`) est repassé à `{3,2,1,1,1}`, et la ligne
+`3-3-1-1-0` y est étiquetée « du 20/10 au 29/10 ». Plus rien ne l'applique.
+
+#### ② La mesure du choix interne — `tools/choix-interne.mjs`
+
+À **quotas fixes** (`GROUPES`), on ne fait varier qu'une chose : l'ordre interne
+de chaque bloc, donc **qui est jeté**. Sept règles :
+
+`carnet` (le rang de presse, l'actuelle) · `marche` (la cote) · `mixte` (1 carnet
+puis 1 marché) · `fusion` (rang P + rang marché) · `bassmat` (le `pc5` de la case) ·
+`marketPlus` (la case que le marché aime beaucoup plus que la presse) ·
+`caseBloc` (**le taux d'arrivée de la case *dans son bloc***, appris en
+leave-one-out — c'est le seul signal qui voit que P4 n'arrive pas au même rythme
+en G1 et en G2).
+
+**Témoin obligatoire** : le remplissage local doit rendre **exactement** les
+tickets du vrai `remplirGrille` → **122 / 122 identiques ✓**. Sans ce contrôle,
+toute la mesure est fausse (§11.16, l'erreur de `test-quotas.mjs`).
+
+```
+                                x/5      5/5       podium
+corpus A · 96 Quintés          3,29    11,46 %    37,5 %
+corpus B · 26 Quintés d'oct.   3,00     3,85 %    26,92 %
+```
+
+#### ③ Le taux d'arrivée de chaque case (corpus A, cases vues ≥ 20 fois)
+
+| bloc | les cases, du meilleur au pire | gardé par le carnet |
+|---|---|---|
+| **G1** | P1 **65,6 %** · P2 53,1 · P3 50,0 · P4 45,8 | P1-P2-P3 → **optimal ✓** |
+| **G2** | P6 **50,0 %** · P5 41,1 · P8 33,9 · P7 31,8 · P4 31,3 | P4-P5 → marge **0,19** |
+| **G3** | P9 26,7 · P10 24,4 | P9 → **optimal ✓** |
+| **G4** | P11 39,0 · P12 27,3 | P11 → **optimal ✓** |
+| **G5** | P12 14,3 · P13 11,9 · P15 11,8 · P14 11,3 | la moins chère → marge 0,01 |
+
+Le carnet garde **déjà le meilleur sous-ensemble** dans G1, G3 et G4. La seule
+inversion réelle est **G2 : P6 (50 %) arrive plus que P4 (31 %), et le carnet
+garde P4**.
+
+#### ④ Sept règles × cinq blocs — et le verdict
+
+| configuration | Δx/5 (A / B) | Δ5/5 | Δpodium |
+|---|---|---|---|
+| G1 → mixte | **+0,02 / +0,08** | +1,04 / 0 | −1,04 / +7,7 |
+| G1 → caseBloc | −0,02 / 0 | −2,08 / 0 | −1,04 / 0 |
+| **G2 → caseBloc** (l'inversion P4→P6) | **−0,09 / −0,04** | −2,08 / −3,85 | −6,25 / −3,84 |
+| G3 → caseBloc | −0,03 / +0,08 | −3,13 / 0 | −1,04 / 0 |
+| G4 → caseBloc | −0,03 / −0,04 | −6,25 / 0 | −1,04 / 0 |
+| G5 → caseBloc | −0,04 / −0,12 | +1,04 / 0 | −1,04 / 0 |
+
+**Aucune règle ne passe le filtre** (« ne perdre sur rien » : x/5, 5/5 et podium
+sur les deux corpus). Point décisif : **`caseBloc` perd dans les cinq blocs** —
+la règle construit exactement sur l'inversion observée (P6 > P4 en G2) et elle
+**ne la retrouve pas hors échantillon**. L'inversion est du **bruit
+d'échantillonnage**, pas un signal.
+
+Le seul candidat est `G1 → mixte` (+0,02/+0,08 de x/5, +1,04 de 5/5 en A) : il
+perd **un** podium sur 96 courses. Rejeté — 1 course sur 96 n'est pas une règle.
+
+#### ⑤ Le plafond : ce qu'un choix PARFAIT aurait rapporté
+
+| bloc | arrivants du bloc | la production prend | l'oracle prendrait | marge |
+|---|---|---|---|---|
+| G1 | 251 | 203 | 249 | +46 |
+| **G2** | 181 | 102 | 171 | **+69** |
+| G3 | 66 | 36 | 59 | +23 |
+| G4 | 61 | 36 | 57 | +21 |
+| G5 | 51 | 17 | 47 | +30 |
+| **total** | **610** | **394 (64,6 %)** | **583 (95,6 %)** | **+189** |
+
+**189 arrivants sont là, dans la grille, et sont jetés par le choix.** Mais
+l'oracle choisit *en connaissant l'arrivée* : ce n'est pas une règle, c'est une
+borne. Et 189 arrivants de marge avec **sept** signaux qui n'en prennent **aucun**
+(le meilleur Δx/5 = +0,08, soit **1 arrivant tous les 12 Quintés**) dit une
+chose : **l'information n'est pas dans la presse, ni dans la cote, ni dans les
+cases.**
+
+#### ⑥ La source de la défaillance, chiffrée
+
+598 blocs jugés (deux corpus) :
+
+| | n | % |
+|---|---|---|
+| le carnet jette un arrivant du bloc | 202 | 33,8 % |
+| … mais **tous les gardés arrivent** (bloc plein, rien à réparer) | 97 | — |
+| … et **une case gardée est vide** → **le mauvais choix** | **105** | **17,6 %** des blocs |
+
+C'est ça, la défaillance du choix interne : **une place sur six est dépensée sur
+une case qui ne produit rien alors qu'une case jetée arrivait.** Elle est
+localisée, elle est mesurée — et elle est **irréparable avec les signaux
+disponibles** : à l'intérieur d'un bloc, les taux vont de 31 % à 50 % (G2) et
+l'écart entre la case gardée et la case jetée est de **~10 points**, soit deux
+chevaux près. Un tri sur 10 points avec 4 cases, c'est du tirage à pile ou face.
+
+#### ⑦ Décision
+
+- **`CHOIX_DU_BLOC` ne bouge pas** : `G1 carnet · G2 carnet · G3 carnet · G4
+  marché · G5 marché`. C'est le choix mesuré le meilleur, et le §11.24 l'avait
+  déjà fermé par 3 125 combinaisons ; ce chapitre le referme par le plafond.
+- **Le quota ne bouge pas** : constitution.
+- **Le vrai déficit n'est ni l'ordre ni le quota : c'est le NOMBRE de places**
+  (§11.28/§11.29), et il est refusé par l'utilisateur — à juste titre, c'est de
+  la dilution.
+- Ce qui reste vrai et utile : **la production est cohérente avec sa propre
+  probabilité.** 8 sièges dont les taux vont de 8 % (fond de G5) à 66 % (P1)
+  donnent une espérance de **~3,3 arrivants** ; le moteur en trouve **3,29** en A
+  et **3,00** en B. Il ne perd pas un arrivant qu'il pouvait prendre : il prend
+  ce que la grille permet.
+
+```
+node tools\choix-interne.mjs   → data/choix-interne.json + public/data/
+```
+
 

@@ -885,13 +885,22 @@ export function groupeDeSlot(slot) {
  *     mesure, c'est la décision de l'utilisateur.
  *   · 28/10/2026 (§11.40) : retour à 3-2-1-1-1 par décision de l'utilisateur.
  *     Le 29/10, la mesure du MOIS (hors échantillon) + le corpus la renversent
- *     tous les deux dans le même sens : le siège de G5 ne tient rien. */
+ *     tous les deux dans le même sens : le siège de G5 ne tient rien.
+ *
+ * ⭐ 29/10/2026 — DÉCISION DE L'UTILISATEUR, DÉFINITIVE (§11.49) :
+ *     « الكوطة التي لا يجب تغييرها بالمرة هي 3 2 1 1 1 تعتمد كدستور »
+ *     → 3-2-1-1-1 est CONSTITUTIONNEL. On ne le re-mesure plus, on ne le
+ *       propose plus, on ne le remplace plus. Tout quota qui n'est pas
+ *       3-2-1-1-1 est retiré du produit. Le seul travail autorisé est le
+ *       CHOIX À L'INTÉRIEUR du bloc : QUI des 4 cases de G1, QUI des 4 de G2,
+ *       QUI des 2 de G3, QUI des 2 de G4, QUI dans G5.
+ *       C'est `CHOIX_DU_BLOC` qui porte ce choix, pas `quota`. */
 export const GROUPES = [
-  { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 3, alt: 4 },
-  { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 3, alt: 2 },
-  { id: 'G3', label: 'G3 · P9-P10', min: 9, max: 10, quota: 1, alt: 2, obligatoire: true },
-  { id: 'G4', label: 'G4 · P11-P12', min: 11, max: 12, quota: 1, alt: 2 },
-  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 0, alt: 1 },
+  { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 3, alt: 3 },
+  { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 2, alt: 2 },
+  { id: 'G3', label: 'G3 · P9-P10', min: 9, max: 10, quota: 1, alt: 1, obligatoire: true },
+  { id: 'G4', label: 'G4 · P11-P12', min: 11, max: 12, quota: 1, alt: 1 },
+  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 1, alt: 1 },
 ]
 
 /** Le « ticket fixé » : le moteur remplit les quotas, on ne modifie pas à la main. */
