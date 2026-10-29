@@ -7379,3 +7379,110 @@ node tools\verdict-course.mjs   → data/verdict-course.json + public/data/
 > du choix dans le bloc, et cette mesure-ci la referme par un autre chemin — le
 > juge préfère les blocs larges et perd. Il **juge** (§11.47), il ne **décide** pas.
 
+---
+
+### 11.48 🔪 COMBIEN DE FOIS 3-2-1-1-1 A CAUSÉ LA PERTE ? (29/10/2026, octobre)
+
+> Demande de l'utilisateur : **« شحال من مرة الكوطة ديال 3 2 1 1 1 كانت سبب
+> فالخسارة فهاد الشهر »**. Outil : `tools/quota-perte.mjs` →
+> `data/quota-perte.json` (26 Quintés d'octobre, 130 arrivants).
+
+#### ① La distinction qui rend la question mesurable
+
+Un arrivant manquant l'est pour **deux** raisons, et une seule est la faute du quota :
+
+| destin | ce que c'est | réparable à 8 chevaux ? |
+|---|---|---|
+| **PRIS** | dans le ticket | — |
+| **COUPÉ** | il **est** une case, dans un bloc, mais le quota du bloc est atteint | **oui**, en déplaçant un siège |
+| **HORS GRILLE** | il n'est même pas une case | non (la presse ne le cite pas) |
+
+#### ② Le résultat brut — 130 arrivants, oct.
+
+| destin | n | % |
+|---|---|---|
+| pris | **78** | **60,0 %** |
+| COUPÉ G1 (3/4) | 13 | 10,0 % |
+| **COUPÉ G2 (2/4)** | **20** | **15,4 %** |
+| COUPÉ G3 (1/2) | 5 | 3,8 % |
+| COUPÉ G4 (1/2) | 7 | 5,4 % |
+| COUPÉ G5 (1/…) | 7 | 5,4 % |
+| hors grille | **0** | **0,0 %** |
+| **total coupés** | **52** | **40,0 %** |
+
+**Aucun arrivant n'est hors grille** : `buildGrid` ajoute à la fin les partants
+que la presse ne cite pas — la grille attrape donc **toujours** l'arrivant.
+La perte ne vient jamais d'un cheval absent, **toujours** d'un quota.
+
+#### ③ Quel bloc coupe, et dans combien de courses
+
+| bloc | arrivants coupés | courses concernées |
+|---|---|---|
+| G1 | 13 | **13 / 26 (50 %)** |
+| **G2** | **20** | **18 / 26 (69 %)** |
+| G3 | 5 | 5 / 26 (19 %) |
+| G4 | 7 | 7 / 26 (27 %) |
+| G5 | 7 | 6 / 26 (23 %) |
+
+**G2 est le coupeur n°1** (38,5 % des coupures) : sous 3-2-1-1-1 il ne prend que
+2 des 4 cases. C'est exactement le siège que 3-3-1-1-0 a récupéré (§11.26).
+
+#### ④ Le verdict : 25 courses sur 26
+
+| | 3-2-1-1-1 |
+|---|---|
+| 5/5 | **1 / 26 (3,8 %)** |
+| courses qui perdent le 5/5 | **25** |
+| dont la perte est une **COUPURE** | **25 → 100 %** |
+| dont la perte est **hors grille** | **0 → 0 %** |
+| podium entier | 7 / 26 (26,9 %) |
+| podium perdu par une coupure | **19 → 100 %** des podiums perdus |
+
+> **Réponse directe : 25 fois sur 25 pertes — et 19 fois sur 19 podiums perdus.**
+> La coupure du quota est la cause **exclusive** de chaque perte du mois.
+
+#### ⑤ Mais à 8 chevaux, combien étaient réparables ?
+
+| | courses |
+|---|---|
+| une autre répartition à 8 chevaux fait 5/5 | **6 / 25 (24 %)** |
+| dont sauvées par **3-3-1-1-0** (la production) | **1** (le 10/10 : 4 → 5) |
+| arrivants trouvés — 3-2-1-1-1 | 78 (x/5 **3,00**) |
+| arrivants trouvés — 3-3-1-1-0 | 85 (x/5 **3,27**) |
+
+Les répartitions qui auraient sauvé le 5/5 : `4-2-1-0-1` ×2 · `3-4-1-0-0` ×2 ·
+`4-3-1-0-0` ×2 · `3-3-1-0-1` · **`3-3-1-1-0`** · `3-3-2-0-0` · `2-4-1-1-0`.
+
+#### ⑥ Le prix réel : combien de sièges il aurait fallu
+
+Plus petite taille de ticket qui attrape les 5 arrivants (toute répartition,
+G1 2-4 · G2 2-4 · G3 1-2 · G4 0-2 · G5 0-1 ; le maximum de la grille = **13**) :
+
+| taille | quinté | podium |
+|---|---|---|
+| 8 chevaux | **6 (24 %)** | **14 (74 %)** |
+| 9 chevaux | **9 (36 %)** | 4 (21 %) |
+| 10 chevaux | 3 (12 %) | — |
+| 11 chevaux | 1 (4 %) | — |
+| impossible même à 13 | 6 (24 %) | 1 (5 %) |
+| **médiane** | **9 chevaux** | **8 chevaux** |
+
+> **Ce que la mesure dit vraiment.** Le quota 3-2-1-1-1 est **coupable à chaque
+> fois** (100 % des pertes), mais le changer ne répare que **6 courses sur 25**.
+> La médiane dit **9 chevaux**, et 6 courses ne sont atteignables par **aucune**
+> répartition de la grille. Le podium, lui, tient **dans 8 chevaux 14 fois sur
+> 19** : c'est le **quinté complet** qui manque de sièges, pas la structure.
+>
+> Autrement dit : la faute est établie, la peine n'est pas « change le quota » —
+> c'est « 8 sièges ne suffisent pas au quinté ». Et l'utilisateur a déjà refusé
+> d'ajouter un cheval (§11.28 : « c'est un ticket de 16 »). **Rien n'est changé.**
+
+```
+node tools\quota-perte.mjs   → data/quota-perte.json + public/data/
+```
+
+> ⚠ Les 26 courses d'octobre mélangent les deux répartitions (3-2-1-1-1 jusqu'au
+> 20/10, 3-3-1-1-0 après). C'est voulu : on mesure la répartition **en vigueur
+> au moment de la course**, pas une répartition théorique. 5 courses n'avaient
+> pas de cotes complètes → G4 y est retombé au carnet.
+
