@@ -7254,3 +7254,128 @@ Vérifié de bout en bout en HTTP : `?action=login` → **200**, 8 pages dont
 > **Ce que ce chapitre retient :** le moteur bouge **parce qu'une mesure l'a
 > exigé**, pas parce qu'un mois a passé. Et une mesure ne vaut que si son
 > **témoin** reproduit les chiffres connus.
+
+---
+
+### 11.47 ⚖️ LA BASSMAT JUGE LE MOTEUR À CHAQUE COURSE (29/10/2026)
+
+> Demande de l'utilisateur : **« البصمة خاصها تحكم على الموتور فكل كينتي »**.
+> La revue du §11.46 est **mensuelle** ; elle doit aussi **parler à chaque
+> Quinté**. C'est fait — et la mesure dit exactement **ce qu'elle peut dire**.
+
+#### ① Ce que « juger » veut dire, et rien d'autre
+
+La bassmat des courses **passées** donne, pour chaque case du carnet (P1..P20),
+deux fréquences. Un ticket de 8 chevaux réclame alors :
+
+```
+attendu5 = Σ pc5(case du cheval) / 100     ← « ce ticket vaut 3,4 arrivants sur 5 »
+attendu3 = Σ pc3(case du cheval) / 100     ← « … et 2,1 sur le podium »
+faible   = le cheval du ticket que la bassmat attend le MOINS (le maillon faible)
+fautes   = dans un bloc où le quota coupe, la case JETÉE vaut-elle mieux que
+           la case GARDÉE ? L'écart des deux taux est le PRIX de la faute.
+```
+
+Trois jugements sont mesurés **séparément**, jamais moyennés :
+**① calibration** (le juge dit-il vrai ?) · **② fautes de choix** (prédisent-elles ?) ·
+**③ valeur de la course** (trie-t-elle les Quintés ?).
+
+#### ② Le protocole — aucune triche
+
+`tools/verdict-course.mjs`, juge à partir de **20 courses** :
+
+- pour la course *i*, la bassmat est calculée sur les courses **strictement
+  antérieures** ; la course jugée ne sert **jamais** à construire le juge ;
+- deux corpus : **96** Quintés à presse réelle (février → juillet, 76 jugés) et
+  **26** Quintés d'octobre (l'archive, juge = 96 + le mois déjà écoulé) ;
+- **22** compositions à 8 chevaux énumérées (G3 obligatoire, donc `q3 ≥ 1`) ;
+- sortie : `data/verdict-course.json` + `public/data/verdict-course.json`.
+
+#### ③ ① La calibration — le juge dit vrai
+
+| corpus | prédit (5 arrivants) | réalisé | écart | prédit (3 premiers) | réalisé |
+|---|---|---|---|---|---|
+| ① contrôle, 76 courses | **3,37** | **3,50** | +0,13 | 2,09 | 2,25 |
+| ② octobre, 26 courses | **3,30** | **3,27** | −0,03 | 2,07 | 2,00 |
+
+Un ticket de 8 chevaux vaut donc **3,3 à 3,5 arrivants** — et la bassmat
+l'annonce **avant** la course, sans se tromper de plus de 0,13. **Calibré : OUI.**
+
+#### ④ ② Les fautes de choix — elles ne prédisent PAS
+
+| corpus | verdict | courses | x/5 | 5/5 | podium |
+|---|---|---|---|---|---|
+| contrôle | aucune faute | 19 (25 %) | 3,53 | 10,5 % | **26,3 %** |
+| contrôle | 1 faute | 17 (22 %) | 3,53 | 5,9 % | 41,2 % |
+| contrôle | 2 fautes et + | 40 (53 %) | 3,48 | **15,0 %** | **45,0 %** |
+| octobre | aucune faute | 5 | 3,60 | 20,0 % | 40,0 % |
+| octobre | 2 fautes et + | 17 | 3,29 | 5,9 % | 35,3 % |
+
+Sur le contrôle, **aucune faute** fait un podium **plus mauvais** (26,3 %) que
+**2 fautes et +** (45,0 %). Sur octobre, l'ordre s'inverse. **→ NON.**
+
+Pourquoi : les taux sont des **marginales**. Une somme de marginales à 3,4 ne
+dit rien de l'événement « les 5 arrivants sont dans le ticket », qui exige une
+**corrélation** entre les cases. C'est la même raison qui interdit de lire
+`1 × top5` comme `5 × top5` : 8 chevaux à 42 % ne font pas 3,4 arrivants
+**indépendants**, ils font 8 chances **liées** au même marché.
+
+#### ⑤ ③ La valeur de la course et l'arbitrage — ils ne trient pas
+
+| corpus | tiers bas de l'attendu | tiers haut | verdict |
+|---|---|---|---|
+| contrôle | 3,58 · 15,4 % 5/5 · 38,5 % podium | 3,72 · 20,0 % · 36,0 % | ne trie pas (x/5 +0,14, podium −2,5) |
+| octobre | 3,33 · 0,0 % · 33,3 % | **3,25** · **12,5 %** · **25,0 %** | trie à l'envers |
+
+**L'arbitrage — la composition que la bassmat préfère :**
+
+| corpus | le ticket change | moteur (5/5 · podium) | choix de la bassmat |
+|---|---|---|---|
+| contrôle | **76/76** | **11,8 % · 39,5 %** | **6,6 % · 30,3 %** |
+| octobre | **26/26** | 7,7 % · 30,8 % | 3,9 % · 42,3 % |
+
+Le juge change **toujours** le ticket et le fait **perdre** : **−5,2 points de
+5/5** sur le contrôle, **−3,8** sur octobre. Compositions choisies :
+`3-4-1-0-0 ×37` · `4-3-1-0-0 ×34` — il pousse vers les blocs larges, pas vers
+le bon cheval.
+
+#### ⑥ Le verdict, et ce qui est affiché
+
+```
+① le juge est calibré          OUI   (3,37 / 3,50 · 3,30 / 3,27)
+② les fautes prédisent         NON
+③ la valeur trie la course     NON
+   l'arbitrage gagne           NON   (11,8 % → 6,6 %)
+```
+
+> **La bassmat est un THERMOMÈTRE, pas un SÉLECTEUR.** Elle annonce la valeur du
+> ticket ; **le moteur choisit**. Le jour où une variante du juge battra le
+> moteur **sur les deux corpus**, elle entrera — pas avant.
+
+Dans l'onglet **Le ticket** (`QuinteGrille.jsx`), un bloc
+« ⚖️ LA BASSMAT JUGE CE TICKET » affiche : `attendu5 / 5`, `attendu3 / 3`, le
+**maillon faible** (n° + case P + son %), le tableau des **fautes** (bloc,
+gardé, jeté, prix) — puis la phrase mesurée *« il annonce la valeur, il ne le
+remplace pas »*. Le calcul est `jugerTicket(detail, bassmat, formeCle)` dans
+`src/lib/quinte.js` (copie backend à l'octet près).
+
+#### ⑦ Les 2 bugs qui ont failli faire croire au juge
+
+| bug | symptôme | cause | correctif |
+|---|---|---|---|
+| `parPlace[p]` | le juge prédit **14,29** arrivants | `parPlace` est **0-indexé** : `parPlace[0]` = case P1 | lire `parPlace[p-1]` |
+| `top3` lu comme un taux | podium prédit **4,69** sur 3 | `top3` est **conditionnel** (podiums / top-5) et en **%** | `pc3 = (top5/100) × (top3/100)` |
+
+Et un troisième, plus vicieux : `CTRL.push({...})` portait `syn` / `nums` mais
+**pas `synthese` / `runners`** — `computeStats` ne voyait aucune course et
+« aucune course jugée » sortait **sans erreur**. Un outil qui ne mesure rien
+doit **le dire** ; ici il le disait, mais il fallait le lire.
+
+```
+node tools\verdict-course.mjs   → data/verdict-course.json + public/data/
+```
+
+> ⚠ Ne jamais faire choisir `jugerTicket` : le §11.24 a déjà fermé la question
+> du choix dans le bloc, et cette mesure-ci la referme par un autre chemin — le
+> juge préfère les blocs larges et perd. Il **juge** (§11.47), il ne **décide** pas.
+

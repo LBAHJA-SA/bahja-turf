@@ -2402,8 +2402,85 @@ export function ticketBassmat(detail, bassmat, formeCle = null) {
   return { ticket, groupes, echanges }
 }
 
-/** Le coût mesuré de la variante — `data/bassmat-choix.json` (tools/bassmat-choix.mjs). */
-export async function fetchBassmatChoix() {
+/* ⭐ 29/10/2026 — LA BASSMAT JUGE LE TICKET, À CHAQUE COURSE (§11.47).
+ *
+ * Demande de l'utilisateur : « البصمة خاصها تحكم على الموتور فكل كينتي ».
+ *
+ * Ce que ce calcul fait, et rien de plus : il annonce, AVANT la course, ce que
+ * le ticket vaut selon les fréquences du passé.
+ *
+ *     attendu5 = Σ pc5(case du cheval) / 100     ← « ce ticket vaut 3,4 sur 5 »
+ *     attendu3 = Σ pc3(case du cheval) / 100     ← « … et 1,9 sur le podium »
+ *     faible   = le cheval du ticket que la bassmat attend le MOINS
+ *     fautes   = dans un bloc où le quota coupe, la case JETÉE vaut-elle mieux
+ *                que la case GARDÉE ? (l'écart est le prix de la faute)
+ *
+ * ⚠ CE QU'IL NE FAIT PAS : il ne choisit pas. Mesuré sur 76 + 26 courses
+ *   (tools/verdict-course.mjs) : le juge est CALIBRÉ (3,37 prédits / 3,50
+ *   réalisés, puis 3,30 / 3,27) mais il ne CLASSE pas les tickets — la
+ *   composition qu'il préfère tombe à 6,6 % de 5/5 contre 11,8 %. C'est un
+ *   thermomètre, pas un sélecteur : il juge la valeur, le moteur choisit.
+ */
+export function jugerTicket(detail, bassmat, formeCle = null) {
+  if (!detail || !bassmat || !Array.isArray(bassmat.cases)) return null
+  const parCase = new Map(bassmat.cases.map((c) => [c.p, c]))
+
+  const tauxDe = (p) => {
+    const c = parCase.get(p)
+    if (!c) return { pc5: null, pc3: null, n: 0, source: 'inconnu' }
+    const f = formeCle && c.parForme ? c.parForme[formeCle] : null
+    if (f && f.n >= 15 && f.pc5 != null) return { pc5: f.pc5, pc3: f.pc3 ?? null, n: f.n, source: formeCle }
+    return { pc5: c.pc5 ?? null, pc3: c.pc3 ?? null, n: c.n ?? 0, source: 'global' }
+  }
+
+  let a5 = 0
+  let a3 = 0
+  let n5 = 0
+  let faible = null
+  const fautes = []
+  let source = 'global'
+
+  for (const g of detail) {
+    const pris = g.cases.filter((c) => c.pris)
+    if (!pris.length) continue
+    for (const c of pris) {
+      const t = tauxDe(c.place)
+      if (t.pc5 == null) continue
+      a5 += t.pc5 / 100
+      if (t.pc3 != null) a3 += t.pc3 / 100
+      n5++
+      source = t.source
+      if (!faible || t.pc5 < faible.pc5) faible = { num: c.num, place: c.place, pc5: t.pc5 }
+    }
+    /* la faute : la case jetée vaut mieux que la case gardée la plus faible */
+    const jete = g.cases.filter((c) => !c.pris)
+    if (jete.length) {
+      const tp = pris.map((c) => ({ c, t: tauxDe(c.place) })).filter((x) => x.t.pc5 != null)
+      const tj = jete.map((c) => ({ c, t: tauxDe(c.place) })).filter((x) => x.t.pc5 != null)
+      if (tp.length && tj.length) {
+        const garde = tp.reduce((m, x) => (x.t.pc5 < m.t.pc5 ? x : m))
+        const jeteMax = tj.reduce((m, x) => (x.t.pc5 > m.t.pc5 ? x : m))
+        if (jeteMax.t.pc5 > garde.t.pc5 + 0.5) {
+          fautes.push({
+            bloc: g.id,
+            garde: { num: garde.c.num, place: garde.c.place, pc5: garde.t.pc5 },
+            jete: { num: jeteMax.c.num, place: jeteMax.c.place, pc5: jeteMax.t.pc5 },
+            ecart: Math.round(10 * (jeteMax.t.pc5 - garde.t.pc5)) / 10,
+          })
+        }
+      }
+    }
+  }
+
+  if (!n5) return null
+  return {
+    attendu5: Math.round(10 * a5) / 10,
+    attendu3: Math.round(10 * a3) / 10,
+    faible, fautes, source, n: n5,
+  }
+}
+
+/** Le coût mesuré de la variante — `data/bassmat-choix.json` (tools/bassmat-choix.mjs). */export async function fetchBassmatChoix() {
   try {
     const r = await fetch('/data/bassmat-choix.json', { headers: { Accept: 'application/json' } })
     if (!r.ok) return null

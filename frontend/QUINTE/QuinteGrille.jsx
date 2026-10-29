@@ -14,7 +14,7 @@ import {
   fetchCotes,
   rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix, fetchEmpreinte,
   fetchBlocPm, fetchBassmat, formeMarche, fetchHuit, fetchBassmatChoix, ticketBassmat,
-  fetchBassmatMois,
+  fetchBassmatMois, jugerTicket,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
@@ -2313,6 +2313,108 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
               </div>
             )}
           </div>
+
+          {/* ⭐ 29/10/2026 — LA BASSMAT JUGE CE TICKET, À CHAQUE COURSE (§11.47).
+              Mesuré sur 76 + 26 courses (tools/verdict-course.mjs) : le juge
+              est CALIBRÉ (3,37 prédits / 3,50 réalisés, puis 3,30 / 3,27) mais
+              il ne CLASSE pas les tickets — la composition qu'il préfère tombe
+              à 6,6 % de 5/5 contre 11,8 % au moteur. Il annonce la valeur du
+              ticket, il ne le remplace pas. Ne jamais le faire choisir. */}
+          {(() => {
+            const J = jugerTicket(detail, bassmat, forme ? forme.cle : null)
+            if (!J) {
+              return (
+                <div style={{ ...s.box, padding: 12, marginBottom: 14, fontSize: 12, color: SK.muted, fontFamily: SK.police }}>
+                  ⚖️ La bassmat ne peut pas juger ce ticket : <b>public/data/bassmat.json</b> manque.
+                  Écrire <code>node tools\bassmat.mjs</code>.
+                </div>
+              )
+            }
+            const fort = J.attendu5 >= 3.4
+            const moyen = J.attendu5 >= 2.9
+            const coul = fort ? '#047857' : moyen ? '#b45309' : '#b91c1c'
+            const nr = (x) => Number(x).toFixed(1).replace('.', ',')
+            return (
+              <div style={{ ...s.box, padding: 16, marginBottom: 14, borderLeft: '6px solid ' + coul }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap', marginBottom: 10 }}>
+                  <b style={{ fontSize: 13, letterSpacing: 1, color: coul, fontFamily: SK.police }}>⚖️ LA BASSMAT JUGE CE TICKET</b>
+                  <span style={{ fontSize: 11, color: SK.muted, fontFamily: SK.police }}>
+                    juge = bassmat des courses passées · lecture : <b>{J.source === 'global' ? 'globale' : (forme && forme.lib) || J.source}</b>
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                  <div>
+                    <div style={{ fontSize: 30, fontWeight: 800, color: coul, fontFamily: SK.nb.td, lineHeight: 1 }}>
+                      {nr(J.attendu5)}<span style={{ fontSize: 16, color: SK.muted }}> / 5</span>
+                    </div>
+                    <div style={{ fontSize: 11, color: SK.muted, fontFamily: SK.police, marginTop: 3 }}>
+                      arrivants attendus dans les 5
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 22, fontWeight: 800, color: SK.texte, fontFamily: SK.nb.td, lineHeight: 1 }}>
+                      {nr(J.attendu3)}<span style={{ fontSize: 13, color: SK.muted }}> / 3</span>
+                    </div>
+                    <div style={{ fontSize: 11, color: SK.muted, fontFamily: SK.police, marginTop: 3 }}>
+                      sur le podium
+                    </div>
+                  </div>
+                  {J.faible && (
+                    <div>
+                      <div style={{ fontSize: 18, fontWeight: 800, color: '#b45309', fontFamily: SK.nb.td, lineHeight: 1 }}>
+                        n°{J.faible.num} <span style={{ fontSize: 12, color: SK.muted }}>· P{J.faible.place}</span>
+                      </div>
+                      <div style={{ fontSize: 11, color: SK.muted, fontFamily: SK.police, marginTop: 3 }}>
+                        maillon faible — cette case ne sort que <b>{nr(J.faible.pc5)} %</b> du temps
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ marginTop: 12, fontSize: 12, fontFamily: SK.police }}>
+                  {J.fautes.length === 0 ? (
+                    <span style={{ color: '#047857' }}>
+                      ✓ Aucune faute de choix : dans aucun bloc, la case jetée ne vaut mieux que la case gardée.
+                    </span>
+                  ) : (
+                    <>
+                      <div style={{ color: '#b45309', fontWeight: 700, marginBottom: 5 }}>
+                        {J.fautes.length} faute{J.fautes.length > 1 ? 's' : ''} de choix — la case jetée valait mieux que la gardée :
+                      </div>
+                      <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: SK.nb.td, fontSize: 12 }}>
+                        <thead>
+                          <tr>
+                            <th style={{ ...SK.th, textAlign: 'left' }}>bloc</th>
+                            <th style={{ ...SK.th, textAlign: 'left' }}>gardé</th>
+                            <th style={{ ...SK.th, textAlign: 'left' }}>jeté</th>
+                            <th style={{ ...SK.th, textAlign: 'right' }}>prix</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {J.fautes.map((f, i) => (
+                            <tr key={f.bloc} style={{ borderBottom: '1px solid ' + SK.bord, background: i % 2 ? SK.alt : SK.ligne }}>
+                              <td style={{ ...SK.td, fontWeight: 800 }}>{f.bloc}</td>
+                              <td style={{ ...SK.td }}>n°{f.garde.num} <span style={{ color: SK.muted }}>P{f.garde.place}</span> · {nr(f.garde.pc5)} %</td>
+                              <td style={{ ...SK.td, color: '#b45309' }}>n°{f.jete.num} <span style={{ color: SK.muted }}>P{f.jete.place}</span> · {nr(f.jete.pc5)} %</td>
+                              <td style={{ ...SK.td, textAlign: 'right', fontWeight: 700 }}>+{nr(f.ecart)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </>
+                  )}
+                </div>
+
+                <div style={{ marginTop: 10, fontSize: 11, color: SK.muted, fontFamily: SK.police, lineHeight: 1.5 }}>
+                  ⚠ Mesuré (<b>tools/verdict-course.mjs</b>, 76 + 26 courses) : le juge est <b>calibré</b>
+                  {' '}(3,37 prédits / 3,50 réalisés, puis 3,30 / 3,27) mais il <b>ne classe pas</b> les tickets —
+                  la composition qu’il préfère tombe à <b>6,6 %</b> de 5/5 contre <b>11,8 %</b> pour le moteur.
+                  Il annonce la valeur du ticket ; <b>il ne le remplace pas</b>.
+                </div>
+              </div>
+            )
+          })()}
 
           {/* ⭐ LE BOUTON « RÉSULTAT ». La course est finie : un clic va chercher
               l'arrivée sur pro.casacourses.com et l'écrit dans l'archive.
