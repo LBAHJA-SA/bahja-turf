@@ -133,29 +133,6 @@
    "place": "05"
   },
   {
-   "num": 2,
-   "cheval": "MONTEDINO",
-   "nom": "MONTEDINO",
-   "poids": 67,
-   "driver": "F.BAYLE",
-   "jockey": "F.BAYLE",
-   "entraineur": "CHAILLE-CHAILLE & PAMART",
-   "valeur": null,
-   "sexe": "H",
-   "age": 3,
-   "couleur": "",
-   "proprietaire": "ECURIE R.E.",
-   "cote": 7.6,
-   "coteRef": 7.6,
-   "depart": null,
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261029-r2c2p2-png-1",
-   "dernierPassage": "Ts1hTs2h",
-   "gains": 10080,
-   "musique": "Ts1hTs2h",
-   "place": null
-  },
-  {
    "num": 6,
    "cheval": "NOLINA BELLA",
    "nom": "NOLINA BELLA",
@@ -179,6 +156,29 @@
    "place": null
   },
   {
+   "num": 2,
+   "cheval": "MONTEDINO",
+   "nom": "MONTEDINO",
+   "poids": 67,
+   "driver": "F.BAYLE",
+   "jockey": "F.BAYLE",
+   "entraineur": "CHAILLE-CHAILLE & PAMART",
+   "valeur": null,
+   "sexe": "H",
+   "age": 3,
+   "couleur": "",
+   "proprietaire": "ECURIE R.E.",
+   "cote": 7.6,
+   "coteRef": 7.6,
+   "depart": null,
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261029-r2c2p2-png-1",
+   "dernierPassage": "Ts1hTs2h",
+   "gains": 10080,
+   "musique": "Ts1hTs2h",
+   "place": null
+  },
+  {
    "num": 7,
    "cheval": "VELVET VOLGA",
    "nom": "VELVET VOLGA",
@@ -199,7 +199,7 @@
    "dernierPassage": null,
    "gains": null,
    "musique": "",
-   "place": null
+   "place": "Non partant"
   }
  ],
  "arrivee": [
@@ -207,8 +207,9 @@
   4,
   1,
   5,
-  3
+  3,
+  7
  ],
- "collecteLe": "2026-10-29T13:13:43.809Z",
+ "collecteLe": "2026-10-29T20:32:36.331Z",
  "collecteApresCourse": true
 }

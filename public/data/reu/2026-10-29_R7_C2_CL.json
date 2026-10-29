@@ -344,8 +344,8 @@
    "cheval": "MARULINA",
    "nom": "MARULINA",
    "poids": 55,
-   "driver": "MIGUEL ANGEL FUENTES",
-   "jockey": "MIGUEL ANGEL FUENTES",
+   "driver": "LUIS RIVERA BAEZA",
+   "jockey": "LUIS RIVERA BAEZA",
    "entraineur": "GENARO JOHN COVARRUBIAS ESCOBAR",
    "valeur": null,
    "sexe": "F",
@@ -364,5 +364,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-10-29T13:13:20.968Z"
+ "collecteLe": "2026-10-29T20:32:18.428Z"
 }

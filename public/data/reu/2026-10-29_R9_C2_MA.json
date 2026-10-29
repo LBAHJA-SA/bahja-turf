@@ -44,7 +44,7 @@
    "num": "3",
    "cheval": "",
    "nom": "",
-   "poids": 58,
+   "poids": 58.5,
    "driver": "",
    "jockey": "",
    "entraineur": "",
@@ -128,7 +128,7 @@
    "num": "10",
    "cheval": "",
    "nom": "",
-   "poids": 52,
+   "poids": 52.5,
    "driver": "",
    "jockey": "",
    "entraineur": "",
@@ -138,5 +138,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-10-29T13:10:55.705Z"
+ "collecteLe": "2026-10-29T20:30:27.648Z"
 }

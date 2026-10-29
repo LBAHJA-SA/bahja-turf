@@ -18,29 +18,6 @@
  },
  "participants": [
   {
-   "num": 1,
-   "cheval": "MALEVAJE",
-   "nom": "MALEVAJE",
-   "poids": 55.5,
-   "driver": "J MEZA",
-   "jockey": "J MEZA",
-   "entraineur": "R J CARPIO",
-   "valeur": 26.5,
-   "sexe": "H",
-   "age": 4,
-   "couleur": "",
-   "proprietaire": "CARPIO MILANO RACING STABLE, INC",
-   "cote": null,
-   "coteRef": null,
-   "depart": "1",
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261029-r6c7p1-png-1",
-   "dernierPassage": "1p7p3p6p1p",
-   "gains": null,
-   "musique": "1p7p3p6p1p",
-   "place": null
-  },
-  {
    "num": 2,
    "cheval": "WHITE WHALE",
    "nom": "WHITE WHALE",
@@ -61,7 +38,7 @@
    "dernierPassage": "1p7p6p6p3p",
    "gains": 28151.73,
    "musique": "1p7p6p6p3p",
-   "place": null
+   "place": "01"
   },
   {
    "num": 3,
@@ -84,7 +61,7 @@
    "dernierPassage": "2p4p5p5p1p",
    "gains": 38715,
    "musique": "2p4p5p5p1p",
-   "place": null
+   "place": "02"
   },
   {
    "num": 4,
@@ -107,53 +84,7 @@
    "dernierPassage": "3p1p7p2p1p",
    "gains": null,
    "musique": "3p1p7p2p1p",
-   "place": null
-  },
-  {
-   "num": 5,
-   "cheval": "HESPER",
-   "nom": "HESPER",
-   "poids": 54.5,
-   "driver": "D CANNON",
-   "jockey": "D CANNON",
-   "entraineur": "S A KURTZ",
-   "valeur": 33,
-   "sexe": "H",
-   "age": 4,
-   "couleur": "",
-   "proprietaire": "HAYDEN THOROUGHBREDS (DARRICK HA",
-   "cote": null,
-   "coteRef": null,
-   "depart": "5",
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261029-r6c7p5-png-1",
-   "dernierPassage": "6p6p1p3p3p",
-   "gains": null,
-   "musique": "6p6p1p3p3p",
-   "place": null
-  },
-  {
-   "num": 6,
-   "cheval": "TROUBLE AHEAD",
-   "nom": "TROUBLE AHEAD",
-   "poids": 54.5,
-   "driver": "F ARRIETA",
-   "jockey": "F ARRIETA",
-   "entraineur": "C MILLIGAN",
-   "valeur": 33,
-   "sexe": "H",
-   "age": 5,
-   "couleur": "",
-   "proprietaire": "GREGORY ALAN PELZEL",
-   "cote": null,
-   "coteRef": null,
-   "depart": "6",
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261029-r6c7p6-png-1",
-   "dernierPassage": "7p7p8p2p6p",
-   "gains": null,
-   "musique": "7p7p8p2p6p",
-   "place": null
+   "place": "03"
   },
   {
    "num": 7,
@@ -176,7 +107,7 @@
    "dernierPassage": "6p6p0p1p2p",
    "gains": null,
    "musique": "6p6p0p1p2p",
-   "place": null
+   "place": "04"
   },
   {
    "num": 8,
@@ -199,9 +130,88 @@
    "dernierPassage": "5p8p6p7p6p",
    "gains": 42809.762,
    "musique": "5p8p6p7p6p",
-   "place": null
+   "place": "05"
+  },
+  {
+   "num": 1,
+   "cheval": "MALEVAJE",
+   "nom": "MALEVAJE",
+   "poids": 55.5,
+   "driver": "W A RODRIGUEZ",
+   "jockey": "W A RODRIGUEZ",
+   "entraineur": "R J CARPIO",
+   "valeur": 26.5,
+   "sexe": "H",
+   "age": 4,
+   "couleur": "",
+   "proprietaire": "CARPIO MILANO RACING STABLE, INC",
+   "cote": null,
+   "coteRef": null,
+   "depart": "1",
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261029-r6c7p1-png-1",
+   "dernierPassage": "1p7p3p6p1p",
+   "gains": null,
+   "musique": "1p7p3p6p1p",
+   "place": "06"
+  },
+  {
+   "num": 5,
+   "cheval": "HESPER",
+   "nom": "HESPER",
+   "poids": 54.5,
+   "driver": "J GRAHAM",
+   "jockey": "J GRAHAM",
+   "entraineur": "S A KURTZ",
+   "valeur": 33,
+   "sexe": "H",
+   "age": 4,
+   "couleur": "",
+   "proprietaire": "HAYDEN THOROUGHBREDS (DARRICK HA",
+   "cote": null,
+   "coteRef": null,
+   "depart": "5",
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261029-r6c7p5-png-1",
+   "dernierPassage": "6p6p1p3p3p",
+   "gains": null,
+   "musique": "6p6p1p3p3p",
+   "place": "07"
+  },
+  {
+   "num": 6,
+   "cheval": "TROUBLE AHEAD",
+   "nom": "TROUBLE AHEAD",
+   "poids": 54.5,
+   "driver": "F ARRIETA",
+   "jockey": "F ARRIETA",
+   "entraineur": "C MILLIGAN",
+   "valeur": 33,
+   "sexe": "H",
+   "age": 5,
+   "couleur": "",
+   "proprietaire": "GREGORY ALAN PELZEL",
+   "cote": null,
+   "coteRef": null,
+   "depart": "6",
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261029-r6c7p6-png-1",
+   "dernierPassage": "7p7p8p2p6p",
+   "gains": null,
+   "musique": "7p7p8p2p6p",
+   "place": "Non partant"
   }
  ],
- "arrivee": [],
- "collecteLe": "2026-10-29T13:12:29.571Z"
+ "arrivee": [
+  2,
+  3,
+  4,
+  7,
+  8,
+  1,
+  5,
+  6
+ ],
+ "collecteLe": "2026-10-29T20:31:40.393Z",
+ "collecteApresCourse": true
 }

@@ -22,8 +22,8 @@
    "cheval": "DIXIE DEVIL",
    "nom": "DIXIE DEVIL",
    "poids": 56,
-   "driver": "I MONCADA",
-   "jockey": "I MONCADA",
+   "driver": "E MORALES",
+   "jockey": "E MORALES",
    "entraineur": "T HUMPHRIES",
    "valeur": 32,
    "sexe": "H",
@@ -387,5 +387,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-10-29T13:12:37.397Z"
+ "collecteLe": "2026-10-29T20:31:45.893Z"
 }
