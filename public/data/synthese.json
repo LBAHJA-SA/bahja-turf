@@ -21,14 +21,29 @@
       9
     ],
     "savedAt": "2026-10-29T01:17:01.250Z",
-    "arrivee": null,
-    "ticket": null,
-    "discipline": "ATTELE",
+    "arrivee": [
+      14,
+      10,
+      5,
+      3,
+      12
+    ],
+    "ticket": [
+      3,
+      2,
+      4,
+      6,
+      8,
+      10,
+      11,
+      12
+    ],
+    "discipline": "Attelé",
     "distance": 2850,
     "nbPartants": 14,
-    "hippodrome": "VINCENNES",
+    "hippodrome": "Paris-Vincennes",
     "prix": "PRIX DES CEVENNES",
-    "courseId": "pmu-R1C1",
+    "courseId": "2026-10-29_R1_C1",
     "cle": "2026-10-29_R1_C1",
     "runners": [
       1,
@@ -46,7 +61,60 @@
       13,
       14
     ],
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "placeholder": false,
+    "ticketMode": "defaut",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          3,
+          8,
+          11
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          12,
+          10
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          4
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          2
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          6
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-10-29T13:10:31.253Z",
+    "ticketMoteur": [
+      3,
+      2,
+      4,
+      6,
+      8,
+      10,
+      11,
+      12
+    ],
+    "cloture": "2026-10-29T13:10:31.254Z",
+    "scores": null,
+    "collecte": "2026-10-29T13:10:31.254Z"
   },
   "2026-10-27": {
     "date": "2026-10-27",
