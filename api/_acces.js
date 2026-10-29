@@ -1,8 +1,30 @@
 /* Vérification de session utilisable par les fonctions Node, Edge et le middleware Vercel. */
 
+/* ⭐ 29/10/2026 — LA MÊME FUSION QUE `_session.js`.
+ *  Ce fichier lit `ADMIN_COMPTES` directement (il tourne aussi en Edge, où l'on
+ *  n'importe pas `_session.js`). Il ignorait donc `ADMIN_COMPTES_RECOURS` : le
+ *  cookie du compte de secours était signé, puis REFUSÉ ici — et, comme le nom
+ *  « sam » existait encore dans l'ancienne liste SANS le droit `admin`, la
+ *  vérification retombait sur le compte verrouillé → « Compte bloqué : nouvel
+ *  appareil détecté ». Une seule liste pour tout le monde. */
+function listeComptes() {
+  const lire = (nom) => {
+    try {
+      const j = JSON.parse(String(process.env[nom] || ''))
+      const l = Array.isArray(j) ? j : (j.comptes || [])
+      return Array.isArray(l) ? l.filter((c) => c && c.nom) : []
+    } catch { return [] }
+  }
+  const secours = lire('ADMIN_COMPTES_RECOURS')
+  const normaux = lire('ADMIN_COMPTES')
+  if (!secours.length) return normaux
+  const pris = new Set(secours.map((c) => String(c.nom).toLowerCase()))
+  return [...secours, ...normaux.filter((c) => !pris.has(String(c.nom).toLowerCase()))]
+}
+
 export async function sessionValide(req) {
   const secret = String(process.env.ADMIN_SECRET || '').trim()
-  const liste = (() => { try { const j = JSON.parse(String(process.env.ADMIN_COMPTES || '')); return Array.isArray(j) ? j : (j.comptes || []) } catch { return [] } })()
+  const liste = listeComptes()
   if (!secret || !liste.length || !globalThis.crypto || !crypto.subtle) return null
 
   const h = req?.headers

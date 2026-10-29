@@ -162,13 +162,32 @@ async function enregistrerComptesVercel(valeur) {
   const variables = await appelVercel(project + team)
   const envs = Array.isArray(variables.envs) ? variables.envs : []
   const cibles = ['production', 'preview', 'development']
-  const misesAJour = cibles.map((cible) => {
-    const env = envs.find((item) => item && item.key === 'ADMIN_COMPTES' &&
-      Array.isArray(item.target) && item.target.includes(cible))
-    return env && env.id ? { cible, id: env.id } : null
-  })
-  if (misesAJour.some((env) => !env)) {
+  /* ⭐ 29/10/2026 — LES DOUBLONS SE NETTOIENT TOUT SEULS.
+   *
+   *  Constat : le 28/10 la production portait TROIS `ADMIN_COMPTES` (une par
+   *  cible, plus des résidus), et `find(...)` n'en écrivait qu'UNE — les autres
+   *  gardaient l'ancienne valeur. Résultat vécu : « حذف المستخدم لا يعمل » —
+   *  on supprimait un compte, une copie oubliée le remettait en place.
+   *
+   *  Ici : on écrit la valeur sur la PREMIÈRE variable de chaque cible, puis on
+   *  SUPPRIME les autres. Après un enregistrement, il n'existe plus qu'une
+   *  `ADMIN_COMPTES` par cible — la console ne peut plus être contredite. */
+  const toutes = envs.filter((item) => item && item.key === 'ADMIN_COMPTES' && item.id)
+  const groupes = cibles.map((cible) => ({
+    cible,
+    ids: toutes.filter((item) => Array.isArray(item.target) && item.target.includes(cible)).map((item) => item.id),
+  }))
+  if (groupes.some((g) => !g.ids.length)) {
     throw new Error('Vercel doit contenir une variable ADMIN_COMPTES distincte pour Production, Preview et Development')
+  }
+  const misesAJour = groupes.map((g) => ({ cible: g.cible, id: g.ids[0] }))
+  const gardes = new Set(misesAJour.map((m) => m.id))
+  const enTrop = [...new Set(groupes.flatMap((g) => g.ids))].filter((id) => !gardes.has(id))
+  for (const id of enTrop) {
+    await appelVercel(
+      '/v9/projects/' + encodeURIComponent(VERCEL_PROJECT_ID) + '/env/' + encodeURIComponent(id) + team,
+      { method: 'DELETE' },
+    )
   }
   // Chaque environnement a déjà son propre type (Secret/sensitive pour
   // Production et Preview, encrypted pour Development). Modifier par ID
@@ -187,9 +206,20 @@ async function enregistrerComptesVercel(valeur) {
   )
   const dernier = (deploys.deployments || []).find((d) => d && (d.uid || d.id))
   if (!dernier) throw new Error('aucun déploiement de production prêt à relancer n’a été trouvé')
-  // Vercel documents `forceNew` as numeric `1` (boolean `true` is rejected).
+  /* ⭐ 29/10/2026 — `name` EST OBLIGATOIRE. Sans lui Vercel répond
+   *  `400 Invalid request: missing required property name` : la valeur était
+   *  bien enregistrée, mais AUCUN redéploiement ne partait — donc la fonction
+   *  continuait de lire l'ancienne liste. C'est exactement ce que l'utilisateur
+   *  a vécu : « حذف المستخدم لا يعمل ». On ajoute aussi `target: 'production'`
+   *  pour que le redéploiement parte sur le bon environnement.
+   *  Vercel documents `forceNew` as numeric `1` (boolean `true` is rejected). */
   const deployment = await appelVercel('/v13/deployments?forceNew=1' + teamParam, {
-    method: 'POST', body: JSON.stringify({ deploymentId: dernier.uid || dernier.id }),
+    method: 'POST',
+    body: JSON.stringify({
+      name: 'bahja-turf',
+      target: 'production',
+      deploymentId: dernier.uid || dernier.id,
+    }),
   })
   return {
     id: deployment.id || deployment.uid || '',
