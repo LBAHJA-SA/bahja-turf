@@ -2154,6 +2154,87 @@ import), qui n'ont rien à faire dans un commit ni dans un déploiement.
 
 ---
 
+### 13.9 🔑 « nom ou mot de passe incorrect » — la clé de secours (29/10/2026)
+
+> Incident réel : le propriétaire ne pouvait plus entrer sur `/admin`, avec pour
+> seul message `nom ou mot de passe incorrect`, et **aucun moyen de vérifier
+> quoi que ce soit depuis l'extérieur**.
+
+#### ① Ce que le diagnostic a trouvé
+
+`GET /api/admin?action=etat` répondait `configure: true · comptes: 3` : le
+serveur lisait donc bien une liste de trois comptes. Le 401 ne venait pas d'une
+variable absente — il venait d'un **hash qui ne correspondait plus** au mot de
+passe tapé.
+
+Et surtout, `GET /v9/projects/{id}/env` a montré **trois exemplaires de la même
+variable** :
+
+| id | type | cible | valeur relisible ? |
+|---|---|---|---|
+| `ibbhp…` | `sensitive` | **production** | ❌ jamais rendue |
+| `zssp…` | `encrypted` | development | ❌ chiffrée (`{"v":"v2","c":"…"}`) |
+| `7e6RL…` | `sensitive` | preview | ❌ jamais rendue |
+
+**Vercel ne rend JAMAIS la valeur d'une variable `sensitive`.** Conséquences :
+
+- impossible de relire un hash perdu ;
+- impossible de reconstruire la liste sans **effacer les deux autres comptes** ;
+- le 401 est donc **indiagnosticable de l'extérieur** — c'est ça, le vrai défaut.
+
+#### ② La correction : une clé de secours, en FUSION
+
+`api/_session.js → comptes()` lit désormais **`ADMIN_COMPTES_RECOURS` en
+premier** et la **fusionne** avec `ADMIN_COMPTES` (dédoublonnage par nom, la
+clé de secours gagne) :
+
+```js
+const secours = lire('ADMIN_COMPTES_RECOURS')
+const normaux = lire('ADMIN_COMPTES')
+if (!secours.length) return normaux
+const pris = new Set(secours.map((c) => String(c.nom).toLowerCase()))
+return [...secours, ...normaux.filter((c) => !pris.has(...))]
+```
+
+**Rien n'est remplacé, rien n'est détruit** : les autres comptes gardent leur
+hash et continuent de fonctionner. Le compte de secours passe en tête pour que
+`find(nom)` le trouve avant un homonyme resté dans l'ancienne liste.
+
+`tools/recours.mjs` :
+
+| commande | ce qu'elle fait |
+|---|---|
+| `node tools\recours.mjs` | mot de passe lisible (14 car., sans `0O1lI5S`) + `sel`/`iter`/`hash` avec **le calcul exact du serveur** (PBKDF2-SHA256, 210 000, 32 octets) → pose la variable sur production + preview + development → affiche le mot de passe **une fois** (copie locale `.recours.json`, ignorée par git) |
+| `--verifier` | login de bout en bout contre `bahja-turf.vercel.app` |
+| `--retirer` | efface la clé de secours (à faire quand l'accès est revenu) |
+
+⚠ **Une variable d'environnement ne prend effet qu'au déploiement suivant** :
+poser la clé ne suffit pas, il faut pousser. Vérifié le 29/10 :
+
+```
+deploiement … · BUILDING → READY
+etat   = {configure:true, comptes:3, version:"verrou-admin-2"}
+login  → HTTP 200  {ok:true, nom:"sam", pages:[…, "admin"]}
+session → {connecte:true, abonnement:{etat:"illimite"}}
+pronostics (admin) → 200
+```
+
+#### ③ La règle qui reste
+
+- **Un hash perdu ne se relit pas.** La seule sortie est de **poser** une valeur
+  neuve — d'où la clé de secours, qui évite d'écraser les autres comptes.
+- **Ne jamais compter sur `?action=etat`** pour dire *qui* existe : il ne donne
+  qu'un **nombre** (`comptes().length`). Le nom vient de `connexions` (Redis).
+- **`sensitive` ≠ `encrypted`** : la première est masquée à jamais, la seconde
+  est chiffrée en `{v,c,k}` — **aucune des deux n'est relisible**. Ne pas perdre
+  le `.recours.json` avant d'avoir retapé un mot de passe dans la console.
+- Une fois dedans : **changer le mot de passe depuis la console**, puis
+  `node tools\recours.mjs --retirer` + push. Sinon la clé de secours garde son
+  propre hash (l'ancien mot de passe resterait valable, et l'abonnement du
+  compte de secours est `illimité`).
+
+---
+
 ## 14. ⚡ LA CARRIÈRE AUTOMATIQUE — fini de saisir à la main
 
 ### 14.1 Pourquoi
