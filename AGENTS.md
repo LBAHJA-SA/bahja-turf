@@ -6897,3 +6897,196 @@ node tools\choix-carriere-chevaux.mjs      # la mesure (0 règle retenue)
 node tools\bassmat-choix.mjs               # l'artefact de la section ⑧
 node tools\test-bassmat-variante.mjs       # la variante sur les 96 courses
 ```
+
+---
+
+### 11.45 ⭐ LA BASSMAT DU MOIS — L'AUTOPSIE DE NOS PROPRES TICKETS (29/10/2026, appliqué)
+
+> Demande de l'utilisateur : **« البصمة ديال QUINTE بغيتها من هنا فقط لان كايبين
+> سوء الاختيار ديال درنا فهاد الشهر »** — « la bassmat du Quinté, je la veux
+> **d'ici seulement**, parce que c'est elle qui montre les mauvais choix qu'on a
+> faits ce mois-ci ».
+
+Toutes les bassmats écrites jusqu'ici (§11.35, §11.43, §11.44) sont calculées sur
+**96 Quintés de février à juillet** : elles décrivent un **régime de course**.
+Elles ne peuvent pas dire où **nous** avons perdu, parce que ce ne sont pas nos
+courses. Celle-ci prend **l'archive du mois** (`data/synthese.json`), avec le
+**ticket réellement posé**, et répond à la seule question qui compte après coup :
+
+```
+pour chaque arrivant : était-il dans le ticket ? sinon, QUI était pris à sa place,
+et ce remplaçant est-il arrivé ?
+```
+
+#### ① Le protocole — aucun chiffre à la main
+
+| entrée | source |
+|---|---|
+| Synthèse, arrivée, **ticket posé** | `data/synthese.json`, entrées du mois |
+| cases P1..P20 et blocs G1..G5 | **le vrai `buildGrid`** de `src/lib/quinte.js` |
+| le ticket manquant | reconstruit par le **vrai `remplirGrille`** (et signalé `ticketReel: false`) |
+| les bandes de marché | `data/cotes.json` (Equidia), rang de cote |
+| sortie | `data/bassmat-mois.json` + `public/data/bassmat-mois.json` |
+
+```
+node tools\bassmat-mois.mjs
+```
+
+**26 Quintés joués** (2026-10-01 → 2026-10-27) · **26 tickets archivés** ·
+`2026-10-29` écartée (pas d'arrivée). Le 27/10 a été ajouté à l'archive depuis la
+page **Archive** de l'utilisateur (arrivée `10-6-9-15-3`), sans lui le mois
+s'arrêtait au 26.
+
+#### ② Le bilan réel du mois — 3,2 / 5 de moyenne
+
+```
+1/5 × 1 · 2/5 × 5 · 3/5 × 10 · 4/5 × 8 · 5/5 × 2   →  moyenne 3,2/5
+10-05 et 10-06 → les deux 5/5 · 10-18 (1/5) le pire · 10-07 / 10-15 / 10-21 / 10-23 / 10-27 à 2/5
+```
+
+**18 courses sur 26 à 3/5 ou mieux (69 %)**. Ce n'est pas un mois perdu : c'est un
+mois où le **podium est presque toujours couvert** et où le **4ᵉ et le 5ᵉ** manquent.
+
+#### ③ Où le ticket a perdu — les 130 arrivants du mois
+
+| | n | % |
+|---|---|---|
+| arrivants (5 premiers) dans le ticket | **83** | **63,8 %** |
+| arrivants **coupés** par un quota | 47 | 36,2 % |
+| dont le siège du bloc était occupé par un cheval **NON arrivé** | **24** | **51,1 % des coupés** |
+| dont le siège du bloc était occupé par un cheval **arrivé** | 23 | 48,9 % |
+
+**Les 24 « sièges morts » sont exactement le mauvais choix du mois** : le cheval
+était dans la grille, à sa case, et le siège a été donné à un cheval qui n'est pas
+arrivé. Les 23 autres sont la **contrainte**, pas l'erreur : le bloc avait raison,
+il produisait deux arrivants et un seul siège.
+
+Les 47 coupés par case :
+
+| zone du carnet | coupés |
+|---|---|
+| **P1 – P8** (la zone que le ticket de 8 revendique) | **25** |
+| P9 – P10 | 4 |
+| **P11 – P20** | **18** |
+
+Et **un seul** des 47 coupés avait une case **P1-P3** : le podium du carnet entre
+donc dans le ticket **presque toujours** — le trou n'est jamais en haut.
+
+#### ④ Bloc par bloc — G5 est le trou
+
+| bloc | sièges posés | arrivants pris | coupés | **sièges morts** | siège occupé par un arrivant |
+|---|---|---|---|---|---|
+| **G1** | 83 | 44 | 11 | **1** | 10 |
+| **G2** | 58 | 23 | 17 | **5** | 12 |
+| **G3** | 26 | 6 | 4 | **4** | 0 |
+| **G4** | 25 | 7 | 7 | **6** | 1 |
+| **G5** | 19 | 3 | 8 | **8** | **0** |
+
+- **G5 : 8 sièges morts sur 19 posés, 0 sauvé.** Aucun siège de G5 n'a été
+  « dépensé pour un autre arrivant » : chaque fois qu'un cheval de G5 est arrivé,
+  le siège était sur un autre. C'est le bloc qui coûte le plus, et il coûte
+  **toujours**.
+- **G1 : 1 siège mort sur 83.** Le 4ᵉ du carnet coupé (P4) a payé 10 fois pour un
+  cheval du bloc qui arrivait aussi — la contrainte, pas l'erreur.
+- **G3 : 4 morts sur 4 coupés**, et **6 pris seulement** : la case P9-P10 a très
+  peu produit ce mois (P9 19,2 % · P10 23,1 %, contre 61,5 % en P1).
+- **G4 : 6 morts** — le marché y choisit (§11.23), et ce mois il s'est trompé.
+
+Les **24 sièges morts** du mois, tels quels :
+
+```
+10-02:7(P12,G4)  10-03:17(P13,G5) 10-04:10(P7,G2)  10-07:16(P4,G1)  10-07:5(P11,G3)
+10-11:3(P6,G2)   10-11:12(P15,G5) 10-18:5(P11,G3)  10-18:9(P7,G2)   10-18:10(P4,G2)
+10-18:11(P12,G4) 10-19:6(P14,G5)  10-21:4(P8,G2)   10-21:2(P13,G4)  10-22:12(P13,G4)
+10-22:3(P15,G5)  10-23:14(P14,G5) 10-23:16(P15,G5) 10-24:13(P14,G5) 10-25:10(P13,G4)
+10-26:13(P11,G3) 10-27:6(P13,G4)  10-27:15(P10,G3) 10-27:3(P14,G5)
+```
+
+**17 des 24 sont en case P11 ou au-delà.** Le mauvais choix du mois n'est pas
+« un mauvais cheval du haut » : c'est **le siège dépensé en bas du carnet**, en
+G4/G5, sur un cheval qui ne vient pas — pendant qu'un autre cheval du bas, lui,
+arrive.
+
+#### ⑤ Les cases du mois — P13 revient
+
+`P1 61,5 % · P2 50 % · P3 53,8 % · P4 50 % · P5 46,2 % · P6 26,9 % · P7 42,3 % ·
+P8 34,6 % · P9 19,2 % · P10 23,1 % · P11 19,2 % · P12 15,4 % · P13 30,8 % ·
+P14 16 % · P15 13,6 % · P16 0 %`
+
+- **P13 = 30,8 %** (8 arrivants sur 26, dont 3 vainqueurs) : le mois a produit un
+  arrivant en P13 **une course sur trois**, comme le corpus de référence.
+- **P16 : 0/18.** Le fond du carnet n'a rien donné ce mois.
+- 12 courses sur 26 ont un arrivant en **P13+** — le ticket de 8 ne peut pas les
+  prendre, et c'est pour ça que le 5/5 plafonne.
+
+#### ⑥ Combien de cases pour tout tenir (le mois)
+
+| P1..Pk | podium | quinté |
+|---|---|---|
+| **8** (le ticket) | **42,3 %** | **15,4 %** |
+| 10 | 57,7 % | 26,9 % |
+| 12 | 73,1 % | 53,8 % |
+| 14 | 100 % | 88,5 % |
+
+Le mois est **meilleur que le corpus de référence** sur le dense (podium 42,3 %
+contre 37,5 % à 8 cases) et sur le quinté (15,4 % contre 11,5 %). Le plafond est
+le même : **8 → 12 cases = 53,8 %** du quinté.
+
+#### ⑦ Empreinte du mois — le podium tient en G1∪G2
+
+```
+podium : G1 1,5 · G2 0,8 · G3 0,3 · G4 0,3 · G5 0,2
+quinté : G1 2,1 · G2 1,5 · G3 0,4 · G4 0,5 · G5 0,4
+```
+
+Motifs de podium les plus fréquents : `2·1·0·0·0` **19,2 %** et `1·1·0·1·0`
+**19,2 %**, puis `3·0·0·0·0` 11,5 %. Le quinté : `2·2·0·1·0` 11,5 %,
+`3·2·0·0·0` 11,5 %. **Rien de neuf par rapport au corpus** — le régime d'octobre
+est le régime normal.
+
+#### ⑧ Bloc × bande du marché — le seul endroit où le mois parle
+
+| bloc | M≤3 fort | M≤5 bon | M6-12 moyen | **M13+ faible** |
+|---|---|---|---|---|
+| G1 | 63,6 % (44) | 63,2 % (19) | 26,3 % (19) | — (1) |
+| G2 | 50 % (14) | 52,6 % (19) | 33,3 % (48) | — (3) |
+| G3 | — (3) | — (3) | 18,8 % (32) | — (3) |
+| G4 | — (1) | — (0) | 28,6 % (28) | 16,7 % (12) |
+| **G5** | — (1) | — (1) | 20 % (20) | **5,4 % (56)** |
+
+**G5 en bande faible = 5,4 % sur 56 chevaux** : quand la cote dit « ce cheval n'a
+rien à faire là », elle a raison 19 fois sur 20 ce mois-ci. C'est la seule bande
+du tableau qui condamne un bloc entier — et c'est là que le ticket a mis 19
+sièges.
+
+#### ⚠ Les limites, écrites dans l'artefact
+
+1. **8 tickets de l'archive ne font pas 8 chevaux** — `10-08 (7)`, `10-10 (6)`,
+   puis `10-22 … 10-27 (9)`. Le mois contient donc **trois régimes de quotas**
+   (4-3-1-1-1-0 puis 3-2-1-1-1 le 28/10). On ausculte **ce qui a été posé**, pas
+   une règle unique : la colonne « sièges » le dit, et l'onglet l'affiche.
+2. **Le marché n'existe que pour les courses de `data/cotes.json`** : sans cote,
+   la bande vaut `null` et la ligne n'est pas comptée (jamais de tri partiel).
+3. **26 courses, c'est un mois** : les pourcentages de bloc se lisent en
+   **sièges morts** (un compte, pas un taux) — 8 en G5 sur 19 posés est lisible,
+   5,4 % sur 56 chevaux aussi, mais P16 à 0/18 ne prouve rien.
+
+#### ⑨ Ce qui est APPLIQUÉ — la section ⓪ de l'onglet Bassmat
+
+| où | quoi |
+|---|---|
+| `tools/bassmat-mois.mjs` | la mesure → `data/bassmat-mois.json` (+ copie `public/data/`) |
+| `fetchBassmatMois()` dans `src/lib/quinte.js` **et** `backend/QUINTE/quinte.js` (sha1 `4a5f72c0…`, identiques) | lit l'artefact |
+| `frontend/QUINTE/QuinteGrille.jsx` → `TabBassmat`, section **⓪ « بصمة هذا الشهر »** | en **tête** de l'onglet : bilan du mois, cases, blocs (sièges / pris / coupés / **siège mort**), verdict + chips des 24 sièges morts, « combien de cases », bloc × bande |
+
+Le sous-titre de l'onglet est passé à **« l'empreinte du mois et de la course »** :
+la section ⓪ est notre archive, les sections ①–⑧ restent le corpus de référence.
+
+**Aucun chiffre n'est saisi dans la page.** Si l'artefact manque, la page le dit
+(`node tools\bassmat-mois.mjs`) au lieu d'afficher zéro.
+
+> **Ce que la bassmat du mois répond, en une ligne :** ce mois-ci, le ticket
+> n'a pas perdu en haut (1 seul coupé en P1-P3, 1 seul siège mort en G1) —
+> il a perdu **en bas**, sur les **24 sièges morts**, dont **17 en P11+** et
+> **8 en G5 qui n'ont jamais rien sauvé**. Le haut est tenu ; c'est le **prix du
+> bas** qui manque le 4ᵉ et le 5ᵉ.

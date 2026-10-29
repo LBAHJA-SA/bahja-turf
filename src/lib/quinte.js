@@ -2389,3 +2389,21 @@ export async function fetchBassmatChoix() {
     return r.json()
   } catch (e) { return null }
 }
+
+/* ============================================ LA BASSMAT DU MOIS (29/10/2026) ===
+ *
+ * §11.45 : la bassmat de référence est calculée sur 96 Quintés de février à
+ * juillet — elle décrit un régime de course. Celle-ci prend **l'archive du
+ * mois** : les courses réellement jouées, avec le ticket réellement posé, et
+ * elle répond à la seule question qui compte après coup : **où le ticket a
+ * perdu, et qui était pris à la place**.
+ *
+ * Écrite par `tools/bassmat-mois.mjs` — jamais un chiffre à la main.
+ */
+export async function fetchBassmatMois() {
+  try {
+    const r = await fetch('/data/bassmat-mois.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}

@@ -1,0 +1,3765 @@
+{
+ "quand": "2026-10-29T01:20:50.034Z",
+ "periode": {
+  "debut": "2026-10-01",
+  "fin": "2026-10-27"
+ },
+ "n": 26,
+ "ecartees": [
+  {
+   "date": "2026-10-29",
+   "quoi": "pas d’arrivée"
+  }
+ ],
+ "ticketsReels": 26,
+ "ticketsIncomplets": [
+  {
+   "date": "2026-10-08",
+   "n": 7
+  },
+  {
+   "date": "2026-10-10",
+   "n": 6
+  },
+  {
+   "date": "2026-10-22",
+   "n": 9
+  },
+  {
+   "date": "2026-10-23",
+   "n": 9
+  },
+  {
+   "date": "2026-10-24",
+   "n": 9
+  },
+  {
+   "date": "2026-10-25",
+   "n": 9
+  },
+  {
+   "date": "2026-10-26",
+   "n": 9
+  },
+  {
+   "date": "2026-10-27",
+   "n": 9
+  }
+ ],
+ "quotas": [
+  3,
+  2,
+  1,
+  1,
+  1
+ ],
+ "cases": [
+  {
+   "p": 1,
+   "n": 26,
+   "top5": 16,
+   "top3": 14,
+   "victoires": 4,
+   "pos": [
+    4,
+    6,
+    4,
+    2,
+    0
+   ],
+   "pc_top5": 61.5,
+   "pc_top3": 53.8,
+   "pc_podium_top5": 87.5
+  },
+  {
+   "p": 2,
+   "n": 26,
+   "top5": 13,
+   "top3": 6,
+   "victoires": 2,
+   "pos": [
+    2,
+    3,
+    1,
+    4,
+    3
+   ],
+   "pc_top5": 50,
+   "pc_top3": 23.1,
+   "pc_podium_top5": 46.2
+  },
+  {
+   "p": 3,
+   "n": 26,
+   "top5": 14,
+   "top3": 11,
+   "victoires": 6,
+   "pos": [
+    6,
+    3,
+    2,
+    1,
+    2
+   ],
+   "pc_top5": 53.8,
+   "pc_top3": 42.3,
+   "pc_podium_top5": 78.6
+  },
+  {
+   "p": 4,
+   "n": 26,
+   "top5": 13,
+   "top3": 9,
+   "victoires": 2,
+   "pos": [
+    2,
+    3,
+    4,
+    3,
+    1
+   ],
+   "pc_top5": 50,
+   "pc_top3": 34.6,
+   "pc_podium_top5": 69.2
+  },
+  {
+   "p": 5,
+   "n": 26,
+   "top5": 12,
+   "top3": 7,
+   "victoires": 2,
+   "pos": [
+    2,
+    1,
+    4,
+    4,
+    1
+   ],
+   "pc_top5": 46.2,
+   "pc_top3": 26.9,
+   "pc_podium_top5": 58.3
+  },
+  {
+   "p": 6,
+   "n": 26,
+   "top5": 7,
+   "top3": 6,
+   "victoires": 2,
+   "pos": [
+    2,
+    2,
+    2,
+    0,
+    1
+   ],
+   "pc_top5": 26.9,
+   "pc_top3": 23.1,
+   "pc_podium_top5": 85.7
+  },
+  {
+   "p": 7,
+   "n": 26,
+   "top5": 11,
+   "top3": 5,
+   "victoires": 2,
+   "pos": [
+    2,
+    0,
+    3,
+    2,
+    4
+   ],
+   "pc_top5": 42.3,
+   "pc_top3": 19.2,
+   "pc_podium_top5": 45.5
+  },
+  {
+   "p": 8,
+   "n": 26,
+   "top5": 9,
+   "top3": 4,
+   "victoires": 2,
+   "pos": [
+    2,
+    1,
+    1,
+    2,
+    3
+   ],
+   "pc_top5": 34.6,
+   "pc_top3": 15.4,
+   "pc_podium_top5": 44.4
+  },
+  {
+   "p": 9,
+   "n": 26,
+   "top5": 5,
+   "top3": 3,
+   "victoires": 0,
+   "pos": [
+    0,
+    3,
+    0,
+    1,
+    1
+   ],
+   "pc_top5": 19.2,
+   "pc_top3": 11.5,
+   "pc_podium_top5": 60
+  },
+  {
+   "p": 10,
+   "n": 26,
+   "top5": 6,
+   "top3": 2,
+   "victoires": 1,
+   "pos": [
+    1,
+    1,
+    0,
+    2,
+    2
+   ],
+   "pc_top5": 23.1,
+   "pc_top3": 7.7,
+   "pc_podium_top5": 33.3
+  },
+  {
+   "p": 11,
+   "n": 26,
+   "top5": 5,
+   "top3": 3,
+   "victoires": 0,
+   "pos": [
+    0,
+    2,
+    1,
+    1,
+    1
+   ],
+   "pc_top5": 19.2,
+   "pc_top3": 11.5,
+   "pc_podium_top5": 60
+  },
+  {
+   "p": 12,
+   "n": 26,
+   "top5": 4,
+   "top3": 1,
+   "victoires": 0,
+   "pos": [
+    0,
+    0,
+    1,
+    0,
+    3
+   ],
+   "pc_top5": 15.4,
+   "pc_top3": 3.8,
+   "pc_podium_top5": 25
+  },
+  {
+   "p": 13,
+   "n": 26,
+   "top5": 8,
+   "top3": 6,
+   "victoires": 3,
+   "pos": [
+    3,
+    1,
+    2,
+    1,
+    1
+   ],
+   "pc_top5": 30.8,
+   "pc_top3": 23.1,
+   "pc_podium_top5": 75
+  },
+  {
+   "p": 14,
+   "n": 25,
+   "top5": 4,
+   "top3": 1,
+   "victoires": 0,
+   "pos": [
+    0,
+    0,
+    1,
+    2,
+    1
+   ],
+   "pc_top5": 16,
+   "pc_top3": 4,
+   "pc_podium_top5": 25
+  },
+  {
+   "p": 15,
+   "n": 22,
+   "top5": 3,
+   "top3": 0,
+   "victoires": 0,
+   "pos": [
+    0,
+    0,
+    0,
+    1,
+    2
+   ],
+   "pc_top5": 13.6,
+   "pc_top3": 0,
+   "pc_podium_top5": 0
+  },
+  {
+   "p": 16,
+   "n": 18,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pos": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pc_top5": 0,
+   "pc_top3": 0,
+   "pc_podium_top5": 0
+  },
+  {
+   "p": 17,
+   "n": 4,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pos": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pc_top5": 0,
+   "pc_top3": 0,
+   "pc_podium_top5": 0
+  },
+  {
+   "p": 18,
+   "n": 4,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pos": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pc_top5": 0,
+   "pc_top3": 0,
+   "pc_podium_top5": 0
+  },
+  {
+   "p": 19,
+   "n": 1,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pos": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pc_top5": 0,
+   "pc_top3": 0,
+   "pc_podium_top5": 0
+  },
+  {
+   "p": 20,
+   "n": 1,
+   "top5": 0,
+   "top3": 0,
+   "victoires": 0,
+   "pos": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "pc_top5": 0,
+   "pc_top3": 0,
+   "pc_podium_top5": 0
+  }
+ ],
+ "groupes": [
+  {
+   "id": "G1",
+   "presence": 25,
+   "pcPresence": 96.2,
+   "victoires": 14,
+   "podiums": 40,
+   "places45": 15,
+   "sieges": 83,
+   "pris": 44,
+   "coupes": 11,
+   "remplacantMort": 1,
+   "remplacantArrive": 10
+  },
+  {
+   "id": "G2",
+   "presence": 23,
+   "pcPresence": 88.5,
+   "victoires": 6,
+   "podiums": 20,
+   "places45": 20,
+   "sieges": 58,
+   "pris": 23,
+   "coupes": 17,
+   "remplacantMort": 5,
+   "remplacantArrive": 12
+  },
+  {
+   "id": "G3",
+   "presence": 10,
+   "pcPresence": 38.5,
+   "victoires": 2,
+   "podiums": 7,
+   "places45": 3,
+   "sieges": 26,
+   "pris": 6,
+   "coupes": 4,
+   "remplacantMort": 4,
+   "remplacantArrive": 0
+  },
+  {
+   "id": "G4",
+   "presence": 13,
+   "pcPresence": 50,
+   "victoires": 2,
+   "podiums": 7,
+   "places45": 7,
+   "sieges": 25,
+   "pris": 7,
+   "coupes": 7,
+   "remplacantMort": 6,
+   "remplacantArrive": 1
+  },
+  {
+   "id": "G5",
+   "presence": 10,
+   "pcPresence": 38.5,
+   "victoires": 2,
+   "podiums": 4,
+   "places45": 7,
+   "sieges": 19,
+   "pris": 3,
+   "coupes": 8,
+   "remplacantMort": 8,
+   "remplacantArrive": 0
+  }
+ ],
+ "empreinte": {
+  "podium": [
+   {
+    "k": "2·1·0·0·0",
+    "n": 5,
+    "pc": 19.2
+   },
+   {
+    "k": "1·1·0·1·0",
+    "n": 5,
+    "pc": 19.2
+   },
+   {
+    "k": "3·0·0·0·0",
+    "n": 3,
+    "pc": 11.5
+   },
+   {
+    "k": "1·2·0·0·0",
+    "n": 3,
+    "pc": 11.5
+   },
+   {
+    "k": "2·0·0·0·1",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "2·0·1·0·0",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "1·0·1·0·1",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "1·1·1·0·0",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "1·0·1·1·0",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "0·2·0·1·0",
+    "n": 1,
+    "pc": 3.8
+   }
+  ],
+  "quinte": [
+   {
+    "k": "2·2·0·1·0",
+    "n": 3,
+    "pc": 11.5
+   },
+   {
+    "k": "3·2·0·0·0",
+    "n": 3,
+    "pc": 11.5
+   },
+   {
+    "k": "3·0·1·0·1",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "2·1·1·0·1",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "1·2·1·1·0",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "3·1·0·1·0",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "3·1·0·0·1",
+    "n": 2,
+    "pc": 7.7
+   },
+   {
+    "k": "3·1·1·0·0",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "2·1·1·1·0",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "0·3·0·2·0",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "2·3·0·0·0",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "1·3·0·1·0",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "1·2·0·1·1",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "1·2·0·0·2",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "3·0·0·1·1",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "2·2·1·0·0",
+    "n": 1,
+    "pc": 3.8
+   },
+   {
+    "k": "1·1·1·1·1",
+    "n": 1,
+    "pc": 3.8
+   }
+  ],
+  "moyPod": {
+   "G1": 1.5,
+   "G2": 0.8,
+   "G3": 0.3,
+   "G4": 0.3,
+   "G5": 0.2
+  },
+  "moyQui": {
+   "G1": 2.1,
+   "G2": 1.5,
+   "G3": 0.4,
+   "G4": 0.5,
+   "G5": 0.4
+  }
+ },
+ "k": [
+  {
+   "k": 3,
+   "podium": 7.7,
+   "quinte": 0
+  },
+  {
+   "k": 4,
+   "podium": 15.4,
+   "quinte": 0
+  },
+  {
+   "k": 5,
+   "podium": 19.2,
+   "quinte": 0
+  },
+  {
+   "k": 6,
+   "podium": 34.6,
+   "quinte": 0
+  },
+  {
+   "k": 7,
+   "podium": 38.5,
+   "quinte": 7.7
+  },
+  {
+   "k": 8,
+   "podium": 42.3,
+   "quinte": 15.4
+  },
+  {
+   "k": 9,
+   "podium": 50,
+   "quinte": 15.4
+  },
+  {
+   "k": 10,
+   "podium": 57.7,
+   "quinte": 26.9
+  },
+  {
+   "k": 11,
+   "podium": 69.2,
+   "quinte": 38.5
+  },
+  {
+   "k": 12,
+   "podium": 73.1,
+   "quinte": 53.8
+  },
+  {
+   "k": 13,
+   "podium": 96.2,
+   "quinte": 76.9
+  },
+  {
+   "k": 14,
+   "podium": 100,
+   "quinte": 88.5
+  }
+ ],
+ "bandes": [
+  {
+   "id": "G1",
+   "cellules": [
+    {
+     "bande": "fort",
+     "n": 44,
+     "n5": 28,
+     "pc": 63.6
+    },
+    {
+     "bande": "bon",
+     "n": 19,
+     "n5": 12,
+     "pc": 63.2
+    },
+    {
+     "bande": "moyen",
+     "n": 19,
+     "n5": 5,
+     "pc": 26.3
+    },
+    {
+     "bande": "faible",
+     "n": 1,
+     "n5": 1,
+     "pc": 100
+    }
+   ]
+  },
+  {
+   "id": "G2",
+   "cellules": [
+    {
+     "bande": "fort",
+     "n": 14,
+     "n5": 7,
+     "pc": 50
+    },
+    {
+     "bande": "bon",
+     "n": 19,
+     "n5": 10,
+     "pc": 52.6
+    },
+    {
+     "bande": "moyen",
+     "n": 48,
+     "n5": 16,
+     "pc": 33.3
+    },
+    {
+     "bande": "faible",
+     "n": 3,
+     "n5": 1,
+     "pc": 33.3
+    }
+   ]
+  },
+  {
+   "id": "G3",
+   "cellules": [
+    {
+     "bande": "fort",
+     "n": 3,
+     "n5": 2,
+     "pc": 66.7
+    },
+    {
+     "bande": "bon",
+     "n": 3,
+     "n5": 0,
+     "pc": 0
+    },
+    {
+     "bande": "moyen",
+     "n": 32,
+     "n5": 6,
+     "pc": 18.8
+    },
+    {
+     "bande": "faible",
+     "n": 3,
+     "n5": 0,
+     "pc": 0
+    }
+   ]
+  },
+  {
+   "id": "G4",
+   "cellules": [
+    {
+     "bande": "fort",
+     "n": 1,
+     "n5": 0,
+     "pc": 0
+    },
+    {
+     "bande": "bon",
+     "n": 0,
+     "n5": 0,
+     "pc": null
+    },
+    {
+     "bande": "moyen",
+     "n": 28,
+     "n5": 8,
+     "pc": 28.6
+    },
+    {
+     "bande": "faible",
+     "n": 12,
+     "n5": 2,
+     "pc": 16.7
+    }
+   ]
+  },
+  {
+   "id": "G5",
+   "cellules": [
+    {
+     "bande": "fort",
+     "n": 1,
+     "n5": 0,
+     "pc": 0
+    },
+    {
+     "bande": "bon",
+     "n": 1,
+     "n5": 0,
+     "pc": 0
+    },
+    {
+     "bande": "moyen",
+     "n": 20,
+     "n5": 4,
+     "pc": 20
+    },
+    {
+     "bande": "faible",
+     "n": 56,
+     "n5": 3,
+     "pc": 5.4
+    }
+   ]
+  }
+ ],
+ "pertes": {
+  "arrivees": 130,
+  "pris": 83,
+  "coupes": 47,
+  "remplacantMort": 24,
+  "remplacantArrive": 23,
+  "pcPris": 63.8,
+  "pcCoupes": 36.2,
+  "pcRemplacantMort": 51.1,
+  "liste": [
+   {
+    "date": "2026-10-01",
+    "num": 14,
+    "place": 4,
+    "bloc": "G1",
+    "bande": "moyen",
+    "remplacants": [
+     1,
+     4,
+     3
+    ],
+    "remplacantsArrives": [
+     1,
+     3
+    ]
+   },
+   {
+    "date": "2026-10-02",
+    "num": 11,
+    "place": 5,
+    "bloc": "G2",
+    "bande": "fort",
+    "remplacants": [
+     10,
+     12
+    ],
+    "remplacantsArrives": [
+     12
+    ]
+   },
+   {
+    "date": "2026-10-02",
+    "num": 7,
+    "place": 12,
+    "bloc": "G4",
+    "bande": "moyen",
+    "remplacants": [
+     8
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-03",
+    "num": 8,
+    "place": 4,
+    "bloc": "G1",
+    "bande": "fort",
+    "remplacants": [
+     4,
+     9,
+     13
+    ],
+    "remplacantsArrives": [
+     4
+    ]
+   },
+   {
+    "date": "2026-10-03",
+    "num": 17,
+    "place": 13,
+    "bloc": "G5",
+    "bande": "moyen",
+    "remplacants": [
+     14
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-04",
+    "num": 16,
+    "place": 5,
+    "bloc": "G1",
+    "bande": "moyen",
+    "remplacants": [
+     1,
+     9,
+     14
+    ],
+    "remplacantsArrives": [
+     1,
+     9
+    ]
+   },
+   {
+    "date": "2026-10-04",
+    "num": 10,
+    "place": 7,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     11,
+     15
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-07",
+    "num": 16,
+    "place": 4,
+    "bloc": "G1",
+    "bande": "fort",
+    "remplacants": [
+     12,
+     17,
+     15
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-07",
+    "num": 5,
+    "place": 11,
+    "bloc": "G3",
+    "bande": "fort",
+    "remplacants": [
+     4
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-07",
+    "num": 14,
+    "place": 7,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     11,
+     13
+    ],
+    "remplacantsArrives": [
+     13
+    ]
+   },
+   {
+    "date": "2026-10-08",
+    "num": 1,
+    "place": 3,
+    "bloc": "G1",
+    "bande": null,
+    "remplacants": [
+     8,
+     5,
+     6
+    ],
+    "remplacantsArrives": [
+     8,
+     5
+    ]
+   },
+   {
+    "date": "2026-10-09",
+    "num": 7,
+    "place": 10,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     6,
+     13
+    ],
+    "remplacantsArrives": [
+     6
+    ]
+   },
+   {
+    "date": "2026-10-10",
+    "num": 9,
+    "place": 7,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     10,
+     8
+    ],
+    "remplacantsArrives": [
+     10
+    ]
+   },
+   {
+    "date": "2026-10-10",
+    "num": 3,
+    "place": 4,
+    "bloc": "G1",
+    "bande": "bon",
+    "remplacants": [
+     4,
+     2
+    ],
+    "remplacantsArrives": [
+     4,
+     2
+    ]
+   },
+   {
+    "date": "2026-10-11",
+    "num": 3,
+    "place": 6,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     6,
+     11
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-11",
+    "num": 12,
+    "place": 15,
+    "bloc": "G5",
+    "bande": "faible",
+    "remplacants": [
+     13
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-13",
+    "num": 9,
+    "place": 5,
+    "bloc": "G1",
+    "bande": "bon",
+    "remplacants": [
+     14,
+     12,
+     3
+    ],
+    "remplacantsArrives": [
+     14
+    ]
+   },
+   {
+    "date": "2026-10-13",
+    "num": 1,
+    "place": 9,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     10,
+     16
+    ],
+    "remplacantsArrives": [
+     16
+    ]
+   },
+   {
+    "date": "2026-10-14",
+    "num": 5,
+    "place": 5,
+    "bloc": "G1",
+    "bande": "bon",
+    "remplacants": [
+     10,
+     2,
+     15
+    ],
+    "remplacantsArrives": [
+     10,
+     15
+    ]
+   },
+   {
+    "date": "2026-10-14",
+    "num": 9,
+    "place": 8,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     8,
+     13
+    ],
+    "remplacantsArrives": [
+     13
+    ]
+   },
+   {
+    "date": "2026-10-15",
+    "num": 12,
+    "place": 8,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     11,
+     10
+    ],
+    "remplacantsArrives": [
+     11
+    ]
+   },
+   {
+    "date": "2026-10-15",
+    "num": 8,
+    "place": 13,
+    "bloc": "G4",
+    "bande": "faible",
+    "remplacants": [
+     15
+    ],
+    "remplacantsArrives": [
+     15
+    ]
+   },
+   {
+    "date": "2026-10-15",
+    "num": 9,
+    "place": 5,
+    "bloc": "G2",
+    "bande": "fort",
+    "remplacants": [
+     11,
+     10
+    ],
+    "remplacantsArrives": [
+     11
+    ]
+   },
+   {
+    "date": "2026-10-16",
+    "num": 7,
+    "place": 5,
+    "bloc": "G1",
+    "bande": "bon",
+    "remplacants": [
+     3,
+     12,
+     6
+    ],
+    "remplacantsArrives": [
+     6
+    ]
+   },
+   {
+    "date": "2026-10-16",
+    "num": 13,
+    "place": 7,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     11,
+     4
+    ],
+    "remplacantsArrives": [
+     11,
+     4
+    ]
+   },
+   {
+    "date": "2026-10-17",
+    "num": 4,
+    "place": 8,
+    "bloc": "G2",
+    "bande": "moyen",
+    "remplacants": [
+     2,
+     19
+    ],
+    "remplacantsArrives": [
+     2
+    ]
+   },
+   {
+    "date": "2026-10-17",
+    "num": 11,
+    "place": 7,
+    "bloc": "G2",
+    "bande": "bon",
+    "remplacants": [
+     2,
+     19
+    ],
+    "remplacantsArrives": [
+     2
+    ]
+   },
+   {
+    "date": "2026-10-18",
+    "num": 5,
+    "place": 11,
+    "bloc": "G3",
+    "bande": null,
+    "remplacants": [
+     12
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-18",
+    "num": 9,
+    "place": 7,
+    "bloc": "G2",
+    "bande": null,
+    "remplacants": [
+     2,
+     1
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-18",
+    "num": 10,
+    "place": 4,
+    "bloc": "G2",
+    "bande": null,
+    "remplacants": [
+     2,
+     1
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-18",
+    "num": 11,
+    "place": 12,
+    "bloc": "G4",
+    "bande": null,
+    "remplacants": [
+     14
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-19",
+    "num": 6,
+    "place": 14,
+    "bloc": "G5",
+    "bande": "moyen",
+    "remplacants": [
+     15
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-20",
+    "num": 14,
+    "place": 5,
+    "bloc": "G1",
+    "bande": "moyen",
+    "remplacants": [
+     2,
+     3,
+     15
+    ],
+    "remplacantsArrives": [
+     3,
+     15
+    ]
+   },
+   {
+    "date": "2026-10-21",
+    "num": 10,
+    "place": 4,
+    "bloc": "G1",
+    "bande": "fort",
+    "remplacants": [
+     12,
+     1,
+     13
+    ],
+    "remplacantsArrives": [
+     12,
+     13
+    ]
+   },
+   {
+    "date": "2026-10-21",
+    "num": 4,
+    "place": 8,
+    "bloc": "G2",
+    "bande": "bon",
+    "remplacants": [
+     7,
+     8
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-21",
+    "num": 2,
+    "place": 13,
+    "bloc": "G4",
+    "bande": "moyen",
+    "remplacants": [
+     9
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-22",
+    "num": 12,
+    "place": 13,
+    "bloc": "G4",
+    "bande": "moyen",
+    "remplacants": [
+     13
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-22",
+    "num": 3,
+    "place": 15,
+    "bloc": "G5",
+    "bande": "faible",
+    "remplacants": [],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-23",
+    "num": 12,
+    "place": 9,
+    "bloc": "G2",
+    "bande": null,
+    "remplacants": [
+     6,
+     7,
+     9
+    ],
+    "remplacantsArrives": [
+     6
+    ]
+   },
+   {
+    "date": "2026-10-23",
+    "num": 14,
+    "place": 14,
+    "bloc": "G5",
+    "bande": null,
+    "remplacants": [],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-23",
+    "num": 16,
+    "place": 15,
+    "bloc": "G5",
+    "bande": null,
+    "remplacants": [],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-24",
+    "num": 13,
+    "place": 14,
+    "bloc": "G5",
+    "bande": null,
+    "remplacants": [],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-25",
+    "num": 10,
+    "place": 13,
+    "bloc": "G4",
+    "bande": "moyen",
+    "remplacants": [
+     11
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-26",
+    "num": 13,
+    "place": 11,
+    "bloc": "G3",
+    "bande": "fort",
+    "remplacants": [
+     8
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-27",
+    "num": 6,
+    "place": 13,
+    "bloc": "G4",
+    "bande": null,
+    "remplacants": [
+     5
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-27",
+    "num": 15,
+    "place": 10,
+    "bloc": "G3",
+    "bande": null,
+    "remplacants": [
+     12
+    ],
+    "remplacantsArrives": []
+   },
+   {
+    "date": "2026-10-27",
+    "num": 3,
+    "place": 14,
+    "bloc": "G5",
+    "bande": null,
+    "remplacants": [],
+    "remplacantsArrives": []
+   }
+  ]
+ },
+ "bilans": [
+  0,
+  1,
+  5,
+  10,
+  8,
+  2
+ ],
+ "moyenneBilan": 3.2,
+ "courses": [
+  {
+   "date": "2026-10-01",
+   "hippodrome": "AUTEUIL",
+   "discipline": "HAIE",
+   "distance": 3600,
+   "arrivee": [
+    15,
+    3,
+    14,
+    1,
+    9
+   ],
+   "ticket": [
+    1,
+    13,
+    4,
+    3,
+    7,
+    9,
+    15,
+    5
+   ],
+   "ticketReel": true,
+   "bilan": 4,
+   "detail": [
+    {
+     "num": 15,
+     "place": 13,
+     "bloc": "G5",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 3,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 14,
+     "place": 4,
+     "bloc": "G1",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      1,
+      4,
+      3
+     ],
+     "remplacantsArrives": [
+      1,
+      3
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 1,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 9,
+     "place": 8,
+     "bloc": "G3",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "hippodrome": "VINCENNES",
+   "discipline": "ATTELE",
+   "distance": 2700,
+   "arrivee": [
+    4,
+    11,
+    13,
+    12,
+    7
+   ],
+   "ticket": [
+    4,
+    10,
+    13,
+    6,
+    14,
+    12,
+    8,
+    2
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 4,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 11,
+     "place": 5,
+     "bloc": "G2",
+     "bande": "fort",
+     "pris": false,
+     "remplacants": [
+      10,
+      12
+     ],
+     "remplacantsArrives": [
+      12
+     ],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 13,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 12,
+     "place": 9,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 7,
+     "place": 12,
+     "bloc": "G4",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      8
+     ],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "hippodrome": "PARISLONGCHAMP",
+   "discipline": "Plat",
+   "distance": 2500,
+   "arrivee": [
+    4,
+    5,
+    8,
+    17,
+    3
+   ],
+   "ticket": [
+    4,
+    3,
+    9,
+    13,
+    18,
+    5,
+    1,
+    14
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 4,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 5,
+     "place": 9,
+     "bloc": "G3",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 8,
+     "place": 4,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": false,
+     "remplacants": [
+      4,
+      9,
+      13
+     ],
+     "remplacantsArrives": [
+      4
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 17,
+     "place": 13,
+     "bloc": "G5",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      14
+     ],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 3,
+     "place": 7,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "hippodrome": "Parislongchamp",
+   "discipline": "Plat",
+   "distance": 2400,
+   "arrivee": [
+    1,
+    7,
+    16,
+    10,
+    9
+   ],
+   "ticket": [
+    1,
+    9,
+    14,
+    11,
+    7,
+    15,
+    2,
+    13
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 1,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 7,
+     "place": 10,
+     "bloc": "G3",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 16,
+     "place": 5,
+     "bloc": "G1",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      1,
+      9,
+      14
+     ],
+     "remplacantsArrives": [
+      1,
+      9
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 10,
+     "place": 7,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      11,
+      15
+     ],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 9,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "hippodrome": "Enghien",
+   "discipline": "Attelé",
+   "distance": 2875,
+   "arrivee": [
+    3,
+    7,
+    9,
+    13,
+    11
+   ],
+   "ticket": [
+    9,
+    3,
+    5,
+    11,
+    13,
+    8,
+    7,
+    4
+   ],
+   "ticketReel": true,
+   "bilan": 5,
+   "detail": [
+    {
+     "num": 3,
+     "place": 7,
+     "bloc": "G3",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 7,
+     "place": 8,
+     "bloc": "G4",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 9,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 13,
+     "place": 4,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 11,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-06",
+   "hippodrome": "Auteuil",
+   "discipline": "Haies",
+   "distance": 3600,
+   "arrivee": [
+    8,
+    2,
+    7,
+    3,
+    15
+   ],
+   "ticket": [
+    9,
+    15,
+    3,
+    2,
+    12,
+    6,
+    8,
+    7
+   ],
+   "ticketReel": true,
+   "bilan": 5,
+   "detail": [
+    {
+     "num": 8,
+     "place": 8,
+     "bloc": "G3",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 2,
+     "place": 4,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 7,
+     "place": 12,
+     "bloc": "G5",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 3,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 15,
+     "place": 7,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "hippodrome": "Enghien",
+   "discipline": "Attelé",
+   "distance": 2875,
+   "arrivee": [
+    16,
+    5,
+    14,
+    13,
+    2
+   ],
+   "ticket": [
+    12,
+    17,
+    15,
+    11,
+    2,
+    10,
+    4,
+    13
+   ],
+   "ticketReel": true,
+   "bilan": 2,
+   "detail": [
+    {
+     "num": 16,
+     "place": 4,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": false,
+     "remplacants": [
+      12,
+      17,
+      15
+     ],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 5,
+     "place": 11,
+     "bloc": "G3",
+     "bande": "fort",
+     "pris": false,
+     "remplacants": [
+      4
+     ],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 14,
+     "place": 7,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      11,
+      13
+     ],
+     "remplacantsArrives": [
+      13
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 13,
+     "place": 5,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 2,
+     "place": 10,
+     "bloc": "G4",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "hippodrome": "Saint-Cloud",
+   "discipline": "Plat",
+   "distance": 2000,
+   "arrivee": [
+    1,
+    5,
+    8,
+    4,
+    15
+   ],
+   "ticket": [
+    8,
+    5,
+    4,
+    15,
+    6,
+    3,
+    12
+   ],
+   "ticketReel": true,
+   "bilan": 4,
+   "detail": [
+    {
+     "num": 1,
+     "place": 3,
+     "bloc": "G1",
+     "bande": null,
+     "pris": false,
+     "remplacants": [
+      8,
+      5,
+      6
+     ],
+     "remplacantsArrives": [
+      8,
+      5
+     ],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 5,
+     "place": 2,
+     "bloc": "G1",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 8,
+     "place": 1,
+     "bloc": "G1",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 4,
+     "place": 8,
+     "bloc": "G2",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 15,
+     "place": 12,
+     "bloc": "G4",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "hippodrome": "VINCENNES",
+   "discipline": "ATTELE",
+   "distance": 2850,
+   "arrivee": [
+    14,
+    6,
+    15,
+    7,
+    10
+   ],
+   "ticket": [
+    14,
+    15,
+    10,
+    6,
+    2,
+    13,
+    8,
+    4
+   ],
+   "ticketReel": true,
+   "bilan": 4,
+   "detail": [
+    {
+     "num": 14,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 6,
+     "place": 4,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 15,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 7,
+     "place": 10,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      6,
+      13
+     ],
+     "remplacantsArrives": [
+      6
+     ],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 10,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-10",
+   "hippodrome": "CAEN",
+   "discipline": "Attelé",
+   "distance": 2200,
+   "arrivee": [
+    9,
+    10,
+    4,
+    3,
+    2
+   ],
+   "ticket": [
+    4,
+    2,
+    10,
+    7,
+    8,
+    6
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 9,
+     "place": 7,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      10,
+      8
+     ],
+     "remplacantsArrives": [
+      10
+     ],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 10,
+     "place": 3,
+     "bloc": "G2",
+     "bande": "faible",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 4,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 3,
+     "place": 4,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": false,
+     "remplacants": [
+      4,
+      2
+     ],
+     "remplacantsArrives": [
+      4,
+      2
+     ],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 2,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "faible",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-11",
+   "hippodrome": "Auteuil",
+   "discipline": "Steeple chase",
+   "distance": 4700,
+   "arrivee": [
+    15,
+    2,
+    3,
+    12,
+    1
+   ],
+   "ticket": [
+    2,
+    6,
+    15,
+    11,
+    9,
+    1,
+    8,
+    13
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 15,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 2,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 3,
+     "place": 6,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      6,
+      11
+     ],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 12,
+     "place": 15,
+     "bloc": "G5",
+     "bande": "faible",
+     "pris": false,
+     "remplacants": [
+      13
+     ],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 1,
+     "place": 4,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "hippodrome": "Parislongchamp",
+   "discipline": "Plat",
+   "distance": 1600,
+   "arrivee": [
+    9,
+    16,
+    2,
+    14,
+    1
+   ],
+   "ticket": [
+    14,
+    10,
+    12,
+    16,
+    3,
+    8,
+    2,
+    4
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 9,
+     "place": 5,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": false,
+     "remplacants": [
+      14,
+      12,
+      3
+     ],
+     "remplacantsArrives": [
+      14
+     ],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 16,
+     "place": 6,
+     "bloc": "G2",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 2,
+     "place": 11,
+     "bloc": "G4",
+     "bande": "faible",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 14,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 1,
+     "place": 9,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      10,
+      16
+     ],
+     "remplacantsArrives": [
+      16
+     ],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "hippodrome": "Reims",
+   "discipline": "Attelé",
+   "distance": 2550,
+   "arrivee": [
+    10,
+    15,
+    13,
+    5,
+    9
+   ],
+   "ticket": [
+    10,
+    8,
+    2,
+    15,
+    13,
+    16,
+    12,
+    4
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 10,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 15,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 13,
+     "place": 6,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 5,
+     "place": 5,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": false,
+     "remplacants": [
+      10,
+      2,
+      15
+     ],
+     "remplacantsArrives": [
+      10,
+      15
+     ],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 9,
+     "place": 8,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      8,
+      13
+     ],
+     "remplacantsArrives": [
+      13
+     ],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "hippodrome": "Chantilly",
+   "discipline": "Plat",
+   "distance": 1200,
+   "arrivee": [
+    12,
+    11,
+    8,
+    9,
+    15
+   ],
+   "ticket": [
+    6,
+    11,
+    15,
+    1,
+    2,
+    4,
+    10,
+    13
+   ],
+   "ticketReel": true,
+   "bilan": 2,
+   "detail": [
+    {
+     "num": 12,
+     "place": 8,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      11,
+      10
+     ],
+     "remplacantsArrives": [
+      11
+     ],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 11,
+     "place": 4,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 8,
+     "place": 13,
+     "bloc": "G4",
+     "bande": "faible",
+     "pris": false,
+     "remplacants": [
+      15
+     ],
+     "remplacantsArrives": [
+      15
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 9,
+     "place": 5,
+     "bloc": "G2",
+     "bande": "fort",
+     "pris": false,
+     "remplacants": [
+      11,
+      10
+     ],
+     "remplacantsArrives": [
+      11
+     ],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 15,
+     "place": 10,
+     "bloc": "G4",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "hippodrome": "Paris-Vincennes",
+   "discipline": "Attelé",
+   "distance": 2850,
+   "arrivee": [
+    4,
+    11,
+    7,
+    6,
+    13
+   ],
+   "ticket": [
+    5,
+    11,
+    1,
+    3,
+    12,
+    6,
+    4,
+    15
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 4,
+     "place": 4,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 11,
+     "place": 6,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 7,
+     "place": 5,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": false,
+     "remplacants": [
+      3,
+      12,
+      6
+     ],
+     "remplacantsArrives": [
+      6
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 6,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 13,
+     "place": 7,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      11,
+      4
+     ],
+     "remplacantsArrives": [
+      11,
+      4
+     ],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "hippodrome": "AUTEUIL",
+   "discipline": "HAIE",
+   "distance": 4300,
+   "arrivee": [
+    1,
+    6,
+    4,
+    11,
+    2
+   ],
+   "ticket": [
+    16,
+    3,
+    1,
+    12,
+    5,
+    6,
+    2,
+    19
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 1,
+     "place": 10,
+     "bloc": "G4",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 6,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 4,
+     "place": 8,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      2,
+      19
+     ],
+     "remplacantsArrives": [
+      2
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 11,
+     "place": 7,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": false,
+     "remplacants": [
+      2,
+      19
+     ],
+     "remplacantsArrives": [
+      2
+     ],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 2,
+     "place": 5,
+     "bloc": "G2",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "hippodrome": "ParisLongchamp",
+   "discipline": "PLAT",
+   "distance": 3100,
+   "arrivee": [
+    4,
+    5,
+    9,
+    10,
+    11
+   ],
+   "ticket": [
+    16,
+    2,
+    1,
+    14,
+    8,
+    3,
+    4,
+    12
+   ],
+   "ticketReel": true,
+   "bilan": 1,
+   "detail": [
+    {
+     "num": 4,
+     "place": 2,
+     "bloc": "G1",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 5,
+     "place": 11,
+     "bloc": "G3",
+     "bande": null,
+     "pris": false,
+     "remplacants": [
+      12
+     ],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 9,
+     "place": 7,
+     "bloc": "G2",
+     "bande": null,
+     "pris": false,
+     "remplacants": [
+      2,
+      1
+     ],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 10,
+     "place": 4,
+     "bloc": "G2",
+     "bande": null,
+     "pris": false,
+     "remplacants": [
+      2,
+      1
+     ],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 11,
+     "place": 12,
+     "bloc": "G4",
+     "bande": null,
+     "pris": false,
+     "remplacants": [
+      14
+     ],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "hippodrome": "DEAUVILLE",
+   "discipline": "PLAT",
+   "distance": 1900,
+   "arrivee": [
+    4,
+    2,
+    6,
+    1,
+    13
+   ],
+   "ticket": [
+    2,
+    9,
+    13,
+    12,
+    1,
+    4,
+    10,
+    15
+   ],
+   "ticketReel": true,
+   "bilan": 4,
+   "detail": [
+    {
+     "num": 4,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 2,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 6,
+     "place": 14,
+     "bloc": "G5",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      15
+     ],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 1,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 13,
+     "place": 6,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "hippodrome": "CLAIREFONTAINE",
+   "discipline": "PLAT",
+   "distance": 2400,
+   "arrivee": [
+    5,
+    13,
+    14,
+    3,
+    15
+   ],
+   "ticket": [
+    2,
+    1,
+    3,
+    5,
+    9,
+    11,
+    13,
+    15
+   ],
+   "ticketReel": true,
+   "bilan": 4,
+   "detail": [
+    {
+     "num": 5,
+     "place": 13,
+     "bloc": "G5",
+     "bande": "faible",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 13,
+     "place": 9,
+     "bloc": "G3",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 14,
+     "place": 5,
+     "bloc": "G1",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      2,
+      3,
+      15
+     ],
+     "remplacantsArrives": [
+      3,
+      15
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 3,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 15,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-21",
+   "hippodrome": "LA CEPIERE",
+   "discipline": "ATTELE",
+   "distance": 2950,
+   "arrivee": [
+    13,
+    12,
+    10,
+    4,
+    2
+   ],
+   "ticket": [
+    12,
+    1,
+    6,
+    7,
+    8,
+    9,
+    11,
+    13
+   ],
+   "ticketReel": true,
+   "bilan": 2,
+   "detail": [
+    {
+     "num": 13,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 12,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 10,
+     "place": 4,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": false,
+     "remplacants": [
+      12,
+      1,
+      13
+     ],
+     "remplacantsArrives": [
+      12,
+      13
+     ],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 4,
+     "place": 8,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": false,
+     "remplacants": [
+      7,
+      8
+     ],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 2,
+     "place": 13,
+     "bloc": "G4",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      9
+     ],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-22",
+   "hippodrome": "AUTEUIL",
+   "discipline": "STEEPLECHASE",
+   "distance": 3600,
+   "arrivee": [
+    12,
+    5,
+    9,
+    7,
+    3
+   ],
+   "ticket": [
+    9,
+    4,
+    5,
+    6,
+    7,
+    11,
+    13,
+    15,
+    16
+   ],
+   "ticketReel": true,
+   "bilan": 3,
+   "detail": [
+    {
+     "num": 12,
+     "place": 13,
+     "bloc": "G4",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      13
+     ],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 5,
+     "place": 3,
+     "bloc": "G2",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 9,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 7,
+     "place": 5,
+     "bloc": "G2",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 3,
+     "place": 15,
+     "bloc": "G5",
+     "bande": "faible",
+     "pris": false,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-23",
+   "hippodrome": "VINCENNES",
+   "discipline": "ATTELE",
+   "distance": 2850,
+   "arrivee": [
+    15,
+    12,
+    6,
+    14,
+    16
+   ],
+   "ticket": [
+    11,
+    3,
+    6,
+    7,
+    8,
+    9,
+    10,
+    15,
+    17
+   ],
+   "ticketReel": true,
+   "bilan": 2,
+   "detail": [
+    {
+     "num": 15,
+     "place": 3,
+     "bloc": "G1",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 12,
+     "place": 9,
+     "bloc": "G2",
+     "bande": null,
+     "pris": false,
+     "remplacants": [
+      6,
+      7,
+      9
+     ],
+     "remplacantsArrives": [
+      6
+     ],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 6,
+     "place": 7,
+     "bloc": "G2",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 14,
+     "place": 14,
+     "bloc": "G5",
+     "bande": null,
+     "pris": false,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 16,
+     "place": 15,
+     "bloc": "G5",
+     "bande": null,
+     "pris": false,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-24",
+   "hippodrome": "COMPIEGNE",
+   "discipline": "HAIE",
+   "distance": 3600,
+   "arrivee": [
+    9,
+    4,
+    7,
+    13,
+    11
+   ],
+   "ticket": [
+    4,
+    2,
+    3,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12
+   ],
+   "ticketReel": true,
+   "bilan": 4,
+   "detail": [
+    {
+     "num": 9,
+     "place": 3,
+     "bloc": "G1",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 4,
+     "place": 1,
+     "bloc": "G1",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 7,
+     "place": 2,
+     "bloc": "G1",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 13,
+     "place": 14,
+     "bloc": "G5",
+     "bande": null,
+     "pris": false,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 11,
+     "place": 11,
+     "bloc": "G4",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-25",
+   "hippodrome": "SAINT-CLOUD",
+   "discipline": "PLAT",
+   "distance": 2500,
+   "arrivee": [
+    9,
+    13,
+    10,
+    3,
+    4
+   ],
+   "ticket": [
+    2,
+    3,
+    4,
+    7,
+    8,
+    9,
+    11,
+    13,
+    15
+   ],
+   "ticketReel": true,
+   "bilan": 4,
+   "detail": [
+    {
+     "num": 9,
+     "place": 5,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 13,
+     "place": 3,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 10,
+     "place": 13,
+     "bloc": "G4",
+     "bande": "moyen",
+     "pris": false,
+     "remplacants": [
+      11
+     ],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 3,
+     "place": 2,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 4,
+     "place": 8,
+     "bloc": "G2",
+     "bande": "moyen",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-26",
+   "hippodrome": "CHANTILLY",
+   "discipline": "PLAT",
+   "distance": 1600,
+   "arrivee": [
+    12,
+    3,
+    10,
+    13,
+    9
+   ],
+   "ticket": [
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    14
+   ],
+   "ticketReel": true,
+   "bilan": 4,
+   "detail": [
+    {
+     "num": 12,
+     "place": 6,
+     "bloc": "G2",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 3,
+     "place": 1,
+     "bloc": "G1",
+     "bande": "fort",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 10,
+     "place": 5,
+     "bloc": "G1",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 13,
+     "place": 11,
+     "bloc": "G3",
+     "bande": "fort",
+     "pris": false,
+     "remplacants": [
+      8
+     ],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 9,
+     "place": 7,
+     "bloc": "G2",
+     "bande": "bon",
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  },
+  {
+   "date": "2026-10-27",
+   "hippodrome": "DEAUVILLE",
+   "discipline": "PLAT",
+   "distance": 1300,
+   "arrivee": [
+    10,
+    6,
+    9,
+    15,
+    3
+   ],
+   "ticket": [
+    4,
+    1,
+    2,
+    5,
+    7,
+    9,
+    10,
+    12,
+    14
+   ],
+   "ticketReel": true,
+   "bilan": 2,
+   "detail": [
+    {
+     "num": 10,
+     "place": 6,
+     "bloc": "G2",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 1,
+     "podium": true
+    },
+    {
+     "num": 6,
+     "place": 13,
+     "bloc": "G4",
+     "bande": null,
+     "pris": false,
+     "remplacants": [
+      5
+     ],
+     "remplacantsArrives": [],
+     "rang": 2,
+     "podium": true
+    },
+    {
+     "num": 9,
+     "place": 4,
+     "bloc": "G1",
+     "bande": null,
+     "pris": true,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 3,
+     "podium": true
+    },
+    {
+     "num": 15,
+     "place": 10,
+     "bloc": "G3",
+     "bande": null,
+     "pris": false,
+     "remplacants": [
+      12
+     ],
+     "remplacantsArrives": [],
+     "rang": 4,
+     "podium": false
+    },
+    {
+     "num": 3,
+     "place": 14,
+     "bloc": "G5",
+     "bande": null,
+     "pris": false,
+     "remplacants": [],
+     "remplacantsArrives": [],
+     "rang": 5,
+     "podium": false
+    }
+   ]
+  }
+ ],
+ "verdict": "Sur 26 Quintés joués, 83 arrivants sur 130 étaient dans le ticket (63,8 %). Les 47 autres étaient DANS la grille : 24 fois (51,1 %), le siège du bloc était pris par un cheval qui n’est pas arrivé — c’est exactement « le mauvais choix », et il se concentre en G5 (8 cas)."
+}

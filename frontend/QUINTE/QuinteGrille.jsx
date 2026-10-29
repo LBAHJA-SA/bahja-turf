@@ -14,6 +14,7 @@ import {
   fetchCotes,
   rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix, fetchEmpreinte,
   fetchBlocPm, fetchBassmat, formeMarche, fetchHuit, fetchBassmatChoix, ticketBassmat,
+  fetchBassmatMois,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
@@ -154,7 +155,7 @@ const THEME = {
      de parier, il ne se confond avec aucun des six autres onglets. */
   bassmat: {
     titre: 'Bassmat',
-    sousTitre: 'بصمة السباق — l’empreinte de cette course',
+    sousTitre: 'بصمة السباق — l’empreinte du mois et de la course',
     fond: 'transparent',
     entete: 'linear-gradient(120deg,#180418 0%,#86198f 55%,#f0abfc 100%)',
     accent: '#f0abfc', accentSombre: '#701a75', accentClair: 'rgba(240,171,252,.16)',
@@ -389,6 +390,9 @@ export default function QuinteGrille() {
   // ⭐ LA VARIANTE DE LA BASSMAT (29/10/2026, §11.43) — elle ne choisit pas dans
   //    le moteur ; ce fichier dit seulement ce qu'elle prendrait et ce que ça coûte.
   const [bassmatChoix, setBassmatChoix] = useState(null)
+  // ⭐ LA BASSMAT DU MOIS (29/10/2026, §11.45) — l'archive réelle du mois :
+  //    où les tickets posés ont perdu, et qui était pris à la place.
+  const [bassmatMois, setBassmatMois] = useState(null)
   // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
   //   (AGENTS.md §13.3) : la page doit le montrer tel quel, pas le recalculer.
   const [ticketManuel, setTicketManuel] = useState(null)  // ⚑ la lecture du RÉSULTAT est déclenchée par l'utilisateur (bouton) :
@@ -411,6 +415,7 @@ export default function QuinteGrille() {
     fetchBassmat().then((x) => x && setBassmat(x)).catch(() => {})
     fetchHuit().then((x) => x && setHuit(x)).catch(() => {})
     fetchBassmatChoix().then((x) => x && setBassmatChoix(x)).catch(() => {})
+    fetchBassmatMois().then((x) => x && setBassmatMois(x)).catch(() => {})
   }, [])
 
   const charger = useCallback(async (d) => {
@@ -1204,7 +1209,11 @@ function TabChoix({ sk, choix }) {
  *  ⚠ Aucun chiffre n'est saisi à la main dans ce composant. Tout vient du
  *    fichier, y compris les verdicts.
  * ══════════════════════════════════════════════════════════════════════════ */
-function TabBassmat({ sk, B, H, detail, forme, BC }) {
+function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
+  /* ⭐ 29/10/2026 — la bassmat du MOIS vient en premier : elle est calculée sur
+   * l'archive réelle (les tickets posés), pas sur le corpus de référence. Si le
+   * corpus manque, elle s'affiche quand même : c'est elle que l'utilisateur a
+   * demandée (« من هنا فقط »). */
   if (!B) return (
     <div style={{ fontSize: 13, color: sk.muted }}>
       Pas encore de mesure : écrire <b>public/data/bassmat.json</b> (node tools\bassmat.mjs).
@@ -1267,9 +1276,177 @@ function TabBassmat({ sk, B, H, detail, forme, BC }) {
 
   return (
     <div>
+      {/* ══ ⓪ LA BASSMAT DU MOIS — l'archive réelle (29/10/2026, §11.45) ══ */}
+      {MOIS && (() => {
+        const mv = MOIS
+        const morts = (mv.pertes?.liste || []).filter((x) => !(x.remplacantsArrives || []).length)
+        const pire = (mv.groupes || []).slice().sort((a, b) => b.remplacantMort - a.remplacantMort)[0]
+        const th = { ...sk.th, padding: '4px 7px', fontSize: 11 }
+        const td = { ...sk.td, padding: '4px 7px', fontSize: 12 }
+        const carte = { border: '1px solid ' + sk.bord, borderRadius: 8, overflow: 'hidden' }
+        return (
+          <div style={{ ...boite, borderLeft: '4px solid #f0abfc' }}>
+            <div style={titre}>⓪ بصمة هذا الشهر — la bassmat de l’archive réelle</div>
+            <div style={{ fontSize: 12.5, color: sk.texte, lineHeight: 1.7 }}>
+              <b>{mv.n}</b> Quintés réellement joués ({mv.periode?.debut} → {mv.periode?.fin}) ·
+              {' '}<b>{mv.ticketsReels}</b> tickets archivés · quotas <b>{(mv.quotas || []).join('-')}</b>.
+              {' '}Ici ce n’est plus un corpus de référence : ce sont <b>nos courses et nos tickets</b>.
+              <br />
+              <span style={{ color: sk.muted }}>
+                Bilan du mois : {(mv.bilans || []).map((n, k) => (n ? k + '/5 × ' + n : null)).filter(Boolean).join(' · ')} — moyenne <b style={{ color: sk.texte }}>{nb(mv.moyenneBilan)}/5</b>.
+                {' '}⚠ Les quotas ont changé en cours de mois (4-3-1-1-1-0 puis retour à 3-2-1-1-1 le 28/10) : on ausculte <b>ce qui a été posé</b>, pas une seule règle.
+                {mv.ticketsIncomplets?.length ? (
+                  <>
+                    <br />
+                    {mv.ticketsIncomplets.length} tickets archivés ne font pas 8 chevaux ({mv.ticketsIncomplets.map((x) => x.date.slice(5) + ' : ' + x.n).join(' · ')}) —
+                    les sièges ci-dessous sont ceux <b>réellement posés</b>, pas ceux d’une règle unique.
+                  </>
+                ) : null}
+              </span>
+            </div>
+
+            {/* ── a. les cases du mois ─────────────────────────────────── */}
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 11 }}>
+              <div style={{ flex: '1 1 330px', minWidth: 300 }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: sk.accent, marginBottom: 4 }}>LES CASES DU MOIS</div>
+                <div style={{ ...carte, overflowX: 'auto' }}>
+                  <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
+                    <thead><tr style={sk.hdrStyle}>
+                      {['P', 'c.', 'top5', '%', 'top3', '1er'].map((h) => <th key={h} style={th}>{h}</th>)}
+                    </tr></thead>
+                    <tbody>
+                      {(mv.cases || []).filter((c) => c.n > 0 && c.p <= 16).map((c) => (
+                        <tr key={c.p} style={{ borderBottom: '1px solid ' + sk.bord, background: c.p === 13 ? sk.on : 'transparent' }}>
+                          <td style={{ ...td, fontWeight: 800, color: sk.accent, fontFamily: sk.nb.td }}>P{c.p}</td>
+                          <td style={{ ...td, color: sk.muted, fontFamily: sk.nb.td }}>{c.n}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td }}>{c.top5}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td, fontWeight: 800, color: teinte(c.pc_top5) }}>{pc(c.pc_top5)}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td }}>{c.top3}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td }}>{c.victoires}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div style={{ fontSize: 10.5, color: sk.muted, marginTop: 4 }}>
+                  % = P(case dans les 5 | courses). <b>P13 : {pc((mv.cases || []).find((c) => c.p === 13)?.pc_top5)}</b> — la queue.
+                </div>
+              </div>
+
+              {/* ── b. les blocs du mois ───────────────────────────────── */}
+              <div style={{ flex: '1 1 380px', minWidth: 330 }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: sk.accent, marginBottom: 4 }}>LES BLOCS — sièges et rendement</div>
+                <div style={{ ...carte, overflowX: 'auto' }}>
+                  <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
+                    <thead><tr style={sk.hdrStyle}>
+                      {['bloc', 'sièges', 'pris', 'coupés', 'siège mort'].map((h) => <th key={h} style={th}>{h}</th>)}
+                    </tr></thead>
+                    <tbody>
+                      {(mv.groupes || []).map((g) => (
+                        <tr key={g.id} style={{ borderBottom: '1px solid ' + sk.bord, background: g.id === pire?.id ? 'rgba(251,113,133,.12)' : 'transparent' }}>
+                          <td style={{ ...td, fontWeight: 800, color: sk.accent }}>{g.id}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td }}>{g.sieges}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td }}>{g.pris}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td }}>{g.coupes}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td, fontWeight: 800, color: g.remplacantMort > 2 ? '#fb7185' : sk.texte }}>{g.remplacantMort}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div style={{ fontSize: 10.5, color: sk.muted, marginTop: 4 }}>
+                  « siège mort » = arrivant coupé dont le siège du bloc était occupé par un cheval <b>non arrivé</b>.
+                </div>
+              </div>
+            </div>
+
+            {/* ── c. le verdict, les chiffres ──────────────────────────── */}
+            <div style={{ marginTop: 11, padding: '9px 11px', borderRadius: 8, background: sk.alt, border: '1px solid ' + sk.bord, fontSize: 12.5, lineHeight: 1.75 }}>
+              <b style={{ color: sk.accent }}>Où le mois a perdu :</b>{' '}
+              {mv.pertes?.pris} arrivants sur {mv.pertes?.arrivees} pris ({pc(mv.pertes?.pcPris)}) ·
+              {' '}{mv.pertes?.coupes} coupés ({pc(mv.pertes?.pcCoupes)}).
+              {' '}Sur ces coupés, <b style={{ color: '#fb7185' }}>{mv.pertes?.remplacantMort}</b>
+              {' '}({pc(mv.pertes?.pcRemplacantMort)}) avaient leur siège occupé par un cheval qui <b>n’est pas arrivé</b>.
+              {' '}Le trou est en <b>{pire?.id}</b> ({pire?.remplacantMort} sièges morts sur {pire?.sieges}).
+              {morts.length > 0 && (
+                <>
+                  <br />
+                  <span style={{ fontSize: 11.5, color: sk.muted }}>Les sièges morts du mois :</span>{' '}
+                  {morts.map((x) => (
+                    <span key={x.date + '-' + x.num} style={{
+                      display: 'inline-block', margin: '2px 4px 0 0', padding: '1px 6px', borderRadius: 6,
+                      border: '1px solid ' + sk.bord, background: sk.ligne, fontSize: 11, fontFamily: sk.nb.td,
+                    }}>
+                      {x.date.slice(5)} · <b>{x.num}</b> P{x.place} <span style={{ color: '#fb7185' }}>{x.bloc}</span>
+                    </span>
+                  ))}
+                </>
+              )}
+            </div>
+
+            {/* ── d. les deux petits tableaux ──────────────────────────── */}
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 11 }}>
+              <div style={{ flex: '1 1 300px', minWidth: 270 }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: sk.accent, marginBottom: 4 }}>COMBIEN DE CASES POUR TOUT TENIR</div>
+                <div style={carte}>
+                  <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
+                    <thead><tr style={sk.hdrStyle}>
+                      {['P1..Pk', 'podium', 'quinté'].map((h) => <th key={h} style={th}>{h}</th>)}
+                    </tr></thead>
+                    <tbody>
+                      {(mv.k || []).filter((x) => [8, 10, 12, 14].includes(x.k)).map((x) => (
+                        <tr key={x.k} style={{ borderBottom: '1px solid ' + sk.bord, background: x.k === 8 ? sk.on : 'transparent', fontWeight: x.k === 8 ? 800 : 400 }}>
+                          <td style={{ ...td, fontFamily: sk.nb.td }}>{x.k === 8 ? '▸ ' : ''}{x.k}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td, color: teinte(x.podium) }}>{pc(x.podium)}</td>
+                          <td style={{ ...td, fontFamily: sk.nb.td, color: teinte(x.quinte) }}>{pc(x.quinte)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div style={{ fontSize: 10.5, color: sk.muted, marginTop: 4 }}>
+                  Ligne 8 = le ticket du mois. Ce qu’il ne tient pas, ce sont les cases qu’il n’a pas.
+                </div>
+              </div>
+
+              <div style={{ flex: '1 1 360px', minWidth: 320 }}>
+                <div style={{ fontSize: 11, fontWeight: 800, color: sk.accent, marginBottom: 4 }}>BLOC × BANDE DU MARCHÉ</div>
+                <div style={{ ...carte, overflowX: 'auto' }}>
+                  <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
+                    <thead><tr style={sk.hdrStyle}>
+                      {['bloc', 'M≤3 fort', 'M≤5 bon', 'M6-12 moyen', 'M13+ faible'].map((h) => <th key={h} style={th}>{h}</th>)}
+                    </tr></thead>
+                    <tbody>
+                      {(mv.bandes || []).map((l) => (
+                        <tr key={l.id} style={{ borderBottom: '1px solid ' + sk.bord }}>
+                          <td style={{ ...td, fontWeight: 800, color: sk.accent }}>{l.id}</td>
+                          {(l.cellules || []).map((c) => (
+                            <td key={c.bande} style={{ ...td, fontFamily: sk.nb.td, color: c.n < 15 ? sk.muted : teinte(c.pc) }}>
+                              {c.n < 15 ? '—' : pc(c.pc)} <span style={{ fontSize: 10, color: sk.muted }}>{c.n}</span>
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div style={{ fontSize: 10.5, color: sk.muted, marginTop: 4 }}>
+                  % arrivés dans les 5 · le petit chiffre = n. Sous 15, on n’affiche pas : trop peu pour voter.
+                </div>
+              </div>
+            </div>
+
+            <div style={{ fontSize: 11, color: sk.muted, marginTop: 9 }}>
+              Écrit par <b>tools/bassmat-mois.mjs</b> à partir de <b>data/synthese.json</b> et du vrai
+              <b> buildGrid</b>/<b>remplirGrille</b> — rejouer : <code>node tools\bassmat-mois.mjs</code>. Aucun chiffre saisi à la main.
+            </div>
+          </div>
+        )
+      })()}
+
       {/* ── l'en-tête : ce que c'est, et sur quoi c'est mesuré ─────────────── */}
       <div style={{ ...boite, borderLeft: '4px solid ' + sk.accent, background: sk.alt }}>
-        <b style={{ fontSize: 14 }}>بصمة السباق — l’empreinte de cette course</b>
+        <b style={{ fontSize: 14 }}>بصمة السباق — l’empreinte du mois, puis celle de la course</b>
         <div style={{ fontSize: 12, color: sk.muted, marginTop: 5, lineHeight: 1.6 }}>
           <b>{B.n}</b> Quintés à presse réelle ({B.periode?.debut} → {B.periode?.fin}) · lus par <b>case du carnet</b> (P1..P20).
           {' '}L’empreinte ne remplace pas votre méthode : elle dit <b>ce que cette course a l’air d’être</b>,
@@ -2220,7 +2397,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
 
       {/* --------------------------------------------------------- bassmat */}
       {onglet === 'bassmat' && (
-        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} BC={bassmatChoix} />
+        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} BC={bassmatChoix} MOIS={bassmatMois} />
       )}
 
       {/* --------------------------------------------------------- archive */}
