@@ -7966,8 +7966,56 @@ engine          src/lib/quinte.js === backend/QUINTE/quinte.js (sha1 identiques)
 > il est **figé** là où le signal n'existe pas (l'ordre du haut du carnet).
 > « Être malin » = savoir où l'on peut bouger, pas bouger partout.
 
+#### ⑤ Combien de fois le ticket change réellement — 34 courses sur 122
+
+> Question de l'utilisateur le 29/10, devant le ticket du jour :
+> **« علاش النتيجة ماتغيراتش رغم كل تعديلاتك »**
+
+Le ⑥ de l'outil compte les tickets qui diffèrent entre la règle d'avant et la
+règle adoptée, sur les deux corpus réunis :
+
 ```
-node tools\choix-interne.mjs   → ⑥ l'adoption, rejouable contre la règle d'avant
+tickets qui changent        34/122   27,9 %   ·   38 chevaux remplacés
+```
+
+**72 % des courses gardent exactement le même ticket.** C'est la réponse
+arithmétique : la règle ne se déclenche que si le marché est **deux fois** plus
+court à l'intérieur d'un bloc, ce qui est rare — et c'est voulu, puisque c'est
+le prix à payer pour ne rien perdre (§11.16 : la cote n'a pas de pouvoir de tri
+dans le haut du carnet).
+
+#### ⑥ Le cas du 29/10 VINCENNES R1C1 — le marché est d'accord avec le carnet
+
+Cotes Equidia de la course (`pari_simple`, plafond 95) rejouées dans le vrai
+`remplirGrille` :
+
+| bloc | règle | cases (cote) | pris |
+|---|---|---|---|
+| G1 | carnet | P1:3 (4,6) · P3:8 (3,4) · P2:11 (58) · P4:14 (38) | 3 · 8 · 11 |
+| G2 | carnet | P7:5 (95) · P5:12 (2) · P9:7 (47) · P6:10 (95) | 12 · 10 |
+| G3 | échange fort | P10:1 (95) · P8:4 (68) | **4** |
+| G4 | marché | P12:13 (95) · P11:2 (95) | **2** |
+| G5 | échange fort | P14:9 (47) · P13:6 (38) | **6** |
+
+```
+AVANT (20→28/10)          →  3 · 2 · 4 · 6 · 8 · 10 · 11 · 12
+DYN   (adopté le 29/10)   →  3 · 2 · 4 · 6 · 8 · 10 · 11 · 12   (identique)
+```
+
+- **G3** : le carnet met déjà le 4 (68) devant le 1 (95) ; `echange20` demande
+  `95 × 2 ≤ 68` → faux, **rien à échanger**. Le marché dirait exactement pareil.
+- **G5** : même chose, le 6 (38) est déjà devant le 9 (47).
+- Les **deux seuls blocs où le marché n'est pas d'accord** sont G1 (il prendrait
+  le 14 à 38 au lieu du 11 à 58) et G2 (le 7 à 47 au lieu du 10 à 95) — et c'est
+  **exactement là qu'on lui interdit de parler** : −8 à −10 points de podium.
+
+Pour mémoire, si le marché décidait aussi en G1-G2 le ticket serait
+`3 · 2 · 4 · 6 · 7 · 8 · 12 · 14` — un autre ticket, mais une règle mesurée
+**perdante**. Le moteur ne change pas parce qu'il n'y a rien à changer, pas
+parce qu'il n'écoute pas.
+
+```
+node tools\choix-interne.mjs   → ⑥ l'adoption + le nombre de tickets qui changent
 ```
 
 

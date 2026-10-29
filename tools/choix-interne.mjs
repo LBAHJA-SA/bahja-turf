@@ -994,6 +994,24 @@ const DYN = { G1: 'carnet', G2: 'carnet', G3: 'echange20', G4: 'marche', G5: 'ec
     (100 * b.pod).toFixed(1).replace('.', ',') + ' %')
   console.log('  → jamais négatif sur les 4 métriques des 2 corpus, mais l’effet est PETIT :')
   console.log('    ' + nr(dA.q5 - pA.q5) + ' pt de 5/5 (' + nr(dA.pod - pA.pod) + ' pt de podium) sur 96 courses.')
+  /* combien de TICKETS changent réellement ? c'est la réponse à « rien n'a bougé » */
+  let chg = 0, chgCh = 0, tot = 0
+  for (const corpus of [CTRL, MOIS]) {
+    for (const c of corpus) {
+      const g = buildGrid(c.syn, c.nums)
+      const cl = g.groupes.flatMap((x) => x.cases).slice().sort((a, b) => a.slot - b.slot)
+        .map((x) => ({ p: { num: x.num }, s: null, ok: true }))
+      const t0 = remplirGrille(g, cl, c.discipline || 'Plat', c.cotes, null, AVANT).ticket
+      const t1 = remplirGrille(g, cl, c.discipline || 'Plat', c.cotes, null, DYN).ticket
+      tot++
+      const dif = t1.filter((n) => !t0.includes(n)).length
+      if (dif) { chg++; chgCh += dif }
+    }
+  }
+  console.log('  ' + pad('tickets qui changent', 34) + padl(chg + '/' + tot, 10) + '   ' + pct(chg, tot) +
+    ' · ' + chgCh + ' chevaux remplacés')
+  console.log('  → c’est ça la réponse à « le ticket n’a pas bougé » : la règle ne se')
+  console.log('    déclenche que quand le marché est DEUX FOIS plus court, ce qui est rare.')
 }
 
 fs.writeFileSync('data/choix-interne.json', JSON.stringify({
