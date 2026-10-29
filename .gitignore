@@ -60,3 +60,4 @@ Desktop.ini
 .vercel/
 .vercelignore
 .env*
+.recours.json

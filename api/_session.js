@@ -29,15 +29,37 @@ export const ITER = 210000
 export const env = (nom) => String(process.env[nom] || '').trim()
 export const secret = () => env('ADMIN_SECRET')
 
-/** Les comptes configurés (jamais rendus tels quels : ni sel ni hash). */
+/** Les comptes configurés (jamais rendus tels quels : ni sel ni hash).
+ *
+ *  ⭐ 28/10/2026 — LA CLÉ DE SECOURS `ADMIN_COMPTES_RECOURS`.
+ *  Constat sur la production : `ADMIN_COMPTES` y existait en TROIS exemplaires
+ *  (production/preview/development), et Vercel ne rend jamais la valeur d'une
+ *  variable « sensitive ». Impossible donc de relire un hash perdu — et
+ *  impossible de reconstruire la liste sans effacer les autres comptes.
+ *
+ *  D'où une seconde variable, lue EN PREMIER : elle porte un seul compte de
+ *  secours, dont on connaît le mot de passe. Fusion, jamais remplacement :
+ *  les comptes d'`ADMIN_COMPTES` restent intacts et continuent de fonctionner.
+ *  Le compte de secours passe en tête pour que `find(nom)` le trouve avant un
+ *  homonyme resté dans l'ancienne liste.
+ *
+ *  `tools/recours.mjs` la pose ; `--retirer` l'efface une fois l'accès revenu.
+ */
 export function comptes() {
-  const brut = env('ADMIN_COMPTES')
-  if (!brut) return []
-  try {
-    const j = JSON.parse(brut)
-    const liste = Array.isArray(j) ? j : (j.comptes || [])
-    return Array.isArray(liste) ? liste.filter((c) => c && c.nom) : []
-  } catch { return [] }
+  const lire = (nom) => {
+    const brut = env(nom)
+    if (!brut) return []
+    try {
+      const j = JSON.parse(brut)
+      const liste = Array.isArray(j) ? j : (j.comptes || [])
+      return Array.isArray(liste) ? liste.filter((c) => c && c.nom) : []
+    } catch { return [] }
+  }
+  const secours = lire('ADMIN_COMPTES_RECOURS')
+  const normaux = lire('ADMIN_COMPTES')
+  if (!secours.length) return normaux
+  const pris = new Set(secours.map((c) => String(c.nom).toLowerCase()))
+  return [...secours, ...normaux.filter((c) => !pris.has(String(c.nom).toLowerCase()))]
 }
 
 /* Comparaison à temps constant : on ne laisse pas mesurer un secret. */
