@@ -1,0 +1,1398 @@
+{
+ "quand": "2026-10-29T00:56:36.495Z",
+ "corpus": 96,
+ "production": {
+  "podium": 37.5,
+  "quinte": 11.5,
+  "q4": 40.6
+ },
+ "lignes": [
+  {
+   "type": "signal",
+   "signal": "le plus vieux",
+   "cle": "age",
+   "sens": 1,
+   "cadre": "G5 seul",
+   "podium": 38.5,
+   "quinte": 12.5,
+   "q4": 41.7,
+   "moitie1": 6,
+   "moitie2": 6,
+   "quartiles": [
+    4,
+    2,
+    2,
+    4
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus lourd)",
+   "cle": "poids",
+   "sens": 1,
+   "cadre": "G1 seul",
+   "podium": 37.5,
+   "quinte": 12.5,
+   "q4": 42.7,
+   "moitie1": 7,
+   "moitie2": 5,
+   "quartiles": [
+    5,
+    2,
+    2,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le moins de jours)",
+   "cle": "jours",
+   "sens": -1,
+   "cadre": "G5 seul",
+   "podium": 35.4,
+   "quinte": 12.5,
+   "q4": 36.5,
+   "moitie1": 6,
+   "moitie2": 6,
+   "quartiles": [
+    3,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "distance la plus proche de la dernière",
+   "cle": "distEcart",
+   "sens": -1,
+   "cadre": "G1 seul",
+   "podium": 34.4,
+   "quinte": 12.5,
+   "q4": 40.6,
+   "moitie1": 7,
+   "moitie2": 5,
+   "quartiles": [
+    5,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "niveau des 3 dernières (a couru plus riche)",
+   "cle": "alloc3",
+   "sens": 1,
+   "cadre": "G5 seul",
+   "podium": 39.6,
+   "quinte": 11.5,
+   "q4": 41.7,
+   "moitie1": 6,
+   "moitie2": 5,
+   "quartiles": [
+    4,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus léger)",
+   "cle": "poids",
+   "sens": -1,
+   "cadre": "G5 seul",
+   "podium": 38.5,
+   "quinte": 11.5,
+   "q4": 43.8,
+   "moitie1": 5,
+   "moitie2": 6,
+   "quartiles": [
+    3,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus lourd)",
+   "cle": "poids",
+   "sens": 1,
+   "cadre": "G5 seul",
+   "podium": 37.5,
+   "quinte": 11.5,
+   "q4": 40.6,
+   "moitie1": 5,
+   "moitie2": 6,
+   "quartiles": [
+    3,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "DESCEND de classe (prix / alloc3)",
+   "cle": "desc",
+   "sens": 1,
+   "cadre": "G4 seul",
+   "podium": 37.5,
+   "quinte": 11.5,
+   "q4": 41.7,
+   "moitie1": 6,
+   "moitie2": 5,
+   "quartiles": [
+    4,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "même discipline que la dernière",
+   "cle": "typeMem",
+   "sens": 1,
+   "cadre": "G2 seul",
+   "podium": 37.5,
+   "quinte": 11.5,
+   "q4": 39.6,
+   "moitie1": 6,
+   "moitie2": 5,
+   "quartiles": [
+    4,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "même discipline que la dernière",
+   "cle": "typeMem",
+   "sens": 1,
+   "cadre": "G3 seul",
+   "podium": 37.5,
+   "quinte": 11.5,
+   "q4": 41.7,
+   "moitie1": 6,
+   "moitie2": 5,
+   "quartiles": [
+    4,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "même discipline que la dernière",
+   "cle": "typeMem",
+   "sens": 1,
+   "cadre": "G5 seul",
+   "podium": 37.5,
+   "quinte": 11.5,
+   "q4": 40.6,
+   "moitie1": 5,
+   "moitie2": 6,
+   "quartiles": [
+    3,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "distance la plus proche de la dernière",
+   "cle": "distEcart",
+   "sens": -1,
+   "cadre": "G5 seul",
+   "podium": 36.5,
+   "quinte": 11.5,
+   "q4": 38.5,
+   "moitie1": 7,
+   "moitie2": 4,
+   "quartiles": [
+    4,
+    3,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "DESCEND de classe (prix / alloc3)",
+   "cle": "desc",
+   "sens": 1,
+   "cadre": "G1 seul",
+   "podium": 31.3,
+   "quinte": 11.5,
+   "q4": 36.5,
+   "moitie1": 5,
+   "moitie2": 6,
+   "quartiles": [
+    4,
+    1,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus léger)",
+   "cle": "poids",
+   "sens": -1,
+   "cadre": "G4 seul",
+   "podium": 40.6,
+   "quinte": 10.4,
+   "q4": 44.8,
+   "moitie1": 5,
+   "moitie2": 5,
+   "quartiles": [
+    3,
+    2,
+    2,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le plus de jours)",
+   "cle": "jours",
+   "sens": 1,
+   "cadre": "G5 seul",
+   "podium": 39.6,
+   "quinte": 10.4,
+   "q4": 39.6,
+   "moitie1": 5,
+   "moitie2": 5,
+   "quartiles": [
+    3,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "meilleure place des 3 dernières",
+   "cle": "place3",
+   "sens": -1,
+   "cadre": "G5 seul",
+   "podium": 38.5,
+   "quinte": 10.4,
+   "q4": 40.6,
+   "moitie1": 5,
+   "moitie2": 5,
+   "quartiles": [
+    3,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus jeune",
+   "cle": "age",
+   "sens": -1,
+   "cadre": "G5 seul",
+   "podium": 38.5,
+   "quinte": 10.4,
+   "q4": 36.5,
+   "moitie1": 5,
+   "moitie2": 5,
+   "quartiles": [
+    3,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus lourd)",
+   "cle": "poids",
+   "sens": 1,
+   "cadre": "G3 seul",
+   "podium": 36.5,
+   "quinte": 10.4,
+   "q4": 38.5,
+   "moitie1": 6,
+   "moitie2": 4,
+   "quartiles": [
+    4,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le moins de jours)",
+   "cle": "jours",
+   "sens": -1,
+   "cadre": "G3 seul",
+   "podium": 36.5,
+   "quinte": 10.4,
+   "q4": 43.8,
+   "moitie1": 7,
+   "moitie2": 3,
+   "quartiles": [
+    3,
+    4,
+    2,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "même discipline que la dernière",
+   "cle": "typeMem",
+   "sens": 1,
+   "cadre": "G1 seul",
+   "podium": 36.5,
+   "quinte": 10.4,
+   "q4": 38.5,
+   "moitie1": 5,
+   "moitie2": 5,
+   "quartiles": [
+    4,
+    1,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus lourd)",
+   "cle": "poids",
+   "sens": 1,
+   "cadre": "G2 seul",
+   "podium": 35.4,
+   "quinte": 10.4,
+   "q4": 38.5,
+   "moitie1": 6,
+   "moitie2": 4,
+   "quartiles": [
+    4,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus léger)",
+   "cle": "poids",
+   "sens": -1,
+   "cadre": "G1 seul",
+   "podium": 35.4,
+   "quinte": 10.4,
+   "q4": 33.3,
+   "moitie1": 4,
+   "moitie2": 6,
+   "quartiles": [
+    2,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus léger)",
+   "cle": "poids",
+   "sens": -1,
+   "cadre": "G3 seul",
+   "podium": 35.4,
+   "quinte": 10.4,
+   "q4": 38.5,
+   "moitie1": 5,
+   "moitie2": 5,
+   "quartiles": [
+    3,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "meilleure place des 3 dernières",
+   "cle": "place3",
+   "sens": -1,
+   "cadre": "G3 seul",
+   "podium": 35.4,
+   "quinte": 10.4,
+   "q4": 38.5,
+   "moitie1": 5,
+   "moitie2": 5,
+   "quartiles": [
+    4,
+    1,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus lourd)",
+   "cle": "poids",
+   "sens": 1,
+   "cadre": "partout",
+   "podium": 34.4,
+   "quinte": 10.4,
+   "q4": 36.5,
+   "moitie1": 2,
+   "moitie2": 8,
+   "quartiles": [
+    1,
+    1,
+    3,
+    5
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "meilleure place des 3 dernières",
+   "cle": "place3",
+   "sens": -1,
+   "cadre": "G1 seul",
+   "podium": 34.4,
+   "quinte": 10.4,
+   "q4": 36.5,
+   "moitie1": 4,
+   "moitie2": 6,
+   "quartiles": [
+    3,
+    1,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus vieux",
+   "cle": "age",
+   "sens": 1,
+   "cadre": "G3 seul",
+   "podium": 34.4,
+   "quinte": 10.4,
+   "q4": 40.6,
+   "moitie1": 6,
+   "moitie2": 4,
+   "quartiles": [
+    2,
+    4,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le plus de jours)",
+   "cle": "jours",
+   "sens": 1,
+   "cadre": "G1 seul",
+   "podium": 31.3,
+   "quinte": 10.4,
+   "q4": 35.4,
+   "moitie1": 5,
+   "moitie2": 5,
+   "quartiles": [
+    4,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus vieux",
+   "cle": "age",
+   "sens": 1,
+   "cadre": "G1 seul",
+   "podium": 39.6,
+   "quinte": 9.4,
+   "q4": 33.3,
+   "moitie1": 3,
+   "moitie2": 6,
+   "quartiles": [
+    3,
+    0,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "distance la plus proche de la dernière",
+   "cle": "distEcart",
+   "sens": -1,
+   "cadre": "G3 seul",
+   "podium": 37.5,
+   "quinte": 9.4,
+   "q4": 45.8,
+   "moitie1": 5,
+   "moitie2": 4,
+   "quartiles": [
+    3,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus jeune",
+   "cle": "age",
+   "sens": -1,
+   "cadre": "G3 seul",
+   "podium": 36.5,
+   "quinte": 9.4,
+   "q4": 39.6,
+   "moitie1": 6,
+   "moitie2": 3,
+   "quartiles": [
+    4,
+    2,
+    2,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus lourd)",
+   "cle": "poids",
+   "sens": 1,
+   "cadre": "G4 seul",
+   "podium": 35.4,
+   "quinte": 9.4,
+   "q4": 42.7,
+   "moitie1": 4,
+   "moitie2": 5,
+   "quartiles": [
+    3,
+    1,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "DESCEND de classe (prix / alloc3)",
+   "cle": "desc",
+   "sens": 1,
+   "cadre": "G5 seul",
+   "podium": 35.4,
+   "quinte": 9.4,
+   "q4": 39.6,
+   "moitie1": 5,
+   "moitie2": 4,
+   "quartiles": [
+    3,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le plus de jours)",
+   "cle": "jours",
+   "sens": 1,
+   "cadre": "G4 seul",
+   "podium": 35.4,
+   "quinte": 9.4,
+   "q4": 38.5,
+   "moitie1": 5,
+   "moitie2": 4,
+   "quartiles": [
+    3,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "meilleure place des 3 dernières",
+   "cle": "place3",
+   "sens": -1,
+   "cadre": "G4 seul",
+   "podium": 35.4,
+   "quinte": 9.4,
+   "q4": 42.7,
+   "moitie1": 6,
+   "moitie2": 3,
+   "quartiles": [
+    4,
+    2,
+    2,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "niveau des 3 dernières (a couru plus riche)",
+   "cle": "alloc3",
+   "sens": 1,
+   "cadre": "G3 seul",
+   "podium": 34.4,
+   "quinte": 9.4,
+   "q4": 42.7,
+   "moitie1": 5,
+   "moitie2": 4,
+   "quartiles": [
+    3,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus jeune",
+   "cle": "age",
+   "sens": -1,
+   "cadre": "G1 seul",
+   "podium": 34.4,
+   "quinte": 9.4,
+   "q4": 41.7,
+   "moitie1": 4,
+   "moitie2": 5,
+   "quartiles": [
+    2,
+    2,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus jeune",
+   "cle": "age",
+   "sens": -1,
+   "cadre": "G2 seul",
+   "podium": 34.4,
+   "quinte": 9.4,
+   "q4": 37.5,
+   "moitie1": 7,
+   "moitie2": 2,
+   "quartiles": [
+    5,
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "DESCEND de classe (prix / alloc3)",
+   "cle": "desc",
+   "sens": 1,
+   "cadre": "G3 seul",
+   "podium": 33.3,
+   "quinte": 9.4,
+   "q4": 40.6,
+   "moitie1": 6,
+   "moitie2": 3,
+   "quartiles": [
+    4,
+    2,
+    2,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le moins de jours)",
+   "cle": "jours",
+   "sens": -1,
+   "cadre": "G1 seul",
+   "podium": 25,
+   "quinte": 9.4,
+   "q4": 37.5,
+   "moitie1": 3,
+   "moitie2": 6,
+   "quartiles": [
+    2,
+    1,
+    3,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "même discipline que la dernière",
+   "cle": "typeMem",
+   "sens": 1,
+   "cadre": "G4 seul",
+   "podium": 38.5,
+   "quinte": 8.3,
+   "q4": 43.8,
+   "moitie1": 4,
+   "moitie2": 4,
+   "quartiles": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus vieux",
+   "cle": "age",
+   "sens": 1,
+   "cadre": "G4 seul",
+   "podium": 36.5,
+   "quinte": 8.3,
+   "q4": 44.8,
+   "moitie1": 3,
+   "moitie2": 5,
+   "quartiles": [
+    2,
+    1,
+    3,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus léger)",
+   "cle": "poids",
+   "sens": -1,
+   "cadre": "partout",
+   "podium": 32.3,
+   "quinte": 8.3,
+   "q4": 35.4,
+   "moitie1": 2,
+   "moitie2": 6,
+   "quartiles": [
+    1,
+    1,
+    2,
+    4
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "poids du jour (le plus léger)",
+   "cle": "poids",
+   "sens": -1,
+   "cadre": "G2 seul",
+   "podium": 32.3,
+   "quinte": 8.3,
+   "q4": 38.5,
+   "moitie1": 4,
+   "moitie2": 4,
+   "quartiles": [
+    2,
+    2,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "niveau des 3 dernières (a couru plus riche)",
+   "cle": "alloc3",
+   "sens": 1,
+   "cadre": "G2 seul",
+   "podium": 31.3,
+   "quinte": 8.3,
+   "q4": 36.5,
+   "moitie1": 3,
+   "moitie2": 5,
+   "quartiles": [
+    2,
+    1,
+    5,
+    0
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "même discipline que la dernière",
+   "cle": "typeMem",
+   "sens": 1,
+   "cadre": "partout",
+   "podium": 38.5,
+   "quinte": 7.3,
+   "q4": 41.7,
+   "moitie1": 2,
+   "moitie2": 5,
+   "quartiles": [
+    1,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le plus de jours)",
+   "cle": "jours",
+   "sens": 1,
+   "cadre": "G3 seul",
+   "podium": 34.4,
+   "quinte": 7.3,
+   "q4": 41.7,
+   "moitie1": 3,
+   "moitie2": 4,
+   "quartiles": [
+    3,
+    0,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le plus de jours)",
+   "cle": "jours",
+   "sens": 1,
+   "cadre": "G2 seul",
+   "podium": 33.3,
+   "quinte": 7.3,
+   "q4": 39.6,
+   "moitie1": 3,
+   "moitie2": 4,
+   "quartiles": [
+    2,
+    1,
+    3,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "meilleure place des 3 dernières",
+   "cle": "place3",
+   "sens": -1,
+   "cadre": "partout",
+   "podium": 28.1,
+   "quinte": 7.3,
+   "q4": 33.3,
+   "moitie1": 3,
+   "moitie2": 4,
+   "quartiles": [
+    2,
+    1,
+    2,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "meilleure place des 3 dernières",
+   "cle": "place3",
+   "sens": -1,
+   "cadre": "G2 seul",
+   "podium": 28.1,
+   "quinte": 7.3,
+   "q4": 32.3,
+   "moitie1": 4,
+   "moitie2": 3,
+   "quartiles": [
+    3,
+    1,
+    2,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le moins de jours)",
+   "cle": "jours",
+   "sens": -1,
+   "cadre": "G4 seul",
+   "podium": 36.5,
+   "quinte": 6.3,
+   "q4": 42.7,
+   "moitie1": 3,
+   "moitie2": 3,
+   "quartiles": [
+    2,
+    1,
+    2,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus jeune",
+   "cle": "age",
+   "sens": -1,
+   "cadre": "G4 seul",
+   "podium": 35.4,
+   "quinte": 6.3,
+   "q4": 38.5,
+   "moitie1": 4,
+   "moitie2": 2,
+   "quartiles": [
+    2,
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "distance la plus proche de la dernière",
+   "cle": "distEcart",
+   "sens": -1,
+   "cadre": "G4 seul",
+   "podium": 34.4,
+   "quinte": 6.3,
+   "q4": 39.6,
+   "moitie1": 4,
+   "moitie2": 2,
+   "quartiles": [
+    2,
+    2,
+    2,
+    0
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le moins de jours)",
+   "cle": "jours",
+   "sens": -1,
+   "cadre": "G2 seul",
+   "podium": 30.2,
+   "quinte": 6.3,
+   "q4": 35.4,
+   "moitie1": 4,
+   "moitie2": 2,
+   "quartiles": [
+    2,
+    2,
+    2,
+    0
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "DESCEND de classe (prix / alloc3)",
+   "cle": "desc",
+   "sens": 1,
+   "cadre": "G2 seul",
+   "podium": 26,
+   "quinte": 6.3,
+   "q4": 30.2,
+   "moitie1": 5,
+   "moitie2": 1,
+   "quartiles": [
+    4,
+    1,
+    0,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "DESCEND de classe (prix / alloc3)",
+   "cle": "desc",
+   "sens": 1,
+   "cadre": "partout",
+   "podium": 22.9,
+   "quinte": 6.3,
+   "q4": 21.9,
+   "moitie1": 5,
+   "moitie2": 1,
+   "quartiles": [
+    2,
+    3,
+    0,
+    1
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "distance la plus proche de la dernière",
+   "cle": "distEcart",
+   "sens": -1,
+   "cadre": "partout + le pire",
+   "podium": 21.9,
+   "quinte": 6.3,
+   "q4": 34.4,
+   "moitie1": 3,
+   "moitie2": 3,
+   "quartiles": [
+    1,
+    2,
+    2,
+    1
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "meilleure place des 3 dernières",
+   "cle": "place3",
+   "sens": -1,
+   "cadre": "partout + le pire",
+   "podium": 21.9,
+   "quinte": 6.3,
+   "q4": 27.1,
+   "moitie1": 3,
+   "moitie2": 3,
+   "quartiles": [
+    1,
+    2,
+    1,
+    2
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "le plus vieux",
+   "cle": "age",
+   "sens": 1,
+   "cadre": "partout + le pire",
+   "podium": 11.5,
+   "quinte": 6.3,
+   "q4": 27.1,
+   "moitie1": 3,
+   "moitie2": 3,
+   "quartiles": [
+    0,
+    3,
+    1,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "niveau des 3 dernières (a couru plus riche)",
+   "cle": "alloc3",
+   "sens": 1,
+   "cadre": "G4 seul",
+   "podium": 32.3,
+   "quinte": 5.2,
+   "q4": 40.6,
+   "moitie1": 3,
+   "moitie2": 2,
+   "quartiles": [
+    2,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus vieux",
+   "cle": "age",
+   "sens": 1,
+   "cadre": "partout",
+   "podium": 30.2,
+   "quinte": 5.2,
+   "q4": 26,
+   "moitie1": 1,
+   "moitie2": 4,
+   "quartiles": [
+    1,
+    0,
+    3,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus vieux",
+   "cle": "age",
+   "sens": 1,
+   "cadre": "G2 seul",
+   "podium": 27.1,
+   "quinte": 5.2,
+   "q4": 34.4,
+   "moitie1": 2,
+   "moitie2": 3,
+   "quartiles": [
+    1,
+    1,
+    3,
+    0
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "niveau des 3 dernières (a couru plus riche)",
+   "cle": "alloc3",
+   "sens": 1,
+   "cadre": "G1 seul",
+   "podium": 29.2,
+   "quinte": 4.2,
+   "q4": 39.6,
+   "moitie1": 2,
+   "moitie2": 2,
+   "quartiles": [
+    0,
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "même discipline que la dernière",
+   "cle": "typeMem",
+   "sens": 1,
+   "cadre": "partout + le pire",
+   "podium": 22.9,
+   "quinte": 4.2,
+   "q4": 28.1,
+   "moitie1": 3,
+   "moitie2": 1,
+   "quartiles": [
+    1,
+    2,
+    0,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "distance la plus proche de la dernière",
+   "cle": "distEcart",
+   "sens": -1,
+   "cadre": "partout",
+   "podium": 21.9,
+   "quinte": 4.2,
+   "q4": 28.1,
+   "moitie1": 2,
+   "moitie2": 2,
+   "quartiles": [
+    0,
+    2,
+    2,
+    0
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "le plus jeune",
+   "cle": "age",
+   "sens": -1,
+   "cadre": "partout",
+   "podium": 30.2,
+   "quinte": 3.1,
+   "q4": 33.3,
+   "moitie1": 2,
+   "moitie2": 1,
+   "quartiles": [
+    1,
+    1,
+    0,
+    1
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "distance la plus proche de la dernière",
+   "cle": "distEcart",
+   "sens": -1,
+   "cadre": "G2 seul",
+   "podium": 29.2,
+   "quinte": 3.1,
+   "q4": 35.4,
+   "moitie1": 2,
+   "moitie2": 1,
+   "quartiles": [
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "le plus jeune",
+   "cle": "age",
+   "sens": -1,
+   "cadre": "partout + le pire",
+   "podium": 19.8,
+   "quinte": 3.1,
+   "q4": 19.8,
+   "moitie1": 2,
+   "moitie2": 1,
+   "quartiles": [
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le moins de jours)",
+   "cle": "jours",
+   "sens": -1,
+   "cadre": "partout",
+   "podium": 18.8,
+   "quinte": 3.1,
+   "q4": 30.2,
+   "moitie1": 1,
+   "moitie2": 2,
+   "quartiles": [
+    0,
+    1,
+    0,
+    2
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "fraîcheur (le plus de jours)",
+   "cle": "jours",
+   "sens": 1,
+   "cadre": "partout",
+   "podium": 24,
+   "quinte": 2.1,
+   "q4": 26,
+   "moitie1": 1,
+   "moitie2": 1,
+   "quartiles": [
+    1,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "poids du jour (le plus léger)",
+   "cle": "poids",
+   "sens": -1,
+   "cadre": "partout + le pire",
+   "podium": 21.9,
+   "quinte": 2.1,
+   "q4": 27.1,
+   "moitie1": 1,
+   "moitie2": 1,
+   "quartiles": [
+    1,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "fraîcheur (le moins de jours)",
+   "cle": "jours",
+   "sens": -1,
+   "cadre": "partout + le pire",
+   "podium": 18.8,
+   "quinte": 2.1,
+   "q4": 24,
+   "moitie1": 1,
+   "moitie2": 1,
+   "quartiles": [
+    0,
+    1,
+    0,
+    1
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "DESCEND de classe (prix / alloc3)",
+   "cle": "desc",
+   "sens": 1,
+   "cadre": "partout + le pire",
+   "podium": 17.7,
+   "quinte": 2.1,
+   "q4": 22.9,
+   "moitie1": 1,
+   "moitie2": 1,
+   "quartiles": [
+    1,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "poids du jour (le plus lourd)",
+   "cle": "poids",
+   "sens": 1,
+   "cadre": "partout + le pire",
+   "podium": 20.8,
+   "quinte": 1,
+   "q4": 18.8,
+   "moitie1": 1,
+   "moitie2": 0,
+   "quartiles": [
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "fraîcheur (le plus de jours)",
+   "cle": "jours",
+   "sens": 1,
+   "cadre": "partout + le pire",
+   "podium": 16.7,
+   "quinte": 1,
+   "q4": 24,
+   "moitie1": 1,
+   "moitie2": 0,
+   "quartiles": [
+    0,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "type": "signal",
+   "signal": "niveau des 3 dernières (a couru plus riche)",
+   "cle": "alloc3",
+   "sens": 1,
+   "cadre": "partout",
+   "podium": 15.6,
+   "quinte": 1,
+   "q4": 30.2,
+   "moitie1": 0,
+   "moitie2": 1,
+   "quartiles": [
+    0,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "type": "illogique",
+   "signal": "niveau des 3 dernières (a couru plus riche)",
+   "cle": "alloc3",
+   "sens": 1,
+   "cadre": "partout + le pire",
+   "podium": 16.7,
+   "quinte": 0,
+   "q4": 22.9,
+   "moitie1": 0,
+   "moitie2": 0,
+   "quartiles": [
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ "reglesRetenues": []
+}

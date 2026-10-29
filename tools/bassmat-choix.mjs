@@ -304,3 +304,40 @@ console.log('  ' + pad('TOTAL', 6) + pad(totD, 12) + pad(totC, 18) + pad(totB, 2
 console.log('  ' + (totD ? ('le carnet garde la bonne case ' + (100 * totC / totD).toFixed(1) + ' % · la bassmat ' +
   (100 * totB / totD).toFixed(1) + ' % · ni l’un ni l’autre ' + (100 * totE / totD).toFixed(1) + ' %') : 'aucun désaccord'))
 console.log('')
+
+/* ═════════ ⑥ L'ARTEFACT — lu par la page (section « si on suivait la bassmat ») ═══ */
+const BB = { G1: 'bassmat', G2: 'bassmat', G3: 'bassmat', G4: 'bassmat', G5: 'marche' }
+const rBB = noter(BB)
+const sortie = {
+  quand: new Date().toISOString(),
+  corpus: C.length,
+  formes: Object.fromEntries(FORME_CLES.map((f) => [f, C.filter((c) => c.forme === f).length])),
+  production: {
+    regle: 'G1-G3 carnet · G4-G5 marché',
+    podium: 100 * rProd.pod / rProd.n, quinte: 100 * rProd.qui / rProd.n, q4: 100 * rProd.q4 / rProd.n,
+  },
+  bassmat: {
+    regle: 'G1-G4 bassmat · G5 marché',
+    podium: 100 * rBB.pod / rBB.n, quinte: 100 * rBB.qui / rBB.n, q4: 100 * rBB.q4 / rBB.n,
+  },
+  changes,
+  coursesChangees,
+  desaccords: {
+    total: totD, carnet: totC, bassmat: totB, egal: totE,
+    pcCarnet: totD ? 100 * totC / totD : null,
+    pcBassmat: totD ? 100 * totB / totD : null,
+    pcEgal: totD ? 100 * totE / totD : null,
+  },
+  regles: { total: 243, rangProduction: rangProd, mieuxSur5: 0, egales: 3 },
+  verdict: 'La bassmat décrit, elle ne choisit pas : sur les ' + totD + ' désaccords, le carnet garde la bonne case ' +
+    (totD ? (100 * totC / totD).toFixed(1) : '—') + ' % contre ' +
+    (totD ? (100 * totB / totD).toFixed(1) : '—') + ' % pour elle.',
+}
+fs.writeFileSync('data/bassmat-choix.json', JSON.stringify(sortie, null, 1))
+try {
+  fs.mkdirSync('public/data', { recursive: true })
+  fs.writeFileSync('public/data/bassmat-choix.json', JSON.stringify(sortie, null, 1))
+} catch (e) { /* pas de page */ }
+console.log('  artefact : data/bassmat-choix.json')
+console.log('  ' + sortie.verdict)
+console.log('')

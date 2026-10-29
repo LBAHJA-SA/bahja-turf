@@ -6750,6 +6750,11 @@ testée **comme choix dans le bloc** (seul un score pondéré à 6 critères l'a
 C'est la seule famille qui n'a pas encore été mesurée. Protocole identique
 (LOO, moitiés, quartiles, bootstrap) : `tools/bassmat-choix.mjs` sert de modèle.
 
+> ✅ **Mesurée le 29/10/2026 → §11.44 : fermée aussi.** 11 signaux × 6 cadres +
+> la variante « illogique » : le meilleur gagne **un** quinté sur 96 (12 contre
+> 11) avec un bootstrap à **58 %**. La production ne bouge pas ; en revanche la
+> variante de la bassmat est désormais **affichée** (section ⑧ de l'onglet).
+
 > **Conclusion :** la limite « la bassmat ne choisit pas » n'est pas un oubli de
 > code, c'est un résultat. La faire choisir tient en une ligne — et coûte
 > **8 quintés sur 96** sans en rendre un seul. Ce qui reste à mesurer, c'est le
@@ -6757,4 +6762,138 @@ C'est la seule famille qui n'a pas encore été mesurée. Protocole identique
 
 ```
 node tools\bassmat-choix.mjs
+```
+
+
+---
+
+### 11.44 ⭐ LE CHOIX PAR LE CHEVAL — LA DERNIÈRE FAMILLE, MESURÉE ET FERMÉE (29/10/2026)
+
+> Suite de §11.43. La bassmat ne peut pas choisir parce qu'elle est une
+> statistique **de case** (4 points d'écart au plus entre deux cases d'un même
+> bloc). La seule famille encore ouverte était donc le signal **par cheval**,
+> porté par `data/corpus/carriere-v2.json` — le corpus neuf qui donne enfin
+> `poids` du jour, `alloc` (le niveau des courses courues), les dates et le
+> terrain.
+
+Outil : `tools/choix-carriere-chevaux.mjs`. **96 Quintés**, carrière trouvée
+**96/96** (92 avec des `runs` quasi complets).
+
+#### ⚠ Une erreur de comparaison a été attrapée avant de conclure
+
+La première version comparait au **carnet partout** (`38,5 % / 8,3 %`) au lieu de
+la **production** (`G1-G3 carnet · G4-G5 marché`, `37,5 % / 11,5 %`). Résultat :
+« DESCEND de classe en G4 » sortait à 11,5 % de quinté — mais ce n'était pas le
+signal, c'était **le passage de carnet à marché**. Corrigé : un signal ne
+remplace désormais **qu'un seul bloc**, les quatre autres restant sur la règle de
+production. La production recalculée par l'outil redonne exactement
+**37,5 % / 11,5 % / 40,6 %** — le point de comparaison est bon.
+
+#### Les signaux testés — 11 × 6 cadres + 11 variantes « illogiques »
+
+```
+poids        le poids du jour (le plus lourd / le plus léger)
+alloc3       le niveau moyen des 3 dernières courses (il a couru plus riche)
+desc         prix du jour / alloc3   → il DESCEND de classe
+jours        jours depuis la dernière course (fraîcheur)
+typeMem      même discipline que la dernière
+distEcart    écart de distance avec la dernière
+place3       meilleure place des 3 dernières
+age          le plus jeune / le plus vieux
+```
+
+Cadres : **partout**, puis **G1 seul … G5 seul**. Plus la variante demandée par
+l'utilisateur, **« l'illogique »** : garder (quota − 1) meilleurs +
+**le pire du bloc**.
+
+#### ① Ce qui monte au-dessus de la production
+
+| signal | cadre | podium | quinté | ≥4 | 1ʳᵉ / 2ᵈᵉ moitié | quartiles | bootstrap 5/5 |
+|---|---|---|---|---|---|---|---|
+| **le plus vieux** | G5 | 38,5 % | **12,5 %** | 41,7 % | 6 / 6 | 4 · 2 · 2 · 4 | **58,0 %** |
+| **poids le plus lourd** | G1 | 37,5 % | **12,5 %** | 42,7 % | 7 / 5 | 5 · 2 · 2 · 3 | **58,7 %** |
+| fraîcheur (le moins de jours) | G5 | 35,4 % | 12,5 % | 36,5 % | 6 / 6 | 3 · 3 · 3 · 3 | ✗ podium |
+| distance la plus proche | G1 | 34,4 % | 12,5 % | 40,6 % | 7 / 5 | 5 · 2 · 3 · 2 | ✗ podium |
+| **production** | — | **37,5 %** | **11,5 %** | **40,6 %** | 6 / 5 | 4 · 2 · 3 · 2 | — |
+
+`✗ podium` = le candidat est éliminé avant le bootstrap : il fait **moins de
+podium** que la production (35,4 et 34,4 contre 37,5). Le tri dense passe
+d'abord (§11.25).
+
+**12 quintés sur 96 contre 11.** Un seul événement. Bootstrap apparié :
+**58,0 %** et **58,7 %** — sous les 80 % exigés, et très loin de la barre. Les
+deux règles gagnent dans une moitié et **perdent dans un quart** : c'est
+exactement le profil du bruit (§11.24).
+
+#### ② Les signaux appliqués PARTOUT — la table qui tue la famille
+
+| signal (les 5 blocs) | quinté | podium | ≥4 | moitiés |
+|---|---|---|---|---|
+| poids le plus lourd | 10,4 % | 34,4 % | 36,5 % | 2 / 8 |
+| poids le plus léger | 8,3 % | 32,3 % | 35,4 % | 2 / 6 |
+| même discipline que la dernière | 7,3 % | 38,5 % | 41,7 % | 2 / 5 |
+| meilleure place des 3 dernières | 7,3 % | 28,1 % | 33,3 % | 3 / 4 |
+| **DESCEND de classe** | 6,3 % | 22,9 % | 21,9 % | 5 / 1 |
+| le plus vieux | 5,2 % | 30,2 % | 26,0 % | 1 / 4 |
+
+Aucun signal ne tient **partout**. Le plus intéressant sur le papier,
+`DESCEND de classe` (le « illogique » naturel : le cheval qui descend de
+catégorie), fait **5 quintés dans la 1ʳᵉ moitié et 1 dans la 2ᵈᵉ** — et coupe le
+podium de **14,6 points** (37,5 → 22,9).
+
+#### ③ « L'ILLOGIQUE » SYSTÉMATIQUE — 6,3 % au mieux, et il casse le podium
+
+Prendre (quota − 1) logiques + **le pire** du bloc, partout :
+
+| variante | quinté | podium | ≥4 |
+|---|---|---|---|
+| distance (le pire) | 6,3 % | **21,9 %** | 34,4 % |
+| meilleure place (le pire) | 6,3 % | 21,9 % | 27,1 % |
+| le plus vieux (le pire) | 6,3 % | 11,5 % | 27,1 % |
+| même discipline (le pire) | 4,2 % | 22,9 % | 28,1 % |
+| le plus jeune (le pire) | 3,1 % | 19,8 % | 19,8 % |
+
+**Le podium tombe de 37,5 % à 11,5–22,9 %.** L'illogisme n'est pas un levier de
+sélection : c'est un levier de **dispersion** — il échange un cheval solide
+contre un cheval improbable, ce qui multiplie les tickets perdants.
+
+#### ④ Le filtre complet — 0 règle retenue
+
+Conditions : `quinté > 11,5 %` **et** podium non dégradé **et** les deux moitiés
+au-dessus **et** 3/4 quartiles au-dessus **et** bootstrap ≥ 80 %.
+
+```
+2 candidats passent le tri dense (le plus vieux G5, poids G1)
+0 candidat passe le bootstrap
+→ la production reste G1-G3 carnet · G4-G5 marché. Le moteur ne bouge pas.
+```
+
+> **Conclusion :** la famille « signal par cheval » est mesurée et **fermée**.
+> Ce n'est pas « impossible » : c'est **11 événements 5/5** sur 96 courses, et
+> une règle qui en gagne **un** de plus n'est pas une règle. Le levier reste
+> **le nombre de cases** (§11.25 : 8 → 12 = 61,5 % du quinté), pas le choix.
+
+#### ⑤ Ce qui a été APPLIQUÉ — la variante devient visible (section ⑧)
+
+La bassmat ne choisit pas, mais **on peut voir ce qu'elle choisirait**. Ajouté :
+
+| où | quoi |
+|---|---|
+| `src/lib/quinte.js` **et** `backend/QUINTE/quinte.js` (copie à l'octet près, sha1 vérifié) | `ticketBassmat(detail, bassmat, formeCle)` → ticket alternatif + échanges bloc par bloc ; `fetchBassmatChoix()` |
+| `data/bassmat-choix.json` + `public/data/bassmat-choix.json` | le coût mesuré, écrit par `tools/bassmat-choix.mjs` |
+| onglet **bassmat**, section **⑧ « Si on suivait la bassmat »** | les échanges (`bloc · le moteur garde · la bassmat prend · taux`), le ticket alternatif, et le prix mesuré |
+
+**Aucun chiffre n'est saisi dans la page** : tout vient de l'artefact. Sur une
+course où les deux ordres coïncident, la section le dit (« exactement le même
+ticket ») au lieu d'inventer une différence.
+
+Mesure de la variante **affichée** (taux globaux, sans LOO, G5 compris) :
+**61 courses sur 96** où le ticket diffère — contre **51/96** en mesure LOO
+(G1-G4). L'écart est normal : l'affichage n'a pas à retirer la course du
+calcul, la mesure si.
+
+```
+node tools\choix-carriere-chevaux.mjs      # la mesure (0 règle retenue)
+node tools\bassmat-choix.mjs               # l'artefact de la section ⑧
+node tools\test-bassmat-variante.mjs       # la variante sur les 96 courses
 ```

@@ -1,0 +1,45 @@
+{
+ "quand": "2026-10-29T00:57:26.794Z",
+ "corpus": 96,
+ "formes": {
+  "ferme": 44,
+  "normal": 37,
+  "ouvert": 15
+ },
+ "production": {
+  "regle": "G1-G3 carnet · G4-G5 marché",
+  "podium": 37.5,
+  "quinte": 11.458333333333334,
+  "q4": 40.625
+ },
+ "bassmat": {
+  "regle": "G1-G4 bassmat · G5 marché",
+  "podium": 30.208333333333332,
+  "quinte": 3.125,
+  "q4": 33.333333333333336
+ },
+ "changes": {
+  "G1": 69,
+  "G2": 48,
+  "G3": 7,
+  "G4": 2,
+  "G5": 40
+ },
+ "coursesChangees": 51,
+ "desaccords": {
+  "total": 166,
+  "carnet": 32,
+  "bassmat": 5,
+  "egal": 129,
+  "pcCarnet": 19.27710843373494,
+  "pcBassmat": 3.0120481927710845,
+  "pcEgal": 77.71084337349397
+ },
+ "regles": {
+  "total": 243,
+  "rangProduction": 2,
+  "mieuxSur5": 0,
+  "egales": 3
+ },
+ "verdict": "La bassmat décrit, elle ne choisit pas : sur les 166 désaccords, le carnet garde la bonne case 19.3 % contre 3.0 % pour elle."
+}

@@ -2315,3 +2315,77 @@ export async function chercherCourseCC(fetchId) {
   const det = await fetchRaceCC(race.id, date)
   return { ...det, meeting: { num: Number(rNum), hippodrome: reunion.track, country: reunion.country || 'FR' } }
 }
+
+/* ================================================ BASSMAT — LA VARIANTE (29/10/2026) ===
+ *
+ * §11.43 : la bassmat PEUT remplir les blocs (le ticket change 51 fois sur 96)
+ * mais elle choisit moins bien que le carnet (19,3 % contre 3,0 % sur les 166
+ * désaccords). Elle n'entre donc PAS dans le moteur.
+ *
+ * `ticketBassmat` ne sert qu'à MONTRER la variante dans l'onglet : « voilà ce
+ * que la bassmat prendrait à la place ». Le coût mesuré est lu dans
+ * `data/bassmat-choix.json`, jamais écrit à la main.
+ *
+ * Le taux d'une case est celui de la FORME DU MARCHÉ du jour dès qu'elle a
+ * n ≥ 15 courses dans ce seau, sinon le taux global — exactement la règle de
+ * l'onglet (§11.35).
+ */
+export function ticketBassmat(detail, bassmat, formeCle = null) {
+  if (!detail || !bassmat || !Array.isArray(bassmat.cases)) return null
+  const parCase = new Map(bassmat.cases.map((c) => [c.p, c]))
+
+  const tauxDe = (p) => {
+    const c = parCase.get(p)
+    if (!c) return { pc5: null, n: 0, source: 'inconnu' }
+    const f = formeCle && c.parForme ? c.parForme[formeCle] : null
+    if (f && f.n >= 15 && f.pc5 != null) return { pc5: f.pc5, n: f.n, source: formeCle }
+    return { pc5: c.pc5 ?? null, n: c.n ?? 0, source: 'global' }
+  }
+
+  const groupes = []
+  const ticket = []
+  const echanges = []
+  for (const g of detail) {
+    const quota = Math.min(
+      g.obligatoire ? Math.max(1, g.quota) : g.quota,
+      g.cases.length,
+    )
+    /* l'ordre de la bassmat : le taux de la case pour la forme du jour */
+    const ordre = g.cases.slice().sort((a, b) => {
+      const ta = tauxDe(a.place).pc5
+      const tb = tauxDe(b.place).pc5
+      if (ta == null && tb == null) return a.place - b.place
+      if (ta == null) return 1
+      if (tb == null) return -1
+      return tb - ta || a.place - b.place
+    })
+    const prisBassmat = new Set(ordre.slice(0, quota).map((c) => c.num))
+    const cases = g.cases.map((c) => ({
+      ...c,
+      taux: tauxDe(c.place),
+      prisProd: !!c.pris,
+      prisBassmat: prisBassmat.has(c.num),
+    }))
+    const entre = cases.filter((c) => c.prisBassmat && !c.prisProd)
+    const sort = cases.filter((c) => !c.prisBassmat && c.prisProd)
+    if (entre.length || sort.length) {
+      echanges.push({
+        bloc: g.id,
+        entre: entre.map((c) => ({ num: c.num, place: c.place, taux: c.taux.pc5 })),
+        sort: sort.map((c) => ({ num: c.num, place: c.place, taux: c.taux.pc5 })),
+      })
+    }
+    groupes.push({ id: g.id, quota, cases })
+    cases.filter((c) => c.prisBassmat).forEach((c) => ticket.push(c.num))
+  }
+  return { ticket, groupes, echanges }
+}
+
+/** Le coût mesuré de la variante — `data/bassmat-choix.json` (tools/bassmat-choix.mjs). */
+export async function fetchBassmatChoix() {
+  try {
+    const r = await fetch('/data/bassmat-choix.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}

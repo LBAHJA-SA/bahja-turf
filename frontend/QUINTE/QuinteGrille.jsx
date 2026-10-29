@@ -13,7 +13,7 @@ import {
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
   rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix, fetchEmpreinte,
-  fetchBlocPm, fetchBassmat, formeMarche, fetchHuit,
+  fetchBlocPm, fetchBassmat, formeMarche, fetchHuit, fetchBassmatChoix, ticketBassmat,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
@@ -386,6 +386,9 @@ export default function QuinteGrille() {
   // ⭐ G5 ET LES 8 CHEVAUX (tools/huit.mjs, 28/10/2026) — la preuve du plafond
   //    de G5, et le classement des 121 répartitions de 8 chevaux.
   const [huit, setHuit] = useState(null)
+  // ⭐ LA VARIANTE DE LA BASSMAT (29/10/2026, §11.43) — elle ne choisit pas dans
+  //    le moteur ; ce fichier dit seulement ce qu'elle prendrait et ce que ça coûte.
+  const [bassmatChoix, setBassmatChoix] = useState(null)
   // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
   //   (AGENTS.md §13.3) : la page doit le montrer tel quel, pas le recalculer.
   const [ticketManuel, setTicketManuel] = useState(null)  // ⚑ la lecture du RÉSULTAT est déclenchée par l'utilisateur (bouton) :
@@ -407,6 +410,7 @@ export default function QuinteGrille() {
     fetchBlocPm().then((x) => x && setBlocPm(x)).catch(() => {})
     fetchBassmat().then((x) => x && setBassmat(x)).catch(() => {})
     fetchHuit().then((x) => x && setHuit(x)).catch(() => {})
+    fetchBassmatChoix().then((x) => x && setBassmatChoix(x)).catch(() => {})
   }, [])
 
   const charger = useCallback(async (d) => {
@@ -1200,7 +1204,7 @@ function TabChoix({ sk, choix }) {
  *  ⚠ Aucun chiffre n'est saisi à la main dans ce composant. Tout vient du
  *    fichier, y compris les verdicts.
  * ══════════════════════════════════════════════════════════════════════════ */
-function TabBassmat({ sk, B, H, detail, forme }) {
+function TabBassmat({ sk, B, H, detail, forme, BC }) {
   if (!B) return (
     <div style={{ fontSize: 13, color: sk.muted }}>
       Pas encore de mesure : écrire <b>public/data/bassmat.json</b> (node tools\bassmat.mjs).
@@ -1627,6 +1631,107 @@ function TabBassmat({ sk, B, H, detail, forme }) {
           </div>
         </div>
       )}
+
+      {/* ── ⑧ LA VARIANTE — « si on suivait la bassmat » ──────────────────── */}
+      {(() => {
+        /* la règle de l'onglet, appliquée au ticket : chaque bloc rempli par le
+         * taux de la CASE pour la FORME DU JOUR (n ≥ 15), jamais par la cote. */
+        const variante = ticketBassmat(detail, B, cle)
+        if (!variante) return null
+        const meme = variante.echanges.length === 0
+        const prod = new Set(tickets.map((c) => c.num))
+        const puce = (n, ok) => (
+          <span key={n} style={{
+            display: 'inline-block', padding: '2px 9px', marginInlineEnd: 5, borderRadius: 8,
+            fontFamily: sk.nb.td, fontWeight: 800, fontSize: 13,
+            border: '1px solid ' + (ok ? '#34d399' : sk.bord),
+            background: ok ? 'rgba(52,211,153,.16)' : sk.alt,
+            color: ok ? '#34d399' : sk.texte,
+          }}>{n}</span>
+        )
+        return (
+          <div style={boite}>
+            <div style={titre}>⑧ Si on suivait la bassmat</div>
+            <div style={{ fontSize: 12.5, color: sk.texte, lineHeight: 1.7 }}>
+              La bassmat est une statistique <b>de case</b>. Appliquée au ticket de cette course, elle
+              prend les cases dans l’ordre de <b>leur taux pour la forme du jour</b>
+              {cle ? <> (<b>{cle}</b>)</> : null} au lieu de l’ordre de la presse.
+              {' '}<span style={{ color: sk.muted }}>Ce n’est pas le moteur : c’est la variante, montrée pour être vue.</span>
+            </div>
+
+            {meme ? (
+              <div style={{ fontSize: 12.5, marginTop: 9 }}>
+                Sur cette course, la bassmat prend <b>exactement le même ticket</b> que le moteur —
+                les deux ordres coïncident dans les cinq blocs.
+              </div>
+            ) : (
+              <>
+                <div style={{ overflowX: 'auto', marginTop: 10 }}>
+                  <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 12.5, border: '1px solid ' + sk.bord, borderRadius: 8, overflow: 'hidden' }}>
+                    <thead><tr style={sk.hdrStyle}>
+                      {['bloc', 'le moteur garde', 'la bassmat prend', 'taux (P5)'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
+                    </tr></thead>
+                    <tbody>
+                      {variante.echanges.map((x) => (
+                        <tr key={x.bloc} style={{ borderBottom: '1px solid ' + sk.bord }}>
+                          <td style={{ ...sk.td, fontWeight: 800, color: sk.accent }}>{x.bloc}</td>
+                          <td style={{ ...sk.td, fontFamily: sk.nb.td }}>
+                            {x.sort.map((c) => (
+                              <span key={c.num} style={{ marginInlineEnd: 8 }}>
+                                <b>{c.num}</b>
+                                <span style={{ color: sk.muted, fontSize: 11 }}> (P{c.place} · {pc(c.taux)})</span>
+                              </span>
+                            ))}
+                          </td>
+                          <td style={{ ...sk.td, fontFamily: sk.nb.td }}>
+                            {x.entre.map((c) => (
+                              <span key={c.num} style={{ marginInlineEnd: 8, color: '#fbbf24' }}>
+                                <b>{c.num}</b>
+                                <span style={{ color: sk.muted, fontSize: 11 }}> (P{c.place} · {pc(c.taux)})</span>
+                              </span>
+                            ))}
+                          </td>
+                          <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>
+                            {x.entre.map((c) => (c.taux == null ? '—' : nb(c.taux))).join(' / ')}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div style={{ marginTop: 10, fontSize: 12.5 }}>
+                  Le ticket de la bassmat : {variante.ticket.map((n) => puce(n, !prod.has(n)))}
+                  <span style={{ fontSize: 11, color: sk.muted, marginInlineStart: 6 }}>
+                    (en vert = ce que le moteur ne prend pas)
+                  </span>
+                </div>
+              </>
+            )}
+
+            {BC && (
+              <div style={{ marginTop: 11, paddingTop: 9, borderTop: '1px dashed ' + sk.bord, fontSize: 12.5, lineHeight: 1.75 }}>
+                <b style={{ color: sk.accent }}>Ce que ça coûte, mesuré sur {BC.corpus} Quintés :</b>
+                {' '}le moteur <b>{nb(Math.round(10 * BC.production.podium) / 10)} %</b> de podium ·
+                {' '}<b>{nb(Math.round(10 * BC.production.quinte) / 10)} %</b> de quinté ·
+                {' '}<b>{nb(Math.round(10 * BC.production.q4) / 10)} %</b> de ≥4.
+                {' '}La bassmat : <b style={{ color: '#fb7185' }}>{nb(Math.round(10 * BC.bassmat.podium) / 10)} %</b> ·
+                {' '}<b style={{ color: '#fb7185' }}>{nb(Math.round(10 * BC.bassmat.quinte) / 10)} %</b> ·
+                {' '}<b style={{ color: '#fb7185' }}>{nb(Math.round(10 * BC.bassmat.q4) / 10)} %</b>.
+                <br />
+                Elle change le ticket dans <b>{BC.coursesChangees}</b> courses sur <b>{BC.corpus}</b> ; sur les
+                {' '}<b>{BC.desaccords.total}</b> blocs où les deux ordres divergent, le carnet garde la bonne case
+                {' '}<b>{nb(Math.round(10 * BC.desaccords.pcCarnet) / 10)} %</b> contre
+                {' '}<b>{nb(Math.round(10 * BC.desaccords.pcBassmat) / 10)} %</b> pour elle.
+                <br />
+                <span style={{ color: sk.muted }}>
+                  Écrit par <b>tools/bassmat-choix.mjs</b> — rejouer : <code>node tools\bassmat-choix.mjs</code>.
+                </span>
+              </div>
+            )}
+          </div>
+        )
+      })()}
 
       {/* ── le verdict, écrit par l'outil ─────────────────────────────────── */}
       <div style={{ ...boite, borderLeft: '4px solid ' + sk.accent, background: sk.alt }}>
@@ -2115,7 +2220,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
 
       {/* --------------------------------------------------------- bassmat */}
       {onglet === 'bassmat' && (
-        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} />
+        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} BC={bassmatChoix} />
       )}
 
       {/* --------------------------------------------------------- archive */}
