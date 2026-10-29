@@ -2232,6 +2232,96 @@ pronostics (admin) → 200
   `node tools\recours.mjs --retirer` + push. Sinon la clé de secours garde son
   propre hash (l'ancien mot de passe resterait valable, et l'abonnement du
   compte de secours est `illimité`).
+- ⚠ **Fait le 29/10** — la clé a été retirée ; la liste vit désormais dans
+  `ADMIN_COMPTES` seule. Voir §13.10 (et `tools/comptes.mjs`).
+
+---
+
+### 13.10 🧨 « حذف المستخدم لا يعمل » — TROIS CAUSES QUI SE CUMULAIENT (29/10/2026)
+
+> Symptômes rapportés, dans cet ordre : « Compte bloqué : nouvel appareil
+> détecté » alors que l'appareil n'a pas changé, puis **« même supprimer un
+> utilisateur ne marche pas »**. Aucun des deux n'était un problème de droits :
+> c'étaient **trois défauts de plomberie**, chacun capable à lui seul de rendre
+> la console menteuse.
+
+#### ① Le redéploiement ne partait JAMAIS (`name` manquant)
+
+`api/admin.js` relançait le déploiement ainsi :
+
+```js
+POST /v13/deployments?forceNew=1   { "deploymentId": "dpl_…" }
+```
+
+Vercel répond **`400 Invalid request: missing required property name`**. La
+valeur était donc **enregistrée** (les trois `PATCH` passaient), le
+redéploiement **échouait**, et la fonction continuait de lire l'ancienne liste.
+La console affichait « Données enregistrées, mais le redéploiement a échoué »
+— ce qui, côté utilisateur, s'appelle « la suppression ne marche pas ».
+
+```js
+// maintenant
+{ name: 'bahja-turf', target: 'production', deploymentId: dpl }
+```
+
+#### ② Les doublons d'`ADMIN_COMPTES` n'étaient jamais nettoyés
+
+`envs.find(key === 'ADMIN_COMPTES' && target.includes(cible))` prenait la
+**première** variable de chaque cible et ignorait les autres : une copie
+résiduelle gardait l'ancienne liste et **remettait le compte supprimé**.
+
+Désormais : on écrit sur la première variable de chaque cible, puis on
+**supprime les autres** (`DELETE /v9/projects/{id}/env/{envId}`). Après un
+enregistrement il n'existe plus qu'une `ADMIN_COMPTES` par cible.
+
+#### ③ La clé de secours contredisait la console — et l'Edge refusait sa session
+
+- `comptes()` (dans `_session.js`) lit `ADMIN_COMPTES_RECOURS` **en premier** et
+  dédoublonne par nom : **la clé de secours gagne**. Modifier ou supprimer
+  « sam » depuis la console était donc **sans effet visible** — et son hash dans
+  `ADMIN_COMPTES` restait périmé.
+- `api/_acces.js` (la version Edge) lisait `ADMIN_COMPTES` **seul**. Le cookie
+  du compte de secours était signé par `admin.js` puis **refusé** ici ; la
+  vérification retombait sur l'ancien « sam » (sans `admin`), donc **soumise au
+  verrou d'appareil** → « Compte bloqué : nouvel appareil détecté ».
+
+Corrigé : `_acces.js` a la **même fusion** que `_session.js` (une seule liste
+pour tout le monde).
+
+#### La sortie : consolider, puis supprimer la clé de secours
+
+`tools/comptes.mjs` :
+
+| commande | ce qu'elle fait |
+|---|---|
+| `node tools\comptes.mjs` | montre la liste **réelle** (nom, admin, actif, abonnement, bloqué, début de hash) et les variables Vercel |
+| `--consolider` | lit la liste avec le mot de passe de `.recours.json` (via `?action=comptes`, qui rend `sel`/`iter`/`hash`), la réécrit **une seule fois par cible**, supprime `ADMIN_COMPTES_RECOURS`, redéploie et vérifie le login |
+| `--verifier` | login de bout en bout |
+
+Fait le 29/10 : **`ADMIN_COMPTES` = `sam` (admin) · `HAJBANE` · `hajban`**,
+clé de secours **supprimée**, les trois hashes conservés (le mot de passe
+existant continue de fonctionner).
+
+#### La preuve — ajouter puis supprimer un compte, pour de vrai
+
+```
+départ      : sam · HAJBANE · hajban
++ compte    : déploiement dpl_BJPq…    → après ajout  : sam · HAJBANE · hajban · essai-suppression
+− compte    : déploiement dpl_HsEn…    → après suppr. : sam · HAJBANE · hajban
+✓ ajouter puis supprimer un compte AGIT vraiment
+```
+
+#### Les règles qui restent
+
+1. **Une écriture de la console ne vaut que si un déploiement part.** Le retour
+   de `?action=comptes` (POST) contient `deploiement.id` : sans lui, rien n'a
+   changé côté fonction.
+2. **Une seule `ADMIN_COMPTES` par cible.** Un doublon est un compte zombie.
+3. **Une clé de secours n'est pas une solution permanente** : tant qu'elle
+   existe, elle gagne sur la console. On la retire dès que l'accès est revenu.
+4. **`_session.js` et `_acces.js` doivent lire la même liste.** Tout ce qui
+   signe un cookie doit pouvoir le relire ailleurs — sinon le cookie est refusé
+   par la moitié du site.
 
 ---
 
