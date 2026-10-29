@@ -113,7 +113,7 @@ function rangsMarche(course) {
 }
 
 const REGLES = ['carnet', 'marche', 'mixte', 'fusion', 'bassmat', 'marketPlus', 'caseBloc',
-  'podiumPlace', 'podiumCase', 'mixtePodium', 'sauterP2']
+  'podiumPlace', 'podiumCase', 'mixtePodium', 'sauterP2', 'derivePlace', 'deriveBloc']
 
 /* ⭐ le taux d'arrivée d'une CASE **dans son bloc** — c'est le signal que le
  * carnet ne peut pas voir : P4 n'arrive pas au même rythme selon qu'il tombe
@@ -161,6 +161,42 @@ const tauxCase = (key, m) => {
   return o && o.n >= 8 ? o.t5 / o.n : null
 }
 const tauxPodium = (o, seuil = 10) => (o && o.n >= seuil ? o.t3 / o.n : null)
+
+/* ⭐ 29/10/2026 — LA RÈGLE DU MARCHÉ QUI BOUGE (le point de l'utilisateur) :
+ * « octobre a changé, il faut être malin et suivre la dérive ». On ne le croit
+ * pas sur parole : on la teste en ROULANT. Pour chaque course, la table est
+ * construite sur les 26 courses PRÉCÉDENTES seulement (même taille qu'octobre),
+ * et on la compare au carnet figé. Si la dérive est réelle et persistante, le
+ * roulant gagne. Sinon il perd — et c'est la réponse. */
+const FENETRE = 26
+const TIMELINE = []
+const ROULANT = new Map()          // course -> { place, bloc }
+{
+  const gp = new Map()             // place -> { n, t5, t3 }
+  const gb = new Map()             // 'G1|4' -> { n, t5, t3 }
+  const hist = []                  // les 26 dernières courses
+  const ajouter = (c, sens) => {
+    const g = buildGrid(c.syn, c.nums)
+    for (const gr of g.groupes) for (const k of gr.cases) {
+      const i = c.arrivee.indexOf(k.num)
+      for (const [m, cle] of [[gp, k.place], [gb, gr.id + '|' + k.place]]) {
+        const o = m.get(cle) || { n: 0, t5: 0, t3: 0 }
+        o.n += sens; if (i >= 0) o.t5 += sens; if (i >= 0 && i < 3) o.t3 += sens
+        m.set(cle, o)
+      }
+    }
+  }
+  for (const c of [...CTRL, ...MOIS]) {
+    TIMELINE.push(c)
+    /* la fenêtre AVANT cette course */
+    const copie = (m) => new Map([...m].map(([k, v]) => [k, { ...v }]))
+    ROULANT.set(c, { place: copie(gp), bloc: copie(gb) })
+    ajouter(c, +1)
+    hist.push(c)
+    if (hist.length > FENETRE) { ajouter(hist.shift(), -1) }
+  }
+}
+
 
 /** l'ordre des cases d'un bloc selon la règle */
 function ordonner(regle, cases, ctx) {
@@ -225,6 +261,19 @@ function ordonner(regle, cases, ctx) {
     const cle = (c) => (ctx.bloc === 'G1' && c.place === 2 ? 99 : c.place)
     return cases.slice().sort((a, b) => cle(a) - cle(b))
   }
+  /* ⭐ 29/10/2026 — LA DÉRIVE SUIVIE EN ROULANT (26 courses précédentes). */
+  if (regle === 'derivePlace' || regle === 'deriveBloc') {
+    const T = regle === 'derivePlace' ? ctx.roulant?.place : ctx.roulant?.bloc
+    const cle = (c) => (regle === 'derivePlace' ? c.place : ctx.bloc + '|' + c.place)
+    return cases.slice().sort((a, b) => {
+      const ra = tauxPodium(T?.get(cle(a)), 5)
+      const rb = tauxPodium(T?.get(cle(b)), 5)
+      if (ra != null && rb != null && ra !== rb) return rb - ra
+      if (ra != null && rb == null) return -1
+      if (ra == null && rb != null) return 1
+      return a.place - b.place
+    })
+  }
   if (!surLeMarche) return parPlace        // sans cote complète : repli carnet (§11.16)
 
   const rM = ctx.rangM
@@ -273,7 +322,7 @@ function remplir(grille, course, regles, table = null, table3 = null) {
     const cases = g.cases.map((c) => ({ ...c }))
     if (!cases.length) { detail.push({ ...g, cases: [] }); continue }
     const regle = regles[g.id] || 'carnet'
-    const ordre = ordonner(regle, cases, { cotes: course.cotes, rangM, bloc: g.id, table, tablePlace: table3 })
+    const ordre = ordonner(regle, cases, { cotes: course.cotes, rangM, bloc: g.id, table, tablePlace: table3, roulant: ROULANT.get(course) })
     const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
     const retenus = new Set(ordre.slice(0, quota).map((c) => c.place))
     detail.push({ ...g, regle, cases: cases.map((c) => ({ ...c, pris: retenus.has(c.place) })) })
@@ -597,6 +646,111 @@ for (let p = 1; p <= 4; p++) {
   console.log('  ' + pad('P' + p, 8) + padl(o.pod + '/' + o.n, 10) + padl(pct(o.pod, o.n), 10) +
     '   ' + '█'.repeat(Math.round(30 * o.pod / o.n)) + '   (P(pod | top5) ' + pct(o.pod, o.n5) + ')')
 }
+
+/* ── ④ quater LE GLISSEMENT D'OCTOBRE ────────────────────────────────────── */
+/* « Octobre montre que les bookmakers ont changé : ce qui était en P9-P10 est
+ * passé en P11-P12. » On mesure la dérive, groupe par groupe, sur les deux
+ * corpus. Aucune opinion : les mêmes cases, les deux périodes. */
+function parGroupe(corpus) {
+  const acc = {}
+  for (const c of corpus) {
+    const g = buildGrid(c.syn, c.nums)
+    const p3 = c.arrivee.slice(0, 3)
+    const p5 = c.arrivee.slice(0, 5)
+    for (const gr of g.groupes) {
+      const nums = new Set(gr.cases.map((k) => k.num))
+      const o = acc[gr.id] || (acc[gr.id] = { n: 0, dans3: 0, dans5: 0, chev3: 0, chev5: 0, cases: 0 })
+      o.n++
+      o.cases += gr.cases.length
+      const a3 = p3.filter((x) => nums.has(x)).length
+      const a5 = p5.filter((x) => nums.has(x)).length
+      if (a3) o.dans3++
+      if (a5) o.dans5++
+      o.chev3 += a3
+      o.chev5 += a5
+    }
+  }
+  return acc
+}
+const gA = parGroupe(CTRL)
+const gB = parGroupe(MOIS)
+/* la queue binomiale exacte : « si A était la vraie loi, quelle chance de voir
+ * autant ou plus en 26 courses ? » — sans ça, une dérive de 26 courses n'est
+ * qu'une impression. */
+function queue(n, k, p0) {
+  if (k <= 0) return 1
+  let s = 0
+  let c = 1
+  for (let i = 0; i <= n; i++) {
+    if (i >= k) s += c * Math.pow(p0, i) * Math.pow(1 - p0, n - i)
+    c = c * (n - i) / (i + 1)
+  }
+  return s
+}
+console.log('\n  ④ quater LE GLISSEMENT D’OCTOBRE — le haut du carnet a-t-il bougé ?')
+console.log('  ' + '-'.repeat(78))
+console.log('  ' + pad('', 8) + padl('P(top5|N)', 11) + padl('P(pod|N)', 10) +
+  padl('A → B', 10) + padl('p', 8) + '   lecture')
+for (let p = 1; p <= 14; p++) {
+  const a = TA.get(p)
+  const b = TB.get(p)
+  if (!a || !b || a.n < 20) continue
+  const ra = a.n ? a.pod / a.n : null
+  const rb = b.n ? b.pod / b.n : null
+  /* la queue porte sur le top5 (l'échantillon est plus gros que le podium) */
+  const q = Math.min(queue(b.n, b.n5, a.n5 / a.n), queue(b.n, b.n - b.n5, 1 - a.n5 / a.n))
+  const d = 100 * (rb - ra)
+  const mot = q < 0.05 ? '★ net' : q < 0.2 ? '~ faible' : 'bruit'
+  console.log('  ' + pad('P' + p, 8) +
+    padl(pct(a.n5, a.n) + ' → ' + pct(b.n5, b.n), 11) +
+    padl(pct(a.pod, a.n) + ' → ' + pct(b.pod, b.n), 10) +
+    padl((d >= 0 ? '+' : '') + d.toFixed(1).replace('.', ','), 10) +
+    padl(q.toFixed(2), 8) + '   ' + (d >= 0 ? '▲ ' : '▼ ') + mot)
+}
+console.log('  ' + '-'.repeat(78))
+console.log('  ' + pad('groupe', 8) + padl('chev. top5 / course', 20) + padl('≥1 dans le TRIO', 17) + padl('≥1 dans le top5', 17) + '   dérive (B − A)')
+for (const id of GROUPES.map((x) => x.id)) {
+  const a = gA[id]; const b = gB[id]
+  if (!a || !b) continue
+  const d3 = 100 * (b.dans3 / b.n - a.dans3 / a.n)
+  console.log('  ' + pad(id, 8) +
+    padl((a.chev5 / a.n).toFixed(2).replace('.', ',') + ' → ' + (b.chev5 / b.n).toFixed(2).replace('.', ','), 20) +
+    padl(pct(a.dans3, a.n) + ' → ' + pct(b.dans3, b.n), 17) +
+    padl(pct(a.dans5, a.n) + ' → ' + pct(b.dans5, b.n), 17) +
+    '   trio ' + (d3 >= 0 ? '+' : '') + d3.toFixed(1).replace('.', ',') + ' pts')
+}
+console.log('  ⚠ la dérive est lue en POINTS sur 26 courses : ±10 points = ±2,6 courses.')
+console.log('  ⚠ la dérive est lue en POINTS sur 26 courses : ±10 points = ±2,6 courses.')
+
+/* d'où viennent les arrivants de G4 ? (le point exact de l'utilisateur) */
+function origines(corpus, id) {
+  const m = new Map()
+  for (const c of corpus) {
+    const g = buildGrid(c.syn, c.nums)
+    const gr = g.groupes.find((x) => x.id === id)
+    for (const k of gr.cases) {
+      const o = m.get(k.place) || { n: 0, t5: 0 }
+      o.n++
+      if (c.arrivee.slice(0, 5).includes(k.num)) o.t5++
+      m.set(k.place, o)
+    }
+  }
+  return m
+}
+console.log('  ' + '-'.repeat(78))
+console.log('  D’OÙ VIENNENT LES ARRIVANTS DE G4 — place de la case, nombre de top5')
+for (const id of ['G3', 'G4']) {
+  for (const [nom, corpus] of [['A', CTRL], ['B', MOIS]]) {
+    const m = origines(corpus, id)
+    const s = [...m.entries()].sort((x, y) => x[0] - y[0])
+      .map(([p, o]) => 'P' + p + ' ' + o.t5).join(' · ')
+    const tot = [...m.values()].reduce((a, o) => a + o.t5, 0)
+    console.log('  ' + pad(id + ' · ' + nom, 10) + padl(tot + ' top5', 9) + '   ' + (s || '—'))
+  }
+}
+console.log('  → si les arrivants de G4 viennent de P13, ce n’est pas P11-P12 qui monte :')
+console.log('    c’est la case P13 qui tombe dans G4 par la parité.')
+
 /* C'est la mesure qui tranche entre les deux diagnostics possibles :
  *
  *   · si l'oracle rapporte BEAUCOUP plus que la production → le choix interne

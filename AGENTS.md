@@ -7741,4 +7741,115 @@ corriger là — mais aussi qu'il n'y a **rien à gagner**.
 node tools\choix-interne.mjs   → section ④ ter + colonnes ΔpodH
 ```
 
+---
+
+### 11.51 📉 OCTOBRE A-T-IL CHANGÉ LA DONNÉE ? — la dérive mesurée, et le « roulant » qui perd (29/10/2026)
+
+> Objection de l'utilisateur :
+> **« Octobre prouve que les sociétés de paris ont changé un peu leur méthode,
+> donc il faut être malin. Regarde le passé dont tu parles et compare avec un
+> de P9 · P10 que je considérais nécessaire — et regarde en octobre comment
+> leurs tendances ont glissé vers P11 · P12. »**
+
+L'objection est légitime : si la presse a changé de méthode, un carnet figé sur
+2026-02 → 2026-07 devient faux. On la mesure donc **deux fois** : ① les mêmes
+cases, période contre période ; ② la dérive **suivie en temps réel** (fenêtre
+roulante de 26 courses) contre le carnet figé.
+
+#### ① La dérive, case par case (`④ quater`)
+
+`P(pod | N)` — la probabilité qu'un cheval de cette case monte sur le podium.
+`p` = queue binomiale exacte : « si la loi de A était la vraie, quelle chance de
+voir autant en 26 courses ? »
+
+| case | P(pod) A → B | dérive | p | lecture |
+|---|---|---|---|---|
+| P1 | 53,1 → 53,8 % | +0,7 | 0,40 | bruit |
+| **P2** | 40,6 → **23,1 %** | **−17,5** | 0,45 | bruit (top5 stable) |
+| P3 | 37,5 → 42,3 % | +4,8 | 0,42 | bruit |
+| P4 | 26,0 → 34,6 % | +8,6 | 0,16 | faible |
+| P9 | 10,4 → 11,5 % | +1,1 | 0,19 | faible |
+| P10 | 10,4 → 7,7 % | −2,7 | 0,52 | bruit |
+| **P11** | 18,8 → **11,5 %** | **−7,2** | 0,11 | descend |
+| **P12** | 6,3 → **3,8 %** | **−2,4** | 0,39 | descend |
+| **P13** | 6,3 → **23,1 %** | **+16,8** | **0,00** | **★ net** |
+| P14 | 5,9 → 4,0 % | −1,9 | 0,27 | bruit |
+
+**P11 et P12 DESCENDENT en octobre.** Le seul mouvement qui résiste au test
+multiple, c'est **P13** (×14 comparaisons, p corrigé ≈ 0,02) : 6,3 % → 23,1 %.
+
+Par groupe (chevaux du top5 par course) :
+
+| groupe | A → B | ≥1 dans le trio | ≥1 dans le top5 |
+|---|---|---|---|
+| G1 | 2,04 → **2,12** | 90,6 → **96,2 %** | 96,9 → 96,2 % |
+| G2 | 1,47 → 1,54 | 67,7 → 61,5 % | 94,8 → 88,5 % |
+| **G3** | 0,58 → **0,38** | 22,9 → 26,9 % | 51,0 → **38,5 %** |
+| G4 | 0,49 → 0,54 | 25,0 → 26,9 % | 45,8 → 50,0 % |
+| G5 | 0,42 → 0,42 | 18,8 → 15,4 % | 38,5 → 38,5 % |
+
+#### ② Le piège que l'objection contient — et qui la réfute
+
+G4 fait **0,54** cheval par course en octobre contre **0,38** pour G3 : sur ce
+chiffre, l'utilisateur a raison. Mais **d'où viennent ces arrivants ?**
+
+```
+G4 · A    47 top5   P7 3 · P8 3 · P9 3 · P10 8 · P11 16 · P12 9 · P13 4 · P14 1
+G4 · B    14 top5   P8 1 · P9 0 · P10 3 · P11 2 · P12 3 · P13 5
+```
+
+**5 des 14 arrivants de G4 en octobre viennent de P13** (36 %), contre 4 sur 47
+en A (8 %). Ce n'est pas **P11-P12** qui a pris le relais : c'est **P13 qui
+tombe dans G4 par la parité** (ligne du haut / ligne du bas, §11.13). Par rang
+de presse, en octobre : **P9 + P10 = 19,2 %** contre **P11 + P12 = 15,3 %** —
+l'ordre du carnet est toujours le bon.
+
+#### ③ « Être malin » : la dérive suivie en roulant — et elle perd
+
+C'est le vrai test de l'objection. Une règle `derive*` reconstruit la table
+**sur les 26 courses précédentes seulement** (même taille qu'octobre) et ordonne
+les cases par P(podium). Sur le corpus A, la première course n'a aucun passé :
+elle retombe sur le carnet. Chronologie réelle : A puis B.
+
+| configuration | Δx/5 (A/B) | Δ5/5 | Δpodium | Δchevaux du podium |
+|---|---|---|---|---|
+| G1 → deriveBloc | −0,06 / +0,08 | −1,04 / 0 | −4,17 / +3,85 | −2,08 / +2,57 |
+| **G2 → deriveBloc** | **−0,13 / +0,04** | −4,17 / 0 | **−9,37** / 0 | **−4,51** / 0 |
+| G2 → derivePlace | −0,09 / 0 | −1,04 / 0 | −5,21 / 0 | −2,43 / 0 |
+| G3 → deriveBloc | −0,08 / 0 | −3,13 / −3,85 | −5,21 / −3,84 | −1,74 / 0 |
+| G3 → derivePlace | −0,05 / −0,04 | −2,08 / −3,85 | −4,17 / −3,84 | −1,39 / −1,28 |
+| **G4 → derivePlace** | 0 / +0,04 | **−3,13** / 0 | 0 / **+7,7** | +1,04 / +5,13 |
+| G5 → derivePlace | −0,03 / −0,04 | −1,04 / 0 | −1,04 / 0 | −0,69 / −2,56 |
+
+**Dix configurations, dix refus.** La seule qui gagne quelque chose en octobre
+(`G4 → derivePlace` : +7,7 points de podium, +5,13 de chevaux du podium en B)
+**perd 3,13 points de 5/5 en A** — c'est-à-dire un Quinté entier. Une dérive de
+26 courses ne prédit pas la course suivante : **elle se paie.**
+
+#### ④ Ce que la mesure dit vraiment
+
+| question | réponse mesurée |
+|---|---|
+| la presse a-t-elle bougé en octobre ? | **une seule case** : P13, 6,3 → 23,1 % (p 0,00) |
+| vers P11-P12 ? | **non** — P11 −7,2 et P12 −2,4 ; ce sont les seules à baisser |
+| P9-P10 était-il nécessaire ? | **oui pour le quinté** (51,0 % en A, 38,5 % en B), **non pour le trio** (22,9 %, sous le hasard 36,8 %) |
+| suivre la dérive paie-t-il ? | **non** — 10 règles roulantes, toutes refusées |
+| que faire de P13 ? | **rien à faire** : P13 est dans G5, et le siège de G5 est déjà rempli **au marché** — c'est exactement le signal qui attrape une case qui chauffe |
+
+#### ⑤ Décision
+
+- **La constitution ne bouge pas** (3-2-1-1-1), `CHOIX_DU_BLOC` non plus.
+- **Ce qui est ajouté au produit** : la dérive est désormais **mesurée et
+  publiée** à chaque run (`data/choix-interne.json` → `podiumG1`, section ④
+  quater imprimée). Le jour où une case bougera avec un `p` corrigé < 0,05 sur
+  **plus de 26 courses**, la règle roulante correspondante remontera d'elle-même
+  dans le classement — aujourd'hui elle est dernière.
+- **La leçon transférable** : « être malin » ne veut pas dire suivre le dernier
+  mois, ça veut dire **mesurer le dernier mois** — et constater qu'il ne
+  contient qu'un mouvement, sur une case que le marché remplit déjà.
+
+```
+node tools\choix-interne.mjs   → ④ quater (dérive) + règles derivePlace / deriveBloc
+```
+
 
