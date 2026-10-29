@@ -70,6 +70,8 @@ for (const q of lire('data/quintes.json', [])) {
     date: q.date, discipline: q.discipline, syn, nums,
     arrivee: q.arrivee.slice(0, 5),
     cotes: Object.fromEntries(nums.map((n) => [n, { cote: cotes[n] }])),
+    ouv: q.ouverture ? Object.fromEntries(nums.filter((n) => q.ouverture[n] > 1).map((n) => [n, q.ouverture[n]])) : null,
+    avis: Number.isFinite(q.nbAvis) ? q.nbAvis : null,
     source: 'A',
   })
 }
@@ -86,12 +88,18 @@ for (const d of Object.keys(ARCH).sort().filter((x) => x >= '2026-10-01' && x <=
   const nums = (e.runners && e.runners.length ? e.runners : syn).map(Number)
   const c = COTES[e.courseId]
   let cotes = null
+  let ouv = null
   if (c && Array.isArray(c.cotes)) {
     const o = {}
-    for (const x of c.cotes) if (x && x.cote > 1) o[x.num] = { cote: x.cote }
+    const oo = {}
+    for (const x of c.cotes) if (x && x.cote > 1) {
+      o[x.num] = { cote: x.cote }
+      if (x.ouverture > 1) oo[x.num] = x.ouverture
+    }
     if (Object.keys(o).length >= 10) cotes = o
+    if (Object.keys(oo).length >= 10) ouv = oo
   }
-  MOIS.push({ date: d, discipline: e.discipline, syn, nums, arrivee: arr.slice(0, 5), cotes, source: 'B' })
+  MOIS.push({ date: d, discipline: e.discipline, syn, nums, arrivee: arr.slice(0, 5), cotes, ouv, source: 'B' })
 }
 MOIS.sort((a, b) => String(a.date).localeCompare(String(b.date)))
 
@@ -113,7 +121,18 @@ function rangsMarche(course) {
 }
 
 const REGLES = ['carnet', 'marche', 'mixte', 'fusion', 'bassmat', 'marketPlus', 'caseBloc',
-  'podiumPlace', 'podiumCase', 'mixtePodium', 'sauterP2', 'derivePlace', 'deriveBloc']
+  'podiumPlace', 'podiumCase', 'mixtePodium', 'sauterP2', 'derivePlace', 'deriveBloc',
+  'tendance', 'chuteForte', 'regime', 'echange15', 'echange20', 'avis']
+
+/** le seuil de régime : la médiane de la dispersion sur le corpus A */
+let SEUIL_REGIME = null
+let SEUIL_AVIS = null
+{
+  const d = CTRL.map(dispersion).filter((x) => x != null).sort((a, b) => a - b)
+  if (d.length) SEUIL_REGIME = d[Math.floor(d.length / 2)]
+  const a = CTRL.map((c) => c.avis).filter((x) => x != null).sort((x, y) => x - y)
+  if (a.length) SEUIL_AVIS = a[Math.floor(a.length / 2)]
+}
 
 /* ⭐ le taux d'arrivée d'une CASE **dans son bloc** — c'est le signal que le
  * carnet ne peut pas voir : P4 n'arrive pas au même rythme selon qu'il tombe
@@ -161,6 +180,16 @@ const tauxCase = (key, m) => {
   return o && o.n >= 8 ? o.t5 / o.n : null
 }
 const tauxPodium = (o, seuil = 10) => (o && o.n >= seuil ? o.t3 / o.n : null)
+
+/* ⭐ 29/10/2026 — LE RÉGIME DE LA COURSE : « un Quinté n'est pas l'autre ».
+ * dispersion = cote du 4ᵉ favori / cote du favori. Petit = marché serré (le
+ * haut du carnet est fiable) ; grand = marché ouvert (le marché en sait plus).
+ * C'est le seul signal dynamique disponible AVANT le départ, course par course. */
+function dispersion(course) {
+  const c = course.nums.map((n) => coteDe(course.cotes, n)).filter((x) => x > 1).sort((a, b) => a - b)
+  return c.length >= 4 && c[0] > 0 ? c[3] / c[0] : null
+}
+
 
 /* ⭐ 29/10/2026 — LA RÈGLE DU MARCHÉ QUI BOUGE (le point de l'utilisateur) :
  * « octobre a changé, il faut être malin et suivre la dérive ». On ne le croit
@@ -274,6 +303,70 @@ function ordonner(regle, cases, ctx) {
       return a.place - b.place
     })
   }
+  /* ⭐ 29/10/2026 — LE MOTEUR DYNAMIQUE : « ils sentent les parieurs et
+   * changent de plan ». Le signal n'est pas le passé des 26 dernières courses,
+   * c'est le mOUVEMENT DE LA COTE DE CETTE COURSE : cote / ouverture.
+   *   tendance    → la plus forte baisse d'abord (le marché a bougé vers lui)
+   *   chuteForte  → le carnet, mais tout cheval dont la cote a chuté ≥ 20 %
+   *                 passe devant (les autres gardent leur ordre) */
+  const ratio = (num) => {
+    const o = ctx.ouv?.[num]
+    const c = coteDe(ctx.cotes, num)
+    return o > 1 && c > 0 ? c / o : null
+  }
+  if (regle === 'tendance') {
+    if (!ctx.ouv) return parPlace
+    return cases.slice().sort((a, b) => {
+      const ra = ratio(a.num)
+      const rb = ratio(b.num)
+      if (ra == null && rb == null) return a.place - b.place
+      if (ra == null) return 1
+      if (rb == null) return -1
+      return ra - rb || a.place - b.place
+    })
+  }
+  if (regle === 'chuteForte') {
+    if (!ctx.ouv) return parPlace
+    const chutes = cases.filter((c) => { const r = ratio(c.num); return r != null && r <= 0.8 })
+    if (!chutes.length) return parPlace
+    chutes.sort((a, b) => ratio(a.num) - ratio(b.num) || a.place - b.place)
+    const pris = new Set(chutes.map((c) => c.num))
+    return [...chutes, ...parPlace.filter((c) => !pris.has(c.num))]
+  }
+  /* ⭐ 29/10/2026 — L'ÉCHANGE FORT : le carnet garde son ordre, SAUF si le
+   * marché de CETTE course préfère nettement un cheval plus bas dans le bloc
+   * (cote SEUIL fois plus courte). C'est la version prudente du dynamisme :
+   * elle ne se déclenche que quand les parieurs ont réellement bougé un cheval. */
+  if (regle === 'echange15' || regle === 'echange20') {
+    const SEUIL = regle === 'echange15' ? 1.5 : 2.0
+    if (!surLeMarche) return parPlace
+    const out = parPlace.slice()
+    for (let i = 0; i < out.length; i++) {
+      let best = i
+      for (let j = i + 1; j < out.length; j++) {
+        const ci = coteDe(ctx.cotes, out[best].num) ?? 999
+        const cj = coteDe(ctx.cotes, out[j].num) ?? 999
+        if (cj * SEUIL <= ci) best = j
+      }
+      if (best !== i) { const x = out[i]; out[i] = out[best]; out[best] = x }
+    }
+    return out
+  }
+  if (regle === 'avis') {
+    /* la presse est-elle sûre d'elle ? quand peu de pronostiqueurs se
+     * prononcent, le carnet est moins fiable → le marché. */
+    if (!surLeMarche) return parPlace
+    if (ctx.avis == null || SEUIL_AVIS == null) return parPlace
+    return ctx.avis < SEUIL_AVIS ? parCote : parPlace
+  }
+  if (regle === 'regime') {
+    /* marché serré → carnet ; marché ouvert → la cote. Dynamique COURSE PAR
+     * COURSE, sans rien apprendre du passé des arrivées. */
+    if (!surLeMarche) return parPlace
+    const d = ctx.disp
+    if (d == null || SEUIL_REGIME == null) return parPlace
+    return d >= SEUIL_REGIME ? parCote : parPlace
+  }
   if (!surLeMarche) return parPlace        // sans cote complète : repli carnet (§11.16)
 
   const rM = ctx.rangM
@@ -322,7 +415,7 @@ function remplir(grille, course, regles, table = null, table3 = null) {
     const cases = g.cases.map((c) => ({ ...c }))
     if (!cases.length) { detail.push({ ...g, cases: [] }); continue }
     const regle = regles[g.id] || 'carnet'
-    const ordre = ordonner(regle, cases, { cotes: course.cotes, rangM, bloc: g.id, table, tablePlace: table3, roulant: ROULANT.get(course) })
+    const ordre = ordonner(regle, cases, { cotes: course.cotes, ouv: course.ouv, disp: dispersion(course), avis: course.avis, rangM, bloc: g.id, table, tablePlace: table3, roulant: ROULANT.get(course) })
     const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
     const retenus = new Set(ordre.slice(0, quota).map((c) => c.place))
     detail.push({ ...g, regle, cases: cases.map((c) => ({ ...c, pris: retenus.has(c.place) })) })
@@ -332,7 +425,7 @@ function remplir(grille, course, regles, table = null, table3 = null) {
 }
 
 /* ──────────── ③ TÉMOIN : le remplissage local === le vrai moteur ────────── */
-const PROD = { G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'marche', G5: 'marche' }
+const PROD = { G1: 'carnet', G2: 'carnet', G3: 'echange20', G4: 'marche', G5: 'echange20' }
 
 function controle(corpus) {
   let ko = 0
@@ -428,7 +521,7 @@ function bootB(nA, nB) {
   return { x5: f(nA), pod: f(nB) }
 }
 
-console.log('\n  ① LA RÉFÉRENCE (carnet G1-G3 · marché G4-G5) — quotas constitutionnels')
+console.log('\n  ① LA RÉFÉRENCE (G1-G2 carnet · G3 échange fort · G4 marché · G5 échange fort) — quotas constitutionnels')
 console.log('  ' + '-'.repeat(78))
 const bA = base(N_A)
 const bB = base(N_B)
@@ -873,6 +966,35 @@ console.log('  ' + pad('corpus A', 12) + 'x/5 ' + nr(cA.x5) + '   ·   5/5 ' + n
   '   (production : ' + nr(bA.x5) + ' · ' + nr(bA.q5) + ' % · ' + nr(bA.pod) + ' %)')
 console.log('  ' + pad('corpus B', 12) + 'x/5 ' + nr(cB.x5) + '   ·   5/5 ' + nr(cB.q5) + ' %   ·   podium ' + nr(cB.pod) + ' %' +
   '   (production : ' + nr(bB.x5) + ' · ' + nr(bB.q5) + ' % · ' + nr(bB.pod) + ' %)')
+
+/* ── ⑥ L'ADOPTION — ce que l'échange fort a changé, contre la règle d'AVANT ── */
+/* On garde la comparaison historique : production du 20→28/10 (G3 carnet,
+ * G5 marché) CONTRE la règle adoptée le 29/10 (§11.52). Rejouable même quand
+ * la production aura changé. */
+const AVANT = { G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'marche', G5: 'marche' }
+const DYN = { G1: 'carnet', G2: 'carnet', G3: 'echange20', G4: 'marche', G5: 'echange20' }
+{
+  const pA = base(noter(CTRL, AVANT))
+  const pB = base(noter(MOIS, AVANT))
+  const dA = base(noter(CTRL, DYN))
+  const dB = base(noter(MOIS, DYN))
+  const nA = noter(CTRL, DYN)
+  const n0 = noter(CTRL, AVANT)
+  const b = boot(nA.map((x, i) => ({ dx5: x.x5 - n0[i].x5, dpod: (x.pod ? 1 : 0) - (n0[i].pod ? 1 : 0) })))
+  console.log('\n  ⑥ L’ADOPTION DE L’ÉCHANGE FORT (§11.52) — G3 et G5')
+  console.log('  ' + '-'.repeat(78))
+  console.log('  règle : le carnet garde son ordre, SAUF si la cote de cette course dit')
+  console.log('          qu’un cheval du bloc est ≥ 2 fois plus court que celui du dessus.')
+  console.log('  ' + pad('', 14) + padl('x/5', 8) + padl('5/5', 10) + padl('podium', 10) + padl('chev. podium', 14))
+  console.log('  ' + pad('A avant', 14) + padl(nr(pA.x5), 8) + padl(nr(pA.q5) + ' %', 10) + padl(nr(pA.pod) + ' %', 10) + padl(nr(pA.podH) + ' %', 14))
+  console.log('  ' + pad('A adopté', 14) + padl(nr(dA.x5), 8) + padl(nr(dA.q5) + ' %', 10) + padl(nr(dA.pod) + ' %', 10) + padl(nr(dA.podH) + ' %', 14))
+  console.log('  ' + pad('B avant', 14) + padl(nr(pB.x5), 8) + padl(nr(pB.q5) + ' %', 10) + padl(nr(pB.pod) + ' %', 10) + padl(nr(pB.podH) + ' %', 14))
+  console.log('  ' + pad('B adopté', 14) + padl(nr(dB.x5), 8) + padl(nr(dB.q5) + ' %', 10) + padl(nr(dB.pod) + ' %', 10) + padl(nr(dB.podH) + ' %', 14))
+  console.log('  bootstrap A : x/5 mieux dans ' + (100 * b.x5).toFixed(1).replace('.', ',') + ' % · podium mieux dans ' +
+    (100 * b.pod).toFixed(1).replace('.', ',') + ' %')
+  console.log('  → jamais négatif sur les 4 métriques des 2 corpus, mais l’effet est PETIT :')
+  console.log('    ' + nr(dA.q5 - pA.q5) + ' pt de 5/5 (' + nr(dA.pod - pA.pod) + ' pt de podium) sur 96 courses.')
+}
 
 fs.writeFileSync('data/choix-interne.json', JSON.stringify({
   quand: new Date().toISOString(),

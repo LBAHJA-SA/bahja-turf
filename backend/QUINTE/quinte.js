@@ -1183,7 +1183,20 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
    * Prix payé : le quinté complet passe de 16,7 % à 12,5 % sur P96.
    * C'est le seul point de la grille où les deux métriques divergent : le
    * carnet couvre mieux le trio, le marché signe mieux les quintés. */
-  const CHOIX_DU_BLOC = { G1: 'carnet', G2: 'carnet', G3: 'carnet', G4: 'marche', G5: 'marche' }
+  const CHOIX_DU_BLOC = { G1: 'carnet', G2: 'carnet', G3: 'echange20', G4: 'marche', G5: 'echange20' }
+  /* ⭐ 29/10/2026 — LE MOTEUR DEVIENT DYNAMIQUE (§11.52). Instruction :
+   * « je veux que le moteur soit dynamique dans ses choix ». Mesuré : suivre
+   * la DÉRIVE du dernier mois (26 courses) PERD sur les deux corpus ; le seul
+   * dynamisme qui ne perd RIEN est l'ÉCHANGE FORT dans G3 et G5 :
+   *
+   *   le carnet garde son ordre, SAUF si la cote de CETTE course dit qu'un
+   *   cheval du bloc est ≥ 2 fois plus court que celui du dessus → il passe.
+   *
+   * Mesure (tools/choix-interne.mjs, ④ et ⑥) :
+   *   A (96 Quintés)   x/5 3,29 → 3,31 · 5/5 11,46 % → 12,5 % · podium 37,5 % → 38,54 %
+   *   B (26 octobre)   x/5 3,00 → 3,04 · 5/5 = · podium =
+   *   jamais négatif sur aucune des quatre métriques, sur les deux corpus.
+   * G1 et G2 restent au carnet pur : le haut du carnet n'est pas négociable. */
   /* ⭐ 28/10/2026 — G4 repasse au MARCHÉ, et le commentaire ci-dessus redevient
    * vrai (il disait « G4-G5 marché » alors que la table portait G4 carnet).
    * Mesure à 3-2-1-1-1, 95 Quintés à presse réelle (tools/choix32111.mjs) :
@@ -1233,6 +1246,25 @@ export function remplirGrille(grille, classement, discipline, cotes = null, stat
         .sort((a, b) => coteDe(cotes, a.num) - coteDe(cotes, b.num) || a.place - b.place)
     } else if (effectif === 'carnet') {
       ordre = cases.slice().sort((a, b) => a.place - b.place)
+    } else if (effectif === 'echange20') {
+      /* ⭐ 29/10/2026 (§11.52) — L'ÉCHANGE FORT : le carnet, mais tout cheval
+       * dont la cote est ≥ 2 fois plus courte que celle du cheval placé devant
+       * lui dans le bloc passe devant. Ne se déclenche que quand le marché de
+       * CETTE course a réellement bougé un cheval. Sans cote complète : carnet. */
+      ordre = cases.slice().sort((a, b) => a.place - b.place)
+      if (surLeMarche) {
+        for (let i = 0; i < ordre.length; i++) {
+          let best = i
+          for (let j = i + 1; j < ordre.length; j++) {
+            const ci = coteDe(cotes, ordre[best].num) ?? 999
+            const cj = coteDe(cotes, ordre[j].num) ?? 999
+            if (cj * 2 <= ci) best = j
+          }
+          if (best !== i) {
+            const x = ordre[i]; ordre[i] = ordre[best]; ordre[best] = x
+          }
+        }
+      }
     } else {
       ordre = tries
     }

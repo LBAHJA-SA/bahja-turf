@@ -7852,4 +7852,122 @@ elle retombe sur le carnet. Chronologie réelle : A puis B.
 node tools\choix-interne.mjs   → ④ quater (dérive) + règles derivePlace / deriveBloc
 ```
 
+---
+
+### 11.52 ⚙️ LE MOTEUR DEVIENT DYNAMIQUE — l'échange fort en G3 et G5 (29/10/2026)
+
+> Instruction de l'utilisateur :
+> **« هذا هو ما أريد من المحرك أن يفهمه ويعتمده ويكون ديناميكيا في اختياراته
+> لأنهم كلما أحسوا بالمراهنين بدؤوا يفهمون اللعبة ويغيرون خططهم »**
+
+#### ① La règle de fond, avant de coder
+
+Le changement de plan des opérateurs **est déjà dans la cote finale**. Le moteur
+la relit toutes les 10 minutes (§11.17) : il consomme leur adaptation, il n'a
+pas besoin de la deviner. Coder un modèle de leur psychologie à partir des
+résultats passés, c'est mesurer leur adaptation **de la semaine dernière** — et
+le §11.51 a montré que ça perd.
+
+Ce qui reste à faire, et qui est légitime : rendre le moteur dynamique **sur la
+course du jour**, avec un signal qui vient de cette course.
+
+#### ② Les huit règles dynamiques testées — 38 configurations
+
+Ajoutées à `tools/choix-interne.mjs`, toutes à quotas constitutionnels :
+
+| règle | le signal, course par course |
+|---|---|
+| `tendance` | la plus forte baisse cote/ouverture d'abord (le marché a bougé vers lui) |
+| `chuteForte` | le carnet, mais tout cheval dont la cote a chuté ≥ 20 % passe devant |
+| `echange15` | idem, seuil × 1,5 |
+| **`echange20`** | idem, seuil × **2** — le marché doit être **deux fois** plus court |
+| `regime` | marché serré (dispersion < médiane) → carnet ; marché ouvert → cote |
+| `avis` | peu de pronostiqueurs (< médiane) → le carnet est moins sûr → cote |
+| `derivePlace` | P(podium) de la case sur les **26 courses précédentes** |
+| `deriveBloc` | idem, case **dans son bloc** |
+
+Résultats (Δ contre la production d'avant, A / B) :
+
+| configuration | Δx/5 | Δ5/5 | Δpodium | Δchev. podium |
+|---|---|---|---|---|
+| G1 → tendance | −0,10 / +0,12 | −2,08 / −3,85 | −8,33 / +7,7 | −3,47 / +5,13 |
+| G2 → tendance | −0,11 / −0,08 | −6,25 / 0 | **−10,42** / 0 | −4,17 / −2,56 |
+| G2 → deriveBloc | −0,13 / +0,04 | −4,17 / 0 | **−9,37** / 0 | −4,51 / 0 |
+| G4 → derivePlace | 0 / +0,04 | **−3,13** / 0 | 0 / +7,7 | +1,04 / +5,13 |
+| G4 → avis | +0,05 / −0,04 | **−3,13** / 0 | +2,08 / 0 | +2,08 / +1,29 |
+| G1 → avis | +0,01 / 0 | +1,04 / 0 | +1,04 / 0 | +0,70 / 0 |
+| G5 → regime | 0 / 0 | 0 / 0 | +1,04 / 0 | +0,70 / 0 |
+| **G3 → echange20** | **+0,01 / +0,04** | **0 / 0** | **0 / 0** | **+0,35 / +1,29** |
+| **G5 → echange20** | **+0,01 / 0** | **+1,04 / 0** | **+1,04 / 0** | **+0,35 / 0** |
+
+Deux constats :
+
+1. **Suivre le marché dans G1-G2 détruit le haut du carnet** (−8 à −10 points de
+   podium). Le marché est un signal de queue, pas de tête.
+2. **Trois règles ne perdent rien nulle part** : `G1 → avis`, `G3 → echange20`,
+   `G5 → echange20`. Elles valent ~1 course sur 96 chacune.
+
+#### ③ Ce qui est adopté
+
+**`echange20` en G3 et G5.** Ni `avis` (le corpus B n'a pas `nbAvis` → aucune
+validation hors échantillon), ni une règle dans G1-G2 (le haut du carnet est
+mesuré meilleur que tout).
+
+```
+le carnet garde son ordre,
+SAUF si la cote de CETTE course dit qu'un cheval du bloc est
+      ≥ 2 fois plus court que celui placé devant lui → il passe devant.
+Sans cote complète sur le bloc → carnet (jamais la carrière, §11.16).
+```
+
+`CHOIX_DU_BLOC` :
+
+```
+G1 carnet · G2 carnet · G3 echange20 · G4 marché · G5 echange20
+```
+
+Mesure d'adoption (`⑥` de l'outil, apparié contre la règle du 20→28/10) :
+
+| | x/5 | 5/5 | podium entier | chevaux du podium |
+|---|---|---|---|---|
+| A · avant | 3,29 | 11,46 % | 37,5 % | 71,18 % |
+| **A · adopté** | **3,31** | **12,50 %** | **38,54 %** | **71,88 %** |
+| B · avant | 3,00 | 3,85 % | 26,92 % | 65,38 % |
+| **B · adopté** | **3,04** | 3,85 % | 26,92 % | **66,67 %** |
+
+- **jamais négatif** sur les quatre métriques des deux corpus ;
+- bootstrap apparié A : x/5 mieux dans **69,7 %**, podium mieux dans **65,6 %** ;
+- **l'effet est petit et il faut le dire** : +1,04 point de 5/5 = **un Quinté de
+  plus sur 96**. Ce n'est pas une preuve forte, c'est un choix **gratuit** —
+  et c'est le seul dynamisme mesuré qui ne coûte rien.
+
+Contrôles après adoption :
+
+```
+témoin          122/122 tickets identiques au vrai remplirGrille ✓
+ticket          96/96 à 8 chevaux · 0 hors quota · 0 doublon (tools/verif-8.mjs)
+fiabilite.mjs   PAYANTE 38,5 % · couvre +4 18,8 % · 5/5 12,5 %
+                (avant : 37,5 % · 17,7 % · 11,5 %)
+engine          src/lib/quinte.js === backend/QUINTE/quinte.js (sha1 identiques)
+```
+
+#### ④ Ce que le moteur ne fera pas — et pourquoi
+
+| tentation | mesure |
+|---|---|
+| changer la règle selon la dérive du dernier mois | 10 configurations roulantes, **toutes refusées** (§11.51) |
+| faire décider le marché dans G1-G2 | −8 à −10 points de podium |
+| changer les quotas | **constitution** (§11.49) |
+| ajouter un 9ᵉ cheval | refusé par l'utilisateur, et mesuré comme de la dilution (§11.29) |
+
+> **La règle de conduite du moteur, désormais écrite :**
+> il est dynamique **là où le signal existe dans la course du jour** (la cote,
+> relue toutes les 10 min, et l'écart de cote à l'intérieur d'un bloc) ;
+> il est **figé** là où le signal n'existe pas (l'ordre du haut du carnet).
+> « Être malin » = savoir où l'on peut bouger, pas bouger partout.
+
+```
+node tools\choix-interne.mjs   → ⑥ l'adoption, rejouable contre la règle d'avant
+```
+
 

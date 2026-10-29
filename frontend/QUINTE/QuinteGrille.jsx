@@ -1178,8 +1178,10 @@ function TabChoix({ sk, choix }) {
           La carrière vient de <b>tools/collect-forms.mjs</b> (<code>data/forms.json</code>),
           enrichie par <b>tools/collect-terrain.mjs</b> (<code>data/terrain.json</code>) et
           <b>tools/collect-vh.mjs</b> (<code>data/vh.json</code>) — terrain, sens et VH collectés de PMU (§14.6).
-          La règle en production est <b>G1-G3 carnet · G4 marché</b>, sur les quotas
-          <b> {QUOTAS_TXT}</b> ({NB_TICKET} chevaux, §11.46).
+          La règle en production est <b>G1-G2 carnet · G3 échange fort · G4 marché ·
+          G5 échange fort</b> (§11.52 : le carnet garde son ordre sauf si la cote du
+          jour dit qu'un cheval du bloc est ≥ 2 fois plus court), sur les quotas
+          <b> {QUOTAS_TXT}</b> ({NB_TICKET} chevaux, §11.49).
         </span>
       </div>
     </div>
