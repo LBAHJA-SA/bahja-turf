@@ -164,6 +164,13 @@ if (!dernier) throw new Error('aucun déploiement de production à relancer')
 const nouveau = await vercel('POST', '/v13/deployments?forceNew=1', {
   name: 'bahja-turf',
   deploymentId: dernier.uid || dernier.id,
+  /* ⚠ 29/10/2026 — `target: 'production'` est OBLIGATOIRE. Sans lui, Vercel
+   * accepte la requête et crée un déploiement SANS cible : il n'est jamais
+   * aliasé sur bahja-turf.vercel.app, la production continue de servir
+   * l'ancien build — donc l'ANCIENNE valeur des variables. C'est exactement
+   * ce qui a fait échouer la réparation du login le 29/10 : `--consolider`
+   * annonçait « déploiement relancé » et le site répondait encore 401. */
+  target: 'production',
 })
 console.log('④ déploiement relancé : ' + (nouveau.url || nouveau.id))
 

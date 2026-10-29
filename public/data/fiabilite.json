@@ -1,7 +1,7 @@
 {
  "mesure": {
   "outil": "tools/fiabilite.mjs",
-  "le": "2026-10-28",
+  "le": "2026-10-29",
   "source": "data/quintes.json — Quinté Global PMU France",
   "echantillon": {
    "n": 96,
@@ -14,24 +14,24 @@
  "code": {
   "finales": {
    "n": 96,
-   "p3": 36,
-   "p4": 17,
-   "p5": 11,
+   "p3": 39,
+   "p4": 20,
+   "p5": 12,
    "ch": 768,
-   "payante": 37.5,
-   "couvre4": 17.7,
-   "q5": 11.5,
+   "payante": 40.6,
+   "couvre4": 20.8,
+   "q5": 12.5,
    "chevaux": 8
   },
   "ouverture": {
    "n": 96,
-   "p3": 36,
-   "p4": 18,
-   "p5": 9,
+   "p3": 40,
+   "p4": 22,
+   "p5": 11,
    "ch": 768,
-   "payante": 37.5,
-   "couvre4": 18.8,
-   "q5": 9.4,
+   "payante": 41.7,
+   "couvre4": 22.9,
+   "q5": 11.5,
    "chevaux": 8
   }
  },
@@ -139,8 +139,8 @@
    "appliquee": false
   },
   {
-   "cle": "g5g2",
-   "nom": "3-3-1-1-0 — la production du 20/10 au matin (§11.26), 8 ch.",
+   "cle": "courante",
+   "nom": "3-3-1-1-0 — EN PRODUCTION depuis le 29/10 (§11.46), 8 ch.",
    "condition": null,
    "payante": 40.6,
    "couvre4": 20.8,
@@ -150,11 +150,11 @@
    "payanteOuverture": 41.7,
    "payante1re": 37.5,
    "payante2e": 43.8,
-   "appliquee": false
+   "appliquee": true
   },
   {
-   "cle": "courante",
-   "nom": "3-2-1-1-1 — en production depuis le 28/10 (§11.40), 8 ch.",
+   "cle": "32111",
+   "nom": "3-2-1-1-1 — la production du 28/10 au 29/10 (§11.40), 8 ch.",
    "condition": null,
    "payante": 37.5,
    "couvre4": 17.7,
@@ -164,7 +164,7 @@
    "payanteOuverture": 37.5,
    "payante1re": 37.5,
    "payante2e": 37.5,
-   "appliquee": true
+   "appliquee": false
   },
   {
    "cle": "sans",

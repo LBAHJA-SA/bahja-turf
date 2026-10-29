@@ -854,23 +854,44 @@ export function groupeDeSlot(slot) {
  *   décision de l'utilisateur, pas par le chiffre. Les deux restent dans la
  *   latitude écrite par la méthode (§11.9 : G1 2 ou 3 · G2 2 ou 3 · G5 0 ou 1).
  *
- * Le CHOIX dans les blocs ne bouge pas : G1-G4 au carnet (place de presse),
- * G5 au marché (§11.23). Mesure bloc par bloc : tools/choix32111.mjs (§11.40).
+ * Le CHOIX dans les blocs ne bouge pas : G1-G3 au carnet (place de presse),
+ * G4 au marché (§11.23/§11.40). Mesure bloc par bloc : tools/choix32111.mjs.
+ *
+ * ⭐ 29/10/2026 — LA REVUE DU MOIS (§11.46) : 3-3-1-1-0.
+ * La bassmat de l'archive d'octobre (26 Quintés, tools/bassmat-mois.mjs) :
+ * 47 arrivants coupés, dont **24 « sièges morts »** — la place du bloc était
+ * prise par un cheval qui n'est pas arrivé. Et G5 y est total : **8 sièges
+ * morts sur 19 posés, 0 sauvé**. Le siège de G5 passe donc à G2, dont le 4e
+ * arrive 26 % du temps.
+ *
+ *                      podium entier   quinté entier   ≥4 du quinté
+ *   le mois (26) — HORS ÉCHANTILLON, jamais utilisé pour choisir
+ *     3-2-1-1-1           26,9 %          3,8 %          30,8 %
+ *     3-3-1-1-0           30,8 %          7,7 %          34,6 %
+ *   les 96 courses — le corpus qui a choisi la règle d'avant
+ *     3-2-1-1-1           37,5 %         11,5 %          40,6 %
+ *     3-3-1-1-0           40,6 %         12,5 %          47,9 %
+ *
+ * Même ticket de 8 chevaux : G5 rend son siège, G2 le prend. Aucune boîte
+ * (P1-P4 / P5-P8 / P9-P10 / P11-P12 / P13+) ne bouge.
+ * `node tools\mois-moteur.mjs` rejoue la comparaison sur les deux corpus.
  *
  * ⚠ Historique, pour ne pas refaire l'erreur :
- *   · §11.26 avait retenu 3-3-1-1-0 sur les chiffres de tools/test-quotas.mjs,
- *     qui RÉIMPLÉMENTE le remplissage (sans computeStats) : il annonçait 11,5 %
- *     de quinté pour 3-2-1-1-1 là où le VRAI remplirGrille en donne 8,3 %.
- *   · 21/10/2026 avait retenu 4-3-1-1-0 (9 chevaux) sur la mesure : +14,6 points
- *     de quinté pour un cheval de plus. Le retour à 8 n'est pas une conclusion
- *     de la mesure, c'est la décision de l'utilisateur — elle est appliquée
- *     telle quelle. */
+ *   · §11.26 avait retenu 3-3-1-1-0 avec des chiffres faux : tools/test-quotas.mjs
+ *     RÉIMPLÉMENTE le remplissage (sans computeStats) et annonçait 11,5 % pour
+ *     3-2-1-1-1 là où le VRAI remplirGrille en donne 8,3 %.
+ *   · 21/10/2026 avait retenu 4-3-1-1-0 (9 chevaux) : +14,6 points de quinté
+ *     pour un cheval de plus. Le retour à 8 n'est pas une conclusion de la
+ *     mesure, c'est la décision de l'utilisateur.
+ *   · 28/10/2026 (§11.40) : retour à 3-2-1-1-1 par décision de l'utilisateur.
+ *     Le 29/10, la mesure du MOIS (hors échantillon) + le corpus la renversent
+ *     tous les deux dans le même sens : le siège de G5 ne tient rien. */
 export const GROUPES = [
   { id: 'G1', label: 'G1 · P1-P4', min: 1, max: 4, quota: 3, alt: 4 },
-  { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 2, alt: 3 },
+  { id: 'G2', label: 'G2 · P5-P8', min: 5, max: 8, quota: 3, alt: 2 },
   { id: 'G3', label: 'G3 · P9-P10', min: 9, max: 10, quota: 1, alt: 2, obligatoire: true },
   { id: 'G4', label: 'G4 · P11-P12', min: 11, max: 12, quota: 1, alt: 2 },
-  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 1, alt: 0 },
+  { id: 'G5', label: 'G5 · P13-P20', min: 13, max: 20, quota: 0, alt: 1 },
 ]
 
 /** Le « ticket fixé » : le moteur remplit les quotas, on ne modifie pas à la main. */

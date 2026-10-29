@@ -807,9 +807,9 @@ function PanneauMesure({ sk, fiabilite, detail }) {
           </div>
           <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6, lineHeight: 1.6 }}>
             Depuis le 19/10/2026 (§11.23), la <b>queue</b> du ticket se remplit à la cote —
-            aujourd'hui <b> G5</b> seulement. Depuis le 28/10/2026 (§11.40) la méthode revient
-            au ticket de <b>{NB_TICKET} chevaux</b> : quotas <b>{QUOTAS_TXT}</b>. G1-G4 restent
-            au rang de presse.
+            aujourd'hui <b> G4</b> seulement. Depuis le 29/10/2026 (§11.46) le ticket de
+            <b>{NB_TICKET} chevaux</b> porte les quotas <b>{QUOTAS_TXT}</b> : le siège de G5 est
+            passé à G2, G5 n'a plus de place. G1-G3 restent au rang de presse.
           </div>
 
           <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
@@ -884,7 +884,7 @@ function PanneauMesure({ sk, fiabilite, detail }) {
             </div>
             <span style={{ color: sk.muted }}>
               Une seule de ces variantes est en production — celle qui porte « appliquée »
-              ({QUOTAS_TXT}, §11.40). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
+              ({QUOTAS_TXT}, §11.46). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
             </span>
           </div>
         </>
@@ -1011,8 +1011,8 @@ function TabChoix({ sk, choix }) {
         ) : null}
         <br />
         <span style={{ color: sk.muted }}>
-          ⛔ Les quotas sont fixés (§11.16) : <b>{QUOTAS_TXT}</b> depuis le 28/10/2026
-          (§11.40 — la méthode revient au ticket de {NB_TICKET} chevaux, G5 compris).
+          ⛔ Les quotas sont fixés (§11.16) : <b>{QUOTAS_TXT}</b> depuis le 29/10/2026
+          (§11.46 — le ticket de {NB_TICKET} chevaux, le siège de G5 passé à G2).
           On ne mesure QUE qui entre dans chaque bloc. Métrique =
           <b>PAYANTE</b>, le 1-2-3 complet dans la grille.
         </span>
@@ -1071,7 +1071,7 @@ function TabChoix({ sk, choix }) {
         <div style={{ marginTop: 8, fontSize: 12, color: sk.texte, borderTop: '1px dashed ' + sk.bord, paddingTop: 8, lineHeight: 1.6 }}>
           Le <b>choix</b> qui reste (G2 seul) vaut <b style={{ color: sk.accent }}>{plus(gainChoix)} pts</b>,
           et le <b>choix parfait</b> reste hors d’atteinte : c’est le plafond du §11.24, pas une
-          règle à trouver. Les quotas sont figés (<b>{QUOTAS_TXT}</b>, §11.40) — le seul travail
+          règle à trouver. Les quotas sont figés (<b>{QUOTAS_TXT}</b>, §11.46) — le seul travail
           permis est de choisir QUI entre dans un bloc.
         </div>
       </div>
@@ -1176,8 +1176,8 @@ function TabChoix({ sk, choix }) {
           La carrière vient de <b>tools/collect-forms.mjs</b> (<code>data/forms.json</code>),
           enrichie par <b>tools/collect-terrain.mjs</b> (<code>data/terrain.json</code>) et
           <b>tools/collect-vh.mjs</b> (<code>data/vh.json</code>) — terrain, sens et VH collectés de PMU (§14.6).
-          La règle en production est <b>G1-G3 carnet · G4-G5 marché</b>, sur les quotas
-          <b> {QUOTAS_TXT}</b> ({NB_TICKET} chevaux, §11.40).
+          La règle en production est <b>G1-G3 carnet · G4 marché</b>, sur les quotas
+          <b> {QUOTAS_TXT}</b> ({NB_TICKET} chevaux, §11.46).
         </span>
       </div>
     </div>
@@ -1289,12 +1289,12 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
             <div style={titre}>⓪ بصمة هذا الشهر — la bassmat de l’archive réelle</div>
             <div style={{ fontSize: 12.5, color: sk.texte, lineHeight: 1.7 }}>
               <b>{mv.n}</b> Quintés réellement joués ({mv.periode?.debut} → {mv.periode?.fin}) ·
-              {' '}<b>{mv.ticketsReels}</b> tickets archivés · quotas <b>{(mv.quotas || []).join('-')}</b>.
+              {' '}<b>{mv.ticketsReels}</b> tickets archivés · le moteur est aujourd’hui à <b>{(mv.quotas || []).join('-')}</b>.
               {' '}Ici ce n’est plus un corpus de référence : ce sont <b>nos courses et nos tickets</b>.
               <br />
               <span style={{ color: sk.muted }}>
                 Bilan du mois : {(mv.bilans || []).map((n, k) => (n ? k + '/5 × ' + n : null)).filter(Boolean).join(' · ')} — moyenne <b style={{ color: sk.texte }}>{nb(mv.moyenneBilan)}/5</b>.
-                {' '}⚠ Les quotas ont changé en cours de mois (4-3-1-1-1-0 puis retour à 3-2-1-1-1 le 28/10) : on ausculte <b>ce qui a été posé</b>, pas une seule règle.
+                {' '}⚠ Les quotas ont changé en cours de mois (4-3-1-1-0 → 3-2-1-1-1 le 28/10 → 3-3-1-1-0 le 29/10) : on ausculte <b>ce qui a été posé</b>, pas une seule règle.
                 {mv.ticketsIncomplets?.length ? (
                   <>
                     <br />
@@ -1619,7 +1619,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
           </div>
         )}
         <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 7, lineHeight: 1.6 }}>
-          Le ticket prend {GROUPES.map((g) => `${g.id} ${g.quota}`).join(' · ')} ({QUOTAS_TXT}, §11.40) :
+          Le ticket prend {GROUPES.map((g) => `${g.id} ${g.quota}`).join(' · ')} ({QUOTAS_TXT}, §11.46) :
           il n’y a de choix que dans les blocs qui ont plus de cases que leur quota.
           C’est <b>là, et seulement là</b>, que l’empreinte peut contredire le moteur — ailleurs
           elle le confirme.
@@ -2203,8 +2203,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           <div style={{ fontSize: 12, color: SK.texte, margin: '12px 0 8px', lineHeight: 1.6, background: SK.alt, border: '1px solid ' + SK.bord, borderLeft: '4px solid ' + SK.accent, borderRadius: SK.box.borderRadius, padding: '10px 12px' }}>
             MA MÉTHODE — cinq groupes, un quota chacun. Le moteur remplit les quotas :
             le ticket est fixé, il ne se modifie pas à la main.
-            Depuis le 28/10/2026 les quotas sont <b>{QUOTAS_TXT}</b> (§11.40) : la méthode revient
-            au ticket de <b>{NB_TICKET} chevaux</b>, G5 compris.
+            Depuis le 29/10/2026 les quotas sont <b>{QUOTAS_TXT}</b> (§11.46) : le ticket de
+            <b>{NB_TICKET} chevaux</b> ne bouge pas, mais le siège de G5 passe à G2 — la
+            bassmat d’octobre montre que ce siège ne tenait rien.
             Les boîtes se lisent <b>en travers</b> : ligne du haut puis ligne du bas.{carnet(detail) && <> Les cases sont numérotées <b>P1, P2… en colonnes</b> : la ligne du haut porte la parité du P1.</>}
             <br />
             {Object.keys(cotes).length >= 4 ? (

@@ -59,11 +59,14 @@ export function rangMarche(c) {
   return Object.fromEntries(ordre.map((n, i) => [n, i + 1]))
 }
 
-/* ⭐ 28/10/2026 (§11.40) — la production est 3-2-1-1-1 : le ticket de 8 de la
- * méthode, G5 compris. « 3-2-1-1-1 هذه هي الاقوى » — décision de l'utilisateur.
- * Mesuré à 8 chevaux, G1-G3 carnet · G4-G5 marché : 37,5 % PAYANTE, 17,7 %
- * couvre +4, 11,5 % de 5/5 (tools/fiabilite.mjs). */
-export const Q_BASE = { G1: 3, G2: 2, G3: 1, G4: 1, G5: 1 }
+/* ⭐ 29/10/2026 (§11.46) — LA PRODUCTION EST 3-3-1-1-0. Le siège de G5 est
+ * passé à G2 sur la bassmat du mois : G5 n'a sauvé AUCUN arrivant sur 19
+ * sièges posés en octobre, alors que le 4e de G2 arrive 26 % du temps.
+ * Mesuré : le mois 30,8 % / 7,7 % (contre 26,9 % / 3,8 %) · les 96 courses
+ * 40,6 % / 12,5 % (contre 37,5 % / 11,5 %) — `tools/mois-moteur.mjs`. */
+export const Q_BASE = { G1: 3, G2: 3, G3: 1, G4: 1, G5: 0 }
+/** 3-2-1-1-1 — la production du 28/10 au 29/10 (§11.40), 8 chevaux, G5 compris */
+export const Q_3_2_1_1_1 = { G1: 3, G2: 2, G3: 1, G4: 1, G5: 1 }
 /** 4-3-1-1-0 — la production du 21/10 au 28/10 (§11.34), 9 chevaux */
 export const Q_4_3_1_1_0 = { G1: 4, G2: 3, G3: 1, G4: 1, G5: 0 }
 /** 4-2-1-1-0 — la production du 20/10 au soir (§11.27), 8 chevaux */
@@ -90,10 +93,10 @@ export function jouer(c, quotas) {
 
 /** ⭐ les variantes — toutes restent dans la latitude déclarée par la méthode */
 export const VARIANTES = [
-  { cle: 'courante', nom: '3-2-1-1-1 — en production depuis le 28/10 (§11.40), 8 ch.' },
+  { cle: 'courante', nom: '3-3-1-1-0 — EN PRODUCTION depuis le 29/10 (§11.46), 8 ch.' },
   { cle: '43110', nom: '4-3-1-1-0 — la production du 21/10 au 28/10 (§11.34), 9 ch.' },
   { cle: '42110', nom: '4-2-1-1-0 — la production du 20/10 au soir (§11.27), 8 ch.' },
-  { cle: 'g5g2', nom: '3-3-1-1-0 — la production du 20/10 au matin (§11.26), 8 ch.' },
+  { cle: '32111', nom: '3-2-1-1-1 — la production du 28/10 au 29/10 (§11.40), 8 ch.' },
   { cle: 'sans', nom: '3-2-1-1-0 — le siège de G5 retiré, 7 ch.' },
   { cle: 'B3', nom: '4-1-2-1-0 — le siège de G2 va à G3, 8 ch.' },
   { cle: 'B4', nom: '4-1-1-2-0 — le siège de G2 va à G4, 8 ch.' },
@@ -108,7 +111,7 @@ function tirer(c, v, base) {
   if (v.cle === 'courante') return { ticket: base.ticket, garde: false }
   if (v.cle === '43110') return { ticket: jouer(c, Q_4_3_1_1_0).ticket, garde: false }
   if (v.cle === '42110') return { ticket: jouer(c, Q_4_2_1_1_0).ticket, garde: false }
-  if (v.cle === 'g5g2') return { ticket: jouer(c, Q_3_3_1_1_0).ticket, garde: false }
+  if (v.cle === '32111') return { ticket: jouer(c, Q_3_2_1_1_1).ticket, garde: false }
   if (v.cle === 'sans') return { ticket: jouer(c, Q_SANS_SIEGE).ticket, garde: false }
   if (v.cle === 'B3') return { ticket: jouer(c, Q_SANS_G5('G3')).ticket, garde: false }
   if (v.cle === 'B4') return { ticket: jouer(c, Q_SANS_G5('G4')).ticket, garde: false }
@@ -163,7 +166,7 @@ function rapport(champ) {
     console.log('  ' + pad(VARIANTES.find((v) => v.cle === cle)?.nom || cle, 50) +
       pad(pct(H1[cle].p3, H1[cle].n), 12) + pct(H2[cle].p3, H2[cle].n))
   }
-  console.log('\n  La variante « courante » est le code en production (§11.40) : 3-2-1-1-1.')
+  console.log('\n  La variante « courante » est le code en production (§11.46) : 3-3-1-1-0.')
   console.log('  Les autres lignes sont mesurées sur les mêmes courses, jamais appliquées.\n')
   return { N, R, H1, H2, ordre }
 }

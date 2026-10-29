@@ -1,0 +1,199 @@
+{
+ "quand": "2026-10-29T01:40:32.460Z",
+ "mois": {
+  "n": 26,
+  "debut": "2026-10-01",
+  "fin": "2026-10-27"
+ },
+ "controle": {
+  "n": 96
+ },
+ "variantes": [
+  {
+   "nom": "production 3-2-1-1-1 · G1-G3 carnet · G4-G5 marché",
+   "quotas": [
+    3,
+    2,
+    1,
+    1,
+    1
+   ],
+   "choix": {
+    "G1": "carnet",
+    "G2": "carnet",
+    "G3": "carnet",
+    "G4": "marche",
+    "G5": "marche"
+   },
+   "mois": {
+    "chevaux": 8,
+    "x5": 3,
+    "podium": 26.9,
+    "quinte": 3.8,
+    "q4": 30.8
+   },
+   "controle": {
+    "chevaux": 8,
+    "x5": 3.3,
+    "podium": 37.5,
+    "quinte": 11.5,
+    "q4": 40.6
+   }
+  },
+  {
+   "nom": "3-2-1-1-1 · G5 au carnet (P13 d’abord)",
+   "quotas": [
+    3,
+    2,
+    1,
+    1,
+    1
+   ],
+   "choix": {
+    "G1": "carnet",
+    "G2": "carnet",
+    "G3": "carnet",
+    "G4": "marche",
+    "G5": "carnet"
+   },
+   "mois": {
+    "chevaux": 8,
+    "x5": 3,
+    "podium": 26.9,
+    "quinte": 3.8,
+    "q4": 30.8
+   },
+   "controle": {
+    "chevaux": 8,
+    "x5": 3.3,
+    "podium": 37.5,
+    "quinte": 11.5,
+    "q4": 40.6
+   }
+  },
+  {
+   "nom": "3-2-1-1-1 · G4 + G5 au carnet",
+   "quotas": [
+    3,
+    2,
+    1,
+    1,
+    1
+   ],
+   "choix": {
+    "G1": "carnet",
+    "G2": "carnet",
+    "G3": "carnet",
+    "G4": "carnet",
+    "G5": "carnet"
+   },
+   "mois": {
+    "chevaux": 8,
+    "x5": 3,
+    "podium": 26.9,
+    "quinte": 3.8,
+    "q4": 26.9
+   },
+   "controle": {
+    "chevaux": 8,
+    "x5": 3.3,
+    "podium": 38.5,
+    "quinte": 8.3,
+    "q4": 43.8
+   }
+  },
+  {
+   "nom": "3-3-1-1-0 · le siège de G5 passe à G2 (§11.26)",
+   "quotas": [
+    3,
+    3,
+    1,
+    1,
+    0
+   ],
+   "choix": {
+    "G1": "carnet",
+    "G2": "carnet",
+    "G3": "carnet",
+    "G4": "marche",
+    "G5": "carnet"
+   },
+   "mois": {
+    "chevaux": 8,
+    "x5": 3.3,
+    "podium": 30.8,
+    "quinte": 7.7,
+    "q4": 34.6
+   },
+   "controle": {
+    "chevaux": 8,
+    "x5": 3.5,
+    "podium": 40.6,
+    "quinte": 12.5,
+    "q4": 47.9
+   }
+  },
+  {
+   "nom": "3-3-1-1-0 · G4 au carnet",
+   "quotas": [
+    3,
+    3,
+    1,
+    1,
+    0
+   ],
+   "choix": {
+    "G1": "carnet",
+    "G2": "carnet",
+    "G3": "carnet",
+    "G4": "carnet",
+    "G5": "marche"
+   },
+   "mois": {
+    "chevaux": 8,
+    "x5": 3.2,
+    "podium": 30.8,
+    "quinte": 7.7,
+    "q4": 30.8
+   },
+   "controle": {
+    "chevaux": 8,
+    "x5": 3.6,
+    "podium": 40.6,
+    "quinte": 9.4,
+    "q4": 52.1
+   }
+  },
+  {
+   "nom": "3-2-1-1-1 · G4 au carnet, G5 au marché",
+   "quotas": [
+    3,
+    2,
+    1,
+    1,
+    1
+   ],
+   "choix": {
+    "G1": "carnet",
+    "G2": "carnet",
+    "G3": "carnet",
+    "G4": "carnet",
+    "G5": "marche"
+   },
+   "mois": {
+    "chevaux": 8,
+    "x5": 3,
+    "podium": 26.9,
+    "quinte": 3.8,
+    "q4": 26.9
+   },
+   "controle": {
+    "chevaux": 8,
+    "x5": 3.3,
+    "podium": 38.5,
+    "quinte": 8.3,
+    "q4": 43.8
+   }
+  }
+ ]
+}

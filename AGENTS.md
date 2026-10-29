@@ -7062,9 +7062,10 @@ sièges.
 #### ⚠ Les limites, écrites dans l'artefact
 
 1. **8 tickets de l'archive ne font pas 8 chevaux** — `10-08 (7)`, `10-10 (6)`,
-   puis `10-22 … 10-27 (9)`. Le mois contient donc **trois régimes de quotas**
-   (4-3-1-1-1-0 puis 3-2-1-1-1 le 28/10). On ausculte **ce qui a été posé**, pas
-   une règle unique : la colonne « sièges » le dit, et l'onglet l'affiche.
+   puis `10-22 … 10-27 (9)`. Le mois contient donc **quatre régimes de quotas**
+   (4-3-1-1-1-0 → 3-2-1-1-1 le 28/10 → 3-3-1-1-0 le 29/10). On ausculte
+   **ce qui a été posé**, pas une règle unique : la colonne « sièges » le dit,
+   et l'onglet l'affiche.
 2. **Le marché n'existe que pour les courses de `data/cotes.json`** : sans cote,
    la bande vaut `null` et la ligne n'est pas comptée (jamais de tri partiel).
 3. **26 courses, c'est un mois** : les pourcentages de bloc se lisent en
@@ -7090,3 +7091,166 @@ la section ⓪ est notre archive, les sections ①–⑧ restent le corpus de r�
 > il a perdu **en bas**, sur les **24 sièges morts**, dont **17 en P11+** et
 > **8 en G5 qui n'ont jamais rien sauvé**. Le haut est tenu ; c'est le **prix du
 > bas** qui manque le 4ᵉ et le 5ᵉ.
+
+---
+
+### 11.46 ⭐ LA REVUE MENSUELLE — LE MOTEUR CHANGE AVEC LA BASSMAT (29/10/2026, appliqué)
+
+> Demande de l'utilisateur : **« المحرك ما تبدلش وعلاش ماتبذلش كل شهر داز خاصنا
+> نغيرو المحرك بناءا على هاد البصمة ديال النتائج السابقة »** — « le moteur n'a
+> pas changé. Chaque mois qui passe, il faut le changer **à partir de la bassmat
+> des résultats précédents** ».
+
+§11.45 savait **montrer** où le ticket a perdu. Elle ne **décidait** rien. Ce
+chapitre est le chaînon manquant : la bassmat devient une **entrée de décision**,
+et le moteur est révisé **une fois par mois**.
+
+#### ① Le protocole — 4 étapes, aucun chiffre à la main
+
+```
+① la bassmat du mois      node tools\bassmat-mois.mjs   → où on a perdu
+② les variantes           node tools\mois-moteur.mjs    → laquelle répare
+③ l'adoption              gagne sur LES DEUX corpus ET ne perd pas le podium
+④ la trace                AGENTS.md + artefact JSON + page
+```
+
+**Le mois est un HORS-ÉCHANTILLON, et c'est tout son intérêt.** Les règles de
+production ont toutes été choisies sur **96 Quintés de février à juillet**
+(`data/quintes.json`). Octobre n'a jamais servi à en choisir une seule : il peut
+donc **juger** les règles au lieu de les flatter. C'est exactement la consigne que
+l'utilisateur avait posée au §11.24 — « ne fais pas passer dans les tests les
+courses qui ont servi aux statistiques ».
+
+Deux corpus, deux rôles :
+
+| corpus | n | rôle |
+|---|---|---|
+| **le mois** `data/synthese.json` (01 → 27/10) | 26 | **juge** — jamais utilisé pour choisir |
+| **le contrôle** `data/quintes.json` | 96 | **garde-fou** — le corpus qui a choisi la règle d'avant |
+
+Métriques **denses** (§11.25) : **podium entier** (3/3) et **quinté entier** (5/5).
+Jamais le cheval isolé — sur 26 courses, un cheval de plus ou de moins ne veut
+rien dire.
+
+#### ② Ce que le mois a dit — et ce que la mesure en a fait
+
+La bassmat d'octobre (§11.45) :
+
+```
+47 arrivants coupés · 24 « sièges morts » (le remplaçant n'est pas arrivé)
+dont 17 en P11+  ·  G1 : 1/83   G3 : 4/4   G4 : 6   G5 : 8 sur 19 posés, 0 sauvé
+G5 en bande de marché M13+ : 5,4 % sur 56 chevaux
+```
+
+Le siège de G5 n'a **rien sauvé** en octobre : 19 places posées, **zéro** arrivant
+que le ticket n'aurait pas eu autrement. Le 4ᵉ de G2, lui, arrive **26 %** du
+temps. **L'échange est mesuré, pas supposé** — `tools/mois-moteur.mjs`, mêmes
+boîtes (P1-P4 / P5-P8 / P9-P10 / P11-P12 / P13+), même ticket de 8 chevaux :
+
+| variante | chev. | **① le mois (26)** podium · quinté · ≥4 | **② contrôle (96)** podium · quinté · ≥4 |
+|---|---|---|---|
+| 3-2-1-1-1 (production) | 8 | 26,9 % · 3,8 % · 30,8 % | 37,5 % · 11,5 % · 40,6 % |
+| 3-2-1-1-1 · G5 au carnet | 8 | 26,9 % · 3,8 % · 30,8 % | 37,5 % · 11,5 % · 40,6 % |
+| 3-2-1-1-1 · G4 + G5 au carnet | 8 | 26,9 % · 3,8 % · 26,9 % | 38,5 % · 8,3 % · 43,8 % |
+| **3-3-1-1-0 · le siège de G5 passe à G2** | **8** | **30,8 % · 7,7 % · 34,6 %** | **40,6 % · 12,5 % · 47,9 %** |
+| 3-3-1-1-0 · G4 au carnet | 8 | 30,8 % · 7,7 % · 30,8 % | 40,6 % · 9,4 % · 52,1 % |
+| 3-2-1-1-1 · G4 au carnet, G5 au marché | 8 | 26,9 % · 3,8 % · 26,9 % | 38,5 % · 8,3 % · 43,8 % |
+
+**Une seule ligne gagne sur les deux corpus et sur les deux métriques.** Et elle
+ne coûte aucun cheval : G5 rend son siège, **G2 le prend**. Le ticket reste à
+**8,00 chevaux** sur 96/96 courses (`node tools\verif-8.mjs` : 96 tickets à
+exactement 8, 0 doublon, 0 bloc hors quota).
+
+#### ③ La décision, appliquée
+
+`GROUPES` dans `src/lib/quinte.js` **et** `backend/QUINTE/quinte.js` (copie à
+l'octet près, sha1 `371124f2…`) :
+
+```
+G1 quota 3 · G2 quota 2 → 3 · G3 quota 1 (obligatoire) · G4 quota 1 · G5 quota 1 → 0
+```
+
+Le **remplissage** ne bouge pas (§11.23 mesuré) : **G1-G3 au carnet, G4 au
+marché**. G5 n'ayant plus de siège, le marché n'y décide plus rien.
+
+Le moteur, recalculé (`node tools\fiabilite.mjs`, 96 Quintés, cotes finales) :
+
+```
+PAYANTE 40,6 %   ·   couvre +4 20,8 %   ·   5/5 12,5 %   ·   8 chevaux
+avant (3-2-1-1-1) : 37,5 %  ·  17,7 %  ·  11,5 %
+```
+
+> ⚠ Ce n'est pas un quota inventé. C'est le **maximum de la latitude déjà
+> écrite** par la méthode (§11.2 : G1 2 ou 3 · G2 2 ou 3 · G5 1 ou 0). Les cinq
+> **boîtes** (P1-P4 / P5-P8 / P9-P10 / P11-P12 / P13+) ne bougent pas d'un
+> cheval.
+
+#### ④ Les variantes REJETÉES, et pourquoi
+
+| variante | le mois | le contrôle | verdict |
+|---|---|---|---|
+| **G5 au carnet** (P13 d'abord) | identique (3,8 %) | identique (11,5 %) | **neutre** — la cote et le carnet prennent le même cheval ; ça ne répare rien |
+| **G4 + G5 au carnet** | 3,8 % | **8,3 %** (−3,2) | rejetée — perd le quinté du contrôle |
+| **3-3-1-1-0 + G4 au carnet** | 7,7 % | **9,4 %** (−3,1) | rejetée — G4 est le seul bloc où le marché gagne (§11.30) |
+| **G4 au carnet seul** | 3,8 % | 8,3 % (−3,2) | rejetée |
+
+Aucune ne perd sur le mois **et** gagne sur le contrôle. Rien n'est retenu par
+goût : c'est le filtre qui tranche.
+
+#### ⑤ ⚠ LE PIÈGE QUI A FAILLI FAIRE ADOPTER DU BRUIT
+
+La première version de `tools/mois-moteur.mjs` passait les choix de bloc sous
+forme de **lettres** (`'C'` = carnet, `'M'` = marché). `remplirGrille` ne connaît
+que `'carnet'` et `'marche'` : `'C'` tombait dans la **branche du classement**, et
+la production mesurait **26,9 % de podium / 3,8 % de quinté** au lieu de
+**37,5 % / 11,5 %**.
+
+Ce qui l'a attrapé — et c'est désormais **obligatoire** dans tout outil qui
+rejoue le moteur :
+
+> **Le témoin.** Avant de lire une seule variante, la production doit
+> **reproduire exactement** les chiffres connus du corpus de contrôle :
+> **37,5 % de podium · 11,5 % de quinté** sur les 96 courses. Si le témoin ne
+> tombe pas juste, l'outil est faux — pas la règle.
+
+Les choix s'écrivent désormais **en toutes lettres** dans `CHOIX`, jamais une
+lettre à traduire.
+
+#### ⑥ La commande du mois — à relancer à chaque fin de mois
+
+```
+node tools\bassmat-mois.mjs     → data/bassmat-mois.json   (où on a perdu)
+node tools\mois-moteur.mjs      → data/mois-moteur.json    (quelle variante répare)
+node tools\fiabilite.mjs        → data/fiabilite.json      (le moteur, chiffré)
+node tools\verif-8.mjs          → le ticket fait-il toujours 8 ?
+node tools\experience-g5.mjs    → les variantes, moitié par moitié
+```
+
+Règle d'adoption, à ne pas négocier :
+
+> Une variante n'entre dans `GROUPES` que si elle **gagne sur le mois ET sur le
+> contrôle**, et si elle **ne perd pas sur le podium** (métrique dense). Sinon on
+> ne touche à rien. Le mois suivant reprend la main : la décision d'aujourd'hui
+> n'est pas un dogme, c'est la meilleure lecture de 26 + 96 courses.
+
+#### ⑦ Le moteur change — mais le LOGIN aussi devait changer
+
+Même journée, même cause racine côté production : **Vercel**. Le 29/10, la
+réparation du compte `sam` a échoué deux fois parce que `POST /v13/deployments`
+était appelé **sans `target: 'production'`** : Vercel accepte la requête et crée
+un déploiement **sans cible**, jamais aliasé sur `bahja-turf.vercel.app`. La
+production continuait donc de servir **l'ancien build, avec l'ancienne variable**
+— le login répondait `401` alors que le déploiement disait `READY`.
+
+| ce qui a été corrigé | où |
+|---|---|
+| `target: 'production'` **obligatoire** dans le redéploiement | `tools/comptes.mjs` |
+| la clé de secours `ADMIN_COMPTES_RECOURS` **supprimée** après consolidation (la console redevient maîtresse de la liste) | `node tools\comptes.mjs --consolider` |
+| `ADMIN_COMPTES` : **une seule** valeur par cible (prod / preview / dev), doublons effacés | idem |
+
+Vérifié de bout en bout en HTTP : `?action=login` → **200**, 8 pages dont
+`admin`, abonnement illimité, `etat → comptes: 2` (`sam` admin · `HAJBANE`).
+
+> **Ce que ce chapitre retient :** le moteur bouge **parce qu'une mesure l'a
+> exigé**, pas parce qu'un mois a passé. Et une mesure ne vaut que si son
+> **témoin** reproduit les chiffres connus.
