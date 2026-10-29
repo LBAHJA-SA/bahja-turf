@@ -112,14 +112,15 @@ function rangsMarche(course) {
   return r
 }
 
-const REGLES = ['carnet', 'marche', 'mixte', 'fusion', 'bassmat', 'marketPlus', 'caseBloc']
+const REGLES = ['carnet', 'marche', 'mixte', 'fusion', 'bassmat', 'marketPlus', 'caseBloc',
+  'podiumPlace', 'podiumCase', 'mixtePodium', 'sauterP2']
 
 /* ⭐ le taux d'arrivée d'une CASE **dans son bloc** — c'est le signal que le
  * carnet ne peut pas voir : P4 n'arrive pas au même rythme selon qu'il tombe
  * dans G1 (parité) ou dans G2. La table est apprise sur les AUTRES courses
  * seulement (leave-one-out), et le corpus B utilise la table complète de A :
  * aucun arrivant n'est deviné, on n'utilise que le passé. */
-let TABLE = null            // Map 'G1|4' -> { n, t5 }
+let TABLE = null            // Map 'G1|4' -> { n, t5, t3 }
 function tableDepuis(corpus, sauf = null) {
   const m = new Map()
   for (const c of corpus) {
@@ -127,10 +128,30 @@ function tableDepuis(corpus, sauf = null) {
     const g = buildGrid(c.syn, c.nums)
     for (const gr of g.groupes) for (const k of gr.cases) {
       const key = gr.id + '|' + k.place
-      const o = m.get(key) || { n: 0, t5: 0 }
+      const o = m.get(key) || { n: 0, t5: 0, t3: 0 }
       o.n++
-      if (c.arrivee.includes(k.num)) o.t5++
+      const i = c.arrivee.indexOf(k.num)
+      if (i >= 0) o.t5++
+      if (i >= 0 && i < 3) o.t3++
       m.set(key, o)
+    }
+  }
+  return m
+}
+/** la table GLOBALE par rang de presse (tous blocs confondus) */
+let TABLE_PLACE = null
+function tablePlace(corpus, sauf = null) {
+  const m = new Map()
+  for (const c of corpus) {
+    if (c === sauf) continue
+    const g = buildGrid(c.syn, c.nums)
+    for (const gr of g.groupes) for (const k of gr.cases) {
+      const o = m.get(k.place) || { n: 0, t5: 0, t3: 0 }
+      o.n++
+      const i = c.arrivee.indexOf(k.num)
+      if (i >= 0) o.t5++
+      if (i >= 0 && i < 3) o.t3++
+      m.set(k.place, o)
     }
   }
   return m
@@ -139,6 +160,7 @@ const tauxCase = (key, m) => {
   const o = (m || TABLE)?.get(key)
   return o && o.n >= 8 ? o.t5 / o.n : null
 }
+const tauxPodium = (o, seuil = 10) => (o && o.n >= seuil ? o.t3 / o.n : null)
 
 /** l'ordre des cases d'un bloc selon la règle */
 function ordonner(regle, cases, ctx) {
@@ -164,6 +186,44 @@ function ordonner(regle, cases, ctx) {
       if (ra == null && rb != null) return 1
       return a.place - b.place
     })
+  }
+  /* ⭐ 29/10/2026 — LE CRITÈRE DU PODIUM (instruction de l'utilisateur).
+   * Ranger les cases par P(podium) = t3 / n — la métrique DENSE (§11.25), pas
+   * P(top5). C'est le seul critère qui dit : « cette case-là produit un
+   * podiums », et c'est la fonction du quota. */
+  if (regle === 'podiumPlace' || regle === 'podiumCase' || regle === 'mixtePodium') {
+    const parPodium = (T, cle) => cases.slice().sort((a, b) => {
+      const ra = tauxPodium(T?.get(cle(a)))
+      const rb = tauxPodium(T?.get(cle(b)))
+      if (ra != null && rb != null && ra !== rb) return rb - ra
+      if (ra != null && rb == null) return -1
+      if (ra == null && rb != null) return 1
+      return a.place - b.place
+    })
+    const parP = parPodium(ctx.tablePlace, (c) => c.place)
+    const parB = parPodium(ctx.table, (c) => ctx.bloc + '|' + c.place)
+    if (regle === 'podiumPlace') return parP
+    if (regle === 'podiumCase') return parB
+    /* mixtePodium : 1 podium-de-case, 1 podium-de-rang, puis on alterne */
+    const out = []
+    const pris = new Set()
+    const lignes = [parB, parP, parPlace]
+    let k = 0
+    while (out.length < cases.length) {
+      const L = lignes[k % lignes.length]
+      const x = L.find((c) => !pris.has(c.num))
+      k++
+      if (!x) continue
+      out.push(x); pris.add(x.num)
+    }
+    return out
+  }
+  /* ⭐ 29/10/2026 — LA RÈGLE DE L'UTILISATEUR, TESTÉE TELLE QUELLE :
+   * « P2 est le maillon jetable de G1, pas P4 » (table d'octobre).
+   * G1 garde P1, P3, P4 et jette P2 — aucune donnée apprise, c'est structurel. */
+  if (regle === 'sauterP2') {
+    const cle = (c) => (ctx.bloc === 'G1' && c.place === 2 ? 99 : c.place)
+    return cases.slice().sort((a, b) => cle(a) - cle(b))
   }
   if (!surLeMarche) return parPlace        // sans cote complète : repli carnet (§11.16)
 
@@ -205,7 +265,7 @@ function ordonner(regle, cases, ctx) {
 }
 
 /** le remplissage complet à quotas FIXES (ceux de GROUPES) */
-function remplir(grille, course, regles, table = null) {
+function remplir(grille, course, regles, table = null, table3 = null) {
   const rangM = rangsMarche(course)
   const ticket = []
   const detail = []
@@ -213,7 +273,7 @@ function remplir(grille, course, regles, table = null) {
     const cases = g.cases.map((c) => ({ ...c }))
     if (!cases.length) { detail.push({ ...g, cases: [] }); continue }
     const regle = regles[g.id] || 'carnet'
-    const ordre = ordonner(regle, cases, { cotes: course.cotes, rangM, bloc: g.id, table })
+    const ordre = ordonner(regle, cases, { cotes: course.cotes, rangM, bloc: g.id, table, tablePlace: table3 })
     const quota = g.obligatoire ? Math.max(1, g.quota) : g.quota
     const retenus = new Set(ordre.slice(0, quota).map((c) => c.place))
     detail.push({ ...g, regle, cases: cases.map((c) => ({ ...c, pris: retenus.has(c.place) })) })
@@ -249,15 +309,22 @@ console.log('  témoin : ' + (CTRL.length + MOIS.length) + ' tickets identiques 
 
 /* ───────────────────────── ④ LA MESURE, BLOC PAR BLOC ──────────────────── */
 function noter(corpus, regles) {
-  /* la table (bloc|case) ne contient jamais la course qu'on note :
+  /* les tables (bloc|case) ne contiennent jamais la course qu'on note :
    * corpus A → leave-one-out · corpus B → la table complète de A (autre année) */
-  const tableB = corpus[0]?.source === 'B' ? tableDepuis(CTRL) : null
+  const estB = corpus[0]?.source === 'B'
+  const tableB = estB ? tableDepuis(CTRL) : null
+  const placeB = estB ? tablePlace(CTRL) : null
   return corpus.map((c) => {
     const g = buildGrid(c.syn, c.nums)
-    const table = c.source === 'B' ? tableB : tableDepuis(corpus, c)
-    const r = remplir(g, c, regles, table)
+    const table = estB ? tableB : tableDepuis(corpus, c)
+    const table3 = estB ? placeB : tablePlace(corpus, c)
+    const r = remplir(g, c, regles, table, table3)
     const x5 = c.arrivee.filter((n) => r.ticket.includes(n)).length
     const pod = c.arrivee.slice(0, 3).every((n) => r.ticket.includes(n))
+    /* ⭐ le critère de l'utilisateur, traduit en score global : combien des 3
+     * chevaux du podium sont dans le ticket (0 à 3). C'est la somme de ce que
+     * mesure sa colonne P(podium | case). */
+    const podH = c.arrivee.slice(0, 3).filter((n) => r.ticket.includes(n)).length
     /* par bloc : arrivants de CE bloc, et combien sont pris */
     const parBloc = {}
     for (const d of r.detail) {
@@ -266,7 +333,7 @@ function noter(corpus, regles) {
       const pris = d.cases.filter((k) => k.pris && c.arrivee.includes(k.num)).length
       parBloc[d.id] = { arrivees: dedans.length, pris }
     }
-    return { date: c.date, x5, pod, q5: x5 === 5, parBloc }
+    return { date: c.date, x5, pod, podH, q5: x5 === 5, parBloc }
   })
 }
 
@@ -276,6 +343,7 @@ const base = (n) => ({
   x5: r2(n.reduce((s, x) => s + x.x5, 0) / n.length),
   q5: r2(100 * n.filter((x) => x.q5).length / n.length),
   pod: r2(100 * n.filter((x) => x.pod).length / n.length),
+  podH: r2(100 * n.reduce((s, x) => s + x.podH, 0) / (3 * n.length)),
 })
 
 function boot(nA, nB) {
@@ -321,7 +389,8 @@ console.log('  ' + pad('corpus B · 26 Quintés d’octobre', 34) + 'x/5 ' + nr(
 /* ② où le bloc coupe : la case JETÉE arrive-t-elle plus que la case GARDÉE ? */
 console.log('\n  ② LES CASES DE CHAQUE BLOC — quel sous-ensemble le carnet garde (corpus A)')
 console.log('  ' + '-'.repeat(78))
-console.log('  ' + pad('bloc', 12) + pad('case', 9) + padl('arrive', 9) + padl('taux', 8) + '   gardée ?')
+console.log('  ' + pad('bloc', 12) + pad('case', 9) + padl('arrive', 9) + padl('taux', 8) +
+  padl('podium', 9) + padl('P(pod)', 8) + '   gardée ?')
 const parCasA = {}
 for (const c of CTRL) {
   const g = buildGrid(c.syn, c.nums)
@@ -330,9 +399,12 @@ for (const c of CTRL) {
     const ordre = gr.cases.slice().sort((a, b) => a.place - b.place)
     for (const k of ordre) {
       const key = gr.id + '|' + k.place
-      const o = parCasA[key] || (parCasA[key] = { n: 0, t5: 0, bloc: gr.id, place: k.place, garde: ordre.indexOf(k) < q })
+      const o = parCasA[key] || (parCasA[key] = { n: 0, t5: 0, t3: 0, bloc: gr.id, place: k.place, garde: ordre.indexOf(k) < q })
       o.n++
-      if (c.arrivee.includes(k.num)) o.t5++
+      const i = c.arrivee.indexOf(k.num)
+      if (i >= 0) o.t5++
+      if (i >= 0 && i < 3) o.t3++
+      parCasA[key] = o
     }
   }
 }
@@ -341,9 +413,10 @@ for (const o of Object.values(parCasA)) (parBlocCas[o.bloc] || (parBlocCas[o.blo
 for (const b of GROUPES.map((g) => g.id)) {
   const cases = (parBlocCas[b] || []).sort((x, y) => x.place - y.place)
   for (const o of cases) {
+    if (o.n < 10) continue
     console.log('  ' + pad(o.bloc, 12) + pad('P' + o.place, 9) + padl(o.t5 + '/' + o.n, 9) +
-      padl(pct(o.t5, o.n), 8) + '   ' + (o.garde ? '✓ gardée' : '✗ jetée') +
-      '   ' + '█'.repeat(Math.round(24 * o.t5 / o.n)))
+      padl(pct(o.t5, o.n), 8) + padl(o.t3 + '/' + o.n, 9) + padl(pct(o.t3, o.n), 8) +
+      '   ' + (o.garde ? '✓ gardée' : '✗ jetée') + '   ' + '█'.repeat(Math.round(16 * o.t3 / o.n)))
   }
 }
 /* le sous-ensemble gardé est-il le MEILLEUR des C(n,q) sous-ensembles ? */
@@ -355,16 +428,22 @@ for (const b of GROUPES.map((g) => g.id)) {
   const g = GROUPES.find((x) => x.id === b)
   const q = g.obligatoire ? Math.max(1, g.quota) : g.quota
   if (cases.length <= q) { console.log('  ' + pad(b, 12) + 'bloc entier pris — aucun choix'); continue }
-  const garde = cases.slice(0, q).reduce((s, o) => s + o.t5 / o.n, 0)
-  let best = -1
-  const combo = (i, pris) => {
-    if (pris.length === q) { const t = pris.reduce((s, o) => s + o.t5 / o.n, 0); if (t > best) best = t; return }
-    for (let k = i; k < cases.length; k++) combo(k + 1, [...pris, cases[k]])
+  const bestOf = (champ) => {
+    let best = -1
+    const combo = (i, pris) => {
+      if (pris.length === q) { const t = pris.reduce((s, o) => s + o[champ] / o.n, 0); if (t > best) best = t; return }
+      for (let k = i; k < cases.length; k++) combo(k + 1, [...pris, cases[k]])
+    }
+    combo(0, [])
+    return best
   }
-  combo(0, [])
-  console.log('  ' + pad(b, 12) + 'le carnet garde ' + pct(garde, q).padStart(8) +
-    '   ·   meilleur sous-ensemble possible ' + pct(best, q).padStart(8) + ' de taux cumulé' +
-    (best - garde < 0.001 ? '   → LE CARNET EST DÉJÀ OPTIMAL ✓' : '   → marge ' + nr(best - garde)))
+  const g5 = cases.slice(0, q).reduce((s, o) => s + o.t5 / o.n, 0)
+  const g3 = cases.slice(0, q).reduce((s, o) => s + o.t3 / o.n, 0)
+  const b5 = bestOf('t5')
+  const b3 = bestOf('t3')
+  console.log('  ' + pad(b, 12) +
+    'top5 : gardé ' + pct(g5, q).padStart(7) + ' · meilleur ' + pct(b5, q).padStart(7) + (b5 - g5 < 0.001 ? ' ✓' : ' ✗ marge ' + nr(b5 - g5)) +
+    '   |   PODIUM : gardé ' + pct(g3, q).padStart(7) + ' · meilleur ' + pct(b3, q).padStart(7) + (b3 - g3 < 0.001 ? ' ✓' : ' ✗ marge ' + nr(b3 - g3)))
 }
 
 /* ─────────────── ⑤ chaque bloc, chaque règle, apparié vs production ────── */
@@ -389,11 +468,14 @@ for (const bloc of GROUPES.map((g) => g.id)) {
     const dPodB = r2(b.pod - bB.pod)
     const dQ5A = r2(a.q5 - bA.q5)
     const dQ5B = r2(b.q5 - bB.q5)
-    resultats.push({ bloc, regle, a, b, dX5A, dX5B, dPodA, dPodB, dQ5A, dQ5B, pA: bA2, pB: bB2 })
+    const dPH_A = r2(a.podH - bA.podH)
+    const dPH_B = r2(b.podH - bB.podH)
+    resultats.push({ bloc, regle, a, b, dX5A, dX5B, dPodA, dPodB, dQ5A, dQ5B, dPH_A, dPH_B, pA: bA2, pB: bB2 })
     console.log('  ' + pad(bloc + ' → ' + regle, 22) +
       pad('Δx/5 ' + (dX5A >= 0 ? '+' : '') + nr(dX5A) + ' / ' + (dX5B >= 0 ? '+' : '') + nr(dX5B), 24) +
       pad('Δ5/5 ' + (dQ5A >= 0 ? '+' : '') + nr(dQ5A) + ' / ' + (dQ5B >= 0 ? '+' : '') + nr(dQ5B), 22) +
-      'Δpod ' + (dPodA >= 0 ? '+' : '') + nr(dPodA) + ' / ' + (dPodB >= 0 ? '+' : '') + nr(dPodB))
+      pad('Δpod ' + (dPodA >= 0 ? '+' : '') + nr(dPodA) + ' / ' + (dPodB >= 0 ? '+' : '') + nr(dPodB), 20) +
+      'ΔpodH ' + (dPH_A >= 0 ? '+' : '') + nr(dPH_A) + ' / ' + (dPH_B >= 0 ? '+' : '') + nr(dPH_B))
   }
 }
 
@@ -413,7 +495,108 @@ for (const r of resultats.filter((x) => x.dX5A >= 0 && x.dX5B >= 0 && x.dPodA >=
     'x/5 ' + nr(h2.x5) + ' · pod ' + nr(h2.pod) + ' %')
 }
 
-/* ───── ⑤ LE PLAFOND DU CHOIX : que rapporterait un choix PARFAIT ? ─────── */
+/* ── ④ bis LE POINT DE L'UTILISATEUR : le podium est-il dans G1 ? ───────── */
+/* « P1-P4 : 25/26 = 96 % » — vrai sur octobre. On le mesure sur les deux
+ * corpus, et on regarde ce que le quota de 3 fait de ces 4 cases. */
+function podiumDansG1(corpus) {
+  let n = 0, dansG1 = 0, dansG12 = 0, jete = 0, podTotal = 0
+  for (const c of corpus) {
+    const g = buildGrid(c.syn, c.nums)
+    const p3 = c.arrivee.slice(0, 3)
+    const c1 = new Set(g.groupes[0].cases.map((k) => k.num))
+    const c2 = new Set(g.groupes[1].cases.map((k) => k.num))
+    n++
+    podTotal += p3.length
+    if (p3.every((x) => c1.has(x))) dansG1++
+    if (p3.every((x) => c1.has(x) || c2.has(x))) dansG12++
+    /* combien de chevaux du podium G1 sont JETÉS par le quota de 3 */
+    const ordre = g.groupes[0].cases.slice().sort((a, b) => a.place - b.place)
+    const jetes = new Set(ordre.slice(g.groupes[0].quota).map((k) => k.num))
+    jete += p3.filter((x) => jetes.has(x)).length
+  }
+  return { n, dansG1, dansG12, jete, podTotal }
+}
+const pdA = podiumDansG1(CTRL)
+const pdB = podiumDansG1(MOIS)
+console.log('\n  ④ bis LE PODIUM EST-IL DANS G1 ? (le point de l’utilisateur)')
+console.log('  ' + '-'.repeat(78))
+console.log('  ' + pad('', 34) + padl('96 courses', 13) + padl('26 d’octobre', 14))
+console.log('  ' + pad('podium entier dans les 4 cases de G1', 34) + padl(pct(pdA.dansG1, pdA.n), 13) + padl(pct(pdB.dansG1, pdB.n), 14))
+console.log('  ' + pad('podium entier dans G1 ∪ G2', 34) + padl(pct(pdA.dansG12, pdA.n), 13) + padl(pct(pdB.dansG12, pdB.n), 14))
+console.log('  ' + pad('chevaux du podium G1 JETÉS par 3/4', 34) + padl(pdA.jete + '/' + pdA.podTotal, 13) + padl(pdB.jete + '/' + pdB.podTotal, 14))
+console.log('  → quand le podium est dans G1, le quota 3 en jette forcément un sur les 4 :')
+console.log('    ce n’est pas une erreur de choix, c’est le nombre de sièges.')
+
+/* ── ④ ter LE TABLEAU DE L'UTILISATEUR, RECALCULÉ SUR LES DEUX CORPUS ────── */
+/* Sa table d'octobre classe les cases par P(podium | top5). On la refait, à
+ * l'identique, sur les 26 courses d'octobre ET sur les 96 courses de contrôle.
+ * Le point à trancher : P2 est-il vraiment le maillon faible de G1 ? */
+function tableParRang(corpus) {
+  const m = new Map()
+  for (const c of corpus) {
+    const g = buildGrid(c.syn, c.nums)
+    for (const gr of g.groupes) for (const k of gr.cases) {
+      const o = m.get(k.place) || { n: 0, n5: 0, pod: 0, vic: 0 }
+      o.n++
+      if (c.nums.includes(k.num)) { }           // course valide
+      const i = c.arrivee.indexOf(k.num)
+      if (i >= 0) { o.n5++; if (i < 3) o.pod++; if (i === 0) o.vic++ }
+      m.set(k.place, o)
+    }
+  }
+  return m
+}
+const TA = tableParRang(CTRL)
+const TB = tableParRang(MOIS)
+console.log('\n  ④ ter LA TABLE DE L’UTILISATEUR — par RANG DE PRESSE, sur les deux corpus')
+console.log('  ' + '-'.repeat(78))
+console.log('  ' + pad('', 8) + padl('n_top5 A', 10) + padl('pod A', 8) + padl('P(pod|5) A', 12) +
+  padl('n_top5 B', 10) + padl('pod B', 8) + padl('P(pod|5) B', 12))
+for (let p = 1; p <= 8; p++) {
+  const a = TA.get(p) || { n: 0, n5: 0, pod: 0 }
+  const b = TB.get(p) || { n: 0, n5: 0, pod: 0 }
+  console.log('  ' + pad('P' + p, 8) + padl(a.n5 + '/' + a.n, 10) + padl(String(a.pod), 8) +
+    padl(a.n5 ? pct(a.pod, a.n5) : '—', 12) +
+    padl(b.n5 + '/' + b.n, 10) + padl(String(b.pod), 8) + padl(b.n5 ? pct(b.pod, b.n5) : '—', 12))
+}
+const combienPod = (corpus, rangs) => {
+  let n = 0, auMoins1 = 0, tous = 0, tot = 0
+  for (const c of corpus) {
+    const g = buildGrid(c.syn, c.nums)
+    const nums = new Set(g.groupes.flatMap((gr) => gr.cases).filter((k) => rangs.includes(k.place)).map((k) => k.num))
+    const p3 = c.arrivee.slice(0, 3)
+    n++
+    const dedans = p3.filter((x) => nums.has(x)).length
+    tot += dedans
+    if (dedans >= 1) auMoins1++
+    if (dedans === p3.length) tous++
+  }
+  return { n, auMoins1, tous, tot }
+}
+const cmpA = combienPod(CTRL, [1, 2, 3, 4])
+const cmpB = combienPod(MOIS, [1, 2, 3, 4])
+console.log('  ' + '-'.repeat(78))
+console.log('  ' + pad('≥ 1 cheval du podium en P1-P4', 34) + padl(pct(cmpA.auMoins1, cmpA.n), 13) + padl(pct(cmpB.auMoins1, cmpB.n), 14))
+console.log('  ' + pad('les 3 du podium en P1-P4', 34) + padl(pct(cmpA.tous, cmpA.n), 13) + padl(pct(cmpB.tous, cmpB.n), 14))
+console.log('  ' + pad('chevaux du podium en P1-P4', 34) + padl(cmpA.tot + '/' + 3 * cmpA.n, 13) + padl(cmpB.tot + '/' + 3 * cmpB.n, 14) + '   (le maximum possible est 3/3)')
+console.log('  ⚠ « ≥ 1 » est trivialement vrai : 3 chevaux du podium, 4 cases larges.')
+console.log('    Le test honnête est « les 3 » — et là le quota de 3 ne peut pas suivre.')
+
+/* les deux corpus réunis — 122 courses : c'est la seule taille qui tranche */
+const TC = new Map()
+for (const T of [TA, TB]) for (const [k, v] of T) {
+  const o = TC.get(k) || { n: 0, n5: 0, pod: 0 }
+  o.n += v.n; o.n5 += v.n5; o.pod += v.pod
+  TC.set(k, o)
+}
+console.log('  ' + '-'.repeat(78))
+console.log('  122 courses réunies — P(podium | N) : la probabilité qu\'un cheval de cette case monte sur le podium')
+for (let p = 1; p <= 4; p++) {
+  const o = TC.get(p)
+  if (!o) continue
+  console.log('  ' + pad('P' + p, 8) + padl(o.pod + '/' + o.n, 10) + padl(pct(o.pod, o.n), 10) +
+    '   ' + '█'.repeat(Math.round(30 * o.pod / o.n)) + '   (P(pod | top5) ' + pct(o.pod, o.n5) + ')')
+}
 /* C'est la mesure qui tranche entre les deux diagnostics possibles :
  *
  *   · si l'oracle rapporte BEAUCOUP plus que la production → le choix interne
@@ -507,13 +690,14 @@ console.log('  ' + pad('… mais tous les gardés arrivent', 34) + padl((mc.bloc
 /* ─────────────────────────────── ⑦ le verdict ─────────────────────────── */
 const retenus = resultats.filter((r) =>
   r.dX5A >= 0 && r.dX5B >= 0 && r.dPodA >= 0 && r.dPodB >= 0 &&
-  (r.dX5A > 0 || r.dX5B > 0) &&
+  r.dPH_A >= 0 && r.dPH_B >= 0 &&
+  (r.dX5A > 0 || r.dX5B > 0 || r.dPH_A > 0 || r.dPH_B > 0) &&
   r.pA.x5 >= 0.9 && r.pB.x5 >= 0.75)
 console.log('\n  ⑤ VERDICT — une règle n’entre que si elle ne perd RIEN sur les deux corpus')
 console.log('  ' + '-'.repeat(78))
 if (!retenus.length) {
-  console.log('  aucune règle ne passe le filtre (x/5 ≥ partout, podium ≥ partout,')
-  console.log('  bootstrap ≥ 90 % sur A et ≥ 75 % sur B).')
+  console.log('  aucune règle ne passe le filtre (x/5 ≥ partout, podium entier ≥ partout,')
+  console.log('  chevaux du podium ≥ partout, bootstrap ≥ 90 % sur A et ≥ 75 % sur B).')
 } else {
   for (const r of retenus) {
     console.log('  ✓ ' + pad(r.bloc + ' → ' + r.regle, 22) +
@@ -544,7 +728,7 @@ fs.writeFileSync('data/choix-interne.json', JSON.stringify({
   resultats: resultats.map((r) => ({
     bloc: r.bloc, regle: r.regle,
     A: r.a, B: r.b,
-    delta: { x5A: r.dX5A, x5B: r.dX5B, q5A: r.dQ5A, q5B: r.dQ5B, podA: r.dPodA, podB: r.dPodB },
+    delta: { x5A: r.dX5A, x5B: r.dX5B, q5A: r.dQ5A, q5B: r.dQ5B, podA: r.dPodA, podB: r.dPodB, podHA: r.dPH_A, podHB: r.dPH_B },
     bootstrap: { A: r.pA, B: r.pB },
   })),
   retenus: retenus.map((r) => ({ bloc: r.bloc, regle: r.regle })),
@@ -557,6 +741,14 @@ fs.writeFileSync('data/choix-interne.json', JSON.stringify({
     mauvaisChoix: mc,
   },
   combinaison: { choix: COMB, A: cA, B: cB },
+  podiumG1: {
+    note: 'P(podium | cas) par rang de presse — le critere demande par l utilisateur',
+    A: Object.fromEntries([1, 2, 3, 4].map((p) => [p, TA.get(p) ? { n: TA.get(p).n, pod: TA.get(p).pod } : null])),
+    B: Object.fromEntries([1, 2, 3, 4].map((p) => [p, TB.get(p) ? { n: TB.get(p).n, pod: TB.get(p).pod } : null])),
+    reunis: Object.fromEntries([1, 2, 3, 4].map((p) => [p, TC.get(p) ? { n: TC.get(p).n, pod: TC.get(p).pod } : null])),
+    podiumEntierDansG1: { A: pdA.dansG1 / pdA.n, B: pdB.dansG1 / pdB.n },
+    auMoinsUnDansP1P4: { A: cmpA.auMoins1 / cmpA.n, B: cmpB.auMoins1 / cmpB.n },
+  },
 }, null, 1))
 try { fs.writeFileSync('public/data/choix-interne.json', fs.readFileSync('data/choix-interne.json')) } catch { /* pas de page */ }
 console.log('\n  artefact : data/choix-interne.json\n')

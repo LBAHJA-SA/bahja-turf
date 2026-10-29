@@ -7624,4 +7624,121 @@ chevaux près. Un tri sur 10 points avec 4 cases, c'est du tirage à pile ou fac
 node tools\choix-interne.mjs   → data/choix-interne.json + public/data/
 ```
 
+---
+
+### 11.50 🎯 LE CRITÈRE DU CHOIX INTERNE PASSE AU PODIUM — et il ne change rien (29/10/2026)
+
+> Objection de l'utilisateur, avec son tableau d'octobre :
+> **« Le podium (1er + 2e + 3e) vient de P1-P4 : 25/26 = 96 % · P1 14 · P2 6 ·
+> P3 10 · P4 10 … P(podium | top5) : P1 88 % · P2 60 % · P3 63 % · P4 77 %
+> → P2 est le maillon jetable de G1, pas P4. »**
+
+#### ① L'erreur de critère — elle est réelle
+
+Le §11.49 classait les cases par **P(top5)** (l'arrivant dans les cinq). Or la
+fonction d'un quota, la métrique dense (§11.25), c'est **le podium**.
+P(podium) = `podiums / n_top5` — c'est le dénominateur conditionnel, le seul où
+les cases sont comparables.
+
+Deux règles ont donc été ajoutées à `tools/choix-interne.mjs` :
+`podiumPlace` (le rang de presse trié par P(podium) global), `podiumCase` (la
+case triée par P(podium) dans son bloc, LOO) et `mixtePodium` — plus une
+quatrième, **`sauterP2`**, qui applique la règle de l'utilisateur telle quelle :
+**G1 garde P1 · P3 · P4 et jette P2**, sans rien apprendre.
+
+#### ② Sa table, recalculée sur les deux corpus — et la contradiction
+
+`P(podium | top5)` par rang de presse, `tools/choix-interne.mjs` section ④ ter :
+
+| rang | P(pod\|top5) **A** (96 c.) | P(pod\|top5) **B** (26 c. d'octobre) |
+|---|---|---|
+| P1 | **81,0 %** | **87,5 %** |
+| P2 | **76,5 %** | 46,2 % |
+| P3 | 75,0 % | 78,6 % |
+| P4 | **67,6 %** | 69,2 % |
+
+**En A, P2 est le deuxième meilleur de G1 et P4 le dernier. En octobre, P2 est
+le dernier.** Les deux corpus **se contredisent** sur la seule question posée.
+
+Sur les **122 courses réunies** (le seul effectif qui tranche), en probabilité
+inconditionnelle P(podium | N) :
+
+```
+P1  65/122  53,3 %   ████████████████
+P3  47/122  38,5 %   ████████████
+P2  45/122  36,9 %   ███████████
+P4  34/122  27,9 %   ████████      ← le maillon faible
+```
+
+**P4 reste le plus faible, avec 9 points de retard sur P2.** Octobre est
+l'exception, pas la règle — et son P2 ne pèse que **6 podiums sur 26 courses**.
+
+#### ③ « 25/26 = 96 % » : vrai, et trivial
+
+| | A (96) | B (26) |
+|---|---|---|
+| **≥ 1** cheval du podium en P1-P4 | 91,7 % | 92,3 % |
+| **les 3** du podium en P1-P4 | **9,4 %** | **15,4 %** |
+| chevaux du podium en P1-P4 | 151/288 | 40/78 |
+| **podium entier dans G1 ∪ G2** | **39,6 %** | **42,3 %** |
+
+4 cases larges qui doivent contenir **au moins un** des 3 arrivants du podium :
+c'est vrai 9 fois sur 10 par construction. Le test honnête est « **les 3** » —
+et là P1-P4 ne les tient que **9,4 %** du temps. Le chiffre de 96 % ne dit donc
+rien sur le quota de 3 : il dit qu'un cheval du podium est presque toujours dans
+le top 4 de la presse, ce que personne ne contestait.
+
+Et quand le podium est effectivement dans les 4 cases de G1, **le quota de 3 en
+jette un sur les quatre** : 21 podiums jetés en A, 11 en B. Ce n'est pas une
+erreur de choix, c'est **le nombre de sièges** — la même conclusion qu'au §11.28.
+
+#### ④ Le test direct de la règle de l'utilisateur
+
+`G1 → sauterP2` (G1 garde P1 · P3 · P4), apparié contre la production :
+
+| | A (96) | B (26) |
+|---|---|---|
+| Δx/5 | **−0,16** | 0,00 |
+| Δ5/5 | **−4,17** | −3,85 |
+| Δpodium entier | **−15,62** | **+11,54** |
+| Δchevaux du podium | **−6,25** (= −18 chevaux) | **+6,41** (= +5 chevaux) |
+
+Sur les 122 courses : **−13 chevaux du podium**. La règle **gagne en octobre et
+perd quatre fois plus en A**. Elle est rejetée par le filtre « ne perdre sur
+rien », et elle n'est pas rejetée par principe : elle est rejetée **par les
+chiffres**.
+
+Les trois règles podium ne font pas mieux :
+
+| règle | Δpodium entier (A / B) | Δchevaux du podium (A / B) |
+|---|---|---|
+| G1 → podiumCase | 0 / 0 | 0 / 0 |
+| G1 → mixtePodium | 0 / 0 | 0 / 0 |
+| G1 → podiumPlace | −1,04 / 0 | −0,35 / 0 |
+| G2 → podiumCase | **−5,21** / 0 | **−3,47** / 0 |
+| G3 → podiumCase | −3,12 / 0 | −1,39 / +1,29 |
+| G5 → podiumCase | −2,08 / 0 | −1,74 / −2,56 |
+
+`G1 → podiumCase` tombe **exactement sur la production** (Δ 0/0 sur les deux
+corpus) : au critère podium, le carnet est **littéralement** le meilleur
+classement possible de G1. C'est la meilleure preuve qu'il n'y a rien à
+corriger là — mais aussi qu'il n'y a **rien à gagner**.
+
+#### ⑤ Décision
+
+- **Le critère du choix interne est désormais le podium**, pas le top-5 : le
+  §11.49 est corrigé sur ce point, et les deux métriques sont désormais
+  imprimées côte à côte (colonnes `Δpod` et `ΔpodH`).
+- **`CHOIX_DU_BLOC` ne bouge pas** : `G1 carnet · G2 carnet · G3 carnet · G4
+  marché · G5 marché`. Aucune règle podium ne passe le filtre.
+- **Le quota ne bouge pas** : constitution (§11.49).
+- **Réponse nette à « qui jeter dans G1 » :** sur **122 courses**, c'est **P4**
+  (27,9 % de podium contre 36,9 % pour P2). Sur les **26 d'octobre**, c'est P2
+  — mais 6 podiums sur 26 courses, c'est 8 points d'écart pour un cheval près :
+  du bruit. La production garde donc P1-P2-P3, et c'est bien le bon choix.
+
+```
+node tools\choix-interne.mjs   → section ④ ter + colonnes ΔpodH
+```
+
 
