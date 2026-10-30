@@ -1,0 +1,130 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "pro.casacourses.com (fallback)",
+ "race": {
+  "numOrdre": 4,
+  "nom": "SIR TOR",
+  "distance": 2100,
+  "type": "N",
+  "date": "2026-10-30",
+  "nbPartants": 9
+ },
+ "meeting": {
+  "num": 9,
+  "hippodrome": "Anfa",
+  "pays": "MA"
+ },
+ "participants": [
+  {
+   "num": "1",
+   "cheval": "",
+   "nom": "",
+   "poids": 57,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "2",
+   "cheval": "",
+   "nom": "",
+   "poids": 57,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "3",
+   "cheval": "",
+   "nom": "",
+   "poids": 56,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "4",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "5",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "6",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "7",
+   "cheval": "",
+   "nom": "",
+   "poids": 54.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "8",
+   "cheval": "",
+   "nom": "",
+   "poids": 54.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "9",
+   "cheval": "",
+   "nom": "",
+   "poids": 53,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  }
+ ],
+ "arrivee": [],
+ "collecteLe": "2026-10-30T08:46:03.387Z"
+}

@@ -1,0 +1,166 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "pro.casacourses.com (fallback)",
+ "race": {
+  "numOrdre": 15,
+  "nom": "JELLY H.",
+  "distance": 2011,
+  "type": "Plat",
+  "date": "2026-10-30",
+  "nbPartants": 12
+ },
+ "meeting": {
+  "num": 34,
+  "hippodrome": "SANTIAGO (Chili)",
+  "pays": "CL"
+ },
+ "participants": [
+  {
+   "num": "1",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.8,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "2",
+   "cheval": "",
+   "nom": "",
+   "poids": 57.1,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "3",
+   "cheval": "",
+   "nom": "",
+   "poids": 57.1,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "4",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.8,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "5",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.8,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "6",
+   "cheval": "",
+   "nom": "",
+   "poids": 57.1,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "7",
+   "cheval": "",
+   "nom": "",
+   "poids": 57.1,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "8",
+   "cheval": "",
+   "nom": "",
+   "poids": 57.1,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "9",
+   "cheval": "",
+   "nom": "",
+   "poids": 57.1,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "10",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.8,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "11",
+   "cheval": "",
+   "nom": "",
+   "poids": 57.1,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "12",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.8,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  }
+ ],
+ "arrivee": [],
+ "collecteLe": "2026-10-30T08:47:22.743Z"
+}

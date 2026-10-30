@@ -5000,5 +5000,181 @@
     "heure": "2026-10-26T13:16:00+01:00"
    }
   ]
+ },
+ "2026-10-30_R1_C5": {
+  "source": "equidia.fr",
+  "favori": 10,
+  "cotes": [
+   {
+    "num": 10,
+    "nom": "MELODICA BELLA",
+    "cote": 5.5,
+    "ouverture": 5.3,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 17,
+    "nom": "MOUNTAIN",
+    "cote": 6.3,
+    "ouverture": 6.3,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 16,
+    "nom": "MOONLIGHT STAR",
+    "cote": 7.5,
+    "ouverture": 8.2,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 13,
+    "nom": "MOUSKIE DE GUEZ",
+    "cote": 7.8,
+    "ouverture": 8.6,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 8,
+    "nom": "MISSLADY DU VICLAU",
+    "cote": 12,
+    "ouverture": 12,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 7,
+    "nom": "MI FA SOL",
+    "cote": 13,
+    "ouverture": 13,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 12,
+    "nom": "MIA DE SIMM",
+    "cote": 13,
+    "ouverture": 13,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 15,
+    "nom": "MARIE DI LEONE",
+    "cote": 14,
+    "ouverture": 16,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 14,
+    "nom": "MERRY RIVER",
+    "cote": 18,
+    "ouverture": 19,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 9,
+    "nom": "MOON DES ARRIS",
+    "cote": 19,
+    "ouverture": 16,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 4,
+    "nom": "MILANTERA",
+    "cote": 25,
+    "ouverture": 26,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 5,
+    "nom": "MORNING NEWS",
+    "cote": 32,
+    "ouverture": 27,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 3,
+    "nom": "MA LIBERTE",
+    "cote": 33,
+    "ouverture": 29,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 6,
+    "nom": "MAHIZ DE GUEZ",
+    "cote": 46,
+    "ouverture": 40,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 1,
+    "nom": "MY HAPPY STORY",
+    "cote": 53,
+    "ouverture": 45,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 11,
+    "nom": "MERIDA DU GRANIT",
+    "cote": 66,
+    "ouverture": 63,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   },
+   {
+    "num": 2,
+    "nom": "MYGIRL DES FORGES",
+    "cote": 111,
+    "ouverture": 106,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 0,
+    "heure": "2026-10-30T09:31:00+01:00"
+   }
+  ]
  }
 }
