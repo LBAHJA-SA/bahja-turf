@@ -18,7 +18,7 @@
      "partants": 7,
      "hippodrome": "Avenches",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-4-7-2-1-3-5"
     },
     {
      "date": "2026-10-30",
@@ -33,7 +33,7 @@
      "partants": 9,
      "hippodrome": "Avenches",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-8-9-7-2-5-3-4-6"
     },
     {
      "date": "2026-10-30",
@@ -48,7 +48,7 @@
      "partants": 10,
      "hippodrome": "Avenches",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "6-7-1-2-10-8-3-4-9-5"
     },
     {
      "date": "2026-10-30",
@@ -63,7 +63,7 @@
      "partants": 9,
      "hippodrome": "Avenches",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "3-1-6-7-8-4-5-9-2"
     },
     {
      "date": "2026-10-30",
@@ -78,7 +78,7 @@
      "partants": 5,
      "hippodrome": "Avenches",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "2-3-1-5-4"
     }
    ]
   },
@@ -99,7 +99,7 @@
      "partants": 9,
      "hippodrome": "Lyon-Parilly",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "3-5-6-2-9-7-4-1-8"
     },
     {
      "date": "2026-10-30",
@@ -114,7 +114,7 @@
      "partants": 5,
      "hippodrome": "Lyon-Parilly",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-4-3-2-5"
     },
     {
      "date": "2026-10-30",
@@ -129,7 +129,7 @@
      "partants": 9,
      "hippodrome": "Lyon-Parilly",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "2-4-7-1-3-8-5-6-9"
     },
     {
      "date": "2026-10-30",
@@ -144,7 +144,7 @@
      "partants": 9,
      "hippodrome": "Lyon-Parilly",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "4-3-5-6-8-7-1-9-2"
     },
     {
      "date": "2026-10-30",
@@ -159,7 +159,7 @@
      "partants": 10,
      "hippodrome": "Lyon-Parilly",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "7-3-9-5-4-2-1-10"
     },
     {
      "date": "2026-10-30",
@@ -174,7 +174,7 @@
      "partants": 14,
      "hippodrome": "Lyon-Parilly",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "7-4-6-9-8-3-14-2-11-1"
     },
     {
      "date": "2026-10-30",
@@ -189,7 +189,7 @@
      "partants": 13,
      "hippodrome": "Lyon-Parilly",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-10-11-9-2-7-12-4-13-5-6"
     },
     {
      "date": "2026-10-30",
@@ -204,7 +204,7 @@
      "partants": 12,
      "hippodrome": "Lyon-Parilly",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-8-5-6-4-11-10-2-3"
     }
    ]
   },
@@ -351,7 +351,7 @@
      "partants": 10,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-9-4-2-7-5-6-3-1-10"
     },
     {
      "date": "2026-10-30",
@@ -366,7 +366,7 @@
      "partants": 8,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-7-4-1-3-2-6-5"
     },
     {
      "date": "2026-10-30",
@@ -381,7 +381,7 @@
      "partants": 16,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "15-2-10-9-4-1-8-5-3-7-13-11-12-16-14-6"
     },
     {
      "date": "2026-10-30",
@@ -396,7 +396,7 @@
      "partants": 13,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "4-1-9-10-8-12-7-2-13-11-3-6-5"
     },
     {
      "date": "2026-10-30",
@@ -411,7 +411,7 @@
      "partants": 11,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-2-4-3-7-9-1-5-10-6-11"
     },
     {
      "date": "2026-10-30",
@@ -426,7 +426,7 @@
      "partants": 10,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "9-8-10-4-3-7-5-1-2-6"
     },
     {
      "date": "2026-10-30",
@@ -441,7 +441,7 @@
      "partants": 16,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "4-3-1-13-7-10-14-11-16-9-12-2-6-15-8-5"
     },
     {
      "date": "2026-10-30",
@@ -456,7 +456,7 @@
      "partants": 16,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-11-6-9-10-7-16-4-15-13-14-8-12-2-5-3"
     },
     {
      "date": "2026-10-30",
@@ -471,7 +471,7 @@
      "partants": 11,
      "hippodrome": "Deauville",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "11-5-1-6-10-9-3-7-8-4-2"
     }
    ]
   },
@@ -492,7 +492,7 @@
      "partants": 15,
      "hippodrome": "Toulouse  ",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "13-14-5-11-10-7-6-1-12"
     },
     {
      "date": "2026-10-30",
@@ -507,7 +507,7 @@
      "partants": 16,
      "hippodrome": "Toulouse  ",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-6-13-12-3-7-16-2-15-14-10-5-11-9-8"
     },
     {
      "date": "2026-10-30",
@@ -522,7 +522,7 @@
      "partants": 16,
      "hippodrome": "Toulouse  ",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "11-9-12-3-1-7-5-2-15-16-4-10-6-13-8"
     },
     {
      "date": "2026-10-30",
@@ -537,7 +537,7 @@
      "partants": 16,
      "hippodrome": "Toulouse  ",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "11-10-7-12-1-9-14-4-3-16-8-2-6-13"
     },
     {
      "date": "2026-10-30",
@@ -552,7 +552,7 @@
      "partants": 16,
      "hippodrome": "Toulouse  ",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "16-13-6-8-2-3-9-15-7-12-10-11-4"
     },
     {
      "date": "2026-10-30",
@@ -567,7 +567,7 @@
      "partants": 16,
      "hippodrome": "Toulouse  ",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-2-9-6-7-11-4-16-10"
     },
     {
      "date": "2026-10-30",
@@ -582,7 +582,7 @@
      "partants": 16,
      "hippodrome": "Toulouse  ",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-13-7-2-11-6-14-15-8-16-12-9"
     },
     {
      "date": "2026-10-30",
@@ -597,7 +597,7 @@
      "partants": 16,
      "hippodrome": "Toulouse  ",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "9-11-2-4-5-6-10-3-12"
     }
    ]
   },
@@ -618,7 +618,7 @@
      "partants": 15,
      "hippodrome": "LA CEPIERE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "13-14-5-11-10-7-6-1-12"
     },
     {
      "date": "2026-10-30",
@@ -633,7 +633,7 @@
      "partants": 16,
      "hippodrome": "LA CEPIERE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-6-13-12-3-7-16-2-15-14-10-5-11-9-8"
     },
     {
      "date": "2026-10-30",
@@ -648,7 +648,7 @@
      "partants": 16,
      "hippodrome": "LA CEPIERE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "11-9-12-3-1-7-5-2-15-16-4-10-6-13-8"
     },
     {
      "date": "2026-10-30",
@@ -663,7 +663,7 @@
      "partants": 16,
      "hippodrome": "LA CEPIERE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "11-10-7-12-1-9-14-4-3-16-8-2-6-13"
     },
     {
      "date": "2026-10-30",
@@ -678,7 +678,7 @@
      "partants": 16,
      "hippodrome": "LA CEPIERE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "16-13-6-8-2-3-9-15-7-12-10-11-4"
     },
     {
      "date": "2026-10-30",
@@ -693,7 +693,7 @@
      "partants": 16,
      "hippodrome": "LA CEPIERE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-2-9-6-7-11-4-16-10"
     },
     {
      "date": "2026-10-30",
@@ -708,7 +708,7 @@
      "partants": 16,
      "hippodrome": "LA CEPIERE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-13-7-2-11-6-14-15-8-16-12-9"
     },
     {
      "date": "2026-10-30",
@@ -723,7 +723,7 @@
      "partants": 16,
      "hippodrome": "LA CEPIERE",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "9-11-2-4-5-6-10-3-12"
     }
    ]
   },
@@ -744,7 +744,7 @@
      "partants": 11,
      "hippodrome": "Paris-Vincennes",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "10-9-5-8-11-2-3-4-1"
     },
     {
      "date": "2026-10-30",
@@ -759,7 +759,7 @@
      "partants": 14,
      "hippodrome": "Paris-Vincennes",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "8-9-7-12-6-13-14-10-3-5-4-2-1"
     },
     {
      "date": "2026-10-30",
@@ -774,7 +774,7 @@
      "partants": 11,
      "hippodrome": "Paris-Vincennes",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "1-7-3-11-5-4-8-6-9"
     },
     {
      "date": "2026-10-30",
@@ -789,7 +789,7 @@
      "partants": 18,
      "hippodrome": "Paris-Vincennes",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "5-18-15-2-10-4-12-16-14"
     },
     {
      "date": "2026-10-30",
@@ -804,7 +804,7 @@
      "partants": 17,
      "hippodrome": "Paris-Vincennes",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "7-12-5-3-4-8-9-14-10-16-15-11-2"
     },
     {
      "date": "2026-10-30",
@@ -819,7 +819,7 @@
      "partants": 11,
      "hippodrome": "Paris-Vincennes",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "7-6-10-1-3-4-5-8-9"
     },
     {
      "date": "2026-10-30",
@@ -870,7 +870,7 @@
      "partants": 11,
      "hippodrome": "KEENELAND",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "10-9-3-2-5-1-4-6-8"
     },
     {
      "date": "2026-10-30",
@@ -885,7 +885,7 @@
      "partants": 17,
      "hippodrome": "KEENELAND",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "3-11-5-9-12-8-1-13-6-4-7-2-14-15-16-17"
     },
     {
      "date": "2026-10-30",
@@ -900,7 +900,7 @@
      "partants": 12,
      "hippodrome": "KEENELAND",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "10-5-8-6-2-3-1-4-9-11-7-12"
     },
     {
      "date": "2026-10-30",
@@ -915,7 +915,7 @@
      "partants": 17,
      "hippodrome": "KEENELAND",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "9-1-3-10-6"
     },
     {
      "date": "2026-10-30",
@@ -964,7 +964,7 @@
      "type": "Plat",
      "dist": 2011,
      "partants": 15,
-     "hippodrome": "SANTIAGO (Chili)",
+     "hippodrome": "SAN",
      "source": "pro.casacourses.com (fallback)",
      "arrivee": null
     },
@@ -979,7 +979,7 @@
      "type": "Plat",
      "dist": 2011,
      "partants": 12,
-     "hippodrome": "SANTIAGO (Chili)",
+     "hippodrome": "SAN",
      "source": "pro.casacourses.com (fallback)",
      "arrivee": null
     }
@@ -1022,5 +1022,5 @@
    ]
   }
  ],
- "collecteLe": "2026-10-30T08:47:27.956Z"
+ "collecteLe": "2026-10-30T20:32:22.167Z"
 }

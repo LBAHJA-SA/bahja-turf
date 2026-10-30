@@ -47,7 +47,13 @@
     "hippodrome": "Paris-Vincennes",
     "distance": 2700,
     "courseId": "2026-10-30_R1_C5",
-    "arrivee": null,
+    "arrivee": [
+      7,
+      12,
+      5,
+      3,
+      4
+    ],
     "ticket": [
       10,
       3,
@@ -107,7 +113,7 @@
       16,
       17
     ],
-    "cloture": null,
+    "cloture": "2026-10-30T20:30:06.536Z",
     "scores": [
       {
         "num": 1,
@@ -416,7 +422,7 @@
         "pris": true
       }
     ],
-    "collecte": "2026-10-30T08:45:30.556Z"
+    "collecte": "2026-10-30T20:30:06.536Z"
   },
   "2026-10-29": {
     "date": "2026-10-29",
@@ -531,7 +537,7 @@
       11,
       12
     ],
-    "cloture": "2026-10-30T08:45:05.860Z",
+    "cloture": "2026-10-30T20:30:04.893Z",
     "scores": null,
     "collecte": "2026-10-29T20:30:06.039Z"
   },

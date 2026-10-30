@@ -12,8 +12,8 @@
  },
  "meeting": {
   "num": 34,
-  "hippodrome": "SANTIAGO (Chili)",
-  "pays": "CL"
+  "hippodrome": "SAN",
+  "pays": "FR"
  },
  "participants": [
   {
@@ -162,5 +162,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-10-30T08:47:22.743Z"
+ "collecteLe": "2026-10-30T20:32:15.734Z"
 }
