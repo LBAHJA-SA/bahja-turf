@@ -8018,4 +8018,85 @@ parce qu'il n'écoute pas.
 node tools\choix-interne.mjs   → ⑥ l'adoption + le nombre de tickets qui changent
 ```
 
+---
+
+### 11.53 🔑 LE LOGIN LOCAL REFUSAIT — le pull Vercel → local (31/10/2026)
+
+> Symptôme rapporté : **« en ligne ça entre, au poste “nom ou mot de passe
+> incorrect” »**, avec l'utilisateur « sam ».
+
+#### ① Ce n'est pas le compte, c'est la PHOTO
+
+`.env.local` est une **photo** prise par `vercel env pull` à une date donnée
+(cf. `vite.config.js` : le dev lit `.env.local` via `loadEnv`). Le login local
+vérifie `PBKDF2-SHA256(motDePasse, sel, iter)` contre le `hash` de **cette
+photo**. Si le mot de passe a changé sur Vercel depuis, la photo est périmée :
+en ligne il est accepté, au poste il est refusé.
+
+Mesuré ce jour-là :
+
+```
+.local  ADMIN_COMPTES  241 car.  ·  1 compte  (sam)          hash A
+Vercel  ADMIN_COMPTES  545 car.  ·  2 comptes (sam, HAJBANE) hash B ≠ A
+```
+
+Le mot de passe n'est **jamais** dans le fichier : `hash` est à sens unique
+(`api/_session.js` → `verifier()`). On ne peut donc pas le « retrouver » — on
+remet la photo à jour.
+
+#### ② Pourquoi `production` ne se tire pas
+
+`ADMIN_COMPTES` existe en trois exemplaires sur Vercel :
+
+| cible | type | valeur lisible ? |
+|---|---|---|
+| **development** | `encrypted` | **oui** (c'est celle qu'on tire) |
+| preview | `sensitive` | non |
+| **production** | `sensitive` | **non — Vercel ne la rend à personne** |
+
+Un `vercel env pull --environment production` ne répare donc rien : la variable
+revient **vide**. C'est `development` qu'il faut tirer — même liste de comptes,
+seule la cible change.
+
+#### ③ L'outil
+
+```
+node tools\env-sync.mjs            → diagnostic (n'écrit rien)
+node tools\env-sync.mjs --ecrire   → répare .env.local
+```
+
+- tire via la CLI (`npx vercel@59 env pull`, cible `development`, token de
+  `.deploy-env`) dans un fichier **temporaire**, supprimé ensuite ;
+- ne réécrit **que** `ADMIN_COMPTES` et `ADMIN_SECRET` — le reste du fichier
+  (`VERCEL_OIDC_TOKEN`…) est conservé : on ne veut pas que le poste se mette à
+  écrire dans le Redis de production ;
+- sauvegarde `.env.local.bak-<date>` avant d'écrire ;
+- n'affiche **jamais** une valeur : noms de comptes, droits, et
+  « hash identique / différent ».
+
+Contrôle après réparation :
+
+```
+ADMIN_COMPTES   identique   (545 car.)
+sam       hash identique
+HAJBANE   hash identique
+```
+
+Puis **Ctrl+C et `npm run dev`** : les variables ne sont lues qu'au démarrage.
+
+#### ④ Le plan B, hors ligne
+
+Si le réseau ou le token manque : `node tools\mdp-local.mjs --set "…"` réécrit
+le hash local du compte `sam` (PBKDF2, `sel` neuf, `iter` 210000) ; `--test "…"`
+dit seulement si le mot de passe saisi correspond au hash local. Ça ne touche
+que `.env.local`, et ça ne change **rien** côté Vercel.
+
+> **Règle :** le poste ne devine pas les identifiants, il **recopie l'état
+> Vercel**. Un refus de login local n'est pas un bug du code — c'est une photo
+> périmée.
+
+```
+node tools\env-sync.mjs --ecrire   → le login du poste = le login en ligne
+```
+
 
