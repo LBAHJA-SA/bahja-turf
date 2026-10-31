@@ -15,7 +15,7 @@
  * ========================================================================== */
 import { useEffect, useState } from 'react'
 import { aujourdhui, fetchRecapSite, siteCorrespondALaDate, fetchCotes } from '../../src/lib/quinte.js'
-import { buildGrilleProno, remplirProno, BLOCS_PRONO, CHOIX_PRONO } from '../../src/lib/pronostique.js'
+import { buildGrilleProno, remplirProno, BLOCS_PRONO } from '../../src/lib/pronostique.js'
 
 const PEAU = {
   bord: 'rgba(232,121,249,.28)',
@@ -165,7 +165,7 @@ export default function PronoMoteur({ apercuPresse = null, apercuCotes = null })
   }, [])
 
   const grille = etat.presse.length ? buildGrilleProno(etat.presse, etat.runners) : null
-  const { ticket, detail } = grille ? remplirProno(grille, etat.cotes, CHOIX_PRONO) : { ticket: [], detail: [] }
+  const { ticket, detail } = grille ? remplirProno(grille, etat.cotes) : { ticket: [], detail: [] }
 
   return (
     <section style={{
@@ -222,9 +222,7 @@ export default function PronoMoteur({ apercuPresse = null, apercuCotes = null })
           </div>
 
           <div style={{ fontSize: 12, color: PEAU.doux, lineHeight: 1.65, borderTop: '1px solid rgba(148,163,184,.16)', paddingTop: 10 }}>
-            Choix dans les blocs :{' '}
-            {BLOCS_PRONO.map((b) => b.id + ' ' + (CHOIX_PRONO[b.id] || 'carnet')).join(' · ')}
-            {!etat.cotes && <span style={{ color: '#fbbf24' }}> · marché indisponible : les blocs suivent la presse</span>}
+            Règle : les DERNIERS de chaque bloc (anti-presse, anti-marché) · 8 chevaux
           </div>
 
           {mesure && mesure.corpus && (
