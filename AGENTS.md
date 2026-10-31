@@ -8100,3 +8100,133 @@ node tools\env-sync.mjs --ecrire   → le login du poste = le login en ligne
 ```
 
 
+
+---
+
+### 11.54 🧩 LE MOTEUR PRONOSTIQUE — un SECOND moteur, indépendant (31/10/2026)
+
+> Instructions de l'utilisateur : « بغيتك تدير محرك اخر ويناقض المحرك اللي
+> عندنا فصفحة QUINTE » puis « بغيت هاد التقسيم :
+> **G1 = P1 P2 P3 P4 P5 P6 = 3 · G2 = P7 P8 P9 P10 = 2 · G3 = P11..P18 = 3** ».
+
+#### ① Ce qui a été construit
+
+| Fichier | Rôle |
+|---|---|
+| `src/lib/pronostique.js` | **le module pur** : `buildGrilleProno`, `remplirProno`, `BLOCS_PRONO`, `CHOIX_PRONO` |
+| `frontend/PRONOSTIQUE/PronoMoteur.jsx` | la section affichée sur `/pronostique-bahja-turf` (3 blocs + ticket + mesure) |
+| `tools/prono-moteur.mjs` | **la mesure** → `data/prono-moteur.json` + `public/data/prono-moteur.json` |
+
+⚠ **Le moteur Quinté n'a pas été touché** : `src/lib/quinte.js`,
+`backend/QUINTE/quinte.js` et `frontend/QUINTE/QuinteGrille.jsx` sont intacts.
+Le nouveau module n'importe de `quinte.js` que des **lecteurs** (`fetchCotes`,
+`fetchRecapSite`, `siteCorrespondALaDate`, `aujourdhui`) et la **mesure**
+emprunte `buildGrid` / `remplirGrille` en lecture seule, comme référence.
+
+#### ② Le découpage demandé, tel quel
+
+```
+G1 = P1..P6   → 3 chevaux
+G2 = P7..P10  → 2 chevaux
+G3 = P11..P18 → 3 chevaux
+                ─────────
+                8 chevaux
+```
+
+`P` = la place de presse (P1 = le plus cité). Ce ne sont **pas** les cases du
+carnet coloré du moteur Quinté (P1-P4 / P5-P8 / P9-P10 / P11-P12 / P13+).
+
+#### ③ Ce que chaque bande donne réellement — `tools/prono-moteur.mjs` §⑧
+
+Arrivants par course, mesurés (97 Quintés à presse réelle + 22 courses d'octobre) :
+
+| bloc | bande | chevaux | top-5 / course | top-3 / course | sièges pris |
+|---|---|---|---|---|---|
+| G1 | P1-P6 | 6 | **2,87** | **1,98** | 3 |
+| G2 | P7-P10 | 4 | 1,21 | 0,56 | 2 |
+| G3 | P11-P18 | 8 | **0,93** | 0,46 | **3** |
+
+Octobre donne la même chose (2,95 · 1,27 · 0,77). **La bande G3 produit
+0,93 arrivant par course et on lui donne 3 sièges** : c'est là que le ticket
+se perd.
+
+#### ④ Les quotas dans les mêmes bandes — 27 répartitions de 8
+
+| quotas | podium A (97) | 1ʳᵉ mt · 2ᵈᵉ mt | podium B (octobre) |
+|---|---|---|---|
+| **6-1-1** | **44,3 %** | 43,8 · 44,9 | **45,5 %** |
+| 6-2-0 | 42,3 % | 45,8 · 38,8 | 40,9 % |
+| 5-2-1 | 42,3 % | 43,8 · 40,8 | 27,3 % |
+| **3-2-3 (demandé)** | **26,8 %** | 29,2 · 24,5 | 13,6 % |
+
+`3-2-3` sort **15ᵉ sur 27**. Bootstrap apparié (10 000 tirages) :
+**6-1-1 bat 3-2-3 dans 99,7 %** des tirages, écart médian **+17 courses / 97**.
+Autrement dit : les trois **bandes** sont justes, les **sièges** sont mal placés.
+
+#### ⑤ « Le choix dans le bloc doit être contre la presse et contre le marché »
+
+Instruction explicite du 31/10. Les trois règles contrariennes ont donc été
+écrites **et mesurées** (mêmes 3 blocs, mêmes 8 chevaux) :
+
+| règle dans les 3 blocs | podium A | 5/5 A | x/5 A | podium B |
+|---|---|---|---|---|
+| **carnet** (l'ordre de la presse) | **26,8 %** | 5,2 % | 2,97 | 13,6 % |
+| marché (la cote la plus courte) | 14,4 % | 1,0 % | 2,68 | 27,3 % |
+| échange20 | 25,8 % | 5,2 % | 2,90 | 18,2 % |
+| fusion P+cote | 24,7 % | 4,1 % | 2,92 | 18,2 % |
+| **anti-presse** (le moins cité) | **5,2 %** | 0,0 % | 2,11 | 4,5 % |
+| **anti-marché** (la cote la plus longue) | **4,1 %** | 1,0 % | 2,46 | 13,6 % |
+| **anti (les deux)** | **2,1 %** | 0,0 % | 2,23 | 13,6 % |
+| contraste (quota−1 carnet + le moins cité) | 13,4 % | 0,0 % | 2,82 | 4,5 % |
+
+**L'opposition systématique détruit le ticket** : 2,1 % de podium contre
+26,8 % pour l'ordre de la presse. Ce n'est pas une opinion : c'est le même
+découpage, le même nombre de chevaux, seule la règle change. Et `3-2-3` +
+anti tombe à **2,1 %** (contre 33,0 % pour `6-1-1` + anti) — l'anti est
+d'autant plus destructeur que le bloc est large.
+
+Sur les 512 combinaisons (8 règles³), la meilleure sur A est `CFF` (28,9 %)
+mais elle **perd hors échantillon** (9,1 % sur octobre contre 13,6 % pour
+`CCC`) et le bootstrap dit « pire » dans 72,9 % des tirages → **rejetée**.
+C'est la même conclusion que §11.24 : le choix dans le bloc est au plafond.
+
+#### ⑥ Pourquoi 70 % est impossible à 8 chevaux — la courbe mesurée
+
+> Objectif exprimé par l'utilisateur : « كلها سيئة لانها لم تصل الى 70 % ».
+
+| N chevaux (top-N presse) | podium A | 5/5 A | podium B (octobre) |
+|---|---|---|---|
+| 6 | 23,7 % | 2,1 % | 31,8 % |
+| **8** | **42,3 %** | 9,3 % | 40,9 % |
+| 9 | 50,5 % | 16,5 % | 45,5 % |
+| 10 | 58,8 % | 27,8 % | 54,5 % |
+| **11** | **70,1 %** | 46,4 % | 63,6 % |
+| 12 | 81,4 % | 62,9 % | 72,7 % |
+| 13 | 85,6 % | 72,2 % | 95,5 % |
+
+**70 % de podium s'atteint à 11 chevaux, pas à 8.** À 8, le plafond mesuré est
+**42,3 %** (top-8 presse) — et 44,3 % avec les meilleures bandes (6-1-1).
+Ce n'est pas un problème de choix : c'est une question de **nombre de cases**
+(§11.25 dit la même chose : 8 → 19,5 % du quinté, 12 → 69,1 %).
+
+#### ⑦ La décision appliquée
+
+`CHOIX_PRONO = { G1: 'carnet', G2: 'carnet', G3: 'carnet' }` — et les quotas
+**3-2-3 tels que demandés**. La règle contrarienne reste **dans le module**
+(`REGLES` + `ordonnerBloc`) pour être re-mesurée à tout moment, mais elle
+n'est pas jouée : elle coûte 24,7 points de podium.
+
+La page affiche, sous le ticket, la mesure réelle du moteur et le
+contre-exemple anti — **aucun chiffre n'est saisi à la main** : tout vient de
+`public/data/prono-moteur.json`.
+
+#### ⑧ Ce qu'il faut lancer
+
+```
+node tools\prono-moteur.mjs          → le rapport complet (12 sections)
+node tools\prono-moteur.mjs --json   → + data/prono-moteur.json (lu par la page)
+```
+
+⚠ `data/quintes.json` = corpus A (97 courses à presse réelle) · `data/synthese.json`
++ `data/cotes.json` = corpus B (22 courses d'octobre avec cotes Equidia). A sert
+à **choisir**, B sert à **contrôler** — aucune course ne fait les deux.
