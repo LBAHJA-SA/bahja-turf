@@ -2,11 +2,11 @@
  * frontend/PRONOSTIQUE/PronoMoteur.jsx — MOTEUR PRONOSTIQUE (statistiques)
  *
  * Sélection par les statistiques de l'archive.
- * Pour chaque bloc, on prend les positions avec le meilleur taux P(top5 | N).
+ * 4 règles au choix : top5, podium, absolu, combo.
  * ========================================================================== */
 import { useEffect, useState } from 'react'
 import { aujourdhui, fetchRecapSite, siteCorrespondALaDate } from '../../src/lib/quinte.js'
-import { buildGrilleProno, remplirProno, BLOCS_PRONO, TAUX_TOP5 } from '../../src/lib/pronostique.js'
+import { buildGrilleProno, remplirProno, BLOCS_PRONO, TAUX_TOP5, TAUX_PODIUM, ABS_PODIUM, REGLES_PRONO, REGLE_DEFAUT } from '../../src/lib/pronostique.js'
 
 const PEAU = {
   bord: 'rgba(232,121,249,.28)',
@@ -21,10 +21,28 @@ const PEAU = {
   chiffrePris: '#6ee7b7',
 }
 
-function Case({ c, pris }) {
-  const taux = (TAUX_TOP5[c.place - 1] * 100).toFixed(1)
+const REGLE_LABELS = {
+  top5: 'Top5 — P(top5 | N)',
+  podium: 'Podium — P(podium | top5)',
+  absolu: 'Absolu — nb podiums',
+  combo: 'Combo — podium × top5',
+}
+
+function tauxCase(c, regle) {
+  const p = c.place - 1
+  switch (regle) {
+    case 'podium': return (TAUX_PODIUM[p] * 100).toFixed(1)
+    case 'absolu': return String(ABS_PODIUM[p])
+    case 'combo': return ((TAUX_PODIUM[p] * TAUX_TOP5[p]) * 100).toFixed(1)
+    case 'top5':
+    default: return (TAUX_TOP5[p] * 100).toFixed(1)
+  }
+}
+
+function Case({ c, pris, regle }) {
+  const taux = tauxCase(c, regle)
   return (
-    <span title={'P' + c.place + ' · taux ' + taux + ' %'} style={{
+    <span title={'P' + c.place + ' · ' + taux} style={{
       position: 'relative', minWidth: 48, height: 54, boxSizing: 'border-box', padding: '4px 6px 3px',
       display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1,
       borderRadius: 9, border: '1px solid ' + (pris ? PEAU.prisBord : PEAU.libreBord),
@@ -38,12 +56,12 @@ function Case({ c, pris }) {
       <span style={{
         fontFamily: 'ui-monospace, Consolas, monospace', fontSize: 9.5, letterSpacing: '.02em',
         color: pris ? 'rgba(110,231,183,.85)' : 'rgba(148,163,184,.7)',
-      }}>P{c.place} · {taux}%</span>
+      }}>P{c.place} · {taux}</span>
     </span>
   )
 }
 
-function Bloc({ bloc }) {
+function Bloc({ bloc, regle }) {
   const pris = bloc.cases.filter((c) => c.pris).length
   return (
     <section style={{
@@ -60,7 +78,7 @@ function Bloc({ bloc }) {
         }}>{pris} / {bloc.quota} pris</span>
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {bloc.cases.map((c) => <Case key={c.num} c={c} pris={c.pris} />)}
+        {bloc.cases.map((c) => <Case key={c.num} c={c} pris={c.pris} regle={regle} />)}
         {!bloc.cases.length && <span style={{ color: PEAU.doux, fontSize: 12 }}>— la presse cite moins de chevaux que ce bloc.</span>}
       </div>
     </section>
@@ -70,7 +88,7 @@ function Bloc({ bloc }) {
 export default function PronoMoteur() {
   const [date, setDate] = useState(aujourdhui())
   const [etat, setEtat] = useState({ chargement: true, erreur: '', source: '', hippodrome: '', presse: [], runners: [] })
-  const [mesure, setMesure] = useState(null)
+  const [regle, setRegle] = useState(REGLE_DEFAUT)
 
   useEffect(() => {
     let vivant = true
@@ -82,7 +100,6 @@ export default function PronoMoteur() {
       let source = ''
       let hippodrome = ''
 
-      /* ① l'archive du job quotidien — data/synthese.json (clé = date) */
       try {
         const r = await fetch('/data/synthese.json', { cache: 'no-store' })
         if (r.ok) {
@@ -95,9 +112,8 @@ export default function PronoMoteur() {
             hippodrome = rec.hippodrome || ''
           }
         }
-      } catch (e) { /* pas d'archive : on passe au site */ }
+      } catch (e) { /* pas d'archive */ }
 
-      /* ② le site, seulement s'il affiche bien la course du jour */
       if (!presse.length) {
         try {
           const r = await fetchRecapSite()
@@ -120,7 +136,7 @@ export default function PronoMoteur() {
   }, [])
 
   const grille = etat.presse.length ? buildGrilleProno(etat.presse, etat.runners) : null
-  const { ticket, detail } = grille ? remplirProno(grille) : { ticket: [], detail: [] }
+  const { ticket, detail } = grille ? remplirProno(grille, regle) : { ticket: [], detail: [] }
 
   return (
     <section style={{
@@ -144,9 +160,22 @@ export default function PronoMoteur() {
           border: '1px solid rgba(94,234,212,.28)', borderRadius: 8, padding: '4px 9px',
           background: 'rgba(13,148,136,.12)',
         }}>
-          3-2-3 · 8 chevaux · stats archive
+          3-2-3 · 8 chevaux
         </div>
       </header>
+
+      {/* Sélecteur de règle */}
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        {REGLES_PRONO.map((r) => (
+          <button key={r} onClick={() => setRegle(r)} style={{
+            padding: '6px 12px', borderRadius: 8, fontSize: 12, fontWeight: 700,
+            border: '1px solid ' + (regle === r ? 'rgba(232,121,249,.6)' : 'rgba(148,163,184,.2)'),
+            background: regle === r ? 'rgba(232,121,249,.15)' : 'rgba(255,255,255,.04)',
+            color: regle === r ? '#f0abfc' : '#a9b2c9',
+            cursor: 'pointer',
+          }}>{REGLE_LABELS[r]}</button>
+        ))}
+      </div>
 
       {etat.chargement && <div style={{ color: PEAU.doux, fontSize: 13 }}>Chargement de la course…</div>}
       {!etat.chargement && etat.erreur && (
@@ -159,7 +188,7 @@ export default function PronoMoteur() {
       {!etat.chargement && !etat.erreur && (
         <>
           <div style={{ display: 'grid', gap: 9 }}>
-            {detail.map((b) => <Bloc key={b.id} bloc={b} />)}
+            {detail.map((b) => <Bloc key={b.id} bloc={b} regle={regle} />)}
           </div>
 
           <div style={{ display: 'grid', gap: 8, paddingTop: 4 }}>
@@ -177,7 +206,7 @@ export default function PronoMoteur() {
           </div>
 
           <div style={{ fontSize: 12, color: PEAU.doux, lineHeight: 1.65, borderTop: '1px solid rgba(148,163,184,.16)', paddingTop: 10 }}>
-            Sélection par les statistiques de l'archive (P(top5 | N)) — les meilleures cases de chaque bloc.
+            Règle : {REGLE_LABELS[regle]} — sélection des meilleures cases de chaque bloc par cette statistique.
           </div>
         </>
       )}

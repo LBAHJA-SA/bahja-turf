@@ -1,5 +1,5 @@
 /* =============================================================================
- * src/lib/pronostique.js — LE MOTEUR PRONOSTIQUE (statistiques)
+ * src/lib/pronostique.js — MOTEUR PRONOSTIQUE (statistiques)
  *
  * ⚠ CE FICHIER EST INDÉPENDANT DE `src/lib/quinte.js`.
  *
@@ -13,13 +13,13 @@
  *
  *   P = la place de presse (P1 = le plus cité).
  *
- * LA RÈGLE : sélection par les STATISTIQUES de l'archive.
- *   Pour chaque bloc, on prend les positions avec le meilleur taux
- *   P(top5 | N) — c'est-à-dire celles qui arrivent le plus souvent
- *   dans les 5 premiers, sur l'archive réelle.
+ * LES 4 RÈGLES DE SÉLECTION (au choix de l'utilisateur) :
+ *   1. top5   — par P(top5 | N) : cases qui arrivent le plus dans les 5
+ *   2. podium — par P(podium | top5) : cases qui montent le plus sur le podium
+ *   3. absolu — par nombre absolu de podiums
+ *   4. combo  — par P(podium | top5) × P(top5 | N) : probabilité globale
  *
- *   Pas de carnet. Pas de marché. Pas de règles complexes.
- *   Seulement les statistiques de l'archive.
+ *   Seulement les statistiques de l'archive. Pas de carnet, pas de marché.
  * ========================================================================== */
 
 /** Les trois blocs, en places de presse. `de`/`a` sont INCLUS. */
@@ -31,8 +31,7 @@ export const BLOCS_PRONO = [
 
 /**
  * Taux P(top5 | N) par position de presse (P1..P18).
- * Source : outil Statistiques de la page QUINTE, 28 Quintés valides.
- * P17 et P18 n'ont jamais été dans les 5 → 0.
+ * Source : outil Statistiques, 28 Quintés valides.
  */
 export const TAUX_TOP5 = [
   0.607, 0.357, 0.571, 0.500, 0.464, 0.357,  // P1-P6   (G1)
@@ -41,7 +40,35 @@ export const TAUX_TOP5 = [
   0.000, 0.000,                                    // P17-P18 (G3)
 ]
 
-/** La cote d'un numéro. Accepte { num: 4.2 } comme { num: { cote: 4.2 } }. */
+/**
+ * Taux P(podium | top5) par position de presse (P1..P18).
+ * Source : outil Statistiques, 28 Quintés valides.
+ */
+export const TAUX_PODIUM = [
+  0.824, 0.600, 0.625, 0.786, 0.769, 0.700,  // P1-P6   (G1)
+  0.167, 0.500, 0.500, 0.833,                    // P7-P10  (G2)
+  0.500, 0.500, 1.000, 0.200, 0.000, 0.000,    // P11-P16 (G3)
+  0.000, 0.000,                                    // P17-P18 (G3)
+]
+
+/**
+ * Nombre absolu de podiums par position (P1..P18).
+ * Source : outil Statistiques, 28 Quintés valides.
+ */
+export const ABS_PODIUM = [
+  14, 6, 10, 11, 10, 7,   // P1-P6   (G1)
+  2, 5, 2, 5,               // P7-P10  (G2)
+  4, 4, 3, 1, 0, 0,         // P11-P16 (G3)
+  0, 0,                      // P17-P18 (G3)
+]
+
+/** Les 4 règles disponibles. */
+export const REGLES_PRONO = ['top5', 'podium', 'absolu', 'combo']
+
+/** Règle par défaut. */
+export const REGLE_DEFAUT = 'top5'
+
+/** La cote d'un numéro. */
 export function coteDe(cotes, num) {
   if (!cotes) return null
   const v = cotes[num]
@@ -52,8 +79,7 @@ export function coteDe(cotes, num) {
 }
 
 /**
- * Construit la grille de la page : une case par place de presse, rangée dans
- * les trois blocs.
+ * Construit la grille de la page.
  */
 export function buildGrilleProno(synthese, runners = []) {
   const partants = new Set((runners || []).filter((n) => Number.isFinite(n) && n > 0))
@@ -87,34 +113,51 @@ export function buildGrilleProno(synthese, runners = []) {
 }
 
 /**
- * Remplit la grille : chaque bloc donne exactement `quota` chevaux.
- * RÈGLE : sélection par les statistiques (meilleur taux P(top5 | N)).
- *   Pour chaque bloc, on prend les positions avec le meilleur taux.
- *   Pas de carnet. Pas de marché. Pas de règles complexes.
+ * Score d'une case selon la règle choisie.
  */
-export function remplirProno(grille) {
+function scoreCase(c, regle) {
+  const p = c.place - 1
+  switch (regle) {
+    case 'podium':
+      return TAUX_PODIUM[p] ?? 0
+    case 'absolu':
+      return ABS_PODIUM[p] ?? 0
+    case 'combo':
+      return (TAUX_PODIUM[p] ?? 0) * (TAUX_TOP5[p] ?? 0)
+    case 'top5':
+    default:
+      return TAUX_TOP5[p] ?? 0
+  }
+}
+
+/**
+ * Remplit la grille : chaque bloc donne exactement `quota` chevaux.
+ * Sélection par la règle choisie (meilleur score en premier).
+ */
+export function remplirProno(grille, regle = REGLE_DEFAUT) {
   const ticket = []
   const detail = []
 
   for (const bloc of grille.blocs) {
-    // Trier les cases par taux décroissant (meilleur en premier)
     const parStats = bloc.cases.slice().sort((a, b) => {
-      const tauxA = TAUX_TOP5[a.place - 1] ?? 0
-      const tauxB = TAUX_TOP5[b.place - 1] ?? 0
-      return tauxB - tauxA || a.place - b.place
+      const scoreA = scoreCase(a, regle)
+      const scoreB = scoreCase(b, regle)
+      return scoreB - scoreA || a.place - b.place
     })
     const pris = parStats.slice(0, Math.min(bloc.quota, parStats.length))
     const set = new Set(pris.map((c) => c.num))
     for (const c of pris) ticket.push(c.num)
     detail.push({
       ...bloc,
-      choix: 'stats',
+      choix: regle,
       surLeMarche: false,
       cases: bloc.cases.map((c) => ({
         ...c,
         cote: null,
         rangMarche: null,
         taux: TAUX_TOP5[c.place - 1] ?? 0,
+        tauxPodium: TAUX_PODIUM[c.place - 1] ?? 0,
+        absPodium: ABS_PODIUM[c.place - 1] ?? 0,
         pris: set.has(c.num),
       })),
     })
