@@ -1,5 +1,5 @@
 /* =============================================================================
- * src/lib/pronostique.js — MOTEUR PRONOSTIQUE (statistiques)
+ * src/lib/pronostique.js — MOTEUR PRONOSTIQUE
  *
  * ⚠ CE FICHIER EST INDÉPENDANT DE `src/lib/quinte.js`.
  *
@@ -9,17 +9,20 @@
  *        G2 = P7 .. P10  → 2 chevaux
  *        G3 = P11.. P18  → 3 chevaux
  *                         ────────────
- *                         8 chevaux
+ *                         8 chevaux (TICKET)
  *
  *   P = la place de presse (P1 = le plus cité).
  *
- * LES 4 RÈGLES DE SÉLECTION (au choix de l'utilisateur) :
- *   1. top5   — par P(top5 | N) : cases qui arrivent le plus dans les 5
- *   2. podium — par P(podium | top5) : cases qui montent le plus sur le podium
- *   3. absolu — par nombre absolu de podiums
- *   4. combo  — par P(podium | top5) × P(top5 | N) : probabilité globale
+ * LE TICKET (8 chevaux) : sélection par les statistiques P(top5 | N).
+ *   Les meilleures cases de chaque bloc.
  *
- *   Seulement les statistiques de l'archive. Pas de carnet, pas de marché.
+ * LE PODIUM (3 chevaux) : 3 règles indépendantes, basées sur les
+ *   statistiques du podium (P(podium | top5), nombre absolu, combo).
+ *   Ces 3 règles sont SÉPARÉES du ticket. Elles ne le modifient pas.
+ *
+ *   1. podium  — par P(podium | top5) : cases qui montent le plus sur le podium
+ *   2. absolu  — par nombre absolu de podiums
+ *   3. combo   — par podium × top5 : probabilité globale
  * ========================================================================== */
 
 /** Les trois blocs, en places de presse. `de`/`a` sont INCLUS. */
@@ -62,11 +65,15 @@ export const ABS_PODIUM = [
   0, 0,                      // P17-P18 (G3)
 ]
 
-/** Les 4 règles disponibles. */
-export const REGLES_PRONO = ['top5', 'podium', 'absolu', 'combo']
+/** Les 3 règles de podium disponibles. */
+export const REGLES_PODIUM = ['podium', 'absolu', 'combo']
 
-/** Règle par défaut. */
-export const REGLE_DEFAUT = 'top5'
+/** Labels des règles de podium. */
+export const REGLE_PODIUM_LABELS = {
+  podium: 'Podium — P(podium | top5)',
+  absolu: 'Absolu — nb podiums',
+  combo: 'Combo — podium × top5',
+}
 
 /** La cote d'un numéro. */
 export function coteDe(cotes, num) {
@@ -113,51 +120,46 @@ export function buildGrilleProno(synthese, runners = []) {
 }
 
 /**
- * Score d'une case selon la règle choisie.
+ * Score d'une case selon la règle choisie (pour le podium).
  */
-function scoreCase(c, regle) {
+function scorePodium(c, regle) {
   const p = c.place - 1
   switch (regle) {
-    case 'podium':
-      return TAUX_PODIUM[p] ?? 0
     case 'absolu':
       return ABS_PODIUM[p] ?? 0
     case 'combo':
       return (TAUX_PODIUM[p] ?? 0) * (TAUX_TOP5[p] ?? 0)
-    case 'top5':
+    case 'podium':
     default:
-      return TAUX_TOP5[p] ?? 0
+      return TAUX_PODIUM[p] ?? 0
   }
 }
 
 /**
- * Remplit la grille : chaque bloc donne exactement `quota` chevaux.
- * Sélection par la règle choisie (meilleur score en premier).
+ * TICKET (8 chevaux) : sélection par les statistiques P(top5 | N).
+ * Les meilleures cases de chaque bloc.
  */
-export function remplirProno(grille, regle = REGLE_DEFAUT) {
+export function remplirTicket(grille) {
   const ticket = []
   const detail = []
 
   for (const bloc of grille.blocs) {
     const parStats = bloc.cases.slice().sort((a, b) => {
-      const scoreA = scoreCase(a, regle)
-      const scoreB = scoreCase(b, regle)
-      return scoreB - scoreA || a.place - b.place
+      const tauxA = TAUX_TOP5[a.place - 1] ?? 0
+      const tauxB = TAUX_TOP5[b.place - 1] ?? 0
+      return tauxB - tauxA || a.place - b.place
     })
     const pris = parStats.slice(0, Math.min(bloc.quota, parStats.length))
     const set = new Set(pris.map((c) => c.num))
     for (const c of pris) ticket.push(c.num)
     detail.push({
       ...bloc,
-      choix: regle,
-      surLeMarche: false,
+      choix: 'top5',
       cases: bloc.cases.map((c) => ({
         ...c,
         cote: null,
         rangMarche: null,
         taux: TAUX_TOP5[c.place - 1] ?? 0,
-        tauxPodium: TAUX_PODIUM[c.place - 1] ?? 0,
-        absPodium: ABS_PODIUM[c.place - 1] ?? 0,
         pris: set.has(c.num),
       })),
     })
@@ -166,5 +168,21 @@ export function remplirProno(grille, regle = REGLE_DEFAUT) {
   return { ticket: [...new Set(ticket)], detail }
 }
 
-/** Le nombre de chevaux attendu — 3 + 2 + 3. */
+/**
+ * PODIUM (3 chevaux) : sélection par la règle choisie.
+ * Prend les 3 meilleures cases de TOUTE la grille (pas par bloc).
+ */
+export function remplirPodium(grille, regle = 'podium') {
+  const allCases = grille.blocs.flatMap((b) => b.cases)
+  const parStats = allCases.slice().sort((a, b) => {
+    const scoreA = scorePodium(a, regle)
+    const scoreB = scorePodium(b, regle)
+    return scoreB - scoreA || a.place - b.place
+  })
+  return parStats.slice(0, 3).map((c) => c.num)
+}
+
+/** Le nombre de chevaux du ticket — 3 + 2 + 3. */
 export const TAILLE_PRONO = BLOCS_PRONO.reduce((n, b) => n + b.quota, 0)
+/** Le nombre de chevaux du podium. */
+export const TAILLE_PODIUM = 3

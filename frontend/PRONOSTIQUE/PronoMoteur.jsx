@@ -1,12 +1,17 @@
 /* =============================================================================
- * frontend/PRONOSTIQUE/PronoMoteur.jsx — MOTEUR PRONOSTIQUE (statistiques)
+ * frontend/PRONOSTIQUE/PronoMoteur.jsx — MOTEUR PRONOSTIQUE
  *
- * Sélection par les statistiques de l'archive.
- * 4 règles au choix : top5, podium, absolu, combo.
+ * TICKET (8 chevaux) : sélection par les statistiques P(top5 | N).
+ * PODIUM (3 chevaux × 3 règles) : sélection par les statistiques du podium.
+ *   - podium  : P(podium | top5)
+ *   - absolu  : nombre absolu de podiums
+ *   - combo   : podium × top5
+ *
+ * Le ticket ne change PAS quand on clique sur les règles de podium.
  * ========================================================================== */
 import { useEffect, useState } from 'react'
 import { aujourdhui, fetchRecapSite, siteCorrespondALaDate } from '../../src/lib/quinte.js'
-import { buildGrilleProno, remplirProno, BLOCS_PRONO, TAUX_TOP5, TAUX_PODIUM, ABS_PODIUM, REGLES_PRONO, REGLE_DEFAUT } from '../../src/lib/pronostique.js'
+import { buildGrilleProno, remplirTicket, remplirPodium, BLOCS_PRONO, TAUX_TOP5, TAUX_PODIUM, ABS_PODIUM, REGLES_PODIUM, REGLE_PODIUM_LABELS } from '../../src/lib/pronostique.js'
 
 const PEAU = {
   bord: 'rgba(232,121,249,.28)',
@@ -21,28 +26,10 @@ const PEAU = {
   chiffrePris: '#6ee7b7',
 }
 
-const REGLE_LABELS = {
-  top5: 'Top5 — P(top5 | N)',
-  podium: 'Podium — P(podium | top5)',
-  absolu: 'Absolu — nb podiums',
-  combo: 'Combo — podium × top5',
-}
-
-function tauxCase(c, regle) {
-  const p = c.place - 1
-  switch (regle) {
-    case 'podium': return (TAUX_PODIUM[p] * 100).toFixed(1)
-    case 'absolu': return String(ABS_PODIUM[p])
-    case 'combo': return ((TAUX_PODIUM[p] * TAUX_TOP5[p]) * 100).toFixed(1)
-    case 'top5':
-    default: return (TAUX_TOP5[p] * 100).toFixed(1)
-  }
-}
-
-function Case({ c, pris, regle }) {
-  const taux = tauxCase(c, regle)
+function Case({ c, pris }) {
+  const taux = (TAUX_TOP5[c.place - 1] * 100).toFixed(1)
   return (
-    <span title={'P' + c.place + ' · ' + taux} style={{
+    <span title={'P' + c.place + ' · top5 ' + taux + ' %'} style={{
       position: 'relative', minWidth: 48, height: 54, boxSizing: 'border-box', padding: '4px 6px 3px',
       display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1,
       borderRadius: 9, border: '1px solid ' + (pris ? PEAU.prisBord : PEAU.libreBord),
@@ -56,12 +43,12 @@ function Case({ c, pris, regle }) {
       <span style={{
         fontFamily: 'ui-monospace, Consolas, monospace', fontSize: 9.5, letterSpacing: '.02em',
         color: pris ? 'rgba(110,231,183,.85)' : 'rgba(148,163,184,.7)',
-      }}>P{c.place} · {taux}</span>
+      }}>P{c.place} · {taux}%</span>
     </span>
   )
 }
 
-function Bloc({ bloc, regle }) {
+function Bloc({ bloc }) {
   const pris = bloc.cases.filter((c) => c.pris).length
   return (
     <section style={{
@@ -78,7 +65,7 @@ function Bloc({ bloc, regle }) {
         }}>{pris} / {bloc.quota} pris</span>
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {bloc.cases.map((c) => <Case key={c.num} c={c} pris={c.pris} regle={regle} />)}
+        {bloc.cases.map((c) => <Case key={c.num} c={c} pris={c.pris} />)}
         {!bloc.cases.length && <span style={{ color: PEAU.doux, fontSize: 12 }}>— la presse cite moins de chevaux que ce bloc.</span>}
       </div>
     </section>
@@ -88,7 +75,6 @@ function Bloc({ bloc, regle }) {
 export default function PronoMoteur() {
   const [date, setDate] = useState(aujourdhui())
   const [etat, setEtat] = useState({ chargement: true, erreur: '', source: '', hippodrome: '', presse: [], runners: [] })
-  const [regle, setRegle] = useState(REGLE_DEFAUT)
 
   useEffect(() => {
     let vivant = true
@@ -136,7 +122,12 @@ export default function PronoMoteur() {
   }, [])
 
   const grille = etat.presse.length ? buildGrilleProno(etat.presse, etat.runners) : null
-  const { ticket, detail } = grille ? remplirProno(grille, regle) : { ticket: [], detail: [] }
+  const ticketResult = grille ? remplirTicket(grille) : { ticket: [], detail: [] }
+  const podiums = grille ? {
+    podium: remplirPodium(grille, 'podium'),
+    absolu: remplirPodium(grille, 'absolu'),
+    combo: remplirPodium(grille, 'combo'),
+  } : { podium: [], absolu: [], combo: [] }
 
   return (
     <section style={{
@@ -164,19 +155,6 @@ export default function PronoMoteur() {
         </div>
       </header>
 
-      {/* Sélecteur de règle */}
-      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-        {REGLES_PRONO.map((r) => (
-          <button key={r} onClick={() => setRegle(r)} style={{
-            padding: '6px 12px', borderRadius: 8, fontSize: 12, fontWeight: 700,
-            border: '1px solid ' + (regle === r ? 'rgba(232,121,249,.6)' : 'rgba(148,163,184,.2)'),
-            background: regle === r ? 'rgba(232,121,249,.15)' : 'rgba(255,255,255,.04)',
-            color: regle === r ? '#f0abfc' : '#a9b2c9',
-            cursor: 'pointer',
-          }}>{REGLE_LABELS[r]}</button>
-        ))}
-      </div>
-
       {etat.chargement && <div style={{ color: PEAU.doux, fontSize: 13 }}>Chargement de la course…</div>}
       {!etat.chargement && etat.erreur && (
         <div role="status" style={{
@@ -187,14 +165,15 @@ export default function PronoMoteur() {
 
       {!etat.chargement && !etat.erreur && (
         <>
+          {/* TICKET (8 chevaux) */}
           <div style={{ display: 'grid', gap: 9 }}>
-            {detail.map((b) => <Bloc key={b.id} bloc={b} regle={regle} />)}
+            {ticketResult.detail.map((b) => <Bloc key={b.id} bloc={b} />)}
           </div>
 
           <div style={{ display: 'grid', gap: 8, paddingTop: 4 }}>
-            <div style={{ color: PEAU.doux, fontSize: 11.5, letterSpacing: '.1em', fontWeight: 700 }}>TICKET</div>
+            <div style={{ color: PEAU.doux, fontSize: 11.5, letterSpacing: '.1em', fontWeight: 700 }}>TICKET · 8 CHEVAUX</div>
             <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
-              {ticket.map((n, i) => (
+              {ticketResult.ticket.map((n, i) => (
                 <span key={n + '-' + i} style={{
                   minWidth: 46, height: 40, padding: '0 9px', boxSizing: 'border-box',
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
@@ -203,10 +182,29 @@ export default function PronoMoteur() {
                 }}>{n}</span>
               ))}
             </div>
+            <div style={{ fontSize: 11, color: PEAU.doux }}>
+              Sélection par P(top5 | N) — les meilleures cases de chaque bloc.
+            </div>
           </div>
 
-          <div style={{ fontSize: 12, color: PEAU.doux, lineHeight: 1.65, borderTop: '1px solid rgba(148,163,184,.16)', paddingTop: 10 }}>
-            Règle : {REGLE_LABELS[regle]} — sélection des meilleures cases de chaque bloc par cette statistique.
+          {/* PODIUM (3 chevaux × 3 règles) */}
+          <div style={{ borderTop: '1px solid rgba(148,163,184,.16)', paddingTop: 12, display: 'grid', gap: 10 }}>
+            <div style={{ color: PEAU.doux, fontSize: 11.5, letterSpacing: '.1em', fontWeight: 700 }}>PODIUM · 3 CHEVAUX · 3 RÈGLES</div>
+            {REGLES_PODIUM.map((regle) => (
+              <div key={regle} style={{ display: 'grid', gap: 6 }}>
+                <div style={{ fontSize: 12, color: '#f0abfc', fontWeight: 700 }}>{REGLE_PODIUM_LABELS[regle]}</div>
+                <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
+                  {podiums[regle].map((n, i) => (
+                    <span key={n + '-' + i} style={{
+                      minWidth: 46, height: 40, padding: '0 9px', boxSizing: 'border-box',
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      borderRadius: 9, border: '1px solid rgba(94,234,212,.55)', background: 'rgba(94,234,212,.12)',
+                      color: '#5eead4', fontFamily: 'ui-monospace, Consolas, monospace', fontSize: 17, fontWeight: 800,
+                    }}>{n}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </>
       )}
