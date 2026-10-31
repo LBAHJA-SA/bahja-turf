@@ -8209,12 +8209,16 @@ C'est la même conclusion que §11.24 : le choix dans le bloc est au plafond.
 Ce n'est pas un problème de choix : c'est une question de **nombre de cases**
 (§11.25 dit la même chose : 8 → 19,5 % du quinté, 12 → 69,1 %).
 
-#### ⑦ La décision appliquée
+#### ⑦ La décision appliquée — mise à jour le 31/10/2026
 
-`CHOIX_PRONO = { G1: 'carnet', G2: 'carnet', G3: 'carnet' }` — et les quotas
-**3-2-3 tels que demandés**. La règle contrarienne reste **dans le module**
-(`REGLES` + `ordonnerBloc`) pour être re-mesurée à tout moment, mais elle
-n'est pas jouée : elle coûte 24,7 points de podium.
+`CHOIX_PRONO = { G1: 'anti', G2: 'anti', G3: 'anti' }` — et les quotas
+**3-2-3 tels que demandés**. L'utilisateur a choisi la règle **anti** (les deux :
+place presse + rang marché, tous les deux décroissants) dans les trois blocs.
+La règle `carnet` reste dans le module pour être re-mesurée à tout moment.
+
+Résultats mesurés de la règle `anti` sur les deux corpus :
+- A (97 Quintés) : podium **2,1 %** · 5/5 **0,0 %** · x/5 **2,23**
+- B (22 courses octobre) : podium **13,6 %** · 5/5 **0,0 %** · x/5 **1,95**
 
 La page affiche, sous le ticket, la mesure réelle du moteur et le
 contre-exemple anti — **aucun chiffre n'est saisi à la main** : tout vient de

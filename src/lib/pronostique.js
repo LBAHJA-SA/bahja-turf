@@ -39,7 +39,7 @@ export const BLOCS_PRONO = [
 ]
 
 /** La règle de choix dans chaque bloc — remplie après la mesure. */
-export const CHOIX_PRONO = { G1: 'carnet', G2: 'carnet', G3: 'carnet' }
+export const CHOIX_PRONO = { G1: 'anti', G2: 'anti', G3: 'anti' }
 
 /* ⚠ 31/10/2026 — l'utilisateur a demandé le CONTRAIRE de la presse et du
  * marché : « طريقة اختيار الارقام داخل المجموعة يجب ان يكون عكس الصحافة وعكس
