@@ -121,7 +121,11 @@ function ordonnerBloc(cases, cotes, regle, rangs, stats, placeDe) {
    *   de la cote de TOUT le bloc. `carnet`, `antipresse` et `stats` s'en
    *   passent : elles ne doivent pas retomber sur le carnet faute de marché. */
   const besoinMarche = ['marche', 'echange20', 'fusion', 'antimarche', 'anti'].includes(regle)
-  const effectif = besoinMarche ? (surLeMarche ? regle : 'carnet') : regle
+  /* Quand le marché est indisponible, 'anti' et 'antimarché' ne tombent PAS
+   * sur le carnet (qui est l'ordre de la presse) — ils tombent sur
+   * 'antipresse' (le moins cité), pour rester "contre" même sans cotes. */
+  const repli = (regle === 'anti' || regle === 'antimarche') ? 'antipresse' : 'carnet'
+  const effectif = besoinMarche ? (surLeMarche ? regle : repli) : regle
 
   const parCarnet = cases.slice().sort((a, b) => a.place - b.place)
 
