@@ -157,7 +157,8 @@ function ordonnerBloc(cases, cotes, regle, rangs, stats, placeDe) {
     return { effectif, surLeMarche, ordre }
   }
   if (effectif === 'anti') {
-    /* les deux ensemble : place de presse + rang de marché, décroissant */
+    /* les deux ensemble : place de presse + rang de marché, décroissants
+     * → on prend les PLUS FORTS (moins cité + cote la plus longue) */
     const poids = (c) => (c.place + (rangs[c.num] ?? 0))
     return { effectif, surLeMarche, ordre: parCarnet.slice().sort((a, b) => poids(b) - poids(a) || b.place - a.place) }
   }

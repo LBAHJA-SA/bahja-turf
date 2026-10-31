@@ -1,5 +1,5 @@
 {
-  "genere": "2026-10-31T04:13:46.396Z",
+  "genere": "2026-10-31T04:23:55.430Z",
   "decoupage": [
     {
       "id": "G1",
@@ -22008,8 +22008,8 @@
   "bootstrapQuotas": {
     "meilleur": "6-1-1",
     "demande": "3-2-3",
-    "mieux": 99.73,
-    "pire": 0.15,
+    "mieux": 99.68,
+    "pire": 0.22,
     "median": 17
   },
   "quinte": {
@@ -22047,10 +22047,10 @@
     }
   },
   "bootstrap": {
-    "podMieux": 14.41,
-    "podPire": 73.28,
-    "x5Mieux": 65.26,
-    "x5Pire": 25.09,
+    "podMieux": 14.1,
+    "podPire": 73.65,
+    "x5Mieux": 64.59,
+    "x5Pire": 25.82,
     "ic": [
       -0.041237113402061855,
       0.08247422680412371
