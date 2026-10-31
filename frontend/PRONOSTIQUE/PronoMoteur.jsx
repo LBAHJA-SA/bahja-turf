@@ -1,21 +1,12 @@
 /* =============================================================================
- * frontend/PRONOSTIQUE/PronoMoteur.jsx — LE MOTEUR PRONOSTIQUE (31/10/2026)
+ * frontend/PRONOSTIQUE/PronoMoteur.jsx — MOTEUR PRONOSTIQUE (statistiques)
  *
- * Un moteur SÉPARÉ de celui de /quinte, avec le découpage donné par
- * l'utilisateur :
- *
- *        G1 = P1..P6 → 3 · G2 = P7..P10 → 2 · G3 = P11..P18 → 3
- *
- * Il lit la Synthèse (presse), le marché (Equidia) et il affiche les TROIS
- * blocs avec, pour chacun, les chevaux ÉLIGIBLES — pris / non pris — puis le
- * ticket de 8.
- *
- * ⚠ Aucun chiffre n'est écrit à la main ici : les taux affichés viennent de
- *   `public/data/prono-moteur.json`, écrit par `node tools\prono-moteur.mjs`.
+ * Sélection par les statistiques de l'archive.
+ * Pour chaque bloc, on prend les positions avec le meilleur taux P(top5 | N).
  * ========================================================================== */
 import { useEffect, useState } from 'react'
-import { aujourdhui, fetchRecapSite, siteCorrespondALaDate, fetchCotes } from '../../src/lib/quinte.js'
-import { buildGrilleProno, remplirProno, BLOCS_PRONO } from '../../src/lib/pronostique.js'
+import { aujourdhui, fetchRecapSite, siteCorrespondALaDate } from '../../src/lib/quinte.js'
+import { buildGrilleProno, remplirProno, BLOCS_PRONO, TAUX_TOP5 } from '../../src/lib/pronostique.js'
 
 const PEAU = {
   bord: 'rgba(232,121,249,.28)',
@@ -30,10 +21,10 @@ const PEAU = {
   chiffrePris: '#6ee7b7',
 }
 
-
 function Case({ c, pris }) {
+  const taux = (TAUX_TOP5[c.place - 1] * 100).toFixed(1)
   return (
-    <span title={'P' + c.place + (c.cote ? ' · cote ' + String(c.cote).replace('.', ',') : '')} style={{
+    <span title={'P' + c.place + ' · taux ' + taux + ' %'} style={{
       position: 'relative', minWidth: 48, height: 54, boxSizing: 'border-box', padding: '4px 6px 3px',
       display: 'inline-flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1,
       borderRadius: 9, border: '1px solid ' + (pris ? PEAU.prisBord : PEAU.libreBord),
@@ -47,7 +38,7 @@ function Case({ c, pris }) {
       <span style={{
         fontFamily: 'ui-monospace, Consolas, monospace', fontSize: 9.5, letterSpacing: '.02em',
         color: pris ? 'rgba(110,231,183,.85)' : 'rgba(148,163,184,.7)',
-      }}>P{c.place}{c.cote ? ' · ' + String(c.cote).replace('.', ',') : ''}</span>
+      }}>P{c.place} · {taux}%</span>
     </span>
   )
 }
@@ -76,16 +67,12 @@ function Bloc({ bloc }) {
   )
 }
 
-export default function PronoMoteur({ apercuPresse = null, apercuCotes = null }) {
-  const apercu = Array.isArray(apercuPresse) && apercuPresse.length > 0
+export default function PronoMoteur() {
   const [date, setDate] = useState(aujourdhui())
-  const [etat, setEtat] = useState(apercu
-    ? { chargement: false, erreur: '', source: 'aperçu', hippodrome: '', presse: apercuPresse, runners: [], cotes: apercuCotes, cle: null }
-    : { chargement: true, erreur: '', source: '', hippodrome: '', presse: [], runners: [], cotes: null, cle: null })
+  const [etat, setEtat] = useState({ chargement: true, erreur: '', source: '', hippodrome: '', presse: [], runners: [] })
   const [mesure, setMesure] = useState(null)
 
   useEffect(() => {
-    if (apercu) return
     let vivant = true
     ;(async () => {
       const d = aujourdhui()
@@ -93,7 +80,6 @@ export default function PronoMoteur({ apercuPresse = null, apercuCotes = null })
       let presse = []
       let runners = []
       let source = ''
-      let cle = null
       let hippodrome = ''
 
       /* ① l'archive du job quotidien — data/synthese.json (clé = date) */
@@ -106,7 +92,6 @@ export default function PronoMoteur({ apercuPresse = null, apercuCotes = null })
             presse = rec.synthese
             runners = Array.isArray(rec.runners) ? rec.runners : []
             source = rec.source || 'archive locale'
-            cle = rec.courseId || null
             hippodrome = rec.hippodrome || ''
           }
         }
@@ -123,49 +108,19 @@ export default function PronoMoteur({ apercuPresse = null, apercuCotes = null })
         } catch (e) { /* le site bloque */ }
       }
 
-      /* ③ le marché : Equidia en direct, sinon le cache du job */
-      let cotes = null
-      if (cle) {
-        try {
-          const c = await fetchCotes(cle)
-          if (c && Object.keys(c).length >= 6) cotes = c
-        } catch (e) { /* proxy coupé */ }
-        if (!cotes) {
-          try {
-            const r = await fetch('/data/cotes.json', { cache: 'no-store' })
-            if (r.ok) {
-              const tout = await r.json()
-              const f = tout && tout[cle]
-              if (f && Array.isArray(f.cotes)) {
-                cotes = Object.fromEntries(f.cotes.map((x) => [Number(x.num), Number(x.cote)]))
-              }
-            }
-          } catch (e) { /* pas de cache */ }
-        }
-      }
-
       if (vivant) {
         setEtat({
           chargement: false,
           erreur: presse.length ? '' : 'Aucune Synthèse pour aujourd’hui — le moteur ne fabrique pas de classement.',
-          source, hippodrome, presse, runners, cotes, cle,
+          source, hippodrome, presse, runners,
         })
       }
     })()
     return () => { vivant = false }
   }, [])
 
-  useEffect(() => {
-    let vivant = true
-    fetch('/data/prono-moteur.json', { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((j) => { if (vivant && j) setMesure(j) })
-      .catch(() => {})
-    return () => { vivant = false }
-  }, [])
-
   const grille = etat.presse.length ? buildGrilleProno(etat.presse, etat.runners) : null
-  const { ticket, detail } = grille ? remplirProno(grille, etat.cotes) : { ticket: [], detail: [] }
+  const { ticket, detail } = grille ? remplirProno(grille) : { ticket: [], detail: [] }
 
   return (
     <section style={{
@@ -176,7 +131,7 @@ export default function PronoMoteur({ apercuPresse = null, apercuCotes = null })
       <header style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap' }}>
         <div>
           <div style={{ color: '#e879f9', fontSize: 11.5, fontWeight: 800, letterSpacing: '.14em' }}>
-            MOTEUR PRONOSTIQUE · 3 BLOCS
+            MOTEUR PRONOSTIQUE · STATISTIQUES
           </div>
           <div style={{ color: PEAU.doux, fontSize: 13, marginTop: 5 }}>
             {etat.hippodrome ? etat.hippodrome + ' · ' : ''}
@@ -189,7 +144,7 @@ export default function PronoMoteur({ apercuPresse = null, apercuCotes = null })
           border: '1px solid rgba(94,234,212,.28)', borderRadius: 8, padding: '4px 9px',
           background: 'rgba(13,148,136,.12)',
         }}>
-          {BLOCS_PRONO.map((b) => b.quota).join('-')} · {BLOCS_PRONO.reduce((n, b) => n + b.quota, 0)} chevaux
+          3-2-3 · 8 chevaux · stats archive
         </div>
       </header>
 
@@ -222,31 +177,8 @@ export default function PronoMoteur({ apercuPresse = null, apercuCotes = null })
           </div>
 
           <div style={{ fontSize: 12, color: PEAU.doux, lineHeight: 1.65, borderTop: '1px solid rgba(148,163,184,.16)', paddingTop: 10 }}>
-            Règle : les DERNIERS de chaque bloc (anti-presse, anti-marché) · 8 chevaux
+            Sélection par les statistiques de l'archive (P(top5 | N)) — les meilleures cases de chaque bloc.
           </div>
-
-          {mesure && mesure.corpus && (
-            <div style={{
-              display: 'grid', gap: 6, padding: '10px 12px', borderRadius: 10,
-              border: '1px solid rgba(148,163,184,.18)', background: 'rgba(2,6,15,.35)',
-            }}>
-              <div style={{ fontSize: 11, letterSpacing: '.1em', color: '#94a3b8', fontWeight: 700 }}>
-                MESURE — {mesure.corpus.A} QUINTÉS ({mesure.corpus.B} COURSES D’OCTOBRE EN CONTRÔLE)
-              </div>
-              <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap', fontFamily: 'ui-monospace, Consolas, monospace', fontSize: 12 }}>
-                <span style={{ color: '#6ee7b7' }}>podium {pct(mesure.production?.A?.podium)}</span>
-                <span style={{ color: '#a9b2c9' }}>5/5 {pct(mesure.production?.A?.cinq)}</span>
-                <span style={{ color: '#a9b2c9' }}>x/5 {Number(mesure.production?.A?.x5 ?? 0).toFixed(2)}</span>
-                <span style={{ color: '#94a3b8' }}>octobre : podium {pct(mesure.production?.B?.podium)}</span>
-              </div>
-              <div style={{ fontSize: 11, color: '#94a3b8', lineHeight: 1.6 }}>
-                contre-exemple mesuré — choisir « contre la presse et contre le marché » dans les trois blocs :
-                {' '}<span style={{ color: '#fca5a5', fontFamily: 'ui-monospace, Consolas, monospace' }}>podium {pct(mesure.anti?.podiumA)}</span>
-                {' '}({mesure.corpus?.A} courses) et {pct(mesure.anti?.podiumB)} sur octobre.
-                {' '}70 % de podium demande {mesure.seuil70 ?? '—'} chevaux, pas 8.
-              </div>
-            </div>
-          )}
         </>
       )}
     </section>
@@ -259,10 +191,4 @@ function dateFr(date) {
   if (!a || !m || !j) return String(date)
   return new Intl.DateTimeFormat('fr-FR', { timeZone: 'UTC', day: '2-digit', month: '2-digit', year: 'numeric' })
     .format(new Date(Date.UTC(a, m - 1, j)))
-}
-
-/** un taux écrit par le job — jamais un chiffre saisi à la main. */
-function pct(v) {
-  const x = Number(v)
-  return (Number.isFinite(x) ? x.toFixed(1) : '—').replace('.', ',') + ' %'
 }
