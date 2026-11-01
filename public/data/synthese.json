@@ -23,7 +23,13 @@
       10
     ],
     "savedAt": "2026-10-31T04:01:03.826Z",
-    "arrivee": null,
+    "arrivee": [
+      9,
+      11,
+      3,
+      1,
+      5
+    ],
     "ticket": [
       6,
       1,
@@ -39,7 +45,7 @@
     "nbPartants": 16,
     "hippodrome": "Deauville",
     "prix": "5280000 DH",
-    "courseId": 147181,
+    "courseId": "2026-10-31_R1_C3",
     "cle": "2026-10-31_R1_C3",
     "runners": [
       1,
@@ -62,7 +68,8 @@
     "sourceImport": "page",
     "ticketSource": "page",
     "ticketPoseLe": null,
-    "ticketMode": null
+    "ticketMode": null,
+    "cloture": "2026-11-01T22:50:41.132Z"
   },
   "2026-10-30": {
     "date": "2026-10-30",
