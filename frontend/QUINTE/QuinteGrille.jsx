@@ -2725,6 +2725,67 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 {' '}Ligne <b>P(top5 | N)</b> : dénominateur <b>global</b> = <b>N</b> (courses valides). Les deux ne sont pas comparables.
               </div>
 
+              {/* ⭐ TRIO — 1er, 2e, 3e par position P */}
+              <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
+                <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Trio — 1er, 2e, 3e par position P</b>
+                <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 10 }}>
+                  Combien de fois chaque P finit 1er, 2e ou 3e. Le Trio = 1er + 2e + 3e réunis.
+                </div>
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8 }}>
+                    <thead>
+                      <tr style={s.hdr}>
+                        <th style={s.th}>Place</th>
+                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
+                          <th key={r.place} style={{ ...s.th, background: r.n === 0 ? SK.muted : SK.accentSombre }}>P{r.place}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
+                        <td style={{ ...s.td, fontWeight: 700, color: '#34d399' }}>1er</td>
+                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
+                          <td key={r.place} style={{ ...s.td, fontWeight: r.n && r.p[0] > 0 ? 800 : 400, color: r.n === 0 ? '#4a5a72' : r.p[0] > 0 ? '#34d399' : '#6d82a2' }}>
+                            {r.n ? r.p[0] + '%' : '—'}
+                          </td>
+                        ))}
+                      </tr>
+                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: SK.alt }}>
+                        <td style={{ ...s.td, fontWeight: 700, color: '#34d399' }}>2e</td>
+                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
+                          <td key={r.place} style={{ ...s.td, fontWeight: r.n && r.p[1] > 0 ? 800 : 400, color: r.n === 0 ? '#4a5a72' : r.p[1] > 0 ? '#34d399' : '#6d82a2' }}>
+                            {r.n ? r.p[1] + '%' : '—'}
+                          </td>
+                        ))}
+                      </tr>
+                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
+                        <td style={{ ...s.td, fontWeight: 700, color: '#34d399' }}>3e</td>
+                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
+                          <td key={r.place} style={{ ...s.td, fontWeight: r.n && r.p[2] > 0 ? 800 : 400, color: r.n === 0 ? '#4a5a72' : r.p[2] > 0 ? '#34d399' : '#6d82a2' }}>
+                            {r.n ? r.p[2] + '%' : '—'}
+                          </td>
+                        ))}
+                      </tr>
+                      <tr style={{ borderBottom: '1px solid ' + SK.bord, background: SK.accentClair }}>
+                        <td style={{ ...s.td, fontWeight: 800, color: SK.accent }}>Trio (1er+2e+3e)</td>
+                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
+                          <td key={r.place} style={{
+                            ...s.td, fontWeight: 800,
+                            color: r.n === 0 ? '#4a5a72' : r.top3 >= 60 ? SK.accent : r.top3 > 0 ? SK.texte : '#6d82a2',
+                            background: r.n ? SK.accentClair : SK.alt,
+                          }}>
+                            {r.n ? r.top3 + '%' : '—'}
+                          </td>
+                        ))}
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
+                  Ligne <b>1er, 2e, 3e</b> : dénominateur <b>conditionnel</b> = <b>n_top5</b>. Ligne <b>Trio</b> : idem (somme des trois).
+                </div>
+              </div>
+
               {/* §2.2 — les indicateurs EXPLICITES, dénominateur nommé, « — » si dénominateur nul */}
               <div style={{ overflowX: 'auto', marginTop: 16 }}>
                 <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', boxShadow: SK.ombreD }}>
