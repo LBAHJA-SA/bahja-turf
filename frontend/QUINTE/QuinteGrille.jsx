@@ -364,6 +364,7 @@ export default function QuinteGrille() {
   const SK = THEME[onglet] || THEME.grille
   const s = { box: SK.box, hdr: SK.hdrStyle, th: SK.th, td: SK.td }
   const [toutLesP, setToutLesP] = useState(true)   // P1 → P20 par défaut
+  const [statsDiscipline, setStatsDiscipline] = useState('all')   // all / plat / attelé / haies
   const [archive, setArchive] = useState([])
   const [carriere, setCarriere] = useState({})      // { n° : [runs] }
   // 📈 LE MARCHÉ — equidia.fr, lu en direct. { n° : { cote, ouverture, … } }
@@ -670,7 +671,19 @@ export default function QuinteGrille() {
 
   // 📊 les probabilités de place (onglet Statistiques) — c'est ELLES qui
   //   décident de l'ordre du ticket. Doit être calculé AVANT `rempli`.
-  const stats = useMemo(() => computeStats(archive), [archive])
+  // normalise la discipline d'une course d'archive (Plat/PLAT → plat, etc.)
+  const normDisc = (d) => {
+    const s = String(d || '').toLowerCase().trim()
+    if (s.startsWith('plat')) return 'plat'
+    if (s.startsWith('attel') || s.startsWith('trot')) return 'attelé'
+    if (s.startsWith('haie') || s.startsWith('steeple')) return 'haies'
+    return s || 'autre'
+  }
+  const archiveFiltree = useMemo(() => {
+    if (statsDiscipline === 'all') return archive
+    return archive.filter((a) => normDisc(a.discipline) === statsDiscipline)
+  }, [archive, statsDiscipline])
+  const stats = useMemo(() => computeStats(archiveFiltree), [archiveFiltree])
 
   // 📍 le RANG DE MARCHÉ de chaque partant (1 = la cote la plus basse) — c'est
   //   le badge des boules. Il ne règle QUE la queue : G4 et G5 (§11.23).
@@ -2636,6 +2649,13 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   style={{ padding: '3px 12px', borderRadius: 999, border: '1px solid ' + SK.bord, background: toutLesP ? 'rgba(255,255,255,.14)' : 'transparent', color: toutLesP ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
                   {toutLesP ? 'P1-P5 seulement' : 'Voir jusqu’à P20'}
                 </button>
+                <span style={{ fontSize: 12, color: SK.muted, fontWeight: 700 }}>Discipline :</span>
+                {['all', 'plat', 'attelé', 'haies'].map((d) => (
+                  <button key={d} onClick={() => setStatsDiscipline(d)}
+                    style={{ padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: statsDiscipline === d ? SK.accent : 'transparent', color: statsDiscipline === d ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
+                    {d === 'all' ? 'Tout' : d.charAt(0).toUpperCase() + d.slice(1)}
+                  </button>
+                ))}
               </div>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
