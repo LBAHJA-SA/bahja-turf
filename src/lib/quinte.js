@@ -2034,6 +2034,10 @@ export function computeStats(records) {
   const tab = Array.from({ length: MAX + 1 }, () => [0, 0, 0, 0, 0])
   const courses = []
   const detailCourses = []
+  /* ⭐ Trio : combinaisons de positions P qui forment le top 3.
+   *   Pour chaque course valide, on prend les 3 premiers arrivants,
+   *   on les mappe à leur position P, on trie, et on compte. */
+  const trioCombos = {}
 
   /* §3 — l'empreinte : 4 tests indépendants, chacun ses compteurs + sa période. */
   const emp = {}
@@ -2071,6 +2075,14 @@ export function computeStats(records) {
     diag.coursesRetenues++
     courses.push(pl)
     detailCourses.push({ synthe, pl, date: rec.date || null })
+    /* ⭐ Trio : enregistrer la combinaison des 3 premiers (positions P). */
+    const trio = pl.slice(0, 3).slice().sort((a, b) => a - b)
+    if (trio.length === 3) {
+      const key = trio.join('-')
+      if (!trioCombos[key]) trioCombos[key] = { combo: trio, count: 0, dates: [] }
+      trioCombos[key].count++
+      if (rec.date) trioCombos[key].dates.push(rec.date)
+    }
     pl.forEach((r, i) => { if (r <= MAX) tab[r][i]++ })
 
     /* §3 — l'empreinte : le rang d'arrivée de chaque CASE du carnet.
@@ -2298,7 +2310,9 @@ export function computeStats(records) {
     absentsDetail: diag.absentsDetail,
   }
 
-  return { nb: courses.length, parPlace, parGroupe, vainqueur, BORNES, parPosition, parPlaceBloc, podiumBloc, courses, detailCourses, drought, empreinte, diagnostic }
+  // ⭐ Trio : trier les combinaisons par fréquence décroissante.
+  const trioList = Object.values(trioCombos).sort((a, b) => b.count - a.count)
+  return { nb: courses.length, parPlace, parGroupe, vainqueur, BORNES, parPosition, parPlaceBloc, podiumBloc, courses, detailCourses, drought, empreinte, diagnostic, trioList }
 }
 
 /**
