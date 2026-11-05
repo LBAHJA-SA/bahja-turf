@@ -1530,7 +1530,11 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS, discipline, setDiscipli
   return (
     <div>
       <BarreFiltres sk={sk} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={discipline} setDiscipline={setDiscipline} />
-      {/* ══ ⓪ LA BASSMAT DU MOIS — l'archive réelle (29/10/2026, §11.45) ══ */}
+      {discipline && discipline !== 'all' && (
+        <div style={{ fontSize: 11.5, color: sk.muted, marginBottom: 10, lineHeight: 1.5 }}>
+          Le filtre change le <b>corpus de référence</b> (① à ⑧). La section ⓪ (ce mois) reste l’archive réelle.
+        </div>
+      )}}
       {MOIS && (() => {
         const mv = MOIS
         const morts = (mv.pertes?.liste || []).filter((x) => !(x.remplacantsArrives || []).length)
@@ -2883,22 +2887,31 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </span>
                 )}
                 <BarreFiltres sk={SK} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={statsDiscipline} setDiscipline={setStatsDiscipline} disciplines={DISCIPLINES_TROT} />
-{statsDiscipline === 'attelé' && (
-  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
-    <span style={{ fontSize: 12, color: SK.muted, fontWeight: 700 }}>Trot :</span>
-    {[{ key: 'all', lib: 'Tout' }, { key: 'autostart', lib: 'Autostart' }, { key: 'volte', lib: 'Volté' }].map((o) => (
-      <button key={o.key} onClick={() => setStatsTrot(o.key)}
-        style={{ padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: statsTrot === o.key ? SK.accentSombre : 'transparent', color: statsTrot === o.key ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-        {o.lib}
-      </button>
-    ))}
-    {departs && (
-      <span style={{ fontSize: 11, color: SK.muted }}>
-        {archiveFiltree.length} course(s) retenue(s) · source : programme PMU
-      </span>
-    )}
-  </div>
-)}
+                {statsDiscipline === 'attelé' && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
+                    <span style={{ fontSize: 12, color: SK.muted, fontWeight: 700 }}>Trot :</span>
+                    {[{ key: 'all', lib: 'Tout' }, { key: 'autostart', lib: 'Autostart' }, { key: 'volte', lib: 'Volté' }].map((o) => (
+                      <button key={o.key} onClick={() => setStatsTrot(o.key)}
+                        style={{ padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: statsTrot === o.key ? SK.accentSombre : 'transparent', color: statsTrot === o.key ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
+                        {o.lib}
+                      </button>
+                    ))}
+                    {departs && (
+                      <span style={{ fontSize: 11, color: SK.muted }}>
+                        {archiveFiltree.length} course(s) retenue(s) · source : programme PMU
+                      </span>
+                    )}
+                  </div>
+                )}
+                {archiveFiltree.length === 0 && (
+                  <div style={{ marginBottom: 12, padding: '10px 12px', background: SK.alt, border: '1px solid ' + SK.bord, borderLeft: '4px solid #f59e0b', borderRadius: SK.box.borderRadius, fontSize: 12.5, color: SK.texte, lineHeight: 1.6 }}>
+                    Aucune course pour ce filtre. Cliquez sur <b>Tout</b> (discipline) ou <b>Tout</b> (Trot) pour revenir.
+                    <button onClick={() => { setStatsDiscipline('all'); setStatsTrot('all') }}
+                      style={{ marginLeft: 10, padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: SK.accent, color: '#fff', cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
+                      ← Tout
+                    </button>
+                  </div>
+                )}
               </div>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
