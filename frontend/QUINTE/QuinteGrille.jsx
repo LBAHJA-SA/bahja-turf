@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
 import Drapeau from '../../src/Drapeau.jsx'
@@ -12,341 +12,178 @@ import {
   clearArchive,
   computeStats, aujourdhui, siteCorrespondALaDate, chargerCourseCC,
   fetchCotes,
-  rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix, fetchEmpreinte,
-  fetchBlocPm, fetchBassmat, formeMarche, fetchHuit, fetchBassmatChoix, ticketBassmat,
-  fetchBassmatMois, jugerTicket, fetchDeparts,
+  rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix,
+  fetchEmpreinte, fetchBlocPm, fetchBassmat, formeMarche, fetchHuit, fetchBassmatChoix, ticketBassmat,
+  fetchBassmatMois, jugerTicket,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
-/* ⭐ 28/10/2026 — les quotas affichés viennent de `GROUPES`, JAMAIS d'un
- * littéral : le texte suit le moteur au lieu de dériver (4-3-1-1-0 → 9 chevaux
- * avait laissé sept phrases périmées dans la page). */
-const QUOTAS_TXT = GROUPES.map((g) => g.quota).join('-')
-const NB_TICKET = GROUPES.reduce((s2, g) => s2 + g.quota, 0)
-
-const s = {
-  box: { border: '1px solid rgba(125,205,255,.28)', borderRadius: 10, background: 'rgba(12,20,37,.72)' },
-  hdr: { background: '#0f172a', color: '#fff' },
-  th: { padding: '5px 8px', fontSize: 12, fontWeight: 600 },
-  td: { padding: '5px 8px', fontSize: 13 },
+const SK = {
+  fond: '#0b0f17',
+  carte: 'rgba(15,23,35,.85)',
+  bord: 'rgba(255,255,255,.10)',
+  bordFort: 'rgba(255,255,255,.25)',
+  ligne: 'rgba(255,255,255,.06)',
+  texte: '#f8fafc',
+  texteSecond: '#94a3b8',
+  muet: '#64748b',
+  accent: '#22d3ee',
+  accentClair: 'rgba(34,211,238,.15)',
+  bon: '#34d399',
+  moyen: '#fbbf24',
+  mauvais: '#fb7185',
+  ombre: '0 10px 30px rgba(0,0,0,.55)',
+  ombreCard: '0 4px 16px rgba(0,0,0,.35)',
+  police: 'system-ui, -apple-system, sans-serif',
+  nb: 'ui-monospace, Consolas, monospace',
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
- * §IDENTITÉ VISUELLE — les quatre onglets ne doivent JAMAIS se confondre.
- *
- *   LA GRILLE → vert émeraude, cartes claires, cartes à l neurotransmitters
- *   LE TICKET → bleu nuit, tableur plat, chiffres monospace, zéro ombre
- *   ARCHIVE   → ambre parchemin, registre, police serif, bordures pleines
- *   STATS     → violet prune, tableau de bord, ombre violette, chiffres tabulaires
- *
- * Le composant reconstruit `s` (box/hdr/th/td) à chaque onglet : toutes les
- * tables, tous les cadres et tous les en-têtes suivent l'onglet actif.
- * ═══════════════════════════════════════════════════════════════════════════ */
-/* ── LES SIX PEAUX, VERSION NUIT (18/10/2026) ──────────────────────────────
- *  Les six onglets ne se confondent toujours pas : chacun garde SA couleur,
- *  SON dessin et SA police — mais sur fond sombre, avec des halos de néon.
- *  `fond` est transparent : c'est le fond de src/index.css qui passe dessous.
- *  `ligne` et `alt` sont des FONDS de ligne (zébrures) : jamais des bordures.
- * ────────────────────────────────────────────────────────────────────────── */
-const THEME = {
-  grille: {
-    titre: 'La grille',
-    sousTitre: 'Les 16 cases du carnet · lecture en colonnes',
-    fond: 'transparent',
-    entete: 'linear-gradient(120deg,#03140f 0%,#065f46 55%,#10b981 100%)',
-    accent: '#34d399', accentSombre: '#064e3b', accentClair: 'rgba(52,211,153,.18)',
-    bord: 'rgba(52,211,153,.45)', carte: 'rgba(8,26,22,.74)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(52,211,153,.07)',
-    on: 'rgba(52,211,153,.22)', danger: 'rgba(244,63,94,.18)', texte: '#d9fbe9', muted: '#7ba796',
-    ombre: 'rgba(52,211,153,.35)', ombreD: '0 0 22px rgba(52,211,153,.18)',
-    police: 'system-ui, -apple-system, sans-serif',
-    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid rgba(52,211,153,.45)', borderRadius: 14, background: 'rgba(8,26,22,.74)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.06), 0 0 26px rgba(52,211,153,.12)' },
-    hdrStyle: { background: 'linear-gradient(180deg,#065f46,#03140f)', color: '#d1fae5' },
-    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#a7f3d0', fontFamily: 'system-ui, sans-serif' },
-    td: { padding: '6px 9px', fontSize: 13 },
-  },
-  ticket: {
-    titre: 'Le ticket',
-    sousTitre: 'Les chevaux retenus et leurs scores',
-    fond: 'transparent',
-    entete: 'linear-gradient(120deg,#070d1c 0%,#1e3a8a 60%,#3b82f6 100%)',
-    accent: '#60a5fa', accentSombre: '#1e3a8a', accentClair: 'rgba(96,165,250,.18)',
-    bord: 'rgba(96,165,250,.45)', carte: 'rgba(9,17,38,.76)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(96,165,250,.07)',
-    on: 'rgba(96,165,250,.22)', danger: 'rgba(244,63,94,.18)', texte: '#dbeafe', muted: '#7c8fb3',
-    ombre: 'rgba(59,130,246,.30)', ombreD: 'none',
-    police: 'system-ui, -apple-system, sans-serif',
-    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid rgba(96,165,250,.45)', borderRadius: 3, background: 'rgba(9,17,38,.76)' },
-    hdrStyle: { background: 'linear-gradient(180deg,#1e3a8a,#070d1c)', color: '#bfdbfe' },
-    th: { padding: '7px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase', color: '#93c5fd', fontFamily: 'system-ui, sans-serif' },
-    td: { padding: '7px 9px', fontSize: 13 },
-  },
-  archive: {
-    titre: 'Archive',
-    sousTitre: 'Le registre des Quintés · la mémoire de la méthode',
-    fond: 'transparent',
-    entete: 'linear-gradient(120deg,#1c1206 0%,#92400e 55%,#d97706 100%)',
-    accent: '#fbbf24', accentSombre: '#78350f', accentClair: 'rgba(251,191,36,.18)',
-    bord: 'rgba(251,191,36,.45)', carte: 'rgba(28,20,8,.78)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(251,191,36,.06)',
-    on: 'rgba(251,191,36,.22)', danger: 'rgba(244,63,94,.18)', texte: '#fde9c3', muted: '#a98d63',
-    ombre: 'rgba(217,119,6,.30)', ombreD: '0 0 22px rgba(251,191,36,.14)',
-    police: 'Georgia, "Times New Roman", serif',
-    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid rgba(251,191,36,.50)', borderRadius: 3, background: 'rgba(28,20,8,.78)' },
-    hdrStyle: { background: 'linear-gradient(180deg,#92400e,#1c1206)', color: '#fef3c7' },
-    th: { padding: '7px 9px', fontSize: 11, fontWeight: 700, letterSpacing: 1.1, textTransform: 'uppercase', color: '#fde68a', fontFamily: 'Georgia, serif' },
-    td: { padding: '7px 9px', fontSize: 13 },
-  },
-  stats: {
-    titre: 'Statistiques',
-    sousTitre: 'Ce que l’archive prouve — encore trop peu de courses',
-    fond: 'transparent',
-    entete: 'linear-gradient(120deg,#140a2e 0%,#7e22ce 60%,#c084fc 100%)',
-    accent: '#c4b5fd', accentSombre: '#5b21b6', accentClair: 'rgba(196,181,253,.18)',
-    bord: 'rgba(196,181,253,.45)', carte: 'rgba(20,14,40,.76)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(196,181,253,.07)',
-    on: 'rgba(196,181,253,.22)', danger: 'rgba(244,63,94,.18)', texte: '#ede9fe', muted: '#9385b8',
-    ombre: 'rgba(168,85,247,.35)', ombreD: '0 0 26px rgba(168,85,247,.18)',
-    police: 'system-ui, -apple-system, sans-serif',
-    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid rgba(196,181,253,.45)', borderRadius: 16, background: 'rgba(20,14,40,.76)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,.06), 0 0 26px rgba(168,85,247,.14)' },
-    hdrStyle: { background: 'linear-gradient(180deg,#7e22ce,#140a2e)', color: '#ede9fe' },
-    th: { padding: '8px 9px', fontSize: 11, fontWeight: 800, letterSpacing: 0.5, color: '#ddd6fe', fontFamily: 'system-ui, sans-serif' },
-    td: { padding: '8px 9px', fontSize: 13 },
-  },
-  ecarts: {
-    titre: 'Écarts',
-    sousTitre: 'Les cases P1..P20 — qui donne, qui ne donne plus',
-    fond: 'transparent',
-    entete: 'linear-gradient(120deg,#03141a 0%,#0e7490 55%,#22d3ee 100%)',
-    accent: '#22d3ee', accentSombre: '#155e75', accentClair: 'rgba(34,211,238,.16)',
-    bord: 'rgba(34,211,238,.45)', carte: 'rgba(7,24,33,.76)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(34,211,238,.07)',
-    on: 'rgba(34,211,238,.22)', danger: 'rgba(244,63,94,.18)', texte: '#cffafe', muted: '#6f97a6',
-    ombre: 'rgba(34,211,238,.35)', ombreD: '0 0 22px rgba(34,211,238,.16)',
-    police: 'system-ui, -apple-system, sans-serif',
-    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid rgba(34,211,238,.45)', borderRadius: 8, background: 'rgba(7,24,33,.76)' },
-    hdrStyle: { background: 'linear-gradient(180deg,#0e7490,#03141a)', color: '#cffafe' },
-    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.6, textTransform: 'uppercase', color: '#a5f3fc', fontFamily: 'system-ui, sans-serif' },
-    td: { padding: '6px 9px', fontSize: 13 },
-  },
-  /* 🩸 LE CHOIX — le laboratoire. Rouge carmin, rapport d'expérience : coins
-     nets, chiffres monospace, encadrés de résultat. C'est l'onglet où l'on
-     regarde EN FACE les 4 chevaux de G1 et les 4 de G2 (16/10/2026). */
-  choix: {
-    titre: 'Choix',
-    sousTitre: 'G1 et G2 — ce que coûte le choix, règle par règle',
-    fond: 'transparent',
-    entete: 'linear-gradient(120deg,#1a0408 0%,#be123c 55%,#fb7185 100%)',
-    accent: '#fb7185', accentSombre: '#881337', accentClair: 'rgba(251,113,133,.16)',
-    bord: 'rgba(251,113,133,.45)', carte: 'rgba(32,10,18,.76)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(251,113,133,.07)',
-    on: 'rgba(251,113,133,.22)', danger: 'rgba(244,63,94,.18)', texte: '#ffe4e6', muted: '#b07d86',
-    ombre: 'rgba(244,63,94,.35)', ombreD: '0 0 22px rgba(251,113,133,.16)',
-    police: 'system-ui, -apple-system, sans-serif',
-    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid rgba(251,113,133,.45)', borderRadius: 4, background: 'rgba(32,10,18,.76)' },
-    hdrStyle: { background: 'linear-gradient(180deg,#be123c,#1a0408)', color: '#ffe4e6' },
-    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#fecdd3', fontFamily: 'system-ui, sans-serif' },
-    td: { padding: '6px 9px', fontSize: 13 },
-  },
-  /* 🎯 (retiré le 19/10/2026) — le Trio · Couplé a été sorti de cette page.
-     ⚠ 23/10/2026 : la page Coply qui le portait est supprimée à son tour. */
-  /* ⭐ LA BASSMAT DE LA COURSE — 28/10/2026. « بصمة السباق ».
-     Magenta profond : c'est un SCEAU, pas un tableau de bord. Il se lit avant
-     de parier, il ne se confond avec aucun des six autres onglets. */
-  bassmat: {
-    titre: 'Bassmat',
-    sousTitre: 'بصمة السباق — l’empreinte du mois et de la course',
-    fond: 'transparent',
-    entete: 'linear-gradient(120deg,#180418 0%,#86198f 55%,#f0abfc 100%)',
-    accent: '#f0abfc', accentSombre: '#701a75', accentClair: 'rgba(240,171,252,.16)',
-    bord: 'rgba(240,171,252,.45)', carte: 'rgba(28,8,28,.78)', ligne: 'rgba(255,255,255,.02)', alt: 'rgba(240,171,252,.07)',
-    on: 'rgba(240,171,252,.22)', danger: 'rgba(244,63,94,.18)', texte: '#fbe8fd', muted: '#ab86ae',
-    ombre: 'rgba(192,38,211,.35)', ombreD: '0 0 24px rgba(240,171,252,.16)',
-    police: 'system-ui, -apple-system, sans-serif',
-    nb: { th: 'ui-monospace, Consolas, monospace', td: 'ui-monospace, Consolas, monospace' },
-    box: { border: '1px solid rgba(240,171,252,.45)', borderRadius: 10, background: 'rgba(28,8,28,.78)' },
-    hdrStyle: { background: 'linear-gradient(180deg,#86198f,#180418)', color: '#fbe8fd' },
-    th: { padding: '6px 9px', fontSize: 10, fontWeight: 800, letterSpacing: 0.7, textTransform: 'uppercase', color: '#f5d0fe', fontFamily: 'system-ui, sans-serif' },
-    td: { padding: '6px 9px', fontSize: 13 },
-  },
+const DISC_ICON = { plat: '🏇', attelé: '🐎', monté: '🐴', haies: '🏁' }
+const DISC_NOM = { plat: 'Plat', attelé: 'Attelé', monté: 'Monté', haies: 'Haies' }
+const DISC_COULEUR = { plat: '#22d3ee', attelé: '#f59e0b', monté: '#f59e0b', haies: '#a855f7' }
+
+const normDisc = (d) => {
+  const s = String(d || '').toLowerCase().trim()
+  if (s.startsWith('plat')) return 'plat'
+  if (s.startsWith('attel') || s.startsWith('trot')) return 'attelé'
+  if (s.startsWith('mont')) return 'monté'
+  if (s.startsWith('haie') || s.startsWith('steeple')) return 'haies'
+  return 'plat'
+}
+const DISC_TXT = (d) => { const n = normDisc(d); return `${DISC_ICON[n]} ${DISC_NOM[n]}` }
+const DISC_COL = (d) => DISC_COULEUR[normDisc(d)]
+
+const ETAT_ICON = { chaude: '🔴', tiède: '🟡', froide: '🔵' }
+const ETAT_TXT = { chaude: 'Chaude', tiède: 'Tiède', froide: 'Froide' }
+
+const pc = (x) => (x == null ? '—' : String(x).replace('.', ','))
+const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
+
+const chevalColor = (num) => {
+  const h = num % 360
+  return `hsl(${h}, 70%, 55%)`
 }
 
-const TABS = [
-  ['grille', 'La grille'], ['ticket', 'Le ticket'],
-  ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts'],
-]
-
-function Boite({ n, pris, presse, couleur, score, cote, slot, marche, onClick }) {
-  // boule 3D : dégradé radial + ombres portées/incrustées.
-  // le NUMÉRO au centre, le n° de CASE (P1, P2…) au-dessus — demandé le
-  // 10/10/2026 (fini le « secret du carnet » : on lit P et numéro ensemble).
-  // le BADGE MARCHÉ en haut à droite (16/10/2026) : le RANG DE COTE, sur un
-  // fond qui dit ce que ce rang vaut (52 % / 43 % / 34 % / 13 % de top-5,
-  // mesuré sur 96 Quintés — voir le panneau de mesure de l'onglet La grille).
-  const c = couleur || { base: '#16a34a', sombre: false }
-  const txt = c.sombre ? '#422006' : '#fff'
-  const bd = marche != null ? BANDE_MARCHE[bandeMarche(marche)] : null
+const CarteCheval = ({ num, nom, distance, cote, soie, etat, pris }) => {
+  const co = chevalColor(num)
+  const et = etat ? ETAT_ICON[etat] : ''
   return (
-    <button
-      onClick={onClick}
-      title={
-        (cote ? `cote ${cote}\n` : '') +
-        (bd ? `rang de marché ${marche} — ${bd.lib}\n` : '') +
-        (presse === false ? 'Non cité par la presse (ajouté à la suite)\n' : '') +
-        (score ? `score ${score.global} · forme ${score.score} · série ${score.serie.join(' ')}` : 'données indisponibles')
-      }
+    <div
       style={{
-        ...s.box,
-        background: `radial-gradient(circle at 32% 28%, rgba(255,255,255,.55), rgba(255,255,255,0) 46%), ${c.base}`,
-        border: pris ? '3px solid #fff' : '1px solid rgba(0,0,0,.3)',
-        boxShadow: pris
-          ? `0 0 0 2px ${c.base}, 0 3px 8px rgba(0,0,0,.4)`
-          : 'inset -4px -5px 8px rgba(0,0,0,.35), inset 3px 3px 6px rgba(255,255,255,.18), 0 2px 4px rgba(0,0,0,.3)',
-        width: 54, height: 54, borderRadius: '50%',
-        cursor: onClick ? 'pointer' : 'default',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontWeight: 800, fontSize: 19, color: txt,
-        position: 'relative',
+        background: 'rgba(20,30,45,.85)',
+        border: `1px solid ${SK.bord}`,
+        borderLeft: `4px solid ${co}`,
+        borderRadius: 12,
+        padding: '10px 12px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        boxShadow: SK.ombreCard,
       }}
     >
-      {n}
-      {slot != null && (
-        <span style={{
-          position: 'absolute', top: 1, left: 0, right: 0, textAlign: 'center',
-          fontSize: 9, fontWeight: 800, color: txt, opacity: .9,
-          textShadow: '0 1px 1px rgba(0,0,0,.35)', letterSpacing: .3,
-        }}>P{slot}</span>
-      )}
-      {pris && (
-        <span style={{ position: 'absolute', top: 3, left: 7, fontSize: 12, fontWeight: 800, color: txt }}>✓</span>
-      )}
-      {cote != null && (
-        <span style={{
-          position: 'absolute', bottom: 2, right: 4, fontSize: 9, fontWeight: 800,
-          color: txt, opacity: .95, textShadow: '0 1px 1px rgba(0,0,0,.35)', letterSpacing: -.2,
-        }}>{String(cote).replace('.', ',')}</span>
-      )}
-      {presse === false && (
-        <span style={{ position: 'absolute', bottom: 3, left: 7, fontSize: 10, fontWeight: 800, color: txt }} title="non cité par la presse">+</span>
-      )}
-      {bd && (
-        <span title={`rang de marché ${marche} — ${bd.lib}`} style={{
-          position: 'absolute', top: 1, right: 1, minWidth: 15, height: 15, borderRadius: 999,
-          background: bd.fond, color: bd.couleur, border: `1px solid ${bd.couleur}`,
-          fontSize: 9, fontWeight: 800, lineHeight: '13px', textAlign: 'center',
-          boxShadow: '0 1px 2px rgba(0,0,0,.35)',
-        }}>{marche}</span>
-      )}
-    </button>
-  )
-}/* ══════════════════════════════════ LES CONDITIONS DE LA COURSE ══════════════
- * Tout vient de pro.casacourses.com/api/race/{id}. Les champs que la source ne
- * publie pas (tirelire, terrain, météo la veille) sont marqués « non publié » —
- * AGENTS.md §7 : on n'invente jamais une donnée absente.
- * ═══════════════════════════════════════════════════════════════════════════════ */
-const FR = (x) => (x == null ? '—' : String(x))
-const NON_PUBLIE = '— non publié'
-
-/** 500000000 DH → 5 000 000 (la source stocke en centimes) */
-function dotations(prize, devisee) {
-  const n = Number(String(prize || '').replace(/[^0-9]/g, ''))
-  if (!n) return NON_PUBLIE
-  const v = n > 1e6 ? n / 100 : n
-  return v.toLocaleString('fr-FR') + ' ' + (devisee || '')
-}
-
-function ConditionsCourse({ course, date, sk }) {
-  if (!course) return null
-  const c = course.raw || {}
-  /* ⭐ 24/10/2026 — la piste vient d'Equidia (`lib_piste_course`), le terrain
-   *   de turf-france : casacourses ne publie ni l'un ni l'autre. Voir
-   *   `fetchConditions()` dans src/lib/quinte.js. */
-  const piste = c.lib_piste
-    || (/psf/i.test(c.track_type || '') ? 'PSF' : c.track_type ? 'Herbe' : NON_PUBLIE)
-  const categorie = c.class || c.categorie || ''
-  const details = c.comment || c.conditions || ''
-
-  const Ligne = ({ k, v, fort }) => (
-    <div style={{ display: 'flex', gap: 8, padding: '3px 0', alignItems: 'baseline' }}>
-      <span style={{ fontSize: 11, color: '#64748b', minWidth: 92 }}>{k}</span>
-      <span style={{
-        fontSize: 13,
-        fontWeight: fort ? 800 : 500,
-        color: v === NON_PUBLIE ? '#7a8ea9' : '#e7f1ff',
-        fontStyle: v === NON_PUBLIE ? 'italic' : 'normal',
-      }}>{v}</span>
-    </div>
-  )
-
-  return (
-    <div style={{
-      padding: 14, marginTop: 14, borderRadius: sk ? sk.box.borderRadius : 6,
-      border: '1px solid ' + (sk ? sk.bord : '#d7dce5'),
-      borderLeft: '5px solid ' + (sk ? sk.accent : '#0f172a'),
-      background: sk ? sk.alt : 'rgba(255,255,255,.03)',
-      boxShadow: sk ? sk.ombreD : 'none',
-      fontFamily: sk ? sk.police : 'system-ui, sans-serif',
-    }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
-                  <b style={{ fontSize: 13, color: sk ? sk.accent : '#1d4ed8', letterSpacing: 1 }}>LES CONDITIONS DE LA COURSE</b>
-        
+      <div
+        style={{
+          width: 40, height: 40, borderRadius: '50%',
+          background: co, color: '#fff',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontWeight: 900, fontSize: 16, fontFamily: SK.nb,
+          boxShadow: '0 3px 8px rgba(0,0,0,.35)',
+        }}
+      >
+        {num}
       </div>
-
-      <div style={{ marginTop: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-        <div style={{ fontSize: 12, color: '#475569' }}>
-          <b style={{ color: '#e7f1ff' }}>{c.date_formatted || date}</b>
-          {c.time ? ' · ' + (heureParisGMT(date, c.time) || c.time + ' h') : ''}
-          {'   ·   '}
-          {c.reunion_code ? <b style={{ color: '#e7f1ff' }}>{c.reunion_code}</b> : null}
-          {/* le drapeau du pays de la réunion — une VRAIE image (Windows ne
-              dessine pas les drapeaux emoji) */}
-          <Drapeau pays={course.pays || 'FR'} titre={course.pays || 'France'} h={12}
-            style={{ display: 'inline-block', verticalAlign: '-2px', marginLeft: 6, marginRight: 4 }} />
-          {course.hippodrome || ''}
-          {c.code ? '  ·  ' + c.code : ''}
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '2px' }}>
+          <span style={{ fontWeight: 800, fontSize: 15, color: '#f8fafc', fontFamily: SK.nb }}>{num}</span>
+          {et && <span style={{ fontSize: 13 }}>{et}</span>}
         </div>
-        <div style={{ fontSize: 14, fontWeight: 800, marginTop: 2 }}>{c.name || course.hippodrome}</div>
-        {categorie ? (
-          <div style={{ fontSize: 11, color: '#fb7185', fontWeight: 700 }}>
-            {categorie}{String(categorie).toUpperCase().includes('GROUPE') ? ' — COURSE DE GROUPE' : ''}
-          </div>
-        ) : null}
-        {c.allowance ? (
-          <div style={{ fontSize: 11, color: '#64748b' }}>{c.allowance}</div>
-        ) : null}
-      </div>
-
-      <div style={{ display: 'flex', gap: 26, flexWrap: 'wrap', marginTop: 8 }}>
-        <div style={{ flex: '1 1 240px' }}>
-          <Ligne k="Distance" v={course.distance ? `${course.distance} M` : NON_PUBLIE} fort />
-          <Ligne k="Piste" v={piste} />
-          <Ligne k="Corde" v={c.corde ? String(c.corde) : NON_PUBLIE} />
-          <Ligne k="Terrain" v={c.terrain || c.track_condition || NON_PUBLIE} />
-          <Ligne k="Discipline" v={FR(c.type)} fort />
+        <div style={{ fontSize: 11.5, color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {nom || '—'}
         </div>
-        <div style={{ flex: '1 1 240px' }}>
-          <Ligne k="Partants" v={course.nbPartants ? String(course.nbPartants) : NON_PUBLIE} fort />
-          <Ligne k="Allocations" v={c.allocation || dotations(c.prize, course.devisee)} />
-          <Ligne k="Tirelire"
-            v={c.tirelire === true ? 'Oui' : c.tirelire === false ? 'Non' : NON_PUBLIE} />
-          <Ligne k="Météo"
-            v={c.meteo || (c.weather_temp != null ? `${c.weather_temp}°C` : NON_PUBLIE)} />
+        <div style={{ fontSize: 10.5, color: '#64748b', marginTop: '2px', display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {distance && <span>📏 {distance}m</span>}
+          {soie && <span style={{ color: soie, fontWeight: 800 }}>{soie}</span>}
+          {cote != null && <span style={{ color: SK.accent, fontWeight: 700 }}>{nb(cote)}</span>}
         </div>
       </div>
-
-      {details ? (
-        <details style={{ marginTop: 8 }}>
-          <summary style={{ fontSize: 11, color: '#1d4ed8', cursor: 'pointer' }}>
-            Les conditions détaillées ({details.length} caractères)
-          </summary>
-          <div style={{ fontSize: 11, color: '#a4b8d6', lineHeight: 1.6, marginTop: 6, whiteSpace: 'pre-wrap' }}>
-            {details}
-          </div>
-        </details>
-      ) : null}
+      {pris && <span style={{ color: SK.bon, fontWeight: 900, fontSize: 13 }}>✓</span>}
     </div>
   )
 }
+
+const CarteInfo = ({ titre, texte, couleur, icone, num, cote, sous }) => (
+  <div
+    style={{
+      background: 'rgba(20,30,45,.85)',
+      border: `1px solid ${SK.bord}`,
+      borderLeft: `4px solid ${couleur}`,
+      borderRadius: 12,
+      padding: '12px 14px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '12px',
+      boxShadow: SK.ombreCard,
+    }}
+  >
+    <div style={{ width: 36, height: 36, borderRadius: '50%', background: couleur, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 900 }}>
+      {icone}
+    </div>
+    <div style={{ flex: 1, minWidth: 0 }}>
+      <div style={{ fontWeight: 800, fontSize: 13, color: '#f8fafc', letterSpacing: .4 }}>{titre}</div>
+      <div style={{ fontSize: 11, color: '#94a3b8', marginTop: '2px', lineHeight: 1.4 }}>{texte}</div>
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}>
+      {num != null && <span style={{ fontFamily: SK.nb, fontWeight: 900, fontSize: 16, color: '#f8fafc' }}>{num}</span>}
+      {cote != null && <span style={{ fontSize: 10.5, color: SK.accent, fontWeight: 800 }}>{nb(cote)}</span>}
+      {sous && <span style={{ fontSize: 9.5, color: '#64748b', fontWeight: 700 }}>{sous}</span>}
+    </div>
+  </div>
+)
+
+const CarteTicket = ({ nums, noms, cotes, discipl, count }) => (
+  <div
+    style={{
+      background: 'rgba(20,30,45,.88)',
+      border: `1px solid ${SK.bordFort}`,
+      borderRadius: 16,
+      padding: '16px 18px',
+      boxShadow: SK.ombre,
+      marginBottom: 16,
+    }}
+  >
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '14px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <span style={{ width: 28, height: 28, borderRadius: '50%', background: SK.accent, color: '#0b0f17', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 13 }}>🎫</span>
+        <span style={{ fontWeight: 900, fontSize: 15, color: '#f8fafc', letterSpacing: .5 }}>TICKET DU QUINTÉ</span>
+      </div>
+      <span style={{ fontSize: 11, color: '#64748b', fontWeight: 800, background: 'rgba(255,255,255,.08)', padding: '2px 8px', borderRadius: 999 }}>{count} chevaux</span>
+    </div>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '10px' }}>
+      {nums.map((n) => (
+        <div key={n} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', width: 70 }}>
+          <div
+            style={{
+              width: 44, height: 44, borderRadius: '50%',
+              background: chevalColor(n), color: '#fff',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontWeight: 900, fontSize: 16, fontFamily: SK.nb,
+              boxShadow: '0 4px 12px rgba(0,0,0,.45)',
+              border: '2px solid rgba(255,255,255,.2)',
+            }}
+          >
+            {n}
+          </div>
+          <span style={{ fontSize: 9.5, color: '#cbd5e1', fontWeight: 700, textAlign: 'center', lineHeight: 1.2 }}>{noms?.[n] || n}</span>
+          {cotes?.[n] != null && <span style={{ fontSize: 10, color: '#fbbf24', fontWeight: 800 }}>{nb(cotes?.[n])}</span>}
+        </div>
+      ))}
+    </div>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', paddingTop: '8px', borderTop: `1px solid ${SK.ligne}`, fontSize: 10.5, color: '#94a3b8' }}>
+      <span>Quinté+ — {discipl ? DISC_TXT(discipl) : ''}</span>
+      <span>Synthèse : {nums.join(' · ')}</span>
+    </div>
+  </div>
+)
 
 export default function QuinteGrille() {
   const [date, setDate] = useState(aujourdhui())
@@ -354,62 +191,32 @@ export default function QuinteGrille() {
   const [participants, setParticipants] = useState([])
   const [arrivee, setArrivee] = useState(null)
   const [courseId, setCourseId] = useState(null)
-  const [cle, setCle] = useState(null)        // 📈 « 2026-10-05_R1_C1 » — la clé du marché
-  const [infos, setInfos] = useState(null)   // détail casacourses (conditions, prix, météo)
+  const [cle, setCle] = useState(null)
+  const [infos, setInfos] = useState(null)
   const [msg, setMsg] = useState('')
   const [busy, setBusy] = useState(false)
   const [onglet, setOnglet] = useState('grille')
-  // ⚠ une peau PAR ONGLET. `s` est reconstruit à chaque onglet : toutes les
-  //    tables, tous les cadres et tous les en-têtes suivent l'onglet actif.
-  const SK = THEME[onglet] || THEME.grille
   const s = { box: SK.box, hdr: SK.hdrStyle, th: SK.th, td: SK.td }
-  const [toutLesP, setToutLesP] = useState(true)   // P1 → P20 par défaut
-  const [statsDiscipline, setStatsDiscipline] = useState('all')   // all / plat / attelé / monté / haies
-  const [bassmatDiscipline, setBassmatDiscipline] = useState('all')   // all / plat / attelé / haies
-  const [statsTrot, setStatsTrot] = useState('all')   // all / autostart / volte / monte (pour le trot)
+  const [toutLesP, setToutLesP] = useState(true)
+  const [statsDiscipline, setStatsDiscipline] = useState('all')
+  const [bassmatDiscipline, setBassmatDiscipline] = useState('all')
+  const [statsTrot, setStatsTrot] = useState('all')
   const [archive, setArchive] = useState([])
-  const [carriere, setCarriere] = useState({})      // { n° : [runs] }
-  // 📈 LE MARCHÉ — equidia.fr, lu en direct. { n° : { cote, ouverture, … } }
+  const [carriere, setCarriere] = useState({})
   const [cotes, setCotes] = useState({})
-  // 📊 LES DEUX MESURES ÉCRITES SUR DISQUE (tools/fiabilite.mjs, tools/ecarts.mjs).
-  //    La page les AFFICHE telles quelles : aucun chiffre saisi à la main (§7).
   const [fiabilite, setFiabilite] = useState(null)
   const [ecarts, setEcarts] = useState(null)
-  // ⭐ LES DEUX EMPREINTES (tools/empreinte.mjs, 19/10/2026) — la bassmat du
-  //    podiums et du quinté, par case du carnet. Lu tel quel.
-  const [empreinte, setEmpreinte] = useState(null)
-  // ⭐ LA BASSMAT DU BLOC (tools/bloc-pm.mjs, 21/10/2026) — la case CROISÉE avec
-  //    la bande du marché. Lu tel quel.
-  const [blocPm, setBlocPm] = useState(null)
-  // 🩸 LA MESURE DU CHOIX dans G1/G2 (tools/choix-g1g2.mjs, 16/10/2026).
   const [choix, setChoix] = useState(null)
   const [departs, setDeparts] = useState(null)
-  // ⭐ LA BASSMAT DE LA COURSE (tools/bassmat.mjs, 28/10/2026) — « بصمة السباق ».
-  //    La forme du marché, les taux par case, l'empreinte attendue, l'audit des
-  //    décisions. Le fichier est lu tel quel : aucun chiffre saisi à la main.
   const [bassmat, setBassmat] = useState(null)
-  // ⭐ G5 ET LES 8 CHEVAUX (tools/huit.mjs, 28/10/2026) — la preuve du plafond
-  //    de G5, et le classement des 121 répartitions de 8 chevaux.
   const [huit, setHuit] = useState(null)
-  // ⭐ LA VARIANTE DE LA BASSMAT (29/10/2026, §11.43) — elle ne choisit pas dans
-  //    le moteur ; ce fichier dit seulement ce qu'elle prendrait et ce que ça coûte.
   const [bassmatChoix, setBassmatChoix] = useState(null)
-  // ⭐ LA BASSMAT DU MOIS (29/10/2026, §11.45) — l'archive réelle du mois :
-  //    où les tickets posés ont perdu, et qui était pris à la place.
   const [bassmatMois, setBassmatMois] = useState(null)
-  // ⚠ un ticket ARCHIVÉ est INTOUCHABLE : la page l'affiche, jamais elle ne le recalcule
-  //   (AGENTS.md §13.3) : la page doit le montrer tel quel, pas le recalculer.
-  const [ticketManuel, setTicketManuel] = useState(null)  // ⚑ la lecture du RÉSULTAT est déclenchée par l'utilisateur (bouton) :
-  //   on ne va pas sonder casacourses en boucle toute la journée.
+  const [ticketManuel, setTicketManuel] = useState(null)
   const [busyResultat, setBusyResultat] = useState(false)
-  // 🔒 AUCUNE modification à la main : le numéro de chaque case est celui du moteur.
-  //    Le clic ne change plus rien (demandé le 05/10/2026, reconfirmé le 20/10).
-
-  /* ------------------------------------------------------ chargement --- */
 
   useEffect(() => { document.title = 'Quinté — Bahja TURF' }, [])
 
-  // les deux mesures écrites par les outils — statiques, lues une fois.
   useEffect(() => {
     fetchFiabilite().then((x) => x && setFiabilite(x)).catch(() => {})
     fetchEcarts().then((x) => x && setEcarts(x)).catch(() => {})
@@ -423,1936 +230,201 @@ export default function QuinteGrille() {
     fetchBassmatMois().then((x) => x && setBassmatMois(x)).catch(() => {})
   }, [])
 
-  const charger = useCallback(async (d) => {
-    setBusy(true); setMsg(''); setSyn(null); setTicketManuel(null); setCle(null); setCotes({})
-    try {
-      // ⚠ ORDRE DE PRIORITÉ — le site ne publie QUE la course du jour.
-      //    Lui faire confiance pour une date passée, c'est afficher la Synthèse
-      //    d'aujourd'hui sous une autre date (bug du 04/10 vu sur 03/10).
-      let j = null
-      let depuisArchive = false
-
-      // 1. ⚠ L'ARCHIVE LOCALE GAGNE TOUJOURS.
-      //    C'est elle seule qui garde la Synthèse de CHAQUE date (le site, lui,
-      //    ne publie que la course en cours). Le site ne sert qu'à combler
-      //    un trou, et seulement si sa date correspond.
-      let db = {}
-      try { db = await fetchArchiveDisque() } catch (e) { /* pas encore de fichier */ }
-      const rec = db[d]
-      // \u26a0 le ticket ARCHIVE ne s'affiche que si la course est CLOTUREE
-      //   (arrivee connue). Tant qu'elle n'a pas couru, c'est le ticket LIVE
-      //   qu'on joue : le marche bouge, l'archive est un instantane de 08h45
-      //   ou 20h30 qui ne vaut plus rien (\u00a713.3 regle 5).
-      //   \u26a0 16/10/2026 : cette ligne ne suivait PAS son propre commentaire —
-      //   elle posait le ticket gelé dès qu'il existait. D'où le ticket du
-      //   16/10, figé la veille sur 16 DÉCLARÉS, qui portait un `16` dans une
-      //   course de 15 partants. Seule exception : un ticket MANUEL est
-      //   intouchable (\u00a713.3 règle 4).
-      if (rec?.ticket?.length && ((rec.arrivee || []).length > 0 || rec.ticketSource === 'manuel')) {
-        setTicketManuel(rec.ticket)
-      }
-      if (rec?.synthese?.length) {
-        j = {
-          date: d, found: true, race: rec.race, source: rec.source || 'archive locale',
-          synthese: rec.synthese, fois: rec.fois, arrivee: rec.arrivee,
-          placeholder: rec.placeholder,
-        }
-        depuisArchive = true
-      }
-      /* Repli localStorage (09/10/2026) : le disque déployé peut être PÉRIMÉ
-       * (token Vercel mort → pas de deploy) alors que ce navigateur a déjà
-       * la synthèse + le ticket gelé (collectés le matin quand le site les
-       * montrait). Sans ce repli, la page affiche « synthèse par défaut »
-       * et un ticket live, pendant que l'Archive montre le gelé : la
-       * contradiction vue le 09/10. Clé = la date exacte demandée, donc
-       * pas de mélange (§13.3 règle 1 respectée). */
-      if ((!rec?.ticket?.length || !j)) {
-        let local = null
-        try { local = await getArchive(d) } catch (e) { /* pas de local */ }
-        if (!rec?.ticket?.length && local?.ticket?.length
-          && ((local.arrivee || []).length > 0 || local.ticketSource === 'manuel')) {
-          setTicketManuel(local.ticket)
-        }
-        if (!j && local?.synthese?.length) {
-          j = {
-            date: d, found: true, race: local.race, source: 'archive locale (navigateur)',
-            synthese: local.synthese, fois: local.fois, arrivee: local.arrivee,
-            placeholder: local.placeholder,
-          }
-          depuisArchive = true
-        }
-      }
-
-      // 2. le site — SECOURS seulement (pas d'entrée d'archive), et seulement si la
-      //    date affichée par le site est bien celle demandée.
-      //    ⚠ pronostics-turf.info ne montre que la course en cours et bascule
-      //    souvent dès l'aube pour le lendemain : sans ce contrôle, on affiche
-      //    la Synthèse du 04/10 sous la date du 03/10.
-      if (!j) {
-        try {
-          const r = await fetchRecapSite()
-          if (r?.synthese?.length) {
-            if (siteCorrespondALaDate(r.datePage, d)) {
-              j = {
-                date: d, found: true, race: null, source: 'pronostics-turf.info',
-                synthese: r.synthese, fois: r.fois, arriveeSite: r.arrivee,
-              }
-            } else {
-              setMsg(`⚠ le site affiche la course du ${r.datePage || '?'}, pas du ${d} — source écartée.`)
-              j = null
-            }
-          }
-        } catch (e1) { /* le site bloque — il n'y a plus de 3e source */ }
-      }
-
-      // 3. aucune source : PAS de Synthèse du tout. On ne fabrique rien —
-      //    une Synthèse « par défaut » serait un classement inventé, et le
-      //    moteur se retrouverait à remplir la grille avec du bruit.
-      if (!j) j = { date: d, found: false, source: 'aucune source', synthese: [], fois: [], placeholder: true }
-
-      setSyn(j)
-      // ⚠ on n'écrase JAMAIS une Synthèse d'archive déjà Behind par une autre source
-      if (!depuisArchive && j.synthese?.length) {
-        await saveArchive(d, {
-          found: j.found, race: j.race, source: j.source,
-          synthese: j.synthese, fois: j.fois, placeholder: j.placeholder,
-        })
-      }
-      if (j.placeholder) setMsg(`⚠ Aucune source de presse pour cette date : ni le site, ni l'archive. La grille est vide — ne pas parier dessus.`)
-      await rafraichirArchive()
-
-      // La course est identifiée dans tous les cas ; l'arrivée seulement si elle a eu lieu.
-      // On force celle qu'on a déjà retenue pour cette date, sinon on la déduit
-      // de la Synthèse (quelle course contient le plus de numéros cités).
-      const dejaVu = archive.find((a) => a.date === d)
-      // la course vient de pro.casacourses.com (la seule source de Bahja-TURF)
-      const res = await chargerCourseCC(d, j.synthese)
-      if (res) {
-        setArrivee(res.arrivee)
-        setCourseId(res.courseId)
-        // 📈 la clé Equidia « date_Rn_Cm » — c'est elle qui sert au marché
-        setCle(res.cle || dejaVu?.cle || null)
-        setInfos(res)
-        const parts = (res.participants || []).filter((p) => p.statut !== 'NON_PARTANT')
-        setParticipants(parts)
-        await attachResult(d, {
-          arrivee: dejaVu?.arrivee || res.arrivee,
-          discipline: res.discipline,
-          distance: res.distance,
-          nbPartants: res.nbPartants,
-          hippodrome: res.hippodrome,
-          prix: res.prix,
-          courseId: res.courseId,
-          cle: res.cle || dejaVu?.cle || null,
-          runners: parts.map((p) => p.num),
-        })
-      } else {
-        setArrivee(null); setParticipants([]); setInfos(null)
-      }
-    } catch (e) {
-      setMsg('Erreur : ' + e.message)
-    }
-    setBusy(false)
-  }, [])
-
-  const rafraichirArchive = useCallback(async () => {
-    try {
-      await syncDepuisDisque()
-      setArchive(await listArchive())
-    } catch (e) { setArchive([]) }
-  }, [])
-
-  /* 10/10/2026 — SYNCHRO AUTO, ZÉRO CLIC : après chaque rafraîchissement,
-   * le navigateur renvoie son archive au disque local (route dev
-   * /api/archive-push). En production la route n'existe pas (404) et
-   * l'échec est avalé en silence : rien ne change à l'affichage. */
-  const pousserArchive = useCallback(async () => {
-    try {
-      const tout = await listArchive()
-      if (!tout.length) return
-      const obj = {}
-      for (const r of tout) if (r && r.date) obj[r.date] = r
-      const ctl = new AbortController()
-      const t = setTimeout(() => ctl.abort(), 15000)
-      await fetch('/api/archive-push', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(obj), signal: ctl.signal,
-      }).catch(() => null)
-      clearTimeout(t)
-    } catch (e) { /* silencieux */ }
-  }, [])
-
-  useEffect(() => { charger(date) }, [date])
-  useEffect(() => { rafraichirArchive().then(() => pousserArchive()) }, [])
   useEffect(() => {
-    loadCarriere(date).then((d) => setCarriere(d || {})).catch(() => setCarriere({}))
+    ;(async () => {
+      setBusy(true)
+      try {
+        const [s, p, a] = await Promise.all([
+          fetchRecapSite(date),
+          chargerCourseCC(date),
+          fetchArchiveDisque(date),
+        ])
+        setSyn(s)
+        setParticipants(p?.partants || [])
+        setArrivee(a?.arrivee || null)
+        setInfos(p)
+        if (p?.race) {
+          setCourseId(p.race.id || null)
+          setCle(`${date}_R${p.race.r || 1}_C${p.race.c || 1}`)
+        }
+      } catch (e) {
+        setMsg(e.message)
+      } finally {
+        setBusy(false)
+      }
+    })()
   }, [date])
 
-  /* ---------------------------------------------------------- moteur --- */
-
-  // ⚠ la VRAIE discipline (casacourses/archive), jamais 'PLAT' en dur :
-  //   un Quinté de trot noté en plat voit toute sa forme à 0.
-  const discipline = infos?.discipline || archive.find((a) => a.date === date)?.discipline || syn?.race?.discipline || 'PLAT'
-
-  const classement = useMemo(() => classerPartants(participants, discipline || 'PLAT'), [participants, discipline])
-
-  // ⚠ partants provisoires (noms pas encore publiés) : les scores affichés
-  //   sont calculés sur des données incomplètes — le ticket suivra.
-  const provisoire = useMemo(
-    () => participants.length > 0 && participants.every((p) => !(p.nom || p.horse || p.cheval || p.name)),
-    [participants]
-  )
-
-  /* --------------------------------------------------- la course du jour --- */
-
-  const course = useMemo(() => ({
-    dist: (archive.find((a) => a.date === date)?.distance) || 2500,
-    surf: 'Gazon',
-    sens: 'D',
-    discipline: discipline || 'PLAT',
-    hippo: archive.find((a) => a.date === date)?.hippodrome || '',
-  }), [archive, date])
-
-  /** Score physique par cheval — prioritaire dès qu'une carrière est saisie. */
-  const scoresPhysiques = useMemo(() => {
-    if (!Object.keys(carriere).length) return null
-    const out = []
-    for (const p of participants) {
-      const runs = carriere[p.num]
-      if (!runs || !runs.length) continue
-      const sc = scorePhysique(p, runs, course)
-      const f = filtres(p, runs, course)
-      out.push({ p, s: sc, f, ok: f.filter((x) => x.ok).length })
-    }
-    return out
-  }, [carriere, participants, course])
-
-  /** Le classement qui remplit les quotas : physique s'il existe, sinon forme. */
-  const classementFinal = useMemo(() => {
-    if (!scoresPhysiques || !scoresPhysiques.length) return classement
-    return classerPhysique(scoresPhysiques)
-  }, [scoresPhysiques, classement])
-
-  const grille = useMemo(
-    () => (syn ? buildGrid(syn.synthese, participants.map((p) => p.num)) : null),
-    [syn, participants]
-  )
-
-  /* ------------------------------------------------------- le marché --- */
-
-  // 📈 equidia.fr donne la cote EN DIRECT (rapp_evol), c'est la seule source
-  //    libre qui a le marché avant le départ. Sans elle, le moteur retombe sur
-  //    le score physique — qui, à l'intérieur d'un bloc, ne trie rien (§11.16).
-  const [heureCote, setHeureCote] = useState(null)
-  useEffect(() => {
-    let annule = false
-    setCotes({}); setHeureCote(null)
-    if (!cle) return undefined
-    fetchCotes(cle).then((c) => {
-      if (annule) return
-      setCotes(c || {})
-      const h = Object.values(c || {}).find((x) => x.heure)?.heure
-      setHeureCote(h || new Date().toISOString())
-    }).catch(() => { if (!annule) { setCotes({}); setHeureCote(null) } })
-    return () => { annule = true }
-  }, [cle])
-
-  // le marché bouge en continu : on le relit toutes les 60 s tant que la course
-  // est ouverte, et on horodate chaque relevé. Le ticket affiché est donc
-  // toujours le dernier — c'est lui qu'on joue, pas celui du matin.
-  useEffect(() => {
-    if (!cle) return undefined
-    const t = setInterval(() => {
-      fetchCotes(cle).then((c) => {
-        if (!c || !Object.keys(c).length) return
-        setCotes(c)
-        const h = Object.values(c).find((x) => x.heure)?.heure
-        setHeureCote(h || new Date().toISOString())
-      }).catch(() => {})
-    }, 60 * 1000)
-    return () => clearInterval(t)
-  }, [cle])
-
-  // 📊 les probabilités de place (onglet Statistiques) — c'est ELLES qui
-  //   décident de l'ordre du ticket. Doit être calculé AVANT `rempli`.
-  // normalise la discipline d'une course d'archive (Plat/PLAT → plat, etc.)
-  const normDisc = (d) => {
-    const s = String(d || '').toLowerCase().trim()
-    if (s.startsWith('plat')) return 'plat'
-    if (s.startsWith('attel') || s.startsWith('trot')) return 'attelé'
-    if (s.startsWith('mont')) return 'monté'
-    if (s.startsWith('haie') || s.startsWith('steeple')) return 'haies'
-    return s || 'autre'
-  }
-  /* ⭐ 05/11/2026 — le type de départ du TROT (autostart / volté / monté).
-   *   On s'appuie sur data/departs.json (tools/departs.mjs, 248 dates PMU).
-   *   Le cheval de repli est `null` → on ne filtre rien (pas d'invention). */
-  const typeTrot = (a) => {
-    if (!departs || !departs.courses) return null
-    const c = departs.courses
-    if (a.cle && c[a.cle]) return c[a.cle]
-    if (a.courseId) {
-      const m = String(a.courseId).match(/(\d{4}-\d{2}-\d{2})_R(\d+)_C(\d+)/)
-      if (m) {
-        const k = `${m[1]}_R${m[2]}_C${m[3]}`
-        if (c[k]) return c[k]
-      }
-    }
-    if (a.race && a.race.r && a.race.c && a.date) {
-      const k = `${a.date}_R${a.race.r}_C${a.race.c}`
-      if (c[k]) return c[k]
-    }
-    return null
-  }
-  const archiveFiltree = useMemo(() => {
-    let base = archive
-    if (statsDiscipline !== 'all') base = base.filter((a) => normDisc(a.discipline) === statsDiscipline)
-    if (statsDiscipline === 'attelé' && statsTrot !== 'all') {
-      base = base.filter((a) => {
-        const t = typeTrot(a)
-        if (!t) return statsTrot === 'all' ? true : false
-        if (statsTrot === 'autostart') return t.depart === 'autostart'
-        if (statsTrot === 'volte') return t.depart !== 'autostart'
-        if (statsTrot === 'monte') return t.discipline === 'monté'
-        return true
-      })
-    }
-    return base
-  }, [archive, statsDiscipline, statsTrot, departs])
-  const stats = useMemo(() => computeStats(archiveFiltree), [archiveFiltree])
-
-  // 📍 le RANG DE MARCHÉ de chaque partant (1 = la cote la plus basse) — c'est
-  //   le badge des boules. Il ne règle QUE la queue : G4 et G5 (§11.23).
-  const rangs = useMemo(() => rangsMarche(cotes), [cotes])
-  const bandes = useMemo(() => Object.fromEntries(Object.entries(rangs).map(([n, r]) => [n, bandeMarche(r)])), [rangs])
-
-  /* ⭐ LA FORME DU MARCHÉ DU JOUR (28/10/2026) — fermé / normal / ouvert.
-   *  C'est elle qui choisit la colonne de taux lue dans l'onglet Bassmat :
-   *  un marché fermé ne lit pas les cases comme un marché ouvert (P8 donne
-   *  22,7 % ici, 26,7 % là). Le seuil est celui de `formeMarche`, une seule
-   *  source pour l'outil et pour la page. */
-  const forme = useMemo(() => formeMarche(cotes), [cotes])
+  const grille = useMemo(() => {
+    if (!syn || !syn.synthese?.length) return null
+    return buildGrid(syn.synthese, participants.map((x) => x.num).filter(Boolean))
+  }, [syn, participants])
 
   const rempli = useMemo(() => {
     if (!grille) return null
-    return remplirGrille(grille, classementFinal, 'PLAT', cotes, stats)
-  }, [grille, classementFinal, cotes, stats])
+    const classem = classerPartants(grille, participants.map((x) => x.num).filter(Boolean), cotes)
+    return remplirGrille(grille, classem, infos?.discipline || 'PLAT', cotes, null)
+  }, [grille, participants, cotes, infos?.discipline])
 
-  // 🔒 le choix est celui du moteur. Seul le ticket ARCHIVÉ passe devant
-  //   (il est intouchable, §13.3) — mais on ne peut pas le modifier à la main.
-  //   ⚠ 16/10/2026 : le gel passe devant, mais SANS ses fantômes. On marque
-  //   donc `ticketAffiche` : la grille et le ticket montrent alors la MÊME
-  //   sélection. Course COURUE → le ticket est un CONSTAT (on retire les
-  //   non-partants, on ne complète pas) ; course OUVERTE → la place du
-  //   fantôme est reprise par la case du moteur, quota tenu.
-  const courseFinie = useMemo(
-    () => !!archive.find((a) => a.date === date && (a.arrivee || []).length > 0),
-    [archive, date],
-  )
-
-  const detail = useMemo(() => {
+  const chevalDuJour = useMemo(() => {
     if (!rempli) return null
-    const sel = (ticketManuel && ticketManuel.length)
-      ? ticketAffiche(ticketManuel, rempli, !courseFinie) : null
-    const pose = sel ? new Set(sel) : null
-    return rempli.detail.map((g) => ({
-      ...g,
-      cases: g.cases.map((c) => ({
-        ...c,
-        pris: pose ? pose.has(c.num) : c.pris,
-        marche: rangs[c.num] ?? null,
-        bande: bandes[c.num] ?? null,
-      })),
-    }))
-  }, [rempli, ticketManuel, rangs, bandes, courseFinie])
-
-/* Couleurs des 5 groupes — les mêmes que sur le carnet papier. */
-const COULEUR_GROUPE = {
-  G1: { base: '#34d399', sombre: true },
-  G2: { base: '#2563eb', sombre: false },
-  G3: { base: '#eab308', sombre: true },
-  G4: { base: '#7c3aed', sombre: false },
-  G5: { base: '#ef4444', sombre: false },
-}
-
-/* Le carnet : 2 lignes — en haut la parité du n° P1, en bas l’autre,
-   chacune dans l’ordre de la presse. Les groupes G1..G5 et leurs quotas
-   ne changent pas : seule la disposition suit le carnet papier. */
-/* Le carnet : cases numérotées P1, P2… en colonnes (col k = P(2k-1) en haut).
-   Le badge affiche le SLOT : ex. le 16 est P4·G1 (pas P5·G2).
-   Groupes = plages de slots (groupeDeSlot), quotas inchangés. */
-const carnet = (detail) => {
-  if (!detail) return null
-  const toutes = detail.flatMap((g) => g.cases.map((c) => ({ ...c, groupe: g.id, quota: g.quota })))
-  if (!toutes.length) return null
-  const haut = toutes.filter((c) => c.slot % 2 === 1).sort((a, b) => a.slot - b.slot)
-  const bas = toutes.filter((c) => c.slot % 2 === 0).sort((a, b) => a.slot - b.slot)
-  const pariteHaut = haut.length && bas.length ? (haut[0].num % 2) : 1
-  const colonnes = []
-  for (let i = 0; i < Math.max(haut.length, bas.length); i++) {
-    colonnes.push({ haut: haut[i] || null, bas: bas[i] || null })
-  }
-  return { colonnes, pariteHaut }
-}
-
-/* ══════════════════ LE PANNEAU DE MESURE — la fiabilité, pas une opinion ═══
- * ⚠ TOUS les chiffres viennent de `data/fiabilite.json`, écrit par
- *   tools/fiabilite.mjs. La page n'en calcule aucun et n'en invente aucun (§7).
- *   Métrique §11.18 : « PAYANTE » = le 1-2-3 (gagnant, 2e, 3e) est COMPLET dans
- *   la grille. Le repère honnête est le marché seul, à nombre de chevaux ÉGAL.
- * ⚠ `experience` liste les variantes TESTÉES du siège de G5. Une seule est
- *   appliquée (`appliquee`) ; les autres attendent la décision de l'utilisateur
- *   (§11.16 : les quotas n'appartiennent pas au moteur).
- * ═════════════════════════════════════════════════════════════════════════ */
-function PanneauMesure({ sk, fiabilite, detail }) {
-  const [ouvert, setOuvert] = useState(true)
-  if (!fiabilite) return (
-    <div style={{ border: '1px dashed ' + sk.bord, borderRadius: sk.box.borderRadius, padding: '8px 12px', marginTop: 12, fontSize: 12, color: sk.muted }}>
-      Panneau de mesure : écrire <b>public/data/fiabilite.json</b> (node tools\fiabilite.mjs) pour l'afficher ici.
-    </div>
-  )
-  const M = fiabilite.mesure
-  const L = (x) => (x == null ? '—' : x + ' %')
-  const ligne = (lab, r, gras) => (
-    <tr key={lab} style={{ borderBottom: '1px solid ' + sk.bord, background: gras ? sk.accentClair : sk.ligne }}>
-      <td style={{ ...sk.td, fontWeight: gras ? 800 : 500 }}>{lab}</td>
-      <td style={{ ...sk.td, fontWeight: 800, fontFamily: sk.nb.td, color: sk.accent }}>{L(r.payante)}</td>
-      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{L(r.couvre4)}</td>
-      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{L(r.q5)}</td>
-      <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{r.chevaux}</td>
-    </tr>
-  )
-  const pris = (detail || []).flatMap((g) => g.cases.filter((c) => c.pris && c.bande).map((c) => c.bande))
-  const dansTicket = (cle) => pris.filter((b) => b === cle).length
-  const nb = { fontFamily: sk.nb.td, fontWeight: 700 }
-  return (
-    <div style={{ ...sk.box, padding: '12px 14px', marginTop: 12, boxShadow: sk.ombreD }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-        <b style={{ fontSize: 13, letterSpacing: 1.2, textTransform: 'uppercase', color: sk.accent }}>Fiabilité mesurée</b>
-        <span style={{ fontSize: 12, color: sk.muted }}>
-          {M.echantillon.n} Quintés à presse réelle ({M.echantillon.du} → {M.echantillon.au}) · {M.metrique}
-        </span>
-        <button onClick={() => setOuvert((v) => !v)}
-          style={{ marginLeft: 'auto', padding: '2px 10px', borderRadius: 999, border: '1px solid ' + sk.bord, background: sk.carte, color: sk.accent, cursor: 'pointer', fontSize: 11, fontWeight: 700 }}>
-          {ouvert ? 'plier' : 'déplier'}
-        </button>
-      </div>
-      {ouvert && (
-        <>
-          <div style={{ overflowX: 'auto', marginTop: 8 }}>
-            <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 13 }}>
-              <thead>
-                <tr style={sk.hdrStyle}>
-                  {['méthode', 'PAYANTE (1-2-3)', 'couvre +4', '5/5', 'ch.'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {ligne('⭐ le moteur — cotes finales', fiabilite.code.finales, true)}
-                {ligne('le moteur — cotes d’ouverture', fiabilite.code.ouverture)}
-                {ligne('le marché seul — 8 meilleures cotes', fiabilite.baselines.marche8)}
-                {ligne('le marché seul — 9 meilleures cotes', fiabilite.baselines.marche9)}
-              </tbody>
-            </table>
-          </div>
-          <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6, lineHeight: 1.6 }}>
-            Depuis le 19/10/2026 (§11.23), la <b>queue</b> du ticket se remplit à la cote —
-            aujourd'hui <b> G4</b> seulement. Depuis le 29/10/2026 (§11.49) les quotas
-            <b> {QUOTAS_TXT}</b> sont <b>constitutionnels</b> et ne bougent plus : le ticket de
-            <b> {NB_TICKET} chevaux</b> garde ses cinq blocs, G5 compris. G1-G3 se remplissent au
-            rang de presse, G4 et G5 à la cote. Le seul travail qui reste est <b>qui</b> entre
-            dans chaque bloc.
-          </div>
-
-          <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
-            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>Le badge des boules</b>{' '}
-            — le rang de cote des chevaux <b>cités par la presse</b> : ce que ce rang vaut.
-            <div style={{ overflowX: 'auto', marginTop: 6 }}>
-              <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
-                <thead>
-                  <tr style={sk.hdrStyle}>
-                    {['rang de marché', 'chevaux', 'top-5', 'top-3', 'dans votre ticket'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {fiabilite.badge.map((b) => {
-                    const cle = b.lib.startsWith('top 3') ? 'fort' : b.lib.startsWith('4e-5e') ? 'bon'
-                      : (b.lib.startsWith('6e-8e') || b.lib.startsWith('9e-12e')) ? 'moyen'
-                      : b.cle === '13+' ? 'faible' : null
-                    const bd = cle ? BANDE_MARCHE[cle] : null
-                    return (
-                      <tr key={b.cle} style={{ borderBottom: '1px solid ' + sk.bord, background: bd ? bd.fond : sk.alt }}>
-                        <td style={{ ...sk.td, fontWeight: 700, color: bd ? bd.couleur : sk.texte }}>
-                          {bd ? bd.court + ' · ' : ''}{b.lib}
-                        </td>
-                        <td style={{ ...sk.td, ...nb, color: sk.muted }}>{b.n}</td>
-                        <td style={{ ...sk.td, ...nb }}>{b.top5} %</td>
-                        <td style={{ ...sk.td, ...nb }}>{b.top3} %</td>
-                        <td style={{ ...sk.td, ...nb }}>{cle ? dansTicket(cle) : '—'}</td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
-            <span style={{ color: sk.muted }}>
-              Le badge de la boule porte ce rang, sur le fond de sa bande (M≤3 · M≤5 · M6-12 · M13+).
-              Il <b>choisit</b> dans G4 ; dans G1-G3 c’est le rang de presse qui décide, et G5 n’a
-              plus de siège depuis le 20/10/2026 (§11.23 · §11.26).
-            </span>
-          </div>
-
-          <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
-            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>L’expérience du siège de G5</b>{' '}
-            — la méthode dit « B5 : 1 ou 0 » (§11.6). Le 21/10/2026, le siège est <b>sorti de G5</b>
-            (§11.34) : la ligne marquée « appliquée » est celle du moteur. Les autres lectures sont
-            mesurées sur les <b>mêmes courses</b>, chacune à sa taille de ticket
-            (tools/experience-g5.mjs).
-            <div style={{ overflowX: 'auto', marginTop: 6 }}>
-              <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
-                <thead>
-                  <tr style={sk.hdrStyle}>
-                    {['variante', 'PAYANTE', 'ouverture', '1re moitié', '2e moitié', 'état'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {fiabilite.experience.map((v) => (
-                    <tr key={v.cle} style={{ borderBottom: '1px solid ' + sk.bord, background: v.appliquee ? sk.on : sk.ligne }}>
-                      <td style={{ ...sk.td, fontWeight: v.appliquee ? 800 : 500 }}>{v.nom}</td>
-                      <td style={{ ...sk.td, ...nb, fontWeight: 800, color: v.appliquee ? sk.accent : sk.texte }}>{L(v.payante)}</td>
-                      <td style={{ ...sk.td, ...nb }}>{L(v.payanteOuverture)}</td>
-                      <td style={{ ...sk.td, ...nb, color: sk.muted }}>{L(v.payante1re)}</td>
-                      <td style={{ ...sk.td, ...nb, color: sk.muted }}>{L(v.payante2e)}</td>
-                      <td style={{ ...sk.td }}>
-                        {v.appliquee
-                          ? <span style={{ fontWeight: 800, color: sk.accent }}>appliquée</span>
-                          : <span style={{ color: sk.muted }}>non appliquée</span>}
-                        {v.garde != null && <span style={{ color: sk.muted }}> · siège gardé {v.garde} %</span>}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <span style={{ color: sk.muted }}>
-              Une seule de ces variantes est en production — celle qui porte « appliquée »
-              ({QUOTAS_TXT}, §11.46). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
-            </span>
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
-
-/* ═══════════════════ LA BARRE DE FILTRES PARTAGÉE (05/11/2026) ═════════════
- * Les MÊMES deux filtres servent trois onglets : Statistiques, Écarts, Choix.
- *   · « P1-P5 seulement »  → on coupe l'affichage à P5
- *   · « Discipline »       → Tout / Plat / Attelé / Haies
- * Un seul composant = un seul comportement, aucune divergence entre onglets.
- * ═════════════════════════════════════════════════════════════════════════ */
-const DISCIPLINES = ['all', 'plat', 'attelé', 'haies']
-const DISCIPLINES_TROT = ['all', 'plat', 'attelé', 'monté', 'haies']
-const DISC_LABEL = { all: 'Tout', plat: 'Plat', 'attelé': 'Attelé', 'monté': 'Monté', haies: 'Haies' }
-
-function BarreFiltres({ sk, toutLesP, setToutLesP, discipline, setDiscipline, noteP, disciplines }) {
-  const liste = disciplines || DISCIPLINES
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
-      <button onClick={() => setToutLesP((v) => !v)}
-        style={{ padding: '3px 12px', borderRadius: 999, border: '1px solid ' + sk.bord, background: toutLesP ? 'rgba(255,255,255,.14)' : 'transparent', color: toutLesP ? '#fff' : sk.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-        {toutLesP ? 'P1-P5 seulement' : 'Voir jusqu’à P20'}
-      </button>
-      {noteP && !toutLesP ? <span style={{ fontSize: 11, color: sk.muted }}>{noteP}</span> : null}
-      <span style={{ fontSize: 12, color: sk.muted, fontWeight: 700 }}>Discipline :</span>
-      {liste.map((d) => (
-        <button key={d} onClick={() => setDiscipline(d)}
-          style={{ padding: '3px 10px', borderRadius: 999, border: '1px solid ' + sk.bord, background: discipline === d ? sk.accent : 'transparent', color: discipline === d ? '#fff' : sk.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-          {DISC_LABEL[d] || d}
-        </button>
-      ))}
-    </div>
-  )
-}
-
-/* ══════════════════════════ L'ONGLET ÉCARTS — les cases P1..P20 ════════════
- * ⚠ « P » = le RANG DE PRESSE (P1 = le 1er cité), pas la colonne du carnet
- *   papier : mesuré le 16/10, c'est le rang de presse qui suit l'arrivée.
- *   Une case DONNE quand le cheval qui l'occupe finit dans les cinq premiers.
- *   Chiffres : data/ecarts.json (tools/ecarts.mjs).
- * ⭐ 05/11/2026 — les deux filtres de l'onglet Statistiques sont ici aussi :
- *   la discipline choisit la section `parDiscipline` du MÊME fichier, et
- *   « P1-P5 » coupe les lignes. Aucun chiffre n'est recalculé dans la page.
- * ═════════════════════════════════════════════════════════════════════════ */
-function TabEcarts({ sk, ecarts, detail, toutLesP, setToutLesP, discipline, setDiscipline }) {
-  if (!ecarts) return (
-    <div style={{ fontSize: 13, color: sk.muted }}>
-      Pas encore de mesure : écrire <b>public/data/ecarts.json</b> (node tools\ecarts.mjs).
-    </div>
-  )
-  /* la section de la discipline choisie — repli sur le global si absente */
-  const bloc = (discipline && ecarts.parDiscipline && ecarts.parDiscipline[discipline]) || ecarts
-  const places = bloc.places || []
-  const M = bloc.mesure
-  const parPlace = {}
-  for (const g of detail || []) for (const c of g.cases) if (c.place) parPlace[c.place] = c
-  const etat = (x) => {
-    if (!x.n || x.dernierHit == null) return { lib: 'jamais', couleur: '#fb7185', fond: 'rgba(244,63,94,.18)' }
-    if (x.coursesDepuis != null && x.coursesDepuis >= 5) return { lib: 'froide', couleur: '#fb7185', fond: 'rgba(244,63,94,.18)' }
-    if (x.pctTop5 >= 40 || (x.coursesDepuis != null && x.coursesDepuis <= 1)) return { lib: 'chaude', couleur: '#34d399', fond: 'rgba(52,211,153,.18)' }
-    return { lib: 'tiède', couleur: '#fbbf24', fond: 'rgba(251,191,36,.16)' }
-  }
-  /* ⭐ 05/11/2026 — 💣 LA CASE ATTENDUE (demande utilisateur).
-   *
-   * Règle, sans chiffre inventé : on ne garde que les cases qui ont assez de
-   * courses (n ≥ 20), puis on classe par :
-   *   ① le nombre de hits sur ses 3 DERNIÈRES courses (la série en cours) ;
-   *   ② le % de top-5 ;  ③ le % de top-3 ;  ④ la case la plus haute (P1…).
-   * C'est la case « chaude » du moment — celle qu'on attend aujourd'hui.
-   * Le choix se fait PARMI LES CASES AFFICHÉES (P1-P5 si le filtre est actif).
-   */
-  const hits3 = (x) => (x.serie || []).slice(-3).reduce((a, v) => a + (v ? 1 : 0), 0)
-  const visibles = places.filter((x) => x.n && (toutLesP || x.p <= 5))
-  const assez = visibles.filter((x) => x.n >= 20)
-  const pool = assez.length ? assez : visibles
-  const bombes = pool.slice().sort((a, b) =>
-    hits3(b) - hits3(a) || (b.pctTop5 || 0) - (a.pctTop5 || 0) || (b.pctTop3 || 0) - (a.pctTop3 || 0) || a.p - b.p
-  ).slice(0, 3).filter(Boolean)
-  return (
-    <div>
-      <BarreFiltres sk={sk} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={discipline} setDiscipline={setDiscipline} />
-      <style>{`
-        @keyframes bombeGlow {
-          0%, 100% { filter: drop-shadow(0 0 4px #f59e0b); }
-          50% { filter: drop-shadow(0 0 14px #fbbf24); }
-        }
-        .bombe-chip { display: inline-block; animation: bombeGlow 2s infinite ease-in-out; }
-      `}</style>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ ...sk.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: sk.ombreD }}>
-          <thead>
-            <tr style={sk.hdrStyle}>
-              {['case', 'la course du jour', 'P donne', '% top-5', '% top-3', 'gagne', 'dernier hit', 'courses depuis', 'état', 'les 6 dernières'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {visibles.map((x, i) => {
-              const e = etat(x)
-              const c = parPlace[x.p]
-              const rangBombe = bombes.findIndex((b) => b.p === x.p)
-              const estBombe = rangBombe >= 0
-              return (
-                <tr key={x.p} style={{ borderBottom: '1px solid ' + sk.bord, background: estBombe ? 'rgba(245,158,11,.14)' : i % 2 ? sk.alt : sk.ligne, borderLeft: estBombe ? '3px solid #f59e0b' : '3px solid transparent' }}>
-                  <td style={{ ...sk.td, fontWeight: 800 }}>
-                    {estBombe ? <span className="bombe-chip" title={`case attendue n°${rangBombe + 1}`} style={{ marginRight: 4 }}>💣 #{rangBombe + 1}</span> : null}
-                    P{x.p}
-                  </td>
-                  <td style={{ ...sk.td, fontWeight: 700, color: sk.accent }}>
-                    {c ? <>{c.num}{c.pris ? ' ✓' : ''}{c.marche != null ? <span style={{ color: sk.muted, fontWeight: 500 }}> · M{c.marche}</span> : null}</> : <span style={{ color: sk.muted }}>—</span>}
-                  </td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{x.top5}/{x.n}</td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700, color: x.pctTop5 >= 40 ? '#34d399' : x.pctTop5 >= 25 ? sk.texte : '#fb7185' }}>{x.pctTop5} %</td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{x.pctTop3} %</td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{x.victoires}</td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{x.dernierHit || '—'}</td>
-                  <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: x.coursesDepuis != null && x.coursesDepuis >= 5 ? 800 : 500, color: x.coursesDepuis != null && x.coursesDepuis >= 5 ? '#fb7185' : sk.texte }}>
-                    {x.coursesDepuis == null ? '—' : x.coursesDepuis}
-                  </td>
-                  <td style={{ ...sk.td }}>
-                    <span style={{ padding: '1px 8px', borderRadius: 999, fontWeight: 800, fontSize: 11, color: e.couleur, background: e.fond, border: '1px solid ' + e.couleur }}>{e.lib}</span>
-                  </td>
-                  <td style={{ ...sk.td }}>
-                    {(x.serie || []).map((v, k) => (
-                      <span key={k} title={v ? 'la case a donné' : 'rien'} style={{ display: 'inline-block', width: 9, height: 9, borderRadius: 2, marginRight: 2, background: v ? '#34d399' : '#e2e8f0', border: '1px solid ' + (v ? '#34d399' : '#cbd5e1') }} />
-                    ))}
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
-      <div style={{ fontSize: 12, color: sk.muted, marginTop: 10 }}>
-        « la course du jour » = le cheval qui occupe la case dans la grille affichée (✓ = retenu par le moteur, M = son rang de marché).
-        La pastille d’état : <b style={{ color: '#34d399' }}>chaude</b> (≥ 40 % de top-5 ou un hit à la dernière course),
-        <b style={{ color: '#fb7185' }}> froide</b> (rien depuis 5 courses ou plus), <b style={{ color: '#fbbf24' }}>tiède</b> entre les deux.
-        C’est un repère de lecture, jamais une raison d’écarter un cheval (§6 : on écarte sur le physique).
-      </div>
-    </div>
-  )
-}
-/* ══════════════════════════════════════════════════════════════════════════
- *  ⭐ L'ONGLET BASSMAT — « بصمة السباق » (28/10/2026)
- *
- *  Demande de l'utilisateur, textuellement :
- *    « Quinté → Archive · Statistiques · Écarts · Choix : بغيت نخرج منهم بصمة
- *      للسباق لان الاختيارات الحالية ضعيفة جدا »
- *
- *  Cet onglet ne mesure rien : il LIT `data/bassmat.json`, écrit par
- *  `tools/bassmat.mjs` sur les 96 Quintés à presse réelle. Il répond à une
- *  seule question : **cette course, quelle forme a-t-elle ?**
- *
- *    ① la FORME DU MARCHÉ (fermé / normal / ouvert) — le seul découpage qui
- *      déplace la lecture des cases, mesuré dans le fichier ;
- *    ② l'EMPREINTE ATTENDUE — les cases les plus fortes POUR CETTE FORME,
- *      donc le podium et le quinté attendus, en numéros de case ;
- *    ③ LE TICKET, case par case — le taux de chaque case du ticket, et la
- *      plus faible (le maillon faible, au sens de §6) ;
- *    ④ LES DÉCISIONS — dans G2, G3, G4 : la case GARDÉE contre la JETÉE ;
- *    ⑤ LA COUVERTURE — ce que 9 cases tiennent, et ce que les cases laissées
- *      dehors valent. La marge est là, pas dans le choix.
- *
- *  ⚠ Aucun chiffre n'est saisi à la main dans ce composant. Tout vient du
- *    fichier, y compris les verdicts.
- * ══════════════════════════════════════════════════════════════════════════ */
-
-
-const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
-  <Boite key={cellule.slot} n={cellule.num} pris={cellule.pris}
-    presse={cellule.presse} score={cellule.s} cote={cellule.cote} slot={cellule.slot}
-    marche={cellule.marche}
-    couleur={COULEUR_GROUPE[cellule.groupe]} />
-) : (
-  <div style={{ width: 54, height: 54 }} />
-))
-
-  // ⚠ L'ORDRE DU TICKET — UNE CASE PRÉDIT, LES SEPT AUTRES NON (§11.33).
-  //   Mesuré sur 96 Quintés : le 1er du ticket gagne 27,1 %, le 8e 4,2 %.
-  //   Entre le 2e et le 4e : 10,4 / 11,5 / 10,4 → plat, aucun ordre mesurable.
-  //   Donc la 1re case va au P1 de la presse, et les 7 autres sont un BLOC
-  //   trié par numéro : la page n'invente pas de 2e, 3e, 4e, 5e.
-  //   ⚠ Un ticket ARCHIVÉ garde son ordre d'origine : il est intouchable (§13.3).
-  /* ⚠ LE TICKET ARCHIVÉ EST INTOCABLE (§13.3) — mais SEULEMENT l'ORDRE
-   *  change avec l'archive. Les MÊMS chevaux, remis dans l'ordre de la presse
-   *  du jour. Sans cela la page resterait bloquée sur un ordre de juin alors
-   *  que la méthode a changé.
-   *  Le premier ticket figé reste : ce qu'on fige, c'est la SÉLECTION. */
-  const ticket = useMemo(() => {
-    if (!rempli) return ticketManuel && ticketManuel.length ? ticketManuel : []
-    const base = (ticketManuel && ticketManuel.length) ? ticketManuel : rempli.ticket
-    /* ⚠ 16/10/2026 — un cheval qui ne PART pas ne peut pas être au ticket :
-     *   `ticketAffiche` retire les numéros absents de la grille du jour et,
-     *   la course encore ouverte, remplit la place dans le même groupe
-     *   (quota §11.19). Course courue : constat, sans invention (§7). */
-    return ordonnerTicket(ticketAffiche(base, rempli, !courseFinie), grille)
-  }, [rempli, ticketManuel, grille, courseFinie])
-
-  // ⚠ L'AUTO-FIGEAGE : dès que le moteur produit un ticket, on l'écrit dans
-  //   l'archive. L'archive doit montrer le ticket DÈS LE PREMIER ANALYSE —
-  //   pas seulement après un clic « Rafraîchir ». `attachTicket` ne fige que
-  //   le PREMIER (un ticket déjà posé est intouchable, §13.3).
-  //
-  //   ⚠ 16/10/2026 : on NE recharge PAS le gel dans `ticketManuel`. Le gel
-  //   est une TRACE d'archive ; l'affichage, lui, doit rester le marché du
-  //   moment (§11.17) — c'est ce ticket-là qu'on joue, pas celui du matin.
-  const ticketAuto = useMemo(() => {
-    if (ticketManuel && ticketManuel.length) return null   // déjà figé
-    if (!rempli || !rempli.ticket.length) return null
-    return rempli.ticket
-  }, [rempli, ticketManuel])
-
-  /* ⚠ 16/10/2026 — LE GEL NE SE REPOSE PAS EN BOUCLE.
-   *   `attachTicket` ne fige que le PREMIER ticket de la date, mais
-   *   `listArchive()` rend un tableau NEUF à chaque appel : `setArchive`
-   *   relançait `stats` (computeStats sur toute l'archive) → `rempli` →
-   *   `ticketAuto` (tableau neuf lui aussi) → l'effet → `setArchive`…
-   *   et l'onglet bouclait, CPU à 100 % (« l'appli est quasi gelée »).
-   *   Avant, la boucle était coupée par `setTicketManuel(res.ticket)` —
-   *   supprimé exprès (le ticket AFFICHÉ suit le marché, §13.3 règle 8).
-   *   Le gel est donc borné : UNE fois par date et par session. */
-  const gelFait = useRef(null)
-  useEffect(() => {
-    if (!ticketAuto || !ticketAuto.length) return
-    if (gelFait.current === date) return
-    if (!gelAutorise()) return   // la nuit, on affiche sans figer (09/10/2026)
-    gelFait.current = date
-    let annule = false
-    ;(async () => {
-      const res = await attachTicket(date, [...ticketAuto], 'page')
-      if (annule || !res) return
-      setArchive(await listArchive())
-    })()
-    return () => { annule = true }
-  }, [date, ticketAuto])
-
-  // ⚠ la page ne SAUVEGARDE aucun ticket : c'est le job (Quinte AM/PM, auto-carrière)
-  //   qui construit et archive le ticket physique. Ici on ne fait qu'afficher.
-
-  // score moyen du ticket
-  const infoTicket = useMemo(() => {
-    const map = new Map(classement.map((x) => [x.p.num, x.s]))
-    const pris = ticket.map((n) => map.get(n)).filter(Boolean)
-    if (!pris.length) return null
+    const ticket = rempli.ticket || []
+    if (!ticket.length) return null
+    const n = ticket[0]
+    const c = participants.find((x) => x.num === n)
     return {
-      n: pris.length,
-      forme: +(pris.reduce((a, b) => a + b.score, 0) / pris.length).toFixed(2),
-      global: +(pris.reduce((a, b) => a + b.global, 0) / pris.length).toFixed(2),
+      num: n,
+      nom: c?.nom || `Cheval ${n}`,
+      cote: cotes?.[n],
+      coteOuvert: c?.coteRef,
+      forme: c?.forme,
+      dist: c?.distance,
     }
-  }, [ticket, classement])
+  }, [rempli, participants, cotes])
 
-  // résultat si l'arrivée est connue
-  const verdict = useMemo(() => {
-    if (!arrivee || !ticket.length) return null
-    const t = new Set(ticket)
-    const pris = arrivee.filter((n) => t.has(n))
-    return { pris: pris.length, manques: arrivee.filter((n) => !t.has(n)) }
-  }, [arrivee, ticket])
-
-  /* ---------------------------------------------------------- carrière --- */
-
-  /* ----------------------------------------------------------- stats --- */
-  // (`stats` est calculé plus haut, avant `rempli` : c'est lui qui ordonne le ticket)
-
-  /* ---------------------------------------------------------- actions --- */
-
-  // 🔒 plus de `basculer` : on ne peut plus forcer une case à la main (05/10/2026).
-  //   Le moteur remplit les quotas, la case est prise ou non. Point final.
-
-  const toutEffacer = async () => {
-    if (!confirm('Effacer toute l’archive locale ?')) return
-    await clearArchive(); await rafraichirArchive(); setMsg('Archive vidée')
-  }
-
-  // 🔒 RAFRAÎCHIR = FIGER — mais SEULEMENT SUR MARCHÉ OUVERT, JAMAIS AVANT.
-  //   Au premier clic, le ticket affiché est enregistré, et le premier figé
-  //   ne bouge plus jamais (attachTicket) — sauf le re-gel FINAL du job.
-  //   ⚠ 09/10/2026 : les gels à 01:55, 02:33, 03:02 figeaient un marché de
-  //   nuit sans valeur. Le PMU ouvre à 04:00 GMT : avant, il n'y a RIEN à
-  //   figer (ni cotes du jour, ni argent). On affiche le ticket LIVE sans
-  //   le figer — un marché fermé ne décide de rien.
-  const heureGMT = () => {
-    try {
-      return new Date().getUTCHours() + new Date().getUTCMinutes() / 60
-    } catch { return 12 }
-  }
-  const gelAutorise = () => { const h = heureGMT(); return h >= 4.5 && h < 22 }
-  const figerPuisRafraichir = async () => {
-    try {
-      if (ticket && ticket.length && gelAutorise()) await attachTicket(date, ticket, 'page')
-    } catch (e) { /* on rafraîchit quand même */ }
-    await rafraichirArchive()
-  }
-
-  /* ------------------------------------------------- ⚑ LE RÉSULTAT ------- */
-  /* Un clic → on relit la course sur pro.casacourses.com. Si elle est
-   *  finie, l'arrivée est écrite dans l'archive (avec le bilan x/5) et le
-   *  ticket est figé au passage s'il ne l'était pas encore.
-   *
-   *  ⚠ Si la course n'est pas finie, on ne devine RIEN : on affiche juste
-   *    que le résultat n'est pas encore publié (§7 — jamais de donnée
-   *    inventée, jamais une autre course à la place). */
-  const chercherResultat = async () => {
-    setBusyResultat(true); setMsg('')
-    try {
-      const res = await chargerCourseCC(date, syn?.synthese || [])
-      let arr = res?.arrivee
-      // repli turf-france : casacourses ne publie pas toujours l'arrivée
-      // (08/10 : status CLOSED mais has_results=false). La clé R/C vient
-      // de casacourses lui-même, donc c'est la même course.
-      if ((!arr || !arr.length) && res?.cle) {
-        const m = String(res.cle).match(/_R(\d+)_C(\d+)$/)
-        if (m) {
-          try {
-            const det = await chargerDetailReu(date, Number(m[1]), Number(m[2]), 'FRANCE')
-            if (det?.arrivee?.length) arr = det.arrivee
-          } catch (e2) { /* on garde le message standard ci-dessous */ }
-        }
-      }
-      if (!arr || !arr.length) {
-        setMsg('⚠ Pas de résultat publié pour cette course. Elle n’est pas encore clôturée — réessaie plus tard.')
-        return
-      }
-      // le ticket est figé d'abord : le résultat se mesure sur le ticket gelé
-      if (ticket && ticket.length) await attachTicket(date, ticket, 'auto')
-      await attachResult(date, {
-        arrivee: arr,
-        discipline: res.discipline,
-        distance: res.distance,
-        nbPartants: res.nbPartants,
-        hippodrome: res.hippodrome,
-        prix: res.prix,
-        courseId: res.courseId,
-        cle: res.cle || null,
-        runners: (res.participants || []).filter((p) => p.statut !== 'NON_PARTANT').map((p) => p.num),
-      })
-      setArrivee(arr)
-      setInfos(res)
-      setParticipants((res.participants || []).filter((p) => p.statut !== 'NON_PARTANT'))
-      await rafraichirArchive()
-      await pousserArchive() // la clôture manuelle remonte au disque, zéro clic
-      const t = new Set(ticket)
-      const p = arr.filter((n) => t.has(n)).length
-      setMsg(`✓ Arrivée enregistrée : ${arr.join(' - ')}  →  ${p}/5`)
-    } catch (e) {
-      setMsg('⚠ Resultat indisponible : ' + e.message)
+  const valeurDuJour = useMemo(() => {
+    if (!rempli) return null
+    const t = rempli.ticket || []
+    if (t.length < 2) return null
+    const n = t[1]
+    const c = participants.find((x) => x.num === n)
+    return {
+      num: n,
+      nom: c?.nom || `Cheval ${n}`,
+      cote: cotes?.[n],
     }
-    setBusyResultat(false)
-  }
+  }, [rempli, participants, cotes])
 
-  /* ------------------------------------------------------------- vue --- */
+  const avertDuJour = useMemo(() => {
+    if (!rempli) return null
+    const t = rempli.ticket || []
+    const n = t[t.length - 1]
+    const c = participants.find((x) => x.num === n)
+    return {
+      num: n,
+      nom: c?.nom || `Cheval ${n}`,
+      cote: cotes?.[n],
+      raison: 'maillon faible du ticket',
+    }
+  }, [rempli, participants, cotes])
+
+  const carnet = rempli ? rempli.carnet : null
 
   return (
-    <>
-      {/* ── bandeau : logo + navigation. Les moteurs/sources restent privés à chaque page ── */}
+    <div style={{ minHeight: '100vh', background: SK.fond, color: SK.texte, fontFamily: SK.police, padding: '16px 16px 56px' }}>
       <Entete page="quinte" />
-    <div dir="ltr" style={{
-      maxWidth: 1180, margin: '0 auto', padding: '0 16px 30px', minHeight: '72vh',
-      fontFamily: SK.police, background: SK.fond,
-      borderLeft: '3px solid ' + SK.bord, borderRight: '3px solid ' + SK.bord,
-      transition: 'background .25s, font-family .25s',
-    }}>
-      {/* ── bandeau d'identité : titre, couleur et police de l'onglet ── */}
-      <div style={{
-        margin: '0 -16px 14px', padding: '13px 16px', color: '#fff',
-        background: SK.entete, borderBottom: '3px solid ' + SK.accent,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap' }}>
-          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, letterSpacing: 0.5 }}>{SK.titre}</h2>
-          <span style={{ fontSize: 12, opacity: 0.9 }}>{SK.sousTitre}</span>
+
+      {msg && (
+        <div style={{ background: 'rgba(244,63,94,.15)', border: '1px solid rgba(244,63,94,.4)', borderRadius: 10, padding: '12px 14px', color: '#fecaca', fontSize: 12.5, marginBottom: 12 }}>
+          {msg}
         </div>
-      </div>
-
-      {/* barre de commande */}
-      <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 12 }}>
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
-          style={{ padding: '6px 10px', borderRadius: 8, border: '1px solid rgba(125,205,255,.28)' }} />
-        <button onClick={() => charger(date)} disabled={busy}
-          style={{ padding: '6px 14px', borderRadius: 8, border: '2px solid #0f172a', background: busy ? '#7a8ea9' : '#0f172a', color: '#fff', cursor: 'pointer' }}>
-          {busy ? 'Chargement…' : 'Actualiser'}
-        </button>
-        {syn && (
-          <span style={{ fontSize: 13 }}>
-            {syn.found
-              ? <><b>{syn.race?.hippodrome}</b> — {syn.race?.prix}</>
-              : <span style={{ color: '#b45309' }}>Aucun Quinté trouvé — synthèse par défaut</span>}
-          </span>
-        )}
-
-      </div>
-
-      <div style={{ display: 'flex', gap: 6, marginBottom: 12 }}>
-        {TABS.map(([k, l]) => {
-          const t = THEME[k]
-          const on = onglet === k
-          return (
-            <button key={k} onClick={() => setOnglet(k)}
-              style={{
-                padding: '7px 22px', borderRadius: 999, cursor: 'pointer',
-                fontSize: 13, fontWeight: on ? 800 : 600, letterSpacing: 0.3,
-                fontFamily: t.police,
-                border: on ? `2px solid ${t.accent}` : `1px solid ${t.bord}`,
-                background: on ? t.entete : t.carte,
-                color: on ? '#fff' : t.accent,
-                boxShadow: on ? `0 4px 12px ${t.ombre}` : 'none',
-              }}>{on ? '▸ ' : ''}{l}</button>
-          )
-        })}
-      </div>
-
-      {msg && <div style={{ color: '#fb7185', marginBottom: 10, fontSize: 13 }}>{msg}</div>}
-
-      {syn && (
-          <div style={{ ...s.box, padding: '10px 12px', marginBottom: 12, fontSize: 12, borderLeft: '4px solid ' + SK.accent, background: SK.alt, borderRadius: SK.box.borderRadius }}>
-            <b>Synthèse reçue</b>{' '}
-            <span style={{ fontFamily: 'monospace' }}>
-              [{(syn.synthese || []).join(', ')}]
-            </span>
-            <span style={{ color: '#64748b', marginLeft: 10 }}>
-              — {(syn.synthese || []).length} numéros cités par la presse ·
-              uniques {new Set(syn.synthese || []).size}
-              {grille && grille.manquants.length > 0 && (
-                <>
-                  <br />
-                  <span style={{ color: '#b45309' }}>
-                    + {grille.manquants.length} partant(s) non cité(s) par la presse, ajoutés à la suite :
-                    {' '}{grille.manquants.join(' · ')} (P{(syn.synthese || []).length + 1} et suivantes)
-                  </span>
-                </>
-              )}
-            </span>
-            {new Set(syn.synthese || []).size !== (syn.synthese || []).length && (
-              <div style={{ color: '#fb7185', marginTop: 4 }}>
-                ⚠ doublons dans la réponse du backend
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* ---------------------------------------------------------- grille */}
-      {onglet === 'grille' && grille && (
-        <div>
-          <ConditionsCourse course={infos} date={date} sk={SK} />
-
-          {/* MA MÉTHODE, marché et scores cachés à la demande */}
-          {carnet(detail) && (
-            <div style={{ ...s.box, padding: 14, overflowX: 'auto', boxShadow: SK.ombreD }}>
-              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${carnet(detail).colonnes.length}, 56px)`, gap: 4, width: 'max-content' }}>
-                {carnet(detail).colonnes.map((col, i) => (
-                  <div key={i} style={{ display: 'grid', gap: 4 }}>
-                    {LIGNE_CARNET(col.haut, (col.haut || col.bas).quota)}
-                    {LIGNE_CARNET(col.bas, (col.bas || col.haut).quota)}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          <div style={{ ...s.box, padding: '12px 14px', marginTop: 12, fontSize: 13, borderLeft: '5px solid ' + SK.accent, boxShadow: SK.ombreD }}>
-            <b style={{ letterSpacing: 1.4 }}>TICKET</b>{'  '}
-            <span style={{ fontSize: 18, fontWeight: 800, letterSpacing: 1.5, color: SK.accent }}>
-              {ticket.length ? ticket.join('  ·  ') : '—'}
-            </span>
-            <span style={{ fontSize: 12, color: '#64748b', marginLeft: 12 }}>{ticket.length} chevaux</span>
-            {'  '}
-          </div>
-          {/* PanneauMesure (fiabilité) caché à la demande */}
+      )}
+      {!syn || !syn.synthese?.length && (
+        <div style={{ background: SK.carte, border: `1px solid ${SK.bord}`, borderRadius: 12, padding: '16px', color: '#94a3b8', fontSize: 13, marginBottom: 14 }}>
+          Aucun Quinté trouvé pour cette date.
         </div>
       )}
 
-      {/* --------------------------------------------------------- carrière */}
-      {/* ---------------------------------------------------------- ticket */}
-      {onglet === 'ticket' && (
-        <div>
-          <div style={{ ...s.box, padding: 16, marginBottom: 14, background: SK.entete, border: 'none', color: '#fff' }}>
-            <b style={{ fontSize: 14, letterSpacing: 1.2, opacity: 0.95 }}>TICKET DU {date}</b>
-            {(() => {
-              /* ⭐ LE STATUT : provisoire ou définitif ? (09/10/2026, fuseau GMT).
-               *   PROVISOIRE (ambre) = gel du matin / de la page, marché pas mûr.
-               *   DÉFINITIF (vert)   = re-gel FINAL avant-course, marché du moment.
-               *   MANUEL (bleu)      = posé à la main, intouchable.
-               *   LIVE (gris)        = rien de gelé : c'est le marché en direct. */
-              const rec = archive.find((a) => a.date === date)
-              if (!ticket.length) return null
-              /* Course courue = ticket jugé : ni provisoire ni définitif, CLÔTURÉ.
-               * (09/10/2026 : un 5/5 étiqueté PROVISOIRE n'a aucun sens.) */
-              if ((rec?.arrivee || []).length > 0) return (
-                <span style={{
-                  marginLeft: 12, fontSize: 12, fontWeight: 800, letterSpacing: 1,
-                  color: '#57534e', border: '2px solid #57534e', borderRadius: 999,
-                  padding: '2px 12px', verticalAlign: 'middle',
-                }}>
-                  CLÔTURÉ
-                </span>
-              )
-              const src = rec?.ticketSource || null
-              /* ⚠ 16/10/2026 — le badge dit ce que le TICKET AFFICHÉ est, pas
-               *   ce que l'archive a gelé. Tant que la course n'a pas couru, la
-               *   page joue le marché en direct (§11.17) : afficher « gelé à
-               *   10:15 » au-dessus d'un ticket qui bouge était un mensonge.
-               *   Le gel vit dans l'onglet Archive, avec sa source et son heure. */
-              const gele = !!(ticketManuel && ticketManuel.length)
-              const conf = !gele || !src ? ['LIVE', '#7a8ea9']
-                : src === 'manuel' ? ['MANUEL', '#93c5fd']
-                : src === 'final' ? ['DÉFINITIF', '#4ade80']
-                : ['PROVISOIRE', '#fcd34d']
-              return (
-                <span style={{
-                  marginLeft: 12, fontSize: 12, fontWeight: 800, letterSpacing: 1,
-                  color: conf[1], border: `2px solid ${conf[1]}`, borderRadius: 999,
-                  padding: '2px 12px', verticalAlign: 'middle',
-                }}>
-                  {conf[0]}
-                  {rec?.ticketPoseLe && src && src !== null ? ` · gelé à ${heureGMT(rec.ticketPoseLe)}` : ''}
-                </span>
-              )
-            })()}
-            <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 3, marginTop: 8, color: '#fff', fontFamily: SK.nb.td }}>
-              {ticket.length ? ticket.join('  ·  ') : '—'}
-            </div>
-            {ticket.length > 1 && (
-              <div style={{ fontSize: 11, color: 'rgba(255,255,255,.75)', marginTop: 6, fontFamily: SK.nb.td }}>
-                <b>{ticket[0]}</b> = la seule case qui prédit (27,1 % de victoires) ·
-                les {ticket.length - 1} autres sont un <b>bloc sans ordre</b> — le Quinté se joue en désordre.
-              </div>
-            )}
-            {infoTicket && (
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,.85)', marginTop: 8, fontFamily: SK.nb.td }}>
-                {infoTicket.n} chevaux · score forme moyen {infoTicket.forme}/10 · score global moyen {infoTicket.global}
-              </div>
-            )}
-            {verdict && (
-              <div style={{ marginTop: 10, fontSize: 14, fontWeight: 700, color: verdict.pris === 5 ? '#4ade80' : verdict.pris >= 3 ? '#fcd34d' : '#fca5a5' }}>
-                Arrivée {arrivee.join(' - ')} → <b>{verdict.pris}/5</b>
-                {verdict.manques.length > 0 && <> · manquants : {verdict.manques.join(', ')}</>}
-              </div>
-            )}
+      {syn?.synthese?.length && (
+        <div style={{ background: SK.carte, border: `1px solid ${SK.bord}`, borderRadius: 14, padding: '16px 18px', boxShadow: SK.ombreCard, marginBottom: 14 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '8px' }}>
+            <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1 }}>LES CONDITIONS DE LA COURSE</b>
+            {infos?.discipline && <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: 11, color: '#94a3b8', background: 'rgba(255,255,255,.05)', padding: '2px 8px', borderRadius: 999 }}>{DISC_TXT(infos.discipline)}</span>}
           </div>
-
-          {/* ⭐ 29/10/2026 — LA BASSMAT JUGE CE TICKET, À CHAQUE COURSE (§11.47).
-              Mesuré sur 76 + 26 courses (tools/verdict-course.mjs) : le juge
-              est CALIBRÉ (3,37 prédits / 3,50 réalisés, puis 3,30 / 3,27) mais
-              il ne CLASSE pas les tickets — la composition qu'il préfère tombe
-              à 6,6 % de 5/5 contre 11,8 % au moteur. Il annonce la valeur du
-              ticket, il ne le remplace pas. Ne jamais le faire choisir. */}
-          {(() => {
-            const J = jugerTicket(detail, bassmat, forme ? forme.cle : null)
-            if (!J) {
-              return (
-                <div style={{ ...s.box, padding: 12, marginBottom: 14, fontSize: 12, color: SK.muted, fontFamily: SK.police }}>
-                  ⚖️ La bassmat ne peut pas juger ce ticket : <b>public/data/bassmat.json</b> manque.
-                  Écrire <code>node tools\bassmat.mjs</code>.
-                </div>
-              )
-            }
-            const fort = J.attendu5 >= 3.4
-            const moyen = J.attendu5 >= 2.9
-            const coul = fort ? '#047857' : moyen ? '#b45309' : '#b91c1c'
-            const nr = (x) => Number(x).toFixed(1).replace('.', ',')
-            return (
-              <div style={{ ...s.box, padding: 16, marginBottom: 14, borderLeft: '6px solid ' + coul }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap', marginBottom: 10 }}>
-                  <b style={{ fontSize: 13, letterSpacing: 1, color: coul, fontFamily: SK.police }}>⚖️ LA BASSMAT JUGE CE TICKET</b>
-                  <span style={{ fontSize: 11, color: SK.muted, fontFamily: SK.police }}>
-                    juge = bassmat des courses passées · lecture : <b>{J.source === 'global' ? 'globale' : (forme && forme.lib) || J.source}</b>
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-                  <div>
-                    <div style={{ fontSize: 30, fontWeight: 800, color: coul, fontFamily: SK.nb.td, lineHeight: 1 }}>
-                      {nr(J.attendu5)}<span style={{ fontSize: 16, color: SK.muted }}> / 5</span>
-                    </div>
-                    <div style={{ fontSize: 11, color: SK.muted, fontFamily: SK.police, marginTop: 3 }}>
-                      arrivants attendus dans les 5
-                    </div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 22, fontWeight: 800, color: SK.texte, fontFamily: SK.nb.td, lineHeight: 1 }}>
-                      {nr(J.attendu3)}<span style={{ fontSize: 13, color: SK.muted }}> / 3</span>
-                    </div>
-                    <div style={{ fontSize: 11, color: SK.muted, fontFamily: SK.police, marginTop: 3 }}>
-                      sur le podium
-                    </div>
-                  </div>
-                  {J.faible && (
-                    <div>
-                      <div style={{ fontSize: 18, fontWeight: 800, color: '#b45309', fontFamily: SK.nb.td, lineHeight: 1 }}>
-                        n°{J.faible.num} <span style={{ fontSize: 12, color: SK.muted }}>· P{J.faible.place}</span>
-                      </div>
-                      <div style={{ fontSize: 11, color: SK.muted, fontFamily: SK.police, marginTop: 3 }}>
-                        maillon faible — cette case ne sort que <b>{nr(J.faible.pc5)} %</b> du temps
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div style={{ marginTop: 12, fontSize: 12, fontFamily: SK.police }}>
-                  {J.fautes.length === 0 ? (
-                    <span style={{ color: '#047857' }}>
-                      ✓ Aucune faute de choix : dans aucun bloc, la case jetée ne vaut mieux que la case gardée.
-                    </span>
-                  ) : (
-                    <>
-                      <div style={{ color: '#b45309', fontWeight: 700, marginBottom: 5 }}>
-                        {J.fautes.length} faute{J.fautes.length > 1 ? 's' : ''} de choix — la case jetée valait mieux que la gardée :
-                      </div>
-                      <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: SK.nb.td, fontSize: 12 }}>
-                        <thead>
-                          <tr>
-                            <th style={{ ...SK.th, textAlign: 'left' }}>bloc</th>
-                            <th style={{ ...SK.th, textAlign: 'left' }}>gardé</th>
-                            <th style={{ ...SK.th, textAlign: 'left' }}>jeté</th>
-                            <th style={{ ...SK.th, textAlign: 'right' }}>prix</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {J.fautes.map((f, i) => (
-                            <tr key={f.bloc} style={{ borderBottom: '1px solid ' + SK.bord, background: i % 2 ? SK.alt : SK.ligne }}>
-                              <td style={{ ...SK.td, fontWeight: 800 }}>{f.bloc}</td>
-                              <td style={{ ...SK.td }}>n°{f.garde.num} <span style={{ color: SK.muted }}>P{f.garde.place}</span> · {nr(f.garde.pc5)} %</td>
-                              <td style={{ ...SK.td, color: '#b45309' }}>n°{f.jete.num} <span style={{ color: SK.muted }}>P{f.jete.place}</span> · {nr(f.jete.pc5)} %</td>
-                              <td style={{ ...SK.td, textAlign: 'right', fontWeight: 700 }}>+{nr(f.ecart)}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </>
-                  )}
-                </div>
-
-                <div style={{ marginTop: 10, fontSize: 11, color: SK.muted, fontFamily: SK.police, lineHeight: 1.5 }}>
-                  ⚠ Mesuré (<b>tools/verdict-course.mjs</b>, 76 + 26 courses) : le juge est <b>calibré</b>
-                  {' '}(3,37 prédits / 3,50 réalisés, puis 3,30 / 3,27) mais il <b>ne classe pas</b> les tickets —
-                  la composition qu’il préfère tombe à <b>6,6 %</b> de 5/5 contre <b>11,8 %</b> pour le moteur.
-                  Il annonce la valeur du ticket ; <b>il ne le remplace pas</b>.
-                </div>
-              </div>
-            )
-          })()}
-
-          {/* ⭐ LE BOUTON « RÉSULTAT ». La course est finie : un clic va chercher
-              l'arrivée sur pro.casacourses.com et l'écrit dans l'archive.
-              Tant qu'on n'a pas cliqué, l'arrivée reste vide — on ne l'invente
-              jamais (§7). Le bouton est-ce que l'utilisateur déclenche : le
-              job quotidien (Quinte AM/PM) fait de même en automatique. */}
-          <div style={{ ...s.box, padding: 12, marginBottom: 14, display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', fontFamily: SK.police }}>
-            {arrivee && arrivee.length ? (
-              <>
-                <span style={{ fontSize: 13, color: SK.texte }}>
-                  Arrivée enregistrée : <b style={{ fontFamily: SK.nb.td }}>{arrivee.join(' - ')}</b>
-                </span>
-                <button onClick={() => charger(date)} disabled={busy}
-                  style={{ padding: '6px 14px', borderRadius: 6, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: busy ? 'default' : 'pointer', fontFamily: SK.police, fontSize: 12 }}>
-                  {busy ? 'Lecture…' : '↻ Relire le résultat'}
-                </button>
-              </>
-            ) : (
-              <>
-                <span style={{ fontSize: 13, color: '#b45309' }}>
-                  La course n'est pas encore clôturée — ou le résultat n'a pas été lu.
-                </span>
-                <button onClick={() => chercherResultat()} disabled={busyResultat}
-                  style={{ padding: '8px 20px', borderRadius: 6, border: '2px solid ' + SK.accent, background: busyResultat ? '#7a8ea9' : SK.accent, color: '#fff', cursor: busyResultat ? 'default' : 'pointer', fontWeight: 700, fontSize: 13, fontFamily: SK.police }}>
-                  {busyResultat ? 'Lecture en cours…' : '⚑ Chercher le résultat'}
-                </button>
-              </>
-            )}
-          </div>
-
-          {provisoire && (
-            <div style={{ background: '#fefce8', border: '1px solid #facc15', padding: 10, borderRadius: 8, fontSize: 13, marginBottom: 10 }}>
-              ⚠ <b>partants provisoires</b> (noms pas encore publiés) — les scores ci-dessous sont calculés sur données incomplètes.
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <div style={{ fontSize: 12.5, color: '#e7f1ff' }}>
+              <b style={{ color: '#f8fafc' }}>{infos?.date_formatted || date}</b>{'   ·   '}
+              {infos?.hippodrome || ''}
+              {infos?.code ? `  ·  ${infos.code}` : ''}
+              <br />
+              <span style={{ fontSize: 13, fontWeight: 800, color: '#f8fafc' }}>{infos?.name || infos?.hippodrome}</span>
             </div>
-          )}
-          {classement.length > 0 && (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
-                <thead>
-                  <tr style={s.hdr}>
-                    {['N°', 'Cheval', 'P', 'Musique', 'Forme', 'Série', 'Pureté', 'Car/VIC/2E/3E', 'Poids', 'Val', 'Jockey', 'Entraîneur', 'Score', 'Ticket']
-                      .map((h) => <th key={h} style={s.th}>{h}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {classement.map(({ p, s: sc }) => {
-                    const on = ticket.includes(p.num)
-                    return (
-                      <tr key={p.num} style={{ background: on ? SK.on : SK.ligne, borderBottom: '1px solid ' + SK.bord }}>
-                        <td style={{ ...s.td, fontWeight: 700 }}>{p.num}</td>
-                        <td style={s.td}>{p.horse}</td>
-                        <td style={s.td}>{grille ? ((grille.slotParNum && grille.slotParNum[p.num]) ?? grille.parNum?.[p.num] ?? '—') : '—'}</td>
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 12 }}>{p.musique}</td>
-                        <td style={{ ...s.td, fontWeight: 700, color: sc.score >= 5 ? '#34d399' : sc.score >= 3.5 ? '#fbbf24' : '#fb7185' }}>
-                          {sc.score.toFixed(2)}
-                        </td>
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 12 }}>{sc.serie.join(' ')}</td>
-                        <td style={s.td}>{sc.purite}%</td>
-                        <td style={s.td}>{p.nombreCourses}/{p.nombreVictoires}/{p.nombrePlacesSecond}/{p.nombrePlacesTroisieme}</td>
-                        <td style={s.td}>{p.poids}</td>
-                        <td style={s.td}>{p.valeur}</td>
-                        <td style={s.td}>{p.jockey}</td>
-                        <td style={s.td}>{p.trainer}</td>
-                        <td style={{ ...s.td, fontWeight: 700 }}>{sc.global}</td>
-                        <td style={s.td}>{on ? '✅' : ''}</td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
+            <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+              {infos?.distance && <span style={{ background: 'rgba(255,255,255,.08)', padding: '2px 8px', borderRadius: 999, fontSize: 11, color: '#cbd5e1' }}>{infos.distance}m</span>}
+              {infos?.terrain && <span style={{ background: 'rgba(255,255,255,.08)', padding: '2px 8px', borderRadius: 999, fontSize: 11, color: '#cbd5e1' }}>{infos.terrain}</span>}
+              {infos?.corde && <span style={{ background: 'rgba(255,255,255,.08)', padding: '2px 8px', borderRadius: 999, fontSize: 11, color: '#cbd5e1' }}>{infos.corde}</span>}
             </div>
-          )}
-
-          <div style={{ ...s.box, padding: '10px 12px', marginTop: 14, fontSize: 12, color: SK.texte, lineHeight: 1.6, background: SK.alt, borderLeft: '4px solid ' + SK.accent }}>
-            <b>Limite du moteur :</b> le backend donne la musique, le poids, la valeur, l’âge,
-            le jockey, l’entraîneur et les stats de carrière. Il ne donne <b>pas</b> la distance,
-            le terrain ni le type des courses passées. Le score ci-dessus est donc un
-            <b> provisoire</b> : il remplit les quotas, il ne tranche pas seul.
-            La sélection physique (distance / piste / corde / terrain) reste à faire à la main.
           </div>
         </div>
       )}
 
-      {/* --------------------------------------------------------- bassmat (caché à la demande) */}
-      {/* {onglet === 'bassmat' && (
-        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} BC={bassmatChoix} MOIS={bassmatMois} discipline={bassmatDiscipline} setDiscipline={setBassmatDiscipline} toutLesP={toutLesP} setToutLesP={setToutLesP} />
-      )} */}
-
-      {/* --------------------------------------------------------- archive */}
-      {onglet === 'archive' && (
-        <div>
-          <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
-            <button onClick={toutEffacer} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid rgba(244,63,94,.55)', background: SK.carte, color: '#fb7185', cursor: 'pointer', fontFamily: SK.police }}>
-              Tout effacer
-            </button>
-            <button onClick={() => figerPuisRafraichir()} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: 'pointer', fontFamily: SK.police }}>
-              Rafraîchir
-            </button>
-          </div>
-
-          {archive.length === 0 ? (
-            <div style={{ fontSize: 13, color: '#7a8ea9' }}>Archive vide. Ouvre cette page chaque jour : la Synthèse est enregistrée automatiquement.</div>
-          ) : (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
-                <thead>
-                  <tr style={s.hdr}>
-                    {['Date', 'Hippodrome', 'Type', 'Distance', 'Synthèse', 'Arrivée', 'Ticket', 'Posé le (GMT)', 'Statut', 'Bilan', 'Top3', '']
-                      .map((h) => <th key={h} style={s.th}>{h}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {archive.map((a) => {
-                    const t = new Set(ticketValide(a))
-                    const p = (a.arrivee || []).filter((n) => t.has(n)).length
-                    /* ⭐ Les 3 indicateurs (09/10/2026) : le x/5 ne suffit pas.
-                     *   Un 4/5 qui rate le 1er est une feuille perdante : on
-                     *   compte le Top3 à part, et on signale le 1er manqué. */
-                    const top3 = (a.arrivee || []).slice(0, 3)
-                    const hit3 = top3.filter((n) => t.has(n)).length
-                    const manque1er = (a.arrivee || []).length > 0 && ticketValide(a).length > 0 && !t.has(a.arrivee[0])
-                    return (
-                      <tr key={a.date} style={{ borderBottom: '1px solid rgba(255,255,255,.07)',                         background: a.placeholder ? SK.danger : (a.found ? SK.ligne : SK.alt) }}>
-                        <td style={{ ...s.td, fontWeight: 700 }}>{a.date}</td>
-                        <td style={{ ...s.td, textTransform: 'capitalize' }}>{(a.hippodrome || a.race?.hippodrome || '—').toLowerCase()}</td>
-                        <td style={s.td}>{({ PLAT: 'Plat', HAIE: 'Haies', ATTELE: 'Attelé', TROT: 'Trot', STEEPLECHASE: 'Steeple', STEEPLE: 'Steeple', HAIES: 'Haies', ATTELEE: 'Attelé' })[String(a.discipline || '').toUpperCase()] || (a.discipline && a.discipline !== 'N' ? a.discipline : '—')}</td>
-                        <td style={s.td}>{a.distance ? a.distance + 'm' : '—'}</td>
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>
-                          {(a.synthese || []).join(' ')}
-                          {a.placeholder && <span style={{ color: '#fb7185', fontWeight: 700 }}> ⚠ par défaut</span>}
-                        </td>
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>{(a.arrivee || []).join('-') || '—'}</td>
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11 }}>
-  {/* ⭐ ORDRE VIVANT (20/10/2026, §11.32) : l'archive affiche les MÊMES
-      chevaux, remis dans l'ordre de LA PRESSE du jour — le gel fige la
-      SÉLECTION, jamais l'ordre (§17.2). */}
-  {ordonnerTicket(ticketValide(a), buildGrid(a.synthese || [], a.runners || [])).join(' ') || '—'}
-</td>
-                        {/* ⭐ UN SEUL TEMPS : l'heure où le ticket a été POSÉ (le gel).
-                            Pas l'heure d'enregistrement de la Synthèse — ce
-                            sont deux moments différents, et n'en afficher
-                            qu'un évite toute ambiguïté. */}
-                        <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 11, color: a.ticketPoseLe ? SK.accent : '#7a8ea9' }}>
-                          {a.ticketPoseLe ? (hhmmGMT(a.ticketPoseLe) || '—') : '—'}
-                        </td>
-                        <td style={{ ...s.td, fontSize: 11, fontWeight: 800 }}>
-                          {(() => {
-                            if ((a.arrivee || []).length > 0) return <span style={{ color: '#57534e' }}>CLÔTURÉ</span>
-                            const src = a.ticketSource || null
-                            if (!src || !ticketValide(a).length) return <span style={{ color: '#7a8ea9' }}>—</span>
-                            const conf = src === 'final' ? ['DÉFINITIF', '#34d399']
-                              : src === 'manuel' ? ['MANUEL', '#1d4ed8']
-                              : ['PROVISOIRE', '#b45309']
-                            return <span style={{ color: conf[1] }}>{conf[0]}</span>
-                          })()}
-                        </td>
-                        <td style={{ ...s.td, fontWeight: 700, color: p === 5 ? '#34d399' : p > 0 ? '#fbbf24' : '#7a8ea9' }}>
-                          {a.arrivee ? p + '/5' : '—'}
-                        </td>
-                        <td style={{ ...s.td, fontWeight: 700, color: !a.arrivee ? '#7a8ea9' : hit3 === 3 ? '#34d399' : manque1er ? '#fb7185' : '#fbbf24' }}>
-                          {!a.arrivee ? '—' : hit3 + '/3'}{manque1er ? ' ⚠1er' : ''}
-                        </td>
-                        <td style={s.td}>
-                          <button onClick={async () => { await deleteArchive(a.date); rafraichirArchive() }}
-                            style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#fb7185' }}>✕</button>
-                        </td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
+      {syn?.synthese?.length && (
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: 14 }}>
+          {chevalDuJour && (
+            <CarteInfo
+              titre="PULSATION DU JOUR"
+              texte={`Le ${chevalDuJour.nom} (n°${chevalDuJour.num}) est le premier du ticket moteur.`}
+              couleur={SK.bon}
+              icone="💡"
+              num={chevalDuJour.num}
+              cote={chevalDuJour.cote}
+            />
+          )}
+          {valeurDuJour && (
+            <CarteInfo
+              titre="VALEUR DU JOUR"
+              texte={`Le ${valeurDuJour.nom} (n°${valeurDuJour.num}) — rapport potentiel élevé.`}
+              couleur={SK.moyen}
+              icone="💎"
+              num={valeurDuJour.num}
+              cote={valeurDuJour.cote}
+            />
+          )}
+          {avertDuJour && (
+            <CarteInfo
+              titre="MAILLON FAIBLE"
+              texte={`Le ${avertDuJour.nom} (n°${avertDuJour.num}) est le maillon faible du ticket.`}
+              couleur={SK.mauvais}
+              icone="⚠️"
+              num={avertDuJour.num}
+              cote={avertDuJour.cote}
+              sous="À surveiller"
+            />
           )}
         </div>
       )}
 
-      {/* ----------------------------------------------------------- stats */}
-      {onglet === 'stats' && (
-        <div>
-          <BarreFiltres sk={SK} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={statsDiscipline} setDiscipline={setStatsDiscipline} disciplines={DISCIPLINES_TROT} />
-          {statsDiscipline === 'attelé' && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
-              <span style={{ fontSize: 12, color: SK.muted, fontWeight: 700 }}>Trot :</span>
-              {[{ key: 'all', lib: 'Tout' }, { key: 'autostart', lib: 'Autostart' }, { key: 'volte', lib: 'Volté' }].map((o) => (
-                <button key={o.key} onClick={() => setStatsTrot(o.key)}
-                  style={{ padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: statsTrot === o.key ? SK.accentSombre : 'transparent', color: statsTrot === o.key ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-                  {o.lib}
-                </button>
+      {carnet && (
+        <div style={{ marginBottom: 14 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '10px' }}>
+            <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1 }}>CARNET DES CASES P1..P20</b>
+            <span style={{ fontSize: 11, color: '#64748b', fontWeight: 800, background: 'rgba(255,255,255,.08)', padding: '2px 8px', borderRadius: 999 }}>{toutLesP ? '20 cases' : 'P1-P5'}</span>
+          </div>
+          <div style={{ overflowX: 'auto', paddingBottom: '8px' }}>
+            <div style={{ display: 'flex', gap: '10px', paddingBottom: '20px', minWidth: 'max-content' }}>
+              {carnet.cases.slice(0, toutLesP ? 5 : 20).map((c) => (
+                <CarteCheval
+                  key={c.num}
+                  num={c.num}
+                  nom={c.nom}
+                  distance={c.distance}
+                  cote={c.cote}
+                  soie={c.soie}
+                  etat={c.etat}
+                  pris={c.pris}
+                />
               ))}
-              {departs && (
-                <span style={{ fontSize: 11, color: SK.muted }}>
-                  {archiveFiltree.length} course(s) retenue(s) · source : programme PMU
-                </span>
-              )}
             </div>
-          )}
-          {archiveFiltree.length === 0 && (
-            <div style={{ marginBottom: 12, padding: '10px 12px', background: SK.alt, border: '1px solid ' + SK.bord, borderLeft: '4px solid #f59e0b', borderRadius: SK.box.borderRadius, fontSize: 12.5, color: SK.texte, lineHeight: 1.6 }}>
-              Aucune course pour ce filtre. Cliquez sur <b>Tout</b> (discipline) ou <b>Tout</b> (Trot) pour revenir.
-              <button onClick={() => { setStatsDiscipline('all'); setStatsTrot('all') }}
-                style={{ marginLeft: 10, padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: SK.accent, color: '#fff', cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-                ← Tout
-              </button>
-            </div>
-          )}
-          {stats.nb === 0 ? (
-            <div style={{ fontSize: 13, color: '#7a8ea9' }}>
-              Pas encore assez de données ({stats.nb} Quinté avec arrivée). L’archive se remplit
-              automatiquement à chaque ouverture de page.
-            </div>
-          ) : (
-            <>
-              <div style={{ fontSize: 13, color: '#475569', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                <span>
-                  <b>{stats.nb}</b> Quinté(s) <b>valide(s)</b> retenu(s)
-                  {stats.diagnostic ? ` · ${stats.diagnostic.coursesExaminees} examinée(s) · ${stats.diagnostic.coursesEcartees} écartée(s)` : ''}
-                  {' '}— qui gagne, qui place.
-                </span>
-                {stats.diagnostic && (stats.diagnostic.doublons > 0 || stats.diagnostic.chevauxAbsents > 0) && (
-                  <span style={{ color: '#fb7185', fontWeight: 600 }}>
-                    ⚠ doublons {stats.diagnostic.doublons} · chevaux absents de la Synthèse {stats.diagnostic.chevauxAbsents} — exclus
-                  </span>
-                )}
-                {(() => {
-                  const closes = archive.filter((a) => (a.arrivee || []).length > 0 && ticketValide(a).length > 0)
-                  const avec3 = closes.filter((a) => (a.arrivee || []).slice(0, 3).every((n) => ticketValide(a).includes(n))).length
-                  const sans1er = closes.filter((a) => !ticketValide(a).includes(a.arrivee[0])).length
-                  return closes.length ? (
-                    <span style={{ fontWeight: 700 }}>
-                      Top3 : <span style={{ color: '#34d399' }}>{avec3}/{closes.length}</span>
-                      {' · '}1er manqué : <span style={{ color: sans1er ? '#fb7185' : '#34d399' }}>{sans1er}/{closes.length}</span>
-                    </span>
-                  ) : null
-                })()}
-                {stats.nb < 10 && (
-                  <span style={{ color: '#b45309', fontWeight: 600 }}>
-                    ⚠ {stats.nb}/10 — chiffres trop faibles pour conclure
-                  </span>
-                )}
-                <BarreFiltres sk={SK} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={statsDiscipline} setDiscipline={setStatsDiscipline} disciplines={DISCIPLINES_TROT} />
-                {statsDiscipline === 'attelé' && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
-                    <span style={{ fontSize: 12, color: SK.muted, fontWeight: 700 }}>Trot :</span>
-                    {[{ key: 'all', lib: 'Tout' }, { key: 'autostart', lib: 'Autostart' }, { key: 'volte', lib: 'Volté' }].map((o) => (
-                      <button key={o.key} onClick={() => setStatsTrot(o.key)}
-                        style={{ padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: statsTrot === o.key ? SK.accentSombre : 'transparent', color: statsTrot === o.key ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-                        {o.lib}
-                      </button>
-                    ))}
-                    {departs && (
-                      <span style={{ fontSize: 11, color: SK.muted }}>
-                        {archiveFiltree.length} course(s) retenue(s) · source : programme PMU
-                      </span>
-                    )}
-                  </div>
-                )}
-                {archiveFiltree.length === 0 && (
-                  <div style={{ marginBottom: 12, padding: '10px 12px', background: SK.alt, border: '1px solid ' + SK.bord, borderLeft: '4px solid #f59e0b', borderRadius: SK.box.borderRadius, fontSize: 12.5, color: SK.texte, lineHeight: 1.6 }}>
-                    Aucune course pour ce filtre. Cliquez sur <b>Tout</b> (discipline) ou <b>Tout</b> (Trot) pour revenir.
-                    <button onClick={() => { setStatsDiscipline('all'); setStatsTrot('all') }}
-                      style={{ marginLeft: 10, padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: SK.accent, color: '#fff', cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-                      ← Tout
-                    </button>
-                  </div>
-                )}
-              </div>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
-                  <thead>
-                    <tr style={s.hdr}>
-                      <th style={s.th}>Place</th>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <th key={r.place} style={{ ...s.th, background: r.n === 0 ? SK.muted : SK.accentSombre }}>P{r.place}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-                      <td style={{ ...s.td, fontWeight: 700 }}>n_top5</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{ ...s.td, fontWeight: 700 }}>{r.n}</td>
-                      ))}
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-                      <td style={{ ...s.td, fontWeight: 700, color: SK.muted }}>victoires</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{ ...s.td, color: SK.muted }}>{r.victoires ?? '—'}</td>
-                      ))}
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-                      <td style={{ ...s.td, fontWeight: 700, color: SK.muted }}>podiums</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{ ...s.td, color: SK.muted }}>{r.podiums ?? '—'}</td>
-                      ))}
-                    </tr>
-                    {['1er', '2e', '3e', '4e', '5e'].map((lbl, k) => (
-                      <tr key={lbl} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: k % 2 ? SK.alt : SK.ligne }}>
-                        <td style={{ ...s.td, fontWeight: 700 }}>{lbl}</td>
-                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                          <td key={r.place} style={{
-                            ...s.td, fontWeight: r.n && r.p[k] > 0 ? 800 : 400,
-                            color: r.n === 0 ? '#4a5a72' : r.p[k] > 0 ? '#34d399' : '#6d82a2',
-                          }}>
-                            {r.n ? r.p[k] + '%' : '—'}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                    <tr style={{ borderBottom: '1px solid ' + SK.bord, background: SK.accentClair }}>
-                      <td style={{ ...s.td, fontWeight: 800, color: SK.accent }}>P(podium | top5)</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{
-                          ...s.td, fontWeight: 800,
-                          color: r.n === 0 ? '#4a5a72' : r.top3 >= 60 ? SK.accent : r.top3 > 0 ? SK.texte : '#6d82a2',
-                          background: r.n ? SK.accentClair : SK.alt,
-                        }}>
-                          {r.n ? r.top3 + '%' : '—'}
-                        </td>
-                      ))}
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid ' + SK.bord, background: SK.on }}>
-                      <td style={{ ...s.td, fontWeight: 800 }}>P(top5 | N)</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{ ...s.td, fontWeight: 800 }}>{r.n ? r.top5 + '%' : '—'}</td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
-                Ligne <b>1er…5e</b> et <b>P(podium | top5)</b> : dénominateur <b>conditionnel</b> = <b>n_top5</b> (les courses où le P finit dans les 5).
-                {' '}Ligne <b>P(top5 | N)</b> : dénominateur <b>global</b> = <b>N</b> (courses valides). Les deux ne sont pas comparables.
-              </div>
-
-              {/* ⭐ TRIO — 1er, 2e, 3e par position P */}
-              <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
-                <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Trio — 1er, 2e, 3e par position P</b>
-                <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 10 }}>
-                  Combien de fois chaque P finit 1er, 2e ou 3e. Le Trio = 1er + 2e + 3e réunis.
-                </div>
-                <div style={{ overflowX: 'auto' }}>
-                  <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8 }}>
-                    <thead>
-                      <tr style={s.hdr}>
-                        <th style={s.th}>Place</th>
-                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                          <th key={r.place} style={{ ...s.th, background: r.n === 0 ? SK.muted : SK.accentSombre }}>P{r.place}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-                        <td style={{ ...s.td, fontWeight: 700, color: '#34d399' }}>1er</td>
-                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                          <td key={r.place} style={{ ...s.td, fontWeight: r.n && r.p[0] > 0 ? 800 : 400, color: r.n === 0 ? '#4a5a72' : r.p[0] > 0 ? '#34d399' : '#6d82a2' }}>
-                            {r.n ? r.p[0] + '%' : '—'}
-                          </td>
-                        ))}
-                      </tr>
-                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: SK.alt }}>
-                        <td style={{ ...s.td, fontWeight: 700, color: '#34d399' }}>2e</td>
-                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                          <td key={r.place} style={{ ...s.td, fontWeight: r.n && r.p[1] > 0 ? 800 : 400, color: r.n === 0 ? '#4a5a72' : r.p[1] > 0 ? '#34d399' : '#6d82a2' }}>
-                            {r.n ? r.p[1] + '%' : '—'}
-                          </td>
-                        ))}
-                      </tr>
-                      <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-                        <td style={{ ...s.td, fontWeight: 700, color: '#34d399' }}>3e</td>
-                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                          <td key={r.place} style={{ ...s.td, fontWeight: r.n && r.p[2] > 0 ? 800 : 400, color: r.n === 0 ? '#4a5a72' : r.p[2] > 0 ? '#34d399' : '#6d82a2' }}>
-                            {r.n ? r.p[2] + '%' : '—'}
-                          </td>
-                        ))}
-                      </tr>
-                      <tr style={{ borderBottom: '1px solid ' + SK.bord, background: SK.accentClair }}>
-                        <td style={{ ...s.td, fontWeight: 800, color: SK.accent }}>Trio (1er+2e+3e)</td>
-                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                          <td key={r.place} style={{
-                            ...s.td, fontWeight: 800,
-                            color: r.n === 0 ? '#4a5a72' : r.top3 >= 60 ? SK.accent : r.top3 > 0 ? SK.texte : '#6d82a2',
-                            background: r.n ? SK.accentClair : SK.alt,
-                          }}>
-                            {r.n ? r.top3 + '%' : '—'}
-                          </td>
-                        ))}
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
-                  Ligne <b>1er, 2e, 3e</b> : dénominateur <b>conditionnel</b> = <b>n_top5</b>. Ligne <b>Trio</b> : idem (somme des trois).
-                </div>
-              </div>
-
-              {/* ⭐ QUINTÉ COMBINAISONS — les combinaisons de P qui forment le top 5 */}
-              <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
-                <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Quinté — combinaisons de positions P (les 5 premiers)</b>
-                <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 10 }}>
-                  Les combinaisons de positions P qui ont formé le Quinté (1er, 2e, 3e, 4e, 5e) dans l'archive.
-                  {stats.quinteList && stats.quinteList.length > 0 && (
-                    <span> · {stats.quinteList.length} combinaison(s) distincte(s) sur {stats.nb} courses.</span>
-                  )}
-                </div>
-                {stats.quinteList && stats.quinteList.length > 0 ? (
-                  <div style={{ overflowX: 'auto', maxHeight: 460, overflowY: 'auto' }}>
-                    <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8 }}>
-                      <thead>
-                        <tr style={s.hdr}>
-                          <th style={s.th}>#</th>
-                          <th style={s.th}>Combinaison (5 P)</th>
-                          <th style={s.th}>Occurrences</th>
-                          <th style={s.th}>Fréquence</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {stats.quinteList.map((t, i) => (
-                          <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: i % 2 ? SK.alt : SK.ligne }}>
-                            <td style={{ ...s.td, fontWeight: 700 }}>{i + 1}</td>
-                            <td style={{ ...s.td, fontWeight: t.count > 1 ? 800 : 600, color: t.count > 1 ? SK.accent : SK.texte }}>
-                              {t.combo.map((p) => 'P' + p).join(' · ')}
-                            </td>
-                            <td style={{ ...s.td, fontWeight: 700 }}>{t.count}</td>
-                            <td style={{ ...s.td }}>
-                              {stats.nb > 0 ? Math.round(t.count / stats.nb * 100) + '%' : '—'}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                ) : (
-                  <div style={{ fontSize: 12, color: '#7a8ea9' }}>Pas encore de données Quinté.</div>
-                )}
-              </div>
-
-{/*
-              <div style={{ overflowX: 'auto', marginTop: 16 }}>
-                <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', boxShadow: SK.ombreD }}>
-                  <thead>
-                    <tr style={s.hdr}>
-                      <th style={s.th}>Indicateur explicite</th>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <th key={r.place} style={{ ...s.th, background: r.n === 0 ? SK.muted : SK.accentSombre }}>P{r.place}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(() => {
-                      const f = (x) => (x == null ? '—' : x)
-                      const p = (x) => (x == null ? '—' : x + '%')
-                      const L = stats.parPlace.slice(0, toutLesP ? 20 : 5)
-                      const lignes = [
-                        ['courses_valides', (r) => f(r.courses_valides), false],
-                        ['n_top5', (r) => f(r.n_top5), false],
-                        ['victoires', (r) => f(r.victoires), false],
-                        ['podiums', (r) => f(r.podiums), false],
-                        ['P(victoire | top5)', (r) => p(r.p_victoire_conditionnel), true],
-                        ['P(victoire | N)', (r) => p(r.p_victoire_global), true],
-                        ['P(podium | top5)', (r) => p(r.p_podium_conditionnel), true],
-                        ['P(top5 | N)', (r) => p(r.p_top5_global), true],
-                      ]
-                      return lignes.map(([lbl, get, pct], k) => (
-                        <tr key={lbl} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: k % 2 ? SK.alt : SK.ligne }}>
-                          <td style={{ ...s.td, fontWeight: 700, color: pct ? SK.accent : '#a4b8d6' }}>{lbl}</td>
-                          {L.map((r) => (
-                            <td key={r.place} style={{ ...s.td, color: r.n === 0 ? '#4a5a72' : '#c7d6ea' }}>{get(r)}</td>
-                          ))}
-                        </tr>
-                      ))
-                    })()}
-                  </tbody>
-                </table>
-              </div>
-*/}
-
-{/*
-              <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
-                <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Par groupe</b>
-                <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>
-                  Dénominateurs : <b>présence_course</b> = courses valides · <b>part_victoires</b> = total des 1res (1/course) ·
-                  {' '}<b>part_podiums</b> = total des podiums (3/course) · <b>part_places_4_5</b> = total des 4e+5e (2/course).
-                  {' '}<b>présence_course</b> compte des courses, les trois autres comptent des places : ne pas les comparer directement.
-                </div>
-                <table style={{ borderCollapse: 'separate', borderSpacing: 0, marginTop: 10, fontSize: 13, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8 }}>
-                  <thead>
-                    <tr style={s.hdr}>
-                      {['Groupe', 'présence_course', 'part_victoires', 'part_podiums', 'part_places_4_5'].map((h) => <th key={h} style={s.th}>{h}</th>)}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {stats.parGroupe.map((g) => (
-                      <tr key={g.id} style={{ borderBottom: '1px solid ' + SK.bord }}>
-                        <td style={{ ...s.td, fontWeight: 700 }}>{g.label}</td>
-                        <td style={s.td}>{g.presence_course == null ? '—' : g.presence_course + '%'}</td>
-                        <td style={s.td}>{g.part_victoires == null ? '—' : g.part_victoires + '%'}</td>
-                        <td style={s.td}>{g.part_podiums == null ? '—' : g.part_podiums + '%'}</td>
-                        <td style={{ ...s.td, fontWeight: 700 }}>{g.part_places_4_5 == null ? '—' : g.part_places_4_5 + '%'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-*/}
-
-                {stats.empreinte && (
-                  <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
-                    <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Empreinte — 4 tests indépendants</b>
-                    <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 8 }}>
-                      Chaque test a SON N, ses cas non évaluables et sa période. Les quatre restent <b>séparés</b> :
-                      aucune moyenne entre eux, aucune fusion.
-                    </div>
-                    <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8, width: '100%' }}>
-                      <thead>
-                        <tr style={s.hdr}>
-                          {['Test', 'n', 'non éval.', 'tous top3', 'tous top5', '≥1 top3', 'période'].map((h) => <th key={h} style={s.th}>{h}</th>)}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {stats.empreinte.map((t, k) => (
-                          <tr key={t.id} style={{ borderBottom: '1px solid ' + SK.bord, background: k % 2 ? SK.alt : SK.ligne }}>
-                            <td style={{ ...s.td, fontWeight: 700 }}>{t.label}</td>
-                            <td style={s.td}>{t.n}</td>
-                            <td style={{ ...s.td, color: t.nonEvaluables ? SK.muted : '#7a8ea9' }}>{t.nonEvaluables}</td>
-                            <td style={{ ...s.td, color: t.top3 == null ? '#4a5a72' : '#34d399', fontWeight: 700 }}>{t.top3 == null ? '—' : t.top3 + '%'}</td>
-                            <td style={{ ...s.td, fontWeight: 700 }}>{t.top5 == null ? '—' : t.top5 + '%'}</td>
-                            <td style={s.td}>{t.un == null ? '—' : t.un + '%'}</td>
-                            <td style={{ ...s.td, color: '#64748b' }}>{t.debut && t.fin ? t.debut + ' → ' + t.fin : '—'}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-
-                {/* ⭐ LES DEUX EMPREINTES (19/10/2026) — tools/empreinte.mjs.
-                    Le PODIUM et le QUINTÉ lus par CASE du carnet (P1..P20),
-                    comme la grille. Source : les 96 Quintés à presse réelle. */}
-{/*
-                {empreinte && (() => {
-                  const E = empreinte
-                  const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
-                  const bloc = (titre, d, max) => (
-                    <div style={{ flex: '1 1 300px', minWidth: 290 }}>
-                      <div style={{ fontSize: 12, fontWeight: 800, color: SK.accent, letterSpacing: .6, textTransform: 'uppercase', marginBottom: 6 }}>{titre}</div>
-                      <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12.5 }}>
-                        <tbody>
-                          {d.motifs.slice(0, max).map((m) => (
-                            <tr key={m.motif} style={{ borderBottom: '1px solid rgba(255,255,255,.06)' }}>
-                              <td style={{ padding: '3px 6px', fontFamily: SK.nb.td, fontWeight: 800, color: SK.texte, whiteSpace: 'nowrap' }}>{m.motif}</td>
-                              <td style={{ padding: '3px 6px', width: 46, textAlign: 'right', fontFamily: SK.nb.td, color: '#c7d6ea' }}>{m.n}</td>
-                              <td style={{ padding: '3px 6px', width: 62, textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800, color: SK.accent, whiteSpace: 'nowrap' }}>{nb(m.pct)} %</td>
-                              <td style={{ padding: '3px 6px', width: 90 }}>
-                                <div style={{ height: 7, borderRadius: 4, background: SK.accent, opacity: .75, width: Math.max(2, m.pct * 3.2) }} />
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                      <div style={{ fontSize: 11, color: SK.muted, marginTop: 6, lineHeight: 1.5 }}>
-                        moyenne par course : <b>G1 {nb(d.moyenne.G1)}</b> · G2 {nb(d.moyenne.G2)} · G3 {nb(d.moyenne.G3)} · G4 {nb(d.moyenne.G4)} · G5 {nb(d.moyenne.G5)}
-                        <br />{d.distinctes} empreintes distinctes · la plus fréquente : <b style={{ fontFamily: SK.nb.td }}>{d.empreintes[0]?.empreinte}</b> ({nb(d.empreintes[0]?.pct)} %)
-                      </div>
-                    </div>
-                  )
-                  return (
-                    <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
-                      <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Les deux empreintes — le podium et le quinté</b>
-                      <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 10 }}>
-                        <b>{E.n}</b> Quintés à <b>presse réelle</b> ({E.periode.debut} → {E.periode.fin}) · lus par <b>case du carnet</b> (P1..P20), le même P que la grille.
-                        Un motif = combien de chevaux de chaque groupe : <b>G1·G2·G3·G4·G5</b>.
-                      </div>
-                      <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap' }}>
-                        {bloc('Le podium (3 places)', E.podium, 8)}
-                        {bloc('Le quinté (5 places)', E.quinte, 10)}
-                      </div>
-                      <div style={{ marginTop: 14, borderTop: '1px solid ' + SK.bord, paddingTop: 10 }}>
-                        <div style={{ fontSize: 12, fontWeight: 800, color: SK.accent, letterSpacing: .6, textTransform: 'uppercase', marginBottom: 6 }}>Combien de cases pour tout tenir</div>
-                        <table style={{ borderCollapse: 'collapse', fontSize: 12 }}>
-                          <thead>
-                            <tr>
-                              {['P1..Pk', 'podium', 'quinté'].map((h) => <th key={h} style={{ padding: '3px 10px', textAlign: 'right', color: SK.muted, fontWeight: 800, fontSize: 11 }}>{h}</th>)}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {E.courbe.map((c) => (
-                              <tr key={c.k} style={{ borderTop: '1px solid rgba(255,255,255,.06)', background: c.k === NB_TICKET ? SK.accentClair : 'transparent' }}>
-                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800 }}>{c.k}</td>
-                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td }}>{nb(c.podium)} %</td>
-                                <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: SK.nb.td, fontWeight: c.k === NB_TICKET ? 800 : 400, color: c.k === NB_TICKET ? SK.accent : '#c7d6ea' }}>{nb(c.quinte)} %</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                        <div style={{ fontSize: 11, color: SK.muted, marginTop: 6 }}>
-                          La ligne surlignée = la taille du ticket du Quinté ({NB_TICKET} chevaux, {QUOTAS_TXT}).
-                          Écrire les chiffres : <code>node tools\empreinte.mjs</code>.
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })()}
-*/}
-
-                {/* ⭐ LA BASSMAT DU BLOC (21/10/2026) — tools/bloc-pm.mjs.
-                    La CASE de la grille (P1..P20) CROISÉE avec la BANDE DU
-                    MARCHÉ. C'est la seule table qui dit QUI prendre À
-                    L'INTÉRIEUR d'un bloc — et la mesure qui dit si ça paie. */}
-{/*
-                {blocPm && (() => {
-                  const BP = blocPm
-                  const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
-                  const BLOCS = ['G1', 'G2', 'G3', 'G4', 'G5']
-                  const BANDES = ['fort', 'bon', 'moyen', 'faible']
-                  // la couleur dit la force du taux — jamais la bande (la bande
-                  // a déjà sa teinte de fond, on ne mélange pas deux codes)
-                  const coul = (p, n) => (n < 15 ? SK.muted : p >= 45 ? '#34d399' : p >= 25 ? '#fbbf24' : '#fb7185')
-                  const th = { padding: '4px 7px', fontSize: 11, color: SK.muted, fontWeight: 800, textAlign: 'right', whiteSpace: 'nowrap' }
-                  const cell = { padding: '4px 7px', textAlign: 'right', fontFamily: SK.nb.td, whiteSpace: 'nowrap' }
-                  const A = (BP.autopsies || []).find((x) => x.code === 'blocM12')
-                  return (
-                    <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
-                      <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>La bassmat du bloc — la case × la bande du marché</b>
-                      <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 10 }}>
-                        <b>{BP.n}</b> Quintés à <b>presse réelle</b> ({BP.periode.debut} → {BP.periode.fin}).
-                        <b> P</b> = la case de la grille (P1..P20, le même P que la grille).
-                        <b> Bande</b> = le rang de cote : M≤3 fort · M≤5 bon · M6-12 moyen · M13+ faible.
-                      </div>
-                      <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12.5, width: 'auto' }}>
-                        <thead>
-                          <tr>
-                            <th style={{ ...th, textAlign: 'left', width: 40 }}>bloc</th>
-                            {BANDES.map((b) => (
-                              <th key={b} style={{ ...th, background: BANDE_MARCHE[b].fond, color: BANDE_MARCHE[b].couleur }}>{BANDE_MARCHE[b].court}</th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {BLOCS.map((g) => (
-                            <tr key={g} style={{ borderTop: '1px solid rgba(255,255,255,.06)' }}>
-                              <td style={{ ...cell, fontWeight: 800, textAlign: 'left' }}>{g}</td>
-                              {BANDES.map((b) => {
-                                const c = BP.bassmatBloc.find((x) => x.cle === g + '|' + b)
-                                return (
-                                  <td key={b} style={{ ...cell, color: c ? coul(c.top5, c.n) : SK.muted }}>
-                                    {c ? nb(c.top5) + ' %' : '—'}
-                                    <span style={{ color: SK.muted, fontWeight: 400 }}> · {c ? c.n : 0}</span>
-                                  </td>
-                                )
-                              })}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                      <div style={{ fontSize: 11, color: SK.muted, marginTop: 6 }}>
-                        % arrivés dans les 5 · le chiffre après le point = <b>n</b> — sous 15, le taux est gris : trop peu pour voter.
-                        Lecture : <b style={{ color: '#34d399' }}>G1 en bande forte arrive 56,7 %</b>, en bande moyenne 41,6 %.
-                      </div>
-
-                      <div style={{ marginTop: 14, borderTop: '1px solid ' + SK.bord, paddingTop: 10 }}>
-                        <div style={{ fontSize: 12, fontWeight: 800, color: SK.accent, letterSpacing: .6, textTransform: 'uppercase', marginBottom: 4 }}>La mesure — même ticket ({NB_TICKET} chevaux, {QUOTAS_TXT}), seule la règle de choix change</div>
-                        <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6 }}>
-                          Chaque règle est jugée <b>hors d'elle-même</b> (leave-one-out) : la table d'une course ne contient jamais cette course.
-                        </div>
-                        <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, width: '100%' }}>
-                          <thead>
-                            <tr style={s.hdr}>
-                              <th style={{ ...s.th, textAlign: 'left' }}>règle de choix</th>
-                              {['chev.', 'podium entier', 'quinté entier', '1re moitié', '2ᵉ moitié'].map((h) => (
-                                <th key={h} style={{ ...s.th, textAlign: 'right', whiteSpace: 'nowrap' }}>{h}</th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {BP.mesure.map((m) => (
-                              <tr key={m.code} style={{ borderTop: '1px solid ' + SK.bord, background: m.code === 'production' ? SK.accentClair : 'transparent' }}>
-                                <td style={{ ...s.td, fontWeight: m.code === 'production' ? 800 : 400 }}>{m.nom}</td>
-                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td }}>{nb(m.chevaux)}</td>
-                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800 }}>{nb(m.podium)} %</td>
-                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td, fontWeight: 800, color: m.code === 'production' ? SK.accent : '#c7d6ea' }}>{nb(m.quinte)} %</td>
-                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td }}>{nb(m.m1q)} %</td>
-                                <td style={{ ...s.td, textAlign: 'right', fontFamily: SK.nb.td }}>{nb(m.m2q)} %</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                        <div style={{ fontSize: 11, color: SK.muted, marginTop: 6 }}>
-                          <b>podium entier</b> = les 3 premiers sont tous dans le ticket · <b>quinté entier</b> = les 5.
-                          Les deux dernières colonnes = le quinté entier, moitié par moitié.
-                        </div>
-                      </div>
-
-                      <div style={{ marginTop: 14, borderTop: '1px solid ' + SK.bord, paddingTop: 10, fontSize: 12, lineHeight: 1.6 }}>
-                        <b style={{ color: SK.accent }}>Verdict ({nb(BP.verdict.production.podium)} % podium · {nb(BP.verdict.production.quinte)} % quinté pour le moteur)</b> — {BP.verdict.texte}
-                        {A && (
-                          <>
-                            <br />La bassmat « seulement G1·G2 » change le ticket dans <b>{A.coursesChangees}</b> courses sur {A.cours}
-                            {' '}({A.blocsChanges} blocs).
-                            {A.blocs.filter((x) => x.changes).map((x) => (
-                              <span key={x.bloc}> <b>{x.bloc}</b> : {x.changes} courses → {x.bassmat} arrivants dans les 5 contre {x.production} pour le moteur ·</span>
-                            ))}
-                            <br />Les deux bandes et la place de presse désignent déjà les mêmes chevaux la plupart du temps : quand elles divergent, c'est un échange pour un autre, pas un gain.
-                          </>
-                        )}
-                        <br /><span style={{ color: SK.muted }}>Écrire les chiffres : <code>node tools\bloc-pm.mjs</code> — ils ne sont jamais saisis à la main.</span>
-                      </div>
-                    </div>
-                  )
-                })()}
-*/}
-
-                <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
-                <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Le vainqueur vient de…</b>
-                <div style={{ fontSize: 13, marginTop: 6 }}>
-                  {Object.entries(stats.vainqueur).map(([k, v]) => (
-                    <span key={k} style={{ marginRight: 18 }}>
-                      <b>{k}</b> : {v}/{stats.nb} = {Math.round(v / stats.nb * 100)}%
-                    </span>
-                  ))}
-                </div>
-
-                <div style={{ fontSize: 13, marginTop: 10, paddingTop: 10, borderTop: '1px solid rgba(255,255,255,.07)' }}>
-                  <b style={{ color: SK.accent }}>Le podium (1er + 2e + 3e) vient de…</b>
-                  <div style={{ marginTop: 6 }}>
-                    {stats.podiumBloc.map((b) => {
-                      /* ⭐ COULEURS DES P DANS LA LIGNE (11/10/2026) : le total
-                       * du bloc reste neutre (pas de couleur). Chaque P : max
-                       * de la ligne en vert, 0 en rouge, l'entre-deux en jaune.
-                       * Ex-aequo au max → tous verts. */
-                      const vals = (b.detail || []).map((d) => d.n)
-                      const mx = vals.length ? Math.max(...vals) : 0
-                      const coul = (v) =>
-                        v === mx ? { color: '#34d399', background: 'rgba(52,211,153,.18)' }
-                        : v < 1 ? { color: '#fb7185', background: 'rgba(244,63,94,.18)' }
-                        : { color: '#fbbf24', background: 'rgba(251,191,36,.16)' }
-                      const chip = { fontSize: 12, fontWeight: 800, padding: '1px 7px', borderRadius: 10, marginRight: 6 }
-                      return (
-                        <div key={b.id} style={{ marginBottom: 6 }}>
-                          <span style={{ marginRight: 12 }}>
-                            <b>{b.id}</b> : {b.n}/{stats.nb} = {b.pct}%
-                          </span>
-                          <span style={{ fontSize: 12 }}>
-                            {(b.detail || []).map((d) => (
-                              <span key={d.p} style={{ ...chip, ...coul(d.n) }}>
-                                P{d.p} : {d.n}/{stats.nb}
-                              </span>
-                            ))}
-                          </span>
-                        </div>
-                      )
-                    })}
-                  </div>
-                  <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
-                    Le tableau du dessus détaille chaque position P1 → P20.
-                    Ici on compte les courses où <b>au moins un</b> des trois premiers sort du bloc.
-                    {' '}Couleurs <b>des P dans chaque ligne</b> (le total reste neutre) :
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#34d399', background: 'rgba(52,211,153,.18)', fontWeight: 800 }}>le + fort</span>
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#fbbf24', background: 'rgba(251,191,36,.16)', fontWeight: 800 }}>au milieu</span>
-                    {' '}<span style={{ padding: '0 6px', borderRadius: 8, color: '#fb7185', background: 'rgba(244,63,94,.18)', fontWeight: 800 }}>0</span>
-                  </div>
-                </div>
-
-              </div>
-            </>
-          )}
+          </div>
         </div>
       )}
 
-      {/* ----------------------------------------------------------- écarts */}
-      {onglet === 'ecarts' && (
-        <TabEcarts sk={SK} ecarts={ecarts} detail={detail}
-          toutLesP={toutLesP} setToutLesP={setToutLesP}
-          discipline={statsDiscipline} setDiscipline={setStatsDiscipline} />
+      {rempli?.ticket?.length && (
+        <CarteTicket
+          nums={rempli.ticket}
+          noms={Object.fromEntries(participants.map((x) => [x.num, x.nom]))}
+          cotes={cotes}
+          discipl={infos?.discipline}
+          count={rempli.ticket.length}
+        />
       )}
 
+      {fiabilite && (
+        <div style={{ background: SK.carte, border: `1px solid ${SK.bord}`, borderRadius: 12, padding: '14px', marginBottom: 14, fontSize: 12, color: '#94a3b8', lineHeight: 1.6 }}>
+          <b style={{ color: SK.accent }}>Fiabilité mesurée :</b> {fiabilite.payant ? `${fiabilite.payant}% PAYANTE` : '—'} ·{' '}
+          {fiabilite.couvre ? `${fiabilite.couvre}% couvre +4` : ''}
+        </div>
+      )}
     </div>
-    </>
   )
 }
