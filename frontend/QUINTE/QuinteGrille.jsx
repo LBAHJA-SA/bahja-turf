@@ -2786,31 +2786,31 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 </div>
               </div>
 
-              {/* ⭐ TRIO COMBINAISONS — les combinaisons de P qui forment le top 3 */}
+              {/* ⭐ QUINTÉ COMBINAISONS — les combinaisons de P qui forment le top 5 */}
               <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
-                <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Trio — combinaisons de positions P</b>
+                <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Quinté — combinaisons de positions P (les 5 premiers)</b>
                 <div style={{ fontSize: 11, color: '#64748b', marginTop: 4, marginBottom: 10 }}>
-                  Les combinaisons de positions P qui ont formé le trio (1er, 2e, 3e) dans l'archive.
-                  {stats.trioList && stats.trioList.length > 0 && (
-                    <span> · {stats.trioList.length} combinaison(s) distincte(s) sur {stats.nb} courses.</span>
+                  Les combinaisons de positions P qui ont formé le Quinté (1er, 2e, 3e, 4e, 5e) dans l'archive.
+                  {stats.quinteList && stats.quinteList.length > 0 && (
+                    <span> · {stats.quinteList.length} combinaison(s) distincte(s) sur {stats.nb} courses.</span>
                   )}
                 </div>
-                {stats.trioList && stats.trioList.length > 0 ? (
-                  <div style={{ overflowX: 'auto' }}>
+                {stats.quinteList && stats.quinteList.length > 0 ? (
+                  <div style={{ overflowX: 'auto', maxHeight: 460, overflowY: 'auto' }}>
                     <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8 }}>
                       <thead>
                         <tr style={s.hdr}>
                           <th style={s.th}>#</th>
-                          <th style={s.th}>Combinaison</th>
+                          <th style={s.th}>Combinaison (5 P)</th>
                           <th style={s.th}>Occurrences</th>
                           <th style={s.th}>Fréquence</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {stats.trioList.slice(0, 20).map((t, i) => (
+                        {stats.quinteList.map((t, i) => (
                           <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: i % 2 ? SK.alt : SK.ligne }}>
                             <td style={{ ...s.td, fontWeight: 700 }}>{i + 1}</td>
-                            <td style={{ ...s.td, fontWeight: 800, color: SK.accent }}>
+                            <td style={{ ...s.td, fontWeight: t.count > 1 ? 800 : 600, color: t.count > 1 ? SK.accent : SK.texte }}>
                               {t.combo.map((p) => 'P' + p).join(' · ')}
                             </td>
                             <td style={{ ...s.td, fontWeight: 700 }}>{t.count}</td>
@@ -2823,7 +2823,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     </table>
                   </div>
                 ) : (
-                  <div style={{ fontSize: 12, color: '#7a8ea9' }}>Pas encore de données trio.</div>
+                  <div style={{ fontSize: 12, color: '#7a8ea9' }}>Pas encore de données Quinté.</div>
                 )}
               </div>
 

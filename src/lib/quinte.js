@@ -2038,6 +2038,9 @@ export function computeStats(records) {
    *   Pour chaque course valide, on prend les 3 premiers arrivants,
    *   on les mappe à leur position P, on trie, et on compte. */
   const trioCombos = {}
+  /* ⭐ Quinté : combinaisons de positions P qui forment le top 5.
+   *   Même principe, sur les 5 premiers arrivants. */
+  const quinteCombos = {}
 
   /* §3 — l'empreinte : 4 tests indépendants, chacun ses compteurs + sa période. */
   const emp = {}
@@ -2082,6 +2085,14 @@ export function computeStats(records) {
       if (!trioCombos[key]) trioCombos[key] = { combo: trio, count: 0, dates: [] }
       trioCombos[key].count++
       if (rec.date) trioCombos[key].dates.push(rec.date)
+    }
+    /* ⭐ Quinté : la combinaison des 5 premiers (positions P), triée. */
+    const quinte = pl.slice(0, 5).slice().sort((a, b) => a - b)
+    if (quinte.length === 5) {
+      const keyQ = quinte.join('-')
+      if (!quinteCombos[keyQ]) quinteCombos[keyQ] = { combo: quinte, count: 0, dates: [] }
+      quinteCombos[keyQ].count++
+      if (rec.date) quinteCombos[keyQ].dates.push(rec.date)
     }
     pl.forEach((r, i) => { if (r <= MAX) tab[r][i]++ })
 
@@ -2312,7 +2323,15 @@ export function computeStats(records) {
 
   // ⭐ Trio : trier les combinaisons par fréquence décroissante.
   const trioList = Object.values(trioCombos).sort((a, b) => b.count - a.count)
-  return { nb: courses.length, parPlace, parGroupe, vainqueur, BORNES, parPosition, parPlaceBloc, podiumBloc, courses, detailCourses, drought, empreinte, diagnostic, trioList }
+  // ⭐ Quinté : idem, et à égalité on garde l'ordre des positions.
+  const quinteList = Object.values(quinteCombos).sort((a, b) => {
+    if (b.count !== a.count) return b.count - a.count
+    for (let i = 0; i < a.combo.length; i++) {
+      if (a.combo[i] !== b.combo[i]) return a.combo[i] - b.combo[i]
+    }
+    return 0
+  })
+  return { nb: courses.length, parPlace, parGroupe, vainqueur, BORNES, parPosition, parPlaceBloc, podiumBloc, courses, detailCourses, drought, empreinte, diagnostic, trioList, quinteList }
 }
 
 /**
