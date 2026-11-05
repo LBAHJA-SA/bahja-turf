@@ -262,7 +262,7 @@ export default function QuinteGrille() {
 
   const rempli = useMemo(() => {
     if (!grille) return null
-    const classem = classerPartants(grille, participants.map((x) => x.num).filter(Boolean), cotes)
+    const classem = classerPartants(Array.isArray(participants) ? participants : [], infos && infos.discipline ? infos.discipline : 'PLAT')
     return remplirGrille(grille, classem, infos?.discipline || 'PLAT', cotes, null)
   }, [grille, participants, cotes, infos?.discipline])
 
