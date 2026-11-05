@@ -3149,6 +3149,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 </table>
               </div>
 
+{/*
               <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
                 <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Par groupe</b>
                 <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>
@@ -3175,6 +3176,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </tbody>
                 </table>
               </div>
+*/}
 
                 {stats.empreinte && (
                   <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
@@ -3209,6 +3211,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 {/* ⭐ LES DEUX EMPREINTES (19/10/2026) — tools/empreinte.mjs.
                     Le PODIUM et le QUINTÉ lus par CASE du carnet (P1..P20),
                     comme la grille. Source : les 96 Quintés à presse réelle. */}
+{/*
                 {empreinte && (() => {
                   const E = empreinte
                   const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
@@ -3272,11 +3275,13 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     </div>
                   )
                 })()}
+*/}
 
                 {/* ⭐ LA BASSMAT DU BLOC (21/10/2026) — tools/bloc-pm.mjs.
                     La CASE de la grille (P1..P20) CROISÉE avec la BANDE DU
                     MARCHÉ. C'est la seule table qui dit QUI prendre À
                     L'INTÉRIEUR d'un bloc — et la mesure qui dit si ça paie. */}
+{/*
                 {blocPm && (() => {
                   const BP = blocPm
                   const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
@@ -3377,6 +3382,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     </div>
                   )
                 })()}
+*/}
 
                 <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
                 <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Le vainqueur vient de…</b>
