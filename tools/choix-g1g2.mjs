@@ -36,6 +36,21 @@ try { F = JSON.parse(fs.readFileSync('data/forms.json', 'utf8')) } catch (e) {
 const CH = process.argv[2] === 'ouverture' ? 'ouverture' : 'cotes'
 const UTILISE_FORMS = Object.keys(F).length > 0
 
+/* ⭐ 05/11/2026 — LE FILTRE DISCIPLINE (même découpage que la page /quinte).
+ *   `node tools\choix-g1g2.mjs cotes plat` ne mesure QUE les Quintés de plat.
+ *   Chaque discipline écrit son propre fichier ; le run « all » les recolle
+ *   dans `parDiscipline` pour que l'onglet Choix sache filtrer sans recalcul. */
+const normDisc = (d) => {
+  const s = String(d || '').toLowerCase().trim()
+  if (s.startsWith('plat')) return 'plat'
+  if (s.startsWith('attel') || s.startsWith('trot')) return 'attelé'
+  if (s.startsWith('haie') || s.startsWith('steeple')) return 'haies'
+  return 'autre'
+}
+const DISC = ['plat', 'attelé', 'haies'].includes(process.argv[3]) ? process.argv[3] : 'all'
+const QF = DISC === 'all' ? Q : Q.filter((q) => normDisc(q.discipline) === DISC)
+const FICHIER = DISC === 'all' ? 'choix' : 'choix.' + (DISC === 'attelé' ? 'attele' : DISC)
+
 /* LE TERRAIN ET LE SENS de chaque course passée — tools/collect-terrain.mjs.
  * La clé est `date|hippodrome|n°` (normés). `jour` porte la course DU JOUR
  * des 96 Quintés (le terrain du jour, que casacourses ne donne pas toujours). */
@@ -72,7 +87,7 @@ const UTILISE_VH = Object.keys(VH).length > 0
 
 const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z]/g, '')
 
-const CASES = Q.filter((q) => q.presse?.length >= 10 && (q.arrivee || []).length)
+const CASES = QF.filter((q) => q.presse?.length >= 10 && (q.arrivee || []).length)
   .map((q) => {
     const c = q[CH] || {}, o = q.ouverture || {}
     const nums = Object.keys(c).map(Number)
@@ -451,6 +466,7 @@ const sortie = {
   genere: new Date().toISOString(),
   date: '2026-10-16',
   n: N,
+  discipline: DISC,
   cotes: CH,
   carriere: UTILISE_FORMS,
   couverture: COUV,
@@ -465,6 +481,17 @@ const sortie = {
   stabilite,
   verdict: VERDICT,
 }
-fs.writeFileSync('data/choix.json', JSON.stringify(sortie, null, 1))
-try { fs.writeFileSync('public/data/choix.json', JSON.stringify(sortie, null, 1)) } catch (e) { /* public absent */ }
-console.log(`\n  → data/choix.json + public/data/choix.json écrits.\n`)
+/* ⭐ le run « all » recolle les trois sections de discipline (si présentes).
+ *   Un fichier par discipline = un corpus par discipline, jamais un mélange. */
+if (DISC === 'all') {
+  const par = {}
+  for (const d of ['plat', 'attelé', 'haies']) {
+    const f = 'data/choix.' + (d === 'attelé' ? 'attele' : d) + '.json'
+    try { par[d] = JSON.parse(fs.readFileSync(f, 'utf8')) } catch (e) { /* pas encore calculé */ }
+  }
+  if (Object.keys(par).length) sortie.parDiscipline = par
+}
+
+fs.writeFileSync('data/' + FICHIER + '.json', JSON.stringify(sortie, null, 1))
+try { fs.writeFileSync('public/data/' + FICHIER + '.json', JSON.stringify(sortie, null, 1)) } catch (e) { /* public absent */ }
+console.log(`\n  → data/${FICHIER}.json + public/data/${FICHIER}.json écrits.\n`)

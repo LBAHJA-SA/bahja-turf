@@ -908,19 +908,53 @@ function PanneauMesure({ sk, fiabilite, detail }) {
   )
 }
 
+/* ═══════════════════ LA BARRE DE FILTRES PARTAGÉE (05/11/2026) ═════════════
+ * Les MÊMES deux filtres servent trois onglets : Statistiques, Écarts, Choix.
+ *   · « P1-P5 seulement »  → on coupe l'affichage à P5
+ *   · « Discipline »       → Tout / Plat / Attelé / Haies
+ * Un seul composant = un seul comportement, aucune divergence entre onglets.
+ * ═════════════════════════════════════════════════════════════════════════ */
+const DISCIPLINES = ['all', 'plat', 'attelé', 'haies']
+const DISC_LABEL = { all: 'Tout', plat: 'Plat', 'attelé': 'Attelé', haies: 'Haies' }
+
+function BarreFiltres({ sk, toutLesP, setToutLesP, discipline, setDiscipline, noteP }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
+      <button onClick={() => setToutLesP((v) => !v)}
+        style={{ padding: '3px 12px', borderRadius: 999, border: '1px solid ' + sk.bord, background: toutLesP ? 'rgba(255,255,255,.14)' : 'transparent', color: toutLesP ? '#fff' : sk.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
+        {toutLesP ? 'P1-P5 seulement' : 'Voir jusqu’à P20'}
+      </button>
+      {noteP && !toutLesP ? <span style={{ fontSize: 11, color: sk.muted }}>{noteP}</span> : null}
+      <span style={{ fontSize: 12, color: sk.muted, fontWeight: 700 }}>Discipline :</span>
+      {DISCIPLINES.map((d) => (
+        <button key={d} onClick={() => setDiscipline(d)}
+          style={{ padding: '3px 10px', borderRadius: 999, border: '1px solid ' + sk.bord, background: discipline === d ? sk.accent : 'transparent', color: discipline === d ? '#fff' : sk.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
+          {DISC_LABEL[d]}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 /* ══════════════════════════ L'ONGLET ÉCARTS — les cases P1..P20 ════════════
  * ⚠ « P » = le RANG DE PRESSE (P1 = le 1er cité), pas la colonne du carnet
  *   papier : mesuré le 16/10, c'est le rang de presse qui suit l'arrivée.
  *   Une case DONNE quand le cheval qui l'occupe finit dans les cinq premiers.
  *   Chiffres : data/ecarts.json (tools/ecarts.mjs).
+ * ⭐ 05/11/2026 — les deux filtres de l'onglet Statistiques sont ici aussi :
+ *   la discipline choisit la section `parDiscipline` du MÊME fichier, et
+ *   « P1-P5 » coupe les lignes. Aucun chiffre n'est recalculé dans la page.
  * ═════════════════════════════════════════════════════════════════════════ */
-function TabEcarts({ sk, ecarts, detail }) {
+function TabEcarts({ sk, ecarts, detail, toutLesP, setToutLesP, discipline, setDiscipline }) {
   if (!ecarts) return (
     <div style={{ fontSize: 13, color: sk.muted }}>
       Pas encore de mesure : écrire <b>public/data/ecarts.json</b> (node tools\ecarts.mjs).
     </div>
   )
-  const M = ecarts.mesure
+  /* la section de la discipline choisie — repli sur le global si absente */
+  const bloc = (discipline && ecarts.parDiscipline && ecarts.parDiscipline[discipline]) || ecarts
+  const places = bloc.places || []
+  const M = bloc.mesure
   const parPlace = {}
   for (const g of detail || []) for (const c of g.cases) if (c.place) parPlace[c.place] = c
   const etat = (x) => {
@@ -931,8 +965,11 @@ function TabEcarts({ sk, ecarts, detail }) {
   }
   return (
     <div>
+      <BarreFiltres sk={sk} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={discipline} setDiscipline={setDiscipline} />
       <div style={{ fontSize: 13, color: sk.texte, lineHeight: 1.6, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', marginBottom: 12 }}>
-        <b>{M.courses} courses à presse réelle</b> ({M.du} → {M.au}) · {M.definition}
+        <b>{M.courses} courses à presse réelle</b>
+        {discipline && discipline !== 'all' ? <span> · <b>{DISC_LABEL[discipline]}</b></span> : null}
+        {' '}({M.du} → {M.au}) · {M.definition}
         <br />
         <span style={{ color: sk.muted }}>
           « courses depuis » = depuis combien de courses de ce registre la case n’a plus rien donné.
@@ -947,7 +984,7 @@ function TabEcarts({ sk, ecarts, detail }) {
             </tr>
           </thead>
           <tbody>
-            {ecarts.places.filter((x) => x.n).map((x, i) => {
+            {places.filter((x) => x.n && (toutLesP || x.p <= 5)).map((x, i) => {
               const e = etat(x)
               const c = parPlace[x.p]
               return (
@@ -987,14 +1024,18 @@ function TabEcarts({ sk, ecarts, detail }) {
     </div>
   )
 }
-function TabChoix({ sk, choix }) {
+function TabChoix({ sk, choix, toutLesP, setToutLesP, discipline, setDiscipline }) {
   if (!choix) return (
     <div style={{ fontSize: 13, color: sk.muted }}>
       Pas encore de mesure : écrire <b>public/data/choix.json</b> (node tools\choix-g1g2.mjs).
     </div>
   )
-  const D = choix.diagnostic || {}
-  const L = choix.levier || {}
+  /* ⭐ 05/11/2026 — la discipline choisit la section `parDiscipline` du MÊME
+   *   fichier (tools\choix-g1g2.mjs calculé 4 fois : all, plat, attelé, haies).
+   *   Repli sur la mesure globale si la section manque. */
+  const src = (discipline && discipline !== 'all' && choix.parDiscipline && choix.parDiscipline[discipline]) || choix
+  const D = src.diagnostic || {}
+  const L = src.levier || {}
   const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
   const bar = (v, max) => (
     <span style={{ display: 'inline-block', verticalAlign: 'middle', width: 120, height: 9, background: sk.alt, border: '1px solid ' + sk.bord, borderRadius: 999, overflow: 'hidden' }}>
@@ -1002,25 +1043,29 @@ function TabChoix({ sk, choix }) {
     </span>
   )
   const blocs = (D.blocs || []).slice().sort((a, b) => (b.ecartes || 0) - (a.ecartes || 0))
-  const meilleure = choix.grille?.meilleure || {}
-  const enTete = (choix.regles || []).filter((r) => r.deux >= (choix.code || 0)).slice(0, 6)
+  const meilleure = src.grille?.meilleure || {}
+  const enTete = (src.regles || []).filter((r) => r.deux >= (src.code || 0)).slice(0, 6)
   /* ⚠ le signe doit s'afficher, pas un « + » aveugle. */
   const plus = (v) => (v > 0 ? '+' : v < 0 ? '\u2212' : '\u00b1') + nb(Math.round(10 * Math.abs(v)) / 10)
   const gainChoix = (L.oracle || 0) - (L.code || 0)
   return (
     <div>
+      <BarreFiltres sk={sk} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={discipline} setDiscipline={setDiscipline}
+        noteP="P1-P5 ne coupe rien ici : cette mesure est par règle de choix, pas par case P." />
       <div style={{ fontSize: 13, color: sk.texte, lineHeight: 1.6, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', marginBottom: 12 }}>
-        <b>{choix.n} Quintés à presse réelle</b> · cotes {choix.cotes === 'ouverture' ? 'du matin (ouverture)' : 'finales (Equidia)'}
-        {choix.carriere ? ' · carrière collectée (casacourses + PMU)' : ' · sans carrière'} — la mesure du <b>choix dans G1 et G2</b>.
-        {choix.couverture ? (
+        <b>{src.n} Quintés à presse réelle</b>
+        {discipline && discipline !== 'all' ? <span> · <b>{DISC_LABEL[discipline]}</b></span> : null}
+        {' '}· cotes {src.cotes === 'ouverture' ? 'du matin (ouverture)' : 'finales (Equidia)'}
+        {src.carriere ? ' · carrière collectée (casacourses + PMU)' : ' · sans carrière'} — la mesure du <b>choix dans G1 et G2</b>.
+        {src.couverture ? (
           <>
             <br />
             <span style={{ color: sk.muted }}>
-              carrière enrichie <b>PMU</b> : terrain {Math.round((100 * choix.couverture.terrain) / choix.couverture.tot)} % ·
-              sens {Math.round((100 * choix.couverture.sens) / choix.couverture.tot)} % ·
-              VH passé {Math.round((100 * choix.couverture.vhPasse) / choix.couverture.tot)} % ·
-              VH du jour {Math.round((100 * choix.couverture.vhJour) / choix.couverture.tot)} %
-              {' '}({choix.couverture.tot} chevaux)
+              carrière enrichie <b>PMU</b> : terrain {Math.round((100 * src.couverture.terrain) / src.couverture.tot)} % ·
+              sens {Math.round((100 * src.couverture.sens) / src.couverture.tot)} % ·
+              VH passé {Math.round((100 * src.couverture.vhPasse) / src.couverture.tot)} % ·
+              VH du jour {Math.round((100 * src.couverture.vhJour) / src.couverture.tot)} %
+              {' '}({src.couverture.tot} chevaux)
             </span>
           </>
         ) : null}
@@ -1093,7 +1138,7 @@ function TabChoix({ sk, choix }) {
 
       {/* ③ LES RÈGLES */}
       <div style={{ fontSize: 12, fontWeight: 800, color: sk.accent, letterSpacing: .6, textTransform: 'uppercase', margin: '16px 0 6px' }}>
-        ③ Chaque règle, seule — G1 puis G2 puis les deux ({(choix.regles || []).length} règles)
+        ③ Chaque règle, seule — G1 puis G2 puis les deux ({(src.regles || []).length} règles)
       </div>
       <div style={{ overflowX: 'auto', maxHeight: 420, overflowY: 'auto' }}>
         <table style={{ ...sk.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 12.5, overflow: 'hidden' }}>
@@ -1103,8 +1148,8 @@ function TabChoix({ sk, choix }) {
             </tr>
           </thead>
           <tbody>
-            {(choix.regles || []).map((r, i) => {
-              const gain = r.deux > (choix.code || 0)
+            {(src.regles || []).map((r, i) => {
+              const gain = r.deux > (src.code || 0)
               return (
                 <tr key={r.id} style={{ borderBottom: '1px solid ' + sk.bord, background: r.id === 'p' ? sk.on : i % 2 ? sk.alt : sk.ligne }}>
                   <td style={{ ...sk.td, fontSize: 12.5 }}>{r.label}{r.id === 'p' ? ' ← le code actuel' : ''}</td>
@@ -1120,9 +1165,9 @@ function TabChoix({ sk, choix }) {
       </div>
       <div style={{ fontSize: 12, color: sk.texte, marginTop: 8, lineHeight: 1.6 }}>
         Au-dessus du code : <b>{enTete.map((r) => r.id).join(', ') || 'rien'}</b>.
-        Le <b>LOO</b> — la meilleure règle choisie sur les {choix.n - 1} autres courses — vaut
-        <b style={{ color: sk.loo < choix.code ? '#fb7185' : '#34d399' }}> {nb(choix.loo)} %</b>
-        {choix.loo < choix.code ? ' , soit SOUS le code : les différences sont du bruit.' : '.'}
+        Le <b>LOO</b> — la meilleure règle choisie sur les {src.n - 1} autres courses — vaut
+        <b style={{ color: sk.loo < src.code ? '#fb7185' : '#34d399' }}> {nb(src.loo)} %</b>
+        {src.loo < src.code ? ' , soit SOUS le code : les différences sont du bruit.' : '.'}
       </div>
 
       {/* ④ LA GRILLE */}
@@ -1134,11 +1179,11 @@ function TabChoix({ sk, choix }) {
           <thead>
             <tr style={sk.hdrStyle}>
               <th style={sk.th}>G1 \ G2</th>
-              {choix.grille.tete.map((m) => <th key={m} style={{ ...sk.th, fontFamily: sk.nb.th }}>{m}</th>)}
+              {src.grille.tete.map((m) => <th key={m} style={{ ...sk.th, fontFamily: sk.nb.th }}>{m}</th>)}
             </tr>
           </thead>
           <tbody>
-            {choix.grille.lignes.map((l, i) => (
+            {src.grille.lignes.map((l, i) => (
               <tr key={l.m1} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
                 <td style={{ ...sk.td, fontFamily: sk.nb.td, fontWeight: 700 }}>{l.m1}</td>
                 {l.lignes.map((v, k) => (
@@ -1153,8 +1198,8 @@ function TabChoix({ sk, choix }) {
       </div>
       <div style={{ fontSize: 12, color: sk.texte, marginTop: 8 }}>
         Meilleure case : <b>{nb(meilleure.taux)} %</b> ({meilleure.m1} / {meilleure.m2}) — contre
-        <b> {nb(choix.code)} %</b> pour le code. L’écart est de
-        <b> {nb(Math.round(10 * ((meilleure.taux || 0) - choix.code)) / 10)} pt</b>.
+        <b> {nb(src.code)} %</b> pour le code. L’écart est de
+        <b> {nb(Math.round(10 * ((meilleure.taux || 0) - src.code)) / 10)} pt</b>.
       </div>
 
       {/* ⑤ STABILITÉ */}
@@ -1169,7 +1214,7 @@ function TabChoix({ sk, choix }) {
             </tr>
           </thead>
           <tbody>
-            {(choix.stabilite || []).map((x, i) => (
+            {(src.stabilite || []).map((x, i) => (
               <tr key={x.id} style={{ borderBottom: '1px solid ' + sk.bord, background: i % 2 ? sk.alt : sk.ligne }}>
                 <td style={{ ...sk.td, fontSize: 12.5 }}>{x.label}</td>
                 <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{nb(x.h1)} %</td>
@@ -1184,7 +1229,7 @@ function TabChoix({ sk, choix }) {
       </div>
 
       <div style={{ marginTop: 12, fontSize: 12.5, color: sk.texte, background: sk.alt, border: '1px solid ' + sk.bord, borderLeft: '4px solid ' + sk.accent, borderRadius: sk.box.borderRadius, padding: '10px 12px', lineHeight: 1.6 }}>
-        <b>Verdict.</b> {choix.verdict}
+        <b>Verdict.</b> {src.verdict}
         <br />
         <span style={{ color: sk.muted }}>
           Mesure écrite par <b>tools/choix-g1g2.mjs</b> (rejouer : <code>node tools\choix-g1g2.mjs</code>).
@@ -2645,17 +2690,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     ⚠ {stats.nb}/10 — chiffres trop faibles pour conclure
                   </span>
                 )}
-                <button onClick={() => setToutLesP((v) => !v)}
-                  style={{ padding: '3px 12px', borderRadius: 999, border: '1px solid ' + SK.bord, background: toutLesP ? 'rgba(255,255,255,.14)' : 'transparent', color: toutLesP ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-                  {toutLesP ? 'P1-P5 seulement' : 'Voir jusqu’à P20'}
-                </button>
-                <span style={{ fontSize: 12, color: SK.muted, fontWeight: 700 }}>Discipline :</span>
-                {['all', 'plat', 'attelé', 'haies'].map((d) => (
-                  <button key={d} onClick={() => setStatsDiscipline(d)}
-                    style={{ padding: '3px 10px', borderRadius: 999, border: '1px solid ' + SK.bord, background: statsDiscipline === d ? SK.accent : 'transparent', color: statsDiscipline === d ? '#fff' : SK.accent, cursor: 'pointer', fontSize: 12, fontWeight: 700 }}>
-                    {d === 'all' ? 'Tout' : d.charAt(0).toUpperCase() + d.slice(1)}
-                  </button>
-                ))}
+                <BarreFiltres sk={SK} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={statsDiscipline} setDiscipline={setStatsDiscipline} />
               </div>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
@@ -3154,12 +3189,16 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
 
       {/* ----------------------------------------------------------- écarts */}
       {onglet === 'ecarts' && (
-        <TabEcarts sk={SK} ecarts={ecarts} detail={detail} />
+        <TabEcarts sk={SK} ecarts={ecarts} detail={detail}
+          toutLesP={toutLesP} setToutLesP={setToutLesP}
+          discipline={statsDiscipline} setDiscipline={setStatsDiscipline} />
       )}
 
       {/* ------------------------------------------------------------ choix */}
       {onglet === 'choix' && (
-        <TabChoix sk={SK} choix={choix} />
+        <TabChoix sk={SK} choix={choix}
+          toutLesP={toutLesP} setToutLesP={setToutLesP}
+          discipline={statsDiscipline} setDiscipline={setStatsDiscipline} />
       )}
     </div>
     </>

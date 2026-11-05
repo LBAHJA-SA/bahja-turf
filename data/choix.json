@@ -1,7 +1,8 @@
 {
- "genere": "2026-10-21T17:22:00.781Z",
+ "genere": "2026-11-05T03:06:57.410Z",
  "date": "2026-10-16",
  "n": 96,
+ "discipline": "all",
  "cotes": "cotes",
  "carriere": true,
  "couverture": {
@@ -14,22 +15,22 @@
   "carriere": true
  },
  "source": "data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses) × data/terrain.json (terrain + sens PMU, tools/collect-terrain.mjs) × data/vh.json (VH PMU, tools/collect-vh.mjs)",
- "code": 57.3,
+ "code": 38.5,
  "diagnostic": {
   "blocs": [
    {
     "id": "G2",
     "arrivees": 75,
-    "gardes": 64,
-    "ecartes": 11,
-    "tauxGarde": 85.3
+    "gardes": 47,
+    "ecartes": 28,
+    "tauxGarde": 62.7
    },
    {
     "id": "G1",
     "arrivees": 144,
-    "gardes": 144,
-    "ecartes": 0,
-    "tauxGarde": 100
+    "gardes": 123,
+    "ecartes": 21,
+    "tauxGarde": 85.4
    },
    {
     "id": "G3",
@@ -48,351 +49,349 @@
    {
     "id": "G5",
     "arrivees": 19,
-    "gardes": 0,
-    "ecartes": 19,
-    "tauxGarde": 0
+    "gardes": 6,
+    "ecartes": 13,
+    "tauxGarde": 31.6
    }
   ],
-  "totalEcartes": 45,
-  "partG1G2": 24.4
+  "totalEcartes": 77,
+  "partG1G2": 63.6
  },
  "levier": {
-  "code": 57.3,
-  "oracle": 66.7,
-  "oracleG1": 57.3,
-  "oracleG2": 66.7,
-  "hasard": 52.3,
-  "quotaG5versG2": 42.7,
-  "note": "le siège de G5 vers G2 (§11.23, 95 courses) = 42,7 %"
+  "code": 38.5,
+  "oracle": 71.9,
+  "oracleG1": 52.1,
+  "oracleG2": 54.2,
+  "hasard": 22.8
  },
  "regles": [
   {
-   "id": "terrain",
-   "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
-   "g1": 57.3,
-   "g2": 61.5,
-   "deux": 61.5,
-   "couv": 2.5625
-  },
-  {
-   "id": "pTrend",
-   "label": "presse + mouvement",
-   "g1": 57.3,
-   "g2": 61.5,
-   "deux": 61.5,
-   "couv": 2.5416666666666665
-  },
-  {
-   "id": "niveau",
-   "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
-   "g1": 57.3,
-   "g2": 60.4,
-   "deux": 60.4,
-   "couv": 2.5520833333333335
-  },
-  {
-   "id": "swapCorde",
-   "label": "presse, mais une corde ≥ 11 cède à une corde ≤ 10",
-   "g1": 57.3,
-   "g2": 60.4,
-   "deux": 60.4,
-   "couv": 2.5416666666666665
-  },
-  {
-   "id": "vhBas",
-   "label": "VH — le plus bas VH d’abord",
-   "g1": 57.3,
-   "g2": 59.4,
-   "deux": 59.4,
-   "couv": 2.5416666666666665
-  },
-  {
-   "id": "filNiveau",
-   "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
-   "g1": 57.3,
-   "g2": 59.4,
-   "deux": 59.4,
-   "couv": 2.5416666666666665
-  },
-  {
-   "id": "pDisc",
-   "label": "presse + discipline",
-   "g1": 57.3,
-   "g2": 59.4,
-   "deux": 59.4,
-   "couv": 2.5520833333333335
-  },
-  {
-   "id": "swapPhys",
-   "label": "presse, mais le 1er écarté cède si son physique est meilleur",
-   "g1": 57.3,
-   "g2": 59.4,
-   "deux": 59.4,
-   "couv": 2.5416666666666665
-  },
-  {
-   "id": "disc",
-   "label": "discipline — a déjà couru ce type",
-   "g1": 57.3,
-   "g2": 58.3,
-   "deux": 58.3,
-   "couv": 2.5416666666666665
-  },
-  {
-   "id": "piste",
-   "label": "piste — cet hippodrome a-t-il été couru",
-   "g1": 57.3,
-   "g2": 58.3,
-   "deux": 58.3,
-   "couv": 2.5208333333333335
-  },
-  {
-   "id": "physT",
-   "label": "PHYSIQUE + TERRAIN + SENS (combiné)",
-   "g1": 57.3,
-   "g2": 58.3,
-   "deux": 58.3,
-   "couv": 2.5208333333333335
-  },
-  {
-   "id": "methode",
-   "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
-   "g1": 57.3,
-   "g2": 58.3,
-   "deux": 58.3,
-   "couv": 2.5208333333333335
-  },
-  {
-   "id": "jours",
-   "label": "jours — l’absence depuis la dernière course",
-   "g1": 57.3,
-   "g2": 58.3,
-   "deux": 58.3,
-   "couv": 2.5416666666666665
-  },
-  {
-   "id": "p",
-   "label": "presse — le rang P (le code actuel)",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.53125
-  },
-  {
-   "id": "m",
-   "label": "marché — la cote",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.53125
-  },
-  {
-   "id": "corde",
-   "label": "corde — le numéro de départ (§4 n°6)",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.53125
+   "id": "filPiste",
+   "label": "presse, mais jamais cet hippodrome passe derrière",
+   "g1": 39.6,
+   "g2": 39.6,
+   "deux": 40.6,
+   "couv": 2.2291666666666665
   },
   {
    "id": "pAge",
    "label": "presse + âge",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.5208333333333335
+   "g1": 39.6,
+   "g2": 38.5,
+   "deux": 39.6,
+   "couv": 2.2291666666666665
+  },
+  {
+   "id": "p",
+   "label": "presse — le rang P (le code actuel)",
+   "g1": 38.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.1979166666666665
+  },
+  {
+   "id": "piste",
+   "label": "piste — cet hippodrome a-t-il été couru",
+   "g1": 37.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.1875
+  },
+  {
+   "id": "pDisc",
+   "label": "presse + discipline",
+   "g1": 37.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.1770833333333335
+  },
+  {
+   "id": "swapPhys",
+   "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+   "g1": 39.6,
+   "g2": 37.5,
+   "deux": 38.5,
+   "couv": 2.1979166666666665
   },
   {
    "id": "swapPodium",
    "label": "presse, mais le 1er écarté cède s’il a un podium récent",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.5416666666666665
-  },
-  {
-   "id": "swapTrend",
-   "label": "presse, mais le 1er écarté cède si mieux soutenu",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.4895833333333335
+   "g1": 39.6,
+   "g2": 37.5,
+   "deux": 38.5,
+   "couv": 2.1770833333333335
   },
   {
    "id": "filJours",
    "label": "presse, mais +180 j d’absence passe derrière",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.53125
+   "g1": 38.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.1979166666666665
   },
   {
    "id": "filDist",
    "label": "presse, mais sans distance courue passe derrière",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.53125
-  },
-  {
-   "id": "filPiste",
-   "label": "presse, mais jamais cet hippodrome passe derrière",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.5104166666666665
-  },
-  {
-   "id": "filTerrain",
-   "label": "presse, mais jamais ce terrain passe derrière",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.5208333333333335
-  },
-  {
-   "id": "filSens",
-   "label": "presse, mais jamais ce sens passe derrière",
-   "g1": 57.3,
-   "g2": 57.3,
-   "deux": 57.3,
-   "couv": 2.5104166666666665
-  },
-  {
-   "id": "slot",
-   "label": "carnet — la colonne (slot) du carnet",
-   "g1": 57.3,
-   "g2": 56.3,
-   "deux": 56.3,
-   "couv": 2.5208333333333335
-  },
-  {
-   "id": "vhHaut",
-   "label": "VH — le plus haut VH d’abord",
-   "g1": 57.3,
-   "g2": 56.3,
-   "deux": 56.3,
-   "couv": 2.5104166666666665
-  },
-  {
-   "id": "dist",
-   "label": "distance — la distance du jour a-t-elle été courue",
-   "g1": 57.3,
-   "g2": 55.2,
-   "deux": 55.2,
-   "couv": 2.5
+   "g1": 38.5,
+   "g2": 38.5,
+   "deux": 38.5,
+   "couv": 2.2083333333333335
   },
   {
    "id": "pMus",
    "label": "presse + musique",
-   "g1": 57.3,
-   "g2": 55.2,
-   "deux": 55.2,
-   "couv": 2.5104166666666665
+   "g1": 38.5,
+   "g2": 37.5,
+   "deux": 37.5,
+   "couv": 2.1770833333333335
+  },
+  {
+   "id": "vhHaut",
+   "label": "VH — le plus haut VH d’abord",
+   "g1": 38.5,
+   "g2": 36.5,
+   "deux": 36.5,
+   "couv": 2.15625
   },
   {
    "id": "filPodium",
    "label": "presse, mais SANS podium récent passe derrière",
-   "g1": 57.3,
-   "g2": 55.2,
-   "deux": 55.2,
-   "couv": 2.5208333333333335
+   "g1": 38.5,
+   "g2": 37.5,
+   "deux": 36.5,
+   "couv": 2.15625
   },
   {
-   "id": "ageG",
-   "label": "âge à l’envers — le plus vieux",
-   "g1": 57.3,
-   "g2": 54.2,
-   "deux": 54.2,
-   "couv": 2.4791666666666665
+   "id": "filSens",
+   "label": "presse, mais jamais ce sens passe derrière",
+   "g1": 36.5,
+   "g2": 38.5,
+   "deux": 36.5,
+   "couv": 2.1770833333333335
   },
   {
-   "id": "piste2",
-   "label": "piste §4 — 60 % le lieu + 40 % le sens",
-   "g1": 57.3,
-   "g2": 54.2,
-   "deux": 54.2,
-   "couv": 2.4791666666666665
+   "id": "terrain",
+   "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+   "g1": 34.4,
+   "g2": 38.5,
+   "deux": 35.4,
+   "couv": 2.1458333333333335
   },
   {
-   "id": "podium",
-   "label": "podium — les podiums récents",
-   "g1": 57.3,
-   "g2": 54.2,
-   "deux": 54.2,
-   "couv": 2.5
+   "id": "disc",
+   "label": "discipline — a déjà couru ce type",
+   "g1": 33.3,
+   "g2": 38.5,
+   "deux": 34.4,
+   "couv": 2.15625
+  },
+  {
+   "id": "niveau",
+   "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+   "g1": 34.4,
+   "g2": 37.5,
+   "deux": 34.4,
+   "couv": 2.1041666666666665
+  },
+  {
+   "id": "filNiveau",
+   "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+   "g1": 35.4,
+   "g2": 35.4,
+   "deux": 34.4,
+   "couv": 2.09375
+  },
+  {
+   "id": "m",
+   "label": "marché — la cote",
+   "g1": 33.3,
+   "g2": 38.5,
+   "deux": 33.3,
+   "couv": 2.1354166666666665
   },
   {
    "id": "age",
    "label": "âge — le plus jeune d’abord",
-   "g1": 57.3,
-   "g2": 53.1,
-   "deux": 53.1,
-   "couv": 2.46875
+   "g1": 36.5,
+   "g2": 36.5,
+   "deux": 33.3,
+   "couv": 2.125
   },
   {
-   "id": "formeP",
-   "label": "forme §4 — la place pondérée",
-   "g1": 57.3,
-   "g2": 53.1,
-   "deux": 53.1,
-   "couv": 2.4791666666666665
+   "id": "ageG",
+   "label": "âge à l’envers — le plus vieux",
+   "g1": 38.5,
+   "g2": 29.2,
+   "deux": 33.3,
+   "couv": 2.125
   },
   {
-   "id": "phys",
-   "label": "PHYSIQUE — distance + piste + jours + podium",
-   "g1": 57.3,
-   "g2": 53.1,
-   "deux": 53.1,
-   "couv": 2.4791666666666665
+   "id": "pTrend",
+   "label": "presse + mouvement",
+   "g1": 37.5,
+   "g2": 34.4,
+   "deux": 33.3,
+   "couv": 2.1145833333333335
   },
   {
-   "id": "physSeul",
-   "label": "PHYSIQUE seul (sans départage presse)",
-   "g1": 57.3,
-   "g2": 53.1,
-   "deux": 53.1,
-   "couv": 2.4791666666666665
+   "id": "filTerrain",
+   "label": "presse, mais jamais ce terrain passe derrière",
+   "g1": 35.4,
+   "g2": 36.5,
+   "deux": 33.3,
+   "couv": 2.09375
   },
   {
-   "id": "cordeG",
-   "label": "corde à l’envers — le plus grand numéro",
-   "g1": 57.3,
-   "g2": 52.1,
-   "deux": 52.1,
-   "couv": 2.4479166666666665
+   "id": "dist",
+   "label": "distance — la distance du jour a-t-elle été courue",
+   "g1": 35.4,
+   "g2": 35.4,
+   "deux": 32.3,
+   "couv": 2.1145833333333335
   },
   {
-   "id": "trend",
-   "label": "mouvement — la cote qui baisse (ouverture ÷ cote)",
-   "g1": 57.3,
-   "g2": 52.1,
-   "deux": 52.1,
-   "couv": 2.4375
+   "id": "swapTrend",
+   "label": "presse, mais le 1er écarté cède si mieux soutenu",
+   "g1": 36.5,
+   "g2": 33.3,
+   "deux": 32.3,
+   "couv": 2.09375
+  },
+  {
+   "id": "swapCorde",
+   "label": "presse, mais une corde ≥ 11 cède à une corde ≤ 10",
+   "g1": 38.5,
+   "g2": 34.4,
+   "deux": 31.3,
+   "couv": 2.125
+  },
+  {
+   "id": "corde",
+   "label": "corde — le numéro de départ (§4 n°6)",
+   "g1": 34.4,
+   "g2": 31.3,
+   "deux": 30.2,
+   "couv": 2.0520833333333335
+  },
+  {
+   "id": "vhBas",
+   "label": "VH — le plus bas VH d’abord",
+   "g1": 34.4,
+   "g2": 33.3,
+   "deux": 30.2,
+   "couv": 2.0729166666666665
+  },
+  {
+   "id": "jours",
+   "label": "jours — l’absence depuis la dernière course",
+   "g1": 34.4,
+   "g2": 34.4,
+   "deux": 30.2,
+   "couv": 2.1354166666666665
+  },
+  {
+   "id": "podium",
+   "label": "podium — les podiums récents",
+   "g1": 34.4,
+   "g2": 33.3,
+   "deux": 29.2,
+   "couv": 2.1041666666666665
+  },
+  {
+   "id": "piste2",
+   "label": "piste §4 — 60 % le lieu + 40 % le sens",
+   "g1": 29.2,
+   "g2": 34.4,
+   "deux": 27.1,
+   "couv": 2.0520833333333335
+  },
+  {
+   "id": "slot",
+   "label": "carnet — la colonne (slot) du carnet",
+   "g1": 32.3,
+   "g2": 33.3,
+   "deux": 26,
+   "couv": 2.0833333333333335
   },
   {
    "id": "sens",
    "label": "piste — le SENS (corde à droite / à gauche)",
-   "g1": 57.3,
-   "g2": 52.1,
-   "deux": 52.1,
-   "couv": 2.4583333333333335
+   "g1": 31.3,
+   "g2": 33.3,
+   "deux": 26,
+   "couv": 2.0208333333333335
   },
   {
-   "id": "trendSeul",
-   "label": "MOUVEMENT seul (sans départage presse)",
-   "g1": 57.3,
-   "g2": 52.1,
-   "deux": 52.1,
-   "couv": 2.4375
+   "id": "formeP",
+   "label": "forme §4 — la place pondérée",
+   "g1": 35.4,
+   "g2": 31.3,
+   "deux": 26,
+   "couv": 2.0520833333333335
+  },
+  {
+   "id": "phys",
+   "label": "PHYSIQUE — distance + piste + jours + podium",
+   "g1": 31.3,
+   "g2": 32.3,
+   "deux": 26,
+   "couv": 2.0729166666666665
   },
   {
    "id": "mus",
    "label": "musique — la forme (§11.16 : sans pouvoir)",
-   "g1": 57.3,
-   "g2": 51,
-   "deux": 51,
-   "couv": 2.4791666666666665
+   "g1": 32.3,
+   "g2": 30.2,
+   "deux": 24,
+   "couv": 2.0416666666666665
+  },
+  {
+   "id": "physSeul",
+   "label": "PHYSIQUE seul (sans départage presse)",
+   "g1": 29.2,
+   "g2": 32.3,
+   "deux": 22.9,
+   "couv": 2.0520833333333335
+  },
+  {
+   "id": "trend",
+   "label": "mouvement — la cote qui baisse (ouverture ÷ cote)",
+   "g1": 30.2,
+   "g2": 29.2,
+   "deux": 21.9,
+   "couv": 1.96875
+  },
+  {
+   "id": "physT",
+   "label": "PHYSIQUE + TERRAIN + SENS (combiné)",
+   "g1": 28.1,
+   "g2": 31.3,
+   "deux": 21.9,
+   "couv": 1.90625
+  },
+  {
+   "id": "methode",
+   "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+   "g1": 28.1,
+   "g2": 31.3,
+   "deux": 21.9,
+   "couv": 1.90625
+  },
+  {
+   "id": "trendSeul",
+   "label": "MOUVEMENT seul (sans départage presse)",
+   "g1": 30.2,
+   "g2": 29.2,
+   "deux": 21.9,
+   "couv": 1.96875
+  },
+  {
+   "id": "cordeG",
+   "label": "corde à l’envers — le plus grand numéro",
+   "g1": 24,
+   "g2": 28.1,
+   "deux": 16.7,
+   "couv": 1.8541666666666667
   }
  ],
  "grille": {
@@ -416,345 +415,2624 @@
    {
     "m1": "p",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     38.5,
+     38.5,
+     32.3,
+     38.5,
+     31.3,
+     30.2,
+     38.5,
+     33.3,
+     37.5,
+     31.3,
+     39.6,
+     36.5,
+     35.4,
+     37.5
     ]
    },
    {
     "m1": "m",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     32.3,
+     33.3,
+     29.2,
+     31.3,
+     26,
+     26,
+     32.3,
+     30.2,
+     33.3,
+     27.1,
+     34.4,
+     31.3,
+     31.3,
+     32.3
     ]
    },
    {
     "m1": "phys",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     32.3,
+     31.3,
+     26,
+     32.3,
+     29.2,
+     25,
+     33.3,
+     30.2,
+     32.3,
+     28.1,
+     32.3,
+     32.3,
+     30.2,
+     29.2
     ]
    },
    {
     "m1": "pAge",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     39.6,
+     39.6,
+     32.3,
+     39.6,
+     33.3,
+     30.2,
+     39.6,
+     34.4,
+     38.5,
+     31.3,
+     40.6,
+     37.5,
+     36.5,
+     37.5
     ]
    },
    {
     "m1": "corde",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     36.5,
+     34.4,
+     28.1,
+     37.5,
+     30.2,
+     29.2,
+     35.4,
+     33.3,
+     38.5,
+     31.3,
+     37.5,
+     35.4,
+     34.4,
+     34.4
     ]
    },
    {
     "m1": "mus",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     33.3,
+     32.3,
+     25,
+     33.3,
+     28.1,
+     24,
+     30.2,
+     30.2,
+     31.3,
+     27.1,
+     33.3,
+     32.3,
+     30.2,
+     30.2
     ]
    },
    {
     "m1": "terrain",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     35.4,
+     34.4,
+     30.2,
+     34.4,
+     30.2,
+     27.1,
+     35.4,
+     32.3,
+     34.4,
+     29.2,
+     36.5,
+     33.3,
+     34.4,
+     33.3
     ]
    },
    {
     "m1": "sens",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     30.2,
+     31.3,
+     27.1,
+     30.2,
+     26,
+     25,
+     32.3,
+     26,
+     33.3,
+     27.1,
+     32.3,
+     29.2,
+     29.2,
+     29.2
     ]
    },
    {
     "m1": "niveau",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     34.4,
+     34.4,
+     28.1,
+     34.4,
+     27.1,
+     26,
+     33.3,
+     30.2,
+     34.4,
+     27.1,
+     35.4,
+     32.3,
+     33.3,
+     33.3
     ]
    },
    {
     "m1": "methode",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     28.1,
+     28.1,
+     21.9,
+     29.2,
+     24,
+     20.8,
+     26,
+     25,
+     27.1,
+     21.9,
+     29.2,
+     25,
+     27.1,
+     25
     ]
    },
    {
     "m1": "filPiste",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     40.6,
+     39.6,
+     33.3,
+     40.6,
+     31.3,
+     31.3,
+     38.5,
+     34.4,
+     38.5,
+     31.3,
+     40.6,
+     37.5,
+     37.5,
+     39.6
     ]
    },
    {
     "m1": "filTerrain",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     35.4,
+     35.4,
+     30.2,
+     35.4,
+     30.2,
+     28.1,
+     36.5,
+     31.3,
+     34.4,
+     29.2,
+     36.5,
+     33.3,
+     33.3,
+     34.4
     ]
    },
    {
     "m1": "filNiveau",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     35.4,
+     35.4,
+     29.2,
+     35.4,
+     28.1,
+     27.1,
+     34.4,
+     31.3,
+     35.4,
+     28.1,
+     36.5,
+     33.3,
+     34.4,
+     34.4
     ]
    },
    {
     "m1": "swapPhys",
     "lignes": [
-     57.3,
-     57.3,
-     53.1,
-     57.3,
-     57.3,
-     51,
-     61.5,
-     52.1,
-     60.4,
-     58.3,
-     57.3,
-     57.3,
-     59.4,
-     59.4
+     40.6,
+     39.6,
+     33.3,
+     39.6,
+     32.3,
+     31.3,
+     38.5,
+     35.4,
+     38.5,
+     32.3,
+     40.6,
+     38.5,
+     37.5,
+     38.5
     ]
    }
   ],
   "meilleure": {
-   "m1": "p",
-   "m2": "terrain",
-   "taux": 61.5,
-   "couv": 2.5625
+   "m1": "pAge",
+   "m2": "filPiste",
+   "taux": 40.6,
+   "couv": 2.2395833333333335
   }
  },
- "loo": 58.3,
+ "loo": 22.9,
  "stabilite": [
   {
    "id": "p",
    "label": "presse — le rang P (le code actuel)",
-   "h1": 58.3,
-   "h2": 56.3
+   "h1": 35.4,
+   "h2": 41.7
   },
   {
    "id": "m",
    "label": "marché — la cote",
-   "h1": 60.4,
-   "h2": 54.2
+   "h1": 35.4,
+   "h2": 31.3
   },
   {
    "id": "phys",
    "label": "PHYSIQUE — distance + piste + jours + podium",
-   "h1": 56.3,
-   "h2": 50
+   "h1": 22.9,
+   "h2": 29.2
   },
   {
    "id": "pAge",
    "label": "presse + âge",
-   "h1": 58.3,
-   "h2": 56.3
+   "h1": 33.3,
+   "h2": 45.8
   },
   {
    "id": "swapPhys",
    "label": "presse, mais le 1er écarté cède si son physique est meilleur",
-   "h1": 60.4,
-   "h2": 58.3
+   "h1": 31.3,
+   "h2": 45.8
   },
   {
    "id": "filPiste",
    "label": "presse, mais jamais cet hippodrome passe derrière",
-   "h1": 58.3,
-   "h2": 56.3
+   "h1": 37.5,
+   "h2": 43.8
   },
   {
    "id": "terrain",
    "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
-   "h1": 64.6,
-   "h2": 58.3
+   "h1": 39.6,
+   "h2": 31.3
   },
   {
    "id": "sens",
    "label": "piste — le SENS (corde à droite / à gauche)",
-   "h1": 50,
-   "h2": 54.2
+   "h1": 20.8,
+   "h2": 31.3
   },
   {
    "id": "niveau",
    "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
-   "h1": 64.6,
-   "h2": 56.3
+   "h1": 27.1,
+   "h2": 41.7
   },
   {
    "id": "methode",
    "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
-   "h1": 62.5,
-   "h2": 54.2
+   "h1": 20.8,
+   "h2": 22.9
   },
   {
    "id": "filNiveau",
    "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
-   "h1": 60.4,
-   "h2": 58.3
+   "h1": 27.1,
+   "h2": 41.7
   }
  ],
- "verdict": "LES 6 CRITÈRES DE §4 SONT TOUS MESURÉS (terrain 58 %, sens 84 %, VH passé 52 % — collectés de PMU, §14.6) : aucun ne trie l’intérieur d’un bloc. Le SCORE §4 complet vaut 58,3 % (+1,0 pts) contre 57,3 % pour la presse ; le terrain 61,5 %, le sens 52,1 % et le niveau 60,4 % sont tous SOUS le code. La meilleure règle reste filPiste (57,3 %, +0,0) et le LOO la ramène à 58,3 % — SOUS le code : c’est du bruit. Le choix a une marge réelle (+9,4 pts à l’oracle) que RIEN ne prend. La presse reste le seul tri : rien n’est appliqué au moteur."
+ "verdict": "LES 6 CRITÈRES DE §4 SONT TOUS MESURÉS (terrain 58 %, sens 84 %, VH passé 52 % — collectés de PMU, §14.6) : aucun ne trie l’intérieur d’un bloc. Le SCORE §4 complet vaut 21,9 % (-16,6 pts) contre 38,5 % pour la presse ; le terrain 35,4 %, le sens 26 % et le niveau 34,4 % sont tous SOUS le code. La meilleure règle reste filPiste (40,6 %, +2,1) et le LOO la ramène à 22,9 % — SOUS le code : c’est du bruit. Le choix a une marge réelle (+33,4 pts à l’oracle) que RIEN ne prend. La presse reste le seul tri : rien n’est appliqué au moteur.",
+ "parDiscipline": {
+  "plat": {
+   "genere": "2026-11-05T03:06:01.817Z",
+   "date": "2026-10-16",
+   "n": 45,
+   "discipline": "plat",
+   "cotes": "cotes",
+   "carriere": true,
+   "couverture": {
+    "tot": 719,
+    "terrain": 668,
+    "sens": 661,
+    "vhJour": 717,
+    "vhPasse": 646,
+    "cotes": "cotes",
+    "carriere": true
+   },
+   "source": "data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses) × data/terrain.json (terrain + sens PMU, tools/collect-terrain.mjs) × data/vh.json (VH PMU, tools/collect-vh.mjs)",
+   "code": 28.9,
+   "diagnostic": {
+    "blocs": [
+     {
+      "id": "G2",
+      "arrivees": 35,
+      "gardes": 22,
+      "ecartes": 13,
+      "tauxGarde": 62.9
+     },
+     {
+      "id": "G1",
+      "arrivees": 67,
+      "gardes": 54,
+      "ecartes": 13,
+      "tauxGarde": 80.6
+     },
+     {
+      "id": "G4",
+      "arrivees": 13,
+      "gardes": 8,
+      "ecartes": 5,
+      "tauxGarde": 61.5
+     },
+     {
+      "id": "G3",
+      "arrivees": 9,
+      "gardes": 7,
+      "ecartes": 2,
+      "tauxGarde": 77.8
+     },
+     {
+      "id": "G5",
+      "arrivees": 11,
+      "gardes": 3,
+      "ecartes": 8,
+      "tauxGarde": 27.3
+     }
+    ],
+    "totalEcartes": 41,
+    "partG1G2": 63.4
+   },
+   "levier": {
+    "code": 28.9,
+    "oracle": 66.7,
+    "oracleG1": 46.7,
+    "oracleG2": 44.4,
+    "hasard": 20.6
+   },
+   "regles": [
+    {
+     "id": "filPiste",
+     "label": "presse, mais jamais cet hippodrome passe derrière",
+     "g1": 35.6,
+     "g2": 33.3,
+     "deux": 40,
+     "couv": 2.2444444444444445
+    },
+    {
+     "id": "pAge",
+     "label": "presse + âge",
+     "g1": 33.3,
+     "g2": 33.3,
+     "deux": 37.8,
+     "couv": 2.2444444444444445
+    },
+    {
+     "id": "swapPhys",
+     "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+     "g1": 33.3,
+     "g2": 33.3,
+     "deux": 37.8,
+     "couv": 2.2
+    },
+    {
+     "id": "piste",
+     "label": "piste — cet hippodrome a-t-il été couru",
+     "g1": 31.1,
+     "g2": 31.1,
+     "deux": 35.6,
+     "couv": 2.1555555555555554
+    },
+    {
+     "id": "age",
+     "label": "âge — le plus jeune d’abord",
+     "g1": 31.1,
+     "g2": 31.1,
+     "deux": 33.3,
+     "couv": 2.1333333333333333
+    },
+    {
+     "id": "dist",
+     "label": "distance — la distance du jour a-t-elle été courue",
+     "g1": 33.3,
+     "g2": 28.9,
+     "deux": 33.3,
+     "couv": 2.088888888888889
+    },
+    {
+     "id": "swapCorde",
+     "label": "presse, mais une corde ≥ 11 cède à une corde ≤ 10",
+     "g1": 31.1,
+     "g2": 33.3,
+     "deux": 33.3,
+     "couv": 2.1333333333333333
+    },
+    {
+     "id": "swapPodium",
+     "label": "presse, mais le 1er écarté cède s’il a un podium récent",
+     "g1": 31.1,
+     "g2": 31.1,
+     "deux": 33.3,
+     "couv": 2.111111111111111
+    },
+    {
+     "id": "p",
+     "label": "presse — le rang P (le code actuel)",
+     "g1": 28.9,
+     "g2": 31.1,
+     "deux": 31.1,
+     "couv": 2.1333333333333333
+    },
+    {
+     "id": "disc",
+     "label": "discipline — a déjà couru ce type",
+     "g1": 26.7,
+     "g2": 31.1,
+     "deux": 31.1,
+     "couv": 2.1333333333333333
+    },
+    {
+     "id": "formeP",
+     "label": "forme §4 — la place pondérée",
+     "g1": 35.6,
+     "g2": 26.7,
+     "deux": 31.1,
+     "couv": 2.088888888888889
+    },
+    {
+     "id": "pMus",
+     "label": "presse + musique",
+     "g1": 28.9,
+     "g2": 31.1,
+     "deux": 31.1,
+     "couv": 2.1333333333333333
+    },
+    {
+     "id": "pDisc",
+     "label": "presse + discipline",
+     "g1": 26.7,
+     "g2": 31.1,
+     "deux": 31.1,
+     "couv": 2.111111111111111
+    },
+    {
+     "id": "filJours",
+     "label": "presse, mais +180 j d’absence passe derrière",
+     "g1": 28.9,
+     "g2": 31.1,
+     "deux": 31.1,
+     "couv": 2.1333333333333333
+    },
+    {
+     "id": "filPodium",
+     "label": "presse, mais SANS podium récent passe derrière",
+     "g1": 28.9,
+     "g2": 31.1,
+     "deux": 31.1,
+     "couv": 2.088888888888889
+    },
+    {
+     "id": "filDist",
+     "label": "presse, mais sans distance courue passe derrière",
+     "g1": 28.9,
+     "g2": 31.1,
+     "deux": 31.1,
+     "couv": 2.1333333333333333
+    },
+    {
+     "id": "filSens",
+     "label": "presse, mais jamais ce sens passe derrière",
+     "g1": 26.7,
+     "g2": 33.3,
+     "deux": 31.1,
+     "couv": 2.1333333333333333
+    },
+    {
+     "id": "piste2",
+     "label": "piste §4 — 60 % le lieu + 40 % le sens",
+     "g1": 20,
+     "g2": 33.3,
+     "deux": 28.9,
+     "couv": 2.111111111111111
+    },
+    {
+     "id": "mus",
+     "label": "musique — la forme (§11.16 : sans pouvoir)",
+     "g1": 31.1,
+     "g2": 24.4,
+     "deux": 26.7,
+     "couv": 2.111111111111111
+    },
+    {
+     "id": "vhHaut",
+     "label": "VH — le plus haut VH d’abord",
+     "g1": 28.9,
+     "g2": 26.7,
+     "deux": 26.7,
+     "couv": 2.022222222222222
+    },
+    {
+     "id": "podium",
+     "label": "podium — les podiums récents",
+     "g1": 26.7,
+     "g2": 24.4,
+     "deux": 26.7,
+     "couv": 2.066666666666667
+    },
+    {
+     "id": "phys",
+     "label": "PHYSIQUE — distance + piste + jours + podium",
+     "g1": 28.9,
+     "g2": 24.4,
+     "deux": 26.7,
+     "couv": 2.022222222222222
+    },
+    {
+     "id": "m",
+     "label": "marché — la cote",
+     "g1": 24.4,
+     "g2": 28.9,
+     "deux": 24.4,
+     "couv": 2.022222222222222
+    },
+    {
+     "id": "slot",
+     "label": "carnet — la colonne (slot) du carnet",
+     "g1": 31.1,
+     "g2": 24.4,
+     "deux": 24.4,
+     "couv": 2.0444444444444443
+    },
+    {
+     "id": "corde",
+     "label": "corde — le numéro de départ (§4 n°6)",
+     "g1": 24.4,
+     "g2": 28.9,
+     "deux": 24.4,
+     "couv": 2
+    },
+    {
+     "id": "ageG",
+     "label": "âge à l’envers — le plus vieux",
+     "g1": 28.9,
+     "g2": 20,
+     "deux": 24.4,
+     "couv": 2
+    },
+    {
+     "id": "sens",
+     "label": "piste — le SENS (corde à droite / à gauche)",
+     "g1": 22.2,
+     "g2": 28.9,
+     "deux": 24.4,
+     "couv": 2
+    },
+    {
+     "id": "physT",
+     "label": "PHYSIQUE + TERRAIN + SENS (combiné)",
+     "g1": 24.4,
+     "g2": 22.2,
+     "deux": 24.4,
+     "couv": 1.8444444444444446
+    },
+    {
+     "id": "methode",
+     "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+     "g1": 24.4,
+     "g2": 22.2,
+     "deux": 24.4,
+     "couv": 1.8444444444444446
+    },
+    {
+     "id": "filNiveau",
+     "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+     "g1": 24.4,
+     "g2": 24.4,
+     "deux": 24.4,
+     "couv": 1.9333333333333333
+    },
+    {
+     "id": "physSeul",
+     "label": "PHYSIQUE seul (sans départage presse)",
+     "g1": 28.9,
+     "g2": 22.2,
+     "deux": 24.4,
+     "couv": 2.022222222222222
+    },
+    {
+     "id": "swapTrend",
+     "label": "presse, mais le 1er écarté cède si mieux soutenu",
+     "g1": 28.9,
+     "g2": 22.2,
+     "deux": 24.4,
+     "couv": 1.9777777777777779
+    },
+    {
+     "id": "filTerrain",
+     "label": "presse, mais jamais ce terrain passe derrière",
+     "g1": 26.7,
+     "g2": 24.4,
+     "deux": 24.4,
+     "couv": 2
+    },
+    {
+     "id": "terrain",
+     "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+     "g1": 20,
+     "g2": 26.7,
+     "deux": 22.2,
+     "couv": 1.9555555555555555
+    },
+    {
+     "id": "niveau",
+     "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+     "g1": 22.2,
+     "g2": 26.7,
+     "deux": 22.2,
+     "couv": 1.9333333333333333
+    },
+    {
+     "id": "jours",
+     "label": "jours — l’absence depuis la dernière course",
+     "g1": 26.7,
+     "g2": 24.4,
+     "deux": 22.2,
+     "couv": 1.9777777777777779
+    },
+    {
+     "id": "pTrend",
+     "label": "presse + mouvement",
+     "g1": 28.9,
+     "g2": 17.8,
+     "deux": 17.8,
+     "couv": 1.9333333333333333
+    },
+    {
+     "id": "cordeG",
+     "label": "corde à l’envers — le plus grand numéro",
+     "g1": 24.4,
+     "g2": 15.6,
+     "deux": 15.6,
+     "couv": 1.8222222222222222
+    },
+    {
+     "id": "vhBas",
+     "label": "VH — le plus bas VH d’abord",
+     "g1": 24.4,
+     "g2": 15.6,
+     "deux": 15.6,
+     "couv": 1.8444444444444446
+    },
+    {
+     "id": "trend",
+     "label": "mouvement — la cote qui baisse (ouverture ÷ cote)",
+     "g1": 24.4,
+     "g2": 15.6,
+     "deux": 13.3,
+     "couv": 1.8222222222222222
+    },
+    {
+     "id": "trendSeul",
+     "label": "MOUVEMENT seul (sans départage presse)",
+     "g1": 24.4,
+     "g2": 15.6,
+     "deux": 13.3,
+     "couv": 1.8222222222222222
+    }
+   ],
+   "grille": {
+    "tete": [
+     "p",
+     "m",
+     "phys",
+     "pAge",
+     "corde",
+     "mus",
+     "terrain",
+     "sens",
+     "niveau",
+     "methode",
+     "filPiste",
+     "filTerrain",
+     "filNiveau",
+     "swapPhys"
+    ],
+    "lignes": [
+     {
+      "m1": "p",
+      "lignes": [
+       31.1,
+       28.9,
+       24.4,
+       33.3,
+       28.9,
+       24.4,
+       26.7,
+       28.9,
+       26.7,
+       22.2,
+       33.3,
+       24.4,
+       24.4,
+       33.3
+      ]
+     },
+     {
+      "m1": "m",
+      "lignes": [
+       24.4,
+       24.4,
+       22.2,
+       24.4,
+       24.4,
+       17.8,
+       20,
+       24.4,
+       24.4,
+       17.8,
+       28.9,
+       20,
+       22.2,
+       26.7
+      ]
+     },
+     {
+      "m1": "phys",
+      "lignes": [
+       33.3,
+       28.9,
+       26.7,
+       35.6,
+       31.1,
+       28.9,
+       31.1,
+       35.6,
+       31.1,
+       31.1,
+       33.3,
+       31.1,
+       28.9,
+       33.3
+      ]
+     },
+     {
+      "m1": "pAge",
+      "lignes": [
+       35.6,
+       33.3,
+       28.9,
+       37.8,
+       33.3,
+       28.9,
+       31.1,
+       33.3,
+       31.1,
+       26.7,
+       37.8,
+       28.9,
+       28.9,
+       37.8
+      ]
+     },
+     {
+      "m1": "corde",
+      "lignes": [
+       28.9,
+       24.4,
+       20,
+       33.3,
+       24.4,
+       24.4,
+       24.4,
+       31.1,
+       31.1,
+       24.4,
+       31.1,
+       26.7,
+       24.4,
+       31.1
+      ]
+     },
+     {
+      "m1": "mus",
+      "lignes": [
+       37.8,
+       31.1,
+       26.7,
+       37.8,
+       31.1,
+       26.7,
+       26.7,
+       35.6,
+       31.1,
+       26.7,
+       35.6,
+       31.1,
+       31.1,
+       37.8
+      ]
+     },
+     {
+      "m1": "terrain",
+      "lignes": [
+       24.4,
+       20,
+       22.2,
+       24.4,
+       26.7,
+       17.8,
+       22.2,
+       26.7,
+       20,
+       20,
+       26.7,
+       20,
+       22.2,
+       24.4
+      ]
+     },
+     {
+      "m1": "sens",
+      "lignes": [
+       22.2,
+       22.2,
+       22.2,
+       24.4,
+       24.4,
+       20,
+       22.2,
+       24.4,
+       26.7,
+       22.2,
+       26.7,
+       20,
+       20,
+       24.4
+      ]
+     },
+     {
+      "m1": "niveau",
+      "lignes": [
+       24.4,
+       22.2,
+       20,
+       26.7,
+       22.2,
+       17.8,
+       20,
+       24.4,
+       22.2,
+       15.6,
+       26.7,
+       20,
+       22.2,
+       26.7
+      ]
+     },
+     {
+      "m1": "methode",
+      "lignes": [
+       26.7,
+       24.4,
+       26.7,
+       28.9,
+       26.7,
+       24.4,
+       22.2,
+       28.9,
+       24.4,
+       24.4,
+       28.9,
+       22.2,
+       24.4,
+       26.7
+      ]
+     },
+     {
+      "m1": "filPiste",
+      "lignes": [
+       37.8,
+       35.6,
+       31.1,
+       40,
+       31.1,
+       28.9,
+       31.1,
+       33.3,
+       33.3,
+       26.7,
+       40,
+       31.1,
+       31.1,
+       40
+      ]
+     },
+     {
+      "m1": "filTerrain",
+      "lignes": [
+       28.9,
+       26.7,
+       26.7,
+       31.1,
+       28.9,
+       24.4,
+       28.9,
+       28.9,
+       24.4,
+       24.4,
+       31.1,
+       24.4,
+       24.4,
+       31.1
+      ]
+     },
+     {
+      "m1": "filNiveau",
+      "lignes": [
+       26.7,
+       24.4,
+       22.2,
+       28.9,
+       24.4,
+       20,
+       22.2,
+       26.7,
+       24.4,
+       17.8,
+       28.9,
+       22.2,
+       24.4,
+       28.9
+      ]
+     },
+     {
+      "m1": "swapPhys",
+      "lignes": [
+       37.8,
+       33.3,
+       28.9,
+       37.8,
+       33.3,
+       28.9,
+       28.9,
+       35.6,
+       31.1,
+       26.7,
+       37.8,
+       31.1,
+       31.1,
+       37.8
+      ]
+     }
+    ],
+    "meilleure": {
+     "m1": "filPiste",
+     "m2": "pAge",
+     "taux": 40,
+     "couv": 2.2444444444444445
+    }
+   },
+   "loo": 17.8,
+   "stabilite": [
+    {
+     "id": "p",
+     "label": "presse — le rang P (le code actuel)",
+     "h1": 31.8,
+     "h2": 30.4
+    },
+    {
+     "id": "m",
+     "label": "marché — la cote",
+     "h1": 31.8,
+     "h2": 17.4
+    },
+    {
+     "id": "phys",
+     "label": "PHYSIQUE — distance + piste + jours + podium",
+     "h1": 27.3,
+     "h2": 26.1
+    },
+    {
+     "id": "pAge",
+     "label": "presse + âge",
+     "h1": 36.4,
+     "h2": 39.1
+    },
+    {
+     "id": "swapPhys",
+     "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+     "h1": 31.8,
+     "h2": 43.5
+    },
+    {
+     "id": "filPiste",
+     "label": "presse, mais jamais cet hippodrome passe derrière",
+     "h1": 40.9,
+     "h2": 39.1
+    },
+    {
+     "id": "terrain",
+     "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+     "h1": 31.8,
+     "h2": 13
+    },
+    {
+     "id": "sens",
+     "label": "piste — le SENS (corde à droite / à gauche)",
+     "h1": 18.2,
+     "h2": 30.4
+    },
+    {
+     "id": "niveau",
+     "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+     "h1": 9.1,
+     "h2": 34.8
+    },
+    {
+     "id": "methode",
+     "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+     "h1": 22.7,
+     "h2": 26.1
+    },
+    {
+     "id": "filNiveau",
+     "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+     "h1": 18.2,
+     "h2": 30.4
+    }
+   ],
+   "verdict": "LES 6 CRITÈRES DE §4 SONT TOUS MESURÉS (terrain 93 %, sens 92 %, VH passé 90 % — collectés de PMU, §14.6) : aucun ne trie l’intérieur d’un bloc. Le SCORE §4 complet vaut 24,4 % (-4,5 pts) contre 28,9 % pour la presse ; le terrain 22,2 %, le sens 24,4 % et le niveau 22,2 % sont tous SOUS le code. La meilleure règle reste filPiste (40 %, +11,1) et le LOO la ramène à 17,8 % — SOUS le code : c’est du bruit. Le choix a une marge réelle (+37,8 pts à l’oracle) que RIEN ne prend. La presse reste le seul tri : rien n’est appliqué au moteur."
+  },
+  "attelé": {
+   "genere": "2026-11-05T03:06:11.241Z",
+   "date": "2026-10-16",
+   "n": 41,
+   "discipline": "attelé",
+   "cotes": "cotes",
+   "carriere": true,
+   "couverture": {
+    "tot": 629,
+    "terrain": 47,
+    "sens": 592,
+    "vhJour": 0,
+    "vhPasse": 0,
+    "cotes": "cotes",
+    "carriere": true
+   },
+   "source": "data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses) × data/terrain.json (terrain + sens PMU, tools/collect-terrain.mjs) × data/vh.json (VH PMU, tools/collect-vh.mjs)",
+   "code": 51.2,
+   "diagnostic": {
+    "blocs": [
+     {
+      "id": "G3",
+      "arrivees": 12,
+      "gardes": 7,
+      "ecartes": 5,
+      "tauxGarde": 58.3
+     },
+     {
+      "id": "G4",
+      "arrivees": 9,
+      "gardes": 8,
+      "ecartes": 1,
+      "tauxGarde": 88.9
+     },
+     {
+      "id": "G1",
+      "arrivees": 68,
+      "gardes": 61,
+      "ecartes": 7,
+      "tauxGarde": 89.7
+     },
+     {
+      "id": "G2",
+      "arrivees": 30,
+      "gardes": 21,
+      "ecartes": 9,
+      "tauxGarde": 70
+     },
+     {
+      "id": "G5",
+      "arrivees": 4,
+      "gardes": 1,
+      "ecartes": 3,
+      "tauxGarde": 25
+     }
+    ],
+    "totalEcartes": 25,
+    "partG1G2": 64
+   },
+   "levier": {
+    "code": 51.2,
+    "oracle": 78,
+    "oracleG1": 63.4,
+    "oracleG2": 61,
+    "hasard": 25.1
+   },
+   "regles": [
+    {
+     "id": "p",
+     "label": "presse — le rang P (le code actuel)",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3902439024390243
+    },
+    {
+     "id": "terrain",
+     "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3902439024390243
+    },
+    {
+     "id": "niveau",
+     "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3902439024390243
+    },
+    {
+     "id": "vhHaut",
+     "label": "VH — le plus haut VH d’abord",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3902439024390243
+    },
+    {
+     "id": "vhBas",
+     "label": "VH — le plus bas VH d’abord",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3902439024390243
+    },
+    {
+     "id": "filNiveau",
+     "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3902439024390243
+    },
+    {
+     "id": "pDisc",
+     "label": "presse + discipline",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3658536585365852
+    },
+    {
+     "id": "filJours",
+     "label": "presse, mais +180 j d’absence passe derrière",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3902439024390243
+    },
+    {
+     "id": "filDist",
+     "label": "presse, mais sans distance courue passe derrière",
+     "g1": 51.2,
+     "g2": 51.2,
+     "deux": 51.2,
+     "couv": 2.3902439024390243
+    },
+    {
+     "id": "pAge",
+     "label": "presse + âge",
+     "g1": 51.2,
+     "g2": 48.8,
+     "deux": 48.8,
+     "couv": 2.3658536585365852
+    },
+    {
+     "id": "pMus",
+     "label": "presse + musique",
+     "g1": 51.2,
+     "g2": 48.8,
+     "deux": 48.8,
+     "couv": 2.341463414634146
+    },
+    {
+     "id": "pTrend",
+     "label": "presse + mouvement",
+     "g1": 48.8,
+     "g2": 51.2,
+     "deux": 48.8,
+     "couv": 2.3658536585365852
+    },
+    {
+     "id": "swapPodium",
+     "label": "presse, mais le 1er écarté cède s’il a un podium récent",
+     "g1": 51.2,
+     "g2": 48.8,
+     "deux": 48.8,
+     "couv": 2.3658536585365852
+    },
+    {
+     "id": "ageG",
+     "label": "âge à l’envers — le plus vieux",
+     "g1": 51.2,
+     "g2": 41.5,
+     "deux": 46.3,
+     "couv": 2.317073170731707
+    },
+    {
+     "id": "piste",
+     "label": "piste — cet hippodrome a-t-il été couru",
+     "g1": 48.8,
+     "g2": 48.8,
+     "deux": 46.3,
+     "couv": 2.341463414634146
+    },
+    {
+     "id": "filPodium",
+     "label": "presse, mais SANS podium récent passe derrière",
+     "g1": 51.2,
+     "g2": 48.8,
+     "deux": 46.3,
+     "couv": 2.341463414634146
+    },
+    {
+     "id": "filPiste",
+     "label": "presse, mais jamais cet hippodrome passe derrière",
+     "g1": 48.8,
+     "g2": 48.8,
+     "deux": 46.3,
+     "couv": 2.341463414634146
+    },
+    {
+     "id": "filSens",
+     "label": "presse, mais jamais ce sens passe derrière",
+     "g1": 48.8,
+     "g2": 48.8,
+     "deux": 46.3,
+     "couv": 2.341463414634146
+    },
+    {
+     "id": "m",
+     "label": "marché — la cote",
+     "g1": 43.9,
+     "g2": 51.2,
+     "deux": 43.9,
+     "couv": 2.317073170731707
+    },
+    {
+     "id": "swapPhys",
+     "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+     "g1": 48.8,
+     "g2": 46.3,
+     "deux": 43.9,
+     "couv": 2.317073170731707
+    },
+    {
+     "id": "swapTrend",
+     "label": "presse, mais le 1er écarté cède si mieux soutenu",
+     "g1": 48.8,
+     "g2": 46.3,
+     "deux": 43.9,
+     "couv": 2.292682926829268
+    },
+    {
+     "id": "filTerrain",
+     "label": "presse, mais jamais ce terrain passe derrière",
+     "g1": 46.3,
+     "g2": 48.8,
+     "deux": 43.9,
+     "couv": 2.292682926829268
+    },
+    {
+     "id": "age",
+     "label": "âge — le plus jeune d’abord",
+     "g1": 46.3,
+     "g2": 46.3,
+     "deux": 39,
+     "couv": 2.268292682926829
+    },
+    {
+     "id": "disc",
+     "label": "discipline — a déjà couru ce type",
+     "g1": 41.5,
+     "g2": 48.8,
+     "deux": 39,
+     "couv": 2.2439024390243905
+    },
+    {
+     "id": "jours",
+     "label": "jours — l’absence depuis la dernière course",
+     "g1": 43.9,
+     "g2": 46.3,
+     "deux": 39,
+     "couv": 2.292682926829268
+    },
+    {
+     "id": "corde",
+     "label": "corde — le numéro de départ (§4 n°6)",
+     "g1": 46.3,
+     "g2": 34.1,
+     "deux": 36.6,
+     "couv": 2.1219512195121952
+    },
+    {
+     "id": "dist",
+     "label": "distance — la distance du jour a-t-elle été courue",
+     "g1": 41.5,
+     "g2": 46.3,
+     "deux": 36.6,
+     "couv": 2.2195121951219514
+    },
+    {
+     "id": "podium",
+     "label": "podium — les podiums récents",
+     "g1": 43.9,
+     "g2": 46.3,
+     "deux": 34.1,
+     "couv": 2.2439024390243905
+    },
+    {
+     "id": "swapCorde",
+     "label": "presse, mais une corde ≥ 11 cède à une corde ≤ 10",
+     "g1": 51.2,
+     "g2": 39,
+     "deux": 34.1,
+     "couv": 2.1707317073170733
+    },
+    {
+     "id": "slot",
+     "label": "carnet — la colonne (slot) du carnet",
+     "g1": 36.6,
+     "g2": 46.3,
+     "deux": 31.7,
+     "couv": 2.1951219512195124
+    },
+    {
+     "id": "trend",
+     "label": "mouvement — la cote qui baisse (ouverture ÷ cote)",
+     "g1": 41.5,
+     "g2": 39,
+     "deux": 31.7,
+     "couv": 2.1707317073170733
+    },
+    {
+     "id": "trendSeul",
+     "label": "MOUVEMENT seul (sans départage presse)",
+     "g1": 41.5,
+     "g2": 39,
+     "deux": 31.7,
+     "couv": 2.1707317073170733
+    },
+    {
+     "id": "sens",
+     "label": "piste — le SENS (corde à droite / à gauche)",
+     "g1": 41.5,
+     "g2": 41.5,
+     "deux": 29.3,
+     "couv": 2.1219512195121952
+    },
+    {
+     "id": "piste2",
+     "label": "piste §4 — 60 % le lieu + 40 % le sens",
+     "g1": 41.5,
+     "g2": 36.6,
+     "deux": 26.8,
+     "couv": 2.073170731707317
+    },
+    {
+     "id": "mus",
+     "label": "musique — la forme (§11.16 : sans pouvoir)",
+     "g1": 36.6,
+     "g2": 39,
+     "deux": 24.4,
+     "couv": 2.024390243902439
+    },
+    {
+     "id": "formeP",
+     "label": "forme §4 — la place pondérée",
+     "g1": 39,
+     "g2": 39,
+     "deux": 24.4,
+     "couv": 2.073170731707317
+    },
+    {
+     "id": "phys",
+     "label": "PHYSIQUE — distance + piste + jours + podium",
+     "g1": 36.6,
+     "g2": 39,
+     "deux": 24.4,
+     "couv": 2.1219512195121952
+    },
+    {
+     "id": "cordeG",
+     "label": "corde à l’envers — le plus grand numéro",
+     "g1": 29.3,
+     "g2": 39,
+     "deux": 22,
+     "couv": 1.951219512195122
+    },
+    {
+     "id": "physT",
+     "label": "PHYSIQUE + TERRAIN + SENS (combiné)",
+     "g1": 36.6,
+     "g2": 39,
+     "deux": 19.5,
+     "couv": 2
+    },
+    {
+     "id": "methode",
+     "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+     "g1": 36.6,
+     "g2": 39,
+     "deux": 19.5,
+     "couv": 2
+    },
+    {
+     "id": "physSeul",
+     "label": "PHYSIQUE seul (sans départage presse)",
+     "g1": 31.7,
+     "g2": 41.5,
+     "deux": 19.5,
+     "couv": 2.073170731707317
+    }
+   ],
+   "grille": {
+    "tete": [
+     "p",
+     "m",
+     "phys",
+     "pAge",
+     "corde",
+     "mus",
+     "terrain",
+     "sens",
+     "niveau",
+     "methode",
+     "filPiste",
+     "filTerrain",
+     "filNiveau",
+     "swapPhys"
+    ],
+    "lignes": [
+     {
+      "m1": "p",
+      "lignes": [
+       51.2,
+       51.2,
+       39,
+       48.8,
+       34.1,
+       39,
+       51.2,
+       41.5,
+       51.2,
+       39,
+       48.8,
+       48.8,
+       51.2,
+       46.3
+      ]
+     },
+     {
+      "m1": "m",
+      "lignes": [
+       43.9,
+       43.9,
+       34.1,
+       41.5,
+       26.8,
+       36.6,
+       43.9,
+       39,
+       43.9,
+       34.1,
+       41.5,
+       41.5,
+       43.9,
+       41.5
+      ]
+     },
+     {
+      "m1": "phys",
+      "lignes": [
+       36.6,
+       36.6,
+       24.4,
+       34.1,
+       29.3,
+       24.4,
+       36.6,
+       29.3,
+       36.6,
+       24.4,
+       34.1,
+       34.1,
+       36.6,
+       29.3
+      ]
+     },
+     {
+      "m1": "pAge",
+      "lignes": [
+       51.2,
+       51.2,
+       36.6,
+       48.8,
+       36.6,
+       36.6,
+       51.2,
+       41.5,
+       51.2,
+       36.6,
+       48.8,
+       48.8,
+       51.2,
+       43.9
+      ]
+     },
+     {
+      "m1": "corde",
+      "lignes": [
+       48.8,
+       46.3,
+       36.6,
+       46.3,
+       36.6,
+       36.6,
+       48.8,
+       39,
+       48.8,
+       36.6,
+       46.3,
+       46.3,
+       48.8,
+       41.5
+      ]
+     },
+     {
+      "m1": "mus",
+      "lignes": [
+       34.1,
+       36.6,
+       22,
+       34.1,
+       26.8,
+       24.4,
+       34.1,
+       29.3,
+       34.1,
+       26.8,
+       34.1,
+       34.1,
+       34.1,
+       26.8
+      ]
+     },
+     {
+      "m1": "terrain",
+      "lignes": [
+       51.2,
+       51.2,
+       39,
+       48.8,
+       34.1,
+       39,
+       51.2,
+       41.5,
+       51.2,
+       39,
+       48.8,
+       48.8,
+       51.2,
+       46.3
+      ]
+     },
+     {
+      "m1": "sens",
+      "lignes": [
+       41.5,
+       41.5,
+       29.3,
+       39,
+       26.8,
+       31.7,
+       41.5,
+       29.3,
+       41.5,
+       29.3,
+       39,
+       36.6,
+       41.5,
+       36.6
+      ]
+     },
+     {
+      "m1": "niveau",
+      "lignes": [
+       51.2,
+       51.2,
+       39,
+       48.8,
+       34.1,
+       39,
+       51.2,
+       41.5,
+       51.2,
+       39,
+       48.8,
+       48.8,
+       51.2,
+       46.3
+      ]
+     },
+     {
+      "m1": "methode",
+      "lignes": [
+       34.1,
+       36.6,
+       19.5,
+       34.1,
+       22,
+       19.5,
+       34.1,
+       24.4,
+       34.1,
+       19.5,
+       34.1,
+       31.7,
+       34.1,
+       26.8
+      ]
+     },
+     {
+      "m1": "filPiste",
+      "lignes": [
+       48.8,
+       48.8,
+       36.6,
+       46.3,
+       31.7,
+       36.6,
+       48.8,
+       39,
+       48.8,
+       36.6,
+       46.3,
+       46.3,
+       48.8,
+       43.9
+      ]
+     },
+     {
+      "m1": "filTerrain",
+      "lignes": [
+       46.3,
+       46.3,
+       34.1,
+       43.9,
+       31.7,
+       34.1,
+       46.3,
+       36.6,
+       46.3,
+       34.1,
+       43.9,
+       43.9,
+       46.3,
+       41.5
+      ]
+     },
+     {
+      "m1": "filNiveau",
+      "lignes": [
+       51.2,
+       51.2,
+       39,
+       48.8,
+       34.1,
+       39,
+       51.2,
+       41.5,
+       51.2,
+       39,
+       48.8,
+       48.8,
+       51.2,
+       46.3
+      ]
+     },
+     {
+      "m1": "swapPhys",
+      "lignes": [
+       48.8,
+       48.8,
+       36.6,
+       46.3,
+       31.7,
+       36.6,
+       48.8,
+       39,
+       48.8,
+       36.6,
+       46.3,
+       46.3,
+       48.8,
+       43.9
+      ]
+     }
+    ],
+    "meilleure": {
+     "m1": "p",
+     "m2": "p",
+     "taux": 51.2,
+     "couv": 2.3902439024390243
+    }
+   },
+   "loo": 26.8,
+   "stabilite": [
+    {
+     "id": "p",
+     "label": "presse — le rang P (le code actuel)",
+     "h1": 50,
+     "h2": 52.4
+    },
+    {
+     "id": "m",
+     "label": "marché — la cote",
+     "h1": 40,
+     "h2": 47.6
+    },
+    {
+     "id": "phys",
+     "label": "PHYSIQUE — distance + piste + jours + podium",
+     "h1": 15,
+     "h2": 33.3
+    },
+    {
+     "id": "pAge",
+     "label": "presse + âge",
+     "h1": 45,
+     "h2": 52.4
+    },
+    {
+     "id": "swapPhys",
+     "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+     "h1": 40,
+     "h2": 47.6
+    },
+    {
+     "id": "filPiste",
+     "label": "presse, mais jamais cet hippodrome passe derrière",
+     "h1": 45,
+     "h2": 47.6
+    },
+    {
+     "id": "terrain",
+     "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+     "h1": 50,
+     "h2": 52.4
+    },
+    {
+     "id": "sens",
+     "label": "piste — le SENS (corde à droite / à gauche)",
+     "h1": 20,
+     "h2": 38.1
+    },
+    {
+     "id": "niveau",
+     "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+     "h1": 50,
+     "h2": 52.4
+    },
+    {
+     "id": "methode",
+     "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+     "h1": 20,
+     "h2": 19
+    },
+    {
+     "id": "filNiveau",
+     "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+     "h1": 50,
+     "h2": 52.4
+    }
+   ],
+   "verdict": "LES 6 CRITÈRES DE §4 SONT TOUS MESURÉS (terrain 7 %, sens 94 %, VH passé 0 % — collectés de PMU, §14.6) : aucun ne trie l’intérieur d’un bloc. Le SCORE §4 complet vaut 19,5 % (-31,7 pts) contre 51,2 % pour la presse ; le terrain 51,2 %, le sens 29,3 % et le niveau 51,2 % sont tous SOUS le code. La meilleure règle reste filPiste (46,3 %, -4,9) et le LOO la ramène à 26,8 % — SOUS le code : c’est du bruit. Le choix a une marge réelle (+26,8 pts à l’oracle) que RIEN ne prend. La presse reste le seul tri : rien n’est appliqué au moteur."
+  },
+  "haies": {
+   "genere": "2026-11-05T03:06:19.297Z",
+   "date": "2026-10-16",
+   "n": 10,
+   "discipline": "haies",
+   "cotes": "cotes",
+   "carriere": true,
+   "couverture": {
+    "tot": 161,
+    "terrain": 161,
+    "sens": 15,
+    "vhJour": 160,
+    "vhPasse": 146,
+    "cotes": "cotes",
+    "carriere": true
+   },
+   "source": "data/quintes.json (96 Quintés à presse réelle) × data/forms.json (carrière casacourses) × data/terrain.json (terrain + sens PMU, tools/collect-terrain.mjs) × data/vh.json (VH PMU, tools/collect-vh.mjs)",
+   "code": 30,
+   "diagnostic": {
+    "blocs": [
+     {
+      "id": "G5",
+      "arrivees": 4,
+      "gardes": 2,
+      "ecartes": 2,
+      "tauxGarde": 50
+     },
+     {
+      "id": "G2",
+      "arrivees": 10,
+      "gardes": 4,
+      "ecartes": 6,
+      "tauxGarde": 40
+     },
+     {
+      "id": "G1",
+      "arrivees": 9,
+      "gardes": 8,
+      "ecartes": 1,
+      "tauxGarde": 88.9
+     },
+     {
+      "id": "G4",
+      "arrivees": 4,
+      "gardes": 3,
+      "ecartes": 1,
+      "tauxGarde": 75
+     },
+     {
+      "id": "G3",
+      "arrivees": 3,
+      "gardes": 2,
+      "ecartes": 1,
+      "tauxGarde": 66.7
+     }
+    ],
+    "totalEcartes": 11,
+    "partG1G2": 63.6
+   },
+   "levier": {
+    "code": 30,
+    "oracle": 70,
+    "oracleG1": 30,
+    "oracleG2": 70,
+    "hasard": 22.9
+   },
+   "regles": [
+    {
+     "id": "pTrend",
+     "label": "presse + mouvement",
+     "g1": 30,
+     "g2": 40,
+     "deux": 40,
+     "couv": 1.9
+    },
+    {
+     "id": "m",
+     "label": "marché — la cote",
+     "g1": 30,
+     "g2": 30,
+     "deux": 30,
+     "couv": 1.9
+    },
+    {
+     "id": "corde",
+     "label": "corde — le numéro de départ (§4 n°6)",
+     "g1": 30,
+     "g2": 30,
+     "deux": 30,
+     "couv": 2
+    },
+    {
+     "id": "disc",
+     "label": "discipline — a déjà couru ce type",
+     "g1": 30,
+     "g2": 30,
+     "deux": 30,
+     "couv": 1.9
+    },
+    {
+     "id": "terrain",
+     "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+     "g1": 30,
+     "g2": 40,
+     "deux": 30,
+     "couv": 2
+    },
+    {
+     "id": "jours",
+     "label": "jours — l’absence depuis la dernière course",
+     "g1": 30,
+     "g2": 30,
+     "deux": 30,
+     "couv": 2.2
+    },
+    {
+     "id": "phys",
+     "label": "PHYSIQUE — distance + piste + jours + podium",
+     "g1": 20,
+     "g2": 40,
+     "deux": 30,
+     "couv": 2.1
+    },
+    {
+     "id": "physSeul",
+     "label": "PHYSIQUE seul (sans départage presse)",
+     "g1": 20,
+     "g2": 40,
+     "deux": 30,
+     "couv": 2.1
+    },
+    {
+     "id": "filTerrain",
+     "label": "presse, mais jamais ce terrain passe derrière",
+     "g1": 30,
+     "g2": 40,
+     "deux": 30,
+     "couv": 1.7
+    },
+    {
+     "id": "p",
+     "label": "presse — le rang P (le code actuel)",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "trend",
+     "label": "mouvement — la cote qui baisse (ouverture ÷ cote)",
+     "g1": 10,
+     "g2": 50,
+     "deux": 20,
+     "couv": 1.8
+    },
+    {
+     "id": "ageG",
+     "label": "âge à l’envers — le plus vieux",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.9
+    },
+    {
+     "id": "piste",
+     "label": "piste — cet hippodrome a-t-il été couru",
+     "g1": 20,
+     "g2": 30,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "sens",
+     "label": "piste — le SENS (corde à droite / à gauche)",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "piste2",
+     "label": "piste §4 — 60 % le lieu + 40 % le sens",
+     "g1": 20,
+     "g2": 30,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "physT",
+     "label": "PHYSIQUE + TERRAIN + SENS (combiné)",
+     "g1": 10,
+     "g2": 40,
+     "deux": 20,
+     "couv": 1.8
+    },
+    {
+     "id": "methode",
+     "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+     "g1": 10,
+     "g2": 40,
+     "deux": 20,
+     "couv": 1.8
+    },
+    {
+     "id": "niveau",
+     "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+     "g1": 20,
+     "g2": 30,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "vhHaut",
+     "label": "VH — le plus haut VH d’abord",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.8
+    },
+    {
+     "id": "podium",
+     "label": "podium — les podiums récents",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "trendSeul",
+     "label": "MOUVEMENT seul (sans départage presse)",
+     "g1": 10,
+     "g2": 50,
+     "deux": 20,
+     "couv": 1.8
+    },
+    {
+     "id": "pMus",
+     "label": "presse + musique",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "pDisc",
+     "label": "presse + discipline",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "swapPhys",
+     "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "swapPodium",
+     "label": "presse, mais le 1er écarté cède s’il a un podium récent",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "swapTrend",
+     "label": "presse, mais le 1er écarté cède si mieux soutenu",
+     "g1": 20,
+     "g2": 30,
+     "deux": 20,
+     "couv": 1.8
+    },
+    {
+     "id": "filJours",
+     "label": "presse, mais +180 j d’absence passe derrière",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "filPodium",
+     "label": "presse, mais SANS podium récent passe derrière",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "filDist",
+     "label": "presse, mais sans distance courue passe derrière",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.8
+    },
+    {
+     "id": "filPiste",
+     "label": "presse, mais jamais cet hippodrome passe derrière",
+     "g1": 20,
+     "g2": 30,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "filSens",
+     "label": "presse, mais jamais ce sens passe derrière",
+     "g1": 30,
+     "g2": 20,
+     "deux": 20,
+     "couv": 1.7
+    },
+    {
+     "id": "slot",
+     "label": "carnet — la colonne (slot) du carnet",
+     "g1": 20,
+     "g2": 20,
+     "deux": 10,
+     "couv": 1.8
+    },
+    {
+     "id": "age",
+     "label": "âge — le plus jeune d’abord",
+     "g1": 20,
+     "g2": 20,
+     "deux": 10,
+     "couv": 1.5
+    },
+    {
+     "id": "mus",
+     "label": "musique — la forme (§11.16 : sans pouvoir)",
+     "g1": 20,
+     "g2": 20,
+     "deux": 10,
+     "couv": 1.8
+    },
+    {
+     "id": "dist",
+     "label": "distance — la distance du jour a-t-elle été courue",
+     "g1": 20,
+     "g2": 20,
+     "deux": 10,
+     "couv": 1.8
+    },
+    {
+     "id": "vhBas",
+     "label": "VH — le plus bas VH d’abord",
+     "g1": 10,
+     "g2": 40,
+     "deux": 10,
+     "couv": 1.8
+    },
+    {
+     "id": "filNiveau",
+     "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+     "g1": 20,
+     "g2": 20,
+     "deux": 10,
+     "couv": 1.6
+    },
+    {
+     "id": "formeP",
+     "label": "forme §4 — la place pondérée",
+     "g1": 20,
+     "g2": 20,
+     "deux": 10,
+     "couv": 1.8
+    },
+    {
+     "id": "pAge",
+     "label": "presse + âge",
+     "g1": 20,
+     "g2": 20,
+     "deux": 10,
+     "couv": 1.6
+    },
+    {
+     "id": "swapCorde",
+     "label": "presse, mais une corde ≥ 11 cède à une corde ≤ 10",
+     "g1": 20,
+     "g2": 20,
+     "deux": 10,
+     "couv": 1.9
+    },
+    {
+     "id": "cordeG",
+     "label": "corde à l’envers — le plus grand numéro",
+     "g1": 0,
+     "g2": 40,
+     "deux": 0,
+     "couv": 1.6
+    }
+   ],
+   "grille": {
+    "tete": [
+     "p",
+     "m",
+     "phys",
+     "pAge",
+     "corde",
+     "mus",
+     "terrain",
+     "sens",
+     "niveau",
+     "methode",
+     "filPiste",
+     "filTerrain",
+     "filNiveau",
+     "swapPhys"
+    ],
+    "lignes": [
+     {
+      "m1": "p",
+      "lignes": [
+       20,
+       30,
+       40,
+       20,
+       30,
+       20,
+       40,
+       20,
+       30,
+       40,
+       30,
+       40,
+       20,
+       20
+      ]
+     },
+     {
+      "m1": "m",
+      "lignes": [
+       20,
+       30,
+       40,
+       20,
+       30,
+       20,
+       40,
+       20,
+       30,
+       40,
+       30,
+       40,
+       20,
+       20
+      ]
+     },
+     {
+      "m1": "phys",
+      "lignes": [
+       10,
+       20,
+       30,
+       10,
+       20,
+       10,
+       30,
+       10,
+       20,
+       30,
+       20,
+       30,
+       10,
+       10
+      ]
+     },
+     {
+      "m1": "pAge",
+      "lignes": [
+       10,
+       20,
+       30,
+       10,
+       20,
+       10,
+       30,
+       10,
+       20,
+       30,
+       20,
+       30,
+       10,
+       10
+      ]
+     },
+     {
+      "m1": "corde",
+      "lignes": [
+       20,
+       30,
+       30,
+       20,
+       30,
+       20,
+       30,
+       20,
+       30,
+       40,
+       30,
+       30,
+       20,
+       20
+      ]
+     },
+     {
+      "m1": "mus",
+      "lignes": [
+       10,
+       20,
+       30,
+       10,
+       20,
+       10,
+       30,
+       10,
+       20,
+       30,
+       20,
+       30,
+       10,
+       10
+      ]
+     },
+     {
+      "m1": "terrain",
+      "lignes": [
+       20,
+       30,
+       30,
+       20,
+       30,
+       20,
+       30,
+       20,
+       30,
+       30,
+       30,
+       30,
+       20,
+       20
+      ]
+     },
+     {
+      "m1": "sens",
+      "lignes": [
+       20,
+       30,
+       40,
+       20,
+       30,
+       20,
+       40,
+       20,
+       30,
+       40,
+       30,
+       40,
+       20,
+       20
+      ]
+     },
+     {
+      "m1": "niveau",
+      "lignes": [
+       10,
+       20,
+       20,
+       10,
+       20,
+       10,
+       20,
+       10,
+       20,
+       30,
+       20,
+       20,
+       10,
+       10
+      ]
+     },
+     {
+      "m1": "methode",
+      "lignes": [
+       10,
+       10,
+       10,
+       10,
+       20,
+       10,
+       10,
+       10,
+       10,
+       20,
+       10,
+       10,
+       10,
+       10
+      ]
+     },
+     {
+      "m1": "filPiste",
+      "lignes": [
+       20,
+       20,
+       30,
+       20,
+       30,
+       20,
+       30,
+       20,
+       20,
+       30,
+       20,
+       30,
+       20,
+       20
+      ]
+     },
+     {
+      "m1": "filTerrain",
+      "lignes": [
+       20,
+       30,
+       30,
+       20,
+       30,
+       20,
+       30,
+       20,
+       30,
+       30,
+       30,
+       30,
+       20,
+       20
+      ]
+     },
+     {
+      "m1": "filNiveau",
+      "lignes": [
+       10,
+       20,
+       20,
+       10,
+       20,
+       10,
+       20,
+       10,
+       20,
+       30,
+       20,
+       20,
+       10,
+       10
+      ]
+     },
+     {
+      "m1": "swapPhys",
+      "lignes": [
+       20,
+       30,
+       40,
+       20,
+       30,
+       20,
+       40,
+       20,
+       30,
+       40,
+       30,
+       40,
+       20,
+       20
+      ]
+     }
+    ],
+    "meilleure": {
+     "m1": "p",
+     "m2": "phys",
+     "taux": 40,
+     "couv": 2.1
+    }
+   },
+   "loo": 30,
+   "stabilite": [
+    {
+     "id": "p",
+     "label": "presse — le rang P (le code actuel)",
+     "h1": 20,
+     "h2": 20
+    },
+    {
+     "id": "m",
+     "label": "marché — la cote",
+     "h1": 40,
+     "h2": 20
+    },
+    {
+     "id": "phys",
+     "label": "PHYSIQUE — distance + piste + jours + podium",
+     "h1": 40,
+     "h2": 20
+    },
+    {
+     "id": "pAge",
+     "label": "presse + âge",
+     "h1": 0,
+     "h2": 20
+    },
+    {
+     "id": "swapPhys",
+     "label": "presse, mais le 1er écarté cède si son physique est meilleur",
+     "h1": 20,
+     "h2": 20
+    },
+    {
+     "id": "filPiste",
+     "label": "presse, mais jamais cet hippodrome passe derrière",
+     "h1": 20,
+     "h2": 20
+    },
+    {
+     "id": "terrain",
+     "label": "TERRAIN §4 — le terrain du jour a-t-il été couru",
+     "h1": 40,
+     "h2": 20
+    },
+    {
+     "id": "sens",
+     "label": "piste — le SENS (corde à droite / à gauche)",
+     "h1": 20,
+     "h2": 20
+    },
+    {
+     "id": "niveau",
+     "label": "NIVEAU §4 — le VH du jour vs ses 2 dernières",
+     "h1": 40,
+     "h2": 0
+    },
+    {
+     "id": "methode",
+     "label": "★ LE SCORE §4 (forme+dist+piste+niveau+terrain+corde)",
+     "h1": 0,
+     "h2": 40
+    },
+    {
+     "id": "filNiveau",
+     "label": "presse, mais qui MONTE de niveau (+1,5) passe derrière",
+     "h1": 20,
+     "h2": 0
+    }
+   ],
+   "verdict": "LES 6 CRITÈRES DE §4 SONT TOUS MESURÉS (terrain 100 %, sens 9 %, VH passé 91 % — collectés de PMU, §14.6) : aucun ne trie l’intérieur d’un bloc. Le SCORE §4 complet vaut 20 % (-10,0 pts) contre 30 % pour la presse ; le terrain 30 %, le sens 20 % et le niveau 20 % sont tous SOUS le code. La meilleure règle reste filPiste (20 %, -10,0) et le LOO la ramène à 30 % — SOUS le code : c’est du bruit. Le choix a une marge réelle (+40,0 pts à l’oracle) que RIEN ne prend. La presse reste le seul tri : rien n’est appliqué au moteur."
+  }
+ }
 }
