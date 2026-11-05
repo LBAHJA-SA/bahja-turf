@@ -47,8 +47,10 @@ const coteDe = (cotes, n) => {
 const blocDeCase = (p) => (p <= 4 ? 'G1' : p <= 8 ? 'G2' : p <= 10 ? 'G3' : p <= 12 ? 'G4' : 'G5')
 const FORME_CLES = ['ferme', 'normal', 'ouvert']
 
-/* ── 1. LE CORPUS — les 96 Quintés à presse RÉELLE ───────────────────────── */
-const TOUT = lire('data/quintes.json')
+const normDiscB = (d) => { const s = String(d || '').toLowerCase().trim(); if (s.startsWith('plat')) return 'plat'; if (s.startsWith('attel') || s.startsWith('trot')) return 'attelé'; if (s.startsWith('haie') || s.startsWith('steeple')) return 'haies'; return 'autre' }
+const DISC_B = ['plat', 'attelé', 'haies'].includes(process.argv[2]) ? process.argv[2] : 'all'
+/* ── 1. LE CORPUS — les Quintés à presse RÉELLE ───────────────────────── */
+const TOUT = (DISC_B === 'all' ? lire('data/quintes.json') : lire('data/quintes.json').filter((q) => normDiscB(q.discipline) === DISC_B))
 const courses = []
 for (const q of TOUT) {
   const presse = arr(q.presse).filter(Number.isFinite)
@@ -251,6 +253,7 @@ const texte = [
 const sortie = {
   outil: 'tools/bassmat.mjs',
   le: new Date().toISOString().slice(0, 10),
+  discipline: DISC_B,
   source: 'data/quintes.json — Quinté Global PMU France, presse réelle + cotes + arrivée',
   n: N,
   periode: { debut: courses[0].date, fin: courses[N - 1].date },
@@ -272,8 +275,23 @@ const ecrire = (p, obj) => {
   fs.mkdirSync(path.dirname(path.join(RACINE, p)), { recursive: true })
   fs.writeFileSync(path.join(RACINE, p), JSON.stringify(obj, null, 1))
 }
-ecrire('data/bassmat.json', sortie)
-ecrire('public/data/bassmat.json', sortie)
+const nom = DISC_B === 'all' ? 'bassmat' : 'bassmat.' + (DISC_B === 'attelé' ? 'attele' : DISC_B)
+ecrire('data/' + nom + '.json', sortie)
+ecrire('public/data/' + nom + '.json', sortie)
+
+/* ⭐ le run « all » recolle les trois sections de discipline (si présentes) */
+if (DISC_B === 'all') {
+  const par = {}
+  for (const d of ['plat', 'attelé', 'haies']) {
+    const f = 'data/bassmat.' + (d === 'attelé' ? 'attele' : d) + '.json'
+    try { par[d] = JSON.parse(fs.readFileSync(path.join(RACINE, f), 'utf8')) } catch (e) { /* pas encore calculé */ }
+  }
+  if (Object.keys(par).length) {
+    sortie.parDiscipline = par
+    ecrire('data/bassmat.json', sortie)
+    ecrire('public/data/bassmat.json', sortie)
+  }
+}
 
 /* ── 10. LE RÉSUMÉ À L'ÉCRAN ─────────────────────────────────────────────── */
 console.log(`\nBASSMAT — ${N} Quintés (${sortie.periode.debut} → ${sortie.periode.fin})`)

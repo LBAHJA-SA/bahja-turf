@@ -364,7 +364,8 @@ export default function QuinteGrille() {
   const SK = THEME[onglet] || THEME.grille
   const s = { box: SK.box, hdr: SK.hdrStyle, th: SK.th, td: SK.td }
   const [toutLesP, setToutLesP] = useState(true)   // P1 → P20 par défaut
-  const [statsDiscipline, setStatsDiscipline] = useState('all')   // all / plat / attelé / haies
+  const [statsDiscipline, setStatsDiscipline] = useState('all')   // all / plat / attelé / monté / haies
+  const [bassmatDiscipline, setBassmatDiscipline] = useState('all')   // all / plat / attelé / haies
   const [statsTrot, setStatsTrot] = useState('all')   // all / autostart / volte / monte (pour le trot)
   const [archive, setArchive] = useState([])
   const [carriere, setCarriere] = useState({})      // { n° : [runs] }
@@ -1462,19 +1463,18 @@ function TabChoix({ sk, choix, toutLesP, setToutLesP, discipline, setDiscipline 
  *  ⚠ Aucun chiffre n'est saisi à la main dans ce composant. Tout vient du
  *    fichier, y compris les verdicts.
  * ══════════════════════════════════════════════════════════════════════════ */
-function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
-  /* ⭐ 29/10/2026 — la bassmat du MOIS vient en premier : elle est calculée sur
-   * l'archive réelle (les tickets posés), pas sur le corpus de référence. Si le
-   * corpus manque, elle s'affiche quand même : c'est elle que l'utilisateur a
-   * demandée (« من هنا فقط »). */
-  if (!B) return (
+function TabBassmat({ sk, B, H, detail, forme, BC, MOIS, discipline, setDiscipline, toutLesP, setToutLesP }) {
+  const src = (discipline && discipline !== 'all' && B && B.parDiscipline && B.parDiscipline[discipline]) || B
+  if (toutLesP == null) toutLesP = true
+  if (!setToutLesP) setToutLesP = () => {}
+  if (!src) return (
     <div style={{ fontSize: 13, color: sk.muted }}>
       Pas encore de mesure : écrire <b>public/data/bassmat.json</b> (node tools\bassmat.mjs).
     </div>
   )
   const nb = (x) => (x == null ? '—' : String(x).replace('.', ','))
   const pc = (x) => (x == null ? '—' : nb(x) + ' %')
-  const caseDe = (p) => (B.cases || []).find((x) => x.p === p) || null
+  const caseDe = (p) => (src.cases || []).find((x) => x.p === p) || null
   /* le taux d'une case : celui de la FORME DU JOUR dès qu'elle a assez de
    * courses (n ≥ 15), sinon le taux global. Jamais un taux sur 3 courses. */
   const taux = (p, cle) => {
@@ -1485,18 +1485,18 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
     return { n: c.n, pc5: c.pc5, pc3: c.pc3 }
   }
   const cle = forme ? forme.cle : null
-  const seau = (B.forme?.seaux || []).find((s) => s.cle === cle) || null
+  const seau = (src.forme?.seaux || []).find((s) => s.cle === cle) || null
   const couleurForme = forme ? forme.couleur : sk.muted
 
   /* le classement des cases POUR CETTE FORME — c'est l'empreinte du jour */
-  const classement = (B.cases || [])
+  const classement = (src.cases || [])
     .filter((c) => c.n >= 20)
     .map((c) => ({ p: c.p, ...taux(c.p, cle), global: c }))
     .sort((a, b) => (b.pc5 - a.pc5) || (a.p - b.p))
   const top5 = classement.slice(0, 5)
   const top3 = classement.slice(0, 3)
-  const podium = B.composition?.podium?.moyenne || {}
-  const quinte = B.composition?.quinte?.moyenne || {}
+  const podium = src.composition?.podium?.moyenne || {}
+  const quinte = src.composition?.quinte?.moyenne || {}
 
   /* le ticket réellement affiché, dans l'ordre des cases */
   const tickets = []
@@ -1510,7 +1510,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
   const manquantes = classement.filter((x) => !tickets.some((c) => c.place === x.p)).slice(0, 3)
 
   /* les décisions : ce que le moteur garde contre ce qu'il jette */
-  const decisions = (B.blocs || []).map((b) => {
+  const decisions = (src.blocs || []).map((b) => {
     const g = (detail || []).find((x) => x.id === b.id)
     const pris = g ? g.cases.filter((c) => c.pris) : []
     const pas = g ? g.cases.filter((c) => !c.pris) : []
@@ -1529,6 +1529,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
 
   return (
     <div>
+      <BarreFiltres sk={sk} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={discipline} setDiscipline={setDiscipline} />
       {/* ══ ⓪ LA BASSMAT DU MOIS — l'archive réelle (29/10/2026, §11.45) ══ */}
       {MOIS && (() => {
         const mv = MOIS
@@ -1701,7 +1702,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
       <div style={{ ...boite, borderLeft: '4px solid ' + sk.accent, background: sk.alt }}>
         <b style={{ fontSize: 14 }}>بصمة السباق — l’empreinte du mois, puis celle de la course</b>
         <div style={{ fontSize: 12, color: sk.muted, marginTop: 5, lineHeight: 1.6 }}>
-          <b>{B.n}</b> Quintés à presse réelle ({B.periode?.debut} → {B.periode?.fin}) · lus par <b>case du carnet</b> (P1..P20).
+          <b>{src.n}</b> Quintés à presse réelle ({src.periode?.debut} → {src.periode?.fin}) · lus par <b>case du carnet</b> (P1..P20).
           {' '}L’empreinte ne remplace pas votre méthode : elle dit <b>ce que cette course a l’air d’être</b>,
           et si le ticket est du bon côté de la statistique.
         </div>
@@ -1734,7 +1735,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
               {['forme du marché', 'courses', 'part', 'le 4e de G2 (P8) arrive top-5'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
             </tr></thead>
             <tbody>
-              {(B.forme?.seaux || []).map((s, i) => (
+              {(src.forme?.seaux || []).map((s, i) => (
                 <tr key={s.cle} style={{
                   borderBottom: '1px solid ' + sk.bord,
                   background: s.cle === cle ? sk.on : (i % 2 ? sk.alt : sk.ligne),
@@ -1750,7 +1751,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
           </table>
         </div>
         <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6 }}>
-          {B.forme?.regle}
+          {src.forme?.regle}
         </div>
       </div>
 
@@ -1884,11 +1885,11 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
         <div style={titre}>⑤ La couverture — ce que {NB_TICKET} cases tiennent</div>
         <div style={{ display: 'flex', gap: 18, flexWrap: 'wrap', alignItems: 'flex-start' }}>
           <div style={{ fontSize: 13, lineHeight: 1.9, minWidth: 250 }}>
-            <div>podium entier : <b style={{ color: '#34d399' }}>{pc(B.tient?.podium)}</b></div>
-            <div>quinté entier : <b style={{ color: B.tient?.quinte >= 20 ? '#34d399' : '#fbbf24' }}>{pc(B.tient?.quinte)}</b></div>
-            <div>arrivants par course : <b style={{ fontFamily: sk.nb.td }}>{nb(B.tient?.x5)}</b> / 5</div>
+            <div>podium entier : <b style={{ color: '#34d399' }}>{pc(src.tient?.podium)}</b></div>
+            <div>quinté entier : <b style={{ color: src.tient?.quinte >= 20 ? '#34d399' : '#fbbf24' }}>{pc(src.tient?.quinte)}</b></div>
+            <div>arrivants par course : <b style={{ fontFamily: sk.nb.td }}>{nb(src.tient?.x5)}</b> / 5</div>
             <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 4 }}>
-              cases promises <b>{nb(B.calibrage?.sommeTaux)}</b> · vues <b>{nb(B.calibrage?.moyenneVue)}</b>
+              cases promises <b>{nb(src.calibrage?.sommeTaux)}</b> · vues <b>{nb(src.calibrage?.moyenneVue)}</b>
             </div>
           </div>
           <div style={{ overflowX: 'auto' }}>
@@ -1897,7 +1898,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
                 {['P1..Pk', 'podium', 'quinté'].map((h) => <th key={h} style={{ padding: '3px 10px', textAlign: 'right', color: sk.muted, fontWeight: 800, fontSize: 11 }}>{h}</th>)}
               </tr></thead>
               <tbody>
-                {(B.courbe || []).map((c) => (
+                {(src.courbe || []).map((c) => (
                   <tr key={c.k} style={{ borderTop: '1px solid ' + sk.bord, background: c.k === 12 ? sk.on : 'transparent' }}>
                     <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: sk.nb.td, fontWeight: 800 }}>{c.k}</td>
                     <td style={{ padding: '2px 10px', textAlign: 'right', fontFamily: sk.nb.td }}>{pc(c.podium)}</td>
@@ -1920,7 +1921,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
             <br />
             <span style={{ color: sk.muted }}>
               Elles ne sont pas mauvaises : le ticket n’a que {NB_TICKET} sièges. À 12 cases le quinté tombe
-              <b> {pc((B.courbe || []).find((c) => c.k === 12)?.quinte)}</b> du temps — c’est la seule marge
+              <b> {pc((src.courbe || []).find((c) => c.k === 12)?.quinte)}</b> du temps — c’est la seule marge
               que la mesure reconnaisse (§11.25).
             </span>
           </div>
@@ -2066,7 +2067,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
       {(() => {
         /* la règle de l'onglet, appliquée au ticket : chaque bloc rempli par le
          * taux de la CASE pour la FORME DU JOUR (n ≥ 15), jamais par la cote. */
-        const variante = ticketBassmat(detail, B, cle)
+        const variante = ticketBassmat(detail, src, cle)
         if (!variante) return null
         const meme = variante.echanges.length === 0
         const prod = new Set(tickets.map((c) => c.num))
@@ -2166,7 +2167,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS }) {
       {/* ── le verdict, écrit par l'outil ─────────────────────────────────── */}
       <div style={{ ...boite, borderLeft: '4px solid ' + sk.accent, background: sk.alt }}>
         <div style={titre}>Le verdict de l’empreinte</div>
-        <div style={{ fontSize: 12.5, lineHeight: 1.7 }}>{B.verdict}</div>
+        <div style={{ fontSize: 12.5, lineHeight: 1.7 }}>{src.verdict}</div>
         <div style={{ fontSize: 11, color: sk.muted, marginTop: 7 }}>
           Écrit par <b>tools/bassmat.mjs</b> — rejouer : <code>node tools\bassmat.mjs</code>.
           Aucun chiffre de cet onglet n’est saisi à la main.
@@ -2753,7 +2754,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
 
       {/* --------------------------------------------------------- bassmat */}
       {onglet === 'bassmat' && (
-        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} BC={bassmatChoix} MOIS={bassmatMois} />
+        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} BC={bassmatChoix} MOIS={bassmatMois} discipline={bassmatDiscipline} setDiscipline={setBassmatDiscipline} toutLesP={toutLesP} setToutLesP={setToutLesP} />
       )}
 
       {/* --------------------------------------------------------- archive */}
