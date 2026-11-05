@@ -240,7 +240,7 @@ export default function QuinteGrille() {
           fetchArchiveDisque(date),
         ])
         setSyn(s)
-        setParticipants(p?.partants || [])
+        setParticipants(Array.isArray(p?.partants) ? p.partants : [])
         setArrivee(a?.arrivee || null)
         setInfos(p)
         if (p?.race) {
