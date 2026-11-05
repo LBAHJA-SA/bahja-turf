@@ -2138,7 +2138,7 @@ export function computeStats(records) {
       place: r,
       // ── champs historiques — le moteur les lit : NE PAS CHANGER ──────────
       n: tot,
-      p: tot ? t.map((v) => +(v / tot * 100).toFixed(0)) : [0, 0, 0, 0, 0],
+      p: tot && Array.isArray(t) ? t.map((v) => +(v / tot * 100).toFixed(0)) : [0, 0, 0, 0, 0],
       // le podium : 1er + 2e + 3e réunis — CONDITIONNEL (base n_top5).
       top3: tot ? +((t[0] + t[1] + t[2]) / tot * 100).toFixed(0) : 0,
       // GLOBAL (base courses_valides) — l'autre dénominateur.
