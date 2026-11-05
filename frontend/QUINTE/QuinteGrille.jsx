@@ -1177,8 +1177,8 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS, discipline, setDiscipli
           La section ⓪ (ce mois) reste l’archive réelle.
         </div>
       )}}
-      {MOIS && (() => {
-        const mv = MOIS
+      {(() => {
+        const mv = MOIS || { pertes: { liste: [] }, groupes: [], pertes: null, bilans: [], ticketsIncomplets: [], cases: [], bandes: [], k: [], quotas: [], ecartees: 0 }
         const morts = (mv.pertes?.liste || []).filter((x) => !(x.remplacantsArrives || []).length)
         const pire = (mv.groupes || []).slice().sort((a, b) => b.remplacantMort - a.remplacantMort)[0]
         const th = { ...sk.th, padding: '4px 7px', fontSize: 11 }
