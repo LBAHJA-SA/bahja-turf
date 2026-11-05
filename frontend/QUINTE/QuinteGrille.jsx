@@ -14,7 +14,7 @@ import {
   fetchCotes,
   rangsMarche, bandeMarche, BANDE_MARCHE, fetchFiabilite, fetchEcarts, fetchChoix,
   fetchEmpreinte, fetchBlocPm, fetchBassmat, formeMarche, fetchHuit, fetchBassmatChoix, ticketBassmat,
-  fetchBassmatMois, jugerTicket,
+  fetchBassmatMois, jugerTicket, fetchDeparts,
 } from '../../src/lib/quinte'
 import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
 
