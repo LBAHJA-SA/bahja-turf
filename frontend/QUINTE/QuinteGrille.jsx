@@ -159,7 +159,7 @@ const CarteTicket = ({ nums, noms, cotes, discipl, count }) => (
       <span style={{ fontSize: 11, color: '#64748b', fontWeight: 800, background: 'rgba(255,255,255,.08)', padding: '2px 8px', borderRadius: 999 }}>{count} chevaux</span>
     </div>
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '10px' }}>
-      {nums.map((n) => (
+      {(Array.isArray(nums) ? nums : []).map((n) => (
         <div key={n} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', width: 70 }}>
           <div
             style={{
@@ -284,7 +284,7 @@ export default function QuinteGrille() {
 
   const valeurDuJour = useMemo(() => {
     if (!rempli) return null
-    const t = rempli.ticket || []
+    const t = Array.isArray(rempli.ticket) ? rempli.ticket : []
     if (t.length < 2) return null
     const n = t[1]
     const c = participants.find((x) => x.num === n)
