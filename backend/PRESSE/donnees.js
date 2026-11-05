@@ -112,35 +112,25 @@ function nomAuteur(a) {
 
 /**
  * Le Quinté du jour : sa réunion, sa course, son hippodrome.
- * → { r, c, hippodrome, nom, heure, distance, partants, date } ou null.
- * ⚠ la course est trouvée sur `sorec_quinte` — et la France d'abord : la source
- *   étiquette parfois un Quinté français en pays étranger (Reims le 14/10).
+ * → { r, c, hippodrome, nom, heure, distance, partants, date, discipline, pays } ou null.
+ *
+ * ⚠ DEUX SOURCES, DANS CET ORDRE (05/11/2026) :
+ *   ① casacourses (`sorec_quinte`) — la source historique, la plus riche ;
+ *   ② le PROGRAMME PMU (`/api/pmu`, `QUINTE_PLUS`) — le REPLI.
+ *   Le 05/11/2026 casacourses répondait `"source": "No data"` pour la journée
+ *   alors que le Quinté existait (Vincennes R1C1, 2100 m) : la course du jour
+ *   tombait, et avec elle les onglets Déclarations et Analyse — ils en
+ *   dépendent tous les deux. Le repli PMU les tient debout.
+ *   La France d'abord dans les deux cas : la source étiquette parfois un Quinté
+ *   français en pays étranger (Reims le 14/10).
  */
 export async function quinteDuJour(date) {
-  const j = await json(PROG_CC + date)
-  const toutes = []
-  for (const m of j.meetings || []) {
-    for (const c of m.races || []) {
-      if (!(c.available_bet_types || []).includes('sorec_quinte')) continue
-      toutes.push({ m, c })
-    }
+  let course = null
+  try { course = await quinteCasa(date) } catch (e) { course = null }
+  if (!course) {
+    try { course = await quintePMU(date) } catch (e) { course = null }
   }
-  const fr = toutes.filter((x) => String(x.m.country || '').toUpperCase() === 'FR')
-  const meilleur = fr[0] || toutes[0]
-  if (!meilleur) return null
-  const { m, c } = meilleur
-  const course = {
-    date,
-    r: c.pmu_reunion || num(m.reunion_code),
-    c: c.pmu_course || num(c.code),
-    hippodrome: m.track || '',
-    pays: m.country || '',
-    nom: c.name || '',
-    heure: c.time_hm || '',
-    distance: c.distance || null,
-    partants: c.starters || null,
-    discipline: c.type || '',
-  }
+  if (!course) return null
 
   /* ⚠ l'heure de la source casacourses est celle du Maroc (UTC+1) : le Quinté
      de ParisLongchamp y annonce 14:15 pour un départ à 15:15. On prend donc
@@ -157,6 +147,78 @@ export async function quinteDuJour(date) {
   } catch (e) { /* sans heure officielle, on n'affiche pas d'heure fausse */ }
 
   return course
+}
+
+/** ① casacourses — la source historique. Rend null s'il n'y a pas de Quinté. */
+async function quinteCasa(date) {
+  const j = await json(PROG_CC + date)
+  const toutes = []
+  for (const m of j.meetings || []) {
+    for (const c of m.races || []) {
+      if (!(c.available_bet_types || []).includes('sorec_quinte')) continue
+      toutes.push({ m, c })
+    }
+  }
+  const fr = toutes.filter((x) => String(x.m.country || '').toUpperCase() === 'FR')
+  const meilleur = fr[0] || toutes[0]
+  if (!meilleur) return null
+  const { m, c } = meilleur
+  return {
+    date,
+    r: c.pmu_reunion || num(m.reunion_code),
+    c: c.pmu_course || num(c.code),
+    hippodrome: m.track || '',
+    pays: m.country || '',
+    nom: c.name || '',
+    heure: c.time_hm || '',
+    distance: c.distance || null,
+    partants: c.starters || null,
+    discipline: c.type || '',
+    source: 'casacourses',
+  }
+}
+
+/**
+ * ② le PROGRAMME PMU — le repli du 05/11/2026.
+ * Le Quinté se reconnaît à `QUINTE_PLUS` dans les paris de la course, jamais au
+ * libellé. L'API ne rend AUCUN en-tête CORS : on passe par le relais `/api/pmu`
+ * (même chemin en local et en production, cf. vite.config.js + vercel.json).
+ */
+async function quintePMU(date) {
+  const [y, mo, d] = date.split('-')
+  const j = await json(`/api/pmu/rest/client/61/programme/${d}${mo}${y}`)
+  const reunions = (j.programme && j.programme.reunions) || []
+  const trouve = []
+  for (const r of reunions) {
+    for (const c of r.courses || []) {
+      const paris = (c.paris || []).map((x) => String(x.typePari || x.codePari || ''))
+      if (paris.indexOf('QUINTE_PLUS') < 0) continue
+      trouve.push({ r, c })
+    }
+  }
+  const fr = trouve.filter((x) => /^FRA/i.test(String((x.r.pays && x.r.pays.code) || '')))
+  const choix = fr[0] || trouve[0]
+  if (!choix) return null
+  const { r, c } = choix
+  const h = r.hippodrome || {}
+  const nomHippo = String(h.libelleLong || h.libelleCourt || '')
+    .replace(/^hippodrome\s+(de\s+|d')?/i, '')
+    .trim()
+  return {
+    date,
+    r: r.numOfficiel,
+    c: c.numOrdre,
+    hippodrome: (h.libelleCourt || nomHippo || '').trim(),
+    pays: /^FRA/i.test(String((r.pays && r.pays.code) || '')) ? 'FR' : String((r.pays && r.pays.code) || ''),
+    nom: c.libelle || '',
+    heure: '',
+    distance: c.distance || null,
+    partants: c.nombreDeclaresPartants || null,
+    discipline: String(c.discipline || '').toUpperCase() === 'ATTELE' ? 'Attelé'
+      : String(c.discipline || '').toUpperCase() === 'MONTE' ? 'Monté'
+        : String(c.discipline || ''),
+    source: 'pmu',
+  }
 }
 
 /* ═══════════ ② LES DÉCLARATIONS DES ENTRAÎNEURS ET DES DRIVERS ═══════════ */

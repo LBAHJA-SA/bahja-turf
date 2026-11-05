@@ -559,6 +559,17 @@ export async function fetchChoix() {
   } catch (e) { return null }
 }
 
+/** ⭐ LE TYPE DE DÉPART DU TROT — tools/departs.mjs (05/11/2026).
+ *  Pour les statistiques ATTELÉ : autostart / volté / monté. */
+export async function fetchDeparts() {
+  try {
+    const r = await fetch('/data/departs.json', { headers: { Accept: 'application/json' } })
+    if (!r.ok) return null
+    return r.json()
+  } catch (e) { return null }
+}
+
+
 /* =========================================================== CASACOURSES ===
  * ⚠ SEULE SOURCE de données de Bahja-TURF. pro.casacourses.com répond en
  *   CORS '*' et donne TOUT : partants, distance, piste, arrivée, formes,
