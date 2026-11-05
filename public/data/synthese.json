@@ -109,7 +109,10 @@
     ],
     "cloture": null,
     "scores": null,
-    "collecte": "2026-11-05T02:41:11.873Z"
+    "collecte": "2026-11-05T02:41:11.873Z",
+    "savedAt": "2026-11-05T02:41:11.873Z",
+    "syntheseChangee": false,
+    "sourceImport": "page"
   },
   "2026-11-02": {
     "date": "2026-11-02",
@@ -134,7 +137,7 @@
       14,
       12
     ],
-    "savedAt": "2026-11-01T23:21:33.775Z",
+    "savedAt": null,
     "arrivee": null,
     "ticket": null,
     "discipline": "PLAT",
@@ -162,7 +165,11 @@
       15,
       16
     ],
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "ticketSource": null,
+    "ticketPoseLe": null,
+    "ticketMode": null,
+    "syntheseChangee": false
   },
   "2026-10-31": {
     "date": "2026-10-31",
@@ -187,7 +194,7 @@
       13,
       10
     ],
-    "savedAt": "2026-10-31T04:01:03.826Z",
+    "savedAt": null,
     "arrivee": [
       9,
       11,
@@ -234,7 +241,8 @@
     "ticketSource": "page",
     "ticketPoseLe": null,
     "ticketMode": null,
-    "cloture": "2026-11-01T22:50:41.132Z"
+    "cloture": "2026-11-01T22:50:41.132Z",
+    "syntheseChangee": false
   },
   "2026-10-30": {
     "date": "2026-10-30",
@@ -659,7 +667,10 @@
         "pris": true
       }
     ],
-    "collecte": "2026-10-30T20:30:06.536Z"
+    "collecte": "2026-10-30T20:30:06.536Z",
+    "savedAt": "2026-10-30T20:30:06.536Z",
+    "syntheseChangee": false,
+    "sourceImport": "page"
   },
   "2026-10-29": {
     "date": "2026-10-29",
@@ -700,12 +711,12 @@
       11,
       12
     ],
-    "discipline": "Attelé",
+    "discipline": "ATTELE",
     "distance": 2850,
     "nbPartants": 14,
-    "hippodrome": "Paris-Vincennes",
+    "hippodrome": "VINCENNES",
     "prix": "PRIX DES CEVENNES",
-    "courseId": "2026-10-29_R1_C1",
+    "courseId": "pmu-R1C1",
     "cle": "2026-10-29_R1_C1",
     "runners": [
       1,
@@ -724,7 +735,9 @@
       14
     ],
     "sourceImport": "page",
-    "placeholder": false,
+    "cloture": "2026-10-30T20:30:04.893Z",
+    "ticketSource": "auto",
+    "ticketPoseLe": "2026-10-29T13:10:31.253Z",
     "ticketMode": "defaut",
     "groupes": [
       {
@@ -761,22 +774,7 @@
         ]
       }
     ],
-    "ticketSource": "auto",
-    "surprises": [],
-    "ticketPoseLe": "2026-10-29T13:10:31.253Z",
-    "ticketMoteur": [
-      3,
-      2,
-      4,
-      6,
-      8,
-      10,
-      11,
-      12
-    ],
-    "cloture": "2026-10-30T20:30:04.893Z",
-    "scores": null,
-    "collecte": "2026-10-29T20:30:06.039Z"
+    "surprises": []
   },
   "2026-10-27": {
     "date": "2026-10-27",
