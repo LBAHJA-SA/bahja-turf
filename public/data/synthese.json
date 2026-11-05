@@ -1,4 +1,116 @@
 {
+  "2026-11-05": {
+    "date": "2026-11-05",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      9,
+      4,
+      5,
+      6,
+      15,
+      16,
+      14,
+      12,
+      17,
+      1,
+      3,
+      2,
+      7,
+      11,
+      10,
+      8
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "nbPartants": 18,
+    "discipline": "Attelé",
+    "hippodrome": "PARIS-VINCENNES",
+    "distance": 2100,
+    "courseId": "2026-11-05_R1_C1",
+    "arrivee": null,
+    "ticket": [
+      9,
+      3,
+      4,
+      5,
+      7,
+      12,
+      15,
+      16
+    ],
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          9,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          15,
+          16
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          12
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          3
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          7
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-11-05T02:41:11.812Z",
+    "ticketMoteur": [
+      9,
+      3,
+      4,
+      5,
+      7,
+      12,
+      15,
+      16
+    ],
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-11-05T02:41:11.873Z"
+  },
   "2026-11-02": {
     "date": "2026-11-02",
     "found": true,

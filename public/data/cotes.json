@@ -5176,5 +5176,91 @@
     "heure": "2026-10-30T09:31:00+01:00"
    }
   ]
+ },
+ "2026-11-05_R1_C1": {
+  "source": "equidia.fr",
+  "favori": 5,
+  "cotes": [
+   {
+    "num": 5,
+    "nom": "EVERY TIME WINNER",
+    "cote": 1.5,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": true,
+    "enjeu": 51,
+    "heure": "2026-11-05T03:16:00+01:00"
+   },
+   {
+    "num": 4,
+    "nom": "JOKER DES CHALIERS",
+    "cote": 6.5,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": false,
+    "enjeu": 51,
+    "heure": "2026-11-05T03:16:00+01:00"
+   },
+   {
+    "num": 9,
+    "nom": "READY STAR",
+    "cote": 9.2,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": false,
+    "enjeu": 51,
+    "heure": "2026-11-05T03:16:00+01:00"
+   },
+   {
+    "num": 6,
+    "nom": "HUMANITY PELLINI",
+    "cote": 14,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": false,
+    "enjeu": 51,
+    "heure": "2026-11-05T03:16:00+01:00"
+   },
+   {
+    "num": 15,
+    "nom": "COMPETIVO",
+    "cote": 14,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": false,
+    "enjeu": 51,
+    "heure": "2026-11-05T03:16:00+01:00"
+   },
+   {
+    "num": 8,
+    "nom": "HINDEN",
+    "cote": 22,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": false,
+    "enjeu": 51,
+    "heure": "2026-11-05T03:16:00+01:00"
+   },
+   {
+    "num": 14,
+    "nom": "KNOCKONWOOD",
+    "cote": 22,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": false,
+    "enjeu": 51,
+    "heure": "2026-11-05T03:16:00+01:00"
+   },
+   {
+    "num": 3,
+    "nom": "MATEO DI QUATTRO",
+    "cote": 44,
+    "ouverture": null,
+    "tendance": "=",
+    "favori": false,
+    "enjeu": 51,
+    "heure": "2026-11-05T03:16:00+01:00"
+   }
+  ]
  }
 }
