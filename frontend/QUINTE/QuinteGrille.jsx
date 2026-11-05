@@ -2378,10 +2378,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
         </div>
       )}
 
-      {/* --------------------------------------------------------- bassmat (caché à la demande) */}
-      {/* {onglet === 'bassmat' && (
+      {/* --------------------------------------------------------- bassmat */}
+      {onglet === 'bassmat' && (
         <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} BC={bassmatChoix} MOIS={bassmatMois} discipline={bassmatDiscipline} setDiscipline={setBassmatDiscipline} toutLesP={toutLesP} setToutLesP={setToutLesP} />
-      )} */}
+      )}
 
       {/* --------------------------------------------------------- archive */}
       {onglet === 'archive' && (
