@@ -1141,7 +1141,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS, discipline, setDiscipli
 
   /* le ticket réellement affiché, dans l'ordre des cases */
   const tickets = []
-  for (const g of detail || []) for (const c of g.cases) if (c.pris) tickets.push({ ...c, groupe: g.id })
+  for (const g of detail || []) for (const c of g.cases || []) if (c.pris) tickets.push({ ...c, groupe: g.id })
   tickets.sort((a, b) => a.place - b.place)
   const tauxTicket = (c) => taux(c.place, cle)
   const faible = tickets.length
