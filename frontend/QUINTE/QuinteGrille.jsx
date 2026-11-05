@@ -1531,8 +1531,9 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS, discipline, setDiscipli
     <div>
       <BarreFiltres sk={sk} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={discipline} setDiscipline={setDiscipline} />
       {discipline && discipline !== 'all' && (
-        <div style={{ fontSize: 11.5, color: sk.muted, marginBottom: 10, lineHeight: 1.5 }}>
-          Le filtre change le <b>corpus de référence</b> (① à ⑧). La section ⓪ (ce mois) reste l’archive réelle.
+        <div style={{ fontSize: 11.5, color: sk.muted, marginBottom: 10, lineHeight: 1.5, padding: '6px 10px', background: sk.accentClair, border: '1px solid ' + sk.bord, borderRadius: sk.box.borderRadius }}>
+          → <b>{src.n} Quintés</b> de référence ({DISC_LABEL[discipline]}) — les sections ① à ⑧ ci-dessous sont recalculées.
+          La section ⓪ (ce mois) reste l’archive réelle.
         </div>
       )}}
       {MOIS && (() => {
