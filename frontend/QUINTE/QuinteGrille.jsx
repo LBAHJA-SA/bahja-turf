@@ -3110,7 +3110,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 )}
               </div>
 
-              {/* §2.2 — les indicateurs EXPLICITES, dénominateur nommé, « — » si dénominateur nul */}
+{/*
               <div style={{ overflowX: 'auto', marginTop: 16 }}>
                 <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', boxShadow: SK.ombreD }}>
                   <thead>
@@ -3148,6 +3148,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </tbody>
                 </table>
               </div>
+*/}
 
 {/*
               <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
