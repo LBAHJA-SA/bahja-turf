@@ -10,6 +10,7 @@
     { "source": "/api/pt/:surcharge(.*)", "destination": "/api/pt?p=:surcharge" },
     { "source": "/api/tf/:surcharge(.*)", "destination": "/api/tf?p=:surcharge" },
     { "source": "/api/ptf/:surcharge(.*)", "destination": "/api/ptf?p=:surcharge" },
+    { "source": "/data/:fichier(.*)", "destination": "/data/:fichier" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
