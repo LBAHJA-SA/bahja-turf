@@ -50,8 +50,8 @@ export default function ParisListe({ paris, mini = false, style }) {
       {clefs.map((k) => {
         const p = PARIS[k]
         return (
-          <span key={k} style={{ display: 'inline-flex', alignItems: 'center', gap: 3, marginRight: 4 }}>
-            <span style={{ fontSize: '1.1em' }}>{p.icone}</span>
+          <span key={k} style={{ display: 'inline-flex', alignItems: 'center', gap: 3, marginRight: 4, background: 'rgba(255,255,255,0.08)', padding: '2px 6px', borderRadius: 6 }}>
+            <span style={{ fontSize: '1.2em' }}>{p.icone}</span>
             <span className={'pari pari-' + p.teinte} title={p.lib}>
               <span className="pari-in">
                 <span className="pari-haut">{p.haut}</span>
