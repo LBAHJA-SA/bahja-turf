@@ -141,8 +141,19 @@ async function enParallele(items, n, fn) {
   await Promise.all(ouvriers)
 }
 
-/** Le cache : une date lue une fois ne se relit pas (sauf `force`). */
+/** Le cache : une date lue une fois ne se relit pas (sauf `force`).
+ *  ⭐ 06/11/2026 — le cache est DÉSACTIVÉ pour les dates récentes :
+ *  casacourses ne publie les résultats qu'une heure après la course.
+ *  Mettre en cache une date avant la publication fige « aucune course »
+ *  pour toute la journée. On ne met en cache que les dates anciennes
+ *  (finies depuis plus de 24h). */
 const cache = new Map()
+function cacheable(date) {
+  try {
+    const d = new Date(date + 'T23:59:59')
+    return (Date.now() - d.getTime()) > 24 * 60 * 60 * 1000
+  } catch { return false }
+}
 
 /**
  * TOUT ce qu'il faut pour la page : les réunions qui ont au moins une course
@@ -151,7 +162,7 @@ const cache = new Map()
  * `onProgress(faits, total)` permet d'afficher l'avancement.
  */
 export async function chargerResultats(date, { force = false, onProgress = null } = {}) {
-  if (!force && cache.has(date)) return cache.get(date)
+  if (!force && cacheable(date) && cache.has(date)) return cache.get(date)
 
   const j = await getJSON(`${CC_API}/programme?date=${date}`)
   const meetings = (j && j.meetings) || []
@@ -193,7 +204,7 @@ export async function chargerResultats(date, { force = false, onProgress = null 
     .sort((a, b) => (Number(String(a.reunion).replace(/\D/g, '')) || 99)
       - (Number(String(b.reunion).replace(/\D/g, '')) || 99))
 
-  cache.set(date, out)
+  if (cacheable(date)) cache.set(date, out)
   return out
 }
 
