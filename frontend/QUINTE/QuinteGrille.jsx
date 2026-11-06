@@ -2624,8 +2624,8 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             <button onClick={toutEffacer} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid rgba(244,63,94,.55)', background: SK.carte, color: '#fb7185', cursor: 'pointer', fontFamily: SK.police }}>
               Tout effacer
             </button>
-            <button onClick={() => figerPuisRafraichir()} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: 'pointer', fontFamily: SK.police }}>
-              Rafraîchir
+            <button onClick={() => chercherResultat()} disabled={busyResultat} style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.carte, color: SK.accent, cursor: busyResultat ? 'default' : 'pointer', fontFamily: SK.police }}>
+              {busyResultat ? 'Lecture…' : 'Rafraîchir'}
             </button>
           </div>
 
@@ -2690,10 +2690,6 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         </td>
                         <td style={{ ...s.td, fontWeight: 700, color: !a.arrivee ? '#7a8ea9' : hit3 === 3 ? '#34d399' : manque1er ? '#fb7185' : '#fbbf24' }}>
                           {!a.arrivee ? '—' : hit3 + '/3'}{manque1er ? ' ⚠1er' : ''}
-                        </td>
-                        <td style={s.td}>
-                          <button onClick={async () => { await deleteArchive(a.date); rafraichirArchive() }}
-                            style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#fb7185' }}>✕</button>
                         </td>
                       </tr>
                     )
