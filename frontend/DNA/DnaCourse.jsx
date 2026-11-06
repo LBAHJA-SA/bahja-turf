@@ -555,51 +555,8 @@ export default function DnaCoursePage() {
 
       {result && (
         <>
-          <Card title="Fiabilité mesurée" icon={<FlaskConical size={15} />} accent="#a855f7"
-            subtitle="Backtest chronologique sur le même contexte de course, sans fuite de données.">
-            <ValidationTable validation={validation} />
-            <div style={{ fontSize: '0.63rem', color: 'var(--text-muted)', marginTop: 9, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <span>Archive : {history.archive || '—'}</span>
-              <span>Chevaliers connus : {history.field_known}/{field.length}</span>
-              <span>Courses de contexte : {history.context_races ?? '—'}</span>
-            </div>
-          </Card>
-
-          <Card title="Market DNA" icon={<Target size={15} />} accent="#00e5ff"
-            subtitle="Structure de marché observée dans l’historique de ce type de course. Décrit la course — ne prédit pas le résultat.">
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 8 }}>
-              <Metric label="DNA (top 3)" value={market.dna || '—'} hint={`support ${market.pattern_support || 0}`} />
-              <Metric label="DNA (top 5)" value={market.top5_dna || '—'} hint={`support ${market.top5_support || 0}`} />
-              {profileBands.map(([band, count]) => (
-                <div key={band} style={{ padding: '9px 10px', borderRadius: 10, background: `${BAND_COLORS[band] || BAND_COLORS.UNK}12`, border: `1px solid ${BAND_COLORS[band] || BAND_COLORS.UNK}44` }}>
-                  <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>{band} dans le field</div>
-                  <div style={{ fontSize: '1.05rem', fontWeight: 900, color: BAND_COLORS[band] || '#fff' }}>{count}</div>
-                </div>
-              ))}
-            </div>
-            {(market.historical_patterns || []).length > 0 && (
-              <div style={{ marginTop: 10 }}>
-                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: 5 }}>Formes top-3 les plus fréquentes dans ce contexte</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  {market.historical_patterns.slice(0, 6).map(([pat, n]) => (
-                    <div key={pat} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                      <span style={{ fontSize: '0.68rem', fontFamily: 'ui-monospace, monospace', width: 74, color: pat === market.dna ? '#4ade80' : 'var(--text-secondary)', fontWeight: pat === market.dna ? 900 : 500 }}>{pat}</span>
-                      <div style={{ flex: 1, height: 6, borderRadius: 3, background: 'rgba(255,255,255,0.05)', overflow: 'hidden' }}>
-                        <div style={{ width: `${(n / patternMax) * 100}%`, height: '100%', background: pat === market.dna ? '#4ade80' : '#0ea5e9' }} />
-                      </div>
-                      <span style={{ fontSize: '0.64rem', color: 'var(--text-muted)', width: 34, textAlign: 'right' }}>{n}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            {(market.tilt || []).length > 0 && (
-              <div style={{ marginTop: 9, fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                Tilt historique : {market.tilt.slice(0, 5).map((t) => `${t.band} ${pct(t.share)}`).join(' · ')}
-              </div>
-            )}
-          </Card>
-
+          {/* Fiabilité mesurée et Market DNA masqués à la demande (06/11/2026) */}
+          
           <Card title="Classement principal" icon={<Users size={15} />} accent="#4ade80"
             subtitle={`Ordre marché (pondération forme ${Math.round((result.ranking?.form_nudge ?? 0) * 100)}%). Le rang marché est la colonne de référence.`}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(232px, 1fr))', gap: 8 }}>
