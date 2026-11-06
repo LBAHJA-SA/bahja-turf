@@ -415,28 +415,7 @@ export default function DnaCoursePage() {
         outsider / tocard à forte variance.
       </p>
 
-      <Card title="Bandes de marché & dosage du modèle" icon={<Settings2 size={14} />} accent="#4ade80">
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center', marginBottom: 8 }}>
-          {['F', 'S', 'O', 'O2'].map((band) => (
-            <label key={band} style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: '0.72rem', color: BAND_COLORS[band] }}>
-              {band} ≤
-              <input type="number" step="0.5" value={limits[band]} onChange={(e) => setLimits((o) => ({ ...o, [band]: e.target.value }))}
-                style={{ width: 66, background: '#0d1424', color: '#fff', border: '1px solid var(--border)', borderRadius: 7, padding: '5px 7px' }} />
-            </label>
-          ))}
-          <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>T &gt; {limits.O2}</span>
-          <button onClick={() => setLimits(DEFAULT_LIMITS)} className="neon-btn outline" style={{ padding: '5px 9px', fontSize: '0.68rem' }}>Réinitialiser</button>
-        </div>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
-          Poids de la forme dans le classement
-          <input type="range" min="0" max="0.25" step="0.01" value={formNudge} onChange={(e) => setFormNudge(e.target.value)} style={{ flex: 1, maxWidth: 220 }} />
-          <b style={{ color: '#4ade80', fontFamily: 'ui-monospace, monospace' }}>{Math.round(formNudge * 100)}%</b>
-        </label>
-        <div style={{ fontSize: '0.63rem', color: 'var(--text-muted)', marginTop: 4 }}>
-          0 % = classement purement marché. Au-delà, la forme ne fait que dégrader la performance
-          mesurée — c&apos;est pour cela que la valeur par défaut reste très basse.
-        </div>
-      </Card>
+      {/* Bandes de marché & dosage du modèle masqués à la demande (06/11/2026) */}
 
       <Programme
         date={date}
