@@ -16,7 +16,7 @@ import {
   fetchBlocPm, fetchBassmat, formeMarche, fetchHuit, fetchBassmatChoix, ticketBassmat,
   fetchBassmatMois, jugerTicket, fetchDeparts,
 } from '../../src/lib/quinte'
-import { chargerDetailReu } from '../../backend/ARTICLE/turfFrance.js'
+import { chargerDetailReu, chargerPageTqq, offsetJour } from '../../backend/ARTICLE/turfFrance.js'
 
 /* ⭐ 28/10/2026 — les quotas affichés viennent de `GROUPES`, JAMAIS d'un
  * littéral : le texte suit le moteur au lieu de dériver (4-3-1-1-0 → 9 chevaux
@@ -2180,7 +2180,22 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   const chercherResultat = async () => {
     setBusyResultat(true); setMsg('')
     try {
-      const res = await chargerCourseCC(date, syn?.synthese || [])
+      let res = await chargerCourseCC(date, syn?.synthese || [])
+      // ⭐ Repli turf-france pour les dates passées (casacourses n'a plus le programme)
+      if (!res) {
+        try {
+          const off = offsetJour(date)
+          const page = await chargerPageTqq(off, date)
+          if (page && page.identite) {
+            const r = page.identite.reunion
+            const c = page.identite.course
+            const det = await chargerDetailReu(date, r, c, 'FRANCE')
+            if (det && det.arrivee && det.arrivee.length) {
+              res = { arrivee: det.arrivee, cle: date + '_R' + r + '_C' + c, discipline: det.discipline, distance: det.distance, nbPartants: det.nbPartants, hippodrome: det.hippodrome, participants: det.participants }
+            }
+          }
+        } catch (e2) { /* on garde le message standard ci-dessous */ }
+      }
       let arr = res?.arrivee
       // repli turf-france : casacourses ne publie pas toujours l'arrivée
       // (08/10 : status CLOSED mais has_results=false). La clé R/C vient
