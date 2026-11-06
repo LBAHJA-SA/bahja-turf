@@ -3298,5 +3298,318 @@
         "heure": "2026-11-05T05:28:00+01:00"
       }
     ]
+  },
+  "2026-11-06_R1_C4": {
+    "source": "equidia.fr",
+    "favori": 18,
+    "snapshots": {
+      "ouverture": {
+        "heure": "2026-11-06T04:35:08.718Z",
+        "cotes": [
+          {
+            "num": 18,
+            "nom": "IZIJAL",
+            "cote": 2.6,
+            "ouverture": null,
+            "tendance": "-",
+            "favori": true,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 9,
+            "nom": "IRIS DU LIVIER",
+            "cote": 6.9,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 6,
+            "nom": "HORSE DE GRAMMONT",
+            "cote": 8.9,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 17,
+            "nom": "HOTESSE NAY",
+            "cote": 10,
+            "ouverture": null,
+            "tendance": "-",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 8,
+            "nom": "ISSI TOP",
+            "cote": 14,
+            "ouverture": null,
+            "tendance": "-",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 3,
+            "nom": "IVON DE LA MONERIE",
+            "cote": 15,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 7,
+            "nom": "ITALICA",
+            "cote": 17,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 4,
+            "nom": "ISEA DU QUENNE",
+            "cote": 18,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 14,
+            "nom": "IGLIANO DES IRIS",
+            "cote": 19,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 12,
+            "nom": "INCREDIBLE GO",
+            "cote": 29,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 10,
+            "nom": "HEAVEN D'ECAJEUL",
+            "cote": 31,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 13,
+            "nom": "HANACK DE VIVOIN",
+            "cote": 31,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 2,
+            "nom": "INDY DE MAI",
+            "cote": 58,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 5,
+            "nom": "HANUGAN",
+            "cote": 58,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 238.9,
+            "heure": "2026-11-06T05:31:00+01:00"
+          },
+          {
+            "num": 16,
+            "nom": "HORSERIS",
+            "cote": 58,
+            "ouverture": null,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 135,
+            "heure": "2026-11-06T05:29:00+01:00"
+          }
+        ]
+      }
+    },
+    "cotes": [
+      {
+        "num": 18,
+        "nom": "IZIJAL",
+        "cote": 2.6,
+        "ouverture": null,
+        "tendance": "-",
+        "favori": true,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 9,
+        "nom": "IRIS DU LIVIER",
+        "cote": 6.9,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 6,
+        "nom": "HORSE DE GRAMMONT",
+        "cote": 8.9,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 17,
+        "nom": "HOTESSE NAY",
+        "cote": 10,
+        "ouverture": null,
+        "tendance": "-",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 8,
+        "nom": "ISSI TOP",
+        "cote": 14,
+        "ouverture": null,
+        "tendance": "-",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 3,
+        "nom": "IVON DE LA MONERIE",
+        "cote": 15,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 7,
+        "nom": "ITALICA",
+        "cote": 17,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 4,
+        "nom": "ISEA DU QUENNE",
+        "cote": 18,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 14,
+        "nom": "IGLIANO DES IRIS",
+        "cote": 19,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 12,
+        "nom": "INCREDIBLE GO",
+        "cote": 29,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 10,
+        "nom": "HEAVEN D'ECAJEUL",
+        "cote": 31,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 13,
+        "nom": "HANACK DE VIVOIN",
+        "cote": 31,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 2,
+        "nom": "INDY DE MAI",
+        "cote": 58,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 5,
+        "nom": "HANUGAN",
+        "cote": 58,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 238.9,
+        "heure": "2026-11-06T05:31:00+01:00"
+      },
+      {
+        "num": 16,
+        "nom": "HORSERIS",
+        "cote": 58,
+        "ouverture": null,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 135,
+        "heure": "2026-11-06T05:29:00+01:00"
+      }
+    ]
   }
 }
