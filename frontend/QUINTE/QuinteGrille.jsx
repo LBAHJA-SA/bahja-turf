@@ -172,8 +172,8 @@ const THEME = {
 }
 
 const TABS = [
-  ['grille', 'La grille'], ['ticket', 'Le ticket'], ['bassmat', 'Bassmat'],
-  ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts'], ['choix', 'Choix'],
+  ['grille', 'La grille'], ['ticket', 'Le ticket'],
+  ['archive', 'Archive'], ['stats', 'Statistiques'], ['ecarts', 'Écarts'],
 ]
 
 function Boite({ n, pris, presse, couleur, score, cote, slot, marche, onClick }) {
@@ -804,145 +804,6 @@ const carnet = (detail) => {
  *   appliquée (`appliquee`) ; les autres attendent la décision de l'utilisateur
  *   (§11.16 : les quotas n'appartiennent pas au moteur).
  * ═════════════════════════════════════════════════════════════════════════ */
-function PanneauMesure({ sk, fiabilite, detail }) {
-  const [ouvert, setOuvert] = useState(true)
-  if (!fiabilite) return (
-    <div style={{ border: '1px dashed ' + sk.bord, borderRadius: sk.box.borderRadius, padding: '8px 12px', marginTop: 12, fontSize: 12, color: sk.muted }}>
-      Panneau de mesure : écrire <b>public/data/fiabilite.json</b> (node tools\fiabilite.mjs) pour l'afficher ici.
-    </div>
-  )
-  const M = fiabilite.mesure
-  const L = (x) => (x == null ? '—' : x + ' %')
-  const ligne = (lab, r, gras) => (
-    <tr key={lab} style={{ borderBottom: '1px solid ' + sk.bord, background: gras ? sk.accentClair : sk.ligne }}>
-      <td style={{ ...sk.td, fontWeight: gras ? 800 : 500 }}>{lab}</td>
-      <td style={{ ...sk.td, fontWeight: 800, fontFamily: sk.nb.td, color: sk.accent }}>{L(r.payante)}</td>
-      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{L(r.couvre4)}</td>
-      <td style={{ ...sk.td, fontFamily: sk.nb.td }}>{L(r.q5)}</td>
-      <td style={{ ...sk.td, fontFamily: sk.nb.td, color: sk.muted }}>{r.chevaux}</td>
-    </tr>
-  )
-  const pris = (detail || []).flatMap((g) => g.cases.filter((c) => c.pris && c.bande).map((c) => c.bande))
-  const dansTicket = (cle) => pris.filter((b) => b === cle).length
-  const nb = { fontFamily: sk.nb.td, fontWeight: 700 }
-  return (
-    <div style={{ ...sk.box, padding: '12px 14px', marginTop: 12, boxShadow: sk.ombreD }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-        <b style={{ fontSize: 13, letterSpacing: 1.2, textTransform: 'uppercase', color: sk.accent }}>Fiabilité mesurée</b>
-        <span style={{ fontSize: 12, color: sk.muted }}>
-          {M.echantillon.n} Quintés à presse réelle ({M.echantillon.du} → {M.echantillon.au}) · {M.metrique}
-        </span>
-        <button onClick={() => setOuvert((v) => !v)}
-          style={{ marginLeft: 'auto', padding: '2px 10px', borderRadius: 999, border: '1px solid ' + sk.bord, background: sk.carte, color: sk.accent, cursor: 'pointer', fontSize: 11, fontWeight: 700 }}>
-          {ouvert ? 'plier' : 'déplier'}
-        </button>
-      </div>
-      {ouvert && (
-        <>
-          <div style={{ overflowX: 'auto', marginTop: 8 }}>
-            <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 13 }}>
-              <thead>
-                <tr style={sk.hdrStyle}>
-                  {['méthode', 'PAYANTE (1-2-3)', 'couvre +4', '5/5', 'ch.'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {ligne('⭐ le moteur — cotes finales', fiabilite.code.finales, true)}
-                {ligne('le moteur — cotes d’ouverture', fiabilite.code.ouverture)}
-                {ligne('le marché seul — 8 meilleures cotes', fiabilite.baselines.marche8)}
-                {ligne('le marché seul — 9 meilleures cotes', fiabilite.baselines.marche9)}
-              </tbody>
-            </table>
-          </div>
-          <div style={{ fontSize: 11.5, color: sk.muted, marginTop: 6, lineHeight: 1.6 }}>
-            Depuis le 19/10/2026 (§11.23), la <b>queue</b> du ticket se remplit à la cote —
-            aujourd'hui <b> G4</b> seulement. Depuis le 29/10/2026 (§11.49) les quotas
-            <b> {QUOTAS_TXT}</b> sont <b>constitutionnels</b> et ne bougent plus : le ticket de
-            <b> {NB_TICKET} chevaux</b> garde ses cinq blocs, G5 compris. G1-G3 se remplissent au
-            rang de presse, G4 et G5 à la cote. Le seul travail qui reste est <b>qui</b> entre
-            dans chaque bloc.
-          </div>
-
-          <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
-            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>Le badge des boules</b>{' '}
-            — le rang de cote des chevaux <b>cités par la presse</b> : ce que ce rang vaut.
-            <div style={{ overflowX: 'auto', marginTop: 6 }}>
-              <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
-                <thead>
-                  <tr style={sk.hdrStyle}>
-                    {['rang de marché', 'chevaux', 'top-5', 'top-3', 'dans votre ticket'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {fiabilite.badge.map((b) => {
-                    const cle = b.lib.startsWith('top 3') ? 'fort' : b.lib.startsWith('4e-5e') ? 'bon'
-                      : (b.lib.startsWith('6e-8e') || b.lib.startsWith('9e-12e')) ? 'moyen'
-                      : b.cle === '13+' ? 'faible' : null
-                    const bd = cle ? BANDE_MARCHE[cle] : null
-                    return (
-                      <tr key={b.cle} style={{ borderBottom: '1px solid ' + sk.bord, background: bd ? bd.fond : sk.alt }}>
-                        <td style={{ ...sk.td, fontWeight: 700, color: bd ? bd.couleur : sk.texte }}>
-                          {bd ? bd.court + ' · ' : ''}{b.lib}
-                        </td>
-                        <td style={{ ...sk.td, ...nb, color: sk.muted }}>{b.n}</td>
-                        <td style={{ ...sk.td, ...nb }}>{b.top5} %</td>
-                        <td style={{ ...sk.td, ...nb }}>{b.top3} %</td>
-                        <td style={{ ...sk.td, ...nb }}>{cle ? dansTicket(cle) : '—'}</td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
-            <span style={{ color: sk.muted }}>
-              Le badge de la boule porte ce rang, sur le fond de sa bande (M≤3 · M≤5 · M6-12 · M13+).
-              Il <b>choisit</b> dans G4 ; dans G1-G3 c’est le rang de presse qui décide, et G5 n’a
-              plus de siège depuis le 20/10/2026 (§11.23 · §11.26).
-            </span>
-          </div>
-
-          <div style={{ marginTop: 12, fontSize: 12, color: sk.texte, lineHeight: 1.6 }}>
-            <b style={{ letterSpacing: .8, textTransform: 'uppercase', color: sk.accent }}>L’expérience du siège de G5</b>{' '}
-            — la méthode dit « B5 : 1 ou 0 » (§11.6). Le 21/10/2026, le siège est <b>sorti de G5</b>
-            (§11.34) : la ligne marquée « appliquée » est celle du moteur. Les autres lectures sont
-            mesurées sur les <b>mêmes courses</b>, chacune à sa taille de ticket
-            (tools/experience-g5.mjs).
-            <div style={{ overflowX: 'auto', marginTop: 6 }}>
-              <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
-                <thead>
-                  <tr style={sk.hdrStyle}>
-                    {['variante', 'PAYANTE', 'ouverture', '1re moitié', '2e moitié', 'état'].map((h) => <th key={h} style={sk.th}>{h}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {fiabilite.experience.map((v) => (
-                    <tr key={v.cle} style={{ borderBottom: '1px solid ' + sk.bord, background: v.appliquee ? sk.on : sk.ligne }}>
-                      <td style={{ ...sk.td, fontWeight: v.appliquee ? 800 : 500 }}>{v.nom}</td>
-                      <td style={{ ...sk.td, ...nb, fontWeight: 800, color: v.appliquee ? sk.accent : sk.texte }}>{L(v.payante)}</td>
-                      <td style={{ ...sk.td, ...nb }}>{L(v.payanteOuverture)}</td>
-                      <td style={{ ...sk.td, ...nb, color: sk.muted }}>{L(v.payante1re)}</td>
-                      <td style={{ ...sk.td, ...nb, color: sk.muted }}>{L(v.payante2e)}</td>
-                      <td style={{ ...sk.td }}>
-                        {v.appliquee
-                          ? <span style={{ fontWeight: 800, color: sk.accent }}>appliquée</span>
-                          : <span style={{ color: sk.muted }}>non appliquée</span>}
-                        {v.garde != null && <span style={{ color: sk.muted }}> · siège gardé {v.garde} %</span>}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <span style={{ color: sk.muted }}>
-              Une seule de ces variantes est en production — celle qui porte « appliquée »
-              ({QUOTAS_TXT}, §11.46). Le fichier est réécrit par <b>node tools\fiabilite.mjs</b>.
-            </span>
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
 
 /* ═══════════════════ LA BARRE DE FILTRES PARTAGÉE (05/11/2026) ═════════════
  * Les MÊMES deux filtres servent trois onglets : Statistiques, Écarts, Choix.
@@ -2499,7 +2360,6 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
             <span style={{ fontSize: 12, color: '#64748b', marginLeft: 12 }}>{ticket.length} chevaux</span>
             {'  '}
           </div>
-          <PanneauMesure sk={SK} fiabilite={fiabilite} detail={detail} />
         </div>
       )}
 
@@ -2756,10 +2616,6 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
         </div>
       )}
 
-      {/* --------------------------------------------------------- bassmat */}
-      {onglet === 'bassmat' && (
-        <TabBassmat sk={SK} B={bassmat} H={huit} detail={detail} forme={forme} BC={bassmatChoix} MOIS={bassmatMois} discipline={bassmatDiscipline} setDiscipline={setBassmatDiscipline} toutLesP={toutLesP} setToutLesP={setToutLesP} />
-      )}
 
       {/* --------------------------------------------------------- archive */}
       {onglet === 'archive' && (
@@ -3441,12 +3297,6 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           discipline={statsDiscipline} setDiscipline={setStatsDiscipline} />
       )}
 
-      {/* ------------------------------------------------------------ choix */}
-      {onglet === 'choix' && (
-        <TabChoix sk={SK} choix={choix}
-          toutLesP={toutLesP} setToutLesP={setToutLesP}
-          discipline={statsDiscipline} setDiscipline={setStatsDiscipline} />
-      )}
     </div>
     </>
   )
