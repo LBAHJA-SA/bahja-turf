@@ -276,6 +276,7 @@ body::before{
 .pari-in{ display: inline-flex; flex-direction: column; align-items: flex-end; transform: skewX(15deg) }
 .pari-haut{ font-size: 11.5px }
 .pari-bas{ font-size: 8px; margin-top: -1px }
+.pari-icone{ font-size: 11px; margin-right: 2px; display: inline-block; vertical-align: middle }
 .pari-violet{ background: linear-gradient(135deg,#4c1d95 0%,#7c3aed 62%,#a855f7 100%) }
 .pari-prune { background: linear-gradient(135deg,#5b21b6 0%,#7e22ce 58%,#a21caf 100%) }
 .pari-orange{ background: linear-gradient(135deg,#b45309 0%,#ea580c 62%,#fb923c 100%) }
@@ -289,6 +290,7 @@ body::before{
 .paris-mini .pari{ padding: 1px 5px; border-radius: 2px; box-shadow: 0 1px 0 rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25) }
 .paris-mini .pari-haut{ font-size: 7.5px }
 .paris-mini .pari-bas{ font-size: 5.5px }
+.paris-mini .pari-icone{ font-size: 7px }
 
 /* ── LES BOUTONS ─────────────────────────────────────────────────────────── */
 .btn{

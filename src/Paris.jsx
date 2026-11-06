@@ -24,16 +24,16 @@
  *  `haut`/`bas` = les deux lignes du ruban (les 4 paris de base en ont deux,
  *  les trois « gros » paris tiennent sur une seule). */
 export const PARIS = {
-  'simple-gagnant': { lib: 'Simple Gagnant', haut: 'Simple', bas: 'Gagnant', teinte: 'violet' },
-  'simple-place':   { lib: 'Simple Placé',   haut: 'Simple', bas: 'Placé',   teinte: 'prune' },
+  'simple-gagnant': { lib: 'Simple Gagnant', haut: 'Simple', bas: 'Gagnant', teinte: 'violet', icone: '🎯' },
+  'simple-place':   { lib: 'Simple Placé',   haut: 'Simple', bas: 'Placé',   teinte: 'prune',  icone: '📍' },
   /* ⚠ Les DEUX clés gardent « jumele- » : c'est la donnée du PMU et celle de
    *   backend/ANALYSE/paris.js. Seul le LIBELLÉ lu par l'utilisateur change :
    *   « Couplé », le nom du pari sur la feuille de course (décidé le 18/10). */
-  'jumele-gagnant': { lib: 'Couplé Gagnant', haut: 'Couplé', bas: 'Gagnant', teinte: 'orange' },
-  'jumele-place':   { lib: 'Couplé Placé',   haut: 'Couplé', bas: 'Placé',   teinte: 'ambre' },
-  'tierce':         { lib: 'Tiercé',         haut: 'Tiercé', bas: '',        teinte: 'vert' },
-  'quarte':         { lib: 'Quarté',         haut: 'Quarté', bas: '',        teinte: 'bleu' },
-  'quinte':         { lib: 'Quinté+',        haut: 'Quinté+', bas: '',       teinte: 'rouge' },
+  'jumele-gagnant': { lib: 'Couplé Gagnant', haut: 'Couplé', bas: 'Gagnant', teinte: 'orange', icone: '🤝' },
+  'jumele-place':   { lib: 'Couplé Placé',   haut: 'Couplé', bas: 'Placé',   teinte: 'ambre',  icone: '📌' },
+  'tierce':         { lib: 'Tiercé',         haut: 'Tiercé', bas: '',        teinte: 'vert',   icone: '🥉' },
+  'quarte':         { lib: 'Quarté',         haut: 'Quarté', bas: '',        teinte: 'bleu',   icone: '4️⃣' },
+  'quinte':         { lib: 'Quinté+',        haut: 'Quinté+', bas: '',       teinte: 'rouge',  icone: '🏆' },
 }
 
 /** L'ordre d'affichage, du plus simple au plus fort (jamais alphabétique). */
@@ -52,6 +52,7 @@ export default function ParisListe({ paris, mini = false, style }) {
         return (
           <span key={k} className={'pari pari-' + p.teinte} title={p.lib}>
             <span className="pari-in">
+              <span className="pari-icone">{p.icone}</span>
               <span className="pari-haut">{p.haut}</span>
               {p.bas ? <span className="pari-bas">{p.bas}</span> : null}
             </span>

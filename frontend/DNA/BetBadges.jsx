@@ -1,3 +1,13 @@
+const BET_ICONS = {
+  SIMPLE_GAGNANT: '🎯', SIMPLE_GAGNANT_PLACE: '🎯', SIMPLE_PLACE: '📍',
+  JUMELE_GAGNANT: '🤝', JUMELE_PLACE: '📌', COUPLE: '🤝',
+  COUPLE_ORDRE: '🤝', COUPLE_PLACE: '📌', COUPLE_GAGNANT: '🤝',
+  COUPLE_GAGNANT_PLACE: '🤝', JUMELE_ORDRE: '🤝',
+  TRIO: '🥉', TRIO_ORDRE: '🥉', E_TRIO: '🥉', E_TRIO_ORDRE: '🥉',
+  TIERCE: '🥉', TIERCE_DESORDRE: '🥉',
+  QUARTE: '4️⃣', QUARTE_PLUS: '4️⃣', E_QUARTE_PLUS: '4️⃣',
+  QUINTE: '🏆', QUINTE_PLUS: '🏆', E_QUINTE_PLUS: '🏆',
+}
 const BET_LABELS = {
   SIMPLE_GAGNANT: 'Simple',
   SIMPLE_GAGNANT_PLACE: 'Simple G/P',
@@ -49,6 +59,14 @@ function labelFor(bet) {
   }
   return '?'
 }
+function iconFor(bet) {
+  if (typeof bet === 'string') return BET_ICONS[normCode(bet)] || ''
+  if (bet && typeof bet === 'object') {
+    const code = String(bet.code || bet.typePari || bet.libelleCourt || bet.nom || bet.libelle || '').toUpperCase()
+    return BET_ICONS[normCode(code)] || ''
+  }
+  return ''
+}
 
 // `light` and `dark` are both opt-in, and neither is the default. The default
 // path is what the theme tokens give, which is a near-black meant for the app's
@@ -74,14 +92,14 @@ export function RaceBetBadges({ race, light, dark }) {
         <span style={{
           padding: '1px 6px', borderRadius: 3, fontSize: '0.55rem', fontWeight: 700,
           background: 'rgba(239,68,68,0.15)', color: dark ? '#fecaca' : '#ef4444', border: '1px solid rgba(239,68,68,0.35)',
-        }}>Q+</span>
+        }}>🏆 Quinté+</span>
       )}
       {filtered.slice(0, 6).map((t, i) => (
         <span key={i} style={{
           padding: '1px 6px', borderRadius: 3, fontSize: '0.55rem', fontWeight: 700,
           background: light ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.06)',
           color: txtDim, border: `1px solid ${border}`,
-        }}>{labelFor(t)}</span>
+        }}>{iconFor(t)} {labelFor(t)}</span>
       ))}
     </div>
   )
