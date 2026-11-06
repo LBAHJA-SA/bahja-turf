@@ -421,6 +421,9 @@ export default function Programme({ date, setDate, meetings, loading, onCharger,
                   {(m.courses || []).map((c) => {
                     const choisi = sel && sel.rnum === m.num && sel.cnum === c.num
                     const pp = parisDe(c)
+                    // Fallback: si les types de paris ne sont pas disponibles (courses futures),
+                    // afficher les paris standard disponibles pour toutes les courses
+                    const ppAffiche = pp.length > 0 ? pp : (c.quinte ? ['simple-gagnant', 'simple-place', 'jumele-gagnant', 'jumele-place', 'tierce', 'quarte', 'quinte'] : ['simple-gagnant', 'simple-place', 'jumele-gagnant', 'jumele-place', 'tierce'])
                     /* ③ la course elle-même : à moins de 5 min elle passe en rouge
                        battant, avec le décompte à la seconde. */
                     const reste = c.time == null ? null : c.time - now
@@ -455,14 +458,14 @@ export default function Programme({ date, setDate, meetings, loading, onCharger,
                           {partie && !imminente && (
                             <span style={{ flex: '0 0 auto', fontSize: 8.5, fontWeight: 800, background: 'rgba(148,163,184,.22)', color: '#dbe4f0', borderRadius: 3, padding: '0 4px' }}>partie</span>
                           )}
-                          {!pp.length && c.quinte && <span style={{ flex: '0 0 auto', fontSize: 8.5, fontWeight: 800, background: choisi ? 'rgba(255,255,255,.92)' : 'rgba(244,63,94,.16)', color: choisi ? '#0b3b4d' : ROUGE, borderRadius: 3, padding: '0 3px' }}>Q+</span>}
+
                         </span>
                         {imminente && (
                           <span style={{ fontSize: 9.5, fontWeight: 800, color: '#ffe4e6', letterSpacing: .2 }}>
                             DÉPART DANS {mmss(reste)} — {heureLocale(c.time, m.country, c.heure)}
                           </span>
                         )}
-                        {pp.length > 0 && <ParisListe paris={pp} mini />}
+                        <ParisListe paris={ppAffiche} mini />
                       </button>
                     )
                   })}
