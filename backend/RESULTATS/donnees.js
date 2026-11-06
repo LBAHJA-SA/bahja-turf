@@ -167,10 +167,14 @@ export async function chargerResultats(date, { force = false, onProgress = null 
   const j = await getJSON(`${CC_API}/programme?date=${date}`)
   const meetings = (j && j.meetings) || []
 
-  /* le travail : une entrée par course TERMINÉE (les autres n'ont pas de résultat) */
+  /* le travail : une entrée par course
+   * ⭐ 06/11/2026 — on ne filtre PLUS sur `r.finished` : casacourses ne marque
+   * pas les courses comme terminées pour les dates récentes, même si les résultats
+   * sont disponibles. On essaie toutes les courses, et on garde celles qui ont
+   * une arrivée non vide (filtre dans chargerCourse). */
   const plan = []
   for (const m of meetings) {
-    for (const r of (m.races || [])) if (r.finished) plan.push({ m, r })
+    for (const r of (m.races || [])) plan.push({ m, r })
   }
 
   const parReunion = new Map()
