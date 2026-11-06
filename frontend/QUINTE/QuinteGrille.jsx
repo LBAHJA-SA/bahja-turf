@@ -879,6 +879,15 @@ function TabEcarts({ sk, ecarts, detail, toutLesP, setToutLesP, discipline, setD
     hits3(b) - hits3(a) || (b.pctTop5 || 0) - (a.pctTop5 || 0) || (b.pctTop3 || 0) - (a.pctTop3 || 0) || a.p - b.p
   )[0] || null
   const chevalBombe = bombe ? parPlace[bombe.p] : null
+  /* ⭐ 06/11/2026 — 💣💣 2e QONBILE pour le TOP-3 (podium).
+   * Même règle, mais le tri privilégie le % de top-3 (podium) plutôt que
+   * le % de top-5. Les deux bombes peuvent désigner la même case. */
+  /* ⭐ 06/11/2026 — 💣💣💣 3 QONBILES pour le TOP-3 (podium).
+   * Les 3 meilleures cases pour le podium, triées par % de top-3. */
+  const top3Bombes = pool.slice().sort((a, b) =>
+    (b.pctTop3 || 0) - (a.pctTop3 || 0) || hits3(b) - hits3(a) || (b.pctTop5 || 0) - (a.pctTop5 || 0) || a.p - b.p
+  ).slice(0, 3)
+  const estTop3Bombe = (p) => top3Bombes.some((b) => b.p === p)
   return (
     <div>
       <BarreFiltres sk={sk} toutLesP={toutLesP} setToutLesP={setToutLesP} discipline={discipline} setDiscipline={setDiscipline} />
@@ -907,6 +916,29 @@ function TabEcarts({ sk, ecarts, detail, toutLesP, setToutLesP, discipline, setD
           </span>
         </div>
       ) : null}
+      {top3Bombes.length > 0 ? (
+        <div style={{ marginBottom: 10, fontSize: 12.5, color: sk.texte, background: sk.alt, border: '1px dashed ' + sk.bord, borderLeft: '4px solid #a855f7', borderRadius: sk.box.borderRadius, padding: '8px 12px', lineHeight: 1.6 }}>
+          <span style={{ fontSize: 15 }}>💣💣💣</span>{' '}
+          <b>3 cases attendues pour le TOP-3 (podium) :</b>
+          {top3Bombes.map((b, i) => {
+            const ch = parPlace[b.p]
+            return (
+              <span key={b.p} style={{ marginLeft: 8 }}>
+                <b>P{b.p}</b>
+                {ch ? <> → <b>{ch.num}</b></> : null}
+                {' '}({b.pctTop3} % top-3 · {b.pctTop5} % top-5 · {hits3(b)}/3)
+                {i < top3Bombes.length - 1 ? ' · ' : ''}
+              </span>
+            )
+          })}
+          <br />
+          <span style={{ color: sk.muted }}>
+            Choix : parmi les cases affichées, celles qui ont assez de courses (n ≥ 20) — d’abord
+            le % de top-3 (podium), puis le nombre de hits sur ses <b>3 dernières courses</b>, puis le % de top-5.
+            Aucun chiffre n’est saisi à la main.
+          </span>
+        </div>
+      ) : null}
       <div style={{ overflowX: 'auto' }}>
         <table style={{ ...sk.box, borderCollapse: 'separate', borderSpacing: 0, width: '100%', fontSize: 13, overflow: 'hidden', boxShadow: sk.ombreD }}>
           <thead>
@@ -919,10 +951,12 @@ function TabEcarts({ sk, ecarts, detail, toutLesP, setToutLesP, discipline, setD
               const e = etat(x)
               const c = parPlace[x.p]
               const estBombe = bombe && bombe.p === x.p
+              const estBombe3 = top3Bombes.some((b) => b.p === x.p)
               return (
-                <tr key={x.p} style={{ borderBottom: '1px solid ' + sk.bord, background: estBombe ? 'rgba(245,158,11,.14)' : i % 2 ? sk.alt : sk.ligne, borderLeft: estBombe ? '3px solid #f59e0b' : '3px solid transparent' }}>
+                <tr key={x.p} style={{ borderBottom: '1px solid ' + sk.bord, background: estBombe ? 'rgba(245,158,11,.14)' : estBombe3 ? 'rgba(168,85,247,.14)' : i % 2 ? sk.alt : sk.ligne, borderLeft: estBombe ? '3px solid #f59e0b' : estBombe3 ? '3px solid #a855f7' : '3px solid transparent' }}>
                   <td style={{ ...sk.td, fontWeight: 800 }}>
-                    {estBombe ? <span title="la case attendue aujourd’hui" style={{ marginRight: 4 }}>💣</span> : null}
+                    {estBombe ? <span title="la case attendue aujourd’hui (top-5)" style={{ marginRight: 4 }}>💣</span> : null}
+                    {estBombe3 ? <span title="la case attendue pour le top-3" style={{ marginRight: 4 }}>💣</span> : null}
                     P{x.p}
                   </td>
                   <td style={{ ...sk.td, fontWeight: 700, color: sk.accent }}>
