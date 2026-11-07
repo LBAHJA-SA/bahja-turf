@@ -257,6 +257,7 @@ function dotations(prize, devisee) {
 }
 
 function ConditionsCourse({ course, date, sk }) {
+  const { t } = useLang()
   if (!course) return null
   const c = course.raw || {}
   /* ⭐ 24/10/2026 — la piste vient d'Equidia (`lib_piste_course`), le terrain

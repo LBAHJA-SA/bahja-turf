@@ -102,6 +102,7 @@ function Notice({ tone = 'info', icon, children }) {
 }
 
 function ValidationTable({ validation }) {
+  const { t } = useLang()
   if (!validation?.available) {
     return <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>Validation indisponible ({validation?.reason || 'historique insuffisant'}).</div>
   }
@@ -175,6 +176,7 @@ function ValidationTable({ validation }) {
 }
 
 function SurfaceList({ title, rows, accent, measured, baseline }) {
+  const { t } = useLang()
   if (!rows?.length) {
     return (
       <div>
@@ -227,6 +229,7 @@ function SurfaceList({ title, rows, accent, measured, baseline }) {
 }
 
 export default function DnaCoursePage() {
+  const { t } = useLang()
   /* ⚠ 23/10/2026 — la date par défaut est celle du CALENDRIER LOCAL, pas
    * `toISOString()` (UTC). Au Maroc (UTC+1), à 23 h 30 UTC il est déjà demain :
    * la page demandait alors la journée d'hier, et la réunion marocaine — qui

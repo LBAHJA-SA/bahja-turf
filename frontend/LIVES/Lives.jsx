@@ -50,6 +50,7 @@ const S = {
 
 /* le badge d'état — la couleur dit tout, le texte confirme */
 function Badge({ m }) {
+  const { t } = useLang()
   if (m.etat === 'direct') {
     return (
       <span style={{ ...S.chip, background: TE.rouge, color: '#fff', display: 'inline-flex', alignItems: 'center', gap: 5 }}>
@@ -73,6 +74,7 @@ function Badge({ m }) {
 /* ─────────────────────────────────────────────── le lecteur HLS ─────────── */
 
 function Lecteur({ reunion, urlDirecte, lien, libelleLien }) {
+  const { t } = useLang()
   const video = useRef(null)
   const [src, setSrc] = useState(null)
   const [etat, setEtat] = useState('ouverture')   // ouverture | pret | erreur
@@ -371,6 +373,7 @@ function Carte({ numero, lieu, badge, image, lignes = [], chips = null, actif, o
 
 /* ⭐ LE PANNEAU DU DIRECT MAROC — il ne s'affiche QUE si sa carte est ouverte. */
 function PanneauSorec({ onFermer }) {
+  const { t } = useLang()
   const [flux, setFlux] = useState('auto')
   /* ⭐ LE RELAIS DÉCALÉ (24/10/2026) — `tools/sorec-relais.mjs` sur ce poste,
      exposé par un tunnel. Quand son adresse est renseignée, elle REMPLACE la

@@ -482,6 +482,7 @@ export default function Analyse() {
 /* ═══════════════════════ ③ L'ÉCRAN « CARRIÈRE » DU CHEVAL ═════════════════════ */
 
 function EcranCarriere({ course, partant, onRetour }) {
+  const { t } = useLang()
   const [identite, setIdentite] = useState(null)
   const [stats, setStats] = useState(null)
   const [carriere, setCarriere] = useState([])
