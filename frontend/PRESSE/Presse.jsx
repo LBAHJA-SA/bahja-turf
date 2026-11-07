@@ -695,7 +695,7 @@ export default function Presse() {
                             <td style={{ ...TD, textAlign: 'center', color: SK.doux }}>
                               {c.rang != null ? c.rang : '—'}
                             </td>
-                            <td style={{ ...TD, color: '#cbd8ea', lineHeight: 1.55 }}><TraduitTexte texte={c.texte || '—'} /></td>
+                            <td style={{ ...TD, color: '#cbd8ea', lineHeight: 1.55 }} data-no-trad><TraduitTexte texte={c.texte || '—'} /></td>
                           </tr>
                         )
                       })}
@@ -828,7 +828,7 @@ export default function Presse() {
                             <p style={{
                               margin: 0, fontSize: 12.5, lineHeight: 1.6, color: '#cbd8ea',
                               display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                            }}><TraduitTexte texte={texteNu(ch.texte)} /></p>
+                            }} data-no-trad><TraduitTexte texte={texteNu(ch.texte)} /></p>
                             <button
                               type="button"
                               onClick={() => setVue({
@@ -1091,6 +1091,7 @@ function TextePliable({ texte, lignes = 5 }) {
           }),
         }}
         dir={lang === 'ar' ? 'rtl' : 'ltr'}
+        data-no-trad
       >
         <span style={{ color: '#8798ad' }}>« </span>
         {texteTraduit}{enCours ? ' …' : ''}

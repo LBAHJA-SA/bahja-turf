@@ -8,6 +8,7 @@
  *  (MyMemory en mode AR, repli silencieux sur le texte original hors ligne).
  * ============================================================================= */
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import { appliquerTraduction } from './trad-dom.js'
 
 const CLE = 'bahja-lang'
 
@@ -206,6 +207,10 @@ export function LangProvider({ children }) {
     document.documentElement.lang = lang === 'ar' ? 'ar' : 'fr'
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
     document.documentElement.setAttribute('data-lang', lang)
+    /* ⭐ 07/11/2026 — la traduction de TOUT l'écran (pas seulement les clés
+       `t()`). Voir `trad-dom.js` : elle traduit les nœuds de texte avec un
+       dictionnaire livré (1 261 phrases) + l'API pour le contenu long. */
+    appliquerTraduction(lang)
   }, [lang])
   const setLang = useCallback((l) => setLangState(normaliser(l)), [])
   const t = useCallback((k, vars) => {
