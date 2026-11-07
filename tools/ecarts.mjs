@@ -1,7 +1,7 @@
 /* =============================================================================
- * tools/ecarts.mjs — LES ÉCARTS DES PLACES P1..P20 (16/10/2026)
+ * tools/ecarts.mjs — LES ÉCARTS DES PLACES P1..P20
  *
- * Question : la case P7 de la Synthèse, elle « donne » ou pas ? Depuis quand
+ * Question : la case P7 de la grille, elle « donne » ou pas ? Depuis quand
  * elle n'a rien donné ?
  *
  * Une case P donne quand LE CHEVAL QUI L'OCCUPE finit dans les cinq premiers.
@@ -10,9 +10,13 @@
  *   · data/quintes.json     — 96 Quintés à presse réelle (02 → 07/2026)
  *   · data/synthese.json    — le registre du site (Synthèse + arrivée)
  *
- * ⚠ « P » = le RANG DE PRESSE (P1 = le 1er cité), pas la colonne du carnet
- *   papier. Mesuré le 16/10 : c'est le rang de presse qui suit l'arrivée
- *   (§11.16, tools/choix-grille.mjs), c'est donc LUI qu'on écarte.
+ * ⭐ 07/11/2026 — « P » = la CASE du carnet (slot), PAS le rang de presse.
+ *   Définition alignée à 100% sur LA GRILLE et sur Statistiques :
+ *   `buildGrid(...).slotParNum` (le P affiché dans la boule, Boite slot).
+ *   L'ancienne version utilisait `presse[p-1]` (rang presse) — faux dès que
+ *   la parité dérive (P1 impair vs pair) : Écarts affichait le mauvais cheval
+ *   pour P (ex. P3→4 au lieu du cheval de la case P3 de LA GRILLE).
+ *   Maintenant : `numAtSlot[p]` via buildGrid, exactement comme computeStats.
  *
  * ⭐ 05/11/2026 — LE FILTRE DISCIPLINE. La page /quinte filtre déjà les
  *   statistiques par discipline (Tout / Plat / Attelé / Haies) ; l'onglet
@@ -28,6 +32,7 @@
  *   node tools\ecarts.mjs
  * ============================================================================= */
 import fs from 'node:fs'
+import { buildGrid } from '../src/lib/quinte.js'
 
 const pc = (a, b) => (b ? +(100 * a / b).toFixed(1) : 0)
 
@@ -40,16 +45,30 @@ const normDisc = (d) => {
   return 'autre'
 }
 
-/* ── le registre reconstitué : { date, presse, arrivee, discipline } ─────── */
+/* numAtSlot via buildGrid — LA MÊME fonction que LA GRILLE et computeStats */
+function numAtSlotDe(presse, runners) {
+  const grille = buildGrid((presse || []).filter(Number.isFinite), (runners || []).filter(Number.isFinite))
+  const numAtSlot = {}
+  for (const [num, slot] of Object.entries(grille.slotParNum || {})) {
+    numAtSlot[slot] = Number(num)
+  }
+  return numAtSlot
+}
+
+/* ── le registre reconstitué : { date, presse, runners, arrivee, discipline, numAtSlot } ─────── */
 const parDate = new Map()
 
 for (const q of JSON.parse(fs.readFileSync('data/quintes.json', 'utf8'))) {
   const cotes = q.cotes || {}
   const presse = (q.presse?.length >= 10 ? [...q.presse] : []).filter((n) => cotes[n] > 1)
   if (presse.length < 10 || !(q.arrivee || []).length) continue
+  let runners = Object.keys(cotes).map(Number).filter(Number.isFinite)
+  if (!runners.length && q.nb) runners = Array.from({ length: q.nb }, (_, i) => i + 1)
   parDate.set(q.date, {
     date: q.date,
     presse,
+    runners,
+    numAtSlot: numAtSlotDe(presse, runners),
     arrivee: q.arrivee.map(Number),
     source: 'quintes',
     discipline: normDisc(q.discipline),
@@ -61,9 +80,13 @@ for (const d of Object.keys(SYN).sort()) {
   const r = SYN[d]
   if (!(r.synthese || []).length) continue
   if (!(r.arrivee || []).length) continue
+  const presse = r.synthese.map(Number)
+  const runners = (r.runners || []).map(Number).filter(Number.isFinite)
   parDate.set(r.date, {
     date: r.date,
-    presse: r.synthese.map(Number),
+    presse,
+    runners,
+    numAtSlot: numAtSlotDe(presse, runners),
     arrivee: r.arrivee.map(Number),
     source: 'synthese',
     hippodrome: r.hippodrome || null,
@@ -80,9 +103,9 @@ function calcPlaces(courses) {
   const derniere = courses[courses.length - 1]?.date || null
   const places = []
   for (let p = 1; p <= PLACES; p++) {
-    const vus = courses.filter((c) => c.presse.length >= p)
+    const vus = courses.filter((c) => c.numAtSlot[p] != null)
     const hist = vus.map((c) => {
-      const num = c.presse[p - 1]
+      const num = c.numAtSlot[p]
       const k = c.arrivee.indexOf(num)
       return { date: c.date, num, place: k >= 0 ? k + 1 : null, top5: k >= 0 && k < 5, top3: k >= 0 && k < 3 }
     })
@@ -114,7 +137,7 @@ function calcPlaces(courses) {
       courses: courses.length,
       du: courses[0]?.date || null,
       au: derniere,
-      definition: 'une case P donne quand LE CHEVAL QUI L\'OCCUPE finit dans les cinq premiers. P = rang de presse.',
+      definition: 'une case P donne quand LE CHEVAL QUI L\'OCCUPE finit dans les cinq premiers. P = case du carnet (slot de LA GRILLE).',
       note: '« joursDepuis » compte depuis la dernière course du registre, pas depuis aujourd\'hui.',
     },
     places,

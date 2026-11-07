@@ -836,10 +836,10 @@ function BarreFiltres({ sk, toutLesP, setToutLesP, discipline, setDiscipline, no
 }
 
 /* ══════════════════════════ L'ONGLET ÉCARTS — les cases P1..P20 ════════════
- * ⚠ « P » = le RANG DE PRESSE (P1 = le 1er cité), pas la colonne du carnet
- *   papier : mesuré le 16/10, c'est le rang de presse qui suit l'arrivée.
+ * ⭐ 07/11/2026 — « P » = la CASE du carnet (slot), PAS le rang de presse :
+ *   identique à LA GRILLE (Boite P{slot}) et à Statistiques (slotParNum).
  *   Une case DONNE quand le cheval qui l'occupe finit dans les cinq premiers.
- *   Chiffres : data/ecarts.json (tools/ecarts.mjs).
+ *   Chiffres : data/ecarts.json (tools/ecarts.mjs, numAtSlot via buildGrid).
  * ⭐ 05/11/2026 — les deux filtres de l'onglet Statistiques sont ici aussi :
  *   la discipline choisit la section `parDiscipline` du MÊME fichier, et
  *   « P1-P5 » coupe les lignes. Aucun chiffre n'est recalculé dans la page.
@@ -854,8 +854,10 @@ function TabEcarts({ sk, ecarts, detail, toutLesP, setToutLesP, discipline, setD
   const bloc = (discipline && ecarts.parDiscipline && ecarts.parDiscipline[discipline]) || ecarts
   const places = bloc.places || []
   const M = bloc.mesure
+  /* ⭐ 07/11/2026 — parPlace doit être indexé par slot (case number),
+   * pas par place (press rank). Écarts utilise slot pour afficher P. */
   const parPlace = {}
-  for (const g of detail || []) for (const c of g.cases) if (c.place) parPlace[c.place] = c
+  for (const g of detail || []) for (const c of g.cases) if (c.slot) parPlace[c.slot] = c
   const etat = (x) => {
     if (!x.n || x.dernierHit == null) return { lib: 'jamais', couleur: '#fb7185', fond: 'rgba(244,63,94,.18)' }
     if (x.coursesDepuis != null && x.coursesDepuis >= 5) return { lib: 'froide', couleur: '#fb7185', fond: 'rgba(244,63,94,.18)' }
