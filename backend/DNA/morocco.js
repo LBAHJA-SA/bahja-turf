@@ -177,6 +177,15 @@ function estMaroc(e) {
   return PISTES_MA.has(String(e?.track || '').split(/\s+/).join(' ').toLowerCase())
 }
 
+/** ⭐ 07/11/2026 — Inclure TOUTES les réunions SOREC, pas seulement le Maroc.
+ *  e-sorec.ma publie aussi les courses internationales (USA, Argentine, etc.)
+ *  avec les mêmes champs. On les affiche dans DNA COURSE.
+ *  Le pays est lu depuis `e.country` (FR, FRA, MA, US, AR, etc.). */
+function estInclus(e) {
+  // Inclure tous les pays : FR, FRA, MA, US, AR, etc.
+  return !!e?.track  // si la réunion a un hippodrome, l'inclure
+}
+
 function nomPiste(brut) {
   const nom = String(brut || '').split(/\s+/).join(' ')
   const connu = NOMS_PISTES[nom.toLowerCase()]
@@ -269,7 +278,9 @@ function versMeetings(events, date) {
   const meetings = []
   let idx = 0
   for (const e of events || []) {
-    if (!estMaroc(e)) continue
+    // ⭐ 07/11/2026 — Inclure TOUTES les réunions SOREC, pas seulement le Maroc.
+    // e-sorec.ma publie aussi les courses internationales (USA, Argentine, etc.)
+    if (!estInclus(e)) continue
     if (e?.date && String(e.date).slice(0, 10) !== String(date).slice(0, 10)) continue
     const num = OFFSET + idx
     idx += 1
@@ -279,10 +290,11 @@ function versMeetings(events, date) {
       .sort((a, b) => a.num - b.num)
     if (!courses.length) continue
     const premier = courses.map((c) => c.time).filter(Boolean).sort((a, b) => a - b)[0]
+    const paysBrut = String(e?.country || '').trim().toUpperCase()
     meetings.push({
       num,
       hippodrome: nomPiste(e?.track),
-      country: 'MA',
+      country: paysBrut.startsWith('MA') ? 'MA' : (paysBrut || 'INT'),
       /* « R9 » quand la SOREC le donne, « SOREC » sinon (Settat arrive avec
        * `code: "R"`, sans numéro : on n'affiche pas « réunion R »). */
       sorec: /\d/.test(String(e?.code || '')) ? String(e.code) : 'SOREC',

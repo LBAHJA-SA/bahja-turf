@@ -162,8 +162,13 @@ export async function fetchMeetings(date) {
     }
   }
 
+  // ⭐ 07/11/2026 — Inclure les réunions internationales SOREC aussi.
+  // `maroc` contient maintenant TOUTES les réunions SOREC (MA + international).
+  // On fusionne avec les réunions PMU, en évitant les doublons (même num).
+  const numsPmu = new Set(meetings.map((m) => m.num))
+  const marocFiltres = maroc.filter((m) => !numsPmu.has(m.num))
   return {
-    meetings: [...meetings.filter((m) => m.num > 0 && m.courses.length), ...maroc],
+    meetings: [...meetings.filter((m) => m.num > 0 && m.courses.length), ...marocFiltres],
   }
 }
 
