@@ -1,4 +1,403 @@
 {
+  "2026-11-07": {
+    "date": "2026-11-07",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      1,
+      2,
+      4,
+      7,
+      13,
+      16,
+      12,
+      14,
+      11,
+      3,
+      5,
+      15,
+      9,
+      6,
+      10,
+      8
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "Plat",
+    "hippodrome": "Deauville",
+    "distance": 1900,
+    "courseId": "2026-11-07_R1_C3",
+    "arrivee": null,
+    "ticket": [
+      1,
+      2,
+      4,
+      6,
+      13,
+      14,
+      15,
+      16
+    ],
+    "ticketMode": "auto+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          13,
+          16
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          14
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          6
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          15
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-11-07T08:45:31.212Z",
+    "ticketMoteur": [
+      1,
+      2,
+      4,
+      6,
+      13,
+      14,
+      15,
+      16
+    ],
+    "cloture": null,
+    "scores": [
+      {
+        "num": 1,
+        "nom": "ZELORO",
+        "global": 6.86,
+        "forme": 2.3,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 2,
+        "nom": "QUIET KING",
+        "global": 6.26,
+        "forme": 2.65,
+        "dist": 7.51,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 3,
+        "nom": "HUMAN EVOLUTION",
+        "global": 6.65,
+        "forme": 1.34,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 4,
+        "nom": "AL MAX",
+        "global": 6.48,
+        "forme": 0.95,
+        "dist": 9.66,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 5,
+        "nom": "OPALUS ROAD",
+        "global": 6.73,
+        "forme": 2.48,
+        "dist": 9.27,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 6,
+        "nom": "PIQUOISEAU",
+        "global": 6.03,
+        "forme": 0.36,
+        "dist": 8.18,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 7,
+        "nom": "FEARLESS CHEETAH",
+        "global": 5.98,
+        "forme": 0.19,
+        "dist": 9.22,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 8,
+        "nom": "WEDGEWOOD PEARL",
+        "global": 6.44,
+        "forme": 3.42,
+        "dist": 8.11,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 9,
+        "nom": "EAST GREY",
+        "global": 6.5,
+        "forme": 1.78,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 10,
+        "nom": "ALLURRE",
+        "global": 6.37,
+        "forme": 2.7,
+        "dist": 8.48,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 11,
+        "nom": "CICCIO BOY",
+        "global": 5.32,
+        "forme": 0,
+        "dist": 6.8,
+        "piste": 6.54,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 12,
+        "nom": "ALMAROMY",
+        "global": 6.15,
+        "forme": 2.37,
+        "dist": 9.44,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 13,
+        "nom": "HERMES WOOD",
+        "global": 5.5,
+        "forme": 0,
+        "dist": 8.85,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 14,
+        "nom": "HER CHRISTOPHER",
+        "global": 6.07,
+        "forme": 1.45,
+        "dist": 10,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 15,
+        "nom": "LAVENDIN",
+        "global": 6.05,
+        "forme": 1.83,
+        "dist": 9.54,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 16,
+        "nom": "SPEEDY GREEN",
+        "global": 5.05,
+        "forme": 2.24,
+        "dist": 5.66,
+        "piste": 7,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 3,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      }
+    ],
+    "collecte": "2026-11-07T08:45:31.214Z"
+  },
   "2026-11-06": {
     "date": "2026-11-06",
     "found": true,
@@ -74,7 +473,7 @@
     "groupes": null,
     "surprises": [],
     "ticketMoteur": null,
-    "cloture": "2026-11-06T23:06:47.952Z",
+    "cloture": "2026-11-07T08:45:13.417Z",
     "scores": null,
     "collecte": "2026-11-06T23:06:47.952Z"
   },
