@@ -24,7 +24,13 @@
       5
     ],
     "savedAt": "2026-11-05T23:09:10.033Z",
-    "arrivee": null,
+    "arrivee": [
+      18,
+      2,
+      10,
+      15,
+      3
+    ],
     "ticket": [
       18,
       4,
@@ -62,15 +68,15 @@
     ],
     "nbPartants": 18,
     "discipline": "Attelé",
-    "hippodrome": "PARIS-VINCENNES",
+    "hippodrome": "Paris-Vincennes",
     "distance": 2850,
     "courseId": "2026-11-06_R1_C4",
     "groupes": null,
     "surprises": [],
     "ticketMoteur": null,
-    "cloture": null,
+    "cloture": "2026-11-06T23:06:47.952Z",
     "scores": null,
-    "collecte": "2026-11-06T08:45:15.544Z"
+    "collecte": "2026-11-06T23:06:47.952Z"
   },
   "2026-11-05": {
     "date": "2026-11-05",
@@ -106,19 +112,22 @@
       8,
       9,
       10,
-      11
+      11,
+      12,
+      13,
+      14
     ],
-    "nbPartants": 11,
+    "nbPartants": 14,
     "discipline": "Attelé",
     "hippodrome": "PARIS-VINCENNES",
     "distance": 2175,
-    "courseId": "2026-11-05_R1_C4",
+    "courseId": "2026-11-05_R1_C3",
     "arrivee": [
-      4,
       9,
-      6,
-      2,
-      1
+      5,
+      4,
+      11,
+      8
     ],
     "ticket": [
       9,
@@ -179,7 +188,7 @@
       15,
       16
     ],
-    "cloture": "2026-11-06T08:45:13.867Z",
+    "cloture": "2026-11-06T23:06:45.609Z",
     "scores": null,
     "collecte": "2026-11-05T22:57:56.869Z",
     "savedAt": "2026-11-05T02:41:11.873Z",
