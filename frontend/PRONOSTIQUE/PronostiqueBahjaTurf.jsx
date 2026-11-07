@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 import Entete from '../../src/Entete.jsx'
 import { useEffect, useState } from 'react'
 
@@ -70,6 +71,7 @@ function Groupe({ groupe, value }) {
 }
 
 export default function PronostiqueBahjaTurf() {
+  const { t } = useLang()
   const [pronostics, setPronostics] = useState([])
   const [chargement, setChargement] = useState(true)
   const [erreur, setErreur] = useState('')
@@ -112,9 +114,9 @@ export default function PronostiqueBahjaTurf() {
             Les pronostics favoris de Bahja Turf.
           </p>
         </section>
-        {chargement && <div style={{ padding: 14, color: '#a9b6c9', fontSize: 13 }}>Chargement des pronostics…</div>}
+        {chargement && <div style={{ padding: 14, color: '#a9b6c9', fontSize: 13 }}>{t('chargement_pronostics')}</div>}
         {erreur && <div role="status" style={{ padding: 14, border: '1px solid rgba(248,113,113,.3)', borderRadius: 10, color: '#fecaca', background: 'rgba(127,29,29,.15)', fontSize: 13 }}>{erreur}</div>}
-        {!chargement && !erreur && !ordonnes.length && <div style={{ padding: 14, border: '1px solid rgba(148,163,184,.18)', borderRadius: 10, color: '#a9b6c9', background: 'rgba(2,6,15,.25)', fontSize: 13 }}>Aucun pronostic publié pour le moment.</div>}
+        {!chargement && !erreur && !ordonnes.length && <div style={{ padding: 14, border: '1px solid rgba(148,163,184,.18)', borderRadius: 10, color: '#a9b6c9', background: 'rgba(2,6,15,.25)', fontSize: 13 }}>{t('aucun_pronostic')}</div>}
         {ordonnes.map((p) => (
           <article key={p.id} style={{
             padding: 'clamp(15px, 3vw, 24px)', display: 'grid', gap: 12,

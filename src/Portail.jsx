@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   useAcces, rafraichirAcces, connecter, deconnecter, aDroit, premierePage,
 } from './lib/acces.js'
+import { useLang, LangToggle } from './lib/langue.jsx'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  src/Portail.jsx — LA PORTE DU SITE (25/10/2026)
@@ -103,9 +104,10 @@ function Porte({ etat, onEntre }) {
   const expire = ab && ab.etat === 'expire'
   const aVenir = ab && ab.etat === 'a-venir'
 
+  const { t } = useLang()
   const envoyer = async (e) => {
     e.preventDefault()
-    if (!nom.trim() || !mdp) { setErreur('écris ton nom et ton mot de passe'); return }
+    if (!nom.trim() || !mdp) { setErreur(t('ecris_nom')); return }
     setEnvoi(true); setErreur('')
     const r = await onEntre(nom, mdp)
     setEnvoi(false)
@@ -115,10 +117,11 @@ function Porte({ etat, onEntre }) {
 
   return (
     <Cadre>
+      <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'flex-end' }}><LangToggle /></div>
       <form onSubmit={envoyer} style={{ display: 'grid', gap: 10 }}>
-        <Champ type="text" valeur={nom} onChange={setNom} placeholder="nom d’utilisateur" autoFocus />
-        <Champ type="password" valeur={mdp} onChange={setMdp} placeholder="mot de passe" />
-        <Bouton type="submit" plein desactive={envoi}>{envoi ? 'vérification…' : 'Entrer'}</Bouton>
+        <Champ type="text" valeur={nom} onChange={setNom} placeholder={t('nom_utilisateur')} autoFocus />
+        <Champ type="password" valeur={mdp} onChange={setMdp} placeholder={t('mot_de_passe')} />
+        <Bouton type="submit" plein desactive={envoi}>{envoi ? t('verification') : t('entrer')}</Bouton>
       </form>
 
       {(erreur || expire || aVenir) && (
@@ -127,16 +130,14 @@ function Porte({ etat, onEntre }) {
           color: C.mal, background: 'rgba(248,113,113,.08)', border: '1px solid rgba(248,113,113,.35)',
         }}>
           {erreur || (expire
-            ? 'Abonnement expiré le ' + (ab.fin ? ab.fin.split('-').reverse().join('/') : '—') +
-              ' — contacte l’administrateur.'
-            : 'Abonnement pas encore commencé (début le ' +
-              (ab.debut ? ab.debut.split('-').reverse().join('/') : '—') + ').')}
+            ? t('abonnement_expire') + ' ' + (ab.fin ? ab.fin.split('-').reverse().join('/') : '—') +
+              ' — ' + t('contact_administrateur')
+            : t('pas_encore') + ' (' + (ab.debut ? ab.debut.split('-').reverse().join('/') : '—') + ').')}
         </div>
       )}
 
       <div style={{ marginTop: 14, fontSize: 11.5, lineHeight: 1.7, color: C.muet }}>
-        <i className="bi bi-shield-lock" /> Le mot de passe est vérifié par le serveur.
-        La session est un cookie que cette page ne peut pas lire.
+        <i className="bi bi-shield-lock" /> {t('mot_verifie')}
       </div>
     </Cadre>
   )
@@ -144,23 +145,24 @@ function Porte({ etat, onEntre }) {
 
 /** ② connecté, mais cette page n'est pas dans son abonnement */
 function Refus({ etat }) {
+  const { t } = useLang()
   const p = premierePage(etat.pages)
   return (
     <Cadre>
+      <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'flex-end' }}><LangToggle /></div>
       <div style={{ fontSize: 14, fontWeight: 800, color: C.ambre, marginBottom: 8 }}>
-        <i className="bi bi-lock" /> Cette page n’est pas dans ton abonnement
+        <i className="bi bi-lock" /> {t('page_non_abonnement')}
       </div>
       <div style={{ fontSize: 12.5, lineHeight: 1.7, color: C.doux }}>
-        Tu es connecté en <b style={{ color: C.texte }}>{etat.nom}</b>. Les pages ouvertes à ton
-        compte sont celles du menu ; pour en ajouter une, vois avec l’administrateur.
+        {t('pages_ouvertes')} <b style={{ color: C.texte }}>{etat.nom}</b>
       </div>
       <div style={{ display: 'grid', gap: 8, marginTop: 14 }}>
         {p && <Link to={p.to} style={{
           display: 'block', textAlign: 'center', padding: '10px 14px', borderRadius: 10,
           textDecoration: 'none', fontSize: 13.5, fontWeight: 800, color: '#04121a',
           background: 'linear-gradient(135deg, #22d3ee, #0ea5e9)',
-        }}>Aller à la page autorisée</Link>}
-        <Bouton onClick={deconnecter}>Se déconnecter</Bouton>
+        }}>{t('aller_page_autorisee')}</Link>}
+        <Bouton onClick={deconnecter}>{t('se_deconnecter')}</Bouton>
       </div>
     </Cadre>
   )
@@ -168,13 +170,15 @@ function Refus({ etat }) {
 
 /** Fermeture par défaut : une configuration absente ne doit jamais ouvrir le site. */
 function AccesFerme() {
+  const { t } = useLang()
   return (
     <Cadre>
+      <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'flex-end' }}><LangToggle /></div>
       <div style={{ fontSize: 14, fontWeight: 800, color: C.ambre, marginBottom: 8 }}>
-        <i className="bi bi-shield-lock" /> Accès fermé
+        <i className="bi bi-shield-lock" /> {t('acces_ferme')}
       </div>
       <div style={{ fontSize: 12.5, lineHeight: 1.7, color: C.doux }}>
-        Le service de connexion n’est pas configuré. Le site reste inaccessible jusqu’à ce que l’administrateur rétablisse les comptes.
+        {t('acces_non_configure')}
       </div>
     </Cadre>
   )
@@ -182,6 +186,7 @@ function AccesFerme() {
 
 export default function Portail({ cle, children }) {
   const etat = useAcces()
+  const { t } = useLang()
 
   useEffect(() => {
     rafraichirAcces()
@@ -197,7 +202,7 @@ export default function Portail({ cle, children }) {
         minHeight: '100vh', background: C.fond, color: C.muet,
         display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13,
       }}>
-        <i className="bi bi-arrow-repeat" /> vérification de la session…
+        <i className="bi bi-arrow-repeat" /> {t('verifier_session')}
       </div>
     )
   }

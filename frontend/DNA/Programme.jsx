@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 /* ── LE PROGRAMME ─────────────────────────────────────────────────────────
  *  Le panneau de gauche de la page « Analyse course » de bahja-TURF, repris
  *  à l'identique : l'en-tête « LE PROGRAMME · n réunions · n courses », une
@@ -161,6 +162,7 @@ function prochaineCourse(meetings, now) {
 }
 
 export default function Programme({ date, setDate, meetings, loading, onCharger, sel, onPick, demain, onAllerDate }) {
+  const { t } = useLang()
   const [ouverte, setOuverte] = useState(null)
 
   /* le décompte bat à la seconde : « 4:07 » doit vouloir dire 4 min 07 s */
@@ -246,7 +248,7 @@ export default function Programme({ date, setDate, meetings, loading, onCharger,
         padding: '9px 12px', background: SK.entete, color: '#fff',
         display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8,
       }}>
-        <b style={{ fontSize: 12.5, letterSpacing: 0.6 }}>LE PROGRAMME</b>
+        <b style={{ fontSize: 12.5, letterSpacing: 0.6 }}>{t('programme_titre')}</b>
         <span style={{ fontSize: 11, opacity: 0.92 }}>
           {loading ? '…' : `${compteurs.reunions} réunion${compteurs.reunions > 1 ? 's' : ''} · ${compteurs.courses} course${compteurs.courses > 1 ? 's' : ''}`}
         </span>
@@ -355,8 +357,8 @@ export default function Programme({ date, setDate, meetings, loading, onCharger,
       )}
 
       <div style={{ padding: 8, display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'flex-start' }}>
-        {loading && <div style={{ padding: 12, fontSize: 13, color: SK.muet }}>Lecture du programme…</div>}
-        {!loading && !meetings.length && <div style={{ padding: 12, fontSize: 13, color: SK.muet }}>Rien à afficher.</div>}
+        {loading && <div style={{ padding: 12, fontSize: 13, color: SK.muet }}>{t('lecture_programme')}</div>}
+        {!loading && !meetings.length && <div style={{ padding: 12, fontSize: 13, color: SK.muet }}>{t('rien_afficher')}</div>}
 
         {meetings.map((m) => {
           const ouvre = ouverte === m.num

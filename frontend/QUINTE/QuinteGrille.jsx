@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
@@ -288,7 +289,7 @@ function ConditionsCourse({ course, date, sk }) {
       fontFamily: sk ? sk.police : 'system-ui, sans-serif',
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
-                  <b style={{ fontSize: 13, color: sk ? sk.accent : '#1d4ed8', letterSpacing: 1 }}>LES CONDITIONS DE LA COURSE</b>
+                  <b style={{ fontSize: 13, color: sk ? sk.accent : '#1d4ed8', letterSpacing: 1 }}>{t('conditions_course')}</b>
         
       </div>
 
@@ -349,6 +350,7 @@ function ConditionsCourse({ course, date, sk }) {
 }
 
 export default function QuinteGrille() {
+  const { t } = useLang()
   const [date, setDate] = useState(aujourdhui())
   const [syn, setSyn] = useState(null)
   const [participants, setParticipants] = useState([])

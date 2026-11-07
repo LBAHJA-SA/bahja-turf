@@ -1,3 +1,4 @@
+import { useLang, useTranslatedText, TraduitTexte } from '../../src/lib/langue.jsx'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Entete from '../../src/Entete.jsx'
 import { jourHeureGMT, heureGMTParPays } from '../../src/temps.js'
@@ -224,6 +225,7 @@ function Etage({ libelle, nums, teinte, aide }) {
 /* ══════════════════════════════ la page ══════════════════════════════════ */
 
 export default function Presse() {
+  const { t } = useLang()
   const date = useMemo(() => aujourdhui(), [])
 
   const [quinte, setQuinte] = useState(null)
@@ -693,7 +695,7 @@ export default function Presse() {
                             <td style={{ ...TD, textAlign: 'center', color: SK.doux }}>
                               {c.rang != null ? c.rang : '—'}
                             </td>
-                            <td style={{ ...TD, color: '#cbd8ea', lineHeight: 1.55 }}>{c.texte || '—'}</td>
+                            <td style={{ ...TD, color: '#cbd8ea', lineHeight: 1.55 }}><TraduitTexte texte={c.texte || '—'} /></td>
                           </tr>
                         )
                       })}
@@ -826,7 +828,7 @@ export default function Presse() {
                             <p style={{
                               margin: 0, fontSize: 12.5, lineHeight: 1.6, color: '#cbd8ea',
                               display: '-webkit-box', WebkitLineClamp: 5, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                            }}>{texteNu(ch.texte)}</p>
+                            }}><TraduitTexte texte={texteNu(ch.texte)} /></p>
                             <button
                               type="button"
                               onClick={() => setVue({
@@ -1060,6 +1062,8 @@ function Puce({ actif, onClick, libelle, n, teinte }) {
  *     texte dépasse réellement les lignes montrées (mesuré, pas deviné).
  */
 function TextePliable({ texte, lignes = 5 }) {
+  const { lang } = useLang()
+  const { texte: texteTraduit, enCours } = useTranslatedText(texte || '')
   const [ouvert, setOuvert] = useState(false)
   const [coupe, setCoupe] = useState(false)
   const ref = useRef(null)
@@ -1073,7 +1077,7 @@ function TextePliable({ texte, lignes = 5 }) {
     mesurer()
     window.addEventListener('resize', mesurer)
     return () => window.removeEventListener('resize', mesurer)
-  }, [texte, ouvert, lignes])
+  }, [texteTraduit, ouvert, lignes])
 
   return (
     <>
@@ -1086,9 +1090,10 @@ function TextePliable({ texte, lignes = 5 }) {
             WebkitBoxOrient: 'vertical', overflow: 'hidden',
           }),
         }}
+        dir={lang === 'ar' ? 'rtl' : 'ltr'}
       >
         <span style={{ color: '#8798ad' }}>« </span>
-        {texte}
+        {texteTraduit}{enCours ? ' …' : ''}
         <span style={{ color: '#8798ad' }}> »</span>
       </p>
       {(coupe || ouvert) && (

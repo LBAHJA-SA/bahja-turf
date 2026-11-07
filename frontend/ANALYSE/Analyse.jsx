@@ -11,6 +11,7 @@ import { chargerEtudesTf } from '../../backend/ANALYSE/turfFrance.js'
 import { programmePmu, paysLisible } from '../../backend/ANALYSE/programme.js'
 import { parisDuJour, parisDe } from '../../backend/ANALYSE/paris.js'
 import { useAcces } from '../../src/lib/acces.js'
+import { useLang, localeDe } from '../../src/lib/langue.jsx'
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * frontend/ANALYSE/Analyse.jsx — TOUTES LES COURSES, TOUS LES CHEVAUX.
@@ -117,6 +118,7 @@ function joursDepuis(carriere, quand) {
 /* ═══════════════════════════════════ LA PAGE ═══════════════════════════════ */
 
 export default function Analyse() {
+  const { t } = useLang()
   const acces = useAcces()
   const [date, setDate] = useState(jourParis())
   /* ⭐ L'HEURE D'UNE COURSE, EN GMT (18/10/2026) : le programme publie l'heure
@@ -272,15 +274,15 @@ export default function Analyse() {
           <div style={{ flex: '0 0 340px', maxWidth: '100%', background: SK.carte, border: '1px solid ' + SK.bord, borderRadius: 14, overflow: 'hidden', maxHeight: '84vh', display: 'flex', flexDirection: 'column', boxShadow: '0 18px 44px rgba(0,0,0,.45), 0 0 30px rgba(34,211,238,.10)' }}>
 
             <div style={{ padding: '9px 12px', background: SK.entete, color: '#fff', display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8 }}>
-              <b style={{ fontSize: 12.5, letterSpacing: 0.6 }} title={refPmu ? 'Le programme PMU du jour' : 'Liste de secours'}>LE PROGRAMME</b>
+              <b style={{ fontSize: 12.5, letterSpacing: 0.6 }} title={refPmu ? 'Le programme PMU du jour' : 'Liste de secours'}>{t('programme_titre')}</b>
               <span style={{ fontSize: 11, opacity: 0.92 }}>
                 {busyProg ? '…' : `${compteurs.reunions} réunion${compteurs.reunions > 1 ? 's' : ''} · ${compteurs.courses} course${compteurs.courses > 1 ? 's' : ''}`}
               </span>
             </div>
 
             <div style={{ overflowY: 'auto', padding: 8 }}>
-              {busyProg && <div style={{ padding: 12, fontSize: 13, color: SK.muet }}>Lecture du programme…</div>}
-              {!busyProg && !reunionsVues.length && <div style={{ padding: 12, fontSize: 13, color: SK.muet }}>Rien à afficher.</div>}
+              {busyProg && <div style={{ padding: 12, fontSize: 13, color: SK.muet }}>{t('lecture_programme')}</div>}
+              {!busyProg && !reunionsVues.length && <div style={{ padding: 12, fontSize: 13, color: SK.muet }}>{t('rien_afficher')}</div>}
 
               {reunionsVues.map((m) => {
                 const ouverte = reunionOuverte === m.id
@@ -398,7 +400,7 @@ export default function Analyse() {
                   {course.conditions && <div style={{ fontSize: 11, opacity: 0.8, marginTop: 4, lineHeight: 1.4 }}>{course.conditions}</div>}
                 </div>
 
-                {busyPartants && <div style={{ padding: 16, fontSize: 13, color: SK.muet }}>Lecture des partants…</div>}
+                {busyPartants && <div style={{ padding: 16, fontSize: 13, color: SK.muet }}>{t('lecture_partants')}</div>}
                 {errPartants && <div style={{ padding: 12 }}><Bandeau texte={errPartants} onReessayer={() => ouvrirCourse(course)} /></div>}
                 {!busyPartants && !course.id && (
                   <div style={{ padding: '11px 14px', fontSize: 12.5, color: SK.doux, background: 'rgba(251,191,36,.10)', borderBottom: '1px solid rgba(251,191,36,.30)' }}>
@@ -610,7 +612,7 @@ function EcranCarriere({ course, partant, onRetour }) {
         </div>
       </div>
 
-      {busy && <div style={{ padding: 18, fontSize: 13, color: SK.muet }}>Lecture de la carrière…</div>}
+      {busy && <div style={{ padding: 18, fontSize: 13, color: SK.muet }}>{t('lecture_carriere')}</div>}
       {erreur && <div style={{ padding: 12 }}><Bandeau texte={erreur} onReessayer={() => setTentative((n) => n + 1)} /></div>}
 
       {!busy && !erreur && courseOuverte && (
@@ -623,7 +625,7 @@ function EcranCarriere({ course, partant, onRetour }) {
           {sel && (
             <div style={{ padding: '12px 15px', borderBottom: '1px solid ' + SK.ligne, background: 'transparent' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 9, flexWrap: 'wrap' }}>
-                <b style={{ fontSize: 17 }}>Filtrer la carrière</b>
+                <b style={{ fontSize: 17 }}>{t('filtre_carriere')}</b>
                 {nbFiltres > 0 && <span style={{ background: ROUGE, color: '#fff', borderRadius: 999, fontSize: 11, fontWeight: 800, padding: '1px 7px' }}>{nbFiltres}</span>}
                 <button onClick={conditionsDuJour} style={{ border: '1px solid ' + SK.accent, background: 'rgba(34,211,238,.10)', color: SK.accentTexte, fontWeight: 700, fontSize: 12.5, cursor: 'pointer', borderRadius: 999, padding: '4px 11px' }}>
                   🎯 mêmes conditions que ce jour
@@ -667,7 +669,7 @@ function EcranCarriere({ course, partant, onRetour }) {
 
           {/* ── la bascule des commentaires ── */}
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 8, padding: '8px 15px', borderBottom: '1px solid ' + SK.ligne }}>
-            <span style={{ fontSize: 12.5, color: SK.doux, fontWeight: 600 }}>Afficher les commentaires</span>
+            <span style={{ fontSize: 12.5, color: SK.doux, fontWeight: 600 }}>{t('afficher_commentaires')}</span>
             <button onClick={() => setVoirCom(!voirCom)} title="commentaires des courses"
               style={{ width: 44, height: 24, borderRadius: 999, border: 0, cursor: 'pointer', position: 'relative', background: voirCom ? SK.accent : 'rgba(255,255,255,.18)' }}>
               <span style={{ position: 'absolute', top: 3, left: voirCom ? 23 : 3, width: 18, height: 18, borderRadius: '50%', background: '#fff', transition: 'left .15s' }} />
@@ -676,7 +678,7 @@ function EcranCarriere({ course, partant, onRetour }) {
 
           {/* ── les cartes ── */}
           <div style={{ padding: '11px 15px 15px', background: 'rgba(255,255,255,.02)' }}>
-            {!carriere.length && <div style={{ fontSize: 13, color: SK.muet }}>Carrière non publiée pour ce cheval.</div>}
+            {!carriere.length && <div style={{ fontSize: 13, color: SK.muet }}>{t('carriere_non_publiee')}</div>}
             {carriere.length > 0 && !lignes.length && <div style={{ fontSize: 13, color: SK.muet }}>Aucune course ne correspond aux filtres — clique « tout effacer ».</div>}
             {lignes.map((l) => <CarteCarriere key={l.id} l={l} voirCom={voirCom} onOuvrir={setCourseOuverte} />)}
           </div>

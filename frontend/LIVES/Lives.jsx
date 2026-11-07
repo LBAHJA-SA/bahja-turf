@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import Entete from '../../src/Entete.jsx'
 import { heureGMT, maintenantGMT, parisVersGMT } from '../../src/temps.js'
@@ -61,12 +62,12 @@ function Badge({ m }) {
     )
   }
   if (m.etat === 'avenir') {
-    return <span style={{ ...S.chip, background: 'rgba(251,191,36,.16)', color: TE.ambre, border: '1px solid rgba(251,191,36,.4)' }}>À venir</span>
+    return <span style={{ ...S.chip, background: 'rgba(251,191,36,.16)', color: TE.ambre, border: '1px solid rgba(251,191,36,.4)' }}>{t('a_venir')}</span>
   }
   if (m.etat === 'sans-flux') {
-    return <span style={{ ...S.chip, background: 'rgba(148,163,184,.16)', color: '#cbd5e1', border: '1px solid rgba(148,163,184,.4)' }}>Sans flux</span>
+    return <span style={{ ...S.chip, background: 'rgba(148,163,184,.16)', color: '#cbd5e1', border: '1px solid rgba(148,163,184,.4)' }}>{t('sans_flux')}</span>
   }
-  return <span style={{ ...S.chip, background: 'rgba(148,163,184,.12)', color: '#94a3b8', border: '1px solid rgba(148,163,184,.3)' }}>Terminé</span>
+  return <span style={{ ...S.chip, background: 'rgba(148,163,184,.12)', color: '#94a3b8', border: '1px solid rgba(148,163,184,.3)' }}>{t('termine')}</span>
 }
 
 /* ─────────────────────────────────────────────── le lecteur HLS ─────────── */
@@ -201,7 +202,7 @@ function Lecteur({ reunion, urlDirecte, lien, libelleLien }) {
             alignItems: 'center', justifyContent: 'center', gap: 10, color: '#e2e8f0',
             background: 'rgba(2,10,8,.72)', textAlign: 'center', padding: 18,
           }}>
-            {etat === 'ouverture' && <span style={{ fontSize: 13 }}>Ouverture du flux…</span>}
+            {etat === 'ouverture' && <span style={{ fontSize: 13 }}>{t('ouverture_flux')}</span>}
             {etat === 'erreur' && (
               <>
                 <span style={{ fontSize: 13, color: '#fecaca' }}>
@@ -211,7 +212,7 @@ function Lecteur({ reunion, urlDirecte, lien, libelleLien }) {
                   padding: '7px 14px', borderRadius: 8, border: '1px solid ' + TE.bord,
                   background: TE.accentClair, color: TE.accent, fontWeight: 800, cursor: 'pointer',
                   fontFamily: TE.police, fontSize: 12,
-                }}>↻ Réessayer</button>
+                }}>{t('reessayer')}</button>
               </>
             )}
           </div>
@@ -443,7 +444,7 @@ function PanneauSorec({ onFermer }) {
 
       {/* ── le relais décalé : l'adresse du poste, exposée par un tunnel ── */}
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center', marginTop: 10 }}>
-        <span style={{ fontSize: 11, color: TE.muet, whiteSpace: 'nowrap' }}>Relais décalé</span>
+        <span style={{ fontSize: 11, color: TE.muet, whiteSpace: 'nowrap' }}>{t('relais_decale')}</span>
         <input
           value={saisie}
           onChange={(e) => setSaisie(e.target.value)}
@@ -458,7 +459,7 @@ function PanneauSorec({ onFermer }) {
         <button onClick={appliquer} style={{
           padding: '6px 12px', borderRadius: 8, cursor: 'pointer', fontSize: 11.5, fontWeight: 800,
           fontFamily: TE.police, background: TE.accentClair, border: '1px solid ' + TE.accent, color: TE.accent,
-        }}>Utiliser</button>
+        }}>{t('utiliser')}</button>
         {relais && (
           <button onClick={() => { setSaisie(''); setRelais(''); try { localStorage.removeItem(CLE_RELAIS) } catch (e) { /* rien */ } }} style={{
             padding: '6px 10px', borderRadius: 8, cursor: 'pointer', fontSize: 11.5, fontWeight: 800,
@@ -526,6 +527,7 @@ function retirerPolitiqueReferer() {
 }
 
 export default function Lives() {
+  const { t } = useLang()
   useMemo(() => assurerPolitiqueReferer(), [])
   useEffect(() => () => retirerPolitiqueReferer(), [])
 
@@ -613,7 +615,7 @@ export default function Lives() {
           background: TE.entete, borderBottom: '2px solid ' + TE.accent,
           display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap',
         }}>
-          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800 }}>Lives en cours</h2>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800 }}>{t('lives_en_cours')}</h2>
           <span style={{ fontSize: 12, opacity: 0.94 }}>
             les hippodromes régionaux d’Equidia, en direct
           </span>
@@ -636,7 +638,7 @@ export default function Lives() {
             padding: '7px 13px', borderRadius: 8, border: '1px solid ' + TE.bord,
             background: TE.accentClair, color: TE.accent, fontWeight: 800,
             cursor: 'pointer', fontSize: 12, fontFamily: TE.police,
-          }}>↻ Rafraîchir</button>
+          }}>{t('rafraichir')}</button>
           <span style={{ fontSize: 11.5, color: TE.muet }}>
             {reunions.length} réunion{reunions.length > 1 ? 's' : ''}
             {data ? ` · ${data.date}` : ''}
@@ -671,7 +673,7 @@ export default function Lives() {
                 padding: '7px 13px', borderRadius: 8, cursor: occupe ? 'default' : 'pointer',
                 border: '1px solid ' + TE.bord, background: 'rgba(255,255,255,.04)', color: TE.muet,
                 fontWeight: 800, fontSize: 12, fontFamily: TE.police, opacity: occupe ? .55 : 1,
-              }}>↻ Réessayer</button>
+              }}>{t('reessayer')}</button>
               <button onClick={voirDerniere} disabled={occupe} style={{
                 padding: '7px 13px', borderRadius: 8, cursor: occupe ? 'default' : 'pointer',
                 border: '1px solid ' + TE.bord, background: TE.accentClair, color: TE.accent,
@@ -692,7 +694,7 @@ export default function Lives() {
                 marginLeft: 'auto', padding: '5px 10px', borderRadius: 8, cursor: 'pointer',
                 fontSize: 11.5, fontWeight: 800, fontFamily: TE.police,
                 background: 'rgba(255,255,255,.04)', border: '1px solid ' + TE.bord, color: TE.muet,
-              }}>✕ Fermer</button>
+              }}>{t('fermer')}</button>
             </div>
             <Lecteur key={choisie.cle} reunion={choisie} />
           </div>

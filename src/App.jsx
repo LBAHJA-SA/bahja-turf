@@ -11,6 +11,7 @@ import PronostiqueBahjaTurf from '../frontend/PRONOSTIQUE/PronostiqueBahjaTurf.j
 import Admin from '../frontend/ADMIN/Admin.jsx'
 import Portail from './Portail.jsx'
 import { pointerVisite } from '../backend/ADMIN/visites.js'
+import { LangProvider } from './lib/langue.jsx'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  Une page, un lien, ses dossiers.
@@ -37,9 +38,10 @@ import { pointerVisite } from '../backend/ADMIN/visites.js'
  * ══════════════════════════════════════════════════════════════════════════ */
 export default function App(){
   return (
-    <BrowserRouter>
-      <NoterPage />
-      <Routes>
+    <LangProvider>
+      <BrowserRouter>
+        <NoterPage />
+        <Routes>
         {/* ── l'accueil : l'analyse de toutes les courses du jour ── */}
         <Route path="/" element={<Portail cle="analyse"><Analyse /></Portail>} />
         {/* alias : l'ancien nom reste valable (les favoris ne cassent pas) */}
@@ -103,8 +105,9 @@ export default function App(){
 
         {/* une adresse inconnue ne laisse jamais un écran vide */}
         <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </LangProvider>
   )
 }
 

@@ -409,3 +409,7 @@ option{ background: #0b1424; color: var(--n-txt) }
   body{ background: #fff !important; color: #000 !important }
   .entete, .header{ position: static }
 }
+
+/* ── RTL AR (07/11/2026) ─────────────────────────────────────────────────── */
+html[dir="rtl"]{ font-family: system-ui, "Segoe UI", Tahoma, sans-serif }
+html[dir="rtl"] th, html[dir="rtl"] td{ text-align: right }

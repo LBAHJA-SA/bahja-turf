@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 import { useEffect, useMemo, useState } from 'react'
 import { Dna, Calendar, RefreshCw, Crown, Users, Layers, Target, FlaskConical, Settings2, TrendingUp, AlertTriangle, Info } from 'lucide-react'
 import { fmtClockZ } from '../../src/lib/gmtTime.js'
@@ -129,9 +130,9 @@ function ValidationTable({ validation }) {
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.74rem' }}>
         <thead>
           <tr style={{ color: 'var(--text-muted)', fontSize: '0.66rem' }}>
-            <th style={{ textAlign: 'left', padding: '4px 8px' }}>Métrique</th>
-            <th style={{ textAlign: 'right', padding: '4px 8px' }}>Moteur</th>
-            <th style={{ textAlign: 'right', padding: '4px 8px' }}>Marché seul</th>
+            <th style={{ textAlign: 'left', padding: '4px 8px' }}>{t('metre')}</th>
+            <th style={{ textAlign: 'right', padding: '4px 8px' }}>{t('moteur')}</th>
+            <th style={{ textAlign: 'right', padding: '4px 8px' }}>{t('marche_seul')}</th>
           </tr>
         </thead>
         <tbody>
@@ -178,7 +179,7 @@ function SurfaceList({ title, rows, accent, measured, baseline }) {
     return (
       <div>
         <div style={{ fontSize: '0.72rem', fontWeight: 800, color: accent, marginBottom: 5 }}>{title}</div>
-        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Aucun cheval dans cette bande pour cette course.</div>
+        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{t('aucun_cheval_bande')}</div>
       </div>
     )
   }

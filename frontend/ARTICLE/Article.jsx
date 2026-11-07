@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 /* =============================================================================
  * src/QUINTE/ARTICLE/Article.jsx   —  LA PAGE /r/:slug
  *
@@ -46,6 +47,7 @@ const LIGNES_TOPS = [
 const SANS = '—'
 
 export default function Article() {
+  const { t } = useLang()
   const { slug, id } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
@@ -184,7 +186,7 @@ export default function Article() {
     return (<>
       {/* ── bandeau : logo + navigation. Les moteurs/sources restent privés à chaque page ── */}
       <Entete page="article" />
-      <div style={{ textAlign: 'center', padding: 40, fontSize: 13 }}>Chargement de la course…</div>
+      <div style={{ textAlign: 'center', padding: 40, fontSize: 13 }}>{t('chargement_course')}</div>
     </>)
   }
 
@@ -325,23 +327,23 @@ export default function Article() {
                 <thead>
                   <tr style={{ background: 'rgba(34,211,238,.10)', color: '#9fb3d1' }}>
                     <th style={{ padding: 8 }}>N°</th>
-                    <th style={{ padding: 8 }}>Cas.</th>
-                    <th style={{ padding: 8, textAlign: 'left' }}>Cheval</th>
-                    <th style={{ padding: 8 }}>Jockey</th>
-                    <th style={{ padding: 8 }}>Entraîneur</th>
-                    <th style={{ padding: 8 }}>Corde</th>
-                    <th style={{ padding: 8 }}>Cote</th>
+                    <th style={{ padding: 8 }}>{t('cas')}</th>
+                    <th style={{ padding: 8, textAlign: 'left' }}>{t('cheval')}</th>
+                    <th style={{ padding: 8 }}>{t('jockey')}</th>
+                    <th style={{ padding: 8 }}>{t('entraineur')}</th>
+                    <th style={{ padding: 8 }}>{t('corde')}</th>
+                    <th style={{ padding: 8 }}>{t('cote')}</th>
                     <th style={{ padding: 8 }}>Cote Réf.</th>
-                    <th style={{ padding: 8 }}>Musique</th>
-                    <th style={{ padding: 8 }}>Chrono</th>
+                    <th style={{ padding: 8 }}>{t('musique')}</th>
+                    <th style={{ padding: 8 }}>{t('chrono')}</th>
                     <th style={{ padding: 8 }}>%Pod.</th>
                     <th style={{ padding: 8 }}>%Vic.</th>
                     <th style={{ padding: 8 }}>2e</th>
                     <th style={{ padding: 8 }}>3e</th>
-                    <th style={{ padding: 8, textAlign: 'right' }}>Gains</th>
-                    <th style={{ padding: 8 }}>Valeur</th>
-                    <th style={{ padding: 8 }}>Poids</th>
-                    <th style={{ padding: 8, textAlign: 'left' }}>Propriétaire</th>
+                    <th style={{ padding: 8, textAlign: 'right' }}>{t('gains')}</th>
+                    <th style={{ padding: 8 }}>{t('valeur')}</th>
+                    <th style={{ padding: 8 }}>{t('poids')}</th>
+                    <th style={{ padding: 8, textAlign: 'left' }}>{t('proprietaire')}</th>
                     <th style={{ padding: 8 }}>Dern.</th>
                   </tr>
                 </thead>
@@ -386,7 +388,7 @@ export default function Article() {
                 <thead>
                   <tr style={{ background: 'rgba(34,211,238,.10)', color: '#9fb3d1' }}>
                     <th style={{ padding: 8 }}>N°</th>
-                    <th style={{ padding: 8, textAlign: 'left' }}>Cheval</th>
+                    <th style={{ padding: 8, textAlign: 'left' }}>{t('cheval')}</th>
                     <th style={{ padding: 8 }}>Courses</th>
                     <th style={{ padding: 8 }}>Vict.</th>
                     <th style={{ padding: 8 }}>Placés</th>
@@ -446,7 +448,7 @@ export default function Article() {
               )
             })}
             <div style={{ display: 'flex', gap: 10, padding: '8px 0', background: '#111111', marginTop: 6, paddingLeft: 12, borderRadius: 6 }}>
-              <span style={{ minWidth: 180, fontWeight: 800, color: '#f5d76e' }}>La Synthèse</span>
+              <span style={{ minWidth: 180, fontWeight: 800, color: '#f5d76e' }}>{t('synthese')}</span>
               <b style={{ color: '#f5d76e' }}>{j(tops.syntheseTf) || SANS}</b>
             </div>
           </div>
@@ -454,7 +456,7 @@ export default function Article() {
 
         {pronosTf.length ? (
           <div style={{ marginTop: 14, background: 'rgba(251,191,36,.06)', border: '1px solid #d4af37', padding: 12, borderRadius: 12 }}>
-            <h3 style={{ color: '#fecdd3', margin: 0, fontSize: 15 }}>Pronostic</h3>
+            <h3 style={{ color: '#fecdd3', margin: 0, fontSize: 15 }}>{t('pronostic')}</h3>
             {pronosTf.map((pr, i) => (
               <div key={i} style={{ marginTop: 6, background: 'rgba(255,255,255,.06)', border: '1px solid rgba(251,191,36,.30)', padding: 8, borderRadius: 8, fontWeight: 800, color: '#fde68a' }}>
                 ► {pr}

@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 /* =============================================================================
  * frontend/PRONOSTIQUE/PronoMoteur.jsx — MOTEUR PRONOSTIQUE
  *
@@ -73,6 +74,7 @@ function Bloc({ bloc }) {
 }
 
 export default function PronoMoteur() {
+  const { t } = useLang()
   const [date, setDate] = useState(aujourdhui())
   const [etat, setEtat] = useState({ chargement: true, erreur: '', source: '', hippodrome: '', presse: [], runners: [] })
 

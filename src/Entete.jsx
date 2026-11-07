@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAcces, aDroit, deconnecter } from './lib/acces.js'
+import { useLang, LangToggle } from './lib/langue.jsx'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  src/Entete.jsx — LE BANDEAU COMMUN (18/10/2026)
@@ -20,24 +21,25 @@ import { useAcces, aDroit, deconnecter } from './lib/acces.js'
  * ══════════════════════════════════════════════════════════════════════════ */
 
 const LIENS = [
-  { cle: 'analyse', to: '/', libelle: 'Analyse course', icone: 'bi-clipboard2-pulse' },
-  { cle: 'quinte', to: '/quinte', libelle: 'Quinté', icone: 'bi-trophy' },
-  { cle: 'pronostic', droit: 'analyse', to: '/pronostique-bahja-turf', libelle: 'PRONOSTIQUE BAHJA TURF', icone: 'bi-star' },
-  { cle: 'presse', to: '/presse', libelle: 'Presse', icone: 'bi-newspaper' },
-  { cle: 'lives', to: '/lives', libelle: 'Lives', icone: 'bi-broadcast' },
+  { cle: 'analyse', to: '/', libelleKey: 'nav_analyse', libelle: 'Analyse course', icone: 'bi-clipboard2-pulse' },
+  { cle: 'quinte', to: '/quinte', libelleKey: 'nav_quinte', libelle: 'Quinté', icone: 'bi-trophy' },
+  { cle: 'pronostic', droit: 'analyse', to: '/pronostique-bahja-turf', libelleKey: 'nav_pronostique', libelle: 'PRONOSTIQUE BAHJA TURF', icone: 'bi-star' },
+  { cle: 'presse', to: '/presse', libelleKey: 'nav_presse', libelle: 'Presse', icone: 'bi-newspaper' },
+  { cle: 'lives', to: '/lives', libelleKey: 'nav_lives', libelle: 'Lives', icone: 'bi-broadcast' },
   /* 23/10/2026 — le moteur DNA COURSE, comme les autres pages.
    * La page ne cadre plus une application à part : c'est `frontend/DNA/`, elle
    * prend le programme et les partants du site (backend/DNA/donnees.js) et
    * envoie les chevaux au moteur par `/api/dna` — le même relais en local et en
    * ligne, comme `/api/tf` pour turf-france. Elle s'affiche donc partout. */
-  { cle: 'dna', to: '/dna', libelle: 'DNA COURSE', icone: 'bi-cpu' },
+  { cle: 'dna', to: '/dna', libelleKey: 'nav_dna', libelle: 'DNA COURSE', icone: 'bi-cpu' },
   /* 24/10/2026 — LES RÉSULTATS ET LES RAPPORTS. La page ne montre que les
    * courses terminées : l'arrivée des 5 premiers et ce que paie chaque pari. */
-  { cle: 'resultats', to: '/resultats', libelle: 'Résultats', icone: 'bi-list-ol' },
+  { cle: 'resultats', to: '/resultats', libelleKey: 'nav_resultats', libelle: 'Résultats', icone: 'bi-list-ol' },
 ]
 
 export default function Entete({ page }) {
   const acces = useAcces()
+  const { t } = useLang()
   /* ⭐ 25/10/2026 — ON NE MONTRE QUE CE QUI S'OUVRE.
    * Un compte limité à `presse` + `quinte` ne voit pas de lien vers DNA :
    * cliquer dessus le mènerait à un refus. Le propriétaire (`admin` dans ses
@@ -59,7 +61,7 @@ export default function Entete({ page }) {
             elle-même la tête de cheval : garder les deux faisait deux logos
             côte à côte. `logo-horse.png` reste dans `public/` (rien n'est
             supprimé) — il suffit de remettre la ligne pour la revoir. */}
-        <Link to="/" className="entete-logo" title="Analyse course">
+        <Link to="/" className="entete-logo" title={t('nav_analyse')}>
           <img src="/logo.svg" alt="Bahja TURF" onError={(e) => { e.currentTarget.style.display = 'none' }} />
         </Link>
 
@@ -72,14 +74,16 @@ export default function Entete({ page }) {
               aria-current={page === l.cle ? 'page' : undefined}
             >
               <i className={`bi ${l.icone}`} aria-hidden="true" />
-              <span>{l.libelle}</span>
+              <span>{t(l.libelleKey)}</span>
             </Link>
           ))}
         </nav>
 
         {/* ⭐ qui est connecté — et de quoi sortir */}
-        {connecte && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginLeft: 6 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginLeft: 6 }}>
+          <LangToggle />
+          {connecte && (
+          <>
             <span title={acces.abonnement && acces.abonnement.fin
               ? 'abonnement jusqu’au ' + acces.abonnement.fin.split('-').reverse().join('/')
               : 'abonnement sans limite'}
@@ -88,16 +92,17 @@ export default function Entete({ page }) {
             </span>
             <button
               onClick={async () => { await deconnecter(); window.location.href = '/' }}
-              title="Fermer la session"
+              title={t('nav_deconnexion')}
               style={{
                 padding: '5px 10px', borderRadius: 8, cursor: 'pointer', fontSize: 11.5, fontWeight: 700,
                 color: '#e2e8f0', background: 'rgba(148,163,184,.14)',
                 border: '1px solid rgba(148,163,184,.3)',
               }}>
-              <i className="bi bi-box-arrow-right" /> Déconnexion
+              <i className="bi bi-box-arrow-right" /> {t('nav_deconnexion')}
             </button>
-          </div>
-        )}
+          </>
+          )}
+        </div>
 
       </div>
     </header>

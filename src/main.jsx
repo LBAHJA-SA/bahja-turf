@@ -86,32 +86,31 @@ class Garde extends React.Component {
     const e = this.state.erreur
     if (!e) return this.props.children
 
+    let langue = 'fr'
+    try { langue = localStorage.getItem('bahja-lang') || 'fr' } catch {}
+    const ar = langue === 'ar'
     const message = String((e && e.message) || e)
     const condamne =
       /insertBefore|removeChild|appendChild|not a child of this node/i.test(message)
 
     return (
-      <div style={{
+      <div dir={ar ? 'rtl' : 'ltr'} lang={ar ? 'ar' : 'fr'} style={{
         fontFamily: 'system-ui, -apple-system, sans-serif',
         maxWidth: 760, margin: '40px auto', padding: 24,
         border: '2px solid #b91c1c', borderRadius: 12,
         background: '#fef2f2', color: '#7f1d1d', lineHeight: 1.6,
       }}>
-        <h1 style={{ margin: '0 0 8px', fontSize: 20 }}>⚠ Erreur d'affichage — la page s'est arrêtée</h1>
+        <h1 style={{ margin: '0 0 8px', fontSize: 20 }}>{ar ? '⚠ خطأ في العرض — توقفت الصفحة' : '⚠ Erreur d’affichage — la page s’est arrêtée'}</h1>
 
         <p style={{ margin: '0 0 12px', fontSize: 14 }}>
-          React n'a pas pu mettre l'écran à jour. <b>Aucune donnée n'est perdue</b> :
-          l'archive, les tickets et les fichiers sur le disque sont intacts — le
-          problème est dans le rendu, pas dans la méthode.
+          {ar ? 'تعذر على React تحديث الشاشة. البيانات محفوظة.' : 'React n’a pas pu mettre l’écran à jour. Aucune donnée n’est perdue.'}
         </p>
 
         {condamne && (
           <p style={{ margin: '0 0 12px', fontSize: 14, background: '#fff', border: '1px solid #fecaca', borderRadius: 8, padding: 10 }}>
-            <b>Cause la plus probable :</b> le navigateur a modifié la page sous React.
-            C'est le cas quand la <b>traduction automatique</b> est active (la page est en
-            français), ou après un rechargement du serveur de développement. Recharge la
-            page ; si ça revient, coupe la traduction sur ce site
-            (<code>clic droit → « Ne jamais traduire ce site »</code>).
+            {ar
+              ? 'السبب الأرجح: المتصفح عدّل الصفحة. أعد التحميل، واقطع الترجمة التلقائية على هذا الموقع.'
+              : <><b>Cause la plus probable :</b> le navigateur a modifié la page sous React (traduction automatique). Recharge la page ; si ça revient, coupe la traduction sur ce site.</>}
           </p>
         )}
 
@@ -127,7 +126,7 @@ class Garde extends React.Component {
             color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer',
           }}
         >
-          Recharger la page
+          {ar ? 'إعادة تحميل الصفحة' : 'Recharger la page'}
         </button>
       </div>
     )

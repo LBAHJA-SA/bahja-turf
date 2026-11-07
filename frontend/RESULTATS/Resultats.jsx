@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import Entete from '../../src/Entete.jsx'
 import Drapeau from '../../src/Drapeau.jsx'
@@ -191,6 +192,7 @@ function typeCourse(c) {
 const cleCourse = (m, c) => `${m.id}|${c.code}`
 
 export default function Resultats() {
+  const { t } = useLang()
   const [date, setDate] = useState(aujourdhui())
   const [reunions, setReunions] = useState([])
   const [busy, setBusy] = useState(false)
@@ -370,11 +372,11 @@ export default function Resultats() {
                 <table className="res-tab">
                   <thead>
                     <tr>
-                      <th>Date</th>
-                      <th>Terrain</th>
-                      <th>Arrivée</th>
+                      <th>{t('date')}</th>
+                      <th>{t('terrain')}</th>
+                      <th>{t('arrivee')}</th>
                       <th>Non-partant(s)</th>
-                      <th>Détails</th>
+                      <th>{t('details')}</th>
                     </tr>
                   </thead>
                   <tbody>

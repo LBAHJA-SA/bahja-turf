@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 import { useEffect, useRef, useState } from 'react'
 import { fetchMeetings } from '../../backend/DNA/donnees.js'
 
@@ -230,6 +231,7 @@ function Editeur({ item, onChange, onSave, onDelete, saving }) {
 }
 
 export default function AdminPronostiques() {
+  const { t } = useLang()
   const [liste, setListe] = useState([])
   const [brouillons, setBrouillons] = useState([])
   const [loading, setLoading] = useState(true)

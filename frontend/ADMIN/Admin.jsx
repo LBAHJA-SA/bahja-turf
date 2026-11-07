@@ -1,3 +1,4 @@
+import { useLang } from '../../src/lib/langue.jsx'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Entete from '../../src/Entete.jsx'
@@ -371,6 +372,7 @@ function Porte({ etat, nom, setNom, mdp, setMdp, erreur, envoi, onSubmit, onReli
 /* ══════════════════════════════════════════════════════ LA PAGE ═══════════ */
 
 export default function Admin() {
+  const { t } = useLang()
   /* ── ① LA PORTE — un VRAI login (25/10/2026) ─────────────────────────────── */
   const [etat, setEtat] = useState(null)       // { configure, secret, comptes }
   const [moi, setMoi] = useState(null)         // { nom, pages } si connecté
@@ -945,7 +947,7 @@ export default function Admin() {
         <div style={{ maxWidth: 420, textAlign: 'center', padding: 24, border: '1px solid ' + T.ligne, borderRadius: 14 }}>
           <h2>Accès réservé à l’administration</h2>
           <p style={{ color: T.doux }}>Ce compte ne possède pas le droit d’ouvrir cette page.</p>
-          <Bouton icone="bi-box-arrow-right" onClick={seDeconnecter}>Se déconnecter</Bouton>
+          <Bouton icone="bi-box-arrow-right" onClick={seDeconnecter}>{t('se_deconnecter')}</Bouton>
         </div>
       </div>
     )
@@ -1072,7 +1074,7 @@ export default function Admin() {
                 et lance automatiquement un redéploiement. Le mot de passe en clair n’est jamais envoyé.
                 <div style={{ marginTop: 6 }}>
                   Les <b>administrateurs</b> sont en premier : ce sont les comptes qui portent la page
-                  {' '}<b>Administration</b> (console + verrou d’appareil levé). Les autres sont des
+                  {' '}<b>{t('admin_titre')}</b> (console + verrou d’appareil levé). Les autres sont des
                   {' '}<b>utilisateurs</b> — on les crée avec <b>+ Utilisateur</b>, plus bas.
                 </div>
                 {!etat?.automatisation && <span style={{ display: 'block', marginTop: 7, color: T.alerte }}>Configuration initiale requise : ajoutez une fois la variable secrète VERCEL_TOKEN dans les réglages Vercel, puis redéployez. Les enregistrements suivants seront automatiques.</span>}
@@ -1212,8 +1214,8 @@ export default function Admin() {
                   {envEnCours ? 'Déploiement…' : 'Enregistrer et déployer'}
                 </Bouton>
                 <Bouton icone="bi-download" onClick={() => telechargerJson('comptes.json', paquetComptes())}
-                  titre="Le brouillon en clair — à garder pour toi, ne pas publier">Exporter</Bouton>
-                <Bouton icone="bi-upload" onClick={() => fichier.current && fichier.current.click()}>Importer</Bouton>
+                  titre="Le brouillon en clair — à garder pour toi, ne pas publier">{t('exporter')}</Bouton>
+                <Bouton icone="bi-upload" onClick={() => fichier.current && fichier.current.click()}>{t('importer')}</Bouton>
                 <input ref={fichier} type="file" accept=".json,application/json" style={{ display: 'none' }}
                   onChange={(e) => { const f = e.target.files && e.target.files[0]; if (f) importer(f); e.target.value = '' }} />
               </>}
@@ -1263,7 +1265,7 @@ export default function Admin() {
                     <>
                       Le serveur en a <b>{duServeur.length}</b> : reprends-les pour changer un mot de passe ou
                       une page, puis remplis le mot de passe à la main (le serveur ne le rend jamais)
-                      et clique <b>Enregistrer</b>.
+                      et clique <b>{t('enregistrer')}</b>.
                       <div style={{ marginTop: 9 }}>
                         <Bouton icone="bi-download" plein teinte={T.accent} onClick={reprendreServeur}>
                           Reprendre les comptes du serveur
@@ -1307,7 +1309,7 @@ export default function Admin() {
                           <Bouton petit icone="bi-save" plein teinte={T.bon} onClick={() => enregistrerCompte(c)} desactive={envEnCours || !enEdition}>
                             {envEnCours ? 'جارٍ الحفظ…' : 'حفظ'}
                           </Bouton>
-                          {enEdition && <Bouton petit icone="bi-x-lg" onClick={() => annulerEdition(c)} desactive={envEnCours}>Annuler</Bouton>}
+                          {enEdition && <Bouton petit icone="bi-x-lg" onClick={() => annulerEdition(c)} desactive={envEnCours}>{t('annuler')}</Bouton>}
                           <Bouton petit icone="bi-trash" teinte={T.mal} onClick={() => supprimer(c)} desactive={envEnCours} titre="Supprimer ce compte du site et de Vercel">
                             حذف
                           </Bouton>
