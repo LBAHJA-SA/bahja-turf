@@ -2882,73 +2882,99 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </div>
                 )}
               </div>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 13, overflow: 'hidden', boxShadow: SK.ombreD }}>
-                  <thead>
-                    <tr style={s.hdr}>
-                      <th style={s.th}>Place</th>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <th key={r.place} style={{ ...s.th, background: r.n === 0 ? SK.muted : SK.accentSombre }}>P{r.place}</th>
+              {/* ⭐ 08/11/2026 — UN SEUL TABLEAU, LISIBLE (demande de l'utilisateur :
+                  « les deux tableaux sont semblables et pas clairs »).
+                  Les deux anciens disaient la MÊME chose deux fois :
+                  · « Place »      : n_top5, victoires, podiums, 1er..5e, P(podium|top5), P(top5|N)
+                  · « Indicateur » : courses_valides, n_top5, victoires, podiums,
+                                     P(victoire|top5), P(victoire|N), P(podium|top5), P(top5|N)
+                  Ici : UNE ligne par case P, chaque taux avec sa barre, et la
+                  répartition 1er→5e en UNE barre empilée. Les dénominateurs sont
+                  écrits dans l'en-tête et dans la légende, une seule fois. */}
+              {(() => {
+                const L = stats.parPlace.slice(0, toutLesP ? 20 : 5)
+                const N = (L[0] && L[0].courses_valides) || stats.nb || 0
+                const COUL = ['#34d399', '#22d3ee', '#a78bfa', '#fbbf24', '#fb7185']
+                const NOM = ['1er', '2e', '3e', '4e', '5e']
+                const barre = (v, coul) => (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ flex: 1, minWidth: 54, height: 7, borderRadius: 999, background: 'rgba(255,255,255,.13)', overflow: 'hidden' }}>
+                      <div style={{ width: Math.max(0, Math.min(100, v == null ? 0 : v)) + '%', height: '100%', background: coul, borderRadius: 999 }} />
+                    </div>
+                    <b style={{ fontSize: 12, minWidth: 40, textAlign: 'right', color: coul }}>{v == null ? '—' : v + ' %'}</b>
+                  </div>
+                )
+                return (
+                  <div style={{ ...s.box, padding: 14, boxShadow: SK.ombreD }}>
+                    <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>
+                      Ce que chaque case P a donné
+                    </b>
+                    <div style={{ fontSize: 11.5, color: '#64748b', margin: '4px 0 10px' }}>
+                      <b>{N}</b> course(s) valides · une ligne par case · toutes les barres sont sur 100 %.
+                      {' '}<b>P(top5 | N)</b> se lit sur les {N} courses ; <b>podium</b> et <b>victoire</b> se lisent
+                      parmi les fois où la case finit dans les 5.
+                    </div>
+                    <div style={{ overflowX: 'auto' }}>
+                      <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12.5, width: '100%', minWidth: 780, overflow: 'hidden', border: '1px solid ' + SK.bord, borderRadius: 8 }}>
+                        <thead>
+                          <tr style={s.hdr}>
+                            <th style={{ ...s.th, textAlign: 'left' }}>Case</th>
+                            <th style={{ ...s.th, textAlign: 'left' }}>arrive dans les 5<br /><span style={{ fontWeight: 400, opacity: .75 }}>n / {N} courses</span></th>
+                            <th style={{ ...s.th, textAlign: 'left' }}>P(top5 | N)</th>
+                            <th style={{ ...s.th, textAlign: 'left' }}>podiums<br /><span style={{ fontWeight: 400, opacity: .75 }}>P(podium | top5)</span></th>
+                            <th style={{ ...s.th, textAlign: 'left' }}>victoires<br /><span style={{ fontWeight: 400, opacity: .75 }}>P(victoire | top5)</span></th>
+                            <th style={{ ...s.th, textAlign: 'left', minWidth: 170 }}>où il finit<br /><span style={{ fontWeight: 400, opacity: .75 }}>1er → 5e, sur ses top-5</span></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {L.map((r, i) => (
+                            <tr key={r.place} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: i % 2 ? SK.alt : SK.ligne }}>
+                              <td style={{ ...s.td, fontWeight: 800, color: r.n ? SK.accent : '#4a5a72', whiteSpace: 'nowrap' }}>P{r.place}</td>
+                              <td style={{ ...s.td, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n_top5} / {N}</td>
+                              <td style={s.td}>{barre(r.n ? r.p_top5_global : null, SK.accent)}</td>
+                              <td style={s.td}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                  <span style={{ fontSize: 11.5, color: '#a4b8d6', minWidth: 14, fontWeight: 700 }}>{r.podiums}</span>
+                                  {barre(r.n ? r.p_podium_conditionnel : null, '#34d399')}
+                                </div>
+                              </td>
+                              <td style={s.td}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                  <span style={{ fontSize: 11.5, color: '#a4b8d6', minWidth: 14, fontWeight: 700 }}>{r.victoires}</span>
+                                  {barre(r.n ? r.p_victoire_conditionnel : null, '#fbbf24')}
+                                </div>
+                              </td>
+                              <td style={s.td}>
+                                {r.n ? (
+                                  <div
+                                    title={NOM.map((n, k) => `${n} : ${r.p[k]} %`).join(' · ')}
+                                    style={{ display: 'flex', height: 10, borderRadius: 999, overflow: 'hidden', minWidth: 150, background: 'rgba(255,255,255,.10)' }}
+                                  >
+                                    {r.p.map((v, k) => (v > 0 ? <div key={k} style={{ width: v + '%', background: COUL[k] }} /> : null))}
+                                  </div>
+                                ) : <span style={{ color: '#4a5a72' }}>—</span>}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 9, fontSize: 11, color: '#7a8ea9', alignItems: 'center' }}>
+                      <span>où il finit :</span>
+                      {NOM.map((n, k) => (
+                        <span key={n} style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                          <span style={{ width: 10, height: 10, borderRadius: 3, background: COUL[k], display: 'inline-block' }} />{n}
+                        </span>
                       ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-                      <td style={{ ...s.td, fontWeight: 700 }}>n_top5</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{ ...s.td, fontWeight: 700 }}>{r.n}</td>
-                      ))}
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-                      <td style={{ ...s.td, fontWeight: 700, color: SK.muted }}>victoires</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{ ...s.td, color: SK.muted }}>{r.victoires ?? '—'}</td>
-                      ))}
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,.07)' }}>
-                      <td style={{ ...s.td, fontWeight: 700, color: SK.muted }}>podiums</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{ ...s.td, color: SK.muted }}>{r.podiums ?? '—'}</td>
-                      ))}
-                    </tr>
-                    {['1er', '2e', '3e', '4e', '5e'].map((lbl, k) => (
-                      <tr key={lbl} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: k % 2 ? SK.alt : SK.ligne }}>
-                        <td style={{ ...s.td, fontWeight: 700 }}>{lbl}</td>
-                        {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                          <td key={r.place} style={{
-                            ...s.td, fontWeight: r.n && r.p[k] > 0 ? 800 : 400,
-                            color: r.n === 0 ? '#4a5a72' : r.p[k] > 0 ? '#34d399' : '#6d82a2',
-                          }}>
-                            {r.n ? r.p[k] + '%' : '—'}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                    <tr style={{ borderBottom: '1px solid ' + SK.bord, background: SK.accentClair }}>
-                      <td style={{ ...s.td, fontWeight: 800, color: SK.accent }}>P(podium | top5)</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{
-                          ...s.td, fontWeight: 800,
-                          color: r.n === 0 ? '#4a5a72' : r.top3 >= 60 ? SK.accent : r.top3 > 0 ? SK.texte : '#6d82a2',
-                          background: r.n ? SK.accentClair : SK.alt,
-                        }}>
-                          {r.n ? r.top3 + '%' : '—'}
-                        </td>
-                      ))}
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid ' + SK.bord, background: SK.on }}>
-                      <td style={{ ...s.td, fontWeight: 800 }}>P(top5 | N)</td>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <td key={r.place} style={{ ...s.td, fontWeight: 800 }}>{r.n ? r.top5 + '%' : '—'}</td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
-                Ligne <b>1er…5e</b> et <b>P(podium | top5)</b> : dénominateur <b>conditionnel</b> = <b>n_top5</b> (les courses où le P finit dans les 5).
-                {' '}Ligne <b>P(top5 | N)</b> : dénominateur <b>global</b> = <b>N</b> (courses valides). Les deux ne sont pas comparables.
-              </div>
+                    </div>
+                    <div style={{ fontSize: 11, color: '#64748b', marginTop: 6 }}>
+                      Les deux dénominateurs, écrits une fois : <b>N = {N}</b> (les courses) pour <b>P(top5 | N)</b> ·
+                      {' '}<b>n_top5</b> (les fois où la case finit dans les 5) pour <b>P(podium | top5)</b>,
+                      {' '}<b>P(victoire | top5)</b> et la répartition 1er→5e.
+                    </div>
+                  </div>
+                )
+              })()}
 
 
               {/* ⭐ QUINTÉ COMBINAISONS — les combinaisons de P qui forment le top 5 */}
@@ -2991,46 +3017,6 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   <div style={{ fontSize: 12, color: '#7a8ea9' }}>Pas encore de données Quinté.</div>
                 )}
               </div>
-
-              {/* §2.2 — les indicateurs EXPLICITES, dénominateur nommé, « — » si dénominateur nul */}
-              <div style={{ overflowX: 'auto', marginTop: 16 }}>
-                <table style={{ ...s.box, borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, overflow: 'hidden', boxShadow: SK.ombreD }}>
-                  <thead>
-                    <tr style={s.hdr}>
-                      <th style={s.th}>Indicateur explicite</th>
-                      {stats.parPlace.slice(0, toutLesP ? 20 : 5).map((r) => (
-                        <th key={r.place} style={{ ...s.th, background: r.n === 0 ? SK.muted : SK.accentSombre }}>P{r.place}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(() => {
-                      const f = (x) => (x == null ? '—' : x)
-                      const p = (x) => (x == null ? '—' : x + '%')
-                      const L = stats.parPlace.slice(0, toutLesP ? 20 : 5)
-                      const lignes = [
-                        ['courses_valides', (r) => f(r.courses_valides), false],
-                        ['n_top5', (r) => f(r.n_top5), false],
-                        ['victoires', (r) => f(r.victoires), false],
-                        ['podiums', (r) => f(r.podiums), false],
-                        ['P(victoire | top5)', (r) => p(r.p_victoire_conditionnel), true],
-                        ['P(victoire | N)', (r) => p(r.p_victoire_global), true],
-                        ['P(podium | top5)', (r) => p(r.p_podium_conditionnel), true],
-                        ['P(top5 | N)', (r) => p(r.p_top5_global), true],
-                      ]
-                      return lignes.map(([lbl, get, pct], k) => (
-                        <tr key={lbl} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: k % 2 ? SK.alt : SK.ligne }}>
-                          <td style={{ ...s.td, fontWeight: 700, color: pct ? SK.accent : '#a4b8d6' }}>{lbl}</td>
-                          {L.map((r) => (
-                            <td key={r.place} style={{ ...s.td, color: r.n === 0 ? '#4a5a72' : '#c7d6ea' }}>{get(r)}</td>
-                          ))}
-                        </tr>
-                      ))
-                    })()}
-                  </tbody>
-                </table>
-              </div>
-
 
                 <div style={{ ...s.box, padding: 14, marginTop: 16, boxShadow: SK.ombreD }}>
                 <b style={{ fontSize: 13, color: SK.accent, letterSpacing: 1, textTransform: 'uppercase' }}>Le vainqueur vient de…</b>
