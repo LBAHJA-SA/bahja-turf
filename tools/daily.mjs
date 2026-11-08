@@ -25,6 +25,12 @@ import {
   buildGrid, classerPartants, classerPhysique, remplirGrille, parseCarriere, scorePhysique, filtres,
   autoCarriere, chargerCourseCC, computeStats,
 } from '../src/lib/quinte.js'
+/* ⭐ 08/11/2026 — LE SIÈGE PLAT : le 9ᵉ cheval, hors quota, en Plat seulement.
+ *   Le moteur n'est pas touché (§11.49) : le ticket de 8 est construit comme
+ *   avant, puis on ajoute le 4ᵉ cité par la presse. Mesuré : 8,9 % → 24,4 %
+ *   de 5/5 en Plat, témoin (n'importe quel cheval de plus) = 0.
+ *   `node tools\diag-discipline-ticket.mjs` rejoue la mesure. */
+import { siegePlat, avecSiegePlat } from '../src/lib/siege-plat.js'
 import { chargerCotes, chargerEquidia, lireCourse } from './cotes.mjs'
 import { fusionnerImport } from './merge-archive.mjs'
 /* repli turf-france pour la CLÔTURE : casacourses ne publie pas toujours
@@ -341,10 +347,14 @@ export async function construireTicket(synthese, course, carriere, courseId, opt
   const stats = computeStats(Object.values(archiveLue).filter((x) => x.arrivee?.length))
 
   const r = remplirGrille(grid, classement, courseJour.discipline, cotes, stats)
-  const prisSet = new Set(r.ticket)
+  /* ⭐ LE SIÈGE PLAT — après le moteur, jamais dedans. Le ticket de 8 reste
+   *   intouché ; en Plat on ajoute le 4ᵉ cité (le cheval que G1 coupe). */
+  const siege = siegePlat(grid, courseJour.discipline)
+  const ticket = avecSiegePlat(r.ticket, grid, courseJour.discipline)
+  const prisSet = new Set(ticket)
   const surprises = []
   return {
-    ticket: r.ticket, mode, surprises,
+    ticket, mode: mode + (siege ? '+siege-plat' : ''), surprises,
     groupes: r.detail.map((g) => ({ id: g.id, pris: g.cases.filter((c) => c.pris).map((c) => c.num) })),
     scores: detailScores.map((d) => ({ ...d, pris: prisSet.has(d.num) })),
     /* ⭐ LES ENTREES, pour pouvoir REJOUER la ticket plus tard (§13.3.4).

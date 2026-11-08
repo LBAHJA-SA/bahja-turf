@@ -17,6 +17,9 @@ import {
   fetchBlocPm, fetchBassmat, formeMarche, fetchHuit, fetchBassmatChoix, ticketBassmat,
   fetchBassmatMois, jugerTicket, fetchDeparts,
 } from '../../src/lib/quinte'
+/* ⭐ 08/11/2026 — LE SIÈGE PLAT (9ᵉ cheval, hors quota). Module séparé : le
+ *   moteur `quinte.js` et sa copie backend ne sont pas touchés (§11.49). */
+import { siegePlat, avecSiegePlat } from '../../src/lib/siege-plat'
 import { chargerDetailReu, chargerPageTqq, offsetJour } from '../../backend/ARTICLE/turfFrance.js'
 
 /* ⭐ 28/10/2026 — les quotas affichés viennent de `GROUPES`, JAMAIS d'un
@@ -2102,6 +2105,15 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
    *  du jour. Sans cela la page resterait bloquée sur un ordre de juin alors
    *  que la méthode a changé.
    *  Le premier ticket figé reste : ce qu'on fige, c'est la SÉLECTION. */
+  /* ⭐ 08/11/2026 — LE SIÈGE PLAT. Le ticket de 8 est construit par le moteur,
+   *   inchangé (3-2-1-1-1). En Plat seulement, on ajoute APRÈS coup le cheval
+   *   que G1 coupe — le 4ᵉ cité par la presse. Mesuré : 8,9 % → 24,4 % de 5/5
+   *   en Plat, témoin (un autre cheval de plus) = 0. Détail : src/lib/siege-plat.js
+   *   ⚠ Course DÉJÀ COURUE → pas de siège : le ticket archivé est un constat. */
+  const siege = useMemo(
+    () => (courseFinie ? null : siegePlat(grille, discipline)),
+    [grille, discipline, courseFinie],
+  )
   const ticket = useMemo(() => {
     if (!rempli) return ticketManuel && ticketManuel.length ? ticketManuel : []
     const base = (ticketManuel && ticketManuel.length) ? ticketManuel : rempli.ticket
@@ -2109,8 +2121,11 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
      *   `ticketAffiche` retire les numéros absents de la grille du jour et,
      *   la course encore ouverte, remplit la place dans le même groupe
      *   (quota §11.19). Course courue : constat, sans invention (§7). */
-    return ordonnerTicket(ticketAffiche(base, rempli, !courseFinie), grille)
-  }, [rempli, ticketManuel, grille, courseFinie])
+    const ordonne = ordonnerTicket(ticketAffiche(base, rempli, !courseFinie), grille)
+    /* le 9ᵉ cheval va À LA FIN : il ne prend la place de personne, et il reste
+     * visible comme le siège Plat — pas noyé dans le bloc sans ordre. */
+    return siege ? avecSiegePlat(ordonne, grille, discipline) : ordonne
+  }, [rempli, ticketManuel, grille, courseFinie, siege, discipline])
 
   // ⚠ L'AUTO-FIGEAGE : dès que le moteur produit un ticket, on l'écrit dans
   //   l'archive. L'archive doit montrer le ticket DÈS LE PREMIER ANALYSE —
@@ -2123,8 +2138,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
   const ticketAuto = useMemo(() => {
     if (ticketManuel && ticketManuel.length) return null   // déjà figé
     if (!rempli || !rempli.ticket.length) return null
-    return rempli.ticket
-  }, [rempli, ticketManuel])
+    /* le siège Plat entre dans le ticket FIGÉ aussi : ce qu'on archive doit
+     * être ce qu'on joue (§13.3). Attelé / Haies : rien ne change. */
+    return avecSiegePlat(rempli.ticket, grille, discipline)
+  }, [rempli, ticketManuel, grille, discipline])
 
   /* ⚠ 16/10/2026 — LE GEL NE SE REPOSE PAS EN BOUCLE.
    *   `attachTicket` ne fige que le PREMIER ticket de la date, mais
@@ -2464,15 +2481,32 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                 </span>
               )
             })()}
-            <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 3, marginTop: 8, color: '#fff', fontFamily: SK.nb.td }}>
-              {ticket.length ? ticket.join('  ·  ') : '—'}
-            </div>
-            {ticket.length > 1 && (
-              <div style={{ fontSize: 11, color: 'rgba(255,255,255,.75)', marginTop: 6, fontFamily: SK.nb.td }}>
-                <b>{ticket[0]}</b> = la seule case qui prédit (27,1 % de victoires) ·
-                les {ticket.length - 1} autres sont un <b>bloc sans ordre</b> — le Quinté se joue en désordre.
-              </div>
-            )}
+            {(() => {
+              /* le siège Plat est affiché À PART : le ticket de 8 reste lisible
+               * tel quel, et le 9ᵉ est étiqueté pour ce qu'il est. */
+              const sans = siege ? ticket.filter((n) => n !== siege.num) : ticket
+              return (
+                <>
+                  <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 3, marginTop: 8, color: '#fff', fontFamily: SK.nb.td }}>
+                    {sans.length ? sans.join('  ·  ') : '—'}
+                  </div>
+                  {siege && (
+                    <div style={{ marginTop: 8, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '4px 12px', borderRadius: 999, border: '2px solid #34d399', background: 'rgba(52,211,153,.14)' }}>
+                      <b style={{ fontSize: 16, color: '#6ee7b7', fontFamily: SK.nb.td }}>+ {siege.num}</b>
+                      <span style={{ fontSize: 11, color: 'rgba(255,255,255,.9)', fontFamily: SK.nb.td }}>
+                        siège Plat · le 4ᵉ cité par la presse, hors quota (P{siege.slot})
+                      </span>
+                    </div>
+                  )}
+                  {sans.length > 1 && (
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,.75)', marginTop: 6, fontFamily: SK.nb.td }}>
+                      <b>{sans[0]}</b> = la seule case qui prédit (27,1 % de victoires) ·
+                      les {sans.length - 1} autres sont un <b>bloc sans ordre</b> — le Quinté se joue en désordre.
+                    </div>
+                  )}
+                </>
+              )
+            })()}
             {infoTicket && (
               <div style={{ fontSize: 12, color: 'rgba(255,255,255,.85)', marginTop: 8, fontFamily: SK.nb.td }}>
                 {infoTicket.n} chevaux · score forme moyen {infoTicket.forme}/10 · score global moyen {infoTicket.global}
