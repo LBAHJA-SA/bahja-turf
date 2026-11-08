@@ -225,6 +225,24 @@ function estPhrase(fr) {
   return mots.some((m) => MOTS_FONCTION.has(m))
 }
 
+function estNomPropre(fr) {
+  const s = String(fr).trim()
+  if (/[0-9·:]/.test(s)) return false
+  const mots = s.split(/\s+/).filter(Boolean)
+  if (mots.length < 2) return false
+  return mots.every((m) => /^[A-ZÀ-Þ]/.test(m))
+}
+
+/* recherche insensible à la casse dans le lexique */
+function chercherLexique(cle) {
+  if (LEXIQUE_COURT[cle]) return LEXIQUE_COURT[cle]
+  const low = cle.toLowerCase()
+  for (const k of Object.keys(LEXIQUE_COURT)) {
+    if (k.toLowerCase() === low) return LEXIQUE_COURT[k]
+  }
+  return null
+}
+
 function motsMajuscules(v) {
   const mots = v.replace(/[·•|/–—:,;!?()[\]«»"'’]/g, ' ').split(/\s+/).filter((m) => m.length > 2)
   if (mots.length < 2) return true                    // 1 mot = nom propre probable
@@ -307,7 +325,7 @@ function patcherMots(fr) {
   for (const k of keys) {
     if (k.length < 3) continue
     const v = LEXIQUE_COURT[k]
-    const re = new RegExp(echapper(k), 'g')
+    const re = new RegExp(echapper(k), 'gi')
     out = out.replace(re, v)
   }
   // « du jour » est un libellé courant ; « du/le/la/les » seuls ne sont PAS
@@ -342,7 +360,7 @@ function traiterNoeud(noeud) {
   }
 
   /* le lexique court prime sur le dictionnaire long */
-  let trad = LEXIQUE_COURT[cle] || LEXIQUE_COURT[fr]
+  let trad = chercherLexique(cle) || chercherLexique(fr)
   if (!trad) trad = dico?.[cle]
   if (trad) {
     if (!originaux.has(noeud)) originaux.set(noeud, fr)
@@ -353,9 +371,9 @@ function traiterNoeud(noeud) {
   }
 
   /* ① patch mot-à-mot pour les libellés courts (« Réunion 1 · Course 4 »).
-   *    On ne patche QUE les libellés (pas de mot-outil français) : sinon les
-   *    phrases sont massacrées (« texte » → « نص » au milieu d'une phrase). */
-  if (cle.length < 120 && !estPhrase(cle)) {
+   *    On ne patche QUE les libellés (pas de mot-outil français, pas les
+   *    noms propres « Maxime Lien »). */
+  if (cle.length < 120 && !estPhrase(cle) && !estNomPropre(cle)) {
     const patche = patcherMots(cle)
     if (patche && patche !== cle) {
       if (!originaux.has(noeud)) originaux.set(noeud, fr)
@@ -386,7 +404,7 @@ function traiterAttributs(el) {
     let map = attrOriginaux.get(el)
     if (!map) { map = {}; attrOriginaux.set(el, map) }
     if (map[a] == null) map[a] = v
-    let trad = LEXIQUE_COURT[cle] || LEXIQUE_COURT[v] || dico?.[cle]
+    let trad = chercherLexique(cle) || chercherLexique(v) || dico?.[cle]
     if (trad) {
       const propre = corriger(trad, cle)
       if (el.getAttribute(a) !== propre) el.setAttribute(a, propre)
