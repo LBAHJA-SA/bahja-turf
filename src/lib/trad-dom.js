@@ -40,6 +40,10 @@ const MAX_CACHE = 2500
  *  basculer : on les gère ici, avant toute recherche dans le dictionnaire. */
 const LEXIQUE_COURT = {
   'Quinté': 'Quinté', 'Quinté+': 'Quinté+', 'quinté': 'كوينتي',
+  /* ⭐ 08/11/2026 — le siège Plat : phrase entière, sinon « Plat » devient
+   *   « بلات » (le plat de cuisine) par la traduction automatique. */
+  'siège Plat · le 4ᵉ cité par la presse, hors quota': 'مقعد البلا · الرابع الذي ذكرته الصحافة، خارج الحصص',
+  'siège Plat': 'مقعد البلا',
   'Quinté du jour': 'Quinté اليوم', 'N°': 'رقم', 'Nº': 'رقم', 'N°.': 'رقم',
   'du jour': 'اليوم',
   'Réunion': 'الشوط', 'réunion': 'الشوط',

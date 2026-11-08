@@ -2494,8 +2494,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     <div style={{ marginTop: 8, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '4px 12px', borderRadius: 999, border: '2px solid #34d399', background: 'rgba(52,211,153,.14)' }}>
                       <b style={{ fontSize: 16, color: '#6ee7b7', fontFamily: SK.nb.td }}>+ {siege.num}</b>
                       <span style={{ fontSize: 11, color: 'rgba(255,255,255,.9)', fontFamily: SK.nb.td }}>
-                        siège Plat · le 4ᵉ cité par la presse, hors quota (P{siege.slot})
+                        siège Plat · le 4ᵉ cité par la presse, hors quota
                       </span>
+                      <span style={{ fontSize: 11, color: 'rgba(255,255,255,.7)', fontFamily: SK.nb.td }}>(P{siege.slot})</span>
                     </div>
                   )}
                   {sans.length > 1 && (
