@@ -8234,3 +8234,148 @@ node tools\prono-moteur.mjs --json   → + data/prono-moteur.json (lu par la pag
 ⚠ `data/quintes.json` = corpus A (97 courses à presse réelle) · `data/synthese.json`
 + `data/cotes.json` = corpus B (22 courses d'octobre avec cotes Equidia). A sert
 à **choisir**, B sert à **contrôler** — aucune course ne fait les deux.
+
+---
+
+### 11.55 ⭐ LE SIÈGE PLAT — un 9ᵉ cheval, HORS quota (08/11/2026, appliqué)
+
+> Instructions de l'utilisateur :
+> « الكوطا 3-2-1-1-1 لا يمكن ان تحكم عليها بانها سبب لان ارشيف العمل بها هو
+> الاول من اكتوبر وليس 96 كينتي تانيا انظر جيدا الى ستاتيستيك ستجد فرق كبير
+> بين البلا و الاتلي بالنسبة ل P ومن هنا نبحث عن الحلول »
+> puis, devant les options : **« B — بلا بـ 9 أحصنة »**.
+
+**Le principe, en une ligne :** le ticket de 8 ne bouge pas, les quotas ne
+bougent pas — en **Plat seulement**, on ajoute un **9ᵉ cheval, hors quota** :
+celui que G1 coupe, c'est-à-dire **le 4ᵉ cité par la presse**.
+
+#### ① Deux choses acquises le 08/11
+
+1. **On ne juge pas `3-2-1-1-1` sur les 96 Quintés.** L'archive qui a
+   réellement tourné avec ces quotas commence le **01/10/2026** —
+   **32 courses**, pas 96. `data/quintes.json` (02 → 07/2026) ne sert plus
+   qu'à mesurer **la force de tri** d'un signal, jamais à condamner un quota.
+2. **Le différend Plat / Attelé existe** — mais il n'est pas là où on le croit.
+
+#### ② L'écart Plat / Attelé dans Statistiques : la moitié est du bruit
+
+Le registre (13 Plat / 13 Attelé) montre des cases très différentes :
+
+| | P1 | P2 | P3 | **P4** | P5 |
+|---|---|---|---|---|---|
+| Plat | 54 % | 38 % | 38 % | **62 %** | 31 % |
+| Attelé | 69 % | 38 % | **77 %** | **23 %** | 62 % |
+
+Mais en **réunissant les deux corpus** (32 + 96 = **128 courses**), aucune case
+ne tient le test (`z` = écart / erreur type ; \|z\| ≥ 1,96 pour conclure) :
+
+| case | Plat | Attelé | écart | z | verdict |
+|---|---|---|---|---|---|
+| P3 | 27/58 = 46,6 % | 32/54 = 59,3 % | −13 pts | −1,36 | bruit |
+| P4 | 27/58 = 46,6 % | 20/54 = 37,0 % | +10 pts | +1,03 | bruit |
+| **P5** | 20/58 = 34,5 % | 27/54 = 50,0 % | −16 pts | **−1,68** | limite, insuffisant |
+
+> **Conséquence : il ne faut PAS construire de règle sur « quelle case P est la
+> plus forte en Plat ».** Avec 13 courses par colonne, l'écart de 39 points sur
+> P4 est du bruit d'échantillon. `node tools\selection-discipline.mjs` §⑦.
+
+#### ③ Le vrai écart : le RENDEMENT du ticket, pas les cases
+
+Moteur réel (`remplirGrille`, quotas `3-2-1-1-1`), corpus 96 :
+
+| discipline | kenti 5/5 | podium 3/3 | AUC du carnet | couverture top-10 |
+|---|---|---|---|---|
+| **Plat** (45) | **8,9 %** | **31,1 %** | **0,681** | **22,2 %** |
+| Attelé (41) | 17,1 % | 51,2 % | 0,715 | 43,9 % |
+| Haies (10) | 10,0 % | 20,0 % | 0,691 | 30,0 % |
+
+**En Plat, la presse est moins lisible.** Le carnet n'a pas besoin d'une autre
+règle : il a besoin d'**une case de plus pour dire la même chose**. C'est un
+écart de **largeur**, pas de choix — donc le seul levier qui ne touche pas aux
+quotas.
+
+#### ④ La mesure — avec le TÉMOIN qui rend le résultat honnête
+
+Ajouter un cheval est toujours un sur-ensemble : **ça ne peut jamais perdre**.
+La seule question valable est donc : le gain est-il **dirigé**, ou n'importe
+quel cheval ferait-il l'affaire ?
+
+**Corpus 96** (presse réelle + marché) :
+
+| ticket | chev. | Plat | Attelé | Haies | tous |
+|---|---|---|---|---|---|
+| T1 (production) | 8 | 4/45 = 8,9 % | 7/41 = 17,1 % | 1/10 = 10 % | 12,5 % |
+| **T1 + 4ᵉ cité** | 9 | **11/45 = 24,4 %** | 8/41 = 19,5 % | 1/10 = 10 % | **20,8 %** |
+| **T1 + 2ᵉ de G5 (TÉMOIN)** | 9 | **4/45 = 8,9 %** | 7/41 = 17,1 % | 1/10 = 10 % | **12,5 %** |
+| T1 + 4ᵉ + 3ᵉ de G2 | 10 | 15/45 = 33,3 % | 14/41 = 34,1 % | 2/10 = 20 % | 32,3 % |
+
+**Podium** (métrique dense, §11.25) :
+
+| ticket | Plat | Attelé | Haies | tous |
+|---|---|---|---|---|
+| T1 | 31,1 % | 51,2 % | 20,0 % | 38,5 % |
+| **T1 + 4ᵉ cité** | **48,9 %** | 61,0 % | 20,0 % | **51,0 %** |
+| T1 + 2ᵉ de G5 (témoin) | 35,6 % | 51,2 % | 20,0 % | 40,6 % |
+
+**Registre du site** (32 courses, tickets réels archivés) :
+
+| ticket | chev. | Plat | Attelé | Haies |
+|---|---|---|---|---|
+| T1 | 8 | 1/13 = 7,7 % | 1/13 = 7,7 % | 1/6 = 16,7 % |
+| **T1 + 4ᵉ cité** | 9 | **2/13 = 15,4 %** | 1/13 = 7,7 % | 2/6 = 33,3 % |
+| T1 + 2ᵉ de G5 (témoin) | 9 | 2/13 = 15,4 % | 1/13 = 7,7 % | 2/6 = 33,3 % |
+| T1 + 4ᵉ + 3ᵉ de G2 | 10 | 3/13 = 23,1 % | 3/13 = 23,1 % | 2/6 = 33,3 % |
+
+Podium, registre : T1 **15,4 %** → +4ᵉ cité **46,2 %** · témoin **30,8 %**.
+
+**Lecture — et sa limite, dite franchement :**
+
+- Sur les 96, **le témoin ne donne rien** (8,9 % → 8,9 %) : le gain est donc
+  **dirigé** vers le 4ᵉ cité, pas vers « un cheval de plus ».
+- Sur les 32, le **kenti** ne sépare plus le 4ᵉ cité du témoin (2 = 2) ; c'est
+  le **podium** qui sépare (46,2 % contre 30,8 %).
+- **8 courses gagnées** en Plat (7 + 1), **0** en Attelé, **0** en Haies.
+  Huit événements, c'est peu. Ce qui le rend crédible : deux corpus
+  indépendants, même direction, et un témoin à zéro.
+
+#### ⑤ Ce qui a été appliqué — le moteur n'est PAS touché
+
+| Fichier | Rôle |
+|---|---|
+| `src/lib/siege-plat.js` | **nouveau** — `estPlat`, `siegePlat(grille, discipline)`, `avecSiegePlat(ticket, grille, discipline)` |
+| `frontend/QUINTE/QuinteGrille.jsx` | le siège entre dans le ticket affiché **et** dans le ticket figé ; badge `+ N` séparé des 8 |
+| `tools/daily.mjs` | le même siège dans `construireTicket` (mode `…+siege-plat`) |
+| `tools/verif-siege-plat.mjs` | **nouveau** — contrôle de l'implémentation |
+
+`src/lib/quinte.js` et `backend/QUINTE/quinte.js` : **zéro ligne changée**.
+`3-2-1-1-1` continue de remplir **8** chevaux ; les cinq boîtes
+(P1-P4 / P5-P8 / P9-P10 / P11-P12 / P13+) **ne bougent pas** (§11.16).
+Le 9ᵉ est **hors quota** : il ne prend la place de personne.
+
+**Règles de bord :**
+
+- Course **déjà courue** → pas de siège : le ticket archivé est un **constat** (§7).
+- Le 4ᵉ cité est **déjà dans les 8** → rien n'est ajouté (c'est arrivé **5 fois
+  sur 13** en Plat, registre).
+- G1 n'a pas 4 cases (non-partant dans les 4 premiers cités) → rien n'est ajouté.
+- **Attelé / Haies → aucun changement**, ticket à 8.
+
+Exemple réel, `2026-11-08` Saint-Cloud 3100 m Plat :
+
+```
+1 · 3 · 5 · 7 · 8 · 9 · 11 · 15     + 10
+                                    siège Plat · le 4ᵉ cité par la presse, hors quota (P4)
+```
+
+#### ⑥ Ce qu'il faut lancer
+
+```
+node tools\verif-siege-plat.mjs        → contrôle : 0 doublon, 0 hors grille, base toujours à 8
+node tools\diag-discipline-ticket.mjs  → la mesure Plat/Attelé + le témoin
+node tools\selection-discipline.mjs    → les tables P par discipline, l'AUC, le test z sur 128 courses
+node tools\verif-stats.mjs             → nb = examinées − écartées = closes (toutes disciplines)
+```
+
+⚠ **Ne pas rejouer ce siège sur les courses antérieures au 08/11** : leur ticket
+est un constat. Le siège s'applique **à partir du 08/11/2026**.
+
