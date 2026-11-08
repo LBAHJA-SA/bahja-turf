@@ -2800,7 +2800,12 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                   </span>
                 )}
                 {(() => {
-                  const closes = archive.filter((a) => (a.arrivee || []).length > 0 && ticketValide(a).length > 0)
+                  /* ⚠ 08/11/2026 — le dénominateur doit être le MÊME que celui des
+                   * statistiques affichées : `archiveFiltree` (discipline + trot),
+                   * pas `archive` entière. Sinon, avec Plat sélectionné, le bandeau
+                   * comparait 13 courses valides à 32 courses toutes disciplines
+                   * (« Top3 8/32 » au lieu de 2/13). */
+                  const closes = archiveFiltree.filter((a) => (a.arrivee || []).length > 0 && ticketValide(a).length > 0)
                   const avec3 = closes.filter((a) => (a.arrivee || []).slice(0, 3).every((n) => ticketValide(a).includes(n))).length
                   const sans1er = closes.filter((a) => !ticketValide(a).includes(a.arrivee[0])).length
                   return closes.length ? (
