@@ -1,4 +1,402 @@
 {
+  "2026-11-08": {
+    "date": "2026-11-08",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      1,
+      7,
+      11,
+      8,
+      5,
+      10,
+      9,
+      6,
+      4,
+      3,
+      2,
+      15,
+      12,
+      14,
+      13
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "nbPartants": 16,
+    "discipline": "Plat",
+    "hippodrome": "Saint-Cloud",
+    "distance": 3100,
+    "courseId": "2026-11-08_R1_C5",
+    "arrivee": null,
+    "ticket": [
+      1,
+      3,
+      5,
+      7,
+      8,
+      9,
+      11,
+      15
+    ],
+    "ticketMode": "auto",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          1,
+          8,
+          7
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          11,
+          5
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          9
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          3
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          15
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-11-08T00:45:29.226Z",
+    "ticketMoteur": [
+      1,
+      3,
+      5,
+      7,
+      8,
+      9,
+      11,
+      15
+    ],
+    "cloture": null,
+    "scores": [
+      {
+        "num": 1,
+        "nom": "DON'T SHUT ME DOWN",
+        "global": 6,
+        "forme": 0.22,
+        "dist": 8.77,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 2,
+        "nom": "HOMO DEUS",
+        "global": 5.83,
+        "forme": 0.75,
+        "dist": 7.7,
+        "piste": 6.02,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 3,
+        "nom": "BLACK SAXON",
+        "global": 5.73,
+        "forme": 0,
+        "dist": 7.75,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 4,
+        "nom": "MISTER GATZ",
+        "global": 5.22,
+        "forme": 0,
+        "dist": 5.43,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 5,
+        "nom": "A BEAUREGARD",
+        "global": 5.91,
+        "forme": 0,
+        "dist": 8.6,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 6,
+        "nom": "MON RICIN",
+        "global": 5.58,
+        "forme": 0,
+        "dist": 7.28,
+        "piste": 6.02,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 10,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 7,
+        "nom": "ORAGEUX",
+        "global": 5.23,
+        "forme": 3.04,
+        "dist": 3.56,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 8,
+        "nom": "RAM SEA",
+        "global": 5.26,
+        "forme": 0,
+        "dist": 6.7,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 9,
+        "nom": "PAOLINO",
+        "global": 4.77,
+        "forme": 0.23,
+        "dist": 4.25,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": true
+      },
+      {
+        "num": 10,
+        "nom": "DARK ROCKSTER",
+        "global": 5.61,
+        "forme": 2.24,
+        "dist": 6.05,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 11,
+        "nom": "DEMPY",
+        "global": 5.57,
+        "forme": 0,
+        "dist": 8.14,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 8,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 12,
+        "nom": "LUCIO VERO",
+        "global": 5.34,
+        "forme": 0.11,
+        "dist": 8.6,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 13,
+        "nom": "GARVEY",
+        "global": 4.94,
+        "forme": 3.34,
+        "dist": 3.56,
+        "piste": 6.29,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      },
+      {
+        "num": 14,
+        "nom": "ZARFLIGHT",
+        "global": 5.6,
+        "forme": 0.11,
+        "dist": 10,
+        "piste": 6.02,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": false
+      },
+      {
+        "num": 15,
+        "nom": "GOOD TO SEE YOU",
+        "global": 5.53,
+        "forme": 2.24,
+        "dist": 7.55,
+        "piste": 6.02,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 5,
+        "filtres": [
+          true,
+          false,
+          true
+        ],
+        "ok": 2,
+        "pris": true
+      },
+      {
+        "num": 16,
+        "nom": "SEEYOUGO",
+        "global": 4.24,
+        "forme": 1.51,
+        "dist": 3.56,
+        "piste": 5.95,
+        "niveau": 5,
+        "terrain": 8,
+        "corde": 3,
+        "filtres": [
+          false,
+          false,
+          true
+        ],
+        "ok": 1,
+        "pris": false
+      }
+    ],
+    "collecte": "2026-11-08T00:45:29.227Z"
+  },
   "2026-11-07": {
     "date": "2026-11-07",
     "found": true,
@@ -45,7 +443,13 @@
     "hippodrome": "Deauville",
     "distance": 1900,
     "courseId": "2026-11-07_R1_C3",
-    "arrivee": null,
+    "arrivee": [
+      1,
+      14,
+      9,
+      13,
+      12
+    ],
     "ticket": [
       1,
       2,
@@ -105,7 +509,7 @@
       15,
       16
     ],
-    "cloture": null,
+    "cloture": "2026-11-08T00:45:13.404Z",
     "scores": [
       {
         "num": 1,
