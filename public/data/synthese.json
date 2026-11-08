@@ -53,9 +53,10 @@
       8,
       9,
       11,
-      15
+      15,
+      10
     ],
-    "ticketMode": "auto",
+    "ticketMode": "auto+siege-plat",
     "groupes": [
       {
         "id": "G1",
@@ -395,7 +396,8 @@
         "pris": false
       }
     ],
-    "collecte": "2026-11-08T00:45:29.227Z"
+    "collecte": "2026-11-08T00:45:29.227Z",
+    "cle": "2026-11-08_R1_C5"
   },
   "2026-11-07": {
     "date": "2026-11-07",
