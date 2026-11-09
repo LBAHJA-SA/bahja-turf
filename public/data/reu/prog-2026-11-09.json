@@ -229,11 +229,11 @@
      "nom": "PRIX DE LA LAIE DES FONDS HOUCHARD",
      "heure": "15:22",
      "distance": 1800,
-     "type": "PLAT",
-     "dist": 1800,
+     "type": "Plat",
+     "dist": null,
      "partants": 12,
      "hippodrome": "Chantilly",
-     "source": "pro.casacourses.com (fallback)",
+     "source": "Equidia",
      "arrivee": null
     },
     {
@@ -1053,5 +1053,5 @@
    ]
   }
  ],
- "collecteLe": "2026-11-09T08:48:04.034Z"
+ "collecteLe": "2026-11-09T09:32:46.321Z"
 }
