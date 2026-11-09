@@ -22,13 +22,22 @@
     ],
     "savedAt": "2026-11-08T23:04:56.928Z",
     "arrivee": null,
-    "ticket": null,
+    "ticket": [
+      5,
+      1,
+      3,
+      6,
+      11,
+      13,
+      14,
+      15
+    ],
     "discipline": "Attelé",
     "distance": 2650,
     "nbPartants": 15,
     "hippodrome": "Bordeaux-Le Bouscat",
     "prix": "3900000 DH",
-    "courseId": 147680,
+    "courseId": "2026-11-09_R1_C2",
     "cle": "2026-11-09_R1_C2",
     "runners": [
       1,
@@ -47,7 +56,17 @@
       14,
       15
     ],
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "ticketSource": "page",
+    "ticketPoseLe": null,
+    "ticketMode": null,
+    "placeholder": false,
+    "groupes": null,
+    "surprises": [],
+    "ticketMoteur": null,
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-11-09T05:21:27.096Z"
   },
   "2026-11-08": {
     "date": "2026-11-08",
@@ -161,7 +180,7 @@
       11,
       15
     ],
-    "cloture": "2026-11-08T23:07:30.385Z",
+    "cloture": "2026-11-09T05:21:25.614Z",
     "scores": [
       {
         "num": 1,
@@ -858,7 +877,8 @@
         "pris": true
       }
     ],
-    "collecte": "2026-11-07T08:45:31.214Z"
+    "collecte": "2026-11-07T08:45:31.214Z",
+    "cle": "2026-11-07_R1_C3"
   },
   "2026-11-06": {
     "date": "2026-11-06",
