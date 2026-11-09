@@ -60,6 +60,13 @@ for (const [nom, e] of [['trio   ', M.ensemble.trio], ['quinté ', M.ensemble.qu
   console.log(`     ${nom} ${String(e.distincts).padStart(2)} combinaisons distinctes sur ${e.courses} courses · ${e.repetes} revue(s) · max ${e.record}×`)
 }
 
+console.log('\n  composition — d\'où viennent les cases qui arrivent :')
+for (const [nom, c] of [['trio  ', M.composition.trio], ['quinté', M.composition.quinte]]) {
+  const z = c.zones.map((x) => `${x.nom} ${x.moyenne.toFixed(2)}/${c.k}`).join(' · ')
+  const un = c.zones[c.zones.length - 1]
+  console.log(`     ${nom} ${z}   · au moins un P11+ : ${pctProb(un.auMoinsUn)}`)
+}
+
 console.log('\n  règles de sélection — hors échantillon, top-8 (2 moitiés moyennées) :')
 for (const c of M.classementRegles) {
   console.log(`     ${c.regle.padEnd(9)}  quinté ${pctProb(c.quinte).padStart(6)}   podium ${pctProb(c.podium).padStart(6)}`)

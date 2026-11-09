@@ -393,6 +393,43 @@ export function construireMatrix(courses) {
     top: tab.slice(0, 6),
   })
 
+  /* ── F-ter. la COMPOSITION : d'où viennent les cases du trio / du quinté ── *
+   * Quatre zones, et P11+ compte autant que P1-P4 : si le Quinté prenait
+   * toujours les 5 premières cases, la moitié de cette page n'existerait pas.
+   * Zone = une bande de la synthèse, pas un groupe de jeu : aucune règle n'en
+   * est tirée, c'est seulement ce qui est arrivé. */
+  const ZONES = [
+    { cle: 'haut', nom: 'P1-P4' },
+    { cle: 'milieu', nom: 'P5-P8' },
+    { cle: 'charniere', nom: 'P9-P10' },
+    { cle: 'bas', nom: 'P11+' },
+  ]
+  const zoneIndex = (p) => (p <= 4 ? 0 : p <= 8 ? 1 : p <= 10 ? 2 : 3)
+  const compoZone = (k) => {
+    const s = [0, 0, 0, 0]
+    const un = [0, 0, 0, 0]
+    let n = 0
+    for (const c of list) {
+      const sc = slotsDe(c).slice(0, k)
+      if (sc.length < k) continue
+      n++
+      const cnt = [0, 0, 0, 0]
+      for (const p of sc) cnt[zoneIndex(p)]++
+      for (let z = 0; z < 4; z++) { s[z] += cnt[z]; if (cnt[z]) un[z]++ }
+    }
+    const tot = s.reduce((x, y) => x + y, 0) || 1
+    return {
+      k, N: n,
+      zones: ZONES.map((z, i) => ({
+        nom: z.nom, cle: z.cle,
+        moyenne: n ? s[i] / n : 0,
+        part: s[i] / tot,
+        auMoinsUn: n ? un[i] / n : 0,
+        total: s[i],
+      })),
+    }
+  }
+
   /* ── G. backtest leave-one-out ─────────────────────────────────────────── */
   const ordrePost = (counts, n) => {
     return Array.from({ length: MAXP }, (_, i) => {
@@ -638,6 +675,7 @@ export function construireMatrix(courses) {
     comboPodium,
     topPodiums: comboPodium.slice(0, 12),
     ensemble: { trio: resumeEnsemble(comboPodium), quinte: resumeEnsemble(comboQuint) },
+    composition: { trio: compoZone(3), quinte: compoZone(5) },
     topCases,
     topPaires: pairList.slice(0, 15),
     topTriples: tripleList.slice(0, 15),

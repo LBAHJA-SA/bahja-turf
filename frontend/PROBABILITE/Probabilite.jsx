@@ -24,8 +24,6 @@ const SK = {
   ombre: '0 8px 24px rgba(124,58,237,.18)',
   alt: 'rgba(255,255,255,.03)',
 }
-const POS_NOM = ['1er', '2e', '3e', '4e', '5e']
-
 const pc = (x, d = 1) => (x == null || !Number.isFinite(x) ? '—' : (x * 100).toFixed(d).replace('.', ',') + ' %')
 const arr = (x, d = 0) => (x == null || !Number.isFinite(x) ? '—' : x.toFixed(d).replace('.', ','))
 
@@ -38,14 +36,6 @@ function Barre({ v, coul = SK.accent, max = 100, libelle, min = 0 }) {
       </div>
       <b style={{ fontSize: 11.5, minWidth: 44, textAlign: 'right', color: coul }}>{libelle ?? pc(v / 100)}</b>
     </div>
-  )
-}
-
-function Case({ children, coul = SK.accent, fond }) {
-  return (
-    <span style={{ display: 'inline-block', padding: '1px 7px', borderRadius: 6, fontSize: 11.5, fontWeight: 800, color: coul, background: fond || 'rgba(255,255,255,.06)', border: '1px solid ' + SK.bord }}>
-      {children}
-    </span>
   )
 }
 
@@ -118,7 +108,7 @@ export default function Probabilite() {
   const [loading, setLoading] = useState(true)
   const [ctx, setCtx] = useState({ disc: '', dist: '', part: '' })
 
-  // sélection (⑨)
+  // sélection (③)
   const [archive, setArchive] = useState([])
   const [raceId, setRaceId] = useState('')
   const [ordreTxt, setOrdreTxt] = useState('')
@@ -307,7 +297,7 @@ export default function Probabilite() {
                   </div>
                   <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 7 }}>
                     Le gros chiffre = le <b>numéro du cheval</b> · « P » = sa place dans la synthèse de la presse.
-                    Changer la course, la taille ou la règle : section ⑨, en bas.
+                    Changer la course, la taille ou la règle : section ③, en bas.
                   </div>
                 </div>
               )}
@@ -337,277 +327,58 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            <details style={{ marginBottom: 16 }}>
-              <summary style={{
-                cursor: 'pointer', fontSize: 12.5, fontWeight: 800, color: SK.accent,
-                padding: '10px 13px', border: '1px solid ' + SK.bord, borderRadius: 9,
-                background: SK.accentClair, listStyle: 'revert',
-              }}>
-                Le détail technique — 9 sections (pour ceux qui veulent vérifier chaque chiffre)
-              </summary>
-              <div style={{ marginTop: 14 }}>
-
-            {/* ① distribution des positions --------------------------------- */}
+            {/* ① composition ------------------------------------------------- */}
             <Section
-              n="①" titre="Distribution des 5 positions — P(position | top-5)"
-              sous={<>Chaque ligne est normalisée sur ses propres top-5 (Dirichlet α = 1). On lit la <b>forme</b> de la case : P1 gagne souvent quand elle est là, P5 place sans gagner, etc.</>}
+              n="①" titre="D'où viennent les 3 et les 5 — P9+ compris"
+              sous={<>
+                Chaque case arrivée est rangée dans une <b>zone</b> de la synthèse. Une zone n'est pas un groupe de jeu :
+                c'est seulement une bande de P1 à P20. Les chiffres disent où les arrivants se trouvent réellement —
+                <b> y compris ceux que la presse cite en P9, P10, P11 et au-delà</b>.
+              </>}
             >
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ borderCollapse: 'separate', borderSpacing: 1, fontSize: 10.5, width: '100%', minWidth: 640 }}>
-                  <thead>
-                    <tr>
-                      <th style={{ ...SK.th, padding: '5px 8px' }}>Case</th>
-                      <th style={{ ...SK.th, padding: '5px 8px' }}>n top-5</th>
-                      {POS_NOM.map((n) => <th key={n} style={{ ...SK.th, padding: '5px 8px' }}>{n}</th>)}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {parP.filter((r) => r.n_top5 > 0).map((r) => {
-                      const post = r.rang_post || []
-                      return (
-                        <tr key={r.p}>
-                          <td style={{ ...SK.td, fontSize: 11.5, fontWeight: 800, color: SK.accent, padding: '4px 8px' }}>P{r.p}</td>
-                          <td style={{ ...SK.td, fontSize: 11, color: SK.muted, padding: '4px 8px' }}>{r.n_top5}</td>
-                          {post.map((v, k) => (
-                            <td key={k} title={`${POS_NOM[k]} : ${pc(v)}`}
-                              style={{ ...SK.td, padding: '4px 6px', textAlign: 'center', fontWeight: 700, fontSize: 11,
-                                color: v > 0.28 ? '#0b1220' : '#e2e8f0',
-                                background: `rgba(167,139,250,${0.06 + 0.85 * Math.min(1, v / 0.6)})`, borderRadius: 3 }}>
-                              {pc(v)}
-                            </td>
-                          ))}
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              </div>
-              <div style={{ fontSize: 11, color: '#64748b', marginTop: 7 }}>
-                Somme de chaque ligne = 100 % · les cases sans top-5 sont masquées.
-              </div>
-            </Section>
-
-            {/* ② paires ------------------------------------------------------ */}
-            <Section
-              n="②" titre="Probabilités jointes — les paires"
-              sous={<>Top 15 sur {data.N} courses. <b>P(a ∩ b)</b> = les deux dans les 5 · <b>P(b | a)</b> = si a est dans les 5, probabilité que b y soit aussi. Les deux versions sont données : brute et lissée vers le taux marginal de b.</>}
-            >
-              <div style={{ display: 'grid', gap: 5 }}>
-                {data.topPaires.map((pr, i) => (
-                  <div key={i} style={{ display: 'grid', gridTemplateColumns: '92px 1fr 80px 84px', gap: 10, alignItems: 'center', padding: '4px 0', borderBottom: '1px solid rgba(255,255,255,.05)' }}>
-                    <b style={{ fontSize: 12.5, color: i === 0 ? SK.accent : '#cbd5e1' }}>P{pr.a} · P{pr.b}</b>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <div style={{ flex: 1, height: 8, borderRadius: 999, background: 'rgba(255,255,255,.12)', overflow: 'hidden' }}>
-                        <div style={{ width: Math.max(2, pr.p_both * 100) + '%', height: '100%', background: 'linear-gradient(90deg,#7c3aed,#a78bfa)', borderRadius: 999 }} />
-                      </div>
-                      <span style={{ fontSize: 11, color: SK.muted, minWidth: 50 }}>{pr.count}/{data.N}</span>
-                    </div>
-                    <span style={{ fontSize: 11.5, color: '#34d399', fontWeight: 700, textAlign: 'right' }}>{pc(pr.p_both)}</span>
-                    <span style={{ fontSize: 10.5, color: '#a4b8d6', textAlign: 'right' }}>b|a {pc(pr.p_b_given_a, 0)}</span>
-                  </div>
-                ))}
-              </div>
-            </Section>
-
-            {/* ③ triples et conditionnelles --------------------------------- */}
-            <Section
-              n="③" titre="Triples et probabilités conditionnelles"
-              sous={<>Le Quinté complet (5 cases) est presque toujours unique — 32 combinaisons distinctes sur {data.N} courses. Le motif réel apparaît au niveau des triples, et surtout des conditionnelles : ce que la présence d'une case fait à une autre.</>}
-            >
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: 8, marginBottom: 14 }}>
-                {data.topTriples.slice(0, 12).map((tr, i) => (
-                  <div key={i} style={{ padding: '7px 10px', borderRadius: 8, border: '1px solid ' + SK.bord, background: i === 0 ? SK.accentClair : SK.alt, display: 'flex', justifyContent: 'space-between', gap: 8 }}>
-                    <b style={{ fontSize: 12, color: i === 0 ? SK.accent : SK.texte }}>{tr.combo.map((x) => 'P' + x).join(' · ')}</b>
-                    <span style={{ fontSize: 10.5, color: SK.muted, fontWeight: 700 }}>{tr.count}/{data.N} · {pc(tr.p, 0)}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ fontSize: 12, fontWeight: 800, color: '#c4b5fd', margin: '4px 0 6px' }}>Les conditionnelles demandées</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 8, marginBottom: 14 }}>
-                {data.exemples.map((ex, i) => {
-                  const cond = ex.condition.map((x) => 'P' + x).join(', ')
-                  const libre = ex.condition.length === 1
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 12 }}>
+                {[['trio', '🥇 Les 3 — le podium', '#34d399'], ['quinte', '🏆 Les 5 — le Quinté', '#a78bfa']].map(([k, titre, coul]) => {
+                  const c = data.composition[k]
+                  const dernier = c.zones[c.zones.length - 1]
                   return (
-                    <div key={i} style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
-                      <div style={{ fontSize: 11.5, color: SK.muted, marginBottom: 3 }}>
-                        P(<b style={{ color: SK.accent }}>P{ex.cible}</b> | {cond})
-                      </div>
-                      <div style={{ fontSize: 19, fontWeight: 900, color: ex.den ? '#e9d5ff' : '#64748b' }}>
-                        {ex.p == null ? '—' : pc(ex.p)}
-                        {ex.den ? <span style={{ fontSize: 11, fontWeight: 600, color: '#7a8ea9', marginLeft: 8 }}>post. {pc(ex.p_post)}</span> : null}
-                      </div>
-                      <div style={{ fontSize: 10.5, color: '#5b6b85', marginTop: 2 }}>
-                        {ex.den ? `${ex.count} / ${ex.den} courses` : 'aucun précédent'} · sans condition {pc(ex.base)}
-                        {libre ? ' (base libre)' : ''}
+                    <div key={k} style={{ padding: '12px 14px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                      <div style={{ fontSize: 11.5, fontWeight: 900, letterSpacing: .8, color: coul, textTransform: 'uppercase', marginBottom: 9 }}>{titre}</div>
+                      {c.zones.map((z, i) => {
+                        const bas = i >= 2
+                        return (
+                          <div key={z.nom} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5 }}>
+                            <span style={{ fontSize: 11, minWidth: 62, color: bas ? '#fbbf24' : '#a4b8d6', fontWeight: bas ? 800 : 500 }}>{z.nom}</span>
+                            <div style={{ flex: 1, height: 9, borderRadius: 999, background: 'rgba(255,255,255,.10)', overflow: 'hidden' }}>
+                              <div style={{ width: Math.max(1, z.part * 100) + '%', height: '100%', borderRadius: 999, background: bas ? '#fbbf24' : coul }} />
+                            </div>
+                            <span style={{ fontSize: 11, minWidth: 58, textAlign: 'right', color: '#e2e8f0', fontWeight: 700 }}>
+                              {arr(z.moyenne, 2)} / {c.k}
+                            </span>
+                            <span style={{ fontSize: 11, minWidth: 38, textAlign: 'right', color: '#7a8ea9' }}>{pc(z.part, 0)}</span>
+                          </div>
+                        )
+                      })}
+                      <div style={{ marginTop: 8, paddingTop: 8, borderTop: '1px dashed rgba(251,191,36,.35)', fontSize: 12, color: '#fbbf24', lineHeight: 1.5 }}>
+                        <b>au moins une case P11+</b> dans {pc(dernier.auMoinsUn)} des courses
+                        <span style={{ color: '#7a8ea9' }}> ({Math.round(dernier.auMoinsUn * dernier.N)} / {dernier.N})</span>
                       </div>
                     </div>
                   )
                 })}
               </div>
-
-              <div style={{ fontSize: 12, fontWeight: 800, color: '#c4b5fd', margin: '4px 0 6px' }}>Les paires les plus « conditionnantes »</div>
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ borderCollapse: 'collapse', fontSize: 12, width: '100%', minWidth: 620 }}>
-                  <thead>
-                    <tr>
-                      <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>Si déjà dans les 5</th>
-                      <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>alors…</th>
-                      <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>P(cible | condition)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.cond2.slice(0, 10).map((g, i) => (
-                      <tr key={i} style={{ background: i % 2 ? SK.alt : 'transparent' }}>
-                        <td style={{ ...SK.td, padding: '5px 9px' }}><b style={{ color: SK.accent }}>P{g.a} · P{g.b}</b> <span style={{ color: '#5b6b85', fontSize: 10.5 }}>({g.den} courses)</span></td>
-                        <td style={{ ...SK.td, padding: '5px 9px' }}>
-                          {g.top.slice(0, 3).map((x) => (
-                            <span key={x.c} style={{ display: 'inline-block', marginRight: 6 }}>
-                              <Case coul="#a4b8d6">P{x.c}</Case>
-                            </span>
-                          ))}
-                        </td>
-                        <td style={{ ...SK.td, padding: '5px 9px' }}>
-                          {g.top.slice(0, 3).map((x) => (
-                            <span key={x.c} style={{ display: 'inline-block', marginRight: 10, fontSize: 11.5 }}>
-                              <b style={{ color: '#34d399' }}>{pc(x.p, 0)}</b> <span style={{ color: '#5b6b85', fontSize: 10 }}>({x.count})</span>
-                            </span>
-                          ))}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div style={{ marginTop: 11, fontSize: 12, color: '#94a3b8', lineHeight: 1.6 }}>
+                En clair : le Quinté <b>ne prend pas « les cinq premiers de la presse »</b>. Une case sur cinq vient de
+                <b style={{ color: '#fbbf24' }}> P11 et au-delà</b> ({arr(data.composition.quinte.zones[3].moyenne, 2)} sur 5), et dans
+                <b style={{ color: '#fbbf24' }}> {pc(data.composition.quinte.zones[3].auMoinsUn)}</b> des courses il y en a au moins une.
+                {' '}Les cases P9-P10 en ajoutent {pc(data.composition.quinte.zones[2].part, 0)} : ensemble, le bas de la synthèse pèse{' '}
+                <b>{pc(data.composition.quinte.zones[2].part + data.composition.quinte.zones[3].part, 0)}</b> du Quinté.
               </div>
             </Section>
 
-            {/* ④ matrice DNA ------------------------------------------------- */}
+            {/* ② le filet ------------------------------------------------------ */}
             <Section
-              n="④" titre="Matrice DNA — co-occurrences P × P"
-              sous={<>Cellule (i, j) = nombre de courses où P<sub>i</sub> et P<sub>j</sub> sont tous deux dans les 5. Diagonale = n_top5 de la case. Valeurs brutes : avec {data.N} courses, une cellule à 1 ou 2 est du bruit — la couleur sert à lire les blocs, pas à conclure.</>}
-            >
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ borderCollapse: 'separate', borderSpacing: 1, fontSize: 9.5 }}>
-                  <thead>
-                    <tr>
-                      <th style={{ ...SK.th, padding: '4px 6px', fontSize: 9 }}>P</th>
-                      {Array.from({ length: 20 }, (_, k) => k + 1).map((p) => (
-                        <th key={p} style={{ ...SK.th, padding: '4px 2px', fontSize: 9, minWidth: 22 }}>{p}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Array.from({ length: 20 }, (_, i) => i + 1).map((a) => {
-                      const rowMax = Math.max(1, ...Array.from({ length: 20 }, (_, b) => data.pairs[a][b + 1] || 0))
-                      return (
-                        <tr key={a}>
-                          <td style={{ ...SK.td, padding: '3px 6px', fontWeight: 800, color: SK.accent, fontSize: 10 }}>P{a}</td>
-                          {Array.from({ length: 20 }, (_, b) => b + 1).map((bb) => {
-                            const v = data.pairs[a][bb] || 0
-                            const inten = v / Math.max(1, rowMax)
-                            const diag = parP[a - 1]?.n_top5 ? parP[a - 1].n_top5 / data.N : 0
-                            const bg = a === bb
-                              ? `rgba(124,58,237,${0.12 + 0.75 * diag})`
-                              : (v > 0 ? `rgba(52,211,153,${0.10 + 0.75 * inten})` : 'rgba(255,255,255,.04)')
-                            return (
-                              <td key={bb} title={`P${a} · P${bb} : ${v} course(s)`}
-                                style={{ ...SK.td, padding: '2px 1px', textAlign: 'center', fontSize: 9, fontWeight: v > 0 ? 700 : 400,
-                                  color: v > 0 ? '#e2e8f0' : '#3a4a62', background: bg, borderRadius: 3 }}>
-                                {v > 0 ? v : '·'}
-                              </td>
-                            )
-                          })}
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </Section>
-
-            {/* ⑤ contexte bayésien ------------------------------------------- */}
-            <Section
-              n="⑤" titre="Mise à jour bayésienne par le contexte"
-              sous={<>Le postérieur d'une case change avec la discipline, la distance et la taille du champ. Formule : <code>(n_ctx + m · p_global) / (N_ctx + m)</code>, m = {data.marge}. Sous 3 courses, le contexte est trop mince : on remonte d'un cran (discipline + distance → discipline → global) et on l'écrit.</>}
-            >
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 10 }}>
-                {[
-                  ['disc', 'Discipline', data.genres.disciplines],
-                  ['dist', 'Distance', data.genres.distances],
-                  ['part', 'Partants', data.genres.partants],
-                ].map(([k, lib, vals]) => (
-                  <label key={k} style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
-                    {lib}
-                    <select value={ctx[k]} onChange={(e) => setCtx((c) => ({ ...c, [k]: e.target.value }))}
-                      style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12, minWidth: 150 }}>
-                      {vals.map((v) => <option key={v} value={v}>{v}</option>)}
-                    </select>
-                  </label>
-                ))}
-                {contexte && (
-                  <div style={{ marginLeft: 'auto', fontSize: 11.5, color: SK.muted, textAlign: 'right' }}>
-                    contexte retenu : <b style={{ color: '#e9d5ff' }}>{contexte.ctx}</b>
-                    <br />
-                    <span style={{ color: contexte.portee === 'solide' ? '#34d399' : contexte.portee === 'mince' ? '#fbbf24' : '#fb7185' }}>
-                      N = {contexte.N} courses · {contexte.portee}
-                    </span>
-                    {contexte.niveau !== 'combine' && <span style={{ color: '#5b6b85' }}> · remonté à « {contexte.niveau} »</span>}
-                  </div>
-                )}
-              </div>
-
-              {contexte && (
-                <div style={{ overflowX: 'auto' }}>
-                  <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, width: '100%', minWidth: 760, border: '1px solid ' + SK.bord, borderRadius: 8, overflow: 'hidden' }}>
-                    <thead>
-                      <tr style={SK.hdr}>
-                        <th style={{ ...SK.th, textAlign: 'left' }}>Case</th>
-                        <th style={{ ...SK.th, textAlign: 'left' }}>dans les 5<br /><span style={{ fontWeight: 400, opacity: .75 }}>sur ce contexte</span></th>
-                        <th style={{ ...SK.th, textAlign: 'left' }}>P(top-5 | contexte)</th>
-                        <th style={{ ...SK.th, textAlign: 'left' }}>postérieur</th>
-                        <th style={{ ...SK.th, textAlign: 'left' }}>indice<br /><span style={{ fontWeight: 400, opacity: .75 }}>vs global</span></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {[...contexte.parP].sort((a, b) => b.p_post - a.p_post).map((r, i) => (
-                        <tr key={r.p} style={{ background: i % 2 ? SK.alt : 'transparent' }}>
-                          <td style={{ ...SK.td, fontWeight: 800, color: SK.accent }}>P{r.p}</td>
-                          <td style={{ ...SK.td, whiteSpace: 'nowrap' }}>{r.n} / {contexte.N}</td>
-                          <td style={{ ...SK.td }}><Barre v={r.p_top5 * 100} coul="#22d3ee" libelle={pc(r.p_top5)} /></td>
-                          <td style={{ ...SK.td }}><Barre v={r.p_post * 100} coul={SK.accent} libelle={pc(r.p_post)} /></td>
-                          <td style={{ ...SK.td, fontWeight: 700, color: r.indice > 1.08 ? '#34d399' : r.indice < 0.92 ? '#fb7185' : '#a4b8d6' }}>
-                            {r.indice ? '×' + arr(r.indice, 2) : '—'}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-              <div style={{ fontSize: 11, color: '#64748b', marginTop: 7 }}>
-                Indice = postérieur du contexte ÷ postérieur global. ×1,00 = comme la moyenne de l'archive. Donnée, pas prédiction.
-              </div>
-            </Section>
-
-            {/* ⑥ combinaisons ------------------------------------------------- */}
-            <Section
-              n="⑥" titre="Combinaisons du Quinté — l'ensemble des 5 cases"
-              sous={<><b>{data.comboQuint.length} combinaisons distinctes sur {data.N} courses.</b> C'est un <b>ensemble</b> de cases, jamais un ordre : la table ne dit pas qui est 1er. Elle dit quelles cases se retrouvent ensemble dans les 5 — et sa rareté dit qu'on ne peut pas bâtir une règle sur la combinaison complète seule.</>}
-            >
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 7 }}>
-                {data.topCombos.map((cb, i) => (
-                  <div key={i} style={{ padding: '7px 10px', borderRadius: 8, border: '1px solid ' + SK.bord, background: i === 0 ? SK.accentClair : SK.alt, display: 'flex', justifyContent: 'space-between', gap: 8 }}>
-                    <b style={{ fontSize: 12, color: i === 0 ? SK.accent : SK.texte }}>{cb.combo.map((x) => 'P' + x).join(' · ')}</b>
-                    <span style={{ fontSize: 10.5, color: SK.muted, fontWeight: 700 }}>{cb.count}× · {pc(cb.p, 0)}</span>
-                  </div>
-                ))}
-              </div>
-            </Section>
-
-            {/* ⑦ backtest ----------------------------------------------------- */}
-            <Section
-              n="⑦" titre="Backtest hors échantillon — ce que couvre un top-N"
-              sous={<>Pour chaque course, le classement est recalculé <b>sans cette course</b> (leave-one-out), puis on regarde si les 3 du podium et les 5 du Quinté tombent dans le top-N. Le hasard est le tirage uniforme de N cases sur 20 : <code>C(N,3)/C(20,3)</code> et <code>C(N,5)/C(20,5)</code>.</>}
+              n="②" titre="Le filet — combien de cases pour tenir les 3, puis les 5"
+              sous={<>Pour chaque course, le classement est recalculé <b>sans cette course</b> (leave-one-out), puis on regarde si les 3 du podium et les 5 du Quinté tombent dans les N cases gardées. La ligne <i>au hasard</i> est ce que donnerait un tirage au sort des mêmes N cases.</>}
             >
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12, width: '100%', minWidth: 720, border: '1px solid ' + SK.bord, borderRadius: 8, overflow: 'hidden' }}>
@@ -653,10 +424,147 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ⑧ DNA 2.0 ------------------------------------------------------ */}
+            {/* ③ sélection ---------------------------------------------------- */}
+            <Section
+              n="③" titre="Choisir une course — et lire son ticket"
+              sous={<>On classe les cases par leur probabilité postérieure, on garde les <b>N</b> premières, et on rend les <b>numéros</b> de la course. Rien d'autre : pas de groupe, pas de quota, pas de place réservée. L'ordre du ticket est la probabilité décroissante (départage par la case).</>}
+            >
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: 12 }}>
+                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  Course (archive réelle)
+                  <select value={raceId} onChange={(e) => { const row = archive.find((r) => r.id === e.target.value); if (row) chargerCourse(row) }}
+                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12, minWidth: 230 }}>
+                    {archive.length === 0 && <option value="">archive indisponible</option>}
+                    {archive.map((r) => <option key={r.id} value={r.id}>{r.date} · {r.hippodrome} · {r.discipline}</option>)}
+                  </select>
+                </label>
+                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3, flex: '1 1 280px' }}>
+                  Ordre de la presse — P1 → P20
+                  <input value={ordreTxt} onChange={(e) => setOrdreTxt(e.target.value)} placeholder="4 8 6 18 16 2 …"
+                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '6px 9px', fontSize: 12.5, fontFamily: 'ui-monospace, monospace' }} />
+                </label>
+                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  Taille
+                  <select value={taille} onChange={(e) => setTaille(Number(e.target.value))}
+                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12 }}>
+                    {[5, 6, 7, 8, 9, 10, 11, 12].map((n) => <option key={n} value={n}>{n}</option>)}
+                  </select>
+                </label>
+                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  Règle de classement
+                  <select value={regle} onChange={(e) => setRegle(e.target.value)}
+                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12, minWidth: 170 }}>
+                    <option value="top5">P(top-5 | N)</option>
+                    <option value="podium">P(podium | N)</option>
+                    <option value="victoire">P(victoire | N)</option>
+                    <option value="contexte">P(top-5 | contexte)</option>
+                  </select>
+                </label>
+              </div>
+
+              {courseChoisie && (
+                <div style={{ fontSize: 11, color: '#5b6b85', marginBottom: 10 }}>
+                  {courseChoisie.ordre.length} chevaux cités · {courseChoisie.nbPartants} partants · {courseChoisie.distance} m
+                  {regle === 'contexte' && contexte ? <> · contexte : <b style={{ color: '#c4b5fd' }}>{contexte.ctx}</b> (N = {contexte.N})</> : null}
+                </div>
+              )}
+
+              {selection && selection.lignes.length ? (
+                <>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', padding: '10px 12px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.accentClair, marginBottom: 12 }}>
+                    <span style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: 0.8 }}>Ticket</span>
+                    {selection.lignes.map((l) => (
+                      <span key={l.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 38 }}>
+                        <b style={{ fontSize: 22, fontWeight: 900, color: '#fff' }}>{l.num}</b>
+                        <span style={{ fontSize: 9.5, color: '#a4b8d6' }}>P{l.slot}</span>
+                      </span>
+                    ))}
+                    <button type="button" onClick={() => {
+                      try { navigator.clipboard.writeText(selection.lignes.map((l) => l.num).join(' ')); setCopie('copié'); setTimeout(() => setCopie(''), 1500) } catch (e) { setCopie('—') }
+                    }} style={{ marginLeft: 'auto', background: 'transparent', color: SK.accent, border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 10px', fontSize: 11.5, cursor: 'pointer' }}>
+                      {copie || 'copier'}
+                    </button>
+                  </div>
+
+                  <div style={{ overflowX: 'auto' }}>
+                    <table style={{ borderCollapse: 'collapse', fontSize: 12, width: '100%', minWidth: 520 }}>
+                      <thead>
+                        <tr>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>#</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>n°</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>case</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>probabilité postérieure</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>brut</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>top-5</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {selection.lignes.map((l, i) => (
+                          <tr key={l.num} style={{ background: i % 2 ? SK.alt : 'transparent' }}>
+                            <td style={{ ...SK.td, padding: '5px 9px', color: SK.muted }}>{i + 1}</td>
+                            <td style={{ ...SK.td, padding: '5px 9px', fontWeight: 900, fontSize: 14 }}>{l.num}</td>
+                            <td style={{ ...SK.td, padding: '5px 9px', color: SK.accent, fontWeight: 800 }}>P{l.slot}</td>
+                            <td style={{ ...SK.td, padding: '5px 9px' }}><Barre v={l.post * 100} coul={SK.accent} libelle={pc(l.post)} /></td>
+                            <td style={{ ...SK.td, padding: '5px 9px', color: '#a4b8d6' }}>{pc(l.p_top5)}</td>
+                            <td style={{ ...SK.td, padding: '5px 9px', color: '#7a8ea9' }}>{l.n == null ? '—' : `${l.n} / ${selection.N_ctx}`}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* ce que cette taille a couvert historiquement */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: 8, marginTop: 12 }}>
+                    {attendu && (
+                      <>
+                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · Quinté entier · N={taille}</div>
+                          <div style={{ fontSize: 19, fontWeight: 900, color: '#e9d5ff' }}>{pc(attendu.quinte)}</div>
+                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>{Math.round(attendu.quinte * attendu.evalues)} / {attendu.evalues} courses</div>
+                        </div>
+                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · podium entier · N={taille}</div>
+                          <div style={{ fontSize: 19, fontWeight: 900, color: '#34d399' }}>{pc(attendu.podium)}</div>
+                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>≥ 4 du Quinté : {pc(attendu.plus4)}</div>
+                        </div>
+                      </>
+                    )}
+                    {data.regles?.[regle]?.horsEchantillon?.map((h, i) => (
+                      <div key={i} style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                        <div style={{ fontSize: 10.5, color: SK.muted }}>hors échantillon · top-8</div>
+                        <div style={{ fontSize: 17, fontWeight: 900, color: '#e9d5ff' }}>{pc(h.quinte)} <span style={{ fontSize: 10.5, color: '#7a8ea9' }}>Quinté</span></div>
+                        <div style={{ fontSize: 11, color: '#34d399' }}>{pc(h.podium)} <span style={{ color: '#7a8ea9' }}>podium</span></div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ fontSize: 11, color: '#64748b', marginTop: 9, lineHeight: 1.55 }}>
+                    Ce que la règle vaut, mesuré :{' '}
+                    {(data.classementRegles || []).map((c, i) => (
+                      <span key={c.regle} style={{ marginRight: 8 }}>
+                        <b style={{ color: c.regle === regle ? '#e9d5ff' : '#7a8ea9' }}>{c.regle}</b> {pc(c.quinte, 0)}<span style={{ color: '#4a5a72' }}>/{pc(c.podium, 0)}</span>{i < data.classementRegles.length - 1 ? ' ·' : ''}
+                      </span>
+                    ))}
+                    <span style={{ color: '#4a5a72' }}> (Quinté / podium, hors échantillon top-8) — écart max {Number.isFinite(data.ecartRegles) ? (data.ecartRegles * 100).toFixed(1).replace('.', ',') : '—'} pts.</span>
+                  </div>
+                </>
+              ) : (
+                <div style={{ fontSize: 12, color: SK.muted, padding: '8px 0' }}>
+                  Saisis l'ordre de la presse (ou choisis une course de l'archive) pour voir le ticket.
+                </div>
+              )}
+            </Section>
+
+                        <details style={{ marginBottom: 16 }}>
+              <summary style={{ cursor: 'pointer', fontSize: 12.5, fontWeight: 800, color: SK.accent, padding: '10px 13px', border: '1px solid ' + SK.bord, borderRadius: 9, background: SK.accentClair }}>
+                Pour aller plus loin — les tests qui n'ont pas changé la sélection
+              </summary>
+              <div style={{ marginTop: 14 }}>
+
+{/* DNA 2.0 -------------------------------------------------------- */}
             {data.dna && (
               <Section
-                n="⑧" titre="DNA 2.0 — du marginal au joint, et ce que le test en dit"
+                n="ⓘ" titre="DNA 2.0 — du marginal au joint, et ce que le test en dit"
                 sous={<>Un Quinté n'est pas un classement de cases : c'est un <b>ensemble de 5</b>. DNA 2.0 modélise donc la loi jointe de cet ensemble par son développement log-linéaire hiérarchique — chaque couche ajoute un terme, avec un coefficient λ appris sur une moitié de l'archive. ⛔ Aucun groupe, aucun quota : le seul critère du ticket est sa couverture estimée.</>}
               >
                 <div style={{ padding: '10px 12px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt, fontSize: 12.5, fontFamily: 'ui-monospace, monospace', marginBottom: 12, overflowX: 'auto', whiteSpace: 'nowrap' }}>
@@ -833,147 +741,16 @@ export default function Probabilite() {
               </Section>
             )}
 
-            {/* ⑨ sélection --------------------------------------------------- */}
-            <Section
-              n="⑨" titre="De la probabilité à la sélection — le ticket"
-              sous={<>On classe les cases par leur probabilité postérieure, on garde les <b>N</b> premières, et on rend les <b>numéros</b> de la course. Rien d'autre : pas de groupe, pas de quota, pas de place réservée. L'ordre du ticket est la probabilité décroissante (départage par la case).</>}
-            >
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: 12 }}>
-                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  Course (archive réelle)
-                  <select value={raceId} onChange={(e) => { const row = archive.find((r) => r.id === e.target.value); if (row) chargerCourse(row) }}
-                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12, minWidth: 230 }}>
-                    {archive.length === 0 && <option value="">archive indisponible</option>}
-                    {archive.map((r) => <option key={r.id} value={r.id}>{r.date} · {r.hippodrome} · {r.discipline}</option>)}
-                  </select>
-                </label>
-                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3, flex: '1 1 280px' }}>
-                  Ordre de la presse — P1 → P20
-                  <input value={ordreTxt} onChange={(e) => setOrdreTxt(e.target.value)} placeholder="4 8 6 18 16 2 …"
-                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '6px 9px', fontSize: 12.5, fontFamily: 'ui-monospace, monospace' }} />
-                </label>
-                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  Taille
-                  <select value={taille} onChange={(e) => setTaille(Number(e.target.value))}
-                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12 }}>
-                    {[5, 6, 7, 8, 9, 10, 11, 12].map((n) => <option key={n} value={n}>{n}</option>)}
-                  </select>
-                </label>
-                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  Règle de classement
-                  <select value={regle} onChange={(e) => setRegle(e.target.value)}
-                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12, minWidth: 170 }}>
-                    <option value="top5">P(top-5 | N)</option>
-                    <option value="podium">P(podium | N)</option>
-                    <option value="victoire">P(victoire | N)</option>
-                    <option value="contexte">P(top-5 | contexte)</option>
-                  </select>
-                </label>
-              </div>
-
-              {courseChoisie && (
-                <div style={{ fontSize: 11, color: '#5b6b85', marginBottom: 10 }}>
-                  {courseChoisie.ordre.length} chevaux cités · {courseChoisie.nbPartants} partants · {courseChoisie.distance} m
-                  {regle === 'contexte' && contexte ? <> · contexte : <b style={{ color: '#c4b5fd' }}>{contexte.ctx}</b> (N = {contexte.N})</> : null}
-                </div>
-              )}
-
-              {selection && selection.lignes.length ? (
-                <>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', padding: '10px 12px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.accentClair, marginBottom: 12 }}>
-                    <span style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: 0.8 }}>Ticket</span>
-                    {selection.lignes.map((l) => (
-                      <span key={l.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 38 }}>
-                        <b style={{ fontSize: 22, fontWeight: 900, color: '#fff' }}>{l.num}</b>
-                        <span style={{ fontSize: 9.5, color: '#a4b8d6' }}>P{l.slot}</span>
-                      </span>
-                    ))}
-                    <button type="button" onClick={() => {
-                      try { navigator.clipboard.writeText(selection.lignes.map((l) => l.num).join(' ')); setCopie('copié'); setTimeout(() => setCopie(''), 1500) } catch (e) { setCopie('—') }
-                    }} style={{ marginLeft: 'auto', background: 'transparent', color: SK.accent, border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 10px', fontSize: 11.5, cursor: 'pointer' }}>
-                      {copie || 'copier'}
-                    </button>
-                  </div>
-
-                  <div style={{ overflowX: 'auto' }}>
-                    <table style={{ borderCollapse: 'collapse', fontSize: 12, width: '100%', minWidth: 520 }}>
-                      <thead>
-                        <tr>
-                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>#</th>
-                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>n°</th>
-                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>case</th>
-                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>probabilité postérieure</th>
-                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>brut</th>
-                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>top-5</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {selection.lignes.map((l, i) => (
-                          <tr key={l.num} style={{ background: i % 2 ? SK.alt : 'transparent' }}>
-                            <td style={{ ...SK.td, padding: '5px 9px', color: SK.muted }}>{i + 1}</td>
-                            <td style={{ ...SK.td, padding: '5px 9px', fontWeight: 900, fontSize: 14 }}>{l.num}</td>
-                            <td style={{ ...SK.td, padding: '5px 9px', color: SK.accent, fontWeight: 800 }}>P{l.slot}</td>
-                            <td style={{ ...SK.td, padding: '5px 9px' }}><Barre v={l.post * 100} coul={SK.accent} libelle={pc(l.post)} /></td>
-                            <td style={{ ...SK.td, padding: '5px 9px', color: '#a4b8d6' }}>{pc(l.p_top5)}</td>
-                            <td style={{ ...SK.td, padding: '5px 9px', color: '#7a8ea9' }}>{l.n == null ? '—' : `${l.n} / ${selection.N_ctx}`}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* ce que cette taille a couvert historiquement */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: 8, marginTop: 12 }}>
-                    {attendu && (
-                      <>
-                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
-                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · Quinté entier · N={taille}</div>
-                          <div style={{ fontSize: 19, fontWeight: 900, color: '#e9d5ff' }}>{pc(attendu.quinte)}</div>
-                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>{Math.round(attendu.quinte * attendu.evalues)} / {attendu.evalues} courses</div>
-                        </div>
-                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
-                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · podium entier · N={taille}</div>
-                          <div style={{ fontSize: 19, fontWeight: 900, color: '#34d399' }}>{pc(attendu.podium)}</div>
-                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>≥ 4 du Quinté : {pc(attendu.plus4)}</div>
-                        </div>
-                      </>
-                    )}
-                    {data.regles?.[regle]?.horsEchantillon?.map((h, i) => (
-                      <div key={i} style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
-                        <div style={{ fontSize: 10.5, color: SK.muted }}>hors échantillon · top-8</div>
-                        <div style={{ fontSize: 17, fontWeight: 900, color: '#e9d5ff' }}>{pc(h.quinte)} <span style={{ fontSize: 10.5, color: '#7a8ea9' }}>Quinté</span></div>
-                        <div style={{ fontSize: 11, color: '#34d399' }}>{pc(h.podium)} <span style={{ color: '#7a8ea9' }}>podium</span></div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div style={{ fontSize: 11, color: '#64748b', marginTop: 9, lineHeight: 1.55 }}>
-                    Ce que la règle vaut, mesuré :{' '}
-                    {(data.classementRegles || []).map((c, i) => (
-                      <span key={c.regle} style={{ marginRight: 8 }}>
-                        <b style={{ color: c.regle === regle ? '#e9d5ff' : '#7a8ea9' }}>{c.regle}</b> {pc(c.quinte, 0)}<span style={{ color: '#4a5a72' }}>/{pc(c.podium, 0)}</span>{i < data.classementRegles.length - 1 ? ' ·' : ''}
-                      </span>
-                    ))}
-                    <span style={{ color: '#4a5a72' }}> (Quinté / podium, hors échantillon top-8) — écart max {Number.isFinite(data.ecartRegles) ? (data.ecartRegles * 100).toFixed(1).replace('.', ',') : '—'} pts.</span>
-                  </div>
-                </>
-              ) : (
-                <div style={{ fontSize: 12, color: SK.muted, padding: '8px 0' }}>
-                  Saisis l'ordre de la presse (ou choisis une course de l'archive) pour voir le ticket.
-                </div>
-              )}
-            </Section>
-
-              </div>
+                          </div>
             </details>
 
-            {/* limites ---------------------------------------------------- */}
+{/* limites ---------------------------------------------------- */}
             <div style={{ ...SK.box, padding: 14, borderLeft: '4px solid #fbbf24', fontSize: 12, lineHeight: 1.7 }}>
               <b style={{ color: '#fbbf24' }}>Ce que la statistique ne dit pas :</b>
               <br />· <b>{data.N} courses.</b> Une case à 2 ou 3 top-5 reste du bruit — le prior m = {data.marge} le rappelle dans chaque chiffre.
               <br />· Les probabilités sont <b>empiriques</b> (fréquences), pas un modèle entraîné. Aucune prédiction sur une course isolée.
               <br />· Les contextes de moins de 3 courses ne sont pas affichés seuls : la page remonte d'un cran et l'écrit.
-              <br />· Le backtest est <b>leave-one-out</b> : la course notée ne sert jamais à son propre classement. Le test par moitié (⑦) est la version la plus stricte.
+              <br />· Le backtest est <b>leave-one-out</b> : la course notée ne sert jamais à son propre classement. Le test par moitié (②) est la version la plus stricte.
               <br />· Mise à jour : <code>node tools\probabilite.mjs</code> — relit l'archive et réécrit <code>data/probabilite.json</code> + <code>public/data/probabilite.json</code>. Le job quotidien le fait tout seul.
             </div>
           </>
