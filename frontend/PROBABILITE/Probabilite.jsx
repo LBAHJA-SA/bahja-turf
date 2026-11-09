@@ -8,6 +8,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Entete from '../../src/Entete.jsx'
 import { selectionner, choisirContexte } from '../../src/lib/probabilite.js'
+import { buildGrid } from '../../src/lib/quinte.js'
 
 const SK = {
   accent: '#a78bfa', bord: 'rgba(124,58,237,.35)',
@@ -67,6 +68,7 @@ export default function Probabilite() {
     if (!course || !data) return null
     const N = course.nbPartants || course.runners.length
     const presse = course.ordre
+    const grille = buildGrid(presse, course.runners)
     const scoreByNum = {}
     for (const s of course.scores) scoreByNum[s.num] = s
     const cotesCourse = (cotes && cotes[course.id] && Array.isArray(cotes[course.id].cotes)) ? cotes[course.id].cotes : []
@@ -95,8 +97,8 @@ export default function Probabilite() {
     // (calculé après)
 
     const rows = course.runners.map((num, idx) => {
-      const slot = presse.indexOf(num) + 1  // 1-based position in press (0 if absent)
-      const slotSafe = slot > 0 ? slot : (presse.length + 1)
+      const slot = (grille.slotParNum || {})[num]
+      const slotSafe = Number.isFinite(slot) ? slot : (presse.length + 1)
       const d = parP.find((x) => x.p === slotSafe) || {}
       const dctx = parPctx.find((x) => x.p === slotSafe) || d
       const sc = scoreByNum[num] || {}
