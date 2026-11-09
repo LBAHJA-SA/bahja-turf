@@ -1153,10 +1153,156 @@ export function bootstrapPaire(a, b, tirages = 4000, seed = 20261109) {
   }
 }
 
+/** Couverture avec pénalité anti-répétition : un 5-sous-ensemble déjà vu est dévalué. */
+export function couvertureAntiRep(dr, T, lam, vus, beta) {
+  let s = 0
+  const n = T.length
+  const acc = []
+  const rec = (start) => {
+    if (acc.length === 5) {
+      const m = dmask5(acc)
+      const i = dr.index.get(m)
+      let p = i === undefined ? 0 : Math.exp(scoreSous(dr, i, lam))
+      if (p && vus && vus.has(m)) p *= Math.exp(-beta)
+      s += p
+      return
+    }
+    for (let i = start; i < n; i++) { acc.push(T[i]); rec(i + 1); acc.pop() }
+  }
+  rec(0)
+  return s
+}
+
 /**
- * DNA 2.0 complet : échelle apprise sur toute l'archive, puis évaluation
- * honnête sur la moitié qui n'a pas servi, dans les deux sens.
+ * « SORTIR DU CONNU » — trois objectifs mesurés face au marginal.
+ *
+ * Le Quinté ne se répète presque jamais (32 combinaisons distinctes sur 33
+ * courses). Faut-il pour autant abandonner la combinaison la plus probable ?
+ * Trois réponses candidates, toutes mesurées sur la moitié qui n'a pas servi :
+ *
+ *   étalement     un seul paramètre θ (les paires, sans triples ni quinté)
+ *                 choisi par vraisemblance : le modèle « écartez-vous »
+ *   anti-répétition  β dévalue les 5-sous-ensembles déjà observés
+ *   marginal      la référence (couche ①)
+ *
+ * Aucune n'entre dans le moteur si elle ne gagne pas dans les deux sens.
  */
+export function objectifsAlternatifs(list, opts = {}) {
+  const taille = opts.taille || 8
+  const N = list.length
+  const moitie = Math.floor(N / 2)
+  const A = list.slice(0, moitie)
+  const B = list.slice(moitie)
+  const grilleTheta = [0, 0.1, 0.2, 0.3, 0.5, 0.75, 1, 1.5]
+  const grilleBeta = [0, 0.5, 1, 2, 4]
+
+  const compte = (dTest, build) => {
+    let q = 0, pod = 0, q4 = 0, ev = 0
+    for (const dr of dTest) {
+      if (!dr.obs) continue
+      ev++
+      const set = new Set(build(dr))
+      if (dr.obsOrder.slice(0, 3).every((p) => set.has(p))) pod++
+      if (dr.obsOrder.slice(0, 5).every((p) => set.has(p))) q++
+      if (dr.obsOrder.slice(0, 5).filter((p) => set.has(p)).length >= 4) q4++
+    }
+    return { evalues: ev, quinte: ev ? q / ev : 0, podium: ev ? pod / ev : 0, plus4: ev ? q4 / ev : 0, hits: q }
+  }
+
+  const runs = []
+  for (const [train, test] of [[A, B], [B, A]]) {
+    const pot = potentielsDNA(train)
+    const dTrain = donneesDNA(train, pot)
+    const dTest = donneesDNA(test, pot)
+
+    // θ : un seul paramètre, choisi par vraisemblance sur l'entraînement
+    let theta = 0
+    let meilleurLL = logVraisemblance(dTrain, LAM_ZERO).moyen
+    for (const th of grilleTheta) {
+      const ll = logVraisemblance(dTrain, { pair: th, triple: 0, quinte: 0 }).moyen
+      if (ll > meilleurLL + 1e-9) { meilleurLL = ll; theta = th }
+    }
+
+    // β : on garde celui qui couvre le plus d'arrivées d'entraînement (LOO interne)
+    let beta = 0
+    let meilleurHits = -1
+    for (const b of grilleBeta) {
+      let h = 0
+      for (let i = 0; i < dTrain.length; i++) {
+        const dr = dTrain[i]
+        if (!dr.obs) continue
+        const vus = new Set()
+        for (let j = 0; j < dTrain.length; j++) if (j !== i && dTrain[j].obs) vus.add(dTrain[j].obs.mask)
+        const T = escalade(dr.cases, taille, (TT) => couvertureAntiRep(dr, TT, LAM_ZERO, vus, b), dr.uParCase).ticket
+        const set = new Set(T)
+        if (dr.obsOrder.slice(0, 5).every((p) => set.has(p))) h++
+      }
+      if (h > meilleurHits) { meilleurHits = h; beta = b }
+    }
+
+    const vusTest = new Set()
+    for (const dr of dTrain) if (dr.obs) vusTest.add(dr.obs.mask)
+
+    const marginal = compte(dTest, (dr) => escalade(dr.cases, taille, (TT) => couvertureRapide(dr, TT, LAM_ZERO), dr.uParCase).ticket)
+    const etalement = compte(dTest, (dr) => escalade(dr.cases, taille, (TT) => couvertureRapide(dr, TT, { pair: theta, triple: 0, quinte: 0 }), dr.uParCase).ticket)
+    const antiRep = compte(dTest, (dr) => escalade(dr.cases, taille, (TT) => couvertureAntiRep(dr, TT, LAM_ZERO, vusTest, beta), dr.uParCase).ticket)
+
+    runs.push({ theta, beta, marginal, etalement, antiRep })
+  }
+
+  /* ── la répétition, mesurée dans l'ordre du temps ─────────────────────── */
+  const potFull = potentielsDNA(list)
+  const vus = new Set()
+  let repetitions = 0, ticketsDejaVus = 0, courses = 0
+  for (const c of list) {
+    const s = slotsDe(c)
+    const cases = casesDeCourse(c)
+    if (s.length === 5) {
+      const m = dmask5(s.slice().sort((a, b) => a - b))
+      if (vus.has(m)) repetitions++
+      courses++
+      if (cases.length >= taille) {
+        const top = cases.slice().sort((a, b) => (potFull.u[b] - potFull.u[a]) || a - b).slice(0, taille)
+        let vusDansTicket = 0
+        const srt = top.slice().sort((a, b) => a - b)
+        const acc2 = []
+        const rec2 = (start) => {
+          if (acc2.length === 5) {
+            if (vus.has(dmask5(acc2))) vusDansTicket++
+            return
+          }
+          for (let i = start; i < srt.length; i++) { acc2.push(srt[i]); rec2(i + 1); acc2.pop() }
+        }
+        rec2(0)
+        ticketsDejaVus += vusDansTicket
+      }
+      vus.add(m)
+    }
+  }
+
+  const moy = (cle) => (runs.length
+    ? runs.reduce((s, r) => s + r[cle].quinte, 0) / runs.length
+    : 0)
+  const moyP = (cle) => (runs.length ? runs.reduce((s, r) => s + r[cle].podium, 0) / runs.length : 0)
+  const moy4 = (cle) => (runs.length ? runs.reduce((s, r) => s + r[cle].plus4, 0) / runs.length : 0)
+
+  return {
+    taille,
+    runs,
+    comparaison: [
+      { objectif: 'marginal (couche ①)', quinte: moy('marginal'), podium: moyP('marginal'), plus4: moy4('marginal') },
+      { objectif: 'étalement — un seul θ', quinte: moy('etalement'), podium: moyP('etalement'), plus4: moy4('etalement') },
+      { objectif: 'anti-répétition — β', quinte: moy('antiRep'), podium: moyP('antiRep'), plus4: moy4('antiRep') },
+    ],
+    repetition: {
+      courses,
+      repetitions,
+      taux: courses ? repetitions / courses : 0,
+      combosDejaVusParTicket: courses ? ticketsDejaVus / courses : 0,
+      combosParTicket: 56,
+    },
+  }
+}
 export function dnaComplet(list, opts = {}) {
   const tailles = opts.tailles || [5, 6, 7, 8, 9, 10, 11, 12]
   const N = list.length

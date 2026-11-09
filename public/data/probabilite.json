@@ -17690,7 +17690,7 @@
       "18+"
     ]
   },
-  "genereLe": "2026-11-09T01:51:33.403Z",
+  "genereLe": "2026-11-09T02:02:45.322Z",
   "dna": {
     "N": 33,
     "moitie": 16,
@@ -22264,6 +22264,88 @@
       "quinteVus": 32,
       "quinteRepetes": 1,
       "quintesDistincts": 32
+    },
+    "audela": {
+      "taille": 8,
+      "runs": [
+        {
+          "theta": 1.5,
+          "beta": 0.5,
+          "marginal": {
+            "evalues": 17,
+            "quinte": 0.11764705882352941,
+            "podium": 0.47058823529411764,
+            "plus4": 0.4117647058823529,
+            "hits": 2
+          },
+          "etalement": {
+            "evalues": 17,
+            "quinte": 0.058823529411764705,
+            "podium": 0.47058823529411764,
+            "plus4": 0.4117647058823529,
+            "hits": 1
+          },
+          "antiRep": {
+            "evalues": 17,
+            "quinte": 0.11764705882352941,
+            "podium": 0.4117647058823529,
+            "plus4": 0.35294117647058826,
+            "hits": 2
+          }
+        },
+        {
+          "theta": 1.5,
+          "beta": 0,
+          "marginal": {
+            "evalues": 16,
+            "quinte": 0.125,
+            "podium": 0.5625,
+            "plus4": 0.5625,
+            "hits": 2
+          },
+          "etalement": {
+            "evalues": 16,
+            "quinte": 0.125,
+            "podium": 0.5625,
+            "plus4": 0.5625,
+            "hits": 2
+          },
+          "antiRep": {
+            "evalues": 16,
+            "quinte": 0.125,
+            "podium": 0.5625,
+            "plus4": 0.5625,
+            "hits": 2
+          }
+        }
+      ],
+      "comparaison": [
+        {
+          "objectif": "marginal (couche ①)",
+          "quinte": 0.1213235294117647,
+          "podium": 0.5165441176470589,
+          "plus4": 0.48713235294117646
+        },
+        {
+          "objectif": "étalement — un seul θ",
+          "quinte": 0.09191176470588236,
+          "podium": 0.5165441176470589,
+          "plus4": 0.48713235294117646
+        },
+        {
+          "objectif": "anti-répétition — β",
+          "quinte": 0.1213235294117647,
+          "podium": 0.48713235294117646,
+          "plus4": 0.45772058823529416
+        }
+      ],
+      "repetition": {
+        "courses": 33,
+        "repetitions": 1,
+        "taux": 0.030303030303030304,
+        "combosDejaVusParTicket": 2.0606060606060606,
+        "combosParTicket": 56
+      }
     }
   }
 }

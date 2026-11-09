@@ -648,6 +648,66 @@ export default function Probabilite() {
                     </div>
                   </div>
                 )}
+
+                {/* « sortir du connu » : la répétition est-elle exploitable ? */}
+                {data.dna.audela && (
+                  <div style={{ marginTop: 16, paddingTop: 12, borderTop: '1px dashed ' + SK.bord }}>
+                    <div style={{ fontSize: 12.5, fontWeight: 800, color: '#e9d5ff', marginBottom: 6 }}>
+                      « Sortir du connu » — le Quinté ne se répète presque jamais. Faut-il fuir la combinaison la plus probable ?
+                    </div>
+                    <div style={{ fontSize: 12, color: '#a4b8d6', lineHeight: 1.6, marginBottom: 9 }}>
+                      Sur <b>{data.dna.audela.repetition.courses}</b> courses, <b>{data.dna.audela.repetition.repetitions}</b> Quinté
+                      est retombé exactement sur une combinaison déjà vue (<b>{pc(data.dna.audela.repetition.taux)}</b>).
+                      Dans la trame d'un ticket de 8, <b>{Number(data.dna.audela.repetition.combosDejaVusParTicket).toFixed(1).replace('.', ',')}</b>{' '}
+                      combinaisons sur {data.dna.audela.repetition.combosParTicket} avaient déjà été vues <i>avant</i> la course.
+                      Deux façons de forcer la sortie du connu sont donc testées, chacune hors échantillon :
+                    </div>
+
+                    <table style={{ borderCollapse: 'collapse', fontSize: 12, width: '100%', minWidth: 520 }}>
+                      <thead>
+                        <tr>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>objectif</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>Quinté · n=8<br /><span style={{ fontWeight: 400, opacity: .7 }}>hors échantillon</span></th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>Podium</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>≥ 4 du Quinté</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data.dna.audela.comparaison.map((c, i) => {
+                          const b = data.dna.audela.comparaison[0]
+                          const dq = (c.quinte - b.quinte) * 100
+                          const dp = (c.podium - b.podium) * 100
+                          return (
+                            <tr key={c.objectif} style={{ background: i === 0 ? SK.accentClair : i % 2 ? SK.alt : 'transparent' }}>
+                              <td style={{ ...SK.td, padding: '6px 9px', fontWeight: i === 0 ? 800 : 500, whiteSpace: 'nowrap' }}>{c.objectif}</td>
+                              <td style={{ ...SK.td, padding: '6px 9px', fontWeight: 800, color: i === 0 ? '#e9d5ff' : dq < 0 ? '#fca5a5' : '#34d399' }}>
+                                {pc(c.quinte)}
+                                {i > 0 && <span style={{ fontSize: 10.5 }}> ({dq >= 0 ? '+' : ''}{dq.toFixed(1).replace('.', ',')})</span>}
+                              </td>
+                              <td style={{ ...SK.td, padding: '6px 9px', color: dp < 0 ? '#fca5a5' : '#a4b8d6' }}>
+                                {pc(c.podium)}
+                                {i > 0 && dp !== 0 && <span style={{ fontSize: 10.5 }}> ({dp >= 0 ? '+' : ''}{dp.toFixed(1).replace('.', ',')})</span>}
+                              </td>
+                              <td style={{ ...SK.td, padding: '6px 9px', color: '#7a8ea9' }}>{pc(c.plus4)}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+
+                    <div style={{ fontSize: 11.5, color: '#64748b', marginTop: 8, lineHeight: 1.6 }}>
+                      <b style={{ color: '#c4b5fd' }}>Verdict mesuré :</b> écarter les combinaisons déjà vues ne change rien
+                      (l'anti-répétition retrouve le marginal, parfois en perdant du podium), et « étaler » la probabilité
+                      coûte {' '}
+                      <b style={{ color: '#fca5a5' }}>
+                        {Math.abs((data.dna.audela.comparaison[1].quinte - data.dna.audela.comparaison[0].quinte) * 100).toFixed(1).replace('.', ',')} points
+                      </b>{' '}
+                      de Quinté. La rareté d'une combinaison n'est pas une information sur la course : les 5 cases restent
+                      indépendantes du fait qu'on les ait déjà vues. Seule la loi <i>marginale</i> porte du signal — c'est la
+                      règle la plus forte, et elle est conservée.
+                    </div>
+                  </div>
+                )}
               </Section>
             )}
 

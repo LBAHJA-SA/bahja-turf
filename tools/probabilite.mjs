@@ -19,7 +19,7 @@
  * ========================================================================== */
 import fs from 'node:fs'
 import { buildGrid } from '../src/lib/quinte.js'
-import { construireMatrix, pctProb, dnaComplet } from '../src/lib/probabilite.js'
+import { construireMatrix, pctProb, dnaComplet, objectifsAlternatifs } from '../src/lib/probabilite.js'
 
 const SYN = JSON.parse(fs.readFileSync('data/synthese.json', 'utf8'))
 const courses = []
@@ -86,6 +86,16 @@ console.log(`     meilleur λ = ${meilleurScan.pair}/${meilleurScan.triple}/${me
 console.log(`     couche ① seule (λ = 0) → quinté ${pctProb(D.scan[0].tauxQ)} · podium ${pctProb(D.scan[0].tauxP)}`)
 
 M.dna = D
+
+/* ── « sortir du connu » : la répétition est-elle exploitable ? ─────────── */
+const ALT = objectifsAlternatifs(courses, { taille: 8 })
+M.dna.audela = ALT
+console.log('\n  « sortir du connu » — le Quinté ne se répète presque jamais :')
+console.log(`     ${ALT.repetition.repetitions} Quinté identique sur ${ALT.repetition.courses} courses (${pctProb(ALT.repetition.taux)})`)
+console.log(`     combinaisons du ticket déjà vues avant la course : ${ALT.repetition.combosDejaVusParTicket.toFixed(1)} / ${ALT.repetition.combosParTicket}`)
+for (const r of ALT.runs) console.log(`     sens ${r.theta} / β ${r.beta} · marginal ${pctProb(r.marginal.quinte)} · étalement ${pctProb(r.etalement.quinte)} · anti-rép. ${pctProb(r.antiRep.quinte)}`)
+console.log('     moyenne des deux sens (n = 8) :')
+for (const c of ALT.comparaison) console.log(`       ${c.objectif.padEnd(24)} quinté ${pctProb(c.quinte).padStart(6)}  podium ${pctProb(c.podium).padStart(6)}  ≥4 ${pctProb(c.plus4).padStart(6)}`)
 
 const out = JSON.stringify(M, null, 2)
 fs.writeFileSync('data/probabilite.json', out)
