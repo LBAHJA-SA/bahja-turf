@@ -408,20 +408,10 @@ export default function Probabilite() {
                   </div>
                 </div>
 
-                {/* les 6 méthodes */}
-                <div style={{ ...SK.box, padding: 14, marginBottom: 14 }}>
-                  <div style={{ fontSize: 12, fontWeight: 900, color: '#e9d5ff', marginBottom: 8, textTransform: 'uppercase', letterSpacing: .6 }}>les 6 méthodes</div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 8, fontSize: 11.5, lineHeight: 1.55, color: '#cbd5e1' }}>
-                    <div><b style={{ color: SK.accent }}>① classique</b> — P = 5/N (référence Top 5 équiprobable).</div>
-                    <div><b style={{ color: SK.accent }}>② fréquentiste</b> — taux historique d'apparition de la case dans les 5 premiers.</div>
-                    <div><b style={{ color: SK.accent }}>③ conditionnelle</b> — fréquence dans un contexte comparable (discipline, distance, partants).</div>
-                    <div><b style={{ color: SK.accent }}>④ bayésienne</b> — prior fréquentiste × likelihood (forme, distance, piste, niveau, terrain, corde).</div>
-                    <div><b style={{ color: SK.accent }}>⑤ odds</b> — P = 1/cote (Equidia), converti en probabilité Top 5. {calc.hasOdds ? 'Disponible.' : 'Indisponible pour cette course.'}</div>
-                    <div><b style={{ color: SK.accent }}>⑥ Monte Carlo</b> — 5000 simulations d'un top-5 pondéré, comptage des apparitions.</div>
-                  </div>
-                </div>
-
-                {/* DNA des paires et triplets */}
+                <details style={{ marginBottom: 14 }}>
+              <summary style={{ cursor: 'pointer', fontSize: 12, fontWeight: 800, color: SK.accent, padding: '8px 10px', border: '1px solid ' + SK.bord, borderRadius: 8, background: 'rgba(124,58,237,.10)' }}>DNA — paires et triplets récurrents (pour vérifier)</summary>
+              <div style={{ marginTop: 10 }}>
+{/* DNA des paires et triplets */}
                 {dna && (
                   <div style={{ ...SK.box, padding: 14, marginBottom: 14 }}>
                     <div style={{ fontSize: 12, fontWeight: 900, color: '#e9d5ff', marginBottom: 8, textTransform: 'uppercase', letterSpacing: .6 }}>
@@ -478,7 +468,11 @@ export default function Probabilite() {
                   </div>
                 )}
 
-                {/* info */}
+                
+              </div>
+            </details>
+
+{/* info */}
                 <div style={{ fontSize: 11, color: '#64748b', lineHeight: 1.6 }}>
                   Données : {data.N} courses réelles (archive) + {data.controle?.N || 96} autres Quintés (contrôle).{' '}
                   Leave-one-out : la course notée ne sert jamais à son propre classement.{' '}
