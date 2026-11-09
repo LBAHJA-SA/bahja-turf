@@ -197,7 +197,7 @@ export default function Probabilite() {
                   </table>
                 </div>
                 <div style={{ fontSize: 11, color: '#64748b', marginTop: 8, lineHeight: 1.5 }}>
-                  <b>P(top-5 | case)</b> = probabilité qu'un cheval dont la case est P{k} finisse dans les 5, calculée sur {data.N} courses (leave-one-out).
+                  <b>P(top-5 | case)</b> = probabilité qu'un cheval dont la case est P(case) finisse dans les 5, calculée sur {data.N} courses (leave-one-out).
                   <b>brut</b> = fréquence brute observée. Le ticket = les 7 plus fortes.
                 </div>
               </div>
