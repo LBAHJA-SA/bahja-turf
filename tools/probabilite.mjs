@@ -19,7 +19,7 @@
  * ========================================================================== */
 import fs from 'node:fs'
 import { buildGrid } from '../src/lib/quinte.js'
-import { construireMatrix, pctProb, dnaComplet, objectifsAlternatifs } from '../src/lib/probabilite.js'
+import { construireMatrix, pctProb, dnaComplet, objectifsAlternatifs, posterior } from '../src/lib/probabilite.js'
 
 const SYN = JSON.parse(fs.readFileSync('data/synthese.json', 'utf8'))
 const courses = []
@@ -98,6 +98,66 @@ console.log(`     meilleur λ = ${meilleurScan.pair}/${meilleurScan.triple}/${me
 console.log(`     couche ① seule (λ = 0) → quinté ${pctProb(D.scan[0].tauxQ)} · podium ${pctProb(D.scan[0].tauxP)}`)
 
 M.dna = D
+
+/* ── contrôle — les 96 Quintés à presse réelle (data/quintes.json) ──────────
+ * L'archive synthese ne compte que 33 courses : une courbe tirée de 33 points
+ * flatte. On refait donc la mesure de LARGEUR sur les 96 Quintés de référence,
+ * et on y teste la seule question qui décide du ticket : à taille égale,
+ * remplacer des favoris par des P11+ — ou élargir ? */
+const Q = JSON.parse(fs.readFileSync('data/quintes.json', 'utf8'))
+const qc = []
+for (const q of Q) {
+  if (!q || !q.presse || !q.arrivee || q.arrivee.length < 5) continue
+  const presse = q.presse.map(Number).filter(Number.isFinite)
+  if (presse.length < 10) continue
+  const maxN = Math.max(q.nb || 0, ...presse)
+  const runners = Array.from({ length: maxN }, (_, i) => i + 1)
+  const g = buildGrid(presse, runners)
+  const arr = q.arrivee.slice(0, 5).map((x) => (g.slotParNum || {})[x]).filter((p) => Number.isFinite(p) && p >= 1 && p <= 20)
+  if (arr.length < 5) continue
+  qc.push({ arr, cases: [...new Set(Object.values(g.slotParNum || {}).map(Number).filter((p) => p >= 1 && p <= 20))] })
+}
+const zoneOf = (p) => (p <= 4 ? 0 : p <= 8 ? 1 : p <= 10 ? 2 : 3)
+const NQ = qc.length
+const cntQ = Array(41).fill(0)
+for (const c of qc) for (const p of new Set(c.arr)) cntQ[p]++
+const prepQ = qc.map((c) => {
+  const cn = cntQ.slice()
+  for (const p of new Set(c.arr)) cn[p]--
+  const post = Array(41).fill(0)
+  for (let p = 1; p <= 40; p++) post[p] = posterior(cn[p], NQ - 1)
+  const ordre = c.cases.slice().sort((a, b) => post[b] - post[a] || a - b)
+  const z = [[], [], [], []]
+  for (const p of ordre) z[zoneOf(p)].push(p)
+  return { arr: c.arr, ordre, z }
+})
+const note = (build) => {
+  let q5 = 0, pod = 0, p4 = 0
+  for (const p of prepQ) {
+    const s = new Set(build(p))
+    const hit = p.arr.filter((x) => s.has(x)).length
+    if (hit === 5) q5++
+    if (hit >= 4) p4++
+    if (p.arr.slice(0, 3).every((x) => s.has(x))) pod++
+  }
+  return { n: NQ, quinte: q5 / NQ, podium: pod / NQ, plus4: p4 / NQ }
+}
+M.controle = {
+  N: NQ,
+  courbe: [6, 7, 8, 9, 10, 11, 12, 13, 14].map((n) => ({ ...note((p) => p.ordre.slice(0, n)), n })),
+  echange: [
+    { nom: 'les 8 meilleures', cases: 8, ...note((p) => p.ordre.slice(0, 8)) },
+    { nom: 'les 10 meilleures', cases: 10, ...note((p) => p.ordre.slice(0, 10)) },
+    { nom: '8 favoris + 2 P11+', cases: 10, ...note((p) => [...p.z[0].slice(0, 4), ...p.z[1].slice(0, 4), ...p.z[3].slice(0, 2)]) },
+    { nom: 'les 12 meilleures', cases: 12, ...note((p) => p.ordre.slice(0, 12)) },  ],
+}
+console.log(`\n  contrôle — ${NQ} Quintés à presse réelle (data/quintes.json) :`)
+for (const c of M.controle.courbe.filter((x) => [8, 10, 12].includes(x.n))) {
+  console.log(`     ${String(c.n).padStart(2)} cases  quinté ${pctProb(c.quinte).padStart(6)}  podium ${pctProb(c.podium).padStart(6)}  ≥4 ${pctProb(c.plus4).padStart(6)}`)
+}
+for (const e of M.controle.echange) {
+  console.log(`     ${e.nom.padEnd(20)} ${String(e.cases).padStart(2)} cases  quinté ${pctProb(e.quinte).padStart(6)}  podium ${pctProb(e.podium).padStart(6)}`)
+}
 
 /* ── « sortir du connu » : la répétition est-elle exploitable ? ─────────── */
 const ALT = objectifsAlternatifs(courses, { taille: 8 })

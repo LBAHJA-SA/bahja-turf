@@ -52,56 +52,6 @@ function Section({ n, titre, sous, children }) {
   )
 }
 
-function CarteEnsemble({ emoji, titre, coul, courbe, cle, ens, phrase, nPhare = 8 }) {
-  const phare = courbe.find((b) => b.n === nPhare) || {}
-  const cleHasard = cle === 'podium' ? 'hasard_podium' : 'hasard_quinte'
-  const lignes = [8, 10, 12].map((n) => {
-    const b = courbe.find((x) => x.n === n) || { n }
-    return { n, v: b[cle], hasard: false }
-  })
-  lignes.push({ n: null, v: phare[cleHasard], hasard: true, sur: nPhare })
-  return (
-    <div style={{ padding: 14, borderRadius: 12, border: '1px solid ' + SK.bord, background: 'linear-gradient(180deg, rgba(124,58,237,.14), rgba(12,20,37,.6))' }}>
-      <div style={{ fontSize: 11.5, fontWeight: 900, letterSpacing: 1, color: coul, textTransform: 'uppercase' }}>{emoji} {titre}</div>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 6, flexWrap: 'wrap' }}>
-        <b style={{ fontSize: 40, lineHeight: 1, fontWeight: 900, color: '#fff' }}>{pc(phare[cle])}</b>
-        <span style={{ fontSize: 12, color: '#a4b8d6' }}>des courses, avec <b style={{ color: '#e9d5ff' }}>{nPhare} cases</b></span>
-      </div>
-      <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 5, lineHeight: 1.5 }}>{phrase}</div>
-      <div style={{ marginTop: 11 }}>
-        {lignes.map((b, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, opacity: b.hasard ? .75 : 1 }}>
-            <span style={{ fontSize: 11, color: b.hasard ? '#5b6b85' : b.n === nPhare ? '#e9d5ff' : '#7a8ea9', minWidth: 74, fontWeight: b.n === nPhare ? 900 : 500 }}>
-              {b.hasard ? `au hasard (${b.sur})` : `${b.n} cases`}
-            </span>
-            <div style={{ flex: 1, height: 8, borderRadius: 999, background: 'rgba(255,255,255,.10)', overflow: 'hidden' }}>
-              <div style={{ width: Math.max(1, (b.v || 0) * 100) + '%', height: '100%', borderRadius: 999,
-                background: b.hasard ? '#475569' : b.n === nPhare ? coul : 'rgba(167,139,250,.45)' }} />
-            </div>
-            <b style={{ fontSize: 11.5, minWidth: 48, textAlign: 'right', color: b.hasard ? '#5b6b85' : b.n === nPhare ? coul : '#a4b8d6' }}>{pc(b.v)}</b>
-          </div>
-        ))}
-      </div>
-      <div style={{ marginTop: 9, paddingTop: 8, borderTop: '1px dashed rgba(255,255,255,.12)', fontSize: 11.5, color: '#94a3b8', lineHeight: 1.5 }}>
-        <b style={{ color: '#e2e8f0' }}>{ens.distincts} combinaisons distinctes</b> sur {ens.courses} courses
-        {' '}({ens.repetes === 0 ? 'aucune revue' : `${ens.repetes} revue${ens.repetes > 1 ? 's' : ''}`}, max {ens.record}×).
-      </div>
-    </div>
-  )
-}
-
-function Etape({ n, titre, children }) {
-  return (
-    <div style={{ padding: '10px 12px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.alt }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-        <span style={{ width: 20, height: 20, borderRadius: 999, background: SK.accentClair, border: '1px solid ' + SK.bord, color: SK.accent, fontSize: 11.5, fontWeight: 900, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
-        <b style={{ fontSize: 12.5, color: '#e9d5ff' }}>{titre}</b>
-      </div>
-      <div style={{ fontSize: 12, color: '#a4b8d6', marginTop: 6, lineHeight: 1.6 }}>{children}</div>
-    </div>
-  )
-}
-
 export default function Probabilite() {
   const [data, setData] = useState(null)
   const [err, setErr] = useState('')
@@ -113,7 +63,7 @@ export default function Probabilite() {
   const [raceId, setRaceId] = useState('')
   const [ordreTxt, setOrdreTxt] = useState('')
   const [partants, setPartants] = useState([])
-  const [taille, setTaille] = useState(8)
+  const [taille, setTaille] = useState(12)
   const [regle, setRegle] = useState('top5')
   const [copie, setCopie] = useState('')
 
@@ -258,43 +208,78 @@ export default function Probabilite() {
           <>
             {/* ★ L'ESSENTIEL ------------------------------------------------ */}
             <Section
-              n="★" titre="L'essentiel — les 3 ensemble, les 5 ensemble"
+              n="★" titre="Le chiffre — et le ticket qui va avec"
               sous={<>
-                Une <b>case</b> (P1…P20) = la place d'un cheval dans la synthèse de la presse. Le <b>podium</b>, ce sont
-                <b> 3 cases ensemble</b> ; le <b>Quinté</b>, <b>5 cases ensemble</b>. Les deux tableaux ci-dessous répondent
-                à ces deux questions, et à rien d'autre. Tout ce qui suit ne sert qu'à vérifier.
+                Une <b>case</b> (P1…P20) = la place d'un cheval dans la synthèse de la presse. Deux questions seulement :
+                les <b>3</b> premières places ensemble, les <b>5</b> ensemble. Une seule chose décide — <b>combien de cases on garde</b>.
               </>}
             >
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 12 }}>
-                <CarteEnsemble
-                  emoji="🥇" titre="Les 3 — le podium" coul="#34d399"
-                  courbe={data.backtest} cle="podium" ens={data.ensemble.trio}
-                  phrase={<>Combien de cases faut-il pour que les <b>trois premiers</b> y soient tous.</>}
-                />
-                <CarteEnsemble
-                  emoji="🏆" titre="Les 5 — le Quinté" coul="#a78bfa"
-                  courbe={data.backtest} cle="quinte" ens={data.ensemble.quinte}
-                  phrase={<>Combien de cases faut-il pour que les <b>cinq premiers</b> y soient tous.</>}
-                />
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12.5, width: '100%', minWidth: 620, border: '1px solid ' + SK.bord, borderRadius: 8, overflow: 'hidden' }}>
+                  <thead>
+                    <tr style={SK.hdr}>
+                      <th style={{ ...SK.th, textAlign: 'left' }}>cases gardées</th>
+                      <th style={{ ...SK.th, textAlign: 'left' }}>les 3 ensemble</th>
+                      <th style={{ ...SK.th, textAlign: 'left' }}>les 5 ensemble</th>
+                      <th style={{ ...SK.th, textAlign: 'left' }}>≥ 4 des 5</th>
+                      <th style={{ ...SK.th, textAlign: 'left' }}>au hasard (3 / 5)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[8, 10, 12].map((n) => {
+                      const b = data.backtest.find((x) => x.n === n) || {}
+                      const phare = n === taille
+                      return (
+                        <tr key={n} style={{ background: phare ? 'rgba(167,139,250,.18)' : 'transparent' }}>
+                          <td style={{ ...SK.td, fontWeight: 900, fontSize: 13, color: phare ? '#e9d5ff' : SK.texte }}>
+                            {n}{phare ? ' ← le ticket' : ''}
+                          </td>
+                          <td style={{ ...SK.td }}><Barre v={b.podium * 100} coul="#34d399" libelle={pc(b.podium)} /></td>
+                          <td style={{ ...SK.td }}><Barre v={b.quinte * 100} coul={SK.accent} libelle={pc(b.quinte)} /></td>
+                          <td style={{ ...SK.td, color: '#fbbf24', fontWeight: 700 }}>{pc(b.plus4)}</td>
+                          <td style={{ ...SK.td, fontSize: 11, color: '#5b6b85' }}>{pc(b.hasard_podium)} / {pc(b.hasard_quinte)}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
               </div>
 
               {/* le ticket, tout de suite */}
               {selection && selection.lignes.length > 0 && (
                 <div style={{ marginTop: 12, padding: '12px 14px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.accentClair }}>
                   <div style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: .8 }}>
-                    ★ votre ticket · {courseChoisie ? `${courseChoisie.date} — ${courseChoisie.hippodrome}` : 'course choisie'}
+                    ★ le ticket · {courseChoisie ? `${courseChoisie.date} — ${courseChoisie.hippodrome}` : 'course choisie'} · {taille} chevaux
                   </div>
                   <div style={{ display: 'flex', gap: 11, alignItems: 'flex-end', flexWrap: 'wrap', marginTop: 7 }}>
-                    {selection.lignes.map((l) => (
+                    {[...selection.lignes].sort((a, b) => a.slot - b.slot).map((l) => (
                       <span key={l.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 40 }}>
-                        <b style={{ fontSize: 26, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>{l.num}</b>
-                        <span style={{ fontSize: 9.5, color: '#a4b8d6' }}>P{l.slot}</span>
+                        <b style={{ fontSize: 26, fontWeight: 900, color: l.slot >= 9 ? '#fbbf24' : '#fff', lineHeight: 1.1 }}>{l.num}</b>
+                        <span style={{ fontSize: 9.5, color: l.slot >= 9 ? '#fbbf24' : '#a4b8d6' }}>P{l.slot}</span>
                       </span>
                     ))}
                     <span style={{ marginLeft: 'auto', fontSize: 11.5, color: '#a4b8d6', textAlign: 'right' }}>
-                      <b style={{ color: '#e9d5ff' }}>{taille} chevaux</b> · {pc(attendu?.podium)} du podium · {pc(attendu?.quinte)} du Quinté
+                      <b style={{ color: '#e9d5ff' }}>{pc(attendu?.podium)}</b> du podium · <b style={{ color: '#e9d5ff' }}>{pc(attendu?.quinte)}</b> du Quinté
                     </span>
                   </div>
+                  {(() => {
+                    const z = [0, 0, 0, 0]
+                    for (const l of selection.lignes) z[l.slot <= 4 ? 0 : l.slot <= 8 ? 1 : l.slot <= 10 ? 2 : 3]++
+                    const ZN = ['P1-P4', 'P5-P8', 'P9-P10', 'P11+']
+                    const bas = z[2] + z[3]
+                    return (
+                      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginTop: 9, paddingTop: 8, borderTop: '1px dashed rgba(255,255,255,.14)', fontSize: 11.5 }}>
+                        {z.map((v, i) => (
+                          <span key={i} style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + (i >= 2 ? 'rgba(251,191,36,.45)' : SK.bord), color: i >= 2 ? '#fbbf24' : '#a4b8d6', fontWeight: i >= 2 ? 800 : 500 }}>
+                            {ZN[i]} · {v}
+                          </span>
+                        ))}
+                        <span style={{ color: '#7a8ea9' }}>
+                          {bas} chevaux hors du haut de la presse — c'est là que se joue le Quinté (page ①).
+                        </span>
+                      </div>
+                    )
+                  })()}
                   <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 7 }}>
                     Le gros chiffre = le <b>numéro du cheval</b> · « P » = sa place dans la synthèse de la presse.
                     Changer la course, la taille ou la règle : section ③, en bas.
@@ -302,28 +287,37 @@ export default function Probabilite() {
                 </div>
               )}
 
-              {/* comment lire — trois phrases */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 9, marginTop: 12 }}>
-                <Etape n="1" titre="La combinaison exacte ne se rejoue pas">
-                  Sur {data.N} courses : <b>{data.ensemble.trio.distincts} trios</b> et <b>{data.ensemble.quinte.distincts} Quintés</b> différents
-                  {data.ensemble.quinte.repetes <= 1 ? <> — un seul Quinté s'est répété</> : null}. Chercher « la combinaison qui va sortir »
-                  ne mène donc nulle part : elle est presque toujours neuve.
-                </Etape>
-                <Etape n="2" titre="Ce qui se mesure, c'est la taille du filet">
-                  La bonne question n'est pas « qui », mais <b>combien de cases</b>. Avec 8 cases, les 3 premiers sont dedans dans{' '}
-                  <b>{(data.backtest.find((b) => b.n === 8) || {}).podium != null ? pc(data.backtest.find((b) => b.n === 8).podium) : '—'}</b> des courses,
-                  et les 5 premiers dans <b>{data.backtest.find((b) => b.n === 8) ? pc(data.backtest.find((b) => b.n === 8).quinte) : '—'}</b>.
-                </Etape>
-                <Etape n="3" titre="Plus le filet est large, plus il coûte">
-                  À 12 cases : <b>{data.backtest.find((b) => b.n === 12) ? pc(data.backtest.find((b) => b.n === 12).podium) : '—'}</b> du podium
-                  et <b>{data.backtest.find((b) => b.n === 12) ? pc(data.backtest.find((b) => b.n === 12).quinte) : '—'}</b> du Quinté —
-                  mais 12 chevaux à jouer. La page ne choisit pas à votre place : elle donne le prix de chaque largeur.
-                </Etape>
+              {/* la seule phrase qui compte, mesurée sur 96 autres Quintés */}
+              <div style={{ marginTop: 12, padding: '11px 13px', borderRadius: 9, border: '1px solid ' + SK.bord, background: SK.alt, fontSize: 12.5, lineHeight: 1.65, color: '#cbd5e1' }}>
+                <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: .7, color: SK.accent, textTransform: 'uppercase', marginBottom: 5 }}>
+                  ce que le ticket ne doit pas faire
+                </div>
+                Remplacer des favoris par des chevaux de P11+ à taille égale, c'est perdre : à 10 cases,{' '}
+                <b style={{ color: '#fca5a5' }}>{pc(data.controle?.echange?.[2]?.quinte)}</b> du Quinté au lieu de{' '}
+                <b style={{ color: '#34d399' }}>{pc(data.controle?.echange?.[1]?.quinte)}</b> (96 Quintés réels). Le bas de la synthèse ne remplace pas
+                le haut : <b>il s'ajoute</b>. Un ticket de 8 chevaux tient les 5 dans {pc((data.controle?.echange?.[0]?.quinte))} des courses ;
+                à 12, c'est {pc(data.controle?.echange?.[3]?.quinte)}.
+              </div>
+
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 10 }}>
+                {[[8, 'les 8 meilleures'], [10, 'les 10 meilleures'], [12, 'les 12 meilleures']].map(([n, nom]) => {
+                  const c = (data.controle?.courbe || []).find((x) => x.n === n) || {}
+                  return (
+                    <div key={n} style={{ flex: '1 1 170px', padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                      <div style={{ fontSize: 10.5, color: SK.muted }}>contrôle · {nom}</div>
+                      <div style={{ fontSize: 18, fontWeight: 900, color: '#e9d5ff' }}>{pc(c.quinte)}</div>
+                      <div style={{ fontSize: 10.5, color: '#5b6b85' }}>Quinté entier · podium {pc(c.podium)}</div>
+                    </div>
+                  )
+                })}
               </div>
 
               <div style={{ fontSize: 11, color: '#64748b', marginTop: 10, lineHeight: 1.6 }}>
-                Mesure <b>leave-one-out</b> : la course notée ne sert jamais à son propre classement.
-                Une seule course = un seul point ; à {data.N} courses, la courbe se lit par grandes largeurs (5-8 / 10-12), jamais case par case.
+                <b style={{ color: '#7a8ea9' }}>D'où viennent ces chiffres :</b> {data.N} courses de l'archive (les 3 lignes du haut) et{' '}
+                {data.controle?.N || 96} autres Quintés à presse réelle (les 3 cartes de contrôle, autre période).
+                Mesure <b>leave-one-out</b> : la course notée ne sert jamais à son propre classement. À {data.N} courses la courbe flatte —
+                les deux mesures encadrent la vraie valeur. Un Quinté ne se répète pas : {data.ensemble.quinte.distincts} combinaisons distinctes
+                sur {data.ensemble.quinte.courses} courses, donc « la combinaison qui va sortir » ne se cherche pas.
               </div>
             </Section>
 
@@ -360,7 +354,7 @@ export default function Probabilite() {
                       })}
                       <div style={{ marginTop: 8, paddingTop: 8, borderTop: '1px dashed rgba(251,191,36,.35)', fontSize: 12, color: '#fbbf24', lineHeight: 1.5 }}>
                         <b>au moins une case P11+</b> dans {pc(dernier.auMoinsUn)} des courses
-                        <span style={{ color: '#7a8ea9' }}> ({Math.round(dernier.auMoinsUn * dernier.N)} / {dernier.N})</span>
+                        <span style={{ color: '#7a8ea9' }}> ({Math.round(dernier.auMoinsUn * c.N)} / {c.N})</span>
                       </div>
                     </div>
                   )
