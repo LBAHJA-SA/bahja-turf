@@ -10,7 +10,7 @@
  * ========================================================================== */
 import { useEffect, useMemo, useState } from 'react'
 import Entete from '../../src/Entete.jsx'
-import { choisirContexte, selectionner, normDiscipline, bandeDistance, bandePartants } from '../../src/lib/probabilite.js'
+import { choisirContexte, selectionner, normDiscipline, bandeDistance, bandePartants, casesDepuisPresse, modeleDepuisJSON, ticketModele, couvertureModele } from '../../src/lib/probabilite.js'
 
 const SK = {
   accent: '#a78bfa', accent2: '#7c3aed', accentClair: 'rgba(124,58,237,.16)',
@@ -68,7 +68,7 @@ export default function Probabilite() {
   const [loading, setLoading] = useState(true)
   const [ctx, setCtx] = useState({ disc: '', dist: '', part: '' })
 
-  // sélection (⑧)
+  // sélection (⑨)
   const [archive, setArchive] = useState([])
   const [raceId, setRaceId] = useState('')
   const [ordreTxt, setOrdreTxt] = useState('')
@@ -158,6 +158,37 @@ export default function Probabilite() {
   const attendu = courbeRegle.find((c) => c.n === taille) || null
   const courseChoisie = archive.find((r) => r.id === raceId) || null
 
+  // DNA 2.0 sur la course choisie : le ticket joint face au ticket marginal
+  const dnaExemple = useMemo(() => {
+    if (!data?.dna || !ordreTxt.trim()) return null
+    const ordre = ordreTxt.split(/[^0-9]+/).map(Number).filter((n) => n > 0)
+    if (ordre.length < 5) return null
+    const map = casesDepuisPresse(ordre, partants)
+    const cases = [...new Set(Object.values(map.slotParNum).map(Number))].sort((a, b) => a - b)
+    if (cases.length < 5) return null
+    const model = modeleDepuisJSON(data.dna)
+    const lam = data.dna.lambda
+    const post = {}
+    for (const c of cases) {
+      const d = (data.parP || []).find((x) => x.p === c)
+      post[c] = d ? d.p_top5_post : 0
+    }
+    const marginal = cases.slice().sort((a, b) => (post[b] - post[a]) || a - b).slice(0, taille)
+    const t = ticketModele(model, cases, taille, lam)
+    const total = couvertureModele(model, cases, lam) || 1
+    return {
+      date: (archive.find((r) => r.id === raceId) || {}).date || '',
+      marginal, dna: t.ticket,
+      couvMarg: couvertureModele(model, marginal, lam) / total,
+      couvDNA: t.couverture / total,
+    }
+  }, [data, ordreTxt, partants, taille, raceId, archive])
+
+  const bestScan = useMemo(() => {
+    const sc = data?.dna?.scan || []
+    return sc.length ? sc.slice().sort((a, b) => b.tauxQ - a.tauxQ || b.tauxP - a.tauxP)[0] : { tauxQ: 0, tauxP: 0 }
+  }, [data])
+
   return (
     <div style={{ minHeight: '100vh', background: 'radial-gradient(1200px 600px at 15% -10%, #16233c 0%, #04070f 55%)', fontFamily: SK.police, color: SK.texte }}>
       <Entete page="quinte" />
@@ -185,7 +216,7 @@ export default function Probabilite() {
           <span style={{ color: '#94a3b8' }}>
             Les probabilités <b>marginales</b> (top-5, podium, victoire de chaque case P) sont déjà dans l'onglet
             <b> Statistiques</b> de la page Quinté. Ici on ne garde que ce qui ne s'y trouve pas : positions, paires,
-            triples, conditionnelles, contexte, matrice DNA et sélection.
+            triples, conditionnelles, contexte, matrice DNA, DNA 2.0 et sélection.
           </span>
         </div>
 
@@ -500,9 +531,129 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ⑧ sélection --------------------------------------------------- */}
+            {/* ⑧ DNA 2.0 ------------------------------------------------------ */}
+            {data.dna && (
+              <Section
+                n="⑧" titre="DNA 2.0 — du marginal au joint, et ce que le test en dit"
+                sous={<>Un Quinté n'est pas un classement de cases : c'est un <b>ensemble de 5</b>. DNA 2.0 modélise donc la loi jointe de cet ensemble par son développement log-linéaire hiérarchique — chaque couche ajoute un terme, avec un coefficient λ appris sur une moitié de l'archive. ⛔ Aucun groupe, aucun quota : le seul critère du ticket est sa couverture estimée.</>}
+              >
+                <div style={{ padding: '10px 12px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt, fontSize: 12.5, fontFamily: 'ui-monospace, monospace', marginBottom: 12, overflowX: 'auto', whiteSpace: 'nowrap' }}>
+                  log P(S) = Σ u<sub>p</sub> + λ₂·Σ w<sub>pq</sub> + λ₃·Σ t<sub>pqr</sub> + λ₄·q<sub>S</sub> − log Z
+                </div>
+
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={{ borderCollapse: 'collapse', fontSize: 12, width: '100%', minWidth: 680 }}>
+                    <thead>
+                      <tr>
+                        <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>couche</th>
+                        <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>λ appris<br /><span style={{ fontWeight: 400, opacity: .7 }}>paire / triple / quinté</span></th>
+                        <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>log vraisemblance<br /><span style={{ fontWeight: 400, opacity: .7 }}>sur la moitié d'entraînement</span></th>
+                        <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>Quinté · n=8<br /><span style={{ fontWeight: 400, opacity: .7 }}>hors échantillon</span></th>
+                        <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>Podium · n=8</th>
+                        <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>≥ 4 du Quinté</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.dna.moyenne.map((m, i) => {
+                        const e = data.dna.echelle[i] || {}
+                        const r = m[8] || {}
+                        const base = data.dna.moyenne[0][8] || {}
+                        const gain = (r.quinte || 0) - (base.quinte || 0)
+                        return (
+                          <tr key={m.couche} style={{ background: i === 0 ? SK.accentClair : i % 2 ? SK.alt : 'transparent' }}>
+                            <td style={{ ...SK.td, padding: '6px 9px', fontWeight: 800, whiteSpace: 'nowrap' }}>
+                              {String(i + 1).padStart(2, '0')} · {e.nom || m.etape}
+                            </td>
+                            <td style={{ ...SK.td, padding: '6px 9px', fontFamily: 'ui-monospace, monospace', whiteSpace: 'nowrap' }}>
+                              {e.lambda ? `${e.lambda.pair} / ${e.lambda.triple} / ${e.lambda.quinte}` : '—'}
+                            </td>
+                            <td style={{ ...SK.td, padding: '6px 9px', fontFamily: 'ui-monospace, monospace', color: Number.isFinite(e.logLik) ? '#e2e8f0' : '#5b6b85' }}>
+                              {Number.isFinite(e.logLik) ? e.logLik.toFixed(4).replace('.', ',') : '—'}
+                            </td>
+                            <td style={{ ...SK.td, padding: '6px 9px', fontWeight: 800, color: i === 0 ? '#e9d5ff' : gain < 0 ? '#fca5a5' : '#34d399' }}>
+                              {pc(r.quinte)}
+                              {i > 0 && <span style={{ fontSize: 10.5, color: gain < 0 ? '#fca5a5' : '#34d399' }}> ({gain >= 0 ? '+' : ''}{(gain * 100).toFixed(1).replace('.', ',')})</span>}
+                            </td>
+                            <td style={{ ...SK.td, padding: '6px 9px', color: '#a4b8d6' }}>{pc(r.podium)}</td>
+                            <td style={{ ...SK.td, padding: '6px 9px', color: '#7a8ea9' }}>{pc(r.plus4)}</td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 9, marginTop: 12 }}>
+                  <div style={{ padding: '10px 12px', borderRadius: 8, border: '1px solid rgba(248,113,113,.45)', background: 'rgba(127,29,29,.25)' }}>
+                    <div style={{ fontSize: 10.5, color: '#fca5a5', textTransform: 'uppercase', letterSpacing: .7 }}>le verdict</div>
+                    <div style={{ fontSize: 13, color: '#fee2e2', lineHeight: 1.5, marginTop: 4 }}>
+                      Le modèle joint bat la couche ① dans <b>{pc(data.dna.bootstrap.mieux)}</b> des tirages, perd dans{' '}
+                      <b>{pc(data.dna.bootstrap.pire)}</b>. Écart moyen : <b>{data.dna.bootstrap.diff >= 0 ? '+' : ''}{data.dna.bootstrap.diff.toFixed(2).replace('.', ',')}</b> arrivant 5/5 par course.
+                    </div>
+                  </div>
+                  <div style={{ padding: '10px 12px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                    <div style={{ fontSize: 10.5, color: SK.muted, textTransform: 'uppercase', letterSpacing: .7 }}>la meilleure λ du balayage</div>
+                    <div style={{ fontSize: 13, color: '#e2e8f0', lineHeight: 1.5, marginTop: 4 }}>
+                      Sur les {data.dna.scan.length} réglages essayés, le meilleur donne{' '}
+                      <b>{pc(bestScan.tauxQ)}</b> de Quinté
+                      et <b>{pc(bestScan.tauxP)}</b> de podium,
+                      contre <b>{pc(data.dna.scan[0].tauxQ)}</b> / <b>{pc(data.dna.scan[0].tauxP)}</b> pour la couche ① seule.
+                    </div>
+                  </div>
+                  <div style={{ padding: '10px 12px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                    <div style={{ fontSize: 10.5, color: SK.muted, textTransform: 'uppercase', letterSpacing: .7 }}>pourquoi</div>
+                    <div style={{ fontSize: 12.5, color: '#a4b8d6', lineHeight: 1.5, marginTop: 4 }}>
+                      {data.dna.diagnostic.quintesDistincts} Quintés distincts sur {data.dna.N} courses ·
+                      {' '}{data.dna.diagnostic.triplesVus} triples vus, dont {data.dna.diagnostic.triplesRepetes} seulement revus ·
+                      {' '}{data.dna.diagnostic.quinteRepetes} Quinté revu une seconde fois.
+                      Il n'y a pas la matière statistique pour une loi jointe.
+                    </div>
+                  </div>
+                </div>
+
+                {/* le ticket, concrètement */}
+                {dnaExemple && (
+                  <div style={{ marginTop: 14 }}>
+                    <div style={{ fontSize: 11, color: SK.muted, marginBottom: 6 }}>
+                      Sur la course choisie plus bas ({dnaExemple.date}) — même ensemble de départ, deux façons de le réduire :
+                    </div>
+                    <table style={{ borderCollapse: 'collapse', fontSize: 12, width: '100%', minWidth: 560 }}>
+                      <thead>
+                        <tr>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>règle</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>ticket</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>couverture estimée<br /><span style={{ fontWeight: 400, opacity: .7 }}>P(Quinté ⊆ ticket)</span></th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '6px 9px' }}>mesuré hors éch.</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style={{ ...SK.td, padding: '6px 9px', whiteSpace: 'nowrap' }}>① marginal</td>
+                          <td style={{ ...SK.td, padding: '6px 9px', fontFamily: 'ui-monospace, monospace', fontWeight: 800 }}>{dnaExemple.marginal.join(' · ')}</td>
+                          <td style={{ ...SK.td, padding: '6px 9px', color: '#a4b8d6' }}>{pc(dnaExemple.couvMarg)}</td>
+                          <td style={{ ...SK.td, padding: '6px 9px', color: '#e9d5ff' }}>{pc(data.dna.moyenne[0][8].quinte)}</td>
+                        </tr>
+                        <tr style={{ background: SK.alt }}>
+                          <td style={{ ...SK.td, padding: '6px 9px', whiteSpace: 'nowrap' }}>④ DNA complet</td>
+                          <td style={{ ...SK.td, padding: '6px 9px', fontFamily: 'ui-monospace, monospace', fontWeight: 800 }}>{dnaExemple.dna.join(' · ')}</td>
+                          <td style={{ ...SK.td, padding: '6px 9px', color: '#a4b8d6' }}>{pc(dnaExemple.couvDNA)}</td>
+                          <td style={{ ...SK.td, padding: '6px 9px', color: '#fca5a5' }}>{pc(data.dna.moyenne[3][8].quinte)}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style={{ fontSize: 11, color: '#64748b', marginTop: 7, lineHeight: 1.55 }}>
+                      Le modèle joint <b>croit</b> couvrir davantage : il se trompe. La couverture qu'il annonce est plus haute,
+                      celle qu'il délivre est plus basse — c'est exactement la définition du surajustement, et c'est pour cela
+                      que la règle de sélection reste la couche ①.
+                    </div>
+                  </div>
+                )}
+              </Section>
+            )}
+
+            {/* ⑨ sélection --------------------------------------------------- */}
             <Section
-              n="⑧" titre="De la probabilité à la sélection — le ticket"
+              n="⑨" titre="De la probabilité à la sélection — le ticket"
               sous={<>On classe les cases par leur probabilité postérieure, on garde les <b>N</b> premières, et on rend les <b>numéros</b> de la course. Rien d'autre : pas de groupe, pas de quota, pas de place réservée. L'ordre du ticket est la probabilité décroissante (départage par la case).</>}
             >
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: 12 }}>

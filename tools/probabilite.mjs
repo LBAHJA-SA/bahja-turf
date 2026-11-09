@@ -19,7 +19,7 @@
  * ========================================================================== */
 import fs from 'node:fs'
 import { buildGrid } from '../src/lib/quinte.js'
-import { construireMatrix, pctProb } from '../src/lib/probabilite.js'
+import { construireMatrix, pctProb, dnaComplet } from '../src/lib/probabilite.js'
 
 const SYN = JSON.parse(fs.readFileSync('data/synthese.json', 'utf8'))
 const courses = []
@@ -60,6 +60,32 @@ for (const c of M.classementRegles) {
   console.log(`     ${c.regle.padEnd(9)}  quinté ${pctProb(c.quinte).padStart(6)}   podium ${pctProb(c.podium).padStart(6)}`)
 }
 console.log(`  écart entre la meilleure et la moins bonne : ${(M.ecartRegles * 100).toFixed(1).replace('.', ',')} points`)
+
+/* ── DNA 2.0 : du marginal au joint ──────────────────────────────────────── */
+console.log('\n  DNA 2.0 — les quatre couches, λ appris couche par couche :')
+const D = dnaComplet(courses)
+for (const e of D.echelle) {
+  console.log(`     ${String(e.couche).padStart(2)}. ${e.nom.padEnd(34)} λ = ${e.lambda.pair}/${e.lambda.triple}/${e.lambda.quinte}   logLik ${e.logLik.toFixed(4)}`)
+}
+const b8d = D.courbe[8]
+console.log(`  modèle complet, dans l'archive : quinté ${pctProb(b8d.quinte)} · podium ${pctProb(b8d.podium)} · hasard ${pctProb(b8d.hasard_quinte)}`)
+
+console.log('\n  hors échantillon — ce que chaque couche ajoute (n = 8, deux moitiés moyennées) :')
+for (const m of D.moyenne) {
+  const r = m[8]
+  console.log(`     ${m.etape.padEnd(14)} quinté ${pctProb(r.quinte).padStart(6)}  podium ${pctProb(r.podium).padStart(6)}  ≥4 ${pctProb(r.plus4).padStart(6)}`)
+}
+console.log(`  bootstrap apparié ④ vs ① (n=8, 4000 tirages) : mieux ${pctProb(D.bootstrap.mieux)} · pire ${pctProb(D.bootstrap.pire)} · écart moyen ${D.bootstrap.diff >= 0 ? '+' : ''}${D.bootstrap.diff.toFixed(3)}`)
+const dg = D.diagnostic
+console.log(`  diagnostic paires du top-8 : ${dg.positives} positives / ${dg.negatives} négatives · ${dg.adjacentes} sont voisines (|a−b| = 1)`)
+console.log(`  triples vus ${dg.triplesVus} (dont ${dg.triplesRepetes} ≥ 2 fois) · quintés distincts ${dg.quintesDistincts} (dont ${dg.quinteRepetes} ≥ 2 fois)`)
+
+const meilleurScan = D.scan.slice().sort((a, b) => b.tauxQ - a.tauxQ || b.tauxP - a.tauxP)[0]
+console.log('\n  balayage λ (n = 8, hors échantillon, meilleur des deux sens) :')
+console.log(`     meilleur λ = ${meilleurScan.pair}/${meilleurScan.triple}/${meilleurScan.quinte} → quinté ${pctProb(meilleurScan.tauxQ)} · podium ${pctProb(meilleurScan.tauxP)}`)
+console.log(`     couche ① seule (λ = 0) → quinté ${pctProb(D.scan[0].tauxQ)} · podium ${pctProb(D.scan[0].tauxP)}`)
+
+M.dna = D
 
 const out = JSON.stringify(M, null, 2)
 fs.writeFileSync('data/probabilite.json', out)

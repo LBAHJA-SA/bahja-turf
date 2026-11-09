@@ -728,3 +728,564 @@ export function selectionner(matrix, opts = {}) {
   return { lignes: tous.slice(0, taille), tous, niveau, N_ctx }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+ *  DNA 2.0 — LE QUINTÉ EST UN ENSEMBLE, PAS UN CLASSEMENT DE CASES
+ *
+ *  v1 classait les cases une par une. Un Quinté réussi n'est pas un bon
+ *  classement de cases : c'est un ENSEMBLE de 5. DNA 2.0 modélise donc la loi
+ *  jointe du sous-ensemble par son développement log-linéaire hiérarchique :
+ *
+ *      log P(S) = Σ u_p + λ₂·Σ w_pq + λ₃·Σ t_pqr + λ₄·q_S  −  log Z
+ *
+ *    ① u_p   la case seule (marginale lissée)              Position DNA
+ *    ② w_pq  l'écart à l'indépendance d'une paire          Pair DNA
+ *    ③ t_pqr le résidu du modèle de paires pour 3 cases    Triple DNA
+ *    ④ q_S   le résidu du modèle paires+triples pour 5     Quinté DNA
+ *    ⑤ la construction du ticket : chaque ajout maximise la couverture
+ *      P(le Quinté ⊆ ticket) — c'est le conditionnel appliqué, pas décrit.
+ *    ⑥ le contexte ré-estime les mêmes potentiels sur un sous-groupe.
+ *    ⑦ λ est appris sur une moitié et noté sur l'autre. Jamais sur lui-même.
+ *
+ *  ⛔ Aucun groupe, aucun quota, aucune case réservée : le seul critère du
+ *     ticket est sa couverture estimée. Un sous-ensemble n'est jamais choisi
+ *     parce qu'il est « P1-P4 » ou « P5-P8 ».
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+export const DNA_PRIOR = { pair: 5, triple: 10, quinte: 20 }
+export const DNA_CAP = 2.5                 // un potentiel est borné à ±2,5
+export const DNA_GRILLE = {
+  pair: [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2],
+  triple: [0, 0.25, 0.5, 0.75, 1],
+  quinte: [0, 0.25, 0.5, 0.75, 1],
+}
+export const LAM_ZERO = Object.freeze({ pair: 0, triple: 0, quinte: 0 })
+export const NOMS_COUCHES = ['Position — la case seule', 'Paires — la relation 2 à 2', 'Triples — le résidu de la paire', 'Quinté — l\'ensemble des 5']
+
+const dcap = (x) => (x > DNA_CAP ? DNA_CAP : x < -DNA_CAP ? -DNA_CAP : x)
+const dmask = (p) => 1 << p
+const dmask3 = (a, b, c) => (1 << a) | (1 << b) | (1 << c)
+const dmask5 = (arr) => arr.reduce((m, p) => m | dmask(p), 0)
+const cleCtxCourse = (c) => `${normDiscipline(c.discipline)}|${bandeDistance(c.distance)}|${bandePartants(c.nbPartants || (c.grille && c.grille.max) || 0)}`
+
+/** Les cases P réellement présentes dans une course (1..20), triées. */
+export function casesDeCourse(race) {
+  const sp = (race && race.grille && race.grille.slotParNum) || {}
+  return [...new Set(Object.values(sp).map(Number)
+    .filter((p) => Number.isFinite(p) && p >= 1 && p <= MAXP))].sort((a, b) => a - b)
+}
+
+/**
+ * Les potentiels ①→④ estimés sur une liste de courses.
+ * `prior` (facultatif) = { kappa, p1, pJoint, tJoint, qJoint } : ré-estimation
+ * hiérarchique sur un sous-groupe (couche ⑥), qui se replie sur le global.
+ */
+export function potentielsDNA(list, prior = null) {
+  const C = compter(list)
+  const N = C.N
+  const { pair: m2, triple: m3, quinte: m5 } = DNA_PRIOR
+  const kap = prior ? prior.kappa : 0
+
+  const p1 = new Array(MAXP + 1).fill(BASE_TOP5)
+  const u = new Array(MAXP + 1).fill(Math.log(BASE_TOP5))
+  for (let p = 1; p <= MAXP; p++) {
+    p1[p] = kap && prior
+      ? (C.parP[p].n + kap * (prior.p1[p] || BASE_TOP5)) / (N + kap)
+      : (C.parP[p].n + m2 * BASE_TOP5) / (N + m2)
+    u[p] = Math.log(p1[p])
+  }
+
+  const w = new Map()
+  const fac = new Map()
+  const nPair = new Map()
+  const pJoint = new Map()
+  for (let a = 1; a <= MAXP; a++) {
+    for (let b = a + 1; b <= MAXP; b++) {
+      const k = dmask(a) | dmask(b)
+      const pred = p1[a] * p1[b]
+      const nAB = C.pairs[a][b]
+      const joint = kap && prior
+        ? (nAB + kap * (prior.pJoint.get(k) || pred)) / (N + kap)
+        : (nAB + m2 * pred) / (N + m2)
+      const v = dcap(Math.log(joint / pred))
+      fac.set(k, Math.exp(v))
+      pJoint.set(k, joint)
+      nPair.set(k, nAB)
+      if (v) w.set(k, v)
+    }
+  }
+
+  const t = new Map()
+  const facT = new Map()
+  const nTri = new Map()
+  const tJoint = new Map()
+  for (const [cle, nABC] of C.triples) {
+    const [a, b, c] = cle.split('-').map(Number)
+    const k = dmask3(a, b, c)
+    const pred = p1[a] * p1[b] * p1[c]
+      * fac.get(dmask(a) | dmask(b)) * fac.get(dmask(a) | dmask(c)) * fac.get(dmask(b) | dmask(c))
+    const joint = kap && prior
+      ? (nABC + kap * (prior.tJoint.get(k) || pred)) / (N + kap)
+      : (nABC + m3 * pred) / (N + m3)
+    const v = dcap(Math.log(joint / pred))
+    facT.set(k, Math.exp(v))
+    tJoint.set(k, joint)
+    nTri.set(k, nABC)
+    if (v) t.set(k, v)
+  }
+
+  const qCache = new Map()
+  const nQuint = new Map()
+  const qJoint = new Map()
+  const qPot = (cases) => {
+    const k = dmask5(cases)
+    const deja = qCache.get(k)
+    if (deja !== undefined) return deja
+    let pred = 1
+    for (const p of cases) pred *= p1[p]
+    for (let i = 0; i < 5; i++) for (let j = i + 1; j < 5; j++) pred *= fac.get(dmask(cases[i]) | dmask(cases[j]))
+    for (let i = 0; i < 5; i++) {
+      for (let j = i + 1; j < 5; j++) {
+        for (let l = j + 1; l < 5; l++) pred *= facT.get(dmask3(cases[i], cases[j], cases[l])) || 1
+      }
+    }
+    const cle = cases.slice().sort((x, y) => x - y).join('-')
+    const nS = C.quints.get(cle) || 0
+    const joint = kap && prior
+      ? (nS + kap * (prior.qJoint.get(k) || pred)) / (N + kap)
+      : (nS + m5 * pred) / (N + m5)
+    const v = dcap(Math.log(joint / pred))
+    qCache.set(k, v)
+    nQuint.set(k, nS)
+    qJoint.set(k, joint)
+    return v
+  }
+
+  return { N, p1, u, w, t, q: qPot, fac, facT, pJoint, tJoint, qJoint, nPair, nTri, nQuint }
+}
+
+/** Tous les 5-sous-ensembles d'une course, avec leurs quatre sommes. */
+export function donneesDNA(list, pot) {
+  return list.map((race) => {
+    const cases = casesDeCourse(race)
+    const K = cases.length
+    const acc = []
+    const masks = [], U = [], W = [], T = [], Q = []
+    const rec = (start) => {
+      if (acc.length === 5) {
+        let uu = 0
+        for (const p of acc) uu += pot.u[p]
+        let ww = 0
+        for (let i = 0; i < 5; i++) for (let j = i + 1; j < 5; j++) ww += pot.w.get(dmask(acc[i]) | dmask(acc[j])) || 0
+        let tt = 0
+        for (let i = 0; i < 5; i++) {
+          for (let j = i + 1; j < 5; j++) {
+            for (let l = j + 1; l < 5; l++) tt += pot.t.get(dmask3(acc[i], acc[j], acc[l])) || 0
+          }
+        }
+        masks.push(dmask5(acc)); U.push(uu); W.push(ww); T.push(tt); Q.push(pot.q(acc.slice().sort((x, y) => x - y)))
+        return
+      }
+      for (let i = start; i < K; i++) { acc.push(cases[i]); rec(i + 1); acc.pop() }
+    }
+    rec(0)
+
+    const index = new Map()
+    for (let i = 0; i < masks.length; i++) index.set(masks[i], i)
+    const uParCase = {}
+    for (const p of cases) uParCase[p] = pot.u[p]
+
+    const obsOrder = slotsDe(race)
+    let obs = null
+    if (obsOrder.length === 5) {
+      const s = obsOrder.slice().sort((a, b) => a - b)
+      let uu = 0
+      for (const p of s) uu += pot.u[p]
+      let ww = 0
+      for (let i = 0; i < 5; i++) for (let j = i + 1; j < 5; j++) ww += pot.w.get(dmask(s[i]) | dmask(s[j])) || 0
+      let tt = 0
+      for (let i = 0; i < 5; i++) {
+        for (let j = i + 1; j < 5; j++) {
+          for (let l = j + 1; l < 5; l++) tt += pot.t.get(dmask3(s[i], s[j], s[l])) || 0
+        }
+      }
+      obs = { mask: dmask5(s), cases: s, u: uu, w: ww, t: tt, q: pot.q(s) }
+    }
+
+    return {
+      date: race.date, ctx: cleCtxCourse(race), cases, K,
+      n: masks.length,
+      masks: Int32Array.from(masks), U: Float64Array.from(U),
+      W: Float64Array.from(W), T: Float64Array.from(T), Q: Float64Array.from(Q),
+      index, uParCase, obs, obsOrder,
+    }
+  })
+}
+
+const scoreSous = (dr, i, lam) => dr.U[i] + lam.pair * dr.W[i] + lam.triple * dr.T[i] + lam.quinte * dr.Q[i]
+
+/** log Z : la constante de normalisation sur les 5-sous-ensembles de la course. */
+export function logZ(dr, lam) {
+  let s = 0
+  for (let i = 0; i < dr.n; i++) s += Math.exp(scoreSous(dr, i, lam))
+  return Math.log(s)
+}
+
+/** Vraisemblance moyenne de l'arrivée réelle sous le modèle. */
+export function logVraisemblance(donnees, lam) {
+  let s = 0, k = 0
+  for (const dr of donnees) {
+    if (!dr.obs) continue
+    const sc = dr.obs.u + lam.pair * dr.obs.w + lam.triple * dr.obs.t + lam.quinte * dr.obs.q
+    s += sc - logZ(dr, lam)
+    k++
+  }
+  return { total: s, evalues: k, moyen: k ? s / k : 0 }
+}
+
+/**
+ * Couche ①→④ : λ est choisi couche par couche, dans cet ordre, en maximisant
+ * la vraisemblance sur la moitié d'entraînement. Montée en avant : une couche
+ * ne peut jamais dégrader ce que les précédentes ont apporté.
+ */
+export function ajusterEchelle(donnees, grille = DNA_GRILLE) {
+  const lam = { ...LAM_ZERO }
+  const etapes = []
+  let ll = logVraisemblance(donnees, lam)
+  etapes.push({ couche: 1, nom: NOMS_COUCHES[0], lambda: { ...lam }, logLik: ll.moyen })
+
+  const cles = ['pair', 'triple', 'quinte']
+  for (let k = 0; k < cles.length; k++) {
+    const cle = cles[k]
+    let meilleur = lam[cle]
+    let meilleurLL = ll.moyen
+    const essais = []
+    for (const v of grille[cle]) {
+      const l = { ...lam, [cle]: v }
+      const r = logVraisemblance(donnees, l)
+      essais.push({ v, logLik: r.moyen })
+      if (r.moyen > meilleurLL + 1e-9) { meilleurLL = r.moyen; meilleur = v }
+    }
+    lam[cle] = meilleur
+    ll = logVraisemblance(donnees, lam)
+    etapes.push({ couche: k + 2, nom: NOMS_COUCHES[k + 1], lambda: { ...lam }, logLik: ll.moyen, essais })
+  }
+  return { lambda: lam, etapes }
+}
+
+/** Couverture d'un ticket (somme non normalisée des exp(score) de ses 5-sous-ensembles). */
+export function couvertureRapide(dr, T, lam) {
+  let s = 0
+  const n = T.length
+  const acc = []
+  const rec = (start) => {
+    if (acc.length === 5) {
+      const i = dr.index.get(dmask5(acc))
+      if (i !== undefined) s += Math.exp(scoreSous(dr, i, lam))
+      return
+    }
+    for (let i = start; i < n; i++) { acc.push(T[i]); rec(i + 1); acc.pop() }
+  }
+  rec(0)
+  return s
+}
+
+/** Couverture d'un ticket calculée directement depuis les potentiels (page). */
+export function couvertureModele(model, T, lam) {
+  let s = 0
+  const n = T.length
+  const acc = []
+  const rec = (start) => {
+    if (acc.length === 5) {
+      let sc = 0
+      for (const p of acc) sc += model.u[p] || 0
+      for (let i = 0; i < 5; i++) for (let j = i + 1; j < 5; j++) sc += lam.pair * (model.w.get(dmask(acc[i]) | dmask(acc[j])) || 0)
+      for (let i = 0; i < 5; i++) {
+        for (let j = i + 1; j < 5; j++) {
+          for (let l = j + 1; l < 5; l++) sc += lam.triple * (model.t.get(dmask3(acc[i], acc[j], acc[l])) || 0)
+        }
+      }
+      sc += lam.quinte * (model.q(acc) || 0)
+      s += Math.exp(sc)
+      return
+    }
+    for (let i = start; i < n; i++) { acc.push(T[i]); rec(i + 1); acc.pop() }
+  }
+  rec(0)
+  return s
+}
+
+/** Escalade : on part du top-N marginal et on échange tant que la couverture monte. */
+function escalade(cases, taille, evalC, uParCase, maxPasse = 8) {
+  const K = cases.length
+  const n = Math.min(taille, K)
+  let T = cases.slice()
+    .sort((a, b) => ((uParCase[b] || 0) - (uParCase[a] || 0)) || a - b)
+    .slice(0, n)
+    .sort((a, b) => a - b)
+  if (n >= K || n < 5) return { ticket: T, couverture: n >= K ? 1 : 0 }
+
+  let best = evalC(T)
+  for (let passe = 0; passe < maxPasse; passe++) {
+    let bouge = false
+    const dedans = new Set(T)
+    for (let i = 0; i < n; i++) {
+      for (const x of cases) {
+        if (dedans.has(x)) continue
+        const essai = T.slice()
+        essai[i] = x
+        essai.sort((a, b) => a - b)
+        const v = evalC(essai)
+        if (v > best * (1 + 1e-12)) {
+          dedans.delete(T[i]); dedans.add(x)
+          T = essai; best = v; bouge = true
+        }
+      }
+    }
+    if (!bouge) break
+  }
+  return { ticket: T, couverture: best }
+}
+
+/** Le ticket DNA d'une course déjà préparée (chemin rapide). */
+export function ticketCouverture(dr, taille, lam, maxPasse = 8) {
+  return escalade(dr.cases, taille, (T) => couvertureRapide(dr, T, lam), dr.uParCase, maxPasse)
+}
+
+/** Le ticket DNA depuis les seuls potentiels exportés (page). */
+export function ticketModele(model, cases, taille, lam, maxPasse = 8) {
+  const uParCase = {}
+  for (const p of cases) uParCase[p] = model.u[p] || 0
+  return escalade(cases, taille, (T) => couvertureModele(model, T, lam), uParCase, maxPasse)
+}
+
+/** Reconstruit les potentiels depuis le JSON publié (page). */
+export function modeleDepuisJSON(dna) {
+  const src = (dna && dna.potentiels) || dna || {}
+  const u = new Array(MAXP + 1).fill(0)
+  for (const r of src.u || []) u[r.p] = r.u
+  const w = new Map()
+  for (const r of src.paires || []) w.set(dmask(r.a) | dmask(r.b), r.w)
+  const t = new Map()
+  for (const r of src.triples || []) t.set(dmask3(r.a, r.b, r.c), r.t)
+  const qm = new Map()
+  for (const r of src.quintes || []) qm.set(dmask5(r.cases), r.q)
+  const q = (cases) => qm.get(dmask5(cases)) || 0
+  return { u, w, t, q }
+}
+
+const combi = (n, k) => {
+  if (n < k) return 0
+  let r = 1
+  for (let i = 0; i < k; i++) r = (r * (n - i)) / (i + 1)
+  return r
+}
+
+/** Ce que couvre le ticket DNA, course par course et taille par taille. */
+export function evaluerTickets(donnees, lam, tailles = [5, 6, 7, 8, 9, 10, 11, 12]) {
+  const out = {}
+  for (const n of tailles) out[n] = { n, evalues: 0, quinte: 0, podium: 0, plus4: 0, gagnant: 0, hasard_quinte: 0, hasard_podium: 0 }
+  for (const dr of donnees) {
+    if (!dr.obs) continue
+    const ordre = dr.obsOrder
+    for (const n of tailles) {
+      if (dr.K < 5) continue
+      const t = ticketCouverture(dr, n, lam).ticket
+      const set = new Set(t)
+      const o = out[n]
+      o.evalues++
+      if (ordre.slice(0, 3).every((p) => set.has(p))) o.podium++
+      if (ordre.slice(0, 5).every((p) => set.has(p))) o.quinte++
+      if (ordre.slice(0, 5).filter((p) => set.has(p)).length >= 4) o.plus4++
+      if (set.has(ordre[0])) o.gagnant++
+      o.hasard_quinte += combi(n, 5) / combi(dr.K, 5)
+      o.hasard_podium += combi(n, 3) / combi(dr.K, 3)
+    }
+  }
+  for (const n of tailles) {
+    const o = out[n]
+    const e = o.evalues || 1
+    o.quinte /= e; o.podium /= e; o.plus4 /= e; o.gagnant /= e
+    o.hasard_quinte /= e; o.hasard_podium /= e
+  }
+  return out
+}
+
+/** 0/1 par course — sert au bootstrap apparié. */
+export function hitsQuinte(donnees, lam, n = 8) {
+  return donnees.filter((dr) => dr.obs).map((dr) => {
+    const set = new Set(ticketCouverture(dr, n, lam).ticket)
+    return dr.obsOrder.slice(0, 5).every((p) => set.has(p)) ? 1 : 0
+  })
+}
+
+function graine(seed) {
+  let a = seed >>> 0
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0
+    let t = Math.imul(a ^ (a >>> 15), 1 | a)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+/** Bootstrap apparié déterministe (même graine → même résultat). */
+export function bootstrapPaire(a, b, tirages = 4000, seed = 20261109) {
+  const n = a.length
+  if (!n) return { tirages: 0, mieux: 0, pire: 0, egal: 0, diff: 0 }
+  const rnd = graine(seed)
+  let mieux = 0, pire = 0, diff = 0
+  for (let t = 0; t < tirages; t++) {
+    let sa = 0, sb = 0
+    for (let i = 0; i < n; i++) {
+      const j = (rnd() * n) | 0
+      sa += a[j]; sb += b[j]
+    }
+    diff += sb - sa
+    if (sb > sa) mieux++
+    else if (sb < sa) pire++
+  }
+  return {
+    tirages, n,
+    mieux: mieux / tirages,
+    pire: pire / tirages,
+    egal: 1 - (mieux + pire) / tirages,
+    diff: diff / tirages,
+  }
+}
+
+/**
+ * DNA 2.0 complet : échelle apprise sur toute l'archive, puis évaluation
+ * honnête sur la moitié qui n'a pas servi, dans les deux sens.
+ */
+export function dnaComplet(list, opts = {}) {
+  const tailles = opts.tailles || [5, 6, 7, 8, 9, 10, 11, 12]
+  const N = list.length
+  const moitie = Math.floor(N / 2)
+  const A = list.slice(0, moitie)
+  const B = list.slice(moitie)
+
+  /* ── le modèle de production : appris sur toute l'archive ─────────────── */
+  const potFull = potentielsDNA(list)
+  const donneesFull = donneesDNA(list, potFull)
+  const echelle = ajusterEchelle(donneesFull)
+  const lam = echelle.lambda
+  const courbe = evaluerTickets(donneesFull, lam, tailles)
+
+  /* ── hors échantillon : deux sens, quatre étapes ──────────────────────── */
+  const sens = []
+  const hitsBase = []
+  const hitsDNA = []
+  const tests = []
+  for (const [train, test, txt] of [
+    [A, B, 'classe sur la 1re moitié → noté sur la 2e'],
+    [B, A, 'classe sur la 2e moitié → noté sur la 1re'],
+  ]) {
+    const pot = potentielsDNA(train)
+    const dTrain = donneesDNA(train, pot)
+    const ech = ajusterEchelle(dTrain)
+    const dTest = donneesDNA(test, pot)
+    const etapes = [
+      { etape: '① position', couche: 1, lambda: { ...LAM_ZERO } },
+      { etape: '② + paires', couche: 2, lambda: ech.etapes[1].lambda },
+      { etape: '③ + triples', couche: 3, lambda: ech.etapes[2].lambda },
+      { etape: '④ + quinté', couche: 4, lambda: ech.etapes[3].lambda },
+    ].map((e) => ({ ...e, ...evaluerTickets(dTest, e.lambda, tailles) }))
+    sens.push({ sens: txt, N_train: train.length, N_test: test.length, lambda: ech.lambda, etapes })
+    hitsBase.push(...hitsQuinte(dTest, LAM_ZERO, 8))
+    hitsDNA.push(...hitsQuinte(dTest, ech.lambda, 8))
+    tests.push(dTest)
+  }
+
+  /* ── moyenne des deux sens, par étape ─────────────────────────────────── */
+  const moyenne = [1, 2, 3, 4].map((couche) => {
+    const l = sens.map((s) => s.etapes.find((e) => e.couche === couche))
+    const acc = { couche, etape: l[0].etape }
+    for (const n of tailles) {
+      acc[n] = { n }
+      for (const k of ['quinte', 'podium', 'plus4', 'gagnant', 'hasard_quinte', 'hasard_podium', 'evalues']) {
+        acc[n][k] = (l[0][n][k] + l[1][n][k]) / 2
+      }
+    }
+    return acc
+  })
+
+  /* ── bootstrap apparié : étape ④ contre étape ①, Quinté entier à n = 8 ── */
+  const boot = bootstrapPaire(hitsBase, hitsDNA, 4000)
+
+  /* ── le balayage : aucun λ ne dépasse-t-il la couche ① ? ──────────────── */
+  const scanLams = []
+  for (const p of [0, 0.25, 0.5, 0.75, 1, 1.5]) for (const t of [0, 0.5, 1]) scanLams.push({ pair: p, triple: t, quinte: 0 })
+  for (const q of [0, 0.5, 1]) scanLams.push({ pair: 1, triple: 0.5, quinte: q })
+  const scan = scanLams.map((l) => {
+    let q = 0, p = 0, e = 0
+    for (const dTest of tests) {
+      const r = evaluerTickets(dTest, l, [8])[8]
+      q += r.quinte; p += r.podium; e += r.evalues
+    }
+    return { ...l, tauxQ: q / 2, tauxP: p / 2, evalues: e / 2 }
+  })
+
+  /* ── diagnostics : le « DNA » est-il autre chose que la répétition ? ──── */
+  const top8 = [1, 2, 3, 4, 5, 6, 7, 8]
+  let pos = 0, neg = 0, adj = 0, forts = 0, sommeW = 0
+  for (let i = 0; i < top8.length; i++) {
+    for (let j = i + 1; j < top8.length; j++) {
+      const a = top8[i], b = top8[j]
+      const v = potFull.w.get(dmask(a) | dmask(b)) || 0
+      if (v > 0) { pos++; sommeW += v; if (b - a === 1) adj++ }
+      else if (v < 0) neg++
+      if (Math.abs(v) > 0.35) forts++
+    }
+  }
+  const triplesVus = [...potFull.nTri.values()].filter((v) => v > 0).length
+  const triplesRepetes = [...potFull.nTri.values()].filter((v) => v >= 2).length
+  const quinteVus = [...potFull.nQuint.values()].filter((v) => v > 0).length
+  const quinteRepetes = [...potFull.nQuint.values()].filter((v) => v >= 2).length
+
+  /* ── export des potentiels (la page n'a pas accès aux Map) ────────────── */
+  const u = []
+  for (let p = 1; p <= MAXP; p++) u.push({ p, u: potFull.u[p], p1: potFull.p1[p] })
+  const paires = []
+  for (const [k, v] of potFull.w) {
+    const bits = []
+    for (let p = 1; p <= MAXP; p++) if (k & dmask(p)) bits.push(p)
+    paires.push({ a: bits[0], b: bits[1], w: v, n: potFull.nPair.get(k) || 0 })
+  }
+  paires.sort((x, y) => Math.abs(y.w) - Math.abs(x.w))
+  const triples = []
+  for (const [k, v] of potFull.t) {
+    const bits = []
+    for (let p = 1; p <= MAXP; p++) if (k & dmask(p)) bits.push(p)
+    triples.push({ a: bits[0], b: bits[1], c: bits[2], t: v, n: potFull.nTri.get(k) || 0 })
+  }
+  triples.sort((x, y) => Math.abs(y.t) - Math.abs(x.t))
+  const quintes = []
+  for (const [k, v] of potFull.nQuint) {
+    if (!v) continue
+    const bits = []
+    for (let p = 1; p <= MAXP; p++) if (k & dmask(p)) bits.push(p)
+    quintes.push({ cases: bits, q: potFull.q(bits), n: v })
+  }
+  quintes.sort((x, y) => y.n - x.n)
+
+  return {
+    N, moitie,
+    prior: DNA_PRIOR, cap: DNA_CAP, grille: DNA_GRILLE,
+    lambda: lam,
+    echelle: echelle.etapes,
+    courbe,
+    horsEchantillon: sens,
+    moyenne,
+    scan,
+    bootstrap: { ...boot, n: 8 },
+    potentiels: { u, paires, triples, quintes },
+    diagnostic: {
+      pairesTop8: 28, positives: pos, negatives: neg, adjacentes: adj,
+      wMoyenPositif: pos ? sommeW / pos : 0,
+      fortes: forts,
+      triplesVus, triplesRepetes, quinteVus, quinteRepetes,
+      quintesDistincts: quintes.length,
+    },
+  }
+}
+
