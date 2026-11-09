@@ -142,29 +142,42 @@ export default function Probabilite() {
               </div>
             )}
 
-            {/* le ticket */}
-            {selection && selection.lignes.length > 0 && (
-              <div style={{ padding: '14px 16px', borderRadius: 12, border: '1px solid ' + SK.bord, background: 'linear-gradient(180deg, rgba(124,58,237,.18), rgba(12,20,37,.6))', marginBottom: 14 }}>
-                <div style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: .8, marginBottom: 8 }}>
-                  ★ le ticket · {courseChoisie ? `${courseChoisie.date} — ${courseChoisie.hippodrome}` : 'course choisie'} · 7 chevaux
+            {/* combinaison nouvelle (DNA) */}
+            {dnaExemple && dnaExemple.dna && dnaExemple.dna.length >= 5 && (
+              <div style={{ ...SK.box, padding: 14, marginBottom: 14, boxShadow: '0 8px 24px rgba(124,58,237,.18)' }}>
+                <div style={{ fontSize: 12, fontWeight: 900, color: '#e9d5ff', marginBottom: 8, textTransform: 'uppercase', letterSpacing: .6 }}>
+                  combinaison nouvelle (DNA) — construite à partir des relations
                 </div>
-                <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end', flexWrap: 'wrap' }}>
-                  {selection.lignes.map((l) => (
-                    <span key={l.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 44 }}>
-                      <b style={{ fontSize: 30, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>{l.num}</b>
-                      <span style={{ fontSize: 10, color: '#a4b8d6' }}>P{l.slot}</span>
-                    </span>
-                  ))}
-                  <button type="button" onClick={() => { try { navigator.clipboard.writeText(selection.lignes.map((l) => l.num).join(' ')); setCopie('copié'); setTimeout(() => setCopie(''), 1500) } catch (e) { setCopie('—') } }}
-                    style={{ marginLeft: 'auto', background: 'transparent', color: SK.accent, border: '1px solid ' + SK.bord, borderRadius: 7, padding: '6px 12px', fontSize: 12, cursor: 'pointer' }}>
-                    {copie || 'copier'}
-                  </button>
+                <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end', flexWrap: 'wrap', marginBottom: 8 }}>
+                  {[...dnaExemple.dna].sort((a, b) => a - b).map((c) => {
+                    const map = casesDepuisPresse(ordreTxt.split(/[^0-9]+/).map(Number).filter((n) => n > 0), partants)
+                    const num = Object.keys(map.slotParNum || {}).find((n) => map.slotParNum[n] === c)
+                    return (
+                      <span key={c} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 40 }}>
+                        <b style={{ fontSize: 24, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>{num || c}</b>
+                        <span style={{ fontSize: 9.5, color: '#a4b8d6' }}>P{c}</span>
+                      </span>
+                    )
+                  })}
+                  <span style={{ marginLeft: 'auto', fontSize: 11.5, color: '#a4b8d6' }}>
+                    couverture estimée <b style={{ color: '#e9d5ff' }}>{pc(dnaExemple.couvDNA)}</b>
+                  </span>
                 </div>
-                <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 8 }}>
-                  Le gros chiffre = le <b>numéro du cheval</b> · « P » = sa place dans la synthèse de la presse.
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', fontSize: 11.5 }}>
+                  <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: dnaExemple.contenus === 0 ? '#34d399' : '#fbbf24', fontWeight: 700 }}>
+                    {dnaExemple.contenus} Quinté du passé contenu dans ce ticket
+                  </span>
+                  <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: '#a4b8d6' }}>
+                    paires déjà vues : {dnaExemple.pairesVues} / {dnaExemple.totalPaires}
+                  </span>
+                  <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: '#a4b8d6' }}>
+                    recouvrement max : {pc(dnaExemple.jaccardMax, 0)}
+                  </span>
                 </div>
               </div>
             )}
+
+            
 
             {/* le calcul — probabilité par cheval */}
             {selection && selection.lignes.length > 0 && (
@@ -203,36 +216,33 @@ export default function Probabilite() {
               </div>
             )}
 
-            {/* combinaison nouvelle (DNA) */}
-            {dnaExemple && dnaExemple.dna && dnaExemple.dna.length >= 5 && (
-              <div style={{ ...SK.box, padding: 14, marginBottom: 14, boxShadow: '0 8px 24px rgba(124,58,237,.18)' }}>
-                <div style={{ fontSize: 12, fontWeight: 900, color: '#e9d5ff', marginBottom: 8, textTransform: 'uppercase', letterSpacing: .6 }}>
-                  combinaison nouvelle (DNA) — construite à partir des relations
+            
+
+            {/* le ticket */}
+            {selection && selection.lignes.length > 0 && (
+              <div style={{ padding: '14px 16px', borderRadius: 12, border: '1px solid ' + SK.bord, background: 'linear-gradient(180deg, rgba(124,58,237,.18), rgba(12,20,37,.6))', marginBottom: 14 }}>
+                <div style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: .8, marginBottom: 8 }}>
+                  le ticket naïf — les favoris · {courseChoisie ? `${courseChoisie.date} — ${courseChoisie.hippodrome}` : 'course choisie'} · 7 chevaux
                 </div>
-                <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end', flexWrap: 'wrap', marginBottom: 8 }}>
-                  {[...dnaExemple.dna].sort((a, b) => a - b).map((c) => (
-                    <span key={c} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 40 }}>
-                      <b style={{ fontSize: 24, fontWeight: 900, color: c >= 9 ? '#fbbf24' : '#fff', lineHeight: 1.1 }}>{c}</b>
-                      <span style={{ fontSize: 9.5, color: c >= 9 ? '#fbbf24' : '#a4b8d6' }}>P{c}</span>
+                <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+                  {selection.lignes.map((l) => (
+                    <span key={l.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 44 }}>
+                      <b style={{ fontSize: 30, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>{l.num}</b>
+                      <span style={{ fontSize: 10, color: '#a4b8d6' }}>P{l.slot}</span>
                     </span>
                   ))}
-                  <span style={{ marginLeft: 'auto', fontSize: 11.5, color: '#a4b8d6' }}>
-                    couverture estimée <b style={{ color: '#e9d5ff' }}>{pc(dnaExemple.couvDNA)}</b>
-                  </span>
+                  <button type="button" onClick={() => { try { navigator.clipboard.writeText(selection.lignes.map((l) => l.num).join(' ')); setCopie('copié'); setTimeout(() => setCopie(''), 1500) } catch (e) { setCopie('—') } }}
+                    style={{ marginLeft: 'auto', background: 'transparent', color: SK.accent, border: '1px solid ' + SK.bord, borderRadius: 7, padding: '6px 12px', fontSize: 12, cursor: 'pointer' }}>
+                    {copie || 'copier'}
+                  </button>
                 </div>
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', fontSize: 11.5 }}>
-                  <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: dnaExemple.contenus === 0 ? '#34d399' : '#fbbf24', fontWeight: 700 }}>
-                    {dnaExemple.contenus} Quinté du passé contenu dans ce ticket
-                  </span>
-                  <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: '#a4b8d6' }}>
-                    paires déjà vues : {dnaExemple.pairesVues} / {dnaExemple.totalPaires}
-                  </span>
-                  <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: '#a4b8d6' }}>
-                    recouvrement max : {pc(dnaExemple.jaccardMax, 0)}
-                  </span>
+                <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 8 }}>
+                  Le gros chiffre = le <b>numéro du cheval</b> · « P » = sa place dans la synthèse de la presse.
                 </div>
               </div>
             )}
+
+            
 
             {/* info */}
             <div style={{ fontSize: 11, color: '#64748b', lineHeight: 1.6 }}>
