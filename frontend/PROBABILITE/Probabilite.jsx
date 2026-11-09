@@ -178,7 +178,85 @@ export default function Probabilite() {
     return { rows, N, hasOdds: cotesCourse.length > 0 }
   }, [course, data, cotes])
 
-  const ticket = calc ? calc.rows.slice(0, 7).map((r) => r.num) : []
+  const ticket = ticketOpti
+
+  // ticket optimisé : maximise la couverture du top-5 (proba individuelle + force paires/triplets + diversité)
+  const ticketOpti = useMemo(() => {
+    if (!calc || !calc.rows.length) return []
+    const rows = calc.rows
+    const pBySlot = {}
+    for (const r of rows) pBySlot[r.slot] = r.pComb
+    const liftMap = {}
+    const tripleLift = {}
+    if (dna) {
+      for (const p of dna.pairs) liftMap[p.a + '-' + p.b] = p.lift
+      for (const t of dna.triples) tripleLift[t.combo.slice().sort((a, b) => a - b).join('-')] = t.count / (dna.N || 1)
+    }
+    const liftOf = (a, b) => liftMap[a < b ? a + '-' + b : b + '-' + a] || 0
+    const tripleLiftOf = (a, b, c) => tripleLift[[a, b, c].sort((x, y) => x - y).join('-')] || 0
+    const scoreOfSet = (set) => {
+      let s = 0
+      for (const sl of set) s += (pBySlot[sl] || 0)
+      for (let i = 0; i < set.length; i++) for (let j = i + 1; j < set.length; j++) s += 0.6 * liftOf(set[i], set[j])
+      for (let i = 0; i < set.length; i++) for (let j = i + 1; j < set.length; j++) for (let k = j + 1; k < set.length; k++) s += 0.4 * tripleLiftOf(set[i], set[j], set[k])
+      return s
+    }
+    const remaining = rows.map((r) => r.slot)
+    const selected = []
+    // premier : meilleure proba individuelle
+    let first = remaining.reduce((a, b) => (pBySlot[a] || 0) >= (pBySlot[b] || 0) ? a : b)
+    selected.push(first)
+    remaining.splice(remaining.indexOf(first), 1)
+    while (selected.length < 7 && remaining.length) {
+      let bestC = null, bestScore = -Infinity
+      for (const c of remaining) {
+        const sc = scoreOfSet(selected.concat([c]))
+        if (sc > bestScore) { bestScore = sc; bestC = c }
+      }
+      selected.push(bestC)
+      remaining.splice(remaining.indexOf(bestC), 1)
+    }
+    const slotToNum = {}
+    for (const r of rows) slotToNum[r.slot] = r.num
+    return selected.map((sl) => slotToNum[sl]).filter(Boolean)
+  }, [calc, dna])
+
+  // couverture MC du ticket optimisé
+  const couverture = useMemo(() => {
+    if (!calc || !ticketOpti.length) return null
+    const rows = calc.rows
+    const slotToNum = {}
+    for (const r of rows) slotToNum[r.slot] = r.num
+    const numToIdx = {}
+    rows.forEach((r, i) => { numToIdx[r.num] = i })
+    const ticketSlots = ticketOpti.map((n) => rows.find((r) => r.num === n)?.slot).filter(Boolean)
+    const ticketIdx = ticketSlots.map((sl) => rows.findIndex((r) => r.slot === sl)).filter((i) => i >= 0)
+    // poids pour sampling
+    const w = rows.map((r) => r.pComb || 0)
+    const wSum = w.reduce((a, b) => a + b, 0) || 1
+    const wn = w.map((x) => x / wSum)
+    const M = 3000
+    const cov = [0, 0, 0, 0, 0, 0]  // cov[k] = nb sims with exactly k hits (0..5)
+    for (let it = 0; it < M; it++) {
+      const remaining = rows.map((_, i) => i)
+      const wrem = wn.slice()
+      const chosen = []
+      for (let k = 0; k < 5 && remaining.length; k++) {
+        const tot = remaining.reduce((s, i) => s + wrem[i], 0) || 1
+        let r = Math.random() * tot
+        let pick = remaining[0]
+        for (const i of remaining) { r -= wrem[i]; if (r <= 0) { pick = i; break } }
+        chosen.push(pick)
+        const pi = remaining.indexOf(pick)
+        remaining.splice(pi, 1)
+        wrem[pick] = 0
+      }
+      const hits = chosen.filter((i) => ticketIdx.includes(i)).length
+      cov[hits]++
+    }
+    const pAuMoins = (k) => cov.slice(k).reduce((a, b) => a + b, 0) / M
+    return { p3: pAuMoins(3), p4: pAuMoins(4), p5: pAuMoins(5), M }
+  }, [calc, ticketOpti, dna])
 
   // DNA : paires et triplets récurrents (depuis l'archive)
   const dna = useMemo(() => {
@@ -251,23 +329,38 @@ export default function Probabilite() {
                 {/* le ticket */}
                 <div style={{ padding: '14px 16px', borderRadius: 12, border: '1px solid ' + SK.bord, background: 'linear-gradient(180deg, rgba(124,58,237,.18), rgba(12,20,37,.6))', marginBottom: 14 }}>
                   <div style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: .8, marginBottom: 8 }}>
-                    ★ le ticket — combiné des 6 méthodes · {course.date} · {course.hippodrome} · 7 chevaux
+                    ★ le ticket optimisé — combiné + DNA · {course.date} · {course.hippodrome} · 7 chevaux
                   </div>
                   <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end', flexWrap: 'wrap' }}>
-                    {calc.rows.slice(0, 7).map((r) => (
-                      <span key={r.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 44 }}>
-                        <b style={{ fontSize: 30, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>{r.num}</b>
-                        <span style={{ fontSize: 10, color: '#a4b8d6' }}>P{r.slot}</span>
-                      </span>
-                    ))}
-                    <button type="button" onClick={() => { try { navigator.clipboard.writeText(ticket.join(' ')); setCopie('copié'); setTimeout(() => setCopie(''), 1500) } catch (e) { setCopie('—') } }}
+                    {ticketOpti.map((num) => {
+                      const r = calc.rows.find((x) => x.num === num)
+                      return (
+                        <span key={num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 44 }}>
+                          <b style={{ fontSize: 30, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>{num}</b>
+                          <span style={{ fontSize: 10, color: '#a4b8d6' }}>P{r ? r.slot : '?'}</span>
+                        </span>
+                      )
+                    })}
+                    <button type="button" onClick={() => { try { navigator.clipboard.writeText(ticketOpti.join(' ')); setCopie('copié'); setTimeout(() => setCopie(''), 1500) } catch (e) { setCopie('—') } }}
                       style={{ marginLeft: 'auto', background: 'transparent', color: SK.accent, border: '1px solid ' + SK.bord, borderRadius: 7, padding: '6px 12px', fontSize: 12, cursor: 'pointer' }}>
                       {copie || 'copier'}
                     </button>
                   </div>
-                  <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 8 }}>
+                  {couverture && (
+                    <div style={{ fontSize: 11.5, color: '#cbd5e1', marginTop: 8, lineHeight: 1.5 }}>
+                      Couverture estimée (Monte Carlo) : <b style={{ color: '#34d399' }}>{pc(couverture.p3)}</b> pour ≥3/5 ·{' '}
+                      <b style={{ color: '#34d399' }}>{pc(couverture.p4)}</b> pour ≥4/5 · <b style={{ color: '#34d399' }}>{pc(couverture.p5)}</b> pour 5/5.
+                    </div>
+                  )}
+                  <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 6 }}>
                     Le gros chiffre = le <b>numéro du cheval</b> · « P » = sa place dans la synthèse de la presse (La grille).
                   </div>
+                </div>
+
+                {/* le ticket naïf pour comparaison */}
+                <div style={{ padding: '10px 14px', borderRadius: 10, border: '1px solid ' + SK.bord, background: 'rgba(255,255,255,.03)', marginBottom: 14, fontSize: 12, color: '#94a3b8' }}>
+                  <b style={{ color: '#7a8ea9' }}>ticket naïf (les 7 favoris) pour comparaison :</b>{' '}
+                  {calc.rows.slice(0, 7).map((r) => r.num).join(' · ')}
                 </div>
 
                 {/* le tableau des 6 probabilités */}
