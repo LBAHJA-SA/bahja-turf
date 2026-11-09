@@ -4090,5 +4090,318 @@
         "heure": "2026-11-09T15:19:00+01:00"
       }
     ]
+  },
+  "2026-11-09_R1_C2": {
+    "source": "equidia.fr",
+    "favori": 5,
+    "snapshots": {
+      "h_moins_3": {
+        "heure": "2026-11-09T09:00:06.763Z",
+        "cotes": [
+          {
+            "num": 5,
+            "nom": "KEROSEN DU GERS",
+            "cote": 3.2,
+            "ouverture": 3.2,
+            "tendance": "+",
+            "favori": true,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 6,
+            "nom": "KASSIOPEE WIND",
+            "cote": 6,
+            "ouverture": 6.2,
+            "tendance": "-",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 11,
+            "nom": "GERICAULT",
+            "cote": 6.9,
+            "ouverture": 6.5,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 13,
+            "nom": "ICARE DU BERYL",
+            "cote": 6.9,
+            "ouverture": 8.7,
+            "tendance": "-",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 4,
+            "nom": "NELSON GREENWOOD",
+            "cote": 9.7,
+            "ouverture": 9.1,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 15,
+            "nom": "ELEGANCE KRONOS",
+            "cote": 11,
+            "ouverture": 10,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 3,
+            "nom": "STARO RAILI",
+            "cote": 21,
+            "ouverture": 20,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 7,
+            "nom": "JACKSON D'ARC",
+            "cote": 21,
+            "ouverture": 22,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 10,
+            "nom": "IRIS DES ROSEAUX",
+            "cote": 21,
+            "ouverture": 19,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 12,
+            "nom": "HOLLYWOOD DU BOIS",
+            "cote": 51,
+            "ouverture": 48,
+            "tendance": "-",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 1,
+            "nom": "DUNA DI GIRIFALCO",
+            "cote": 68,
+            "ouverture": 77,
+            "tendance": "-",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 9,
+            "nom": "IDOLE OF LOVE",
+            "cote": 87,
+            "ouverture": 75,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 14,
+            "nom": "HOLD UP DES VENTES",
+            "cote": 97,
+            "ouverture": 96,
+            "tendance": "-",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 2,
+            "nom": "ROSSI GARLINE",
+            "cote": 112,
+            "ouverture": 101,
+            "tendance": "+",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          },
+          {
+            "num": 8,
+            "nom": "GALANT DE CAREL",
+            "cote": 134,
+            "ouverture": 133,
+            "tendance": "-",
+            "favori": false,
+            "enjeu": 27095,
+            "heure": "2026-11-09T09:45:00+01:00"
+          }
+        ]
+      }
+    },
+    "cotes": [
+      {
+        "num": 5,
+        "nom": "KEROSEN DU GERS",
+        "cote": 3.2,
+        "ouverture": 3.2,
+        "tendance": "+",
+        "favori": true,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 6,
+        "nom": "KASSIOPEE WIND",
+        "cote": 6,
+        "ouverture": 6.2,
+        "tendance": "-",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 11,
+        "nom": "GERICAULT",
+        "cote": 6.9,
+        "ouverture": 6.5,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 13,
+        "nom": "ICARE DU BERYL",
+        "cote": 6.9,
+        "ouverture": 8.7,
+        "tendance": "-",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 4,
+        "nom": "NELSON GREENWOOD",
+        "cote": 9.7,
+        "ouverture": 9.1,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 15,
+        "nom": "ELEGANCE KRONOS",
+        "cote": 11,
+        "ouverture": 10,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 3,
+        "nom": "STARO RAILI",
+        "cote": 21,
+        "ouverture": 20,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 7,
+        "nom": "JACKSON D'ARC",
+        "cote": 21,
+        "ouverture": 22,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 10,
+        "nom": "IRIS DES ROSEAUX",
+        "cote": 21,
+        "ouverture": 19,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 12,
+        "nom": "HOLLYWOOD DU BOIS",
+        "cote": 51,
+        "ouverture": 48,
+        "tendance": "-",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 1,
+        "nom": "DUNA DI GIRIFALCO",
+        "cote": 68,
+        "ouverture": 77,
+        "tendance": "-",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 9,
+        "nom": "IDOLE OF LOVE",
+        "cote": 87,
+        "ouverture": 75,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 14,
+        "nom": "HOLD UP DES VENTES",
+        "cote": 97,
+        "ouverture": 96,
+        "tendance": "-",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 2,
+        "nom": "ROSSI GARLINE",
+        "cote": 112,
+        "ouverture": 101,
+        "tendance": "+",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      },
+      {
+        "num": 8,
+        "nom": "GALANT DE CAREL",
+        "cote": 134,
+        "ouverture": 133,
+        "tendance": "-",
+        "favori": false,
+        "enjeu": 27095,
+        "heure": "2026-11-09T09:45:00+01:00"
+      }
+    ]
   }
 }
