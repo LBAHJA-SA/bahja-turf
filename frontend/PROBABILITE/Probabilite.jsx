@@ -232,6 +232,45 @@ export default function Probabilite() {
                 les <b>3</b> premières places ensemble, les <b>5</b> ensemble. Une seule chose décide — <b>combien de cases on garde</b>.
               </>}
             >
+              {dnaExemple && dnaExemple.dna && dnaExemple.dna.length >= 5 && (
+                <div style={{ marginTop: 12, padding: '12px 14px', borderRadius: 10, border: '1px solid ' + SK.bord, background: 'rgba(124,58,237,.10)' }}>
+                  <div style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: .8, marginBottom: 6 }}>
+                    combinaison nouvelle (DNA) — le ticket · {dnaExemple.date || 'course choisie'}
+                  </div>
+                  <div style={{ display: 'flex', gap: 9, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+                    {[...dnaExemple.dna].sort((a, b) => a - b).map((c) => (
+                      <span key={c} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 36 }}>
+                        <b style={{ fontSize: 22, fontWeight: 900, color: c >= 9 ? '#fbbf24' : '#fff', lineHeight: 1.1 }}>{c}</b>
+                        <span style={{ fontSize: 9.5, color: c >= 9 ? '#fbbf24' : '#a4b8d6' }}>P{c}</span>
+                      </span>
+                    ))}
+                    <span style={{ marginLeft: 'auto', fontSize: 11.5, color: '#a4b8d6', textAlign: 'right' }}>
+                      couverture estimée <b style={{ color: '#e9d5ff' }}>{pc(dnaExemple.couvDNA)}</b>
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 9, paddingTop: 8, borderTop: '1px dashed rgba(255,255,255,.14)', fontSize: 11.5 }}>
+                    <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: dnaExemple.contenus === 0 ? '#34d399' : '#fbbf24', fontWeight: 700 }}>
+                      {dnaExemple.contenus} Quinté du passé contenu dans ce ticket
+                    </span>
+                    <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: '#a4b8d6' }}>
+                      paires déjà vues : {dnaExemple.pairesVues} / {dnaExemple.totalPaires}
+                    </span>
+                    <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: '#a4b8d6' }}>
+                      recouvrement max avec un Quinté passé : {pc(dnaExemple.jaccardMax, 0)}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 7, lineHeight: 1.5 }}>
+                    Ce ticket n'est pas une copie d'une combinaison passée : il est construit à partir des relations (paires, triples)
+                    mesurées dans l'archive, puis testé hors échantillon. Le nombre de Quintés passés qu'il contient dit s'il est
+                    vraiment nouveau.
+                  </div>
+                </div>
+              )}
+
+              <div style={{ fontSize: 11, color: '#64748b', marginTop: 10, lineHeight: 1.6 }}>
+                <b style={{ color: '#7a8ea9' }}>D'où viennent ces chiffres :</b> {data.N} courses de l'archive (les 3 lignes du haut) et{' '}
+                {data.controle?.N || 96} autres Quintés à presse réelle (les 3 cartes de contrôle, autre période).
+
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12.5, width: '100%', minWidth: 620, border: '1px solid ' + SK.bord, borderRadius: 8, overflow: 'hidden' }}>
                   <thead>
@@ -303,44 +342,7 @@ export default function Probabilite() {
                 })}
               </div>
 
-              {dnaExemple && dnaExemple.dna && dnaExemple.dna.length >= 5 && (
-                <div style={{ marginTop: 12, padding: '12px 14px', borderRadius: 10, border: '1px solid ' + SK.bord, background: 'rgba(124,58,237,.10)' }}>
-                  <div style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: .8, marginBottom: 6 }}>
-                    combinaison nouvelle (DNA) · {dnaExemple.date || 'course choisie'}
-                  </div>
-                  <div style={{ display: 'flex', gap: 9, alignItems: 'flex-end', flexWrap: 'wrap' }}>
-                    {[...dnaExemple.dna].sort((a, b) => a - b).map((c) => (
-                      <span key={c} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 36 }}>
-                        <b style={{ fontSize: 22, fontWeight: 900, color: c >= 9 ? '#fbbf24' : '#fff', lineHeight: 1.1 }}>{c}</b>
-                        <span style={{ fontSize: 9.5, color: c >= 9 ? '#fbbf24' : '#a4b8d6' }}>P{c}</span>
-                      </span>
-                    ))}
-                    <span style={{ marginLeft: 'auto', fontSize: 11.5, color: '#a4b8d6', textAlign: 'right' }}>
-                      couverture estimée <b style={{ color: '#e9d5ff' }}>{pc(dnaExemple.couvDNA)}</b>
-                    </span>
-                  </div>
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 9, paddingTop: 8, borderTop: '1px dashed rgba(255,255,255,.14)', fontSize: 11.5 }}>
-                    <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: dnaExemple.contenus === 0 ? '#34d399' : '#fbbf24', fontWeight: 700 }}>
-                      {dnaExemple.contenus} Quinté du passé contenu dans ce ticket
-                    </span>
-                    <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: '#a4b8d6' }}>
-                      paires déjà vues : {dnaExemple.pairesVues} / {dnaExemple.totalPaires}
-                    </span>
-                    <span style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + SK.bord, color: '#a4b8d6' }}>
-                      recouvrement max avec un Quinté passé : {pc(dnaExemple.jaccardMax, 0)}
-                    </span>
-                  </div>
-                  <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 7, lineHeight: 1.5 }}>
-                    Ce ticket n'est pas une copie d'une combinaison passée : il est construit à partir des relations (paires, triples)
-                    mesurées dans l'archive, puis testé hors échantillon. Le nombre de Quintés passés qu'il contient dit s'il est
-                    vraiment nouveau.
-                  </div>
-                </div>
-              )}
-
-              <div style={{ fontSize: 11, color: '#64748b', marginTop: 10, lineHeight: 1.6 }}>
-                <b style={{ color: '#7a8ea9' }}>D'où viennent ces chiffres :</b> {data.N} courses de l'archive (les 3 lignes du haut) et{' '}
-                {data.controle?.N || 96} autres Quintés à presse réelle (les 3 cartes de contrôle, autre période).
+              
                 Mesure <b>leave-one-out</b> : la course notée ne sert jamais à son propre classement. À {data.N} courses la courbe flatte —
                 les deux mesures encadrent la vraie valeur. Un Quinté ne se répète pas : {data.ensemble.quinte.distincts} combinaisons distinctes
                 sur {data.ensemble.quinte.courses} courses, donc « la combinaison qui va sortir » ne se cherche pas.
@@ -446,7 +448,7 @@ export default function Probabilite() {
 
             {/* ③ sélection ---------------------------------------------------- */}
             <Section
-              n="③" titre="Choisir une course — et lire son ticket"
+              n="③" titre="Le ticket naïf — les favoris (pour comparaison)"
               sous={<>On classe les cases par leur probabilité postérieure, on garde les <b>N</b> premières, et on rend les <b>numéros</b> de la course. Rien d'autre : pas de groupe, pas de quota, pas de place réservée. L'ordre du ticket est la probabilité décroissante (départage par la case).</>}
             >
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: 12 }}>
