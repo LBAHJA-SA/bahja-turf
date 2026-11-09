@@ -151,13 +151,55 @@ M.controle = {
     { nom: '8 favoris + 2 P11+', cases: 10, ...note((p) => [...p.z[0].slice(0, 4), ...p.z[1].slice(0, 4), ...p.z[3].slice(0, 2)]) },
     { nom: 'les 12 meilleures', cases: 12, ...note((p) => p.ordre.slice(0, 12)) },  ],
 }
-console.log(`\n  contrôle — ${NQ} Quintés à presse réelle (data/quintes.json) :`)
-for (const c of M.controle.courbe.filter((x) => [8, 10, 12].includes(x.n))) {
-  console.log(`     ${String(c.n).padStart(2)} cases  quinté ${pctProb(c.quinte).padStart(6)}  podium ${pctProb(c.podium).padStart(6)}  ≥4 ${pctProb(c.plus4).padStart(6)}`)
+/* ── la règle mesurée à 7 cases : 3·P1-P4 + 2·P5-P8 + 1·P9-P10 + 1·P11+ ── */
+const zoneOf2 = (p) => (p <= 4 ? 0 : p <= 8 ? 1 : p <= 10 ? 2 : 3)
+const mesurer7 = (rows) => {
+  const N = rows.length
+  const counts = Array(41).fill(0)
+  for (const c of rows) for (const p of new Set(c.arr)) if (p <= 40) counts[p]++
+  const prep = rows.map((c) => {
+    const cnt = counts.slice()
+    for (const p of new Set(c.arr)) if (p <= 40) cnt[p]--
+    const post = Array(41).fill(0)
+    for (let p = 1; p <= 40; p++) post[p] = posterior(cnt[p], N - 1)
+    const ordre = c.cases.slice().sort((a, b) => post[b] - post[a] || a - b)
+    const z = [[], [], [], []]
+    for (const p of ordre) z[zoneOf2(p)].push(p)
+    return { arr: c.arr, ordre, z }
+  })
+  const ev = (build) => { let q = 0, p4 = 0, pod = 0; for (const p of prep) { const s = new Set(build(p)); const hit = p.arr.filter((x) => s.has(x)).length; if (hit === 5) q++; if (hit >= 4) p4++; if (p.arr.slice(0, 3).every((x) => s.has(x))) pod++ } return { quinte: q / N, podium: pod / N, plus4: p4 / N, N } }
+  return {
+    favoris: ev((p) => p.ordre.slice(0, 7)),
+    zones: ev((p) => [...p.z[0].slice(0, 3), ...p.z[1].slice(0, 2), ...p.z[2].slice(0, 1), ...p.z[3].slice(0, 1)]),
+  }
 }
-for (const e of M.controle.echange) {
-  console.log(`     ${e.nom.padEnd(20)} ${String(e.cases).padStart(2)} cases  quinté ${pctProb(e.quinte).padStart(6)}  podium ${pctProb(e.podium).padStart(6)}`)
+const r1b = []
+for (const r of Object.values(SYN)) {
+  if (!r || !r.synthese || !r.synthese.length) continue
+  if (!r.arrivee || r.arrivee.length < 5) continue
+  const presse = r.synthese.map(Number).filter(Number.isFinite)
+  const runners = (r.runners || []).map(Number).filter(Number.isFinite)
+  if (presse.length < 10) continue
+  const grille = buildGrid(presse, runners)
+  const arr = r.arrivee.slice(0, 5).map((x) => (grille.slotParNum || {})[x]).filter((p) => Number.isFinite(p) && p >= 1 && p <= 20)
+  if (arr.length < 5) continue
+  r1b.push({ arr, cases: [...new Set(Object.values(grille.slotParNum || {}).map(Number).filter((p) => p >= 1 && p <= 20))] })
 }
+const r2b = []
+for (const q of Q) {
+  if (!q || !q.presse || !q.arrivee || q.arrivee.length < 5) continue
+  const presse = q.presse.map(Number).filter(Number.isFinite)
+  if (presse.length < 10) continue
+  const runners = Array.from({ length: Math.max(q.nb || 0, ...presse) }, (_, i) => i + 1)
+  const g = buildGrid(presse, runners)
+  const arr = q.arrivee.slice(0, 5).map((x) => (g.slotParNum || {})[x]).filter((p) => Number.isFinite(p) && p >= 1 && p <= 20)
+  if (arr.length < 5) continue
+  r2b.push({ arr, cases: [...new Set(Object.values(g.slotParNum || {}).map(Number).filter((p) => p >= 1 && p <= 20))] })
+}
+M.regle7 = { NArchive: r1b.length, N: r2b.length, archive: mesurer7(r1b), controle: mesurer7(r2b) }
+console.log(`\n  règle 7 cases — 3·P1-P4 + 2·P5-P8 + 1·P9-P10 + 1·P11+ :`)
+console.log(`     archive (33)  favoris ${pctProb(M.regle7.archive.favoris.quinte)} · zones ${pctProb(M.regle7.archive.zones.quinte)}`)
+console.log(`     contrôle (96) favoris ${pctProb(M.regle7.controle.favoris.quinte)} · zones ${pctProb(M.regle7.controle.zones.quinte)}`)
 
 /* ── « sortir du connu » : la répétition est-elle exploitable ? ─────────── */
 const ALT = objectifsAlternatifs(courses, { taille: 8 })

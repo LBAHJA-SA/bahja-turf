@@ -63,7 +63,7 @@ export default function Probabilite() {
   const [raceId, setRaceId] = useState('')
   const [ordreTxt, setOrdreTxt] = useState('')
   const [partants, setPartants] = useState([])
-  const [taille, setTaille] = useState(12)
+  const [taille, setTaille] = useState(7)
   const [regle, setRegle] = useState('top5')
   const [copie, setCopie] = useState('')
 
@@ -141,8 +141,18 @@ export default function Probabilite() {
     if (!data || !ordreTxt.trim()) return null
     const ordre = ordreTxt.split(/[^0-9]+/).map(Number).filter((n) => n > 0)
     if (!ordre.length) return null
-    return selectionner(data, { ordre, partants, taille, regle, contexte: ctx })
-  }, [data, ordreTxt, partants, taille, regle, ctx])
+    return selectionner(data, { ordre, partants, taille: 20, regle, contexte: ctx })
+  }, [data, ordreTxt, partants, regle, ctx])
+
+  const ticket = useMemo(() => {
+    if (!selection || !selection.lignes.length) return []
+    const z = [[], [], [], []]
+    for (const l of selection.lignes) z[l.slot <= 4 ? 0 : l.slot <= 8 ? 1 : l.slot <= 10 ? 2 : 3].push(l)
+    const t = []
+    ;[3, 2, 1, 1].forEach((k, i) => t.push(...z[i].slice(0, k)))
+    if (t.length < 7) for (const l of selection.lignes) { if (t.length >= 7) break; if (!t.includes(l)) t.push(l) }
+    return t.sort((a, b) => a.slot - b.slot)
+  }, [selection])
 
   const courbeRegle = data?.regles?.[regle]?.courbe || []
   const attendu = courbeRegle.find((c) => c.n === taille) || null
@@ -226,7 +236,7 @@ export default function Probabilite() {
                     </tr>
                   </thead>
                   <tbody>
-                    {[8, 10, 12].map((n) => {
+                    {[5, 6, 7].map((n) => {
                       const b = data.backtest.find((x) => x.n === n) || {}
                       const phare = n === taille
                       return (
@@ -246,25 +256,25 @@ export default function Probabilite() {
               </div>
 
               {/* le ticket, tout de suite */}
-              {selection && selection.lignes.length > 0 && (
+              {ticket.length > 0 && (
                 <div style={{ marginTop: 12, padding: '12px 14px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.accentClair }}>
                   <div style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: .8 }}>
-                    ★ le ticket · {courseChoisie ? `${courseChoisie.date} — ${courseChoisie.hippodrome}` : 'course choisie'} · {taille} chevaux
+                    ★ le ticket · {courseChoisie ? `${courseChoisie.date} — ${courseChoisie.hippodrome}` : 'course choisie'} · 7 chevaux
                   </div>
                   <div style={{ display: 'flex', gap: 11, alignItems: 'flex-end', flexWrap: 'wrap', marginTop: 7 }}>
-                    {[...selection.lignes].sort((a, b) => a.slot - b.slot).map((l) => (
+                    {ticket.map((l) => (
                       <span key={l.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 40 }}>
                         <b style={{ fontSize: 26, fontWeight: 900, color: l.slot >= 9 ? '#fbbf24' : '#fff', lineHeight: 1.1 }}>{l.num}</b>
                         <span style={{ fontSize: 9.5, color: l.slot >= 9 ? '#fbbf24' : '#a4b8d6' }}>P{l.slot}</span>
                       </span>
                     ))}
                     <span style={{ marginLeft: 'auto', fontSize: 11.5, color: '#a4b8d6', textAlign: 'right' }}>
-                      <b style={{ color: '#e9d5ff' }}>{pc(attendu?.podium)}</b> du podium · <b style={{ color: '#e9d5ff' }}>{pc(attendu?.quinte)}</b> du Quinté
+                      <b style={{ color: '#e9d5ff' }}>{pc(data.regle7?.controle?.zones?.podium)}</b> du podium · <b style={{ color: '#e9d5ff' }}>{pc(data.regle7?.controle?.zones?.quinte)}</b> du Quinté
                     </span>
                   </div>
                   {(() => {
                     const z = [0, 0, 0, 0]
-                    for (const l of selection.lignes) z[l.slot <= 4 ? 0 : l.slot <= 8 ? 1 : l.slot <= 10 ? 2 : 3]++
+                    for (const l of ticket) z[l.slot <= 4 ? 0 : l.slot <= 8 ? 1 : l.slot <= 10 ? 2 : 3]++
                     const ZN = ['P1-P4', 'P5-P8', 'P9-P10', 'P11+']
                     const bas = z[2] + z[3]
                     return (
@@ -282,7 +292,7 @@ export default function Probabilite() {
                   })()}
                   <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 7 }}>
                     Le gros chiffre = le <b>numéro du cheval</b> · « P » = sa place dans la synthèse de la presse.
-                    Changer la course, la taille ou la règle : section ③, en bas.
+                    Changer la course ou la règle : section ③, en bas.
                   </div>
                 </div>
               )}
@@ -292,15 +302,14 @@ export default function Probabilite() {
                 <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: .7, color: SK.accent, textTransform: 'uppercase', marginBottom: 5 }}>
                   ce que le ticket ne doit pas faire
                 </div>
-                Remplacer des favoris par des chevaux de P11+ à taille égale, c'est perdre : à 10 cases,{' '}
-                <b style={{ color: '#fca5a5' }}>{pc(data.controle?.echange?.[2]?.quinte)}</b> du Quinté au lieu de{' '}
-                <b style={{ color: '#34d399' }}>{pc(data.controle?.echange?.[1]?.quinte)}</b> (96 Quintés réels). Le bas de la synthèse ne remplace pas
-                le haut : <b>il s'ajoute</b>. Un ticket de 8 chevaux tient les 5 dans {pc((data.controle?.echange?.[0]?.quinte))} des courses ;
-                à 12, c'est {pc(data.controle?.echange?.[3]?.quinte)}.
+                À 7 chevaux, garder les 7 favoris donne {pc(data.regle7?.controle?.favoris?.quinte)} du Quinté sur 96 autres Quintés réels ;
+                la règle mesurée (3 de P1-P4, 2 de P5-P8, 1 de P9-P10, 1 de P11+) en donne{' '}
+                <b style={{ color: '#34d399' }}>{pc(data.regle7?.controle?.zones?.quinte)}</b> — trois fois plus.
+                Le bas de la synthèse ne remplace pas le haut : <b>il s'ajoute</b>, et il entre dans le ticket sans discussion.
               </div>
 
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 10 }}>
-                {[[8, 'les 8 meilleures'], [10, 'les 10 meilleures'], [12, 'les 12 meilleures']].map(([n, nom]) => {
+                {[[5, '5 chevaux'], [6, '6 chevaux'], [7, '7 chevaux']].map(([n, nom]) => {
                   const c = (data.controle?.courbe || []).find((x) => x.n === n) || {}
                   return (
                     <div key={n} style={{ flex: '1 1 170px', padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
@@ -387,8 +396,8 @@ export default function Probabilite() {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.backtest.map((b, i) => {
-                      const phare = b.n === 8
+                    {data.backtest.filter((b) => [5, 6, 7].includes(b.n)).map((b, i) => {
+                      const phare = b.n === taille
                       return (
                         <tr key={b.n} style={{ background: phare ? SK.accentClair : i % 2 ? SK.alt : 'transparent' }}>
                           <td style={{ ...SK.td, fontWeight: 900, color: phare ? SK.accent : SK.texte }}>{b.n}{phare ? ' ←' : ''}</td>
@@ -441,7 +450,7 @@ export default function Probabilite() {
                   Taille
                   <select value={taille} onChange={(e) => setTaille(Number(e.target.value))}
                     style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12 }}>
-                    {[5, 6, 7, 8, 9, 10, 11, 12].map((n) => <option key={n} value={n}>{n}</option>)}
+                    {[5, 6, 7].map((n) => <option key={n} value={n}>{n}</option>)}
                   </select>
                 </label>
                 <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -493,7 +502,7 @@ export default function Probabilite() {
                         </tr>
                       </thead>
                       <tbody>
-                        {selection.lignes.map((l, i) => (
+                        {ticket.map((l, i) => (
                           <tr key={l.num} style={{ background: i % 2 ? SK.alt : 'transparent' }}>
                             <td style={{ ...SK.td, padding: '5px 9px', color: SK.muted }}>{i + 1}</td>
                             <td style={{ ...SK.td, padding: '5px 9px', fontWeight: 900, fontSize: 14 }}>{l.num}</td>
@@ -509,20 +518,18 @@ export default function Probabilite() {
 
                   {/* ce que cette taille a couvert historiquement */}
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: 8, marginTop: 12 }}>
-                    {attendu && (
-                      <>
-                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
-                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · Quinté entier · N={taille}</div>
-                          <div style={{ fontSize: 19, fontWeight: 900, color: '#e9d5ff' }}>{pc(attendu.quinte)}</div>
-                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>{Math.round(attendu.quinte * attendu.evalues)} / {attendu.evalues} courses</div>
-                        </div>
-                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
-                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · podium entier · N={taille}</div>
-                          <div style={{ fontSize: 19, fontWeight: 900, color: '#34d399' }}>{pc(attendu.podium)}</div>
-                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>≥ 4 du Quinté : {pc(attendu.plus4)}</div>
-                        </div>
-                      </>
-                    )}
+                    <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                      <div style={{ fontSize: 10.5, color: SK.muted }}>règle 7 cases · 96 Quintés réels</div>
+                      <div style={{ fontSize: 19, fontWeight: 900, color: '#e9d5ff' }}>{pc(data.regle7?.controle?.zones?.quinte)} <span style={{ fontSize: 10.5, color: '#7a8ea9' }}>Quinté</span></div>
+                      <div style={{ fontSize: 11, color: '#34d399' }}>{pc(data.regle7?.controle?.zones?.podium)} <span style={{ color: '#7a8ea9' }}>podium</span> · {pc(data.regle7?.controle?.zones?.plus4)} ≥4</div>
+                      <div style={{ fontSize: 10.5, color: '#5b6b85', marginTop: 3 }}>contre {pc(data.regle7?.controle?.favoris?.quinte)} pour les 7 favoris</div>
+                    </div>
+                    <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                      <div style={{ fontSize: 10.5, color: SK.muted }}>sur l'archive (33 courses)</div>
+                      <div style={{ fontSize: 17, fontWeight: 900, color: '#e9d5ff' }}>{pc(data.regle7?.archive?.zones?.quinte)} <span style={{ fontSize: 10.5, color: '#7a8ea9' }}>Quinté</span></div>
+                      <div style={{ fontSize: 11, color: '#34d399' }}>{pc(data.regle7?.archive?.zones?.podium)} <span style={{ color: '#7a8ea9' }}>podium</span></div>
+                      <div style={{ fontSize: 10.5, color: '#5b6b85', marginTop: 3 }}>favoris : {pc(data.regle7?.archive?.favoris?.quinte)}</div>
+                    </div>
                     {data.regles?.[regle]?.horsEchantillon?.map((h, i) => (
                       <div key={i} style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
                         <div style={{ fontSize: 10.5, color: SK.muted }}>hors échantillon · top-8</div>
