@@ -2992,6 +2992,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                       <thead>
                         <tr style={s.hdr}>
                           <th style={s.th}>#</th>
+                          <th style={s.th}>Date</th>
                           <th style={s.th}>Combinaison (5 P)</th>
                           <th style={s.th}>Occurrences</th>
                           <th style={s.th}>Fréquence</th>
@@ -3001,6 +3002,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         {stats.quinteList.map((t, i) => (
                           <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,.07)', background: i % 2 ? SK.alt : SK.ligne }}>
                             <td style={{ ...s.td, fontWeight: 700 }}>{i + 1}</td>
+                            <td style={{ ...s.td, fontSize: 10.5, color: '#7a8ea9', whiteSpace: 'nowrap' }}>
+                              {Array.isArray(t.dates) && t.dates.length ? t.dates.join(', ') : '—'}
+                            </td>
                             <td style={{ ...s.td, fontWeight: t.count > 1 ? 800 : 600, color: t.count > 1 ? SK.accent : SK.texte }}>
                               {t.combo.map((p) => 'P' + p).join(' · ')}
                             </td>
