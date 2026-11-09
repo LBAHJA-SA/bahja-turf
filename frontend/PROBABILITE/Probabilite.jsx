@@ -64,6 +64,38 @@ export default function Probabilite() {
 
   const course = archive.find((r) => r.id === raceId) || null
 
+  const dna = useMemo(() => {
+    if (!data || !data.combosQuinte) return null
+    const combos = data.combosQuinte  // array of 5-subsets (cases)
+    // paires
+    const pairCount = {}
+    const tripleCount = {}
+    for (const combo of combos) {
+      for (let i = 0; i < combo.length; i++) for (let j = i + 1; j < combo.length; j++) {
+        const key = combo[i] < combo[j] ? combo[i] + '-' + combo[j] : combo[j] + '-' + combo[i]
+        pairCount[key] = (pairCount[key] || 0) + 1
+      }
+      for (let i = 0; i < combo.length; i++) for (let j = i + 1; j < combo.length; j++) for (let k = j + 1; k < combo.length; k++) {
+        const key = [combo[i], combo[j], combo[k]].sort((a, b) => a - b).join('-')
+        tripleCount[key] = (tripleCount[key] || 0) + 1
+      }
+    }
+    const N = combos.length
+    const pairs = Object.entries(pairCount).map(([k, v]) => {
+      const [a, b] = k.split('-').map(Number)
+      // lift : P(A∩B)/(P(A)P(B))
+      const pA = combos.filter((c) => c.includes(a)).length / N
+      const pB = combos.filter((c) => c.includes(b)).length / N
+      const pBoth = v / N
+      const lift = (pA * pB > 0) ? pBoth / (pA * pB) : 0
+      return { a, b, count: v, freq: pBoth, pCond: v / combos.filter((c) => c.includes(a)).length, lift }
+    }).sort((x, y) => y.count - x.count).slice(0, 12)
+    const triples = Object.entries(tripleCount).map(([k, v]) => {
+      const parts = k.split('-').map(Number)
+      return { combo: parts, count: v, freq: v / N }
+    }).sort((x, y) => y.count - x.count).slice(0, 8)
+    return { N, pairs, triples }
+  }, [data])
   const calc = useMemo(() => {
     if (!course || !data) return null
     const N = course.nbPartants || course.runners.length
@@ -259,38 +291,6 @@ export default function Probabilite() {
   }, [calc, ticketOpti, dna])
 
   // DNA : paires et triplets récurrents (depuis l'archive)
-  const dna = useMemo(() => {
-    if (!data || !data.combosQuinte) return null
-    const combos = data.combosQuinte  // array of 5-subsets (cases)
-    // paires
-    const pairCount = {}
-    const tripleCount = {}
-    for (const combo of combos) {
-      for (let i = 0; i < combo.length; i++) for (let j = i + 1; j < combo.length; j++) {
-        const key = combo[i] < combo[j] ? combo[i] + '-' + combo[j] : combo[j] + '-' + combo[i]
-        pairCount[key] = (pairCount[key] || 0) + 1
-      }
-      for (let i = 0; i < combo.length; i++) for (let j = i + 1; j < combo.length; j++) for (let k = j + 1; k < combo.length; k++) {
-        const key = [combo[i], combo[j], combo[k]].sort((a, b) => a - b).join('-')
-        tripleCount[key] = (tripleCount[key] || 0) + 1
-      }
-    }
-    const N = combos.length
-    const pairs = Object.entries(pairCount).map(([k, v]) => {
-      const [a, b] = k.split('-').map(Number)
-      // lift : P(A∩B)/(P(A)P(B))
-      const pA = combos.filter((c) => c.includes(a)).length / N
-      const pB = combos.filter((c) => c.includes(b)).length / N
-      const pBoth = v / N
-      const lift = (pA * pB > 0) ? pBoth / (pA * pB) : 0
-      return { a, b, count: v, freq: pBoth, pCond: v / combos.filter((c) => c.includes(a)).length, lift }
-    }).sort((x, y) => y.count - x.count).slice(0, 12)
-    const triples = Object.entries(tripleCount).map(([k, v]) => {
-      const parts = k.split('-').map(Number)
-      return { combo: parts, count: v, freq: v / N }
-    }).sort((x, y) => y.count - x.count).slice(0, 8)
-    return { N, pairs, triples }
-  }, [data])
 
   return (
     <div style={{ minHeight: '100vh', background: 'radial-gradient(1200px 600px at 15% -10%, #16233c 0%, #04070f 55%)', fontFamily: SK.police, color: SK.texte }}>
