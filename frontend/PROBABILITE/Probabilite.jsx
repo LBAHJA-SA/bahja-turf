@@ -178,7 +178,7 @@ export default function Probabilite() {
     return { rows, N, hasOdds: cotesCourse.length > 0 }
   }, [course, data, cotes])
 
-  const ticket = ticketOpti
+  // (ticket = ticketOpti, déjà défini ci-dessus)
 
   // ticket optimisé : maximise la couverture du top-5 (proba individuelle + force paires/triplets + diversité)
   const ticketOpti = useMemo(() => {
