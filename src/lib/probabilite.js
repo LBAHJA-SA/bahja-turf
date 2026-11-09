@@ -38,6 +38,8 @@ export const BASE_TOP5 = 5 / MAXP      // 0.25 : taux de base d'une case sur 20
 export const BASE_RANG = 1 / 5         // 0.20 : taux de base d'une position
 export const BASE_PAIRE = 10 / 190     // C(5,2)/C(20,2)
 export const BASE_TRIPLE = 10 / 1140   // C(5,3)/C(20,3)
+export const BASE_PODIUM = 3 / MAXP    // 0.15 : taux de base d'un podium sur 20 cases
+export const BASE_VICTOIRE = 1 / MAXP  // 0.05 : taux de base d'une victoire
 
 /* ─────────────────────────────────────────────────────── lissage bayésien ── */
 
@@ -187,6 +189,8 @@ export function construireMatrix(courses) {
       p_top5,
       p_top5_post: posterior(d.n, N),
       p_top5_smooth: posterior(d.n, N),           // compat
+      p_podium_post: posterior(d.pod, N, MARGIN, BASE_PODIUM),
+      p_victoire_post: posterior(d.vic, N, MARGIN, BASE_VICTOIRE),
       p_victoire: N ? d.vic / N : 0,              // global (dénominateur N)
       p_podium: N ? d.pod / N : 0,                // global (dénominateur N)
       pos: d.pos.slice(),
@@ -438,6 +442,142 @@ export function construireMatrix(courses) {
     { sens: 'classe sur la 2e moitié → noté sur la 1re', base: B.length, ...courbeSur(comptesB, B.length, A) },
   ]
 
+  /* ── G-bis. LES RÈGLES DE SÉLECTION (probabilité → choix) ──────────────── *
+   * Quatre façons de classer les cases, toutes mesurées de la même manière :
+   *   top5     : P(top-5 | N) postérieur
+   *   podium   : P(podium | N) postérieur
+   *   victoire : P(victoire | N) postérieur
+   *   contexte : P(top-5 | contexte) postérieur, avec repli si N_ctx < 3
+   * On mesure en LOO (la course ne sert pas à son propre classement) puis en
+   * deux moitiés strictes. Aucune règle n'est déclarée gagnante sur un écart
+   * qui tient dans le bruit : le classement est publié, pas imposé. */
+  const REGLES = ['top5', 'podium', 'victoire', 'contexte']
+  const cleCtx = (c) => `${normDiscipline(c.discipline)}|${bandeDistance(c.distance)}|${bandePartants(c.nbPartants || (c.grille && c.grille.max) || 0)}`
+  const baseDe = (r) => (r === 'podium' ? BASE_PODIUM : r === 'victoire' ? BASE_VICTOIRE : BASE_TOP5)
+  const champDe = (r) => (r === 'podium' ? 'pod' : r === 'victoire' ? 'vic' : 'n')
+
+  const parCourse = list.map((c) => {
+    const cc = compter([c])
+    const n = [0], vic = [0], pod = [0]
+    for (let p = 1; p <= MAXP; p++) { n[p] = cc.parP[p].n; vic[p] = cc.parP[p].vic; pod[p] = cc.parP[p].pod }
+    return { n, vic, pod, slots: slotsDe(c), ctx: cleCtx(c) }
+  })
+
+  const postsDepuis = (rule, champ, Ntot) => {
+    const base = baseDe(rule)
+    return Array.from({ length: MAXP }, (_, i) => posterior(champ[i + 1], Ntot, MARGIN, base))
+  }
+  const ordreDe = (posts) => Array.from({ length: MAXP }, (_, i) => ({ p: i + 1, post: posts[i] }))
+    .sort((x, y) => y.post - x.post || x.p - y.p)
+    .map((x) => x.p)
+
+  const postGlobal = (rule, excludeIdx) => {
+    const champ = [0]
+    for (let p = 1; p <= MAXP; p++) {
+      let v = C.parP[p][champDe(rule)]
+      if (excludeIdx != null) v -= parCourse[excludeIdx][champDe(rule)][p]
+      champ[p] = v
+    }
+    return postsDepuis(rule, champ, N - (excludeIdx != null ? 1 : 0))
+  }
+
+  const postContexte = (rule, idx) => {
+    const g = postGlobal(rule, idx)
+    if (rule !== 'contexte') return g
+    const key = parCourse[idx].ctx
+    let Nctx = 0
+    const champ = [0]
+    for (let j = 0; j < N; j++) {
+      if (j === idx || parCourse[j].ctx !== key) continue
+      Nctx++
+      for (let p = 1; p <= MAXP; p++) champ[p] = (champ[p] || 0) + parCourse[j].n[p]
+    }
+    if (!Nctx) return g
+    return g.map((gp, i) => (champ[i + 1] + MARGIN * gp) / (Nctx + MARGIN))
+  }
+
+  const regles = {}
+  for (const rule of REGLES) {
+    const courbe = []
+    for (let nTop = 5; nTop <= 12; nTop++) {
+      let pod = 0, quin = 0, quatre = 0, gagnant = 0, ev = 0
+      for (let i = 0; i < N; i++) {
+        const s = parCourse[i].slots
+        if (s.length < 5) continue
+        ev++
+        const set = new Set(ordreDe(postContexte(rule, i)).slice(0, nTop))
+        if (s.slice(0, 3).every((p) => set.has(p))) pod++
+        if (s.slice(0, 5).every((p) => set.has(p))) quin++
+        if (s.slice(0, 5).filter((p) => set.has(p)).length >= 4) quatre++
+        if (set.has(s[0])) gagnant++
+      }
+      courbe.push({
+        n: nTop, evalues: ev,
+        podium: ev ? pod / ev : 0,
+        quinte: ev ? quin / ev : 0,
+        plus4: ev ? quatre / ev : 0,
+        gagnant: ev ? gagnant / ev : 0,
+      })
+    }
+
+    // moitiés strictes : on classe sur une moitié, on note sur l'autre
+    const moitieRegle = (apprend, note) => {
+      const CA = compter(apprend)
+      const champ = [0], champV = [0], champP = [0]
+      for (let p = 1; p <= MAXP; p++) { champ[p] = CA.parP[p].n; champV[p] = CA.parP[p].vic; champP[p] = CA.parP[p].pod }
+      const posts = (r) => postsDepuis(r, r === 'podium' ? champP : r === 'victoire' ? champV : champ, apprend.length)
+      const groupe = new Map()
+      if (rule === 'contexte') {
+        for (const c of apprend) {
+          const k = cleCtx(c)
+          if (!groupe.has(k)) groupe.set(k, { N: 0, champ: [0] })
+          const g = groupe.get(k)
+          g.N++
+          for (const p of slotsDe(c)) g.champ[p]++
+        }
+      }
+      const postG = posts(rule === 'contexte' ? 'top5' : rule)
+      let pod = 0, quin = 0, ev = 0
+      for (const c of note) {
+        const s = slotsDe(c)
+        if (s.length < 5) continue
+        ev++
+        let pset = postG
+        if (rule === 'contexte') {
+          const g = groupe.get(cleCtx(c))
+          pset = g && g.N >= 3
+            ? postG.map((gp, i) => (g.champ[i + 1] + MARGIN * gp) / (g.N + MARGIN))
+            : postG
+        }
+        const set = new Set(ordreDe(pset).slice(0, 8))
+        if (s.slice(0, 3).every((p) => set.has(p))) pod++
+        if (s.slice(0, 5).every((p) => set.has(p))) quin++
+      }
+      return { evalues: ev, podium: ev ? pod / ev : 0, quinte: ev ? quin / ev : 0 }
+    }
+
+    regles[rule] = {
+      courbe,
+      horsEchantillon: [
+        { sens: 'classe sur la 1re moitié → noté sur la 2e', base: A.length, ...moitieRegle(A, B) },
+        { sens: 'classe sur la 2e moitié → noté sur la 1re', base: B.length, ...moitieRegle(B, A) },
+      ],
+    }
+  }
+
+  const classementRegles = REGLES.map((r) => {
+    const h = regles[r].horsEchantillon
+    return {
+      regle: r,
+      quinte: (h[0].quinte + h[1].quinte) / 2,
+      podium: (h[0].podium + h[1].podium) / 2,
+    }
+  }).sort((a, b) => b.quinte - a.quinte || b.podium - a.podium)
+
+  const ecartRegles = classementRegles.length
+    ? classementRegles[0].quinte - classementRegles[classementRegles.length - 1].quinte
+    : 0
+
   /* ── H. divers ─────────────────────────────────────────────────────────── */
   const avecBas = auMoinsUn(list, 11)
   const casesMoyennes = (() => {
@@ -476,6 +616,10 @@ export function construireMatrix(courses) {
     contextes,
     backtest,
     horsEchantillon,
+    regles,
+    classementRegles,
+    ecartRegles,
+    regleRecommandee: classementRegles.length ? classementRegles[0].regle : 'top5',
     coursesAvecBas: avecBas,
     p_auMoinsUnBas: N ? avecBas / N : 0,
     casesMoyennes,
@@ -493,3 +637,94 @@ export function pctProb(x, d = 1) {
   if (x == null || !Number.isFinite(x)) return '—'
   return (x * 100).toFixed(d).replace('.', ',') + ' %'
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ *  DE LA PROBABILITÉ À LA SÉLECTION
+ *
+ *  `casesDepuisPresse` reproduit la numérotation des cases P vue par l'archive
+ *  (même règle que `buildGrid().slotParNum` : la ligne du haut porte la parité
+ *  du 1er cité, dans l'ordre de la presse ; la ligne du bas porte l'autre).
+ *  Aucun groupe, aucun quota : uniquement l'ordre de la Récapitulative.
+ *
+ *  `choisirContexte` / `selectionner` transforment les postérieurs en ticket :
+ *  on classe les cases, on garde les N premières, on rend les NUMÉROS.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+/** Ordre presse → { numAtPlace, slotParNum } (même règle que buildGrid). */
+export function casesDepuisPresse(ordre = [], partants = []) {
+  const parts = new Set((partants || []).map(Number).filter((n) => Number.isFinite(n) && n > 0))
+  const cites = [...new Set((ordre || []).map(Number).filter((n) => Number.isFinite(n) && n > 0))]
+  const base = parts.size ? cites.filter((n) => parts.has(n)) : cites
+  const manquants = [...parts].filter((n) => !base.includes(n)).sort((a, b) => a - b)
+  const tous = [...base, ...manquants]
+
+  const numAtPlace = {}
+  tous.forEach((n, i) => { numAtPlace[i + 1] = n })
+
+  const par = (x) => ((x % 2) + 2) % 2
+  const pariteHaut = par(numAtPlace[1])
+  const haut = tous.filter((n) => par(n) === pariteHaut)
+  const bas = tous.filter((n) => par(n) !== pariteHaut)
+  const slotParNum = {}
+  haut.forEach((n, i) => { slotParNum[n] = 2 * i + 1 })
+  bas.forEach((n, i) => { slotParNum[n] = 2 * i + 2 })
+  return { numAtPlace, slotParNum, ordre: tous }
+}
+
+/** Le contexte retenu pour une course à venir, avec la même remontée que la page. */
+export function choisirContexte(matrix, disc, dist, part) {
+  const C = matrix?.contextes || {}
+  const essais = [
+    ['combine', `${disc} · ${dist} · ${part} part.`],
+    ['discDist', `${disc} · ${dist}`],
+    ['discipline', disc],
+  ]
+  for (const [niveau, cle] of essais) {
+    const g = (C[niveau] || []).find((x) => x.ctx === cle)
+    if (g && g.N >= 3) return { ...g, niveau, portee: g.N >= 10 ? 'solide' : 'mince' }
+  }
+  const g = (C.discipline || []).find((x) => x.ctx === disc)
+  if (g) return { ...g, niveau: 'discipline', portee: 'très mince' }
+  return { ...(C.global || { N: 0, parP: [] }), ctx: 'global (archive entière)', niveau: 'global', portee: 'repli global' }
+}
+
+const champRegle = (r) => (r === 'podium' ? 'p_podium_post' : r === 'victoire' ? 'p_victoire_post' : 'p_top5_post')
+
+/**
+ * Classe les cases puis rend les N premières en NUMÉROS.
+ *
+ * @param {object} matrix  sortie de construireMatrix
+ * @param {object} opts    { ordre, partants, taille, regle, contexte }
+ *   regle ∈ 'top5' | 'podium' | 'victoire' | 'contexte'
+ *   contexte = { disc, dist, part }
+ * @returns {object} { lignes, tous, niveau, N_ctx }
+ */
+export function selectionner(matrix, opts = {}) {
+  const { ordre = [], partants = [], taille = 8, regle = 'top5', contexte = null } = opts
+  const map = casesDepuisPresse(ordre, partants)
+  const nums = Object.keys(map.slotParNum).map(Number)
+  if (!nums.length) return { lignes: [], tous: [], niveau: 'aucun', N_ctx: 0 }
+
+  let parCase = matrix.parP
+  let niveau = 'global'
+  let N_ctx = matrix.N
+  if (regle === 'contexte') {
+    const g = choisirContexte(matrix, contexte?.disc || '', contexte?.dist || '', contexte?.part || '')
+    if (g.parP && g.parP.length) { parCase = g.parP; niveau = g.niveau; N_ctx = g.N }
+  }
+  const champ = regle === 'contexte' ? 'p_post' : champRegle(regle)
+
+  const tous = nums.map((num) => {
+    const slot = map.slotParNum[num]
+    const d = parCase.find((x) => x.p === slot) || {}
+    return {
+      num, slot,
+      post: Number.isFinite(d[champ]) ? d[champ] : 0,
+      p_top5: Number.isFinite(d.p_top5) ? d.p_top5 : null,
+      n: Number.isFinite(d.n) ? d.n : null,
+    }
+  }).sort((a, b) => b.post - a.post || a.slot - b.slot)
+
+  return { lignes: tous.slice(0, taille), tous, niveau, N_ctx }
+}
+

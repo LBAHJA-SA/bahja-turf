@@ -55,6 +55,12 @@ const b8 = M.backtest.find((b) => b.n === 8)
 if (b8) console.log(`  backtest LOO, n=8 : quinté ${pctProb(b8.quinte)} · podium ${pctProb(b8.podium)} · hasard quinté ${pctProb(b8.hasard_quinte)}`)
 for (const h of M.horsEchantillon) console.log(`  hors échantillon (${h.sens}) : quinté ${pctProb(h.quinte)} · podium ${pctProb(h.podium)}`)
 
+console.log('\n  règles de sélection — hors échantillon, top-8 (2 moitiés moyennées) :')
+for (const c of M.classementRegles) {
+  console.log(`     ${c.regle.padEnd(9)}  quinté ${pctProb(c.quinte).padStart(6)}   podium ${pctProb(c.podium).padStart(6)}`)
+}
+console.log(`  écart entre la meilleure et la moins bonne : ${(M.ecartRegles * 100).toFixed(1).replace('.', ',')} points`)
+
 const out = JSON.stringify(M, null, 2)
 fs.writeFileSync('data/probabilite.json', out)
 try { fs.writeFileSync('public/data/probabilite.json', out) } catch (e) { /* public absent */ }

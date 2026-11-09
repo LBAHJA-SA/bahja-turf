@@ -10,6 +10,7 @@
  * ========================================================================== */
 import { useEffect, useMemo, useState } from 'react'
 import Entete from '../../src/Entete.jsx'
+import { choisirContexte, selectionner, normDiscipline, bandeDistance, bandePartants } from '../../src/lib/probabilite.js'
 
 const SK = {
   accent: '#a78bfa', accent2: '#7c3aed', accentClair: 'rgba(124,58,237,.16)',
@@ -62,27 +63,20 @@ function Section({ n, titre, sous, children }) {
   )
 }
 
-/* Contexte : on descend l'arbre jusqu'au premier groupe qui porte ≥ 3 courses. */
-function contexteDe(data, disc, dist, part) {
-  const essais = [
-    ['combine', `${disc} · ${dist} · ${part} part.`],
-    ['discDist', `${disc} · ${dist}`],
-    ['discipline', disc],
-  ]
-  for (const [niv, cle] of essais) {
-    const g = (data.contextes?.[niv] || []).find((x) => x.ctx === cle)
-    if (g && g.N >= 3) return { ...g, niveau: niv, portee: g.N >= 10 ? 'solide' : 'mince' }
-  }
-  const g = (data.contextes?.discipline || []).find((x) => x.ctx === disc)
-  if (g) return { ...g, niveau: 'discipline', portee: 'très mince' }
-  return { ...data.contextes.global, ctx: 'global (archive entière)', niveau: 'global', portee: 'repli global' }
-}
-
 export default function Probabilite() {
   const [data, setData] = useState(null)
   const [err, setErr] = useState('')
   const [loading, setLoading] = useState(true)
   const [ctx, setCtx] = useState({ disc: '', dist: '', part: '' })
+
+  // sélection (⑩)
+  const [archive, setArchive] = useState([])
+  const [raceId, setRaceId] = useState('')
+  const [ordreTxt, setOrdreTxt] = useState('')
+  const [partants, setPartants] = useState([])
+  const [taille, setTaille] = useState(8)
+  const [regle, setRegle] = useState('top5')
+  const [copie, setCopie] = useState('')
 
   useEffect(() => {
     let annule = false
@@ -90,6 +84,40 @@ export default function Probabilite() {
       .then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json() })
       .then((j) => { if (!annule) { setData(j); setLoading(false) } })
       .catch((e) => { if (!annule) { setErr(e.message || 'indisponible'); setLoading(false) } })
+    return () => { annule = true }
+  }, [])
+
+  // l'archive fournit l'ordre de la presse des courses réelles : la sélection
+  // se fait sur les NUMÉROS de la course, pas sur des cases abstraites.
+  useEffect(() => {
+    let annule = false
+    fetch('/data/synthese.json', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((j) => {
+        if (annule) return
+        const rows = Object.entries(j || {})
+          .filter(([, r]) => r && Array.isArray(r.synthese) && r.synthese.length >= 8)
+          .map(([k, r]) => ({
+            id: k, date: r.date || k,
+            hippodrome: r.hippodrome || '', discipline: r.discipline || '',
+            distance: r.distance, nbPartants: r.nbPartants || (r.runners || []).length,
+            ordre: r.synthese.map(Number).filter(Number.isFinite),
+            runners: (r.runners || []).map(Number).filter(Number.isFinite),
+          }))
+          .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+        setArchive(rows)
+        if (rows[0]) {
+          setRaceId(rows[0].id)
+          setOrdreTxt(rows[0].ordre.join(' '))
+          setPartants(rows[0].runners)
+          setCtx({
+            disc: normDiscipline(rows[0].discipline),
+            dist: bandeDistance(rows[0].distance),
+            part: bandePartants(rows[0].nbPartants),
+          })
+        }
+      })
+      .catch(() => { /* sélection indisponible : les stats restent affichées */ })
     return () => { annule = true }
   }, [])
 
@@ -106,10 +134,31 @@ export default function Probabilite() {
   const parP = data?.parP || []
   const topCases = data?.topCases || []
   const contexte = useMemo(
-    () => (data && ctx.disc ? contexteDe(data, ctx.disc, ctx.dist, ctx.part) : null),
+    () => (data && ctx.disc ? choisirContexte(data, ctx.disc, ctx.dist, ctx.part) : null),
     [data, ctx]
   )
-  const maxPost = useMemo(() => Math.max(1, ...parP.map((r) => r.p_top5_post)), [parP])
+
+  function chargerCourse(row) {
+    setRaceId(row.id)
+    setOrdreTxt(row.ordre.join(' '))
+    setPartants(row.runners)
+    setCtx({
+      disc: normDiscipline(row.discipline),
+      dist: bandeDistance(row.distance),
+      part: bandePartants(row.nbPartants),
+    })
+  }
+
+  const selection = useMemo(() => {
+    if (!data || !ordreTxt.trim()) return null
+    const ordre = ordreTxt.split(/[^0-9]+/).map(Number).filter((n) => n > 0)
+    if (!ordre.length) return null
+    return selectionner(data, { ordre, partants, taille, regle, contexte: ctx })
+  }, [data, ordreTxt, partants, taille, regle, ctx])
+
+  const courbeRegle = data?.regles?.[regle]?.courbe || []
+  const attendu = courbeRegle.find((c) => c.n === taille) || null
+  const courseChoisie = archive.find((r) => r.id === raceId) || null
 
   return (
     <div style={{ minHeight: '100vh', background: 'radial-gradient(1200px 600px at 15% -10%, #16233c 0%, #04070f 55%)', fontFamily: SK.police, color: SK.texte }}>
@@ -520,6 +569,137 @@ export default function Probabilite() {
                   </div>
                 ))}
               </div>
+            </Section>
+
+            {/* ⑩ sélection --------------------------------------------------- */}
+            <Section
+              n="⑩" titre="De la probabilité à la sélection — le ticket"
+              sous={<>On classe les cases par leur probabilité postérieure, on garde les <b>N</b> premières, et on rend les <b>numéros</b> de la course. Rien d'autre : pas de groupe, pas de quota, pas de place réservée. L'ordre du ticket est la probabilité décroissante (départage par la case).</>}
+            >
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: 12 }}>
+                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  Course (archive réelle)
+                  <select value={raceId} onChange={(e) => { const row = archive.find((r) => r.id === e.target.value); if (row) chargerCourse(row) }}
+                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12, minWidth: 230 }}>
+                    {archive.length === 0 && <option value="">archive indisponible</option>}
+                    {archive.map((r) => <option key={r.id} value={r.id}>{r.date} · {r.hippodrome} · {r.discipline}</option>)}
+                  </select>
+                </label>
+                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3, flex: '1 1 280px' }}>
+                  Ordre de la presse — P1 → P20
+                  <input value={ordreTxt} onChange={(e) => setOrdreTxt(e.target.value)} placeholder="4 8 6 18 16 2 …"
+                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '6px 9px', fontSize: 12.5, fontFamily: 'ui-monospace, monospace' }} />
+                </label>
+                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  Taille
+                  <select value={taille} onChange={(e) => setTaille(Number(e.target.value))}
+                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12 }}>
+                    {[5, 6, 7, 8, 9, 10, 11, 12].map((n) => <option key={n} value={n}>{n}</option>)}
+                  </select>
+                </label>
+                <label style={{ fontSize: 11, color: SK.muted, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  Règle de classement
+                  <select value={regle} onChange={(e) => setRegle(e.target.value)}
+                    style={{ background: '#0b1220', color: '#e2e8f0', border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 8px', fontSize: 12, minWidth: 170 }}>
+                    <option value="top5">P(top-5 | N)</option>
+                    <option value="podium">P(podium | N)</option>
+                    <option value="victoire">P(victoire | N)</option>
+                    <option value="contexte">P(top-5 | contexte)</option>
+                  </select>
+                </label>
+              </div>
+
+              {courseChoisie && (
+                <div style={{ fontSize: 11, color: '#5b6b85', marginBottom: 10 }}>
+                  {courseChoisie.ordre.length} chevaux cités · {courseChoisie.nbPartants} partants · {courseChoisie.distance} m
+                  {regle === 'contexte' && contexte ? <> · contexte : <b style={{ color: '#c4b5fd' }}>{contexte.ctx}</b> (N = {contexte.N})</> : null}
+                </div>
+              )}
+
+              {selection && selection.lignes.length ? (
+                <>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', padding: '10px 12px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.accentClair, marginBottom: 12 }}>
+                    <span style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: 0.8 }}>Ticket</span>
+                    {selection.lignes.map((l) => (
+                      <span key={l.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 38 }}>
+                        <b style={{ fontSize: 22, fontWeight: 900, color: '#fff' }}>{l.num}</b>
+                        <span style={{ fontSize: 9.5, color: '#a4b8d6' }}>P{l.slot}</span>
+                      </span>
+                    ))}
+                    <button type="button" onClick={() => {
+                      try { navigator.clipboard.writeText(selection.lignes.map((l) => l.num).join(' ')); setCopie('copié'); setTimeout(() => setCopie(''), 1500) } catch (e) { setCopie('—') }
+                    }} style={{ marginLeft: 'auto', background: 'transparent', color: SK.accent, border: '1px solid ' + SK.bord, borderRadius: 7, padding: '5px 10px', fontSize: 11.5, cursor: 'pointer' }}>
+                      {copie || 'copier'}
+                    </button>
+                  </div>
+
+                  <div style={{ overflowX: 'auto' }}>
+                    <table style={{ borderCollapse: 'collapse', fontSize: 12, width: '100%', minWidth: 520 }}>
+                      <thead>
+                        <tr>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>#</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>n°</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>case</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>probabilité postérieure</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>brut</th>
+                          <th style={{ ...SK.th, textAlign: 'left', padding: '5px 9px' }}>top-5</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {selection.lignes.map((l, i) => (
+                          <tr key={l.num} style={{ background: i % 2 ? SK.alt : 'transparent' }}>
+                            <td style={{ ...SK.td, padding: '5px 9px', color: SK.muted }}>{i + 1}</td>
+                            <td style={{ ...SK.td, padding: '5px 9px', fontWeight: 900, fontSize: 14 }}>{l.num}</td>
+                            <td style={{ ...SK.td, padding: '5px 9px', color: SK.accent, fontWeight: 800 }}>P{l.slot}</td>
+                            <td style={{ ...SK.td, padding: '5px 9px' }}><Barre v={l.post * 100} coul={SK.accent} libelle={pc(l.post)} /></td>
+                            <td style={{ ...SK.td, padding: '5px 9px', color: '#a4b8d6' }}>{pc(l.p_top5)}</td>
+                            <td style={{ ...SK.td, padding: '5px 9px', color: '#7a8ea9' }}>{l.n == null ? '—' : `${l.n} / ${selection.N_ctx}`}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* ce que cette taille a couvert historiquement */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: 8, marginTop: 12 }}>
+                    {attendu && (
+                      <>
+                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · Quinté entier · N={taille}</div>
+                          <div style={{ fontSize: 19, fontWeight: 900, color: '#e9d5ff' }}>{pc(attendu.quinte)}</div>
+                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>{Math.round(attendu.quinte * attendu.evalues)} / {attendu.evalues} courses</div>
+                        </div>
+                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · podium entier · N={taille}</div>
+                          <div style={{ fontSize: 19, fontWeight: 900, color: '#34d399' }}>{pc(attendu.podium)}</div>
+                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>≥ 4 du Quinté : {pc(attendu.plus4)}</div>
+                        </div>
+                      </>
+                    )}
+                    {data.regles?.[regle]?.horsEchantillon?.map((h, i) => (
+                      <div key={i} style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                        <div style={{ fontSize: 10.5, color: SK.muted }}>hors échantillon · top-8</div>
+                        <div style={{ fontSize: 17, fontWeight: 900, color: '#e9d5ff' }}>{pc(h.quinte)} <span style={{ fontSize: 10.5, color: '#7a8ea9' }}>Quinté</span></div>
+                        <div style={{ fontSize: 11, color: '#34d399' }}>{pc(h.podium)} <span style={{ color: '#7a8ea9' }}>podium</span></div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ fontSize: 11, color: '#64748b', marginTop: 9, lineHeight: 1.55 }}>
+                    Ce que la règle vaut, mesuré :{' '}
+                    {(data.classementRegles || []).map((c, i) => (
+                      <span key={c.regle} style={{ marginRight: 8 }}>
+                        <b style={{ color: c.regle === regle ? '#e9d5ff' : '#7a8ea9' }}>{c.regle}</b> {pc(c.quinte, 0)}<span style={{ color: '#4a5a72' }}>/{pc(c.podium, 0)}</span>{i < data.classementRegles.length - 1 ? ' ·' : ''}
+                      </span>
+                    ))}
+                    <span style={{ color: '#4a5a72' }}> (Quinté / podium, hors échantillon top-8) — écart max {Number.isFinite(data.ecartRegles) ? (data.ecartRegles * 100).toFixed(1).replace('.', ',') : '—'} pts.</span>
+                  </div>
+                </>
+              ) : (
+                <div style={{ fontSize: 12, color: SK.muted, padding: '8px 0' }}>
+                  Saisis l'ordre de la presse (ou choisis une course de l'archive) pour voir le ticket.
+                </div>
+              )}
             </Section>
 
             {/* ⑨ limites ------------------------------------------------------ */}
