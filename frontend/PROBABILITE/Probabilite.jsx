@@ -50,8 +50,8 @@ export default function Probabilite() {
       .then((j) => {
         if (annule) return
         const rows = Object.entries(j || {})
-          .filter(([, r]) => r && Array.isArray(r.synthese) && r.synthese.length >= 8 && Array.isArray(r.scores) && r.scores.length >= 8)
-          .map(([k, r]) => ({ id: k, date: r.date || k, hippodrome: r.hippodrome || '', discipline: r.discipline || '', distance: r.distance, nbPartants: r.nbPartants || (r.runners || []).length, terrain: (r.scores[0] && r.scores[0].terrain) || 'Bon', ordre: r.synthese.map(Number).filter(Number.isFinite), runners: (r.runners || []).map(Number).filter(Number.isFinite), scores: r.scores }))
+          .filter(([, r]) => r && Array.isArray(r.synthese) && r.synthese.length >= 8)
+          .map(([k, r]) => ({ id: k, date: r.date || k, hippodrome: r.hippodrome || '', discipline: r.discipline || '', distance: r.distance, nbPartants: r.nbPartants || (r.runners || []).length, terrain: (r.scores && r.scores[0] && r.scores[0].terrain) || 'Bon', ordre: r.synthese.map(Number).filter(Number.isFinite), runners: (r.runners || []).map(Number).filter(Number.isFinite), scores: r.scores || [] }))
           .sort((a, b) => String(b.date).localeCompare(String(a.date)))
         setArchive(rows)
         if (rows[0]) setRaceId(rows[0].id)
@@ -102,17 +102,23 @@ export default function Probabilite() {
       const d = parP.find((x) => x.p === slotSafe) || {}
       const dctx = parPctx.find((x) => x.p === slotSafe) || d
       const sc = scoreByNum[num] || {}
+      const hasScore = sc && (sc.forme != null || sc.dist != null)
       // bayésien
-      const factors = [
-        (sc.forme || 0) / 10,
-        (sc.dist || 0) / 10,
-        (sc.piste || 0) / 10,
-        (sc.niveau || 0) / 10,
-        (sc.terrain || 0) / 10,
-        (sc.corde || 0) / 10,
-      ].map((f) => Math.max(0.05, f))
-      const lik = factors.reduce((a, b) => a * b, 1)
-      const pBayes = pClassique * lik
+      let pBayes
+      if (hasScore) {
+        const factors = [
+          (sc.forme || 0) / 10,
+          (sc.dist || 0) / 10,
+          (sc.piste || 0) / 10,
+          (sc.niveau || 0) / 10,
+          (sc.terrain || 0) / 10,
+          (sc.corde || 0) / 10,
+        ].map((f) => Math.max(0.05, f))
+        const lik = factors.reduce((a, b) => a * b, 1)
+        pBayes = pClassique * lik
+      } else {
+        pBayes = (Number.isFinite(d.p_top5) ? d.p_top5 : pClassique)
+      }
       // odds
       const pOdds = oddsRaw[idx] != null ? oddsRaw[idx] / oddsSum * course.runners.length / N * (1 / course.runners.length) * N / course.runners.length : null
       // simpler: normalize odds to sum 1
