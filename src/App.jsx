@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Article from '../frontend/ARTICLE/Article.jsx'
 import QuinteGrille from '../frontend/QUINTE/QuinteGrille.jsx'
+import Probabilite from '../frontend/PROBABILITE/Probabilite.jsx'
 import Analyse from '../frontend/ANALYSE/Analyse.jsx'
 import Presse from '../frontend/PRESSE/Presse.jsx'
 import Lives from '../frontend/LIVES/Lives.jsx'
@@ -53,7 +54,7 @@ export default function App(){
         <Route path="/race/:id" element={<Portail cle="article"><Article /></Portail>} />
 
         <Route path="/quinte" element={<Portail cle="quinte"><QuinteGrille /></Portail>} />
-
+<Route path="/probabilite" element={<Portail cle="quinte"><Probabilite /></Portail>} />
         {/* Espace des pronostics favoris de Bahja Turf. L'accès suit le droit
          * Analyse course afin qu'il soit disponible aux abonnés concernés. */}
         <Route path="/pronostique-bahja-turf" element={<Portail cle="analyse"><PronostiqueBahjaTurf /></Portail>} />

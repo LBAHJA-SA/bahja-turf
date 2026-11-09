@@ -23,6 +23,7 @@ import { useLang, LangToggle } from './lib/langue.jsx'
 const LIENS = [
   { cle: 'analyse', to: '/', libelleKey: 'nav_analyse', libelle: 'Analyse course', icone: 'bi-clipboard2-pulse' },
   { cle: 'quinte', to: '/quinte', libelleKey: 'nav_quinte', libelle: 'Quinté', icone: 'bi-trophy' },
+  { cle: 'quinte', to: '/probabilite', libelleKey: 'nav_probabilite', libelle: 'PROBABILITÉ', icone: 'bi-graph-up' },
   { cle: 'pronostic', droit: 'analyse', to: '/pronostique-bahja-turf', libelleKey: 'nav_pronostique', libelle: 'PRONOSTIQUE BAHJA TURF', icone: 'bi-star' },
   { cle: 'presse', to: '/presse', libelleKey: 'nav_presse', libelle: 'Presse', icone: 'bi-newspaper' },
   { cle: 'lives', to: '/lives', libelleKey: 'nav_lives', libelle: 'Lives', icone: 'bi-broadcast' },
