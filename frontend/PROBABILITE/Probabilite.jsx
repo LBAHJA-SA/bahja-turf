@@ -24,7 +24,6 @@ const SK = {
   ombre: '0 8px 24px rgba(124,58,237,.18)',
   alt: 'rgba(255,255,255,.03)',
 }
-const COUL_POS = ['#34d399', '#22d3ee', '#a78bfa', '#fbbf24', '#fb7185']
 const POS_NOM = ['1er', '2e', '3e', '4e', '5e']
 
 const pc = (x, d = 1) => (x == null || !Number.isFinite(x) ? '—' : (x * 100).toFixed(d).replace('.', ',') + ' %')
@@ -69,7 +68,7 @@ export default function Probabilite() {
   const [loading, setLoading] = useState(true)
   const [ctx, setCtx] = useState({ disc: '', dist: '', part: '' })
 
-  // sélection (⑩)
+  // sélection (⑧)
   const [archive, setArchive] = useState([])
   const [raceId, setRaceId] = useState('')
   const [ordreTxt, setOrdreTxt] = useState('')
@@ -132,7 +131,6 @@ export default function Probabilite() {
   }, [data, ctx.disc])
 
   const parP = data?.parP || []
-  const topCases = data?.topCases || []
   const contexte = useMemo(
     () => (data && ctx.disc ? choisirContexte(data, ctx.disc, ctx.dist, ctx.part) : null),
     [data, ctx]
@@ -183,6 +181,12 @@ export default function Probabilite() {
           <br />
           <b style={{ color: '#fbbf24' }}>Deux dénominateurs, jamais mélangés :</b> <code>P(top-5 | N)</code> se lit sur les{' '}
           {data?.N ?? 0} courses · <code>P(position k | top-5)</code> se lit uniquement parmi les fois où la case finit dans les 5.
+          <br />
+          <span style={{ color: '#94a3b8' }}>
+            Les probabilités <b>marginales</b> (top-5, podium, victoire de chaque case P) sont déjà dans l'onglet
+            <b> Statistiques</b> de la page Quinté. Ici on ne garde que ce qui ne s'y trouve pas : positions, paires,
+            triples, conditionnelles, contexte, matrice DNA et sélection.
+          </span>
         </div>
 
         {loading && <div style={{ padding: 20, color: SK.muted }}>Chargement…</div>}
@@ -190,84 +194,9 @@ export default function Probabilite() {
 
         {data && (
           <>
-            {/* ① marginales ------------------------------------------------- */}
+            {/* ① distribution des positions --------------------------------- */}
             <Section
-              n="①" titre="Probabilités marginales — chaque case P"
-              sous={<>Fréquence brute et probabilité postérieure. La barre violette est le postérieur ; le chiffre à droite est le brut. Podium et victoire sont conditionnels à un top-5 — d'où un second dénominateur, n_top5.</>}
-            >
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
-                {topCases.slice(0, 8).map((r, i) => (
-                  <span key={r.p} style={{ padding: '5px 9px', borderRadius: 8, background: i === 0 ? SK.accentClair : SK.alt, border: '1px solid ' + SK.bord, fontSize: 11.5 }}>
-                    <b style={{ color: SK.accent }}>P{r.p}</b>
-                    <span style={{ color: SK.muted }}> · </span>
-                    <b style={{ color: '#e2e8f0' }}>{pc(r.p_top5_post)}</b>
-                    <span style={{ color: '#5b6b85' }}> (brut {pc(r.p_top5)})</span>
-                  </span>
-                ))}
-                <span style={{ fontSize: 11, color: '#5b6b85', alignSelf: 'center' }}>← classement par probabilité postérieure</span>
-              </div>
-
-              <div style={{ overflowX: 'auto' }}>
-                <table style={{ borderCollapse: 'separate', borderSpacing: 0, fontSize: 12.5, width: '100%', minWidth: 860, border: '1px solid ' + SK.bord, borderRadius: 8, overflow: 'hidden' }}>
-                  <thead>
-                    <tr style={SK.hdr}>
-                      <th style={{ ...SK.th, textAlign: 'left' }}>Case</th>
-                      <th style={{ ...SK.th, textAlign: 'left' }}>top-5<br /><span style={{ fontWeight: 400, opacity: .75 }}>n / {data.N}</span></th>
-                      <th style={{ ...SK.th, textAlign: 'left' }}>P(top-5 | N)<br /><span style={{ fontWeight: 400, opacity: .75 }}>postérieur</span></th>
-                      <th style={{ ...SK.th, textAlign: 'left' }}>podiums<br /><span style={{ fontWeight: 400, opacity: .75 }}>P(podium | top-5)</span></th>
-                      <th style={{ ...SK.th, textAlign: 'left' }}>victoires<br /><span style={{ fontWeight: 400, opacity: .75 }}>P(victoire | top-5)</span></th>
-                      <th style={{ ...SK.th, textAlign: 'left', minWidth: 160 }}>où il finit<br /><span style={{ fontWeight: 400, opacity: .75 }}>1er → 5e</span></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {parP.map((r, i) => (
-                      <tr key={r.p} style={{ background: i % 2 ? SK.alt : 'transparent' }}>
-                        <td style={{ ...SK.td, fontWeight: 800, color: r.n_top5 ? SK.accent : '#4a5a72', whiteSpace: 'nowrap' }}>P{r.p}</td>
-                        <td style={{ ...SK.td, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.n_top5} / {data.N}</td>
-                        <td style={{ ...SK.td }}>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                            <Barre v={r.p_top5_post * 100} coul={SK.accent} libelle={pc(r.p_top5_post)} />
-                            <span style={{ fontSize: 10.5, color: '#5b6b85' }}>brut {pc(r.p_top5)}</span>
-                          </div>
-                        </td>
-                        <td style={{ ...SK.td }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                            <span style={{ fontSize: 11, color: '#a4b8d6', minWidth: 16, fontWeight: 700 }}>{r.podiums}</span>
-                            <Barre v={r.n_top5 ? r.podiums / r.n_top5 * 100 : null} coul="#34d399" libelle={r.n_top5 ? pc(r.podiums / r.n_top5) : '—'} />
-                          </div>
-                        </td>
-                        <td style={{ ...SK.td }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                            <span style={{ fontSize: 11, color: '#a4b8d6', minWidth: 16, fontWeight: 700 }}>{r.victoires}</span>
-                            <Barre v={r.n_top5 ? r.victoires / r.n_top5 * 100 : null} coul="#fbbf24" libelle={r.n_top5 ? pc(r.victoires / r.n_top5) : '—'} />
-                          </div>
-                        </td>
-                        <td style={{ ...SK.td }}>
-                          {r.n_top5 ? (
-                            <div title={r.pos.map((v, k) => `${POS_NOM[k]} : ${pc(v / r.n_top5)}`).join(' · ')}
-                              style={{ display: 'flex', height: 10, borderRadius: 999, overflow: 'hidden', minWidth: 160, background: 'rgba(255,255,255,.10)' }}>
-                              {r.pos.map((v, k) => (v > 0 ? <div key={k} style={{ width: (v / r.n_top5 * 100) + '%', background: COUL_POS[k] }} /> : null))}
-                            </div>
-                          ) : <span style={{ color: '#4a5a72' }}>—</span>}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 9, fontSize: 11, color: SK.muted, alignItems: 'center' }}>
-                <span>où il finit :</span>
-                {POS_NOM.map((n, k) => (
-                  <span key={n} style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                    <span style={{ width: 10, height: 10, borderRadius: 3, background: COUL_POS[k] }} />{n}
-                  </span>
-                ))}
-              </div>
-            </Section>
-
-            {/* ② distribution des positions --------------------------------- */}
-            <Section
-              n="②" titre="Distribution des 5 positions — P(position | top-5)"
+              n="①" titre="Distribution des 5 positions — P(position | top-5)"
               sous={<>Chaque ligne est normalisée sur ses propres top-5 (Dirichlet α = 1). On lit la <b>forme</b> de la case : P1 gagne souvent quand elle est là, P5 place sans gagner, etc.</>}
             >
               <div style={{ overflowX: 'auto' }}>
@@ -305,9 +234,9 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ③ paires ------------------------------------------------------ */}
+            {/* ② paires ------------------------------------------------------ */}
             <Section
-              n="③" titre="Probabilités jointes — les paires"
+              n="②" titre="Probabilités jointes — les paires"
               sous={<>Top 15 sur {data.N} courses. <b>P(a ∩ b)</b> = les deux dans les 5 · <b>P(b | a)</b> = si a est dans les 5, probabilité que b y soit aussi. Les deux versions sont données : brute et lissée vers le taux marginal de b.</>}
             >
               <div style={{ display: 'grid', gap: 5 }}>
@@ -327,9 +256,9 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ④ triples et conditionnelles --------------------------------- */}
+            {/* ③ triples et conditionnelles --------------------------------- */}
             <Section
-              n="④" titre="Triples et probabilités conditionnelles"
+              n="③" titre="Triples et probabilités conditionnelles"
               sous={<>Le Quinté complet (5 cases) est presque toujours unique — 32 combinaisons distinctes sur {data.N} courses. Le motif réel apparaît au niveau des triples, et surtout des conditionnelles : ce que la présence d'une case fait à une autre.</>}
             >
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: 8, marginBottom: 14 }}>
@@ -399,9 +328,9 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ⑤ matrice DNA ------------------------------------------------- */}
+            {/* ④ matrice DNA ------------------------------------------------- */}
             <Section
-              n="⑤" titre="Matrice DNA — co-occurrences P × P"
+              n="④" titre="Matrice DNA — co-occurrences P × P"
               sous={<>Cellule (i, j) = nombre de courses où P<sub>i</sub> et P<sub>j</sub> sont tous deux dans les 5. Diagonale = n_top5 de la case. Valeurs brutes : avec {data.N} courses, une cellule à 1 ou 2 est du bruit — la couleur sert à lire les blocs, pas à conclure.</>}
             >
               <div style={{ overflowX: 'auto' }}>
@@ -443,9 +372,9 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ⑥ contexte bayésien ------------------------------------------- */}
+            {/* ⑤ contexte bayésien ------------------------------------------- */}
             <Section
-              n="⑥" titre="Mise à jour bayésienne par le contexte"
+              n="⑤" titre="Mise à jour bayésienne par le contexte"
               sous={<>Le postérieur d'une case change avec la discipline, la distance et la taille du champ. Formule : <code>(n_ctx + m · p_global) / (N_ctx + m)</code>, m = {data.marge}. Sous 3 courses, le contexte est trop mince : on remonte d'un cran (discipline + distance → discipline → global) et on l'écrit.</>}
             >
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginBottom: 10 }}>
@@ -507,9 +436,9 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ⑦ combinaisons ------------------------------------------------- */}
+            {/* ⑥ combinaisons ------------------------------------------------- */}
             <Section
-              n="⑦" titre="Combinaisons du Quinté — l'ensemble des 5 cases"
+              n="⑥" titre="Combinaisons du Quinté — l'ensemble des 5 cases"
               sous={<><b>{data.comboQuint.length} combinaisons distinctes sur {data.N} courses.</b> C'est un <b>ensemble</b> de cases, jamais un ordre : la table ne dit pas qui est 1er. Elle dit quelles cases se retrouvent ensemble dans les 5 — et sa rareté dit qu'on ne peut pas bâtir une règle sur la combinaison complète seule.</>}
             >
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 7 }}>
@@ -522,9 +451,9 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ⑧ backtest ----------------------------------------------------- */}
+            {/* ⑦ backtest ----------------------------------------------------- */}
             <Section
-              n="⑧" titre="Backtest hors échantillon — ce que couvre un top-N"
+              n="⑦" titre="Backtest hors échantillon — ce que couvre un top-N"
               sous={<>Pour chaque course, le classement est recalculé <b>sans cette course</b> (leave-one-out), puis on regarde si les 3 du podium et les 5 du Quinté tombent dans le top-N. Le hasard est le tirage uniforme de N cases sur 20 : <code>C(N,3)/C(20,3)</code> et <code>C(N,5)/C(20,5)</code>.</>}
             >
               <div style={{ overflowX: 'auto' }}>
@@ -571,9 +500,9 @@ export default function Probabilite() {
               </div>
             </Section>
 
-            {/* ⑩ sélection --------------------------------------------------- */}
+            {/* ⑧ sélection --------------------------------------------------- */}
             <Section
-              n="⑩" titre="De la probabilité à la sélection — le ticket"
+              n="⑧" titre="De la probabilité à la sélection — le ticket"
               sous={<>On classe les cases par leur probabilité postérieure, on garde les <b>N</b> premières, et on rend les <b>numéros</b> de la course. Rien d'autre : pas de groupe, pas de quota, pas de place réservée. L'ordre du ticket est la probabilité décroissante (départage par la case).</>}
             >
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: 12 }}>
@@ -702,13 +631,13 @@ export default function Probabilite() {
               )}
             </Section>
 
-            {/* ⑨ limites ------------------------------------------------------ */}
+            {/* limites ---------------------------------------------------- */}
             <div style={{ ...SK.box, padding: 14, borderLeft: '4px solid #fbbf24', fontSize: 12, lineHeight: 1.7 }}>
               <b style={{ color: '#fbbf24' }}>Ce que la statistique ne dit pas :</b>
               <br />· <b>{data.N} courses.</b> Une case à 2 ou 3 top-5 reste du bruit — le prior m = {data.marge} le rappelle dans chaque chiffre.
               <br />· Les probabilités sont <b>empiriques</b> (fréquences), pas un modèle entraîné. Aucune prédiction sur une course isolée.
               <br />· Les contextes de moins de 3 courses ne sont pas affichés seuls : la page remonte d'un cran et l'écrit.
-              <br />· Le backtest est <b>leave-one-out</b> : la course notée ne sert jamais à son propre classement. Le test par moitié (⑧) est la version la plus stricte.
+              <br />· Le backtest est <b>leave-one-out</b> : la course notée ne sert jamais à son propre classement. Le test par moitié (⑦) est la version la plus stricte.
               <br />· Mise à jour : <code>node tools\probabilite.mjs</code> — relit l'archive et réécrit <code>data/probabilite.json</code> + <code>public/data/probabilite.json</code>. Le job quotidien le fait tout seul.
             </div>
           </>
