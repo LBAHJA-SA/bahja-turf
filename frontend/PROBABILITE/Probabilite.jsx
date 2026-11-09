@@ -507,6 +507,9 @@ export default function Probabilite() {
                   </tbody>
                 </table>
               </div>
+              <div style={{ fontSize: 11, color: '#64748b', marginTop: 7 }}>
+                Les ex æquo sont départagés par le numéro de case : deux paliers qui se suivent peuvent venir d'un ex æquo, pas d'un signal. La courbe se lit par grandes largeurs (5-8 / 10-12), jamais case par case.
+              </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 8, marginTop: 12 }}>
                 {data.horsEchantillon.map((h, i) => (
                   <div key={i} style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
