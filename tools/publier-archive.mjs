@@ -70,6 +70,7 @@ const A_PUBLIER = [
   ['public/data/empreinte.json', 'les empreintes'],
   ['public/data/empreinte-v3.json', 'les empreintes v3'],
   ['public/data/empreinte-v4.json', 'les empreintes v4'],
+  ['public/data/probabilite.json', 'le moteur de probabilité'],
 ]
 
 /* un chemin qui n'existe pas ferait échouer `git add` : on l'écarte d'abord */
