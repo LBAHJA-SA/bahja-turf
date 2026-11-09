@@ -2098,9 +2098,9 @@ export function computeStats(records) {
       if (rec.date) trioCombos[key].dates.push(rec.date)
     }
     /* ⭐ Quinté : la combinaison des 5 premiers (positions P), triée. */
-    const quinte = pl.slice(0, 5).slice().sort((a, b) => a - b)
+    const quinte = pl.slice(0, 5)
     if (quinte.length === 5) {
-      const keyQ = quinte.join('-')
+      const keyQ = quinte.slice().sort((a, b) => a - b).join('-')
       if (!quinteCombos[keyQ]) quinteCombos[keyQ] = { combo: quinte, count: 0, dates: [] }
       quinteCombos[keyQ].count++
       if (rec.date) quinteCombos[keyQ].dates.push(rec.date)
