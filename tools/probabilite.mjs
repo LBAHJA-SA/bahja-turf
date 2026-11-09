@@ -55,6 +55,11 @@ const b8 = M.backtest.find((b) => b.n === 8)
 if (b8) console.log(`  backtest LOO, n=8 : quinté ${pctProb(b8.quinte)} · podium ${pctProb(b8.podium)} · hasard quinté ${pctProb(b8.hasard_quinte)}`)
 for (const h of M.horsEchantillon) console.log(`  hors échantillon (${h.sens}) : quinté ${pctProb(h.quinte)} · podium ${pctProb(h.podium)}`)
 
+console.log('\n  les deux ensembles — « qui occupe les 3 ? » / « qui occupe les 5 ? » :')
+for (const [nom, e] of [['trio   ', M.ensemble.trio], ['quinté ', M.ensemble.quinte]]) {
+  console.log(`     ${nom} ${String(e.distincts).padStart(2)} combinaisons distinctes sur ${e.courses} courses · ${e.repetes} revue(s) · max ${e.record}×`)
+}
+
 console.log('\n  règles de sélection — hors échantillon, top-8 (2 moitiés moyennées) :')
 for (const c of M.classementRegles) {
   console.log(`     ${c.regle.padEnd(9)}  quinté ${pctProb(c.quinte).padStart(6)}   podium ${pctProb(c.podium).padStart(6)}`)

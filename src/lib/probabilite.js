@@ -368,6 +368,31 @@ export function construireMatrix(courses) {
     .map(([k, v]) => ({ combo: k.split('-').map(Number), count: v, p: N ? v / N : 0 }))
     .sort((x, y) => y.count - x.count || cleCombo(x.combo).localeCompare(cleCombo(y.combo)))
 
+  /* ── F-bis. l'ensemble du PODIUM (3 cases, sans ordre) ─────────────────── *
+   * C.comboQuint est l'ensemble des 5 cases telles qu'elles arrivent. Ici on
+   * compte la même chose pour les 3 premières : « qui occupe les 3 places
+   * ENSEMBLE », pas case par case. */
+  const podSets = new Map()
+  for (const c of list) {
+    const s = slotsDe(c)
+    if (s.length >= 3) {
+      const k = cleCombo(s.slice(0, 3))
+      podSets.set(k, (podSets.get(k) || 0) + 1)
+    }
+  }
+  const comboPodium = [...podSets.entries()]
+    .map(([k, v]) => ({ combo: k.split('-').map(Number), count: v, p: N ? v / N : 0 }))
+    .sort((x, y) => y.count - x.count || cleCombo(x.combo).localeCompare(cleCombo(y.combo)))
+
+  /* la photo, en deux lignes : une combinaison exacte se répète-t-elle ? */
+  const resumeEnsemble = (tab) => ({
+    courses: tab.reduce((s, x) => s + x.count, 0),
+    distincts: tab.length,
+    repetes: tab.filter((x) => x.count >= 2).length,
+    record: tab.length ? tab[0].count : 0,
+    top: tab.slice(0, 6),
+  })
+
   /* ── G. backtest leave-one-out ─────────────────────────────────────────── */
   const ordrePost = (counts, n) => {
     return Array.from({ length: MAXP }, (_, i) => {
@@ -610,6 +635,9 @@ export function construireMatrix(courses) {
     exemples,
     comboQuint,
     topCombos: comboQuint.slice(0, 12),
+    comboPodium,
+    topPodiums: comboPodium.slice(0, 12),
+    ensemble: { trio: resumeEnsemble(comboPodium), quinte: resumeEnsemble(comboQuint) },
     topCases,
     topPaires: pairList.slice(0, 15),
     topTriples: tripleList.slice(0, 15),

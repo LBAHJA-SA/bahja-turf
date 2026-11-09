@@ -62,6 +62,56 @@ function Section({ n, titre, sous, children }) {
   )
 }
 
+function CarteEnsemble({ emoji, titre, coul, courbe, cle, ens, phrase, nPhare = 8 }) {
+  const phare = courbe.find((b) => b.n === nPhare) || {}
+  const cleHasard = cle === 'podium' ? 'hasard_podium' : 'hasard_quinte'
+  const lignes = [8, 10, 12].map((n) => {
+    const b = courbe.find((x) => x.n === n) || { n }
+    return { n, v: b[cle], hasard: false }
+  })
+  lignes.push({ n: null, v: phare[cleHasard], hasard: true, sur: nPhare })
+  return (
+    <div style={{ padding: 14, borderRadius: 12, border: '1px solid ' + SK.bord, background: 'linear-gradient(180deg, rgba(124,58,237,.14), rgba(12,20,37,.6))' }}>
+      <div style={{ fontSize: 11.5, fontWeight: 900, letterSpacing: 1, color: coul, textTransform: 'uppercase' }}>{emoji} {titre}</div>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 6, flexWrap: 'wrap' }}>
+        <b style={{ fontSize: 40, lineHeight: 1, fontWeight: 900, color: '#fff' }}>{pc(phare[cle])}</b>
+        <span style={{ fontSize: 12, color: '#a4b8d6' }}>des courses, avec <b style={{ color: '#e9d5ff' }}>{nPhare} cases</b></span>
+      </div>
+      <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 5, lineHeight: 1.5 }}>{phrase}</div>
+      <div style={{ marginTop: 11 }}>
+        {lignes.map((b, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, opacity: b.hasard ? .75 : 1 }}>
+            <span style={{ fontSize: 11, color: b.hasard ? '#5b6b85' : b.n === nPhare ? '#e9d5ff' : '#7a8ea9', minWidth: 74, fontWeight: b.n === nPhare ? 900 : 500 }}>
+              {b.hasard ? `au hasard (${b.sur})` : `${b.n} cases`}
+            </span>
+            <div style={{ flex: 1, height: 8, borderRadius: 999, background: 'rgba(255,255,255,.10)', overflow: 'hidden' }}>
+              <div style={{ width: Math.max(1, (b.v || 0) * 100) + '%', height: '100%', borderRadius: 999,
+                background: b.hasard ? '#475569' : b.n === nPhare ? coul : 'rgba(167,139,250,.45)' }} />
+            </div>
+            <b style={{ fontSize: 11.5, minWidth: 48, textAlign: 'right', color: b.hasard ? '#5b6b85' : b.n === nPhare ? coul : '#a4b8d6' }}>{pc(b.v)}</b>
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: 9, paddingTop: 8, borderTop: '1px dashed rgba(255,255,255,.12)', fontSize: 11.5, color: '#94a3b8', lineHeight: 1.5 }}>
+        <b style={{ color: '#e2e8f0' }}>{ens.distincts} combinaisons distinctes</b> sur {ens.courses} courses
+        {' '}({ens.repetes === 0 ? 'aucune revue' : `${ens.repetes} revue${ens.repetes > 1 ? 's' : ''}`}, max {ens.record}×).
+      </div>
+    </div>
+  )
+}
+
+function Etape({ n, titre, children }) {
+  return (
+    <div style={{ padding: '10px 12px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.alt }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+        <span style={{ width: 20, height: 20, borderRadius: 999, background: SK.accentClair, border: '1px solid ' + SK.bord, color: SK.accent, fontSize: 11.5, fontWeight: 900, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
+        <b style={{ fontSize: 12.5, color: '#e9d5ff' }}>{titre}</b>
+      </div>
+      <div style={{ fontSize: 12, color: '#a4b8d6', marginTop: 6, lineHeight: 1.6 }}>{children}</div>
+    </div>
+  )
+}
+
 export default function Probabilite() {
   const [data, setData] = useState(null)
   const [err, setErr] = useState('')
@@ -194,30 +244,21 @@ export default function Probabilite() {
       <Entete page="quinte" />
       <div style={{ maxWidth: 1320, margin: '0 auto', padding: '18px 16px 70px' }}>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12, flexWrap: 'wrap' }}>
-          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 900, letterSpacing: 0.3, color: '#fff', textShadow: '0 0 18px rgba(124,58,237,.5)' }}>
-            ⚡ Probabilité — DNA des cases P1–P20
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
+          <h1 style={{ margin: 0, fontSize: 23, fontWeight: 900, letterSpacing: 0.3, color: '#fff', textShadow: '0 0 18px rgba(124,58,237,.5)' }}>
+            ⚡ Qui prend les 3 ? Qui prend les 5 ?
           </h1>
           {data && (
             <span style={{ fontSize: 12, color: SK.muted, padding: '3px 10px', border: '1px solid ' + SK.bord, borderRadius: 999 }}>
-              {data.N} courses réelles · prior m = {data.marge} · {data.genres.disciplines.length} disciplines · généré le {String(data.genereLe || '').slice(0, 10)}
+              {data.N} courses réelles · résultats du {String(data.genereLe || '').slice(0, 10)}
             </span>
           )}
         </div>
 
-        <div style={{ ...SK.box, padding: 14, marginBottom: 16, borderLeft: '4px solid ' + SK.accent2, fontSize: 12.5, lineHeight: 1.7 }}>
-          <b style={{ color: '#e9d5ff' }}>Uniquement des résultats réels.</b> Chaque probabilité de cette page est une
-          fréquence observée dans l'archive, lissée par un prior écrit (Beta pour <i>top-5</i>, Dirichlet pour les positions,
-          m = {data?.marge ?? 10} pseudo-courses). Aucun chiffre n'est inventé, aucun n'est extrapolé.
-          <br />
-          <b style={{ color: '#fbbf24' }}>Deux dénominateurs, jamais mélangés :</b> <code>P(top-5 | N)</code> se lit sur les{' '}
-          {data?.N ?? 0} courses · <code>P(position k | top-5)</code> se lit uniquement parmi les fois où la case finit dans les 5.
-          <br />
-          <span style={{ color: '#94a3b8' }}>
-            Les probabilités <b>marginales</b> (top-5, podium, victoire de chaque case P) sont déjà dans l'onglet
-            <b> Statistiques</b> de la page Quinté. Ici on ne garde que ce qui ne s'y trouve pas : positions, paires,
-            triples, conditionnelles, contexte, matrice DNA, DNA 2.0 et sélection.
-          </span>
+        <div style={{ fontSize: 12.5, color: '#94a3b8', marginBottom: 14, lineHeight: 1.6 }}>
+          Tous les chiffres de cette page viennent des <b style={{ color: '#e2e8f0' }}>résultats réels</b> de l'archive :
+          aucune estimation inventée. On y répond à <b style={{ color: '#e9d5ff' }}>deux questions seulement</b> —
+          les 3 places ensemble, les 5 places ensemble.
         </div>
 
         {loading && <div style={{ padding: 20, color: SK.muted }}>Chargement…</div>}
@@ -225,6 +266,87 @@ export default function Probabilite() {
 
         {data && (
           <>
+            {/* ★ L'ESSENTIEL ------------------------------------------------ */}
+            <Section
+              n="★" titre="L'essentiel — les 3 ensemble, les 5 ensemble"
+              sous={<>
+                Une <b>case</b> (P1…P20) = la place d'un cheval dans la synthèse de la presse. Le <b>podium</b>, ce sont
+                <b> 3 cases ensemble</b> ; le <b>Quinté</b>, <b>5 cases ensemble</b>. Les deux tableaux ci-dessous répondent
+                à ces deux questions, et à rien d'autre. Tout ce qui suit ne sert qu'à vérifier.
+              </>}
+            >
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 12 }}>
+                <CarteEnsemble
+                  emoji="🥇" titre="Les 3 — le podium" coul="#34d399"
+                  courbe={data.backtest} cle="podium" ens={data.ensemble.trio}
+                  phrase={<>Combien de cases faut-il pour que les <b>trois premiers</b> y soient tous.</>}
+                />
+                <CarteEnsemble
+                  emoji="🏆" titre="Les 5 — le Quinté" coul="#a78bfa"
+                  courbe={data.backtest} cle="quinte" ens={data.ensemble.quinte}
+                  phrase={<>Combien de cases faut-il pour que les <b>cinq premiers</b> y soient tous.</>}
+                />
+              </div>
+
+              {/* le ticket, tout de suite */}
+              {selection && selection.lignes.length > 0 && (
+                <div style={{ marginTop: 12, padding: '12px 14px', borderRadius: 10, border: '1px solid ' + SK.bord, background: SK.accentClair }}>
+                  <div style={{ fontSize: 11, color: SK.muted, textTransform: 'uppercase', letterSpacing: .8 }}>
+                    ★ votre ticket · {courseChoisie ? `${courseChoisie.date} — ${courseChoisie.hippodrome}` : 'course choisie'}
+                  </div>
+                  <div style={{ display: 'flex', gap: 11, alignItems: 'flex-end', flexWrap: 'wrap', marginTop: 7 }}>
+                    {selection.lignes.map((l) => (
+                      <span key={l.num} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', minWidth: 40 }}>
+                        <b style={{ fontSize: 26, fontWeight: 900, color: '#fff', lineHeight: 1.1 }}>{l.num}</b>
+                        <span style={{ fontSize: 9.5, color: '#a4b8d6' }}>P{l.slot}</span>
+                      </span>
+                    ))}
+                    <span style={{ marginLeft: 'auto', fontSize: 11.5, color: '#a4b8d6', textAlign: 'right' }}>
+                      <b style={{ color: '#e9d5ff' }}>{taille} chevaux</b> · {pc(attendu?.podium)} du podium · {pc(attendu?.quinte)} du Quinté
+                    </span>
+                  </div>
+                  <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 7 }}>
+                    Le gros chiffre = le <b>numéro du cheval</b> · « P » = sa place dans la synthèse de la presse.
+                    Changer la course, la taille ou la règle : section ⑨, en bas.
+                  </div>
+                </div>
+              )}
+
+              {/* comment lire — trois phrases */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 9, marginTop: 12 }}>
+                <Etape n="1" titre="La combinaison exacte ne se rejoue pas">
+                  Sur {data.N} courses : <b>{data.ensemble.trio.distincts} trios</b> et <b>{data.ensemble.quinte.distincts} Quintés</b> différents
+                  {data.ensemble.quinte.repetes <= 1 ? <> — un seul Quinté s'est répété</> : null}. Chercher « la combinaison qui va sortir »
+                  ne mène donc nulle part : elle est presque toujours neuve.
+                </Etape>
+                <Etape n="2" titre="Ce qui se mesure, c'est la taille du filet">
+                  La bonne question n'est pas « qui », mais <b>combien de cases</b>. Avec 8 cases, les 3 premiers sont dedans dans{' '}
+                  <b>{(data.backtest.find((b) => b.n === 8) || {}).podium != null ? pc(data.backtest.find((b) => b.n === 8).podium) : '—'}</b> des courses,
+                  et les 5 premiers dans <b>{data.backtest.find((b) => b.n === 8) ? pc(data.backtest.find((b) => b.n === 8).quinte) : '—'}</b>.
+                </Etape>
+                <Etape n="3" titre="Plus le filet est large, plus il coûte">
+                  À 12 cases : <b>{data.backtest.find((b) => b.n === 12) ? pc(data.backtest.find((b) => b.n === 12).podium) : '—'}</b> du podium
+                  et <b>{data.backtest.find((b) => b.n === 12) ? pc(data.backtest.find((b) => b.n === 12).quinte) : '—'}</b> du Quinté —
+                  mais 12 chevaux à jouer. La page ne choisit pas à votre place : elle donne le prix de chaque largeur.
+                </Etape>
+              </div>
+
+              <div style={{ fontSize: 11, color: '#64748b', marginTop: 10, lineHeight: 1.6 }}>
+                Mesure <b>leave-one-out</b> : la course notée ne sert jamais à son propre classement.
+                Une seule course = un seul point ; à {data.N} courses, la courbe se lit par grandes largeurs (5-8 / 10-12), jamais case par case.
+              </div>
+            </Section>
+
+            <details style={{ marginBottom: 16 }}>
+              <summary style={{
+                cursor: 'pointer', fontSize: 12.5, fontWeight: 800, color: SK.accent,
+                padding: '10px 13px', border: '1px solid ' + SK.bord, borderRadius: 9,
+                background: SK.accentClair, listStyle: 'revert',
+              }}>
+                Le détail technique — 9 sections (pour ceux qui veulent vérifier chaque chiffre)
+              </summary>
+              <div style={{ marginTop: 14 }}>
+
             {/* ① distribution des positions --------------------------------- */}
             <Section
               n="①" titre="Distribution des 5 positions — P(position | top-5)"
@@ -841,6 +963,9 @@ export default function Probabilite() {
                 </div>
               )}
             </Section>
+
+              </div>
+            </details>
 
             {/* limites ---------------------------------------------------- */}
             <div style={{ ...SK.box, padding: 14, borderLeft: '4px solid #fbbf24', fontSize: 12, lineHeight: 1.7 }}>
