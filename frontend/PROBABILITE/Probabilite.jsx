@@ -146,12 +146,7 @@ export default function Probabilite() {
 
   const ticket = useMemo(() => {
     if (!selection || !selection.lignes.length) return []
-    const z = [[], [], [], []]
-    for (const l of selection.lignes) z[l.slot <= 4 ? 0 : l.slot <= 8 ? 1 : l.slot <= 10 ? 2 : 3].push(l)
-    const t = []
-    ;[3, 2, 1, 1].forEach((k, i) => t.push(...z[i].slice(0, k)))
-    if (t.length < 7) for (const l of selection.lignes) { if (t.length >= 7) break; if (!t.includes(l)) t.push(l) }
-    return t.sort((a, b) => a.slot - b.slot)
+    return selection.lignes.slice(0, 7).sort((a, b) => a.slot - b.slot)
   }, [selection])
 
   const courbeRegle = data?.regles?.[regle]?.courbe || []
@@ -285,24 +280,6 @@ export default function Probabilite() {
                       <b style={{ color: '#e9d5ff' }}>{pc(data.regle7?.controle?.zones?.podium)}</b> du podium · <b style={{ color: '#e9d5ff' }}>{pc(data.regle7?.controle?.zones?.quinte)}</b> du Quinté
                     </span>
                   </div>
-                  {(() => {
-                    const z = [0, 0, 0, 0]
-                    for (const l of ticket) z[l.slot <= 4 ? 0 : l.slot <= 8 ? 1 : l.slot <= 10 ? 2 : 3]++
-                    const ZN = ['P1-P4', 'P5-P8', 'P9-P10', 'P11+']
-                    const bas = z[2] + z[3]
-                    return (
-                      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginTop: 9, paddingTop: 8, borderTop: '1px dashed rgba(255,255,255,.14)', fontSize: 11.5 }}>
-                        {z.map((v, i) => (
-                          <span key={i} style={{ padding: '2px 8px', borderRadius: 6, border: '1px solid ' + (i >= 2 ? 'rgba(251,191,36,.45)' : SK.bord), color: i >= 2 ? '#fbbf24' : '#a4b8d6', fontWeight: i >= 2 ? 800 : 500 }}>
-                            {ZN[i]} · {v}
-                          </span>
-                        ))}
-                        <span style={{ color: '#7a8ea9' }}>
-                          {bas} chevaux hors du haut de la presse — c'est là que se joue le Quinté (page ①).
-                        </span>
-                      </div>
-                    )
-                  })()}
                   <div style={{ fontSize: 11, color: '#7a8ea9', marginTop: 7 }}>
                     Le gros chiffre = le <b>numéro du cheval</b> · « P » = sa place dans la synthèse de la presse.
                     Changer la course ou la règle : section ③, en bas.
@@ -311,15 +288,7 @@ export default function Probabilite() {
               )}
 
               {/* la seule phrase qui compte, mesurée sur 96 autres Quintés */}
-              <div style={{ marginTop: 12, padding: '11px 13px', borderRadius: 9, border: '1px solid ' + SK.bord, background: SK.alt, fontSize: 12.5, lineHeight: 1.65, color: '#cbd5e1' }}>
-                <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: .7, color: SK.accent, textTransform: 'uppercase', marginBottom: 5 }}>
-                  ce que le ticket ne doit pas faire
-                </div>
-                À 7 chevaux, garder les 7 favoris donne {pc(data.regle7?.controle?.favoris?.quinte)} du Quinté sur 96 autres Quintés réels ;
-                la règle mesurée (3 de P1-P4, 2 de P5-P8, 1 de P9-P10, 1 de P11+) en donne{' '}
-                <b style={{ color: '#34d399' }}>{pc(data.regle7?.controle?.zones?.quinte)}</b> — trois fois plus.
-                Le bas de la synthèse ne remplace pas le haut : <b>il s'ajoute</b>, et il entre dans le ticket sans discussion.
-              </div>
+              
 
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 10 }}>
                 {[[5, '5 chevaux'], [6, '6 chevaux'], [7, '7 chevaux']].map(([n, nom]) => {
@@ -566,18 +535,20 @@ export default function Probabilite() {
 
                   {/* ce que cette taille a couvert historiquement */}
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: 8, marginTop: 12 }}>
-                    <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
-                      <div style={{ fontSize: 10.5, color: SK.muted }}>règle 7 cases · 96 Quintés réels</div>
-                      <div style={{ fontSize: 19, fontWeight: 900, color: '#e9d5ff' }}>{pc(data.regle7?.controle?.zones?.quinte)} <span style={{ fontSize: 10.5, color: '#7a8ea9' }}>Quinté</span></div>
-                      <div style={{ fontSize: 11, color: '#34d399' }}>{pc(data.regle7?.controle?.zones?.podium)} <span style={{ color: '#7a8ea9' }}>podium</span> · {pc(data.regle7?.controle?.zones?.plus4)} ≥4</div>
-                      <div style={{ fontSize: 10.5, color: '#5b6b85', marginTop: 3 }}>contre {pc(data.regle7?.controle?.favoris?.quinte)} pour les 7 favoris</div>
-                    </div>
-                    <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
-                      <div style={{ fontSize: 10.5, color: SK.muted }}>sur l'archive (33 courses)</div>
-                      <div style={{ fontSize: 17, fontWeight: 900, color: '#e9d5ff' }}>{pc(data.regle7?.archive?.zones?.quinte)} <span style={{ fontSize: 10.5, color: '#7a8ea9' }}>Quinté</span></div>
-                      <div style={{ fontSize: 11, color: '#34d399' }}>{pc(data.regle7?.archive?.zones?.podium)} <span style={{ color: '#7a8ea9' }}>podium</span></div>
-                      <div style={{ fontSize: 10.5, color: '#5b6b85', marginTop: 3 }}>favoris : {pc(data.regle7?.archive?.favoris?.quinte)}</div>
-                    </div>
+                    {attendu && (
+                      <>
+                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · Quinté entier · N={taille}</div>
+                          <div style={{ fontSize: 19, fontWeight: 900, color: '#e9d5ff' }}>{pc(attendu.quinte)}</div>
+                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>{Math.round(attendu.quinte * attendu.evalues)} / {attendu.evalues} courses</div>
+                        </div>
+                        <div style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
+                          <div style={{ fontSize: 10.5, color: SK.muted }}>LOO · podium entier · N={taille}</div>
+                          <div style={{ fontSize: 19, fontWeight: 900, color: '#34d399' }}>{pc(attendu.podium)}</div>
+                          <div style={{ fontSize: 10.5, color: '#5b6b85' }}>≥ 4 du Quinté : {pc(attendu.plus4)}</div>
+                        </div>
+                      </>
+                    )}
                     {data.regles?.[regle]?.horsEchantillon?.map((h, i) => (
                       <div key={i} style={{ padding: '9px 11px', borderRadius: 8, border: '1px solid ' + SK.bord, background: SK.alt }}>
                         <div style={{ fontSize: 10.5, color: SK.muted }}>hors échantillon · top-8</div>
