@@ -675,6 +675,7 @@ export function construireMatrix(courses) {
     comboPodium,
     topPodiums: comboPodium.slice(0, 12),
     ensemble: { trio: resumeEnsemble(comboPodium), quinte: resumeEnsemble(comboQuint) },
+    combosQuinte: comboQuint.map((c) => c.combo),
     composition: { trio: compoZone(3), quinte: compoZone(5) },
     topCases,
     topPaires: pairList.slice(0, 15),
