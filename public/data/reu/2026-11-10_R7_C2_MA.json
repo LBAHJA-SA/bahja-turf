@@ -1,0 +1,82 @@
+{
+ "v": 2,
+ "pv": 4,
+ "source": "pro.casacourses.com (fallback)",
+ "race": {
+  "numOrdre": 2,
+  "nom": "ALFIDAH",
+  "distance": 1700,
+  "type": "N",
+  "date": "2026-11-10",
+  "nbPartants": 5
+ },
+ "meeting": {
+  "num": 7,
+  "hippodrome": "Khemisset",
+  "pays": "MA"
+ },
+ "participants": [
+  {
+   "num": "1",
+   "cheval": "",
+   "nom": "",
+   "poids": 58,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "2",
+   "cheval": "",
+   "nom": "",
+   "poids": 55.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "3",
+   "cheval": "",
+   "nom": "",
+   "poids": 53.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "4",
+   "cheval": "",
+   "nom": "",
+   "poids": 53.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  },
+  {
+   "num": "5",
+   "cheval": "",
+   "nom": "",
+   "poids": 53.5,
+   "driver": "",
+   "jockey": "",
+   "entraineur": "",
+   "valeur": null,
+   "musique": "",
+   "place": null
+  }
+ ],
+ "arrivee": [],
+ "collecteLe": "2026-11-10T02:25:32.085Z"
+}
