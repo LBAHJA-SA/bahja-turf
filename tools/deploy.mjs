@@ -153,7 +153,7 @@ if (!FORCE && etat?.hash === local.hash) {
 
 log('deploy Vercel --prod…')
 await run(process.platform === 'win32' ? 'npx.cmd' : 'npx',
-  ['-y', 'vercel@59', 'deploy', '--prod', '--yes', '--token', token])
+  ['-y', 'vercel@59', 'deploy', '--prod', '--yes', '--token', token, '--archive=tgz'])
 
 log('verification en ligne…')
 let verif = null

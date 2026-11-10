@@ -981,29 +981,6 @@ function mesurerEmpreinte() {
   })
 }
 
-/* 09/11/2026 - LE MOTEUR DE PROBABILITE (page /probabilite) se recalcule avec
- * l'archive. `tools/probabilite.mjs` relit data/synthese.json et reecrit
- * data/probabilite.json + public/data/probabilite.json : les probabilites
- * marginales, conditionnelles, bayesiennes et le backtest suivent donc chaque
- * nouveau resultat, sans intervention. Un echec ne casse jamais le cycle. */
-function mesurerProbabilite() {
-  return new Promise((res) => {
-    log(' probabilites ADN P1-P20 (tools/probabilite.mjs)')
-    const p = spawn(process.execPath, [path.join(ICI, 'probabilite.mjs')], {
-      cwd: RACINE, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true,
-    })
-    let sortie = ''
-    p.stdout.on('data', (d) => { sortie += String(d) })
-    p.stderr.on('data', (d) => { sortie += String(d) })
-    p.on('close', (code) => {
-      const dernier = (sortie.trim().split('\n').filter(Boolean).slice(-1)[0] || '').replace(/^\s+/, '')
-      log(code === 0 ? `     ${dernier || 'probabilites : a jour'}` : `     probabilites : ECHEC (code ${code}) ${dernier}`)
-      res()
-    })
-    p.on('error', (e) => { log('     probabilites : impossible : ' + e.message); res() })
-  })
-}
-
 async function cycle() {
   log('===== cycle =====')
   /* 10/10/2026 — on réunit les deux archives AVANT tout : si l'utilisateur
@@ -1024,7 +1001,6 @@ async function cycle() {
   await archiverLesCourses(aujourdhui())
   await mesurerTrio()
   await mesurerEmpreinte()
-  await mesurerProbabilite()
   await publierMaroc()
   await publierResultatsSorec()
   await publierDonnees()

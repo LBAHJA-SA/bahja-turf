@@ -23,7 +23,7 @@ import { useLang, LangToggle } from './lib/langue.jsx'
 const LIENS = [
   { cle: 'analyse', to: '/', libelleKey: 'nav_analyse', libelle: 'Analyse course', icone: 'bi-clipboard2-pulse' },
   { cle: 'quinte', to: '/quinte', libelleKey: 'nav_quinte', libelle: 'Quinté', icone: 'bi-trophy' },
-  { cle: 'quinte', to: '/probabilite', libelleKey: 'nav_probabilite', libelle: 'PROBABILITÉ', icone: 'bi-graph-up' },
+
   { cle: 'pronostic', droit: 'analyse', to: '/pronostique-bahja-turf', libelleKey: 'nav_pronostique', libelle: 'PRONOSTIQUE BAHJA TURF', icone: 'bi-star' },
   { cle: 'presse', to: '/presse', libelleKey: 'nav_presse', libelle: 'Presse', icone: 'bi-newspaper' },
   { cle: 'lives', to: '/lives', libelleKey: 'nav_lives', libelle: 'Lives', icone: 'bi-broadcast' },
@@ -35,7 +35,11 @@ const LIENS = [
   { cle: 'dna', to: '/dna', libelleKey: 'nav_dna', libelle: 'DNA COURSE', icone: 'bi-cpu' },
   /* 24/10/2026 — LES RÉSULTATS ET LES RAPPORTS. La page ne montre que les
    * courses terminées : l'arrivée des 5 premiers et ce que paie chaque pari. */
-  { cle: 'resultats', to: '/resultats', libelleKey: 'nav_resultats', libelle: 'Résultats', icone: 'bi-list-ol' },
+  { cle: 'resultats', to: '/resultats', libelleKey: 'nav_resultats', libelle: 'Resultats', icone: 'bi-list-ol' },
+  /* 10/11/2026 — LA PAGE DES PROBABILITÉS : la même droit que le Quinté
+   * (elle lit la même archive), mais sa propre clé d'affichage et sa couleur
+   * d'or — sans quoi deux liens porteraient la même `key` React. */
+  { cle: 'probability', droit: 'quinte', to: '/probability', libelleKey: 'nav_probability', libelle: 'PROBABILITE', icone: 'bi-graph-up' },
 ]
 
 export default function Entete({ page }) {
