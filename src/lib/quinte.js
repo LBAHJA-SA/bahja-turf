@@ -2097,11 +2097,15 @@ export function computeStats(records) {
       trioCombos[key].count++
       if (rec.date) trioCombos[key].dates.push(rec.date)
     }
-    /* ⭐ Quinté : la combinaison des 5 premiers (positions P), triée. */
+    /* ⭐ Quinté : la combinaison des 5 premiers (positions P), dans l'ordre
+     *   d'arrivée (1er, 2e, 3e, 4e, 5e). La clé est l'ordre d'arrivée : deux
+     *   courses dont les mêmes positions finissent dans un ordre différent
+     *   sont deux combinaisons distinctes (sinon on afficherait la mauvaise
+     *   arrivée pour l'une d'elles). */
     const quinte = pl.slice(0, 5)
     if (quinte.length === 5) {
-      const keyQ = quinte.slice().sort((a, b) => a - b).join('-')
-      if (!quinteCombos[keyQ]) quinteCombos[keyQ] = { combo: quinte, count: 0, dates: [] }
+      const keyQ = quinte.join('-')
+      if (!quinteCombos[keyQ]) quinteCombos[keyQ] = { combo: quinte.slice(), count: 0, dates: [] }
       quinteCombos[keyQ].count++
       if (rec.date) quinteCombos[keyQ].dates.push(rec.date)
     }

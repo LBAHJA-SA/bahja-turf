@@ -2097,11 +2097,12 @@ export function computeStats(records) {
       trioCombos[key].count++
       if (rec.date) trioCombos[key].dates.push(rec.date)
     }
-    /* ⭐ Quinté : la combinaison des 5 premiers (positions P), triée. */
-    const quinte = pl.slice(0, 5).slice().sort((a, b) => a - b)
+    /* ⭐ Quinté : la combinaison des 5 premiers (positions P), dans l'ordre
+     *   d'arrivée (1er, 2e, 3e, 4e, 5e). La clé est l'ordre d'arrivée. */
+    const quinte = pl.slice(0, 5)
     if (quinte.length === 5) {
       const keyQ = quinte.join('-')
-      if (!quinteCombos[keyQ]) quinteCombos[keyQ] = { combo: quinte, count: 0, dates: [] }
+      if (!quinteCombos[keyQ]) quinteCombos[keyQ] = { combo: quinte.slice(), count: 0, dates: [] }
       quinteCombos[keyQ].count++
       if (rec.date) quinteCombos[keyQ].dates.push(rec.date)
     }
