@@ -328,7 +328,7 @@
    "sexe": "H",
    "age": 4,
    "couleur": "",
-   "proprietaire": "ECURIE NICOLATO/J.FOUGEROUSE",
+   "proprietaire": "ECURIE NICOLATO",
    "cote": 8.6,
    "coteRef": 8.6,
    "depart": "5",
@@ -380,6 +380,6 @@
   1,
   15
  ],
- "collecteLe": "2026-11-10T19:03:02.348Z",
+ "collecteLe": "2026-11-10T22:22:28.186Z",
  "collecteApresCourse": true
 }

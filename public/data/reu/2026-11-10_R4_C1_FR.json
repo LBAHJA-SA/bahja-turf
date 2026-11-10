@@ -29,7 +29,7 @@
    "sexe": "F",
    "age": 7,
    "couleur": "",
-   "proprietaire": "VDA TRANSPORT/A.FOUASSIER",
+   "proprietaire": "VDA TRANSPORT SOLUTIONS",
    "cote": 4.2,
    "coteRef": 4.2,
    "depart": "6",
@@ -144,7 +144,7 @@
    "sexe": "H",
    "age": 7,
    "couleur": "",
-   "proprietaire": "F.CARNEVALI/S.CARNEVALI",
+   "proprietaire": "F.CARNEVALI",
    "cote": 60,
    "coteRef": 60,
    "depart": "2",
@@ -213,7 +213,7 @@
    "sexe": "H",
    "age": 7,
    "couleur": "",
-   "proprietaire": "ECURIE NICOLATO/J.FOUGEROUSE",
+   "proprietaire": "ECURIE NICOLATO",
    "cote": null,
    "coteRef": null,
    "depart": "8",
@@ -236,6 +236,6 @@
   9,
   1
  ],
- "collecteLe": "2026-11-10T19:02:48.887Z",
+ "collecteLe": "2026-11-10T22:22:03.246Z",
  "collecteApresCourse": true
 }
