@@ -2681,7 +2681,7 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                     return (
                       <tr key={p.num} style={{ background: on ? SK.on : SK.ligne, borderBottom: '1px solid ' + SK.bord }}>
                         <td style={{ ...s.td, fontWeight: 700 }}>{p.num}</td>
-                        <td style={s.td}>{p.horse}</td>
+                        <td style={s.td}>{p.horse || p.nom || '—'}</td>
                         <td style={s.td}>{grille ? ((grille.slotParNum && grille.slotParNum[p.num]) ?? grille.parNum?.[p.num] ?? '—') : '—'}</td>
                         <td style={{ ...s.td, fontFamily: 'monospace', fontSize: 12 }}>{p.musique}</td>
                         <td style={{ ...s.td, fontWeight: 700, color: sc.score >= 5 ? '#34d399' : sc.score >= 3.5 ? '#fbbf24' : '#fb7185' }}>
@@ -2691,9 +2691,9 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
                         <td style={s.td}>{sc.purite}%</td>
                         <td style={s.td}>{p.nombreCourses}/{p.nombreVictoires}/{p.nombrePlacesSecond}/{p.nombrePlacesTroisieme}</td>
                         <td style={s.td}>{p.poids}</td>
-                        <td style={s.td}>{p.valeur}</td>
-                        <td style={s.td}>{p.jockey}</td>
-                        <td style={s.td}>{p.trainer}</td>
+                        <td style={s.td}>{p.valeur ?? '—'}</td>
+                        <td style={s.td}>{p.jockey || '—'}</td>
+                        <td style={s.td}>{p.entraineur || p.trainer || '—'}</td>
                         <td style={{ ...s.td, fontWeight: 700 }}>{sc.global}</td>
                         <td style={s.td}>{on ? '✅' : ''}</td>
                       </tr>

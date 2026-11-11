@@ -8472,6 +8472,38 @@ comptait plus) → la ligne d'archive réécrite avec `corrigeLe` et
 | le **siège Plat** dans l'affichage | noyé dans le bloc trié | **à la fin**, avec son badge — même sur une course clôturée (§11.55) |
 | le texte « MA MÉTHODE » | « les quotas sont 3-2-1-1-1 (§11.46) … le siège de G5 passe à G2 » — **contradictoire** (§11.46 est abrogé par §11.49) | « 3-2-1-1-1 (§11.49) : **constitutionnels** — ils ne changent plus. En Plat, un siège s'ajoute après coup (§11.55) » |
 
+#### ⑤ Les effets de bord — la clé de fiche et les noms
+
+> Symptôme rapporté le 11/11 : **« أسماء الخيول لا تطابق السباق الذي نحلله »** —
+> sur `/probability`, la course du 10/11 (Fontainebleau) affichait les chevaux
+> du **Vincennes R2 C3**. Les numéros, eux, étaient justes.
+
+**La cause.** Chaque ligne d'archive porte **deux clés** :
+
+| champ | écrit par | sert à |
+|---|---|---|
+| `courseId` | le job (la course résolue) | lire la fiche de la course |
+| `cle` | **la PAGE** (quand elle lit le résultat) | l'URL de la fiche : `/data/reu/{cle}_{pays}.json` |
+
+La page écrivait `cle` avec la course qu'elle avait résolue — et, avant le
+correctif §11.56, c'était parfois **la course devinée**. Le 10/11, l'archive
+avait `courseId: 2026-11-10_R1_C4` (juste) mais `cle: 2026-11-10_R2_C3`
+(perimée) → la page lisait la fiche du **Vincennes** et y affichait les noms.
+
+**Le correctif :**
+- `tools/reparer-archive.mjs` **normalise `cle`** sur les 37 dates (la clé du
+  PMU fait foi) ;
+- `cleDe()` (page `/probability`) prend **`courseId` en priorité** quand il est
+  déjà de la forme `AAAA-MM-JJ_Rn_Cm` — la fiche des noms est toujours celle de
+  la course analysée ;
+- la table « Les chevaux retenus » de `/quinte` affichait une colonne **cheval
+  vide** : le backend nomme le champ `nom` (`horse` n'existe pas) — corrigé,
+  idem pour l'entraîneur (`entraineur`) et la valeur (`—` quand elle est absente).
+
+**Contrôle** (`tools/reparer-archive.mjs --check` + comparaison
+archive ↔ fiche) : **0 date en défaut** sur 37 — les noms et l'arrivée de
+chaque course sont bien ceux de la course analysée.
+
 #### ⑥ La règle qui en sort
 
 > **Ne JAMAIS deviner quelle course est le Quinté. Le demander.**
