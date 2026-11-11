@@ -30,8 +30,8 @@
    "age": 4,
    "couleur": "",
    "proprietaire": "G. SUCAET",
-   "cote": null,
-   "coteRef": null,
+   "cote": 1.1,
+   "coteRef": 1.1,
    "depart": "1",
    "def": "6",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r10c6p1-png-1",
@@ -387,5 +387,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-11-11T04:04:52.747Z"
+ "collecteLe": "2026-11-11T10:41:54.735Z"
 }

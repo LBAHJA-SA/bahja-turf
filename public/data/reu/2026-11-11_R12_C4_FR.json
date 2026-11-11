@@ -145,8 +145,8 @@
    "age": 5,
    "couleur": "",
    "proprietaire": "ECURIE HOUSSIN JEREMY",
-   "cote": null,
-   "coteRef": null,
+   "cote": 1.7,
+   "coteRef": 1.7,
    "depart": null,
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r12c4p6-png-1",
@@ -283,8 +283,8 @@
    "age": 6,
    "couleur": "",
    "proprietaire": "A. PEREIRA",
-   "cote": null,
-   "coteRef": null,
+   "cote": 1.7,
+   "coteRef": 1.7,
    "depart": null,
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r12c4p12-png-1",
@@ -295,5 +295,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-11-11T04:04:25.978Z"
+ "collecteLe": "2026-11-11T10:40:44.540Z"
 }

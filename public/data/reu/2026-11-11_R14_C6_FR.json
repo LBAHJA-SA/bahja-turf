@@ -30,8 +30,8 @@
    "age": 4,
    "couleur": "",
    "proprietaire": "MME N.PALLOT",
-   "cote": null,
-   "coteRef": null,
+   "cote": 1.1,
+   "coteRef": 1.1,
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r14c6p1-png-1",
@@ -272,5 +272,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-11-11T04:05:26.287Z"
+ "collecteLe": "2026-11-11T10:43:43.631Z"
 }

@@ -76,8 +76,8 @@
    "age": 3,
    "couleur": "",
    "proprietaire": "ECURIE VAUTORS",
-   "cote": null,
-   "coteRef": null,
+   "cote": 5.1,
+   "coteRef": 5.1,
    "depart": null,
    "def": "5",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r12c2p3-png-1",
@@ -122,8 +122,8 @@
    "age": 3,
    "couleur": "",
    "proprietaire": "J. SECHE",
-   "cote": null,
-   "coteRef": null,
+   "cote": 2,
+   "coteRef": 2,
    "depart": null,
    "def": "5",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r12c2p5-png-1",
@@ -306,8 +306,8 @@
    "age": 3,
    "couleur": "",
    "proprietaire": "ECURIE CH. A. MARY",
-   "cote": null,
-   "coteRef": null,
+   "cote": 2,
+   "coteRef": 2,
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r12c2p13-png-1",
@@ -341,5 +341,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-11-11T04:04:20.599Z"
+ "collecteLe": "2026-11-11T10:40:07.829Z"
 }

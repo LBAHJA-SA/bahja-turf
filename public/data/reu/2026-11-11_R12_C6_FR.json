@@ -168,8 +168,8 @@
    "age": 9,
    "couleur": "",
    "proprietaire": "MME M. LEMONNIER",
-   "cote": null,
-   "coteRef": null,
+   "cote": 1.7,
+   "coteRef": 1.7,
    "depart": null,
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r12c6p7-png-1",
@@ -352,8 +352,8 @@
    "age": 8,
    "couleur": "",
    "proprietaire": "D. BARRE",
-   "cote": null,
-   "coteRef": null,
+   "cote": 1.7,
+   "coteRef": 1.7,
    "depart": null,
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r12c6p15-png-1",
@@ -387,5 +387,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-11-11T04:04:32.446Z"
+ "collecteLe": "2026-11-11T10:41:07.986Z"
 }

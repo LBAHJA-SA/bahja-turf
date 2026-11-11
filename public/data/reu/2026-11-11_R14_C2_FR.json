@@ -53,8 +53,8 @@
    "age": 5,
    "couleur": "",
    "proprietaire": "SEARCHING",
-   "cote": null,
-   "coteRef": null,
+   "cote": 3,
+   "coteRef": 3,
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r14c2p2-png-1",
@@ -145,8 +145,8 @@
    "age": 5,
    "couleur": "",
    "proprietaire": "ECURIE SERENITE",
-   "cote": null,
-   "coteRef": null,
+   "cote": 1.2,
+   "coteRef": 1.2,
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r14c2p6-png-1",
@@ -226,5 +226,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-11-11T04:05:17.235Z"
+ "collecteLe": "2026-11-11T10:43:08.343Z"
 }

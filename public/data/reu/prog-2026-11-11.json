@@ -18,7 +18,7 @@
      "partants": 10,
      "hippodrome": "STRASBOURG",
      "source": "Equidia",
-     "arrivee": null
+     "arrivee": "3-7-2-1-8"
     },
     {
      "date": "2026-11-11",
@@ -88,11 +88,11 @@
      "nom": "PRIX ALBERT RIEDINGER",
      "heure": "13:54",
      "distance": 3600,
-     "type": "Haies",
-     "dist": null,
+     "type": "HAIE",
+     "dist": 3600,
      "partants": 8,
      "hippodrome": "STRASBOURG",
-     "source": "Equidia",
+     "source": "pro.casacourses.com (fallback)",
      "arrivee": null
     },
     {
@@ -184,11 +184,11 @@
      "nom": "PRIX PAULETTE ROLLAND (PRIX SPERANZA)",
      "heure": "13:06",
      "distance": 3400,
-     "type": "Haies",
-     "dist": null,
+     "type": "HAIE",
+     "dist": 3400,
      "partants": 17,
      "hippodrome": "COMPIEGNE",
-     "source": "Equidia",
+     "source": "pro.casacourses.com (fallback)",
      "arrivee": null
     },
     {
@@ -310,11 +310,11 @@
      "nom": "SZE MEI HANDICAP - SECTION 1",
      "heure": "13:10",
      "distance": 1650,
-     "type": "Plat",
-     "dist": null,
+     "type": "PLAT",
+     "dist": 1650,
      "partants": 12,
      "hippodrome": "HAPPY VALLEY",
-     "source": "Equidia",
+     "source": "pro.casacourses.com (fallback)",
      "arrivee": null
     },
     {
@@ -1772,5 +1772,5 @@
    ]
   }
  ],
- "collecteLe": "2026-11-11T10:22:31.119Z"
+ "collecteLe": "2026-11-11T10:47:15.254Z"
 }

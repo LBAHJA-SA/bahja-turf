@@ -168,8 +168,8 @@
    "age": 2,
    "couleur": "",
    "proprietaire": "ECURIE FIF",
-   "cote": null,
-   "coteRef": null,
+   "cote": 1.1,
+   "coteRef": 1.1,
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r10c2p7-png-1",
@@ -295,5 +295,5 @@
   }
  ],
  "arrivee": [],
- "collecteLe": "2026-11-11T04:04:42.440Z"
+ "collecteLe": "2026-11-11T10:41:36.053Z"
 }
