@@ -30,6 +30,28 @@ function zoneOf(slot) {
   return ZONES.find((z) => slot >= z.min && slot <= z.max) || ZONES[ZONES.length - 1]
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+ * LA DISCIPLINE — une seule famille par course, la même règle que l'onglet
+ * Statistiques de /quinte (normDisc).
+ *
+ * ⚠ 11/11/2026 — l'archive écrit la discipline de huit façons :
+ *   « PLAT » 8 · « Plat » 8 · « Attelé » 10 · « ATTELE » 5 · « HAIE » 3 ·
+ *   « STEEPLECHASE » 1 · « Steeple chase » 1 · « Haies » 1.
+ *   Comparer la chaîne brute ne donnait que 8 courses « Plat » au lieu de 14,
+ *   et zéro « Haies » visible. On range donc en famille, comme la Statistique.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+const FAMILLES = ['plat', 'attelé', 'monté', 'haies']
+const FAMILLE_LABEL = { plat: 'Plat', attelé: 'Attelé', monté: 'Monté', haies: 'Haies', autre: 'Autre' }
+
+function familleDiscipline(d) {
+  const s = String(d || '').toLowerCase().trim()
+  if (s.startsWith('plat')) return 'plat'
+  if (s.startsWith('attel') || s.startsWith('trot')) return 'attelé'
+  if (s.startsWith('mont')) return 'monté'
+  if (s.startsWith('haie') || s.startsWith('steeple')) return 'haies'
+  return s || 'autre'
+}
+
 const nf = (v, d = 1) => (v == null || !Number.isFinite(v) ? '—' : v.toFixed(d).replace('.', ','))
 const pct = (v, d = 1) => (v == null || !Number.isFinite(v) ? '—' : nf(v * 100, d) + ' %')
 const pctRaw = (v, d = 1) => (v == null || !Number.isFinite(v) ? '—' : nf(v * 100, d) + '%')
@@ -103,10 +125,10 @@ export default function Probability() {
   const [jockeys, setJockeys] = useState({})
   const [partants, setPartants] = useState([])
   const [disciplineFilter, setDisciplineFilter] = useState('Tout')
-  const [courseLimit, setCourseLimit] = useState(35)
-
-  /* ── Choix du nombre de courses à afficher ──────────────────────── */
-  const courseLimitChoices = [35, 50, 100, -1]
+  // ⚠ 11/11/2026 — -1 = TOUT ce que le type de course contient dans les
+  //   Statistiques. Ce n'est pas un réglage libre : le défaut est toujours
+  //   « toutes les courses du type sélectionné ».
+  const [courseLimit, setCourseLimit] = useState(-1)
 
   const rafraichir = useCallback(async () => {
     setPret(false)
@@ -138,20 +160,45 @@ export default function Probability() {
         max: g.max,
         slots,
         discipline: a.discipline || 'Tout',
+        fam: familleDiscipline(a.discipline),
       })
     }
     return out.sort((x, y) => (x.date < y.date ? -1 : 1))
   }, [archive])
 
-  /* ── filtre par discipline ────────────────────────────────────────── */
-  const disciplineFilterChoices = ['Tout', 'Plat', 'Attelé', 'Monté', 'Haies', 'Trot']
+  /* ── combien de courses par famille de discipline — c'est EUX qui
+   *    commandent le nombre de courses affiché, pas un réglage libre.
+   *    (11/11/2026 : « le nombre est donné par le nombre de courses du type
+   *    choisi présentes dans les statistiques, pas par toutes les courses ».) */
+  const parFamille = useMemo(() => {
+    const c = {}
+    for (const x of base) c[x.fam] = (c[x.fam] || 0) + 1
+    return c
+  }, [base])
+
+  const choixDiscipline = useMemo(
+    () => ['Tout', ...FAMILLES.filter((f) => (parFamille[f] || 0) > 0)],
+    [parFamille],
+  )
+
+  /* le pool = toutes les courses mesurables du type sélectionné */
+  const dispo = disciplineFilter === 'Tout' ? base.length : (parFamille[disciplineFilter] || 0)
+
+  /* la fenêtre réellement appliquée : jamais plus que ce que le type contient */
+  const limiteEff = courseLimit < 0 ? dispo : Math.min(courseLimit, dispo)
+
+  /* les fenêtres proposées : seulement celles plus petites que le pool */
+  const courseLimitChoices = useMemo(
+    () => [10, 20, 35, 50, 100].filter((b) => b < dispo),
+    [dispo],
+  )
+
   const filteredBase = useMemo(() => {
     let res = base
-    if (disciplineFilter !== 'Tout') res = res.filter((c) => c.discipline === disciplineFilter)
-    // Limite le nombre de courses affichées (35, 50, 100 ou -1 = Tout)
-    if (courseLimit >= 0 && res.length > courseLimit) res = res.slice(-courseLimit)
+    if (disciplineFilter !== 'Tout') res = res.filter((c) => c.fam === disciplineFilter)
+    if (limiteEff > 0 && res.length > limiteEff) res = res.slice(-limiteEff)
     return res
-  }, [base, disciplineFilter, courseLimit])
+  }, [base, disciplineFilter, limiteEff])
 
   const N = filteredBase.length
 
@@ -455,25 +502,30 @@ export default function Probability() {
           <div className="dna-title">
             <h1>DNA Probability</h1>
             <h2>P1 – P20</h2>
-            <div className="dna-ribbon">{N} courses réelles · Analyse du {jour(dateAnalyse)} · {courseLimit >= 0 ? courseLimit + ' dernières' : 'toutes'}{disciplineFilter !== 'Tout' ? ' · ' + disciplineFilter : ''}</div>
+            <div className="dna-ribbon">
+              {N} courses{disciplineFilter !== 'Tout' ? ' ' + FAMILLE_LABEL[disciplineFilter] : ''} · Analyse du {jour(dateAnalyse)} · {limiteEff >= dispo ? `tout le registre (${dispo})` : `les ${limiteEff} dernières sur ${dispo}`}
+            </div>
             <div style={{marginRight: 20, marginBottom: 10}}>
               <label style={{marginRight: 10}}>Courses : </label>
-              <select value={courseLimit} onChange={(e) => setCourseLimit(Number(e.target.value))} style={{padding: '4px 8px', fontSize: '12px'}}>
-                <option value={35}>35</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-                <option value={-1}>Tout</option>
+              <select
+                value={courseLimit < 0 || courseLimit > dispo ? -1 : courseLimit}
+                onChange={(e) => setCourseLimit(Number(e.target.value))}
+                style={{padding: '4px 8px', fontSize: '12px'}}>
+                <option value={-1}>toutes ({dispo})</option>
+                {courseLimitChoices.map((b) => <option key={b} value={b}>{b}</option>)}
               </select>
             </div>
             <div style={{marginRight: 20, marginBottom: 10}}>
               <label>Discipline : </label>
-              <select value={disciplineFilter} onChange={(e) => setDisciplineFilter(e.target.value)} style={{padding: '4px 8px', fontSize: '12px'}}>
-                <option value="Tout">Tout</option>
-                <option value="Plat">Plat</option>
-                <option value="Attelé">Attelé</option>
-                <option value="Monté">Monté</option>
-                <option value="Haies">Haies</option>
-                <option value="Trot">Trot</option>
+              <select
+                value={disciplineFilter}
+                onChange={(e) => { setDisciplineFilter(e.target.value); setCourseLimit(-1) }}
+                style={{padding: '4px 8px', fontSize: '12px'}}>
+                {choixDiscipline.map((f) => (
+                  <option key={f} value={f}>
+                    {f === 'Tout' ? `Tout (${base.length})` : `${FAMILLE_LABEL[f]} (${parFamille[f]})`}
+                  </option>
+                ))}
               </select>
             </div>
             <p className="dna-question">Qui prend les 3 ? Qui prend les 5 ?</p>
