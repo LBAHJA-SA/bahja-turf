@@ -62,7 +62,7 @@
     ],
     "sourceImport": "page",
     "placeholder": false,
-    "ticketMode": "defaut+siege-plat",
+    "ticketMode": "defaut+marche+siege-plat",
     "groupes": [
       {
         "id": "G1",
@@ -98,9 +98,9 @@
         ]
       }
     ],
-    "ticketSource": "auto",
+    "ticketSource": "final",
     "surprises": [],
-    "ticketPoseLe": "2026-11-11T10:22:20.443Z",
+    "ticketPoseLe": "2026-11-11T12:22:53.163Z",
     "ticketMoteur": [
       10,
       1,
@@ -114,7 +114,18 @@
     ],
     "cloture": null,
     "scores": null,
-    "collecte": "2026-11-11T10:22:20.443Z"
+    "collecte": "2026-11-11T12:22:53.261Z",
+    "ticketMatin": [
+      10,
+      1,
+      3,
+      7,
+      8,
+      9,
+      11,
+      13,
+      5
+    ]
   },
   "2026-11-10": {
     "date": "2026-11-10",
