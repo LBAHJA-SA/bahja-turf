@@ -128,15 +128,25 @@ for (const date of dates) {
       && String(avant.discipline || '').toUpperCase().startsWith(String(pmu.discipline || '').toUpperCase().slice(0, 3)))
 
   if (memeCourse) {
-    /* même course : on vérifie quand même que l'arrivée est la bonne */
+    /* même course : on vérifie que l'arrivée est la bonne, et on NORMALISE
+     * la clé `cle` — c'est elle que la page utilise pour lire la fiche de
+     * course (les noms de chevaux). Elle peut être périmée : c'est la PAGE
+     * qui l'écrit dans l'archive, et elle écrivait celle de la course
+     * devinée (10/11 : R2_C3 au lieu de R1_C4 → les noms d'une autre course). */
     const arAttendue = (pmu.arrivee || []).slice(0, 5).join('-')
     const arEnregistree = (avant.arrivee || []).slice(0, 5).join('-')
+    const cleFausse = avant.cle !== cleAttendue
     if (arAttendue && arEnregistree && arAttendue !== arEnregistree) {
       suspects++
       log(`⚠ ${date}  même course, arrivée différente : archive ${arEnregistree} · PMU ${arAttendue}`)
       if (!checkOnly) {
-        db[date] = { ...avant, arrivee: pmu.arrivee.slice(0, 5), corrigeLe: new Date().toISOString() }
+        db[date] = { ...avant, arrivee: pmu.arrivee.slice(0, 5), cle: cleAttendue, corrigeLe: new Date().toISOString() }
         log(`   → arrivée corrigée : ${arAttendue}`)
+      }
+    } else if (cleFausse) {
+      log(`⚠ ${date}  clé de fiche périmée : ${avant.cle || '—'} → ${cleAttendue}`)
+      if (!checkOnly) {
+        db[date] = { ...avant, cle: cleAttendue, corrigeCleLe: new Date().toISOString() }
       }
     } else {
       log(`✓ ${date}  R${pmu.r} C${pmu.c} ${pmu.hippo} ${pmu.nom} ${pmu.distance}m ${pmu.partants}p — conforme`)
@@ -203,6 +213,7 @@ for (const date of dates) {
     distance: courseRep.distance,
     hippodrome: courseRep.hippodrome,
     courseId: cleAttendue,
+    cle: cleAttendue,
     arrivee,
     ticket: t.ticket,
     ticketMode: t.mode,

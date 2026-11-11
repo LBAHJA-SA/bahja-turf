@@ -48,9 +48,19 @@ const jour = (iso) => {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || ''))
   return m ? `${m[3]}/${m[2]}/${m[1]}` : '—'
 }
+/* La clé de la course : « AAAA-MM-JJ_Rn_Cm ».
+ * ⚠ l'archive porte DEUX clés : `courseId` (celle du moteur, écrite par le
+ *   job) et `cle` (celle de la fiche de course). Elles peuvent diverger — la
+ *   `cle` est écrite par la PAGE, et elle a pu rester sur une course devinée.
+ *   On prend donc `courseId` quand il est déjà de cette forme, et `cle`
+ *   sinon : la fiche des noms de chevaux doit être celle de la course
+ *   analysée. */
 const cleDe = (rec) => {
-  const c = rec && (rec.cle || rec.courseId)
-  return /^\d{4}-\d{2}-\d{2}_R\d+_C\d+$/.test(String(c || '')) ? c : null
+  const c = rec || {}
+  const Eq = /^\d{4}-\d{2}-\d{2}_R\d+_C\d+$/
+  if (Eq.test(String(c.courseId || ''))) return c.courseId
+  if (Eq.test(String(c.cle || ''))) return c.cle
+  return null
 }
 
 /* les distances réellement présentes dans UNE liste, groupées quand l'écart
