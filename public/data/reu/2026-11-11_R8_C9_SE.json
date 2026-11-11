@@ -18,6 +18,29 @@
  },
  "participants": [
   {
+   "num": 7,
+   "cheval": "VANITA",
+   "nom": "VANITA",
+   "poids": null,
+   "driver": "M. FORSS",
+   "jockey": "M. FORSS",
+   "entraineur": "H. EHLERT",
+   "valeur": null,
+   "sexe": "F",
+   "age": 4,
+   "couleur": "",
+   "proprietaire": "GESTUT LASBEK",
+   "cote": null,
+   "coteRef": null,
+   "depart": "7",
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r8c9p7-png-1",
+   "dernierPassage": "2a1a3aDa1a",
+   "gains": 8892,
+   "musique": "2a1a3aDa1a",
+   "place": "01"
+  },
+  {
    "num": 1,
    "cheval": "ALWAYS V.G.",
    "nom": "ALWAYS V.G.",
@@ -38,7 +61,30 @@
    "dernierPassage": "0a1a2a3a8a",
    "gains": 8793,
    "musique": "0a1a2a3a8a",
-   "place": null
+   "place": "02"
+  },
+  {
+   "num": 10,
+   "cheval": "NUANCE JOSSELYN",
+   "nom": "NUANCE JOSSELYN",
+   "poids": null,
+   "driver": "M.E. DJUSE",
+   "jockey": "M.E. DJUSE",
+   "entraineur": "D. REDÉN",
+   "valeur": null,
+   "sexe": "F",
+   "age": 3,
+   "couleur": "",
+   "proprietaire": "COSTA STABLE APS",
+   "cote": null,
+   "coteRef": null,
+   "depart": "10",
+   "def": "2",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r8c9p10-png-1",
+   "dernierPassage": "4a3a2a0a0a",
+   "gains": 7190,
+   "musique": "4a3a2a0a0a",
+   "place": "03"
   },
   {
    "num": 2,
@@ -156,29 +202,6 @@
    "place": null
   },
   {
-   "num": 7,
-   "cheval": "VANITA",
-   "nom": "VANITA",
-   "poids": null,
-   "driver": "M. FORSS",
-   "jockey": "M. FORSS",
-   "entraineur": "H. EHLERT",
-   "valeur": null,
-   "sexe": "F",
-   "age": 4,
-   "couleur": "",
-   "proprietaire": "GESTUT LASBEK",
-   "cote": null,
-   "coteRef": null,
-   "depart": "7",
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r8c9p7-png-1",
-   "dernierPassage": "2a1a3aDa1a",
-   "gains": 8892,
-   "musique": "2a1a3aDa1a",
-   "place": null
-  },
-  {
    "num": 8,
    "cheval": "TETON NIKK MIRCHI",
    "nom": "TETON NIKK MIRCHI",
@@ -222,29 +245,6 @@
    "dernierPassage": "5a2a2a3a3a",
    "gains": 9956,
    "musique": "5a2a2a3a3a",
-   "place": null
-  },
-  {
-   "num": 10,
-   "cheval": "NUANCE JOSSELYN",
-   "nom": "NUANCE JOSSELYN",
-   "poids": null,
-   "driver": "M.E. DJUSE",
-   "jockey": "M.E. DJUSE",
-   "entraineur": "D. REDÉN",
-   "valeur": null,
-   "sexe": "F",
-   "age": 3,
-   "couleur": "",
-   "proprietaire": "COSTA STABLE APS",
-   "cote": null,
-   "coteRef": null,
-   "depart": "10",
-   "def": "2",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r8c9p10-png-1",
-   "dernierPassage": "4a3a2a0a0a",
-   "gains": 7190,
-   "musique": "4a3a2a0a0a",
    "place": null
   },
   {
@@ -294,6 +294,11 @@
    "place": null
   }
  ],
- "arrivee": [],
- "collecteLe": "2026-11-11T10:46:13.704Z"
+ "arrivee": [
+  7,
+  1,
+  10
+ ],
+ "collecteLe": "2026-11-11T20:33:33.725Z",
+ "collecteApresCourse": true
 }

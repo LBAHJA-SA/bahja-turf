@@ -18,29 +18,6 @@
  },
  "participants": [
   {
-   "num": 1,
-   "cheval": "COMEDIDO",
-   "nom": "COMEDIDO",
-   "poids": 54,
-   "driver": "THIAGO EVER LARREA FRUTOS",
-   "jockey": "THIAGO EVER LARREA FRUTOS",
-   "entraineur": "OSVALDO DARIO CASTIGLIONI",
-   "valeur": null,
-   "sexe": "M",
-   "age": 6,
-   "couleur": "",
-   "proprietaire": "JUANJO",
-   "cote": null,
-   "coteRef": null,
-   "depart": "1",
-   "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r9c6p1-png-1",
-   "dernierPassage": "2p8p1p1p6p",
-   "gains": 1708,
-   "musique": "2p8p1p1p6p",
-   "place": null
-  },
-  {
    "num": 2,
    "cheval": "CON AFECTO",
    "nom": "CON AFECTO",
@@ -61,38 +38,38 @@
    "dernierPassage": "8p6p9p6p1p",
    "gains": 11604,
    "musique": "8p6p9p6p1p",
-   "place": null
+   "place": "01"
   },
   {
-   "num": 3,
-   "cheval": "IN AGAIN",
-   "nom": "IN AGAIN",
-   "poids": 55,
-   "driver": "MARIA EUGENIA SCHNEIDER",
-   "jockey": "MARIA EUGENIA SCHNEIDER",
-   "entraineur": "ALEJANDRO IVAN IRUNGARAY",
+   "num": 1,
+   "cheval": "COMEDIDO",
+   "nom": "COMEDIDO",
+   "poids": 54,
+   "driver": "THIAGO EVER LARREA FRUTOS",
+   "jockey": "THIAGO EVER LARREA FRUTOS",
+   "entraineur": "OSVALDO DARIO CASTIGLIONI",
    "valeur": null,
    "sexe": "M",
-   "age": 7,
+   "age": 6,
    "couleur": "",
-   "proprietaire": "MIRAME EL OJITO (SI)",
+   "proprietaire": "JUANJO",
    "cote": null,
    "coteRef": null,
-   "depart": "3",
+   "depart": "1",
    "def": "",
-   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r9c6p3-png-1",
-   "dernierPassage": "2p8p7p6p8p",
-   "gains": 43430,
-   "musique": "2p8p7p6p8p",
-   "place": null
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r9c6p1-png-1",
+   "dernierPassage": "2p8p1p1p6p",
+   "gains": 1708,
+   "musique": "2p8p1p1p6p",
+   "place": "02"
   },
   {
    "num": 4,
    "cheval": "MATHOMARK",
    "nom": "MATHOMARK",
    "poids": 57,
-   "driver": "ANIBAL JOSE CABRERA",
-   "jockey": "ANIBAL JOSE CABRERA",
+   "driver": "MAXIMILIANO HERNAN MACHADO",
+   "jockey": "MAXIMILIANO HERNAN MACHADO",
    "entraineur": "CARLOS ALBERTO DAVILA",
    "valeur": null,
    "sexe": "M",
@@ -107,7 +84,7 @@
    "dernierPassage": "1p3p3p3p8p",
    "gains": 20089,
    "musique": "1p3p3p3p8p",
-   "place": null
+   "place": "03"
   },
   {
    "num": 5,
@@ -130,7 +107,30 @@
    "dernierPassage": "4p7p6p6p6p",
    "gains": 47367,
    "musique": "4p7p6p6p6p",
-   "place": null
+   "place": "04"
+  },
+  {
+   "num": 3,
+   "cheval": "IN AGAIN",
+   "nom": "IN AGAIN",
+   "poids": 55,
+   "driver": "MARIA EUGENIA SCHNEIDER",
+   "jockey": "MARIA EUGENIA SCHNEIDER",
+   "entraineur": "ALEJANDRO IVAN IRUNGARAY",
+   "valeur": null,
+   "sexe": "M",
+   "age": 7,
+   "couleur": "",
+   "proprietaire": "MIRAME EL OJITO (SI)",
+   "cote": null,
+   "coteRef": null,
+   "depart": "3",
+   "def": "",
+   "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261111-r9c6p3-png-1",
+   "dernierPassage": "2p8p7p6p8p",
+   "gains": 43430,
+   "musique": "2p8p7p6p8p",
+   "place": "05"
   },
   {
    "num": 6,
@@ -153,7 +153,7 @@
    "dernierPassage": "3p6p5p6p8p",
    "gains": 29274,
    "musique": "3p6p5p6p8p",
-   "place": null
+   "place": "06"
   },
   {
    "num": 7,
@@ -176,9 +176,18 @@
    "dernierPassage": "1p6p5p3p3p",
    "gains": 7481,
    "musique": "1p6p5p3p3p",
-   "place": null
+   "place": "07"
   }
  ],
- "arrivee": [],
- "collecteLe": "2026-11-11T10:46:42.409Z"
+ "arrivee": [
+  2,
+  1,
+  4,
+  5,
+  3,
+  6,
+  7
+ ],
+ "collecteLe": "2026-11-11T20:33:54.242Z",
+ "collecteApresCourse": true
 }
