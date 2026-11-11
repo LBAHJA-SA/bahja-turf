@@ -327,7 +327,12 @@ export default function Probability() {
               if (String(cc.reunion) === rn && String(cc.code) === cn) pays = cc.pays || re.pays
             }
           }
-          const essais = [...new Set([pays, 'FR', 'MA', 'BE', 'GB', 'CH', 'IT', 'ES'].filter(Boolean))]
+          /* ⚠ le SUFFIXE du fichier fiche est le pays, mais écrit de plusieurs
+             façons : FR · FRANCE · MA · MAROC… (le collecteur suit la source,
+             et casacourses étiquette parfois la réunion française « MA »).
+             On tente le pays du programme, puis les écritures françaises —
+             le Quinté est toujours en France (§10). */
+          const essais = [...new Set([pays, 'FR', 'FRANCE', 'MA', 'MAROC', 'BE', 'GB', 'CH'].filter(Boolean))]
           for (const p of essais) {
             const j = await lireJson(`/data/reu/${cle}_${p}.json`)
             const ps = j && (j.participants || j.runners)
