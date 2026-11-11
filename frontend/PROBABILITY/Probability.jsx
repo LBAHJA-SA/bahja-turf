@@ -54,6 +54,33 @@ async function lireJson(url) {
   }
 }
 
+/* Les meilleures combinaisons d'une taille donnée, classées par la SOMME des
+ * taux mesurés de leurs cases. Ce n'est pas une probabilité conjointe : les
+ * chevaux d'une même course ne sont pas indépendants (3 places de podium, 5 de
+ * Quinté). C'est un ordre de force, et la page le dit. */
+function meilleuresCombinaisons(pool, taille, cle, limite) {
+  const n = pool.length
+  const out = []
+  if (n < taille) return out
+  const cur = []
+  const marcher = (dep) => {
+    if (cur.length === taille) {
+      let s = 0
+      for (const p of cur) s += (p.c && p.c[cle]) || 0
+      out.push({ items: cur.slice(), score: s })
+      return
+    }
+    for (let i = dep; i <= n - (taille - cur.length); i++) {
+      cur.push(pool[i])
+      marcher(i + 1)
+      cur.pop()
+    }
+  }
+  marcher(0)
+  out.sort((a, b) => b.score - a.score || a.items[0].slot - b.items[0].slot)
+  return out.slice(0, limite)
+}
+
 function Box({ n, title, sub, extra, children, className = '' }) {
   return (
     <section className={`dna-box ${className}`}>
@@ -74,6 +101,12 @@ export default function Probability() {
   const [archive, setArchive] = useState([])
   const [pret, setPret] = useState(false)
   const [jockeys, setJockeys] = useState({})
+  const [partants, setPartants] = useState([])
+  const [disciplineFilter, setDisciplineFilter] = useState('Tout')
+  const [courseLimit, setCourseLimit] = useState(35)
+
+  /* ── Choix du nombre de courses à afficher ──────────────────────── */
+  const courseLimitChoices = [35, 50, 100, -1]
 
   const rafraichir = useCallback(async () => {
     setPret(false)
@@ -100,19 +133,34 @@ export default function Probability() {
       const sp = g.slotParNum || {}
       const slots = a.arrivee.slice(0, 5).map((n) => sp[n])
       if (slots.some((s) => !Number.isFinite(s))) continue
-      out.push({ date: a.date, max: g.max, slots })
+      out.push({
+        date: a.date,
+        max: g.max,
+        slots,
+        discipline: a.discipline || 'Tout',
+      })
     }
     return out.sort((x, y) => (x.date < y.date ? -1 : 1))
   }, [archive])
 
-  const N = base.length
+  /* ── filtre par discipline ────────────────────────────────────────── */
+  const disciplineFilterChoices = ['Tout', 'Plat', 'Attelé', 'Monté', 'Haies', 'Trot']
+  const filteredBase = useMemo(() => {
+    let res = base
+    if (disciplineFilter !== 'Tout') res = res.filter((c) => c.discipline === disciplineFilter)
+    // Limite le nombre de courses affichées (35, 50, 100 ou -1 = Tout)
+    if (courseLimit >= 0 && res.length > courseLimit) res = res.slice(-courseLimit)
+    return res
+  }, [base, disciplineFilter, courseLimit])
+
+  const N = filteredBase.length
 
   /* ── ① chaque case : présence, top 5, podium, victoire ──────────────── */
   const parCase = useMemo(() => {
     const rows = []
     for (let k = 1; k <= 20; k++) {
       let n = 0, top5 = 0, pod = 0, win = 0
-      for (const c of base) {
+      for (const c of filteredBase) {
         if (c.max < k) continue
         n++
         if (c.slots.includes(k)) top5++
@@ -128,12 +176,12 @@ export default function Probability() {
       })
     }
     return rows
-  }, [base])
+  }, [filteredBase])
 
   /* ── zones : part du Quinté, du podium et du vainqueur ──────────────── */
   const parZone = useMemo(() => ZONES.map((z) => {
     let cases = 0, vue = 0, top5 = 0, pod = 0, win = 0
-    for (const c of base) {
+    for (const c of filteredBase) {
       for (let k = z.min; k <= z.max; k++) if (c.max >= k) cases++
       for (const s of c.slots) if (s >= z.min && s <= z.max) top5++
       for (const s of c.slots.slice(0, 3)) if (s >= z.min && s <= z.max) pod++
@@ -148,13 +196,13 @@ export default function Probability() {
       pw: N ? win / N : null,
       taux: cases ? top5 / cases : null,
     }
-  }), [base, N])
+  }), [filteredBase, N])
 
   /* ── le filet : que couvrent les k premières cases ? ────────────────── */
   const filet = useMemo(() => {
     const out = {}
     for (const k of [5, 6, 7, 8, 10, 12, 14]) {
-      const cs = base.filter((c) => c.max >= k)
+      const cs = filteredBase.filter((c) => c.max >= k)
       if (!cs.length) { out[k] = null; continue }
       const n = cs.length
       out[k] = {
@@ -165,7 +213,7 @@ export default function Probability() {
       }
     }
     return out
-  }, [base])
+  }, [filteredBase])
 
   /* ── ④ matrice : P(colonne au top 5 | ligne au top 5) ──────────────── */
   const matrice = useMemo(() => {
@@ -176,7 +224,7 @@ export default function Probability() {
       for (let j = 1; j <= 20; j++) {
         if (i === j) { ligne.push(null); continue }
         let nI = 0, nBoth = 0
-        for (const c of base) {
+        for (const c of filteredBase) {
           if (c.max < i || c.max < j) continue
           const ai = c.slots.includes(i)
           if (!ai) continue
@@ -190,12 +238,12 @@ export default function Probability() {
       cells.push(ligne)
     }
     return { cells, maxi: maxi || 1 }
-  }, [base])
+  }, [filteredBase])
 
   /* ── ⑤ les combinaisons de Quinté réellement sorties ───────────────── */
   const combos = useMemo(() => {
     const m = new Map()
-    for (const c of base) {
+    for (const c of filteredBase) {
       const k = [...c.slots].sort((a, b) => a - b).join(' · ')
       m.set(k, (m.get(k) || 0) + 1)
     }
@@ -203,7 +251,7 @@ export default function Probability() {
       .map(([k, v]) => ({ k, v }))
       .sort((a, b) => b.v - a.v || a.k.localeCompare(b.k, 'fr', { numeric: true }))
     return { tous, distinctes: tous.length }
-  }, [base])
+  }, [filteredBase])
 
   /* ── ⑦ le ticket le plus récent + son réalisme mesuré ──────────────── */
   const ticketRec = useMemo(() => {
@@ -228,11 +276,20 @@ export default function Probability() {
     })).filter((l) => Number.isFinite(l.slot))
     if (!lignes.length) return null
     const set = new Set(lignes.map((l) => l.slot))
-    const pod = N ? base.filter((c) => c.slots.slice(0, 3).every((s) => set.has(s))).length / N : null
-    const qui = N ? base.filter((c) => c.slots.every((s) => set.has(s))).length / N : null
-    const win = N ? base.filter((c) => set.has(c.slots[0])).length / N : null
-    return { rec: ticketRec, lignes, pod, qui, win, cle: cleDe(ticketRec) }
-  }, [ticketRec, base, N])
+    const pod = N ? filteredBase.filter((c) => c.slots.slice(0, 3).every((s) => set.has(s))).length / N : null
+    const qui = N ? filteredBase.filter((c) => c.slots.every((s) => set.has(s))).length / N : null
+    const win = N ? filteredBase.filter((c) => set.has(c.slots[0])).length / N : null
+    /* tout le peloton cité par la presse — chaque case P reçoit son cheval,
+       pas seulement les 8 du ticket. Le nom vient des scores du moteur. */
+    const pelotonBase = Object.entries(g.slotParNum || {})
+      .map(([num, slot]) => ({ num: Number(num), nom: noms[Number(num)] || '', slot: Number(slot) }))
+      .filter((h) => Number.isFinite(h.slot) && h.slot <= g.max)
+      .sort((a, b) => a.slot - b.slot || a.num - b.num)
+    return {
+      rec: ticketRec, lignes, pod, qui, win, cle: cleDe(ticketRec),
+      sp: g.slotParNum || {}, max: g.max, pelotonBase,
+    }
+  }, [ticketRec, filteredBase, N])
 
   /* ── les jockeys / drivers, lus dans la fiche de la course ──────────── */
   useEffect(() => {
@@ -263,6 +320,20 @@ export default function Probability() {
         if (p.num != null && nom) out[Number(p.num)] = nom
       }
       setJockeys(out)
+      /* le peloton complet de la course, avec sa case — pool des combinaisons */
+      const sp = ticket.sp || {}
+      const max = ticket.max || 0
+      const pel = []
+      for (const p of fiche) {
+        const num = Number(p.num)
+        const slot = sp[num]
+        if (!Number.isFinite(slot) || slot > max) continue
+        const nom = String(p.cheval || p.nom || '').trim()
+        if (!nom) continue
+        pel.push({ num, nom, jockey: p.jockey || p.driver || '', slot })
+      }
+      pel.sort((a, b) => a.slot - b.slot || a.num - b.num)
+      setPartants(pel)
     }
     charger()
     return () => { vivant = false }
@@ -295,11 +366,53 @@ export default function Probability() {
   const pod11 = parCase.filter((r) => r.k >= 11).reduce((s, r) => s + r.pod, 0)
   const partPod11 = N ? pod11 / (3 * N) : null
   const coursesAvecP11 = useMemo(
-    () => (N ? base.filter((c) => c.slots.some((s) => s >= 11)).length / N : null),
-    [base, N]
+    () => (N ? filteredBase.filter((c) => c.slots.some((s) => s >= 11)).length / N : null),
+    [filteredBase, N]
   )
   const f8 = filet[8]
   const f12 = filet[12]
+  const maxP5 = Math.max(0.0001, ...parCase.map((r) => r.p5 || 0))
+
+  /* ── le peloton de la course du ticket : pool des combinaisons ──────── */
+  /* la base = TOUS les chevaux cités (16 ici), pas seulement les 8 du ticket ;
+     la fiche complète le nom et le jockey quand elle est disponible. */
+  const peloton = useMemo(() => {
+    const base = (ticket && ticket.pelotonBase) || []
+    const fiche = new Map(partants.map((p) => [p.num, p]))
+    if (!base.length) {
+      if (partants.length) return partants
+      if (!ticket) return []
+      return ticket.lignes.map((l) => ({
+        num: l.num, nom: l.nom, jockey: jockeys[l.num] || '', slot: l.slot,
+      }))
+    }
+    return base
+      .map((h) => {
+        const f = fiche.get(h.num)
+        return {
+          num: h.num,
+          slot: h.slot,
+          nom: (f && f.nom) || h.nom || '',
+          jockey: (f && f.jockey) || jockeys[h.num] || '',
+        }
+      })
+      .filter((h) => h.nom)
+  }, [partants, ticket, jockeys])
+
+  const analyse = useMemo(() => {
+    const pool = peloton.map((h) => ({ ...h, c: parCase[h.slot - 1] || null }))
+    if (!pool.length) return null
+    const gagne = pool
+      .filter((h) => h.c && h.c.pw != null)
+      .sort((a, b) => b.c.pw - a.c.pw || b.c.p5 - a.c.p5 || a.slot - b.slot)
+      .slice(0, 3)
+    return {
+      pool,
+      gagne,
+      trios: meilleuresCombinaisons(pool, 3, 'pp', 5),
+      quintes: meilleuresCombinaisons(pool, 5, 'p5', 3),
+    }
+  }, [peloton, parCase])
 
   const heat = (v) => {
     if (v == null) return 'transparent'
@@ -342,7 +455,27 @@ export default function Probability() {
           <div className="dna-title">
             <h1>DNA Probability</h1>
             <h2>P1 – P20</h2>
-            <div className="dna-ribbon">{N} courses réelles · Analyse du {jour(dateAnalyse)}</div>
+            <div className="dna-ribbon">{N} courses réelles · Analyse du {jour(dateAnalyse)} · {courseLimit >= 0 ? courseLimit + ' dernières' : 'toutes'}{disciplineFilter !== 'Tout' ? ' · ' + disciplineFilter : ''}</div>
+            <div style={{marginRight: 20, marginBottom: 10}}>
+              <label style={{marginRight: 10}}>Courses : </label>
+              <select value={courseLimit} onChange={(e) => setCourseLimit(Number(e.target.value))} style={{padding: '4px 8px', fontSize: '12px'}}>
+                <option value={35}>35</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+                <option value={-1}>Tout</option>
+              </select>
+            </div>
+            <div style={{marginRight: 20, marginBottom: 10}}>
+              <label>Discipline : </label>
+              <select value={disciplineFilter} onChange={(e) => setDisciplineFilter(e.target.value)} style={{padding: '4px 8px', fontSize: '12px'}}>
+                <option value="Tout">Tout</option>
+                <option value="Plat">Plat</option>
+                <option value="Attelé">Attelé</option>
+                <option value="Monté">Monté</option>
+                <option value="Haies">Haies</option>
+                <option value="Trot">Trot</option>
+              </select>
+            </div>
             <p className="dna-question">Qui prend les 3 ? Qui prend les 5 ?</p>
           </div>
 
@@ -352,6 +485,141 @@ export default function Probability() {
           </div>
         </header>
 
+        {/* ═══════════════════ COMMENCER ICI ═══════════════════ */}
+        <section className="dna-howto">
+          <div className="dna-howto-t">
+            <h3>Commencer ici — c’est quoi « P » ?</h3>
+            <p>
+              Avant la course, la presse cite les chevaux <b>dans un ordre</b>. Cet ordre est
+              rangé en <b>cases</b> numérotées <b>P1</b>, <b>P2</b> … <b>P20</b> — les cases du
+              carnet. <b>P1</b> = le cheval cité en premier, <b>P2</b> = le deuxième, et ainsi de
+              suite. <b>P est donc une place dans la grille, pas une cote et pas un numéro de
+              selle.</b> Chaque case reçoit ensuite une couleur — son groupe — et c’est cette
+              couleur qui décide combien de chevaux du groupe entrent dans le ticket.
+            </p>
+          </div>
+
+          <div className="dna-places" role="img" aria-label="les 20 cases P1 à P20 et leur taux d’arrivée dans les 5">
+            {parCase.map((r) => {
+              const horseInfo = peloton.find((h) => h.slot === r.k)
+              return (
+                <div className="dna-place" key={r.k} style={{ '--zc': r.zone.color }}
+                  title={`P${r.k}${horseInfo ? ' · ' + horseInfo.num + ' ' + horseInfo.nom : ''} · ${r.zone.nom} · vu ${r.n} fois · ${r.top5} arrivées dans les 5`}>
+                  <span className="dna-place-v">{pctRaw(r.p5, 0)}</span>
+                  <span className="dna-place-track">
+                    <b style={{ height: `${Math.round(((r.p5 || 0) / maxP5) * 100)}%` }} />
+                  </span>
+                  <span className="dna-place-lab">
+                    <b>{horseInfo ? horseInfo.num : 'P'}</b>
+                    <em>{horseInfo ? (horseInfo.nom || '—') : r.k}</em>
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+          <p className="dna-places-c">hauteur de la barre = <b>P(arriver dans les 5)</b> de la case, mesuré sur {N} courses</p>
+
+          <div className="dna-zones-b">
+            {parZone.map((z) => (
+              <div className="dna-zone-chip" key={z.key} style={{ '--zc': z.color }}>
+                <span className="dna-zone-h"><i />{z.label}</span>
+                <span className="dna-zone-p">P{z.min} – P{z.max}</span>
+                <span className="dna-zone-n">{z.nom}</span>
+                <span className="dna-zone-m">{pct(z.p5, 0)} des arrivants · {pct(z.pw, 0)} des vainqueurs</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ═══════════════════ LIGNE 0 — LE DUEL ET LES COMBINAISONS ═══════════════════ */}
+        <div className="dna-row0">
+
+          <Box n="A" title="Qui joue la gagne ?" className="dna-b0 dna-duel"
+            sub={peloton.length ? `les 3 chevaux de ${ticket ? ticket.rec.hippodrome || 'la course' : 'la course'} dont la case gagne le plus souvent` : 'la fiche des partants n’est pas disponible'}>
+            {analyse && analyse.gagne.length ? (
+              <ol className="dna-duel-list">
+                {analyse.gagne.map((h, i) => (
+                  <li key={h.num}>
+                    <span className="dna-duel-r">{i + 1}</span>
+                    <span className="dna-duel-num">{h.num}</span>
+                    <span className="dna-duel-txt">
+                      <b>{h.nom}</b>
+                      <em>{h.jockey || '—'}</em>
+                    </span>
+                    <span className="dna-duel-p">
+                      <b>{pct(h.c.pw, 1)}</b>
+                      <em>{h.num} · {h.nom} · P{h.slot} · {pct(h.c.p5, 0)} top 5</em>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            ) : <p className="dna-vide">—</p>}
+            <p className="dna-duel-n">
+              Le pourcentage est celui de la <b>case</b> du cheval : sur {N} courses, les chevaux
+              de cette case ont gagné ce nombre de fois. Deux chevaux qui partagent la même case
+              ont donc le même chiffre — c’est une mesure, pas un pronostic.
+            </p>
+          </Box>
+
+          <Box n="B" title="Les 5 trios les plus forts" className="dna-b0 dna-cb"
+            sub="3 chevaux, les meilleures cases du peloton">
+            {analyse && analyse.trios.length ? (
+              <ul className="dna-cb-list">
+                {analyse.trios.map((t, i) => (
+                  <li key={t.items.map((x) => x.num).join('-')}>
+                    <span className="dna-cb-r">{i + 1}</span>
+                    <span className="dna-cb-set">
+                      {t.items.map((h) => (
+                        <span className="dna-cb-chip" key={h.num} title={`${h.nom} — ${h.jockey || '—'}`}>
+                          <b>{h.num}</b>{h.nom}
+                        </span>
+                      ))}
+                    </span>
+                    <span className="dna-cb-s">
+                      <b>{nf(t.score, 2)}<i>/ 3</i></b>
+                      <em>trio</em>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : <p className="dna-vide">—</p>}
+            <p className="dna-cb-n">
+              Le score <b>additionne les taux de podium des 3 cases</b> ({pct(1, 0)} par case au
+              maximum). Ce n’est <b>pas</b> une probabilité conjointe : sur une course il n’y a que
+              <b> 3 places</b> de podium, et les chevaux ne sont pas indépendants.
+            </p>
+          </Box>
+
+          <Box n="C" title="Les 3 quintés les plus forts" className="dna-b0 dna-cb"
+            sub="5 chevaux, les meilleures cases du peloton">
+            {analyse && analyse.quintes.length ? (
+              <ul className="dna-cb-list dna-cb-list5">
+                {analyse.quintes.map((q, i) => (
+                  <li key={q.items.map((x) => x.num).join('-')}>
+                    <span className="dna-cb-r">{i + 1}</span>
+                    <span className="dna-cb-set">
+                      {q.items.map((h) => (
+                        <span className="dna-cb-chip" key={h.num} title={`${h.nom} — ${h.jockey || '—'}`}>
+                          <b>{h.num}</b>{h.nom}
+                        </span>
+                      ))}
+                    </span>
+                    <span className="dna-cb-s">
+                      <b>{nf(q.score, 2)}<i>/ 5</i></b>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : <p className="dna-vide">—</p>}
+            <p className="dna-cb-n">
+              Même lecture avec <b>P(arriver dans les 5)</b>. Un Quinté demande les <b>5 bons
+              chevaux</b> : à 8 chevaux la mesure plafonne autour de 12 % des courses — la
+              largeur du ticket compte plus que l’ordre.
+            </p>
+          </Box>
+
+        </div>
+
         {/* ═══════════════════ LIGNE 1 ═══════════════════ */}
         <div className="dna-row1">
 
@@ -359,31 +627,48 @@ export default function Probability() {
             <table className="dna-t dna-t5">
               <thead>
                 <tr>
-                  <th>Case</th>
+                  <th>Cheval</th>
                   <th>n / {N}</th>
                   <th className="bar-col" aria-label="barre" />
                   <th className="r">P(top5 | N)</th>
                 </tr>
               </thead>
               <tbody>
-                {top5Rows.map((r) => (
-                  <tr key={r.k}>
-                    <td className="case">
-                      <i className="dna-dot" style={{ background: r.zone.color }} />P{r.k}
-                    </td>
-                    <td className="num">{r.top5} / {r.n}</td>
-                    <td className="bar-col">
-                      <span className="dna-bar">
-                        <b style={{ width: `${Math.round((r.p5 || 0) * 100)}%`, background: r.zone.color }} />
-                      </span>
-                    </td>
-                    <td className="r fort">{pct(r.p5)}</td>
-                  </tr>
-                ))}
+                {top5Rows.map((r) => {
+                  const caseInfo = parCase[r.k - 1]
+                  const horseInfo = peloton.find(h => h.slot === r.k)
+                  return (
+                    <tr key={r.k}>
+                      <td className="case">
+                        {horseInfo ? (
+                          <div>
+                            <span className="dna-duel-num">{horseInfo.num}</span>
+                            <span className="dna-duel-txt">
+                              <b>{horseInfo.nom || '—'}</b>
+                              <em>{horseInfo.jockey || '—'}</em>
+                            </span>
+                          </div>
+                        ) : (
+                          <span>
+                            <i className="dna-dot" style={{ background: r.zone.color }} />P{r.k}
+                          </span>
+                        )}
+                      </td>
+                      <td className="num">{r.top5} / {r.n}</td>
+                      <td className="bar-col">
+                        <span className="dna-bar">
+                          <b style={{ width: `${Math.round((r.p5 || 0) * 100)}%`, background: r.zone.color }} />
+                        </span>
+                      </td>
+                      <td className="r fort">{pct(r.p5)}</td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
             <p className="dna-legende">
-              Une case = une colonne du carnet. n = courses où la case existait.
+              La case correspond au numéro de la case du carnet. n = courses où la case existait.
+              Les chevaux sont ceux du peloton de la course du ticket.
             </p>
           </Box>
 
@@ -391,7 +676,7 @@ export default function Probability() {
             <table className="dna-t dna-t35">
               <thead>
                 <tr>
-                  <th>Cases gardées</th>
+                  <th>Cheval(s)</th>
                   <th className="r">Podium<br /><span>(3)</span></th>
                   <th className="r">Quinté<br /><span>(5)</span></th>
                   <th className="r">≥ 4<br /><span>sur 5</span></th>
@@ -401,9 +686,16 @@ export default function Probability() {
                 {[5, 6, 7].map((k) => {
                   const f = filet[k]
                   if (!f) return null
+                  // Build list of horses for the first k cases
+                  const chevauxK = peloton.filter((h) => h.slot >= 1 && h.slot <= k).sort((a, b) => a.slot - b.slot)
+                  const chevauxText = chevauxK.length
+                    ? chevauxK.map((h) => `${h.num} · ${h.nom}`).join(' · ')
+                    : '—'
                   return (
                     <tr key={k} className={k === 7 ? 'on' : ''}>
-                      <td className="gros">{k}</td>
+                      <td className="gros">
+                        {chevauxText}
+                      </td>
                       <td className="r">{pct(f.pod)}</td>
                       <td className="r">{pct(f.qui)}</td>
                       <td className="r">{pct(f.q4)}</td>
@@ -432,15 +724,21 @@ export default function Probability() {
                 <tr><th>Case</th><th className="r">Victoires</th></tr>
               </thead>
               <tbody>
-                {winRows.map((r, i) => (
-                  <tr key={r.k}>
-                    <td className="case">
-                      {i === 0 ? <span className="dna-crown" title="la case qui gagne le plus">👑</span> : <span className="dna-crown-vide" />}
-                      <i className="dna-dot" style={{ background: r.zone.color }} />P{r.k}
-                    </td>
-                    <td className="r gros">{r.win}</td>
-                  </tr>
-                ))}
+                {winRows.map((r, i) => {
+                  const h = peloton.find((x) => x.slot === r.k)
+                  return (
+                    <tr key={r.k}>
+                      <td className="case">
+                        {i === 0 ? <span className="dna-crown" title="la case qui gagne le plus">👑</span> : <span className="dna-crown-vide" />}
+                        <i className="dna-dot" style={{ background: r.zone.color }} />
+                        {h ? (
+                          <span className="dna-case-lab"><b>{h.num}</b> {h.nom || '—'} <em>P{r.k}</em></span>
+                        ) : `P${r.k}`}
+                      </td>
+                      <td className="r gros">{r.win}</td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
             <p className="dna-legende">
@@ -457,13 +755,19 @@ export default function Probability() {
             <ul>
               <li>
                 <span className="ok">✔</span>
-                <span><b>P1</b> reste la référence avec <b>{pct(p1.p5)}</b> d’accès au Top 5.</span>
+                <span>
+                  <b>{peloton.find((h) => h.slot === 1) ? `${peloton.find((h) => h.slot === 1).num} · ${peloton.find((h) => h.slot === 1).nom}` : 'la case P1'}</b>
+                  {' '}reste la référence avec <b>{pct(p1.p5)}</b> d’accès au Top 5.
+                </span>
               </li>
               {solides.length ? (
                 <li>
                   <span className="ok">✔</span>
                   <span>
-                    {solides.slice(0, 5).map((r) => `P${r.k}`).join(', ')} sont très présentes
+                    {solides.slice(0, 5).map((r) => {
+                      const h = peloton.find((x) => x.slot === r.k)
+                      return h ? `${h.num} ${h.nom || ''}`.trim() : `P${r.k}`
+                    }).join(', ')} sont très présentes
                     ({pct(solides[solides.length - 1].p5)} – {pct(solides[0].p5)}).
                   </span>
                 </li>
@@ -586,9 +890,24 @@ export default function Probability() {
                   {[8, 10, 12].map((k) => {
                     const f = filet[k]
                     if (!f) return null
+                    const chevauxK = peloton
+                      .filter((h) => h.slot >= 1 && h.slot <= k)
+                      .sort((a, b) => a.slot - b.slot)
                     return (
                       <tr key={k}>
-                        <td className="gros">{k}</td>
+                        <td className="gros">
+                          <b className="dna-kc">{k}</b>
+                          {chevauxK.length ? (
+                            <span className="dna-kc-list">
+                              {chevauxK.map((h) => (
+                                <span key={h.num} className="dna-kc-h" title={`${h.num} · ${h.nom}${h.jockey ? ' · ' + h.jockey : ''} — case P${h.slot}`}>
+                                  <b>{h.num}</b>
+                                  <em>P{h.slot}</em>
+                                </span>
+                              ))}
+                            </span>
+                          ) : null}
+                        </td>
                         <td className="r">{pct(f.pod)}</td>
                         <td className="r">{pct(f.qui)}</td>
                         <td className="r">{pct(f.q4)}</td>
@@ -625,7 +944,9 @@ export default function Probability() {
                           {l.nom || <i className="dim">nom non publié</i>}
                           <em>{jockeys[l.num] || '—'}</em>
                         </span>
-                        <span className="case" style={{ color: zoneOf(l.slot).color }}>P{l.slot}</span>
+                        <span className="case" style={{ color: zoneOf(l.slot).color }}>
+                          P{l.slot}
+                        </span>
                         <span className="pc">{c ? pct(c.p5) : '—'}</span>
                       </div>
                     )
