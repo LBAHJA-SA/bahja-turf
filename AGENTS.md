@@ -8379,3 +8379,105 @@ node tools\verif-stats.mjs             → nb = examinées − écartées = clos
 ⚠ **Ne pas rejouer ce siège sur les courses antérieures au 08/11** : leur ticket
 est un constat. Le siège s'applique **à partir du 08/11/2026**.
 
+---
+
+### 11.56 ⭐ LE PMU DIT QUELLE COURSE EST LE QUINTÉ — le devinement est supprimé (11/11/2026, appliqué)
+
+> Signalement de l'utilisateur : **« التذكرة المسجلة خاطئة »** — la ticket du
+> 10/11 montrait **R2 Paris-Vincennes C3 (Prix de Villeurbanne, 2850 m,
+> attelé)** alors que le Quinté du 10/11 était **R1 Fontainebleau C4 (Prix
+> Roland Fougedoire, 1200 m, plat)** — **la première réunion, pas la seconde**.
+
+#### ① La cause — deviner la course, c'est la perdre
+
+`chercherQuinteCC()` (src/lib/quinte.js) choisit la course du Quinté en
+**deux temps** :
+
+| étape | comment | quand ça marche |
+|---|---|---|
+| ① nominal | `available_bet_types` contient `sorec_quinte` | **le jour même** |
+| ② repli | deviner : couverture de la Synthèse, puis la plus grosse dotation | les jours **passés** |
+
+⚠ **casacourses ne garde les paris que LE JOUR MÊME.** Le soir — et pour toute
+course passée — `available_bet_types` est **VIDE** : on tombe toujours sur le
+repli. Et le repli est **faux**, parce que :
+
+```
+la Synthèse cite 16 numéros  ·  TOUTE course de 16 partants porte les n° 1..16
+→ la couverture vaut 1 pour la MAUVAISE course comme pour la bonne
+→ le départage par la dotation ne restaure rien
+```
+
+#### ② La mesure — 3 dates fausses sur 37
+
+`tools/reparer-archive.mjs --check` interroge le PMU (la course qui porte le
+pari `QUINTE_PLUS`) et compare à l'archive :
+
+| date | archive (FAUX) | PMU (le Quinté) |
+|---|---|---|
+| **10/10** | R1 C3 Caen 2200 m 14 p | **R1 C4 Caen 2450 m 18 p** |
+| **11/05** | R1 C3 Vincennes 2175 m 16 p | **R1 C1 Vincennes 2100 m 18 p** |
+| **11/10** | R2 C3 Vincennes 2850 m 16 p | **R1 C4 Fontainebleau 1200 m 16 p** |
+
+Les 34 autres dates sont conformes. **Une arrivée fausse fausse tout** :
+le ticket, le x/5, les stats, la bassmat du mois.
+
+#### ③ Le correctif — le PMU est l'autorité
+
+`quintePMU(date)` (src/lib/quinte.js, copie `backend/QUINTE/quinte.js` à
+l'octet près) :
+
+```
+GET {PMU}/rest/client/61/programme/{JJMMAAAA}
+  → la course dont paris[] contient QUINTE_PLUS  =  LE Quinté
+```
+
+- **`courseDuPMU()`** la retrouve chez casacourses (`pmu_reunion`/`pmu_course`,
+  sinon `reunion_code`/`code` ; la réunion `pmu-*` gagne sur la `sorec-*`) ;
+- elle est appelée **AVANT** tout devinement, et sa réponse **prime** ;
+- le PMU garde le programme **des cours passées** → le repli n'est plus jamais
+  nécessaire pour l'IDENTITÉ de la course ;
+- ⚠ le PMU **n'a pas de CORS** (§23.1) : le navigateur passe par le relais
+  **`/api/pmu`** (api/pmu.js + le middleware de dev + le rewrite vercel.json),
+  le job (node) appelle l'adresse **directement** (`typeof window`).
+
+#### ④ La réparation de l'archive — `tools/reparer-archive.mjs`
+
+```
+node tools\reparer-archive.mjs --check    audit seul, n'écrit rien
+node tools\reparer-archive.mjs            corrige et réécrit data + public/data
+```
+
+Pour chaque date fausse : la course du PMU → les partants (casacourses, sinon
+le PMU) → l'arrivée (casacourses, sinon `ordreArrivee` du PMU) → **le ticket
+REFAIT par le moteur** (l'ancien appartenait à une autre course : il ne
+comptait plus) → la ligne d'archive réécrite avec `corrigeLe` et
+`courseCorrigee: true`.
+
+| date | avant | après |
+|---|---|---|
+| 10/10 | R1 C3 2200 m — arrivée 9-10-4-3-2 | **R1 C4 2450 m** · ticket `4 2 6 7 9 10 15 18` · **4/5** |
+| 11/05 | R1 C3 2175 m — arrivée 9-5-4-11-8 | **R1 C1 2100 m 18 p** · ticket `9 1 3 4 5 7 15 16` · **4/5** |
+| 11/10 | R2 C3 2850 m attelé — arrivée 3-9-12-11-7 | **R1 C4 1200 m plat** · ticket `5 3 4 7 9 10 11 14 2` (**9 chevaux** : le siège Plat s'y ajoute, §11.55) · arrivée **4-9-15-5-13** → **3/5** |
+
+> ⚠ Le 11/05, casacourses n'a **plus rien** pour cette date (`meetings: 0`) :
+> c'est le PMU qui donne les partants (18) et l'arrivée (`ordreArrivee`).
+> ⚠ `ordreArrivee` a **deux formes** : `[[9],[6],…]` (brut) ou `{value:[9],Count:1}`
+> (certaines réponses). On lit les deux.
+
+#### ⑤ Deux effets de bord corrigés
+
+| quoi | avant | après |
+|---|---|---|
+| le **siège Plat** dans l'affichage | noyé dans le bloc trié | **à la fin**, avec son badge — même sur une course clôturée (§11.55) |
+| le texte « MA MÉTHODE » | « les quotas sont 3-2-1-1-1 (§11.46) … le siège de G5 passe à G2 » — **contradictoire** (§11.46 est abrogé par §11.49) | « 3-2-1-1-1 (§11.49) : **constitutionnels** — ils ne changent plus. En Plat, un siège s'ajoute après coup (§11.55) » |
+
+#### ⑥ La règle qui en sort
+
+> **Ne JAMAIS deviner quelle course est le Quinté. Le demander.**
+> Le PMU garde le programme : `QUINTE_PLUS` sur une course = le Quinté.
+> Un repli « par la couverture de la Synthèse » est un devinement : il a
+> coûté 3 tickets, 3 arrivées et 3 x/5 sur 37 courses — **sans une seule
+> erreur visible** (la page affichait fièrement la mauvaise course).
+
+

@@ -2121,7 +2121,15 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
      *   `ticketAffiche` retire les numéros absents de la grille du jour et,
      *   la course encore ouverte, remplit la place dans le même groupe
      *   (quota §11.19). Course courue : constat, sans invention (§7). */
-    const ordonne = ordonnerTicket(ticketAffiche(base, rempli, !courseFinie), grille)
+    const affiche = ticketAffiche(base, rempli, !courseFinie)
+    /* ⭐ 11/11/2026 — le SIÈGE PLAT reste À LA FIN, même sur une course
+     *   DÉJÀ COURUE : c'est le 9ᵉ cheval, hors quota. Il ne se mélange pas
+     *   au bloc sans ordre (sinon on ne le distingue plus d'un cheval du
+     *   quota). On le retire donc avant de trier, puis on le repose. */
+    const s = siegePlat(grille, discipline)
+    const sansSiege = s ? affiche.filter((n) => n !== s.num) : affiche
+    const ordonne = ordonnerTicket(sansSiege, grille)
+    if (s && affiche.includes(s.num)) return [...ordonne, s.num]
     /* le 9ᵉ cheval va À LA FIN : il ne prend la place de personne, et il reste
      * visible comme le siège Plat — pas noyé dans le bloc sans ordre. */
     return siege ? avecSiegePlat(ordonne, grille, discipline) : ordonne
@@ -2393,9 +2401,10 @@ const LIGNE_CARNET = (cellule, quotaGroupe) => (cellule ? (
           <div style={{ fontSize: 12, color: SK.texte, margin: '12px 0 8px', lineHeight: 1.6, background: SK.alt, border: '1px solid ' + SK.bord, borderLeft: '4px solid ' + SK.accent, borderRadius: SK.box.borderRadius, padding: '10px 12px' }}>
             MA MÉTHODE — cinq groupes, un quota chacun. Le moteur remplit les quotas :
             le ticket est fixé, il ne se modifie pas à la main.
-            Depuis le 29/10/2026 les quotas sont <b>{QUOTAS_TXT}</b> (§11.46) : le ticket de
-            <b>{NB_TICKET} chevaux</b> ne bouge pas, mais le siège de G5 passe à G2 — la
-            bassmat d’octobre montre que ce siège ne tenait rien.
+            Depuis le 29/10/2026 les quotas sont <b>{QUOTAS_TXT}</b> (§11.49) :
+            <b>constitutionnels</b> — ils ne changent plus. Le ticket fait
+            <b>{NB_TICKET} chevaux</b> ; en Plat seulement, un <b>siège</b> s’y ajoute
+            après coup (le 4ᵉ cité par la presse, hors quota — §11.55).
             Les boîtes se lisent <b>en travers</b> : ligne du haut puis ligne du bas.{carnet(detail) && <> Les cases sont numérotées <b>P1, P2… en colonnes</b> : la ligne du haut porte la parité du P1.</>}
             <br />
             {Object.keys(cotes).length >= 4 ? (

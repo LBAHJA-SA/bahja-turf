@@ -613,12 +613,98 @@ export async function redirectionQuinteEQ(date) {
   return null
 }
 
+/* ⚠ 11/11/2026 — LE PMU, AUTORITÉ SUR « QUELLE COURSE EST LE QUINTÉ ».
+ * ─────────────────────────────────────────────────────────────
+ * Le PMU garde le programme même pour les courses passées, et chaque course
+ * porte la liste de ses paris : celle qui a le pari `QUINTE_PLUS` EST le
+ * Quinté. C'est une lecture, pas un devinement.
+ *
+ * ⚠ le PMU n'a AUCUN en-tête CORS (§23.1) : le navigateur passe par le
+ *   relais `/api/pmu` (api/pmu.js + le middleware de dev), le job (node)
+ *   appelle l'adresse directement. */
+const PMU_BASE = typeof window === 'undefined'
+  ? 'https://online.turfinfo.api.pmu.fr'
+  : '/api/pmu'
+
+/** La course Quinté d'une date d'après le PMU — null si le PMU ne répond pas. */
+export async function quintePMU(date) {
+  const d = String(date || '')
+  const jjmm = `${d.slice(8, 10)}${d.slice(5, 7)}${d.slice(0, 4)}`
+  if (!/^\d{8}$/.test(jjmm)) return null
+  try {
+    const j = await getJSON(`${PMU_BASE}/rest/client/61/programme/${jjmm}`)
+    const reus = (j && j.programme && j.programme.reunions) || []
+    for (const re of reus) {
+      /* ⚠ on ne garde que la FRANCE : le programme PMU liste aussi des
+       * réunions étrangères (Chili, États-Unis…) qui peuvent porter un
+       * Quinté local. Le Quinté qu'on joue est français (§10). */
+      const pays = (re.pays && (re.pays.code || re.pays.libelle)) || ''
+      if (!/^FR/i.test(String(pays))) continue
+      for (const c of re.courses || []) {
+        const paris = (c.paris || []).map((p) => p.codePari || p.typePari || '')
+        if (paris.includes('QUINTE_PLUS') || paris.includes('QUINTE')) {
+          return {
+            r: Number(re.numOfficiel) || 0,
+            c: Number(c.numOrdre) || 0,
+            hippo: (re.hippodrome && (re.hippodrome.libelleCourt || re.hippodrome.libelle)) || '',
+            nom: c.libelle || '',
+            distance: Number(c.distance) || null,
+            discipline: c.discipline || '',
+            partants: Number(c.nombreDeclaresPartants) || 0,
+          }
+        }
+      }
+    }
+  } catch (e) { /* PMU muet : on garde l'ancien chemin */ }
+  return null
+}
+
+/** Retrouve chez casacourses la course que le PMU désigne (réunion + n°).
+ *  ⚠ deux réunions portent parfois le même R (la `pmu-` et la `sorec-`) :
+ *    on préfère celle du PMU. */
+export function courseDuPMU(ms, pmu) {
+  if (!pmu || !pmu.r || !pmu.c) return null
+  let best = null
+  for (const m of ms || []) {
+    for (const r of m.races || []) {
+      const parPMU = Number(r.pmu_reunion) === pmu.r && Number(r.pmu_course) === pmu.c
+      const parCode = String(m.reunion_code || '') === 'R' + pmu.r && String(r.code || '') === 'C' + pmu.c
+      if (!parPMU && !parCode) continue
+      const prefere = String(m.id || '').startsWith('pmu-')
+      if (!best || (prefere && !best.prefere)) best = { m, r, prefere }
+    }
+  }
+  return best
+}
+
 /** La course Quinté d'une date (available_bet_types contient sorec_quinte). */
 /** La course Quinté FRANÇAISE d'une date (available_bet_types contient sorec_quinte).
  *  ⚠ le Maroc sort aussi avec sorec_quinte : on le jette sur meeting.country. */
 export async function chercherQuinteCC(date) {
   const ms = await fetchProgrammeCC(date)
   const synthe = new Set(SYNTHESE_A_ATTENDRE)
+
+  /* ── 0. ⭐ LE PMU DIT QUELLE COURSE EST LE QUINTÉ (11/11/2026) ─────────
+   * On le demande AVANT tout devinement, et sa réponse prime.
+   *
+   * POURQUOI (mesuré sur les 37 dates archivées) : casacourses ne garde les
+   * paris que LE JOUR MÊME. Le soir — et pour toute course passée —
+   * `available_bet_types` est VIDE, et l'ancien repli (deviner la course par
+   * la COUVERTURE de la Synthèse de presse) choisissait parfois la MAUVAISE
+   * course :  10/10 (Caen R1 C4 2450 m au lieu de C3) · 11/05 (Vincennes R1 C1
+   * 2100 m au lieu de C3) · 11/10 (Fontainebleau R1 C4 1200 m au lieu de
+   * Vincennes R2 C3). La Synthèse cite 16 numéros et TOUTE course de 16
+   * partants porte les numéros 1..16 : la couverture vaut donc 1 pour la
+   * mauvaise course comme pour la bonne — le départage par la dotation ne
+   * restaure rien.
+   *
+   * Le PMU, lui, garde le programme : la course qui porte le pari QUINTE_PLUS
+   * EST le Quinté. Aucune couverture, aucune dotation, aucun devinement. */
+  const pmu = await quintePMU(date)
+  if (pmu) {
+    const cand = courseDuPMU(ms, pmu)
+    if (cand) return { m: cand.m, r: cand.r, ratio: 1 }
+  }
 
   // le Maroc sort aussi avec sorec_quinte : on le jette sur meeting.country
   // ⚠ la page Quinté ne joue QUE la France (AGENTS.md §10) : exit l'Italie,
@@ -2098,7 +2184,10 @@ export function computeStats(records) {
       if (rec.date) trioCombos[key].dates.push(rec.date)
     }
     /* ⭐ Quinté : la combinaison des 5 premiers (positions P), dans l'ordre
-     *   d'arrivée (1er, 2e, 3e, 4e, 5e). La clé est l'ordre d'arrivée. */
+     *   d'arrivée (1er, 2e, 3e, 4e, 5e). La clé est l'ordre d'arrivée : deux
+     *   courses dont les mêmes positions finissent dans un ordre différent
+     *   sont deux combinaisons distinctes (sinon on afficherait la mauvaise
+     *   arrivée pour l'une d'elles). */
     const quinte = pl.slice(0, 5)
     if (quinte.length === 5) {
       const keyQ = quinte.join('-')
@@ -2139,7 +2228,7 @@ export function computeStats(records) {
       place: r,
       // ── champs historiques — le moteur les lit : NE PAS CHANGER ──────────
       n: tot,
-      p: tot ? t.map((v) => +(v / tot * 100).toFixed(0)) : [0, 0, 0, 0, 0],
+      p: tot && Array.isArray(t) ? t.map((v) => +(v / tot * 100).toFixed(0)) : [0, 0, 0, 0, 0],
       // le podium : 1er + 2e + 3e réunis — CONDITIONNEL (base n_top5).
       top3: tot ? +((t[0] + t[1] + t[2]) / tot * 100).toFixed(0) : 0,
       // GLOBAL (base courses_valides) — l'autre dénominateur.
