@@ -35,7 +35,7 @@
    "depart": "1",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c5p7-png-4",
-   "dernierPassage": "2p1p2p1p",
+   "dernierPassage": "1p2p1p2p1p",
    "gains": 157390,
    "musique": "2p1p2p1p",
    "place": "01"
@@ -58,7 +58,7 @@
    "depart": "12",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c5p14-png-4",
-   "dernierPassage": "1p2p",
+   "dernierPassage": "2p1p2p",
    "gains": 45700,
    "musique": "1p2p",
    "place": "02"
@@ -81,7 +81,7 @@
    "depart": "13",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c5p13-png-4",
-   "dernierPassage": "8p4p1p4p",
+   "dernierPassage": "3p8p4p1p4p",
    "gains": 23486,
    "musique": "8p4p1p4p",
    "place": "03"
@@ -104,7 +104,7 @@
    "depart": "11",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c5p10-png-4",
-   "dernierPassage": "2p6p",
+   "dernierPassage": "4p2p6p",
    "gains": 5206,
    "musique": "2p6p",
    "place": "04"
@@ -150,7 +150,7 @@
    "depart": "14",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c5p2-png-4",
-   "dernierPassage": "3p4p3p6p3p",
+   "dernierPassage": "6p6p3p4p3p6p3p",
    "gains": 37259,
    "musique": "3p4p3p6p3p",
    "place": "06"
@@ -173,7 +173,7 @@
    "depart": "4",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c5p11-png-4",
-   "dernierPassage": "1p7p",
+   "dernierPassage": "7p1p7p",
    "gains": 10500,
    "musique": "1p7p",
    "place": "07"
@@ -242,7 +242,7 @@
    "depart": "5",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c5p12-png-4",
-   "dernierPassage": "1p",
+   "dernierPassage": "1p0p1p",
    "gains": 10500,
    "musique": "1p",
    "place": "10"
@@ -380,6 +380,6 @@
   5,
   8
  ],
- "collecteLe": "2026-10-20T22:48:40.699Z",
+ "collecteLe": "2026-11-11T04:19:23.605Z",
  "collecteApresCourse": true
 }

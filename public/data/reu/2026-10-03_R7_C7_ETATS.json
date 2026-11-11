@@ -35,7 +35,7 @@
    "depart": "6",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r7c7p6-png-1",
-   "dernierPassage": "1p",
+   "dernierPassage": "1p1p",
    "gains": 63250,
    "musique": "1p",
    "place": "01"
@@ -173,7 +173,7 @@
    "depart": "3",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r7c7p3-png-1",
-   "dernierPassage": "1p",
+   "dernierPassage": "4p1p",
    "gains": 60000,
    "musique": "1p",
    "place": "Non partant"
@@ -212,6 +212,6 @@
   3,
   8
  ],
- "collecteLe": "2026-10-20T22:51:08.879Z",
+ "collecteLe": "2026-11-11T04:22:27.861Z",
  "collecteApresCourse": true
 }

@@ -35,7 +35,7 @@
    "depart": "14",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c9p2-png-4",
-   "dernierPassage": "2p1p3p4p2p1p5p2p3p0p",
+   "dernierPassage": "1p2p1p3p4p2p1p5p2p3p",
    "gains": 246184,
    "musique": "2p1p3p4p2p1p5p2p3p0p",
    "place": "01"
@@ -58,7 +58,7 @@
    "depart": "10",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c9p6-png-4",
-   "dernierPassage": "3p6p9p3p6p3p(25)4p2p4p",
+   "dernierPassage": "2p3p6p9p3p6p3p(25)4p2p",
    "gains": 136132,
    "musique": "3p6p9p3p6p3p(25)4p2p4p",
    "place": "02"
@@ -104,7 +104,7 @@
    "depart": "7",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c9p4-png-4",
-   "dernierPassage": "0p0p1p1p2p5p(25)2p0p9p",
+   "dernierPassage": "4p0p0p1p1p2p5p(25)2p0p",
    "gains": 117951,
    "musique": "0p0p1p1p2p5p(25)2p0p9p",
    "place": "04"
@@ -150,7 +150,7 @@
    "depart": "3",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c9p5-png-4",
-   "dernierPassage": "1p3p6p9p0p7p(25)1p3p4p",
+   "dernierPassage": "6p1p3p6p9p0p7p(25)1p3p",
    "gains": 68205,
    "musique": "1p3p6p9p0p7p(25)1p3p4p",
    "place": "06"
@@ -167,13 +167,13 @@
    "sexe": "F",
    "age": 3,
    "couleur": "",
-   "proprietaire": "MME C.PELIER/G.HEBERT",
+   "proprietaire": "MME C.PELIER",
    "cote": 7.8,
    "coteRef": 7.8,
    "depart": "1",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c9p10-png-4",
-   "dernierPassage": "2p0p1p2p8p3p2p2p(25)2p",
+   "dernierPassage": "7p2p0p1p2p8p3p2p2p",
    "gains": 68214,
    "musique": "2p0p1p2p8p3p2p2p(25)2p",
    "place": "07"
@@ -196,7 +196,7 @@
    "depart": "11",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c9p11-png-4",
-   "dernierPassage": "0p8p0p8p6p7p6p1p1p5p",
+   "dernierPassage": "8p0p8p0p8p6p7p6p1p1p",
    "gains": 130341,
    "musique": "0p8p0p8p6p7p6p1p1p5p",
    "place": "08"
@@ -213,13 +213,13 @@
    "sexe": "M",
    "age": 3,
    "couleur": "",
-   "proprietaire": "MME G.REILLE-VILLEDEY",
+   "proprietaire": "G. REILLE-VILLEDEY/ALLARD (S)",
    "cote": 47,
    "coteRef": 47,
    "depart": "5",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c9p12-png-4",
-   "dernierPassage": "9p7p9p7p4p6p(25)4p3p1p",
+   "dernierPassage": "9p9p7p9p7p4p6p(25)4p3p",
    "gains": 21924,
    "musique": "7p9p7p4p6p(25)4p3p1p5p",
    "place": "09"
@@ -265,7 +265,7 @@
    "depart": "9",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c9p3-png-4",
-   "dernierPassage": "3p8p4p3p6p4p4p(25)6p1p",
+   "dernierPassage": "0p3p8p4p3p6p4p4p(25)6p",
    "gains": 91187,
    "musique": "3p8p4p3p6p4p4p(25)6p1p",
    "place": "11"
@@ -305,7 +305,7 @@
    "sexe": "H",
    "age": 6,
    "couleur": "",
-   "proprietaire": "A.DON/D.MACAULIFFE",
+   "proprietaire": "A.DON/D.MACAULLIFFE",
    "cote": 60,
    "coteRef": 60,
    "depart": "13",
@@ -380,6 +380,6 @@
   1,
   14
  ],
- "collecteLe": "2026-10-20T22:48:52.471Z",
+ "collecteLe": "2026-11-11T04:19:34.461Z",
  "collecteApresCourse": true
 }

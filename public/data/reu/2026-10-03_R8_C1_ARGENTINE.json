@@ -35,7 +35,7 @@
    "depart": "11",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r8c1p11-png-1",
-   "dernierPassage": "1p2p2p9p1p",
+   "dernierPassage": "1p1p2p2p",
    "gains": 59104,
    "musique": "1p2p2p9p1p",
    "place": "01"
@@ -173,7 +173,7 @@
    "depart": "12",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r8c1p12-png-1",
-   "dernierPassage": "2p9p5p3p1p",
+   "dernierPassage": "0p2p0p5p",
    "gains": 37945,
    "musique": "2p9p5p3p1p",
    "place": "07"
@@ -356,6 +356,6 @@
   2,
   7
  ],
- "collecteLe": "2026-10-20T22:51:19.622Z",
+ "collecteLe": "2026-11-11T04:22:38.291Z",
  "collecteApresCourse": true
 }

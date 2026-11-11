@@ -35,7 +35,7 @@
    "depart": "2",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r6c1p3-png-1",
-   "dernierPassage": "1p4p1p1p1p",
+   "dernierPassage": "1p1p4p1p1p1p(25)4p3p",
    "gains": 66657,
    "musique": "1p4p1p1p1p",
    "place": "01"
@@ -188,6 +188,6 @@
   1,
   5
  ],
- "collecteLe": "2026-10-20T22:50:35.447Z",
+ "collecteLe": "2026-11-11T04:21:58.367Z",
  "collecteApresCourse": true
 }

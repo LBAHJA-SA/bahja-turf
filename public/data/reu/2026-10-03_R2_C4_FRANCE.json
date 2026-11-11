@@ -35,7 +35,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c4p4-png-1",
-   "dernierPassage": "1h2h6h(25)3h2h6h",
+   "dernierPassage": "1h1h2h6h(25)3h2h6h",
    "gains": 14120,
    "musique": "2h6h(25)3h2h6h",
    "place": "01"
@@ -58,7 +58,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c4p9-png-1",
-   "dernierPassage": "2h7h7h6h(25)5hAh3p",
+   "dernierPassage": "5h2h7h7h6h(25)5hAh3p",
    "gains": 3990,
    "musique": "7h7h6h(25)5hAh3p",
    "place": "02"
@@ -81,7 +81,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c4p2-png-1",
-   "dernierPassage": "6h6h",
+   "dernierPassage": "3h6h6h",
    "gains": 1920,
    "musique": "6h6h",
    "place": "03"
@@ -127,7 +127,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c4p3-png-1",
-   "dernierPassage": "5h8h5h(25)9h4h5p2p",
+   "dernierPassage": "4h5h8h5h(25)9h4h5p2p",
    "gains": 4590,
    "musique": "8h5h(25)9h4h5p2p",
    "place": "05"
@@ -144,7 +144,7 @@
    "sexe": "H",
    "age": 4,
    "couleur": "",
-   "proprietaire": "D.SATALIA/MME B.NICCO",
+   "proprietaire": "D.SATALIA",
    "cote": 6.6,
    "coteRef": 6.6,
    "depart": null,
@@ -173,7 +173,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c4p6-png-1",
-   "dernierPassage": "7h5h6h8pAh5h(25)7p7p8p",
+   "dernierPassage": "4h7h5h6h8pAh5h(25)7p7p",
    "gains": 3240,
    "musique": "5h6h8pAh5h(25)7p7p8p",
    "place": "07"
@@ -196,7 +196,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c4p8-png-1",
-   "dernierPassage": "8h9h(24)7p9p9p",
+   "dernierPassage": "6h8h9h(24)7p9p9p",
    "gains": 0,
    "musique": "9h(24)7p9p9p",
    "place": "08"
@@ -235,6 +235,6 @@
   6,
   8
  ],
- "collecteLe": "2026-10-20T22:49:02.893Z",
+ "collecteLe": "2026-11-11T04:19:44.004Z",
  "collecteApresCourse": true
 }

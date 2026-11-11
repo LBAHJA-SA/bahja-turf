@@ -12,12 +12,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE VERSAILLES (Quinte+)",
      "heure": "13:58",
-     "dist": 2000,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Saint-Cloud",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "SAINT CLOUD",
+     "source": "Equidia",
+     "arrivee": "1-5-8-4-15-16-10-11-13-2-3-9-14-12-7-6"
     },
     {
      "date": "2026-10-08",
@@ -26,12 +26,12 @@
      "pays": "FRANCE",
      "nom": "PRIX ESMERALDA",
      "heure": "14:34",
-     "dist": 1600,
+     "dist": null,
      "partants": 7,
-     "type": null,
-     "hippodrome": "Saint-Cloud",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "SAINT CLOUD",
+     "source": "Equidia",
+     "arrivee": "4-2-5-1-3-6-7"
     },
     {
      "date": "2026-10-08",
@@ -40,12 +40,12 @@
      "pays": "FRANCE",
      "nom": "PRIX D'ECQUEVILLY",
      "heure": "15:09",
-     "dist": 1600,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Saint-Cloud",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "SAINT CLOUD",
+     "source": "Equidia",
+     "arrivee": "3-1-7-6-5-4-10-2-8-9"
     },
     {
      "date": "2026-10-08",
@@ -54,12 +54,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU HARAS DE LA HUME",
      "heure": "16:02",
-     "dist": 3000,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Saint-Cloud",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "SAINT CLOUD",
+     "source": "Equidia",
+     "arrivee": "10-8-1-3-6-2-5-4-7-9"
     },
     {
      "date": "2026-10-08",
@@ -68,12 +68,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU BOURBONNAIS",
      "heure": "16:40",
-     "dist": 2500,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Saint-Cloud",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "SAINT CLOUD",
+     "source": "Equidia",
+     "arrivee": "2-4-5-1-3-6"
     },
     {
      "date": "2026-10-08",
@@ -82,12 +82,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU CHESNAY",
      "heure": "17:20",
-     "dist": 2000,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Saint-Cloud",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "SAINT CLOUD",
+     "source": "Equidia",
+     "arrivee": "7-11-5-15-4-13-14-9-16-3-8-2-1-6-10-12"
     },
     {
      "date": "2026-10-08",
@@ -96,12 +96,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE ROCQUENCOURT",
      "heure": "18:00",
-     "dist": 2000,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Saint-Cloud",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "SAINT CLOUD",
+     "source": "Equidia",
+     "arrivee": "4-8-11-9-5-10-2-7-15-1-12-14-16-3-13-6"
     }
    ]
   },
@@ -116,12 +116,12 @@
      "pays": "FRANCE",
      "nom": "PRIX OCTOBRE ROSE",
      "heure": "11:07",
-     "dist": 2700,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "La Capelle",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "LA CAPELLE",
+     "source": "Equidia",
+     "arrivee": "8-6-7-13-9-11-14-4-1-10-2-15-16"
     },
     {
      "date": "2026-10-08",
@@ -130,12 +130,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE SAINS RICHAUMONT",
      "heure": "11:39",
-     "dist": 2750,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "La Capelle",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "LA CAPELLE",
+     "source": "Equidia",
+     "arrivee": "10-7-12-13-5-4-9-11-3-1"
     },
     {
      "date": "2026-10-08",
@@ -144,12 +144,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE VERVINS",
      "heure": "12:10",
-     "dist": 2750,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "La Capelle",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "LA CAPELLE",
+     "source": "Equidia",
+     "arrivee": "12-13-7-3-5-1-4-10-2-11-8-14"
     },
     {
      "date": "2026-10-08",
@@ -158,12 +158,12 @@
      "pays": "FRANCE",
      "nom": "PX CONSEIL REGIONAL DES HAUTS DE FRANCE",
      "heure": "12:41",
-     "dist": 2750,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "La Capelle",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "LA CAPELLE",
+     "source": "Equidia",
+     "arrivee": "5-11-14-6-9-1-4-8-7-12"
     },
     {
      "date": "2026-10-08",
@@ -172,12 +172,12 @@
      "pays": "FRANCE",
      "nom": "GRAND PRIX DE LA SAUR",
      "heure": "13:15",
-     "dist": 2700,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "La Capelle",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "LA CAPELLE",
+     "source": "Equidia",
+     "arrivee": "3-4-14-1-13-12-6-5-2-10-11-15-9-8"
     },
     {
      "date": "2026-10-08",
@@ -186,12 +186,12 @@
      "pays": "FRANCE",
      "nom": "PRIX NELLY JANIER-DUBRY & ERIC DONNAY",
      "heure": "13:43",
-     "dist": 2700,
+     "dist": null,
      "partants": 11,
-     "type": null,
-     "hippodrome": "La Capelle",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "LA CAPELLE",
+     "source": "Equidia",
+     "arrivee": "6-3-1-7-11-8-5-10"
     },
     {
      "date": "2026-10-08",
@@ -200,12 +200,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE MARLE",
      "heure": "14:15",
-     "dist": 2700,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "La Capelle",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "LA CAPELLE",
+     "source": "Equidia",
+     "arrivee": "1-6-13-12-4-11-15-10-5-3-7-16-9"
     }
    ]
   },
@@ -220,12 +220,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE SAUTERNES",
      "heure": "10:50",
-     "dist": 3800,
+     "dist": null,
      "partants": 5,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Steeple Chase",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "2-4-3-5"
     },
     {
      "date": "2026-10-08",
@@ -234,12 +234,12 @@
      "pays": "FRANCE",
      "nom": "PRIX BARON DE MONTESQUIEU",
      "heure": "11:22",
-     "dist": 1600,
+     "dist": null,
      "partants": 7,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "3-1-5-6-7-4-2"
     },
     {
      "date": "2026-10-08",
@@ -248,12 +248,12 @@
      "pays": "FRANCE",
      "nom": "PRIX MAURICE CALVE",
      "heure": "11:54",
-     "dist": 3300,
+     "dist": null,
      "partants": 11,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Haies",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "6-2-4-9-10-11-3-5-7-8"
     },
     {
      "date": "2026-10-08",
@@ -262,12 +262,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE SAINT-JULIEN",
      "heure": "12:26",
-     "dist": 1600,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "8-6-2-1-4-5-7-3"
     },
     {
      "date": "2026-10-08",
@@ -276,12 +276,12 @@
      "pays": "FRANCE",
      "nom": "PRIX EDOUARD CLAVERIE",
      "heure": "12:59",
-     "dist": 3900,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Haies",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "1-6-4-3-7-2-8"
     },
     {
      "date": "2026-10-08",
@@ -290,12 +290,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU HONG KONG JOCKEY CLUB",
      "heure": "13:30",
-     "dist": 1900,
+     "dist": null,
      "partants": 13,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "4-2-11-3-13-7-5-6-9-1-8-10-12"
     },
     {
      "date": "2026-10-08",
@@ -304,12 +304,12 @@
      "pays": "FRANCE",
      "nom": "PRIX LEOGNAN",
      "heure": "14:16",
-     "dist": 3800,
+     "dist": null,
      "partants": 9,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Steeple Chase",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "7-6-1-8-9-3-2-4"
     },
     {
      "date": "2026-10-08",
@@ -318,12 +318,12 @@
      "pays": "FRANCE",
      "nom": "PRIX PIERRE VALENTIN",
      "heure": "14:51",
-     "dist": 1900,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "7-13-2-5-10-4-11-9-6-1-8-3-12-14"
     },
     {
      "date": "2026-10-08",
@@ -332,12 +332,12 @@
      "pays": "FRANCE",
      "nom": "PRIX JACQUES MEILHAN BORDES",
      "heure": "15:27",
-     "dist": 1900,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "Le Bouscat",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LE BOUSCAT",
+     "source": "Equidia",
+     "arrivee": "4-5-14-1-8-11-10-9-3-12-2-7-6-13"
     }
    ]
   },
@@ -352,12 +352,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE LA SEINE-MARITIME",
      "heure": "15:44",
-     "dist": 2150,
+     "dist": null,
      "partants": 11,
-     "type": null,
-     "hippodrome": "Enghien",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "6-7-5-4-1-3-9-11-8-10"
     },
     {
      "date": "2026-10-08",
@@ -366,12 +366,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE PRADELLES",
      "heure": "16:21",
-     "dist": 2875,
+     "dist": null,
      "partants": 12,
-     "type": null,
-     "hippodrome": "Enghien",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "9-6-10-11-2-3-7-12"
     },
     {
      "date": "2026-10-08",
@@ -380,12 +380,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE LA PORTE D'ISSY",
      "heure": "17:00",
-     "dist": 2875,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "Enghien",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "13-15-3-1-5-14-11-4-8-10-6"
     },
     {
      "date": "2026-10-08",
@@ -394,12 +394,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE LA PLACE DU CANADA",
      "heure": "17:40",
-     "dist": 2875,
+     "dist": null,
      "partants": 13,
-     "type": null,
-     "hippodrome": "Enghien",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Monté",
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "6-13-12-11-10-2-5-9"
     },
     {
      "date": "2026-10-08",
@@ -408,12 +408,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE SEVRAN",
      "heure": "18:20",
-     "dist": 2150,
+     "dist": null,
      "partants": 13,
-     "type": null,
-     "hippodrome": "Enghien",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "1-7-3-2-9-8-11-6-12-13-10"
     },
     {
      "date": "2026-10-08",
@@ -422,12 +422,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE LA PORTE DE CHAMPERRET",
      "heure": "18:58",
-     "dist": 2875,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "Enghien",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "12-8-11-9-10-7-3-13-1-6-2-4"
     },
     {
      "date": "2026-10-08",
@@ -436,12 +436,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE MAURON",
      "heure": "19:31",
-     "dist": 2875,
+     "dist": null,
      "partants": 12,
-     "type": null,
-     "hippodrome": "Enghien",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "11-12-4-6-7-5-3-9-1-8"
     },
     {
      "date": "2026-10-08",
@@ -450,12 +450,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE LA PORTE D'IVRY",
      "heure": "20:03",
-     "dist": 2250,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Enghien",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Monté",
+     "hippodrome": "ENGHIEN",
+     "source": "Equidia",
+     "arrivee": "11-16-9-12-4-15-8-14-3"
     }
    ]
   },
@@ -470,12 +470,12 @@
      "pays": "CHILI",
      "nom": "REGALON FUNDIDO",
      "heure": "18:37",
-     "dist": 1000,
+     "dist": null,
      "partants": 13,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "13-7-9-6-1-8-2-4-10-12-3-5-11"
     },
     {
      "date": "2026-10-08",
@@ -484,12 +484,12 @@
      "pays": "CHILI",
      "nom": "RECTOR",
      "heure": "19:14",
-     "dist": 1000,
+     "dist": null,
      "partants": 11,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "10-1-8-4-5-7-9-6-3-11-2"
     },
     {
      "date": "2026-10-08",
@@ -498,12 +498,12 @@
      "pays": "CHILI",
      "nom": "RAMBUTAN",
      "heure": "19:43",
-     "dist": 1000,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "6-7-2-3-1-9-4-5-8-10"
     },
     {
      "date": "2026-10-08",
@@ -512,12 +512,12 @@
      "pays": "CHILI",
      "nom": "RASSAM",
      "heure": "20:15",
-     "dist": 1100,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "3-10-4-9-8-7-1-5-2-6"
     },
     {
      "date": "2026-10-08",
@@ -526,12 +526,12 @@
      "pays": "CHILI",
      "nom": "RED SETTER",
      "heure": "20:45",
-     "dist": 1100,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "5-7-3-2-1-6-4-8"
     },
     {
      "date": "2026-10-08",
@@ -540,12 +540,12 @@
      "pays": "CHILI",
      "nom": "RETOQUE",
      "heure": "21:15",
-     "dist": 1300,
+     "dist": null,
      "partants": 9,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "3-5-2-4-1-8-6-9-7"
     },
     {
      "date": "2026-10-08",
@@ -554,12 +554,12 @@
      "pays": "CHILI",
      "nom": "RIO ABAJO",
      "heure": "21:45",
-     "dist": 1300,
+     "dist": null,
      "partants": 5,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "4-3-5-1-2"
     },
     {
      "date": "2026-10-08",
@@ -568,12 +568,12 @@
      "pays": "CHILI",
      "nom": "LUIS HINRICHS OLIVARES",
      "heure": "22:15",
-     "dist": 1400,
+     "dist": null,
      "partants": 7,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "7-4-3-2-1-5-6"
     },
     {
      "date": "2026-10-08",
@@ -582,12 +582,12 @@
      "pays": "CHILI",
      "nom": "RUCACURA",
      "heure": "22:48",
-     "dist": 900,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "6-5-7-1-4-2-3-8"
     },
     {
      "date": "2026-10-08",
@@ -596,12 +596,12 @@
      "pays": "CHILI",
      "nom": "ROSA NAUTICA",
      "heure": "23:18",
-     "dist": 1100,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Concepcion",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "CONCEPCION",
+     "source": "Equidia",
+     "arrivee": "5-3-4-2-8-1-7-6"
     }
    ]
   },
@@ -616,12 +616,12 @@
      "pays": "ETATS",
      "nom": "MAIDEN SPECIAL WEIGHT (3 YO & UP - FILLIES & MARES - DIRT)",
      "heure": "19:10",
-     "dist": 1600,
+     "dist": null,
      "partants": 6,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "2-4-6-5-3-1"
     },
     {
      "date": "2026-10-08",
@@ -630,12 +630,12 @@
      "pays": "ETATS",
      "nom": "MAIDEN SPECIAL WEIGHT (3 & UP - TURF)",
      "heure": "19:43",
-     "dist": 1800,
+     "dist": null,
      "partants": 9,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "1-3-5-6-7-9-2-8-4"
     },
     {
      "date": "2026-10-08",
@@ -644,12 +644,12 @@
      "pays": "ETATS",
      "nom": "STARTER ALLOWANCE (3 & UP - DIRT)",
      "heure": "20:16",
-     "dist": 1700,
+     "dist": null,
      "partants": 9,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "6-7-3-8-5-9-1-4-2"
     },
     {
      "date": "2026-10-08",
@@ -658,12 +658,12 @@
      "pays": "ETATS",
      "nom": "MAIDEN SPECIAL WEIGHT (3 YO & UP - TURF)",
      "heure": "20:49",
-     "dist": 1700,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "2-1-3-5-4-6-7-8"
     },
     {
      "date": "2026-10-08",
@@ -672,12 +672,12 @@
      "pays": "ETATS",
      "nom": "MAIDEN CLAIMING (3 YO & UP - DIRT)",
      "heure": "21:23",
-     "dist": 1600,
+     "dist": null,
      "partants": 9,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "1-9-3-5-7-2-4-6-8"
     },
     {
      "date": "2026-10-08",
@@ -686,12 +686,12 @@
      "pays": "ETATS",
      "nom": "ALLOWANCE (3 YO & UP - TURF)",
      "heure": "21:57",
-     "dist": 1800,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "2-8-4-1-6-5-3-7"
     },
     {
      "date": "2026-10-08",
@@ -700,12 +700,12 @@
      "pays": "ETATS",
      "nom": "MAIDEN OPTIONAL CLAIMING (2 YO - TURF)",
      "heure": "22:31",
-     "dist": 1700,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "6-2-10-5-4-3-8-9-1-7"
     },
     {
      "date": "2026-10-08",
@@ -714,12 +714,12 @@
      "pays": "ETATS",
      "nom": "ALLOWANCE OPTIONAL CLAIMING (3 YO & UP - DIRT)",
      "heure": "23:05",
-     "dist": 1200,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "8-2-7-5-3-6-4-1"
     },
     {
      "date": "2026-10-08",
@@ -728,12 +728,12 @@
      "pays": "ETATS",
      "nom": "CLAIMING (3 YO & UP - DIRT)",
      "heure": "23:38",
-     "dist": 1600,
+     "dist": null,
      "partants": 11,
-     "type": null,
-     "hippodrome": "Belmont Park",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "BELMONT PARK",
+     "source": "Equidia",
+     "arrivee": "6-3-10-7-4"
     }
    ]
   },
@@ -747,7 +747,10 @@
      "code": "C1",
      "pays": "MAROC",
      "nom": "NOUFISSA",
-     "heure": "12:18"
+     "heure": "12:18",
+     "distance": null,
+     "partants": null,
+     "type": ""
     },
     {
      "date": "2026-10-08",
@@ -755,7 +758,10 @@
      "code": "C2",
      "pays": "MAROC",
      "nom": "DIB",
-     "heure": "12:56"
+     "heure": "12:56",
+     "distance": null,
+     "partants": null,
+     "type": ""
     },
     {
      "date": "2026-10-08",
@@ -763,7 +769,10 @@
      "code": "C3",
      "pays": "MAROC",
      "nom": "RAIL LINK",
-     "heure": "13:26"
+     "heure": "13:26",
+     "distance": null,
+     "partants": null,
+     "type": ""
     },
     {
      "date": "2026-10-08",
@@ -771,7 +780,10 @@
      "code": "C4",
      "pays": "MAROC",
      "nom": "LUDJIN",
-     "heure": "14:03"
+     "heure": "14:03",
+     "distance": null,
+     "partants": null,
+     "type": ""
     },
     {
      "date": "2026-10-08",
@@ -779,7 +791,10 @@
      "code": "C5",
      "pays": "MAROC",
      "nom": "ALIANTHUS",
-     "heure": "14:43"
+     "heure": "14:43",
+     "distance": null,
+     "partants": null,
+     "type": ""
     },
     {
      "date": "2026-10-08",
@@ -787,7 +802,10 @@
      "code": "C6",
      "pays": "MAROC",
      "nom": "NICARON",
-     "heure": "15:23"
+     "heure": "15:23",
+     "distance": null,
+     "partants": null,
+     "type": ""
     },
     {
      "date": "2026-10-08",
@@ -795,7 +813,10 @@
      "code": "C7",
      "pays": "MAROC",
      "nom": "ORDOKI",
-     "heure": "16:03"
+     "heure": "16:03",
+     "distance": null,
+     "partants": null,
+     "type": ""
     },
     {
      "date": "2026-10-08",
@@ -803,10 +824,13 @@
      "code": "C8",
      "pays": "MAROC",
      "nom": "BAHRARA",
-     "heure": "16:41"
+     "heure": "16:41",
+     "distance": null,
+     "partants": null,
+     "type": ""
     }
    ]
   }
  ],
- "collecteLe": "2026-10-08T23:45:09.052Z"
+ "collecteLe": "2026-11-11T04:39:57.468Z"
 }

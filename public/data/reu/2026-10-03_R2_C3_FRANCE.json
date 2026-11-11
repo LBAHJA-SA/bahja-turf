@@ -35,7 +35,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c3p2-png-1",
-   "dernierPassage": "7h3h",
+   "dernierPassage": "1h7h3h",
    "gains": 5095,
    "musique": "7h3h",
    "place": "01"
@@ -52,15 +52,15 @@
    "sexe": "H",
    "age": 3,
    "couleur": "",
-   "proprietaire": "MME C.KAIRIS/TOLMI RACING",
+   "proprietaire": "C.KAIRIS/TOLMI RACING/NIGHTCHILL",
    "cote": 9.3,
    "coteRef": 9.3,
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c3p5-png-1",
-   "dernierPassage": null,
+   "dernierPassage": "2h",
    "gains": 0,
-   "musique": "",
+   "musique": "2h",
    "place": "02"
   },
   {
@@ -81,7 +81,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c3p3-png-1",
-   "dernierPassage": "5h",
+   "dernierPassage": "3h5h",
    "gains": 1080,
    "musique": "5h",
    "place": "03"
@@ -104,8 +104,8 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c3p4-png-1",
-   "dernierPassage": "Ah4p",
-   "gains": 0,
+   "dernierPassage": "4hAh4p",
+   "gains": 1809,
    "musique": "Ah4p",
    "place": "04"
   },
@@ -127,7 +127,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c3p7-png-1",
-   "dernierPassage": "5hAhJh8p5p8p1p0p",
+   "dernierPassage": "3h5hAhJh8p5p8p1p0p",
    "gains": 4884,
    "musique": "AhJh8p5p8p1p0p",
    "place": "05"
@@ -150,7 +150,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c3p8-png-1",
-   "dernierPassage": "5h",
+   "dernierPassage": "6h5h",
    "gains": 1080,
    "musique": "5h",
    "place": "06"
@@ -173,7 +173,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c3p1-png-1",
-   "dernierPassage": "1p3h",
+   "dernierPassage": "7h1p3h",
    "gains": 3120,
    "musique": "1p3h",
    "place": "07"
@@ -190,7 +190,7 @@
    "sexe": "H",
    "age": 3,
    "couleur": "",
-   "proprietaire": "SEARCHING SNC / N. MOISSON",
+   "proprietaire": "SEARCHING",
    "cote": 12,
    "coteRef": 12,
    "depart": null,
@@ -211,6 +211,6 @@
   8,
   1
  ],
- "collecteLe": "2026-10-20T22:49:00.042Z",
+ "collecteLe": "2026-11-11T04:19:41.196Z",
  "collecteApresCourse": true
 }

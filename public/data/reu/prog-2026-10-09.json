@@ -12,12 +12,12 @@
      "pays": "FRANCE",
      "nom": "PRIX GORDONIA",
      "heure": "18:32",
-     "dist": 2850,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "Vincennes",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Monté",
+     "hippodrome": "VINCENNES",
+     "source": "Equidia",
+     "arrivee": "15-10-3-12-11-8-4-5-1-13"
     },
     {
      "date": "2026-10-09",
@@ -26,12 +26,12 @@
      "pays": "FRANCE",
      "nom": "PRIX INGEBORG",
      "heure": "19:06",
-     "dist": 2100,
+     "dist": null,
      "partants": 18,
-     "type": null,
-     "hippodrome": "Vincennes",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "VINCENNES",
+     "source": "Equidia",
+     "arrivee": "7-4-16-3-5-18-15-13-9-14-8-10-2-1-17-6-11"
     },
     {
      "date": "2026-10-09",
@@ -40,12 +40,12 @@
      "pays": "FRANCE",
      "nom": "PRIX LUCINA",
      "heure": "19:41",
-     "dist": 2850,
+     "dist": null,
      "partants": 17,
-     "type": null,
-     "hippodrome": "Vincennes",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "VINCENNES",
+     "source": "Equidia",
+     "arrivee": "6-10-11-7-1-14-8-4-16-9-2-15-3-13-5"
     },
     {
      "date": "2026-10-09",
@@ -54,12 +54,12 @@
      "pays": "FRANCE",
      "nom": "PRIX HERA (Quinte+)",
      "heure": "20:17",
-     "dist": 2850,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "Vincennes",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "VINCENNES",
+     "source": "Equidia",
+     "arrivee": "14-6-15-7-10-13-2-1-12-9-5-3-4-11"
     },
     {
      "date": "2026-10-09",
@@ -68,12 +68,12 @@
      "pays": "FRANCE",
      "nom": "PRIX ABULFEDA",
      "heure": "20:47",
-     "dist": 2850,
+     "dist": null,
      "partants": 13,
-     "type": null,
-     "hippodrome": "Vincennes",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "VINCENNES",
+     "source": "Equidia",
+     "arrivee": "10-6-1-7-9-3-13-5-8-2-12-11"
     },
     {
      "date": "2026-10-09",
@@ -82,12 +82,12 @@
      "pays": "FRANCE",
      "nom": "PRIX THERESIA",
      "heure": "21:16",
-     "dist": 2100,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "Vincennes",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "VINCENNES",
+     "source": "Equidia",
+     "arrivee": "5-3-6-12-1-9-7-11-2-10-8"
     },
     {
      "date": "2026-10-09",
@@ -96,12 +96,12 @@
      "pays": "FRANCE",
      "nom": "PRIX EDMOND HENRY",
      "heure": "21:45",
-     "dist": 2700,
+     "dist": null,
      "partants": 7,
-     "type": null,
-     "hippodrome": "Vincennes",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Monté",
+     "hippodrome": "VINCENNES",
+     "source": "Equidia",
+     "arrivee": "6-7-3-5-2-4-1"
     },
     {
      "date": "2026-10-09",
@@ -110,12 +110,12 @@
      "pays": "FRANCE",
      "nom": "PRIX PAULINA",
      "heure": "22:10",
-     "dist": 2100,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Vincennes",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "VINCENNES",
+     "source": "Equidia",
+     "arrivee": "15-12-1-3-16-14-10-11-13-4"
     }
    ]
   },
@@ -130,12 +130,12 @@
      "pays": "BELGIQUE",
      "nom": "PRIJS WWW.EUROTIERCE.BE",
      "heure": "10:28",
-     "dist": 2200,
+     "dist": null,
      "partants": 9,
-     "type": null,
-     "hippodrome": "Waregem",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "WAREGEM",
+     "source": "Equidia",
+     "arrivee": "9-5-8-6-4-3-2-7-1"
     },
     {
      "date": "2026-10-09",
@@ -144,12 +144,12 @@
      "pays": "BELGIQUE",
      "nom": "PRIJS BERT MAES",
      "heure": "10:58",
-     "dist": 2200,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Waregem",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "WAREGEM",
+     "source": "Equidia",
+     "arrivee": "8-7-4-5-9-1-3-6-2-10"
     },
     {
      "date": "2026-10-09",
@@ -158,12 +158,12 @@
      "pays": "BELGIQUE",
      "nom": "PRIJS TUVABO/BAKKERIJ DEWAELE TOM&CINDY",
      "heure": "11:31",
-     "dist": 1600,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Waregem",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "WAREGEM",
+     "source": "Equidia",
+     "arrivee": "1-7-6-3-4-10-5-9-8-2"
     },
     {
      "date": "2026-10-09",
@@ -172,12 +172,12 @@
      "pays": "BELGIQUE",
      "nom": "PRIJS T'SMESSPLEIN /BAKKERIJ MOLLY/EXPERZA",
      "heure": "12:03",
-     "dist": 1600,
+     "dist": null,
      "partants": 12,
-     "type": null,
-     "hippodrome": "Waregem",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "WAREGEM",
+     "source": "Equidia",
+     "arrivee": "3-12-2-9-8-5-4-7-6-11-1-10"
     },
     {
      "date": "2026-10-09",
@@ -186,12 +186,12 @@
      "pays": "BELGIQUE",
      "nom": "PRIJS T'NOTELAEREGOED/FRITUUR ST-LOUIS",
      "heure": "12:37",
-     "dist": 1350,
+     "dist": null,
      "partants": 12,
-     "type": null,
-     "hippodrome": "Waregem",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "WAREGEM",
+     "source": "Equidia",
+     "arrivee": "1-6-12-9-4-11-3-7-10-5-8"
     }
    ]
   },
@@ -206,12 +206,12 @@
      "pays": "FRANCE",
      "nom": "PRIX OCTOBRE ROSE",
      "heure": "11:14",
-     "dist": 2650,
+     "dist": null,
      "partants": 9,
-     "type": null,
-     "hippodrome": "Hyeres",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "HYERES",
+     "source": "Equidia",
+     "arrivee": "2-7-1-8-3-5-9-6"
     },
     {
      "date": "2026-10-09",
@@ -220,12 +220,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DES HIPPODROMES DE MARSEILLE",
      "heure": "11:46",
-     "dist": 2850,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Hyeres",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "HYERES",
+     "source": "Equidia",
+     "arrivee": "5-7-9-8-10-3-4"
     },
     {
      "date": "2026-10-09",
@@ -234,12 +234,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE L'HIPPODROME DE CAGNES SUR MER",
      "heure": "12:20",
-     "dist": 2650,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "Hyeres",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "HYERES",
+     "source": "Equidia",
+     "arrivee": "10-13-1-7-14-3-9-11"
     },
     {
      "date": "2026-10-09",
@@ -248,12 +248,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DES CASQUES NACA",
      "heure": "12:54",
-     "dist": 2850,
+     "dist": null,
      "partants": 9,
-     "type": null,
-     "hippodrome": "Hyeres",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Monté",
+     "hippodrome": "HYERES",
+     "source": "Equidia",
+     "arrivee": "9-2-6-8-7-4"
     },
     {
      "date": "2026-10-09",
@@ -262,12 +262,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE L'HIPPODROME DE CAVAILLON",
      "heure": "13:28",
-     "dist": 2850,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "Hyeres",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "HYERES",
+     "source": "Equidia",
+     "arrivee": "15-11-13-6-14-12-3-7-5-8"
     },
     {
      "date": "2026-10-09",
@@ -276,12 +276,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU PRESIDENT JEAN-MARIE GIOVANNA",
      "heure": "14:03",
-     "dist": 2850,
+     "dist": null,
      "partants": 11,
-     "type": null,
-     "hippodrome": "Hyeres",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "HYERES",
+     "source": "Equidia",
+     "arrivee": "9-3-7-1-4-11"
     },
     {
      "date": "2026-10-09",
@@ -290,12 +290,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE L'ECOLE DE GIENS - HYERES",
      "heure": "14:36",
-     "dist": 2650,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Hyeres",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "HYERES",
+     "source": "Equidia",
+     "arrivee": "7-5-1-6-4-10-8"
     },
     {
      "date": "2026-10-09",
@@ -304,12 +304,12 @@
      "pays": "FRANCE",
      "nom": "PRIX JEAN SONIGO",
      "heure": "15:17",
-     "dist": 2850,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "Hyeres",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Attelé",
+     "hippodrome": "HYERES",
+     "source": "Equidia",
+     "arrivee": "14-6-4-15-11-9-7-5-8-1-13-10-2-12-3"
     }
    ]
   },
@@ -324,12 +324,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE VENETTE",
      "heure": "13:12",
-     "dist": 2000,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "2-6-5-3-4-1-8-7"
     },
     {
      "date": "2026-10-09",
@@ -338,12 +338,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE JAUX",
      "heure": "13:46",
-     "dist": 2000,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "10-7-4-3-1-9-8-5-6-2"
     },
     {
      "date": "2026-10-09",
@@ -352,12 +352,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE LONGUEIL-ANNEL",
      "heure": "14:20",
-     "dist": 1400,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "8-7-10-5-6-2-3-9-4-1"
     },
     {
      "date": "2026-10-09",
@@ -366,12 +366,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU CARREFOUR DU VIVIER CORAX",
      "heure": "14:53",
-     "dist": 1400,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "11-4-16-8-3-14-1-15-9-5-12-7-10-6-13-2"
     },
     {
      "date": "2026-10-09",
@@ -380,12 +380,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE JONQUIERES",
      "heure": "15:34",
-     "dist": 1800,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "13-9-2-6-4-5-3-14-8-11-12-7-1-10-15-16"
     },
     {
      "date": "2026-10-09",
@@ -394,12 +394,12 @@
      "pays": "FRANCE",
      "nom": "PRIX CHARLES LAFFITTE",
      "heure": "16:06",
-     "dist": 2000,
+     "dist": null,
      "partants": 13,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "8-12-4-13-9-10-6-1-5-2-11-7-3"
     },
     {
      "date": "2026-10-09",
@@ -408,12 +408,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU CARREFOUR DU FRANCPORT",
      "heure": "16:41",
-     "dist": 1400,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "10-2-7-5-14-1-13-16-12-4-8-15-9-11-3-6"
     },
     {
      "date": "2026-10-09",
@@ -422,12 +422,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU CARREFOUR DU MONT DU TREMBLE",
      "heure": "17:18",
-     "dist": 1400,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "9-10-4-11-8-16-12-3-14-15-6-13-2-1-7-5"
     },
     {
      "date": "2026-10-09",
@@ -436,12 +436,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DU CARREFOUR DU FOND PERNANT",
      "heure": "17:49",
-     "dist": 1400,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Compiegne",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "COMPIEGNE",
+     "source": "Equidia",
+     "arrivee": "7-6-10-3-14-15-4-16-13-8-5-12-1-11-2-9"
     }
    ]
   },
@@ -456,12 +456,12 @@
      "pays": "FRANCE",
      "nom": "PRIX PANACEE - FONDS EUROPEEN DE L'ELEVAGE",
      "heure": "15:50",
-     "dist": 2400,
+     "dist": null,
      "partants": 7,
-     "type": null,
-     "hippodrome": "La Cepiere",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LA CEPIERE",
+     "source": "Equidia",
+     "arrivee": "6-7-5-1-4-3-2"
     },
     {
      "date": "2026-10-09",
@@ -470,12 +470,12 @@
      "pays": "FRANCE",
      "nom": "DERBY DU LANGUEDOC - FONDS EUROPEEN DE L'ELEVAGE",
      "heure": "16:22",
-     "dist": 2400,
+     "dist": null,
      "partants": 7,
-     "type": null,
-     "hippodrome": "La Cepiere",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LA CEPIERE",
+     "source": "Equidia",
+     "arrivee": "6-5-2-3-4-1-7"
     },
     {
      "date": "2026-10-09",
@@ -484,12 +484,12 @@
      "pays": "FRANCE",
      "nom": "PRIX GOSSE DU BEARN - JEAN-LUC JARDEL",
      "heure": "16:56",
-     "dist": 2100,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "La Cepiere",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LA CEPIERE",
+     "source": "Equidia",
+     "arrivee": "12-2-10-7-16-4-14-5-1-15-13-8-9-11-6-3"
     },
     {
      "date": "2026-10-09",
@@ -498,12 +498,12 @@
      "pays": "FRANCE",
      "nom": "PRIX DE NEXON",
      "heure": "17:33",
-     "dist": 1600,
+     "dist": null,
      "partants": 10,
-     "type": null,
-     "hippodrome": "La Cepiere",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LA CEPIERE",
+     "source": "Equidia",
+     "arrivee": "8-1-2-4-5-3-6-7-10-9"
     },
     {
      "date": "2026-10-09",
@@ -512,12 +512,12 @@
      "pays": "FRANCE",
      "nom": "PRIX MAGNESIE",
      "heure": "18:05",
-     "dist": 2100,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "La Cepiere",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LA CEPIERE",
+     "source": "Equidia",
+     "arrivee": "6-2-1-7-8-11-4-14-10-9-12-3-5-13"
     },
     {
      "date": "2026-10-09",
@@ -526,12 +526,12 @@
      "pays": "FRANCE",
      "nom": "PRIX COMITE REGIONAL D'EQUITATION OCCITANIE",
      "heure": "18:48",
-     "dist": 1400,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "La Cepiere",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LA CEPIERE",
+     "source": "Equidia",
+     "arrivee": "1-8-10-15-5-2-7-4-9-14-13-11-6-3-12"
     },
     {
      "date": "2026-10-09",
@@ -540,12 +540,12 @@
      "pays": "FRANCE",
      "nom": "PRIX FONTAINE LESTANG",
      "heure": "19:21",
-     "dist": 1400,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "La Cepiere",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LA CEPIERE",
+     "source": "Equidia",
+     "arrivee": "1-9-11-3-15-12-7-10-14-13-2-6-4-8-5"
     },
     {
      "date": "2026-10-09",
@@ -554,12 +554,12 @@
      "pays": "FRANCE",
      "nom": "PRIX FLEUR D'AVRIL - VERONIQUE BRIAT",
      "heure": "19:55",
-     "dist": 1600,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "La Cepiere",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "LA CEPIERE",
+     "source": "Equidia",
+     "arrivee": "8-4-1-7-2-3-5-6"
     }
    ]
   },
@@ -574,12 +574,12 @@
      "pays": "ROYAUME",
      "nom": "GODOLPHIN B. PROJECT CORNWALLIS STK (GR 3) - WORLD POOL",
      "heure": "14:15",
-     "dist": 1000,
+     "dist": null,
      "partants": 13,
-     "type": null,
-     "hippodrome": "Newmarket",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "NEWMARKET",
+     "source": "Equidia",
+     "arrivee": "5-12-11-1-8-7-2-3-6-13-4-9-10"
     },
     {
      "date": "2026-10-09",
@@ -588,12 +588,12 @@
      "pays": "ROYAUME",
      "nom": "GODOLPHIN LIF. CARE OH SO SHARP STK (GR 3) - WORLD POOL",
      "heure": "14:50",
-     "dist": 1400,
+     "dist": null,
      "partants": 16,
-     "type": null,
-     "hippodrome": "Newmarket",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "NEWMARKET",
+     "source": "Equidia",
+     "arrivee": "7-14-16-2-13-9-5-8-1-3-11-15-12-4-6-10"
     },
     {
      "date": "2026-10-09",
@@ -602,12 +602,12 @@
      "pays": "ROYAUME",
      "nom": "THOROUGHBRED I.E.A. CHALLENGE STAKES (GR 2) - WORLD POOL",
      "heure": "15:25",
-     "dist": 1400,
+     "dist": null,
      "partants": 6,
-     "type": null,
-     "hippodrome": "Newmarket",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "NEWMARKET",
+     "source": "Equidia",
+     "arrivee": "2-5-4-3-6-1"
     },
     {
      "date": "2026-10-09",
@@ -616,12 +616,12 @@
      "pays": "ROYAUME",
      "nom": "FILLIES' MILE (GR 1) - WORLD POOL",
      "heure": "15:57",
-     "dist": 1600,
+     "dist": null,
      "partants": 8,
-     "type": null,
-     "hippodrome": "Newmarket",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "NEWMARKET",
+     "source": "Equidia",
+     "arrivee": "6-4-3-5-8-1-7-2"
     },
     {
      "date": "2026-10-09",
@@ -630,12 +630,12 @@
      "pays": "ROYAUME",
      "nom": "OLD ROWLEY CUP HANDICAP (CLASS 2) - WORLD POOL",
      "heure": "16:30",
-     "dist": 2400,
+     "dist": null,
      "partants": 11,
-     "type": null,
-     "hippodrome": "Newmarket",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "NEWMARKET",
+     "source": "Equidia",
+     "arrivee": "5-10-2-3-9-6-4-1-11-7-8"
     },
     {
      "date": "2026-10-09",
@@ -644,12 +644,12 @@
      "pays": "ROYAUME",
      "nom": "GODOLPHIN UNDER STARTERS ORDERS BOADICEA STK (L) - WORLD POOL",
      "heure": "17:10",
-     "dist": 1200,
+     "dist": null,
      "partants": 14,
-     "type": null,
-     "hippodrome": "Newmarket",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "NEWMARKET",
+     "source": "Equidia",
+     "arrivee": "11-14-3-4-12-8-9-5-1-7-6-13-10-2"
     },
     {
      "date": "2026-10-09",
@@ -658,12 +658,12 @@
      "pays": "ROYAUME",
      "nom": "NEWMARKET PONY ACADEMY PRIDE STK (GR 3) - WORLD POOL",
      "heure": "17:45",
-     "dist": 2000,
+     "dist": null,
      "partants": 17,
-     "type": null,
-     "hippodrome": "Newmarket",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "NEWMARKET",
+     "source": "Equidia",
+     "arrivee": "16-15-12-9-17-1-5-8-11-4-3-2-10-14-6-7-13"
     },
     {
      "date": "2026-10-09",
@@ -672,15 +672,15 @@
      "pays": "ROYAUME",
      "nom": "HKJC HANDICAP (CLASS 4) - WORLD POOL",
      "heure": "18:20",
-     "dist": 1400,
+     "dist": null,
      "partants": 15,
-     "type": null,
-     "hippodrome": "Newmarket",
-     "source": "Turf-France · reu.php",
-     "arrivee": null
+     "type": "Plat",
+     "hippodrome": "NEWMARKET",
+     "source": "Equidia",
+     "arrivee": "9-5-7-11-8-13-15-10-1-6-14-2-3-4-12"
     }
    ]
   }
  ],
- "collecteLe": "2026-10-09T22:30:12.774Z"
+ "collecteLe": "2026-11-11T04:42:21.788Z"
 }

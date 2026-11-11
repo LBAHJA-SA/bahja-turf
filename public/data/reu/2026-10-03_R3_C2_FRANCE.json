@@ -127,7 +127,7 @@
    "depart": null,
    "def": "5",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r3c2p4-png-1",
-   "dernierPassage": "0aDm5a(25)Dm",
+   "dernierPassage": "5m0aDm5a(25)Dm",
    "gains": 800,
    "musique": "0aDm5a(25)Dm",
    "place": "05"
@@ -196,7 +196,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r3c2p2-png-1",
-   "dernierPassage": "8mDm0aDaDa",
+   "dernierPassage": "Da8mDm0aDaDa",
    "gains": 0,
    "musique": "Dm0aDaDa",
    "place": "08"
@@ -242,7 +242,7 @@
    "depart": null,
    "def": "4",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r3c2p3-png-1",
-   "dernierPassage": "Dm5mDa",
+   "dernierPassage": "DmDm5mDa",
    "gains": 750,
    "musique": "Dm5mDa",
    "place": null
@@ -265,7 +265,7 @@
    "depart": null,
    "def": "5",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r3c2p8-png-1",
-   "dernierPassage": "DmDmDm5m6mDm5mDm7aDm",
+   "dernierPassage": "5mDmDmDmDmDm5m6mDm5m",
    "gains": 4690,
    "musique": "Dm5m6mDm5mDm7aDm",
    "place": null
@@ -311,7 +311,7 @@
    "depart": null,
    "def": "5",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r3c2p10-png-1",
-   "dernierPassage": "7a3a2a4a",
+   "dernierPassage": "3aDm7a3a2a4a",
    "gains": 7835,
    "musique": "7a3a2a4a",
    "place": null
@@ -334,7 +334,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r3c2p12-png-1",
-   "dernierPassage": "Dm3aDa2a3a4a",
+   "dernierPassage": "7aDaDm3aDa2a3a4a",
    "gains": 9925,
    "musique": "3aDa2a3a4a",
    "place": null
@@ -374,6 +374,6 @@
   2,
   13
  ],
- "collecteLe": "2026-10-20T22:49:16.881Z",
+ "collecteLe": "2026-11-11T04:19:59.129Z",
  "collecteApresCourse": true
 }

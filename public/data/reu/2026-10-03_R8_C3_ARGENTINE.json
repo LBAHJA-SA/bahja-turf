@@ -150,7 +150,7 @@
    "depart": "5",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r8c3p5-png-1",
-   "dernierPassage": "4p4p4p6p4p",
+   "dernierPassage": "6p4p4p4p6p",
    "gains": 43188,
    "musique": "4p4p4p6p4p",
    "place": "06"
@@ -188,6 +188,6 @@
   5,
   7
  ],
- "collecteLe": "2026-10-20T22:51:24.051Z",
+ "collecteLe": "2026-11-11T04:22:42.804Z",
  "collecteApresCourse": true
 }

@@ -35,7 +35,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c2p6-png-1",
-   "dernierPassage": "9h7h",
+   "dernierPassage": "1s9h7h",
    "gains": 870,
    "musique": "9h7h",
    "place": "01"
@@ -58,7 +58,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c2p5-png-1",
-   "dernierPassage": "5s7h2h",
+   "dernierPassage": "2s5s7h2h",
    "gains": 15215,
    "musique": "5s7h2h",
    "place": "02"
@@ -81,7 +81,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c2p7-png-1",
-   "dernierPassage": "Ah",
+   "dernierPassage": "4s3sAh",
    "gains": 0,
    "musique": "Ah",
    "place": "03"
@@ -127,7 +127,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c2p3-png-1",
-   "dernierPassage": "0h8hAh",
+   "dernierPassage": "5s0h8hAh",
    "gains": 0,
    "musique": "0h8hAh",
    "place": "05"
@@ -144,7 +144,7 @@
    "sexe": "H",
    "age": 3,
    "couleur": "",
-   "proprietaire": "MME MACLENNAN/HARAS DE ST-VOIR",
+   "proprietaire": "MME L.MACLENNAN",
    "cote": 7.6,
    "coteRef": 7.6,
    "depart": null,
@@ -173,7 +173,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r2c2p2-png-1",
-   "dernierPassage": "3s3h9h0p6p(25)0p4p",
+   "dernierPassage": "7s3s3h9h0p6p(25)0p4p",
    "gains": 8970,
    "musique": "3s3h9h0p6p(25)0p4p",
    "place": "07"
@@ -211,6 +211,6 @@
   4,
   2
  ],
- "collecteLe": "2026-10-20T22:48:57.656Z",
+ "collecteLe": "2026-11-11T04:19:39.128Z",
  "collecteApresCourse": true
 }

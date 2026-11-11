@@ -58,7 +58,7 @@
    "depart": "6",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r7c9p6-png-1",
-   "dernierPassage": "1p4p2p",
+   "dernierPassage": "2p1p4p2p",
    "gains": 93150,
    "musique": "1p4p2p",
    "place": "02"
@@ -81,7 +81,7 @@
    "depart": "1",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r7c9p1-png-1",
-   "dernierPassage": "3p",
+   "dernierPassage": "3p3p",
    "gains": 10000,
    "musique": "3p",
    "place": "03"
@@ -150,7 +150,7 @@
    "depart": "3",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r7c9p3-png-1",
-   "dernierPassage": "1p5p3p",
+   "dernierPassage": "6p1p5p3p",
    "gains": 78400,
    "musique": "1p5p3p",
    "place": "06"
@@ -188,6 +188,6 @@
   3,
   2
  ],
- "collecteLe": "2026-10-20T22:51:13.957Z",
+ "collecteLe": "2026-11-11T04:22:32.863Z",
  "collecteApresCourse": true
 }

@@ -35,7 +35,7 @@
    "depart": "2",
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c4p2-png-1",
-   "dernierPassage": "2a3a6a5a3a3a1a3a5a",
+   "dernierPassage": "1a2a3a6a5a3a3a1a3a",
    "gains": 19105,
    "musique": "2a3a6a5a3a3a1a3a5a",
    "place": "01"
@@ -81,7 +81,7 @@
    "depart": "3",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c4p3-png-1",
-   "dernierPassage": "5a1a1a7a2a8a4a4a4a",
+   "dernierPassage": "3a5a1a1a7a2a8a4a4a",
    "gains": 14978,
    "musique": "5a1a1a7a2a8a4a4a4a",
    "place": "03"
@@ -127,7 +127,7 @@
    "depart": "4",
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c4p4-png-1",
-   "dernierPassage": "5a5a0a0aDa7a4a4a4a",
+   "dernierPassage": "7a6a0a5a5a0a0aDa7a",
    "gains": 17922,
    "musique": "5a0a0aDa7a4a4a4a6a",
    "place": "05"
@@ -242,7 +242,7 @@
    "depart": "10",
    "def": "2",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c4p10-png-1",
-   "dernierPassage": "Aa5a5a2a5a5a6a0a7a",
+   "dernierPassage": "Da4aAa5a5a2a5a5a6a",
    "gains": 19867,
    "musique": "5a5a2a5a5a6a0a7a7a",
    "place": null
@@ -283,6 +283,6 @@
   11,
   9
  ],
- "collecteLe": "2026-10-20T22:50:21.510Z",
+ "collecteLe": "2026-11-11T04:21:43.697Z",
  "collecteApresCourse": true
 }

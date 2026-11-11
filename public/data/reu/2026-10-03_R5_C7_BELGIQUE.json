@@ -35,7 +35,7 @@
    "depart": "3",
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c7p3-png-1",
-   "dernierPassage": "1a2a0a1a8a1a3a1a2a",
+   "dernierPassage": "7a1a2a0a1a8a1a3a1a",
    "gains": 6817,
    "musique": "2a0a1a8a1a3a1a2a3a",
    "place": "01"
@@ -58,7 +58,7 @@
    "depart": "6",
    "def": "2",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c7p6-png-1",
-   "dernierPassage": "5a5a6a8a6a8a0a1a8a",
+   "dernierPassage": "6a2a5a5a6a8a6a8a0a",
    "gains": 7423,
    "musique": "5a5a6a8a6a8a0a1a8a",
    "place": "02"
@@ -81,7 +81,7 @@
    "depart": "2",
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c7p2-png-1",
-   "dernierPassage": "3a0a3a7aDa4aDa4a1a",
+   "dernierPassage": "7a3a0a3a7aDa4aDa4a",
    "gains": 8865,
    "musique": "0a3a7aDa4aDa4a1a1a",
    "place": "03"
@@ -104,7 +104,7 @@
    "depart": "8",
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c7p8-png-1",
-   "dernierPassage": "4a3a5a5a2a7a3a5a5a",
+   "dernierPassage": "4a4a4a3a5a5a2a7a3a",
    "gains": 6868,
    "musique": "4a3a5a5a2a7a3a5a5a",
    "place": "04"
@@ -173,7 +173,7 @@
    "depart": "4",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c7p4-png-1",
-   "dernierPassage": "DaQa",
+   "dernierPassage": "7aDaQa",
    "gains": 0,
    "musique": "DaQa",
    "place": "07"
@@ -219,7 +219,7 @@
    "depart": "5",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r5c7p5-png-1",
-   "dernierPassage": "Da2a6aDa4a2a0aDa0a",
+   "dernierPassage": "DaDa9a2a6aDa4a2a0a",
    "gains": 7173,
    "musique": "Da2a6aDa4a2a0aDa0a",
    "place": null
@@ -235,6 +235,6 @@
   4,
   1
  ],
- "collecteLe": "2026-10-20T22:50:28.995Z",
+ "collecteLe": "2026-11-11T04:21:50.928Z",
  "collecteApresCourse": true
 }

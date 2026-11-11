@@ -58,7 +58,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c3p5-png-1",
-   "dernierPassage": "8a4aDaDa0a5aDa",
+   "dernierPassage": "2a8a4aDaDa0a5aDa",
    "gains": 1660,
    "musique": "8a4aDaDa0a5aDa",
    "place": "02"
@@ -81,7 +81,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c3p12-png-1",
-   "dernierPassage": "2aDa",
+   "dernierPassage": "8a3a2aDa",
    "gains": 3500,
    "musique": "2aDa",
    "place": "03"
@@ -104,7 +104,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c3p6-png-1",
-   "dernierPassage": "4a5a8aDa0a8a4aDmDa",
+   "dernierPassage": "1a4a5a8aDa0a8a4aDmDa",
    "gains": 1770,
    "musique": "5a8aDa0a8a4aDmDa",
    "place": "04"
@@ -127,7 +127,7 @@
    "depart": null,
    "def": "5",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c3p4-png-1",
-   "dernierPassage": "5a4a6a7a",
+   "dernierPassage": "Da5a4a6a7a",
    "gains": 1350,
    "musique": "4a6a7a",
    "place": "05"
@@ -242,9 +242,9 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c3p1-png-1",
-   "dernierPassage": null,
+   "dernierPassage": "7mDa",
    "gains": 0,
-   "musique": "",
+   "musique": "7mDa",
    "place": null
   },
   {
@@ -288,7 +288,7 @@
    "depart": null,
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c3p10-png-1",
-   "dernierPassage": "DaDa2a",
+   "dernierPassage": "1aDaDa2a",
    "gains": 3250,
    "musique": "Da2a",
    "place": null
@@ -305,6 +305,6 @@
   8,
   7
  ],
- "collecteLe": "2026-10-20T22:51:41.114Z",
+ "collecteLe": "2026-11-11T04:22:54.796Z",
  "collecteApresCourse": true
 }

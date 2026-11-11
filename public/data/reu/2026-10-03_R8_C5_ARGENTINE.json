@@ -127,7 +127,7 @@
    "depart": "12",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r8c5p12-png-1",
-   "dernierPassage": "1p2p0p7p",
+   "dernierPassage": "5p1p2p0p7p",
    "gains": 18597600,
    "musique": "1p2p0p7p",
    "place": "05"
@@ -356,6 +356,6 @@
   11,
   13
  ],
- "collecteLe": "2026-10-20T22:51:31.330Z",
+ "collecteLe": "2026-11-11T04:22:47.949Z",
  "collecteApresCourse": true
 }

@@ -29,13 +29,13 @@
    "sexe": "H",
    "age": 3,
    "couleur": "",
-   "proprietaire": "K.FREEMAN/ /D.MACAULIFFE/A.DON",
+   "proprietaire": "K.FREEMAN",
    "cote": 10,
    "coteRef": 10,
    "depart": "7",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r1c1p5-png-4",
-   "dernierPassage": "1p5p2p1p1p1p(25)4p0p4p",
+   "dernierPassage": "1p1p5p2p1p1p1p(25)4p0p",
    "gains": 105356,
    "musique": "1p5p2p1p1p1p(25)4p0p4p",
    "place": "01"
@@ -212,6 +212,6 @@
   3,
   8
  ],
- "collecteLe": "2026-10-20T22:48:27.111Z",
+ "collecteLe": "2026-11-11T04:19:12.768Z",
  "collecteApresCourse": true
 }

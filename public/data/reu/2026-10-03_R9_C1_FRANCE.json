@@ -81,7 +81,7 @@
    "depart": "7",
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c1p7-png-1",
-   "dernierPassage": "7a4a4a9a7a1a2a2a(25)Da",
+   "dernierPassage": "3a7a4a4a9a7a1a2a2a(25)",
    "gains": 98200,
    "musique": "7a4a4a9a7a1a2a2a(25)Da",
    "place": "03"
@@ -104,7 +104,7 @@
    "depart": "1",
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c1p1-png-1",
-   "dernierPassage": "9a2a9a0a5a8a4a0a0aDa",
+   "dernierPassage": "4a9a2a9a0a5a8a4a0a0a",
    "gains": 98030,
    "musique": "9a2a9a0a5a8a4a0a0aDa",
    "place": "04"
@@ -127,7 +127,7 @@
    "depart": "12",
    "def": "3",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c1p12-png-1",
-   "dernierPassage": "5a4a8a4a0a5a6a5a7a(25)",
+   "dernierPassage": "0a5a4a8a4a0a5a6a5a7a",
    "gains": 87790,
    "musique": "4a8a4a0a5a6a5a7a(25)Da",
    "place": "05"
@@ -242,7 +242,7 @@
    "depart": "9",
    "def": "",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c1p9-png-1",
-   "dernierPassage": "0a0a4a2a4aDa3a3aDaDa",
+   "dernierPassage": "0a0a0a4a2a4aDa3a3aDa",
    "gains": 86865,
    "musique": "0a4a2a4aDa3a3aDaDa(25)",
    "place": "10"
@@ -288,7 +288,7 @@
    "depart": "6",
    "def": "1",
    "silk": "https://media.equidia.fr/unsafe/fit-in/1920x0/filters:format(webp)/https://api.equidia.fr/api/public/media/original/20261003-r9c1p6-png-1",
-   "dernierPassage": "Da2aDa3a2aDa0aDa(25)Da",
+   "dernierPassage": "DaDa2aDa3a2aDa0aDa(25)",
    "gains": 93960,
    "musique": "Da2aDa3a2aDa0aDa(25)Da",
    "place": null
@@ -354,6 +354,6 @@
   10,
   4
  ],
- "collecteLe": "2026-10-20T22:51:34.163Z",
+ "collecteLe": "2026-11-11T04:22:50.358Z",
  "collecteApresCourse": true
 }
