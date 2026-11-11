@@ -24,13 +24,23 @@
     ],
     "savedAt": "2026-11-11T00:46:56.395Z",
     "arrivee": null,
-    "ticket": null,
+    "ticket": [
+      10,
+      1,
+      3,
+      7,
+      8,
+      9,
+      11,
+      13,
+      5
+    ],
     "discipline": "PLAT",
     "distance": 2400,
     "nbPartants": 16,
     "hippodrome": "LA CEPIERE",
     "prix": "PRIX DE LA VILLE DE TOULOUSE",
-    "courseId": "pmu-R1C3",
+    "courseId": "2026-11-11_R1_C3",
     "cle": "2026-11-11_R1_C3",
     "runners": [
       1,
@@ -50,7 +60,61 @@
       15,
       16
     ],
-    "sourceImport": "page"
+    "sourceImport": "page",
+    "placeholder": false,
+    "ticketMode": "defaut+siege-plat",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          10,
+          11,
+          8
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          3,
+          7
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          1
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          13
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          9
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-11-11T10:22:20.443Z",
+    "ticketMoteur": [
+      10,
+      1,
+      3,
+      7,
+      8,
+      9,
+      11,
+      13,
+      5
+    ],
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-11-11T10:22:20.443Z"
   },
   "2026-11-10": {
     "date": "2026-11-10",
@@ -165,7 +229,7 @@
       13,
       14
     ],
-    "cloture": "2026-11-10T19:01:11.065Z",
+    "cloture": "2026-11-11T10:22:16.593Z",
     "scores": [
       {
         "num": 1,
