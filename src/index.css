@@ -107,7 +107,17 @@ body::before{
   gap: 14px; width: 100%; max-width: 1400px; margin: 0 auto;
 }
 .entete-logo{ display: flex; align-items: center; gap: 10px; text-decoration: none }
-.entete-logo img{ height: 42px; border-radius: 10px; display: block }
+/* ⭐ 12/11/2026 — `logo-bahja-turf.jpg` (tête de cheval + mot-symbole +
+   signature) : une image large, on la lit à 54 px de haut. `contain` évite
+   toute déformation si un autre visuel la remplace un jour. */
+.entete-logo img{
+  height: 54px; width: auto; display: block;
+  border-radius: 10px; object-fit: contain;
+  box-shadow: 0 0 0 1px rgba(251,191,36,.28), 0 6px 18px rgba(0,0,0,.45);
+}
+@media (max-width: 720px){
+  .entete-logo img{ height: 42px }
+}
 /* ⭐ 27/10/2026 — l'ancienne pastille blanche était réservée à l'illustration
    `logo-horse.png` (première image de l'en-tête). La plaque `logo.svg` porte
    maintenant son propre cadre : elle ne doit pas recevoir de fond blanc. La

@@ -59,15 +59,13 @@ export default function Entete({ page }) {
     <header className="entete">
       <div className="entete-in">
 
-        {/* ⭐ 27/10/2026 — UN SEUL LOGO.
-            L'ancien en-tête posait DEUX images : l'illustration
-            `logo-horse.png` (une course de chevaux, sur fond blanc, avec un
-            halo cyan) PUIS la plaque `logo.svg`. La nouvelle plaque porte
-            elle-même la tête de cheval : garder les deux faisait deux logos
-            côte à côte. `logo-horse.png` reste dans `public/` (rien n'est
-            supprimé) — il suffit de remettre la ligne pour la revoir. */}
+        {/* ⭐ 12/11/2026 — LE LOGO DE LA MARQUE.
+            `logo-bahja-turf.jpg` : la tête de cheval dorée, le mot-symbole
+            « Bahja TURF » et la signature « Analyse • Stratégie • Performance ».
+            Il remplace la plaque `logo.svg` ; `logo.svg` et `logo-horse.png`
+            restent dans `public/` (rien n'est supprimé). */}
         <Link to="/" className="entete-logo" title={t('nav_analyse')}>
-          <img src="/logo.svg" alt="Bahja TURF" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+          <img src="/logo-bahja-turf.jpg" alt="Bahja TURF" onError={(e) => { e.currentTarget.style.display = 'none' }} />
         </Link>
 
         <nav className="entete-nav">

@@ -49,14 +49,14 @@ function Cadre({ children }) {
         background: C.carte, border: '1px solid ' + C.bord,
         boxShadow: '0 22px 60px rgba(0,0,0,.55)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-          <img src="/logo.svg" alt="" style={{ height: 38, borderRadius: 9 }}
+        {/* ⭐ 12/11/2026 — le logo porte déjà le nom : on ne le réécrit pas
+            à côté. Il reste la mention « accès abonné », qui dit la page. */}
+        <div style={{ textAlign: 'center', marginBottom: 16 }}>
+          <img src="/logo-bahja-turf.jpg" alt="Bahja TURF"
+            style={{ height: 74, borderRadius: 10, display: 'block', margin: '0 auto 8px' }}
             onError={(e) => { e.currentTarget.style.display = 'none' }} />
-          <div>
-            <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: '.02em' }}>LBAHJA-TURF</div>
-            <div style={{ fontSize: 11.5, color: C.muet, textTransform: 'uppercase', letterSpacing: '.08em' }}>
-              accès abonné
-            </div>
+          <div style={{ fontSize: 11.5, color: C.muet, textTransform: 'uppercase', letterSpacing: '.14em' }}>
+            accès abonné
           </div>
         </div>
         {children}
