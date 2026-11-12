@@ -5535,5 +5535,171 @@
     "heure": "2026-11-11T13:15:00+01:00"
    }
   ]
+ },
+ "2026-11-12_R1_C1": {
+  "source": "equidia.fr",
+  "favori": 2,
+  "cotes": [
+   {
+    "num": 2,
+    "nom": "FRANK GIO",
+    "cote": 2.3,
+    "ouverture": 2.2,
+    "tendance": "+",
+    "favori": true,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 6,
+    "nom": "LIZA JOSSELYN",
+    "cote": 5.4,
+    "ouverture": 5.5,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 12,
+    "nom": "LORD DU BASSIN",
+    "cote": 11,
+    "ouverture": 11,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 5,
+    "nom": "FALCO KILLER GAR",
+    "cote": 12,
+    "ouverture": 12,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 10,
+    "nom": "LANCIER DU GOUTIER",
+    "cote": 13,
+    "ouverture": 13,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 8,
+    "nom": "BULLET THE BLUESKY",
+    "cote": 14,
+    "ouverture": 15,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 4,
+    "nom": "MAGIC NIGHT",
+    "cote": 17,
+    "ouverture": 17,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 1,
+    "nom": "LOMBOK JIEL",
+    "cote": 21,
+    "ouverture": 21,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 13,
+    "nom": "MADRID HAUFOR",
+    "cote": 25,
+    "ouverture": 25,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 11,
+    "nom": "LIBERTE DE CHOISEL",
+    "cote": 31,
+    "ouverture": 31,
+    "tendance": "+",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 7,
+    "nom": "MAITRE JACQUES",
+    "cote": 45,
+    "ouverture": 46,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 9,
+    "nom": "L'AS DESBOIS",
+    "cote": 72,
+    "ouverture": 76,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 3,
+    "nom": "LIONHEART",
+    "cote": 83,
+    "ouverture": 89,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 15,
+    "nom": "MILA DES COUPERIES",
+    "cote": 133,
+    "ouverture": 137,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 14,
+    "nom": "KOOGOO GAAGAA",
+    "cote": 155,
+    "ouverture": 159,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   },
+   {
+    "num": 16,
+    "nom": "L'ECRIN D'OR",
+    "cote": 155,
+    "ouverture": 158,
+    "tendance": "-",
+    "favori": false,
+    "enjeu": 140246.63,
+    "heure": "2026-11-12T11:46:00+01:00"
+   }
+  ]
  }
 }

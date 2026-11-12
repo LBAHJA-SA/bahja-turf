@@ -1,4 +1,114 @@
 {
+  "2026-11-12": {
+    "date": "2026-11-12",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      8,
+      6,
+      2,
+      5,
+      12,
+      10,
+      1,
+      4,
+      11,
+      7,
+      13,
+      3,
+      9,
+      15,
+      14
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "nbPartants": 17,
+    "discipline": "ATTELE",
+    "hippodrome": "VINCENNES",
+    "distance": 2100,
+    "courseId": "2026-11-12_R1_C1",
+    "arrivee": null,
+    "ticket": [
+      8,
+      2,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12
+    ],
+    "ticketMode": "defaut+marche",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          8,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          2,
+          12
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          10
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          4
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": [
+          9
+        ]
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-11-12T10:56:58.260Z",
+    "ticketMoteur": [
+      8,
+      2,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12
+    ],
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-11-12T10:56:58.269Z"
+  },
   "2026-11-11": {
     "date": "2026-11-11",
     "found": true,
@@ -118,7 +228,7 @@
       13,
       5
     ],
-    "cloture": "2026-11-11T20:30:09.478Z",
+    "cloture": "2026-11-12T10:56:32.427Z",
     "scores": null,
     "collecte": "2026-11-11T20:30:09.478Z",
     "ticketMatin": [
