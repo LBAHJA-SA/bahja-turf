@@ -92,9 +92,9 @@
         ]
       }
     ],
-    "ticketSource": "auto",
+    "ticketSource": "final",
     "surprises": [],
-    "ticketPoseLe": "2026-11-12T10:56:58.260Z",
+    "ticketPoseLe": "2026-11-12T11:24:33.735Z",
     "ticketMoteur": [
       8,
       2,
@@ -107,7 +107,17 @@
     ],
     "cloture": null,
     "scores": null,
-    "collecte": "2026-11-12T10:56:58.269Z"
+    "collecte": "2026-11-12T11:24:33.738Z",
+    "ticketMatin": [
+      8,
+      2,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12
+    ]
   },
   "2026-11-11": {
     "date": "2026-11-11",
