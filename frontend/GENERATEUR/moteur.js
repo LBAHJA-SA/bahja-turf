@@ -114,7 +114,7 @@ export async function genererMoteur({ ordre, discipline, ignored, lignes, db, di
   const allCandidates = candidatesFromPatterns(patterns, ordre, absents)
 
   const out = {}
-  const priors = []   /* تُحفظ التذكرات الكاملة (أرقام) لـ≤ 2 بين كل زوجين */
+  const priors = []   /* التذاكر الخمسية فقط : ≤ 2 بين كل زوج من التذاكر الخمسية (الأساسين خارج القيد) */
   const baseUsed = new Set()  /* أرقام BASE 1 تُستبعد من BASE 2 لمنع التماثل */
 
   for (const id of keys) {
@@ -136,7 +136,6 @@ export async function genererMoteur({ ordre, discipline, ignored, lignes, db, di
       }
       const total = [...typedNums, ...fill]
       for (const n of total) baseUsed.add(n)
-      priors.push(total)
       out[id] = fill
       continue
     }
