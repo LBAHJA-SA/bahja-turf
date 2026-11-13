@@ -18,7 +18,6 @@ import {
   etatAdmin, sessionAdmin, connexionAdmin, deconnexionAdmin, comptesServeur, sauvegarderComptesServeur, reinitialiserAppareilServeur,
 } from '../../src/lib/adminAuth.js'
 import { heureGMT } from '../../src/temps.js'
-import AdminPronostiques from '../PRONOSTIQUE/AdminPronostiques.jsx'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  frontend/ADMIN/Admin.jsx — LA CONSOLE D'ADMINISTRATION
@@ -41,7 +40,6 @@ import AdminPronostiques from '../PRONOSTIQUE/AdminPronostiques.jsx'
  *  TROIS ONGLETS
  *    Utilisateurs : qui entre, avec quel mot de passe, et QUELLES PAGES.
  *    Pages        : le catalogue du site, et qui a le droit d'y aller.
- *    Pronostique  : l'espace d'administration de PRONOSTIQUE BAHJA TURF.
  *    Visiteurs    : le journal (IP, pays, page, appareil, compte) + les connexions + la mesure Vercel.
  * ══════════════════════════════════════════════════════════════════════════ */
 
@@ -419,9 +417,7 @@ export default function Admin() {
     setOnglet('utilisateurs')
   }
 
-  const [onglet, setOnglet] = useState(() =>
-    new URLSearchParams(window.location.search).get('onglet') === 'pronostique' ? 'pronostique' : 'utilisateurs'
-  )
+  const [onglet, setOnglet] = useState('utilisateurs')
 
   /* ── ② LES COMPTES (dans ce navigateur) ─────────────────────────────────── */
   const [comptes, setComptes] = useState(() => lireComptes())
@@ -1001,8 +997,6 @@ export default function Admin() {
             icone="bi-people" libelle="Utilisateurs" compte={comptesBrouillon.length} />
           <Onglet actif={onglet === 'pages'} onClick={() => setOnglet('pages')}
             icone="bi-grid-3x3-gap" libelle="Pages" compte={PAGES.length} />
-          <Onglet actif={onglet === 'pronostique'} onClick={() => setOnglet('pronostique')}
-            icone="bi-star" libelle="PRONOSTIQUE BAHJA TURF" />
           <Onglet actif={onglet === 'visiteurs'} onClick={() => setOnglet('visiteurs')}
             icone="bi-graph-up" libelle="Visiteurs" />
         </div>
@@ -1495,18 +1489,7 @@ export default function Admin() {
           </Carte>
         )}
 
-        {/* ═════════════ ③ PRONOSTIQUE BAHJA TURF ════════════════════════ */}
-        {onglet === 'pronostique' && (
-          <Carte
-            titre="PRONOSTIQUE BAHJA TURF"
-            sous="édition et publication pour les visiteurs"
-            teinte="#e879f9"
-          >
-            <AdminPronostiques />
-          </Carte>
-        )}
-
-        {/* ═══════════════════════════ ④ VISITEURS ═══════════════════════════ */}
+        {/* ═══════════════════════════ ③ VISITEURS ═══════════════════════════ */}
         {onglet === 'visiteurs' && (
           <>
             <Carte
