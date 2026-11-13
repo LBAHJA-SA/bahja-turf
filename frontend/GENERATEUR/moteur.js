@@ -27,36 +27,36 @@ export function attributionSlots(synthese, runners) {
   return slot
 }
 
-function pickDiverse(ranked, priors, target = 5) {
+/* اختيار المتدرج القيد: ≤ 2 مشتركين صارمًا بين كل زوج من التذاكرات —
+ * التكرار الكامل مرفوض تلقائيًا (تطابق 5 > 2). عند الاستنفاد يبقى مكان «؟».
+ * حتمية 100%. */
+function pickDiverse(ranked, priors, target = 5, forced = []) {
   const picks = []
   const priorSets = priors.map((prior) => new Set(prior.map((p) => p.slot)))
+  const taken = new Set(forced.map((c) => c.slot))
+  const overlap = (tent, s) => { let n = 0; for (const x of tent) if (s.has(x)) n++; return n }
   for (const c of ranked) {
-    if (picks.length >= target) break
-    let ok = true
-    const tent = [...picks.map((p) => p.slot), c.slot]
-    for (const s of priorSets) {
-      let count = 0
-      for (const x of tent) if (s.has(x)) count++
-      if (count > 2) { ok = false; break }
-    }
-    if (ok) picks.push(c)
-  }
-  /* الإشباع الاحتياطي — لا يُسقط الخانة حتى لو اضطررت للتكرار */
-  for (const c of ranked) {
-    if (picks.length >= target) break
-    if (picks.find((p) => p.slot === c.slot)) continue
+    if (forced.length + picks.length >= target) break
+    if (taken.has(c.slot)) continue
+    const tent = [...forced.map((p) => p.slot), ...picks.map((p) => p.slot), c.slot]
+    if (priorSets.some((s) => overlap(tent, s) > 2)) continue  /* قيد ≤ 2 صارم */
+    taken.add(c.slot)
     picks.push(c)
   }
-  return picks
+  return [...forced, ...picks]
 }
 
-function remplaceComboInterdit(picks, ordonnes, combos) {
+function remplaceComboInterdit(picks, ordonnes, combos, priors = []) {
   if (picks.length !== 5) return picks
   const cle = (arr) => arr.map((p) => p.slot).slice().sort((a, b) => a - b).join('-')
   if (!combos.has(cle(picks))) return picks
+  const priorSets = priors.map((prior) => new Set(prior.map((p) => p.slot)))
+  const overlap = (tent, s) => { let n = 0; for (const x of tent) if (s.has(x)) n++; return n }
   const restantes = ordonnes.filter((x) => !picks.includes(x))
   for (const alt of restantes) {
     const tentative = [...picks.slice(0, -1), alt]
+    const slots = tentative.map((p) => p.slot)
+    if (priorSets.some((s) => overlap(slots, s) > 2)) continue   /* لا تكسر قيد ≤ 2 عند الاستبدال */
     if (!combos.has(cle(tentative))) return tentative
   }
   return picks
@@ -122,12 +122,15 @@ export async function genererMoteur({ ordre, discipline, ignored, lignes, db, di
     const ligne = lignes[id]
     const typedNums = (ligne.typed || []).map((v) => Number(v)).filter(Number.isFinite).filter((n) => n > 0)
     const cible = ligne.cible
-    if (typedNums.length === 0 && diverseSet.has(id)) {
-      /* توليد التذاكرات الخمسية بتباين حتمي ≤ 2 مشترك بين كل زوجين */
+    if (diverseSet.has(id)) {
+      /* توليد الصفوف الخمسة كتذاكرات : الأرقام المكتوبة تُثبَّت، والباقي يُملأ
+       * بقيد المشاركة ≤ 2 بين كل زوجين — ولا تذكيرة مكررة مطلقًا */
       const target = Math.min(cible, 5)
-      const picks = pickDiverse(ranked, priors, target)
-      priors.push(picks)
-      out[id] = remplaceComboInterdit(picks, ranked, an.combos).map((c) => c.num)
+      const fixed = (ordre || []).filter((c) => typedNums.includes(c.num))
+      const total0 = pickDiverse(ranked, priors, target, fixed)
+      const total = remplaceComboInterdit(total0, ranked, an.combos, priors)
+      priors.push(total)
+      out[id] = total.filter((c) => !typedNums.includes(c.num)).map((c) => c.num)
     } else {
       /* التوليد الحتمي المعتاد */
       const target = Math.max(0, cible - typedNums.length)

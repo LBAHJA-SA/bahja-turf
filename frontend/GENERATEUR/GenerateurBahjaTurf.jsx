@@ -489,9 +489,14 @@ export default function GenerateurBahjaTurf() {
                         <RCircle />
                       </>
                     )}
-                    {/* Lignes 5–7 : 5 cases pures */}
+                    {/* Lignes 5–7 : 5 cases pures (« ? » si le moteur ne peut pas compléter sans violer ≤ 2) */}
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                      {picks ? picks.map((n, i) => EngineCell(n, i)) : Array.from({ length: base ? engineCount : 5 }).map((_, i) => EmptyCell(i))}
+                      {picks
+                        ? [
+                            ...picks.map((n, i) => EngineCell(n, i)),
+                            ...Array.from({ length: Math.max(0, (base ? engineCount : 5) - picks.length) }, (_, i) => EmptyCell(picks.length + i)),
+                          ]
+                        : Array.from({ length: base ? engineCount : 5 }).map((_, i) => EmptyCell(i))}
                     </div>
                   </div>
                 </div>
