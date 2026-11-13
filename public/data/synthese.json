@@ -48,7 +48,13 @@
     "hippodrome": "VINCENNES",
     "distance": 2100,
     "courseId": "2026-11-13_R1_C4",
-    "arrivee": null,
+    "arrivee": [
+      8,
+      13,
+      2,
+      6,
+      5
+    ],
     "ticket": [
       6,
       2,
@@ -106,9 +112,9 @@
       9,
       7
     ],
-    "cloture": null,
+    "cloture": "2026-11-13T20:30:08.664Z",
     "scores": null,
-    "collecte": "2026-11-13T08:45:06.247Z",
+    "collecte": "2026-11-13T20:30:08.664Z",
     "cle": "2026-11-13_R1_C4"
   },
   "2026-11-12": {
@@ -223,7 +229,7 @@
       10,
       12
     ],
-    "cloture": "2026-11-13T08:45:05.004Z",
+    "cloture": "2026-11-13T20:30:06.201Z",
     "scores": null,
     "collecte": "2026-11-12T11:24:33.738Z",
     "ticketMatin": [
