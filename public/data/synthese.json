@@ -47,7 +47,7 @@
     "discipline": "ATTELE",
     "hippodrome": "VINCENNES",
     "distance": 2100,
-    "courseId": "pmu-R1C4",
+    "courseId": "2026-11-13_R1_C4",
     "arrivee": null,
     "ticket": [
       6,
@@ -108,7 +108,7 @@
     ],
     "cloture": null,
     "scores": null,
-    "collecte": "2026-11-13T00:23:35.314Z",
+    "collecte": "2026-11-13T08:45:06.247Z",
     "cle": "2026-11-13_R1_C4"
   },
   "2026-11-12": {
