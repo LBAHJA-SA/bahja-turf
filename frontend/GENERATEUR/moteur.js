@@ -27,23 +27,33 @@ export function attributionSlots(synthese, runners) {
   return slot
 }
 
-/* اختيار المتدرج القيد: ≤ 2 مشتركين صارمًا بين كل زوج من التذاكرات —
- * التكرار الكامل مرفوض تلقائيًا (تطابق 5 > 2). عند الاستنفاد يبقى مكان «؟».
- * حتمية 100%. */
+/* اختيار حتمي كامل : خوارزمية رجوع للخلف (DFS) بترتيب الأوزان —
+ * تُرجع أول تركيبة تحقق قيد ≤ 2 مع كل تذكيرة سابقة؛ إذا وُجدت تركيبة صالحة
+ * يتم إيجادها مهما كان ترتيب المرشحين (اكتمال لا جشع أحادي الاتجاه).
+ * لا إشباع متجاهل للقيد، ولا تذكيرة مكررة، حتمية 100%. */
 function pickDiverse(ranked, priors, target = 5, forced = []) {
-  const picks = []
   const priorSets = priors.map((prior) => new Set(prior.map((p) => p.slot)))
   const taken = new Set(forced.map((c) => c.slot))
+  const sol = [...forced]
   const overlap = (tent, s) => { let n = 0; for (const x of tent) if (s.has(x)) n++; return n }
-  for (const c of ranked) {
-    if (forced.length + picks.length >= target) break
-    if (taken.has(c.slot)) continue
-    const tent = [...forced.map((p) => p.slot), ...picks.map((p) => p.slot), c.slot]
-    if (priorSets.some((s) => overlap(tent, s) > 2)) continue  /* قيد ≤ 2 صارم */
-    taken.add(c.slot)
-    picks.push(c)
+  const okWithPriors = (tent) => priorSets.every((s) => overlap(tent, s) <= 2)
+  const dfs = (startIdx) => {
+    if (sol.length >= target) return true
+    for (let i = startIdx; i < ranked.length; i++) {
+      const c = ranked[i]
+      if (taken.has(c.slot)) continue
+      const tent = [...sol.map((p) => p.slot), c.slot]
+      if (!okWithPriors(tent)) continue
+      taken.add(c.slot)
+      sol.push(c)
+      if (dfs(i + 1)) return true
+      sol.pop()
+      taken.delete(c.slot)
+    }
+    return false
   }
-  return [...forced, ...picks]
+  dfs(0)
+  return sol
 }
 
 function remplaceComboInterdit(picks, ordonnes, combos, priors = []) {
