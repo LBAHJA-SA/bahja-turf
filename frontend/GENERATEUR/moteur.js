@@ -30,15 +30,25 @@ export function attributionSlots(synthese, runners) {
   return slot
 }
 
+/** أسبوع الشهر لتحديد نطاق الترشيحات — كل أسبوع = طريقة من الأرشيف */
+export function weekOfMonth(dateStr) {
+  const day = Number(String(dateStr).slice(8, 10))
+  if (day <= 7) return 1
+  if (day <= 14) return 2
+  if (day <= 21) return 3
+  return 4
+}
+
 /** أنماط P المؤرشفة : كل خماسي سباق مؤرَشَف = تركيبة خانات جاهزة بترتيب وصولها
  *  (1,2,3,4,5 كما في السباق نفسه). مرتبة بـ(date تنازليًا ثم بالمفتاح) — حتمية.
- *  التكرار (نفس مجموعة الخانات) يُحذف مرة واحدة. */
-export function patternsFromArchive(db, discipline) {
+ *  التكرار (نفس مجموعة الخانات) يُحذف مرة واحدة. `week` تقيّد الأسبوع من الشهر نفسه. */
+export function patternsFromArchive(db, discipline, week) {
   const items = []
   for (const [k, e] of Object.entries(db || {})) {
     if (!e || !Array.isArray(e.arrivee) || e.arrivee.length < 5) continue
     if (!Array.isArray(e.synthese) || !Array.isArray(e.runners)) continue
     if (discipline && normDiscipline(e.discipline) !== discipline) continue
+    if (week && weekOfMonth(k) !== week) continue
     const slots = attributionSlots(e.synthese, e.runners)
     const comboS = e.arrivee.slice(0, 5).map((n) => slots[n]).filter((s) => s != null)
     if (comboS.length !== 5) continue
@@ -67,9 +77,20 @@ function candidatesFromPatterns(patterns, ordre, absents) {
 }
 
 /** توليد كل السطور دفعة واحدة — الأرشيف وحده، حتمية 100%.
- *  كل سطر يستهلك أحدث نمط مجسَّد لم يُستهلك بعد؛ الاستهلاك مرة واحدة فقط لكل نمط. */
+ *  «منهج كل أسبوع» : المرشحون أولاً = أنماط نفس أسبوع الشهر (كما الأرشيف كرَيس اليوم)،
+ *  وإن قلّت عن عدد الصفوف يتراجعَ المرشحون إلى أرشيف كل الأسابيع (نفس المنهج).
+ *  كل سطر يستهلك أحدث نمط مجسَّد لم يُستهلك بعد؛ الاستهلاك مرة واحدة فقط. */
 export async function genererMoteur({ ordre, discipline, ignored, lignes, db }) {
-  const patterns = patternsFromArchive(db, discipline === 'TOUS' ? null : discipline)
+  const disc = discipline === 'TOUS' ? null : discipline
+  /* تاريخ اليوم بيروق ثم الأسبوع المناسب */
+  const now = new Date()
+  const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0')
+  const week = weekOfMonth(todayStr)
+  const weekPatterns = patternsFromArchive(db, disc, week)
+  const weekKeys = new Set(weekPatterns.map((p) => p.key))
+  /* «منهج الأسبوع» : الأرشيف الخاص بأسبوع اليوم أولًا، ثم بقية الأرشيف */
+  const rest = patternsFromArchive(db, disc, null).filter((p) => !weekKeys.has(p.key))
+  const patterns = [...weekPatterns, ...rest]
   const absents = new Set(ignored || [])
   const candidates = candidatesFromPatterns(patterns, ordre, absents)
 
