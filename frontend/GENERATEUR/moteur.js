@@ -1,9 +1,14 @@
 /* ══════════════════════════════════════════════════════════════════════════
- *  frontend/GENERATEUR/moteur.js — MOTOR ENGINE (دستور في MOTEUR.md)
+ *  frontend/GENERATEUR/moteur.js — المحرك (دستور في MOTEUR.md)
  *
- *  13/11/2026 — أول إصدار. حتمية 100% : نفس المدخلات → نفس المخرجات.
- *  الترجيح = الأرشيف لأنه «المراة» : كل خلية تُوزن بمرات حضورها في الخماسي.
- *  لا عشوائية — لا shuffle — لا !تعديلية. ولا تُكرر أي تشكيلة من الأرشيف.
+ *  13/11/2026 — القاعدة : **أنماط P التي كوّنت الخماسي في الأرشيف**.
+ *  لا أوزان، لا قوة، لا ترتيب بالأفضلية — الكل مرشح.
+ *  لا يُرجّح المحرك شيئًا؛ الترشيح مصدره شيئان فقط :
+ *    ① الأنماط المؤرشفة : كل خماسي سباق مؤرَشَف هو مرشّح خماسي جاهز
+ *      {1,5,3,10,8} مثلًا — تُستدعى كما هي، بترتيب **الأحدث أولًا**
+ *      (ثم بالمفتاح المرتب، حتمية 100%).
+ *    ② الأرقام المستبعدة يدويًا بـ«ignorer» يقلص الحقل — لا أكثر.
+ *  القيد الصارم بين كل صفَّين : **≤ 2 رقمًا مشتركًا** — بالتزامن مع التذكرات الخمسية وقاعدة الأساسين (disjoint).
  * ════════════════════════════════════════════════════════════════════════ */
 
 import { normDiscipline } from './synthese.js'
@@ -27,28 +32,66 @@ export function attributionSlots(synthese, runners) {
   return slot
 }
 
-/* اختيار حتمي كامل : خوارزمية رجوع للخلف (DFS) بترتيب الأوزان —
- * تُرجع أول تركيبة تحقق قيد ≤ 2 مع كل تذكيرة سابقة؛ إذا وُجدت تركيبة صالحة
- * يتم إيجادها مهما كان ترتيب المرشحين (اكتمال لا جشع أحادي الاتجاه).
- * لا إشباع متجاهل للقيد، ولا تذكيرة مكررة، حتمية 100%. */
-function pickDiverse(ranked, priors, target = 5, forced = []) {
-  const priorSets = priors.map((prior) => new Set(prior.map((p) => p.slot)))
-  const taken = new Set(forced.map((c) => c.slot))
+/** أنماط P المؤرشفة : كل خماسي سباق مؤرَشَف هو «تركيبة نجحت» للخانات.
+ *  مرتبة بـ(date تنازليًا ثم بالمفتاح) — حتمية، لا ترجيح. تُصفّى بالتخصص كبقية الأرشيف.
+ *  التكرار يُحذف (نفس مجموعة الخانات = نفس المرشح). */
+export function patternsFromArchive(db, discipline) {
+  const items = []
+  for (const [k, e] of Object.entries(db || {})) {
+    if (!e || !Array.isArray(e.arrivee) || e.arrivee.length < 5) continue
+    if (!Array.isArray(e.synthese) || !Array.isArray(e.runners)) continue
+    if (discipline && normDiscipline(e.discipline) !== discipline) continue
+    const slots = attributionSlots(e.synthese, e.runners)
+    const comboS = e.arrivee.slice(0, 5).map((n) => slots[n]).filter((s) => s != null)
+    if (comboS.length !== 5) continue
+    const sorted = comboS.slice().sort((a, b) => a - b)
+    items.push({ slots: sorted, key: sorted.join('-'), date: k })
+  }
+  items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : (a.key < b.key ? -1 : a.key > b.key ? 1 : 0)))
+  const seen = new Set()
+  return items.filter((p) => (seen.has(p.key) ? false : (seen.add(p.key), true)))
+}
+
+/** تجسيد الأنماط بأرقام اليوم (مع الاستبعاد والترجيح بال P تصاعديًا فقط) */
+function candidatesFromPatterns(patterns, ordre, absents) {
+  const numBySlot = {}
+  for (const c of ordre || []) if (c.slot != null) numBySlot[c.slot] = c.num
+  const out = []
+  for (const p of patterns) {
+    const nums = p.slots.map((s) => numBySlot[s])
+    if (nums.some((n) => !Number.isFinite(n))) continue          /* اليوم لا يملك هذه الخانة */
+    if (new Set(nums).size !== 5) continue
+    if (nums.some((n) => absents.has(n))) continue               /* رقم مُتجاهَل */
+    out.push({ nums, key: p.key, slots: p.slots, date: p.date })
+  }
+  return out
+}
+
+const overlapCount = (a, b) => {
+  const sb = new Set(b)
+  let n = 0
+  for (const x of a) if (sb.has(x)) n++
+  return n
+}
+
+/** اختيار خارجي حتمي كامل (DFS) — يُستدعى فقط إذا لم تكفِ الأنماط.
+ *  ترتيب المرشحين = ترتيب الكارني (P تصاعدي) — لا أفضلية ولا وزن. */
+function fillDiverse(candidates, priors, target, forced) {
+  const priorSets = priors.map((p) => new Set(p))
   const sol = [...forced]
-  const overlap = (tent, s) => { let n = 0; for (const x of tent) if (s.has(x)) n++; return n }
-  const okWithPriors = (tent) => priorSets.every((s) => overlap(tent, s) <= 2)
+  const taken = new Set(forced)
   const dfs = (startIdx) => {
     if (sol.length >= target) return true
-    for (let i = startIdx; i < ranked.length; i++) {
-      const c = ranked[i]
-      if (taken.has(c.slot)) continue
-      const tent = [...sol.map((p) => p.slot), c.slot]
-      if (!okWithPriors(tent)) continue
-      taken.add(c.slot)
+    for (let i = startIdx; i < candidates.length; i++) {
+      const c = candidates[i]
+      if (taken.has(c)) continue
+      const tent = [...sol, c]
+      if (priorSets.some((s) => overlapCount(tent, [...s]) > 2)) continue
+      taken.add(c)
       sol.push(c)
       if (dfs(i + 1)) return true
       sol.pop()
-      taken.delete(c.slot)
+      taken.delete(c)
     }
     return false
   }
@@ -56,99 +99,73 @@ function pickDiverse(ranked, priors, target = 5, forced = []) {
   return sol
 }
 
-function remplaceComboInterdit(picks, ordonnes, combos, priors = []) {
-  if (picks.length !== 5) return picks
-  const cle = (arr) => arr.map((p) => p.slot).slice().sort((a, b) => a - b).join('-')
-  if (!combos.has(cle(picks))) return picks
-  const priorSets = priors.map((prior) => new Set(prior.map((p) => p.slot)))
-  const overlap = (tent, s) => { let n = 0; for (const x of tent) if (s.has(x)) n++; return n }
-  const restantes = ordonnes.filter((x) => !picks.includes(x))
-  for (const alt of restantes) {
-    const tentative = [...picks.slice(0, -1), alt]
-    const slots = tentative.map((p) => p.slot)
-    if (priorSets.some((s) => overlap(slots, s) > 2)) continue   /* لا تكسر قيد ≤ 2 عند الاستبدال */
-    if (!combos.has(cle(tentative))) return tentative
-  }
-  return picks
-}
-
-/** تحليل الأرشيف لتخصص — أو الكل عند discipline = null («TOUS»). */
-export function analyser(db, discipline) {
-  const parNature = {}
-  const combos = new Set()
-  for (const e of Object.values(db)) {
-    if (!e || !Array.isArray(e.arrivee) || e.arrivee.length < 5 || !Array.isArray(e.synthese)) continue
-    if (discipline && normDiscipline(e.discipline) !== discipline) continue
-    const slot = attributionSlots(e.synthese, e.runners)
-    e.arrivee.slice(0, 5).forEach((num, i) => {
-      const s = slot[num]
-      if (s == null) return
-      const c = parNature[s] || (parNature[s] = { cinq: 0, trois: 0, un: 0 })
-      c.cinq++
-      if (i < 3) c.trois++
-      if (i === 0) c.un++
-    })
-    const combo = e.arrivee.slice(0, 5).map((n) => slot[n]).filter((s) => s != null)
-    if (combo.length === 5) combos.add(combo.slice().sort((a, b) => a - b).join('-'))
-  }
-  const poids = {}
-  let maxPoids = 0
-  for (const [s, c] of Object.entries(parNature)) {
-    const p = c.cinq + c.trois * 2 + c.un * 3
-    poids[Number(s)] = p
-    if (p > maxPoids) maxPoids = p
-  }
-  return { poids, maxPoids, combos, races: Object.keys(db).filter((k) => !discipline || normDiscipline(db[k]?.discipline) === discipline).length }
-}
-
-/** توليد سطر واحد — target خلية «?»، بلا أرقام مكتوبة وملا، بترتيب الأوزان. */
-export function genererLigne({ ordre, discipline, ignored, typed, target, db, cache }) {
-  const an = (cache || analyser(db, discipline))
-  const absents = new Set(ignored || [])
-  for (const n of typed || []) absents.add(n)
-  const candidates = (ordre || []).filter((c) => !absents.has(c.num)).map((c) => ({ ...c, p: an.poids[c.slot] || 0 }))
-  const ordonnes = [...candidates].sort((a, b) => (b.p - a.p) || (a.slot - b.slot))
-  const picked = ordonnes.slice(0, target)
-  return remplaceComboInterdit(picked, ordonnes, an.combos).map((c) => c.num)
-}
-
-/** توليد كل السطور دفعة واحدة — استعمال واحد للتحليل وللأداء.
- *  `diversify` : قائمة من المعرفات تُولَّد بخوارزمية التباين (≤ 2 مشترك بين كل زوجين). */
+/** توليد كل السطور دفعة واحدة — حتمية 100%، لا أوزان. */
 export async function genererMoteur({ ordre, discipline, ignored, lignes, db, diversify }) {
-  const caches = {}
-  const analyserWithCache = (dbLocal, disc) => {
-    const key = disc || 'TOUS'
-    if (!caches[key]) caches[key] = analyser(dbLocal, disc || null)
-    return caches[key]
-  }
-  const an = analyserWithCache(db, discipline === 'TOUS' ? null : discipline)
+  const patterns = patternsFromArchive(db, discipline === 'TOUS' ? null : discipline)
   const absents = new Set(ignored || [])
-  const ranked = (ordre || []).filter((c) => !absents.has(c.num)).map((c) => ({ ...c, p: an.poids[c.slot] || 0 }))
-    .sort((a, b) => (b.p - a.p) || (a.slot - b.slot))
+  /* ترتيب التوليد : الأساسين ثم التذاكر الخمسية */
+  const keys = Object.keys(lignes)
+
+  const rankOrder = (a, b) => ordre.findIndex((c) => c.num === a) - ordre.findIndex((c) => c.num === b)
+
+  /* تجسيد المرشّحات مرة واحدة */
+  const candidatBase = (ordre || []).filter((c) => !absents.has(c.num))
+  const rankedNums = candidatBase.map((c) => c.num)
+  const allCandidates = candidatesFromPatterns(patterns, ordre, absents)
+
   const out = {}
-  const priors = []
-  const diverseSet = new Set(diversify || [])
-  for (const id of Object.keys(lignes)) {
+  const priors = []   /* تُحفظ التذكرات الكاملة (أرقام) لـ≤ 2 بين كل زوجين */
+  const baseUsed = new Set()  /* أرقام BASE 1 تُستبعد من BASE 2 لمنع التماثل */
+
+  for (const id of keys) {
     const ligne = lignes[id]
-    const typedNums = (ligne.typed || []).map((v) => Number(v)).filter(Number.isFinite).filter((n) => n > 0)
-    const cible = ligne.cible
-    if (diverseSet.has(id)) {
-      /* توليد الصفوف الخمسة كتذاكرات : الأرقام المكتوبة تُثبَّت، والباقي يُملأ
-       * بقيد المشاركة ≤ 2 بين كل زوجين — ولا تذكيرة مكررة مطلقًا */
-      const target = Math.min(cible, 5)
-      const fixed = (ordre || []).filter((c) => typedNums.includes(c.num))
-      const total0 = pickDiverse(ranked, priors, target, fixed)
-      const total = remplaceComboInterdit(total0, ranked, an.combos, priors)
+    const typedNums = [...new Set((ligne.typed || []).map((v) => Number(v)).filter((n) => Number.isFinite(n) && n > 0))]
+    const isDiverse = !!diversify?.includes(id)
+    const isBase = !isDiverse
+
+    if (isBase) {
+      /* BASE 1 / BASE 2 : تعبئة بترتيب الكارني صرف — لا أوزان، بلا تماثل حتى بينهما */
+      const cible = ligne.cible
+      const used = new Set([...baseUsed, ...typedNums])
+      const fill = []
+      for (const n of rankedNums) {
+        if (fill.length >= cible - typedNums.length) break
+        if (used.has(n)) continue
+        used.add(n)
+        fill.push(n)
+      }
+      const total = [...typedNums, ...fill]
+      for (const n of total) baseUsed.add(n)
       priors.push(total)
-      out[id] = total.filter((c) => !typedNums.includes(c.num)).map((c) => c.num)
-    } else {
-      /* التوليد الحتمي المعتاد */
-      const target = Math.max(0, cible - typedNums.length)
-      const mine = ranked.filter((c) => !typedNums.includes(c.num))
-      const gen = mine.slice(0, target)
-      out[id] = remplaceComboInterdit(gen, ranked, an.combos).map((c) => c.num)
+      out[id] = fill
+      continue
     }
+
+    /* التذاكر الخمسية : المرشحون = أنماط P المؤرشفة (الأحدث أولًا) — بلا أوزان */
+    const target = Math.min(ligne.cible, 5)
+    const fixed = typedNums
+    let pick = null
+    for (const cand of allCandidates) {
+      if (pick) break
+      const total = [...fixed, ...cand.nums]
+      /* أرقام مكتوبة إلزامية : يجب أن تحتويها التذكرة */
+      if (fixed.some((n) => !cand.nums.includes(n))) continue
+      if (priors.some((s) => overlapCount(total, s) > 2)) continue
+      pick = cand
+    }
+    if (pick) {
+      const total = [...fixed, ...pick.nums]
+      priors.push(total)
+      out[id] = pick.nums.filter((n) => !fixed.includes(n))
+      continue
+    }
+    /* الاستنفاد : DFS بترتيب الكارني — لا أوزان، ≤ 2 أو «؟» للباقي */
+    const forcedArr = [...fixed]
+    const rest = fillDiverse(rankedNums, priors, target, forcedArr)
+    priors.push(rest)
+    out[id] = rest.filter((n) => !fixed.includes(n))
   }
+
   return out
 }
 
@@ -184,13 +201,12 @@ export function statsParPosition(db) {
   return res
 }
 
-/** اختيارات المحرك للميدالية/الفائز — حتمية، من الأرشيف فقط. */
+/** اختيارات المحرك للقلادة/الفائز — من الأرشيف فقط. */
 export function choisirPredictions({ ordre, discipline, db }) {
   const stats = statsParPosition(db)
   const key = discipline ? discipline : 'TOUS'
   const s = stats[key] || stats['TOUS'] || { win: {}, second: {}, third: {} }
   if (!Array.isArray(ordre) || !ordre.length) return null
-  // رتّب كل مرشح حسب المركز : الأكثر تكرارًا أولًا، ثم الكارني الأقرب
   const candidats = ordre.map((c) => c)
   const used = new Set()
   const pickBest = (cle) => {
