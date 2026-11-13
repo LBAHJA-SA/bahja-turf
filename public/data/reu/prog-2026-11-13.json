@@ -1,0 +1,532 @@
+{
+ "date": "2026-11-13",
+ "reunions": [
+  {
+   "hippodrome": "Casablanca",
+   "pays": "MA",
+   "courses": [
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C1",
+     "pays": "MA",
+     "nom": "PRIX HARVEST",
+     "heure": "10:25",
+     "distance": 1300,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C2",
+     "pays": "MA",
+     "nom": "PRIX ELMIRA",
+     "heure": "10:55",
+     "distance": 1300,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C3",
+     "pays": "MA",
+     "nom": "PRIX MARTINICO",
+     "heure": "11:27",
+     "distance": 1750,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C4",
+     "pays": "MA",
+     "nom": "PRIX ARIKA",
+     "heure": "12:05",
+     "distance": 1750,
+     "type": "PLAT"
+    }
+   ]
+  },
+  {
+   "hippodrome": "LYON-PARILLY",
+   "pays": "FR",
+   "courses": [
+    {
+     "date": "2026-11-13",
+     "reunion": "R3",
+     "code": "C1",
+     "pays": "FR",
+     "nom": "PRIX DU MINERVOIS",
+     "heure": "10:40",
+     "distance": 2850,
+     "type": "MONTE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R3",
+     "code": "C2",
+     "pays": "FR",
+     "nom": "PRIX DU BAS-RHIN",
+     "heure": "11:11",
+     "distance": 2600,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R3",
+     "code": "C3",
+     "pays": "FR",
+     "nom": "PRIX SERGE AUDIN",
+     "heure": "11:43",
+     "distance": 2600,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R3",
+     "code": "C4",
+     "pays": "FR",
+     "nom": "GRAND PRIX DES APPRENTIS",
+     "heure": "12:15",
+     "distance": 2600,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R3",
+     "code": "C5",
+     "pays": "FR",
+     "nom": "PRIX DE LA COTE D'EMERAUDE",
+     "heure": "12:50",
+     "distance": 2850,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R3",
+     "code": "C6",
+     "pays": "FR",
+     "nom": "PRIX DU DUCHE DE NIVERNAIS",
+     "heure": "13:25",
+     "distance": 2850,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R3",
+     "code": "C7",
+     "pays": "FR",
+     "nom": "PRIX D'EURE-ET-LOIR",
+     "heure": "14:00",
+     "distance": 2850,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R3",
+     "code": "C8",
+     "pays": "FR",
+     "nom": "PRIX DE PROVENCE",
+     "heure": "14:35",
+     "distance": 2850,
+     "type": "ATTELE"
+    }
+   ]
+  },
+  {
+   "hippodrome": "SAINT-CLOUD",
+   "pays": "FR",
+   "courses": [
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C1",
+     "pays": "FR",
+     "nom": "PRIX DU PAYS D'YVELINES",
+     "heure": "11:59",
+     "distance": 1600,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C2",
+     "pays": "FR",
+     "nom": "PRIX KANTAR",
+     "heure": "12:33",
+     "distance": 2000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C3",
+     "pays": "FR",
+     "nom": "PRIX PHARSALE",
+     "heure": "13:08",
+     "distance": 2000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C4",
+     "pays": "FR",
+     "nom": "PRIX DE JUZIERS",
+     "heure": "13:43",
+     "distance": 2500,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C5",
+     "pays": "FR",
+     "nom": "PRIX DE LA GOUBINIERE",
+     "heure": "14:18",
+     "distance": 2400,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C6",
+     "pays": "FR",
+     "nom": "PRIX DU HARAS D'OUILLY",
+     "heure": "14:53",
+     "distance": 2400,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C7",
+     "pays": "FR",
+     "nom": "PRIX DE LA VALLEE DE L'YVETTE",
+     "heure": "15:28",
+     "distance": 2000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C8",
+     "pays": "FR",
+     "nom": "PRIX DU PLATEAU DE SACLAY",
+     "heure": "16:03",
+     "distance": 2000,
+     "type": "PLAT"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R4",
+     "code": "C9",
+     "pays": "FR",
+     "nom": "PRIX DE LA VALLEE DE CHEVREUSE",
+     "heure": "16:38",
+     "distance": 2000,
+     "type": "PLAT"
+    }
+   ]
+  },
+  {
+   "hippodrome": "LA CEPIERE",
+   "pays": "FR",
+   "courses": [
+    {
+     "date": "2026-11-13",
+     "reunion": "R5",
+     "code": "C1",
+     "pays": "FR",
+     "nom": "PRIX DE L'HIPPODROME D'EAUZE",
+     "heure": "15:10",
+     "distance": 2950,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R5",
+     "code": "C2",
+     "pays": "FR",
+     "nom": "PRIX DE L'HIPPODROME DE FLEURANCE",
+     "heure": "15:45",
+     "distance": 2950,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R5",
+     "code": "C3",
+     "pays": "FR",
+     "nom": "PRIX DE L'HIPPODROME DE BIARRITZ",
+     "heure": "16:20",
+     "distance": 2950,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R5",
+     "code": "C4",
+     "pays": "FR",
+     "nom": "PRIX DE L'HIPPODROME DE MONTAUBAN",
+     "heure": "16:55",
+     "distance": 2950,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R5",
+     "code": "C5",
+     "pays": "FR",
+     "nom": "PRIX DE L'HIPPODROME D'AUCH",
+     "heure": "17:30",
+     "distance": 2950,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R5",
+     "code": "C6",
+     "pays": "FR",
+     "nom": "PRIX DE L'HIPPODROME DE CASTELSARRASIN",
+     "heure": "18:05",
+     "distance": 2750,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R5",
+     "code": "C7",
+     "pays": "FR",
+     "nom": "PRIX DE L'HIPPODROME DE VILLENEUVE-SUR-LOT",
+     "heure": "18:40",
+     "distance": 2950,
+     "type": "MONTE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R5",
+     "code": "C8",
+     "pays": "FR",
+     "nom": "PRIX DE L'HIPPODROME DE CASTERA-VERDUZAN",
+     "heure": "19:15",
+     "distance": 2150,
+     "type": "ATTELE"
+    }
+   ]
+  },
+  {
+   "hippodrome": "WOLVEGA",
+   "pays": "NL",
+   "courses": [
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C1",
+     "pays": "NL",
+     "nom": "VAN KAMMEN TENTEN TROPHY                PAYS BAS",
+     "heure": "16:00",
+     "distance": 1609,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C2",
+     "pays": "NL",
+     "nom": "STAL FAN BEINTEMAHUS TROPHY             PAYS BAS",
+     "heure": "16:24",
+     "distance": 1609,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C3",
+     "pays": "NL",
+     "nom": "ALLERT POL FYSIOTHERAPIE TROPHY         PAYS BAS",
+     "heure": "16:48",
+     "distance": 1609,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C4",
+     "pays": "NL",
+     "nom": "GEMEENTE WESTSTELLINGWERF GIGANTEN      PAYS BAS",
+     "heure": "17:12",
+     "distance": 3100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C5",
+     "pays": "NL",
+     "nom": "TCT SPEEDY VOLITA CUP                   PAYS BAS",
+     "heure": "17:47",
+     "distance": 1609,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C6",
+     "pays": "NL",
+     "nom": "BROWNIE JUNIOREN GIGANTEN               PAYS BAS",
+     "heure": "18:22",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C7",
+     "pays": "NL",
+     "nom": "TROTR MEDIA MONTÉ GIGANTEN              PAYS BAS",
+     "heure": "18:50",
+     "distance": 2100,
+     "type": "MONTE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C8",
+     "pays": "NL",
+     "nom": "ZOVEA GIGANTEN MIJL                     PAYS BAS",
+     "heure": "19:18",
+     "distance": 1609,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C9",
+     "pays": "NL",
+     "nom": "KLAAS J. BOOTSMAN TCT DERBY             PAYS BAS",
+     "heure": "19:49",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C10",
+     "pays": "NL",
+     "nom": "MERWESTAAL PRIJS DER GIGANTEN           PAYS BAS",
+     "heure": "20:32",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C11",
+     "pays": "NL",
+     "nom": "PRIX BOONSTRA ASSURANTIËN               PAYS BAS",
+     "heure": "21:07",
+     "distance": 2600,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R6",
+     "code": "C12",
+     "pays": "NL",
+     "nom": "NEWPORT BREEDING TCT FILLY DERBY        PAYS BAS",
+     "heure": "21:42",
+     "distance": 2100,
+     "type": "ATTELE"
+    }
+   ]
+  },
+  {
+   "hippodrome": "VINCENNES",
+   "pays": "FR",
+   "courses": [
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C1",
+     "pays": "FR",
+     "nom": "PRIX CAMPANUS",
+     "heure": "18:23",
+     "distance": 2700,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C2",
+     "pays": "FR",
+     "nom": "PRIX XAVIER DE SAINT PALAIS",
+     "heure": "18:58",
+     "distance": 2175,
+     "type": "MONTE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C3",
+     "pays": "FR",
+     "nom": "PRIX ADELHEID",
+     "heure": "19:33",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C4",
+     "pays": "FR",
+     "nom": "GRAND PRIX DU VENDREDI 13 (PRIX MIZAR)",
+     "heure": "20:15",
+     "distance": 2100,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C5",
+     "pays": "FR",
+     "nom": "PRIX FRIZZA",
+     "heure": "20:50",
+     "distance": 2700,
+     "type": "MONTE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C6",
+     "pays": "FR",
+     "nom": "PRIX EDNA",
+     "heure": "21:25",
+     "distance": 2850,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C7",
+     "pays": "FR",
+     "nom": "PRIX SOPHIA",
+     "heure": "22:00",
+     "distance": 2850,
+     "type": "ATTELE"
+    },
+    {
+     "date": "2026-11-13",
+     "reunion": "R1",
+     "code": "C8",
+     "pays": "FR",
+     "nom": "PRIX PSYCHE",
+     "heure": "22:25",
+     "distance": 2200,
+     "type": "MONTE"
+    }
+   ]
+  }
+ ],
+ "collecteLe": "2026-11-13T00:23:38.408Z"
+}

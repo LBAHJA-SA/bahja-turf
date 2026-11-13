@@ -1,4 +1,108 @@
 {
+  "2026-11-13": {
+    "date": "2026-11-13",
+    "found": true,
+    "placeholder": false,
+    "source": "pronostics-turf.info",
+    "synthese": [
+      6,
+      13,
+      5,
+      17,
+      8,
+      2,
+      4,
+      12,
+      7,
+      15,
+      18,
+      11,
+      1,
+      9,
+      10,
+      16,
+      3
+    ],
+    "runners": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "nbPartants": 11,
+    "discipline": "",
+    "hippodrome": "Casablanca",
+    "distance": 1750,
+    "courseId": "2026-11-13_R9_C4",
+    "arrivee": null,
+    "ticket": [
+      6,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      7
+    ],
+    "ticketMode": "defaut+siege-plat",
+    "groupes": [
+      {
+        "id": "G1",
+        "pris": [
+          6,
+          5,
+          8
+        ]
+      },
+      {
+        "id": "G2",
+        "pris": [
+          2,
+          4
+        ]
+      },
+      {
+        "id": "G3",
+        "pris": [
+          9
+        ]
+      },
+      {
+        "id": "G4",
+        "pris": [
+          3
+        ]
+      },
+      {
+        "id": "G5",
+        "pris": []
+      }
+    ],
+    "ticketSource": "auto",
+    "surprises": [],
+    "ticketPoseLe": "2026-11-13T00:23:35.314Z",
+    "ticketMoteur": [
+      6,
+      2,
+      3,
+      4,
+      5,
+      8,
+      9,
+      7
+    ],
+    "cloture": null,
+    "scores": null,
+    "collecte": "2026-11-13T00:23:35.314Z"
+  },
   "2026-11-12": {
     "date": "2026-11-12",
     "found": true,
@@ -45,7 +149,13 @@
     "hippodrome": "VINCENNES",
     "distance": 2100,
     "courseId": "2026-11-12_R1_C1",
-    "arrivee": null,
+    "arrivee": [
+      2,
+      1,
+      13,
+      6,
+      12
+    ],
     "ticket": [
       8,
       2,
@@ -105,7 +215,7 @@
       10,
       12
     ],
-    "cloture": null,
+    "cloture": "2026-11-13T00:23:31.106Z",
     "scores": null,
     "collecte": "2026-11-12T11:24:33.738Z",
     "ticketMatin": [
