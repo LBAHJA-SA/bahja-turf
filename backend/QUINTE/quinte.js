@@ -647,6 +647,7 @@ export async function quintePMU(date) {
             r: Number(re.numOfficiel) || 0,
             c: Number(c.numOrdre) || 0,
             hippo: (re.hippodrome && (re.hippodrome.libelleCourt || re.hippodrome.libelle)) || '',
+            pays: (re.pays && (re.pays.code || re.pays.libelle)) || '',
             nom: c.libelle || '',
             distance: Number(c.distance) || null,
             discipline: c.discipline || '',
@@ -660,18 +661,32 @@ export async function quintePMU(date) {
 }
 
 /** Retrouve chez casacourses la course que le PMU désigne (réunion + n°).
- *  ⚠ deux réunions portent parfois le même R (la `pmu-` et la `sorec-`) :
- *    on préfère celle du PMU. */
+ *  ⭐ 13/11/2026 — casacourses liste AUSSI la réunion marocaine du jour
+ *  (Casablanca R1 C4 · id `pmu-…`) en parallèle de la réunion française du
+ *  même numéro (Vincennes R1 C4). L'ancien départage (`startsWith('pmu-')`)
+ *  ne départageait PLUS rien : les DEUX réunions sont préfixées `pmu-` et la
+ *  première du programme (Casablanca) gagnait → la carte affichait le Quinté
+ *  Maroc le 13/11/2026.
+ *  Départage DÉTERMINISTE : ① l'hippodrome du PMU (VINCENNES) prime sur tout ;
+ *  ② le pays FR quand le PMU dit FRA ; ③ le préfixe `pmu-` en dernier recours. */
 export function courseDuPMU(ms, pmu) {
   if (!pmu || !pmu.r || !pmu.c) return null
+  const norm = (s) => String(s || '').toUpperCase().normalize('NFD')
+    .replace(/[̀-ͯ]/g, '').replace(/[^A-Z0-9]/g, '')
+  const cible = norm(pmu.hippo)
+  const pmuFR = /^FR/i.test(String(pmu.pays || ''))
   let best = null
   for (const m of ms || []) {
     for (const r of m.races || []) {
       const parPMU = Number(r.pmu_reunion) === pmu.r && Number(r.pmu_course) === pmu.c
       const parCode = String(m.reunion_code || '') === 'R' + pmu.r && String(r.code || '') === 'C' + pmu.c
       if (!parPMU && !parCode) continue
+      const hippo = norm(m.track)
+      const hippoMatch = !!cible && !!hippo && (hippo === cible || hippo.includes(cible) || cible.includes(hippo))
+      const paysMatch = pmuFR && String(m.country || '').toUpperCase() === 'FR'
       const prefere = String(m.id || '').startsWith('pmu-')
-      if (!best || (prefere && !best.prefere)) best = { m, r, prefere }
+      const score = (hippoMatch ? 100 : 0) + (paysMatch ? 10 : 0) + (prefere ? 1 : 0)
+      if (!best || score > best.score) best = { m, r, prefere, score }
     }
   }
   return best
@@ -706,28 +721,42 @@ export async function chercherQuinteCC(date) {
     if (cand) return { m: cand.m, r: cand.r, ratio: 1 }
   }
 
-  // le Maroc sort aussi avec sorec_quinte : on le jette sur meeting.country
   // ⚠ la page Quinté ne joue QUE la France (AGENTS.md §10) : exit l'Italie,
   //   l'Espagne et les USA que casacourses mélange dans le programme.
-  const fr = ms.filter((m) => (m.country || '').toUpperCase() === 'FR')
+  /* ⭐ 13/11/2026 — LE QUINTÉ MAROC PORTE AUSSI `sorec_quinte`.
+   *   Le soir (le Quinté français est couru, ses paris sont effacés), le SEUL
+   *   candidat `sorec_quinte` restant était Casablanca (PRIX ARIKA, 11
+   *   partants) : il s'imposait avec ~11/17 de la Synthèse, et la carte
+   *   affichait le Quinté Maroc — 13/11/2026 : conditions fausses, partants
+   *   faux, ticket gelé dessus.
+   *   RÈGLE : le Maroc est JETÉ dans TOUS les chemins, même s'il est le seul
+   *   candidat. Un meeting tagué MA dont l'hippodrome n'est PAS marocain
+   *   (cas Reims, 14/10/2026) passe quand même : on juge l'HIPPODROME, pas
+   *   le drapeau. */
+  const piste = (s) => String(s || '').toUpperCase().normalize('NFD')
+    .replace(/[̀-ͯ]/g, '').replace(/[^A-Z]/g, '')
+  const MA = new Set(['KHEMISSET', 'CASABLANCA', 'MARRAKECH', 'MEKNES', 'RABAT', 'ELJADIDA', 'SETTAT', 'KHOURIBGA', 'BENGUERIR', 'SAFI', 'KENITRA', 'FES', 'OUJDA', 'TANGER', 'AGADIR'])
+  const estMarocain = (m) => MA.has(piste(m && m.track))
+  const estEligibleFrance = (m) =>
+    String((m && m.country) || '').toUpperCase() === 'FR' || !estMarocain(m)
+  const fr = ms.filter(estEligibleFrance)
 
-  // ── 1. le cas nominal : la course annonce sorec_quinte
+  // ── 1. le cas nominal : la course annonce sorec_quinte — FRANCE UNIQUEMENT.
   //   ⚠ 14/10/2026 : casacourses étiquette Reims (le Quinté, FR) en country
   //   MA. L'ancien filtre FR jetait le vrai Quinté et ne gardait que
-  //   Cabourg → conditions + ticket faux. On collecte D'ABORD partout, et :
-  //     ① la Synthèse départage (le Maroc ne couvre rien face à la vraie) ;
-  //     ② Equidia (redirection datée du jour seulement) ;
-  //     ③ on jette les hippodromes marocains connus, R1 d'abord.
+  //   Cabourg → conditions + ticket faux. On juge donc l'hippodrome, pas le
+  //   drapeau (voir estEligibleFrance).
   const tous = []
   for (const m of ms) {
     for (const r of m.races || []) {
       if ((r.available_bet_types || []).includes('sorec_quinte')) tous.push({ m, r })
     }
   }
-  if (tous.length) {
+  const eligibles = tous.filter((c) => estEligibleFrance(c.m))
+  if (eligibles.length) {
     if (synthe.size) {
       let best = null
-      for (const c of tous) {
+      for (const c of eligibles) {
         const nums = new Set((c.r.runners || []).map((x) => Number(x.number)))
         let cover = 0
         for (const x of synthe) if (nums.has(x)) cover++
@@ -739,55 +768,61 @@ export async function chercherQuinteCC(date) {
     try {
       const redir = await redirectionQuinteEQ(date)
       if (redir && redir.date === date) {
-        const cand = tous.find((c) => String(c.m.reunion_code || '') === 'R' + redir.r)
+        const cand = eligibles.find((c) => String(c.m.reunion_code || '') === 'R' + redir.r)
         if (cand) return { ...cand, ratio: 0 }
       }
     } catch (e) { /* repli ci-dessous */ }
-    const piste = (s) => String(s || '').toUpperCase().normalize('NFD')
-      .replace(/[̀-ͯ]/g, '').replace(/[^A-Z]/g, '')
-    const MA = new Set(['KHEMISSET', 'CASABLANCA', 'MARRAKECH', 'MEKNES', 'RABAT', 'ELJADIDA', 'SETTAT', 'KHOURIBGA', 'BENGUERIR', 'SAFI', 'KENITRA', 'FES', 'OUJDA', 'TANGER', 'AGADIR'])
-    const pool = tous.filter((c) => !MA.has(piste(c.m.track)))
-    const vivier = pool.length ? pool : tous
-    const p1 = vivier.find((c) => (c.m.reunion_code || 'R9') <= 'R2') || vivier[0]
+    const p1 = eligibles.find((c) => (c.m.reunion_code || 'R9') <= 'R2') || eligibles[0]
     return { ...p1, ratio: 0 }
   }
+  /* ⭐ 13/11/2026 — PLUS AUCUN candidat français (le Quinté a couru, ses
+   *    paris sont effacés — le soir, c'est systématique). L'ancien code
+   *    REPLIAIT sur `tous`, c'est-à-dire sur le Maroc : la carte affichait
+   *    Casablanca. On ne replie plus JAMAIS : on passe au 1bis (couverture
+   *    de la Synthèse sur toutes les réunions de France). */
 
-  // ── 2. ⚠ available_bet_types VIDE : les paris du jour ne sont pas encore
-  //      publiés (cas du 04/10, jour de l'Arc). On identifie le Quinté par la
-  //      Synthèse de la presse : elle ne cite QUE le Quinté.
-  //      ⚠ le Quinté PMU est en R1 (01/10 Auteuil, 02/10 Vincennes, 03/10 et
-  //      04/10 Longchamp) : on ne regarde donc QUE R1 puis R2, sinon l’Arc
-      //      (R1 C5) passait après la coupe des 12 appels.
+  /* ── 2. ⚠ REPLI DE COUVERTURE (13/11/2026 élargi).
+   *      available_bet_types VIDE (le soir, le Quinté français est couru et
+   *      ses paris sont effacés) : on identifie le Quinté par la Synthèse de
+   *      la presse — elle ne cite QUE le Quinté.
+   *      ⭐ PLUS DE LIMITE R1/R2 : le Quinté est en R1 presque toujours, mais
+   *      s'il n'y est pas, le candidat « le moins couvert » l'emportait sur
+   *      du silence. On passe R1/R2 d'abord (l'Arc, R1 C5, reste prioritaire),
+   *      puis TOUTES les réunions de France (id pmu-*, ≥ 10 partants).
+   *      Le Maroc n'entre JAMAIS ici (fr est déjà filtré). */
   const pool = fr
     .filter((m) => (m.id || '').startsWith('pmu-'))
     .sort((a, b) => (a.reunion_code || 'R99').localeCompare(b.reunion_code || 'R99', 'en', { numeric: true }))
   if (!pool.length) return null
 
-  const court = []
-  for (const m of pool) {
-    if (!/^R[12]$/.test(m.reunion_code || '')) break   // R1 puis R2, dans l'ordre
-    for (const r of m.races || []) {
-      if ((r.starters || 0) >= 10) court.push({ m, r })
-    }
-  }
-  if (!court.length) return null
+  // R1 puis R2 d'abord, puis le reste — dans l'ordre des réunions.
+  const r12 = pool.filter((m) => /^R[12]$/.test(m.reunion_code || ''))
+  const reste = pool.filter((m) => !/^R[12]$/.test(m.reunion_code || ''))
+  const ordonnes = [...r12, ...reste]
 
   let best = null
-  for (const c of court) {
-    let det = null
-    try { det = await getJSON(`${CC_API}/race/${c.r.id}?date=${date}`) } catch (e) { continue }
-    const nums = new Set((det.runners || []).map((x) => Number(x.number)))
-    let cover = 0
-    for (const x of synthe) if (nums.has(x)) cover++
-    const ratio = synthe.size ? cover / synthe.size : 0
-    const dotations = Number(String(det.prize || '').replace(/[^0-9]/g, '')) || 0
-    // couverture d’abord, puis la plus grosse dotation
-    const score = ratio * 1e12 + dotations
-    if (!best || score > best.score) {
-      best = { m: c.m, r: { ...c.r, runners: det.runners }, det, ratio, score }
-      // couverture parfaite ET gros prix : on peut s’arrêter
-      if (ratio === 1 && dotations > 1e6) break
+  for (const m of ordonnes) {
+    const premierePasse = r12.includes(m)
+    for (const r of m.races || []) {
+      if ((r.starters || 0) < 10) continue
+      let det = null
+      try { det = await getJSON(`${CC_API}/race/${r.id}?date=${date}`) } catch (e) { continue }
+      const nums = new Set((det.runners || []).map((x) => Number(x.number)))
+      let cover = 0
+      for (const x of synthe) if (nums.has(x)) cover++
+      const ratio = synthe.size ? cover / synthe.size : 0
+      const dotations = Number(String(det.prize || '').replace(/[^0-9]/g, '')) || 0
+      // couverture d’abord, puis la plus grosse dotation
+      const score = ratio * 1e12 + dotations
+      if (!best || score > best.score) {
+        best = { m, r: { ...r, runners: det.runners }, det, ratio, score }
+        // couverture parfaite ET gros prix : on peut s’arrêter
+        if (ratio === 1 && dotations > 1e6) return best
+      }
     }
+    /* la passe R1/R2 a tranché avec une couverture parfaite : inutile
+     * d'élargir (et de multiplier les appels) */
+    if (premierePasse && best && /^R[12]$/.test(best.m.reunion_code || '') && best.ratio === 1) return best
   }
   return best
 }

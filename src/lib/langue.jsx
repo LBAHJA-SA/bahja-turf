@@ -16,7 +16,7 @@ export const VOCAB = {
   // navigation
   nav_analyse: { fr: 'Analyse course', ar: 'تحليل السباق' },
   nav_quinte: { fr: 'Quinté', ar: 'Quinté' },
-  nav_pronostique: { fr: 'PRONOSTIQUE BAHJA TURF', ar: 'تنبؤات باحجا تورف' },
+  nav_generateur: { fr: 'GENERATEUR BAHJA TURF', ar: 'مولّد باحجا تورف' },
   nav_presse: { fr: 'Presse', ar: 'الصحافة' },
   nav_lives: { fr: 'Lives', ar: 'مباشر' },
   nav_dna: { fr: 'DNA COURSE', ar: 'DNA COURSE' },
@@ -94,10 +94,6 @@ export const VOCAB = {
   flux_ouvre_pas: { fr: 'Le flux ne s’ouvre pas (hors direct, ou bloqué par l’éditeur).', ar: 'تعذر فتح البث (خارج المباشر أو محظور من الناشر).' },
   // presse
   presse_titre: { fr: 'Presse', ar: 'الصحافة' },
-  // pronostique
-  espace_pronostics: { fr: 'ESPACE PRONOSTICS', ar: 'فضاء التنبؤات' },
-  prono_titre: { fr: 'PRONOSTIQUE BAHJA TURF', ar: 'تنبؤات باحجا تورف' },
-  prono_sous: { fr: 'Les pronostics favoris de Bahja Turf.', ar: 'التنبؤات المفضلة لباحجا تورف.' },
   // quinte
   grille_titre: { fr: 'La grille', ar: 'الشبكة' },
   ticket_titre: { fr: 'Le ticket', ar: 'الورقة' },
@@ -169,8 +165,6 @@ export const VOCAB = {
   date: { fr: 'Date', ar: 'التاريخ' },
   arrivee: { fr: 'Arrivée', ar: 'الوصول' },
   details: { fr: 'Détails', ar: 'التفاصيل' },
-  chargement_pronostics: { fr: 'Chargement des pronostics…', ar: 'جار تحميل التنبؤات…' },
-  aucun_pronostic: { fr: 'Aucun pronostic publié pour le moment.', ar: 'لا تنبؤ منشور حالياً.' },
   synthese: { fr: 'La Synthèse', ar: 'الخلاصة' },
   pronostic: { fr: 'Pronostic', ar: 'التنبؤ' },
   aptitudes: { fr: 'Aptitudes — Courses · Victoires · Placés', ar: 'القدرات — سباقات · انتصارات · مراكز' },

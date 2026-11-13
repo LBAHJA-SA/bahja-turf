@@ -2,13 +2,13 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Article from '../frontend/ARTICLE/Article.jsx'
 import QuinteGrille from '../frontend/QUINTE/QuinteGrille.jsx'
+import GenerateurBahjaTurf from '../frontend/GENERATEUR/GenerateurBahjaTurf.jsx'
 
 import Analyse from '../frontend/ANALYSE/Analyse.jsx'
 import Presse from '../frontend/PRESSE/Presse.jsx'
 import Lives from '../frontend/LIVES/Lives.jsx'
 import DnaCourse from '../frontend/DNA/DnaCourse.jsx'
 import Resultats from '../frontend/RESULTATS/Resultats.jsx'
-import PronostiqueBahjaTurf from '../frontend/PRONOSTIQUE/PronostiqueBahjaTurf.jsx'
 import Admin from '../frontend/ADMIN/Admin.jsx'
 import Portail from './Portail.jsx'
 import { pointerVisite } from '../backend/ADMIN/visites.js'
@@ -55,9 +55,14 @@ export default function App(){
 
         <Route path="/quinte" element={<Portail cle="quinte"><QuinteGrille /></Portail>} />
 
-        {/* Espace des pronostics favoris de Bahja Turf. L'accès suit le droit
-         * Analyse course afin qu'il soit disponible aux abonnés concernés. */}
-        <Route path="/pronostique-bahja-turf" element={<Portail cle="analyse"><PronostiqueBahjaTurf /></Portail>} />
+        {/* ⚠ 13/11/2026 — GENERATEUR BAHJA TURF arrive.
+         *  L'accès suit le droit Analyse course, comme l'ancienne page
+         *  PRONOSTIQUE BAHJA TURF. Le contenu de la page est à définir. */}
+        <Route path="/generateur-bahja-turf" element={<Portail cle="analyse"><GenerateurBahjaTurf /></Portail>} />
+
+        {/* ⚠ 13/11/2026 — LA PAGE « PRONOSTIQUE BAHJA TURF » EST SUPPRIMÉE.
+ *  /pronostique-bahja-turf tombe dans l'adresse inconnue → retour à
+ *  l'accueil, comme n'importe quelle vieille adresse. */}
 
         {/* ⚠ 23/10/2026 — LA PAGE « COPLY » EST SUPPRIMÉE.
          *  /coply et /couple tombent dans l'adresse inconnue → retour à

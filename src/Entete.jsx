@@ -23,8 +23,9 @@ import { useLang, LangToggle } from './lib/langue.jsx'
 const LIENS = [
   { cle: 'analyse', to: '/', libelleKey: 'nav_analyse', libelle: 'Analyse course', icone: 'bi-clipboard2-pulse' },
   { cle: 'quinte', to: '/quinte', libelleKey: 'nav_quinte', libelle: 'Quinté', icone: 'bi-trophy' },
-
-  { cle: 'pronostic', droit: 'analyse', to: '/pronostique-bahja-turf', libelleKey: 'nav_pronostique', libelle: 'PRONOSTIQUE BAHJA TURF', icone: 'bi-star' },
+  /* 13/11/2026 — GENERATEUR BAHJA TURF : le générateur de Bahja TURF,
+   *   son propre onglet, sa propre lumière (l'or du logo). */
+  { cle: 'generateur', droit: 'analyse', to: '/generateur-bahja-turf', libelleKey: 'nav_generateur', libelle: 'GENERATEUR BAHJA TURF', icone: 'bi-magic' },
   { cle: 'presse', to: '/presse', libelleKey: 'nav_presse', libelle: 'Presse', icone: 'bi-newspaper' },
   { cle: 'lives', to: '/lives', libelleKey: 'nav_lives', libelle: 'Lives', icone: 'bi-broadcast' },
   /* 23/10/2026 — le moteur DNA COURSE, comme les autres pages.
@@ -52,6 +53,7 @@ export default function Entete({ page }) {
     .filter((l) => !connecte || aDroit(acces.pages, l.droit || l.cle))
 
   return (
+    <>
     <header className="entete">
       <div className="entete-in">
 
@@ -105,5 +107,13 @@ export default function Entete({ page }) {
 
       </div>
     </header>
+
+    {/* ⭐ 13/11/2026 — البانير الرسمي «Bienvenue sur Bahja TURF».
+     *  صورة فنية كاملة العرض (2139×405) تظهر في كل صفحات الموقع،
+     *  تحت الشريط مباشرة — بدون أي تغيير على محتوى الصفحات. */}
+    <div className="banniere-bienvenue">
+      <img src="/bienvenue-bahja-turf.jpg" alt="Bienvenue sur Bahja TURF — Études • Analyses • Pronostics" />
+    </div>
+    </>
   )
 }

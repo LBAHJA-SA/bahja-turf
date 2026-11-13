@@ -40,6 +40,7 @@
   --n-violet:    #a78bfa;
   --n-orange:    #fb923c;
   --n-magenta:   #e879f9;
+  --n-dore:      #ffd700;
 
   /* ── les halos ── */
   --n-halo-cyan:   0 0 22px rgba(34, 211, 238, .28);
@@ -157,10 +158,27 @@ body::before{
 .entete-lien .bi{ font-size: 15px; color: var(--t) }
 .entete-lien.actif .bi{ color: #fff; text-shadow: 0 0 12px var(--t) }
 
+/* ── BIENVENUE BAHJA TURF — البانير الرسمي (13/11/2026) ──────────────────
+ *  صورة كاملة العرض تحت الشريط في كل الصفحات — بلا حواف، بلا انحناء. */
+.banniere-bienvenue{ display:block; width:100%; line-height:0; background:#000 }
+.banniere-bienvenue img{ display:block; width:100%; height:auto }
+
+/* ── GENERATEUR BAHJA TURF — table + panneau droit vertical ── */
+.generateur-row{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  width: 100%;
+}
+@media (max-width: 960px){
+  .generateur-row{ grid-template-columns: 1fr; }
+}
+
 /* la teinte de chaque page */
 .p-analyse{ --t: var(--n-cyan) }
 .p-quinte { --t: var(--n-magenta) }
-.p-pronostic { --t: var(--n-magenta) }
+.p-generateur{ --t: var(--n-dore) }
 .p-couple { --t: var(--n-orange) }
 .p-article{ --t: var(--n-violet) }
 .p-presse{ --t: var(--n-ambre) }
