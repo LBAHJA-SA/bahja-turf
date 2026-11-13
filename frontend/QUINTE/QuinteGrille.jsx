@@ -1437,7 +1437,7 @@ function TabBassmat({ sk, B, H, detail, forme, BC, MOIS, discipline, setDiscipli
         <div style={{ fontSize: 11.5, color: sk.muted, marginBottom: 10, lineHeight: 1.5 }}>
           Le filtre change le <b>corpus de référence</b> (① à ⑧). La section ⓪ (ce mois) reste l’archive réelle.
         </div>
-      )}}
+      )}
       {MOIS && (() => {
         const mv = MOIS
         const morts = (mv.pertes?.liste || []).filter((x) => !(x.remplacantsArrives || []).length)
