@@ -8,7 +8,6 @@ import Presse from '../frontend/PRESSE/Presse.jsx'
 import Lives from '../frontend/LIVES/Lives.jsx'
 import DnaCourse from '../frontend/DNA/DnaCourse.jsx'
 import Resultats from '../frontend/RESULTATS/Resultats.jsx'
-import Probability from '../frontend/PROBABILITY/Probability.jsx'
 import PronostiqueBahjaTurf from '../frontend/PRONOSTIQUE/PronostiqueBahjaTurf.jsx'
 import Admin from '../frontend/ADMIN/Admin.jsx'
 import Portail from './Portail.jsx'
@@ -92,7 +91,6 @@ export default function App(){
          *  Données : backend/RESULTATS/donnees.js.
          * ══════════════════════════════════════════════════════════════════════ */}
         <Route path="/resultats" element={<Portail cle="resultats"><Resultats /></Portail>} />
-        <Route path="/probability" element={<Portail cle="quinte"><Probability /></Portail>} />
         <Route path="/rapports" element={<Portail cle="resultats"><Resultats /></Portail>} />
 
         {/* ══════════════════════════════════════════════════════════════════════

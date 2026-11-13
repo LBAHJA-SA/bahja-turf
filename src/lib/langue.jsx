@@ -21,7 +21,6 @@ export const VOCAB = {
   nav_lives: { fr: 'Lives', ar: 'مباشر' },
   nav_dna: { fr: 'DNA COURSE', ar: 'DNA COURSE' },
   nav_resultats: { fr: 'Résultats', ar: 'النتائج' },
-  nav_probability: { fr: 'Probabilité', ar: 'الاحتمالات' },
   nav_deconnexion: { fr: 'Déconnexion', ar: 'تسجيل الخروج' },
   nav_lang: { fr: 'العربية', ar: 'Français' },
   // commun

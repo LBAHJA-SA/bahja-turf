@@ -36,10 +36,6 @@ const LIENS = [
   /* 24/10/2026 — LES RÉSULTATS ET LES RAPPORTS. La page ne montre que les
    * courses terminées : l'arrivée des 5 premiers et ce que paie chaque pari. */
   { cle: 'resultats', to: '/resultats', libelleKey: 'nav_resultats', libelle: 'Resultats', icone: 'bi-list-ol' },
-  /* 10/11/2026 — LA PAGE DES PROBABILITÉS : la même droit que le Quinté
-   * (elle lit la même archive), mais sa propre clé d'affichage et sa couleur
-   * d'or — sans quoi deux liens porteraient la même `key` React. */
-  { cle: 'probability', droit: 'quinte', to: '/probability', libelleKey: 'nav_probability', libelle: 'PROBABILITE', icone: 'bi-graph-up' },
 ]
 
 export default function Entete({ page }) {
