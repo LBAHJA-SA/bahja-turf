@@ -1,12 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════════
- *  frontend/GENERATEUR/tests/comparator.mjs — تقرير مقارنة V1 × V2
- *
- *  الإطار:
- *  • Walk-Forward حقيقي — لا تدخل عنصر السباق الجاري في التدريب.
- *  • كل تخصص يُسجَّل بجداوله الخاصة.
- *  • v1 تُستدعي ربيبة بربيبة لأنها الـ référence.
- *  • v2 تُستدعي مع كل ملف تعريف scoring لوحدة إضافية.
- *  • لا استنساخ لخماسي مكرر بين الصفوف عند نفس الـ idéogramme.
+ *  frontend/GENERATEUR/tests/comparator.mjs — مقارنة V1 و V2 (مُحكمة)
  * ════════════════════════════════════════════════════════════════════════ */
 
 import fs from 'fs'
@@ -15,16 +8,20 @@ import { fileURLToPath } from 'url'
 import { normDiscipline } from '../synthese.js'
 import { attributionSlots } from '../moteur.js'
 import { genererMoteur as V1 } from '../moteur.js'
-import { genererMoteur as V2, choisirPredictions } from '../moteur-v2.js'
+import { genererMoteur as V2 } from '../moteur-v2.js'
 import { WEIGHTS_BY_PROFILE } from '../generation/classement.js'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const DATA = path.resolve(HERE, '..', '..', '..', 'data', 'synthese.json')
 
 const db = JSON.parse(fs.readFileSync(DATA, 'utf8'))
-const races = Object.keys(db).sort().filter((d) => Array.isArray(db[d]?.arrivee) && db[d].arrivee.length >= 5)
+const allDates = Object.keys(db).sort().filter((d) => Array.isArray(db[d]?.arrivee) && db[d].arrivee.length >= 5)
 
-/* ── فترة 95٪ (Wilson) ────────────────────────────────────────────── */
+function getDatesForDisc(D) {
+  return allDates.filter((d) => D === 'TOUS' || normDiscipline(db[d]?.discipline) === D)
+}
+
+/* ── فترة 95% (Wilson) ─────────────────────────────────────────────── */
 function wilson(k, n, z = 1.96) {
   if (n === 0) return { lo: 0, hi: 1 }
   const p = k / n
@@ -33,19 +30,19 @@ function wilson(k, n, z = 1.96) {
   const half = (z * Math.sqrt((p * (1 - p)) / n + z * z / (4 * n * n))) / denom
   return { lo: Math.max(0, center - half), hi: Math.min(1, center + half) }
 }
-
 const pctCI = (k, n) => {
   const c = wilson(k, n)
   return `${((k / (n || 1)) * 100).toFixed(1)} [${(c.lo * 100).toFixed(1)}, ${(c.hi * 100).toFixed(1)}]`
 }
 
-/* ── بناء EVAL ──────────────────────────────────────────────────────── */
-function ordrer(e) {
+/* ── EVAL ─────────────────────────────────────────────────────────────── */
+function ordrer(e, ignoreBottom) {
   const slots = attributionSlots(e.synthese, e.runners)
-  return [
+  const ordreRaw = [
     ...(e.synthese || []).map((n) => ({ num: n, presse: true, slot: slots[n] })),
     ...((e.runners || []).filter((n) => !(e.synthese || []).includes(n)).sort((a, b) => a - b)).map((n) => ({ num: n, presse: false, slot: slots[n] })),
   ].filter((c) => c.slot != null)
+  return { slots, ordreRaw }
 }
 
 function evaluerTicket(ticket, arrivee) {
@@ -67,90 +64,98 @@ function evaluerTicket(ticket, arrivee) {
   }
 }
 
+function ignoredFor(ordreRaw, ignoreBottom) {
+  if (!ignoreBottom || ignoreBottom <= 0) return []
+  return ordreRaw.slice(-ignoreBottom).map((c) => c.num)
+}
 
-
-
-const PROFILES_V2 = Object.entries(WEIGHTS_BY_PROFILE)
-
-/* ── تنفيذ V1 + V2 (بملفات التعريف) ─────────────────────────────────────── */
-async function runVariant(label, generator, disc, dbRaces, dbAll) {
-  const filtered = dbRaces.filter((d) => disc === 'TOUS' || normDiscipline(dbAll[d]?.discipline) === disc)
-  if (filtered.length < 4) return { n: 0 }
-  let n = 0, p1 = 0, p2 = 0, p3 = 0, p4 = 0, p5 = 0, unorderedTop3 = 0, top3Count = 0, quatre = 0, cinq = 0, count = 0
-  for (let i = 2; i < filtered.length; i++) {
-    const date = filtered[i]
-    const test = dbAll[date]
-    const ordre = ordrer(test)
+/* ── تنفيذ الحلين ─────────────────────────────────────────────────────── */
+async function runVariant(label, D, datesFiltered, ignoreBottom, holdoutStart) {
+  const outcomes = []
+  /* فقط السباقات المطلوبة هي اختبارات (تخطَّ الأولى للتعلّق) */
+  const testSet = holdoutStart ? datesFiltered.filter((d) => d >= holdoutStart) : datesFiltered.slice(2)
+  for (const date of testSet) {
+    const test = db[date]
+    if (!test) continue
+    const { ordreRaw } = ordrer(test, ignoreBottom)
+    const ordre = ordreRaw
+    const ignored = ignoredFor(ordreRaw, ignoreBottom)
     const training = {}
-    for (let j = 0; j < i; j++) training[filtered[j]] = dbAll[filtered[j]]
+    for (const d of datesFiltered) {
+      if (d >= date) break
+      training[d] = db[d]
+    }
     const lignes = { n1: { typed: [], cible: 5 }, n2: { typed: [], cible: 5 }, n3: { typed: [], cible: 5 }, n4: { typed: [], cible: 5 }, n5: { typed: [], cible: 5 } }
-    const ignored = []
     try {
       let out
-      if (label === 'v1') out = await V1({ ordre, discipline: disc === 'TOUS' ? null : disc, ignored, lignes, db: training })
+      if (label === 'v1') out = await V1({ ordre, discipline: D === 'TOUS' ? null : D, ignored, lignes, db: training })
       else {
         const opts = label.startsWith('v2:') ? { weights: WEIGHTS_BY_PROFILE[label.slice(3)] } : {}
-        out = await V2({ ordre, discipline: disc === 'TOUS' ? null : disc, ignored, lignes, db, uptoDate: date, ...opts })
+        out = await V2({ ordre, discipline: D === 'TOUS' ? null : D, ignored, lignes, db, uptoDate: date, ...opts })
       }
       for (const id of ['n1', 'n2', 'n3', 'n4', 'n5']) {
         const t = out[id]
         if (!t || t.length !== 5) continue
         const ev = evaluerTicket(t, test.arrivee)
-        if (!ev) continue
-        n++
-        p1 += ev.p1; p2 += ev.p2; p3 += ev.p3; p4 += ev.p4; p5 += ev.p5
-        unorderedTop3 += ev.unorderedTop3; top3Count += ev.top3Count
-        quatre += ev.quatre; cinq += ev.cinq; count += ev.count
+        outcomes.push({ ...ev, id })
       }
     } catch (e) { /* skip */ }
   }
-  return { n, p1, p2, p3, p4, p5, unorderedTop3, top3Count, quatre, cinq, count }
+  const n = outcomes.length
+  const sum = (k) => outcomes.reduce((a, b) => a + (b[k] || 0), 0)
+  return {
+    n,
+    p1: sum('p1'), p2: sum('p2'), p3: sum('p3'), p4: sum('p4'), p5: sum('p5'),
+    unorderedTop3: sum('unorderedTop3'), top3Count: sum('top3Count'),
+    quatre: sum('quatre'), cinq: sum('cinq'), count: sum('count'),
+  }
 }
 
-/* نفس السباق × نفس التذاكر — كل سباق يقيس بـ best-of-5 */
-async function pairedComparison(dbAll, D, label = 'v2:full') {
-  const racesAsc = [...new Set(Object.keys(dbAll))].sort()
-  const filtered = racesAsc.filter((d) => D === 'TOUS' || normDiscipline(dbAll[d]?.discipline) === D)
-  if (filtered.length < 4) return { v1Wins: 0, v2Wins: 0, ties: 0, usedRaces: 0 }
+/* ── المناظِر head vs head (وأ académico best-of-5) ─────────────────── */
+async function pairedComparison(D, ordersFiltered, ignoreBottom, holdoutStart, label, mode) {
+  const testSet = holdoutStart ? ordersFiltered.filter((d) => d >= holdoutStart) : ordersFiltered.slice(2)
   let v1Wins = 0, v2Wins = 0, ties = 0, usedRaces = 0
-  const ticketIds = ['n1', 'n2', 'n3', 'n4', 'n5']
-  for (let i = 2; i < filtered.length; i++) {
-    const date = filtered[i]
-    const test = dbAll[date]
-    const ordre = ordrer(test)
+  const idx = ['n1', 'n2', 'n3', 'n4', 'n5']
+  for (const date of testSet) {
+    const test = db[date]
+    if (!test) continue
+    const { ordreRaw } = ordrer(test, ignoreBottom)
+    const ordre = ordreRaw
+    const ignored = ignoredFor(ordreRaw, ignoreBottom)
     const training = {}
-    for (let j = 0; j < i; j++) training[filtered[j]] = dbAll[filtered[j]]
+    for (const d of ordersFiltered) {
+      if (d >= date) break
+      training[d] = db[d]
+    }
     const lignes = { n1: { typed: [], cible: 5 }, n2: { typed: [], cible: 5 }, n3: { typed: [], cible: 5 }, n4: { typed: [], cible: 5 }, n5: { typed: [], cible: 5 } }
-    const ignored = []
     try {
       const opts = label.startsWith('v2:') ? { weights: WEIGHTS_BY_PROFILE[label.slice(3)] } : {}
       const r1 = await V1({ ordre, discipline: D === 'TOUS' ? null : D, ignored, lignes, db: training })
-      const r2 = await V2({ ordre, discipline: D === 'TOUS' ? null : D, ignored, lignes, db: dbAll, uptoDate: date, ...opts })
-      /* أفضل تذكرة في كل سباق */
-      let best1 = 0, best2 = 0
-      let usedT1 = 0, usedT2 = 0
-      for (const id of ticketIds) {
-        const t1 = r1[id], t2 = r2[id]
+      const r2 = await V2({ ordre, discipline: D === 'TOUS' ? null : D, ignored, lignes, db, uptoDate: date, ...opts })
+      const arr = test.arrivee
+      let score1, score2
+      if (mode === 'head') {
+        const t1 = r1['n1']; const t2 = r2['n1']
         if (!t1 || !t2 || t1.length !== 5 || t2.length !== 5) continue
-        const arr = test.arrivee
-        const c1 = arr.filter((n) => new Set(t1).has(n)).length
-        const c2 = arr.filter((n) => new Set(t2).has(n)).length
-        best1 = Math.max(best1, c1)
-        best2 = Math.max(best2, c2)
-        usedT1++
-        usedT2++
+        const s1 = new Set(t1), s2 = new Set(t2)
+        score1 = arr.filter((n) => s1.has(n)).length
+        score2 = arr.filter((n) => s2.has(n)).length
+      } else {
+        const c1 = Math.max(...idx.map((id) => r1[id] && r1[id].length === 5 ? arr.filter((n) => new Set(r1[id]).has(n)).length : -1))
+        const c2 = Math.max(...idx.map((id) => r2[id] && r2[id].length === 5 ? arr.filter((n) => new Set(r2[id]).has(n)).length : -1))
+        if (c1 < 0 || c2 < 0) continue
+        score1 = c1; score2 = c2
       }
-      if (usedT1 < 5 || usedT2 < 5) continue
       usedRaces++
-      if (best1 > best2) v1Wins++
-      else if (best2 > best1) v2Wins++
+      if (score1 > score2) v1Wins++
+      else if (score2 > score1) v2Wins++
       else ties++
     } catch (e) { /* skip */ }
   }
   return { v1Wins, v2Wins, ties, usedRaces }
 }
 
-/* ── بناء التقرير ────────────────────────────────────────────────────────── */
+/* ── التقرير ──────────────────────────────────────────────────────────── */
 function fmt(s) {
   const n = s.n || 0
   return {
@@ -182,47 +187,46 @@ function printTable(title, rows) {
   }
 }
 
+function parseArgs(argv) {
+  const a = { discs: null, ignoreBottom: 2, holdoutStart: null, nStart: 2, mode: 'head' }
+  for (const arg of argv) {
+    if (arg.startsWith('disc=')) a.discs = arg.slice(5).split(',')
+    else if (arg.startsWith('ignoreBottom=')) a.ignoreBottom = parseInt(arg.slice(13), 10) || 0
+    else if (arg.startsWith('holdoutStart=')) a.holdoutStart = arg.slice(13)
+    else if (arg.startsWith('mode=')) a.mode = arg.slice(5)
+  }
+  return a
+}
+
 async function main() {
-  /* سنختار التخصصات المختبرة بقيم محددة */
-  const disciplines = process.argv.slice(2)
-  const DI = (disciplines.length ? disciplines : ['TOUS', 'ATTELÉ', 'PLAT', 'HAIE', 'STEEPLE'])
-  for (const D of DI) {
-    const filtered = races.filter((d) => D === 'TOUS' || normDiscipline(db[d]?.discipline) === D)
+  const { discs, ignoreBottom, holdoutStart, mode } = parseArgs(process.argv.slice(2))
+  const disciplines = discs || ['TOUS', 'ATTELÉ', 'PLAT', 'HAIE']
+
+  console.log('ignoreBottom:', ignoreBottom, '| holdoutStart:', holdoutStart || '(كل السباقات، المعروض من i>=2)', '| mode:', mode)
+
+  const variants = ['v1', 'v2:full', 'v2:onlyP12', 'v2:onlyP13', 'v2:onlyP23', 'v2:onlyPaires', 'v2:onlyTrioSet', 'v2:onlyTrioOrder', 'v2:onlyQuinte', 'v2:onlyIndividuel', 'v2:noRelations', 'v2:noIndividuel']
+  const variantsPaired = ['v2:full', 'v2:onlyP12', 'v2:onlyPaires', 'v2:onlyTrioSet', 'v2:onlyTrioOrder']
+
+  for (const D of disciplines) {
+    const orders = getDatesForDisc(D)
+    const visibleCount = holdoutStart ? orders.filter((d) => d >= holdoutStart).length : orders.length
     console.log('\n' + '═'.repeat(70))
-    console.log('التخصص:', D, '| السباقات التقييم:', filtered.length)
-    /* V1 */
-    const s1 = await runVariant('v1', V1, D, races, db)
-    /* V2 full + variants */
-    const v2Full = await runVariant('v2:full', V2, D, races, db)
-    const v2OnlyP12 = await runVariant('v2:onlyP12', V2, D, races, db)
-    const v2OnlyP13 = await runVariant('v2:onlyP13', V2, D, races, db)
-    const v2OnlyP23 = await runVariant('v2:onlyP23', V2, D, races, db)
-    const v2OnlyPaires = await runVariant('v2:onlyPaires', V2, D, races, db)
-    const v2OnlyTrioSet = await runVariant('v2:onlyTrioSet', V2, D, races, db)
-    const v2OnlyTrioOrder = await runVariant('v2:onlyTrioOrder', V2, D, races, db)
-    const v2OnlyQuinte = await runVariant('v2:onlyQuinte', V2, D, races, db)
-    const v2OnlyIndividuel = await runVariant('v2:onlyIndividuel', V2, D, races, db)
-    const v2NoRelations = await runVariant('v2:noRelations', V2, D, races, db)
-    const v2NoIndividuel = await runVariant('v2:noIndividuel', V2, D, races, db)
-    /* عرض النتائج */
-    const rows = [
-      ['V1', s1],
-      ['V2-full', v2Full],
-      ['V2-onlyP12', v2OnlyP12],
-      ['V2-onlyP13', v2OnlyP13],
-      ['V2-onlyP23', v2OnlyP23],
-      ['V2-onlyPaires', v2OnlyPaires],
-      ['V2-onlyTrioSet', v2OnlyTrioSet],
-      ['V2-onlyTrioOrd', v2OnlyTrioOrder],
-      ['V2-onlyQuinte', v2OnlyQuinte],
-      ['V2-onlyIndiv', v2OnlyIndividuel],
-      ['V2-noRel', v2NoRelations],
-      ['V2-noIndv', v2NoIndividuel],
-    ]
-    printTable('مقارنة التذاكر', rows)
-    /* مناظرة لكل تذاكر n1..n5 مرتبًا */
-    const pairedFull = await pairedComparison(db, D, 'v2:full')
-    console.log('\nمناظرة V1 × V2-full (كل التذاكر): V1 فوز=', pairedFull.v1Wins, '| V2 فوز=', pairedFull.v2Wins, '| تعادل=', pairedFull.ties)
+    console.log('التخصص:', D, '| السباقات للتقييم:', visibleCount)
+
+    const variantResults = {}
+    for (const v of variants) {
+      const r = await runVariant(v, D, orders, ignoreBottom, holdoutStart)
+      variantResults[v] = r
+    }
+
+    const rows = variants.map((v) => [v, variantResults[v]])
+    printTable('جدول المقارنة — بعد تطبيق ignored=' + ignoreBottom, rows)
+
+    /* مناظرات */
+    for (const v of variantsPaired) {
+      const p = await pairedComparison(D, orders, ignoreBottom, holdoutStart, v, mode)
+      console.log('  مناظرة — V1 × ' + v + ': V1 فوز=', p.v1Wins, '| V2 فوز=', p.v2Wins, '| تعادل=', p.ties, '| مستخدمة=', p.usedRaces)
+    }
   }
 }
 
