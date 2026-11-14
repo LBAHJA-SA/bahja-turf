@@ -77,7 +77,15 @@ const CHEMINS = A_PUBLIER.filter(([p]) => fs.existsSync(path.join(RACINE, p)))
 const NOMS = CHEMINS.map(([p]) => p)
 
 /* ------------------------------------------------------------------ helpers */
-const g = (...a) => execFileSync('git', a, { cwd: RACINE, encoding: 'utf8' }).trim()
+/* ⚠ 14/11/2026 — كل استدعاء فرعي يجب أن يكون محدودًا بـ مهلة (timeout).
+ *  سابقًا لا مهلة → إن علِقت الشبكة، يبقى النص పిల్లవాడు للأبد، والجداول
+ *  تحتفظ بالمهمة « En cours » وتمنع القادمة. البصمة: اليوم (2 tasks son stuck).
+ *  الآن: 60 ث كافي لكل git; 200 ث للـ push الكبير. */
+const g = (...a) => {
+  const cmd = a[0]
+  const limit = cmd === 'push' ? 180_000 : 60_000
+  return execFileSync('git', a, { cwd: RACINE, encoding: 'utf8', timeout: limit }).trim()
+}
 const log = (...a) => { if (!AUTO) console.log('  ' + a.join(' ')) }
 const dire = (...a) => console.log('  ' + a.join(' '))
 const lire = (f) => { try { return fs.readFileSync(f, 'utf8') } catch { return '' } }
@@ -87,7 +95,7 @@ const lire = (f) => { try { return fs.readFileSync(f, 'utf8') } catch { return '
 function movantes() {
   const r = spawnSync('git',
     ['status', '--porcelain', '--ignored=matching', '--untracked-files=all', '--', ...NOMS],
-    { cwd: RACINE, encoding: 'utf8' })
+    { cwd: RACINE, encoding: 'utf8', timeout: 60_000 })
   return (r.stdout || '').split('\n').map((l) => l.trim()).filter(Boolean)
 }
 
@@ -152,7 +160,7 @@ if (!change.length) {
  *  On le dit donc ici, avant de pousser, et dans les deux modes : `--auto`
  *  passe par `dire()` pour que l'avertissement finisse dans data/daily.log. */
 function codeEnAttente() {
-  const r = spawnSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: RACINE, encoding: 'utf8' })
+  const r = spawnSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: RACINE, encoding: 'utf8', timeout: 60_000 })
   return (r.stdout || '').split('\n').filter(Boolean).filter((l) => {
     const p = l.slice(3).trim().replace(/^"|"$/g, '')
     return !/^(data\/|public\/data\/|dist\/|node_modules\/)/.test(p)

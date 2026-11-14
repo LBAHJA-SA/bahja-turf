@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Entete from '../../src/Entete.jsx'
 import {
-  aujourdhui, fetchRecap, fetchArchive, dateCorrespondALaDate, latestDateAvecDiscipline, fetchArchiveDb,
+  aujourdhui, fetchRecap, fetchArchive, dateCorrespondALaDate, fetchArchiveDb,
 } from './synthese.js'
 import { genererMoteur, choisirPredictions } from './moteur.js'
 import { chargerParticipants } from './participants.js'
@@ -98,11 +98,9 @@ export default function GenerateurBahjaTurf() {
     return () => { vivant = false }
   }, [date]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const choisirDiscipline = async (d) => {
-    if (d === null) { setDiscipline(null); return }
+  /* ── التبديل بين التخصصات دون تغيير تاريخ البحث ──────────────────── */
+  const choisirDiscipline = (d) => {
     setDiscipline(d)
-    const latest = await latestDateAvecDiscipline(d)
-    if (latest) setDate(latest)
   }
 
   /* ── Moteur : remplit uniquement les cases « ? » (constat MOTEUR.md) ── */
