@@ -100,7 +100,8 @@ export async function genererMoteur({ ordre, discipline, ignored, lignes, db }) 
   const keys = Object.keys(lignes)
   const out = {}
   const usedKeys = new Set()   /* لضمان عدم تكرار الخماسي نفسه */
-  let ptr = 0   /* مؤشر مشترك لكل الصفوف — لا يرجع أبدًا */
+  let ptr = 0   /* مؤشر مشترك على الأرشيف — لا يرجع أبدا */
+  let fptr = 0  /* مؤشر مشترك على ترتيبة الكارني — يدور (لضمان عدم التماثل بين الصفوف) */
 
   for (const id of keys) {
     const ligne = lignes[id]
@@ -120,10 +121,14 @@ export async function genererMoteur({ ordre, discipline, ignored, lignes, db }) 
       }
     }
 
-    /* المرحلة 2 — حتمية : إكمال الناقص بأرقام اليوم بترتيب الكارني (P1..Pn) */
+    /* المرحلة 2 — حتمية : إكمال الناقص بأرقام اليوم بترتيب الكارني (P1..Pn) مع مؤشر مشترك */
     if (picks.length < need) {
-      for (const c of ordre) {
-        if (picks.length >= need) break
+      let guard = 0
+      const maxGuard = ordre.length * 4
+      while (picks.length < need && guard < maxGuard) {
+        const c = ordre[fptr % ordre.length]
+        fptr++
+        guard++
         const n = c.num
         if (usedLocal.has(n) || absents.has(n)) continue
         usedLocal.add(n)
