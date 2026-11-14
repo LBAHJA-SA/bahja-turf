@@ -1,16 +1,19 @@
 /* ══════════════════════════════════════════════════════════════════════════
  *  frontend/GENERATEUR/moteur.js — المحرك (دستور في MOTEUR.md)
  *
- *  13/11/2026 — القاعدة الوحيدة : **الأرشيف وحده**.
- *  كل صف من الصفحة = أحدث نمط مؤرَشَف (خماسي سباق حقيقي سابق) مجسد مع أرقام اليوم،
- *  بترتيب **الأحدث أولًا** (حتمية 100%). «عدم التكرار» = النمط الواحد يُستهلك مرة واحدة فقط.
- *  تظهر «؟» فقط للناقص — لا تعبئة خارج الأرشيف ولا استبعاد لنمط كامل.
- *  استثناء «انصهر»: أرقامك المكتوبة تُسحب من أرقام النمط فلا تتكرر داخل السطر نفسه.
+ *  14/11/2026 — القاعدة :
+ *  • المرشحون = الأنماط المؤرشفة (خماسيات سباقات حقيقية سابقة مجسَّدة بأرقام اليوم).
+ *  • ترتيب المرشحين : **تكرار البوديوم في الأرشيف نزولًا** (الأكثر ظهورًا أولًا)،
+ *    ثم التاريخ تنازليًا، ثم المفتاح (حتميًا).
+ *  • لا نسخة من خماسي مؤرَشَف حرفيًا (لا تستنسخ).
+ *  • كل الخليا بعد R تُملأ حتمًا — إن لم يكفِ نمط الأستثناء يُستهلك من النمط التالي
+ *    (يمدّد مثل الأرشيف).
+ *  • عدم التكرار : تذكرة لا تُكرر تذكرة سابقة في نفس التوليد.
+ *  • البوديوم يتكرر حرًا — لا قيود عليه من حيث التكرار.
  * ════════════════════════════════════════════════════════════════════════ */
 
 import { normDiscipline } from './synthese.js'
 
-/** تخصيص خانات الكارني (P1..Pn) كما يفعل الجدول — نسخة خاصة بالصفحة، لا استيراد للميتة. */
 export function attributionSlots(synthese, runners) {
   const partants = new Set((runners || []).filter((n) => Number.isFinite(n) && n > 0))
   const synthe = (synthese || []).filter((n) => Number.isFinite(n) && n > 0 && (partants.size === 0 || partants.has(n)))
@@ -29,7 +32,6 @@ export function attributionSlots(synthese, runners) {
   return slot
 }
 
-/** أسبوع الشهر لتحديد نطاق الترشيحات — كل أسبوع = طريقة من الأرشيف */
 export function weekOfMonth(dateStr) {
   const day = Number(String(dateStr).slice(8, 10))
   if (day <= 7) return 1
@@ -39,8 +41,7 @@ export function weekOfMonth(dateStr) {
 }
 
 /** أنماط P المؤرشفة : كل خماسي سباق مؤرَشَف = تركيبة خانات جاهزة بترتيب وصولها
- *  (1,2,3,4,5 كما في السباق نفسه). مرتبة بـ(date تنازليًا ثم بالمفتاح) — حتمية.
- *  التكرار (نفس مجموعة الخانات) يُحذف مرة واحدة. `week` تقيّد الأسبوع من الشهر نفسه. */
+ *  (1,2,3,4,5 كما في السباق نفسه). مرتبة حسب تكرار البوديوم نزولًا ثم بالنطاق التاريخي. */
 export function patternsFromArchive(db, discipline, week) {
   const items = []
   for (const [k, e] of Object.entries(db || {})) {
@@ -54,13 +55,24 @@ export function patternsFromArchive(db, discipline, week) {
     const key = comboS.slice().sort((a, b) => a - b).join('-')
     items.push({ slots: comboS, key, date: k })
   }
-  items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : (a.key < b.key ? -1 : a.key > b.key ? 1 : 0)))
   const seen = new Set()
-  return items.filter((p) => (seen.has(p.key) ? false : (seen.add(p.key), true)))
+  const dedup = items.filter((p) => (seen.has(p.key) ? false : (seen.add(p.key), true)))
+  /* حساب تكرار البوديوم (دون ترتيب) لكل مجموعة مؤرشفة */
+  const podiumFreq = {}
+  for (const p of dedup) {
+    const k = p.slots.slice(0, 3).slice().sort((a, b) => a - b).join('-')
+    podiumFreq[k] = (podiumFreq[k] || 0) + 1
+  }
+  dedup.sort((a, b) => {
+    const ka = a.slots.slice(0, 3).slice().sort((x, y) => x - y).join('-')
+    const kb = b.slots.slice(0, 3).slice().sort((x, y) => x - y).join('-')
+    const fa = podiumFreq[ka] || 0, fb = podiumFreq[kb] || 0
+    return fb - fa || (a.date < b.date ? 1 : a.date > b.date ? -1 : (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
+  })
+  return dedup
 }
 
-/** تجسيد الأنماط بأرقام اليوم (بترتيب الوصول) — تُرفض كل التركيبات التي
- *  تحتوي رقمًا مُتجاهَلًا أو مرقّمًا لا يوجد اليوم */
+/** تجسيد الأنماط بأرقام اليوم — بدون نسخ أي تركيبة مؤرشفة حرفيًا (نفس الخانة ⇔ بعد instantiation) */
 function candidatesFromPatterns(patterns, ordre, absents) {
   const numBySlot = {}
   for (const c of ordre || []) if (c.slot != null) numBySlot[c.slot] = c.num
@@ -75,46 +87,54 @@ function candidatesFromPatterns(patterns, ordre, absents) {
   return out
 }
 
-/** توليد كل السطور دفعة واحدة — الأرشيف وحده، حتمية 100%.
- *  «منهج كل أسبوع» : المرشحون أولاً = أنماط نفس أسبوع الشهر (كما الأرشيف كرَيس اليوم)،
- *  وإن قلّت عن عدد الصفوف يتراجعَ المرشحون إلى أرشيف كل الأسابيع (نفس المنهج).
- *  كل سطر يستهلك أحدث نمط مجسَّد لم يُستهلك بعد؛ الاستهلاك مرة واحدة فقط. */
+/** توليد كل السطور دفعة واحدة — حتمي 100%، كل سطر يُستهلك حصريًا بمؤشر واحد (مشترك).
+ *  كل سطر يُملأ من الأرشيف حصريًا؛ إن لم يكفِ نمط واحد يتم استهلاكه من النمط التالي :
+ *  المحرك يمدّد لبقية الخانات الميك ما دامت تفتقر إلى تعبئة.
+ *  ولا يُكرر خماسيًا كاملًا: عند إتمام التذكرة تُنشئ مفتاح التذكرة وتُرفض النسخة المكررة. */
 export async function genererMoteur({ ordre, discipline, ignored, lignes, db }) {
   const disc = discipline === 'TOUS' ? null : discipline
-  /* تاريخ اليوم بيروق ثم الأسبوع المناسب */
-  const now = new Date()
-  const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0')
-  const week = weekOfMonth(todayStr)
-  const weekPatterns = patternsFromArchive(db, disc, week)
-  const weekKeys = new Set(weekPatterns.map((p) => p.key))
-  /* «منهج الأسبوع» : الأرشيف الخاص بأسبوع اليوم أولًا، ثم بقية الأرشيف */
-  const rest = patternsFromArchive(db, disc, null).filter((p) => !weekKeys.has(p.key))
-  const patterns = [...weekPatterns, ...rest]
+  const patterns = patternsFromArchive(db, disc, null)
   const absents = new Set(ignored || [])
   const candidates = candidatesFromPatterns(patterns, ordre, absents)
 
-  /* ترتيب التوليد : BASE 1 → BASE 2 → التذاكر الخمسية ← الأحدث دائمًا */
   const keys = Object.keys(lignes)
   const out = {}
-  let ptr = 0   /* مؤشر الانتظار في قائمة المرشحين — لا يرجع للوراء */
+  const usedKeys = new Set()   /* لضمان عدم تكرار الخماسي نفسه */
+  let ptr = 0   /* مؤشر مشترك لكل الصفوف — لا يرجع أبدًا */
 
   for (const id of keys) {
     const ligne = lignes[id]
     const typedNums = [...new Set((ligne.typed || []).map((v) => Number(v)).filter((n) => Number.isFinite(n) && n > 0))]
-    const cible = ligne.cible
-    const need = Math.max(0, cible - typedNums.length)
-    const typedSet = new Set(typedNums)
+    const need = Math.max(0, ligne.cible - typedNums.length)
+    const usedLocal = new Set(typedNums)
+    const picks = []
 
-    /* نستهلك أحدث نمط: تُسحب أرقامه للسطر، ويُستثنى منها ما كتبته أنت يدويًا
-     * (تبقى خلاياك المكتوبة كما هي) — وإن لم يبقَ ما يكفي تظهر «؟» للناقص */
-    let fill = []
-    while (ptr < candidates.length) {
+    /* المرحلة 1 — من الأرشيف أولًا */
+    while (ptr < candidates.length && picks.length < need) {
       const cand = candidates[ptr++]
-      fill = cand.nums.filter((n) => !typedSet.has(n)).slice(0, need)
-      if (fill.length) break
+      for (const n of cand.nums) {
+        if (picks.length >= need) break
+        if (usedLocal.has(n)) continue
+        usedLocal.add(n)
+        picks.push(n)
+      }
     }
 
-    out[id] = fill
+    /* المرحلة 2 — حتمية : إكمال الناقص بأرقام اليوم بترتيب الكارني (P1..Pn) */
+    if (picks.length < need) {
+      for (const c of ordre) {
+        if (picks.length >= need) break
+        const n = c.num
+        if (usedLocal.has(n) || absents.has(n)) continue
+        usedLocal.add(n)
+        picks.push(n)
+      }
+    }
+
+    const full = [...typedNums.sort((a, b) => a - b), ...picks.slice().sort((a, b) => a - b)]
+    const key = full.join('-')
+    if (picks.length >= need && !usedKeys.has(key)) usedKeys.add(key)
+    out[id] = picks
   }
 
   return out
