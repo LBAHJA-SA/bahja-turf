@@ -85,7 +85,7 @@ export default function GenerateurBahjaTurf() {
       let runners = runnersArch
       if (!runners.length) {
         const live = await chargerParticipants(date, base.synthese).catch(() => null)
-        if (live?.runners?.length) runners = live.runners.filter((n) => !(live.exclus || []).includes(n))
+        if (live?.runners?.length) runners = live.runners
       }
       const ordre = [
         ...base.synthese.map((num) => ({ num, presse: true })),
