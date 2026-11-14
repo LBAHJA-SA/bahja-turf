@@ -4,6 +4,7 @@ import {
   aujourdhui, fetchRecap, fetchArchive, dateCorrespondALaDate, latestDateAvecDiscipline, fetchArchiveDb,
 } from './synthese.js'
 import { genererMoteur, choisirPredictions } from './moteur.js'
+import { chargerParticipants } from './participants.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
  *  frontend/GENERATEUR/GenerateurBahjaTurf.jsx — GENERATEUR BAHJA TURF
@@ -78,7 +79,14 @@ export default function GenerateurBahjaTurf() {
       if (!base) { setErreur(TXT_VIDE); return }
       /* ⭐ ne pas ignorer ceux que la presse n'a pas notés : les partants manquants
        *   sont ajoutés à la suite, en presse, avec un « + » sur leur tuile */
-      const runners = arch?.runners || []
+      /* ⭐ متباريوه يوم السباق من كاساركوس — يكمّل بهم الأرشيف ما لم تذكره
+       *   الصحافة (لا كوجود في الأرشيف إلا بعد نهاية السباق). */
+      const runnersArch = arch?.runners || []
+      let runners = runnersArch
+      if (!runners.length) {
+        const live = await chargerParticipants(date, base.synthese).catch(() => null)
+        if (live?.runners?.length) runners = live.runners.filter((n) => !(live.exclus || []).includes(n))
+      }
       const ordre = [
         ...base.synthese.map((num) => ({ num, presse: true })),
         ...runners.filter((n) => !base.synthese.includes(n)).sort((a, b) => a - b).map((num) => ({ num, presse: false })),
