@@ -52,23 +52,23 @@ function evaluerTicket(ticket, arrivee) {
   if (!ticket || ticket.length !== 5) return null
   const set = new Set(ticket)
   const count = arrivee.filter((n) => set.has(n)).length
-  const orderedTop3 =
-    ticket[0] === arrivee[0] && ticket[1] === arrivee[1] && ticket[2] === arrivee[2]
-  const unorderedTop3 = [arrivee[0], arrivee[1], arrivee[2]].every((n) => set.has(n))
-  const anyPos = (s, p) => (ticket[p] === s ? 1 : 0)
+  const top3Matched = arrivee.slice(0, 3).filter((n) => set.has(n)).length
   return {
     p1: set.has(arrivee[0]) ? 1 : 0,
     p2: set.has(arrivee[1]) ? 1 : 0,
     p3: set.has(arrivee[2]) ? 1 : 0,
     p4: set.has(arrivee[3]) ? 1 : 0,
     p5: set.has(arrivee[4]) ? 1 : 0,
-    unorderedTop3: unorderedTop3 ? 1 : 0,
-    orderedTop3: orderedTop3 ? 1 : 0,
+    top3Count: top3Matched,
+    unorderedTop3: top3Matched === 3 ? 1 : 0,
     quatre: count >= 4 ? 1 : 0,
     cinq: count === 5 ? 1 : 0,
     count,
   }
 }
+
+
+
 
 const PROFILES_V2 = Object.entries(WEIGHTS_BY_PROFILE)
 
@@ -76,8 +76,7 @@ const PROFILES_V2 = Object.entries(WEIGHTS_BY_PROFILE)
 async function runVariant(label, generator, disc, dbRaces, dbAll) {
   const filtered = dbRaces.filter((d) => disc === 'TOUS' || normDiscipline(dbAll[d]?.discipline) === disc)
   if (filtered.length < 4) return { n: 0 }
-  let n = 0, p1 = 0, p2 = 0, p3 = 0, p4 = 0, p5 = 0, unorderedTop3 = 0, orderedTop3 = 0, quatre = 0, cinq = 0, count = 0
-  const raceWins = { v1: 0, v2: 0, tie: 0 }    /* reserved; we also use absolute counts */
+  let n = 0, p1 = 0, p2 = 0, p3 = 0, p4 = 0, p5 = 0, unorderedTop3 = 0, top3Count = 0, quatre = 0, cinq = 0, count = 0
   for (let i = 2; i < filtered.length; i++) {
     const date = filtered[i]
     const test = dbAll[date]
@@ -100,20 +99,20 @@ async function runVariant(label, generator, disc, dbRaces, dbAll) {
         if (!ev) continue
         n++
         p1 += ev.p1; p2 += ev.p2; p3 += ev.p3; p4 += ev.p4; p5 += ev.p5
-        unorderedTop3 += ev.unorderedTop3; orderedTop3 += ev.orderedTop3
+        unorderedTop3 += ev.unorderedTop3; top3Count += ev.top3Count
         quatre += ev.quatre; cinq += ev.cinq; count += ev.count
       }
     } catch (e) { /* skip */ }
   }
-  return { n, p1, p2, p3, p4, p5, unorderedTop3, orderedTop3, quatre, cinq, count }
+  return { n, p1, p2, p3, p4, p5, unorderedTop3, top3Count, quatre, cinq, count }
 }
 
-/* نفس السباق × نفس التذاكر — مناظرة V1 وV2 */
+/* نفس السباق × نفس التذاكر — كل سباق يقيس بـ best-of-5 */
 async function pairedComparison(dbAll, D, label = 'v2:full') {
   const racesAsc = [...new Set(Object.keys(dbAll))].sort()
   const filtered = racesAsc.filter((d) => D === 'TOUS' || normDiscipline(dbAll[d]?.discipline) === D)
-  if (filtered.length < 4) return { v1Wins: 0, v2Wins: 0, ties: 0 }
-  let v1Wins = 0, v2Wins = 0, ties = 0
+  if (filtered.length < 4) return { v1Wins: 0, v2Wins: 0, ties: 0, usedRaces: 0 }
+  let v1Wins = 0, v2Wins = 0, ties = 0, usedRaces = 0
   const ticketIds = ['n1', 'n2', 'n3', 'n4', 'n5']
   for (let i = 2; i < filtered.length; i++) {
     const date = filtered[i]
@@ -127,19 +126,28 @@ async function pairedComparison(dbAll, D, label = 'v2:full') {
       const opts = label.startsWith('v2:') ? { weights: WEIGHTS_BY_PROFILE[label.slice(3)] } : {}
       const r1 = await V1({ ordre, discipline: D === 'TOUS' ? null : D, ignored, lignes, db: training })
       const r2 = await V2({ ordre, discipline: D === 'TOUS' ? null : D, ignored, lignes, db: dbAll, uptoDate: date, ...opts })
+      /* أفضل تذكرة في كل سباق */
+      let best1 = 0, best2 = 0
+      let usedT1 = 0, usedT2 = 0
       for (const id of ticketIds) {
         const t1 = r1[id], t2 = r2[id]
         if (!t1 || !t2 || t1.length !== 5 || t2.length !== 5) continue
         const arr = test.arrivee
-        const count1 = arr.filter((n) => new Set(t1).has(n)).length
-        const count2 = arr.filter((n) => new Set(t2).has(n)).length
-        if (count1 > count2) v1Wins++
-        else if (count2 > count1) v2Wins++
-        else ties++
+        const c1 = arr.filter((n) => new Set(t1).has(n)).length
+        const c2 = arr.filter((n) => new Set(t2).has(n)).length
+        best1 = Math.max(best1, c1)
+        best2 = Math.max(best2, c2)
+        usedT1++
+        usedT2++
       }
+      if (usedT1 < 5 || usedT2 < 5) continue
+      usedRaces++
+      if (best1 > best2) v1Wins++
+      else if (best2 > best1) v2Wins++
+      else ties++
     } catch (e) { /* skip */ }
   }
-  return { v1Wins, v2Wins, ties }
+  return { v1Wins, v2Wins, ties, usedRaces }
 }
 
 /* ── بناء التقرير ────────────────────────────────────────────────────────── */
@@ -153,7 +161,7 @@ function fmt(s) {
     p4: pctCI(s.p4 || 0, n),
     p5: pctCI(s.p5 || 0, n),
     unorderedTop3: pctCI(s.unorderedTop3 || 0, n),
-    orderedTop3: pctCI(s.orderedTop3 || 0, n),
+    top3Count: n ? (s.top3Count / n).toFixed(2) : '0.00',
     quatre: pctCI(s.quatre || 0, n),
     cinq: pctCI(s.cinq || 0, n),
     x: n ? (s.count / n).toFixed(2) : '0.00',
@@ -162,14 +170,14 @@ function fmt(s) {
 
 function printTable(title, rows) {
   console.log('\n══', title, '══')
-  const head = '               ' + ['n', 'P1', 'P2', 'P3', 'P4', 'P5', 'Top3-×', 'Top3=', '4/5', '5/5', 'x/5'].map((k) => String(k).padEnd(10)).join('')
+  const head = '               ' + ['n', 'P1', 'P2', 'P3', 'P4', 'P5', 'Top3-×', 'Top3n', '4/5', '5/5', 'x/5'].map((k) => String(k).padEnd(10)).join('')
   console.log(head)
   for (const [name, s] of rows) {
     const f = fmt(s)
     console.log(String(name).padEnd(15)
       + String(f.n).padEnd(10)
       + f.p1.padEnd(10) + f.p2.padEnd(10) + f.p3.padEnd(10) + f.p4.padEnd(10) + f.p5.padEnd(10)
-      + f.unorderedTop3.padEnd(10) + f.orderedTop3.padEnd(10)
+      + f.unorderedTop3.padEnd(10) + f.top3Count.padEnd(10)
       + f.quatre.padEnd(10) + f.cinq.padEnd(10) + String(f.x).padEnd(10))
   }
 }
