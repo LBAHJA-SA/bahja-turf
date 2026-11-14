@@ -51,8 +51,8 @@ export default function GenerateurBahjaTurf() {
   useEffect(() => { let vivant = true; fetchArchiveDb().then((db) => { if (vivant) setArchiveDb(db) }); return () => { vivant = false } }, [])
   const predictions = useMemo(() => (archiveDb && data?.ordre?.length ? choisirPredictions({ ordre: data.ordre, discipline, db: archiveDb }) : null), [archiveDb, data, discipline])
   const [nums, setNums] = useState({
-    b1: ['8', '12', '14', '', ''],
-    b2: ['5', '6', '12', '', ''],
+    b1: ['', '', '', '', ''],
+    b2: ['', '', '', '', ''],
     n1: [], n2: [], n3: [], n4: [], n5: [],
   })
   const [gen, setGen] = useState({})          // résultats du moteur { b1: [5,6,...] }
