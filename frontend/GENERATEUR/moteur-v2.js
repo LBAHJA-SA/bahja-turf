@@ -15,7 +15,7 @@
 import { normDiscipline } from './synthese.js'
 import { attributionSlots } from './moteur.js'
 import { buildFingerprint } from './empreinte/extraction.js'
-import { scoreQuinté, scoreHuit } from './generation/classement.js'
+import { scoreQuinté, scoreHuit, WEIGHTS_BY_PROFILE } from './generation/classement.js'
 
 function* combinaisons(arr, k) {
   const n = arr.length
@@ -43,10 +43,14 @@ function getFingerprint(db, discipline, uptoDate) {
 }
 
 /** توليد كل السطور دفعة واحدة — حتمي 100%.
- *  @param uptoDate يسمح بحقن Walk-Forward (لاسة verbatim للسباق الحالي) */
-export async function genererMoteur({ ordre, discipline, ignored, lignes, db, uptoDate }) {
+ *  @param  {object} params
+ *  @param  {string} [params.uptoDate]     — يسمح بحقن Walk-Forward (يُمرّر إلى buildFpTrain)
+ *  @param  {object} [params.weights]      — يسمح باختبار كل علاقة منفردًا؛ undefined = W_FULL
+ */
+export async function genererMoteur({ ordre, discipline, ignored, lignes, db, uptoDate, weights }) {
   const disc = discipline === 'TOUS' ? null : discipline
   const fp = getFingerprint(db, disc, uptoDate)
+  const weightsArr = weights || WEIGHTS_BY_PROFILE.full
 
   const ignoredSet = new Set(ignored || [])
   const slotsByOrdre = {}
@@ -89,7 +93,7 @@ export async function genererMoteur({ ordre, discipline, ignored, lignes, db, up
       for (const slots5 of combinaisons(pool, 5)) {
         const quinté = [...typedSlots, ...slots5]
         if (quinté.length !== 5) continue
-        candidates.push({ slots5: quinté, score: scoreQuinté(quinté, fp) })
+        candidates.push({ slots5: quinté, score: scoreQuinté(quinté, fp, weightsArr) })
       }
     } else {
       for (const slots8 of combinaisons(pool, need)) {

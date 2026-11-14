@@ -17,25 +17,52 @@ import { trioSetFreq, trioOrdreFreq, quintéFreqSlots } from '../empreinte/relat
 
 const keySet = (x) => [...x].sort((a, b) => a - b).join('-')
 
-/* أوزان حتمية للعلاقات (علاقات أولاً، أفراد كمرجّح) */
-export const W_QUINTE  = 5
-export const W_TRIOSET = 4
-export const W_TRIO    = 4
-export const W_P12     = 3
-export const W_P13     = 3
-export const W_P23     = 3
-export const W_INDIV   = 1
+/* أوزان حتمية للعلاقات (علاقات أولاً، أفراد كمرجّح) — المجموعة افتراضيًا full
+ *  لكنها تلقى من المحرك أو من الاختبار عبر `weights` للتحليل المستقل. */
+export const W_FULL    = { p12: 3, p13: 3, p23: 3, trioSet: 4, trioOrder: 4, quinte: 5, individuel: 1 }
+export const W_ONLY_P12      = { p12: 1, p13: 0, p23: 0, trioSet: 0, trioOrder: 0, quinte: 0, individuel: 0 }
+export const W_ONLY_P13      = { p12: 0, p13: 1, p23: 0, trioSet: 0, trioOrder: 0, quinte: 0, individuel: 0 }
+export const W_ONLY_P23      = { p12: 0, p13: 0, p23: 1, trioSet: 0, trioOrder: 0, quinte: 0, individuel: 0 }
+export const W_ONLY_PAIRES   = { p12: 1, p13: 1, p23: 1, trioSet: 0, trioOrder: 0, quinte: 0, individuel: 0 }
+export const W_ONLY_TRIOSET  = { p12: 0, p13: 0, p23: 0, trioSet: 1, trioOrder: 0, quinte: 0, individuel: 0 }
+export const W_ONLY_TRIOORD  = { p12: 0, p13: 0, p23: 0, trioSet: 0, trioOrder: 1, quinte: 0, individuel: 0 }
+export const W_ONLY_QUINTE   = { p12: 0, p13: 0, p23: 0, trioSet: 0, trioOrder: 0, quinte: 1, individuel: 0 }
+export const W_ONLY_INDIV    = { p12: 0, p13: 0, p23: 0, trioSet: 0, trioOrder: 0, quinte: 0, individuel: 1 }
+export const W_NO_RELATIONS  = { ...W_FULL, p12: 0, p13: 0, p23: 0, trioSet: 0, trioOrder: 0, quinte: 0, individuel: 5 }
+export const W_NO_INDIV      = { ...W_FULL, individuel: 0 }
+export const WEIGHTS_BY_PROFILE = {
+  full: W_FULL,
+  onlyP12: W_ONLY_P12,
+  onlyP13: W_ONLY_P13,
+  onlyP23: W_ONLY_P23,
+  onlyPaires: W_ONLY_PAIRES,
+  onlyTrioSet: W_ONLY_TRIOSET,
+  onlyTrioOrder: W_ONLY_TRIOORD,
+  onlyQuinte: W_ONLY_QUINTE,
+  onlyIndividuel: W_ONLY_INDIV,
+  noRelations: W_NO_RELATIONS,
+  noIndividuel: W_NO_INDIV,
+}
+
+/* ثابت تاريخي للإعلان عن الأوزان الافتراضيين (compat خارجي) */
+export const W_QUINTE  = W_FULL.quinte
+export const W_TRIOSET = W_FULL.trioSet
+export const W_TRIO    = W_FULL.trioOrder
+export const W_P12     = W_FULL.p12
+export const W_P13     = W_FULL.p13
+export const W_P23     = W_FULL.p23
+export const W_INDIV   = W_FULL.individuel
 
 /** علاقة الثنائية بالمركز المقصود لرئيس المراكز الثلاثة الأولى */
 const pairPeso = (fp, a, b, place) => {
-  if (a == null || b == null) return 0
-  if (a === b) return 0
+  if (a == null || b == null || a === b) return 0
   return paireFreq(fp, place, a, b)
 }
 
-/** تقييم خماسي ناقص العرض — النتيجة قابلة للجبر لاحقًا */
-export function scoreQuinté(slots5, fp) {
+/** تقييم خماسي — يُحقِّق وزنًا اختياريًا عبر `weights` */
+export function scoreQuinté(slots5, fp, weights) {
   if (!Array.isArray(slots5) || slots5.length !== 5) return 0
+  const w = weights || W_FULL
   const [s1, s2, s3] = slots5
   const p12 = pairPeso(fp, s1, s2, '1-2')
   const p13 = pairPeso(fp, s1, s3, '1-3')
@@ -45,13 +72,13 @@ export function scoreQuinté(slots5, fp) {
   const quint = quintéFreqSlots(fp, slots5)
   const ind = individuelleScore(slots5, fp)
   return (
-    W_P12 * p12 +
-    W_P13 * p13 +
-    W_P23 * p23 +
-    W_TRIOSET * trioSet +
-    W_TRIO * trioOrder +
-    W_QUINTE * quint +
-    W_INDIV * ind
+    w.p12 * p12 +
+    w.p13 * p13 +
+    w.p23 * p23 +
+    w.trioSet * trioSet +
+    w.trioOrder * trioOrder +
+    w.quinte * quint +
+    w.individuel * ind
   )
 }
 
@@ -81,8 +108,8 @@ export function scoreHuit(slots8, fp) {
 }
 
 /** الترتيب التنازلي (تُعاد قائمة ممثّلة {slots5, score}) */
-export function classerCandidats(cands, fp) {
+export function classerCandidats(cands, fp, weights) {
   return cands
-    .map((c) => ({ slots5: [...c], score: scoreQuinté([...c], fp) }))
+    .map((c) => ({ slots5: [...c], score: scoreQuinté([...c], fp, weights) }))
     .sort((a, b) => b.score - a.score)
 }
