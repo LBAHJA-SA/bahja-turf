@@ -14,6 +14,27 @@
 
 import { normDiscipline } from './synthese.js'
 
+/** « Type de départ » du trot (autostart / volté / monté), depuis data/departs.json.
+ *  Renvoie null si la course n'est pas couverte → on ne filtre RIEN (pas d'invention). */
+export function typeTrotOf(e, courses) {
+  if (!e || !courses) return null
+  if (e.cle && courses[e.cle]) return courses[e.cle]
+  if (e.courseId && courses[e.courseId]) return courses[e.courseId]
+  const m = String(e.courseId || e.cle || '').match(/(\d{4}-\d{2}-\d{2})_R(\d+)_C(\d+)/)
+  if (m) {
+    const k = `${m[1]}_R${m[2]}_C${m[3]}`
+    if (courses[k]) return courses[k]
+  }
+  return null
+}
+
+/** Vrai si la course est un Quinté ATTELE au départ AUTOSTART (d'après departs.json). */
+export function estCourseAutostart(e, courses) {
+  if (normDiscipline((e && e.discipline) || '') !== 'ATTELÉ') return false
+  const t = typeTrotOf(e, courses)
+  return !!t && t.depart === 'autostart'
+}
+
 export function attributionSlots(synthese, runners) {
   const partants = new Set((runners || []).filter((n) => Number.isFinite(n) && n > 0))
   const synthe = (synthese || []).filter((n) => Number.isFinite(n) && n > 0 && (partants.size === 0 || partants.has(n)))
@@ -42,12 +63,14 @@ export function weekOfMonth(dateStr) {
 
 /** أنماط P المؤرشفة : كل خماسي سباق مؤرَشَف = تركيبة خانات جاهزة بترتيب وصولها
  *  (1,2,3,4,5 كما في السباق نفسه). مرتبة حسب تكرار البوديوم نزولًا ثم بالنطاق التاريخي. */
-export function patternsFromArchive(db, discipline, week) {
+export function patternsFromArchive(db, discipline, week, courses) {
   const items = []
   for (const [k, e] of Object.entries(db || {})) {
     if (!e || !Array.isArray(e.arrivee) || e.arrivee.length < 5) continue
     if (!Array.isArray(e.synthese) || !Array.isArray(e.runners)) continue
-    if (discipline && normDiscipline(e.discipline) !== discipline) continue
+    if (discipline === 'AUTOSTART') {
+      if (!estCourseAutostart(e, courses)) continue
+    } else if (discipline && normDiscipline(e.discipline) !== discipline) continue
     if (week && weekOfMonth(k) !== week) continue
     const slots = attributionSlots(e.synthese, e.runners)
     const comboS = e.arrivee.slice(0, 5).map((n) => slots[n]).filter((s) => s != null)
@@ -91,9 +114,9 @@ function candidatesFromPatterns(patterns, ordre, absents) {
  *  كل سطر يُملأ من الأرشيف حصريًا؛ إن لم يكفِ نمط واحد يتم استهلاكه من النمط التالي :
  *  المحرك يمدّد لبقية الخانات الميك ما دامت تفتقر إلى تعبئة.
  *  ولا يُكرر خماسيًا كاملًا: عند إتمام التذكرة تُنشئ مفتاح التذكرة وتُرفض النسخة المكررة. */
-export async function genererMoteur({ ordre, discipline, ignored, lignes, db }) {
+export async function genererMoteur({ ordre, discipline, ignored, lignes, db, departs }) {
   const disc = discipline === 'TOUS' ? null : discipline
-  const patterns = patternsFromArchive(db, disc, null)
+  const patterns = patternsFromArchive(db, disc, null, departs)
   const absents = new Set(ignored || [])
   const candidates = candidatesFromPatterns(patterns, ordre, absents)
 
@@ -146,26 +169,18 @@ export async function genererMoteur({ ordre, discipline, ignored, lignes, db }) 
 }
 
 /** إحصائيات المراكز من الأرشيف — لكل تخصص : كم مرة حل كل مركز في الموضع 1 / 2 / 3. */
-export function statsParPosition(db) {
+export function statsParPosition(db, departs) {
   const res = {}
   for (const e of Object.values(db || {})) {
     if (!e || !Array.isArray(e.arrivee) || e.arrivee.length < 3) continue
     if (!Array.isArray(e.synthese) || !Array.isArray(e.runners)) continue
     const slots = attributionSlots(e.synthese, e.runners)
     if (!Object.keys(slots).length) continue
-    const disc = (e.discipline || 'AUTRE')
-    const d = {}
-    try {
-      d.d = (() => {
-        const s = String(disc).toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Z]/g, '')
-        if (s.startsWith('ATT')) return 'ATTELÉ'
-        if (s.startsWith('PLAT')) return 'PLAT'
-        if (s.startsWith('HAI')) return 'HAIE'
-        if (s.startsWith('STEEP')) return 'STEEPLE'
-        return 'AUTRE'
-      })()
-    } catch { d.d = 'AUTRE' }
-    for (const key of [d.d, 'TOUS']) {
+    const d = normDiscipline(e.discipline)
+    const keys = [d, 'TOUS']
+    if (estCourseAutostart(e, departs)) keys.push('AUTOSTART')
+    for (const key of keys) {
+      if (key === 'AUTRE') continue
       if (!res[key]) res[key] = { win: {}, second: {}, third: {} }
       const [a, b, c] = e.arrivee
       const s1 = slots[a]; const s2 = slots[b]; const s3 = slots[c]
@@ -178,8 +193,8 @@ export function statsParPosition(db) {
 }
 
 /** اختيارات المحرك للقلادة/الفائز — من الأرشيف فقط. */
-export function choisirPredictions({ ordre, discipline, db }) {
-  const stats = statsParPosition(db)
+export function choisirPredictions({ ordre, discipline, db, departs }) {
+  const stats = statsParPosition(db, departs)
   const key = discipline ? discipline : 'TOUS'
   const s = stats[key] || stats['TOUS'] || { win: {}, second: {}, third: {} }
   if (!Array.isArray(ordre) || !ordre.length) return null

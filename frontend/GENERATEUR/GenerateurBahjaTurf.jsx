@@ -42,14 +42,29 @@ export default function GenerateurBahjaTurf() {
     if (next.has(n)) next.delete(n); else next.add(n)
     return next
   })
-  // ⭐ Filtre discipline — ATTELÉ / PLAT / …
-  const DISCIPLINES = ['ATTELÉ', 'PLAT', 'HAIE', 'STEEPLE']
+  // ⭐ Filtre discipline — ATTELÉ / PLAT / HAIE / STEEPLE / MONTÉ / AUTOSTART
+  const DISCIPLINES = ['ATTELÉ', 'PLAT', 'HAIE', 'STEEPLE', 'MONTÉ', 'AUTOSTART']
   const [discipline, setDiscipline] = useState(null) // null = TOUS
+  const [departs, setDeparts] = useState(null)
+  const besoinDeparts = discipline === 'AUTOSTART'
+  /* departs.json (~13 Mo) n'est chargé QUE si l'utilisateur choisit AUTOSTART. */
+  const chargerDeparts = async () => {
+    if (departs?.courses) return departs.courses
+    try {
+      const r = await fetch('/data/departs.json', { headers: { Accept: 'application/json' } })
+      if (!r.ok) return null
+      const j = await r.json()
+      if (j && j.courses) { setDeparts(j); return j.courses }
+      return null
+    } catch { return null }
+  }
+  useEffect(() => { if (besoinDeparts && !departs) chargerDeparts() }, [besoinDeparts, departs]) // eslint-disable-line react-hooks/exhaustive-deps
+  const courses = besoinDeparts && departs ? departs.courses : undefined
 
   const [maquetteNote, setMaquetteNote] = useState('')
   const [archiveDb, setArchiveDb] = useState(null)
   useEffect(() => { let vivant = true; fetchArchiveDb().then((db) => { if (vivant) setArchiveDb(db) }); return () => { vivant = false } }, [])
-  const predictions = useMemo(() => (archiveDb && data?.ordre?.length ? choisirPredictions({ ordre: data.ordre, discipline, db: archiveDb }) : null), [archiveDb, data, discipline])
+  const predictions = useMemo(() => (archiveDb && data?.ordre?.length ? choisirPredictions({ ordre: data.ordre, discipline, db: archiveDb, departs: courses }) : null), [archiveDb, data, discipline, courses])
   const [nums, setNums] = useState({
     b1: ['', '', '', '', ''],
     b2: ['', '', '', '', ''],
@@ -126,7 +141,9 @@ export default function GenerateurBahjaTurf() {
         return
       }
       const lignesCfg = Object.fromEntries(LIGNES.map(({ id, cible }) => [id, { typed: nums[id] || [], cible }]))
-      const out = await genererMoteur({ ordre: data.ordre, discipline, ignored: [...ignores], lignes: lignesCfg, db, diversify: ['n1', 'n2', 'n3', 'n4', 'n5'] })
+      let coursesActuelles = courses
+      if (besoinDeparts && !coursesActuelles) coursesActuelles = await chargerDeparts()
+      const out = await genererMoteur({ ordre: data.ordre, discipline, ignored: [...ignores], lignes: lignesCfg, db, diversify: ['n1', 'n2', 'n3', 'n4', 'n5'], departs: coursesActuelles })
       setGen(out)
       setMaquetteNote(TXT_GENERE)
     } catch (e) {
