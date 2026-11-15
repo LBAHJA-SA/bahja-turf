@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/api/visite", "destination": "/api/visiteurs" },
     { "source": "/api/eq/:surcharge(.*)", "destination": "/api/eq?p=:surcharge" },
+    { "source": "/api/eqa/:surcharge(.*)", "destination": "/api/eqa?p=:surcharge" },
     { "source": "/api/lv/:surcharge(.*)", "destination": "/api/lv?p=:surcharge" },
     { "source": "/api/yt/:surcharge(.*)", "destination": "/api/yt?p=:surcharge" },
     { "source": "/api/gz/:surcharge(.*)", "destination": "/api/gz?p=:surcharge" },

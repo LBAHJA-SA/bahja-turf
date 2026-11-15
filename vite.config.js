@@ -33,6 +33,8 @@ const ORIGINES = {
   pt: "https://www.pronostics-turf.info",
   tf: "https://www.turf-france.com",
   eq: "https://www.equidia.fr",
+  eqa: "https://api.equidia.fr",
+  /* l'API equidia exige un Referer equidia.fr depuis la fin d'octobre : le relais l'ajoute. */
   /* LE VEINARD — « quotidien hippique, un tuyau et une dernière minute pour
    * chaque quinté ». Son site ne donne AUCUN en-tête CORS : la page ne peut
    * pas le lire en direct (mesuré le 18/10/2026). On relaie. */
@@ -337,6 +339,7 @@ function decoderTexte(octets, type = "") {
         label === "ptf"
           ? "application/json, text/plain, */*"
           : "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+      ...(label === "eqa" ? { referer: "https://www.equidia.fr/" } : {}),
       ...(label === "ptf" ? { "x-api-key": CLE_PTF } : {}),
     };
     let body = null;
@@ -535,7 +538,7 @@ function proxiesApi() {
       server.middlewares.use((req, res, next) => {
         const base = "http://" + (req.headers.host || "localhost:3003");
         const u = new URL(req.url || "/", base);
-        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma|pmu)$/.exec(u.pathname);
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|eqa|ma|pmu)$/.exec(u.pathname);
         if (!m) return next();
         /* La requête ENTIÈRE : `relayer` reconnaît les trois formes —
          *   /api/tf?p=…            (Vercel) · /api/ptf?v=… ou ?hls=… (la vidéo).
@@ -544,7 +547,7 @@ function proxiesApi() {
         relayer(m[1], req.url, res, base);
       });
       server.middlewares.use((req, res, next) => {
-        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma|pmu)(\/.*)?$/.exec(req.url || "");
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|eqa|ma|pmu)(\/.*)?$/.exec(req.url || "");
         if (!m) return next();
         relayer(m[1], req.url, res, "http://" + (req.headers.host || "localhost:3003"));
       });

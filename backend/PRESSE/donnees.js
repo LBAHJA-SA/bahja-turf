@@ -42,7 +42,8 @@
  *   ⚠ QUI PASSE PAR QUOI
  *     · pronostics-turf.info (la revue de presse) → relais `/api/pt` (pas de CORS) ;
  *     · equidia `api.equidia.fr` (déclarations, analyse du jour, la course) →
- *       appel DIRECT en CORS ouvert ;
+ *       relais `/api/eqa` (depuis fin octobre l'API exige un Referer equidia.fr ;
+ *       le relais l'ajoute, sinon HTTP 403) ;
  *     · paris-turf.com (les articles)  → relais `/api/ptf` (clé + Cloudflare) ;
  *     · leveinard.com (les articles)   → relais `/api/lv` (pas de CORS).
  *
@@ -50,7 +51,7 @@
  *   renvoie un objet vide et la page l'écrit — jamais un écran vide.
  * ========================================================================= */
 
-const API_EQ = 'https://api.equidia.fr/api/public'
+const API_EQ = '/api/eqa/api/public'
 const PROG_CC = 'https://pro.casacourses.com/api/programme?date='
 
 /* ══════════════════════════════ les outils ═══════════════════════════════ */
@@ -71,6 +72,7 @@ async function json(url, essais = 3) {
   let derniere = null
   for (let i = 0; i < essais; i++) {
     const r = await fetch(url, { headers: { Accept: 'application/json' } })
+    if (r.status === 204) return null
     if (r.ok) return r.json()
     derniere = r
     if ((r.status === 403 || r.status === 429 || r.status >= 500) && i < essais - 1) {
@@ -229,7 +231,7 @@ async function quintePMU(date) {
  *   `personne` = « Carina Fey », `role` = « entraîneur » / « driver » / …
  */
 export async function declarations(date, r, c) {
-  const j = await json(`${API_EQ}/courses/${date}/R${r}/C${c}/interview`)
+  const j = (await json(`${API_EQ}/courses/${date}/R${r}/C${c}/interview`)) || {}
   const auteur = nomAuteur(j.author)
   const liste = (j.interview_partants || []).map((x) => {
     const brut = String(x.personne || '').trim()
@@ -256,7 +258,7 @@ export async function declarations(date, r, c) {
  * Les quatre listes de numéros viennent de la source, telles quelles.
  */
 export async function analyse(date, r, c) {
-  const j = await json(`${API_EQ}/courses/${date}/R${r}/C${c}/pronostic`)
+  const j = (await json(`${API_EQ}/courses/${date}/R${r}/C${c}/pronostic`)) || {}
   const chevaux = (j.pronostic_analyses || []).map((x) => ({
     num: Number(x.num_partant) || null,
     nom: (x.cheval && x.cheval.nom_cheval) || '',
@@ -972,6 +974,7 @@ export async function papierDuJour({ date, r, c } = {}) {
 
   /* ① les partants : c'est eux qui relient un papier à un numéro */
   const course = await json(`${API_EQ}/v2/courses/${date}/R${r}/C${c}`)
+  if (!course) return { journal: JOURNAL_TEXTE.nom, publie: '', nb: 0, rubriques: [] }
   const partants = (course.partants || []).map((x) => {
     const ch = x.cheval || {}
     return {

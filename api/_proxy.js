@@ -29,6 +29,7 @@ export const ORIGINES = {
   pt: 'https://www.pronostics-turf.info',   // la Synthese de la presse
   tf: 'https://www.turf-france.com',         // reu.php, tqqjour.php
   eq: 'https://www.equidia.fr',              // le marche
+  eqa: 'https://api.equidia.fr',             // l'API equidia (déclarations, pronostics — exige un Referer equidia.fr depuis 14/11/2026)
   lv: 'https://www.leveinard.com',           // LE VEINARD — les actualites des courses
   yt: 'https://www.youtube.com',             // la revue de presse EN VIDEO
   gz: 'https://www.lagazettedescourses.fr',  // le papier du jour, en texte (WordPress REST)
@@ -149,6 +150,10 @@ export function proxy(label) {
         'user-agent': UA,
         'accept-language': 'fr-FR,fr;q=0.9',
         accept: 'text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8',
+        /* l'API api.equidia.fr exige un Referer de son propre domaine depuis
+         * la fin octobre (sinon 403). www.equidia.fr, lui, accepte tout —
+         * seul eqa en a besoin. */
+        ...(label === 'eqa' ? { referer: 'https://www.equidia.fr/' } : {}),
       }
 
       const r = await fetch(cible, {
