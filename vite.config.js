@@ -306,6 +306,8 @@ function decoderTexte(octets, type = "") {
 
 /** Le même corps que api/_proxy.js : /api/<nom>/<suite> -> <origine>/<suite> */async function relayer(label, cheminComplet, res, origine = "") {
   try {
+    /* l'API equidia vit sous /api/eq/api/* (le segment "eq" reste celui du marché) :
+     * on relaie vers api.equidia.fr avec le Referer equidia.fr (sinon HTTP 403). */
     // le sous-chemin peut venir du chemin (/api/tf/tqqjour.php) ou de la
     // requete (?p=tqqjour.php) : c'est la forme que produit le rewrite Vercel.
     const u = new URL(cheminComplet, "http://localhost");
@@ -319,6 +321,9 @@ function decoderTexte(octets, type = "") {
       ? "/" + depuisRequete.replace(/^\/+/, "")
       : u.pathname.replace(new RegExp("^/api/" + label), "") || "/";
     if (!chemin.startsWith("/") || chemin.startsWith("//")) throw new Error("chemin refuse");
+    /* l'API equidia vit sous /api/eq/api/* : on envoie vers api.equidia.fr
+     * avec le Referer equidia.fr (sinon HTTP 403). */
+    if (chemin.startsWith("/api/") && label === "eq") label = "eqa";
     /* ⚠ 07/10/2026 : la query string fait partie de la cible. reu.php
      *   ?view=program&date=… sans la query retombait sur la page d'accueil
      *   (3 935 o) au lieu du programme (132 165 o).
@@ -538,7 +543,7 @@ function proxiesApi() {
       server.middlewares.use((req, res, next) => {
         const base = "http://" + (req.headers.host || "localhost:3003");
         const u = new URL(req.url || "/", base);
-        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|eqa|ma|pmu)$/.exec(u.pathname);
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma|pmu)$/.exec(u.pathname);
         if (!m) return next();
         /* La requête ENTIÈRE : `relayer` reconnaît les trois formes —
          *   /api/tf?p=…            (Vercel) · /api/ptf?v=… ou ?hls=… (la vidéo).
@@ -547,7 +552,7 @@ function proxiesApi() {
         relayer(m[1], req.url, res, base);
       });
       server.middlewares.use((req, res, next) => {
-        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|eqa|ma|pmu)(\/.*)?$/.exec(req.url || "");
+        const m = /^\/api\/(ptf|pt|tf|lv|yt|gz|eq|ma|pmu)(\/.*)?$/.exec(req.url || "");
         if (!m) return next();
         relayer(m[1], req.url, res, "http://" + (req.headers.host || "localhost:3003"));
       });

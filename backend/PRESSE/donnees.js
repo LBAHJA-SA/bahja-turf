@@ -42,8 +42,8 @@
  *   ⚠ QUI PASSE PAR QUOI
  *     · pronostics-turf.info (la revue de presse) → relais `/api/pt` (pas de CORS) ;
  *     · equidia `api.equidia.fr` (déclarations, analyse du jour, la course) →
- *       relais `/api/eqa` (depuis fin octobre l'API exige un Referer equidia.fr ;
- *       le relais l'ajoute, sinon HTTP 403) ;
+ *       relais `/api/eq` sous le préfixe `/api/` (le même relais que le marché) ;
+ *       depuis fin octobre l'API exige un Referer equidia.fr, sinon HTTP 403.
  *     · paris-turf.com (les articles)  → relais `/api/ptf` (clé + Cloudflare) ;
  *     · leveinard.com (les articles)   → relais `/api/lv` (pas de CORS).
  *
@@ -51,7 +51,7 @@
  *   renvoie un objet vide et la page l'écrit — jamais un écran vide.
  * ========================================================================= */
 
-const API_EQ = '/api/eqa/api/public'
+const API_EQ = '/api/eq/api/public'
 const PROG_CC = 'https://pro.casacourses.com/api/programme?date='
 
 /* ══════════════════════════════ les outils ═══════════════════════════════ */
