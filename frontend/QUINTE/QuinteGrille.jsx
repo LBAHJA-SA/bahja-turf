@@ -687,7 +687,8 @@ export default function QuinteGrille() {
     if (s.startsWith('plat')) return 'plat'
     if (s.startsWith('attel') || s.startsWith('trot')) return 'attelé'
     if (s.startsWith('mont')) return 'monté'
-    if (s.startsWith('haie') || s.startsWith('steeple')) return 'haies'
+    if (s.startsWith('haie')) return 'haies'
+    if (s.startsWith('steeple')) return 'steeple'
     return s || 'autre'
   }
   /* ⭐ 05/11/2026 — le type de départ du TROT (autostart / volté / monté).
@@ -712,7 +713,11 @@ export default function QuinteGrille() {
   }
   const archiveFiltree = useMemo(() => {
     let base = archive
-    if (statsDiscipline !== 'all') base = base.filter((a) => normDisc(a.discipline) === statsDiscipline)
+    if (statsDiscipline === 'autostart') {
+      base = base.filter((a) => normDisc(a.discipline) === 'attelé' && typeTrot(a)?.depart === 'autostart')
+    } else if (statsDiscipline !== 'all') {
+      base = base.filter((a) => normDisc(a.discipline) === statsDiscipline)
+    }
     if (statsDiscipline === 'attelé' && statsTrot !== 'all') {
       base = base.filter((a) => {
         const t = typeTrot(a)
@@ -817,9 +822,9 @@ const carnet = (detail) => {
  *   · « Discipline »       → Tout / Plat / Attelé / Haies
  * Un seul composant = un seul comportement, aucune divergence entre onglets.
  * ═════════════════════════════════════════════════════════════════════════ */
-const DISCIPLINES = ['all', 'plat', 'attelé', 'haies']
-const DISCIPLINES_TROT = ['all', 'plat', 'attelé', 'monté', 'haies']
-const DISC_LABEL = { all: 'Tout', plat: 'Plat', 'attelé': 'Attelé', 'monté': 'Monté', haies: 'Haies' }
+const DISCIPLINES = ['all', 'plat', 'attelé', 'haies', 'steeple']
+const DISCIPLINES_TROT = ['all', 'plat', 'attelé', 'monté', 'haies', 'steeple', 'autostart']
+const DISC_LABEL = { all: 'Tout', plat: 'Plat', 'attelé': 'Attelé', 'monté': 'Monté', haies: 'Haies', steeple: 'Steeple', autostart: 'Autostart' }
 
 function BarreFiltres({ sk, toutLesP, setToutLesP, discipline, setDiscipline, noteP, disciplines }) {
   const liste = disciplines || DISCIPLINES
