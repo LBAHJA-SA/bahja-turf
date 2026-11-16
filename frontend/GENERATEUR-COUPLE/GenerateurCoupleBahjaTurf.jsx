@@ -264,6 +264,85 @@ async function chargerProgramme(ymd) {
   return pmu
 }
 
+/* turf-france.com — الجدول التفصيلي للسباق ( view=detail ) عندما يتعذر الوصول لـ Equidia
+   من الإنتاج. البنية مثبتة في هذا التطبيق (backend/ANALYSE/turfFrance.js). */
+const paysTfCache = new Map()
+async function paysTf(date) {
+  if (paysTfCache.has(date)) return paysTfCache.get(date)
+  try {
+    const r = await fetch(`/api/tf/php/reu.php?view=program&date=${date}`)
+    if (!r.ok) throw new Error('tf HTTP ' + r.status)
+    const html = await r.text()
+    const map = new Map()
+    for (const m of String(html).matchAll(/view=detail&date=(\d{4}-\d{2}-\d{2})&reunion=(R\d+)&course=(C\d+)&pays=([^&"'>]+)/g)) {
+      let pays = m[4]
+      try { pays = decodeURIComponent(pays.replace(/\+/g, ' ')) } catch { /* tel quel */ }
+      const r0 = Number(m[2].slice(1)), c0 = Number(m[3].slice(1))
+      if (!map.has(r0 + '-' + c0)) map.set(r0 + '-' + c0, String(pays || '').toUpperCase().trim())
+    }
+    paysTfCache.set(date, map)
+    return map
+  } catch {
+    paysTfCache.set(date, null)
+    return null
+  }
+}
+
+const stripTF = (s) => String(s || '')
+  .replace(/<[^>]*>/g, ' ')
+  .replace(/&#039;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&')
+  .replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
+const coteTF = (s) => {
+  const m = String(s || '').match(/([0-9]+[.,][0-9]+)/)
+  return m ? Number(m[1].replace(',', '.')) : null
+}
+
+function parseTF(html) {
+  const partants = []
+  for (const m of String(html).matchAll(/<tr\s+data-num='?(\d+)'?[^>]*>([\s\S]*?)<\/tr>/gi)) {
+    const cells = [...m[2].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((c) => c[1])
+    if (cells.length < 14) continue
+    partants.push({
+      num: Number(cells[2]),
+      nom: stripTF(cells[3]),
+      cote: coteTF(stripTF(cells[4])),
+      age: Number(stripTF(cells[5])) || null,
+      sexe: stripTF(cells[6]) || null,
+      musique: stripTF(cells[8]) || null,
+      corde: Number(stripTF(cells[12]).replace(/[^\d]/g, '')) || null,
+      monte: stripTF(cells[13]) || null,
+      entraineur: stripTF(cells[15]) || null,
+    })
+  }
+  return partants
+}
+
+async function chargerTurfFranceFrance(ymd, r, num) {
+  const paysMap = await paysTf(ymd)
+  const pays = paysMap?.get(r + '-' + num)
+  if (!pays) throw new Error('pays introuvable sur turf-france pour cette course')
+  const r0 = await fetch(`/api/tf/php/reu.php?view=detail&date=${ymd}&reunion=R${r}&course=C${num}&pays=${encodeURIComponent(pays)}`)
+  if (!r0.ok) throw new Error('tf detail HTTP ' + r0.status)
+  const html = await r0.text()
+  const partants = parseTF(html)
+  const cotes = partants
+    .filter((p) => p.cote != null)
+    .map((p) => ({ num: p.num, cote: p.cote, ouverture: null, favori: false, tendance: '=', nom: p.nom }))
+    .sort((a, b) => a.cote - b.cote)
+  if (cotes.length) cotes[0].favori = true
+  return { cotes, partants, source: 'turf-france' }
+}
+
+async function chargerFranceMarche(ymd, r, c) {
+  try {
+    const v = await chargerMarche(ymd, r, c)
+    if (v.partants && v.partants.length) return v
+    throw new Error('équidia vide')
+  } catch {
+    return chargerTurfFranceFrance(ymd, r, c)
+  }
+}
+
 /* Equidia → le marché + la fiche complète des partants (page Angular, état collé en JSON).
    Une seule page, deux exports : pari_simple (cotes) + v2/courses (partants). */
 async function chargerMarche(ymd, r, c) {
@@ -404,7 +483,7 @@ export default function GenerateurCoupleBahjaTurf() {
     setChargementMarche(true); setMarche(null); setPartants([]); setGenerer(false)
     const p = course.source === 'sorec'
       ? chargerSorecCourse(course.sorecId)
-      : chargerMarche(date, course.r, course.c)
+      : chargerFranceMarche(date, course.r, course.c)
     p.then((v) => { if (vivant) { setMarche(v.cotes || []); setPartants(v.partants || []) } })
       .catch(() => { if (vivant) { setMarche([]); setPartants([]) } })
       .finally(() => { if (vivant) setChargementMarche(false) })
