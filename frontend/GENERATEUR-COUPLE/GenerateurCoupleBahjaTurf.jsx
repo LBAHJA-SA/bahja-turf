@@ -788,6 +788,9 @@ export default function GenerateurCoupleBahjaTurf() {
     return {
       logique: { gagner: a, couple: [a, b], trio: [a, b, c0] },
       speculative: { outsider: d, couple: [a, d], trio: [a, b, d] },
+      /* la rangée large : 6 numéros = C(6,3) = 20 trios.
+         C'est le seul levier mesuré qui existe sans le marché (voir mesures). */
+      six: cells.slice(0, 6),
       profil: empreinte,
     }
   }, [empreinte, marche])
@@ -1119,6 +1122,32 @@ export default function GenerateurCoupleBahjaTurf() {
                 </div>
               ))}
 
+              {/* RANGÉE LARGE — 6 numéros (20 trios). Le seul levier mesuré sans marché. */}
+              <div style={{ display: 'grid', gap: 4, minWidth: 225 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8 }}>
+                  <span style={{ fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800 }}>TRIO ÉLARGI · 6</span>
+                  <span style={{ fontSize: 7.5, color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>C(6,3) = 20</span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 34px)', gap: 3 }}>
+                  {[0, 1, 2, 3, 4, 5].map((pos) => {
+                    const o = generer && picks ? picks.six?.[pos] : null
+                    return (
+                      <div key={pos} style={{
+                        position: 'relative',
+                        width: 34, height: 38, display: 'grid', placeItems: 'center', alignContent: 'center', gap: 0,
+                        borderRadius: 10, border: '1.5px solid rgba(215,140,80,.45)',
+                        background: 'linear-gradient(160deg, #4d3624 0%, #2e2117 100%)',
+                        boxShadow: 'inset 0 1px 0 rgba(255,255,255,.2), 0 2px 6px rgba(0,0,0,.45)',
+                        color: '#e9d3ab', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 13,
+                      }}>
+                        {o ? o.num : '?'}
+                        {o && <span style={{ fontSize: 6.5, color: '#a8946f', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 400 }}>{o.cote != null ? o.cote.toFixed(1) : '—'}</span>}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
               {/* النسب المقيسة — مأخوذة من ملف البصمة، لا من اليد */}
               {picks?.profil?.mesure && (
                 <span style={{
@@ -1128,6 +1157,7 @@ export default function GenerateurCoupleBahjaTurf() {
                   مقيس خارج العينة · {picks.profil.taille === 'PETIT' ? 'ميدان صغير (<10)' : 'ميدان كبير (10+)'}<br />
                   الفائز {picks.profil.mesure.gagnant.empreinte}% · كوبليه {picks.profil.mesure.couple.empreinte}% ·
                   تريو {picks.profil.mesure.trio.empreinte}%<br />
+                  3 أرقام ← {picks.profil.mesure.trio.empreinte}% · 6 أرقام ← {picks.profil.mesure.six.empreinte}%<br />
                   <span style={{ opacity: .7 }}>(ن = {picks.profil.mesure.trio.n} سباق)</span>
                 </span>
               )}
