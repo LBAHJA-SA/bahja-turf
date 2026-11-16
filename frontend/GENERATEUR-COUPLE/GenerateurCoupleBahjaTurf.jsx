@@ -147,15 +147,30 @@ async function chargerSorecCourseArchive(sorecId) {
 function buildSorecCourseFromArchive(c, _date) {
   const partants = (c.runners || []).map((p) => ({
     num: Number(p.num),
+    silks: null,
     nom: p?.horse || '',
     sexe: p?.sexe || null,
     age: p?.age ?? null,
     corde: p?.corde ?? null,
+    record: null,
     musique: p?.musique || null,
+    gains: null,
+    distance: Number(c.distance) || null,
+    def: null,
     monte: p?.jockey || null,
+    monteRef: null, monteRefBg: null,
     entraineur: p?.entraineur || null,
+    entraineurRef: null, entraineurRefBg: null,
+    owner: null,
+    daysSince: null,
+    avis: null,
+    avisTitle: null,
     cote: p?.cote ?? (p?.ouverture && Number(p.ouverture) > 1.1 ? Number(p.ouverture) : null),
     ouverture: p?.ouverture ?? null,
+    coteBg: null,
+    coteText: '#f3c887',
+    cordeBg: null,
+    cordeText: '#e8d5a4',
     depart: null,
   }))
   const cotes = partants
@@ -174,16 +189,30 @@ async function chargerSorecCourse(sorecId) {
     const d = j?.content || {}
     const partants = (d.runners || []).map((p) => ({
       num: Number(p.startnr),
+      silks: null,
       nom: p?.horse?.name || '',
       sexe: p?.horse?.gender || null,
       age: p?.horse?.age ?? null,
       corde: p?.startbox ?? null,
+      record: null,
       musique: p?.shortperformance || null,
+      gains: null,
+      distance: Number(d?.distance) || null,
+      def: null,
       monte: p?.rider?.name || null,
+      monteRef: null, monteRefBg: null,
       entraineur: p?.horse?.trainer || null,
-      jockeyColorFile: p?.jockeyColorFile || null,
+      entraineurRef: null, entraineurRefBg: null,
+      owner: p?.horse?.owner || null,
+      daysSince: null,
+      avis: null,
+      avisTitle: null,
       cote: p?.odd > 0 ? Number(p.odd) / 100 : (p?.startodd > 0 ? Number(p.startodd) / 100 : null),
       depart: p?.oddtime ? Number(p.oddtime) : null,
+      coteBg: null,
+      coteText: '#f3c887',
+      cordeBg: null,
+      cordeText: '#e8d5a4',
     }))
     const cotes = partants
       .filter((p) => p.cote != null)
@@ -274,7 +303,7 @@ async function paysTf(date) {
     if (!r.ok) throw new Error('tf HTTP ' + r.status)
     const html = await r.text()
     const map = new Map()
-    for (const m of String(html).matchAll(/view=detail&date=(\d{4}-\d{2}-\d{2})&reunion=(R\d+)&course=(C\d+)&pays=([^&"'>]+)/g)) {
+    for (const m of String(html).matchAll(/view=detail(?:&amp;|&)date=(\d{4}-\d{2}-\d{2})(?:&amp;|&)reunion=(R\d+)(?:&amp;|&)course=(C\d+)(?:&amp;|&)pays=([^&"'>]+)/g)) {
       let pays = m[4]
       try { pays = decodeURIComponent(pays.replace(/\+/g, ' ')) } catch { /* tel quel */ }
       const r0 = Number(m[2].slice(1)), c0 = Number(m[3].slice(1))
@@ -290,28 +319,66 @@ async function paysTf(date) {
 
 const stripTF = (s) => String(s || '')
   .replace(/<[^>]*>/g, ' ')
-  .replace(/&#039;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&')
-  .replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
+  .replace(/&#039;|&apos;|&#34;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&')
+  .replace(/&#x27;/g, "'").replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
 const coteTF = (s) => {
-  const m = String(s || '').match(/([0-9]+[.,][0-9]+)/)
+  const m = String(s || '').match(/([0-9]+(?:[.,][0-9]+)?)/)
   return m ? Number(m[1].replace(',', '.')) : null
 }
+const bgOfTF = (html) => {
+  const m = String(html).match(/background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,6}|[a-z]+)/i)
+  return m ? m[1] : null
+}
+const pickText = (bg) => {
+  if (!bg) return '#e8d5a4'
+  const h = String(bg).replace('#', '')
+  const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h
+  if (!/^[0-9a-fA-F]{6}$/.test(full)) return '#e8d5a4'
+  const r = parseInt(full.slice(0, 2), 16), g = parseInt(full.slice(2, 4), 16), b = parseInt(full.slice(4, 6), 16)
+  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b
+  return lum > 140 ? '#111' : '#fff'
+}
+const gainsTF = (s) => { const m = String(s || '').match(/\d[\d\s]*/); return m ? m[0].replace(/\s/g, '') : s }
+const imgTF = (html) => { const m = String(html).match(/<img[^>]*\bsrc\s*=\s*['"]([^'"]+)['"]/i); return m ? m[1] : null }
+const imgTitleTF = (html) => { const m = String(html).match(/<img[^>]*\btitle\s*=\s*['"]([^'"]+)['"]/i); return m ? stripTF(m[1]) : null }
 
 function parseTF(html) {
   const partants = []
   for (const m of String(html).matchAll(/<tr\s+data-num='?(\d+)'?[^>]*>([\s\S]*?)<\/tr>/gi)) {
-    const cells = [...m[2].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((c) => c[1])
-    if (cells.length < 14) continue
+    const cells = [...m[2].matchAll(/<t[dh][^>]*>[\s\S]*?<\/t[dh]>/gi)].map((c) => c[0])
+    if (cells.length < 19) continue
+    const c4 = cells[4]
+    const c12 = cells[12]
+    const c14 = cells[14]
+    const c16 = cells[16]
+    const cote = coteTF(stripTF(c4))
     partants.push({
-      num: Number(cells[2]),
+      num: Number(stripTF(cells[2])),
+      silks: imgTF(cells[1]),
       nom: stripTF(cells[3]),
-      cote: coteTF(stripTF(cells[4])),
+      cote,
+      coteBg: bgOfTF(c4),
+      coteText: pickText(bgOfTF(c4)),
       age: Number(stripTF(cells[5])) || null,
       sexe: stripTF(cells[6]) || null,
+      record: stripTF(cells[7]) || null,
       musique: stripTF(cells[8]) || null,
-      corde: Number(stripTF(cells[12]).replace(/[^\d]/g, '')) || null,
+      gains: gainsTF(stripTF(cells[9])) || null,
+      distance: Number((stripTF(cells[10]).match(/\d+/) || [null])[0]) || null,
+      def: stripTF(cells[11]) || null,
+      corde: coteTF(stripTF(c12)),
+      cordeBg: bgOfTF(c12),
+      cordeText: pickText(bgOfTF(c12)),
       monte: stripTF(cells[13]) || null,
+      monteRef: coteTF(stripTF(c14)),
+      monteRefBg: bgOfTF(c14),
       entraineur: stripTF(cells[15]) || null,
+      entraineurRef: coteTF(stripTF(c16)),
+      entraineurRefBg: bgOfTF(c16),
+      owner: stripTF(cells[17]) || null,
+      daysSince: stripTF(cells[18]) || null,
+      avis: imgTF(cells[19]),
+      avisTitle: imgTitleTF(cells[19]),
     })
   }
   return partants
@@ -333,13 +400,15 @@ async function chargerTurfFranceFrance(ymd, r, num) {
   return { cotes, partants, source: 'turf-france' }
 }
 
-async function chargerFranceMarche(ymd, r, c) {
+async function chargerFranceMarche(ymd, r, num) {
+  /* turf-france أولاً: الجدول بكامل أعمدة المصدر وألوانه حرفياً (casaque، cotes ref، corde…).
+     Equidia عند الفشل — الأسماء والأعسر تظهر بدون ألوان المصدر. */
   try {
-    const v = await chargerMarche(ymd, r, c)
+    const v = await chargerTurfFranceFrance(ymd, r, num)
     if (v.partants && v.partants.length) return v
-    throw new Error('équidia vide')
+    throw new Error('turf-france vide')
   } catch {
-    return chargerTurfFranceFrance(ymd, r, c)
+    return chargerMarche(ymd, r, num)
   }
 }
 
@@ -368,6 +437,7 @@ async function chargerMarche(ymd, r, c) {
   const v2 = state[`v2/courses/${ymd}/R${r}/C${c}`] || {}
   const partants = (v2.partants || []).map((p) => ({
     num: Number(p.num_partant),
+    silks: p?.silks_path || null,
     nom: p?.cheval?.nom_cheval || '',
     sexe: p?.cheval?.sexe_cheval || p?.sexe_cheval || null,
     age: p?.cheval?.age_cheval ?? p?.age_cheval ?? null,
@@ -375,6 +445,17 @@ async function chargerMarche(ymd, r, c) {
     musique: p?.cheval?.musique ?? p?.musique ?? null,
     monte: p?.monte?.nom_monte || null,
     entraineur: p?.cheval?.entraineur?.nom_entraineur || p?.entraineur?.nom_entraineur || null,
+    owner: p?.proprietaire?.nom_proprietaire || null,
+    gains: p?.cheval?.gains_carriere ?? null,
+    distance: null,
+    record: null,
+    def: null,
+    daysSince: null,
+    avis: null,
+    avisTitle: p?.libelle_avis_entraineur || null,
+    coteBg: null, coteText: '#f3c887', cordeBg: null, cordeText: '#e8d5a4',
+    monteRef: null, monteRefBg: null,
+    entraineurRef: null, entraineurRefBg: null,
   }))
   return { cotes, partants }
 }
@@ -679,39 +760,77 @@ export default function GenerateurCoupleBahjaTurf() {
                   </div>
                 )}
 
-                {/* جدول المشاركين الكامل — حصان · عمر · فارس · مدرب */}
+                {/* TABLE DES PARTANTS — 19 عموداً، ألوان المصدر حرفياً */}
                 {partantsTri.length > 0 && (
                   <div style={{ marginTop: 4, borderTop: '1px solid rgba(205,130,70,.18)', paddingTop: 10 }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8, marginBottom: 6, flexWrap: 'wrap' }}>
                       <span style={{ fontSize: 9, letterSpacing: '.16em', color: '#f3c887', fontWeight: 800 }}>
                         TABLE DES PARTANTS{courseMeta?.source === 'sorec' ? ' — SOREC (المغرب)' : ''}
                       </span>
-                      <span style={{ fontSize: 8, color: THEME.muted }}>ترتيب السوق عند توفره</span>
+                      <span style={{ fontSize: 8, color: THEME.muted }}>ترتيب السوق عند توفره · الألوان = ألوان المصدر</span>
                     </div>
-                    <div style={{ overflowX: 'auto', border: '1px solid rgba(205,130,70,.22)', borderRadius: 10 }}>
-                      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10.5, color: '#e8d5a4', whiteSpace: 'nowrap' }}>
+                    <div style={{ overflowX: 'auto', border: '1px solid rgba(205,130,70,.22)', borderRadius: 10, scrollbarWidth: 'thin' }}>
+                      <table style={{ borderCollapse: 'collapse', fontSize: 10.5, color: '#e8d5a4', whiteSpace: 'nowrap', minWidth: 1180 }}>
                         <thead>
-                          <tr style={{ color: THEME.muted, fontSize: 8, letterSpacing: '.12em' }}>
-                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>N°</th>
-                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>الخيل</th>
-                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>عمر · ج</th>
-                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>الفارس</th>
-                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>المدرب</th>
-                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>الحبل</th>
-                            <th style={{ textAlign: 'right', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>كوط</th>
+                          <tr style={{ color: THEME.muted, fontSize: 7.5, letterSpacing: '.08em', background: 'rgba(255,255,255,.02)' }}>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="casaque">Casaque</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>N°</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Cheval</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes de Références Cheval (3 ans)">Cotes Ref.</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Age</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Sexe</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Record</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Musique</th>
+                            <th style={{ textAlign: 'right', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Gains</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Distance</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Def.</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Distance cordaée">Corde</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Drivers</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes de Références Jockey (3 ans)">Cotes Ref.</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Entraineurs</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes de Références Entraineur (3 ans)">Cotes Ref.</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Propriétaire</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Dern.Part.</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Avis</th>
                           </tr>
                         </thead>
                         <tbody>
                           {partantsTri.map((p) => (
                             <tr key={p.num} style={{ borderBottom: '1px solid rgba(255,255,255,.05)' }}>
-                              <td style={{ padding: '5px 8px', fontWeight: 800, color: '#f3c887' }}>{p.num}{p.favori ? ' ★' : ''}</td>
-                              <td style={{ padding: '5px 8px', fontWeight: 800 }}>{p.nom}</td>
-                              <td style={{ padding: '5px 8px', color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.age ?? '—'} · {p.sexe || '—'}</td>
-                              <td style={{ padding: '5px 8px' }}>{p.monte || '—'}</td>
-                              <td style={{ padding: '5px 8px', color: THEME.texte }}>{p.entraineur || '—'}</td>
-                              <td style={{ padding: '5px 8px', color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.corde ?? '—'}</td>
-                              <td style={{ padding: '5px 8px', textAlign: 'right', fontFamily: 'ui-monospace, Consolas, monospace', color: '#b8afa6' }}>
+                              <td style={{ padding: '4px 6px', textAlign: 'center' }}>
+                                {p.silks
+                                  ? <img src={p.silks} alt="casaque" style={{ width: 22, height: 22, borderRadius: 3 }} />
+                                  : <span style={{ color: THEME.muted, fontSize: 9 }}>—</span>}
+                              </td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', fontWeight: 800, color: '#f3c887' }}>{p.num}{p.favori ? ' ★' : ''}</td>
+                              <td style={{ padding: '4px 8px', fontWeight: 800 }}>{p.nom}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.coteBg || 'transparent', color: p.coteText || '#f3c887', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 800 }}>
                                 {p.cote != null ? p.cote.toFixed(1) : '—'}
+                              </td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center' }}>{p.age ?? '—'}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', color: THEME.muted }}>{p.sexe || '—'}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.record || '—'}</td>
+                              <td style={{ padding: '4px 8px', color: '#d8cfbf', fontFamily: 'ui-monospace, Consolas, monospace', fontSize: 9 }}>{p.musique || '—'}</td>
+                              <td style={{ padding: '4px 8px', textAlign: 'right', fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.gains ? Number(p.gains).toLocaleString('fr-FR') : '—'}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.distance ? p.distance + 'm' : (courseMeta?.distance ? courseMeta.distance + 'm' : '—')}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', color: THEME.muted }}>{p.def || '—'}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.cordeBg || 'transparent', color: p.cordeText || '#e8d5a4', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 800 }}>
+                                {p.corde != null ? p.corde : '—'}
+                              </td>
+                              <td style={{ padding: '4px 8px' }}>{p.monte || '—'}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.monteRefBg || 'transparent', color: p.monteRefBg ? '#111' : THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>
+                                {p.monteRef != null ? p.monteRef.toFixed(1) : '—'}
+                              </td>
+                              <td style={{ padding: '4px 8px' }}>{p.entraineur || '—'}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.entraineurRefBg || 'transparent', color: p.entraineurRefBg ? '#111' : THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>
+                                {p.entraineurRef != null ? p.entraineurRef.toFixed(1) : '—'}
+                              </td>
+                              <td style={{ padding: '4px 8px' }}>{p.owner || '—'}</td>
+                              <td style={{ padding: '4px 8px', color: THEME.muted }}>{p.daysSince || '—'}</td>
+                              <td style={{ padding: '4px 6px', textAlign: 'center' }}>
+                                {p.avis
+                                  ? <img src={p.avis} alt={p.avisTitle || 'avis'} title={p.avisTitle || ''} style={{ width: 15, height: 15 }} />
+                                  : <span style={{ color: THEME.muted }}>—</span>}
                               </td>
                             </tr>
                           ))}
