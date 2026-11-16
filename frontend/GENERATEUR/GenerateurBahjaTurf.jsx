@@ -7,7 +7,7 @@ import { genererMoteur, choisirPredictions } from './moteur.js'
 import { chargerParticipants } from './participants.js'
 
 /* ══════════════════════════════════════════════════════════════════════════
- *  frontend/GENERATEUR/GenerateurBahjaTurf.jsx — GENERATEUR BAHJA TURF
+ *  frontend/GENERATEUR/GenerateurBahjaTurf.jsx — GENERATEUR QUINTE BAHJA TURF
  *  13/11/2026 — page autonome : ses fichiers, rien des autres pages.
  *  Identité visuelle propre : bronze & or « registre » (pas d'import inter-pages).
  * ════════════════════════════════════════════════════════════════════════ */

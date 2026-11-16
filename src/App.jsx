@@ -55,7 +55,7 @@ export default function App(){
 
         <Route path="/quinte" element={<Portail cle="quinte"><QuinteGrille /></Portail>} />
 
-        {/* ⚠ 13/11/2026 — GENERATEUR BAHJA TURF arrive.
+        {/* ⚠ 13/11/2026 — GENERATEUR QUINTE BAHJA TURF arrive.
          *  L'accès suit le droit Analyse course, comme l'ancienne page
          *  PRONOSTIQUE BAHJA TURF. Le contenu de la page est à définir. */}
         <Route path="/generateur-bahja-turf" element={<Portail cle="analyse"><GenerateurBahjaTurf /></Portail>} />

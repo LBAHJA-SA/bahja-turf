@@ -163,7 +163,7 @@ body::before{
 .banniere-bienvenue{ display:block; width:100%; line-height:0; background:#000 }
 .banniere-bienvenue img{ display:block; width:100%; height:auto }
 
-/* ── GENERATEUR BAHJA TURF — table + panneau droit vertical ── */
+/* ── GENERATEUR QUINTE BAHJA TURF — table + panneau droit vertical ── */
 .generateur-row{
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

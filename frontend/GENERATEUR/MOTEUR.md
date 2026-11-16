@@ -1,10 +1,10 @@
-# GENERATEUR BAHJA TURF — دستور المحرك (Constitution du moteur)
+# GENERATEUR QUINTE BAHJA TURF — دستور المحرك (Constitution du moteur)
 
 > 13/11/2026 — القاعدة الوحيدة : **الأرشيف وحده**.
 > لا أوزان، لا قوة، لا ترتيب بأفضلية، لا قيد رؤية بين الصفوف، لا تعبئة خارج الأرشيف.
 
 ## ① الهوية
-- صفحة **GENERATEUR BAHJA TURF** مستقلة بذاتها: ملفات داخل `frontend/GENERATEUR/`، لا تستورد من `src/lib/quinte.js` ولا من أي صفحة أخرى.
+- صفحة **GENERATEUR QUINTE BAHJA TURF** مستقلة بذاتها: ملفات داخل `frontend/GENERATEUR/`، لا تستورد من `src/lib/quinte.js` ولا من أي صفحة أخرى.
 - الملفات الخاصة: `synthese.js` (قراءة السانس) · `moteur.js` (المحرك) · `GenerateurBahjaTurf.jsx` (العرض).
 
 ## ② مصادر الأرقام — ترشيح الأسابيع من الشهر
