@@ -152,7 +152,7 @@ function buildSorecCourseFromArchive(c, _date) {
     nom: p?.horse || '',
     sexe: p?.sexe || null,
     age: p?.age ?? null,
-    corde: p?.corde ?? null,
+    coteTrend: null,
     record: null,
     musique: p?.musique || null,
     gains: null,
@@ -167,11 +167,12 @@ function buildSorecCourseFromArchive(c, _date) {
     avis: null,
     avisTitle: null,
     cote: p?.cote ?? (p?.ouverture && Number(p.ouverture) > 1.1 ? Number(p.ouverture) : null),
+    coteRef: null,
+    coteRefBg: null,
+    coteRefText: '#e8d5a4',
     ouverture: p?.ouverture ?? null,
     coteBg: null,
     coteText: '#f3c887',
-    cordeBg: null,
-    cordeText: '#e8d5a4',
     depart: null,
   }))
   const cotes = partants
@@ -194,7 +195,8 @@ async function chargerSorecCourse(sorecId) {
       nom: p?.horse?.name || '',
       sexe: p?.horse?.gender || null,
       age: p?.horse?.age ?? null,
-      corde: p?.startbox ?? null,
+      coteLive: p?.odd > 0 ? Number(p.odd) / 100 : (p?.startodd > 0 ? Number(p.startodd) / 100 : null),
+      coteLiveTrend: null,
       record: null,
       musique: p?.shortperformance || null,
       gains: null,
@@ -212,8 +214,8 @@ async function chargerSorecCourse(sorecId) {
       depart: p?.oddtime ? Number(p.oddtime) : null,
       coteBg: null,
       coteText: '#f3c887',
-      cordeBg: null,
-      cordeText: '#e8d5a4',
+      coteLiveBg: null,
+      coteLiveText: '#e8d5a4',
     }))
     const cotes = partants
       .filter((p) => p.cote != null)
@@ -345,6 +347,15 @@ const gainsTF = (s) => { const m = String(s || '').match(/\d[\d\s]*/); return m 
 const imgTF = (html) => { const m = String(html).match(/<img[^>]*\bsrc\s*=\s*['"]([^'"]+)['"]/i); return m ? m[1] : null }
 const imgTitleTF = (html) => { const m = String(html).match(/<img[^>]*\btitle\s*=\s*['"]([^'"]+)['"]/i); return m ? stripTF(m[1]) : null }
 
+const trendOfTF = (html) => {
+  const m = String(html).match(/<img[^>]*\bsrc=['"]([^'"]+)['"]/i)
+  const src = m ? m[1] : ''
+  if (/\/b\.gif($|\?)/i.test(src)) return 'down'
+  if (/\/d\.gif($|\?)/i.test(src)) return 'flat'
+  if (/\/h\.gif($|\?)/i.test(src)) return 'up'
+  return null
+}
+
 function parseTF(html) {
   const partants = []
   for (const m of String(html).matchAll(/<tr\s+data-num='?(\d+)'?[^>]*>([\s\S]*?)<\/tr>/gi)) {
@@ -354,14 +365,20 @@ function parseTF(html) {
     const c12 = cells[12]
     const c14 = cells[14]
     const c16 = cells[16]
-    const cote = coteTF(stripTF(c4))
+    // cells[4] = Cotes Ref. (3 سنوات) · cells[12] = Cotes (الكوط الحية del marché)
+    const coteRef = coteTF(stripTF(c4))
+    const cote = coteTF(stripTF(c12))
     partants.push({
       num: Number(stripTF(cells[2])),
       silks: imgTF(cells[1]),
       nom: stripTF(cells[3]),
       cote,
-      coteBg: bgOfTF(c4),
-      coteText: pickText(bgOfTF(c4)),
+      coteBg: bgOfTF(c12),
+      coteText: pickText(bgOfTF(c12)),
+      coteTrend: trendOfTF(c12),
+      coteRef,
+      coteRefBg: bgOfTF(c4),
+      coteRefText: pickText(bgOfTF(c4)),
       age: Number(stripTF(cells[5])) || null,
       sexe: stripTF(cells[6]) || null,
       record: stripTF(cells[7]) || null,
@@ -369,9 +386,6 @@ function parseTF(html) {
       gains: gainsTF(stripTF(cells[9])) || null,
       distance: Number((stripTF(cells[10]).match(/\d+/) || [null])[0]) || null,
       def: stripTF(cells[11]) || null,
-      corde: coteTF(stripTF(c12)),
-      cordeBg: bgOfTF(c12),
-      cordeText: pickText(bgOfTF(c12)),
       monte: stripTF(cells[13]) || null,
       monteRef: coteTF(stripTF(c14)),
       monteRefBg: bgOfTF(c14),
@@ -404,7 +418,7 @@ async function chargerTurfFranceFrance(ymd, r, num) {
 }
 
 async function chargerFranceMarche(ymd, r, num) {
-  /* turf-france أولاً: الجدول بكامل أعمدة المصدر وألوانه حرفياً (casaque، cotes ref، corde…).
+  /* turf-france أولاً: الجدول بكامل أعمدة المصدر وألوانه حرفياً (casaque، cotes ref، cotes…).
      Equidia عند الفشل — الأسماء والأعسر تظهر بدون ألوان المصدر. */
   try {
     const v = await chargerTurfFranceFrance(ymd, r, num)
@@ -444,7 +458,8 @@ async function chargerMarche(ymd, r, c) {
     nom: p?.cheval?.nom_cheval || '',
     sexe: p?.cheval?.sexe_cheval || p?.sexe_cheval || null,
     age: p?.cheval?.age_cheval ?? p?.age_cheval ?? null,
-    corde: p?.place_corde_partant ?? null,
+    coteLive: null,
+    coteLiveTrend: null,
     musique: p?.cheval?.musique ?? p?.musique ?? null,
     monte: p?.monte?.nom_monte || null,
     entraineur: p?.cheval?.entraineur?.nom_entraineur || p?.entraineur?.nom_entraineur || null,
@@ -456,7 +471,7 @@ async function chargerMarche(ymd, r, c) {
     daysSince: null,
     avis: null,
     avisTitle: p?.libelle_avis_entraineur || null,
-    coteBg: null, coteText: '#f3c887', cordeBg: null, cordeText: '#e8d5a4',
+    coteBg: null, coteText: '#f3c887', coteLiveBg: null, coteLiveText: '#e8d5a4',
     monteRef: null, monteRefBg: null,
     entraineurRef: null, entraineurRefBg: null,
   }))
@@ -551,14 +566,14 @@ export default function GenerateurCoupleBahjaTurf() {
     return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
   }
 
-  const totales = useMemo(() => reunions.reduce((a, m0) => a + m0.courses.length, 0), [reunions])
-
+  /* العداد علوي يعكس الفلاتر دائماً */
   const reunionsAffiches = useMemo(() => {
     if (discipline === 'TOUS') return reunions
     return reunions
       .map((m0) => ({ ...m0, courses: m0.courses.filter((c) => c.discipline === discipline) }))
       .filter((m0) => m0.courses.length > 0)
   }, [reunions, discipline])
+  const totales = useMemo(() => reunionsAffiches.reduce((a, m0) => a + m0.courses.length, 0), [reunionsAffiches])
 
   /* charge le marché de la course choisie (Equidia FR · SOREC MAR) */
   useEffect(() => {
@@ -787,7 +802,7 @@ export default function GenerateurCoupleBahjaTurf() {
                             <th style={{ textAlign: 'right', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Gains</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Distance</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Def.</th>
-                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Distance cordaée">Corde</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes du marché — la course du jour">Cotes</th>
                             <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Drivers</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes de Références Jockey (3 ans)">Cotes Ref.</th>
                             <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Entraineurs</th>
@@ -817,8 +832,8 @@ export default function GenerateurCoupleBahjaTurf() {
                               <td style={{ padding: '4px 8px', textAlign: 'right', fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.gains ? Number(p.gains).toLocaleString('fr-FR') : '—'}</td>
                               <td style={{ padding: '4px 6px', textAlign: 'center', fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.distance ? p.distance + 'm' : (courseMeta?.distance ? courseMeta.distance + 'm' : '—')}</td>
                               <td style={{ padding: '4px 6px', textAlign: 'center', color: THEME.muted }}>{p.def || '—'}</td>
-                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.cordeBg || 'transparent', color: p.cordeText || '#e8d5a4', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 800 }}>
-                                {p.corde != null ? p.corde : '—'}
+                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.coteLiveBg || 'transparent', color: p.coteLiveText || '#e8d5a4', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 800 }}>
+                                {p.coteLive != null ? p.coteLive : '—'}
                               </td>
                               <td style={{ padding: '4px 8px' }}>{p.monte || '—'}</td>
                               <td style={{ padding: '4px 6px', textAlign: 'center', background: p.monteRefBg || 'transparent', color: p.monteRefBg ? '#111' : THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>
@@ -1033,7 +1048,7 @@ export default function GenerateurCoupleBahjaTurf() {
                 fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800,
               }}>LE PROGRAMME</h2>
               <span style={{ fontSize: 11, color: THEME.bronzeTxt, background: 'rgba(215,140,80,.06)', border: '1px solid rgba(215,140,80,.25)', padding: '3px 12px', borderRadius: 999, fontFamily: 'ui-monospace, Consolas, monospace' }}>
-                {reunions.length} réunions · {totales} courses
+                {reunionsAffiches.length} réunion · {totales} courses{discipline !== 'TOUS' ? ` · ` + discipline : ''}
               </span>
             </div>
 
