@@ -488,10 +488,6 @@ const probsImplicites = (liste) => {
   return inv.map((x) => x / s)
 }
 
-/* بصمة DNA — إشاراتها متاحة 9عاً هنا (كوط/افتراضي فقط). تُستعمل كعرض وإعادة ترتيب اقتراحات فقط.
-   ملاحظة مثبتة: مكسبها خارج العينة = 0 (tools/dna-independance.py). لا تحذف أي خيل أبداً. */
-const dnaMatch = (x) => x.rangCote <= 3
-
 const drapeauPour = (code) => {
   const c = String(code || '').toUpperCase()
   if (c === 'FR' || c === 'FRA') return '🇫🇷'
@@ -510,6 +506,116 @@ const drapeauPour = (code) => {
   return '🏳️'
 }
 
+/* ═══ L'EMPREINTE DES COURSES — le cœur du moteur, sans marché ═══════════════
+   Mesurée sur 4 624 courses de archives/ (2020-2026), discipline × distance ×
+   taille du peloton. Aucune cote n'entre dans le score : les variables sont la
+   musique, l'âge, le sexe et le déferrage — tout ce qui est publié avant le
+   départ. Le modèle (poids par type) est dans /data/dna-empreinte-taille.json,
+   écrit par tools/dna-empreinte-taille.mjs. */
+
+function discKey(discipline) {
+  const d = String(discipline || '').toUpperCase()
+  if (/AUTOSTART|ATTEL|TROT/.test(d)) return 'ATTELE'
+  if (/MONT/.test(d)) return 'MONTE'
+  if (/PLAT|GALOP/.test(d)) return 'PLAT'
+  if (/STEEPLE/.test(d)) return 'STEEPLE'
+  if (/HAIE/.test(d)) return 'HAIE'
+  if (/CROSS/.test(d)) return 'CROSS'
+  return null
+}
+const LETTER_DISC = { a: 'ATTELE', m: 'MONTE', p: 'PLAT', h: 'HAIE', s: 'STEEPLE', c: 'CROSS' }
+
+function distKey(d) {
+  const n = Number(d) || 0
+  if (!n) return null
+  if (n <= 1400) return 'SPRINT'
+  if (n <= 1900) return 'MILE'
+  if (n <= 2450) return 'MOYEN'
+  return 'LONG'
+}
+
+/* « 5a2a2a4a4a2a » -> [{place:5,lettre:'a'}, …] ; « 0 » = non placé, « D » = disqualifié */
+function parseMusique(m) {
+  const re = /([0-9]{1,2}|D|A|T|R)([amphsc])/gi
+  const out = []
+  let x
+  while ((x = re.exec(String(m || '')))) {
+    out.push({ place: /^[0-9]+$/.test(x[1]) ? Number(x[1]) : 0, lettre: x[2].toLowerCase() })
+  }
+  return out
+}
+
+const PTS_PLACE = (p) => (p === 1 ? 10 : p === 2 ? 8 : p === 3 ? 6 : p <= 5 ? 4 : p <= 9 ? 1.5 : 0)
+
+function empreinteFeats(p, disc) {
+  const mus = parseMusique(p.musique)
+  const lettre = Object.entries(LETTER_DISC).find(([, v]) => v === disc)?.[0]
+  const moyenne = (arr) => {
+    let s = 0
+    let w = 0
+    arr.forEach((r, i) => {
+      const wi = 1 / (1 + i * 0.55)
+      s += PTS_PLACE(r.place) * wi
+      w += wi
+    })
+    return w ? s / w : null
+  }
+  const last8 = mus.slice(0, 8)
+  const b3 = mus.slice(0, 3).filter((r) => r.place > 0)
+  return {
+    forme: moyenne(mus.slice(0, 5)),
+    formeDisc: moyenne(mus.filter((r) => r.lettre === lettre).slice(0, 5)),
+    placeRate: last8.length ? last8.filter((r) => r.place >= 1 && r.place <= 3).length / last8.length : null,
+    disq: last8.length ? last8.filter((r) => r.place === 0).length / last8.length : null,
+    best: b3.length ? 1 / Math.min(...b3.map((r) => r.place)) : null,
+    age: p.age == null ? null : Number(p.age),
+    jeune: p.age == null ? null : -Math.abs(Number(p.age) - 6),
+    deferre: p.def && /[DPdp]/.test(String(p.def)) ? 1 : 0,
+  }
+}
+
+/* percentile 0..1 dans la course (0,5 = neutre si la donnée manque) */
+function percentiles(valeurs) {
+  const ix = valeurs.map((v, i) => ({ v, i })).filter((x) => x.v != null && Number.isFinite(x.v))
+  const out = new Array(valeurs.length).fill(0.5)
+  const n = ix.length
+  if (!n) return out
+  ix.sort((a, b) => a.v - b.v)
+  let i = 0
+  while (i < n) {
+    let j = i
+    while (j + 1 < n && ix[j + 1].v === ix[i].v) j++
+    const pr = n === 1 ? 0.5 : (i + j) / 2 / (n - 1)
+    for (let k = i; k <= j; k++) out[ix[k].i] = pr
+    i = j + 1
+  }
+  return out
+}
+
+/* classe les partants par l'empreinte du type de course — retourne [{num, score, partant, clé, mesure}] */
+function classerParEmpreinte(partants, meta, modele) {
+  if (!partants || partants.length < 4 || !modele) return null
+  const disc = discKey(meta?.discipline) || 'ATTELE'
+  const bd = distKey(meta?.distance)
+  const bn = partants.length < 10 ? 'PETIT' : 'GRAND'
+  const table =
+    (bd && modele.tables[disc + '|' + bd + '|' + bn]) ||
+    modele.tables[disc + '|' + bn] ||
+    (bd && modele.tables[disc + '|' + bd]) ||
+    modele.universal
+  const KEYS = modele.KEYS
+  const feats = partants.map((p) => empreinteFeats(p, disc))
+  const P = {}
+  for (const k of KEYS) P[k] = percentiles(feats.map((f) => f[k]))
+  const score = partants.map((p, i) => {
+    let v = 0
+    for (const k of KEYS) v += (table[k] || 0) * P[k][i]
+    return { num: p.num, partant: p, score: +v.toFixed(6), i }
+  })
+  score.sort((a, b) => b.score - a.score || a.i - b.i)
+  return { ordre: score, taille: bn, mesure: modele.mesure?.[bn] || null, disc, bd }
+}
+
 /* ── COMPOSANT ───────────────────────────────────────────── */
 export default function GenerateurCoupleBahjaTurf() {
   const [date, setDate] = useState(todayYMD)
@@ -523,8 +629,9 @@ export default function GenerateurCoupleBahjaTurf() {
   const [partants, setPartants] = useState([])  // fiche complète des partants
   const [chargementMarche, setChargementMarche] = useState(false)
   const [maintenant, setMaintenant] = useState(Date.now())
-  const [dnaReorder, setDnaReorder] = useState(false) // بصمة DNA = إعادة ترتيب فقط، لا حذف
   const [generer, setGenerer] = useState(false)
+  const [dnaModele, setDnaModele] = useState(null)   // بصمة الأرشيف: أوزان حسب نوع السباق × حجم الميدان
+  const [dnaErreur, setDnaErreur] = useState('')
 
   /* charge le programme de la date choisie */
   const charger = async (ymd) => {
@@ -543,6 +650,16 @@ export default function GenerateurCoupleBahjaTurf() {
   useEffect(() => {
     const t = setInterval(() => setMaintenant(Date.now()), 1000)
     return () => clearInterval(t)
+  }, [])
+
+  /* charge l'empreinte des courses (poids par type × taille de peloton) */
+  useEffect(() => {
+    let vivant = true
+    fetch('/data/dna-empreinte-taille.json')
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
+      .then((j) => { if (vivant) setDnaModele(j) })
+      .catch((e) => { if (vivant) setDnaErreur(String((e && e.message) || e)) })
+    return () => { vivant = false }
   }, [])
 
   const prochaine = useMemo(() => {
@@ -640,36 +757,44 @@ export default function GenerateurCoupleBahjaTurf() {
     return c ? { hippodrome: m0.hippodrome, paysCode: m0.paysCode, ...c } : null
   }, [course, reunions])
 
-  /* السوق + الاحتمالات الضمنية — النواة الوحيدة للتوليد */
+  /* السوق — للعرض فقط (العمود « Cotes »)، لا يدخل في الاختيار */
   const marcheOrdonne = useMemo(() => {
     if (!marche || !marche.length) return null
     const probs = probsImplicites(marche)
     return marche.map((m0, i) => ({ ...m0, proba: probs[i], rangCote: i + 1 }))
   }, [marche])
 
-  /* الاقتراحات: LOGIQUE = السوق بالضبط. SPECULATIVE = المفضّل + خارجي السوق (الرتبة 4)،
-     أو الخارجي المفضّل البصريّ بالبصمة عند تفعيل «ترتيب DNA» — إعادة ترتيب فقط، لا حذف. */
-  const picks = useMemo(() => {
-    if (!marcheOrdonne || marcheOrdonne.length < 4) return null
-    const [p1, p2, p3, p4] = marcheOrdonne
-    const outsiders = marcheOrdonne.slice(3)
-    let outsider = p4
-    if (dnaReorder && outsiders.length) {
-      /* بصمة السعر كترتيب للاقتراح فقط: كوط ≤ 7 أولاً (عنقود DNA السعري)، ثم الكوط */
-      const scored = outsiders
-        .map((o) => ({ o, s: (o.cote <= 7 ? 2 : 0) + (dnaMatch(o) ? 1 : 0) }))
-        .sort((a, b) => b.s - a.s || a.o.cote - b.o.cote)
-      outsider = scored[0].o
-    }
-    return {
-      logique: { gagner: p1, couple: [p1, p2], trio: [p1, p2, p3] },
-      speculative: { outsider, couple: [p1, outsider], trio: [p1, p2, outsider] },
-      dnaClusterCouple: dnaMatch(p1) && dnaMatch(p2),
-      dnaClusterTrio: [p1, p2, p3].every((x) => dnaMatch(x)),
-    }
-  }, [marcheOrdonne, dnaReorder])
+  /* ═══ البصمة — نواة المحرك ═══
+     ترتيب الخيول بحسب بصمة الأرشيف (نوع السباق × حجم الميدان).
+     السوق لا يدخل في الاختيار إطلاقاً. */
+  const empreinte = useMemo(
+    () => classerParEmpreinte(partants, courseMeta, dnaModele),
+    [partants, courseMeta, dnaModele],
+  )
 
-  const pctProba = (x) => (x && x.proba != null ? (x.proba * 100).toFixed(1) + '%' : '')
+  /* الاقتراحات — من البصمة وحدها.
+     LOGIQUE  = أفضل 3 حسب البصمة.
+     SPECULATIVE = الأول في البصمة + الأول خارج الثلاثة (الرابع). */
+  const picks = useMemo(() => {
+    if (!empreinte || empreinte.ordre.length < 4) return null
+    const coteDe = new Map((marche || []).map((x) => [x.num, x.cote]))
+    const cell = (o) => ({
+      num: o.num,
+      nom: o.partant?.nom || '',
+      cote: coteDe.get(o.num) ?? o.partant?.cote ?? null,
+      score: o.score,
+    })
+    const cells = empreinte.ordre.map(cell)
+    const [a, b, c0, d] = cells
+    return {
+      logique: { gagner: a, couple: [a, b], trio: [a, b, c0] },
+      speculative: { outsider: d, couple: [a, d], trio: [a, b, d] },
+      profil: empreinte,
+    }
+  }, [empreinte, marche])
+
+  /* النسبة الحقيقية المقيسة لهذا النوع (تُقرأ من ملف البصمة، لا تُكتب يدوياً) */
+  /* النسبة الحقيقية المقيسة لهذا النوع تُقرأ من picks.profil.mesure (ملف البصمة) */
 
   /* جدول المشاركين — ترتيب السوق عند توفره، وإلا بترتيب N° */
   const partantsTri = useMemo(() => {
@@ -852,8 +977,8 @@ export default function GenerateurCoupleBahjaTurf() {
                               <td style={{ padding: '4px 8px', textAlign: 'right', fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.gains ? Number(p.gains).toLocaleString('fr-FR') : '—'}</td>
                               <td style={{ padding: '4px 6px', textAlign: 'center', fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.distance ? p.distance + 'm' : (courseMeta?.distance ? courseMeta.distance + 'm' : '—')}</td>
                               <td style={{ padding: '4px 6px', textAlign: 'center', color: THEME.muted }}>{p.def || '—'}</td>
-                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.coteLiveBg || 'transparent', color: p.coteLiveText || '#e8d5a4', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 800 }}>
-                                {p.coteLive != null ? p.coteLive : '—'}
+                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.coteLiveBg || p.coteBg || 'transparent', color: p.coteLiveText || p.coteText || '#e8d5a4', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 800 }}>
+                                {(p.coteLive != null ? p.coteLive : p.cote) != null ? (p.coteLive != null ? p.coteLive : p.cote) : '—'}
                               </td>
                               <td style={{ padding: '4px 8px' }}>{p.monte || '—'}</td>
                               <td style={{ padding: '4px 6px', textAlign: 'center', background: p.monteRefBg || 'transparent', color: p.monteRefBg ? '#111' : THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>
@@ -895,10 +1020,10 @@ export default function GenerateurCoupleBahjaTurf() {
                 fontWeight: 800, letterSpacing: '.2em', fontSize: 10, textIndent: '.2em', whiteSpace: 'nowrap',
               }}>GENERATEUR SYSTÈME</span>
               <span style={{ textAlign: 'center', fontSize: 8.5, color: THEME.muted, maxWidth: 210, lineHeight: 1.5 }}>
-                النواة = السوق (1/كوط مطبّعة) · البصمة = عرض وإعادة ترتيب فقط · صفر مكسب مقاس خارج العينة
+                النواة = بصمة الأرشيف (نوع السباق × حجم الميدان) · لا سوق · النسب أسفلها مقيسة خارج العينة
               </span>
 
-              {/* GAGNANT LOGIQUE · GAGNANT OUTSIDER — مولّدة من السوق عند الضغط على GENERER */}
+              {/* GAGNANT LOGIQUE · GAGNANT OUTSIDER — من البصمة عند الضغط على GENERER */}
               {[
                 { txt: 'GAGNANT LOGIQUE', pick: generer && picks ? picks.logique.gagner : null },
                 { txt: 'GAGNANT OUTSIDER', pick: generer && picks ? picks.speculative.outsider : null },
@@ -908,7 +1033,7 @@ export default function GenerateurCoupleBahjaTurf() {
                     <span style={{ fontSize: 10, letterSpacing: '.12em', color: '#edeae6', fontWeight: 800 }}>{txt}</span>
                     {pick && (
                       <div style={{ marginTop: 2, fontSize: 8.5, color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>
-                        كوط {pick.cote.toFixed(1)} · {(pick.proba * 100).toFixed(1)}%
+                        بصمة {pick.score.toFixed(2)}{pick.cote != null ? ' · كوط ' + pick.cote.toFixed(1) : ''}
                       </div>
                     )}
                   </div>
@@ -921,8 +1046,8 @@ export default function GenerateurCoupleBahjaTurf() {
                     color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 17,
                   }}>
                     {pick ? pick.num : '?'}
-                    {pick && dnaMatch(pick) && (
-                      <span title="عنقود بصمة المفضّل (كوط ≤ 3)" style={{ position: 'absolute', top: 1, right: 4, fontSize: 9, color: '#ffd77a' }}>★</span>
+                    {pick && (
+                      <span title="من بصمة الأرشيف" style={{ position: 'absolute', top: 1, right: 4, fontSize: 9, color: '#ffd77a' }}>★</span>
                     )}
                   </div>
                 </div>
@@ -930,15 +1055,12 @@ export default function GenerateurCoupleBahjaTurf() {
 
               {/* BASE COUPLE — خانتان فقط (1ER · 2ÈME) — مولّدة من السوق */}
               {[
-                { txt: 'BASE COUPLE LOGIQUE', cells: generer && picks ? picks.logique.couple : null, star: generer && picks?.dnaClusterCouple },
+                { txt: 'BASE COUPLE LOGIQUE', cells: generer && picks ? picks.logique.couple : null, star: false },
                 { txt: 'BASE COUPLE SPECULATIVE', cells: generer && picks ? picks.speculative.couple : null, star: false },
-              ].map(({ txt, cells, star }) => (
+              ].map(({ txt, cells }) => (
                 <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
                   <div style={{ flex: 1 }}>
                     <span style={{ fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
-                    {star && (
-                      <div style={{ fontSize: 8, color: '#ffd77a', marginTop: 2 }}>★ عنقود المفضّل (≤ 3 · ≤ 3)</div>
-                    )}
                   </div>
                   <div style={{ display: 'grid', gap: 2 }}>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 46px)', gap: 4, fontSize: 7.5, fontWeight: 800, letterSpacing: '.09em', color: THEME.muted }}>
@@ -956,7 +1078,7 @@ export default function GenerateurCoupleBahjaTurf() {
                           color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 15,
                         }}>
                           {cells ? cells[pos].num : '?'}
-                          {cells && <span style={{ fontSize: 7, color: '#c9b285', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 400 }}>{cells[pos].cote.toFixed(1)}</span>}
+                          {cells && <span style={{ fontSize: 7, color: '#c9b285', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 400 }}>{cells[pos].cote != null ? cells[pos].cote.toFixed(1) : '—'}</span>}
                         </div>
                       ))}
                     </div>
@@ -966,15 +1088,12 @@ export default function GenerateurCoupleBahjaTurf() {
 
               {/* BASE TRIO — ثلاث خانات (1ER · 2ÈME · 3ÈME) — مولّدة من السوق */}
               {[
-                { txt: 'BASE TRIO LOGIQUE', cells: generer && picks ? picks.logique.trio : null, star: generer && picks?.dnaClusterTrio },
+                { txt: 'BASE TRIO LOGIQUE', cells: generer && picks ? picks.logique.trio : null, star: false },
                 { txt: 'BASE TRIO SPECULATIVE', cells: generer && picks ? picks.speculative.trio : null, star: false },
-              ].map(({ txt, cells, star }) => (
+              ].map(({ txt, cells }) => (
                 <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
                   <div style={{ flex: 1 }}>
                     <span style={{ flex: 1, fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
-                    {star && (
-                      <div style={{ fontSize: 8, color: '#ffd77a', marginTop: 2 }}>★ عنقود المفضّل (الثلاثة ≤ 3)</div>
-                    )}
                   </div>
                   <div style={{ display: 'grid', gap: 2 }}>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 46px)', gap: 4, fontSize: 7.5, fontWeight: 800, letterSpacing: '.09em', color: THEME.muted }}>
@@ -993,7 +1112,7 @@ export default function GenerateurCoupleBahjaTurf() {
                           color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 15,
                         }}>
                           {cells ? cells[pos].num : '?'}
-                          {cells && <span style={{ fontSize: 7, color: '#c9b285', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 400 }}>{cells[pos].cote.toFixed(1)}</span>}
+                          {cells && <span style={{ fontSize: 7, color: '#c9b285', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 400 }}>{cells[pos].cote != null ? cells[pos].cote.toFixed(1) : '—'}</span>}
                         </div>
                       ))}
                     </div>
@@ -1001,51 +1120,53 @@ export default function GenerateurCoupleBahjaTurf() {
                 </div>
               ))}
 
-              {/* ترتيب البصمة — إعادة ترتيب اقتراحات فقط، لا حذف لأي خيل */}
-              <button
-                type="button" onClick={() => setDnaReorder((v) => !v)} aria-pressed={dnaReorder}
-                title="إعادة ترتيب الخارجي المرشح للاقتراح — لا تحذف أي خيل"
-                style={{
-                  justifySelf: 'center', display: 'flex', alignItems: 'center', gap: 8,
-                  padding: '6px 12px', borderRadius: 999, cursor: 'pointer',
-                  border: dnaReorder ? '1px solid rgba(255,215,122,.7)' : '1px solid rgba(215,140,80,.35)',
-                  background: dnaReorder ? 'rgba(255,215,122,.12)' : 'rgba(215,140,80,.05)',
-                  color: dnaReorder ? '#ffd77a' : THEME.muted, fontSize: 9, fontWeight: 800, letterSpacing: '.08em',
-                }}
-              >
+              {/* النسبة الحقيقية المقيسة — مأخوذة من ملف البصمة، لا من اليد */}
+              {picks?.profil?.mesure && (
                 <span style={{
-                  width: 14, height: 14, borderRadius: 999, display: 'grid', placeItems: 'center',
-                  border: '1px solid rgba(215,140,80,.5)', fontSize: 9,
-                }}>{dnaReorder ? '✓' : ''}</span>
-                ترتيب البصمة (تجريبي)
-              </button>
+                  textAlign: 'center', fontSize: 8.5, color: '#b8afa6', maxWidth: 210, lineHeight: 1.6,
+                  fontFamily: 'ui-monospace, Consolas, monospace',
+                }}>
+                  مقيس خارج العينة · {picks.profil.taille === 'PETIT' ? 'ميدان صغير (<10)' : 'ميدان كبير (10+)'}<br />
+                  تريو 3 أرقام : {picks.profil.mesure.trio.empreinte}% · 6 أرقام : {picks.profil.mesure.six.empreinte}%<br />
+                  <span style={{ opacity: .7 }}>(ن = {picks.profil.mesure.trio.n} سباق)</span>
+                </span>
+              )}
               <span style={{ textAlign: 'center', fontSize: 8, color: THEME.muted, maxWidth: 210, lineHeight: 1.5 }}>
-                البصمة هنا = سعر فقط (لا يوجد عمر على الصفحة) — يفضّل الخارجي الأقرب سعراً · لا تحذف أي خيل · صفر مكسب خارج العينة
+                البصمة = موسيقى + عمر + جنس + ديفيرّي — لا سوق في الاختيار
               </span>
 
-              {/* زر GENERER — يفعّل المحرك: النواة = السوق */}
+              {/* زر GENERER — يفعّل المحرك: النواة = بصمة الأرشيف */}
               {(() => {
-                const ready = marcheOrdonne && marcheOrdonne.length >= 4
+                const pretSchema = dnaModele && !dnaErreur
+                const ready = pretSchema && partants && partants.length >= 4
+                const statusLabel = !pretSchema
+                  ? (dnaErreur ? 'ملف البصمة غير محمّل — ' + dnaErreur : 'تحميل بصمة الأرشيف…')
+                  : ready
+                    ? `البصمة جاهزة · ${partants.length} خيلاً · ${picks?.profil?.taille === 'PETIT' ? 'ميدان صغير' : 'ميدان كبير'} — اضغط «GENERER»`
+                    : 'اختر سباقاً — يلزم 4 خيول على الأقل'
+                const title = ready ? 'توليد الاقتراحات من بصمة الأرشيف' : statusLabel
                 return (
-                  <button
-                    type="button" onClick={() => setGenerer(true)} disabled={!ready}
-                    title={ready ? 'توليد الاقتراحات من السوق' : 'انتظر نشر السوق للاختيارات (قبل الانطلاق ~10 دقائق)'}
-                    style={{
-                      marginTop: 2, justifySelf: 'center', padding: '10px 24px', borderRadius: 999,
-                      cursor: ready ? 'pointer' : 'default',
-                      border: '1px solid rgba(215,140,80,.6)',
-                      color: ready ? '#241a02' : 'rgba(243,200,135,.4)',
-                      fontFamily: 'Inter, system-ui, sans-serif',
-                      fontWeight: 900, letterSpacing: '.22em', fontSize: 13, textIndent: '.22em',
-                      background: ready ? 'linear-gradient(150deg, #e8d5a4, #f3c887 55%, #c87533)' : 'rgba(215,140,80,.05)',
-                      boxShadow: ready ? '0 3px 14px rgba(215,140,80,.35)' : 'none',
-                    }}
-                  >GENERER</button>
+                  <>
+                    <button
+                      type="button" onClick={() => setGenerer(true)} disabled={!ready}
+                      title={title}
+                      style={{
+                        marginTop: 2, justifySelf: 'center', padding: '10px 24px', borderRadius: 999,
+                        cursor: ready ? 'pointer' : 'default',
+                        border: '1px solid rgba(215,140,80,.6)',
+                        color: ready ? '#241a02' : 'rgba(243,200,135,.4)',
+                        fontFamily: 'Inter, system-ui, sans-serif',
+                        fontWeight: 900, letterSpacing: '.22em', fontSize: 13, textIndent: '.22em',
+                        background: ready ? 'linear-gradient(150deg, #e8d5a4, #f3c887 55%, #c87533)' : 'rgba(215,140,80,.05)',
+                        boxShadow: ready ? '0 3px 14px rgba(215,140,80,.35)' : 'none',
+                      }}
+                    >GENERER</button>
+                    <span style={{ textAlign: 'center', fontSize: 10, color: THEME.muted, maxWidth: 210, lineHeight: 1.5 }}>
+                      {statusLabel}
+                    </span>
+                  </>
                 )
               })()}
-              <span style={{ textAlign: 'center', fontSize: 10, color: THEME.muted, maxWidth: 210, lineHeight: 1.5 }}>
-                {marche ? 'السوق جاهز — اضغط «GENERER»' : 'السوق غير منشور بعد · يُنشر قبل الانطلاق ~10 دقائق'}
-              </span>
               {generer && picks && (
                 <button type="button" onClick={() => setGenerer(false)} style={{
                   justifySelf: 'center', border: 'none', background: 'transparent', color: '#b8afa6',
