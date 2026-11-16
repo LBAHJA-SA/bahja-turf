@@ -368,8 +368,32 @@ export default function GenerateurCoupleBahjaTurf() {
                 </div>
               ))}
 
-              {/* BASE COUPLE / TRIO — عنوان يسار، خانات يمين */}
-              {['BASE COUPLE LOGIQUE', 'BASE COUPLE SPECULATIVE', 'BASE TRIO LOGIQUE', 'BASE TRIO SPECULATIVE'].map((txt) => (
+              {/* BASE COUPLE — خانتان فقط (1ER · 2ÈME) */}
+              {['BASE COUPLE LOGIQUE', 'BASE COUPLE SPECULATIVE'].map((txt) => (
+                <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
+                  <span style={{ flex: 1, fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
+                  <div style={{ display: 'grid', gap: 2 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 46px)', gap: 4, fontSize: 7.5, fontWeight: 800, letterSpacing: '.09em', color: THEME.muted }}>
+                      <div style={{ textAlign: 'center' }}>1ER</div>
+                      <div style={{ textAlign: 'center' }}>2ÈME</div>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 46px)', gap: 4 }}>
+                      {[0, 1].map((pos) => (
+                        <div key={pos} style={{
+                          width: 46, height: 44, display: 'grid', placeItems: 'center',
+                          borderRadius: 14, border: '1.5px solid rgba(215,140,80,.6)',
+                          background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,.16), transparent 60%), linear-gradient(160deg, #6b4630 0%, #46301f 100%)',
+                          boxShadow: 'inset 0 1px 0 rgba(255,255,255,.28), 0 3px 8px rgba(0,0,0,.5)',
+                          color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 16,
+                        }}>?</div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              {/* BASE TRIO — ثلاث خانات (1ER · 2ÈME · 3ÈME) */}
+              {['BASE TRIO LOGIQUE', 'BASE TRIO SPECULATIVE'].map((txt) => (
                 <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
                   <span style={{ flex: 1, fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
                   <div style={{ display: 'grid', gap: 2 }}>
