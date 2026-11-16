@@ -1,5 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import Entete from '../../src/Entete.jsx'
+/* Le modèle est EMBARQUÉ au build (import JSON → Vite l'inline).
+   Avant, il arrivait par fetch('/data/…'), route protégée par middleware.js :
+   une session expirée suffisait à laisser le moteur sans noyau. */
+import MODELE_EMPREINTE from '../../public/data/dna-empreinte-taille.json'
 
 /* ──────────────────────────────────────────────────────────────
  *  frontend/GENERATEUR-COUPLE/GenerateurCoupleBahjaTurf.jsx
@@ -595,13 +599,17 @@ function percentiles(valeurs) {
 /* classe les partants par l'empreinte du type de course — retourne [{num, score, partant, clé, mesure}] */
 function classerParEmpreinte(partants, meta, modele) {
   if (!partants || partants.length < 4 || !modele) return null
-  const disc = discKey(meta?.discipline) || 'ATTELE'
+  /* discipline inconnue → null : on retombe sur le modèle universel.
+     Avant, un `|| 'ATTELE'` notait silencieusement toute course inconnue
+     avec la table du trot attelé. */
+  const disc = discKey(meta?.discipline)
   const bd = distKey(meta?.distance)
   const bn = partants.length < 10 ? 'PETIT' : 'GRAND'
   const table =
-    (bd && modele.tables[disc + '|' + bd + '|' + bn]) ||
-    modele.tables[disc + '|' + bn] ||
-    (bd && modele.tables[disc + '|' + bd]) ||
+    (disc && bd && modele.tables[disc + '|' + bd + '|' + bn]) ||
+    (disc && modele.tables[disc + '|' + bn]) ||
+    (disc && bd && modele.tables[disc + '|' + bd]) ||
+    (disc && modele.tables[disc]) ||
     modele.universal
   const KEYS = modele.KEYS
   const feats = partants.map((p) => empreinteFeats(p, disc))
@@ -630,8 +638,7 @@ export default function GenerateurCoupleBahjaTurf() {
   const [chargementMarche, setChargementMarche] = useState(false)
   const [maintenant, setMaintenant] = useState(Date.now())
   const [generer, setGenerer] = useState(false)
-  const [dnaModele, setDnaModele] = useState(null)   // بصمة الأرشيف: أوزان حسب نوع السباق × حجم الميدان
-  const [dnaErreur, setDnaErreur] = useState('')
+  const [dnaModele] = useState(() => MODELE_EMPREINTE)
 
   /* charge le programme de la date choisie */
   const charger = async (ymd) => {
@@ -652,15 +659,7 @@ export default function GenerateurCoupleBahjaTurf() {
     return () => clearInterval(t)
   }, [])
 
-  /* charge l'empreinte des courses (poids par type × taille de peloton) */
-  useEffect(() => {
-    let vivant = true
-    fetch('/data/dna-empreinte-taille.json')
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))))
-      .then((j) => { if (vivant) setDnaModele(j) })
-      .catch((e) => { if (vivant) setDnaErreur(String((e && e.message) || e)) })
-    return () => { vivant = false }
-  }, [])
+  /* l'empreinte est embarquée au build : aucun chargement, aucun échec possible */
 
   const prochaine = useMemo(() => {
     const now = maintenant
@@ -789,6 +788,9 @@ export default function GenerateurCoupleBahjaTurf() {
     return {
       logique: { gagner: a, couple: [a, b], trio: [a, b, c0] },
       speculative: { outsider: d, couple: [a, d], trio: [a, b, d] },
+      /* la rangée large : 6 numéros = C(6,3) = 20 trios.
+         C'est le seul levier mesuré qui existe sans le marché (voir mesures). */
+      six: cells.slice(0, 6),
       profil: empreinte,
     }
   }, [empreinte, marche])
@@ -1120,14 +1122,42 @@ export default function GenerateurCoupleBahjaTurf() {
                 </div>
               ))}
 
-              {/* النسبة الحقيقية المقيسة — مأخوذة من ملف البصمة، لا من اليد */}
+              {/* RANGÉE LARGE — 6 numéros (20 trios). Le seul levier mesuré sans marché. */}
+              <div style={{ display: 'grid', gap: 4, minWidth: 225 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8 }}>
+                  <span style={{ fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800 }}>TRIO ÉLARGI · 6</span>
+                  <span style={{ fontSize: 7.5, color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>C(6,3) = 20</span>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 34px)', gap: 3 }}>
+                  {[0, 1, 2, 3, 4, 5].map((pos) => {
+                    const o = generer && picks ? picks.six?.[pos] : null
+                    return (
+                      <div key={pos} style={{
+                        position: 'relative',
+                        width: 34, height: 38, display: 'grid', placeItems: 'center', alignContent: 'center', gap: 0,
+                        borderRadius: 10, border: '1.5px solid rgba(215,140,80,.45)',
+                        background: 'linear-gradient(160deg, #4d3624 0%, #2e2117 100%)',
+                        boxShadow: 'inset 0 1px 0 rgba(255,255,255,.2), 0 2px 6px rgba(0,0,0,.45)',
+                        color: '#e9d3ab', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 13,
+                      }}>
+                        {o ? o.num : '?'}
+                        {o && <span style={{ fontSize: 6.5, color: '#a8946f', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 400 }}>{o.cote != null ? o.cote.toFixed(1) : '—'}</span>}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* النسب المقيسة — مأخوذة من ملف البصمة، لا من اليد */}
               {picks?.profil?.mesure && (
                 <span style={{
-                  textAlign: 'center', fontSize: 8.5, color: '#b8afa6', maxWidth: 210, lineHeight: 1.6,
+                  textAlign: 'center', fontSize: 8.5, color: '#b8afa6', maxWidth: 225, lineHeight: 1.7,
                   fontFamily: 'ui-monospace, Consolas, monospace',
                 }}>
                   مقيس خارج العينة · {picks.profil.taille === 'PETIT' ? 'ميدان صغير (<10)' : 'ميدان كبير (10+)'}<br />
-                  تريو 3 أرقام : {picks.profil.mesure.trio.empreinte}% · 6 أرقام : {picks.profil.mesure.six.empreinte}%<br />
+                  الفائز {picks.profil.mesure.gagnant.empreinte}% · كوبليه {picks.profil.mesure.couple.empreinte}% ·
+                  تريو {picks.profil.mesure.trio.empreinte}%<br />
+                  3 أرقام ← {picks.profil.mesure.trio.empreinte}% · 6 أرقام ← {picks.profil.mesure.six.empreinte}%<br />
                   <span style={{ opacity: .7 }}>(ن = {picks.profil.mesure.trio.n} سباق)</span>
                 </span>
               )}
@@ -1137,10 +1167,10 @@ export default function GenerateurCoupleBahjaTurf() {
 
               {/* زر GENERER — يفعّل المحرك: النواة = بصمة الأرشيف */}
               {(() => {
-                const pretSchema = dnaModele && !dnaErreur
+                const pretSchema = !!dnaModele
                 const ready = pretSchema && partants && partants.length >= 4
                 const statusLabel = !pretSchema
-                  ? (dnaErreur ? 'ملف البصمة غير محمّل — ' + dnaErreur : 'تحميل بصمة الأرشيف…')
+                  ? 'بصمة الأرشيف غير محمّلة'
                   : ready
                     ? `البصمة جاهزة · ${partants.length} خيلاً · ${picks?.profil?.taille === 'PETIT' ? 'ميدان صغير' : 'ميدان كبير'} — اضغط «GENERER»`
                     : 'اختر سباقاً — يلزم 4 خيول على الأقل'
