@@ -18,14 +18,22 @@ import Entete from '../../src/Entete.jsx'
  *      avec l'utilisateur (discussion à venir).
  * ────────────────────────────────────────────────────────────── */
 
-const BRONZE = {
-  bord: 'rgba(218,165,32,.4)',
-  bord2: 'rgba(218,165,32,.18)',
-  accent: '#ffd700',
-  accent2: '#f5c044',
-  bronzeTxt: '#d8b86a',
-  muted: '#a89468',
-  texte: '#f7ead1',
+const THEME = {
+  bord: 'rgba(215,140,80,.38)',
+  bord2: 'rgba(215,140,80,.15)',
+  accent: '#f3c887',       // cuivre clair
+  accent2: '#e8d5a4',      // champagne / argent chaud
+  cuivre: '#c87533',        // cuivre profond
+  cuivre2: '#a85627',
+  argent: '#d6dbe3',       // argent
+  muted: '#a29a90',        // gris chaud
+  texte: '#edeae6',        // argent métallisé
+  fond: 'radial-gradient(900px 520px at 12% 0%, rgba(200,120,64,.08) 0%, transparent 55%), #0d0e12',
+  carte: 'linear-gradient(160deg, #23242c 0%, #14151b 100%)',
+  carteFond: 'linear-gradient(160deg, #23242c 0%, #14151b 100%)',
+  carteBord: 'rgba(215,140,80,.28)',
+  cellule: 'linear-gradient(160deg, #4a3728 0%, #33241a 100%)',
+  policeFonte: 'Georgia, "Times New Roman", serif',
 }
 
 const DISCIPLINES = ['TOUS', 'ATTELÉ', 'PLAT', 'HAIE', 'STEEPLE']
@@ -225,8 +233,8 @@ export default function GenerateurCoupleBahjaTurf() {
         style={{
           minHeight: 'calc(100vh - 68px)',
           padding: 'clamp(16px, 3vw, 26px) 16px clamp(20px, 5vw, 48px)',
-          background: 'radial-gradient(900px 520px at 12% 0%, rgba(255,215,0,.07) 0%, transparent 55%), #0a0803',
-          color: BRONZE.texte,
+          background: 'radial-gradient(900px 520px at 12% 0%, rgba(215,140,80,.07) 0%, transparent 55%), #0a0803',
+          color: THEME.texte,
         }}
       >
         <div style={{ display: 'grid', gap: 16, width: '100%' }}>
@@ -237,19 +245,19 @@ export default function GenerateurCoupleBahjaTurf() {
             {/* ── LA TABLE — partants ordonnés par le marché ── */}
             <section style={{
               padding: 'clamp(14px, 2.5vw, 20px)', borderRadius: 18,
-              border: '1px solid ' + BRONZE.bord,
-              background: 'linear-gradient(165deg, rgba(28,22,10,.6) 0%, rgba(13,10,4,.85) 100%)',
-              boxShadow: '0 14px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,215,0,.15)',
+              border: '1px solid ' + THEME.bord,
+              background: 'linear-gradient(165deg, rgba(46,45,55,.55) 0%, rgba(22,23,28,.88) 100%)',
+              boxShadow: '0 14px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(215,140,80,.15)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
                 <div>
                   <h2 style={{
-                    margin: 0, fontSize: 14, letterSpacing: '.16em', color: '#ffd700',
+                    margin: 0, fontSize: 14, letterSpacing: '.16em', color: '#f3c887',
                     fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800,
                   }}>
                     {courseNom || 'LA TABLE'}
                   </h2>
-                  <div style={{ marginTop: 4, fontSize: 11, color: BRONZE.muted }}>
+                  <div style={{ marginTop: 4, fontSize: 11, color: THEME.muted }}>
                     {courseMeta && (
                       <>
                         Source : le marché{courseMeta?.hippodrome ? ' · ' + courseMeta.hippodrome : ''}
@@ -264,7 +272,7 @@ export default function GenerateurCoupleBahjaTurf() {
 
               {/* Filtre discipline */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
-                <span style={{ fontSize: 10, letterSpacing: '.16em', color: BRONZE.muted, fontWeight: 800 }}>
+                <span style={{ fontSize: 10, letterSpacing: '.16em', color: THEME.muted, fontWeight: 800 }}>
                   DISCIPLINE
                 </span>
                 {DISCIPLINES.map((d) => {
@@ -275,10 +283,10 @@ export default function GenerateurCoupleBahjaTurf() {
                       style={{
                         padding: '5px 14px', borderRadius: 999, cursor: 'pointer',
                         fontSize: 11.5, fontWeight: 800, letterSpacing: '.08em',
-                        color: actif ? '#241a02' : '#d8b86a',
-                        border: actif ? 'none' : '1px solid rgba(218,165,32,.4)',
-                        background: actif ? 'linear-gradient(150deg, #ffe97a, #ffd700 55%, #b98410)' : 'rgba(255,215,0,.05)',
-                        boxShadow: actif ? '0 3px 12px rgba(255,215,0,.3)' : 'none',
+                        color: actif ? '#241a02' : '#b8afa6',
+                        border: actif ? 'none' : '1px solid rgba(205,130,70,.4)',
+                        background: actif ? 'linear-gradient(150deg, #e8d5a4, #f3c887 55%, #c87533)' : 'rgba(215,140,80,.05)',
+                        boxShadow: actif ? '0 3px 12px rgba(215,140,80,.3)' : 'none',
                       }}
                     >{d}</button>
                   )
@@ -287,15 +295,15 @@ export default function GenerateurCoupleBahjaTurf() {
 
               <div style={{ marginTop: 12 }}>
                 {!course && (
-                  <p style={{ fontSize: 12, color: BRONZE.bronzeTxt, margin: '6px 2px 0' }}>
+                  <p style={{ fontSize: 12, color: THEME.bronzeTxt, margin: '6px 2px 0' }}>
                     اختر سباقًا من « LE PROGRAMME » — جدول السباق يملأ بترتيب السوق.
                   </p>
                 )}
                 {course && chargementMarche && (
-                  <p style={{ fontSize: 12, color: BRONZE.bronzeTxt, margin: '6px 2px 0' }}>الـسوق يُحمّل…</p>
+                  <p style={{ fontSize: 12, color: THEME.bronzeTxt, margin: '6px 2px 0' }}>الـسوق يُحمّل…</p>
                 )}
                 {course && !chargementMarche && marche && marche.length === 0 && (
-                  <p style={{ fontSize: 12, color: BRONZE.bronzeTxt, margin: '6px 2px 0' }}>
+                  <p style={{ fontSize: 12, color: THEME.bronzeTxt, margin: '6px 2px 0' }}>
                     الـسوق غير منشور لهذا السباق (يُنشر قبل الانطلاق ~10 دقائق).
                   </p>
                 )}
@@ -308,13 +316,13 @@ export default function GenerateurCoupleBahjaTurf() {
                             c ? (
                               <div key={k} style={{
                                 position: 'relative', display: 'grid', justifyItems: 'center', gap: 2,
-                                padding: '7px 6px 8px', borderRadius: 10, border: '1px solid rgba(218,165,32,.35)',
-                                background: BRONZE.carteFond || 'linear-gradient(160deg, #1d1608 0%, #120d04 100%)',
-                                boxShadow: 'inset 0 1px 0 rgba(255,215,0,.2), 0 3px 8px rgba(0,0,0,.5)',
+                                padding: '7px 6px 8px', borderRadius: 10, border: '1px solid rgba(205,130,70,.35)',
+                                background: THEME.carteFond || 'linear-gradient(160deg, #23242c 0%, #14151b 100%)',
+                                boxShadow: 'inset 0 1px 0 rgba(215,140,80,.2), 0 3px 8px rgba(0,0,0,.5)',
                               }}>
-                                <span style={{ fontSize: 8, color: BRONZE.muted, letterSpacing: '.18em', fontWeight: 800 }}>P{c.slot}</span>
-                                <span style={{ fontSize: 22, lineHeight: 1.1, fontWeight: 800, fontFamily: 'Georgia, "Times New Roman", serif', color: '#ffd766' }}>{c.num}</span>
-                                <span style={{ fontSize: 8.5, color: '#d8b86a', fontFamily: 'ui-monospace, Consolas, monospace' }}>{c.cote.toFixed(1)}</span>
+                                <span style={{ fontSize: 8, color: THEME.muted, letterSpacing: '.18em', fontWeight: 800 }}>P{c.slot}</span>
+                                <span style={{ fontSize: 22, lineHeight: 1.1, fontWeight: 800, fontFamily: 'Georgia, "Times New Roman", serif', color: '#f3c887' }}>{c.num}</span>
+                                <span style={{ fontSize: 8.5, color: '#b8afa6', fontFamily: 'ui-monospace, Consolas, monospace' }}>{c.cote.toFixed(1)}</span>
                                 {c.favori && (
                                   <span style={{ position: 'absolute', top: 2, right: 5, fontSize: 10, color: '#ffd77a' }}>★</span>
                                 )}
@@ -334,68 +342,66 @@ export default function GenerateurCoupleBahjaTurf() {
             {/* ── GENERATEUR SYSTÈME — اللوح آبار memorبح ولوحة المميزة السوق ── */}
             <section style={{
               padding: 'clamp(12px, 2vw, 16px)', borderRadius: 18,
-              border: '1px solid ' + BRONZE.bord,
-              background: 'linear-gradient(165deg, rgba(28,22,10,.6) 0%, rgba(13,10,4,.85) 100%)',
-              boxShadow: '0 14px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,215,0,.15)',
-              display: 'grid', gap: 10, alignContent: 'start', width: 'max-content',
+              border: '1px solid ' + THEME.bord,
+              background: 'linear-gradient(165deg, rgba(46,45,55,.55) 0%, rgba(22,23,28,.88) 100%)',
+              boxShadow: '0 14px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(215,140,80,.15)',
+              display: 'grid', gap: 12, alignContent: 'start', width: 'max-content',
             }}>
               <span style={{
-                display: 'block', padding: '6px 10px', textAlign: 'center',
-                border: '1.5px solid #d8b86a', borderRadius: 6, color: '#ffe97a',
-                background: 'rgba(255,215,0,.05)', fontFamily: 'Georgia, "Times New Roman", serif',
+                display: 'block', padding: '7px 10px', textAlign: 'center',
+                border: '1.5px solid #d6dbe3', borderRadius: 999, color: '#edeae6',
+                background: 'rgba(215,140,80,.08)', fontFamily: 'Georgia, "Times New Roman", serif',
                 fontWeight: 800, letterSpacing: '.2em', fontSize: 10, textIndent: '.2em', whiteSpace: 'nowrap',
               }}>GENERATEUR SYSTÈME</span>
 
-              {/* GAGNANT LOGIQUE · GAGNANT OUTSIDER */}
+              {/* GAGNANT LOGIQUE · GAGNANT OUTSIDER — label clair puis coin rond à droite */}
               {[{ txt: 'GAGNANT LOGIQUE' }, { txt: 'GAGNANT OUTSIDER' }].map(({ txt }) => (
-                <div key={txt} style={{ display: 'grid', gap: 4 }}>
-                  <span style={{ fontSize: 9, letterSpacing: '.14em', color: BRONZE.muted, fontWeight: 800 }}>{txt}</span>
+                <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
+                  <span style={{ fontSize: 10, letterSpacing: '.12em', color: '#edeae6', fontWeight: 800 }}>{txt}</span>
                   <div style={{
-                    width: 120, height: 46, display: 'grid', placeItems: 'center', borderRadius: 8,
-                    border: '1.5px solid rgba(255,215,0,.55)',
-                    background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,.14), transparent 60%), linear-gradient(160deg, #5a4410 0%, #3d2c06 100%)',
-                    color: '#ffe97a', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 20,
+                    width: 46, height: 44, display: 'grid', placeItems: 'center', borderRadius: 999,
+                    border: '1.5px solid rgba(215,140,80,.6)',
+                    background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,.16), transparent 60%), linear-gradient(160deg, #6b4630 0%, #46301f 100%)',
+                    boxShadow: 'inset 0 1px 0 rgba(255,255,255,.3), 0 3px 8px rgba(0,0,0,.5)',
+                    color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 17,
                   }}>?</div>
                 </div>
               ))}
 
-              {/* BASE COUPLE LOGIQUE · SPECULATIVE + BASE TRIO LOGIQUE · SPECULATIVE */}
-              {[
-                { txt: 'BASE COUPLE LOGIQUE', titres: ['1ER', '2ÈME', '3ÈME'] },
-                { txt: 'BASE COUPLE SPECULATIVE' },
-                { txt: 'BASE TRIO LOGIQUE' },
-                { txt: 'BASE TRIO SPECULATIVE' },
-              ].map(({ txt }) => (
-                <div key={txt} style={{ display: 'grid', gap: 3 }}>
-                  <span style={{ fontSize: 9, letterSpacing: '.14em', color: BRONZE.muted, fontWeight: 800 }}>{txt}</span>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 52px)', gap: 4, fontSize: 8, fontWeight: 800, letterSpacing: '.08em', color: '#a89468' }}>
-                    <div style={{ textAlign: 'center' }}>1ER</div>
-                    <div style={{ textAlign: 'center' }}>2ÈME</div>
-                    <div style={{ textAlign: 'center' }}>3ÈME</div>
-                  </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 52px)', gap: 4 }}>
-                    {[0, 1, 2].map((pos) => (
-                      <div key={pos} style={{
-                        width: 52, height: 46, display: 'grid', placeItems: 'center',
-                        borderRadius: 8, border: '1.5px solid rgba(255,215,0,.55)',
-                        background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,.14), transparent 60%), linear-gradient(160deg, #5a4410 0%, #3d2c06 100%)',
-                        boxShadow: 'inset 0 1px 0 rgba(255,215,0,.35), 0 3px 8px rgba(0,0,0,.45)',
-                        color: '#ffe97a', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 20,
-                      }}>?</div>
-                    ))}
+              {/* BASE COUPLE / TRIO — عنوان يسار، خانات يمين */}
+              {['BASE COUPLE LOGIQUE', 'BASE COUPLE SPECULATIVE', 'BASE TRIO LOGIQUE', 'BASE TRIO SPECULATIVE'].map((txt) => (
+                <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
+                  <span style={{ flex: 1, fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
+                  <div style={{ display: 'grid', gap: 2 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 46px)', gap: 4, fontSize: 7.5, fontWeight: 800, letterSpacing: '.09em', color: THEME.muted }}>
+                      <div style={{ textAlign: 'center' }}>1ER</div>
+                      <div style={{ textAlign: 'center' }}>2ÈME</div>
+                      <div style={{ textAlign: 'center' }}>3ÈME</div>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 46px)', gap: 4 }}>
+                      {[0, 1, 2].map((pos) => (
+                        <div key={pos} style={{
+                          width: 46, height: 44, display: 'grid', placeItems: 'center',
+                          borderRadius: 14, border: '1.5px solid rgba(215,140,80,.6)',
+                          background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,.16), transparent 60%), linear-gradient(160deg, #6b4630 0%, #46301f 100%)',
+                          boxShadow: 'inset 0 1px 0 rgba(255,255,255,.28), 0 3px 8px rgba(0,0,0,.5)',
+                          color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 16,
+                        }}>?</div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))}
 
               {/* زر GENERER — معطّل منتظرًا نقاس المحرك */}
               <button type="button" disabled title="Les règles du moteur sont à discuter" style={{
-                marginTop: 6, justifySelf: 'center', padding: '10px 22px', borderRadius: 10,
-                cursor: 'default', border: '1px solid rgba(255,215,0,.25)',
-                color: 'rgba(255,233,122,.45)', fontFamily: 'Inter, system-ui, sans-serif',
+                marginTop: 2, justifySelf: 'center', padding: '10px 24px', borderRadius: 999,
+                cursor: 'default', border: '1px solid rgba(215,140,80,.35)',
+                color: 'rgba(243,200,135,.5)', fontFamily: 'Inter, system-ui, sans-serif',
                 fontWeight: 900, letterSpacing: '.22em', fontSize: 13, textIndent: '.22em',
-                background: 'rgba(255,215,0,.03)',
+                background: 'rgba(215,140,80,.05)',
               }}>GENERER</button>
-              <span style={{ textAlign: 'center', fontSize: 10, color: BRONZE.muted, maxWidth: 200 }}>
+              <span style={{ textAlign: 'center', fontSize: 10, color: THEME.muted, maxWidth: 200 }}>
                 المحرك يناقش قبل التفعيل — الحقول تبقى فارغة.
               </span>
             </section>
@@ -404,28 +410,28 @@ export default function GenerateurCoupleBahjaTurf() {
           {/* ── LE PROGRAMME ── */}
           <section style={{
             padding: 'clamp(14px, 2.5vw, 20px)', borderRadius: 18,
-            border: '1px solid ' + BRONZE.bord,
-            background: 'linear-gradient(165deg, rgba(28,22,10,.6) 0%, rgba(13,10,4,.85) 100%)',
-            boxShadow: '0 14px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,215,0,.15)',
+            border: '1px solid ' + THEME.bord,
+            background: 'linear-gradient(165deg, rgba(46,45,55,.55) 0%, rgba(22,23,28,.88) 100%)',
+            boxShadow: '0 14px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(215,140,80,.15)',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', marginBottom: 10 }}>
               <h2 style={{
-                margin: 0, fontSize: 13, letterSpacing: '.16em', color: '#ffd700',
+                margin: 0, fontSize: 13, letterSpacing: '.16em', color: '#f3c887',
                 fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800,
               }}>LE PROGRAMME</h2>
-              <span style={{ fontSize: 11, color: BRONZE.bronzeTxt, background: 'rgba(255,215,0,.06)', border: '1px solid rgba(255,215,0,.25)', padding: '3px 12px', borderRadius: 999, fontFamily: 'ui-monospace, Consolas, monospace' }}>
+              <span style={{ fontSize: 11, color: THEME.bronzeTxt, background: 'rgba(215,140,80,.06)', border: '1px solid rgba(215,140,80,.25)', padding: '3px 12px', borderRadius: 999, fontFamily: 'ui-monospace, Consolas, monospace' }}>
                 {reunions.length} réunions · {totales} courses
               </span>
             </div>
 
             <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: BRONZE.bronzeTxt }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: THEME.bronzeTxt }}>
                 <span>Date</span>
                 <input
                   type="date" value={date} onChange={(e) => setDate(e.target.value)}
                   style={{
-                    colorScheme: 'dark', background: 'rgba(255,215,0,.05)', color: '#ffe97a',
-                    border: '1px solid rgba(218,165,32,.45)', borderRadius: 10, padding: '6px 10px', fontSize: 13,
+                    colorScheme: 'dark', background: 'rgba(215,140,80,.05)', color: '#e8d5a4',
+                    border: '1px solid rgba(205,130,70,.45)', borderRadius: 10, padding: '6px 10px', fontSize: 13,
                     fontFamily: 'ui-monospace, Consolas, monospace',
                   }}
                 />
@@ -433,8 +439,8 @@ export default function GenerateurCoupleBahjaTurf() {
               <button
                 type="button" onClick={() => charger(date)}
                 style={{
-                  padding: '6px 18px', borderRadius: 10, cursor: 'pointer', border: '1px solid rgba(255,215,0,.4)',
-                  background: 'rgba(255,215,0,.07)', color: '#ffd700', fontWeight: 800, fontSize: 12, letterSpacing: '.06em',
+                  padding: '6px 18px', borderRadius: 10, cursor: 'pointer', border: '1px solid rgba(215,140,80,.4)',
+                  background: 'rgba(215,140,80,.07)', color: '#f3c887', fontWeight: 800, fontSize: 12, letterSpacing: '.06em',
                 }}
               >Charger</button>
             </div>
@@ -446,27 +452,27 @@ export default function GenerateurCoupleBahjaTurf() {
             {/* compte à rebours de la prochaine course */}
             <div style={{
               marginTop: 10, display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap',
-              border: '1px solid rgba(255,215,0,.35)', borderRadius: 10,
-              background: 'radial-gradient(ellipse at center, rgba(255,215,0,.13) 0%, rgba(255,215,0,.03) 75%)',
+              border: '1px solid rgba(215,140,80,.35)', borderRadius: 10,
+              background: 'radial-gradient(ellipse at center, rgba(215,140,80,.13) 0%, rgba(215,140,80,.03) 75%)',
               padding: '10px 14px',
             }}>
-              <span style={{ fontSize: 10, letterSpacing: '.14em', color: BRONZE.muted, fontWeight: 800 }}>PROCHAINE COURSE</span>
+              <span style={{ fontSize: 10, letterSpacing: '.14em', color: THEME.muted, fontWeight: 800 }}>PROCHAINE COURSE</span>
               {prochaine ? (
                 <>
-                  <span style={{ fontSize: 22, fontFamily: 'ui-monospace, Consolas, monospace', color: '#ffd766', fontWeight: 800 }}>
+                  <span style={{ fontSize: 22, fontFamily: 'ui-monospace, Consolas, monospace', color: '#f3c887', fontWeight: 800 }}>
                     {formatCountdown(prochaine.heure - maintenant)}
                   </span>
-                  <span style={{ fontSize: 11, color: BRONZE.bronzeTxt }}>
+                  <span style={{ fontSize: 11, color: THEME.bronzeTxt }}>
                     {prochaine.paysCode ? drapeauPour(prochaine.paysCode) + ' ' : ''}
                     {prochaine.hippodrome} · R{prochaine.r}C{prochaine.c}
                   </span>
                 </>
               ) : (
-                <span style={{ fontSize: 11, color: BRONZE.muted }}>aucune course planifiée aujourd’hui (ou déjà terminées).</span>
+                <span style={{ fontSize: 11, color: THEME.muted }}>aucune course planifiée aujourd’hui (ou déjà terminées).</span>
               )}
             </div>
 
-            {chargement && <p style={{ marginTop: 10, fontSize: 12, color: BRONZE.bronzeTxt }}>Chargement du programme…</p>}
+            {chargement && <p style={{ marginTop: 10, fontSize: 12, color: THEME.bronzeTxt }}>Chargement du programme…</p>}
             {erreur && <p style={{ marginTop: 10, fontSize: 12, color: '#fda4af' }}>{erreur}</p>}
 
             {/* grille des réunions */}
@@ -482,21 +488,21 @@ export default function GenerateurCoupleBahjaTurf() {
                       aria-pressed={ouverte}
                       style={{
                         textAlign: 'left', cursor: 'pointer', borderRadius: 12, padding: '10px 12px',
-                        border: ouverte ? '1.5px solid rgba(255,215,0,.6)' : '1px solid rgba(255,215,0,.2)',
-                        background: ouverte ? 'rgba(255,215,0,.06)' : 'rgba(255,255,255,.02)',
-                        color: BRONZE.texte, fontFamily: 'inherit',
+                        border: ouverte ? '1.5px solid rgba(215,140,80,.6)' : '1px solid rgba(215,140,80,.2)',
+                        background: ouverte ? 'rgba(215,140,80,.06)' : 'rgba(255,255,255,.02)',
+                        color: THEME.texte, fontFamily: 'inherit',
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6 }}>
-                        <span style={{ fontSize: 11, fontWeight: 900, padding: '2px 8px', borderRadius: 6, border: '1px solid rgba(255,215,0,.45)', color: '#ffd766', background: 'rgba(0,0,0,.3)' }}>
+                        <span style={{ fontSize: 11, fontWeight: 900, padding: '2px 8px', borderRadius: 6, border: '1px solid rgba(215,140,80,.45)', color: '#f3c887', background: 'rgba(0,0,0,.3)' }}>
                           R{m0.r}
                         </span>
                         <span style={{ fontSize: 15 }}>{drapeauPour(m0.paysCode)}</span>
                       </div>
-                      <div style={{ marginTop: 6, fontSize: 12.5, fontWeight: 800, color: '#ffe97a', fontFamily: 'Georgia, "Times New Roman", serif' }}>
+                      <div style={{ marginTop: 6, fontSize: 12.5, fontWeight: 800, color: '#e8d5a4', fontFamily: 'Georgia, "Times New Roman", serif' }}>
                         {m0.hippodrome}
                       </div>
-                      <div style={{ fontSize: 10.5, color: BRONZE.muted, marginTop: 2 }}>
+                      <div style={{ fontSize: 10.5, color: THEME.muted, marginTop: 2 }}>
                         {m0.courses.length} course{m0.courses.length > 1 ? 's' : ''} · 1er à {heure}
                       </div>
                     </button>
@@ -510,7 +516,7 @@ export default function GenerateurCoupleBahjaTurf() {
               <div style={{ marginTop: 12 }}>
                 {reunionsAffiches.filter((m0) => m0.r === chargee.r).map((m0) => (
                   <div key={m0.r}>
-                    <div style={{ fontSize: 10, letterSpacing: '.16em', fontWeight: 800, color: BRONZE.muted, marginBottom: 6 }}>
+                    <div style={{ fontSize: 10, letterSpacing: '.16em', fontWeight: 800, color: THEME.muted, marginBottom: 6 }}>
                       R{m0.r} · {m0.hippodrome} — CHOISISSEZ LA COURSE
                     </div>
                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -520,12 +526,12 @@ export default function GenerateurCoupleBahjaTurf() {
                           aria-pressed={course?.r === m0.r && course?.c === c.c}
                           style={{
                             cursor: 'pointer', borderRadius: 10, padding: '6px 10px', fontFamily: 'inherit',
-                            border: course?.r === m0.r && course?.c === c.c ? '1.5px solid rgba(255,215,0,.6)' : '1px solid rgba(255,215,0,.18)',
-                            background: course?.r === m0.r && course?.c === c.c ? 'rgba(255,215,0,.08)' : 'rgba(255,255,255,.02)',
-                            color: course?.r === m0.r && course?.c === c.c ? '#ffe97a' : BRONZE.texte,
+                            border: course?.r === m0.r && course?.c === c.c ? '1.5px solid rgba(215,140,80,.6)' : '1px solid rgba(215,140,80,.18)',
+                            background: course?.r === m0.r && course?.c === c.c ? 'rgba(215,140,80,.08)' : 'rgba(255,255,255,.02)',
+                            color: course?.r === m0.r && course?.c === c.c ? '#e8d5a4' : THEME.texte,
                           }}
                         >
-                          <span style={{ fontSize: 10, fontWeight: 800, color: BRONZE.muted }}>C{c.c} · {c.discipline} · {c.distance}m</span>
+                          <span style={{ fontSize: 10, fontWeight: 800, color: THEME.muted }}>C{c.c} · {c.discipline} · {c.distance}m</span>
                           <div style={{ fontSize: 10.5, marginTop: 2, fontWeight: 700 }}>
                             {c.heure ? new Date(c.heure).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : ''} · {c.partants} partants
                           </div>
