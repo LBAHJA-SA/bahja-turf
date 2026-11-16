@@ -7,11 +7,12 @@ import Entete from '../../src/Entete.jsx'
  *
  *  Page autonome (ses fichiers, pas d'import inter-pages — même
  *  règle que GENERATEUR QUINTE BAHJA TURF). Elle affiche :
- *    · LE PROGRAMME : toutes les réunions du jour, tous pays
- *      (PMU), filtrables par discipline, avec compte à rebours
- *      de la prochaine course.
+ *    · LE PROGRAMME : toutes les réunions du jour, tous pays (PMU), avec les
+ *      réunions du Maroc importées de SOREC (e-sorec.ma — le PMU n'en publie
+ *      qu'une moitié), avec compte à rebours de la prochaine course.
  *    · LA TABLE : les partants de la course choisie, ordonnés
- *      PAR LE MARCHÉ (Equidia) — pas par la Synthèse de la presse.
+ *      PAR LE MARCHÉ (Equidia / SOREC), plus la fiche complète des partants
+ *      (الخيل · الفارس · المدرب · الكوط).
  *    · GENERATEUR SYSTÈME : GAGNANT LOGIQUE / OUTSIDER و
  *      BASE COUPLE + BASE TRIO LOGIQUE / SPECULATIVE — مُولّدة السوق
  *      (احتمالات 1/كوط مطبّعة) بعد الضغط على «GENERER». البصمة DNA
@@ -55,6 +56,48 @@ const todayYMD = () => {
 }
 
 /* PMU fournit le programme complet du jour — toutes les réunions, tous pays. */
+/* SOREC (e-sorec.ma) — la SEULE liste complète du Maroc : le PMU n'en publie
+   qu'une moitié. Voir backend/RESULTATS/maroc.js pour le contrat détaillé. */
+const SOREC_DISC = { T: 'PLAT', P: 'PLAT', H: 'ATTELÉ', M: 'MONTÉ', S: 'STEEPLE', A: 'HAIE', C: 'STEEPLE' }
+
+async function chargerSorecReunions(ymd) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(ymd || ''))
+  if (!m) return []
+  const r = await fetch(`/api/ma/api/meetings-v2/${ymd}`)
+  if (!r.ok) throw new Error('sorec HTTP ' + r.status)
+  const j = await r.json()
+  return (j?.content?.events || []).filter((e) => /^MAR/i.test(String(e.country || '').trim()))
+}
+
+async function chargerSorecCourse(sorecId) {
+  const r = await fetch(`/api/ma/api/races/${sorecId}`)
+  if (!r.ok) throw new Error('sorec HTTP ' + r.status)
+  const j = await r.json()
+  const d = j?.content || {}
+  const partants = (d.runners || []).map((p) => ({
+    num: Number(p.startnr),
+    nom: p?.horse?.name || '',
+    sexe: p?.horse?.gender || null,
+    age: p?.horse?.age ?? null,
+    corde: p?.startbox ?? null,
+    musique: p?.shortperformance || null,
+    monte: p?.rider?.name || null,
+    entraineur: p?.horse?.trainer || null,
+    jockeyColorFile: p?.jockeyColorFile || null,
+    cote: p?.odd > 0 ? Number(p.odd) / 100 : (p?.startodd > 0 ? Number(p.startodd) / 100 : null),
+    depart: p?.oddtime ? Number(p.oddtime) : null,
+  }))
+  const cotes = partants
+    .filter((p) => p.cote != null)
+    .map((p) => ({
+      num: p.num, cote: p.cote, ouverture: null,
+      favori: false, tendance: '=', nom: p.nom,
+    }))
+    .sort((a, b) => a.cote - b.cote)
+  if (cotes.length) cotes[0].favori = true
+  return { cotes, partants }
+}
+
 async function chargerProgramme(ymd) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(ymd || ''))
   if (!m) return []
@@ -62,7 +105,7 @@ async function chargerProgramme(ymd) {
   const r = await fetch('/api/pmu/rest/client/61/programme/' + jjmm)
   if (!r.ok) throw new Error('programme HTTP ' + r.status)
   const j = await r.json()
-  return (j?.programme?.reunions || []).map((m0) => ({
+  const pmu = (j?.programme?.reunions || []).map((m0) => ({
     r: Number(m0.numOfficiel) || 0,
     hippodrome: m0.hippodrome?.libelleCourt || m0.hippodrome?.libelleLong || m0.hippodrome?.liblong || '—',
     paysCode: String(m0.pays?.code || '').toUpperCase(),
@@ -76,21 +119,62 @@ async function chargerProgramme(ymd) {
       heure: Number(c.heureDepart) || null,
       partants: Number(c.nombreDeclaresPartants) || 0,
       prix: Number(c.montantPrix) || null,
+      source: 'pmu',
     })),
   }))
+  /* دمج اجتماعات المغرب من SOREC — PMU يعرض نصف اجتماع كازابلانكا فقط
+     ملاحظة مثبتة: PMU يزيح توقيت المغرب بساعة عن SOREC — التطابق بالاسم لا بالوقت. */
+  try {
+    const norm = (s) => String(s || '').toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Z0-9]/g, '')
+    const mar = await chargerSorecReunions(ymd)
+    for (const e of mar) {
+      const sorecRaces = (e.races || []).map((c) => ({
+        r: Number(String(e.code || 'R9').replace(/\D/g, '')) || 9,
+        c: Number(String(c.code || 'C1').replace(/\D/g, '')) || 1,
+        nom: c.name || '',
+        discipline: SOREC_DISC[String(c.type || 'T').toUpperCase()] || 'PLAT',
+        distance: Number(c.distance) || null,
+        heure: Number(c.timestamp) || null,
+        partants: Number(c.starters) || 0,
+        prix: Number(c.purse) || null,
+        source: 'sorec',
+        sorecId: Number(c.id) || null,
+      })).sort((a, b) => a.heure - b.heure)
+      const overlap = (m0) => m0.courses.filter((c) => sorecRaces.some((s) => norm(s.nom) === norm(c.nom))).length
+      const dupIdx = pmu.findIndex((m0) => m0.paysCode === 'MAR' && overlap(m0) >= 2)
+      const dup = dupIdx >= 0 ? pmu[dupIdx] : null
+      const merged = {
+        r: dup ? dup.r : (Math.max(0, ...pmu.map((m0) => m0.r || 0)) + 1),
+        hippodrome: dup ? dup.hippodrome : String(e.track || 'MAROC').toUpperCase(),
+        paysCode: 'MAR',
+        pays: 'Maroc',
+        source: 'sorec',
+        courses: [],
+      }
+      merged.courses = sorecRaces.map((x) => ({ ...x, r: merged.r }))
+      if (dup) pmu.splice(dupIdx, 1, merged)
+      else pmu.push(merged)
+    }
+    /* أي نسخة PMU للمغرب لم تُدمج → احذفها (ناقصة دائماً) */
+    for (let i = pmu.length - 1; i >= 0; i--) {
+      if (pmu[i].paysCode === 'MAR' && pmu[i].source !== 'sorec') pmu.splice(i, 1)
+    }
+  } catch { /* SOREC غير متاح — نعرض ما عند PMU فقط */ }
+  return pmu
 }
 
-/* Equidia → le marché de la course (page Angular, état collé en JSON). */
+/* Equidia → le marché + la fiche complète des partants (page Angular, état collé en JSON).
+   Une seule page, deux exports : pari_simple (cotes) + v2/courses (partants). */
 async function chargerMarche(ymd, r, c) {
   const html = await fetch(`/api/eq/courses/${ymd}/R${r}/C${c}`, { headers: { Accept: 'text/html' } }).then((x) => x.text())
   const m = html.match(/<script id="serverApp-state" type="application\/json">([\s\S]*?)<\/script>/)
-  if (!m) return null
+  if (!m) return { cotes: null, partants: [] }
   const state = JSON.parse(
     m[1].replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
        .replace(/&nbsp;/g, ' ').replace(/&#39;/g, "'").replace(/&amp;/g, '&')
   )
   const ps = state[`courses/${ymd}/R${r}/C${c}/pari_simple`] || []
-  return ps
+  const cotes = ps
     .filter((x) => Number(x.rapp_evol) > 0)
     .map((x) => ({
       num: Number(x.num_partant),
@@ -101,6 +185,18 @@ async function chargerMarche(ymd, r, c) {
       nom: x.cheval?.nom_cheval || '',
     }))
     .sort((a, b) => a.cote - b.cote)
+  const v2 = state[`v2/courses/${ymd}/R${r}/C${c}`] || {}
+  const partants = (v2.partants || []).map((p) => ({
+    num: Number(p.num_partant),
+    nom: p?.cheval?.nom_cheval || '',
+    sexe: p?.cheval?.sexe_cheval || p?.sexe_cheval || null,
+    age: p?.cheval?.age_cheval ?? p?.age_cheval ?? null,
+    corde: p?.place_corde_partant ?? null,
+    musique: p?.cheval?.musique ?? p?.musique ?? null,
+    monte: p?.monte?.nom_monte || null,
+    entraineur: p?.cheval?.entraineur?.nom_entraineur || p?.entraineur?.nom_entraineur || null,
+  }))
+  return { cotes, partants }
 }
 
 /* السوق: الاحتمال الضمني المطبّع لكل خيل = (1/كوط) مقسومًا على مجموع (1/كوط) داخل السباق.
@@ -145,6 +241,7 @@ export default function GenerateurCoupleBahjaTurf() {
   const [chargee, setChargee] = useState(null) // réunion choisie
   const [course, setCourse] = useState(null)   // course choisie (r,c)
   const [marche, setMarche] = useState(null)   // tableau ordonné par cote
+  const [partants, setPartants] = useState([])  // fiche complète des partants
   const [chargementMarche, setChargementMarche] = useState(false)
   const [maintenant, setMaintenant] = useState(Date.now())
   const [dnaReorder, setDnaReorder] = useState(false) // بصمة DNA = إعادة ترتيب فقط، لا حذف
@@ -199,14 +296,16 @@ export default function GenerateurCoupleBahjaTurf() {
       .filter((m0) => m0.courses.length > 0)
   }, [reunions, discipline])
 
-  /* charge le marché de la course choisie */
+  /* charge le marché de la course choisie (Equidia FR · SOREC MAR) */
   useEffect(() => {
     if (!course || !date) return undefined
     let vivant = true
-    setChargementMarche(true); setMarche(null); setGenerer(false)
-    chargerMarche(date, course.r, course.c)
-      .then((v) => { if (vivant) setMarche(v) })
-      .catch(() => { if (vivant) setMarche([]) })
+    setChargementMarche(true); setMarche(null); setPartants([]); setGenerer(false)
+    const p = course.source === 'sorec'
+      ? chargerSorecCourse(course.sorecId)
+      : chargerMarche(date, course.r, course.c)
+    p.then((v) => { if (vivant) { setMarche(v.cotes || []); setPartants(v.partants || []) } })
+      .catch(() => { if (vivant) { setMarche([]); setPartants([]) } })
       .finally(() => { if (vivant) setChargementMarche(false) })
     return () => { vivant = false }
   }, [course, date])
@@ -272,6 +371,21 @@ export default function GenerateurCoupleBahjaTurf() {
   }, [marcheOrdonne, dnaReorder])
 
   const pctProba = (x) => (x && x.proba != null ? (x.proba * 100).toFixed(1) + '%' : '')
+
+  /* جدول المشاركين — ترتيب السوق عند توفره، وإلا بترتيب N° */
+  const partantsTri = useMemo(() => {
+    if (!partants || !partants.length) return []
+    const coteBy = new Map((marche || []).map((x) => [x.num, x.cote]))
+    const merged = partants.map((p) => ({ ...p, cote: coteBy.get(p.num) ?? p.cote ?? null }))
+    if (marche && marche.length) {
+      const ord = new Map(marche.map((x, i) => [x.num, i]))
+      merged.sort((a, b) => (ord.get(a.num) ?? 999) - (ord.get(b.num) ?? 999))
+    } else {
+      merged.sort((a, b) => a.num - b.num)
+    }
+    const fav = marche && marche.length ? marche[0].num : null
+    return merged.map((p) => ({ ...p, favori: p.num === fav }))
+  }, [partants, marche])
 
   return (
     <>
@@ -381,6 +495,48 @@ export default function GenerateurCoupleBahjaTurf() {
                           ))}
                         </div>
                       ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* جدول المشاركين الكامل — حصان · عمر · فارس · مدرب */}
+                {partantsTri.length > 0 && (
+                  <div style={{ marginTop: 4, borderTop: '1px solid rgba(205,130,70,.18)', paddingTop: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8, marginBottom: 6, flexWrap: 'wrap' }}>
+                      <span style={{ fontSize: 9, letterSpacing: '.16em', color: '#f3c887', fontWeight: 800 }}>
+                        TABLE DES PARTANTS{courseMeta?.source === 'sorec' ? ' — SOREC (المغرب)' : ''}
+                      </span>
+                      <span style={{ fontSize: 8, color: THEME.muted }}>ترتيب السوق عند توفره</span>
+                    </div>
+                    <div style={{ overflowX: 'auto', border: '1px solid rgba(205,130,70,.22)', borderRadius: 10 }}>
+                      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10.5, color: '#e8d5a4', whiteSpace: 'nowrap' }}>
+                        <thead>
+                          <tr style={{ color: THEME.muted, fontSize: 8, letterSpacing: '.12em' }}>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>N°</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>الخيل</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>عمر · ج</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>الفارس</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>المدرب</th>
+                            <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>الحبل</th>
+                            <th style={{ textAlign: 'right', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.25)' }}>كوط</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {partantsTri.map((p) => (
+                            <tr key={p.num} style={{ borderBottom: '1px solid rgba(255,255,255,.05)' }}>
+                              <td style={{ padding: '5px 8px', fontWeight: 800, color: '#f3c887' }}>{p.num}{p.favori ? ' ★' : ''}</td>
+                              <td style={{ padding: '5px 8px', fontWeight: 800 }}>{p.nom}</td>
+                              <td style={{ padding: '5px 8px', color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.age ?? '—'} · {p.sexe || '—'}</td>
+                              <td style={{ padding: '5px 8px' }}>{p.monte || '—'}</td>
+                              <td style={{ padding: '5px 8px', color: THEME.texte }}>{p.entraineur || '—'}</td>
+                              <td style={{ padding: '5px 8px', color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>{p.corde ?? '—'}</td>
+                              <td style={{ padding: '5px 8px', textAlign: 'right', fontFamily: 'ui-monospace, Consolas, monospace', color: '#b8afa6' }}>
+                                {p.cote != null ? p.cote.toFixed(1) : '—'}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 )}
@@ -677,7 +833,7 @@ export default function GenerateurCoupleBahjaTurf() {
                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                       {m0.courses.map((c) => (
                         <button
-                          key={c.c} type="button" onClick={() => setCourse({ r: m0.r, c: c.c })}
+                          key={c.c} type="button" onClick={() => setCourse({ r: m0.r, c: c.c, source: c.source || 'pmu', sorecId: c.sorecId || null })}
                           aria-pressed={course?.r === m0.r && course?.c === c.c}
                           style={{
                             cursor: 'pointer', borderRadius: 10, padding: '6px 10px', fontFamily: 'inherit',
