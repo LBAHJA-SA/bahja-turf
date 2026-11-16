@@ -12,10 +12,11 @@ import Entete from '../../src/Entete.jsx'
  *      de la prochaine course.
  *    · LA TABLE : les partants de la course choisie, ordonnés
  *      PAR LE MARCHÉ (Equidia) — pas par la Synthèse de la presse.
- *    · GENERATEUR SYSTÈME : GAGNANT LOGIQUE / OUTSIDER et
- *      BASE COUPLE + BASE TRIO LOGIQUE / SPECULATIVE — champs
- *      volontairement VIDES tant que le moteur n'est pas acté
- *      avec l'utilisateur (discussion à venir).
+ *    · GENERATEUR SYSTÈME : GAGNANT LOGIQUE / OUTSIDER و
+ *      BASE COUPLE + BASE TRIO LOGIQUE / SPECULATIVE — مُولّدة السوق
+ *      (احتمالات 1/كوط مطبّعة) بعد الضغط على «GENERER». البصمة DNA
+ *      تُعرض كشارة ★ وتعيد ترتيب «الخارجي» فقط — لا تحذف أي خيل.
+ *      مكسبها خارج العينة = 0 (انظر public/data/dna-independance.json).
  * ────────────────────────────────────────────────────────────── */
 
 const THEME = {
@@ -102,6 +103,20 @@ async function chargerMarche(ymd, r, c) {
     .sort((a, b) => a.cote - b.cote)
 }
 
+/* السوق: الاحتمال الضمني المطبّع لكل خيل = (1/كوط) مقسومًا على مجموع (1/كوط) داخل السباق.
+   لا يُستعمل أي متغير آخر في النواة — لا عمر، لا جنس (ممنوع من المالك)، لا إشارات أخرى. */
+const probsImplicites = (liste) => {
+  if (!liste || !liste.length) return []
+  const inv = liste.map((r) => 1 / r.cote)
+  const s = inv.reduce((a, b) => a + b, 0)
+  if (s <= 0) return liste.map(() => 1 / liste.length)
+  return inv.map((x) => x / s)
+}
+
+/* بصمة DNA — إشاراتها متاحة 9عاً هنا (كوط/افتراضي فقط). تُستعمل كعرض وإعادة ترتيب اقتراحات فقط.
+   ملاحظة مثبتة: مكسبها خارج العينة = 0 (tools/dna-independance.py). لا تحذف أي خيل أبداً. */
+const dnaMatch = (x) => x.rangCote <= 3
+
 const drapeauPour = (code) => {
   const c = String(code || '').toUpperCase()
   if (c === 'FR' || c === 'FRA') return '🇫🇷'
@@ -132,6 +147,8 @@ export default function GenerateurCoupleBahjaTurf() {
   const [marche, setMarche] = useState(null)   // tableau ordonné par cote
   const [chargementMarche, setChargementMarche] = useState(false)
   const [maintenant, setMaintenant] = useState(Date.now())
+  const [dnaReorder, setDnaReorder] = useState(false) // بصمة DNA = إعادة ترتيب فقط، لا حذف
+  const [generer, setGenerer] = useState(false)
 
   /* charge le programme de la date choisie */
   const charger = async (ymd) => {
@@ -186,7 +203,7 @@ export default function GenerateurCoupleBahjaTurf() {
   useEffect(() => {
     if (!course || !date) return undefined
     let vivant = true
-    setChargementMarche(true); setMarche(null)
+    setChargementMarche(true); setMarche(null); setGenerer(false)
     chargerMarche(date, course.r, course.c)
       .then((v) => { if (vivant) setMarche(v) })
       .catch(() => { if (vivant) setMarche([]) })
@@ -224,6 +241,37 @@ export default function GenerateurCoupleBahjaTurf() {
     const c = m0?.courses.find((y) => y.c === course.c)
     return c ? { hippodrome: m0.hippodrome, paysCode: m0.paysCode, ...c } : null
   }, [course, reunions])
+
+  /* السوق + الاحتمالات الضمنية — النواة الوحيدة للتوليد */
+  const marcheOrdonne = useMemo(() => {
+    if (!marche || !marche.length) return null
+    const probs = probsImplicites(marche)
+    return marche.map((m0, i) => ({ ...m0, proba: probs[i], rangCote: i + 1 }))
+  }, [marche])
+
+  /* الاقتراحات: LOGIQUE = السوق بالضبط. SPECULATIVE = المفضّل + خارجي السوق (الرتبة 4)،
+     أو الخارجي المفضّل البصريّ بالبصمة عند تفعيل «ترتيب DNA» — إعادة ترتيب فقط، لا حذف. */
+  const picks = useMemo(() => {
+    if (!marcheOrdonne || marcheOrdonne.length < 4) return null
+    const [p1, p2, p3, p4] = marcheOrdonne
+    const outsiders = marcheOrdonne.slice(3)
+    let outsider = p4
+    if (dnaReorder && outsiders.length) {
+      /* بصمة السعر كترتيب للاقتراح فقط: كوط ≤ 7 أولاً (عنقود DNA السعري)، ثم الكوط */
+      const scored = outsiders
+        .map((o) => ({ o, s: (o.cote <= 7 ? 2 : 0) + (dnaMatch(o) ? 1 : 0) }))
+        .sort((a, b) => b.s - a.s || a.o.cote - b.o.cote)
+      outsider = scored[0].o
+    }
+    return {
+      logique: { gagner: p1, couple: [p1, p2], trio: [p1, p2, p3] },
+      speculative: { outsider, couple: [p1, outsider], trio: [p1, p2, outsider] },
+      dnaClusterCouple: dnaMatch(p1) && dnaMatch(p2),
+      dnaClusterTrio: [p1, p2, p3].every((x) => dnaMatch(x)),
+    }
+  }, [marcheOrdonne, dnaReorder])
+
+  const pctProba = (x) => (x && x.proba != null ? (x.proba * 100).toFixed(1) + '%' : '')
 
   return (
     <>
@@ -353,25 +401,52 @@ export default function GenerateurCoupleBahjaTurf() {
                 background: 'rgba(215,140,80,.08)', fontFamily: 'Georgia, "Times New Roman", serif',
                 fontWeight: 800, letterSpacing: '.2em', fontSize: 10, textIndent: '.2em', whiteSpace: 'nowrap',
               }}>GENERATEUR SYSTÈME</span>
+              <span style={{ textAlign: 'center', fontSize: 8.5, color: THEME.muted, maxWidth: 210, lineHeight: 1.5 }}>
+                النواة = السوق (1/كوط مطبّعة) · البصمة = عرض وإعادة ترتيب فقط · صفر مكسب مقاس خارج العينة
+              </span>
 
-              {/* GAGNANT LOGIQUE · GAGNANT OUTSIDER — label clair puis coin rond à droite */}
-              {[{ txt: 'GAGNANT LOGIQUE' }, { txt: 'GAGNANT OUTSIDER' }].map(({ txt }) => (
+              {/* GAGNANT LOGIQUE · GAGNANT OUTSIDER — مولّدة من السوق عند الضغط على GENERER */}
+              {[
+                { txt: 'GAGNANT LOGIQUE', pick: generer && picks ? picks.logique.gagner : null },
+                { txt: 'GAGNANT OUTSIDER', pick: generer && picks ? picks.speculative.outsider : null },
+              ].map(({ txt, pick }) => (
                 <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
-                  <span style={{ fontSize: 10, letterSpacing: '.12em', color: '#edeae6', fontWeight: 800 }}>{txt}</span>
+                  <div>
+                    <span style={{ fontSize: 10, letterSpacing: '.12em', color: '#edeae6', fontWeight: 800 }}>{txt}</span>
+                    {pick && (
+                      <div style={{ marginTop: 2, fontSize: 8.5, color: THEME.muted, fontFamily: 'ui-monospace, Consolas, monospace' }}>
+                        كوط {pick.cote.toFixed(1)} · {(pick.proba * 100).toFixed(1)}%
+                      </div>
+                    )}
+                  </div>
                   <div style={{
+                    position: 'relative',
                     width: 46, height: 44, display: 'grid', placeItems: 'center', borderRadius: 999,
                     border: '1.5px solid rgba(215,140,80,.6)',
                     background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,.16), transparent 60%), linear-gradient(160deg, #6b4630 0%, #46301f 100%)',
                     boxShadow: 'inset 0 1px 0 rgba(255,255,255,.3), 0 3px 8px rgba(0,0,0,.5)',
                     color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 17,
-                  }}>?</div>
+                  }}>
+                    {pick ? pick.num : '?'}
+                    {pick && dnaMatch(pick) && (
+                      <span title="عنقود بصمة المفضّل (كوط ≤ 3)" style={{ position: 'absolute', top: 1, right: 4, fontSize: 9, color: '#ffd77a' }}>★</span>
+                    )}
+                  </div>
                 </div>
               ))}
 
-              {/* BASE COUPLE — خانتان فقط (1ER · 2ÈME) */}
-              {['BASE COUPLE LOGIQUE', 'BASE COUPLE SPECULATIVE'].map((txt) => (
+              {/* BASE COUPLE — خانتان فقط (1ER · 2ÈME) — مولّدة من السوق */}
+              {[
+                { txt: 'BASE COUPLE LOGIQUE', cells: generer && picks ? picks.logique.couple : null, star: generer && picks?.dnaClusterCouple },
+                { txt: 'BASE COUPLE SPECULATIVE', cells: generer && picks ? picks.speculative.couple : null, star: false },
+              ].map(({ txt, cells, star }) => (
                 <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
-                  <span style={{ flex: 1, fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
+                  <div style={{ flex: 1 }}>
+                    <span style={{ fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
+                    {star && (
+                      <div style={{ fontSize: 8, color: '#ffd77a', marginTop: 2 }}>★ عنقود المفضّل (≤ 3 · ≤ 3)</div>
+                    )}
+                  </div>
                   <div style={{ display: 'grid', gap: 2 }}>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 46px)', gap: 4, fontSize: 7.5, fontWeight: 800, letterSpacing: '.09em', color: THEME.muted }}>
                       <div style={{ textAlign: 'center' }}>1ER</div>
@@ -380,22 +455,34 @@ export default function GenerateurCoupleBahjaTurf() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 46px)', gap: 4 }}>
                       {[0, 1].map((pos) => (
                         <div key={pos} style={{
-                          width: 46, height: 44, display: 'grid', placeItems: 'center',
+                          position: 'relative',
+                          width: 46, height: 44, display: 'grid', placeItems: 'center', alignContent: 'center', gap: 1,
                           borderRadius: 14, border: '1.5px solid rgba(215,140,80,.6)',
                           background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,.16), transparent 60%), linear-gradient(160deg, #6b4630 0%, #46301f 100%)',
                           boxShadow: 'inset 0 1px 0 rgba(255,255,255,.28), 0 3px 8px rgba(0,0,0,.5)',
-                          color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 16,
-                        }}>?</div>
+                          color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 15,
+                        }}>
+                          {cells ? cells[pos].num : '?'}
+                          {cells && <span style={{ fontSize: 7, color: '#c9b285', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 400 }}>{cells[pos].cote.toFixed(1)}</span>}
+                        </div>
                       ))}
                     </div>
                   </div>
                 </div>
               ))}
 
-              {/* BASE TRIO — ثلاث خانات (1ER · 2ÈME · 3ÈME) */}
-              {['BASE TRIO LOGIQUE', 'BASE TRIO SPECULATIVE'].map((txt) => (
+              {/* BASE TRIO — ثلاث خانات (1ER · 2ÈME · 3ÈME) — مولّدة من السوق */}
+              {[
+                { txt: 'BASE TRIO LOGIQUE', cells: generer && picks ? picks.logique.trio : null, star: generer && picks?.dnaClusterTrio },
+                { txt: 'BASE TRIO SPECULATIVE', cells: generer && picks ? picks.speculative.trio : null, star: false },
+              ].map(({ txt, cells, star }) => (
                 <div key={txt} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, minWidth: 225 }}>
-                  <span style={{ flex: 1, fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
+                  <div style={{ flex: 1 }}>
+                    <span style={{ flex: 1, fontSize: 10, letterSpacing: '.11em', color: '#edeae6', fontWeight: 800, lineHeight: 1.35 }}>{txt}</span>
+                    {star && (
+                      <div style={{ fontSize: 8, color: '#ffd77a', marginTop: 2 }}>★ عنقود المفضّل (الثلاثة ≤ 3)</div>
+                    )}
+                  </div>
                   <div style={{ display: 'grid', gap: 2 }}>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 46px)', gap: 4, fontSize: 7.5, fontWeight: 800, letterSpacing: '.09em', color: THEME.muted }}>
                       <div style={{ textAlign: 'center' }}>1ER</div>
@@ -405,29 +492,73 @@ export default function GenerateurCoupleBahjaTurf() {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 46px)', gap: 4 }}>
                       {[0, 1, 2].map((pos) => (
                         <div key={pos} style={{
-                          width: 46, height: 44, display: 'grid', placeItems: 'center',
+                          position: 'relative',
+                          width: 46, height: 44, display: 'grid', placeItems: 'center', alignContent: 'center', gap: 1,
                           borderRadius: 14, border: '1.5px solid rgba(215,140,80,.6)',
                           background: 'radial-gradient(circle at 35% 30%, rgba(255,255,255,.16), transparent 60%), linear-gradient(160deg, #6b4630 0%, #46301f 100%)',
                           boxShadow: 'inset 0 1px 0 rgba(255,255,255,.28), 0 3px 8px rgba(0,0,0,.5)',
-                          color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 16,
-                        }}>?</div>
+                          color: '#f3c887', fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 800, fontSize: 15,
+                        }}>
+                          {cells ? cells[pos].num : '?'}
+                          {cells && <span style={{ fontSize: 7, color: '#c9b285', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 400 }}>{cells[pos].cote.toFixed(1)}</span>}
+                        </div>
                       ))}
                     </div>
                   </div>
                 </div>
               ))}
 
-              {/* زر GENERER — معطّل منتظرًا نقاس المحرك */}
-              <button type="button" disabled title="Les règles du moteur sont à discuter" style={{
-                marginTop: 2, justifySelf: 'center', padding: '10px 24px', borderRadius: 999,
-                cursor: 'default', border: '1px solid rgba(215,140,80,.35)',
-                color: 'rgba(243,200,135,.5)', fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 900, letterSpacing: '.22em', fontSize: 13, textIndent: '.22em',
-                background: 'rgba(215,140,80,.05)',
-              }}>GENERER</button>
-              <span style={{ textAlign: 'center', fontSize: 10, color: THEME.muted, maxWidth: 200 }}>
-                المحرك يناقش قبل التفعيل — الحقول تبقى فارغة.
+              {/* ترتيب البصمة — إعادة ترتيب اقتراحات فقط، لا حذف لأي خيل */}
+              <button
+                type="button" onClick={() => setDnaReorder((v) => !v)} aria-pressed={dnaReorder}
+                title="إعادة ترتيب الخارجي المرشح للاقتراح — لا تحذف أي خيل"
+                style={{
+                  justifySelf: 'center', display: 'flex', alignItems: 'center', gap: 8,
+                  padding: '6px 12px', borderRadius: 999, cursor: 'pointer',
+                  border: dnaReorder ? '1px solid rgba(255,215,122,.7)' : '1px solid rgba(215,140,80,.35)',
+                  background: dnaReorder ? 'rgba(255,215,122,.12)' : 'rgba(215,140,80,.05)',
+                  color: dnaReorder ? '#ffd77a' : THEME.muted, fontSize: 9, fontWeight: 800, letterSpacing: '.08em',
+                }}
+              >
+                <span style={{
+                  width: 14, height: 14, borderRadius: 999, display: 'grid', placeItems: 'center',
+                  border: '1px solid rgba(215,140,80,.5)', fontSize: 9,
+                }}>{dnaReorder ? '✓' : ''}</span>
+                ترتيب البصمة (تجريبي)
+              </button>
+              <span style={{ textAlign: 'center', fontSize: 8, color: THEME.muted, maxWidth: 210, lineHeight: 1.5 }}>
+                البصمة هنا = سعر فقط (لا يوجد عمر على الصفحة) — يفضّل الخارجي الأقرب سعراً · لا تحذف أي خيل · صفر مكسب خارج العينة
               </span>
+
+              {/* زر GENERER — يفعّل المحرك: النواة = السوق */}
+              {(() => {
+                const ready = marcheOrdonne && marcheOrdonne.length >= 4
+                return (
+                  <button
+                    type="button" onClick={() => setGenerer(true)} disabled={!ready}
+                    title={ready ? 'توليد الاقتراحات من السوق' : 'انتظر نشر السوق للاختيارات (قبل الانطلاق ~10 دقائق)'}
+                    style={{
+                      marginTop: 2, justifySelf: 'center', padding: '10px 24px', borderRadius: 999,
+                      cursor: ready ? 'pointer' : 'default',
+                      border: '1px solid rgba(215,140,80,.6)',
+                      color: ready ? '#241a02' : 'rgba(243,200,135,.4)',
+                      fontFamily: 'Inter, system-ui, sans-serif',
+                      fontWeight: 900, letterSpacing: '.22em', fontSize: 13, textIndent: '.22em',
+                      background: ready ? 'linear-gradient(150deg, #e8d5a4, #f3c887 55%, #c87533)' : 'rgba(215,140,80,.05)',
+                      boxShadow: ready ? '0 3px 14px rgba(215,140,80,.35)' : 'none',
+                    }}
+                  >GENERER</button>
+                )
+              })()}
+              <span style={{ textAlign: 'center', fontSize: 10, color: THEME.muted, maxWidth: 210, lineHeight: 1.5 }}>
+                {marche ? 'السوق جاهز — اضغط «GENERER»' : 'السوق غير منشور بعد · يُنشر قبل الانطلاق ~10 دقائق'}
+              </span>
+              {generer && picks && (
+                <button type="button" onClick={() => setGenerer(false)} style={{
+                  justifySelf: 'center', border: 'none', background: 'transparent', color: '#b8afa6',
+                  fontSize: 9, textDecoration: 'underline', cursor: 'pointer', letterSpacing: '.06em',
+                }}>مسح التوليد</button>
+              )}
             </section>
           </div>{/* generateur-row */}
 
