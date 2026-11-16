@@ -38,14 +38,17 @@ const THEME = {
   policeFonte: 'Georgia, "Times New Roman", serif',
 }
 
-const DISCIPLINES = ['TOUS', 'ATTELÉ', 'PLAT', 'HAIE', 'STEEPLE']
+const DISCIPLINES = ['TOUS', 'ATTELÉ', 'PLAT', 'HAIE', 'STEEPLE', 'MONTÉ', 'AUTOSTART']
 
-const normDiscipline = (d) => {
+const normDiscipline = (d, classe) => {
+  const cls = String(classe || '').toUpperCase()
+  if (/AUTOSTART/i.test(cls)) return 'AUTOSTART'
   const s = String(d || '').toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim()
-  if (s.startsWith('ATTEL') || s.startsWith('MONT') || s.startsWith('TROT') || s.startsWith('AUC')) return 'ATTELÉ'
-  if (s.startsWith('PLAT')) return 'PLAT'
-  if (s.startsWith('HAI')) return 'HAIE'
-  if (s.startsWith('STEEP')) return 'STEEPLE'
+  if (s.startsWith('PLAT') || s.startsWith('GALOP')) return 'PLAT'
+  if (s.startsWith('MONT')) return 'MONTÉ'
+  if (s.startsWith('ATTEL') || s.startsWith('TROT') || s.startsWith('AUC')) return 'ATTELÉ'
+  if (s.startsWith('HAI') || s.startsWith('HURD')) return 'HAIE'
+  if (s.startsWith('STEEP') || s.startsWith('CROSS')) return 'STEEPLE'
   return 'TOUS' // inconnue → affichée partout
 }
 
@@ -58,8 +61,6 @@ const todayYMD = () => {
 /* PMU fournit le programme complet du jour — toutes les réunions, tous pays. */
 /* SOREC (e-sorec.ma) — la SEULE liste complète du Maroc : le PMU n'en publie
    qu'une moitié. Voir backend/RESULTATS/maroc.js pour le contrat détaillé. */
-const SOREC_DISC = { T: 'PLAT', P: 'PLAT', H: 'ATTELÉ', M: 'MONTÉ', S: 'STEEPLE', A: 'HAIE', C: 'STEEPLE' }
-
 /* الأرشيف اليومي للنتائج المغربية (يكتبه job المتواجد بالمغرب).
    يصلح كبديل احتياطي عندما يتعذر الوصول المباشر (Vercel خارج المغرب). */
 let _cacheMaroc = null
@@ -93,7 +94,7 @@ function mapSorecArchiveMeeting(e) {
       id: c.sorecId, code: 'C' + c.num, name: String(c.nom || c.libelle || ''),
       time: null, timestamp: Number(c.time) || null,
       status: c.statut || 'OPEN',
-      type: ({ PLAT: 'T', GALOP: 'T', ATTELE: 'H', MONTE: 'M', HAIE: 'A', STEEPLE: 'S', CROSS: 'C' }[String(c.discipline || 'PLAT').toUpperCase()] || 'T'),
+      type: ({ PLAT: 'Plat', GALOP: 'Plat', ATTELE: 'Attelé', MONTE: 'Monté', HAIE: 'Haies', HAIES: 'Haies', STEEPLE: 'Steeple', CROSS: 'Steeple' }[String(c.discipline || 'PLAT').toUpperCase()] || 'Plat'),
       distance: Number(c.distance) || null, starters: (c.runners || []).length, purse: Number(c.prix) || 0,
     })),
   }
@@ -244,7 +245,8 @@ async function chargerProgramme(ymd) {
       r: Number(m0.numOfficiel) || 0,
       c: Number(c.numOrdre) || 0,
       nom: c.libelle || '',
-      discipline: normDiscipline(c.discipline),
+      discipline: normDiscipline(c.discipline, c.categorieParticularite),
+      classe: c.categorieParticularite || null,
       distance: Number(c.distance) || null,
       heure: Number(c.heureDepart) || null,
       partants: Number(c.nombreDeclaresPartants) || 0,
@@ -262,7 +264,8 @@ async function chargerProgramme(ymd) {
         r: Number(String(e.code || 'R9').replace(/\D/g, '')) || 9,
         c: Number(String(c.code || 'C1').replace(/\D/g, '')) || 1,
         nom: c.name || '',
-        discipline: SOREC_DISC[String(c.type || 'T').toUpperCase()] || 'PLAT',
+        discipline: normDiscipline(c.racetype || c.type, c.class),
+        classe: c.class || null,
         distance: Number(c.distance) || null,
         heure: Number(c.timestamp) || null,
         partants: Number(c.starters) || 0,
@@ -776,7 +779,7 @@ export default function GenerateurCoupleBahjaTurf() {
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="casaque">Casaque</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>N°</th>
                             <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Cheval</th>
-                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes de Références Cheval (3 ans)">Cotes Ref.</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes du marché — la course du jour">Cotes</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Age</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Sexe</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Record</th>
