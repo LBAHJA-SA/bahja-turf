@@ -60,42 +60,143 @@ const todayYMD = () => {
    qu'une moitié. Voir backend/RESULTATS/maroc.js pour le contrat détaillé. */
 const SOREC_DISC = { T: 'PLAT', P: 'PLAT', H: 'ATTELÉ', M: 'MONTÉ', S: 'STEEPLE', A: 'HAIE', C: 'STEEPLE' }
 
+/* الأرشيف اليومي للنتائج المغربية (يكتبه job المتواجد بالمغرب).
+   يصلح كبديل احتياطي عندما يتعذر الوصول المباشر (Vercel خارج المغرب). */
+let _cacheMaroc = null
+
+async function marocArchive(date) {
+  if (_cacheMaroc) return _cacheMaroc
+  try {
+    const r = await fetch('/data/maroc.json')
+    if (!r.ok) throw new Error('maroc.json HTTP ' + r.status)
+    _cacheMaroc = await r.json()
+    return _cacheMaroc
+  } catch {
+    _cacheMaroc = null
+    return null
+  }
+}
+
+async function joursArchive(date) {
+  /* 28 يوماً من الأرشيف — يُحمّل فقط إذا تعذر اليوم */
+  try {
+    const r = await fetch('/data/maroc-jours.json')
+    if (!r.ok) throw new Error('maroc-jours.json HTTP ' + r.status)
+    return await r.json()
+  } catch { return null }
+}
+
+function mapSorecArchiveMeeting(e) {
+  return {
+    id: e.num, date: null, track: e.hippodrome, country: e.country, code: e.sorec,
+    races: (e.courses || []).map((c) => ({
+      id: c.sorecId, code: 'C' + c.num, name: String(c.nom || c.libelle || ''),
+      time: null, timestamp: Number(c.time) || null,
+      status: c.statut || 'OPEN',
+      type: ({ PLAT: 'T', GALOP: 'T', ATTELE: 'H', MONTE: 'M', HAIE: 'A', STEEPLE: 'S', CROSS: 'C' }[String(c.discipline || 'PLAT').toUpperCase()] || 'T'),
+      distance: Number(c.distance) || null, starters: (c.runners || []).length, purse: Number(c.prix) || 0,
+    })),
+  }
+}
+
 async function chargerSorecReunions(ymd) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(ymd || ''))
   if (!m) return []
-  const r = await fetch(`/api/ma/api/meetings-v2/${ymd}`)
-  if (!r.ok) throw new Error('sorec HTTP ' + r.status)
-  const j = await r.json()
-  return (j?.content?.events || []).filter((e) => /^MAR/i.test(String(e.country || '').trim()))
+  try {
+    const r = await fetch(`/api/ma/api/meetings-v2/${ymd}`)
+    if (!r.ok) throw new Error('sorec HTTP ' + r.status)
+    const j = await r.json()
+    const live = (j?.content?.events || []).filter((e) => /^MAR/i.test(String(e.country || '').trim()))
+    if (live.length) return live
+    throw new Error('sorec : aucune réunion MAR')
+  } catch {
+    /* ② الأرشيف — يسترد من maroc-jours.json (28 يوماً) أو maroc.json (اليوم) */
+    const jours = await joursArchive(ymd)
+    const parJour = jours && jours.jours && Array.isArray(jours.jours[ymd]) ? jours.jours[ymd] : null
+    const mta = (parJour && parJour.length ? parJour : (await marocArchive(ymd))?.meetings) || []
+    return mta.filter((e) => String(e.country || '').toUpperCase() === 'MA').map(mapSorecArchiveMeeting)
+  }
 }
 
-async function chargerSorecCourse(sorecId) {
-  const r = await fetch(`/api/ma/api/races/${sorecId}`)
-  if (!r.ok) throw new Error('sorec HTTP ' + r.status)
-  const j = await r.json()
-  const d = j?.content || {}
-  const partants = (d.runners || []).map((p) => ({
-    num: Number(p.startnr),
-    nom: p?.horse?.name || '',
-    sexe: p?.horse?.gender || null,
-    age: p?.horse?.age ?? null,
-    corde: p?.startbox ?? null,
-    musique: p?.shortperformance || null,
-    monte: p?.rider?.name || null,
-    entraineur: p?.horse?.trainer || null,
-    jockeyColorFile: p?.jockeyColorFile || null,
-    cote: p?.odd > 0 ? Number(p.odd) / 100 : (p?.startodd > 0 ? Number(p.startodd) / 100 : null),
-    depart: p?.oddtime ? Number(p.oddtime) : null,
+async function chargerSorecCourseArchive(sorecId) {
+  /* maroc.json — اليوم */
+  const mar = await marocArchive(null)
+  if (mar) {
+    for (const m of mar.meetings || []) {
+      for (const c of m.courses || []) {
+        if (Number(c.sorecId) !== Number(sorecId)) continue
+        return buildSorecCourseFromArchive(c, mar.date)
+      }
+    }
+  }
+  /* jours — 28 يوماً */
+  const jours = await joursArchive(null)
+  if (jours && jours.jours) {
+    for (const [date, arr] of Object.entries(jours.jours)) {
+      for (const m of Array.isArray(arr) ? arr : []) {
+        for (const c of m.courses || []) {
+          if (Number(c.sorecId) !== Number(sorecId)) continue
+          return buildSorecCourseFromArchive(c, date)
+        }
+      }
+    }
+  }
+  throw new Error('Course introuvable dans les archives')
+}
+
+function buildSorecCourseFromArchive(c, _date) {
+  const partants = (c.runners || []).map((p) => ({
+    num: Number(p.num),
+    nom: p?.horse || '',
+    sexe: p?.sexe || null,
+    age: p?.age ?? null,
+    corde: p?.corde ?? null,
+    musique: p?.musique || null,
+    monte: p?.jockey || null,
+    entraineur: p?.entraineur || null,
+    cote: p?.cote ?? (p?.ouverture && Number(p.ouverture) > 1.1 ? Number(p.ouverture) : null),
+    ouverture: p?.ouverture ?? null,
+    depart: null,
   }))
   const cotes = partants
     .filter((p) => p.cote != null)
-    .map((p) => ({
-      num: p.num, cote: p.cote, ouverture: null,
-      favori: false, tendance: '=', nom: p.nom,
-    }))
+    .map((p) => ({ num: p.num, cote: p.cote, ouverture: p.ouverture ?? null, favori: false, tendance: '=', nom: p.nom }))
     .sort((a, b) => a.cote - b.cote)
   if (cotes.length) cotes[0].favori = true
-  return { cotes, partants }
+  return { cotes, partants, source: 'archive' }
+}
+
+async function chargerSorecCourse(sorecId) {
+  try {
+    const r = await fetch(`/api/ma/api/races/${sorecId}`)
+    if (!r.ok) throw new Error('sorec HTTP ' + r.status)
+    const j = await r.json()
+    const d = j?.content || {}
+    const partants = (d.runners || []).map((p) => ({
+      num: Number(p.startnr),
+      nom: p?.horse?.name || '',
+      sexe: p?.horse?.gender || null,
+      age: p?.horse?.age ?? null,
+      corde: p?.startbox ?? null,
+      musique: p?.shortperformance || null,
+      monte: p?.rider?.name || null,
+      entraineur: p?.horse?.trainer || null,
+      jockeyColorFile: p?.jockeyColorFile || null,
+      cote: p?.odd > 0 ? Number(p.odd) / 100 : (p?.startodd > 0 ? Number(p.startodd) / 100 : null),
+      depart: p?.oddtime ? Number(p.oddtime) : null,
+    }))
+    const cotes = partants
+      .filter((p) => p.cote != null)
+      .map((p) => ({
+        num: p.num, cote: p.cote, ouverture: null,
+        favori: false, tendance: '=', nom: p.nom,
+      }))
+      .sort((a, b) => a.cote - b.cote)
+    if (cotes.length) cotes[0].favori = true
+    return { cotes, partants, source: 'live' }
+  } catch (e) {
+    return chargerSorecCourseArchive(sorecId)
+  }
 }
 
 async function chargerProgramme(ymd) {
