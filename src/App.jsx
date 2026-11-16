@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import Article from '../frontend/ARTICLE/Article.jsx'
 import QuinteGrille from '../frontend/QUINTE/QuinteGrille.jsx'
 import GenerateurBahjaTurf from '../frontend/GENERATEUR/GenerateurBahjaTurf.jsx'
+import GenerateurCoupleBahjaTurf from '../frontend/GENERATEUR-COUPLE/GenerateurCoupleBahjaTurf.jsx'
 
 import Analyse from '../frontend/ANALYSE/Analyse.jsx'
 import Presse from '../frontend/PRESSE/Presse.jsx'
@@ -59,6 +60,7 @@ export default function App(){
          *  L'accès suit le droit Analyse course, comme l'ancienne page
          *  PRONOSTIQUE BAHJA TURF. Le contenu de la page est à définir. */}
         <Route path="/generateur-bahja-turf" element={<Portail cle="analyse"><GenerateurBahjaTurf /></Portail>} />
+        <Route path="/generateur-couple-bahja-turf" element={<Portail cle="analyse"><GenerateurCoupleBahjaTurf /></Portail>} />
 
         {/* ⚠ 13/11/2026 — LA PAGE « PRONOSTIQUE BAHJA TURF » EST SUPPRIMÉE.
  *  /pronostique-bahja-turf tombe dans l'adresse inconnue → retour à

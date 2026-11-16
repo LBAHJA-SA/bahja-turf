@@ -17,6 +17,7 @@ export const VOCAB = {
   nav_analyse: { fr: 'Analyse course', ar: 'تحليل السباق' },
   nav_quinte: { fr: 'Quinté', ar: 'Quinté' },
   nav_generateur: { fr: 'GENERATEUR QUINTE BAHJA TURF', ar: 'مولّد كوينتي باحجا تورف' },
+  nav_couple_generateur: { fr: 'GENERATEUR COUPLE BAHJA TURF', ar: 'مولّد الكوبلي باحجا تورف' },
   nav_presse: { fr: 'Presse', ar: 'الصحافة' },
   nav_lives: { fr: 'Lives', ar: 'مباشر' },
   nav_dna: { fr: 'DNA COURSE', ar: 'DNA COURSE' },

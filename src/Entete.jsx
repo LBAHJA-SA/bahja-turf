@@ -26,6 +26,7 @@ const LIENS = [
   /* 13/11/2026 — GENERATEUR QUINTE BAHJA TURF : le générateur de Bahja TURF,
    *   son propre onglet, sa propre lumière (l'or du logo). */
   { cle: 'generateur', droit: 'analyse', to: '/generateur-bahja-turf', libelleKey: 'nav_generateur', libelle: 'GENERATEUR QUINTE BAHJA TURF', icone: 'bi-magic' },
+  { cle: 'coupleGenerateur', droit: 'analyse', to: '/generateur-couple-bahja-turf', libelleKey: 'nav_couple_generateur', libelle: 'GENERATEUR COUPLE BAHJA TURF', icone: 'bi-bullseye' },
   { cle: 'presse', to: '/presse', libelleKey: 'nav_presse', libelle: 'Presse', icone: 'bi-newspaper' },
   { cle: 'lives', to: '/lives', libelleKey: 'nav_lives', libelle: 'Lives', icone: 'bi-broadcast' },
   /* 23/10/2026 — le moteur DNA COURSE, comme les autres pages.
