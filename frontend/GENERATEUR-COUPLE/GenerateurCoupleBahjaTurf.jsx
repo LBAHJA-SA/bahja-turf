@@ -575,6 +575,26 @@ export default function GenerateurCoupleBahjaTurf() {
   }, [reunions, discipline])
   const totales = useMemo(() => reunionsAffiches.reduce((a, m0) => a + m0.courses.length, 0), [reunionsAffiches])
 
+  /* عندما يتغير الفلتر إلى تصنيف لا يحتوي السباق المحدد — نتخطى للسباق المطابق الأول */
+  useEffect(() => {
+    if (course) {
+      const inFiltered = reunionsAffiches.some((m0) =>
+        m0.courses.some((c) => c.r === course.r && c.c === course.c && (c.source || 'pmu') === (course.source || 'pmu'))
+      )
+      if (inFiltered) return
+    }
+    const first = reunionsAffiches[0]?.courses?.[0]
+    if (first) {
+      setCourse({ r: first.r, c: first.c, source: first.source || 'pmu', sorecId: first.sorecId || null })
+      setMarche(null); setPartants([]); setGenerer(false)
+      setChargee({ r: first.r })
+    } else {
+      setCourse(null); setMarche(null); setPartants([]); setGenerer(false)
+      setChargee(null)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reunionsAffiches])
+
   /* charge le marché de la course choisie (Equidia FR · SOREC MAR) */
   useEffect(() => {
     if (!course || !date) return undefined
@@ -794,7 +814,7 @@ export default function GenerateurCoupleBahjaTurf() {
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="casaque">Casaque</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>N°</th>
                             <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Cheval</th>
-                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes du marché — la course du jour">Cotes</th>
+                            <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }} title="Cotes de Références Cheval (3 ans)">Cotes Ref.</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Age</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Sexe</th>
                             <th style={{ textAlign: 'center', padding: '6px 6px', borderBottom: '1px solid rgba(205,130,70,.3)' }}>Record</th>
@@ -822,8 +842,8 @@ export default function GenerateurCoupleBahjaTurf() {
                               </td>
                               <td style={{ padding: '4px 6px', textAlign: 'center', fontWeight: 800, color: '#f3c887' }}>{p.num}{p.favori ? ' ★' : ''}</td>
                               <td style={{ padding: '4px 8px', fontWeight: 800 }}>{p.nom}</td>
-                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.coteBg || 'transparent', color: p.coteText || '#f3c887', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 800 }}>
-                                {p.cote != null ? p.cote.toFixed(1) : '—'}
+                              <td style={{ padding: '4px 6px', textAlign: 'center', background: p.coteRefBg || 'transparent', color: p.coteRefText || '#f3c887', fontFamily: 'ui-monospace, Consolas, monospace', fontWeight: 800 }} title="Cotes de Références Chevaux (3 ans)">
+                                {p.coteRef != null ? p.coteRef : '—'}
                               </td>
                               <td style={{ padding: '4px 6px', textAlign: 'center' }}>{p.age ?? '—'}</td>
                               <td style={{ padding: '4px 6px', textAlign: 'center', color: THEME.muted }}>{p.sexe || '—'}</td>
